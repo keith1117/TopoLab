@@ -6,8 +6,9 @@ core, reproducible experiment workflows, and a controlled evaluation of learned
 warm starts.
 
 > **Status:** N1 finite-element foundation in progress. Structured Hex8 mesh
-> generation and element stiffness are implemented; no global solver, scalability
-> result, or ML acceleration claim has been implemented yet.
+> generation, element stiffness, sparse assembly, and constrained linear solving are
+> implemented; no SIMP solver, scalability result, or ML acceleration claim has been
+> implemented yet.
 
 ## Intended scope
 
@@ -49,7 +50,7 @@ docs/
   numerical_conventions.md     Numerical definitions that code and tests must follow
   reference_baseline.md        Frozen upstream reference and known limitations
   planning/                    Admissions, schedule, and implementation planning
-src/topolab/                   TopoLab package, Hex8 mesh, and element stiffness
+src/topolab/                   TopoLab package and finite-element foundation
 tests/                         Package and numerical convention tests
 ```
 

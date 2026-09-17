@@ -55,6 +55,13 @@ reason and regression-test update.
   node and DOF order above, trilinear isoparametric shape functions, and `2 x 2 x 2`
   Gauss integration. The first implementation supports axis-aligned rectangular
   elements with positive finite side lengths.
+- Assemble the global stiffness by scattering each element's 24-by-24 matrix through
+  its documented DOF map. Sum duplicate COO entries when converting to canonical CSR.
+- Apply zero-displacement constraints by solving the reduced free-free system; do not
+  overwrite stiffness rows or add artificial diagonal penalties. Recover reactions as
+  `r = K @ u - f`, so free-DOF residuals vanish and constrained reactions balance the
+  applied load. Reject a reduced system when sparse factorization fails or its pivot
+  scale indicates numerical singularity at the matrix-size-scaled machine precision.
 - The unconstrained element/global stiffness is positive semidefinite because of rigid
   body modes; test positive definiteness only after sufficient supports are applied.
 
