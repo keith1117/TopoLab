@@ -1,16 +1,27 @@
 """Finite-element building blocks for small-strain 3D elasticity."""
 
+from dataclasses import dataclass
 from itertools import product
 from math import isfinite, sqrt
 from numbers import Real
 
 import numpy as np
 from numpy.typing import NDArray
+from scipy.sparse import coo_matrix, csr_matrix  # type: ignore[import-untyped]
+from scipy.sparse.linalg import splu  # type: ignore[import-untyped]
 
-from topolab.mesh import HEX8_LOCAL_NODE_OFFSETS
+from topolab.mesh import HEX8_LOCAL_NODE_OFFSETS, Hex8Mesh
 
 _HEX8_REFERENCE_COORDINATES = 2.0 * np.asarray(HEX8_LOCAL_NODE_OFFSETS, dtype=np.float64) - 1.0
 _GAUSS_POINTS = (-1.0 / sqrt(3.0), 1.0 / sqrt(3.0))
+
+
+@dataclass(frozen=True, slots=True)
+class LinearStaticResult:
+    """Displacements and reactions for a zero-prescribed-displacement solve."""
+
+    displacements: NDArray[np.float64]
+    reactions: NDArray[np.float64]
 
 
 def isotropic_elasticity_matrix(
@@ -71,6 +82,112 @@ def hex8_element_stiffness(
         )
 
     return stiffness
+
+
+def assemble_global_stiffness(
+    mesh: Hex8Mesh,
+    element_stiffness: NDArray[np.float64],
+) -> csr_matrix:
+    """Assemble one uniform Hex8 element matrix into a global CSR matrix."""
+
+    element_stiffness = np.asarray(element_stiffness, dtype=np.float64)
+    if element_stiffness.shape != (24, 24):
+        raise ValueError("element_stiffness must have shape (24, 24)")
+    if not np.all(np.isfinite(element_stiffness)):
+        raise ValueError("element_stiffness must contain only finite values")
+
+    element_dofs = mesh.element_dofs
+    number_of_elements = element_dofs.shape[0]
+    row_indices = np.broadcast_to(
+        element_dofs[:, :, np.newaxis],
+        (number_of_elements, 24, 24),
+    ).ravel()
+    column_indices = np.broadcast_to(
+        element_dofs[:, np.newaxis, :],
+        (number_of_elements, 24, 24),
+    ).ravel()
+    values = np.broadcast_to(
+        element_stiffness,
+        (number_of_elements, 24, 24),
+    ).ravel()
+    number_of_dofs = 3 * mesh.coordinates.shape[0]
+
+    stiffness = coo_matrix(
+        (values, (row_indices, column_indices)),
+        shape=(number_of_dofs, number_of_dofs),
+    ).tocsr()
+    stiffness.sum_duplicates()
+    stiffness.sort_indices()
+    return stiffness
+
+
+def solve_linear_static(
+    stiffness: csr_matrix,
+    loads: NDArray[np.float64],
+    constrained_dofs: NDArray[np.int64],
+) -> LinearStaticResult:
+    """Solve a sparse linear-elastic system with zero prescribed displacements."""
+
+    if not isinstance(stiffness, csr_matrix):
+        raise TypeError("stiffness must be a scipy.sparse.csr_matrix")
+    if stiffness.shape[0] != stiffness.shape[1]:
+        raise ValueError("stiffness must be square")
+    if not np.all(np.isfinite(stiffness.data)):
+        raise ValueError("stiffness must contain only finite values")
+
+    number_of_dofs = stiffness.shape[0]
+    load_vector = np.asarray(loads, dtype=np.float64)
+    if load_vector.shape != (number_of_dofs,):
+        raise ValueError(f"loads must have shape ({number_of_dofs},)")
+    if not np.all(np.isfinite(load_vector)):
+        raise ValueError("loads must contain only finite values")
+    if not np.any(load_vector):
+        raise ValueError("loads must contain at least one nonzero value")
+
+    constrained = np.asarray(constrained_dofs)
+    if constrained.ndim != 1 or not np.issubdtype(constrained.dtype, np.integer):
+        raise TypeError("constrained_dofs must be a one-dimensional integer array")
+    constrained = constrained.astype(np.int64, copy=False)
+    if constrained.size == 0:
+        raise ValueError("constrained_dofs must contain at least one DOF")
+    if np.any(constrained < 0) or np.any(constrained >= number_of_dofs):
+        raise ValueError("constrained_dofs contains an out-of-range DOF")
+    if np.unique(constrained).size != constrained.size:
+        raise ValueError("constrained_dofs must not contain duplicates")
+
+    free_mask = np.ones(number_of_dofs, dtype=np.bool_)
+    free_mask[constrained] = False
+    free_dofs = np.flatnonzero(free_mask)
+    if free_dofs.size == 0:
+        raise ValueError("at least one unconstrained DOF is required")
+
+    reduced_stiffness = stiffness[free_dofs][:, free_dofs].tocsc()
+    try:
+        factorization = splu(reduced_stiffness)
+    except RuntimeError as error:
+        raise ValueError(
+            "reduced stiffness is singular; constraints may leave rigid body modes"
+        ) from error
+    pivot_magnitudes = np.abs(factorization.U.diagonal())
+    pivot_scale = float(np.max(pivot_magnitudes))
+    singular_threshold = (
+        np.finfo(np.float64).eps * reduced_stiffness.shape[0] * pivot_scale
+    )
+    if pivot_scale == 0.0 or float(np.min(pivot_magnitudes)) <= singular_threshold:
+        raise ValueError(
+            "reduced stiffness is singular; constraints may leave rigid body modes"
+        )
+
+    free_displacements = factorization.solve(load_vector[free_dofs])
+    if not np.all(np.isfinite(free_displacements)):
+        raise ValueError(
+            "reduced stiffness solve was non-finite; constraints may leave rigid body modes"
+        )
+
+    displacements = np.zeros(number_of_dofs, dtype=np.float64)
+    displacements[free_dofs] = free_displacements
+    reactions = np.asarray(stiffness @ displacements).reshape(-1) - load_vector
+    return LinearStaticResult(displacements=displacements, reactions=reactions)
 
 
 def _shape_function_gradients(
