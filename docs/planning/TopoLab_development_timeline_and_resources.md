@@ -10,7 +10,7 @@
 
 ## 当前起点（2026-09-17）
 
-- [`keith1117/TopoLab`](https://github.com/keith1117/TopoLab) 已创建为公开仓库，但目前为空，没有 commit、README 或许可证。
+- [`keith1117/TopoLab`](https://github.com/keith1117/TopoLab) 已完成 G0 仓库准备，包含 README、MIT License、provenance 记录、锁定环境、最小包结构、测试和 CI。
 - 上游参考仓库固定为 `Jiangce2017/3D_SIMP_Topology_Optimization_Numpy@584cb8ee570d375f8ba9b10272020c5c2daa8c30`。
 - 上游仓库没有声明开源许可证。因此 TopoLab 只把它作为行为参考和审计基线，不复制或重新分发源文件；新核心依据标准 SIMP/Hex8 资料独立实现，并在 `PROVENANCE.md` 中记录来源。
 - 当前本地已有上游代码、运行图和前期审计，但这些不属于新 TopoLab 的实现成果。
@@ -27,6 +27,45 @@
 - [x] 推送 G0 commit，并确认远端 GitHub Actions run `35275304334` 通过。
 
 G0 只建立开发与审计基础，不计作 Numerical Core 实现。
+
+## Git 分支与版本管理策略
+
+TopoLab 采用轻量级 **GitHub Flow**。项目由单人主导且处于快速迭代期，不维护长期 `develop`、`release/*` 或 `hotfix/*` 分支，以免增加合并成本和分支漂移。
+
+### 分支规则
+
+- `main` 始终保持可运行、可测试，作为唯一长期分支；禁止 force push。
+- 每个独立、可审查的改动从最新 `main` 创建短期分支，建议在半天到 3 天内完成。
+- 分支前缀使用 `feat/`、`fix/`、`docs/`、`test/`、`bench/` 或 `experiment/`，名称描述交付内容而非人员姓名。
+- 一个分支只处理一个明确切片；数值实现、平台功能和 ML 实验不混在同一 PR 中。
+- 即使单人开发也通过 PR 合并，以保留设计说明、CI 结果和审查记录；CI 全部通过后 squash merge，并删除远端分支。
+- `main` 建议启用 required status checks、合并前必须与主分支同步和禁止 force push；单人阶段不强制 reviewer，后续有稳定协作者再启用审批要求。
+
+### 近期分支顺序
+
+| 分支 | 范围 |
+|---|---|
+| `feat/n1-hex8-mesh` | 结构化 Hex8 网格、节点/单元/DOF 索引约定及相应测试 |
+| `feat/n1-element-stiffness` | 材料矩阵、Hex8 单元刚度和局部数值验证 |
+| `feat/n1-sparse-assembly` | COO/CSR 全局装配、边界条件和线性求解 |
+| `feat/n1-boundary-load-models` | 支撑、点载荷/面载荷模型和载荷守恒测试 |
+| `feat/n2-sensitivity` | compliance、解析 sensitivity 与有限差分检查 |
+| `feat/n2-simp-optimizer` | filter、OC 更新和完整 SIMP 循环 |
+| `feat/p1-api-jobs` | N2 通过后的 API、任务状态与运行隔离 |
+| `experiment/m1-warm-start-cnn` | M0 通过后的 learned warm-start 对照实验 |
+
+分支列表是当前执行顺序，不是必须提前创建的固定结构。只有前一切片的接口和测试稳定后，才创建下一分支；发现独立缺陷时，从最新 `main` 创建 `fix/*` 分支。
+
+### 里程碑版本
+
+里程碑使用 annotated Git tag 标记，不另设 release 分支：
+
+- `v0.1.0`：Gate N1 通过；
+- `v0.2.0`：Gate N2 通过；
+- `v0.3.0`：Gate P1 通过；
+- `v1.0.0`：公开演示、复现实验和文档达到发布标准。
+
+当前下一步是从最新 `main` 创建 `feat/n1-hex8-mesh`。该分支只实现结构化 Hex8 mesh 与索引/方向/非法尺寸测试，不提前加入单元刚度、SIMP、API 或 ML。
 
 ## 总体时间估计
 
@@ -217,7 +256,7 @@ GPU 是提高效率的可选资源，不是完成项目的硬性条件。部署�
 
 ## 开始前的 0 号阶段（1–2 天）
 
-1. 克隆空仓库并建立首个本地工作分支。
+1. 克隆仓库并建立首个短期工作分支（已完成仓库克隆；首个开发分支为 `feat/n1-hex8-mesh`）。
 2. 添加 README、`PROVENANCE.md`、`LICENSE`、`.gitignore`、`pyproject.toml` 和最小 CI。
    同时把本目录中的三份规划文档迁移到新仓库的 `docs/planning/`，作为可追踪的设计记录。
 3. 在 provenance 中固定上游 URL、commit SHA、无许可证状态和“不复制上游源文件”的边界。
