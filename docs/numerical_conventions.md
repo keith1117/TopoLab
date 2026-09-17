@@ -48,6 +48,13 @@ reason and regression-test update.
 - Initial scope is isotropic, linear elasticity under small deformation.
 - Express Young's modulus in pascals and loads in newtons.
 - Require `E > 0` and `-1 < nu < 0.5`.
+- Store strain in engineering-Voigt order
+  `(epsilon_xx, epsilon_yy, epsilon_zz, gamma_xy, gamma_yz, gamma_xz)` and stress in
+  the matching order `(sigma_xx, sigma_yy, sigma_zz, tau_xy, tau_yz, tau_xz)`.
+- Derive the Hex8 stiffness from `Ke = integral(B.T @ D @ B) dV`, using the local
+  node and DOF order above, trilinear isoparametric shape functions, and `2 x 2 x 2`
+  Gauss integration. The first implementation supports axis-aligned rectangular
+  elements with positive finite side lengths.
 - The unconstrained element/global stiffness is positive semidefinite because of rigid
   body modes; test positive definiteness only after sufficient supports are applied.
 
