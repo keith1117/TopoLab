@@ -24,7 +24,7 @@
 - [x] 添加 GitHub Actions CI 配置与包导入 smoke test；
 - [x] 记录开发机器的非敏感硬件信息和数值约定；
 - [x] 将三份规划文档复制到新仓库 `docs/planning/`；
-- [ ] 推送 G0 commit 后确认远端 GitHub Actions 通过。
+- [x] 推送 G0 commit，并确认远端 GitHub Actions run `35275304334` 通过。
 
 G0 只建立开发与审计基础，不计作 Numerical Core 实现。
 
