@@ -43,3 +43,4 @@ Hex8 finite elements, density filtering, or the Optimality Criteria method.
 | Date | Component | Source/derivation | Notes |
 |---|---|---|---|
 | 2026-09-17 | G0 repository scaffolding | Original TopoLab work | No numerical implementation |
+| 2026-09-17 | Structured Hex8 mesh | Independent Cartesian-grid derivation from the conventions documented in this repository | No upstream source code or file structure used |

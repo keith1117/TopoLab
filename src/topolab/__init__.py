@@ -1,6 +1,7 @@
-"""TopoLab package.
+"""TopoLab package."""
 
-Numerical implementation begins after the G0 repository gate.
-"""
+from topolab.mesh import Hex8Mesh, generate_structured_hex8
 
 __version__ = "0.0.0"
+
+__all__ = ["Hex8Mesh", "generate_structured_hex8"]

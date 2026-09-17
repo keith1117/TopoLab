@@ -5,8 +5,9 @@ topology optimization. The project will combine a sparse finite-element numerica
 core, reproducible experiment workflows, and a controlled evaluation of learned
 warm starts.
 
-> **Status:** pre-development / G0 repository preparation. No numerical solver,
-> scalability result, or ML acceleration claim has been implemented yet.
+> **Status:** N1 finite-element foundation in progress. Structured Hex8 mesh
+> generation is implemented; no element stiffness, solver, scalability result, or
+> ML acceleration claim has been implemented yet.
 
 ## Intended scope
 
@@ -48,8 +49,8 @@ docs/
   numerical_conventions.md     Numerical definitions that code and tests must follow
   reference_baseline.md        Frozen upstream reference and known limitations
   planning/                    Admissions, schedule, and implementation planning
-src/topolab/                   TopoLab package; numerical code begins after G0
-tests/                         Smoke tests now, numerical verification tests next
+src/topolab/                   TopoLab package and structured Hex8 mesh generator
+tests/                         Package and numerical convention tests
 ```
 
 ## Provenance
