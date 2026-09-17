@@ -1,0 +1,45 @@
+# Provenance and implementation boundary
+
+## Hack3D reference baseline
+
+- Repository: <https://github.com/Jiangce2017/3D_SIMP_Topology_Optimization_Numpy>
+- Fixed commit: `584cb8ee570d375f8ba9b10272020c5c2daa8c30`
+- Author/account: Jiangce2017
+- License status checked on 2026-09-17: no open-source license is declared in the
+  GitHub repository.
+
+The reference repository is kept outside TopoLab and is used only to understand the
+original Hack3D problem statement, preserve a historical behavior baseline, and
+identify cases for independent numerical validation. TopoLab does not copy,
+translate, modify, or redistribute its source files, comments, module structure, or
+figures.
+
+## TopoLab implementation boundary
+
+TopoLab's source code will be independently written from published equations,
+documented numerical conventions, and tests. Cross-checking against the Hack3D
+reference is secondary to analytical checks, finite differences, equilibrium, and
+dense-versus-sparse verification. TopoLab will not reproduce an upstream behavior
+when independent evidence shows that behavior is incorrect.
+
+If upstream code is ever introduced, development must stop until written permission
+and license compatibility are documented here and in the affected files.
+
+## Primary technical references
+
+1. Kai Liu and Andrés Tovar, "An efficient 3D topology optimization code written in
+   Matlab," *Structural and Multidisciplinary Optimization* 50, 1175–1196 (2014).
+   <https://doi.org/10.1007/s00158-014-1107-x>
+2. Top3d documentation and errata. <https://www.top3d.app/>
+3. Ole Sigmund, "A 99 line topology optimization code written in MATLAB,"
+   *Structural and Multidisciplinary Optimization* 21, 120–127 (2001).
+   <https://doi.org/10.1007/s001580050176>
+
+These sources define standard methods; they do not imply that TopoLab invented SIMP,
+Hex8 finite elements, density filtering, or the Optimality Criteria method.
+
+## Contribution log
+
+| Date | Component | Source/derivation | Notes |
+|---|---|---|---|
+| 2026-09-17 | G0 repository scaffolding | Original TopoLab work | No numerical implementation |

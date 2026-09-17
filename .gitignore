@@ -1,0 +1,25 @@
+.DS_Store
+.idea/
+.vscode/
+
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+build/
+dist/
+
+artifacts/
+data/generated/
+results/
+*.log
+
+# Small, reviewed numerical fixtures may be committed under tests/fixtures/.
+!tests/fixtures/
+!tests/fixtures/**
