@@ -1,7 +1,7 @@
 # Numerical conventions
 
-Status: **frozen for the N1 mesh slice**. Any later change requires a documented
-reason and regression-test update.
+Status: **frozen at Gate N1 / v0.1.0**. Any later change requires a documented reason
+and regression-test update.
 
 ## Geometry and indexing
 

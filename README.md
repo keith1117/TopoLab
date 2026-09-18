@@ -5,10 +5,10 @@ topology optimization. The project will combine a sparse finite-element numerica
 core, reproducible experiment workflows, and a controlled evaluation of learned
 warm starts.
 
-> **Status:** N1 finite-element foundation in progress. Structured Hex8 mesh
-> generation, element stiffness, sparse assembly, and constrained linear solving are
-> implemented, together with fixed-face supports and point/face loads. No SIMP solver,
-> scalability result, or ML acceleration claim has been implemented yet.
+> **Status:** `v0.1.0` / Gate N1 finite-element foundation complete. Structured Hex8
+> mesh generation, element stiffness, sparse assembly, constrained solving, supports,
+> and point/face loads have automated validation evidence. No SIMP solver, scalability
+> result, or ML acceleration claim has been implemented yet.
 
 ## Intended scope
 
@@ -50,6 +50,7 @@ docs/
   numerical_conventions.md     Numerical definitions that code and tests must follow
   reference_baseline.md        Frozen upstream reference and known limitations
   planning/                    Admissions, schedule, and implementation planning
+  validation/                  Gate evidence, thresholds, results, and limitations
 src/topolab/                   TopoLab package and finite-element foundation
 tests/                         Package and numerical convention tests
 ```
