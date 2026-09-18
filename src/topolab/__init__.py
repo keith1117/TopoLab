@@ -1,5 +1,6 @@
 """TopoLab package."""
 
+from topolab.api import create_app
 from topolab.fem import (
     LinearStaticResult,
     assemble_global_stiffness,
@@ -10,11 +11,25 @@ from topolab.fem import (
     select_face_nodes,
     solve_linear_static,
 )
+from topolab.jobs import RunManager, RunNotFoundError, RunSnapshot, RunStatus
 from topolab.mesh import Hex8Mesh, generate_structured_hex8
 from topolab.model import FaceLoad, FixedFaceSupport, PointLoad
+from topolab.problem import (
+    FaceLoadDefinition,
+    FixedFaceSupportDefinition,
+    IterationResult,
+    MaterialDefinition,
+    MeshDefinition,
+    OptimizationDefinition,
+    PointLoadDefinition,
+    TopologyProblem,
+    TopologyResult,
+    solve_problem,
+)
 from topolab.simp import (
     ComplianceResult,
     DensityFilter,
+    OptimizationCancelledError,
     SimpConfig,
     SimpIteration,
     SimpResult,
@@ -35,17 +50,32 @@ __all__ = [
     "ComplianceResult",
     "DensityFilter",
     "FaceLoad",
+    "FaceLoadDefinition",
     "FixedFaceSupport",
+    "FixedFaceSupportDefinition",
     "PointLoad",
+    "PointLoadDefinition",
+    "IterationResult",
+    "MaterialDefinition",
+    "MeshDefinition",
+    "OptimizationCancelledError",
+    "OptimizationDefinition",
+    "RunManager",
+    "RunNotFoundError",
+    "RunSnapshot",
+    "RunStatus",
     "SimpConfig",
     "SimpIteration",
     "SimpResult",
+    "TopologyProblem",
+    "TopologyResult",
     "apply_density_filter",
     "assemble_global_stiffness",
     "build_constrained_dofs",
     "build_load_vector",
     "backpropagate_density_gradient",
     "build_density_filter",
+    "create_app",
     "evaluate_compliance",
     "generate_structured_hex8",
     "hex8_element_stiffness",
@@ -54,5 +84,6 @@ __all__ = [
     "optimize_simp",
     "select_face_nodes",
     "simp_element_moduli",
+    "solve_problem",
     "solve_linear_static",
 ]

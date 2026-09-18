@@ -5,7 +5,9 @@ from topolab.fem import build_constrained_dofs, build_load_vector
 from topolab.mesh import Hex8Mesh, generate_structured_hex8
 from topolab.model import FixedFaceSupport, PointLoad
 from topolab.simp import (
+    OptimizationCancelledError,
     SimpConfig,
+    SimpIteration,
     SimpResult,
     apply_density_filter,
     backpropagate_density_gradient,
@@ -193,6 +195,32 @@ def test_optimizer_accepts_custom_initial_density() -> None:
         float(np.max(np.abs(result.history[0].design_density - initial_density))),
         abs=1e-15,
     )
+
+
+def test_optimizer_reports_iterations_and_honors_cooperative_cancellation() -> None:
+    mesh, loads, constrained_dofs, config = _optimization_case()
+    observed_iterations: list[SimpIteration] = []
+    cancel_requested = False
+
+    def record_iteration(state: SimpIteration) -> None:
+        nonlocal cancel_requested
+        observed_iterations.append(state)
+        cancel_requested = True
+
+    with pytest.raises(OptimizationCancelledError, match="cancelled"):
+        optimize_simp(
+            mesh,
+            loads,
+            constrained_dofs,
+            solid_modulus=1000.0,
+            minimum_modulus=1.0,
+            poisson_ratio=0.3,
+            config=config,
+            iteration_callback=record_iteration,
+            should_cancel=lambda: cancel_requested,
+        )
+
+    assert len(observed_iterations) == 1
 
 
 @pytest.mark.parametrize(
