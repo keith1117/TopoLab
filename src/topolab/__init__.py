@@ -13,7 +13,7 @@ from topolab.fem import (
 from topolab.mesh import Hex8Mesh, generate_structured_hex8
 from topolab.model import FaceLoad, FixedFaceSupport, PointLoad
 
-__version__ = "0.0.0"
+__version__ = "0.1.0"
 
 __all__ = [
     "Hex8Mesh",

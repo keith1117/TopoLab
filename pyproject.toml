@@ -1,7 +1,7 @@
 [project]
 name = "topolab"
-version = "0.0.0"
-description = "Validated 3D SIMP topology optimization platform"
+version = "0.1.0"
+description = "Numerical foundation for a 3D topology optimization platform"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = "MIT"
