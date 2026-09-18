@@ -1,10 +1,11 @@
 """SQLite persistence for optimization run state."""
 
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Protocol
 
-from sqlalchemy import Boolean, Integer, String, Text, create_engine, select
+from sqlalchemy import Boolean, Integer, String, Text, create_engine, inspect, select
 from sqlalchemy.engine import URL
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
@@ -22,6 +23,8 @@ class StoredRun:
     cancel_requested: bool
     result: TopologyResult | None
     error: str | None
+    created_at: datetime
+    updated_at: datetime
 
 
 class RunStore(Protocol):
@@ -52,6 +55,8 @@ class _RunRow(_Base):
     cancel_requested: Mapped[bool] = mapped_column(Boolean)
     result_json: Mapped[str | None] = mapped_column(Text, nullable=True)
     error: Mapped[str | None] = mapped_column(Text, nullable=True)
+    created_at: Mapped[str] = mapped_column(String(40))
+    updated_at: Mapped[str] = mapped_column(String(40))
 
 
 class SqliteRunStore:
@@ -63,6 +68,7 @@ class SqliteRunStore:
         self._engine = create_engine(url)
         self._session_factory = sessionmaker(self._engine)
         _Base.metadata.create_all(self._engine)
+        self._migrate_timestamp_columns()
 
     def load_all(self) -> tuple[StoredRun, ...]:
         """Load and validate all persisted contracts."""
@@ -81,6 +87,8 @@ class SqliteRunStore:
             "cancel_requested": run.cancel_requested,
             "result_json": None if run.result is None else run.result.model_dump_json(),
             "error": run.error,
+            "created_at": _serialize_timestamp(run.created_at),
+            "updated_at": _serialize_timestamp(run.updated_at),
         }
         with self._session_factory.begin() as session:
             row = session.get(_RunRow, run.run_id)
@@ -110,4 +118,42 @@ class SqliteRunStore:
             cancel_requested=row.cancel_requested,
             result=result,
             error=row.error,
+            created_at=_deserialize_timestamp(row.created_at),
+            updated_at=_deserialize_timestamp(row.updated_at),
         )
+
+    def _migrate_timestamp_columns(self) -> None:
+        columns = {
+            column["name"] for column in inspect(self._engine).get_columns("runs")
+        }
+        missing = {"created_at", "updated_at"} - columns
+        if not missing:
+            return
+        timestamp = datetime.now(UTC).isoformat()
+        with self._engine.begin() as connection:
+            if "created_at" in missing:
+                connection.exec_driver_sql(
+                    "ALTER TABLE runs ADD COLUMN created_at TEXT"
+                )
+            if "updated_at" in missing:
+                connection.exec_driver_sql(
+                    "ALTER TABLE runs ADD COLUMN updated_at TEXT"
+                )
+            connection.exec_driver_sql(
+                "UPDATE runs SET created_at = COALESCE(created_at, ?), "
+                "updated_at = COALESCE(updated_at, ?)",
+                (timestamp, timestamp),
+            )
+
+
+def _serialize_timestamp(value: datetime) -> str:
+    if value.tzinfo is None or value.utcoffset() is None:
+        raise ValueError("run timestamps must include a timezone")
+    return value.astimezone(UTC).isoformat()
+
+
+def _deserialize_timestamp(value: str) -> datetime:
+    timestamp = datetime.fromisoformat(value)
+    if timestamp.tzinfo is None or timestamp.utcoffset() is None:
+        raise ValueError("stored run timestamps must include a timezone")
+    return timestamp.astimezone(UTC)

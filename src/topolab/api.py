@@ -4,10 +4,17 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from http import HTTPStatus
 from pathlib import Path
+from typing import Annotated
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 
-from topolab.jobs import RunManager, RunNotFoundError, RunSnapshot
+from topolab.jobs import (
+    RunCursorError,
+    RunManager,
+    RunNotFoundError,
+    RunPage,
+    RunSnapshot,
+)
 from topolab.persistence import SqliteRunStore
 from topolab.problem import TopologyProblem
 
@@ -45,6 +52,19 @@ def create_app(
     )
     def create_run(problem: TopologyProblem) -> RunSnapshot:
         return manager.submit(problem)
+
+    @app.get("/runs", response_model=RunPage)
+    def list_runs(
+        limit: Annotated[int, Query(ge=1, le=100)] = 20,
+        cursor: str | None = None,
+    ) -> RunPage:
+        try:
+            return manager.list_runs(limit=limit, cursor=cursor)
+        except RunCursorError as error:
+            raise HTTPException(
+                status_code=HTTPStatus.BAD_REQUEST,
+                detail="invalid run cursor",
+            ) from error
 
     @app.get("/runs/{run_id}", response_model=RunSnapshot)
     def get_run(run_id: str) -> RunSnapshot:

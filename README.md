@@ -8,8 +8,9 @@ warm starts.
 > **Status:** Gate P1 has passed for the `v0.3.0` in-memory platform. It combines the
 > validated numerical core with serializable problem/result contracts, isolated run
 > state, cooperative cancellation, and a minimal HTTP adapter. Post-P1 development
-> adds optional SQLite run persistence and explicit restart recovery; process workers,
-> scalability evidence, frontend work, and ML remain incomplete.
+> adds optional SQLite run persistence, explicit restart recovery, and paginated run
+> history; process workers, scalability evidence, frontend work, and ML remain
+> incomplete.
 
 ## Intended scope
 

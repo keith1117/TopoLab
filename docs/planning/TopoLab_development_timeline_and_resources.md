@@ -53,6 +53,7 @@ TopoLab 采用轻量级 **GitHub Flow**。项目由单人主导且处于快速�
 | `feat/n2-simp-optimizer` | filter、OC 更新和完整 SIMP 循环 |
 | `feat/p1-api-jobs` | N2 通过后的 API、任务状态与运行隔离 |
 | `feat/platform-run-persistence` | SQLite 运行持久化、终态恢复和进程中断语义 |
+| `feat/platform-run-history` | UTC 生命周期时间、稳定游标分页与运行历史 API |
 | `experiment/m1-warm-start-cnn` | M0 通过后的 learned warm-start 对照实验 |
 
 分支列表是当前执行顺序，不是必须提前创建的固定结构。只有前一切片的接口和测试稳定后，才创建下一分支；发现独立缺陷时，从最新 `main` 创建 `fix/*` 分支。
@@ -66,9 +67,10 @@ TopoLab 采用轻量级 **GitHub Flow**。项目由单人主导且处于快速�
 - `v0.3.0`：Gate P1 通过；
 - `v1.0.0`：公开演示、复现实验和文档达到发布标准。
 
-Gate P1 已通过。当前切片补充 SQLite 运行持久化与明确的进程重启恢复语义，
-随后可开始前端与公开 demo。ML 仍需先通过 M0，冻结 case schema、生成器
-版本、数据分割和 baseline，不能直接跳到模型训练。
+Gate P1 已通过。SQLite 运行持久化、重启恢复、UTC 生命周期时间和稳定游标
+分页已经完成，前端实验历史页面的读取边界已冻结；下一切片可以开始简单前端
+与公开 demo。ML 仍需先通过 M0，冻结 case schema、生成器版本、数据分割和
+baseline，不能直接跳到模型训练。
 
 ## 总体时间估计
 

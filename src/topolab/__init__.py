@@ -11,7 +11,15 @@ from topolab.fem import (
     select_face_nodes,
     solve_linear_static,
 )
-from topolab.jobs import RunManager, RunNotFoundError, RunSnapshot, RunStatus
+from topolab.jobs import (
+    RunCursorError,
+    RunManager,
+    RunNotFoundError,
+    RunPage,
+    RunSnapshot,
+    RunStatus,
+    RunSummary,
+)
 from topolab.mesh import Hex8Mesh, generate_structured_hex8
 from topolab.model import FaceLoad, FixedFaceSupport, PointLoad
 from topolab.persistence import RunStore, SqliteRunStore, StoredRun
@@ -62,10 +70,13 @@ __all__ = [
     "OptimizationCancelledError",
     "OptimizationDefinition",
     "RunManager",
+    "RunCursorError",
     "RunNotFoundError",
+    "RunPage",
     "RunSnapshot",
     "RunStore",
     "RunStatus",
+    "RunSummary",
     "SimpConfig",
     "SimpIteration",
     "SimpResult",
