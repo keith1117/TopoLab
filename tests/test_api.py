@@ -1,5 +1,6 @@
 import asyncio
 from collections.abc import Callable
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from threading import Event
 
@@ -114,9 +115,26 @@ def test_api_rejects_invalid_problems_and_unknown_runs() -> None:
     assert cancel_missing.status_code == 404
 
 
+def test_api_lists_an_empty_run_history() -> None:
+    async def exercise(app: FastAPI) -> httpx2.Response:
+        transport = httpx2.ASGITransport(app=app)
+        async with httpx2.AsyncClient(
+            transport=transport,
+            base_url="http://testserver",
+        ) as client:
+            return await client.get("/runs")
+
+    with RunManager(max_workers=1) as manager:
+        response = asyncio.run(exercise(create_app(manager)))
+
+    assert response.status_code == 200
+    assert response.json() == {"items": [], "next_cursor": None}
+
+
 def test_api_reads_a_completed_run_after_restart(tmp_path: Path) -> None:
     database_path = tmp_path / "runs.sqlite3"
     store = SqliteRunStore(database_path)
+    timestamp = datetime(2026, 9, 18, tzinfo=UTC)
     store.save(
         StoredRun(
             run_id="completed",
@@ -126,6 +144,8 @@ def test_api_reads_a_completed_run_after_restart(tmp_path: Path) -> None:
             cancel_requested=False,
             result=_result(),
             error=None,
+            created_at=timestamp,
+            updated_at=timestamp,
         )
     )
     store.close()
@@ -145,6 +165,70 @@ def test_api_reads_a_completed_run_after_restart(tmp_path: Path) -> None:
     assert response.status_code == 200
     assert response.json()["status"] == "succeeded"
     assert response.json()["result"]["compliance"] == 1.0
+
+
+def test_api_lists_persisted_runs_with_stable_cursor_pagination(
+    tmp_path: Path,
+) -> None:
+    database_path = tmp_path / "runs.sqlite3"
+    start = datetime(2026, 9, 18, tzinfo=UTC)
+    store = SqliteRunStore(database_path)
+    for index, run_id in enumerate(("oldest", "middle", "newest")):
+        timestamp = start + timedelta(seconds=index)
+        store.save(
+            StoredRun(
+                run_id=run_id,
+                problem=TopologyProblem.model_validate(_problem_payload()),
+                status=RunStatus.SUCCEEDED.value,
+                iteration=index,
+                cancel_requested=False,
+                result=_result(),
+                error=None,
+                created_at=timestamp,
+                updated_at=timestamp,
+            )
+        )
+    store.close()
+    app = create_app(database_path=database_path)
+
+    async def exercise() -> tuple[
+        httpx2.Response,
+        httpx2.Response,
+        httpx2.Response,
+        httpx2.Response,
+    ]:
+        async with app.router.lifespan_context(app):
+            transport = httpx2.ASGITransport(app=app)
+            async with httpx2.AsyncClient(
+                transport=transport,
+                base_url="http://testserver",
+            ) as client:
+                first = await client.get("/runs", params={"limit": 2})
+                second = await client.get(
+                    "/runs",
+                    params={"limit": 2, "cursor": first.json()["next_cursor"]},
+                )
+                invalid_cursor = await client.get(
+                    "/runs",
+                    params={"cursor": "unknown"},
+                )
+                invalid_limit = await client.get("/runs", params={"limit": 0})
+        return first, second, invalid_cursor, invalid_limit
+
+    first, second, invalid_cursor, invalid_limit = asyncio.run(exercise())
+
+    assert first.status_code == 200
+    assert [run["run_id"] for run in first.json()["items"]] == [
+        "newest",
+        "middle",
+    ]
+    assert first.json()["next_cursor"] == "middle"
+    assert first.json()["items"][0]["created_at"]
+    assert "result" not in first.json()["items"][0]
+    assert [run["run_id"] for run in second.json()["items"]] == ["oldest"]
+    assert second.json()["next_cursor"] is None
+    assert invalid_cursor.status_code == 400
+    assert invalid_limit.status_code == 422
 
 
 def test_api_rejects_two_run_manager_configurations(tmp_path: Path) -> None:

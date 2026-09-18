@@ -83,4 +83,5 @@ The full evidence matrix and limitations are recorded in
 Optional SQLite persistence and explicit process-restart semantics are additive work
 after the frozen v0.3.0 contract. Their provisional contract is documented in
 `docs/run_persistence.md`; the default remains in-memory unless a database path or
-store is supplied.
+store is supplied. The same post-P1 contract defines UTC run timestamps and stable
+cursor pagination through `GET /runs`.

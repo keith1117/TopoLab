@@ -5,10 +5,10 @@ Status: **implemented after v0.3.0 and provisional until the next platform relea
 ## Scope
 
 `SqliteRunStore` adds an optional durable boundary beneath `RunManager`. One SQLite
-row stores the immutable problem JSON and the latest run status, iteration,
-cancellation request, result JSON, and error. SQLAlchemy owns schema creation and
-transaction handling; numerical arrays remain represented by the frozen Pydantic
-problem/result contracts rather than ORM objects.
+row stores the immutable problem JSON, UTC creation/update timestamps, and the latest
+run status, iteration, cancellation request, result JSON, and error. SQLAlchemy owns
+schema creation and transaction handling; numerical arrays remain represented by the
+frozen Pydantic problem/result contracts rather than ORM objects.
 
 Persistence is explicit. Library callers pass a store to `RunManager`, while the API
 factory accepts a database path:
@@ -42,6 +42,11 @@ Each save is one SQLite transaction. A successful result is therefore durable be
 the corresponding terminal snapshot is returned by `wait`. Runs keep separate rows
 and independently serialized result objects.
 
+`created_at` is assigned once when a run is submitted. `updated_at` changes on each
+persisted lifecycle transition and is returned as a timezone-aware UTC timestamp.
+Databases created by the first persistence slice are upgraded in place by adding and
+backfilling the two timestamp columns.
+
 ## Restart semantics
 
 On construction, a manager with a store loads all existing records:
@@ -57,11 +62,26 @@ The second rule avoids reporting abandoned work as still active. It is recovery 
 durable record, not automatic retry or numerical checkpoint/resume. A caller may
 submit a new run from the persisted problem after making that retry decision explicit.
 
+## Run history pagination
+
+`GET /runs` returns a `RunPage` with summary `items` and `next_cursor`. Summaries omit
+the potentially large numerical result arrays; callers fetch one full result through
+`GET /runs/{run_id}`. Results are ordered newest first by `(created_at, run_id)`; the
+run ID provides a deterministic tie-break when creation timestamps match. The default
+page size is 20 and the accepted range is 1 through 100.
+
+When more results exist, `next_cursor` is the final run ID in the current page. Passing
+that value as `cursor` starts after the same record. Newer runs inserted between page
+requests remain before the cursor and do not duplicate records on subsequent pages.
+An unknown cursor returns HTTP `400`, while an invalid page size is rejected by request
+validation with HTTP `422`.
+
 ## Current limits
 
-- The schema is created directly and has no migration framework yet.
-- Startup loads all run records into memory; pagination and archival are not present.
-- The HTTP surface still requires a known run ID and has no list endpoint.
+- The schema has one built-in additive timestamp migration but no general migration
+  framework yet.
+- Startup still loads all run records into memory; pagination bounds the HTTP response,
+  not database memory use. Filtering, search, deletion, and archival are not present.
 - SQLite persistence does not provide process-isolated execution, distributed workers,
   authentication, quotas, or artifact storage.
 - Optimizer checkpoint/resume is not implemented; interruption recovery deliberately
