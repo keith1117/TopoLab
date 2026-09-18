@@ -70,8 +70,15 @@ reason and regression-test update.
 - A direction is an axis (`x`, `y`, `z`) or DOF index (`0`, `1`, `2`).
 - The load's signed magnitude determines positive or negative direction. Never use a
   negative direction index to encode sign.
+- A face selector uses a global axis and the `min` or `max` side of the structured
+  domain. A fixed-face support constrains the selected displacement components for
+  every node on that face.
+- A point load adds its signed magnitude once at one node and direction. Multiple load
+  objects superpose in the same global vector.
 - A distributed load's `total` means the resultant over the selected nodes or face;
-  discretization performs exactly one distribution step.
+  discretization performs exactly one distribution step. The initial `FaceLoad`
+  distributes this total equally over the selected face nodes; it represents a
+  discrete resultant, not a pressure or consistent surface-traction integration.
 - Reject problems with no loads, no supports, out-of-domain selectors, or remaining
   rigid body modes with explicit validation errors.
 

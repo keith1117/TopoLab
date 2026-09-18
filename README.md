@@ -7,8 +7,8 @@ warm starts.
 
 > **Status:** N1 finite-element foundation in progress. Structured Hex8 mesh
 > generation, element stiffness, sparse assembly, and constrained linear solving are
-> implemented; no SIMP solver, scalability result, or ML acceleration claim has been
-> implemented yet.
+> implemented, together with fixed-face supports and point/face loads. No SIMP solver,
+> scalability result, or ML acceleration claim has been implemented yet.
 
 ## Intended scope
 
