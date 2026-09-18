@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { getRun, listRuns } from "./api";
+import { DensityVisualization } from "./DensityVisualization";
 import type { RunSnapshot, RunStatus, RunSummary } from "./types";
 
 const STATUS_LABELS: Record<RunStatus, string> = {
@@ -70,7 +71,7 @@ export function App() {
     setIsDetailLoading(true);
     try {
       setDetail(await getRun(runId));
-      if (window.matchMedia?.("(max-width: 980px)").matches) {
+      if (window.matchMedia?.("(max-width: 980px)")?.matches) {
         requestAnimationFrame(() => {
           detailPanelRef.current?.scrollIntoView?.({
             behavior: "smooth",
@@ -243,11 +244,33 @@ export function App() {
             <RunDetail run={detail} />
           ) : null}
         </aside>
+
+        {detail?.result && (
+          <section
+            className="panel density-panel"
+            aria-labelledby="density-title"
+          >
+            <div className="panel-heading density-heading">
+              <div>
+                <p className="section-kicker">Final physical field</p>
+                <h2 id="density-title">3D density</h2>
+              </div>
+              <span className="mesh-chip">
+                {detail.problem.mesh.element_counts.join(" × ")} elements
+              </span>
+            </div>
+            <DensityVisualization
+              key={detail.run_id}
+              density={detail.result.physical_density}
+              mesh={detail.problem.mesh}
+            />
+          </section>
+        )}
       </main>
 
       <footer>
         <span>TopoLab platform · post-P1</span>
-        <span>UTC timestamps · cursor pagination</span>
+        <span>UTC timestamps · cursor pagination · physical density</span>
       </footer>
     </div>
   );

@@ -36,6 +36,7 @@ class RunSnapshot(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
 
     run_id: str
+    problem: TopologyProblem
     status: RunStatus
     iteration: int
     cancel_requested: bool
@@ -325,6 +326,7 @@ class RunManager:
     def _snapshot(run_id: str, state: _RunState) -> RunSnapshot:
         return RunSnapshot(
             run_id=run_id,
+            problem=state.problem,
             status=state.status,
             iteration=state.iteration,
             cancel_requested=state.cancel_event.is_set(),

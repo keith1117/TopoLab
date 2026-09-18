@@ -48,6 +48,10 @@ def test_api_creates_and_reads_an_isolated_run() -> None:
     assert response.status_code == 202
     assert fetched.status_code == 200
     assert fetched.json()["status"] == "succeeded"
+    assert fetched.json()["problem"]["mesh"] == {
+        "element_counts": [1, 1, 1],
+        "lengths": [1.0, 1.0, 1.0],
+    }
     assert fetched.json()["result"]["design_density"] == [0.5]
 
 
@@ -224,6 +228,7 @@ def test_api_lists_persisted_runs_with_stable_cursor_pagination(
     ]
     assert first.json()["next_cursor"] == "middle"
     assert first.json()["items"][0]["created_at"]
+    assert "problem" not in first.json()["items"][0]
     assert "result" not in first.json()["items"][0]
     assert [run["run_id"] for run in second.json()["items"]] == ["oldest"]
     assert second.json()["next_cursor"] is None

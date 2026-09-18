@@ -49,6 +49,8 @@ def test_completed_runs_survive_restart_and_keep_results_isolated(
 
     assert first.status is RunStatus.SUCCEEDED
     assert second.status is RunStatus.SUCCEEDED
+    assert first.problem.mesh.element_counts == (1, 1, 1)
+    assert second.problem.mesh.element_counts == (2, 1, 1)
     assert first.result is not None
     assert second.result is not None
     assert first.result.compliance == 1.0
