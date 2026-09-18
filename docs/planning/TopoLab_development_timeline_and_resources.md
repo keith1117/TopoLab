@@ -65,8 +65,8 @@ TopoLab 采用轻量级 **GitHub Flow**。项目由单人主导且处于快速�
 - `v0.3.0`：Gate P1 通过；
 - `v1.0.0`：公开演示、复现实验和文档达到发布标准。
 
-Gate N2 已通过。下一步是从最新 `main` 创建 `feat/p1-api-jobs`，只建立稳定的
-problem/result 接口、任务状态与运行隔离；前端和 ML 继续等待各自的 Gate。
+Gate P1 已通过，前端与公开 demo 可以开始。ML 仍需先通过 M0，冻结 case
+schema、生成器版本、数据分割和 baseline，不能直接跳到模型训练。
 
 ## 总体时间估计
 

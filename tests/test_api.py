@@ -3,6 +3,7 @@ from collections.abc import Callable
 from threading import Event
 
 import httpx2
+from fastapi import FastAPI
 
 from topolab.api import create_app
 from topolab.jobs import RunManager, RunStatus
@@ -19,8 +20,11 @@ def test_api_creates_and_reads_an_isolated_run() -> None:
         del problem, should_cancel, iteration_callback
         return _result()
 
-    async def exercise(manager: RunManager) -> tuple[httpx2.Response, httpx2.Response]:
-        transport = httpx2.ASGITransport(app=create_app(manager))
+    async def exercise(
+        app: FastAPI,
+        manager: RunManager,
+    ) -> tuple[httpx2.Response, httpx2.Response]:
+        transport = httpx2.ASGITransport(app=app)
         async with httpx2.AsyncClient(
             transport=transport,
             base_url="http://testserver",
@@ -33,8 +37,10 @@ def test_api_creates_and_reads_an_isolated_run() -> None:
         return response, fetched
 
     with RunManager(max_workers=1, runner=runner) as manager:
-        response, fetched = asyncio.run(exercise(manager))
+        app = create_app(manager)
+        response, fetched = asyncio.run(exercise(app, manager))
 
+    assert app.version == "0.3.0"
     assert response.status_code == 202
     assert fetched.status_code == 200
     assert fetched.json()["status"] == "succeeded"

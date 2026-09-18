@@ -23,7 +23,7 @@ def create_app(run_manager: RunManager | None = None) -> FastAPI:
         if owns_manager:
             manager.shutdown()
 
-    app = FastAPI(title="TopoLab", version="0.2.0", lifespan=lifespan)
+    app = FastAPI(title="TopoLab", version="0.3.0", lifespan=lifespan)
 
     @app.post(
         "/runs",
