@@ -99,8 +99,15 @@ regression-test update.
 - Use a density filter in the optimizer: design density `x` is filtered to physical
   density `rho = (H @ x) / Hs` before stiffness interpolation. Back-propagate
   compliance and volume derivatives through that linear map before the OC update.
-  The current sensitivity slice accepts `rho` directly; filter construction and OC
-  placement are implemented and tested in the following optimizer slice.
+  For element-center distance `d_ij`, use sparse weights
+  `H_ij = max(0, r_min - d_ij)` and `Hs_i = sum_j H_ij`.
+- Define volume as the mean physical density. Apply the OC move limit and
+  `[rho_min, 1]` bounds to design density, while bisection evaluates the filtered
+  physical volume constraint.
+- Record each history row after an OC update and a fresh finite-element solve. Its
+  design density, physical density, volume, compliance, and maximum design-density
+  change therefore describe the same updated state. Convergence uses that maximum
+  design-density change.
 - Compliance, volume, density change, and density stored for one history row must all
   describe the same optimization state.
 - Re-solve the final density before returning final compliance.
