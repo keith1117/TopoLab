@@ -1,5 +1,6 @@
 """Compliance and sensitivity operations for density-based topology optimization."""
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from math import ceil, isfinite, sqrt
 from numbers import Integral, Real
@@ -70,6 +71,10 @@ class SimpResult:
     reactions: NDArray[np.float64]
     history: tuple[SimpIteration, ...]
     converged: bool
+
+
+class OptimizationCancelledError(RuntimeError):
+    """Raised when a caller requests cooperative optimization cancellation."""
 
 
 def simp_element_moduli(
@@ -324,10 +329,13 @@ def optimize_simp(
     poisson_ratio: float,
     config: SimpConfig,
     initial_density: NDArray[np.float64] | None = None,
+    iteration_callback: Callable[[SimpIteration], None] | None = None,
+    should_cancel: Callable[[], bool] | None = None,
 ) -> SimpResult:
     """Run deterministic density-filtered SIMP with Optimality Criteria updates."""
 
     _validate_optimizer_config(config)
+    _raise_if_cancelled(should_cancel)
     number_of_elements = mesh.element_dofs.shape[0]
     density_filter = build_density_filter(mesh, config.filter_radius)
     if initial_density is None:
@@ -359,6 +367,7 @@ def optimize_simp(
     converged = False
 
     for iteration in range(1, config.max_iterations + 1):
+        _raise_if_cancelled(should_cancel)
         design_objective_gradient = backpropagate_density_gradient(
             density_filter,
             analysis.sensitivity,
@@ -384,16 +393,17 @@ def optimize_simp(
             poisson_ratio=poisson_ratio,
             penalty=config.penalty,
         )
-        history.append(
-            SimpIteration(
-                iteration=iteration,
-                compliance=updated_analysis.compliance,
-                volume_fraction=float(np.mean(updated_physical)),
-                density_change=density_change,
-                design_density=updated_design.copy(),
-                physical_density=updated_physical.copy(),
-            )
+        iteration_state = SimpIteration(
+            iteration=iteration,
+            compliance=updated_analysis.compliance,
+            volume_fraction=float(np.mean(updated_physical)),
+            density_change=density_change,
+            design_density=updated_design.copy(),
+            physical_density=updated_physical.copy(),
         )
+        history.append(iteration_state)
+        if iteration_callback is not None:
+            iteration_callback(iteration_state)
         design_density = updated_design
         physical_density = updated_physical
         analysis = updated_analysis
@@ -410,6 +420,11 @@ def optimize_simp(
         history=tuple(history),
         converged=converged,
     )
+
+
+def _raise_if_cancelled(should_cancel: Callable[[], bool] | None) -> None:
+    if should_cancel is not None and should_cancel():
+        raise OptimizationCancelledError("optimization was cancelled")
 
 
 def _validate_densities(densities: NDArray[np.float64]) -> NDArray[np.float64]:

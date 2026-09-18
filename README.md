@@ -7,8 +7,9 @@ warm starts.
 
 > **Status:** Gate N2 has passed for the `v0.2.0` numerical core. The release includes
 > independently validated analytical sensitivity, density-filtered SIMP, OC updates,
-> and state-consistent iteration history. Scalability evidence, platform features, and
-> ML acceleration remain incomplete.
+> and state-consistent iteration history. Gate P1 platform work is in progress with
+> serializable problem/result contracts, isolated in-memory runs, and a minimal HTTP
+> adapter; persistence, scalability evidence, frontend work, and ML remain incomplete.
 
 ## Intended scope
 
@@ -54,6 +55,9 @@ docs/
 src/topolab/                   TopoLab package and finite-element foundation
 tests/                         Package and numerical convention tests
 ```
+
+The provisional platform contract and run lifecycle are documented in
+[`docs/platform_contract.md`](docs/platform_contract.md).
 
 ## Provenance
 
