@@ -1,9 +1,10 @@
 """Finite-element building blocks for small-strain 3D elasticity."""
 
+from collections.abc import Sequence
 from dataclasses import dataclass
 from itertools import product
 from math import isfinite, sqrt
-from numbers import Real
+from numbers import Integral, Real
 
 import numpy as np
 from numpy.typing import NDArray
@@ -11,6 +12,7 @@ from scipy.sparse import coo_matrix, csr_matrix  # type: ignore[import-untyped]
 from scipy.sparse.linalg import splu  # type: ignore[import-untyped]
 
 from topolab.mesh import HEX8_LOCAL_NODE_OFFSETS, Hex8Mesh
+from topolab.model import Axis, FaceLoad, FaceSide, FixedFaceSupport, Load, PointLoad
 
 _HEX8_REFERENCE_COORDINATES = 2.0 * np.asarray(HEX8_LOCAL_NODE_OFFSETS, dtype=np.float64) - 1.0
 _GAUSS_POINTS = (-1.0 / sqrt(3.0), 1.0 / sqrt(3.0))
@@ -190,6 +192,74 @@ def solve_linear_static(
     return LinearStaticResult(displacements=displacements, reactions=reactions)
 
 
+def select_face_nodes(
+    mesh: Hex8Mesh,
+    axis: Axis,
+    side: FaceSide,
+) -> NDArray[np.int64]:
+    """Return nodes on a minimum or maximum structured-domain face."""
+
+    axis_index = _axis_index(axis)
+    if side not in ("min", "max"):
+        raise ValueError("side must be 'min' or 'max'")
+    coordinate = 0.0 if side == "min" else mesh.lengths[axis_index]
+    return np.flatnonzero(mesh.coordinates[:, axis_index] == coordinate)
+
+
+def build_constrained_dofs(
+    mesh: Hex8Mesh,
+    supports: Sequence[FixedFaceSupport],
+) -> NDArray[np.int64]:
+    """Discretize fixed-face supports into sorted unique global DOF indices."""
+
+    if len(supports) == 0:
+        raise ValueError("supports must contain at least one support")
+
+    support_dofs: list[NDArray[np.int64]] = []
+    for support in supports:
+        if not isinstance(support, FixedFaceSupport):
+            raise TypeError("supports must contain only FixedFaceSupport objects")
+        direction_indices = _direction_indices(support.directions)
+        face_nodes = select_face_nodes(mesh, support.axis, support.side)
+        dofs = (
+            3 * face_nodes[:, np.newaxis]
+            + np.asarray(direction_indices, dtype=np.int64)
+        ).ravel()
+        support_dofs.append(dofs)
+
+    return np.unique(np.concatenate(support_dofs))
+
+
+def build_load_vector(
+    mesh: Hex8Mesh,
+    loads: Sequence[Load],
+) -> NDArray[np.float64]:
+    """Discretize and superpose point and equal-node face loads."""
+
+    if len(loads) == 0:
+        raise ValueError("loads must contain at least one load")
+
+    number_of_nodes = mesh.coordinates.shape[0]
+    load_vector = np.zeros(3 * number_of_nodes, dtype=np.float64)
+    for load in loads:
+        if isinstance(load, PointLoad):
+            node = _node_index(load.node, number_of_nodes)
+            direction = _direction_index(load.direction)
+            magnitude = _nonzero_finite("magnitude", load.magnitude)
+            load_vector[3 * node + direction] += magnitude
+        elif isinstance(load, FaceLoad):
+            direction = _direction_index(load.direction)
+            total = _nonzero_finite("total", load.total)
+            face_nodes = select_face_nodes(mesh, load.axis, load.side)
+            load_vector[3 * face_nodes + direction] += total / face_nodes.size
+        else:
+            raise TypeError("loads must contain only PointLoad or FaceLoad objects")
+
+    if not np.any(load_vector):
+        raise ValueError("loads cancel to a zero load vector")
+    return load_vector
+
+
 def _shape_function_gradients(
     xi: float,
     eta: float,
@@ -239,6 +309,51 @@ def _validate_dimensions(
         _positive_finite("hy", hy),
         _positive_finite("hz", hz),
     )
+
+
+def _axis_index(axis: Axis) -> int:
+    if axis not in ("x", "y", "z"):
+        raise ValueError("axis must be 'x', 'y', or 'z'")
+    return {"x": 0, "y": 1, "z": 2}[axis]
+
+
+def _direction_index(direction: object) -> int:
+    if isinstance(direction, bool):
+        raise ValueError("direction must be 'x', 'y', 'z', 0, 1, or 2")
+    if isinstance(direction, str):
+        if direction not in ("x", "y", "z"):
+            raise ValueError("direction must be 'x', 'y', 'z', 0, 1, or 2")
+        return {"x": 0, "y": 1, "z": 2}[direction]
+    if isinstance(direction, Integral):
+        index = int(direction)
+        if 0 <= index <= 2:
+            return index
+    raise ValueError("direction must be 'x', 'y', 'z', 0, 1, or 2")
+
+
+def _direction_indices(directions: Sequence[object]) -> tuple[int, ...]:
+    if len(directions) == 0:
+        raise ValueError("directions must contain at least one direction")
+    indices = tuple(_direction_index(direction) for direction in directions)
+    if len(set(indices)) != len(indices):
+        raise ValueError("directions must not contain duplicate components")
+    return indices
+
+
+def _node_index(node: object, number_of_nodes: int) -> int:
+    if isinstance(node, bool) or not isinstance(node, Integral):
+        raise TypeError("node must be an integer")
+    index = int(node)
+    if index < 0 or index >= number_of_nodes:
+        raise ValueError("node is outside the mesh")
+    return index
+
+
+def _nonzero_finite(name: str, value: float) -> float:
+    result = _finite_real(name, value)
+    if result == 0.0:
+        raise ValueError(f"{name} must be nonzero")
+    return result
 
 
 def _positive_finite(name: str, value: float) -> float:
