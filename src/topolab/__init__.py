@@ -27,7 +27,7 @@ from topolab.simp import (
     simp_element_moduli,
 )
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 __all__ = [
     "Hex8Mesh",

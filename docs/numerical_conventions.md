@@ -1,8 +1,8 @@
 # Numerical conventions
 
-Status: **N1 conventions frozen at v0.1.0; N2 conventions provisional until Gate
-N2**. Any change to a frozen convention requires a documented reason and
-regression-test update.
+Status: **N1 conventions frozen at v0.1.0; N2 conventions frozen at v0.2.0**. Any
+change to a frozen convention requires a documented reason and regression-test
+update.
 
 ## Geometry and indexing
 

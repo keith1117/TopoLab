@@ -5,16 +5,16 @@ topology optimization. The project will combine a sparse finite-element numerica
 core, reproducible experiment workflows, and a controlled evaluation of learned
 warm starts.
 
-> **Status:** Gate N2 numerical optimization work is in progress on top of the
-> `v0.1.0` finite-element foundation. Density-filtered SIMP, analytical sensitivity,
-> OC updates, and state-consistent iteration history are implemented; Gate N2 release
-> evidence, scalability results, and ML acceleration remain incomplete.
+> **Status:** Gate N2 has passed for the `v0.2.0` numerical core. The release includes
+> independently validated analytical sensitivity, density-filtered SIMP, OC updates,
+> and state-consistent iteration history. Scalability evidence, platform features, and
+> ML acceleration remain incomplete.
 
 ## Intended scope
 
 The first implementation targets a structured rectangular Hex8 mesh, isotropic
 linear elasticity, small deformation, single-load-case minimum-compliance SIMP,
-point and face loads, density or sensitivity filtering, and an Optimality Criteria
+point and face loads, density filtering, and an Optimality Criteria
 update.
 
 Development is gated in this order:
