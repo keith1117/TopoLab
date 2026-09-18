@@ -77,3 +77,10 @@ The `v0.3.0` release passed and documented:
 
 The full evidence matrix and limitations are recorded in
 `docs/validation/p1_platform_validation.md`.
+
+## Post-P1 persistence work
+
+Optional SQLite persistence and explicit process-restart semantics are additive work
+after the frozen v0.3.0 contract. Their provisional contract is documented in
+`docs/run_persistence.md`; the default remains in-memory unless a database path or
+store is supplied.

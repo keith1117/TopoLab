@@ -14,6 +14,7 @@ from topolab.fem import (
 from topolab.jobs import RunManager, RunNotFoundError, RunSnapshot, RunStatus
 from topolab.mesh import Hex8Mesh, generate_structured_hex8
 from topolab.model import FaceLoad, FixedFaceSupport, PointLoad
+from topolab.persistence import RunStore, SqliteRunStore, StoredRun
 from topolab.problem import (
     FaceLoadDefinition,
     FixedFaceSupportDefinition,
@@ -63,10 +64,13 @@ __all__ = [
     "RunManager",
     "RunNotFoundError",
     "RunSnapshot",
+    "RunStore",
     "RunStatus",
     "SimpConfig",
     "SimpIteration",
     "SimpResult",
+    "SqliteRunStore",
+    "StoredRun",
     "TopologyProblem",
     "TopologyResult",
     "apply_density_filter",
