@@ -6,9 +6,9 @@ core, reproducible experiment workflows, and a controlled evaluation of learned
 warm starts.
 
 > **Status:** Gate N2 numerical optimization work is in progress on top of the
-> `v0.1.0` finite-element foundation. SIMP compliance and analytical physical-density
-> sensitivity are implemented with finite-difference checks; no filter/OC loop,
-> scalability result, or ML acceleration claim has been implemented yet.
+> `v0.1.0` finite-element foundation. Density-filtered SIMP, analytical sensitivity,
+> OC updates, and state-consistent iteration history are implemented; Gate N2 release
+> evidence, scalability results, and ML acceleration remain incomplete.
 
 ## Intended scope
 
