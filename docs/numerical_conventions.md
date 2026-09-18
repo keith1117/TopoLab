@@ -1,7 +1,8 @@
 # Numerical conventions
 
-Status: **frozen at Gate N1 / v0.1.0**. Any later change requires a documented reason
-and regression-test update.
+Status: **N1 conventions frozen at v0.1.0; N2 conventions provisional until Gate
+N2**. Any change to a frozen convention requires a documented reason and
+regression-test update.
 
 ## Geometry and indexing
 
@@ -84,11 +85,22 @@ and regression-test update.
 
 ## SIMP state
 
-- Design and physical density values lie in `[rho_min, 1]`.
-- Record the exact interpolation equation and whether `E_min` is an absolute modulus
-  or an `E_0` ratio when the material model is implemented.
-- Choose one filter definition before N2 and test its placement relative to the OC
-  update; do not reproduce the reference repository's ordering without validation.
+- Design and physical density values lie in `[rho_min, 1]`, where the optimizer will
+  require `0 < rho_min < 1`. The standalone compliance analysis accepts physical
+  densities in `(0, 1]`.
+- Use the SIMP interpolation
+  `E(rho) = E_min + rho**p * (E_0 - E_min)`, with `p >= 1`. `E_min` and `E_0` are
+  absolute Young's moduli in pascals and must satisfy `0 < E_min < E_0`; `E_min` is
+  not a ratio.
+- For element `e`, let `K0_e` be its stiffness at unit Young's modulus. Evaluate
+  `C = f.T @ u = sum_e E(rho_e) * u_e.T @ K0_e @ u_e`, and use the unfiltered
+  physical-density derivative
+  `dC/drho_e = -p * rho_e**(p - 1) * (E_0 - E_min) * u_e.T @ K0_e @ u_e`.
+- Use a density filter in the optimizer: design density `x` is filtered to physical
+  density `rho = (H @ x) / Hs` before stiffness interpolation. Back-propagate
+  compliance and volume derivatives through that linear map before the OC update.
+  The current sensitivity slice accepts `rho` directly; filter construction and OC
+  placement are implemented and tested in the following optimizer slice.
 - Compliance, volume, density change, and density stored for one history row must all
   describe the same optimization state.
 - Re-solve the final density before returning final compliance.

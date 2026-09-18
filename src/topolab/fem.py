@@ -89,8 +89,10 @@ def hex8_element_stiffness(
 def assemble_global_stiffness(
     mesh: Hex8Mesh,
     element_stiffness: NDArray[np.float64],
+    *,
+    element_factors: NDArray[np.float64] | None = None,
 ) -> csr_matrix:
-    """Assemble one uniform Hex8 element matrix into a global CSR matrix."""
+    """Assemble optionally scaled Hex8 element matrices into a global CSR matrix."""
 
     element_stiffness = np.asarray(element_stiffness, dtype=np.float64)
     if element_stiffness.shape != (24, 24):
@@ -100,6 +102,16 @@ def assemble_global_stiffness(
 
     element_dofs = mesh.element_dofs
     number_of_elements = element_dofs.shape[0]
+    if element_factors is None:
+        factors = np.ones(number_of_elements, dtype=np.float64)
+    else:
+        factors = np.asarray(element_factors, dtype=np.float64)
+        if factors.shape != (number_of_elements,):
+            raise ValueError(
+                f"element_factors must have shape ({number_of_elements},)"
+            )
+        if not np.all(np.isfinite(factors)) or np.any(factors <= 0.0):
+            raise ValueError("element_factors must contain only positive finite values")
     row_indices = np.broadcast_to(
         element_dofs[:, :, np.newaxis],
         (number_of_elements, 24, 24),
@@ -108,10 +120,7 @@ def assemble_global_stiffness(
         element_dofs[:, np.newaxis, :],
         (number_of_elements, 24, 24),
     ).ravel()
-    values = np.broadcast_to(
-        element_stiffness,
-        (number_of_elements, 24, 24),
-    ).ravel()
+    values = (factors[:, np.newaxis, np.newaxis] * element_stiffness).ravel()
     number_of_dofs = 3 * mesh.coordinates.shape[0]
 
     stiffness = coo_matrix(

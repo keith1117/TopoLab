@@ -5,10 +5,10 @@ topology optimization. The project will combine a sparse finite-element numerica
 core, reproducible experiment workflows, and a controlled evaluation of learned
 warm starts.
 
-> **Status:** `v0.1.0` / Gate N1 finite-element foundation complete. Structured Hex8
-> mesh generation, element stiffness, sparse assembly, constrained solving, supports,
-> and point/face loads have automated validation evidence. No SIMP solver, scalability
-> result, or ML acceleration claim has been implemented yet.
+> **Status:** Gate N2 numerical optimization work is in progress on top of the
+> `v0.1.0` finite-element foundation. SIMP compliance and analytical physical-density
+> sensitivity are implemented with finite-difference checks; no filter/OC loop,
+> scalability result, or ML acceleration claim has been implemented yet.
 
 ## Intended scope
 

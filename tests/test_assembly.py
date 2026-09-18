@@ -38,6 +38,28 @@ def test_sparse_assembly_matches_independent_dense_scatter() -> None:
     assert symmetry_residual <= SYMMETRY_RELATIVE_TOLERANCE
 
 
+def test_element_factors_scale_each_scattered_matrix() -> None:
+    mesh = generate_structured_hex8(2, 1, 1, lengths=(2.0, 1.0, 1.0))
+    element_stiffness = hex8_element_stiffness(1.0, 0.3)
+    factors = np.array([2.0, 5.0])
+
+    sparse_stiffness = assemble_global_stiffness(
+        mesh,
+        element_stiffness,
+        element_factors=factors,
+    )
+    expected = np.zeros(sparse_stiffness.shape)
+    for factor, element_dofs in zip(factors, mesh.element_dofs, strict=True):
+        expected[np.ix_(element_dofs, element_dofs)] += factor * element_stiffness
+
+    np.testing.assert_allclose(
+        sparse_stiffness.toarray(),
+        expected,
+        rtol=DENSE_SPARSE_RELATIVE_TOLERANCE,
+        atol=0.0,
+    )
+
+
 def test_sparse_solve_matches_dense_reduced_system_and_balances_load() -> None:
     mesh, stiffness = _two_element_system()
     constrained_dofs = _dofs_on_x_plane(mesh, x_coordinate=0.0)
@@ -87,6 +109,26 @@ def test_sparse_assembly_rejects_invalid_element_matrix(
 
     with pytest.raises(ValueError):
         assemble_global_stiffness(mesh, element_stiffness)
+
+
+@pytest.mark.parametrize(
+    "factors",
+    [
+        np.ones(1),
+        np.array([1.0, 0.0]),
+        np.array([1.0, np.nan]),
+    ],
+)
+def test_sparse_assembly_rejects_invalid_element_factors(factors: np.ndarray) -> None:
+    mesh = generate_structured_hex8(2, 1, 1)
+    element_stiffness = hex8_element_stiffness(1.0, 0.3)
+
+    with pytest.raises(ValueError):
+        assemble_global_stiffness(
+            mesh,
+            element_stiffness,
+            element_factors=factors,
+        )
 
 
 def test_solve_rejects_missing_loads_or_constraints() -> None:
