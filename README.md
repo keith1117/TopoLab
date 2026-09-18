@@ -9,8 +9,8 @@ warm starts.
 > validated numerical core with serializable problem/result contracts, isolated run
 > state, cooperative cancellation, and a minimal HTTP adapter. Post-P1 development
 > adds optional SQLite run persistence, explicit restart recovery, and paginated run
-> history; process workers, scalability evidence, frontend work, and ML remain
-> incomplete.
+> history. A first React run-history workspace consumes that contract; 3D result
+> visualization, process workers, scalability evidence, and ML remain incomplete.
 
 ## Intended scope
 
@@ -36,13 +36,19 @@ Development is gated in this order:
 
 ## Development setup
 
-Requirements: Python 3.12 and [`uv`](https://docs.astral.sh/uv/).
+Requirements: Python 3.12, [`uv`](https://docs.astral.sh/uv/), and Node.js 24 or later.
 
 ```bash
 uv sync --dev
 uv run ruff check .
 uv run mypy src
 uv run pytest
+
+cd frontend
+npm ci
+npm run typecheck
+npm test
+npm run build
 ```
 
 ## Repository map
@@ -55,11 +61,14 @@ docs/
   validation/                  Gate evidence, thresholds, results, and limitations
 src/topolab/                   TopoLab package and finite-element foundation
 tests/                         Package and numerical convention tests
+frontend/                      React/TypeScript run-history workspace
 ```
 
 The platform contract and run lifecycle are documented in
 [`docs/platform_contract.md`](docs/platform_contract.md); the additive persistence
 contract is in [`docs/run_persistence.md`](docs/run_persistence.md).
+Frontend scope and local development are documented in
+[`docs/frontend.md`](docs/frontend.md).
 
 ## Provenance
 
