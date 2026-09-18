@@ -3,25 +3,38 @@
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from http import HTTPStatus
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
 
 from topolab.jobs import RunManager, RunNotFoundError, RunSnapshot
+from topolab.persistence import SqliteRunStore
 from topolab.problem import TopologyProblem
 
 
-def create_app(run_manager: RunManager | None = None) -> FastAPI:
+def create_app(
+    run_manager: RunManager | None = None,
+    *,
+    database_path: str | Path | None = None,
+) -> FastAPI:
     """Create an API backed by one explicit run manager."""
 
-    manager = RunManager() if run_manager is None else run_manager
+    if run_manager is not None and database_path is not None:
+        raise ValueError("database_path cannot be combined with run_manager")
+    owned_store = None if database_path is None else SqliteRunStore(database_path)
+    manager = RunManager(store=owned_store) if run_manager is None else run_manager
     owns_manager = run_manager is None
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         del app
-        yield
-        if owns_manager:
-            manager.shutdown()
+        try:
+            yield
+        finally:
+            if owns_manager:
+                manager.shutdown()
+            if owned_store is not None:
+                owned_store.close()
 
     app = FastAPI(title="TopoLab", version="0.3.0", lifespan=lifespan)
 

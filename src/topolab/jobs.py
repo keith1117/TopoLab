@@ -9,6 +9,7 @@ from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict
 
+from topolab.persistence import RunStore, StoredRun
 from topolab.problem import TopologyProblem, TopologyResult, solve_problem
 from topolab.simp import OptimizationCancelledError, SimpIteration
 
@@ -45,6 +46,9 @@ class RunNotFoundError(KeyError):
     """Raised when a run identifier is unknown."""
 
 
+_RESTART_ERROR = "RunInterruptedError: process exited before run reached a terminal state"
+
+
 @dataclass(slots=True)
 class _RunState:
     problem: TopologyProblem
@@ -64,19 +68,22 @@ class RunManager:
         *,
         max_workers: int = 2,
         runner: JobRunner | None = None,
+        store: RunStore | None = None,
     ) -> None:
         if isinstance(max_workers, bool) or not isinstance(max_workers, int):
             raise TypeError("max_workers must be an integer")
         if max_workers <= 0:
             raise ValueError("max_workers must be positive")
+        self._runner = _run_problem if runner is None else runner
+        self._store = store
+        self._runs: dict[str, _RunState] = {}
+        self._lock = Lock()
+        self._closed = False
+        self._restore_runs()
         self._executor = ThreadPoolExecutor(
             max_workers=max_workers,
             thread_name_prefix="topolab-run",
         )
-        self._runner = _run_problem if runner is None else runner
-        self._runs: dict[str, _RunState] = {}
-        self._lock = Lock()
-        self._closed = False
 
     def submit(self, problem: TopologyProblem) -> RunSnapshot:
         """Queue one immutable problem and return its initial snapshot."""
@@ -89,6 +96,11 @@ class RunManager:
                 raise RuntimeError("run manager is closed")
             state = _RunState(problem=problem)
             self._runs[run_id] = state
+            try:
+                self._persist(run_id, state)
+            except Exception:
+                del self._runs[run_id]
+                raise
             state.future = self._executor.submit(self._execute, run_id)
             return self._snapshot(run_id, state)
 
@@ -113,6 +125,7 @@ class RunManager:
             state.cancel_event.set()
             if state.future is not None and state.future.cancel():
                 state.status = RunStatus.CANCELLED
+            self._persist(run_id, state)
             return True
 
     def wait(self, run_id: str, timeout: float | None = None) -> RunSnapshot:
@@ -133,11 +146,12 @@ class RunManager:
 
         with self._lock:
             self._closed = True
-            for state in self._runs.values():
+            for run_id, state in self._runs.items():
                 if state.status in {RunStatus.QUEUED, RunStatus.RUNNING}:
                     state.cancel_event.set()
                 if state.status is RunStatus.QUEUED:
                     state.status = RunStatus.CANCELLED
+                self._persist(run_id, state)
         self._executor.shutdown(wait=wait, cancel_futures=True)
 
     def __enter__(self) -> "RunManager":
@@ -151,12 +165,15 @@ class RunManager:
             state = self._get_state(run_id)
             if state.cancel_event.is_set():
                 state.status = RunStatus.CANCELLED
+                self._persist(run_id, state)
                 return
             state.status = RunStatus.RUNNING
+            self._persist(run_id, state)
 
         def on_iteration(iteration: SimpIteration) -> None:
             with self._lock:
                 state.iteration = iteration.iteration
+                self._persist(run_id, state)
             if state.cancel_event.is_set():
                 raise OptimizationCancelledError("optimization was cancelled")
 
@@ -165,10 +182,12 @@ class RunManager:
         except OptimizationCancelledError:
             with self._lock:
                 state.status = RunStatus.CANCELLED
+                self._persist(run_id, state)
         except Exception as error:
             with self._lock:
                 state.status = RunStatus.FAILED
                 state.error = f"{type(error).__name__}: {error}"
+                self._persist(run_id, state)
         else:
             with self._lock:
                 if state.cancel_event.is_set():
@@ -176,6 +195,42 @@ class RunManager:
                 else:
                     state.status = RunStatus.SUCCEEDED
                     state.result = result
+                self._persist(run_id, state)
+
+    def _restore_runs(self) -> None:
+        if self._store is None:
+            return
+        for stored in self._store.load_all():
+            state = _RunState(
+                problem=stored.problem,
+                status=RunStatus(stored.status),
+                iteration=stored.iteration,
+                result=stored.result,
+                error=stored.error,
+            )
+            if stored.cancel_requested:
+                state.cancel_event.set()
+            if state.status in {RunStatus.QUEUED, RunStatus.RUNNING}:
+                state.status = RunStatus.FAILED
+                state.result = None
+                state.error = _RESTART_ERROR
+                self._persist(stored.run_id, state)
+            self._runs[stored.run_id] = state
+
+    def _persist(self, run_id: str, state: _RunState) -> None:
+        if self._store is None:
+            return
+        self._store.save(
+            StoredRun(
+                run_id=run_id,
+                problem=state.problem,
+                status=state.status.value,
+                iteration=state.iteration,
+                cancel_requested=state.cancel_event.is_set(),
+                result=state.result,
+                error=state.error,
+            )
+        )
 
     def _get_state(self, run_id: str) -> _RunState:
         try:

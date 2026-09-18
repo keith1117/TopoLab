@@ -1,12 +1,15 @@
 import asyncio
 from collections.abc import Callable
+from pathlib import Path
 from threading import Event
 
 import httpx2
+import pytest
 from fastapi import FastAPI
 
 from topolab.api import create_app
 from topolab.jobs import RunManager, RunStatus
+from topolab.persistence import SqliteRunStore, StoredRun
 from topolab.problem import TopologyProblem, TopologyResult
 from topolab.simp import OptimizationCancelledError, SimpIteration
 
@@ -109,6 +112,45 @@ def test_api_rejects_invalid_problems_and_unknown_runs() -> None:
     assert invalid.status_code == 422
     assert missing.status_code == 404
     assert cancel_missing.status_code == 404
+
+
+def test_api_reads_a_completed_run_after_restart(tmp_path: Path) -> None:
+    database_path = tmp_path / "runs.sqlite3"
+    store = SqliteRunStore(database_path)
+    store.save(
+        StoredRun(
+            run_id="completed",
+            problem=TopologyProblem.model_validate(_problem_payload()),
+            status=RunStatus.SUCCEEDED.value,
+            iteration=3,
+            cancel_requested=False,
+            result=_result(),
+            error=None,
+        )
+    )
+    store.close()
+    app = create_app(database_path=database_path)
+
+    async def exercise() -> httpx2.Response:
+        async with app.router.lifespan_context(app):
+            transport = httpx2.ASGITransport(app=app)
+            async with httpx2.AsyncClient(
+                transport=transport,
+                base_url="http://testserver",
+            ) as client:
+                return await client.get("/runs/completed")
+
+    response = asyncio.run(exercise())
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "succeeded"
+    assert response.json()["result"]["compliance"] == 1.0
+
+
+def test_api_rejects_two_run_manager_configurations(tmp_path: Path) -> None:
+    with RunManager(max_workers=1) as manager:
+        with pytest.raises(ValueError, match="cannot be combined"):
+            create_app(manager, database_path=tmp_path / "runs.sqlite3")
 
 
 def _problem_payload() -> dict[str, object]:

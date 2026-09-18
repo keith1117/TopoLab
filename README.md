@@ -7,8 +7,9 @@ warm starts.
 
 > **Status:** Gate P1 has passed for the `v0.3.0` in-memory platform. It combines the
 > validated numerical core with serializable problem/result contracts, isolated run
-> state, cooperative cancellation, and a minimal HTTP adapter. Persistence, process
-> workers, scalability evidence, frontend work, and ML remain incomplete.
+> state, cooperative cancellation, and a minimal HTTP adapter. Post-P1 development
+> adds optional SQLite run persistence and explicit restart recovery; process workers,
+> scalability evidence, frontend work, and ML remain incomplete.
 
 ## Intended scope
 
@@ -55,8 +56,9 @@ src/topolab/                   TopoLab package and finite-element foundation
 tests/                         Package and numerical convention tests
 ```
 
-The provisional platform contract and run lifecycle are documented in
-[`docs/platform_contract.md`](docs/platform_contract.md).
+The platform contract and run lifecycle are documented in
+[`docs/platform_contract.md`](docs/platform_contract.md); the additive persistence
+contract is in [`docs/run_persistence.md`](docs/run_persistence.md).
 
 ## Provenance
 
