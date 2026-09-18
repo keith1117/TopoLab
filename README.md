@@ -5,11 +5,10 @@ topology optimization. The project will combine a sparse finite-element numerica
 core, reproducible experiment workflows, and a controlled evaluation of learned
 warm starts.
 
-> **Status:** Gate N2 has passed for the `v0.2.0` numerical core. The release includes
-> independently validated analytical sensitivity, density-filtered SIMP, OC updates,
-> and state-consistent iteration history. Gate P1 platform work is in progress with
-> serializable problem/result contracts, isolated in-memory runs, and a minimal HTTP
-> adapter; persistence, scalability evidence, frontend work, and ML remain incomplete.
+> **Status:** Gate P1 has passed for the `v0.3.0` in-memory platform. It combines the
+> validated numerical core with serializable problem/result contracts, isolated run
+> state, cooperative cancellation, and a minimal HTTP adapter. Persistence, process
+> workers, scalability evidence, frontend work, and ML remain incomplete.
 
 ## Intended scope
 

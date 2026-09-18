@@ -1,6 +1,7 @@
 # Platform contract and run lifecycle
 
-Status: **provisional until Gate P1**. This contract may change before `v0.3.0`.
+Status: **frozen at Gate P1 in v0.3.0**. Contract changes require a documented reason
+and regression-test update.
 
 ## Scope
 
@@ -63,9 +64,9 @@ isolation and does not survive application restart.
 The API owns and shuts down its default `RunManager`. Tests and embedding callers can
 inject an explicit manager with a bounded worker count.
 
-## Gate P1 evidence still required
+## Gate P1 evidence
 
-Before `v0.3.0`, the implementation must pass and document:
+The `v0.3.0` release passed and documented:
 
 - queued/running/terminal state transitions;
 - queued and running cancellation behavior;
@@ -73,3 +74,6 @@ Before `v0.3.0`, the implementation must pass and document:
 - result isolation for two concurrent tasks;
 - request validation and HTTP error semantics;
 - the repository-wide locked dependency, lint, type, and test checks.
+
+The full evidence matrix and limitations are recorded in
+`docs/validation/p1_platform_validation.md`.
