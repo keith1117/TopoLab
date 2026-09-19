@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { getRun, listRuns } from "./api";
 import { DensityVisualization } from "./DensityVisualization";
+import { RunSubmissionForm } from "./RunSubmissionForm";
 import type { RunSnapshot, RunStatus, RunSummary } from "./types";
 
 const STATUS_LABELS: Record<RunStatus, string> = {
@@ -47,6 +48,33 @@ export function App() {
     void loadInitialRuns();
   }, [loadInitialRuns]);
 
+  useEffect(() => {
+    if (!detail || (detail.status !== "queued" && detail.status !== "running")) {
+      return;
+    }
+    let ignore = false;
+    const timeout = window.setTimeout(async () => {
+      try {
+        const updated = await getRun(detail.run_id);
+        if (ignore) {
+          return;
+        }
+        setDetail(updated);
+        setRuns((current) => current.map(
+          (run) => run.run_id === updated.run_id ? updated : run,
+        ));
+      } catch (error) {
+        if (!ignore) {
+          setDetailError(errorMessage(error));
+        }
+      }
+    }, 500);
+    return () => {
+      ignore = true;
+      window.clearTimeout(timeout);
+    };
+  }, [detail]);
+
   const loadMore = async () => {
     if (!nextCursor || isLoadingMore) {
       return;
@@ -86,6 +114,14 @@ export function App() {
     }
   };
 
+  const acceptSubmittedRun = (run: RunSnapshot) => {
+    setRuns((current) => [run, ...current.filter((item) => item.run_id !== run.run_id)]);
+    setSelectedId(run.run_id);
+    setDetail(run);
+    setDetailError(null);
+    setListError(null);
+  };
+
   const counts = useMemo(() => summarizeStatuses(runs), [runs]);
 
   return (
@@ -110,10 +146,10 @@ export function App() {
         <div className="hero-copy">
           <div>
             <p className="eyebrow">Structured 3D SIMP · Operations</p>
-            <h1>Run history, without the noise.</h1>
+            <h1>Configure, run, and inspect.</h1>
             <p className="hero-description">
-              Inspect solver progress and terminal results through the frozen
-              TopoLab platform contract.
+              Submit a structured 3D optimization problem, then inspect solver
+              progress and terminal results through the frozen platform contract.
             </p>
           </div>
           <button
@@ -136,6 +172,20 @@ export function App() {
       </header>
 
       <main className="workspace">
+        <section className="panel submission-panel" aria-labelledby="submission-title">
+          <div className="panel-heading">
+            <div>
+              <p className="section-kicker">Problem definition</p>
+              <h2 id="submission-title">New optimization run</h2>
+            </div>
+            <span className="page-note">SI units · face resultant</span>
+          </div>
+          <RunSubmissionForm
+            onCreated={acceptSubmittedRun}
+            disabled={isInitialLoading}
+          />
+        </section>
+
         <section className="panel history-panel" aria-labelledby="history-title">
           <div className="panel-heading">
             <div>
@@ -270,7 +320,7 @@ export function App() {
 
       <footer>
         <span>TopoLab platform · post-P1</span>
-        <span>UTC timestamps · cursor pagination · physical density</span>
+        <span>Run submission · UTC history · physical density</span>
       </footer>
     </div>
   );

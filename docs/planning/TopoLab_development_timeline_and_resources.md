@@ -56,6 +56,7 @@ TopoLab 采用轻量级 **GitHub Flow**。项目由单人主导且处于快速�
 | `feat/platform-run-history` | UTC 生命周期时间、稳定游标分页与运行历史 API |
 | `feat/frontend-run-history` | React/TypeScript 运行历史、状态和结果详情页面 |
 | `feat/frontend-density-visualization` | 最终 physical density 的交互式 3D 结果可视化 |
+| `feat/frontend-run-submission` | 结构化问题配置、运行提交和所选活动运行的终态刷新 |
 | `experiment/m1-warm-start-cnn` | M0 通过后的 learned warm-start 对照实验 |
 
 分支列表是当前执行顺序，不是必须提前创建的固定结构。只有前一切片的接口和测试稳定后，才创建下一分支；发现独立缺陷时，从最新 `main` 创建 `fix/*` 分支。
@@ -69,10 +70,10 @@ TopoLab 采用轻量级 **GitHub Flow**。项目由单人主导且处于快速�
 - `v0.3.0`：Gate P1 通过；
 - `v1.0.0`：公开演示、复现实验和文档达到发布标准。
 
-Gate P1 已通过。SQLite 持久化、重启恢复、稳定游标分页、运行历史、结果详情
-以及最终 physical density 的交互式 3D 可视化已经完成。下一独立切片是问题
-配置与运行提交；收敛曲线继续留待其后。ML 仍需先通过 M0，冻结 case schema、
-生成器版本、数据分割和 baseline，不能直接跳到模型训练。
+Gate P1 已通过。SQLite 持久化、重启恢复、稳定游标分页、运行历史、结果详情、
+最终 physical density 的交互式 3D 可视化，以及首版问题配置与运行提交已经完成。
+下一独立切片是收敛曲线。ML 仍需先通过 M0，冻结 case schema、生成器版本、
+数据分割和 baseline，不能直接跳到模型训练。
 
 ## 总体时间估计
 
