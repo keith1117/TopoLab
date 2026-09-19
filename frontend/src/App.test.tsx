@@ -1,7 +1,7 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { createRun, getRun, listRuns } from "./api";
+import { cancelRun, createRun, getRun, listRuns } from "./api";
 import { App } from "./App";
 import type { RunSnapshot, RunSummary, TopologyProblem } from "./types";
 
@@ -16,6 +16,7 @@ vi.mock("./api", () => ({
   listRuns: vi.fn(),
   getRun: vi.fn(),
   createRun: vi.fn(),
+  cancelRun: vi.fn(),
 }));
 
 vi.mock("plotly.js-gl3d-dist-min", () => ({
@@ -35,6 +36,7 @@ vi.mock("plotly.js-basic-dist-min", () => ({
 const listRunsMock = vi.mocked(listRuns);
 const getRunMock = vi.mocked(getRun);
 const createRunMock = vi.mocked(createRun);
+const cancelRunMock = vi.mocked(cancelRun);
 
 describe("App", () => {
   beforeEach(() => {
@@ -141,6 +143,80 @@ describe("App", () => {
     ).toBeInTheDocument();
     await waitFor(() => expect(plotlyMocks.convergenceReact).toHaveBeenCalledOnce());
     expect(getRunMock).toHaveBeenCalledWith("result-a");
+  });
+
+  it("cancels a queued run and renders the returned terminal state", async () => {
+    const queued = activeSnapshot("queued-run", "queued");
+    const cancelled = { ...queued, status: "cancelled" as const };
+    let resolveCancellation: (snapshot: RunSnapshot) => void = () => undefined;
+    listRunsMock.mockResolvedValue({ items: [queued], next_cursor: null });
+    getRunMock.mockResolvedValue(queued);
+    cancelRunMock.mockImplementation(() => new Promise((resolve) => {
+      resolveCancellation = resolve;
+    }));
+
+    render(<App />);
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Open run queued-run" }),
+    );
+    fireEvent.click(await screen.findByRole("button", { name: "Cancel run" }));
+
+    await waitFor(() => expect(cancelRunMock).toHaveBeenCalledWith("queued-run"));
+    expect(
+      screen.getByRole("button", { name: "Requesting cancellation…" }),
+    ).toBeDisabled();
+    fireEvent.click(
+      screen.getByRole("button", { name: "Requesting cancellation…" }),
+    );
+    expect(cancelRunMock).toHaveBeenCalledOnce();
+    await act(async () => resolveCancellation(cancelled));
+    expect(await screen.findByText("Run was cancelled")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Cancel run" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("keeps polling after cooperative cancellation is requested", async () => {
+    const running = activeSnapshot("running-run", "running");
+    const requested = { ...running, cancel_requested: true };
+    const cancelled = { ...requested, status: "cancelled" as const };
+    listRunsMock.mockResolvedValue({ items: [running], next_cursor: null });
+    getRunMock
+      .mockResolvedValueOnce(running)
+      .mockResolvedValueOnce(cancelled);
+    cancelRunMock.mockResolvedValue(requested);
+
+    render(<App />);
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Open run running-run" }),
+    );
+    fireEvent.click(await screen.findByRole("button", { name: "Cancel run" }));
+
+    expect(
+      await screen.findByRole("button", { name: "Cancellation requested" }),
+    ).toBeDisabled();
+    expect(
+      await screen.findByText("Run was cancelled", {}, { timeout: 2_000 }),
+    ).toBeInTheDocument();
+    expect(getRunMock).toHaveBeenCalledTimes(2);
+  });
+
+  it("keeps cancellation retryable after an API error", async () => {
+    const running = activeSnapshot("retry-run", "running");
+    listRunsMock.mockResolvedValue({ items: [running], next_cursor: null });
+    getRunMock.mockResolvedValue(running);
+    cancelRunMock.mockRejectedValue(new Error("cancellation service unavailable"));
+
+    render(<App />);
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Open run retry-run" }),
+    );
+    fireEvent.click(await screen.findByRole("button", { name: "Cancel run" }));
+
+    expect(
+      await screen.findByText("cancellation service unavailable"),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Cancel run" })).toBeEnabled();
   });
 
   it("reveals the detail panel after a small-screen selection", async () => {
@@ -285,6 +361,16 @@ function pendingSnapshot(runId: string): RunSnapshot {
     iteration: 0,
     problem: defaultProblem(),
     result: null,
+  };
+}
+
+function activeSnapshot(
+  runId: string,
+  status: "queued" | "running",
+): RunSnapshot {
+  return {
+    ...pendingSnapshot(runId),
+    status,
   };
 }
 

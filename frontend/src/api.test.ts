@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { createRun, listRuns } from "./api";
+import { cancelRun, createRun, listRuns } from "./api";
 import type { RunSnapshot, TopologyProblem } from "./types";
 
 afterEach(() => {
@@ -27,6 +27,27 @@ describe("API client", () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+    });
+  });
+
+  it("posts a cancellation request for an encoded run identifier", async () => {
+    const cancelled = {
+      ...sampleSnapshot(sampleProblem()),
+      run_id: "run/with space",
+      status: "cancelled" as const,
+    };
+    const fetchMock = vi.fn().mockResolvedValue(
+      new Response(JSON.stringify(cancelled), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+
+    await expect(cancelRun("run/with space")).resolves.toEqual(cancelled);
+    expect(fetchMock).toHaveBeenCalledWith("/runs/run%2Fwith%20space/cancel", {
+      method: "POST",
+      headers: { Accept: "application/json" },
     });
   });
 

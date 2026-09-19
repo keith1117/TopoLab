@@ -1,6 +1,6 @@
 # Frontend optimization workspace
 
-Status: **problem submission, run history, convergence, and final 3D physical-density visualization implemented**.
+Status: **problem submission, run cancellation, run history, convergence, and final 3D physical-density visualization implemented**.
 
 ## Scope
 
@@ -13,6 +13,7 @@ contract without importing numerical-core code. It provides:
 - client-side cross-field validation followed by authoritative API validation;
 - immediate insertion and selection of a newly submitted asynchronous run;
 - polling of the selected active run until it reaches a terminal state;
+- cancellation requests for the selected queued or running run;
 - status totals for the currently loaded pages;
 - cursor-based incremental loading;
 - on-demand retrieval of one full run result;
@@ -24,9 +25,9 @@ contract without importing numerical-core code. It provides:
 
 History pages intentionally omit displacement, reaction, and density arrays. Those
 arrays and the immutable problem geometry are requested only after the user selects
-one run. Cancellation controls, dynamic multiple-support/load editing, point-load
-editing, initial-density import, history filtering, and authentication are outside
-this slice.
+one run. Dynamic multiple-support/load editing, point-load editing, initial-density
+import, history filtering, and authentication remain outside the current frontend
+scope.
 
 ## Problem submission contract
 
@@ -42,6 +43,21 @@ of truth, and structured FastAPI validation locations are rendered as readable f
 paths. A successful `202` response is placed at the top of the loaded history and
 selected without a redundant detail request. While that selection is `queued` or
 `running`, the client polls its detail every 500 ms and stops on a terminal state.
+
+## Cancellation contract
+
+The detail panel offers cancellation only while the selected run is `queued` or
+`running`. It sends `POST /runs/{run_id}/cancel` and replaces the detail and history
+summary with the returned server snapshot; the browser never invents a terminal
+state. The control is disabled while the request is in flight and while the returned
+snapshot has `cancel_requested=true`.
+
+A queued run may return `cancelled` immediately. A running solve may remain `running`
+with cancellation requested because the numerical core observes its cooperative
+token between iterations. In that case polling continues until the API reports a
+terminal state. A request failure is shown next to the control and leaves the action
+available for retry. Switching selections cannot allow a late cancellation response
+to replace another run's detail.
 
 ## Convergence visualization contract
 
@@ -119,10 +135,11 @@ npm test
 npm run build
 ```
 
-Component, API-client, and geometry tests cover form validation, exact submission
-payloads, readable API errors, active-run polling, empty history, cursor pagination,
-detail loading, result metrics, convergence trace/reference-line mapping, x-fast
-density mapping, interior-face removal, thresholding, UTC labeling, small-screen
-detail navigation, and recovery from an API error. CI runs these checks independently
-from the Python quality job. Browser QA uses Playwright CLI against the real Vite
+Component, API-client, and geometry tests cover form validation, exact submission and
+cancellation requests, cooperative-cancellation polling, cancellation retry behavior,
+readable API errors, active-run polling, empty history, cursor pagination, detail
+loading, result metrics, convergence trace/reference-line mapping, x-fast density
+mapping, interior-face removal, thresholding, UTC labeling, small-screen detail
+navigation, and recovery from an API error. CI runs these checks independently from
+the Python quality job. Browser QA uses Playwright CLI against the real Vite
 application and API; generated screenshots and traces remain untracked artifacts.

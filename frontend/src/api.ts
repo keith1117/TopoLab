@@ -21,6 +21,13 @@ export async function createRun(problem: TopologyProblem): Promise<RunSnapshot> 
   });
 }
 
+export async function cancelRun(runId: string): Promise<RunSnapshot> {
+  return requestJson<RunSnapshot>(
+    `/runs/${encodeURIComponent(runId)}/cancel`,
+    { method: "POST" },
+  );
+}
+
 async function requestJson<T>(
   path: string,
   init: RequestInit = {},

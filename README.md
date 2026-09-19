@@ -10,9 +10,9 @@ warm starts.
 > state, cooperative cancellation, and a minimal HTTP adapter. Post-P1 development
 > adds optional SQLite run persistence, explicit restart recovery, and paginated run
 > history. The React workspace consumes that contract for run history, result detail,
-> problem configuration and submission, and interactive 3D physical-density
-> inspection with state-consistent convergence charts. Process workers, scalability
-> evidence, and ML remain incomplete.
+> problem configuration, submission and cancellation, and interactive 3D
+> physical-density inspection with state-consistent convergence charts. Process
+> workers, scalability evidence, and ML remain incomplete.
 
 ## Intended scope
 

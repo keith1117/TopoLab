@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { getRun, listRuns } from "./api";
+import { cancelRun, getRun, listRuns } from "./api";
 import { ConvergenceVisualization } from "./ConvergenceVisualization";
 import { DensityVisualization } from "./DensityVisualization";
 import { RunSubmissionForm } from "./RunSubmissionForm";
@@ -25,6 +25,11 @@ export function App() {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isDetailLoading, setIsDetailLoading] = useState(false);
+  const [cancellingRunId, setCancellingRunId] = useState<string | null>(null);
+  const [cancellationError, setCancellationError] = useState<{
+    runId: string;
+    message: string;
+  } | null>(null);
 
   const loadInitialRuns = useCallback(async () => {
     setIsInitialLoading(true);
@@ -32,6 +37,7 @@ export function App() {
     setSelectedId(null);
     setDetail(null);
     setDetailError(null);
+    setCancellationError(null);
     try {
       const page = await listRuns();
       setRuns(page.items);
@@ -50,7 +56,11 @@ export function App() {
   }, [loadInitialRuns]);
 
   useEffect(() => {
-    if (!detail || (detail.status !== "queued" && detail.status !== "running")) {
+    if (
+      !detail
+      || (detail.status !== "queued" && detail.status !== "running")
+      || cancellingRunId === detail.run_id
+    ) {
       return;
     }
     let ignore = false;
@@ -74,7 +84,7 @@ export function App() {
       ignore = true;
       window.clearTimeout(timeout);
     };
-  }, [detail]);
+  }, [cancellingRunId, detail]);
 
   const loadMore = async () => {
     if (!nextCursor || isLoadingMore) {
@@ -97,6 +107,7 @@ export function App() {
     setSelectedId(runId);
     setDetail(null);
     setDetailError(null);
+    setCancellationError(null);
     setIsDetailLoading(true);
     try {
       setDetail(await getRun(runId));
@@ -120,7 +131,33 @@ export function App() {
     setSelectedId(run.run_id);
     setDetail(run);
     setDetailError(null);
+    setCancellationError(null);
     setListError(null);
+  };
+
+  const requestCancellation = async () => {
+    if (
+      !detail
+      || (detail.status !== "queued" && detail.status !== "running")
+      || detail.cancel_requested
+      || cancellingRunId === detail.run_id
+    ) {
+      return;
+    }
+    const runId = detail.run_id;
+    setCancellingRunId(runId);
+    setCancellationError(null);
+    try {
+      const updated = await cancelRun(runId);
+      setDetail((current) => current?.run_id === runId ? updated : current);
+      setRuns((current) => current.map(
+        (run) => run.run_id === updated.run_id ? updated : run,
+      ));
+    } catch (error) {
+      setCancellationError({ runId, message: errorMessage(error) });
+    } finally {
+      setCancellingRunId((current) => current === runId ? null : current);
+    }
   };
 
   const counts = useMemo(() => summarizeStatuses(runs), [runs]);
@@ -292,7 +329,16 @@ export function App() {
           ) : detailError ? (
             <ErrorNotice title="Could not load detail" message={detailError} />
           ) : detail ? (
-            <RunDetail run={detail} />
+            <RunDetail
+              run={detail}
+              isCancelling={cancellingRunId === detail.run_id}
+              cancellationError={
+                cancellationError?.runId === detail.run_id
+                  ? cancellationError.message
+                  : null
+              }
+              onCancel={() => void requestCancellation()}
+            />
           ) : null}
         </aside>
 
@@ -346,15 +392,26 @@ export function App() {
 
       <footer>
         <span>TopoLab platform · post-P1</span>
-        <span>Run submission · convergence · physical density</span>
+        <span>Submission · cancellation · convergence · physical density</span>
       </footer>
     </div>
   );
 }
 
-function RunDetail({ run }: { run: RunSnapshot }) {
+function RunDetail({
+  run,
+  isCancelling,
+  cancellationError,
+  onCancel,
+}: {
+  run: RunSnapshot;
+  isCancelling: boolean;
+  cancellationError: string | null;
+  onCancel: () => void;
+}) {
   const result = run.result;
   const lastIteration = result?.history.at(-1);
+  const isActive = run.status === "queued" || run.status === "running";
 
   return (
     <div className="detail-content">
@@ -373,6 +430,41 @@ function RunDetail({ run }: { run: RunSnapshot }) {
           <dd>{formatTimestamp(run.updated_at)}</dd>
         </div>
       </dl>
+
+      {isActive && (
+        <div className="cancellation-control">
+          <div>
+            <strong>
+              {run.cancel_requested
+                ? "Cancellation requested"
+                : "Stop this run"}
+            </strong>
+            <p>
+              {run.cancel_requested
+                ? "The active solve will stop after it reaches an iteration boundary."
+                : "The current solver iteration may finish before cancellation completes."}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onCancel}
+            disabled={isCancelling || run.cancel_requested}
+          >
+            {isCancelling
+              ? "Requesting cancellation…"
+              : run.cancel_requested
+                ? "Cancellation requested"
+                : "Cancel run"}
+          </button>
+        </div>
+      )}
+
+      {cancellationError && isActive && (
+        <div className="cancellation-error" role="alert">
+          <strong>Could not cancel run</strong>
+          <p>{cancellationError}</p>
+        </div>
+      )}
 
       {run.error && (
         <div className="solver-error" role="alert">

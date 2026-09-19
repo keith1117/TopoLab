@@ -58,6 +58,7 @@ TopoLab 采用轻量级 **GitHub Flow**。项目由单人主导且处于快速�
 | `feat/frontend-density-visualization` | 最终 physical density 的交互式 3D 结果可视化 |
 | `feat/frontend-run-submission` | 结构化问题配置、运行提交和所选活动运行的终态刷新 |
 | `feat/frontend-convergence-visualization` | 同状态 compliance、体积分数和 density change 收敛曲线 |
+| `feat/frontend-run-cancellation` | 活动运行取消请求、请求中反馈和 cooperative cancellation 终态轮询 |
 | `experiment/m1-warm-start-cnn` | M0 通过后的 learned warm-start 对照实验 |
 
 分支列表是当前执行顺序，不是必须提前创建的固定结构。只有前一切片的接口和测试稳定后，才创建下一分支；发现独立缺陷时，从最新 `main` 创建 `fix/*` 分支。
@@ -73,10 +74,10 @@ TopoLab 采用轻量级 **GitHub Flow**。项目由单人主导且处于快速�
 
 Gate P1 已通过。SQLite 持久化、重启恢复、稳定游标分页、运行历史、结果详情、
 最终 physical density 的交互式 3D 可视化，以及首版问题配置与运行提交已经完成。
-同状态 compliance、physical volume fraction 和 density change 收敛曲线也已完成。
-下一独立切片是前端运行取消控制；之后进入稀疏求解性能与内存 benchmark。
-ML 仍需先通过 M0，冻结 case schema、生成器版本、数据分割和 baseline，不能
-直接跳到模型训练。
+同状态 compliance、physical volume fraction 和 density change 收敛曲线，以及
+前端 cooperative run cancellation 控制也已完成。下一独立切片进入稀疏求解性能与
+内存 benchmark。ML 仍需先通过 M0，冻结 case schema、生成器版本、数据分割和
+baseline，不能直接跳到模型训练。
 
 ## 总体时间估计
 
