@@ -58,3 +58,4 @@ Hex8 finite elements, density filtering, or the Optimality Criteria method.
 | 2026-09-18 | React run-history workspace | Original TopoLab frontend work using the documented public API contract | No upstream reference code, figures, or visual assets used |
 | 2026-09-18 | 3D physical-density visualization | Original TopoLab geometry mapping using the frozen element-index convention and the public Plotly API | No upstream reference code, plotting code, figures, or visual assets used |
 | 2026-09-19 | Problem configuration and run submission workspace | Original TopoLab frontend work over the frozen problem and run-lifecycle contracts | No upstream reference code, forms, or visual assets used |
+| 2026-09-19 | State-consistent convergence visualization | Original TopoLab frontend mapping of the frozen iteration-history contract using the public Plotly API | No upstream plotting code, figures, or visual assets used |

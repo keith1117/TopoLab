@@ -1,6 +1,6 @@
 # Frontend optimization workspace
 
-Status: **problem submission, run history, and final 3D physical-density visualization implemented**.
+Status: **problem submission, run history, convergence, and final 3D physical-density visualization implemented**.
 
 ## Scope
 
@@ -18,14 +18,15 @@ contract without importing numerical-core code. It provides:
 - on-demand retrieval of one full run result;
 - final compliance, convergence, element count, iteration, volume, and density-change
   inspection;
+- aligned compliance, physical-volume, and maximum design-density-change histories;
 - an interactive thresholded 3D view of the final physical-density field; and
 - explicit loading, empty, API-error, failed-run, and cancelled-run states.
 
 History pages intentionally omit displacement, reaction, and density arrays. Those
 arrays and the immutable problem geometry are requested only after the user selects
-one run. Cancellation controls, convergence charts, dynamic multiple-support/load
-editing, point-load editing, initial-density import, history filtering, and
-authentication are outside this slice.
+one run. Cancellation controls, dynamic multiple-support/load editing, point-load
+editing, initial-density import, history filtering, and authentication are outside
+this slice.
 
 ## Problem submission contract
 
@@ -41,6 +42,27 @@ of truth, and structured FastAPI validation locations are rendered as readable f
 paths. A successful `202` response is placed at the top of the loaded history and
 selected without a redundant detail request. While that selection is `queued` or
 `running`, the client polls its detail every 500 ms and stops on a terminal state.
+
+## Convergence visualization contract
+
+The convergence panel reads the result's existing post-update `history`; it does not
+derive new numerical states or combine metrics from different iterations. Three
+vertically aligned plots share the recorded iteration axis:
+
+- compliance;
+- physical volume fraction in percent, with the requested target; and
+- maximum design-density change, with the configured convergence tolerance.
+
+The volume plot uses a physical window of five percentage points on either side of
+the target, clamped to `[0%, 100%]`. This prevents the browser from magnifying the
+machine-scale volume noise produced by the constrained OC update into a misleading
+trend. Exact values remain available on hover. Summary cards report the recorded
+state count, first-to-final compliance change, final volume, and final density
+change. A result with no history renders an explicit empty state.
+
+Plotly's basic 2D distribution is loaded only when a non-empty successful history is
+selected. It remains separate from the lazily loaded GL3D distribution, so neither
+visualization runtime is part of the initial application bundle.
 
 ## Density visualization contract
 
@@ -99,8 +121,8 @@ npm run build
 
 Component, API-client, and geometry tests cover form validation, exact submission
 payloads, readable API errors, active-run polling, empty history, cursor pagination,
-detail loading, result metrics, x-fast density mapping, interior-face removal,
-thresholding, UTC labeling, small-screen detail navigation, and recovery from an API
-error. CI runs these checks independently from the Python quality job. Browser QA
-uses Playwright CLI against the real Vite application and API; generated screenshots
-and traces remain untracked artifacts.
+detail loading, result metrics, convergence trace/reference-line mapping, x-fast
+density mapping, interior-face removal, thresholding, UTC labeling, small-screen
+detail navigation, and recovery from an API error. CI runs these checks independently
+from the Python quality job. Browser QA uses Playwright CLI against the real Vite
+application and API; generated screenshots and traces remain untracked artifacts.

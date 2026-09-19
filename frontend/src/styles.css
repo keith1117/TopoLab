@@ -244,6 +244,10 @@ button:focus-visible {
   grid-column: 1 / -1;
 }
 
+.convergence-panel {
+  grid-column: 1 / -1;
+}
+
 .submission-panel {
   grid-column: 1 / -1;
 }
@@ -726,6 +730,120 @@ button:focus-visible {
   min-height: 80px;
 }
 
+.convergence-heading {
+  min-height: 80px;
+}
+
+.convergence-visualization {
+  padding: 1.5rem;
+}
+
+.convergence-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.convergence-metric {
+  display: grid;
+  gap: 0.35rem;
+  min-height: 92px;
+  padding: 1rem;
+  border: 1px solid #dce2e9;
+  border-radius: 9px;
+  background: #f7f9fb;
+}
+
+.convergence-metric span {
+  color: #7c8797;
+  font-size: 0.65rem;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.convergence-metric strong {
+  color: #233149;
+  font: 500 1.05rem "DM Mono", monospace;
+}
+
+.convergence-metric small {
+  color: #7d8999;
+  font-size: 0.65rem;
+}
+
+.convergence-stage {
+  position: relative;
+  min-height: 620px;
+  margin-top: 1rem;
+  overflow: hidden;
+  border: 1px solid #dce2e9;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.convergence-plot {
+  width: 100%;
+  min-height: 620px;
+}
+
+.convergence-loading,
+.convergence-render-error {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #65758b;
+  background: rgba(248, 250, 252, 0.78);
+  font: 0.75rem "DM Mono", monospace;
+  backdrop-filter: blur(2px);
+}
+
+.convergence-render-error {
+  color: #963e3e;
+}
+
+.convergence-note {
+  margin: 0.8rem 0 0;
+  color: #7d8999;
+  font-size: 0.7rem;
+  text-align: right;
+}
+
+.convergence-empty {
+  display: grid;
+  place-items: center;
+  min-height: 260px;
+  margin: 1.5rem;
+  padding: 2rem;
+  border: 1px dashed #cbd4df;
+  border-radius: 12px;
+  color: #738095;
+  text-align: center;
+  background: #f8fafb;
+}
+
+.convergence-empty > span {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 1rem;
+  border: 1px solid #c8d3df;
+  border-radius: 50%;
+  color: #326bd2;
+  font: 500 1.2rem "DM Mono", monospace;
+}
+
+.convergence-empty strong {
+  color: #26364d;
+}
+
+.convergence-empty p {
+  margin: 0.35rem 0 0;
+  font-size: 0.76rem;
+}
+
 .mesh-chip {
   padding: 0.42rem 0.64rem;
   border: 1px solid #cfd8e4;
@@ -1007,6 +1125,10 @@ footer {
     grid-column: 1 / -1;
   }
 
+  .convergence-summary {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .form-grid-six,
   .form-grid-four {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1107,6 +1229,28 @@ footer {
   .density-stage,
   .density-plot {
     min-height: 390px;
+  }
+
+  .convergence-heading {
+    align-items: flex-start;
+  }
+
+  .convergence-visualization {
+    padding: 0.75rem;
+  }
+
+  .convergence-summary {
+    gap: 0.6rem;
+  }
+
+  .convergence-metric {
+    min-height: 86px;
+    padding: 0.8rem;
+  }
+
+  .convergence-stage,
+  .convergence-plot {
+    min-height: 560px;
   }
 
   .run-form {

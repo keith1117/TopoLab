@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { getRun, listRuns } from "./api";
+import { ConvergenceVisualization } from "./ConvergenceVisualization";
 import { DensityVisualization } from "./DensityVisualization";
 import { RunSubmissionForm } from "./RunSubmissionForm";
 import type { RunSnapshot, RunStatus, RunSummary } from "./types";
@@ -296,31 +297,56 @@ export function App() {
         </aside>
 
         {detail?.result && (
-          <section
-            className="panel density-panel"
-            aria-labelledby="density-title"
-          >
-            <div className="panel-heading density-heading">
-              <div>
-                <p className="section-kicker">Final physical field</p>
-                <h2 id="density-title">3D density</h2>
+          <>
+            <section
+              className="panel convergence-panel"
+              aria-labelledby="convergence-title"
+            >
+              <div className="panel-heading convergence-heading">
+                <div>
+                  <p className="section-kicker">Optimization trajectory</p>
+                  <h2 id="convergence-title">Convergence history</h2>
+                </div>
+                <span className="mesh-chip">
+                  {detail.result.history.length.toLocaleString()} recorded states
+                </span>
               </div>
-              <span className="mesh-chip">
-                {detail.problem.mesh.element_counts.join(" × ")} elements
-              </span>
-            </div>
-            <DensityVisualization
-              key={detail.run_id}
-              density={detail.result.physical_density}
-              mesh={detail.problem.mesh}
-            />
-          </section>
+              <ConvergenceVisualization
+                key={`convergence-${detail.run_id}`}
+                history={detail.result.history}
+                targetVolumeFraction={detail.problem.optimization.volume_fraction}
+                convergenceTolerance={
+                  detail.problem.optimization.convergence_tolerance
+                }
+              />
+            </section>
+
+            <section
+              className="panel density-panel"
+              aria-labelledby="density-title"
+            >
+              <div className="panel-heading density-heading">
+                <div>
+                  <p className="section-kicker">Final physical field</p>
+                  <h2 id="density-title">3D density</h2>
+                </div>
+                <span className="mesh-chip">
+                  {detail.problem.mesh.element_counts.join(" × ")} elements
+                </span>
+              </div>
+              <DensityVisualization
+                key={`density-${detail.run_id}`}
+                density={detail.result.physical_density}
+                mesh={detail.problem.mesh}
+              />
+            </section>
+          </>
         )}
       </main>
 
       <footer>
         <span>TopoLab platform · post-P1</span>
-        <span>Run submission · UTC history · physical density</span>
+        <span>Run submission · convergence · physical density</span>
       </footer>
     </div>
   );
