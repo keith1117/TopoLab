@@ -1,6 +1,6 @@
-# Frontend run-history workspace
+# Frontend optimization workspace
 
-Status: **run history and final 3D physical-density visualization implemented**.
+Status: **problem submission, run history, and final 3D physical-density visualization implemented**.
 
 ## Scope
 
@@ -8,6 +8,11 @@ The React/TypeScript workspace in `frontend/` consumes the frozen run-history
 contract without importing numerical-core code. It provides:
 
 - a newest-first list of lightweight run summaries;
+- a structured problem form for mesh, material, one fully fixed face, one signed
+  face-resultant load, and SIMP settings;
+- client-side cross-field validation followed by authoritative API validation;
+- immediate insertion and selection of a newly submitted asynchronous run;
+- polling of the selected active run until it reaches a terminal state;
 - status totals for the currently loaded pages;
 - cursor-based incremental loading;
 - on-demand retrieval of one full run result;
@@ -18,8 +23,24 @@ contract without importing numerical-core code. It provides:
 
 History pages intentionally omit displacement, reaction, and density arrays. Those
 arrays and the immutable problem geometry are requested only after the user selects
-one run. Problem submission, cancellation controls, convergence charts, history
-filtering, and authentication are outside this slice.
+one run. Cancellation controls, convergence charts, dynamic multiple-support/load
+editing, point-load editing, initial-density import, history filtering, and
+authentication are outside this slice.
+
+## Problem submission contract
+
+The first form deliberately exposes one common cantilever-style problem without
+inventing a second frontend schema. Its JSON payload is the frozen `TopologyProblem`:
+structured element counts and lengths, isotropic material values, one fully fixed
+face, one equal-node face resultant, and all current SIMP controls. The signed load
+value carries direction; the axis selector never encodes sign.
+
+The browser rejects non-finite values, invalid integer counts, invalid material and
+density bounds, and zero loads before requesting the API. The API remains the source
+of truth, and structured FastAPI validation locations are rendered as readable field
+paths. A successful `202` response is placed at the top of the loaded history and
+selected without a redundant detail request. While that selection is `queued` or
+`running`, the client polls its detail every 500 ms and stops on a terminal state.
 
 ## Density visualization contract
 
@@ -76,9 +97,10 @@ npm test
 npm run build
 ```
 
-Component and geometry tests cover empty history, cursor pagination, detail loading,
-result metrics, x-fast density mapping, interior-face removal, thresholding, UTC
-labeling, small-screen detail navigation, and recovery from an API error. CI runs
-these checks independently from the Python quality job. Browser QA uses Playwright CLI
-against the real Vite application and API; generated screenshots and traces remain
-untracked artifacts.
+Component, API-client, and geometry tests cover form validation, exact submission
+payloads, readable API errors, active-run polling, empty history, cursor pagination,
+detail loading, result metrics, x-fast density mapping, interior-face removal,
+thresholding, UTC labeling, small-screen detail navigation, and recovery from an API
+error. CI runs these checks independently from the Python quality job. Browser QA
+uses Playwright CLI against the real Vite application and API; generated screenshots
+and traces remain untracked artifacts.

@@ -1,9 +1,9 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { getRun, listRuns } from "./api";
+import { createRun, getRun, listRuns } from "./api";
 import { App } from "./App";
-import type { RunSnapshot, RunSummary } from "./types";
+import type { RunSnapshot, RunSummary, TopologyProblem } from "./types";
 
 const plotlyMocks = vi.hoisted(() => ({
   purge: vi.fn(),
@@ -13,6 +13,7 @@ const plotlyMocks = vi.hoisted(() => ({
 vi.mock("./api", () => ({
   listRuns: vi.fn(),
   getRun: vi.fn(),
+  createRun: vi.fn(),
 }));
 
 vi.mock("plotly.js-gl3d-dist-min", () => ({
@@ -24,6 +25,7 @@ vi.mock("plotly.js-gl3d-dist-min", () => ({
 
 const listRunsMock = vi.mocked(listRuns);
 const getRunMock = vi.mocked(getRun);
+const createRunMock = vi.mocked(createRun);
 
 describe("App", () => {
   beforeEach(() => {
@@ -61,6 +63,53 @@ describe("App", () => {
     expect(
       screen.queryByRole("button", { name: "Load more runs" }),
     ).not.toBeInTheDocument();
+  });
+
+  it("submits a configured problem and opens the new run", async () => {
+    listRunsMock.mockResolvedValue({ items: [], next_cursor: null });
+    const created = pendingSnapshot("new-run");
+    createRunMock.mockResolvedValue(created);
+    getRunMock.mockResolvedValue(snapshot(summary("new-run")));
+
+    render(<App />);
+    await screen.findByText("No runs yet");
+    fireEvent.click(screen.getByRole("button", { name: "Submit optimization" }));
+
+    expect((await screen.findAllByText("new-run")).length).toBe(2);
+    expect(screen.getByText("Result pending")).toBeInTheDocument();
+    expect(screen.getByText("Run new-run submitted.")).toBeInTheDocument();
+    expect(createRunMock).toHaveBeenCalledWith(defaultProblem());
+    expect(await screen.findByText("42.125", {}, { timeout: 2_000 })).toBeInTheDocument();
+    expect(getRunMock).toHaveBeenCalledWith("new-run");
+  });
+
+  it("rejects an invalid material before submission", async () => {
+    listRunsMock.mockResolvedValue({ items: [], next_cursor: null });
+
+    render(<App />);
+    await screen.findByText("No runs yet");
+    fireEvent.change(screen.getByLabelText("Minimum modulus (Pa)"), {
+      target: { value: "300000000000" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Submit optimization" }));
+
+    expect(
+      await screen.findByText("Minimum modulus must be less than solid modulus."),
+    ).toBeInTheDocument();
+    expect(createRunMock).not.toHaveBeenCalled();
+  });
+
+  it("keeps the form available after a submission error", async () => {
+    listRunsMock.mockResolvedValue({ items: [], next_cursor: null });
+    createRunMock.mockRejectedValue(new Error("volume fraction rejected"));
+
+    render(<App />);
+    await screen.findByText("No runs yet");
+    fireEvent.click(screen.getByRole("button", { name: "Submit optimization" }));
+
+    expect(await screen.findByText("volume fraction rejected")).toBeInTheDocument();
+    expect(screen.getByLabelText("Volume fraction")).toHaveValue(0.3);
+    expect(screen.getByRole("button", { name: "Submit optimization" })).toBeEnabled();
   });
 
   it("loads one full result on selection", async () => {
@@ -186,6 +235,7 @@ function snapshot(
   return {
     ...run,
     problem: {
+      ...defaultProblem(),
       mesh: {
         element_counts: elementCounts,
         lengths: elementCounts.map(Number) as [number, number, number],
@@ -209,5 +259,51 @@ function snapshot(
         },
       ],
     },
+  };
+}
+
+function pendingSnapshot(runId: string): RunSnapshot {
+  return {
+    ...summary(runId),
+    status: "queued",
+    iteration: 0,
+    problem: defaultProblem(),
+    result: null,
+  };
+}
+
+function defaultProblem(): TopologyProblem {
+  return {
+    mesh: {
+      element_counts: [8, 4, 3],
+      lengths: [1, 0.4, 0.3],
+    },
+    material: {
+      solid_modulus: 2e11,
+      minimum_modulus: 2e5,
+      poisson_ratio: 0.3,
+    },
+    supports: [{
+      axis: "x",
+      side: "min",
+      directions: ["x", "y", "z"],
+    }],
+    loads: [{
+      kind: "face",
+      axis: "x",
+      side: "max",
+      direction: "y",
+      total: -1000,
+    }],
+    optimization: {
+      volume_fraction: 0.3,
+      filter_radius: 0.15,
+      penalty: 3,
+      minimum_density: 0.001,
+      move_limit: 0.2,
+      convergence_tolerance: 0.01,
+      max_iterations: 40,
+    },
+    initial_density: null,
   };
 }

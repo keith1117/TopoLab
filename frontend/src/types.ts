@@ -44,11 +44,57 @@ export interface MeshDefinition {
   lengths: [number, number, number];
 }
 
-export interface RunProblem {
+export type Axis = "x" | "y" | "z";
+export type FaceSide = "min" | "max";
+export type Direction = Axis | 0 | 1 | 2;
+
+export interface MaterialDefinition {
+  solid_modulus: number;
+  minimum_modulus: number;
+  poisson_ratio: number;
+}
+
+export interface FixedFaceSupportDefinition {
+  axis: Axis;
+  side: FaceSide;
+  directions: Direction[];
+}
+
+export interface FaceLoadDefinition {
+  kind: "face";
+  axis: Axis;
+  side: FaceSide;
+  direction: Direction;
+  total: number;
+}
+
+export interface PointLoadDefinition {
+  kind: "point";
+  node: number;
+  direction: Direction;
+  magnitude: number;
+}
+
+export interface OptimizationDefinition {
+  volume_fraction: number;
+  filter_radius: number;
+  penalty: number;
+  minimum_density: number;
+  move_limit: number;
+  convergence_tolerance: number;
+  max_iterations: number;
+}
+
+export interface TopologyProblem {
   mesh: MeshDefinition;
+  material: MaterialDefinition;
+  supports: FixedFaceSupportDefinition[];
+  loads: (FaceLoadDefinition | PointLoadDefinition)[];
+  optimization: OptimizationDefinition;
+  initial_density: number[] | null;
 }
 
 export interface RunSnapshot extends RunSummary {
-  problem: RunProblem;
+  problem: TopologyProblem;
   result: TopologyResult | null;
 }

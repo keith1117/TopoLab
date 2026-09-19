@@ -10,8 +10,8 @@ warm starts.
 > state, cooperative cancellation, and a minimal HTTP adapter. Post-P1 development
 > adds optional SQLite run persistence, explicit restart recovery, and paginated run
 > history. The React workspace consumes that contract for run history, result detail,
-> and interactive 3D physical-density inspection; problem configuration, process
-> workers, scalability evidence, and ML remain incomplete.
+> problem configuration and submission, and interactive 3D physical-density
+> inspection. Process workers, scalability evidence, and ML remain incomplete.
 
 ## Intended scope
 
@@ -62,7 +62,7 @@ docs/
   validation/                  Gate evidence, thresholds, results, and limitations
 src/topolab/                   TopoLab package and finite-element foundation
 tests/                         Package and numerical convention tests
-frontend/                      React/TypeScript run-history workspace
+frontend/                      React/TypeScript optimization workspace
 ```
 
 The platform contract and run lifecycle are documented in
