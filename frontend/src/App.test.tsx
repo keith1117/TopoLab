@@ -6,8 +6,10 @@ import { App } from "./App";
 import type { RunSnapshot, RunSummary, TopologyProblem } from "./types";
 
 const plotlyMocks = vi.hoisted(() => ({
-  purge: vi.fn(),
-  react: vi.fn(),
+  convergencePurge: vi.fn(),
+  convergenceReact: vi.fn(),
+  densityPurge: vi.fn(),
+  densityReact: vi.fn(),
 }));
 
 vi.mock("./api", () => ({
@@ -18,8 +20,15 @@ vi.mock("./api", () => ({
 
 vi.mock("plotly.js-gl3d-dist-min", () => ({
   default: {
-    purge: plotlyMocks.purge,
-    react: plotlyMocks.react,
+    purge: plotlyMocks.densityPurge,
+    react: plotlyMocks.densityReact,
+  },
+}));
+
+vi.mock("plotly.js-basic-dist-min", () => ({
+  default: {
+    purge: plotlyMocks.convergencePurge,
+    react: plotlyMocks.convergenceReact,
   },
 }));
 
@@ -124,6 +133,13 @@ describe("App", () => {
 
     expect(await screen.findByText("42.125")).toBeInTheDocument();
     expect(screen.getByText("50.00% volume")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Convergence history" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("img", { name: /Convergence history across 1 recorded states/ }),
+    ).toBeInTheDocument();
+    await waitFor(() => expect(plotlyMocks.convergenceReact).toHaveBeenCalledOnce());
     expect(getRunMock).toHaveBeenCalledWith("result-a");
   });
 
@@ -174,8 +190,8 @@ describe("App", () => {
     expect(
       screen.getByRole("img", { name: /showing 2 of 4 elements/ }),
     ).toBeInTheDocument();
-    await waitFor(() => expect(plotlyMocks.react).toHaveBeenCalledOnce());
-    expect(plotlyMocks.react.mock.calls[0]?.[3]).toMatchObject({
+    await waitFor(() => expect(plotlyMocks.densityReact).toHaveBeenCalledOnce());
+    expect(plotlyMocks.densityReact.mock.calls[0]?.[3]).toMatchObject({
       modeBarButtonsToRemove: ["sendChartToCloud"],
     });
 
@@ -187,7 +203,7 @@ describe("App", () => {
     expect(
       screen.getByRole("img", { name: /showing 1 of 4 elements/ }),
     ).toBeInTheDocument();
-    await waitFor(() => expect(plotlyMocks.react).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(plotlyMocks.densityReact).toHaveBeenCalledTimes(2));
 
     fireEvent.change(screen.getByRole("slider", { name: /Density threshold/ }), {
       target: { value: "1" },

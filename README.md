@@ -11,7 +11,8 @@ warm starts.
 > adds optional SQLite run persistence, explicit restart recovery, and paginated run
 > history. The React workspace consumes that contract for run history, result detail,
 > problem configuration and submission, and interactive 3D physical-density
-> inspection. Process workers, scalability evidence, and ML remain incomplete.
+> inspection with state-consistent convergence charts. Process workers, scalability
+> evidence, and ML remain incomplete.
 
 ## Intended scope
 
