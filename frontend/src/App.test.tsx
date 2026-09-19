@@ -5,9 +5,21 @@ import { getRun, listRuns } from "./api";
 import { App } from "./App";
 import type { RunSnapshot, RunSummary } from "./types";
 
+const plotlyMocks = vi.hoisted(() => ({
+  purge: vi.fn(),
+  react: vi.fn(),
+}));
+
 vi.mock("./api", () => ({
   listRuns: vi.fn(),
   getRun: vi.fn(),
+}));
+
+vi.mock("plotly.js-gl3d-dist-min", () => ({
+  default: {
+    purge: plotlyMocks.purge,
+    react: plotlyMocks.react,
+  },
 }));
 
 const listRunsMock = vi.mocked(listRuns);
@@ -94,6 +106,51 @@ describe("App", () => {
     expect((await screen.findAllByText(/UTC/)).length).toBeGreaterThan(0);
   });
 
+  it("renders and filters the final physical density field", async () => {
+    const run = summary("density-result");
+    listRunsMock.mockResolvedValue({ items: [run], next_cursor: null });
+    getRunMock.mockResolvedValue(
+      snapshot(run, [0.1, 0.2, 0.7, 0.8], [2, 2, 1]),
+    );
+
+    render(<App />);
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Open run density-result" }),
+    );
+
+    expect(
+      await screen.findByRole("heading", { name: "3D density" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("2 × 2 × 1 elements")).toBeInTheDocument();
+    expect(
+      screen.getByRole("img", { name: /showing 2 of 4 elements/ }),
+    ).toBeInTheDocument();
+    await waitFor(() => expect(plotlyMocks.react).toHaveBeenCalledOnce());
+    expect(plotlyMocks.react.mock.calls[0]?.[3]).toMatchObject({
+      modeBarButtonsToRemove: ["sendChartToCloud"],
+    });
+
+    fireEvent.change(screen.getByRole("slider", { name: /Density threshold/ }), {
+      target: { value: "0.75" },
+    });
+
+    expect(screen.getByText("ρ ≥ 0.75")).toBeInTheDocument();
+    expect(
+      screen.getByRole("img", { name: /showing 1 of 4 elements/ }),
+    ).toBeInTheDocument();
+    await waitFor(() => expect(plotlyMocks.react).toHaveBeenCalledTimes(2));
+
+    fireEvent.change(screen.getByRole("slider", { name: /Density threshold/ }), {
+      target: { value: "1" },
+    });
+    expect(
+      screen.getByText("No elements meet this threshold"),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText(/drag to rotate/),
+    ).not.toBeInTheDocument();
+  });
+
   it("shows a recoverable history error", async () => {
     listRunsMock.mockRejectedValueOnce(new Error("backend unavailable"));
     listRunsMock.mockResolvedValueOnce({ items: [], next_cursor: null });
@@ -121,12 +178,22 @@ function summary(runId: string): RunSummary {
   };
 }
 
-function snapshot(run: RunSummary): RunSnapshot {
+function snapshot(
+  run: RunSummary,
+  density: number[] = [0.5],
+  elementCounts: [number, number, number] = [1, 1, 1],
+): RunSnapshot {
   return {
     ...run,
+    problem: {
+      mesh: {
+        element_counts: elementCounts,
+        lengths: elementCounts.map(Number) as [number, number, number],
+      },
+    },
     result: {
-      design_density: [0.5],
-      physical_density: [0.5],
+      design_density: density,
+      physical_density: density,
       compliance: 42.125,
       displacements: [],
       reactions: [],
@@ -137,8 +204,8 @@ function snapshot(run: RunSummary): RunSnapshot {
           compliance: 42.125,
           volume_fraction: 0.5,
           density_change: 0.0025,
-          design_density: [0.5],
-          physical_density: [0.5],
+          design_density: density,
+          physical_density: density,
         },
       ],
     },

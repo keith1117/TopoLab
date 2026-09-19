@@ -9,8 +9,9 @@ warm starts.
 > validated numerical core with serializable problem/result contracts, isolated run
 > state, cooperative cancellation, and a minimal HTTP adapter. Post-P1 development
 > adds optional SQLite run persistence, explicit restart recovery, and paginated run
-> history. A first React run-history workspace consumes that contract; 3D result
-> visualization, process workers, scalability evidence, and ML remain incomplete.
+> history. The React workspace consumes that contract for run history, result detail,
+> and interactive 3D physical-density inspection; problem configuration, process
+> workers, scalability evidence, and ML remain incomplete.
 
 ## Intended scope
 

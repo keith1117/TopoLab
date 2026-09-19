@@ -30,6 +30,11 @@ displacements, reactions, convergence status, and every post-update history stat
 Arrays are converted to immutable tuples internally and JSON arrays at the HTTP
 boundary.
 
+Post-P1 run snapshots also include the immutable `TopologyProblem`. This additive
+field gives detail clients the structured mesh dimensions and physical lengths needed
+to reconstruct the x-fast density array without guessing its 3D shape. Paginated
+`RunSummary` objects continue to omit both the problem and numerical result arrays.
+
 ## Run states
 
 Each run has one generated identifier and follows one of these transitions:
@@ -58,7 +63,7 @@ isolation and does not survive application restart.
 | Method and path | Behavior |
 |---|---|
 | `POST /runs` | Validate a `TopologyProblem`, enqueue it, and return `202` with a run snapshot |
-| `GET /runs/{run_id}` | Return the current snapshot or `404` |
+| `GET /runs/{run_id}` | Return the current snapshot, problem, and available result, or `404` |
 | `POST /runs/{run_id}/cancel` | Request cancellation, return `404` if unknown or `409` if terminal |
 
 The API owns and shuts down its default `RunManager`. Tests and embedding callers can

@@ -239,9 +239,8 @@ button:focus-visible {
   box-shadow: 0 12px 34px rgba(16, 30, 54, 0.045);
 }
 
-.detail-panel {
-  position: sticky;
-  top: 1.25rem;
+.density-panel {
+  grid-column: 1 / -1;
 }
 
 .panel-heading {
@@ -592,6 +591,172 @@ button:focus-visible {
   font-size: 0.82rem;
 }
 
+.density-heading {
+  min-height: 80px;
+}
+
+.mesh-chip {
+  padding: 0.42rem 0.64rem;
+  border: 1px solid #cfd8e4;
+  border-radius: 999px;
+  color: #52627a;
+  background: #f5f7fa;
+  font: 0.68rem "DM Mono", monospace;
+}
+
+.density-visualization {
+  padding: 1.5rem;
+}
+
+.density-toolbar {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.2fr) minmax(180px, 2fr) auto;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid #dce2e9;
+  border-radius: 10px;
+  background: #f6f8fa;
+}
+
+.density-toolbar label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: #26364d;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.density-toolbar label > span {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.density-toolbar label small {
+  color: #7d8999;
+  font-size: 0.66rem;
+  font-weight: 400;
+}
+
+.density-toolbar output {
+  flex: 0 0 auto;
+  padding: 0.38rem 0.52rem;
+  border-radius: 6px;
+  color: #235ac0;
+  background: #e8efff;
+  font: 600 0.69rem "DM Mono", monospace;
+}
+
+.density-toolbar input[type="range"] {
+  width: 100%;
+  accent-color: var(--blue);
+}
+
+.density-counts {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: baseline;
+  gap: 0.35rem;
+  min-width: 150px;
+  color: #788496;
+  white-space: nowrap;
+}
+
+.density-counts strong {
+  color: #1f3049;
+  font: 500 1.15rem "DM Mono", monospace;
+}
+
+.density-counts span {
+  font-size: 0.7rem;
+}
+
+.density-stage {
+  position: relative;
+  min-height: 500px;
+  margin-top: 1rem;
+  overflow: hidden;
+  border: 1px solid #dce2e9;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(47, 111, 237, 0.08), transparent 45%),
+    #f8fafc;
+}
+
+.density-plot {
+  width: 100%;
+  min-height: 500px;
+}
+
+.density-loading,
+.density-render-error {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #65758b;
+  background: rgba(248, 250, 252, 0.78);
+  font: 0.75rem "DM Mono", monospace;
+  backdrop-filter: blur(2px);
+}
+
+.density-render-error {
+  color: #963e3e;
+}
+
+.density-note {
+  margin: 0.8rem 0 0;
+  color: #7d8999;
+  font-size: 0.7rem;
+  text-align: right;
+}
+
+.density-empty,
+.density-error {
+  display: grid;
+  place-items: center;
+  min-height: 320px;
+  margin-top: 1rem;
+  padding: 2rem;
+  border: 1px dashed #cbd4df;
+  border-radius: 12px;
+  color: #738095;
+  text-align: center;
+  background: #f8fafb;
+}
+
+.density-empty > span {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 1rem;
+  border: 1px solid #c8d3df;
+  border-radius: 50%;
+  color: #326bd2;
+  font: 500 1.2rem "DM Mono", monospace;
+}
+
+.density-empty strong,
+.density-error strong {
+  color: #26364d;
+}
+
+.density-empty p,
+.density-error p {
+  margin: 0.35rem 0 0;
+  font-size: 0.76rem;
+}
+
+.density-error {
+  min-height: 180px;
+  border-color: #efc8c8;
+  color: #863b3b;
+  background: #fff1f1;
+}
+
 .solver-error,
 .error-notice {
   display: flex;
@@ -703,8 +868,12 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .detail-panel {
-    position: static;
+  .density-toolbar {
+    grid-template-columns: 1fr 1.4fr;
+  }
+
+  .density-counts {
+    grid-column: 1 / -1;
   }
 }
 
@@ -772,6 +941,36 @@ footer {
   .row-arrow {
     position: absolute;
     right: 1.25rem;
+  }
+
+  .density-heading {
+    align-items: flex-start;
+  }
+
+  .mesh-chip {
+    text-align: right;
+  }
+
+  .density-visualization {
+    padding: 0.75rem;
+  }
+
+  .density-toolbar {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .density-toolbar label {
+    align-items: flex-start;
+  }
+
+  .density-counts {
+    grid-column: auto;
+  }
+
+  .density-stage,
+  .density-plot {
+    min-height: 390px;
   }
 
   footer {

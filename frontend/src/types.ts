@@ -39,6 +39,16 @@ export interface TopologyResult {
   converged: boolean;
 }
 
+export interface MeshDefinition {
+  element_counts: [number, number, number];
+  lengths: [number, number, number];
+}
+
+export interface RunProblem {
+  mesh: MeshDefinition;
+}
+
 export interface RunSnapshot extends RunSummary {
+  problem: RunProblem;
   result: TopologyResult | null;
 }
