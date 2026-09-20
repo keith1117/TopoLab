@@ -60,3 +60,4 @@ Hex8 finite elements, density filtering, or the Optimality Criteria method.
 | 2026-09-19 | Problem configuration and run submission workspace | Original TopoLab frontend work over the frozen problem and run-lifecycle contracts | No upstream reference code, forms, or visual assets used |
 | 2026-09-19 | State-consistent convergence visualization | Original TopoLab frontend mapping of the frozen iteration-history contract using the public Plotly API | No upstream plotting code, figures, or visual assets used |
 | 2026-09-19 | Frontend run cancellation workflow | Original TopoLab frontend work over the frozen cooperative-cancellation contract | No upstream reference code, controls, or visual assets used |
+| 2026-09-19 | Sparse solver performance and peak-memory benchmark | Original TopoLab benchmark harness over the independently implemented FEM path | No upstream benchmark code, measurements, or figures used |

@@ -11,8 +11,10 @@ warm starts.
 > adds optional SQLite run persistence, explicit restart recovery, and paginated run
 > history. The React workspace consumes that contract for run history, result detail,
 > problem configuration, submission and cancellation, and interactive 3D
-> physical-density inspection with state-consistent convergence charts. Process
-> workers, scalability evidence, and ML remain incomplete.
+> physical-density inspection with state-consistent convergence charts. A reproducible
+> sparse assembly/solve benchmark now records four mesh scales, wall time, matrix
+> storage, and peak memory. Process workers, broad scalability evidence, and ML remain
+> incomplete.
 
 ## Intended scope
 
@@ -71,6 +73,26 @@ The platform contract and run lifecycle are documented in
 contract is in [`docs/run_persistence.md`](docs/run_persistence.md).
 Frontend scope and local development are documented in
 [`docs/frontend.md`](docs/frontend.md).
+
+## Sparse solver benchmark
+
+The fixed local benchmark uses isolated single-threaded workers, one cold numerical
+run, and three repeated runs at each of four mesh sizes. On the recorded Apple M2
+environment, the `45 x 18 x 9` case completed with 726.44 MiB peak process RSS; one
+equivalent dense global `float64` matrix would require an estimated 5.12 GiB before
+factorization or workspace. These results support the sparse solver design without
+claiming that the entire platform is universally scalable.
+
+Reproduce the machine-readable report with:
+
+```bash
+PYTHONPATH=src uv run python -m topolab.benchmark \
+  --repeated-runs 3 \
+  --output results/sparse_solver_benchmark.json
+```
+
+Methodology, full measurements, numerical guards, and limitations are recorded in
+[`docs/validation/sparse_solver_benchmark.md`](docs/validation/sparse_solver_benchmark.md).
 
 ## Provenance
 
