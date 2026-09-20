@@ -1,6 +1,15 @@
 """TopoLab package."""
 
 from topolab.api import create_app
+from topolab.experiment import (
+    CASE_ID_PREFIX,
+    CASE_SCHEMA_VERSION,
+    LABEL_GENERATOR_VERSION,
+    SOLVER_CONTRACT_VERSION,
+    ExperimentCase,
+    build_case_id,
+    canonical_case_json,
+)
 from topolab.fem import (
     LinearStaticResult,
     assemble_global_stiffness,
@@ -54,6 +63,10 @@ from topolab.simp import (
 __version__ = "0.3.0"
 
 __all__ = [
+    "CASE_ID_PREFIX",
+    "CASE_SCHEMA_VERSION",
+    "ExperimentCase",
+    "LABEL_GENERATOR_VERSION",
     "Hex8Mesh",
     "LinearStaticResult",
     "ComplianceResult",
@@ -80,6 +93,7 @@ __all__ = [
     "SimpConfig",
     "SimpIteration",
     "SimpResult",
+    "SOLVER_CONTRACT_VERSION",
     "SqliteRunStore",
     "StoredRun",
     "TopologyProblem",
@@ -87,10 +101,12 @@ __all__ = [
     "apply_density_filter",
     "assemble_global_stiffness",
     "build_constrained_dofs",
+    "build_case_id",
     "build_load_vector",
     "backpropagate_density_gradient",
     "build_density_filter",
     "create_app",
+    "canonical_case_json",
     "evaluate_compliance",
     "generate_structured_hex8",
     "hex8_element_stiffness",

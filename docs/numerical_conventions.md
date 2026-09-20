@@ -1,8 +1,8 @@
 # Numerical conventions
 
-Status: **N1 conventions frozen at v0.1.0; N2 conventions frozen at v0.2.0**. Any
-change to a frozen convention requires a documented reason and regression-test
-update.
+Status: **N1 conventions frozen at v0.1.0; N2 conventions frozen at v0.2.0; M0
+experiment-contract conventions frozen at m0.v1**. Any change to a frozen convention
+requires a documented reason and regression-test update.
 
 ## Geometry and indexing
 
@@ -120,3 +120,23 @@ update.
   time, and peak memory.
 - Numerical tolerances are defined in the reimplementation strategy and encoded as
   named test constants rather than scattered literals.
+
+## M0 experiment representation
+
+- A versioned experiment case contains one complete `TopologyProblem` with no
+  `initial_density`. Its stable ID is the SHA-256 digest of the canonical mesh,
+  material, support, load, and optimization payload. Initialization is a compared
+  method, not part of physical case identity.
+- ML tensors are channel-first and use spatial order `(z, y, x)`, so array access is
+  `[channel, ez, ey, ex]` and `x` remains the fastest flattened axis. No image-style
+  axis reversal is allowed.
+- The first input representation has ten element-grid channels: three support masks,
+  three signed load components, three normalized element-center coordinates, and one
+  broadcast target physical volume fraction.
+- The learned output initializes design density, not physical density. Project it to
+  the target filtered physical volume before SIMP; derive physical density only by
+  the frozen density filter.
+- Dataset partitions operate on complete case IDs. Optimizer history states, derived
+  tensors, repeated labels, and augmentations from one case cannot cross partitions.
+- Exact identity, encoding, projection, label, split, OOD, baseline, quality,
+  statistics, and fallback rules are frozen in `docs/ml_experiment_contract.md`.
