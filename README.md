@@ -13,8 +13,10 @@ warm starts.
 > problem configuration, submission and cancellation, and interactive 3D
 > physical-density inspection with state-consistent convergence charts. A reproducible
 > sparse assembly/solve benchmark now records four mesh scales, wall time, matrix
-> storage, and peak memory. Process workers, broad scalability evidence, and ML remain
-> incomplete.
+> storage, and peak memory. The first M0 slice freezes versioned ML case identity,
+> tensor/label semantics, leakage-safe splits, baselines, and evaluation rules before
+> data generation. Process workers, broad scalability evidence, dataset generation,
+> and ML remain incomplete.
 
 ## Intended scope
 
@@ -60,6 +62,7 @@ npm run build
 ```text
 docs/
   numerical_conventions.md     Numerical definitions that code and tests must follow
+  ml_experiment_contract.md    Frozen M0 case, representation, split, and evaluation rules
   reference_baseline.md        Frozen upstream reference and known limitations
   planning/                    Admissions, schedule, and implementation planning
   validation/                  Gate evidence, thresholds, results, and limitations
@@ -73,6 +76,9 @@ The platform contract and run lifecycle are documented in
 contract is in [`docs/run_persistence.md`](docs/run_persistence.md).
 Frontend scope and local development are documented in
 [`docs/frontend.md`](docs/frontend.md).
+The first M0 data and evaluation contract is documented in
+[`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md); it does not yet
+constitute a generated dataset or a passed M0 gate.
 
 ## Sparse solver benchmark
 
