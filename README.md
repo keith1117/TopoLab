@@ -13,10 +13,10 @@ warm starts.
 > problem configuration, submission and cancellation, and interactive 3D
 > physical-density inspection with state-consistent convergence charts. A reproducible
 > sparse assembly/solve benchmark now records four mesh scales, wall time, matrix
-> storage, and peak memory. The first M0 slice freezes versioned ML case identity,
-> tensor/label semantics, leakage-safe splits, baselines, and evaluation rules before
-> data generation. Process workers, broad scalability evidence, dataset generation,
-> and ML remain incomplete.
+> storage, and peak memory. The first M0 slices freeze versioned ML case identity,
+> tensor/label semantics, leakage-safe splits, baselines, and evaluation rules, and
+> implement deterministic case encoding and warm-start volume projection. Process
+> workers, broad scalability evidence, dataset generation, and ML remain incomplete.
 
 ## Intended scope
 

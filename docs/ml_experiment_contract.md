@@ -1,9 +1,10 @@
 # M0 machine-learning experiment contract
 
-Status: **contract slice frozen at `m0.v1`**. This document freezes case identity,
-representation, split, label, baseline, and evaluation semantics before any dataset
-generation or model training. M0 is not complete until a later slice implements and
-validates the generator and manifest against this contract.
+Status: **contract and deterministic representation slices implemented at `m0.v1`**.
+This document freezes case identity, representation, split, label, baseline, and
+evaluation semantics before any dataset generation or model training. M0 is not
+complete until a later slice implements and validates the generator and manifest
+against this contract.
 
 ## Scope and claims boundary
 
@@ -11,10 +12,11 @@ The first experiment asks one question: can a predicted design-density warm star
 reduce the end-to-end time required by the existing SIMP solver to reach a result of
 the same quality as a uniform start?
 
-This slice does not generate cases, add PyTorch, train a model, select
-hyperparameters, or support an `accelerated` claim. It also does not turn optimizer
-history rows into independent samples. The numerical and platform contracts remain
-unchanged.
+The current implementation provides typed case identity, deterministic input
+encoding, and filtered-volume projection. It does not generate datasets, add
+PyTorch, train a model, select hyperparameters, or support an `accelerated` claim. It
+also does not turn optimizer history rows into independent samples. The numerical
+and platform contracts remain unchanged.
 
 ## Versioned case schema and identity
 
@@ -87,6 +89,10 @@ an invalid case.
 No axis transposition, image-style `y` reversal, or implicit batch dimension is
 allowed. Batches add one leading dimension: `(batch, 10, nz, ny, nx)`.
 
+`topolab.experiment.encode_case` implements this mapping and returns an `EncodedCase`
+whose `input_tensor` has the frozen shape/dtype and whose `load_scale` records the
+dimensional L1 scale used for normalization.
+
 ## Label and warm-start density definitions
 
 Both label arrays are `float32` tensors of shape `(1, nz, ny, nx)` with the same
@@ -114,6 +120,10 @@ choose lambda so abs(mean(rho(lambda)) - volume_fraction) <= 1e-6
 Bisection uses the bracket `[-1, 1]` and at most 100 iterations. The same projection
 is used for baseline warm starts. Wrong shape, non-finite values, values outside
 `[0, 1]`, or failure to meet the projection tolerance triggers the uniform fallback.
+`topolab.experiment.project_design_density` implements the projection and returns
+x-fast `float64` design and physical vectors ready for the numerical core. It raises
+an explicit error for invalid predictions or failed projection; the later experiment
+runner owns the required fallback and cost accounting.
 
 ## Label generator and termination
 
