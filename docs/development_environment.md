@@ -19,6 +19,9 @@ Recorded on 2026-09-17 for reproducibility and future performance reporting.
 
 Exact Python dependencies are recorded in `uv.lock`.
 
+The first reproducible sparse assembly/solve measurements on this machine are recorded
+in [`validation/sparse_solver_benchmark.md`](validation/sparse_solver_benchmark.md).
+
 ## Resource implications
 
 This machine is sufficient for repository development, unit tests, small reference
