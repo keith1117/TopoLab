@@ -1,14 +1,19 @@
 import json
 
+import numpy as np
 import pytest
 from pydantic import ValidationError
 
 from topolab.experiment import (
     CASE_SCHEMA_VERSION,
+    INPUT_CHANNEL_NAMES,
     ExperimentCase,
     build_case_id,
     canonical_case_json,
+    encode_case,
+    project_design_density,
 )
+from topolab.mesh import generate_structured_hex8
 from topolab.problem import (
     FaceLoadDefinition,
     FixedFaceSupportDefinition,
@@ -18,6 +23,7 @@ from topolab.problem import (
     PointLoadDefinition,
     TopologyProblem,
 )
+from topolab.simp import apply_density_filter, build_density_filter
 
 
 def test_experiment_case_has_stable_identity_and_json_round_trip() -> None:
@@ -132,6 +138,208 @@ def test_experiment_case_rejects_unknown_or_changed_schema_fields() -> None:
     payload["schema_version"] = "topolab.m0.case.v2"
     with pytest.raises(ValidationError):
         ExperimentCase.model_validate(payload)
+
+
+def test_case_encoding_has_frozen_shape_axes_supports_coordinates_and_volume() -> None:
+    case = ExperimentCase.from_problem(
+        _problem(
+            element_counts=(2, 2, 2),
+            lengths=(2.0, 4.0, 6.0),
+            supports=(
+                FixedFaceSupportDefinition(
+                    axis="x",
+                    side="min",
+                    directions=("x", "z"),
+                ),
+            ),
+        )
+    )
+
+    encoded = encode_case(case)
+
+    assert encoded.input_tensor.shape == (10, 2, 2, 2)
+    assert encoded.input_tensor.dtype == np.float32
+    assert encoded.input_tensor.flags.c_contiguous
+    assert INPUT_CHANNEL_NAMES == (
+        "support_x",
+        "support_y",
+        "support_z",
+        "load_x",
+        "load_y",
+        "load_z",
+        "coord_x",
+        "coord_y",
+        "coord_z",
+        "volume_fraction",
+    )
+    np.testing.assert_array_equal(encoded.input_tensor[0, :, :, 0], 1.0)
+    np.testing.assert_array_equal(encoded.input_tensor[0, :, :, 1], 0.0)
+    np.testing.assert_array_equal(encoded.input_tensor[1], 0.0)
+    np.testing.assert_array_equal(encoded.input_tensor[2], encoded.input_tensor[0])
+    np.testing.assert_array_equal(
+        encoded.input_tensor[6],
+        np.broadcast_to(np.array([0.25, 0.75], dtype=np.float32), (2, 2, 2)),
+    )
+    np.testing.assert_array_equal(
+        encoded.input_tensor[7],
+        np.broadcast_to(
+            np.array([[0.25], [0.75]], dtype=np.float32),
+            (2, 2, 2),
+        ),
+    )
+    np.testing.assert_array_equal(
+        encoded.input_tensor[8],
+        np.broadcast_to(
+            np.array([[[0.25]], [[0.75]]], dtype=np.float32),
+            (2, 2, 2),
+        ),
+    )
+    np.testing.assert_array_equal(encoded.input_tensor[9], 0.5)
+
+
+def test_case_encoding_scatters_loads_conservatively_and_records_scale() -> None:
+    case = ExperimentCase.from_problem(
+        _problem(
+            element_counts=(2, 2, 1),
+            lengths=(2.0, 2.0, 1.0),
+            loads=(
+                PointLoadDefinition(node=13, direction="y", magnitude=-8.0),
+                FaceLoadDefinition(
+                    axis="x",
+                    side="max",
+                    direction="z",
+                    total=4.0,
+                ),
+            ),
+        )
+    )
+
+    encoded = encode_case(case)
+
+    assert encoded.load_scale == pytest.approx(12.0, abs=1e-12)
+    np.testing.assert_array_equal(encoded.input_tensor[3], 0.0)
+    np.testing.assert_allclose(
+        encoded.input_tensor[4],
+        np.full((1, 2, 2), -1.0 / 6.0, dtype=np.float32),
+        rtol=0.0,
+        atol=1e-8,
+    )
+    assert float(np.sum(encoded.input_tensor[4], dtype=np.float64)) == pytest.approx(
+        -8.0 / 12.0,
+        abs=1e-7,
+    )
+    assert float(np.sum(encoded.input_tensor[5], dtype=np.float64)) == pytest.approx(
+        4.0 / 12.0,
+        abs=1e-7,
+    )
+
+
+def test_case_encoding_is_deterministic() -> None:
+    case = ExperimentCase.from_problem(_problem())
+
+    first = encode_case(case)
+    second = encode_case(case)
+
+    assert first.load_scale == second.load_scale
+    np.testing.assert_array_equal(first.input_tensor, second.input_tensor)
+
+
+def test_density_projection_matches_filtered_volume_and_x_fast_order() -> None:
+    case = ExperimentCase.from_problem(
+        _problem(
+            element_counts=(3, 2, 1),
+            lengths=(3.0, 2.0, 1.0),
+            volume_fraction=0.4,
+        )
+    )
+    raw = np.array(
+        [[[[0.0, 0.2, 0.4], [0.6, 0.8, 1.0]]]],
+        dtype=np.float32,
+    )
+
+    projected = project_design_density(case, raw)
+    repeated = project_design_density(case, raw)
+
+    assert projected.design_density.shape == (6,)
+    assert projected.physical_density.shape == (6,)
+    assert projected.design_density.dtype == np.float64
+    assert projected.physical_density.dtype == np.float64
+    assert np.all(projected.design_density >= 0.05)
+    assert np.all(projected.design_density <= 1.0)
+    assert float(np.mean(projected.physical_density)) == pytest.approx(0.4, abs=1e-6)
+    assert np.all(np.diff(projected.design_density) >= 0.0)
+    np.testing.assert_array_equal(projected.design_density, repeated.design_density)
+    np.testing.assert_array_equal(projected.physical_density, repeated.physical_density)
+
+    mesh = generate_structured_hex8(3, 2, 1, lengths=(3.0, 2.0, 1.0))
+    density_filter = build_density_filter(mesh, radius=1.5)
+    np.testing.assert_allclose(
+        projected.physical_density,
+        apply_density_filter(density_filter, projected.design_density),
+        rtol=0.0,
+        atol=1e-15,
+    )
+
+
+def test_uniform_density_projection_is_unchanged() -> None:
+    case = ExperimentCase.from_problem(_problem(volume_fraction=0.4))
+    raw = np.full((1, 1, 1, 2), 0.4, dtype=np.float32)
+
+    projected = project_design_density(case, raw)
+
+    np.testing.assert_allclose(projected.design_density, 0.4, rtol=0.0, atol=1e-7)
+    np.testing.assert_allclose(projected.physical_density, 0.4, rtol=0.0, atol=1e-7)
+
+
+@pytest.mark.parametrize(
+    ("raw_density", "error_type", "message"),
+    [
+        (np.zeros((2,), dtype=np.float32), ValueError, "must have shape"),
+        (
+            np.zeros((1, 1, 1, 2), dtype=np.int64),
+            TypeError,
+            "floating-point dtype",
+        ),
+        (
+            np.array([[[[0.5, np.nan]]]], dtype=np.float32),
+            ValueError,
+            "only finite",
+        ),
+        (
+            np.array([[[[-0.1, 0.5]]]], dtype=np.float32),
+            ValueError,
+            r"interval \[0, 1\]",
+        ),
+        (
+            np.array([[[[0.5, 1.1]]]], dtype=np.float32),
+            ValueError,
+            r"interval \[0, 1\]",
+        ),
+    ],
+)
+def test_density_projection_rejects_invalid_model_fields(
+    raw_density: np.ndarray,
+    error_type: type[Exception],
+    message: str,
+) -> None:
+    case = ExperimentCase.from_problem(_problem())
+
+    with pytest.raises(error_type, match=message):
+        project_design_density(case, raw_density)  # type: ignore[arg-type]
+
+
+def test_case_encoding_rejects_a_zero_resultant_load_vector() -> None:
+    case = ExperimentCase.from_problem(
+        _problem(
+            loads=(
+                PointLoadDefinition(node=11, direction="y", magnitude=-1.0),
+                PointLoadDefinition(node=11, direction="y", magnitude=1.0),
+            )
+        )
+    )
+
+    with pytest.raises(ValueError, match="loads cancel to a zero load vector"):
+        encode_case(case)
 
 
 def _problem(
