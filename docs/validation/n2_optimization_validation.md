@@ -84,6 +84,22 @@ configured `0.01` convergence threshold and well below any decision boundary in 
 test. The optimizer convergence tolerance, physical-volume acceptance criterion, and
 all implementation behavior remain unchanged.
 
+## Density-filter bound roundoff regression
+
+On 2026-09-21, preflight work for the bounded M0 case catalog exposed a sparse
+reduction result of `1.0000000000000002` for a mathematically bounded density-filter
+average. The `2.220446049250313e-16` excess was one binary64 ULP above the exact upper
+bound and caused the strict compliance-input validator to reject an otherwise valid
+optimizer state.
+
+`apply_density_filter` now clips its computed quotient to the closed convex interval
+spanned by the validated input design density. This enforces an invariant of the
+documented nonnegative normalized filter; it does not relax the public `[0, 1]`
+input boundary or an acceptance tolerance. Regression tests require exact
+preservation of constant `0.05` and `1.0` fields on the exposing `12 x 6 x 3` mesh,
+and require the previously failing saturated-bound optimization case to converge
+without leaving `(0, 1]`.
+
 ## Reproduction
 
 Environment details are recorded in `docs/development_environment.md`; exact Python

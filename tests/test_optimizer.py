@@ -38,6 +38,19 @@ def test_density_filter_uses_documented_distance_weights() -> None:
     )
 
 
+@pytest.mark.parametrize("density", [0.05, 1.0])
+def test_density_filter_preserves_constant_bound_fields_exactly(density: float) -> None:
+    mesh = generate_structured_hex8(12, 6, 3, lengths=(12.0, 6.0, 3.0))
+    density_filter = build_density_filter(mesh, radius=1.5)
+    design = np.full(12 * 6 * 3, density)
+
+    physical = apply_density_filter(density_filter, design)
+
+    np.testing.assert_array_equal(physical, design)
+    assert np.all(physical >= density)
+    assert np.all(physical <= density)
+
+
 def test_density_filter_gradient_matches_central_finite_difference() -> None:
     mesh = generate_structured_hex8(3, 1, 1, lengths=(3.0, 1.0, 1.0))
     density_filter = build_density_filter(mesh, radius=1.5)
@@ -155,6 +168,31 @@ def test_optimizer_history_and_final_resolve_are_state_consistent() -> None:
         rtol=FINAL_COMPLIANCE_RELATIVE_TOLERANCE,
         atol=1e-12,
     )
+
+
+def test_optimizer_handles_filter_roundoff_at_saturated_density_bound() -> None:
+    mesh = generate_structured_hex8(12, 6, 3, lengths=(12.0, 6.0, 3.0))
+    constrained_dofs = build_constrained_dofs(
+        mesh,
+        [FixedFaceSupport(axis="x", side="min")],
+    )
+    loads = build_load_vector(
+        mesh,
+        [PointLoad(node=12, direction="y", magnitude=-1.0)],
+    )
+    config = SimpConfig(
+        volume_fraction=0.5,
+        filter_radius=1.5,
+        minimum_density=0.05,
+        convergence_tolerance=0.01,
+        max_iterations=100,
+    )
+
+    result = _run_optimizer(mesh, loads, constrained_dofs, config)
+
+    assert result.converged
+    assert np.all(result.physical_density > 0.0)
+    assert np.all(result.physical_density <= 1.0)
 
 
 def test_optimizer_is_deterministic() -> None:
