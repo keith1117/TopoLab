@@ -48,6 +48,14 @@ from topolab.jobs import (
     RunStatus,
     RunSummary,
 )
+from topolab.label_artifacts import (
+    LABEL_ARTIFACT_VERSION,
+    LabelArtifactError,
+    LabelArtifactReference,
+    canonical_label_bytes,
+    read_label_artifact,
+    write_label_artifact,
+)
 from topolab.labels import (
     LABEL_COMPLIANCE_RELATIVE_TOLERANCE,
     LABEL_RECORD_VERSION,
@@ -104,10 +112,13 @@ __all__ = [
     "INPUT_CHANNEL_COUNT",
     "INPUT_CHANNEL_NAMES",
     "LABEL_GENERATOR_VERSION",
+    "LABEL_ARTIFACT_VERSION",
     "LABEL_COMPLIANCE_RELATIVE_TOLERANCE",
     "LABEL_RECORD_VERSION",
     "LABEL_VOLUME_TOLERANCE",
     "LabelGenerationError",
+    "LabelArtifactError",
+    "LabelArtifactReference",
     "LabelRecord",
     "Hex8Mesh",
     "LinearStaticResult",
@@ -154,6 +165,7 @@ __all__ = [
     "build_density_filter",
     "create_app",
     "canonical_case_json",
+    "canonical_label_bytes",
     "evaluate_compliance",
     "encode_case",
     "generate_structured_hex8",
@@ -163,8 +175,10 @@ __all__ = [
     "optimality_criteria_update",
     "optimize_simp",
     "project_design_density",
+    "read_label_artifact",
     "select_face_nodes",
     "simp_element_moduli",
     "solve_problem",
     "solve_linear_static",
+    "write_label_artifact",
 ]
