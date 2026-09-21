@@ -1,10 +1,10 @@
 # M0 machine-learning experiment contract
 
-Status: **contract, deterministic representation, manifest, and single-case label
-generation slices implemented at `m0.v1`**. This document freezes case identity,
-representation, split, label, baseline, and evaluation semantics before any dataset
-generation or model training. M0 is not complete until a later slice freezes the
-label-artifact layout and validates controlled dataset writing against this contract.
+Status: **contract, deterministic representation, manifest, single-case label
+generation, and label-artifact slices implemented at `m0.v1`**. This document
+freezes case identity, representation, split, label, baseline, and evaluation
+semantics before any dataset generation or model training. M0 is not complete until
+a later slice validates controlled dataset materialization against this contract.
 
 ## Scope and claims boundary
 
@@ -15,10 +15,9 @@ the same quality as a uniform start?
 The current implementation provides typed case identity, deterministic input
 encoding, filtered-volume projection, immutable sample metadata, a validated dataset
 manifest, and deterministic generation of one in-memory label record. It does not
-write label artifacts or datasets, add PyTorch, train a model, select
-hyperparameters, or support an `accelerated` claim. It also does not turn optimizer
-history rows into independent samples. The numerical and platform contracts remain
-unchanged.
+materialize a complete dataset, add PyTorch, train a model, select hyperparameters,
+or support an `accelerated` claim. It also does not turn optimizer history rows into
+independent samples. The numerical and platform contracts remain unchanged.
 
 ## Versioned case schema and identity
 
@@ -171,6 +170,33 @@ are independently evaluated for the stored physical field. Deserialization rejec
 non-`float32` values, a stale shape, a changed filter mapping, or inconsistent volume
 and convergence metadata.
 
+## Label artifact format
+
+`topolab.label_artifacts` freezes one portable label file and its reference:
+
+- `artifact_version = "topolab.m0.label-artifact.v1"`;
+- file contents are `LabelRecord.model_dump(mode="json")` serialized with sorted
+  object keys, ASCII escaping, no insignificant whitespace, UTF-8 encoding, and
+  exactly one final newline;
+- `sha256` is the full lowercase SHA-256 digest of those exact bytes, including the
+  final newline, and `byte_size` is their exact length; and
+- the POSIX relative path is
+  `labels/<case_id>/<sha256>.json`, allowing labels for different revisions or
+  environments to coexist without changing physical case identity.
+
+`LabelArtifactReference` also records the case ID, generator version, and source
+revision. Its path is derived from the case ID and checksum and cannot be supplied
+independently. Writes create the parent directory, write and `fsync` a temporary file
+in that same directory, then publish it with one atomic `os.replace`. Rewriting the
+same bytes is idempotent; different bytes already present at the content-addressed
+path are an error rather than being overwritten.
+
+Reads verify, in order, file presence, byte size, SHA-256, `LabelRecord` schema,
+canonical byte representation, and equality between reference provenance and label
+contents. Any failure raises `LabelArtifactError`. These APIs operate on one label at
+a time; tests use temporary directories, and this slice commits no generated label
+or dataset artifact.
+
 ## Typed sample and dataset manifest
 
 `topolab.dataset` implements the metadata boundary without writing tensors, labels,
@@ -193,10 +219,9 @@ stale derived metadata, changed schema constants, extra fields, or an OOD case w
 exact `y`-load counterpart is absent. The counterpart check changes only every load
 direction from `z` to `y` and then uses the canonical case identity, so all other
 physical fields must match. JSON serialization uses Pydantic's strict immutable
-contracts; a later artifact slice will define file layout, label checksums, and
-atomic artifact writing rather than overloading this metadata schema. That later
-artifact slice will consume `LabelRecord`; the current generator performs no file
-I/O and creates no dataset.
+contracts. A later dataset-materialization slice will associate every manifest sample
+with a verified `LabelArtifactReference`; the current artifact API performs no bulk
+generation and creates no manifest-to-label index.
 
 ## Dataset split and leakage prevention
 

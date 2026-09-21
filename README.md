@@ -17,8 +17,9 @@ warm starts.
 > tensor/label semantics, leakage-safe splits, baselines, and evaluation rules, and
 > implement deterministic case encoding, warm-start volume projection, a typed
 > dataset manifest with verified partitions and provenance metadata, and validated
-> single-case label generation. Process workers, broad scalability evidence,
-> dataset-artifact writing, and ML remain incomplete.
+> single-case label generation with content-addressed, checksum-verified atomic
+> artifacts. Process workers, broad scalability evidence, controlled dataset
+> materialization, and ML remain incomplete.
 
 ## Intended scope
 
@@ -80,8 +81,8 @@ Frontend scope and local development are documented in
 [`docs/frontend.md`](docs/frontend.md).
 The first M0 data and evaluation contract is documented in
 [`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md). Its typed manifest
-and in-memory single-case label generator write no dataset files and do not yet
-constitute a passed M0 gate.
+and single-label artifact API do not yet materialize a complete dataset or constitute
+a passed M0 gate.
 
 ## Sparse solver benchmark
 
