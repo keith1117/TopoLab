@@ -1,9 +1,9 @@
 # M0 machine-learning experiment contract
 
-Status: **contract and deterministic representation slices implemented at `m0.v1`**.
-This document freezes case identity, representation, split, label, baseline, and
-evaluation semantics before any dataset generation or model training. M0 is not
-complete until a later slice implements and validates the generator and manifest
+Status: **contract, deterministic representation, and manifest slices implemented at
+`m0.v1`**. This document freezes case identity, representation, split, label,
+baseline, and evaluation semantics before any dataset generation or model training.
+M0 is not complete until a later slice implements and validates label generation
 against this contract.
 
 ## Scope and claims boundary
@@ -13,10 +13,11 @@ reduce the end-to-end time required by the existing SIMP solver to reach a resul
 the same quality as a uniform start?
 
 The current implementation provides typed case identity, deterministic input
-encoding, and filtered-volume projection. It does not generate datasets, add
-PyTorch, train a model, select hyperparameters, or support an `accelerated` claim. It
-also does not turn optimizer history rows into independent samples. The numerical
-and platform contracts remain unchanged.
+encoding, filtered-volume projection, immutable sample metadata, and a validated
+dataset manifest. It does not generate label arrays or dataset files, add PyTorch,
+train a model, select hyperparameters, or support an `accelerated` claim. It also
+does not turn optimizer history rows into independent samples. The numerical and
+platform contracts remain unchanged.
 
 ## Versioned case schema and identity
 
@@ -149,6 +150,31 @@ Changing code revision does not change physical `case_id`; it creates a new labe
 artifact version. Two labels for the same case and generator version but different
 revisions may coexist only for an explicit reproducibility comparison and may not be
 mixed in one training dataset.
+
+## Typed sample and dataset manifest
+
+`topolab.dataset` implements the metadata boundary without writing tensors, labels,
+or generated files:
+
+- `DatasetSample` uses `sample_version = "topolab.m0.sample.v1"`, embeds the complete
+  verified `ExperimentCase`, records its derived partition and dimensional
+  `load_scale`, and re-derives both fields when deserialized;
+- `DatasetEnvironment` records non-sensitive Python, NumPy, and SciPy version strings
+  plus the lowercase SHA-256 digest of `uv.lock`;
+- `DatasetManifest` uses `manifest_version = "topolab.m0.dataset.v1"`, embeds the
+  case, generator, solver, and split contract versions, requires an exact lowercase
+  40-character source commit and `source_tree_clean = true`, and freezes the tensor
+  dtype, axis order, and channel names; and
+- manifest samples are sorted by `case_id`, must be unique, and must reproduce the
+  recorded positive count for every train, validation, test, and OOD partition.
+
+On construction and every JSON read, the manifest rejects mixed fixed-shape cohorts,
+stale derived metadata, changed schema constants, extra fields, or an OOD case whose
+exact `y`-load counterpart is absent. The counterpart check changes only every load
+direction from `z` to `y` and then uses the canonical case identity, so all other
+physical fields must match. JSON serialization uses Pydantic's strict immutable
+contracts; a later generator slice will define file layout, label checksums, and
+atomic artifact writing rather than overloading this metadata schema.
 
 ## Dataset split and leakage prevention
 
