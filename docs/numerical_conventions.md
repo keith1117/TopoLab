@@ -138,5 +138,8 @@ requires a documented reason and regression-test update.
   the frozen density filter.
 - Dataset partitions operate on complete case IDs. Optimizer history states, derived
   tensors, repeated labels, and augmentations from one case cannot cross partitions.
+- Dataset materialization checkpoints are keyed by the canonical complete-manifest
+  digest. Recorded case outcomes are append-only, and a complete checkpoint contains
+  exactly one success or sanitized terminal failure for every manifest case.
 - Exact identity, encoding, projection, label, split, OOD, baseline, quality,
   statistics, and fallback rules are frozen in `docs/ml_experiment_contract.md`.
