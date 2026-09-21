@@ -50,7 +50,7 @@ def test_label_generation_is_deterministic_state_consistent_and_serializable() -
     assert first.iterations == 13
     assert first.terminal_density_change == pytest.approx(
         0.009107108670230402,
-        abs=1e-15,
+        abs=1e-12,
     )
 
     design = first.design_tensor()

@@ -73,6 +73,17 @@ most 60 iterations.
 
 No numerical tolerance was changed or loosened during the Gate N2 audit.
 
+## Cross-platform regression tolerance note
+
+On 2026-09-21, Linux CI produced terminal density change
+`0.009107108670234287` for the optimizer case, differing from the macOS value above
+by `3.9e-15`. This is expected last-bit variation from the sparse linear solve and
+floating-point reduction order, not a change in the optimization result. The golden
+scalar assertion now uses absolute tolerance `1e-12`: one ten-billionth of the
+configured `0.01` convergence threshold and well below any decision boundary in the
+test. The optimizer convergence tolerance, physical-volume acceptance criterion, and
+all implementation behavior remain unchanged.
+
 ## Reproduction
 
 Environment details are recorded in `docs/development_environment.md`; exact Python
