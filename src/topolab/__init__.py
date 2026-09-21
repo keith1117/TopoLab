@@ -48,6 +48,14 @@ from topolab.jobs import (
     RunStatus,
     RunSummary,
 )
+from topolab.labels import (
+    LABEL_COMPLIANCE_RELATIVE_TOLERANCE,
+    LABEL_RECORD_VERSION,
+    LABEL_VOLUME_TOLERANCE,
+    LabelGenerationError,
+    LabelRecord,
+    generate_label,
+)
 from topolab.mesh import Hex8Mesh, generate_structured_hex8
 from topolab.model import FaceLoad, FixedFaceSupport, PointLoad
 from topolab.persistence import RunStore, SqliteRunStore, StoredRun
@@ -96,6 +104,11 @@ __all__ = [
     "INPUT_CHANNEL_COUNT",
     "INPUT_CHANNEL_NAMES",
     "LABEL_GENERATOR_VERSION",
+    "LABEL_COMPLIANCE_RELATIVE_TOLERANCE",
+    "LABEL_RECORD_VERSION",
+    "LABEL_VOLUME_TOLERANCE",
+    "LabelGenerationError",
+    "LabelRecord",
     "Hex8Mesh",
     "LinearStaticResult",
     "ComplianceResult",
@@ -144,6 +157,7 @@ __all__ = [
     "evaluate_compliance",
     "encode_case",
     "generate_structured_hex8",
+    "generate_label",
     "hex8_element_stiffness",
     "isotropic_elasticity_matrix",
     "optimality_criteria_update",

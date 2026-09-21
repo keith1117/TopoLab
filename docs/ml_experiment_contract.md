@@ -1,10 +1,10 @@
 # M0 machine-learning experiment contract
 
-Status: **contract, deterministic representation, and manifest slices implemented at
-`m0.v1`**. This document freezes case identity, representation, split, label,
-baseline, and evaluation semantics before any dataset generation or model training.
-M0 is not complete until a later slice implements and validates label generation
-against this contract.
+Status: **contract, deterministic representation, manifest, and single-case label
+generation slices implemented at `m0.v1`**. This document freezes case identity,
+representation, split, label, baseline, and evaluation semantics before any dataset
+generation or model training. M0 is not complete until a later slice freezes the
+label-artifact layout and validates controlled dataset writing against this contract.
 
 ## Scope and claims boundary
 
@@ -13,11 +13,12 @@ reduce the end-to-end time required by the existing SIMP solver to reach a resul
 the same quality as a uniform start?
 
 The current implementation provides typed case identity, deterministic input
-encoding, filtered-volume projection, immutable sample metadata, and a validated
-dataset manifest. It does not generate label arrays or dataset files, add PyTorch,
-train a model, select hyperparameters, or support an `accelerated` claim. It also
-does not turn optimizer history rows into independent samples. The numerical and
-platform contracts remain unchanged.
+encoding, filtered-volume projection, immutable sample metadata, a validated dataset
+manifest, and deterministic generation of one in-memory label record. It does not
+write label artifacts or datasets, add PyTorch, train a model, select
+hyperparameters, or support an `accelerated` claim. It also does not turn optimizer
+history rows into independent samples. The numerical and platform contracts remain
+unchanged.
 
 ## Versioned case schema and identity
 
@@ -151,6 +152,25 @@ artifact version. Two labels for the same case and generator version but differe
 revisions may coexist only for an explicit reproducibility comparison and may not be
 mixed in one training dataset.
 
+`topolab.labels.generate_label` implements the single-case generator through the
+public problem adapter, which invokes the frozen `optimize_simp` path with
+`initial_density = null` and therefore the uniform default. Solver exceptions,
+missing history, non-convergence, an iteration-limit violation, a terminal density
+change above tolerance, inconsistent final history, excessive volume error, or an
+independent compliance re-solve outside `rtol = 1e-9` raises
+`LabelGenerationError`; no partial label is returned.
+
+`LabelRecord` uses `label_version = "topolab.m0.label.v1"` and stores all required
+contract versions, source/environment provenance, the complete case, tensor
+metadata, convergence metrics, final compliance, and physical volume. JSON stores
+each density tensor as an x-fast flat sequence together with shape
+`(1, nz, ny, nx)`, dtype `float32`, and axis order `channel,z,y,x`. During generation,
+the terminal design field is materialized as `float32`, physical density is derived
+again from that stored design through the frozen filter, and compliance and volume
+are independently evaluated for the stored physical field. Deserialization rejects
+non-`float32` values, a stale shape, a changed filter mapping, or inconsistent volume
+and convergence metadata.
+
 ## Typed sample and dataset manifest
 
 `topolab.dataset` implements the metadata boundary without writing tensors, labels,
@@ -173,8 +193,10 @@ stale derived metadata, changed schema constants, extra fields, or an OOD case w
 exact `y`-load counterpart is absent. The counterpart check changes only every load
 direction from `z` to `y` and then uses the canonical case identity, so all other
 physical fields must match. JSON serialization uses Pydantic's strict immutable
-contracts; a later generator slice will define file layout, label checksums, and
-atomic artifact writing rather than overloading this metadata schema.
+contracts; a later artifact slice will define file layout, label checksums, and
+atomic artifact writing rather than overloading this metadata schema. That later
+artifact slice will consume `LabelRecord`; the current generator performs no file
+I/O and creates no dataset.
 
 ## Dataset split and leakage prevention
 
