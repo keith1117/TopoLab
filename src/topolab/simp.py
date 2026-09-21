@@ -227,7 +227,11 @@ def apply_density_filter(
     design = _validate_filter_vector(density_filter, design_density, "design_density")
     if np.any(design < 0.0) or np.any(design > 1.0):
         raise ValueError("design_density must lie in the interval [0, 1]")
-    return np.asarray(density_filter.matrix @ design).reshape(-1) / density_filter.row_sums
+    physical = (
+        np.asarray(density_filter.matrix @ design).reshape(-1)
+        / density_filter.row_sums
+    )
+    return np.clip(physical, np.min(design), np.max(design))
 
 
 def backpropagate_density_gradient(

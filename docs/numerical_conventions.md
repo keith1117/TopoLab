@@ -104,6 +104,10 @@ requires a documented reason and regression-test update.
 - Define volume as the mean physical density. Apply the OC move limit and
   `[rho_min, 1]` bounds to design density, while bisection evaluates the filtered
   physical volume constraint.
+- Because every filter row is a nonnegative normalized weighted average, its exact
+  result lies in the closed interval from the minimum to the maximum input design
+  density. Clip the computed sparse quotient to that convex interval to remove only
+  last-bit floating-point reduction overshoot at a bound.
 - Record each history row after an OC update and a fresh finite-element solve. Its
   design density, physical density, volume, compliance, and maximum design-density
   change therefore describe the same updated state. Convergence uses that maximum
