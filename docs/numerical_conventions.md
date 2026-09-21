@@ -141,5 +141,8 @@ requires a documented reason and regression-test update.
 - Dataset materialization checkpoints are keyed by the canonical complete-manifest
   digest. Recorded case outcomes are append-only, and a complete checkpoint contains
   exactly one success or sanitized terminal failure for every manifest case.
+- The materialization executor visits pending samples in canonical `case_id` order,
+  checkpoints each known success or terminal failure, and leaves an unexpectedly
+  interrupted case pending for a later resume.
 - Exact identity, encoding, projection, label, split, OOD, baseline, quality,
   statistics, and fallback rules are frozen in `docs/ml_experiment_contract.md`.

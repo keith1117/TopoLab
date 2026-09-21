@@ -19,8 +19,9 @@ warm starts.
 > dataset manifest with verified partitions and provenance metadata, and validated
 > single-case label generation with content-addressed, checksum-verified atomic
 > artifacts plus an append-only, atomically recoverable manifest-to-label index.
-> Process workers, broad scalability evidence, controlled bulk dataset execution,
-> and ML remain incomplete.
+> A single-process executor now materializes supplied manifests in canonical order
+> with per-case checkpoints and interruption recovery. Process workers, broad
+> scalability evidence, a bounded production case catalog, and ML remain incomplete.
 
 ## Intended scope
 
@@ -82,8 +83,8 @@ Frontend scope and local development are documented in
 [`docs/frontend.md`](docs/frontend.md).
 The first M0 data and evaluation contract is documented in
 [`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md). Its typed manifest
-and verified materialization index do not yet run the ordered bulk generator,
-materialize a complete dataset, or constitute a passed M0 gate.
+and recoverable executor do not yet define or materialize the bounded production case
+catalog and therefore do not constitute a passed M0 gate.
 
 ## Sparse solver benchmark
 
