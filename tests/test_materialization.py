@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
+import topolab.materialization as materialization_module
 from topolab.dataset import DatasetEnvironment, DatasetManifest
 from topolab.experiment import ExperimentCase
 from topolab.label_artifacts import LabelArtifactReference, write_label_artifact
@@ -18,6 +19,7 @@ from topolab.materialization import (
     canonical_manifest_bytes,
     canonical_materialization_index_bytes,
     materialization_index_path,
+    materialize_dataset,
     read_materialization_index,
     write_materialization_index,
 )
@@ -48,6 +50,18 @@ def train_label(manifest: DatasetManifest) -> LabelRecord:
         source_revision=manifest.source_revision,
         environment=manifest.environment,
     )
+
+
+@pytest.fixture(scope="module")
+def labels(manifest: DatasetManifest) -> dict[str, LabelRecord]:
+    return {
+        sample.case.case_id: generate_label(
+            sample.case,
+            source_revision=manifest.source_revision,
+            environment=manifest.environment,
+        )
+        for sample in manifest.samples
+    }
 
 
 def test_materialization_index_starts_with_stable_manifest_identity(
@@ -272,6 +286,104 @@ def test_read_rejects_noncanonical_checkpoint(
 
     with pytest.raises(MaterializationIndexError, match="canonical"):
         read_materialization_index(tmp_path, manifest)
+
+
+def test_materializer_processes_canonical_order_and_complete_rerun_is_idempotent(
+    tmp_path: Path,
+    manifest: DatasetManifest,
+    labels: dict[str, LabelRecord],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    visited: list[str] = []
+
+    def generate(case: ExperimentCase, **kwargs: object) -> LabelRecord:
+        visited.append(case.case_id)
+        return labels[case.case_id]
+
+    monkeypatch.setattr(materialization_module, "generate_label", generate)
+    complete = materialize_dataset(tmp_path, manifest)
+
+    assert complete.state == "complete"
+    assert visited == [sample.case.case_id for sample in manifest.samples]
+    assert all(isinstance(entry, MaterializationSuccess) for entry in complete.entries)
+
+    def fail_if_called(case: ExperimentCase, **kwargs: object) -> LabelRecord:
+        raise AssertionError("completed materialization must not regenerate labels")
+
+    monkeypatch.setattr(materialization_module, "generate_label", fail_if_called)
+    assert materialize_dataset(tmp_path, manifest) == complete
+
+
+def test_materializer_resumes_after_interruption_without_repeating_recorded_case(
+    tmp_path: Path,
+    manifest: DatasetManifest,
+    labels: dict[str, LabelRecord],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    first_case_id = manifest.samples[0].case.case_id
+    interrupted_calls: list[str] = []
+
+    def interrupt_second(case: ExperimentCase, **kwargs: object) -> LabelRecord:
+        interrupted_calls.append(case.case_id)
+        if len(interrupted_calls) == 2:
+            raise KeyboardInterrupt
+        return labels[case.case_id]
+
+    monkeypatch.setattr(materialization_module, "generate_label", interrupt_second)
+    with pytest.raises(KeyboardInterrupt):
+        materialize_dataset(tmp_path, manifest)
+
+    checkpoint = read_materialization_index(tmp_path, manifest)
+    assert checkpoint.state == "in_progress"
+    assert tuple(entry.case_id for entry in checkpoint.entries) == (first_case_id,)
+
+    resumed_calls: list[str] = []
+
+    def resume(case: ExperimentCase, **kwargs: object) -> LabelRecord:
+        resumed_calls.append(case.case_id)
+        return labels[case.case_id]
+
+    monkeypatch.setattr(materialization_module, "generate_label", resume)
+    complete = materialize_dataset(tmp_path, manifest)
+
+    assert complete.state == "complete"
+    assert first_case_id not in resumed_calls
+    assert resumed_calls == [
+        sample.case.case_id for sample in manifest.samples[1:]
+    ]
+
+
+def test_materializer_records_known_failures_and_continues(
+    tmp_path: Path,
+    manifest: DatasetManifest,
+    labels: dict[str, LabelRecord],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    generation_failure_id = manifest.samples[0].case.case_id
+    artifact_failure_id = manifest.samples[1].case.case_id
+    real_write = write_label_artifact
+
+    def generate(case: ExperimentCase, **kwargs: object) -> LabelRecord:
+        if case.case_id == generation_failure_id:
+            raise materialization_module.LabelGenerationError("injected failure")
+        return labels[case.case_id]
+
+    def write(root: Path, label: LabelRecord) -> LabelArtifactReference:
+        if label.case.case_id == artifact_failure_id:
+            raise materialization_module.LabelArtifactError("injected failure")
+        return real_write(root, label)
+
+    monkeypatch.setattr(materialization_module, "generate_label", generate)
+    monkeypatch.setattr(materialization_module, "write_label_artifact", write)
+    complete = materialize_dataset(tmp_path, manifest)
+    entries = {entry.case_id: entry for entry in complete.entries}
+
+    assert complete.state == "complete"
+    assert isinstance(entries[generation_failure_id], MaterializationFailure)
+    assert entries[generation_failure_id].failure_code == "label_generation_error"  # type: ignore[union-attr]
+    assert isinstance(entries[artifact_failure_id], MaterializationFailure)
+    assert entries[artifact_failure_id].failure_code == "label_artifact_error"  # type: ignore[union-attr]
+    assert sum(isinstance(entry, MaterializationSuccess) for entry in complete.entries) == 2
 
 
 def _index(

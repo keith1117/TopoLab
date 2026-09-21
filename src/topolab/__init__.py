@@ -75,6 +75,7 @@ from topolab.materialization import (
     canonical_manifest_bytes,
     canonical_materialization_index_bytes,
     materialization_index_path,
+    materialize_dataset,
     read_materialization_index,
     write_materialization_index,
 )
@@ -195,6 +196,7 @@ __all__ = [
     "generate_label",
     "hex8_element_stiffness",
     "isotropic_elasticity_matrix",
+    "materialize_dataset",
     "materialization_index_path",
     "optimality_criteria_update",
     "optimize_simp",

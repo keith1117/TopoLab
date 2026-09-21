@@ -1,11 +1,11 @@
 # M0 machine-learning experiment contract
 
 Status: **contract, deterministic representation, manifest, single-case label,
-label-artifact, and recoverable materialization-index slices implemented at
-`m0.v1`**. This document freezes case identity, representation, split, label,
-baseline, and evaluation semantics before any dataset generation or model training.
-M0 is not complete until a later slice executes and validates controlled dataset
-materialization against this contract.
+label-artifact, recoverable materialization-index, and controlled materialization
+executor slices implemented at `m0.v1`**. This document freezes case identity,
+representation, split, label, baseline, and evaluation semantics before model
+training. M0 is not complete until a bounded case catalog and its controlled
+materialization are validated against this contract.
 
 ## Scope and claims boundary
 
@@ -15,11 +15,12 @@ the same quality as a uniform start?
 
 The current implementation provides typed case identity, deterministic input
 encoding, filtered-volume projection, immutable sample metadata, a validated dataset
-manifest, deterministic generation of one in-memory label record, and a recoverable
-manifest-to-label index. It does not run a bulk generator, materialize a complete
-dataset, add PyTorch, train a model, select hyperparameters, or support an
-`accelerated` claim. It also does not turn optimizer history rows into independent
-samples. The numerical and platform contracts remain unchanged.
+manifest, deterministic generation of one label, a recoverable manifest-to-label
+index, and a single-process executor for a supplied manifest. It does not define the
+bounded production case catalog, commit generated data, add PyTorch, train a model,
+select hyperparameters, or support an `accelerated` claim. It also does not turn
+optimizer history rows into independent samples. The numerical and platform
+contracts remain unchanged.
 
 ## Versioned case schema and identity
 
@@ -256,8 +257,23 @@ a new auditable manifest/source revision rather than rewriting history.
 Writes use a same-directory temporary file, flush and `fsync`, and atomic
 `os.replace`. Repeating identical content is idempotent. A crash after a label is
 published but before its success entry is checkpointed is safe because label writes
-are content-addressed and idempotent. This slice defines and verifies the index only;
-it does not implement the later ordered generation loop or commit generated data.
+are content-addressed and idempotent.
+
+`materialize_dataset` is the single-process, single-writer executor for a supplied
+manifest. It creates an empty checkpoint before solving, validates and resumes an
+existing checkpoint, skips every recorded case, and visits remaining samples in the
+manifest's canonical `case_id` order. For each pending sample it calls the frozen
+single-case generator with the manifest revision and environment, publishes the
+content-addressed label, and atomically checkpoints that success before continuing.
+
+`LabelGenerationError` becomes terminal code `label_generation_error`;
+`LabelArtifactError` becomes `label_artifact_error`. Both are checkpointed and the
+executor continues so every attempted case remains visible. Any other exception or
+process interruption propagates immediately and leaves that case absent, preserving
+an `in_progress` checkpoint for retry. Only after every manifest case has a recorded
+outcome is the index changed to `complete`. Re-running a complete index performs no
+generation. Tests materialize only small temporary fixtures; the repository commits
+no generated label or dataset files.
 
 ## Dataset split and leakage prevention
 
