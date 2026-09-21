@@ -18,8 +18,9 @@ warm starts.
 > implement deterministic case encoding, warm-start volume projection, a typed
 > dataset manifest with verified partitions and provenance metadata, and validated
 > single-case label generation with content-addressed, checksum-verified atomic
-> artifacts. Process workers, broad scalability evidence, controlled dataset
-> materialization, and ML remain incomplete.
+> artifacts plus an append-only, atomically recoverable manifest-to-label index.
+> Process workers, broad scalability evidence, controlled bulk dataset execution,
+> and ML remain incomplete.
 
 ## Intended scope
 
@@ -81,8 +82,8 @@ Frontend scope and local development are documented in
 [`docs/frontend.md`](docs/frontend.md).
 The first M0 data and evaluation contract is documented in
 [`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md). Its typed manifest
-and single-label artifact API do not yet materialize a complete dataset or constitute
-a passed M0 gate.
+and verified materialization index do not yet run the ordered bulk generator,
+materialize a complete dataset, or constitute a passed M0 gate.
 
 ## Sparse solver benchmark
 

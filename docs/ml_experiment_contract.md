@@ -1,10 +1,11 @@
 # M0 machine-learning experiment contract
 
-Status: **contract, deterministic representation, manifest, single-case label
-generation, and label-artifact slices implemented at `m0.v1`**. This document
-freezes case identity, representation, split, label, baseline, and evaluation
-semantics before any dataset generation or model training. M0 is not complete until
-a later slice validates controlled dataset materialization against this contract.
+Status: **contract, deterministic representation, manifest, single-case label,
+label-artifact, and recoverable materialization-index slices implemented at
+`m0.v1`**. This document freezes case identity, representation, split, label,
+baseline, and evaluation semantics before any dataset generation or model training.
+M0 is not complete until a later slice executes and validates controlled dataset
+materialization against this contract.
 
 ## Scope and claims boundary
 
@@ -14,10 +15,11 @@ the same quality as a uniform start?
 
 The current implementation provides typed case identity, deterministic input
 encoding, filtered-volume projection, immutable sample metadata, a validated dataset
-manifest, and deterministic generation of one in-memory label record. It does not
-materialize a complete dataset, add PyTorch, train a model, select hyperparameters,
-or support an `accelerated` claim. It also does not turn optimizer history rows into
-independent samples. The numerical and platform contracts remain unchanged.
+manifest, deterministic generation of one in-memory label record, and a recoverable
+manifest-to-label index. It does not run a bulk generator, materialize a complete
+dataset, add PyTorch, train a model, select hyperparameters, or support an
+`accelerated` claim. It also does not turn optimizer history rows into independent
+samples. The numerical and platform contracts remain unchanged.
 
 ## Versioned case schema and identity
 
@@ -219,9 +221,43 @@ stale derived metadata, changed schema constants, extra fields, or an OOD case w
 exact `y`-load counterpart is absent. The counterpart check changes only every load
 direction from `z` to `y` and then uses the canonical case identity, so all other
 physical fields must match. JSON serialization uses Pydantic's strict immutable
-contracts. A later dataset-materialization slice will associate every manifest sample
-with a verified `LabelArtifactReference`; the current artifact API performs no bulk
-generation and creates no manifest-to-label index.
+contracts.
+
+## Recoverable materialization index
+
+`topolab.materialization` associates one immutable manifest with its label outcomes
+without running the solver:
+
+- `index_version = "topolab.m0.materialization.v1"`;
+- `manifest_sha256` covers canonical sorted-key, compact, ASCII-escaped UTF-8 JSON of
+  the complete manifest, including exactly one final newline;
+- the single-writer checkpoint path is
+  `materializations/<manifest_sha256>.json`;
+- a `succeeded` entry stores the manifest case ID, its frozen split, and one
+  `LabelArtifactReference`; and
+- a `failed` entry stores the case ID, split, and only the sanitized terminal code
+  `label_generation_error` or `label_artifact_error`. It never persists exception
+  messages, host paths, device identifiers, or partial labels.
+
+Entries are canonicalized by `case_id` and unique. An `in_progress` index may omit
+unattempted cases; absence is the only pending state. A `complete` index must contain
+exactly one success or failure for every manifest sample, so failures cannot silently
+disappear. Completion records that work finished, not that the dataset is suitable
+for training: any failed entry keeps M0 dataset materialization unsuccessful.
+
+Every success must match the manifest case, split, generator version, source
+revision, solver/case contract versions, and locked environment. Reads and writes
+re-verify the referenced label bytes through `read_label_artifact`. Checkpoint updates
+are append-only: an existing outcome cannot be removed or changed, and a complete
+index is immutable. A retryable interruption therefore leaves the case absent; only
+a terminal attempt is recorded as failed. Fixing a recorded terminal failure requires
+a new auditable manifest/source revision rather than rewriting history.
+
+Writes use a same-directory temporary file, flush and `fsync`, and atomic
+`os.replace`. Repeating identical content is idempotent. A crash after a label is
+published but before its success entry is checkpointed is safe because label writes
+are content-addressed and idempotent. This slice defines and verifies the index only;
+it does not implement the later ordered generation loop or commit generated data.
 
 ## Dataset split and leakage prevention
 
