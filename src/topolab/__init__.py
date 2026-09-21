@@ -1,6 +1,17 @@
 """TopoLab package."""
 
 from topolab.api import create_app
+from topolab.dataset import (
+    DATASET_MANIFEST_VERSION,
+    DATASET_SAMPLE_VERSION,
+    SPLIT_CONTRACT_VERSION,
+    DatasetEnvironment,
+    DatasetManifest,
+    DatasetSample,
+    DatasetSplit,
+    DatasetSplitCounts,
+    assign_case_split,
+)
 from topolab.experiment import (
     CASE_ID_PREFIX,
     CASE_SCHEMA_VERSION,
@@ -73,6 +84,13 @@ __version__ = "0.3.0"
 __all__ = [
     "CASE_ID_PREFIX",
     "CASE_SCHEMA_VERSION",
+    "DATASET_MANIFEST_VERSION",
+    "DATASET_SAMPLE_VERSION",
+    "DatasetEnvironment",
+    "DatasetManifest",
+    "DatasetSample",
+    "DatasetSplit",
+    "DatasetSplitCounts",
     "EncodedCase",
     "ExperimentCase",
     "INPUT_CHANNEL_COUNT",
@@ -107,6 +125,7 @@ __all__ = [
     "SimpConfig",
     "SimpIteration",
     "SimpResult",
+    "SPLIT_CONTRACT_VERSION",
     "SOLVER_CONTRACT_VERSION",
     "SqliteRunStore",
     "StoredRun",
@@ -114,6 +133,7 @@ __all__ = [
     "TopologyResult",
     "apply_density_filter",
     "assemble_global_stiffness",
+    "assign_case_split",
     "build_constrained_dofs",
     "build_case_id",
     "build_load_vector",
