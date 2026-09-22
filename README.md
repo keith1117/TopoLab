@@ -24,8 +24,9 @@ warm starts.
 > catalog is content-identified and exactly reproducible. A production entrypoint
 > now derives its manifest from a clean Git revision and locked environment, defaults
 > to a read-only plan, and requires an external output root plus explicit execution.
-> Its full controlled materialization, process workers, broad scalability evidence,
-> and ML remain incomplete.
+> The first complete controlled materialization recorded 156 successful labels and
+> four correctly rejected non-converged OOD cases, so M0 has not passed. Process
+> workers, broad scalability evidence, and ML remain incomplete.
 
 ## Intended scope
 
@@ -88,8 +89,10 @@ Frontend scope and local development are documented in
 The first M0 data and evaluation contract is documented in
 [`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md). Its typed manifest,
 recoverable executor, bounded content-identified catalog, and safe production
-entrypoint are implemented, but all 160 cases have not yet been materialized and
-validated; M0 has therefore not passed.
+entrypoint are implemented. The first complete attempt and its four terminal
+non-convergence failures are documented in
+[`docs/validation/m0_catalog_materialization.md`](docs/validation/m0_catalog_materialization.md);
+M0 has therefore not passed.
 
 ## Sparse solver benchmark
 
