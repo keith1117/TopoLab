@@ -99,7 +99,9 @@ artifact 审计，160 个 case 全部成功、零失败；证据见
 uniform、物理启发式和 training-only nearest-neighbor baseline runner 及其
 成本/质量、失败和回退核算也已实现。下一独立切片应先冻结 M1 的轻量模型、损失、
 训练预算和 checkpoint 选择规则，并建立只读取 train/validation artifacts 的
-PyTorch dataset adapter；仍不打开 test/OOD labels 或启动正式训练。
+PyTorch dataset adapter；该切片现已完成，且尚未打开 test/OOD labels 或启动正式
+训练。下一独立切片实现五个固定 seed 的确定性训练、epoch history 和内容寻址
+checkpoint/selection artifacts，完成后仍先停在 held-out evaluation 之前。
 
 ## 总体时间估计
 

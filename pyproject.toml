@@ -12,6 +12,7 @@ dependencies = [
   "pydantic>=2.10",
   "scipy>=1.14",
   "sqlalchemy>=2.0",
+  "torch>=2.8",
   "uvicorn>=0.30",
 ]
 
@@ -43,3 +44,11 @@ select = ["E", "F", "I", "UP", "B"]
 python_version = "3.12"
 strict = true
 files = ["src"]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

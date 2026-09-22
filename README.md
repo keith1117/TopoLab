@@ -31,7 +31,9 @@ warm starts.
 > so Gate M0 has passed for the frozen v2 manifest. The three fixed baselines now run
 > through one leakage-safe evaluator with training-only nearest-neighbor lookup,
 > independent quality checks, phase timing, and explicit charged fallback. Process
-> workers, broad scalability evidence, and learned-model training remain incomplete.
+> workers and broad scalability evidence remain incomplete. The first M1 slice now
+> freezes one lightweight CNN, design-density MSE, a single training recipe, and a
+> train/validation-only PyTorch adapter; learned-model training has not started.
 
 ## Intended scope
 
@@ -100,6 +102,8 @@ non-convergence failures are documented in
 [`docs/validation/m0_catalog_materialization.md`](docs/validation/m0_catalog_materialization.md);
 the zero-failure v2 execution and Gate M0 decision are documented in
 [`docs/validation/m0_catalog_v2_materialization.md`](docs/validation/m0_catalog_v2_materialization.md).
+The frozen M1 fitting boundary, model, loss, budget, and checkpoint-selection rule
+are documented in [`docs/m1_training_contract.md`](docs/m1_training_contract.md).
 
 ## Sparse solver benchmark
 
