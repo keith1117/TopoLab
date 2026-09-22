@@ -153,5 +153,9 @@ requires a documented reason and regression-test update.
   fractions, ID/OOD pairing, and partition counts are frozen in
   `docs/ml_experiment_contract.md`; changing the population requires a new catalog
   version and identity.
+- The production catalog entrypoint builds a manifest only from a clean Git
+  worktree, capturing the exact commit, active Python/NumPy/SciPy versions, and the
+  repository `uv.lock` digest. Planning is read-only, solver execution requires an
+  explicit flag, and every output root must resolve outside the source repository.
 - Exact identity, encoding, projection, label, split, OOD, baseline, quality,
   statistics, and fallback rules are frozen in `docs/ml_experiment_contract.md`.
