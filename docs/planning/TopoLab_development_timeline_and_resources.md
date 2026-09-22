@@ -100,8 +100,10 @@ uniform、物理启发式和 training-only nearest-neighbor baseline runner 及�
 成本/质量、失败和回退核算也已实现。下一独立切片应先冻结 M1 的轻量模型、损失、
 训练预算和 checkpoint 选择规则，并建立只读取 train/validation artifacts 的
 PyTorch dataset adapter；该切片现已完成，且尚未打开 test/OOD labels 或启动正式
-训练。下一独立切片实现五个固定 seed 的确定性训练、epoch history 和内容寻址
-checkpoint/selection artifacts，完成后仍先停在 held-out evaluation 之前。
+训练。五个固定 seed 的确定性拟合循环、epoch history 和内容寻址
+checkpoint/selection artifacts 现已实现，但尚未正式执行。下一独立切片增加只允许
+clean revision、已验证外部 v2 materialization、锁文件和仓库外 artifact root 的生产
+入口，然后执行并审计五个 seed；完成后仍先停在 held-out evaluation 之前。
 
 ## 总体时间估计
 

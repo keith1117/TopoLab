@@ -1,8 +1,9 @@
 # Numerical conventions
 
 Status: **N1 conventions frozen at v0.1.0; N2 conventions frozen at v0.2.0; M0
-experiment-contract conventions frozen at m0.v1**. Any change to a frozen convention
-requires a documented reason and regression-test update.
+experiment-contract conventions frozen at m0.v1; M1 fitting conventions frozen at
+m1.v1**. Any change to a frozen convention requires a documented reason and
+regression-test update.
 
 ## Geometry and indexing
 
@@ -162,3 +163,25 @@ requires a documented reason and regression-test update.
   explicit flag, and every output root must resolve outside the source repository.
 - Exact identity, encoding, projection, label, split, OOD, baseline, quality,
   statistics, and fallback rules are frozen in `docs/ml_experiment_contract.md`.
+
+## M1 deterministic fitting and artifacts
+
+- M1 fitting runs only on CPU and only opens the frozen train and validation
+  partitions. Test and OOD labels remain inaccessible to the fitting adapter and
+  all-seed runner.
+- Each seed initializes the model and the training-shuffle generator independently.
+  PyTorch deterministic algorithms are required during fitting; the prior process RNG
+  and deterministic-algorithm settings are restored afterward.
+- Epoch loss is the elementwise squared-error sum divided by the exact number of
+  target elements, so a smaller final batch is weighted by its sample count rather
+  than as one full batch.
+- Select the first epoch with the strictly lowest mean validation MSE. An equal value
+  never replaces an earlier checkpoint. Stop after 25 consecutive epochs without a
+  strict improvement, subject to the 200-epoch maximum.
+- Checkpoints contain only the selected model state, not pickle, optimizer state, or
+  a resumable training process. Named tensors are finite `float32` Safetensors and
+  are addressed by the SHA-256 of those exact bytes.
+- A selection artifact records every epoch metric, selected epoch/value, early-stop
+  state, duration, train/validation case IDs, manifest digest, label and training
+  revisions, locked runtime versions, hardware/thread metadata, and the verified
+  checkpoint reference. Generated training artifacts remain outside Git.

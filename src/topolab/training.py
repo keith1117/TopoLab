@@ -1,6 +1,8 @@
-"""Frozen M1 recipe, model, loss, and leakage-safe tensor datasets."""
+"""Frozen M1 recipe, model, loss, datasets, and deterministic fitting."""
 
+from dataclasses import dataclass
 from pathlib import Path
+from time import perf_counter
 from typing import Annotated, Literal
 
 import numpy as np
@@ -8,7 +10,8 @@ import torch
 from numpy.typing import NDArray
 from pydantic import Field, model_validator
 from torch import Tensor, nn
-from torch.utils.data import Dataset
+from torch.optim import AdamW
+from torch.utils.data import DataLoader, Dataset
 
 from topolab.dataset import DatasetSample
 from topolab.experiment import INPUT_CHANNEL_COUNT, encode_case
@@ -27,12 +30,18 @@ M1_LOSS_VERSION = "topolab.m1.design-mse.v1"
 M1_SEEDS = (17, 29, 43, 71, 113)
 M1_HIDDEN_CHANNELS = 16
 M1_MODEL_PARAMETER_COUNT = 11_281
+M1_ADAM_BETAS = (0.9, 0.999)
+M1_ADAM_EPSILON = 1e-8
 
 type M1DatasetSplit = Literal["train", "validation"]
 
 
 class M1DatasetError(RuntimeError):
     """Raised when materialized data cannot safely back an M1 dataset."""
+
+
+class M1TrainingError(RuntimeError):
+    """Raised when the frozen M1 fitting loop cannot run safely."""
 
 
 class M1TrainingContract(ContractModel):
@@ -73,6 +82,27 @@ class M1TrainingContract(ContractModel):
 M1_TRAINING_CONTRACT = M1TrainingContract()
 
 
+class M1EpochMetrics(ContractModel):
+    """Mean elementwise losses for one completed fitting epoch."""
+
+    epoch: Annotated[int, Field(strict=True, gt=0)]
+    mean_training_mse: Annotated[float, Field(strict=True, ge=0.0)]
+    mean_validation_mse: Annotated[float, Field(strict=True, ge=0.0)]
+
+
+@dataclass(frozen=True, slots=True)
+class M1FitResult:
+    """Selected in-memory state and audit metrics for one seed."""
+
+    seed: int
+    history: tuple[M1EpochMetrics, ...]
+    selected_epoch: int
+    selected_validation_mse: float
+    stopped_early: bool
+    duration_seconds: float
+    selected_state: tuple[tuple[str, Tensor], ...]
+
+
 class WarmStartCNN(nn.Module):
     """The fixed shape-preserving M1 3D CNN."""
 
@@ -108,6 +138,23 @@ def design_density_mse(prediction: Tensor, target: Tensor) -> Tensor:
     if not torch.isfinite(prediction).all() or not torch.isfinite(target).all():
         raise ValueError("prediction and target must contain only finite values")
     return torch.mean(torch.square(prediction - target))
+
+
+def fit_m1_model(
+    training_dataset: "M1TensorDataset",
+    validation_dataset: "M1TensorDataset",
+    *,
+    seed: int,
+) -> M1FitResult:
+    """Fit one frozen M1 seed and select the earliest minimum validation epoch."""
+
+    return _fit_m1_model(
+        training_dataset,
+        validation_dataset,
+        seed=seed,
+        max_epochs=M1_TRAINING_CONTRACT.max_epochs,
+        early_stopping_patience=M1_TRAINING_CONTRACT.early_stopping_patience,
+    )
 
 
 class M1TensorDataset(Dataset[tuple[Tensor, Tensor]]):
@@ -148,6 +195,130 @@ class M1TensorDataset(Dataset[tuple[Tensor, Tensor]]):
 
     def __getitem__(self, index: int) -> tuple[Tensor, Tensor]:
         return self._inputs[index], self._targets[index]
+
+
+def _fit_m1_model(
+    training_dataset: M1TensorDataset,
+    validation_dataset: M1TensorDataset,
+    *,
+    seed: int,
+    max_epochs: int,
+    early_stopping_patience: int,
+) -> M1FitResult:
+    if seed not in M1_SEEDS:
+        raise M1TrainingError("seed must belong to the frozen M1 seed sequence")
+    if training_dataset.split != "train":
+        raise M1TrainingError("training_dataset must use the train split")
+    if validation_dataset.split != "validation":
+        raise M1TrainingError("validation_dataset must use the validation split")
+    if training_dataset._inputs.shape[2:] != validation_dataset._inputs.shape[2:]:
+        raise M1TrainingError("training and validation spatial shapes must match")
+    if max_epochs <= 0 or early_stopping_patience <= 0:
+        raise ValueError("fitting limits must be positive")
+
+    started = perf_counter()
+    generator = torch.Generator(device="cpu")
+    generator.manual_seed(seed)
+    deterministic_was_enabled = torch.are_deterministic_algorithms_enabled()
+    deterministic_warn_only_was_enabled = (
+        torch.is_deterministic_algorithms_warn_only_enabled()
+    )
+
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(seed)
+        torch.use_deterministic_algorithms(True)
+        try:
+            model = WarmStartCNN()
+            optimizer = AdamW(
+                model.parameters(),
+                lr=M1_TRAINING_CONTRACT.learning_rate,
+                betas=M1_ADAM_BETAS,
+                eps=M1_ADAM_EPSILON,
+                weight_decay=M1_TRAINING_CONTRACT.weight_decay,
+                amsgrad=False,
+            )
+            training_loader = DataLoader(
+                training_dataset,
+                batch_size=M1_TRAINING_CONTRACT.batch_size,
+                shuffle=True,
+                num_workers=M1_TRAINING_CONTRACT.dataloader_workers,
+                generator=generator,
+            )
+            validation_loader = DataLoader(
+                validation_dataset,
+                batch_size=M1_TRAINING_CONTRACT.batch_size,
+                shuffle=False,
+                num_workers=M1_TRAINING_CONTRACT.dataloader_workers,
+            )
+            history: list[M1EpochMetrics] = []
+            best_validation = float("inf")
+            best_epoch = 0
+            best_state: tuple[tuple[str, Tensor], ...] = ()
+            epochs_without_improvement = 0
+
+            for epoch in range(1, max_epochs + 1):
+                model.train()
+                training_squared_error = 0.0
+                training_elements = 0
+                for inputs, targets in training_loader:
+                    optimizer.zero_grad(set_to_none=True)
+                    predictions = model(inputs)
+                    loss = design_density_mse(predictions, targets)
+                    torch.autograd.backward(loss)
+                    optimizer.step()
+                    training_squared_error += loss.item() * targets.numel()
+                    training_elements += targets.numel()
+
+                model.eval()
+                validation_squared_error = 0.0
+                validation_elements = 0
+                with torch.no_grad():
+                    for inputs, targets in validation_loader:
+                        predictions = model(inputs)
+                        loss = design_density_mse(predictions, targets)
+                        validation_squared_error += loss.item() * targets.numel()
+                        validation_elements += targets.numel()
+
+                if training_elements == 0 or validation_elements == 0:
+                    raise M1TrainingError("fitting datasets must be nonempty")
+                training_mse = training_squared_error / training_elements
+                validation_mse = validation_squared_error / validation_elements
+                metrics = M1EpochMetrics(
+                    epoch=epoch,
+                    mean_training_mse=training_mse,
+                    mean_validation_mse=validation_mse,
+                )
+                history.append(metrics)
+
+                if validation_mse < best_validation:
+                    best_validation = validation_mse
+                    best_epoch = epoch
+                    best_state = tuple(
+                        (name, tensor.detach().cpu().clone())
+                        for name, tensor in sorted(model.state_dict().items())
+                    )
+                    epochs_without_improvement = 0
+                else:
+                    epochs_without_improvement += 1
+                    if epochs_without_improvement >= early_stopping_patience:
+                        break
+        finally:
+            torch.use_deterministic_algorithms(
+                deterministic_was_enabled,
+                warn_only=deterministic_warn_only_was_enabled,
+            )
+
+    if not best_state or best_epoch == 0:
+        raise M1TrainingError("fitting did not produce a selected checkpoint")
+    return M1FitResult(
+        seed=seed,
+        history=tuple(history),
+        selected_epoch=best_epoch,
+        selected_validation_mse=best_validation,
+        stopped_early=len(history) < max_epochs,
+        duration_seconds=perf_counter() - started,
+        selected_state=best_state,
+    )
 
 
 def build_m1_tensor_dataset(
