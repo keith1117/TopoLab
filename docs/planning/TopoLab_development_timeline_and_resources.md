@@ -79,7 +79,7 @@ Gate P1 已通过。SQLite 持久化、重启恢复、稳定游标分页、运�
 前端 cooperative run cancellation 控制也已完成。四档稀疏装配/求解性能与峰值
 内存 benchmark 也已完成；其方法、结果和限制记录在
 `docs/validation/sparse_solver_benchmark.md`。下一阶段进入 M0，冻结 case schema、
-生成器版本、数据分割和 baseline。前十一个 M0 切片已在
+生成器版本、数据分割和 baseline。前十二个 M0 切片已在
 `docs/ml_experiment_contract.md` 冻结这些契约、加入 typed case identity，实现
 确定性 case encoding 与 filtered-volume projection，并加入验证分区、cohort、
 OOD 配对和 provenance 元数据的 typed dataset manifest，以及拒绝未收敛和
@@ -93,8 +93,11 @@ production entrypoint。首次完整外部执行已记录 156 个成功 label �
 次迭代内未收敛而被正确拒绝的 OOD case；验证结果见
 `docs/validation/m0_catalog_materialization.md`。第十一个切片已将 termination
 budget 独立版本化为 120，冻结新的 catalog v2、case identities 与分区计数，而不
-放宽 `0.01` 收敛容差或移除 case。因此 M0 gate 仍未通过，在 catalog v2 获得新的
-零失败完整 materialization 前不能开始模型训练。
+放宽 `0.01` 收敛容差或移除 case。catalog v2 随后从 clean revision 完整生成并经
+artifact 审计，160 个 case 全部成功、零失败；证据见
+`docs/validation/m0_catalog_v2_materialization.md`。因此 M0 gate 已通过。下一独立
+切片先实现固定的 uniform、物理启发式和 training-only nearest-neighbor baseline
+runner 与成本/质量核算，再开始 PyTorch 模型或训练。
 
 ## 总体时间估计
 

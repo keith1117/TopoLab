@@ -26,8 +26,9 @@ warm starts.
 > now derives its manifest from a clean Git revision and locked environment, defaults
 > to a read-only plan, and requires an external output root plus explicit execution.
 > The v1 controlled materialization recorded 156 successful labels and four correctly
-> rejected non-converged OOD cases. The versioned v2 catalog has not yet been
-> materialized, so M0 has not passed. Process
+> rejected non-converged OOD cases. Catalog v2 was then materialized from a clean
+> revision with 160 successful labels, zero failures, and a complete artifact audit,
+> so Gate M0 has passed for the frozen v2 manifest. Process
 > workers, broad scalability evidence, and ML remain incomplete.
 
 ## Intended scope
@@ -92,9 +93,10 @@ The first M0 data and evaluation contract is documented in
 [`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md). Its typed manifest,
 recoverable executor, bounded content-identified catalog, and safe production
 entrypoint are implemented. The v1 attempt and its four terminal non-convergence
-failures, together with the evidence for the v2 termination-budget revision, are documented in
+failures are documented in
 [`docs/validation/m0_catalog_materialization.md`](docs/validation/m0_catalog_materialization.md);
-M0 has therefore not passed.
+the zero-failure v2 execution and Gate M0 decision are documented in
+[`docs/validation/m0_catalog_v2_materialization.md`](docs/validation/m0_catalog_v2_materialization.md).
 
 ## Sparse solver benchmark
 
