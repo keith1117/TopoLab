@@ -28,8 +28,10 @@ warm starts.
 > The v1 controlled materialization recorded 156 successful labels and four correctly
 > rejected non-converged OOD cases. Catalog v2 was then materialized from a clean
 > revision with 160 successful labels, zero failures, and a complete artifact audit,
-> so Gate M0 has passed for the frozen v2 manifest. Process
-> workers, broad scalability evidence, and ML remain incomplete.
+> so Gate M0 has passed for the frozen v2 manifest. The three fixed baselines now run
+> through one leakage-safe evaluator with training-only nearest-neighbor lookup,
+> independent quality checks, phase timing, and explicit charged fallback. Process
+> workers, broad scalability evidence, and learned-model training remain incomplete.
 
 ## Intended scope
 
@@ -92,8 +94,9 @@ Frontend scope and local development are documented in
 The first M0 data and evaluation contract is documented in
 [`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md). Its typed manifest,
 recoverable executor, bounded content-identified catalog, and safe production
-entrypoint are implemented. The v1 attempt and its four terminal non-convergence
-failures are documented in
+entrypoint are implemented, together with the fixed uniform, physics-heuristic, and
+training-only nearest-neighbor runner. The v1 attempt and its four terminal
+non-convergence failures are documented in
 [`docs/validation/m0_catalog_materialization.md`](docs/validation/m0_catalog_materialization.md);
 the zero-failure v2 execution and Gate M0 decision are documented in
 [`docs/validation/m0_catalog_v2_materialization.md`](docs/validation/m0_catalog_v2_materialization.md).
