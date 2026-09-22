@@ -37,7 +37,8 @@ warm starts.
 > content-addressed checkpoint/selection artifacts are implemented. A guarded M1
 > production entrypoint now requires the exact external catalog-v2 materialization,
 > a clean locked checkout, repository-external artifact storage, and explicit
-> execution; production learned-model training has not started.
+> execution. All five frozen production seeds have been fitted and artifact-audited;
+> test/OOD evaluation and any learned-acceleration claim remain pending.
 
 ## Intended scope
 
@@ -118,6 +119,9 @@ PYTHONPATH=src uv run python -m topolab.training_cli \
 
 Add `--execute` only for the reviewed five-seed production run. Test and OOD labels
 remain outside this entrypoint's fitting path.
+The completed production run, five selection/checkpoint hashes, runtime, resource
+use, and current claims boundary are recorded in
+[`docs/validation/m1_training.md`](docs/validation/m1_training.md).
 
 ## Sparse solver benchmark
 
