@@ -1,7 +1,8 @@
 # M1 learned warm-start training contract
 
-Status: **model, loss, fitting-data boundary, training budget, and checkpoint-selection
-rules frozen at `topolab.m1.training.v1`; no training run has started**.
+Status: **model, loss, fitting-data boundary, training budget, deterministic fitting,
+and content-addressed checkpoint/selection formats implemented for
+`topolab.m1.training.v1`; no production training run has started**.
 
 ## Scope and claims boundary
 
@@ -67,6 +68,8 @@ The single frozen hyperparameter configuration is:
 | Optimizer | AdamW |
 | Learning rate | `1e-3` |
 | Weight decay | `1e-4` |
+| Adam betas | `(0.9, 0.999)` |
+| Adam epsilon | `1e-8` |
 | Batch size | `8` |
 | Maximum epochs | `200` |
 | Early-stopping patience | `25` epochs |
@@ -82,6 +85,14 @@ audit; the project pins PyTorch to its official CPU-only package index, so Linux
 does not acquire unused CUDA runtimes. Later device changes require a new contract
 version.
 
+`fit_m1_model` seeds model initialization and a dedicated training-shuffle generator
+for each run, enables strict PyTorch deterministic algorithms during fitting, and
+restores the caller's RNG and deterministic settings afterward. Epoch train and
+validation MSE are accumulated by squared-error element count, including the smaller
+last training batch. Bitwise-repeatability is tested within one recorded CPU/runtime
+environment; the artifacts record the package, hardware, and thread context rather
+than claiming cross-platform floating-point identity.
+
 ## Checkpoint selection
 
 Each seed is an independent run. After every epoch, compute mean validation
@@ -90,16 +101,43 @@ strictly lowest validation mean; an exact tie selects the earliest epoch. Early
 stopping occurs after 25 consecutive epochs without a strictly lower value. The
 maximum-epoch checkpoint is not preferred unless it satisfies the same rule.
 
+## Checkpoint and selection artifacts
+
+`topolab.training_artifacts` persists two content-addressed artifact formats:
+
+- `topolab.m1.checkpoint.v1` stores the selected model's named, finite `float32`
+  tensors in the documented Safetensors format. It deliberately avoids pickle and
+  contains no optimizer state or training-resume claim.
+- `topolab.m1.selection.v1` stores the complete epoch history, selected epoch and
+  validation value, early-stop state, training duration, exact train/validation case
+  IDs, M0 manifest digest, label/training revisions, runtime and thread metadata, and
+  the verified checkpoint reference.
+
+Paths are
+`m1/checkpoints/<manifest_sha256>/<seed>/<sha256>.safetensors` and
+`m1/selections/<manifest_sha256>/<seed>/<sha256>.json`. Writes use same-directory
+temporary files, flush and `fsync`, then publish with atomic replacement. Reads check
+path, byte length, SHA-256, Safetensors or selection schema, canonical selection
+serialization, model tensor names and shapes, finite values, and
+checkpoint-to-selection provenance before returning data.
+
+`train_all_m1_seeds` constructs the train and validation datasets once, then fits and
+persists every seed in the frozen order. It has no code path accepting test or OOD
+partitions. Partial artifacts from an interrupted invocation are immutable valid
+content, but this slice does not claim resumable optimizer state or provide a
+production CLI.
+
 Test and OOD labels remain unopened until all five seed-specific checkpoints exist
 and their selection records have been frozen. No seed may be dropped because of an
 unfavorable validation result. A later training artifact must record the M0 manifest
 digest, M1 contract/model/loss versions, exact source revision, `uv.lock` digest,
-Python/NumPy/SciPy/PyTorch versions, seed, epoch history, selected epoch, hardware,
-thread settings, and checkpoint checksum.
+Python/NumPy/SciPy/PyTorch/Safetensors versions, seed, epoch history, selected epoch,
+hardware, thread settings, and checkpoint checksum.
 
 ## Next implementation slice
 
-The next slice may implement deterministic fitting and content-addressed checkpoint
-artifacts for this exact recipe. It must still stop before test/OOD evaluation. The
-five trained checkpoints and auditable selection records are the prerequisite for
-opening held-out labels and running the frozen end-to-end comparison.
+The next slice should add a safe production entrypoint that requires a clean source
+revision, the verified external catalog-v2 materialization, the repository lockfile,
+and an external training-artifact root. It can then execute and audit all five seeds.
+The resulting five verified selection records remain the prerequisite for opening
+test/OOD labels and running the frozen end-to-end comparison.

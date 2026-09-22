@@ -30,8 +30,11 @@ from topolab.training import (
     M1_SEEDS,
     M1_TRAINING_CONTRACT,
     M1DatasetError,
+    M1TensorDataset,
     M1TrainingContract,
+    M1TrainingError,
     WarmStartCNN,
+    _fit_m1_model,
     build_m1_tensor_dataset,
     design_density_mse,
 )
@@ -112,6 +115,72 @@ def test_design_density_mse_is_elementwise_mean_and_differentiable() -> None:
         design_density_mse(prediction, target.reshape(1, 2))
     with pytest.raises(TypeError, match="float32"):
         design_density_mse(prediction.detach().double(), target.double())
+
+
+def test_short_fitting_loop_is_repeatable_and_restores_rng_state() -> None:
+    training = _tensor_dataset("train", ("case-a", "case-b"), offset=0.0)
+    validation = _tensor_dataset("validation", ("case-c",), offset=0.1)
+    torch.manual_seed(999)
+    state_before = torch.get_rng_state().clone()
+    deterministic_before = torch.are_deterministic_algorithms_enabled()
+
+    first = _fit_m1_model(
+        training,
+        validation,
+        seed=17,
+        max_epochs=3,
+        early_stopping_patience=2,
+    )
+    second = _fit_m1_model(
+        training,
+        validation,
+        seed=17,
+        max_epochs=3,
+        early_stopping_patience=2,
+    )
+
+    assert first.history == second.history
+    assert first.selected_epoch == second.selected_epoch
+    assert first.selected_validation_mse == second.selected_validation_mse
+    assert tuple(name for name, _ in first.selected_state) == tuple(
+        name for name, _ in second.selected_state
+    )
+    for (_, first_tensor), (_, second_tensor) in zip(
+        first.selected_state,
+        second.selected_state,
+        strict=True,
+    ):
+        torch.testing.assert_close(first_tensor, second_tensor, rtol=0.0, atol=0.0)
+    best = min(
+        first.history,
+        key=lambda metrics: (metrics.mean_validation_mse, metrics.epoch),
+    )
+    assert first.selected_epoch == best.epoch
+    assert first.selected_validation_mse == best.mean_validation_mse
+    assert torch.equal(torch.get_rng_state(), state_before)
+    assert torch.are_deterministic_algorithms_enabled() is deterministic_before
+
+
+def test_fitting_loop_rejects_wrong_partitions_and_unfrozen_seed() -> None:
+    training = _tensor_dataset("train", ("case-a",), offset=0.0)
+    validation = _tensor_dataset("validation", ("case-b",), offset=0.1)
+
+    with pytest.raises(M1TrainingError, match="seed sequence"):
+        _fit_m1_model(
+            training,
+            validation,
+            seed=1,
+            max_epochs=1,
+            early_stopping_patience=1,
+        )
+    with pytest.raises(M1TrainingError, match="train split"):
+        _fit_m1_model(
+            validation,
+            validation,
+            seed=17,
+            max_epochs=1,
+            early_stopping_patience=1,
+        )
 
 
 @pytest.mark.parametrize("split", ["train", "validation"])
@@ -198,6 +267,32 @@ def _partition_cases() -> tuple[ExperimentCase, ...]:
         ExperimentCase.from_problem(
             _problem(volume_fraction=0.06, load_direction="z")
         ),
+    )
+
+
+def _tensor_dataset(
+    split: str,
+    case_ids: tuple[str, ...],
+    *,
+    offset: float,
+) -> M1TensorDataset:
+    inputs = torch.linspace(
+        0.0 + offset,
+        1.0 + offset,
+        steps=len(case_ids) * 10 * 2,
+        dtype=torch.float32,
+    ).reshape(len(case_ids), 10, 1, 1, 2)
+    targets = torch.linspace(
+        0.2 + offset,
+        0.8 + offset,
+        steps=len(case_ids) * 2,
+        dtype=torch.float32,
+    ).reshape(len(case_ids), 1, 1, 1, 2)
+    return M1TensorDataset(
+        split=split,  # type: ignore[arg-type]
+        case_ids=case_ids,
+        inputs=inputs,
+        targets=targets,
     )
 
 

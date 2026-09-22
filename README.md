@@ -33,7 +33,9 @@ warm starts.
 > independent quality checks, phase timing, and explicit charged fallback. Process
 > workers and broad scalability evidence remain incomplete. The first M1 slice now
 > freezes one lightweight CNN, design-density MSE, a single training recipe, and a
-> train/validation-only PyTorch adapter; learned-model training has not started.
+> train/validation-only PyTorch adapter. Deterministic per-seed fitting and safe,
+> content-addressed checkpoint/selection artifacts are implemented; production
+> learned-model training has not started.
 
 ## Intended scope
 
