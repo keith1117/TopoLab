@@ -1,6 +1,20 @@
 """TopoLab package."""
 
 from topolab.api import create_app
+from topolab.baselines import (
+    BASELINE_COMPLIANCE_RELATIVE_TOLERANCE,
+    BASELINE_QUALITY_FACTOR,
+    BASELINE_RUNNER_VERSION,
+    BASELINE_VOLUME_TOLERANCE,
+    BaselineCaseResult,
+    BaselineEvaluationError,
+    BaselineFailureCode,
+    BaselineMethod,
+    NearestNeighborIndex,
+    NearestNeighborMatch,
+    build_nearest_neighbor_index,
+    run_fixed_baselines,
+)
 from topolab.catalog import (
     CASE_CATALOG_ID_PREFIX,
     CASE_CATALOG_VERSION,
@@ -122,6 +136,14 @@ from topolab.simp import (
 __version__ = "0.3.0"
 
 __all__ = [
+    "BASELINE_COMPLIANCE_RELATIVE_TOLERANCE",
+    "BASELINE_QUALITY_FACTOR",
+    "BASELINE_RUNNER_VERSION",
+    "BASELINE_VOLUME_TOLERANCE",
+    "BaselineCaseResult",
+    "BaselineEvaluationError",
+    "BaselineFailureCode",
+    "BaselineMethod",
     "CASE_CATALOG_ID_PREFIX",
     "CASE_CATALOG_VERSION",
     "CASE_ID_PREFIX",
@@ -170,6 +192,8 @@ __all__ = [
     "MaterializationIndexError",
     "MaterializationSuccess",
     "MeshDefinition",
+    "NearestNeighborIndex",
+    "NearestNeighborMatch",
     "OptimizationCancelledError",
     "OptimizationDefinition",
     "RunManager",
@@ -198,6 +222,7 @@ __all__ = [
     "build_load_vector",
     "build_m0_case_catalog",
     "build_manifest_sha256",
+    "build_nearest_neighbor_index",
     "backpropagate_density_gradient",
     "build_density_filter",
     "create_app",
@@ -219,6 +244,7 @@ __all__ = [
     "project_design_density",
     "read_label_artifact",
     "read_materialization_index",
+    "run_fixed_baselines",
     "select_face_nodes",
     "simp_element_moduli",
     "solve_problem",

@@ -2,11 +2,12 @@
 
 Status: **contract, deterministic representation, manifest, single-case label,
 label-artifact, recoverable materialization-index, controlled materialization
-executor, bounded case-catalog, and production entrypoint slices implemented at
-`m0.v1`; production catalog revised to `topolab.m0.catalog.v2`**. This document freezes case identity, representation, split, label,
-baseline, and evaluation semantics before model training. M0 is not complete until
-a bounded catalog is materialized with zero failures and the complete outcomes are
-validated against this contract. The first complete attempt recorded 156 successes
+executor, bounded case-catalog, production entrypoint, and fixed-baseline runner
+slices implemented at `m0.v1`; production catalog revised to
+`topolab.m0.catalog.v2`**. This document freezes case identity, representation,
+split, label, baseline, and evaluation semantics before model training. M0 is not
+complete until a bounded catalog is materialized with zero failures and the complete
+outcomes are validated against this contract. The first complete attempt recorded 156 successes
 and four terminal OOD generation failures. The v2 catalog corrects the bounded
 iteration budget and its complete materialization recorded 160 successes and zero
 failures. Gate M0 passes for the exact v2 manifest recorded in
@@ -22,8 +23,9 @@ the same quality as a uniform start?
 The current implementation provides typed case identity, deterministic input
 encoding, filtered-volume projection, immutable sample metadata, a validated dataset
 manifest, deterministic generation of one label, a recoverable manifest-to-label
-index, a single-process executor, one bounded deterministic case catalog, and a safe
-production entrypoint that constructs the manifest from a clean checkout. The first
+index, a single-process executor, one bounded deterministic case catalog, a safe
+production entrypoint that constructs the manifest from a clean checkout, and the
+three fixed baseline initializations with quality and cost accounting. The first
 complete production attempt is recorded in
 `docs/validation/m0_catalog_materialization.md`; its generated artifacts remain
 outside Git. The successful v2 materialization and audit are recorded in
@@ -436,6 +438,31 @@ All methods use the same volume projection and the same refinement solver/settin
 No baseline may use a query label, final compliance, or optimizer history to choose
 its initialization.
 
+`topolab.baselines` implements these definitions for one held-out or OOD
+`DatasetSample`. `build_nearest_neighbor_index` requires a complete zero-failure
+materialization and reads artifacts only for samples whose frozen split is `train`.
+The in-memory index stores sorted case IDs, complete `float32` input tensors, and
+final `float32` design labels. Its reported storage size is the sum of those tensor
+buffers and the UTF-8 case-ID bytes; Python object overhead and the external artifact
+store are reported separately rather than estimated.
+
+`run_fixed_baselines` runs uniform first as the mandatory per-case reference, then
+the physics heuristic and nearest neighbor through the same projection and public
+SIMP solver. Training samples are rejected as evaluation queries. Exact nearest-
+neighbor distance ties select the lexicographically first case ID. A non-uniform
+setup, projection, refinement, or quality failure triggers a fresh uniform fallback;
+the full fallback is charged while the original method remains failed. A uniform
+reference or fallback failure is a dataset/evaluation error, not a recoverable method
+result.
+
+`BaselineCaseResult` records candidate and operational metrics separately, so a
+valid fallback cannot overwrite the failed candidate's status. Setup, projection,
+refinement, and fallback wall times are recorded independently. Nearest-neighbor
+index construction and label loading are dataset setup costs, not per-query setup
+time. The current in-process runner does not report a per-method peak-memory number
+because process-wide high-water marks cannot isolate sequential methods
+reproducibly; that metric requires a later isolated-process experiment harness.
+
 ## Quality constraints and failures
 
 The uniform method is the per-case quality reference. A refined candidate succeeds
@@ -462,7 +489,8 @@ Report at least these per-case values for every method:
   inference);
 - volume-projection time;
 - SIMP refinement time and iteration count;
-- end-to-end time, defined as the sum of the preceding three;
+- end-to-end time, defined as the sum of the preceding three plus the full fallback
+  time when fallback is used;
 - final compliance, physical volume error, convergence/failure, and fallback use; and
 - peak process memory where the runner can measure it reproducibly.
 

@@ -95,9 +95,11 @@ production entrypoint。首次完整外部执行已记录 156 个成功 label �
 budget 独立版本化为 120，冻结新的 catalog v2、case identities 与分区计数，而不
 放宽 `0.01` 收敛容差或移除 case。catalog v2 随后从 clean revision 完整生成并经
 artifact 审计，160 个 case 全部成功、零失败；证据见
-`docs/validation/m0_catalog_v2_materialization.md`。因此 M0 gate 已通过。下一独立
-切片先实现固定的 uniform、物理启发式和 training-only nearest-neighbor baseline
-runner 与成本/质量核算，再开始 PyTorch 模型或训练。
+`docs/validation/m0_catalog_v2_materialization.md`。因此 M0 gate 已通过。固定的
+uniform、物理启发式和 training-only nearest-neighbor baseline runner 及其
+成本/质量、失败和回退核算也已实现。下一独立切片应先冻结 M1 的轻量模型、损失、
+训练预算和 checkpoint 选择规则，并建立只读取 train/validation artifacts 的
+PyTorch dataset adapter；仍不打开 test/OOD labels 或启动正式训练。
 
 ## 总体时间估计
 
