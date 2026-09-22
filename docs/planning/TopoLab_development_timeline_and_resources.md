@@ -102,9 +102,11 @@ uniform、物理启发式和 training-only nearest-neighbor baseline runner 及�
 PyTorch dataset adapter；该切片现已完成，且尚未打开 test/OOD labels 或启动正式
 训练。五个固定 seed 的确定性拟合循环、epoch history 和内容寻址
 checkpoint/selection artifacts 现已实现。只允许 clean revision、固定外部 v2
-materialization、锁文件和仓库外 artifact root，且默认仅规划的生产入口也已完成，
-但尚未正式执行。下一独立执行步骤应从合并后的 clean `main` revision 运行并审计
-五个 seed；完成后仍先停在 held-out evaluation 之前。
+materialization、锁文件和仓库外 artifact root，且默认仅规划的生产入口也已完成。
+该入口已从合并后的 clean `main` revision 正式运行，五个 seed 均完成并通过 artifact
+审计，证据见 `docs/validation/m1_training.md`；test/OOD 仍未打开。下一独立切片实现并
+测试 learned inference、filtered-volume projection、SIMP refinement、fallback 和
+成本/质量核算边界，然后才执行冻结的 held-out comparison。
 
 ## 总体时间估计
 

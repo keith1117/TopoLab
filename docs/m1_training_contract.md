@@ -2,16 +2,17 @@
 
 Status: **model, loss, fitting-data boundary, training budget, deterministic fitting,
 content-addressed checkpoint/selection formats, and guarded production entrypoint
-implemented for `topolab.m1.training.v1`; no production training run has started**.
+implemented for `topolab.m1.training.v1`; all five production seeds fitted and
+audited; held-out evaluation has not started**.
 
 ## Scope and claims boundary
 
 M1 asks whether one lightweight learned design-density initialization can reduce the
 end-to-end SIMP time while satisfying the frozen M0 quality constraints. The current
 implementation defines the model, supervised loss, train/validation adapter,
-deterministic fitting, artifacts, and guarded production entrypoint. No production
-parameters have yet been fitted, test/OOD labels remain unopened, and the project
-does not support an `accelerated` claim.
+deterministic fitting, artifacts, and guarded production entrypoint. All five frozen
+production seeds have now been fitted and audited. Test/OOD labels remain unopened,
+and the project does not support an `accelerated` claim.
 
 The only training data source is the zero-failure catalog-v2 materialization recorded
 in `docs/validation/m0_catalog_v2_materialization.md`. The case, tensor, label,
@@ -166,10 +167,14 @@ digest, M1 contract/model/loss versions, exact source revision, `uv.lock` digest
 Python/NumPy/SciPy/PyTorch/Safetensors versions, seed, epoch history, selected epoch,
 hardware, thread settings, and checkpoint checksum.
 
-## Next execution slice
+The production execution from source revision
+`a538d40ffaf3da20e8a06ff9e3ac136da72b5718` produced and reverified all five
+required records. Exact hashes, losses, durations, environment, artifact sizes, and
+the claims boundary are recorded in `docs/validation/m1_training.md`.
 
-After this entrypoint is merged to `main`, run it from that clean immutable revision
-and audit all five seeds. Record the five verified selection/checkpoint references,
-loss histories, runtime, and resource use without committing generated artifacts.
-Those five records remain the prerequisite for opening test/OOD labels and running
-the frozen end-to-end comparison.
+## Next evaluation slice
+
+Implement and test the frozen learned-inference, filtered-volume projection, SIMP
+refinement, charged fallback, and cost/quality accounting boundary. Then use all five
+verified selections in the predefined held-out test/OOD comparison against every
+fixed baseline. Do not select or drop seeds based on held-out results.
