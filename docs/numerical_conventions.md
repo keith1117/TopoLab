@@ -166,6 +166,16 @@ regression-test update.
 
 ## M1 deterministic fitting and artifacts
 
+- Production M1 fitting accepts only the frozen catalog-v2 materialization with
+  manifest SHA-256
+  `7e732446d683a3609ec3e4af4b87d334caeb583c69da3db9ea0f47f91d119d5a`.
+  Its entrypoint requires a clean Git checkout, the repository `uv.lock`, and data
+  and artifact roots that both resolve outside the source repository. Omission of
+  the explicit execution flag is a read-only plan.
+- Production preflight reads and canonically validates the embedded materialization
+  index but does not open label artifacts. Execution opens and verifies only train
+  and validation label artifacts through the fitting adapter; held-out test and OOD
+  label bytes remain unopened.
 - M1 fitting runs only on CPU and only opens the frozen train and validation
   partitions. Test and OOD labels remain inaccessible to the fitting adapter and
   all-seed runner.

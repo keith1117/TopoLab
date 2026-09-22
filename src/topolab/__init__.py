@@ -135,6 +135,7 @@ from topolab.simp import (
 from topolab.training import (
     M1_ADAM_BETAS,
     M1_ADAM_EPSILON,
+    M1_DATA_MANIFEST_SHA256,
     M1_HIDDEN_CHANNELS,
     M1_LOSS_VERSION,
     M1_MODEL_PARAMETER_COUNT,
@@ -210,6 +211,7 @@ __all__ = [
     "M1_ADAM_BETAS",
     "M1_ADAM_EPSILON",
     "M1_CHECKPOINT_ARTIFACT_VERSION",
+    "M1_DATA_MANIFEST_SHA256",
     "M1_HIDDEN_CHANNELS",
     "M1_LOSS_VERSION",
     "M1_MODEL_PARAMETER_COUNT",
