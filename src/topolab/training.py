@@ -32,6 +32,9 @@ M1_HIDDEN_CHANNELS = 16
 M1_MODEL_PARAMETER_COUNT = 11_281
 M1_ADAM_BETAS = (0.9, 0.999)
 M1_ADAM_EPSILON = 1e-8
+M1_DATA_MANIFEST_SHA256 = (
+    "7e732446d683a3609ec3e4af4b87d334caeb583c69da3db9ea0f47f91d119d5a"
+)
 
 type M1DatasetSplit = Literal["train", "validation"]
 

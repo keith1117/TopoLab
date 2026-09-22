@@ -34,8 +34,10 @@ warm starts.
 > workers and broad scalability evidence remain incomplete. The first M1 slice now
 > freezes one lightweight CNN, design-density MSE, a single training recipe, and a
 > train/validation-only PyTorch adapter. Deterministic per-seed fitting and safe,
-> content-addressed checkpoint/selection artifacts are implemented; production
-> learned-model training has not started.
+> content-addressed checkpoint/selection artifacts are implemented. A guarded M1
+> production entrypoint now requires the exact external catalog-v2 materialization,
+> a clean locked checkout, repository-external artifact storage, and explicit
+> execution; production learned-model training has not started.
 
 ## Intended scope
 
@@ -106,6 +108,16 @@ the zero-failure v2 execution and Gate M0 decision are documented in
 [`docs/validation/m0_catalog_v2_materialization.md`](docs/validation/m0_catalog_v2_materialization.md).
 The frozen M1 fitting boundary, model, loss, budget, and checkpoint-selection rule
 are documented in [`docs/m1_training_contract.md`](docs/m1_training_contract.md).
+Plan the production fit without opening label artifacts or writing checkpoints with:
+
+```bash
+PYTHONPATH=src uv run python -m topolab.training_cli \
+  --data-root <external-m0-v2-root> \
+  --artifact-root <external-m1-root>
+```
+
+Add `--execute` only for the reviewed five-seed production run. Test and OOD labels
+remain outside this entrypoint's fitting path.
 
 ## Sparse solver benchmark
 

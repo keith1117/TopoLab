@@ -1,16 +1,17 @@
 # M1 learned warm-start training contract
 
 Status: **model, loss, fitting-data boundary, training budget, deterministic fitting,
-and content-addressed checkpoint/selection formats implemented for
-`topolab.m1.training.v1`; no production training run has started**.
+content-addressed checkpoint/selection formats, and guarded production entrypoint
+implemented for `topolab.m1.training.v1`; no production training run has started**.
 
 ## Scope and claims boundary
 
 M1 asks whether one lightweight learned design-density initialization can reduce the
-end-to-end SIMP time while satisfying the frozen M0 quality constraints. This slice
-defines and implements the model, supervised loss, and train/validation adapter. It
-does not fit parameters, select a checkpoint, inspect test/OOD labels, or support an
-`accelerated` claim.
+end-to-end SIMP time while satisfying the frozen M0 quality constraints. The current
+implementation defines the model, supervised loss, train/validation adapter,
+deterministic fitting, artifacts, and guarded production entrypoint. No production
+parameters have yet been fitted, test/OOD labels remain unopened, and the project
+does not support an `accelerated` claim.
 
 The only training data source is the zero-failure catalog-v2 materialization recorded
 in `docs/validation/m0_catalog_v2_materialization.md`. The case, tensor, label,
@@ -124,8 +125,39 @@ checkpoint-to-selection provenance before returning data.
 `train_all_m1_seeds` constructs the train and validation datasets once, then fits and
 persists every seed in the frozen order. It has no code path accepting test or OOD
 partitions. Partial artifacts from an interrupted invocation are immutable valid
-content, but this slice does not claim resumable optimizer state or provide a
-production CLI.
+content, but this slice does not claim resumable optimizer state.
+
+## Production entrypoint
+
+`python -m topolab.training_cli` is the sole production fitting entrypoint. It
+requires:
+
+- a clean Git checkout with a readable repository `uv.lock`;
+- the exact catalog-v2 materialization identified by SHA-256
+  `7e732446d683a3609ec3e4af4b87d334caeb583c69da3db9ea0f47f91d119d5a`;
+- a data root and a training-artifact root that both resolve outside the source
+  repository; and
+- `--execute` before any fitting or artifact write occurs.
+
+Without `--execute`, the command validates repository state and the canonical,
+complete, zero-failure materialization index, prints a machine-readable plan, and
+does not create the artifact root. This metadata preflight deliberately does not
+open any label artifact. Execution delegates label access to the train/validation
+adapter, fits all five seeds in frozen order, persists each selection, then reopens
+and verifies every selection and checkpoint against the exact fitting context.
+
+The command form is:
+
+```bash
+PYTHONPATH=src uv run python -m topolab.training_cli \
+  --data-root <external-m0-v2-root> \
+  --artifact-root <external-m1-root>
+
+PYTHONPATH=src uv run python -m topolab.training_cli \
+  --data-root <external-m0-v2-root> \
+  --artifact-root <external-m1-root> \
+  --execute
+```
 
 Test and OOD labels remain unopened until all five seed-specific checkpoints exist
 and their selection records have been frozen. No seed may be dropped because of an
@@ -134,10 +166,10 @@ digest, M1 contract/model/loss versions, exact source revision, `uv.lock` digest
 Python/NumPy/SciPy/PyTorch/Safetensors versions, seed, epoch history, selected epoch,
 hardware, thread settings, and checkpoint checksum.
 
-## Next implementation slice
+## Next execution slice
 
-The next slice should add a safe production entrypoint that requires a clean source
-revision, the verified external catalog-v2 materialization, the repository lockfile,
-and an external training-artifact root. It can then execute and audit all five seeds.
-The resulting five verified selection records remain the prerequisite for opening
-test/OOD labels and running the frozen end-to-end comparison.
+After this entrypoint is merged to `main`, run it from that clean immutable revision
+and audit all five seeds. Record the five verified selection/checkpoint references,
+loss histories, runtime, and resource use without committing generated artifacts.
+Those five records remain the prerequisite for opening test/OOD labels and running
+the frozen end-to-end comparison.
