@@ -1,11 +1,11 @@
 # M0 machine-learning experiment contract
 
 Status: **contract, deterministic representation, manifest, single-case label,
-label-artifact, recoverable materialization-index, and controlled materialization
-executor slices implemented at `m0.v1`**. This document freezes case identity,
-representation, split, label, baseline, and evaluation semantics before model
-training. M0 is not complete until a bounded case catalog and its controlled
-materialization are validated against this contract.
+label-artifact, recoverable materialization-index, controlled materialization
+executor, and bounded case-catalog slices implemented at `m0.v1`**. This document
+freezes case identity, representation, split, label, baseline, and evaluation
+semantics before model training. M0 is not complete until the bounded catalog is
+materialized and the complete outcomes are validated against this contract.
 
 ## Scope and claims boundary
 
@@ -16,11 +16,11 @@ the same quality as a uniform start?
 The current implementation provides typed case identity, deterministic input
 encoding, filtered-volume projection, immutable sample metadata, a validated dataset
 manifest, deterministic generation of one label, a recoverable manifest-to-label
-index, and a single-process executor for a supplied manifest. It does not define the
-bounded production case catalog, commit generated data, add PyTorch, train a model,
-select hyperparameters, or support an `accelerated` claim. It also does not turn
-optimizer history rows into independent samples. The numerical and platform
-contracts remain unchanged.
+index, a single-process executor, and one bounded deterministic case catalog. It does
+not materialize or commit the production labels, add PyTorch, train a model, select
+hyperparameters, or support an `accelerated` claim. It also does not turn optimizer
+history rows into independent samples. The numerical and platform contracts remain
+unchanged.
 
 ## Versioned case schema and identity
 
@@ -274,6 +274,54 @@ an `in_progress` checkpoint for retry. Only after every manifest case has a reco
 outcome is the index changed to `complete`. Re-running a complete index performs no
 generation. Tests materialize only small temporary fixtures; the repository commits
 no generated label or dataset files.
+
+## Bounded M0 v1 case catalog
+
+`topolab.catalog` freezes the first production population independently of source
+revision and runtime environment. `CaseCatalog` is a strict immutable contract with
+`catalog_version = "topolab.m0.catalog.v1"`, the complete sorted `ExperimentCase`
+tuple, and a verified content-derived `catalog_id`. The ID hashes compact,
+sorted-key, ASCII-escaped canonical JSON containing the catalog version and sorted
+case IDs. The frozen catalog identity is:
+
+```text
+tlcatalog-v1-e532ad3d9de3083918e1ab074e7ba3b88a254d0b6729af508f96959ea1eedc3d
+```
+
+Because every case ID already covers the complete normalized physical problem, the
+catalog digest transitively covers every case field. Source revision, environment,
+split counts, and tensor metadata enter the separately identified `DatasetManifest`
+when `CaseCatalog.build_manifest` is called; they are deliberately not physical case
+catalog identity.
+
+The exact `m0.v1` enumeration is:
+
+| Field | Frozen value |
+|---|---|
+| Mesh | `(nx, ny, nz) = (12, 6, 3)` and `(Lx, Ly, Lz) = (12.0, 6.0, 3.0)` |
+| Material | `E0 = 1000.0`, `Emin = 1.0`, `nu = 0.3` |
+| Support | all displacement components on the `x=min` face |
+| Point-load face | `x=max` |
+| Loaded-node `y` indices | `[0, 2, 4, 6]` |
+| Loaded-node `z` indices | `[0, 1, 2, 3]` |
+| ID load | one `y` component with magnitude `-1.0` |
+| Matched OOD load | the same node and magnitude with direction changed only to `z` |
+| Target physical volume fractions | `[0.2, 0.3, 0.4, 0.5, 0.6]` |
+| SIMP/filter settings | radius `1.5`, penalty `3.0`, minimum density `0.05`, move limit `0.2` |
+| Termination | density-change tolerance `0.01`, maximum `100` iterations |
+
+Node identity follows the repository's x-fast convention:
+`node = nx + (nx + 1) * (y_index + (ny + 1) * z_index)`. The mesh therefore has
+unit-cube elements, 216 elements, 364 nodes, and 1,092 displacement DOFs. Cartesian
+enumeration produces 16 load locations times five volume fractions: 80 ID cases plus
+80 exact OOD counterparts, for 160 cases total. The frozen ID hash rule produces
+60 train, 9 validation, and 11 test cases; all 80 direction-shifted cases are OOD.
+These counts are pre-label and must not be rebalanced after materialization.
+
+`build_m0_case_catalog` rechecks the pinned catalog ID, and the manifest constructor
+rechecks uniqueness, fixed-cohort identity, positive partitions, and every OOD pair.
+This slice enumerates metadata only. It does not solve the catalog or write generated
+artifacts.
 
 ## Dataset split and leakage prevention
 

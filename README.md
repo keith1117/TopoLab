@@ -20,8 +20,10 @@ warm starts.
 > single-case label generation with content-addressed, checksum-verified atomic
 > artifacts plus an append-only, atomically recoverable manifest-to-label index.
 > A single-process executor now materializes supplied manifests in canonical order
-> with per-case checkpoints and interruption recovery. Process workers, broad
-> scalability evidence, a bounded production case catalog, and ML remain incomplete.
+> with per-case checkpoints and interruption recovery. The bounded 160-case M0 v1
+> catalog is content-identified and exactly reproducible. Its full controlled
+> materialization, process workers, broad scalability evidence, and ML remain
+> incomplete.
 
 ## Intended scope
 
@@ -83,8 +85,9 @@ Frontend scope and local development are documented in
 [`docs/frontend.md`](docs/frontend.md).
 The first M0 data and evaluation contract is documented in
 [`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md). Its typed manifest
-and recoverable executor do not yet define or materialize the bounded production case
-catalog and therefore do not constitute a passed M0 gate.
+and recoverable executor now define the bounded, content-identified production case
+catalog, but do not yet materialize and validate all 160 cases; M0 has therefore not
+passed.
 
 ## Sparse solver benchmark
 

@@ -79,16 +79,16 @@ Gate P1 已通过。SQLite 持久化、重启恢复、稳定游标分页、运�
 前端 cooperative run cancellation 控制也已完成。四档稀疏装配/求解性能与峰值
 内存 benchmark 也已完成；其方法、结果和限制记录在
 `docs/validation/sparse_solver_benchmark.md`。下一阶段进入 M0，冻结 case schema、
-生成器版本、数据分割和 baseline。前七个 M0 切片已在
+生成器版本、数据分割和 baseline。前八个 M0 切片已在
 `docs/ml_experiment_contract.md` 冻结这些契约、加入 typed case identity，实现
 确定性 case encoding 与 filtered-volume projection，并加入验证分区、cohort、
 OOD 配对和 provenance 元数据的 typed dataset manifest，以及拒绝未收敛和
 不一致终态的单 case label generator、canonical JSON、SHA-256、内容寻址路径与
 原子 label artifact 写入，并冻结可恢复、append-only、完整覆盖 case 的
 manifest-to-label materialization index，以及按 canonical case 顺序执行、逐 case
-原子 checkpoint、可中断恢复的单进程 materialization executor；尚未冻结有界的
-production case catalog，也没有实际 materialize 并验证该完整数据集，因此 M0
-gate 仍未通过，在通过前不能开始模型训练。
+原子 checkpoint、可中断恢复的单进程 materialization executor；并已冻结 160 个
+case 的有界、content-identified production catalog。尚未实际 materialize 并验证
+该完整数据集，因此 M0 gate 仍未通过，在通过前不能开始模型训练。
 
 ## 总体时间估计
 

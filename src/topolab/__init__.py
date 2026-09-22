@@ -1,6 +1,15 @@
 """TopoLab package."""
 
 from topolab.api import create_app
+from topolab.catalog import (
+    CASE_CATALOG_ID_PREFIX,
+    CASE_CATALOG_VERSION,
+    M0_CASE_CATALOG_ID,
+    CaseCatalog,
+    build_catalog_id,
+    build_m0_case_catalog,
+    canonical_catalog_json,
+)
 from topolab.dataset import (
     DATASET_MANIFEST_VERSION,
     DATASET_SAMPLE_VERSION,
@@ -113,6 +122,8 @@ from topolab.simp import (
 __version__ = "0.3.0"
 
 __all__ = [
+    "CASE_CATALOG_ID_PREFIX",
+    "CASE_CATALOG_VERSION",
     "CASE_ID_PREFIX",
     "CASE_SCHEMA_VERSION",
     "DATASET_MANIFEST_VERSION",
@@ -132,6 +143,7 @@ __all__ = [
     "LABEL_COMPLIANCE_RELATIVE_TOLERANCE",
     "LABEL_RECORD_VERSION",
     "LABEL_VOLUME_TOLERANCE",
+    "M0_CASE_CATALOG_ID",
     "MATERIALIZATION_INDEX_VERSION",
     "LabelGenerationError",
     "LabelArtifactError",
@@ -140,6 +152,7 @@ __all__ = [
     "Hex8Mesh",
     "LinearStaticResult",
     "ComplianceResult",
+    "CaseCatalog",
     "DensityFilter",
     "FaceLoad",
     "FaceLoadDefinition",
@@ -180,13 +193,16 @@ __all__ = [
     "assemble_global_stiffness",
     "assign_case_split",
     "build_constrained_dofs",
+    "build_catalog_id",
     "build_case_id",
     "build_load_vector",
+    "build_m0_case_catalog",
     "build_manifest_sha256",
     "backpropagate_density_gradient",
     "build_density_filter",
     "create_app",
     "canonical_case_json",
+    "canonical_catalog_json",
     "canonical_label_bytes",
     "canonical_manifest_bytes",
     "canonical_materialization_index_bytes",
