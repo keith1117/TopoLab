@@ -8,8 +8,10 @@ baseline, and evaluation semantics before model training. M0 is not complete unt
 a bounded catalog is materialized with zero failures and the complete outcomes are
 validated against this contract. The first complete attempt recorded 156 successes
 and four terminal OOD generation failures. The v2 catalog corrects the bounded
-iteration budget but has not yet been materialized, so M0 has not passed and the v1
-manifest is not training data.
+iteration budget and its complete materialization recorded 160 successes and zero
+failures. Gate M0 passes for the exact v2 manifest recorded in
+`docs/validation/m0_catalog_v2_materialization.md`; the v1 manifest remains failed
+evidence and is not training data.
 
 ## Scope and claims boundary
 
@@ -24,10 +26,11 @@ index, a single-process executor, one bounded deterministic case catalog, and a 
 production entrypoint that constructs the manifest from a clean checkout. The first
 complete production attempt is recorded in
 `docs/validation/m0_catalog_materialization.md`; its generated artifacts remain
-outside Git. The implementation does not add PyTorch, train a model, select
-hyperparameters, or support an `accelerated` claim. It also does not turn optimizer
-history rows into independent samples. The numerical and platform contracts remain
-unchanged.
+outside Git. The successful v2 materialization and audit are recorded in
+`docs/validation/m0_catalog_v2_materialization.md`. The implementation does not add
+PyTorch, train a model, select hyperparameters, or support an `accelerated` claim. It
+also does not turn optimizer history rows into independent samples. The numerical
+and platform contracts remain unchanged.
 
 ## Versioned case schema and identity
 

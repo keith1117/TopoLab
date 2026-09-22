@@ -131,6 +131,10 @@ the `topolab.m0.split.v1` algorithm. The resulting catalog identity is
 `tlcatalog-v2-4ba44e175ca47f85aa0fbcafbc9456b2a1b672fd181430ec9aef29a468f46500`;
 the new pre-label split counts are 66 train, 8 validation, 6 test, and 80 OOD.
 
-The next independent slice must materialize and audit a new v2 manifest. PyTorch,
-training, hyperparameter selection, and M1 remain blocked until that complete
-materialization has zero failures.
+At that point, the next independent slice had to materialize and audit a new v2
+manifest. PyTorch, training, hyperparameter selection, and M1 remained blocked until
+that complete materialization had zero failures.
+
+That follow-up completed successfully and is recorded separately in
+`docs/validation/m0_catalog_v2_materialization.md`. This v1 report remains the
+immutable record of the failed 100-iteration attempt.
