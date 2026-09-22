@@ -20,12 +20,14 @@ warm starts.
 > single-case label generation with content-addressed, checksum-verified atomic
 > artifacts plus an append-only, atomically recoverable manifest-to-label index.
 > A single-process executor now materializes supplied manifests in canonical order
-> with per-case checkpoints and interruption recovery. The bounded 160-case M0 v1
-> catalog is content-identified and exactly reproducible. A production entrypoint
+> with per-case checkpoints and interruption recovery. The bounded 160-case M0 v2
+> catalog is content-identified and exactly reproducible; it preserves the v1 case
+> schema while increasing the frozen iteration budget from 100 to 120. A production entrypoint
 > now derives its manifest from a clean Git revision and locked environment, defaults
 > to a read-only plan, and requires an external output root plus explicit execution.
-> The first complete controlled materialization recorded 156 successful labels and
-> four correctly rejected non-converged OOD cases, so M0 has not passed. Process
+> The v1 controlled materialization recorded 156 successful labels and four correctly
+> rejected non-converged OOD cases. The versioned v2 catalog has not yet been
+> materialized, so M0 has not passed. Process
 > workers, broad scalability evidence, and ML remain incomplete.
 
 ## Intended scope
@@ -89,8 +91,8 @@ Frontend scope and local development are documented in
 The first M0 data and evaluation contract is documented in
 [`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md). Its typed manifest,
 recoverable executor, bounded content-identified catalog, and safe production
-entrypoint are implemented. The first complete attempt and its four terminal
-non-convergence failures are documented in
+entrypoint are implemented. The v1 attempt and its four terminal non-convergence
+failures, together with the evidence for the v2 termination-budget revision, are documented in
 [`docs/validation/m0_catalog_materialization.md`](docs/validation/m0_catalog_materialization.md);
 M0 has therefore not passed.
 

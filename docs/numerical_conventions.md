@@ -148,11 +148,14 @@ requires a documented reason and regression-test update.
 - The materialization executor visits pending samples in canonical `case_id` order,
   checkpoints each known success or terminal failure, and leaves an unexpectedly
   interrupted case pending for a later resume.
-- The bounded `m0.v1` production catalog has its own content-derived identity over
+- The bounded `topolab.m0.catalog.v2` production catalog has its own content-derived identity over
   the sorted complete case IDs. Its exact fixed cohort, load-location grid, volume
   fractions, ID/OOD pairing, and partition counts are frozen in
   `docs/ml_experiment_contract.md`; changing the population requires a new catalog
   version and identity.
+- Catalog v2 keeps the v1 case schema and `0.01` density-change tolerance but freezes
+  the maximum at 120 iterations. Catalog v1 and its 100-iteration failed
+  materialization remain immutable validation evidence.
 - The production catalog entrypoint builds a manifest only from a clean Git
   worktree, capturing the exact commit, active Python/NumPy/SciPy versions, and the
   repository `uv.lock` digest. Planning is read-only, solver execution requires an

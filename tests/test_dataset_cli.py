@@ -83,7 +83,7 @@ def test_cli_defaults_to_read_only_plan(
         "mode": "plan",
         "source_revision": _git(repository, "rev-parse", "HEAD"),
         "source_tree_clean": True,
-        "split_counts": {"ood": 80, "test": 11, "train": 60, "validation": 9},
+        "split_counts": {"ood": 80, "test": 6, "train": 66, "validation": 8},
         "state": "planned",
         "summary_version": dataset_cli.MATERIALIZATION_SUMMARY_VERSION,
         "total_cases": 160,

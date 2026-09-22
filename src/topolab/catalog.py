@@ -19,10 +19,10 @@ from topolab.problem import (
     TopologyProblem,
 )
 
-CASE_CATALOG_VERSION = "topolab.m0.catalog.v1"
-CASE_CATALOG_ID_PREFIX = "tlcatalog-v1-"
+CASE_CATALOG_VERSION = "topolab.m0.catalog.v2"
+CASE_CATALOG_ID_PREFIX = "tlcatalog-v2-"
 M0_CASE_CATALOG_ID = (
-    "tlcatalog-v1-e532ad3d9de3083918e1ab074e7ba3b88a254d0b6729af508f96959ea1eedc3d"
+    "tlcatalog-v2-4ba44e175ca47f85aa0fbcafbc9456b2a1b672fd181430ec9aef29a468f46500"
 )
 
 _CATALOG_ID_PATTERN = rf"^{CASE_CATALOG_ID_PREFIX}[0-9a-f]{{64}}$"
@@ -36,7 +36,7 @@ _VOLUME_FRACTIONS = (0.2, 0.3, 0.4, 0.5, 0.6)
 class CaseCatalog(ContractModel):
     """One immutable, content-identified collection of complete physical cases."""
 
-    catalog_version: Literal["topolab.m0.catalog.v1"] = "topolab.m0.catalog.v1"
+    catalog_version: Literal["topolab.m0.catalog.v2"] = "topolab.m0.catalog.v2"
     catalog_id: Annotated[str, Field(pattern=_CATALOG_ID_PATTERN)]
     cases: Annotated[tuple[ExperimentCase, ...], Field(min_length=1)]
 
@@ -112,7 +112,7 @@ def build_catalog_id(cases: Iterable[ExperimentCase]) -> str:
 
 
 def build_m0_case_catalog() -> CaseCatalog:
-    """Enumerate the exact bounded M0 v1 ID and matched-OOD case population."""
+    """Enumerate the exact bounded M0 v2 ID and matched-OOD case population."""
 
     cases = (
         _build_case(y_index, z_index, volume_fraction, direction)
@@ -123,7 +123,7 @@ def build_m0_case_catalog() -> CaseCatalog:
     )
     catalog = CaseCatalog.from_cases(cases)
     if catalog.catalog_id != M0_CASE_CATALOG_ID:
-        raise RuntimeError("the M0 v1 case catalog changed without a version update")
+        raise RuntimeError("the M0 v2 case catalog changed without a version update")
     return catalog
 
 
@@ -160,7 +160,7 @@ def _build_case(
             minimum_density=0.05,
             move_limit=0.2,
             convergence_tolerance=0.01,
-            max_iterations=100,
+            max_iterations=120,
         ),
     )
     return ExperimentCase.from_problem(problem)
