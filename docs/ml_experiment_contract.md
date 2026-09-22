@@ -5,8 +5,10 @@ label-artifact, recoverable materialization-index, controlled materialization
 executor, bounded case-catalog, and production entrypoint slices implemented at
 `m0.v1`**. This document freezes case identity, representation, split, label,
 baseline, and evaluation semantics before model training. M0 is not complete until
-the bounded catalog is materialized and the complete outcomes are validated against
-this contract.
+a bounded catalog is materialized with zero failures and the complete outcomes are
+validated against this contract. The first complete attempt recorded 156 successes
+and four terminal OOD generation failures, so M0 has not passed and that manifest is
+not training data.
 
 ## Scope and claims boundary
 
@@ -18,8 +20,10 @@ The current implementation provides typed case identity, deterministic input
 encoding, filtered-volume projection, immutable sample metadata, a validated dataset
 manifest, deterministic generation of one label, a recoverable manifest-to-label
 index, a single-process executor, one bounded deterministic case catalog, and a safe
-production entrypoint that constructs the manifest from a clean checkout. It does
-not materialize or commit the production labels, add PyTorch, train a model, select
+production entrypoint that constructs the manifest from a clean checkout. The first
+complete production attempt is recorded in
+`docs/validation/m0_catalog_materialization.md`; its generated artifacts remain
+outside Git. The implementation does not add PyTorch, train a model, select
 hyperparameters, or support an `accelerated` claim. It also does not turn optimizer
 history rows into independent samples. The numerical and platform contracts remain
 unchanged.
@@ -364,9 +368,10 @@ Execution retains the materializer's atomic per-case checkpoint and resume rules
 complete index containing one or more terminal case failures is summarized but exits
 with status 1; an unsafe checkout or output location exits with status 2. Unexpected
 exceptions continue to propagate so an interrupted case remains pending. The
-entrypoint never writes generated data into the source repository. This slice tests
-the control path with temporary fixtures and does not execute or commit the full
-160-case materialization.
+entrypoint never writes generated data into the source repository. Its control path
+is covered with temporary fixtures. The first complete external execution and its
+four correctly recorded failures are documented in
+`docs/validation/m0_catalog_materialization.md`; no generated artifact is committed.
 
 ## Dataset split and leakage prevention
 
