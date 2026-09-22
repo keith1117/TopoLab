@@ -21,9 +21,11 @@ warm starts.
 > artifacts plus an append-only, atomically recoverable manifest-to-label index.
 > A single-process executor now materializes supplied manifests in canonical order
 > with per-case checkpoints and interruption recovery. The bounded 160-case M0 v1
-> catalog is content-identified and exactly reproducible. Its full controlled
-> materialization, process workers, broad scalability evidence, and ML remain
-> incomplete.
+> catalog is content-identified and exactly reproducible. A production entrypoint
+> now derives its manifest from a clean Git revision and locked environment, defaults
+> to a read-only plan, and requires an external output root plus explicit execution.
+> Its full controlled materialization, process workers, broad scalability evidence,
+> and ML remain incomplete.
 
 ## Intended scope
 
@@ -84,10 +86,10 @@ contract is in [`docs/run_persistence.md`](docs/run_persistence.md).
 Frontend scope and local development are documented in
 [`docs/frontend.md`](docs/frontend.md).
 The first M0 data and evaluation contract is documented in
-[`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md). Its typed manifest
-and recoverable executor now define the bounded, content-identified production case
-catalog, but do not yet materialize and validate all 160 cases; M0 has therefore not
-passed.
+[`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md). Its typed manifest,
+recoverable executor, bounded content-identified catalog, and safe production
+entrypoint are implemented, but all 160 cases have not yet been materialized and
+validated; M0 has therefore not passed.
 
 ## Sparse solver benchmark
 

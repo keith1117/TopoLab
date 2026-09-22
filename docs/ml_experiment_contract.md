@@ -2,10 +2,11 @@
 
 Status: **contract, deterministic representation, manifest, single-case label,
 label-artifact, recoverable materialization-index, controlled materialization
-executor, and bounded case-catalog slices implemented at `m0.v1`**. This document
-freezes case identity, representation, split, label, baseline, and evaluation
-semantics before model training. M0 is not complete until the bounded catalog is
-materialized and the complete outcomes are validated against this contract.
+executor, bounded case-catalog, and production entrypoint slices implemented at
+`m0.v1`**. This document freezes case identity, representation, split, label,
+baseline, and evaluation semantics before model training. M0 is not complete until
+the bounded catalog is materialized and the complete outcomes are validated against
+this contract.
 
 ## Scope and claims boundary
 
@@ -16,7 +17,8 @@ the same quality as a uniform start?
 The current implementation provides typed case identity, deterministic input
 encoding, filtered-volume projection, immutable sample metadata, a validated dataset
 manifest, deterministic generation of one label, a recoverable manifest-to-label
-index, a single-process executor, and one bounded deterministic case catalog. It does
+index, a single-process executor, one bounded deterministic case catalog, and a safe
+production entrypoint that constructs the manifest from a clean checkout. It does
 not materialize or commit the production labels, add PyTorch, train a model, select
 hyperparameters, or support an `accelerated` claim. It also does not turn optimizer
 history rows into independent samples. The numerical and platform contracts remain
@@ -322,6 +324,49 @@ These counts are pre-label and must not be rebalanced after materialization.
 rechecks uniqueness, fixed-cohort identity, positive partitions, and every OOD pair.
 This slice enumerates metadata only. It does not solve the catalog or write generated
 artifacts.
+
+## Production catalog entrypoint
+
+`topolab.dataset_cli` is the sole production entrypoint for turning the frozen M0
+catalog into a revision- and environment-specific manifest. From the TopoLab
+repository root, plan the operation with:
+
+```bash
+PYTHONPATH=src uv run --locked python -m topolab.dataset_cli \
+  --output-root /absolute/path/outside/TopoLab
+```
+
+Planning is the default and is read-only: it does not create the output root, a
+manifest file, a checkpoint, or labels. It prints one sorted-key, versioned JSON
+object with the catalog ID, manifest SHA-256, exact clean-source declaration and
+revision, split counts, total cases, and the non-sensitive Python/NumPy/SciPy and
+`uv.lock` metadata embedded in the manifest. It deliberately omits repository and
+output paths. The summary schema version is
+`topolab.m0.materialization-summary.v1`.
+
+The entrypoint requires a Git worktree with no tracked or non-ignored untracked
+changes, captures the exact 40-character `HEAD`, hashes the checkout's `uv.lock`, and
+records the versions of the active runtime. It resolves the requested output path and
+rejects the repository root or any descendant, including paths reached through an
+existing symlink. These checks apply in planning mode so the exact proposed manifest
+and destination policy can be reviewed before solving.
+
+Only an explicit execution flag starts the existing single-process, single-writer
+materializer:
+
+```bash
+PYTHONPATH=src uv run --locked python -m topolab.dataset_cli \
+  --output-root /absolute/path/outside/TopoLab \
+  --execute
+```
+
+Execution retains the materializer's atomic per-case checkpoint and resume rules. A
+complete index containing one or more terminal case failures is summarized but exits
+with status 1; an unsafe checkout or output location exits with status 2. Unexpected
+exceptions continue to propagate so an interrupted case remains pending. The
+entrypoint never writes generated data into the source repository. This slice tests
+the control path with temporary fixtures and does not execute or commit the full
+160-case materialization.
 
 ## Dataset split and leakage prevention
 
