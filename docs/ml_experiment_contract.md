@@ -3,12 +3,13 @@
 Status: **contract, deterministic representation, manifest, single-case label,
 label-artifact, recoverable materialization-index, controlled materialization
 executor, bounded case-catalog, and production entrypoint slices implemented at
-`m0.v1`**. This document freezes case identity, representation, split, label,
+`m0.v1`; production catalog revised to `topolab.m0.catalog.v2`**. This document freezes case identity, representation, split, label,
 baseline, and evaluation semantics before model training. M0 is not complete until
 a bounded catalog is materialized with zero failures and the complete outcomes are
 validated against this contract. The first complete attempt recorded 156 successes
-and four terminal OOD generation failures, so M0 has not passed and that manifest is
-not training data.
+and four terminal OOD generation failures. The v2 catalog corrects the bounded
+iteration budget but has not yet been materialized, so M0 has not passed and the v1
+manifest is not training data.
 
 ## Scope and claims boundary
 
@@ -281,17 +282,17 @@ outcome is the index changed to `complete`. Re-running a complete index performs
 generation. Tests materialize only small temporary fixtures; the repository commits
 no generated label or dataset files.
 
-## Bounded M0 v1 case catalog
+## Bounded M0 v2 case catalog
 
 `topolab.catalog` freezes the first production population independently of source
 revision and runtime environment. `CaseCatalog` is a strict immutable contract with
-`catalog_version = "topolab.m0.catalog.v1"`, the complete sorted `ExperimentCase`
+`catalog_version = "topolab.m0.catalog.v2"`, the complete sorted `ExperimentCase`
 tuple, and a verified content-derived `catalog_id`. The ID hashes compact,
 sorted-key, ASCII-escaped canonical JSON containing the catalog version and sorted
 case IDs. The frozen catalog identity is:
 
 ```text
-tlcatalog-v1-e532ad3d9de3083918e1ab074e7ba3b88a254d0b6729af508f96959ea1eedc3d
+tlcatalog-v2-4ba44e175ca47f85aa0fbcafbc9456b2a1b672fd181430ec9aef29a468f46500
 ```
 
 Because every case ID already covers the complete normalized physical problem, the
@@ -300,7 +301,7 @@ split counts, and tensor metadata enter the separately identified `DatasetManife
 when `CaseCatalog.build_manifest` is called; they are deliberately not physical case
 catalog identity.
 
-The exact `m0.v1` enumeration is:
+The exact v2 enumeration is:
 
 | Field | Frozen value |
 |---|---|
@@ -314,15 +315,25 @@ The exact `m0.v1` enumeration is:
 | Matched OOD load | the same node and magnitude with direction changed only to `z` |
 | Target physical volume fractions | `[0.2, 0.3, 0.4, 0.5, 0.6]` |
 | SIMP/filter settings | radius `1.5`, penalty `3.0`, minimum density `0.05`, move limit `0.2` |
-| Termination | density-change tolerance `0.01`, maximum `100` iterations |
+| Termination | density-change tolerance `0.01`, maximum `120` iterations |
 
 Node identity follows the repository's x-fast convention:
 `node = nx + (nx + 1) * (y_index + (ny + 1) * z_index)`. The mesh therefore has
 unit-cube elements, 216 elements, 364 nodes, and 1,092 displacement DOFs. Cartesian
 enumeration produces 16 load locations times five volume fractions: 80 ID cases plus
 80 exact OOD counterparts, for 160 cases total. The frozen ID hash rule produces
-60 train, 9 validation, and 11 test cases; all 80 direction-shifted cases are OOD.
+66 train, 8 validation, and 6 test cases; all 80 direction-shifted cases are OOD.
 These counts are pre-label and must not be rebalanced after materialization.
+
+Catalog v1 remains frozen as
+`tlcatalog-v1-e532ad3d9de3083918e1ab074e7ba3b88a254d0b6729af508f96959ea1eedc3d`
+with a 100-iteration maximum and split counts 60/9/11/80. Its complete materialization
+is immutable failed-gate evidence, not training data. The only physical-case change
+in v2 is the maximum iteration budget. The case schema remains
+`topolab.m0.case.v1`, the convergence tolerance remains `0.01`, the split algorithm
+remains `topolab.m0.split.v1`, and no case is removed or rebalanced. Because maximum
+iterations participates in physical case identity, all case IDs, the catalog ID, and
+the next manifest identity necessarily change.
 
 `build_m0_case_catalog` rechecks the pinned catalog ID, and the manifest constructor
 rechecks uniqueness, fixed-cohort identity, positive partitions, and every OOD pair.
@@ -369,8 +380,8 @@ complete index containing one or more terminal case failures is summarized but e
 with status 1; an unsafe checkout or output location exits with status 2. Unexpected
 exceptions continue to propagate so an interrupted case remains pending. The
 entrypoint never writes generated data into the source repository. Its control path
-is covered with temporary fixtures. The first complete external execution and its
-four correctly recorded failures are documented in
+is covered with temporary fixtures. The v1 complete external execution, its four
+correctly recorded failures, and the evidence for the v2 revision are documented in
 `docs/validation/m0_catalog_materialization.md`; no generated artifact is committed.
 
 ## Dataset split and leakage prevention

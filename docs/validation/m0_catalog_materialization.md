@@ -124,8 +124,13 @@ No numerical tolerance was loosened, no case was removed, no split was rebalance
 and no failed outcome was overwritten. The complete index remains the immutable
 record of this unsuccessful M0 v1 attempt.
 
-The next independent slice should decide and test a versioned termination-budget
-revision. It must confirm that the change is a catalog-contract correction rather
-than a solver defect, regenerate all affected identities, and materialize a new
-manifest. PyTorch, training, hyperparameter selection, and M1 remain blocked until a
-new complete materialization has zero failures.
+The follow-up contract slice adopted the diagnosed termination-budget correction as
+`topolab.m0.catalog.v2`, increasing only `max_iterations` from 100 to 120. It keeps
+the `topolab.m0.case.v1` schema, the `0.01` tolerance, the 160-case population, and
+the `topolab.m0.split.v1` algorithm. The resulting catalog identity is
+`tlcatalog-v2-4ba44e175ca47f85aa0fbcafbc9456b2a1b672fd181430ec9aef29a468f46500`;
+the new pre-label split counts are 66 train, 8 validation, 6 test, and 80 OOD.
+
+The next independent slice must materialize and audit a new v2 manifest. PyTorch,
+training, hyperparameter selection, and M1 remain blocked until that complete
+materialization has zero failures.

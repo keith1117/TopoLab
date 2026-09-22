@@ -24,7 +24,7 @@ def test_m0_catalog_has_stable_identity_and_json_round_trip() -> None:
     assert catalog.catalog_version == CASE_CATALOG_VERSION
     assert catalog.catalog_id == M0_CASE_CATALOG_ID
     assert catalog.catalog_id == (
-        "tlcatalog-v1-e532ad3d9de3083918e1ab074e7ba3b88a254d0b6729af508f96959ea1eedc3d"
+        "tlcatalog-v2-4ba44e175ca47f85aa0fbcafbc9456b2a1b672fd181430ec9aef29a468f46500"
     )
     assert catalog.catalog_id.startswith(CASE_CATALOG_ID_PREFIX)
     assert catalog.catalog_id == build_catalog_id(reversed(catalog.cases))
@@ -35,10 +35,10 @@ def test_m0_catalog_has_stable_identity_and_json_round_trip() -> None:
         sorted(case.case_id for case in catalog.cases)
     )
     assert catalog.cases[0].case_id == (
-        "tlcase-v1-03dc455163a08145ffd01c55cba407a50414f07dfab550111784d0a141c66527"
+        "tlcase-v1-0030af2e9d265d398665198304d7f4d34a4f51f2432394e1e07d9eb750de30d0"
     )
     assert catalog.cases[-1].case_id == (
-        "tlcase-v1-f97f8a73dc947430cca6abfe1ea1d832c4d54a4a9d7b18a7307e2bd86fb26274"
+        "tlcase-v1-fffa6c821de04e3168fcc2fe25e6b35a1f454a615069b2129db4a445fae7d5ac"
     )
 
 
@@ -47,6 +47,7 @@ def test_m0_catalog_exactly_enumerates_frozen_cohort_and_matched_ood_axis() -> N
 
     assert len(catalog.cases) == 160
     assert len({case.case_id for case in catalog.cases}) == 160
+    assert {case.schema_version for case in catalog.cases} == {"topolab.m0.case.v1"}
     assert {case.problem.mesh.element_counts for case in catalog.cases} == {(12, 6, 3)}
     assert {case.problem.mesh.lengths for case in catalog.cases} == {(12.0, 6.0, 3.0)}
     assert {
@@ -84,7 +85,7 @@ def test_m0_catalog_exactly_enumerates_frozen_cohort_and_matched_ood_axis() -> N
             "minimum_density": 0.05,
             "move_limit": 0.2,
             "convergence_tolerance": 0.01,
-            "max_iterations": 100,
+            "max_iterations": 120,
         }
 
     nx, ny = 12, 6
@@ -108,9 +109,9 @@ def test_m0_catalog_builds_manifest_with_frozen_nonempty_partitions() -> None:
     )
 
     assert manifest.split_counts.model_dump() == {
-        "train": 60,
-        "validation": 9,
-        "test": 11,
+        "train": 66,
+        "validation": 8,
+        "test": 6,
         "ood": 80,
     }
     assert len(manifest.samples) == 160
@@ -129,7 +130,7 @@ def test_catalog_rejects_duplicate_stale_and_changed_schema() -> None:
         CaseCatalog.model_validate(payload)
 
     payload = catalog.model_dump(mode="json")
-    payload["catalog_version"] = "topolab.m0.catalog.v2"
+    payload["catalog_version"] = "topolab.m0.catalog.v1"
     with pytest.raises(ValidationError):
         CaseCatalog.model_validate(payload)
 
