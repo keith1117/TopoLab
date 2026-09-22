@@ -148,5 +148,10 @@ requires a documented reason and regression-test update.
 - The materialization executor visits pending samples in canonical `case_id` order,
   checkpoints each known success or terminal failure, and leaves an unexpectedly
   interrupted case pending for a later resume.
+- The bounded `m0.v1` production catalog has its own content-derived identity over
+  the sorted complete case IDs. Its exact fixed cohort, load-location grid, volume
+  fractions, ID/OOD pairing, and partition counts are frozen in
+  `docs/ml_experiment_contract.md`; changing the population requires a new catalog
+  version and identity.
 - Exact identity, encoding, projection, label, split, OOD, baseline, quality,
   statistics, and fallback rules are frozen in `docs/ml_experiment_contract.md`.
