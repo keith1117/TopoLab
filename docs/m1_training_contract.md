@@ -4,7 +4,8 @@ Status: **model, loss, fitting-data boundary, training budget, deterministic fit
 content-addressed checkpoint/selection formats, and guarded production entrypoint
 implemented for `topolab.m1.training.v1`; all five production seeds fitted and
 audited; the single-case learned inference/refinement/fallback boundary is
-implemented; held-out production evaluation has not started**.
+implemented; the recoverable five-seed held-out runner and frozen statistics are
+implemented; held-out production execution has not started**.
 
 ## Scope and claims boundary
 
@@ -193,10 +194,65 @@ and fallback use. The evaluator receives no query-label input. Its current tests
 synthetic validation/OOD metadata only; production test/OOD cases and labels remain
 unopened.
 
+## Full experiment boundary
+
+`topolab.m1_experiment` and `python -m topolab.evaluation_cli` implement the guarded
+full comparison without changing the single-case numerical rules. The production
+entrypoint fixes the five selection SHA-256 values recorded in
+`docs/validation/m1_training.md`; callers cannot substitute a seed or choose a
+checkpoint after observing held-out behavior.
+
+Planning requires a clean checkout, the exact catalog-v2 materialization, all five
+canonical selection/checkpoint artifacts, and repository-external data, artifact,
+and output roots. It audits the fitting manifest, label revision, train/validation
+case IDs, shared fitting source/runtime, and every checkpoint checksum. Planning is
+read-only: it creates no evaluation checkpoint and opens no dataset label artifact.
+
+Explicit `--execute` loads all five CPU candidates, builds the nearest-neighbor index
+from training labels only, and visits every test/OOD sample in canonical manifest
+order. Query labels are never opened. One `topolab.m1.evaluation-index.v1` entry
+contains the uniform, physics-heuristic, nearest-neighbor, and five learned results
+for one physical case. The index path is:
+
+```text
+m1/evaluations/<manifest_sha256>/<evaluation_context_sha256>.json
+```
+
+The context digest covers the manifest, ordered selections and checkpoints, clean
+evaluation source revision, and locked runtime/thread metadata. The index is
+canonical JSON, append-only, atomically replaced, and checkpointed only after all
+eight method/seed outcomes for one case exist. An unexpected interruption leaves
+that physical case pending; restart skips completed cases and reruns the interrupted
+case in full.
+
+`topolab.m1.statistics.v1` reports each fixed baseline, every learned seed, and one
+five-seed aggregate separately for test and OOD. Every time ratio is paired to the
+same case's uniform time. The primary 95% interval uses 10,000 case-cluster bootstrap
+resamples with seed `20260919`; each split resets the generator and every sampled
+case retains all five seeds. NumPy linear quantiles define the interval and the
+reported median/IQR. Failures and fallbacks remain in the time distribution and are
+reported as rates; operational compliance, iteration, and volume summaries cannot
+erase their failed status.
+
+The production command forms are:
+
+```bash
+PYTHONPATH=src uv run python -m topolab.evaluation_cli \
+  --data-root <external-m0-v2-root> \
+  --artifact-root <external-m1-root> \
+  --output-root <external-evaluation-root>
+
+PYTHONPATH=src uv run python -m topolab.evaluation_cli \
+  --data-root <external-m0-v2-root> \
+  --artifact-root <external-m1-root> \
+  --output-root <external-evaluation-root> \
+  --execute
+```
+
 ## Next evaluation slice
 
-Implement a guarded production experiment runner that loads all five verified
-selections and the training-only nearest-neighbor index, enumerates the frozen
-test/OOD cases, persists every per-case method outcome, and computes the predefined
-paired statistics. Only after that boundary is reviewed should the held-out run be
-executed. Do not select or drop seeds based on held-out results.
+Review and merge the guarded runner from a clean branch, run its read-only production
+plan, and only then authorize the one frozen held-out execution. Preserve the exact
+checkpoint and raw summary outside Git, audit every case/seed outcome, and commit a
+validation report regardless of whether the result is positive, negative, or
+inconclusive. Do not select or drop seeds based on held-out results.

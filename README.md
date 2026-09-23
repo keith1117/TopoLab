@@ -40,8 +40,10 @@ warm starts.
 > execution. All five frozen production seeds have been fitted and artifact-audited;
 > the single-case learned evaluator now covers checkpoint-bound CPU inference,
 > filtered-volume projection, shared SIMP refinement and quality checks, phase
-> timing, and fully charged uniform fallback. The guarded production comparison,
-> test/OOD execution, and any learned-acceleration claim remain pending.
+> timing, and fully charged uniform fallback. A guarded full runner now fixes the five
+> production selections, checkpoints all eight method/seed outcomes per physical
+> case, resumes atomically, and computes the frozen case-cluster statistics. The
+> production test/OOD execution and any learned-acceleration claim remain pending.
 
 ## Intended scope
 
