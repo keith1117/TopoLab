@@ -114,7 +114,10 @@ learned inference、filtered-volume projection、共享 SIMP refinement/质量�
 区间不能证明稳定加速，OOD 平均时间比显著高于 1 且 learned fallback 率为 25%，因此
 M1 不通过 learned-acceleration gate，uniform 保持 operational default。后续若进行
 M2，必须预先冻结有限干预预算并使用新的 untouched holdout/OOD，不能在已观察的 M1
-集合上继续选择模型。
+集合上继续选择模型。该有限 M2 已在 `docs/m2_experiment_contract.md` 预注册：保持
+M1 模型、loss、optimizer 与五个 seed 不变，只扩大 direction-balanced fitting data，
+加入有限 validation-calibrated ensemble gate，并保留全新的 36 个 ID-test 与 252 个
+OOD case。若一次最终比较仍不通过门槛，即停止 ML 扩张并进入发布收尾。
 
 ## 总体时间估计
 

@@ -133,6 +133,11 @@ use, and current claims boundary are recorded in
 The completed held-out comparison, artifact hash, per-seed results, failure audit,
 and negative/inconclusive M1 gate decision are recorded in
 [`docs/validation/m1_held_out_evaluation.md`](docs/validation/m1_held_out_evaluation.md).
+A single bounded follow-up is pre-registered in
+[`docs/m2_experiment_contract.md`](docs/m2_experiment_contract.md). It changes data
+coverage and adds a finite validation-calibrated reliability gate while keeping the
+M1 model and fitting recipe fixed; it reserves new ID-test and OOD evidence and stops
+after one final comparison.
 
 ## Sparse solver benchmark
 
