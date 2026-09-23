@@ -46,7 +46,9 @@ warm starts.
 > frozen production comparison completed all 6 ID-test and 80 OOD cases. Its ID-test
 > interval was inconclusive and its OOD result was slower than uniform with a 25%
 > learned failure/fallback rate, so uniform remains the operational default and the
-> project makes no learned-acceleration claim.
+> project makes no learned-acceleration claim. The bounded M2 follow-up contract and
+> its content-identified 756-case, exposure-aware catalog/split are implemented; no
+> M2 label generation, fitting, calibration, or held-out evaluation has started.
 
 ## Intended scope
 

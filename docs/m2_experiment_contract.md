@@ -1,8 +1,8 @@
 # M2 bounded warm-start follow-up contract
 
-Status: **pre-implementation contract frozen for `topolab.m2.experiment.v1`; no M2
-case has been materialized, no M2 model has been fitted, and no M2 validation,
-ID-test, or OOD outcome has been observed**.
+Status: **contract, 756-case catalog identity, and exposure-aware split implemented
+for `topolab.m2.experiment.v1`; no M2 case has been materialized, no M2 model has been
+fitted, and no M2 validation, ID-test, or OOD outcome has been observed**.
 
 ## Question and stopping rule
 
@@ -221,7 +221,7 @@ after M2, not an amendment made after seeing M2 outcomes.
 ## Required implementation order
 
 1. Implement and test the M2 catalog, exposure-aware split, identities, and exact
-   counts without solving cases.
+   counts without solving cases. **Complete.**
 2. Implement a guarded M2 materialization entrypoint and audit the complete external
    artifact set.
 3. Implement the train/validation-only adapter and unchanged five-seed fitting path.
