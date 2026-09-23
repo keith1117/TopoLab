@@ -107,8 +107,10 @@ materialization、锁文件和仓库外 artifact root，且默认仅规划的生
 审计，证据见 `docs/validation/m1_training.md`；test/OOD 仍未打开。checkpoint-bound
 learned inference、filtered-volume projection、共享 SIMP refinement/质量审计、分阶段
 计时和完整计费 uniform fallback 的单 case 边界现已实现并通过合成 validation/OOD
-测试。下一独立切片应实现安全的全实验 runner、逐 case 持久化和预定义统计，然后才
-执行冻结的 held-out comparison。
+测试。固定五个 selection、只从 training labels 构建 nearest-neighbor、按物理 case
+原子 checkpoint/恢复并计算 case-cluster bootstrap 的安全全实验 runner 也已实现；
+生产 test/OOD 仍未执行。下一步是从 clean 合并 revision 审查 plan，然后一次性执行并
+无论结果正负都冻结验证报告。
 
 ## 总体时间估计
 

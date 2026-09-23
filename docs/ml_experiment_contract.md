@@ -31,8 +31,10 @@ complete production attempt is recorded in
 outside Git. The successful v2 materialization and audit are recorded in
 `docs/validation/m0_catalog_v2_materialization.md`. Later M1 slices add the frozen
 PyTorch model, deterministic fitting and artifacts, and a single-case learned
-evaluator without changing the M0 identities or data boundary. Held-out production
-evaluation is still pending, so the project does not support an `accelerated` claim.
+evaluator without changing the M0 identities or data boundary. A recoverable
+five-seed runner and frozen paired statistics are now also implemented, but held-out
+production execution is still pending, so the project does not support an
+`accelerated` claim.
 The implementation does not turn optimizer history rows into independent samples.
 The numerical and platform contracts remain unchanged.
 
@@ -473,6 +475,13 @@ no query label. Checkpoint loading is an experiment setup cost; encoding, tensor
 construction, inference, and output validation are learned per-query setup time.
 Production test/OOD execution remains outside this implemented single-case slice.
 
+`topolab.m1_experiment` composes that boundary into one recoverable full comparison.
+Its canonical append-only index checkpoints only after all three baselines and all
+five learned seeds finish for one physical case; restart skips completed cases and
+reruns an interrupted case in full. The guarded entrypoint fixes the five audited
+production selection hashes, opens only training labels for nearest-neighbor setup,
+and never reads a test/OOD label. Production execution remains pending.
+
 ## Quality constraints and failures
 
 The uniform method is the per-case quality reference. A refined candidate succeeds
@@ -514,6 +523,14 @@ reported separately for ID test and OOD. The 95% confidence interval uses 10,000
 case-cluster bootstrap resamples with seed `20260919`; each resampled case retains all
 five model seeds. Also report median, interquartile range, failure rate, and quality
 metrics without dropping failed cases.
+
+`topolab.m1_experiment` freezes the implementation detail required to reproduce that
+statement. For each split, it independently initializes `numpy.random.default_rng`
+with `20260919`, represents learned ratios as `(case, five seeds)`, samples case
+indices with replacement 10,000 times, averages each resample across cases and all
+five retained seeds, and uses NumPy's linear 2.5th/97.5th percentiles. Seed-specific
+and flattened descriptive quartiles also use the linear method. All ratios use the
+matching physical case's uniform end-to-end time; failures remain charged and present.
 
 An acceleration claim requires the upper bound of the ID-test 95% confidence
 interval for the mean learned/uniform end-to-end time ratio to be below 1.0, all

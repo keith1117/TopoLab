@@ -1,9 +1,9 @@
 # Numerical conventions
 
 Status: **N1 conventions frozen at v0.1.0; N2 conventions frozen at v0.2.0; M0
-experiment-contract conventions frozen at m0.v1; M1 fitting conventions frozen at
-m1.v1**. Any change to a frozen convention requires a documented reason and
-regression-test update.
+experiment-contract conventions frozen at m0.v1; M1 fitting and evaluation
+conventions frozen at m1.v1**. Any change to a frozen convention requires a
+documented reason and regression-test update.
 
 ## Geometry and indexing
 
@@ -212,3 +212,23 @@ regression-test update.
 - The matching uniform reference is timed separately and is not charged to a
   successful learned attempt. A failed attempt runs a fresh uniform fallback, fully
   charges it, and remains failed even when the fallback succeeds.
+
+## M1 held-out experiment and statistics
+
+- One evaluation context is identified by the frozen data-manifest digest, the exact
+  five ordered selection and checkpoint references, the clean evaluation source
+  revision, and the locked CPU runtime/thread metadata.
+- Evaluate only `test` and `ood` samples, in canonical manifest order. One atomic
+  checkpoint entry contains all three fixed baselines and all five learned seeds for
+  one physical case; an interrupted case remains pending and is rerun in full.
+- The recoverable index is append-only. Completion requires exactly every frozen
+  test and OOD case, while train/validation cases are forbidden as entries.
+- Every time ratio uses the matching case's uniform end-to-end time as denominator.
+  Seed-specific median and interquartile range use NumPy linear quantiles over all
+  cases in that split. Aggregate learned summaries flatten all five seed observations
+  only for descriptive median/IQR and failure/fallback rates.
+- For the primary learned mean-time ratio, arrange observations as
+  `(physical case, five seeds)`. Independently for test and OOD, initialize
+  `numpy.random.default_rng(20260919)`, draw 10,000 case-index samples with
+  replacement, retain all five seeds in each sampled case, average across sampled
+  cases and seeds, and take the linear 2.5th/97.5th percentiles.
