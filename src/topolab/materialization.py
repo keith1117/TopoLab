@@ -1,11 +1,11 @@
-"""Recoverable manifest-to-label indexing for the frozen M0 dataset contract."""
+"""Recoverable manifest-to-label indexing for frozen dataset contracts."""
 
 import hashlib
 import json
 import os
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from typing import Annotated, Literal
+from typing import Annotated, Final, Literal
 
 from pydantic import Field, ValidationError, field_validator, model_validator
 
@@ -18,9 +18,11 @@ from topolab.label_artifacts import (
     write_label_artifact,
 )
 from topolab.labels import LabelGenerationError, generate_label
+from topolab.m2_dataset import M2DatasetManifest
 from topolab.problem import ContractModel
 
-MATERIALIZATION_INDEX_VERSION = "topolab.m0.materialization.v1"
+MATERIALIZATION_INDEX_VERSION: Final = "topolab.m0.materialization.v1"
+M2_MATERIALIZATION_INDEX_VERSION: Final = "topolab.m2.materialization.v1"
 
 _CASE_ID_PATTERN = rf"^{CASE_ID_PREFIX}[0-9a-f]{{64}}$"
 _SHA256_PATTERN = r"^[0-9a-f]{64}$"
@@ -58,24 +60,34 @@ type MaterializationEntry = Annotated[
     MaterializationSuccess | MaterializationFailure,
     Field(discriminator="status"),
 ]
+type MaterializationManifest = Annotated[
+    DatasetManifest | M2DatasetManifest,
+    Field(discriminator="manifest_version"),
+]
 
 
 class DatasetMaterializationIndex(ContractModel):
     """Canonical, append-only checkpoint for one immutable dataset manifest."""
 
-    index_version: Literal["topolab.m0.materialization.v1"] = (
-        "topolab.m0.materialization.v1"
-    )
+    index_version: Literal[
+        "topolab.m0.materialization.v1",
+        "topolab.m2.materialization.v1",
+    ] = MATERIALIZATION_INDEX_VERSION
     state: Literal["in_progress", "complete"]
     manifest_sha256: Annotated[str, Field(pattern=_SHA256_PATTERN)]
-    manifest: DatasetManifest
+    manifest: MaterializationManifest
     entries: tuple[MaterializationEntry, ...] = ()
 
     @classmethod
-    def start(cls, manifest: DatasetManifest) -> "DatasetMaterializationIndex":
+    def start(cls, manifest: MaterializationManifest) -> "DatasetMaterializationIndex":
         """Create the empty deterministic checkpoint for one manifest."""
 
         return cls(
+            index_version=(
+                M2_MATERIALIZATION_INDEX_VERSION
+                if isinstance(manifest, M2DatasetManifest)
+                else MATERIALIZATION_INDEX_VERSION
+            ),
             state="in_progress",
             manifest_sha256=build_manifest_sha256(manifest),
             manifest=manifest,
@@ -91,6 +103,16 @@ class DatasetMaterializationIndex(ContractModel):
 
     @model_validator(mode="after")
     def validate_index(self) -> "DatasetMaterializationIndex":
+        expected_version: Literal[
+            "topolab.m0.materialization.v1",
+            "topolab.m2.materialization.v1",
+        ] = (
+            M2_MATERIALIZATION_INDEX_VERSION
+            if isinstance(self.manifest, M2DatasetManifest)
+            else MATERIALIZATION_INDEX_VERSION
+        )
+        if self.index_version != expected_version:
+            raise ValueError("index_version does not match the manifest contract")
         if self.manifest_sha256 != build_manifest_sha256(self.manifest):
             raise ValueError("manifest_sha256 does not match the embedded manifest")
 
@@ -116,13 +138,13 @@ class DatasetMaterializationIndex(ContractModel):
         return self
 
 
-def canonical_manifest_bytes(manifest: DatasetManifest) -> bytes:
+def canonical_manifest_bytes(manifest: MaterializationManifest) -> bytes:
     """Return the exact canonical bytes used to identify one dataset manifest."""
 
     return _canonical_json_bytes(manifest.model_dump(mode="json"))
 
 
-def build_manifest_sha256(manifest: DatasetManifest) -> str:
+def build_manifest_sha256(manifest: MaterializationManifest) -> str:
     """Return the stable digest of one canonical dataset manifest."""
 
     return hashlib.sha256(canonical_manifest_bytes(manifest)).hexdigest()
@@ -136,7 +158,7 @@ def canonical_materialization_index_bytes(
     return _canonical_json_bytes(index.model_dump(mode="json"))
 
 
-def materialization_index_path(root: Path, manifest: DatasetManifest) -> Path:
+def materialization_index_path(root: Path, manifest: MaterializationManifest) -> Path:
     """Return the stable checkpoint path for one immutable manifest."""
 
     return root / "materializations" / f"{build_manifest_sha256(manifest)}.json"
@@ -144,7 +166,7 @@ def materialization_index_path(root: Path, manifest: DatasetManifest) -> Path:
 
 def materialize_dataset(
     root: Path,
-    manifest: DatasetManifest,
+    manifest: MaterializationManifest,
 ) -> DatasetMaterializationIndex:
     """Materialize pending labels in canonical order and checkpoint every outcome."""
 
@@ -262,7 +284,7 @@ def write_materialization_index(
 
 def read_materialization_index(
     root: Path,
-    manifest: DatasetManifest,
+    manifest: MaterializationManifest,
 ) -> DatasetMaterializationIndex:
     """Read a canonical checkpoint and verify every successful label artifact."""
 

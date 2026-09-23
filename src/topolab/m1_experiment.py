@@ -15,6 +15,7 @@ from topolab.baselines import (
     build_nearest_neighbor_index,
     run_fixed_baselines,
 )
+from topolab.dataset import DatasetManifest
 from topolab.learned_evaluation import (
     M1CaseResult,
     M1LearnedCandidate,
@@ -406,6 +407,8 @@ def run_m1_experiment(
         raise M1ExperimentError("loaded checkpoints do not match the evaluation context")
     start = M1EvaluationIndex.start(context)
     _validate_index_materialization(start, materialization)
+    if not isinstance(materialization.manifest, DatasetManifest):
+        raise M1ExperimentError("M1 evaluation requires an M0 dataset manifest")
     target = m1_evaluation_index_path(output_root, context)
     if target.exists():
         index = read_m1_evaluation_index(
@@ -650,6 +653,8 @@ def _validate_index_materialization(
     index: M1EvaluationIndex,
     materialization: DatasetMaterializationIndex,
 ) -> None:
+    if not isinstance(materialization.manifest, DatasetManifest):
+        raise M1ExperimentError("M1 evaluation requires an M0 dataset manifest")
     if materialization.state != "complete" or any(
         isinstance(entry, MaterializationFailure) for entry in materialization.entries
     ):

@@ -1,8 +1,9 @@
 # M2 bounded warm-start follow-up contract
 
-Status: **contract, 756-case catalog identity, and exposure-aware split implemented
-for `topolab.m2.experiment.v1`; no M2 case has been materialized, no M2 model has been
-fitted, and no M2 validation, ID-test, or OOD outcome has been observed**.
+Status: **contract, 756-case catalog identity, exposure-aware split, and guarded
+materialization entrypoint implemented for `topolab.m2.experiment.v1`; no M2 case has
+been materialized, no M2 model has been fitted, and no M2 validation, ID-test, or OOD
+outcome has been observed**.
 
 ## Question and stopping rule
 
@@ -28,6 +29,8 @@ project proceeds to release with uniform initialization as the operational defau
 - Catalog: `topolab.m2.catalog.v1`.
 - Dataset manifest and split: `topolab.m2.dataset.v1` and
   `topolab.m2.split.v1`.
+- Materialization index and plan summary: `topolab.m2.materialization.v1` and
+  `topolab.m2.materialization-summary.v1`.
 - Training contract: `topolab.m2.training.v1`.
 - Reused model architecture: `topolab.m1.cnn.v1`.
 - Ensemble and gate: `topolab.m2.ensemble.v1` and `topolab.m2.gate.v1`.
@@ -36,6 +39,22 @@ project proceeds to release with uniform initialization as the operational defau
 Every artifact identity must cover its complete versioned payload, source revision,
 locked runtime, and upstream artifact references. Generated data, checkpoints,
 selections, gate records, and evaluation indexes remain outside Git.
+
+## Guarded materialization
+
+The M2 entrypoint builds the exact frozen manifest only from a clean Git revision and
+records the locked Python, NumPy, SciPy, and `uv.lock` identities. The output root
+must resolve outside the repository. Omitting `--execute` is read-only: it neither
+creates the output root nor invokes the solver.
+
+```bash
+PYTHONPATH=src uv run --locked python -m topolab.m2_dataset_cli \
+  --output-root /absolute/external/root
+```
+
+Only a separately authorized run may add `--execute`. Execution uses the shared
+canonical-order, per-case atomic checkpoint path, but writes an M2-specific index
+version so an M0 consumer cannot silently accept the expanded manifest.
 
 ## Fixed physical cohort
 
@@ -222,14 +241,16 @@ after M2, not an amendment made after seeing M2 outcomes.
 
 1. Implement and test the M2 catalog, exposure-aware split, identities, and exact
    counts without solving cases. **Complete.**
-2. Implement a guarded M2 materialization entrypoint and audit the complete external
-   artifact set.
-3. Implement the train/validation-only adapter and unchanged five-seed fitting path.
-4. Implement and test ensemble inference, finite gate calibration, artifacts, and
+2. Implement and test a guarded M2 materialization entrypoint without solving cases.
+   **Complete.**
+3. Merge the entrypoint, run its read-only production plan, obtain explicit execution
+   authorization, then materialize and audit the complete external artifact set.
+4. Implement the train/validation-only adapter and unchanged five-seed fitting path.
+5. Implement and test ensemble inference, finite gate calibration, artifacts, and
    charged rejection/fallback accounting.
-5. Implement the recoverable final runner and frozen statistics.
-6. Merge all code, run a read-only production plan, request explicit authorization,
-   execute once, and commit the result regardless of outcome.
+6. Implement the recoverable final runner and frozen statistics.
+7. Merge all final-evaluation code, run a read-only production plan, request explicit
+   authorization, execute once, and commit the result regardless of outcome.
 
 No later step may begin before the preceding contract boundary has tests and a clean,
 reviewed source revision.
