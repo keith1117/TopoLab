@@ -2,8 +2,8 @@
 
 Status: **N1 conventions frozen at v0.1.0; N2 conventions frozen at v0.2.0; M0
 experiment-contract conventions frozen at m0.v1; M1 fitting and evaluation
-conventions frozen at m1.v1**. Any change to a frozen convention requires a
-documented reason and regression-test update.
+conventions frozen at m1.v1; M2 follow-up conventions frozen at m2.v1**. Any change
+to a frozen convention requires a documented reason and regression-test update.
 
 ## Geometry and indexing
 
@@ -232,3 +232,27 @@ documented reason and regression-test update.
   `numpy.random.default_rng(20260919)`, draw 10,000 case-index samples with
   replacement, retain all five seeds in each sampled case, average across sampled
   cases and seeds, and take the linear 2.5th/97.5th percentiles.
+
+## M2 bounded follow-up
+
+- M1 held-out cases are development-exposed and cannot serve as M2 validation or
+  final evidence. All M2 validation and ID-test cases must be physically absent from
+  the M1 catalog.
+- The M2 fixed-shape catalog has 504 `y/z` ID cases and 252 matched `x`-direction OOD
+  cases. Its exposure-aware, direction/volume-stratified split contains 432 train,
+  36 validation, 36 ID-test, and 252 OOD cases.
+- M2 reuses the exact M1 architecture, design-density MSE, optimizer recipe, fitting
+  budget, and five seeds. Expanded direction-balanced data is the only fitting
+  intervention.
+- The five-model ensemble averages independently projected seed predictions and is
+  projected again before refinement. Its uncertainty is the mean elementwise
+  population variance across those projected predictions.
+- Reliability-gate calibration is limited to reject-all, five validation uncertainty
+  percentile thresholds, and accept-all. Only zero-failure validation policies are
+  eligible; mean paired time ratio selects among them with conservative fixed ties.
+- Gate rejection runs and charges uniform after all ensemble setup but is not a
+  learned failure. An accepted failed attempt runs a fresh fully charged uniform
+  fallback and remains failed.
+- M2 ID-test and OOD label artifacts are forbidden to fitting, calibration, and final
+  evaluation adapters. Exact cohort, split, calibration, statistics, and stopping
+  rules are frozen in `docs/m2_experiment_contract.md`.
