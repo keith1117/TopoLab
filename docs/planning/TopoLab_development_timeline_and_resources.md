@@ -108,9 +108,13 @@ materialization、锁文件和仓库外 artifact root，且默认仅规划的生
 learned inference、filtered-volume projection、共享 SIMP refinement/质量审计、分阶段
 计时和完整计费 uniform fallback 的单 case 边界现已实现并通过合成 validation/OOD
 测试。固定五个 selection、只从 training labels 构建 nearest-neighbor、按物理 case
-原子 checkpoint/恢复并计算 case-cluster bootstrap 的安全全实验 runner 也已实现；
-生产 test/OOD 仍未执行。下一步是从 clean 合并 revision 审查 plan，然后一次性执行并
-无论结果正负都冻结验证报告。
+原子 checkpoint/恢复并计算 case-cluster bootstrap 的安全全实验 runner 也已实现。
+生产 comparison 已从 clean 合并 revision 完成全部 6 个 ID-test 与 80 个 OOD case，
+结果与原始 artifact hash 冻结在 `docs/validation/m1_held_out_evaluation.md`。ID-test
+区间不能证明稳定加速，OOD 平均时间比显著高于 1 且 learned fallback 率为 25%，因此
+M1 不通过 learned-acceleration gate，uniform 保持 operational default。后续若进行
+M2，必须预先冻结有限干预预算并使用新的 untouched holdout/OOD，不能在已观察的 M1
+集合上继续选择模型。
 
 ## 总体时间估计
 

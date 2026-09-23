@@ -43,7 +43,10 @@ warm starts.
 > timing, and fully charged uniform fallback. A guarded full runner now fixes the five
 > production selections, checkpoints all eight method/seed outcomes per physical
 > case, resumes atomically, and computes the frozen case-cluster statistics. The
-> production test/OOD execution and any learned-acceleration claim remain pending.
+> frozen production comparison completed all 6 ID-test and 80 OOD cases. Its ID-test
+> interval was inconclusive and its OOD result was slower than uniform with a 25%
+> learned failure/fallback rate, so uniform remains the operational default and the
+> project makes no learned-acceleration claim.
 
 ## Intended scope
 
@@ -127,6 +130,9 @@ remain outside this entrypoint's fitting path.
 The completed production run, five selection/checkpoint hashes, runtime, resource
 use, and current claims boundary are recorded in
 [`docs/validation/m1_training.md`](docs/validation/m1_training.md).
+The completed held-out comparison, artifact hash, per-seed results, failure audit,
+and negative/inconclusive M1 gate decision are recorded in
+[`docs/validation/m1_held_out_evaluation.md`](docs/validation/m1_held_out_evaluation.md).
 
 ## Sparse solver benchmark
 
