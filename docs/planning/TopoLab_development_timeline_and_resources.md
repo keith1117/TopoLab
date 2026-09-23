@@ -118,8 +118,10 @@ M2，必须预先冻结有限干预预算并使用新的 untouched holdout/OOD�
 M1 模型、loss、optimizer 与五个 seed 不变，只扩大 direction-balanced fitting data，
 加入有限 validation-calibrated ensemble gate，并保留全新的 36 个 ID-test 与 252 个
 OOD case。首个实现切片已冻结并测试 756-case catalog identity、M1 exposure-aware
-split 与 432/36/36/252 精确计数，尚未生成 M2 label。若一次最终比较仍不通过门槛，
-即停止 ML 扩张并进入发布收尾。
+split 与 432/36/36/252 精确计数。第二个切片已将共享 recoverable materialization
+executor 泛化到显式 M2 index version，并加入 clean revision、locked environment、
+仓库外 output root 和默认只读 plan 保护的生产入口；尚未执行 M2 label 生成。若一次
+最终比较仍不通过门槛，即停止 ML 扩张并进入发布收尾。
 
 ## 总体时间估计
 

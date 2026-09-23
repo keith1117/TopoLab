@@ -13,7 +13,7 @@ from torch import Tensor, nn
 from torch.optim import AdamW
 from torch.utils.data import DataLoader, Dataset
 
-from topolab.dataset import DatasetSample
+from topolab.dataset import DatasetManifest, DatasetSample
 from topolab.experiment import INPUT_CHANNEL_COUNT, encode_case
 from topolab.label_artifacts import LabelArtifactError, read_label_artifact
 from topolab.labels import LabelRecord
@@ -338,6 +338,8 @@ def build_m1_tensor_dataset(
         raise M1DatasetError("M1 data must be fully materialized")
     if any(isinstance(entry, MaterializationFailure) for entry in materialization.entries):
         raise M1DatasetError("M1 data cannot contain failed cases")
+    if not isinstance(materialization.manifest, DatasetManifest):
+        raise M1DatasetError("M1 data requires an M0 dataset manifest")
 
     entries = {
         entry.case_id: entry

@@ -241,6 +241,10 @@ to a frozen convention requires a documented reason and regression-test update.
 - The M2 fixed-shape catalog has 504 `y/z` ID cases and 252 matched `x`-direction OOD
   cases. Its exposure-aware, direction/volume-stratified split contains 432 train,
   36 validation, 36 ID-test, and 252 OOD cases.
+- Its production entrypoint requires a clean locked checkout and an external output
+  root, defaults to a read-only plan, and requires `--execute` to invoke the solver.
+  M2 checkpoints use `topolab.m2.materialization.v1`; the shared executor rejects an
+  index version that does not match the embedded M0 or M2 manifest contract.
 - M2 reuses the exact M1 architecture, design-density MSE, optimizer recipe, fitting
   budget, and five seeds. Expanded direction-balanced data is the only fitting
   intervention.
