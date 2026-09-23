@@ -38,7 +38,10 @@ warm starts.
 > production entrypoint now requires the exact external catalog-v2 materialization,
 > a clean locked checkout, repository-external artifact storage, and explicit
 > execution. All five frozen production seeds have been fitted and artifact-audited;
-> test/OOD evaluation and any learned-acceleration claim remain pending.
+> the single-case learned evaluator now covers checkpoint-bound CPU inference,
+> filtered-volume projection, shared SIMP refinement and quality checks, phase
+> timing, and fully charged uniform fallback. The guarded production comparison,
+> test/OOD execution, and any learned-acceleration claim remain pending.
 
 ## Intended scope
 

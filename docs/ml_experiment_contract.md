@@ -20,7 +20,7 @@ The first experiment asks one question: can a predicted design-density warm star
 reduce the end-to-end time required by the existing SIMP solver to reach a result of
 the same quality as a uniform start?
 
-The current implementation provides typed case identity, deterministic input
+The M0 implementation provides typed case identity, deterministic input
 encoding, filtered-volume projection, immutable sample metadata, a validated dataset
 manifest, deterministic generation of one label, a recoverable manifest-to-label
 index, a single-process executor, one bounded deterministic case catalog, a safe
@@ -29,10 +29,12 @@ three fixed baseline initializations with quality and cost accounting. The first
 complete production attempt is recorded in
 `docs/validation/m0_catalog_materialization.md`; its generated artifacts remain
 outside Git. The successful v2 materialization and audit are recorded in
-`docs/validation/m0_catalog_v2_materialization.md`. The implementation does not add
-PyTorch, train a model, select hyperparameters, or support an `accelerated` claim. It
-also does not turn optimizer history rows into independent samples. The numerical
-and platform contracts remain unchanged.
+`docs/validation/m0_catalog_v2_materialization.md`. Later M1 slices add the frozen
+PyTorch model, deterministic fitting and artifacts, and a single-case learned
+evaluator without changing the M0 identities or data boundary. Held-out production
+evaluation is still pending, so the project does not support an `accelerated` claim.
+The implementation does not turn optimizer history rows into independent samples.
+The numerical and platform contracts remain unchanged.
 
 ## Versioned case schema and identity
 
@@ -462,6 +464,14 @@ index construction and label loading are dataset setup costs, not per-query setu
 time. The current in-process runner does not report a per-method peak-memory number
 because process-wide high-water marks cannot isolate sequential methods
 reproducibly; that metric requires a later isolated-process experiment harness.
+
+`topolab.learned_evaluation` applies the same per-case boundary to one verified M1
+selection/checkpoint: CPU `float32` inference, frozen filtered-volume projection,
+public SIMP refinement, the shared quality audit, and a fresh fully charged uniform
+fallback after any failed learned attempt. It rejects training queries and accepts
+no query label. Checkpoint loading is an experiment setup cost; encoding, tensor
+construction, inference, and output validation are learned per-query setup time.
+Production test/OOD execution remains outside this implemented single-case slice.
 
 ## Quality constraints and failures
 

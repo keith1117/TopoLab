@@ -195,3 +195,20 @@ regression-test update.
   state, duration, train/validation case IDs, manifest digest, label and training
   revisions, locked runtime versions, hardware/thread metadata, and the verified
   checkpoint reference. Generated training artifacts remain outside Git.
+
+## M1 learned evaluation
+
+- Learned evaluation rejects training samples. It accepts one verified selection and
+  its matching checkpoint only when both refer to the frozen M1 data manifest, and
+  runs the frozen model as CPU `float32` without gradients.
+- Per-query learned setup time includes deterministic case encoding, host-tensor
+  construction, model inference, and output validation. Checkpoint loading is an
+  experiment setup cost and is not hidden inside per-query inference time.
+- A prediction must be CPU `float32`, finite, within `[0, 1]`, and have shape
+  `(1, 1, nz, ny, nx)`. Remove only the leading batch dimension before the frozen
+  filtered-volume projection.
+- Learned refinement uses the same public SIMP path and the same quality boundary as
+  the fixed baselines.
+- The matching uniform reference is timed separately and is not charged to a
+  successful learned attempt. A failed attempt runs a fresh uniform fallback, fully
+  charges it, and remains failed even when the fallback succeeds.

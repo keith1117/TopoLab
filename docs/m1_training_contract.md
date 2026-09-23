@@ -3,7 +3,8 @@
 Status: **model, loss, fitting-data boundary, training budget, deterministic fitting,
 content-addressed checkpoint/selection formats, and guarded production entrypoint
 implemented for `topolab.m1.training.v1`; all five production seeds fitted and
-audited; held-out evaluation has not started**.
+audited; the single-case learned inference/refinement/fallback boundary is
+implemented; held-out production evaluation has not started**.
 
 ## Scope and claims boundary
 
@@ -172,9 +173,30 @@ The production execution from source revision
 required records. Exact hashes, losses, durations, environment, artifact sizes, and
 the claims boundary are recorded in `docs/validation/m1_training.md`.
 
+## Learned evaluation boundary
+
+`topolab.learned_evaluation` implements one checkpoint-bound evaluation attempt:
+
+1. verify one frozen selection and its matching checkpoint;
+2. encode one non-training query and run CPU `float32` inference without gradients;
+3. validate the output shape, device, dtype, finiteness, and `[0, 1]` bounds;
+4. apply the frozen filtered-volume projection;
+5. refine through the same public SIMP path used by the fixed baselines;
+6. apply the same convergence, volume, independent-compliance, and uniform-quality
+   checks; and
+7. on any learned-attempt failure, run and fully charge a fresh uniform fallback
+   without converting the learned result to success.
+
+`M1CaseResult` preserves the full selection/checkpoint identity, candidate and
+operational metrics, uniform reference compliance, phase timings, failure category,
+and fallback use. The evaluator receives no query-label input. Its current tests use
+synthetic validation/OOD metadata only; production test/OOD cases and labels remain
+unopened.
+
 ## Next evaluation slice
 
-Implement and test the frozen learned-inference, filtered-volume projection, SIMP
-refinement, charged fallback, and cost/quality accounting boundary. Then use all five
-verified selections in the predefined held-out test/OOD comparison against every
-fixed baseline. Do not select or drop seeds based on held-out results.
+Implement a guarded production experiment runner that loads all five verified
+selections and the training-only nearest-neighbor index, enumerates the frozen
+test/OOD cases, persists every per-case method outcome, and computes the predefined
+paired statistics. Only after that boundary is reviewed should the held-out run be
+executed. Do not select or drop seeds based on held-out results.

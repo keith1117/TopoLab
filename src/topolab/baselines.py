@@ -284,14 +284,10 @@ def run_fixed_baselines(
 
     if sample.split == "train":
         raise ValueError("baseline evaluation queries must not be training samples")
-    try:
-        uniform = _attempt(sample.case, "uniform", nearest_neighbors, None)
-    except _AttemptFailure as error:
-        raise BaselineEvaluationError("uniform reference failed") from error
-
-    uniform_compliance = uniform.metrics.final_compliance
+    uniform_result = run_uniform_baseline(sample)
+    uniform_compliance = uniform_result.operational.final_compliance
     return (
-        _success_result(sample, "uniform", uniform, uniform_compliance, None),
+        uniform_result,
         _nonuniform_result(
             sample,
             "physics_heuristic",
@@ -307,10 +303,24 @@ def run_fixed_baselines(
     )
 
 
+def run_uniform_baseline(sample: DatasetSample) -> BaselineCaseResult:
+    """Run the mandatory uniform reference for one non-training sample."""
+
+    if sample.split == "train":
+        raise ValueError("baseline evaluation queries must not be training samples")
+    try:
+        uniform = _attempt(sample.case, "uniform", None, None)
+    except _AttemptFailure as error:
+        raise BaselineEvaluationError("uniform reference failed") from error
+
+    uniform_compliance = uniform.metrics.final_compliance
+    return _success_result(sample, "uniform", uniform, uniform_compliance, None)
+
+
 def _attempt(
     case: ExperimentCase,
     method: BaselineMethod,
-    nearest_neighbors: NearestNeighborIndex,
+    nearest_neighbors: NearestNeighborIndex | None,
     uniform_compliance: float | None,
 ) -> _AttemptOutcome:
     setup = projection = refinement = 0.0
@@ -321,6 +331,8 @@ def _attempt(
         if method == "uniform":
             raw = _uniform_raw_density(case)
         else:
+            if nearest_neighbors is None:  # pragma: no cover - internal contract
+                raise TypeError("non-uniform attempts require a nearest-neighbor index")
             started = perf_counter()
             try:
                 raw, matched_case_id = _raw_initialization(
@@ -341,12 +353,12 @@ def _attempt(
         phase = "refinement_error"
         started = perf_counter()
         try:
-            result = _solve_with_initial_density(case, projected.design_density)
+            result = solve_case_with_initial_density(case, projected.design_density)
         finally:
             refinement = perf_counter() - started
 
         phase = "quality_error"
-        metrics = _validate_quality(case, result, uniform_compliance)
+        metrics = validate_refinement_quality(case, result, uniform_compliance)
     except Exception as error:
         raise _AttemptFailure(
             phase,
@@ -384,7 +396,7 @@ def _nonuniform_result(
         )
     except _AttemptFailure as failure:
         try:
-            fallback = _attempt(sample.case, "uniform", nearest_neighbors, None)
+            fallback = _attempt(sample.case, "uniform", None, None)
         except _AttemptFailure as error:
             raise BaselineEvaluationError("uniform fallback failed") from error
         timing = BaselineTiming.from_phases(
@@ -401,7 +413,7 @@ def _nonuniform_result(
             failure_code=failure.code,
             fallback_used=True,
             timing=timing,
-            candidate=_safe_metrics(sample.case, failure.result),
+            candidate=safe_refinement_metrics(sample.case, failure.result),
             operational=fallback.metrics,
             uniform_reference_compliance=uniform_compliance,
             nearest_neighbor=_nearest_metadata(
@@ -506,20 +518,24 @@ def _physics_heuristic_raw_density(case: ExperimentCase) -> NDArray[np.float32]:
     return np.asarray(raw, dtype=np.float32).reshape(1, nz, ny, nx)
 
 
-def _solve_with_initial_density(
+def solve_case_with_initial_density(
     case: ExperimentCase,
     initial_density: NDArray[np.float64],
 ) -> TopologyResult:
+    """Refine one projected design through the public frozen SIMP adapter."""
+
     payload = case.problem.model_dump(mode="json")
     payload["initial_density"] = tuple(float(value) for value in initial_density)
     return solve_problem(TopologyProblem.model_validate(payload))
 
 
-def _validate_quality(
+def validate_refinement_quality(
     case: ExperimentCase,
     result: TopologyResult,
     uniform_compliance: float | None,
 ) -> BaselineMetrics:
+    """Apply the frozen convergence, volume, compliance, and finiteness checks."""
+
     if not result.converged or not result.history:
         raise _BaselineQualityError("baseline refinement did not converge")
     if len(result.history) > case.problem.optimization.max_iterations:
@@ -575,10 +591,12 @@ def _validate_quality(
     )
 
 
-def _safe_metrics(
+def safe_refinement_metrics(
     case: ExperimentCase,
     result: TopologyResult | None,
 ) -> BaselineMetrics | None:
+    """Extract finite candidate metrics without converting a failure to success."""
+
     if (
         result is None
         or not result.history
