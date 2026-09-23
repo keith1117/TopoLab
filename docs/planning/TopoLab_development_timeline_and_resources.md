@@ -104,9 +104,11 @@ PyTorch dataset adapter；该切片现已完成，且尚未打开 test/OOD label
 checkpoint/selection artifacts 现已实现。只允许 clean revision、固定外部 v2
 materialization、锁文件和仓库外 artifact root，且默认仅规划的生产入口也已完成。
 该入口已从合并后的 clean `main` revision 正式运行，五个 seed 均完成并通过 artifact
-审计，证据见 `docs/validation/m1_training.md`；test/OOD 仍未打开。下一独立切片实现并
-测试 learned inference、filtered-volume projection、SIMP refinement、fallback 和
-成本/质量核算边界，然后才执行冻结的 held-out comparison。
+审计，证据见 `docs/validation/m1_training.md`；test/OOD 仍未打开。checkpoint-bound
+learned inference、filtered-volume projection、共享 SIMP refinement/质量审计、分阶段
+计时和完整计费 uniform fallback 的单 case 边界现已实现并通过合成 validation/OOD
+测试。下一独立切片应实现安全的全实验 runner、逐 case 持久化和预定义统计，然后才
+执行冻结的 held-out comparison。
 
 ## 总体时间估计
 
