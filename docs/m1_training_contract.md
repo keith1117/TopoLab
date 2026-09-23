@@ -5,7 +5,7 @@ content-addressed checkpoint/selection formats, and guarded production entrypoin
 implemented for `topolab.m1.training.v1`; all five production seeds fitted and
 audited; the single-case learned inference/refinement/fallback boundary is
 implemented; the recoverable five-seed held-out runner and frozen statistics are
-implemented; held-out production execution has not started**.
+implemented; held-out production execution is complete and its result is frozen**.
 
 ## Scope and claims boundary
 
@@ -13,8 +13,10 @@ M1 asks whether one lightweight learned design-density initialization can reduce
 end-to-end SIMP time while satisfying the frozen M0 quality constraints. The current
 implementation defines the model, supervised loss, train/validation adapter,
 deterministic fitting, artifacts, and guarded production entrypoint. All five frozen
-production seeds have now been fitted and audited. Test/OOD labels remain unopened,
-and the project does not support an `accelerated` claim.
+production seeds were fitted and audited before the production comparison. The
+held-out runner completed all 6 ID-test and 80 OOD cases without opening their label
+artifacts. The result does not pass the learned-acceleration gate, and the project
+does not support an `accelerated` claim.
 
 The only training data source is the zero-failure catalog-v2 materialization recorded
 in `docs/validation/m0_catalog_v2_materialization.md`. The case, tensor, label,
@@ -191,8 +193,8 @@ the claims boundary are recorded in `docs/validation/m1_training.md`.
 `M1CaseResult` preserves the full selection/checkpoint identity, candidate and
 operational metrics, uniform reference compliance, phase timings, failure category,
 and fallback use. The evaluator receives no query-label input. Its current tests use
-synthetic validation/OOD metadata only; production test/OOD cases and labels remain
-unopened.
+synthetic validation/OOD metadata only. Production test/OOD cases have now been
+evaluated, while their label artifacts remained unopened.
 
 ## Full experiment boundary
 
@@ -249,10 +251,14 @@ PYTHONPATH=src uv run python -m topolab.evaluation_cli \
   --execute
 ```
 
-## Next evaluation slice
+## Frozen evaluation result
 
-Review and merge the guarded runner from a clean branch, run its read-only production
-plan, and only then authorize the one frozen held-out execution. Preserve the exact
-checkpoint and raw summary outside Git, audit every case/seed outcome, and commit a
-validation report regardless of whether the result is positive, negative, or
-inconclusive. Do not select or drop seeds based on held-out results.
+The reviewed runner was merged, its read-only production plan passed, and the
+explicit execution completed all 86 physical cases. The exact checkpoint, per-seed
+statistics, failure audit, claims boundary, and negative/inconclusive gate decision
+are recorded in `docs/validation/m1_held_out_evaluation.md`. No seed was selected or
+dropped after observing held-out results.
+
+Any follow-up model study is M2, not a continuation of M1 selection. It must freeze a
+new finite intervention budget and reserve a new untouched final holdout/OOD boundary
+before fitting.

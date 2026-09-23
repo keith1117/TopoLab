@@ -473,14 +473,16 @@ public SIMP refinement, the shared quality audit, and a fresh fully charged unif
 fallback after any failed learned attempt. It rejects training queries and accepts
 no query label. Checkpoint loading is an experiment setup cost; encoding, tensor
 construction, inference, and output validation are learned per-query setup time.
-Production test/OOD execution remains outside this implemented single-case slice.
+The production test/OOD execution and result remain documented separately in
+`docs/validation/m1_held_out_evaluation.md`.
 
 `topolab.m1_experiment` composes that boundary into one recoverable full comparison.
 Its canonical append-only index checkpoints only after all three baselines and all
 five learned seeds finish for one physical case; restart skips completed cases and
 reruns an interrupted case in full. The guarded entrypoint fixes the five audited
 production selection hashes, opens only training labels for nearest-neighbor setup,
-and never reads a test/OOD label. Production execution remains pending.
+and never reads a test/OOD label. Production execution completed all 86 held-out
+physical cases; the frozen result does not pass the learned-acceleration threshold.
 
 ## Quality constraints and failures
 
