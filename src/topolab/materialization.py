@@ -213,6 +213,7 @@ def materialize_dataset(
                 )
 
         index = DatasetMaterializationIndex(
+            index_version=index.index_version,
             state="in_progress",
             manifest_sha256=index.manifest_sha256,
             manifest=manifest,
@@ -222,6 +223,7 @@ def materialize_dataset(
         recorded.add(entry.case_id)
 
     complete = DatasetMaterializationIndex(
+        index_version=index.index_version,
         state="complete",
         manifest_sha256=index.manifest_sha256,
         manifest=manifest,
