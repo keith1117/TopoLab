@@ -1,0 +1,35 @@
+{
+  "mesh": {
+    "element_counts": [4, 2, 2],
+    "lengths": [4.0, 2.0, 2.0]
+  },
+  "material": {
+    "solid_modulus": 1000.0,
+    "minimum_modulus": 1.0,
+    "poisson_ratio": 0.3
+  },
+  "supports": [
+    {
+      "axis": "x",
+      "side": "min",
+      "directions": ["x", "y", "z"]
+    }
+  ],
+  "loads": [
+    {
+      "kind": "point",
+      "node": 44,
+      "direction": "y",
+      "magnitude": -1.0
+    }
+  ],
+  "optimization": {
+    "volume_fraction": 0.5,
+    "filter_radius": 1.5,
+    "penalty": 3.0,
+    "minimum_density": 0.05,
+    "move_limit": 0.2,
+    "convergence_tolerance": 0.01,
+    "max_iterations": 60
+  }
+}

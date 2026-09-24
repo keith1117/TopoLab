@@ -69,6 +69,28 @@ npm test
 npm run build
 ```
 
+## Canonical local demo
+
+Run the versioned `canonical-demo.v1` problem with one command after installing the
+locked Python environment:
+
+```bash
+PYTHONPATH=src uv run --locked python -m topolab.demo --output-dir /tmp/topolab-demo
+```
+
+The command prints one JSON line with the run ID, terminal status, convergence flag,
+compliance, final physical volume fraction, and absolute result path. The result file
+contains the complete public run snapshot, including the problem, iteration history,
+and final density fields. Choose an output directory outside any Git repository;
+omitting `--output-dir` creates a new temporary directory. The example input is
+[`src/topolab/examples/canonical_demo_v1.json`](src/topolab/examples/canonical_demo_v1.json)
+and can also be submitted unchanged to `POST /runs`.
+
+This small `4 x 2 x 2` cantilever is a local numerical demonstration. It does not
+establish a hosted demo, production service, or broad performance claim. A1.1 smoke
+evidence is recorded in
+[`docs/validation/a1_1_canonical_demo.md`](docs/validation/a1_1_canonical_demo.md).
+
 ## Repository map
 
 ```text
