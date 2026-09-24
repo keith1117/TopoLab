@@ -3,7 +3,9 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
+import topolab.materialization as materialization_module
 from topolab.dataset import DatasetEnvironment
+from topolab.labels import LabelGenerationError
 from topolab.m2_dataset import M2DatasetManifest, build_m2_case_catalog
 from topolab.materialization import (
     M2_MATERIALIZATION_INDEX_VERSION,
@@ -12,6 +14,7 @@ from topolab.materialization import (
     MaterializationFailure,
     build_manifest_sha256,
     canonical_materialization_index_bytes,
+    materialize_dataset,
     read_materialization_index,
     write_materialization_index,
 )
@@ -78,3 +81,40 @@ def test_complete_m2_index_writes_and_reads_canonically(
 
     assert target.read_bytes() == canonical_materialization_index_bytes(index)
     assert read_materialization_index(tmp_path, m2_manifest) == index
+
+
+def test_m2_materializer_preserves_index_version_across_checkpoints(
+    tmp_path: Path,
+    m2_manifest: M2DatasetManifest,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    checkpoints: list[DatasetMaterializationIndex] = []
+
+    def fail_generation(*args: object, **kwargs: object) -> None:
+        raise LabelGenerationError("injected failure")
+
+    def capture_checkpoint(
+        root: Path,
+        index: DatasetMaterializationIndex,
+    ) -> Path:
+        checkpoints.append(index)
+        if len(checkpoints) == 2:
+            raise KeyboardInterrupt
+        return root / "ignored.json"
+
+    monkeypatch.setattr(materialization_module, "generate_label", fail_generation)
+    monkeypatch.setattr(
+        materialization_module,
+        "write_materialization_index",
+        capture_checkpoint,
+    )
+
+    with pytest.raises(KeyboardInterrupt):
+        materialize_dataset(tmp_path, m2_manifest)
+
+    assert len(checkpoints) == 2
+    assert all(
+        index.index_version == M2_MATERIALIZATION_INDEX_VERSION
+        for index in checkpoints
+    )
+    assert checkpoints[1].entries[0].status == "failed"
