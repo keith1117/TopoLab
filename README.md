@@ -91,6 +91,33 @@ establish a hosted demo, production service, or broad performance claim. A1.1 sm
 evidence is recorded in
 [`docs/validation/a1_1_canonical_demo.md`](docs/validation/a1_1_canonical_demo.md).
 
+## Local API and frontend stack
+
+With Docker and Compose installed, start the A1.2 local stack from the repository root:
+
+```bash
+docker compose up --build -d
+```
+
+Open <http://127.0.0.1:8080>. The frontend serves its built assets and sends `/runs`
+requests through the same-origin proxy to the API. The API persists run records in a
+Docker named volume. For a command-line check, submit the unchanged canonical case:
+
+```bash
+curl -fsS -X POST -H 'Content-Type: application/json' \
+  --data-binary @src/topolab/examples/canonical_demo_v1.json \
+  http://127.0.0.1:8080/runs
+```
+
+The response contains a `run_id`; inspect it at
+`http://127.0.0.1:8080/runs/<run_id>`. Stop containers with `docker compose down`;
+the named volume remains for later starts. `docker compose down -v` also deletes the
+database and run history. The stack is bound to loopback and is intended for local
+demonstration. It retains the v1 in-process worker and restart semantics described in
+[`docs/run_persistence.md`](docs/run_persistence.md); it has no authentication,
+resource quotas, or optimizer checkpoint/resume. Build and smoke evidence is recorded
+in [`docs/validation/a1_2_local_stack.md`](docs/validation/a1_2_local_stack.md).
+
 ## Repository map
 
 ```text
