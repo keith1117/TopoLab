@@ -1,5 +1,7 @@
 # TopoLab 开发周期与资源评估
 
+English version: [Development Timeline and Resource Assessment](./TopoLab_development_timeline_and_resources.en.md)
+
 相关文档：[美研申请匹配度评估](./TopoLab_admissions_fit_assessment.md) · [Numerical Core 重写策略](./TopoLab_reimplementation_strategy.md)
 
 ## 目标项目

@@ -1,5 +1,7 @@
 # TopoLab Numerical Core 重写策略
 
+English version: [Numerical Core Reimplementation Strategy](./TopoLab_reimplementation_strategy.en.md)
+
 相关文档：[美研申请匹配度评估](./TopoLab_admissions_fit_assessment.md) · [开发周期与资源评估](./TopoLab_development_timeline_and_resources.md)
 
 ## 核心决策

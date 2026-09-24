@@ -1,5 +1,7 @@
 # TopoLab v1.x 后续开发路线图
 
+English version: [v1.x Development Roadmap](./TopoLab_post_v1_development_roadmap.en.md)
+
 状态：**v1.x 规划草案，起点为已发布的 `v1.0.0`；A1.1 已完成**
 
 制定日期：2026-09-24

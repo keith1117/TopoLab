@@ -1,5 +1,7 @@
 # TopoLab 美研申请匹配度评估
 
+English version: [Graduate Admissions Fit Assessment](./TopoLab_admissions_fit_assessment.en.md)
+
 相关文档：[开发周期与资源评估](./TopoLab_development_timeline_and_resources.md) · [Numerical Core 重写策略](./TopoLab_reimplementation_strategy.md)
 
 ## 项目定位
