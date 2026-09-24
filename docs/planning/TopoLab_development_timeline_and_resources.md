@@ -120,8 +120,11 @@ M1 模型、loss、optimizer 与五个 seed 不变，只扩大 direction-balance
 OOD case。首个实现切片已冻结并测试 756-case catalog identity、M1 exposure-aware
 split 与 432/36/36/252 精确计数。第二个切片已将共享 recoverable materialization
 executor 泛化到显式 M2 index version，并加入 clean revision、locked environment、
-仓库外 output root 和默认只读 plan 保护的生产入口；尚未执行 M2 label 生成。若一次
-最终比较仍不通过门槛，即停止 ML 扩张并进入发布收尾。
+仓库外 output root 和默认只读 plan 保护的生产入口。固定 756-case production
+materialization 随后完成 746 个有效 label 与 10 个确定性不收敛失败，其中 7 个位于
+training split。由于预注册契约禁止事后删例或第二个 M2 catalog，M2 data gate 未通过，
+未启动 fitting、calibration 或 final evaluation；证据见
+`docs/validation/m2_catalog_materialization.md`。现停止 ML 扩张并进入发布收尾。
 
 ## 总体时间估计
 

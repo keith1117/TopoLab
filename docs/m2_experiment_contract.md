@@ -1,9 +1,10 @@
 # M2 bounded warm-start follow-up contract
 
-Status: **contract, 756-case catalog identity, exposure-aware split, and guarded
-materialization entrypoint implemented for `topolab.m2.experiment.v1`; no M2 case has
-been materialized, no M2 model has been fitted, and no M2 validation, ID-test, or OOD
-outcome has been observed**.
+Status: **materialization complete for `topolab.m2.experiment.v1`: 746 labels
+succeeded and 10 cases failed the frozen convergence gate, including seven training
+cases. The required 432-label training partition is incomplete, so the M2 data gate
+does not pass. No M2 model was fitted and no learned validation, ID-test, or OOD
+outcome was observed. Learned-model expansion is stopped.**
 
 ## Question and stopping rule
 
@@ -245,12 +246,19 @@ after M2, not an amendment made after seeing M2 outcomes.
    **Complete.**
 3. Merge the entrypoint, run its read-only production plan, obtain explicit execution
    authorization, then materialize and audit the complete external artifact set.
+   **Executed; the complete index contains 746 successes and 10 failures, so the data
+   gate did not pass.**
 4. Implement the train/validation-only adapter and unchanged five-seed fitting path.
+   **Canceled: seven frozen training cases have no valid label.**
 5. Implement and test ensemble inference, finite gate calibration, artifacts, and
-   charged rejection/fallback accounting.
-6. Implement the recoverable final runner and frozen statistics.
+   charged rejection/fallback accounting. **Canceled.**
+6. Implement the recoverable final runner and frozen statistics. **Canceled.**
 7. Merge all final-evaluation code, run a read-only production plan, request explicit
    authorization, execute once, and commit the result regardless of outcome.
+   **Canceled.**
 
 No later step may begin before the preceding contract boundary has tests and a clean,
 reviewed source revision.
+
+The immutable production evidence and gate decision are recorded in
+`docs/validation/m2_catalog_materialization.md`.
