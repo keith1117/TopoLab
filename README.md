@@ -118,6 +118,12 @@ demonstration. It retains the v1 in-process worker and restart semantics describ
 resource quotas, or optimizer checkpoint/resume. Build and smoke evidence is recorded
 in [`docs/validation/a1_2_local_stack.md`](docs/validation/a1_2_local_stack.md).
 
+The [architecture diagram](docs/architecture.md) and
+[recorded local walkthrough](docs/demo.md) explain the implemented data flow,
+restart behavior, cancellation, convergence, and 3D result view. Their evidence and
+limits are recorded in
+[`docs/validation/a1_3_architecture_demo.md`](docs/validation/a1_3_architecture_demo.md).
+
 ## Repository map
 
 ```text

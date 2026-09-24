@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">TopoLab local demo architecture</title>
+  <desc id="description">The browser uses a static web container that proxies run requests to FastAPI. The API owns an in-process RunManager, a Hex8 SIMP numerical core, and a SQLite run store on a named volume.</desc>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1830"/>
+      <stop offset="1" stop-color="#12243b"/>
+    </linearGradient>
+    <linearGradient id="card" x2="0" y2="1">
+      <stop offset="0" stop-color="#203650"/>
+      <stop offset="1" stop-color="#1a2c44"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#73d6c5"/>
+    </marker>
+    <style>
+      text { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .eyebrow { fill: #78dac8; font-size: 19px; font-weight: 700; letter-spacing: 4px; }
+      .title { fill: #f5f9ff; font-size: 53px; font-weight: 750; }
+      .subtitle { fill: #b9cadb; font-size: 23px; }
+      .card-title { fill: #ffffff; font-size: 30px; font-weight: 720; }
+      .card-text { fill: #c9d7e5; font-size: 21px; }
+      .badge { fill: #7be1cd; font-size: 16px; font-weight: 750; letter-spacing: 2px; }
+      .edge { fill: none; stroke: #73d6c5; stroke-width: 5; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
+      .edge-label { fill: #b2e9df; font-size: 18px; font-weight: 650; }
+      .footer { fill: #b7c9da; font-size: 19px; }
+      .footer-strong { fill: #f3f8ff; font-size: 19px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#background)"/>
+  <path d="M 0 175 H 1600" stroke="#35546c" stroke-width="2"/>
+  <text x="80" y="67" class="eyebrow">TOPOLAB / A1.3 / LOCAL DEMO</text>
+  <text x="80" y="127" class="title">From problem input to durable run history</text>
+  <text x="80" y="162" class="subtitle">Current v1.x architecture · structured Hex8 and density-filtered SIMP</text>
+
+  <rect x="75" y="215" width="430" height="196" rx="22" fill="url(#card)" stroke="#5b7890" stroke-width="2"/>
+  <text x="105" y="255" class="badge">BROWSER</text>
+  <text x="105" y="304" class="card-title">React workspace</text>
+  <text x="105" y="340" class="card-text">Problem form · run history</text>
+  <text x="105" y="373" class="card-text">Convergence · 3D density</text>
+
+  <rect x="585" y="215" width="430" height="196" rx="22" fill="url(#card)" stroke="#5b7890" stroke-width="2"/>
+  <text x="615" y="255" class="badge">WEB CONTAINER</text>
+  <text x="615" y="304" class="card-title">NGINX · local port</text>
+  <text x="615" y="340" class="card-text">Host bind: 127.0.0.1:8080</text>
+  <text x="615" y="373" class="card-text">Static assets + /runs proxy</text>
+
+  <rect x="1095" y="215" width="430" height="196" rx="22" fill="url(#card)" stroke="#5b7890" stroke-width="2"/>
+  <text x="1125" y="255" class="badge">API CONTAINER</text>
+  <text x="1125" y="304" class="card-title">FastAPI boundary</text>
+  <text x="1125" y="340" class="card-text">TopologyProblem validation</text>
+  <text x="1125" y="373" class="card-text">RunSnapshot / RunPage JSON</text>
+
+  <path class="edge" d="M 510 313 H 569"/>
+  <path class="edge" d="M 1020 313 H 1079"/>
+  <text x="523" y="289" class="edge-label">HTTP</text>
+  <text x="1032" y="289" class="edge-label">/runs</text>
+
+  <path class="edge" d="M 1310 418 V 466 H 800 V 493"/>
+  <text x="948" y="454" class="edge-label">submit · poll · cancel</text>
+
+  <rect x="75" y="520" width="430" height="225" rx="22" fill="url(#card)" stroke="#6984a0" stroke-width="2"/>
+  <text x="105" y="560" class="badge">NUMERICAL CORE</text>
+  <text x="105" y="610" class="card-title">SIMP + Hex8 FEM</text>
+  <text x="105" y="650" class="card-text">Density filter · OC update</text>
+  <text x="105" y="683" class="card-text">Sparse assembly and solve</text>
+  <text x="105" y="716" class="card-text">State-consistent history</text>
+
+  <rect x="585" y="520" width="430" height="225" rx="22" fill="url(#card)" stroke="#6984a0" stroke-width="2"/>
+  <text x="615" y="560" class="badge">IN-PROCESS EXECUTION</text>
+  <text x="615" y="610" class="card-title">RunManager</text>
+  <text x="615" y="650" class="card-text">Bounded thread pool</text>
+  <text x="615" y="683" class="card-text">Queued · running · terminal</text>
+  <text x="615" y="716" class="card-text">Cooperative cancellation</text>
+
+  <rect x="1095" y="520" width="430" height="225" rx="22" fill="url(#card)" stroke="#6984a0" stroke-width="2"/>
+  <text x="1125" y="560" class="badge">NAMED VOLUME</text>
+  <text x="1125" y="610" class="card-title">SQLite run store</text>
+  <text x="1125" y="650" class="card-text">Problem, status and results</text>
+  <text x="1125" y="683" class="card-text">Survives container recreation</text>
+  <text x="1125" y="716" class="card-text">No optimizer checkpoint</text>
+
+  <path class="edge" d="M 580 632 H 521"/>
+  <path class="edge" d="M 1020 632 H 1079"/>
+  <text x="520" y="605" class="edge-label">solve</text>
+  <text x="1023" y="605" class="edge-label">save</text>
+
+  <path d="M 75 793 H 1525" stroke="#35546c" stroke-width="2"/>
+  <text x="80" y="830" class="footer-strong">Restart semantics</text>
+  <text x="250" y="830" class="footer">Terminal records remain; interrupted queued/running runs become failed.</text>
+  <text x="80" y="864" class="footer">Local demo only · no process isolation, authentication, quotas, or numerical resume.</text>
+</svg>
