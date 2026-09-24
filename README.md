@@ -50,6 +50,7 @@ not optimizer checkpoint/resume.
 | M0 data foundation | [`docs/validation/m0_catalog_v2_materialization.md`](docs/validation/m0_catalog_v2_materialization.md) | Gate M0 passed, 160/160 labels |
 | M1 training and held-out evaluation | [`docs/validation/m1_training.md`](docs/validation/m1_training.md), [`docs/validation/m1_held_out_evaluation.md`](docs/validation/m1_held_out_evaluation.md) | No learned-acceleration claim |
 | M2 bounded follow-up | [`docs/validation/m2_catalog_materialization.md`](docs/validation/m2_catalog_materialization.md) | Data gate failed; fitting not started |
+| v1 release verification | [`docs/validation/v1_release_validation.md`](docs/validation/v1_release_validation.md) | Full locked test, build, package, and repository audit passed |
 
 ## Development setup
 
