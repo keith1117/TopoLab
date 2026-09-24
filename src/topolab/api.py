@@ -43,7 +43,7 @@ def create_app(
             if owned_store is not None:
                 owned_store.close()
 
-    app = FastAPI(title="TopoLab", version="0.3.0", lifespan=lifespan)
+    app = FastAPI(title="TopoLab", version="1.0.0", lifespan=lifespan)
 
     @app.post(
         "/runs",

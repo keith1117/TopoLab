@@ -1,7 +1,7 @@
 [project]
 name = "topolab"
-version = "0.3.0"
-description = "Numerical foundation for a 3D topology optimization platform"
+version = "1.0.0"
+description = "Reproducible 3D topology optimization platform"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = "MIT"

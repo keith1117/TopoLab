@@ -1,6 +1,7 @@
 # Frontend optimization workspace
 
-Status: **problem submission, run cancellation, run history, convergence, and final 3D physical-density visualization implemented**.
+Status: **stable in v1.0.0 for problem submission, run cancellation, run history,
+convergence, and final 3D physical-density visualization**.
 
 ## Scope
 
