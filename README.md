@@ -50,8 +50,11 @@ warm starts.
 > its content-identified 756-case, exposure-aware catalog/split are implemented. A
 > guarded M2 materialization entrypoint now preserves the recoverable executor,
 > requires a clean locked checkout and external output root, and defaults to a
-> read-only plan; no M2 label generation, fitting, calibration, or held-out
-> evaluation has started.
+> read-only plan. The frozen production materialization completed with 746 successful
+> labels and 10 deterministic non-convergence failures, including seven training
+> cases. Because the contract forbids post-hoc case removal or a second M2 catalog,
+> the M2 data gate did not pass and fitting did not start. Learned-model expansion is
+> stopped; uniform initialization remains the operational default.
 
 ## Intended scope
 
@@ -141,8 +144,11 @@ and negative/inconclusive M1 gate decision are recorded in
 A single bounded follow-up is pre-registered in
 [`docs/m2_experiment_contract.md`](docs/m2_experiment_contract.md). It changes data
 coverage and adds a finite validation-calibrated reliability gate while keeping the
-M1 model and fitting recipe fixed; it reserves new ID-test and OOD evidence and stops
-after one final comparison.
+M1 model and fitting recipe fixed. Its materialization audit and failed data-gate
+decision are recorded in
+[`docs/validation/m2_catalog_materialization.md`](docs/validation/m2_catalog_materialization.md);
+the experiment stopped before fitting so the reserved ID-test and OOD evidence was
+not used for learned evaluation.
 
 ## Sparse solver benchmark
 
