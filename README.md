@@ -1,62 +1,17 @@
-# TopoLab
+# TopoLab — Reproducible 3D Topology Optimization Platform
 
-TopoLab is a planned, independently implemented platform for validated 3D SIMP
-topology optimization. The project will combine a sparse finite-element numerical
-core, reproducible experiment workflows, and a controlled evaluation of learned
-warm starts.
+TopoLab is an independently implemented 3D SIMP topology-optimization platform. It
+combines a validated sparse finite-element and optimization core, typed HTTP and
+persistence boundaries, a React results workspace, and reproducible learned
+warm-start experiments.
 
-> **Status:** Gate P1 has passed for the `v0.3.0` in-memory platform. It combines the
-> validated numerical core with serializable problem/result contracts, isolated run
-> state, cooperative cancellation, and a minimal HTTP adapter. Post-P1 development
-> adds optional SQLite run persistence, explicit restart recovery, and paginated run
-> history. The React workspace consumes that contract for run history, result detail,
-> problem configuration, submission and cancellation, and interactive 3D
-> physical-density inspection with state-consistent convergence charts. A reproducible
-> sparse assembly/solve benchmark now records four mesh scales, wall time, matrix
-> storage, and peak memory. The first M0 slices freeze versioned ML case identity,
-> tensor/label semantics, leakage-safe splits, baselines, and evaluation rules, and
-> implement deterministic case encoding, warm-start volume projection, a typed
-> dataset manifest with verified partitions and provenance metadata, and validated
-> single-case label generation with content-addressed, checksum-verified atomic
-> artifacts plus an append-only, atomically recoverable manifest-to-label index.
-> A single-process executor now materializes supplied manifests in canonical order
-> with per-case checkpoints and interruption recovery. The bounded 160-case M0 v2
-> catalog is content-identified and exactly reproducible; it preserves the v1 case
-> schema while increasing the frozen iteration budget from 100 to 120. A production entrypoint
-> now derives its manifest from a clean Git revision and locked environment, defaults
-> to a read-only plan, and requires an external output root plus explicit execution.
-> The v1 controlled materialization recorded 156 successful labels and four correctly
-> rejected non-converged OOD cases. Catalog v2 was then materialized from a clean
-> revision with 160 successful labels, zero failures, and a complete artifact audit,
-> so Gate M0 has passed for the frozen v2 manifest. The three fixed baselines now run
-> through one leakage-safe evaluator with training-only nearest-neighbor lookup,
-> independent quality checks, phase timing, and explicit charged fallback. Process
-> workers and broad scalability evidence remain incomplete. The first M1 slice now
-> freezes one lightweight CNN, design-density MSE, a single training recipe, and a
-> train/validation-only PyTorch adapter. Deterministic per-seed fitting and safe,
-> content-addressed checkpoint/selection artifacts are implemented. A guarded M1
-> production entrypoint now requires the exact external catalog-v2 materialization,
-> a clean locked checkout, repository-external artifact storage, and explicit
-> execution. All five frozen production seeds have been fitted and artifact-audited;
-> the single-case learned evaluator now covers checkpoint-bound CPU inference,
-> filtered-volume projection, shared SIMP refinement and quality checks, phase
-> timing, and fully charged uniform fallback. A guarded full runner now fixes the five
-> production selections, checkpoints all eight method/seed outcomes per physical
-> case, resumes atomically, and computes the frozen case-cluster statistics. The
-> frozen production comparison completed all 6 ID-test and 80 OOD cases. Its ID-test
-> interval was inconclusive and its OOD result was slower than uniform with a 25%
-> learned failure/fallback rate, so uniform remains the operational default and the
-> project makes no learned-acceleration claim. The bounded M2 follow-up contract and
-> its content-identified 756-case, exposure-aware catalog/split are implemented. A
-> guarded M2 materialization entrypoint now preserves the recoverable executor,
-> requires a clean locked checkout and external output root, and defaults to a
-> read-only plan. The frozen production materialization completed with 746 successful
-> labels and 10 deterministic non-convergence failures, including seven training
-> cases. Because the contract forbids post-hoc case removal or a second M2 catalog,
-> the M2 data gate did not pass and fitting did not start. Learned-model expansion is
-> stopped; uniform initialization remains the operational default.
+Version `1.0.0` consolidates the completed numerical, platform, benchmark, and
+experiment evidence. Gates N1, N2, P1, and M0 passed. The frozen M1 comparison was
+negative or inconclusive, and the pre-registered M2 follow-up stopped at its failed
+data gate after 10 of 756 cases did not converge. Uniform initialization therefore
+remains the operational default; TopoLab makes no learned-acceleration claim.
 
-## Intended scope
+## Scope
 
 The first implementation targets a structured rectangular Hex8 mesh, isotropic
 linear elasticity, small deformation, single-load-case minimum-compliance SIMP,
@@ -70,20 +25,38 @@ Development is gated in this order:
 3. add API, job execution, persistence, and visualization;
 4. generate versioned cases and evaluate learned density-field warm starts.
 
-## Non-goals for the first release
+## Version 1 limits
 
 - unstructured meshes or CAD import;
 - nonlinear, dynamic, thermal, or multi-physics analysis;
 - multiple materials or manufacturing constraints;
 - GPU finite-element solving;
-- an end-to-end neural replacement for the physics solver.
+- an end-to-end neural replacement for the physics solver;
+- distributed or process-isolated workers, authentication, and quotas; and
+- a hosted production deployment or public online demo.
+
+The sparse numerical path has reproducible performance evidence, but the project does
+not claim universal scalability. SQLite restart recovery preserves run records; it is
+not optimizer checkpoint/resume.
+
+## Release evidence
+
+| Area | Evidence | Decision |
+|---|---|---|
+| Hex8 finite elements | [`docs/validation/n1_fem_validation.md`](docs/validation/n1_fem_validation.md) | Gate N1 passed |
+| SIMP optimization | [`docs/validation/n2_optimization_validation.md`](docs/validation/n2_optimization_validation.md) | Gate N2 passed |
+| API and run isolation | [`docs/validation/p1_platform_validation.md`](docs/validation/p1_platform_validation.md) | Gate P1 passed |
+| Sparse performance | [`docs/validation/sparse_solver_benchmark.md`](docs/validation/sparse_solver_benchmark.md) | Four scales benchmarked |
+| M0 data foundation | [`docs/validation/m0_catalog_v2_materialization.md`](docs/validation/m0_catalog_v2_materialization.md) | Gate M0 passed, 160/160 labels |
+| M1 training and held-out evaluation | [`docs/validation/m1_training.md`](docs/validation/m1_training.md), [`docs/validation/m1_held_out_evaluation.md`](docs/validation/m1_held_out_evaluation.md) | No learned-acceleration claim |
+| M2 bounded follow-up | [`docs/validation/m2_catalog_materialization.md`](docs/validation/m2_catalog_materialization.md) | Data gate failed; fitting not started |
 
 ## Development setup
 
 Requirements: Python 3.12, [`uv`](https://docs.astral.sh/uv/), and Node.js 24 or later.
 
 ```bash
-uv sync --dev
+uv sync --dev --locked
 uv run ruff check .
 uv run mypy src
 uv run pytest
@@ -173,15 +146,15 @@ Methodology, full measurements, numerical guards, and limitations are recorded i
 ## Provenance
 
 TopoLab is not a fork or redistribution of the Hack3D reference implementation.
-That repository currently declares no open-source license. Its behavior and fixed
-commit are documented in [PROVENANCE.md](PROVENANCE.md), while TopoLab's code will
-be implemented independently from published SIMP and Hex8 references.
+That repository declares no open-source license. Its behavior and fixed commit are
+documented in [PROVENANCE.md](PROVENANCE.md); TopoLab's code was implemented
+independently from published SIMP and Hex8 references.
 
 ## Claims policy
 
-The README and application materials will use `validated`, `scalable`, and
-`accelerated` only after the corresponding gates and reproducible evidence in
-[`docs/planning`](docs/planning/) are complete.
+`Validated` refers only to the numerical behaviors covered by the N1/N2 evidence.
+`Benchmark` claims refer only to the recorded sparse cases and environment. The
+project does not describe the platform as universally scalable or ML-accelerated.
 
 ## License
 

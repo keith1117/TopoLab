@@ -4,7 +4,7 @@
 
 ## 项目定位
 
-**TopoLab — Scalable 3D Topology Optimization Platform with Learned Warm Starts**
+**TopoLab — Reproducible 3D Topology Optimization Platform**
 
 项目由三层组成：
 
@@ -18,6 +18,14 @@
 - 本文所有高分评价都是**完成条件下的项目方向匹配度**，不是当前项目完成度，也不是录取概率预测。
 - 在 Numerical Core 通过验证之前，不使用 `validated`；在完成多网格性能测试之前，不使用 `scalable`；在 ML 与 baseline 的同等质量比较完成之前，不使用 `accelerated`。
 - 如果 learned warm start 没有稳定改善总运行时间，最终标题改为 **TopoLab — Reproducible 3D Topology Optimization Platform**，ML 部分写成 evaluation/negative result，不继续保留暗示已加速的标题。
+
+## v1.0.0 最终结果（2026-09-24）
+
+- 数值内核、SIMP 优化、平台契约与 M0 数据基础 gate 已通过，并有仓库内验证报告。
+- 四档稀疏 benchmark 已完成，但证据不足以支持对整个平台使用宽泛的 `scalable` 表述。
+- M1 的固定五 seed 对照在 ID-test 上结论不确定，在 OOD 上慢于 uniform 且有 25% learned failure/fallback；M2 又因 756 个 case 中 10 个未收敛而未通过预注册 data gate，因此没有开始 M2 拟合。
+- 最终标题按原停止规则降级为 **TopoLab — Reproducible 3D Topology Optimization Platform**。ML 成果定位为可复现实验、负结果和严格停止规则，不声称 learned acceleration。
+- v1.0.0 是可在本地运行和复现的研究软件发布，不包含分布式 worker、认证、容器化或托管在线 demo。
 
 这个项目对应的科研与工程领域是：计算力学、结构拓扑优化、有限元、数值优化、科学计算、Scientific ML / AI for Engineering，以及长时间计算任务的软件平台工程。对 CS/SWE/AI/ML/Information Systems 的价值来自可验证的算法、系统和实验贡献，而不是机械工程主题本身。
 

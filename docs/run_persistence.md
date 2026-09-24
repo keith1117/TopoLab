@@ -1,6 +1,6 @@
 # Run persistence and restart recovery
 
-Status: **implemented after v0.3.0 and provisional until the next platform release**.
+Status: **stable in v1.0.0**.
 
 ## Scope
 

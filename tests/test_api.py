@@ -44,7 +44,7 @@ def test_api_creates_and_reads_an_isolated_run() -> None:
         app = create_app(manager)
         response, fetched = asyncio.run(exercise(app, manager))
 
-    assert app.version == "0.3.0"
+    assert app.version == "1.0.0"
     assert response.status_code == 202
     assert fetched.status_code == 200
     assert fetched.json()["status"] == "succeeded"

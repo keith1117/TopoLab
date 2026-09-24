@@ -4,7 +4,7 @@
 
 ## 目标项目
 
-**TopoLab — Scalable 3D Topology Optimization Platform with Learned Warm Starts**
+**TopoLab — Reproducible 3D Topology Optimization Platform**
 
 本报告评估从当前 Hack3D/3D SIMP 代码基础出发，在大量使用 Codex 辅助开发的情况下，把 TopoLab 建设为符合美研申请高标准的完整项目所需的时间、开发阶段、计算资源和现实世界条件。
 
@@ -27,6 +27,14 @@
 - [x] 推送 G0 commit，并确认远端 GitHub Actions run `35275304334` 通过。
 
 G0 只建立开发与审计基础，不计作 Numerical Core 实现。
+
+## v1.0.0 收口状态（2026-09-24）
+
+N1、N2、P1 和 M0 gate 已通过。M1 的固定 held-out 实验没有建立 learned
+acceleration，预注册的 M2 follow-up 又因 10 个确定性不收敛 case 未通过 data gate，
+因此按停止规则结束 learned-model 扩展。v1.0.0 以 uniform initialization 为默认，
+发布经验证的数值内核、可复现稀疏 benchmark、本地 API/SQLite/React 工作区，以及
+完整的正负实验记录；不包含托管在线 demo、分布式 worker、认证或容器化交付。
 
 ## Git 分支与版本管理策略
 
@@ -71,7 +79,7 @@ TopoLab 采用轻量级 **GitHub Flow**。项目由单人主导且处于快速�
 - `v0.1.0`：Gate N1 通过；
 - `v0.2.0`：Gate N2 通过；
 - `v0.3.0`：Gate P1 通过；
-- `v1.0.0`：公开演示、复现实验和文档达到发布标准。
+- `v1.0.0`：本地可运行的软件、复现实验、验证证据和文档达到发布标准。
 
 Gate P1 已通过。SQLite 持久化、重启恢复、稳定游标分页、运行历史、结果详情、
 最终 physical density 的交互式 3D 可视化，以及首版问题配置与运行提交已经完成。
