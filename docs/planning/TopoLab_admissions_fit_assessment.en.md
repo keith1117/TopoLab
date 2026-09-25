@@ -3,6 +3,13 @@
 English counterpart of [the Chinese assessment](./TopoLab_admissions_fit_assessment.md).
 Related documents: [Development timeline and resources](./TopoLab_development_timeline_and_resources.en.md) · [Numerical Core reimplementation strategy](./TopoLab_reimplementation_strategy.en.md)
 
+Current v1.x delivery rule: the ratings and `v1.0.0` title below are historical
+positioning assessments. The active
+[v1.x roadmap](./TopoLab_post_v1_development_roadmap.en.md) requires a positive,
+reproducible learned end-to-end acceleration result before the *full flagship*
+project is called delivered. Platform strength does not replace that required ML
+gate; no `accelerated` claim is permitted before it passes.
+
 ## Project positioning
 
 **TopoLab — Reproducible 3D Topology Optimization Platform**
@@ -108,7 +115,10 @@ A strong numerical core and software platform retain substantial value even if M
 | Information Systems | **8/10** |
 | Scientific Computing | **9/10** |
 
-A failed ML experiment does not invalidate the whole project. An honest failure analysis, reliable 3D solver, and complete platform can still form a strong CS/SWE project; stronger AI/ML positioning requires rigorous, useful model results.
+A failed ML experiment does not erase the numerical and platform work. Those
+components can be presented accurately as interim CS/SWE results, but a negative
+ML result leaves the current full-flagship delivery gate open. Stronger AI/ML
+positioning requires a rigorous positive result on the predefined workload.
 
 Set a stopping rule in advance: after one lightweight 3D CNN, a bounded hyperparameter budget, and at least three seeds, freeze the outcome and analyze failure if held-out cases do not reduce end-to-end time within the same compliance and volume tolerances. Do not conduct an unbounded model search.
 
@@ -169,6 +179,6 @@ Together these projects cover CS, SWE/SDE, AI, ML, and Information Systems while
 | Core validated | Validated 3D SIMP engine | ML-accelerated, full-stack platform |
 | Platform and performance evaluated | Reproducible topology-optimization platform | learned acceleration unless experimentally established |
 | ML evaluation positive | Platform with learned warm starts | Generalization beyond tested distributions |
-| ML negative or unstable | Platform with rigorous warm-start evaluation | accelerated optimization |
+| ML negative or unstable | Platform with rigorous warm-start evaluation; full v1.x flagship still in development | accelerated optimization, full flagship delivered |
 
 Use these boundaries consistently in the resume, GitHub README, statement of purpose, and interviews so the project title never outruns the evidence.

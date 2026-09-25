@@ -2,6 +2,11 @@
 
 English version: [v1.x Development Roadmap](./TopoLab_post_v1_development_roadmap.en.md)
 
+**Historical translation.** The linked English roadmap is the active plan.
+Full v1.x flagship delivery now requires reproducible learned end-to-end
+acceleration on a predefined workload; the optional-ML language below is
+superseded. Future development documentation is maintained in English.
+
 状态：**v1.x 路线图，起点为已发布的 `v1.0.0`；Gate A1 于 2026-09-25 通过**
 
 制定日期：2026-09-24
