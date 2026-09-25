@@ -10,6 +10,7 @@ from numpy.typing import NDArray
 from scipy.sparse import coo_matrix, csr_matrix  # type: ignore[import-untyped]
 
 from topolab.fem import (
+    FactorizationOrdering,
     assemble_global_stiffness,
     hex8_element_stiffness,
     solve_linear_static,
@@ -107,6 +108,7 @@ def evaluate_compliance(
     minimum_modulus: float,
     poisson_ratio: float,
     penalty: float,
+    ordering: FactorizationOrdering = "auto",
 ) -> ComplianceResult:
     """Solve one physical-density state and return compliance and its derivative."""
 
@@ -136,7 +138,9 @@ def evaluate_compliance(
         unit_stiffness,
         element_factors=element_moduli,
     )
-    solution = solve_linear_static(global_stiffness, loads, constrained_dofs)
+    solution = solve_linear_static(
+        global_stiffness, loads, constrained_dofs, ordering=ordering
+    )
 
     element_displacements = solution.displacements[mesh.element_dofs]
     unit_energies = np.einsum(
@@ -335,6 +339,7 @@ def optimize_simp(
     initial_density: NDArray[np.float64] | None = None,
     iteration_callback: Callable[[SimpIteration], None] | None = None,
     should_cancel: Callable[[], bool] | None = None,
+    ordering: FactorizationOrdering = "auto",
 ) -> SimpResult:
     """Run deterministic density-filtered SIMP with Optimality Criteria updates."""
 
@@ -361,6 +366,7 @@ def optimize_simp(
         minimum_modulus=minimum_modulus,
         poisson_ratio=poisson_ratio,
         penalty=config.penalty,
+        ordering=ordering,
     )
     physical_volume_gradient = np.full(number_of_elements, 1.0 / number_of_elements)
     design_volume_gradient = backpropagate_density_gradient(
@@ -396,6 +402,7 @@ def optimize_simp(
             minimum_modulus=minimum_modulus,
             poisson_ratio=poisson_ratio,
             penalty=config.penalty,
+            ordering=ordering,
         )
         iteration_state = SimpIteration(
             iteration=iteration,

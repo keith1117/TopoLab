@@ -18,6 +18,8 @@ from pathlib import Path
 from time import perf_counter
 from typing import cast
 
+from topolab.fem import FactorizationOrdering
+
 DOMAIN_LENGTHS = (1.0, 0.4, 0.2)
 YOUNGS_MODULUS = 200.0e9
 POISSON_RATIO = 0.3
@@ -102,7 +104,12 @@ class _Sample:
     equilibrium_relative_residual: float
 
 
-def measure_case(case: BenchmarkCase, *, repeated_runs: int) -> BenchmarkCaseResult:
+def measure_case(
+    case: BenchmarkCase,
+    *,
+    repeated_runs: int,
+    ordering: FactorizationOrdering = "auto",
+) -> BenchmarkCaseResult:
     """Measure one case in the current process after validating repeat count."""
 
     if isinstance(repeated_runs, bool) or not isinstance(repeated_runs, int):
@@ -111,7 +118,9 @@ def measure_case(case: BenchmarkCase, *, repeated_runs: int) -> BenchmarkCaseRes
         raise ValueError("repeated_runs must be positive")
 
     baseline_peak_rss = _peak_rss_bytes()
-    samples = tuple(_measure_once(case) for _ in range(repeated_runs + 1))
+    samples = tuple(
+        _measure_once(case, ordering=ordering) for _ in range(repeated_runs + 1)
+    )
     peak_rss = _peak_rss_bytes()
     cold = samples[0]
 
@@ -154,6 +163,7 @@ def generate_report(
     *,
     cases: Sequence[BenchmarkCase] = DEFAULT_CASES,
     repeated_runs: int = 3,
+    ordering: FactorizationOrdering = "auto",
 ) -> dict[str, object]:
     """Run every case in an isolated worker and return a JSON-ready report."""
 
@@ -176,14 +186,20 @@ def generate_report(
             "support": "x=min, ux=uy=uz=0",
             "load": "x=max face, y direction, total=-1000 N",
             "solver": "scipy.sparse.linalg.splu through solve_linear_static",
-            "solver_ordering": "SuperLU default COLAMD ordering",
+            "solver_ordering_policy": (
+                "auto selects MMD_AT_PLUS_A for >=5000 free DOFs; otherwise COLAMD"
+            ),
+            "requested_ordering": ordering,
             "cold_runs_per_case": 1,
             "repeated_runs_per_case": repeated_runs,
             "thread_environment": THREAD_ENVIRONMENT,
             "timing_clock": "time.perf_counter wall time",
             "memory_metric": "isolated worker peak resident set size",
         },
-        "cases": [_run_worker(case, repeated_runs=repeated_runs) for case in cases],
+        "cases": [
+            _run_worker(case, repeated_runs=repeated_runs, ordering=ordering)
+            for case in cases
+        ],
     }
 
 
@@ -204,6 +220,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="timed runs after the first cold numerical run (default: 3)",
     )
     parser.add_argument(
+        "--ordering", choices=("auto", "COLAMD", "MMD_AT_PLUS_A"), default="auto"
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         help="optional JSON output path; stdout is used when omitted",
@@ -211,7 +230,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     parsed = parser.parse_args(arguments)
     repeated_runs = cast(int, parsed.repeated_runs)
     output = cast(Path | None, parsed.output)
-    report = generate_report(repeated_runs=repeated_runs)
+    report = generate_report(
+        repeated_runs=repeated_runs,
+        ordering=cast(FactorizationOrdering, parsed.ordering),
+    )
     serialized = json.dumps(report, indent=2, sort_keys=True, allow_nan=False)
     if output is None:
         print(serialized)
@@ -222,7 +244,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     return 0
 
 
-def _measure_once(case: BenchmarkCase) -> _Sample:
+def _measure_once(
+    case: BenchmarkCase, *, ordering: FactorizationOrdering
+) -> _Sample:
     import numpy as np
 
     from topolab.fem import (
@@ -258,7 +282,9 @@ def _measure_once(case: BenchmarkCase) -> _Sample:
         [FaceLoad(axis="x", side="max", direction="y", total=FACE_LOAD_TOTAL)],
     )
     solve_start = perf_counter()
-    solution = solve_linear_static(stiffness, loads, constrained_dofs)
+    solution = solve_linear_static(
+        stiffness, loads, constrained_dofs, ordering=ordering
+    )
     solve_seconds = perf_counter() - solve_start
     total_seconds = perf_counter() - total_start
 
@@ -294,7 +320,12 @@ def _summarize(samples: Sequence[_Sample], attribute: str) -> TimingSummary:
     )
 
 
-def _run_worker(case: BenchmarkCase, *, repeated_runs: int) -> dict[str, object]:
+def _run_worker(
+    case: BenchmarkCase,
+    *,
+    repeated_runs: int,
+    ordering: FactorizationOrdering,
+) -> dict[str, object]:
     environment = os.environ.copy()
     environment.update(THREAD_ENVIRONMENT)
     source_root = str(Path(__file__).resolve().parents[1])
@@ -313,6 +344,8 @@ def _run_worker(case: BenchmarkCase, *, repeated_runs: int) -> dict[str, object]
         *(str(count) for count in case.element_counts),
         "--repeated-runs",
         str(repeated_runs),
+        "--ordering",
+        ordering,
     ]
     completed = subprocess.run(
         command,
@@ -337,6 +370,9 @@ def _worker_main(argv: Sequence[str]) -> int:
     parser.add_argument("ny", type=_positive_integer)
     parser.add_argument("nz", type=_positive_integer)
     parser.add_argument("--repeated-runs", type=_positive_integer, required=True)
+    parser.add_argument(
+        "--ordering", choices=("auto", "COLAMD", "MMD_AT_PLUS_A"), required=True
+    )
     parsed = parser.parse_args(argv)
     case = BenchmarkCase(
         name=cast(str, parsed.name),
@@ -346,7 +382,11 @@ def _worker_main(argv: Sequence[str]) -> int:
             cast(int, parsed.nz),
         ),
     )
-    result = measure_case(case, repeated_runs=cast(int, parsed.repeated_runs))
+    result = measure_case(
+        case,
+        repeated_runs=cast(int, parsed.repeated_runs),
+        ordering=cast(FactorizationOrdering, parsed.ordering),
+    )
     print(json.dumps(asdict(result), sort_keys=True, allow_nan=False))
     return 0
 

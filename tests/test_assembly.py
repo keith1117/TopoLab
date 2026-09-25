@@ -95,6 +95,33 @@ def test_sparse_solve_matches_dense_reduced_system_and_balances_load() -> None:
     )
 
 
+def test_sparse_factorization_orderings_preserve_small_mesh_solution() -> None:
+    mesh, stiffness = _two_element_system()
+    constrained_dofs = _dofs_on_x_plane(mesh, x_coordinate=0.0)
+    loads = np.zeros(stiffness.shape[0])
+    loads[3 * _node_at(mesh, (2.0, 1.0, 1.0)) + 1] = -1.0
+
+    reference = solve_linear_static(
+        stiffness, loads, constrained_dofs, ordering="COLAMD"
+    )
+    for ordering in ("auto", "MMD_AT_PLUS_A"):
+        result = solve_linear_static(
+            stiffness, loads, constrained_dofs, ordering=ordering
+        )
+        np.testing.assert_allclose(
+            result.displacements,
+            reference.displacements,
+            rtol=DENSE_SPARSE_RELATIVE_TOLERANCE,
+            atol=1e-12,
+        )
+        np.testing.assert_allclose(
+            result.reactions,
+            reference.reactions,
+            rtol=DENSE_SPARSE_RELATIVE_TOLERANCE,
+            atol=1e-10,
+        )
+
+
 @pytest.mark.parametrize(
     "element_stiffness",
     [

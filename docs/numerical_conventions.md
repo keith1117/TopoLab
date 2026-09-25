@@ -64,6 +64,11 @@ to a frozen convention requires a documented reason and regression-test update.
   `r = K @ u - f`, so free-DOF residuals vanish and constrained reactions balance the
   applied load. Reject a reduced system when sparse factorization fails or its pivot
   scale indicates numerical singularity at the matrix-size-scaled machine precision.
+- For the A3 solver ordering policy, use SuperLU `COLAMD` below 5,000 free DOFs and
+  `MMD_AT_PLUS_A` at or above 5,000 free DOFs. An explicit `COLAMD` option preserves
+  the historical fallback for matched comparisons. Assembly, pivot rejection, and
+  the mathematical linear system remain unchanged; benchmark both orderings when
+  evaluating a larger-mesh performance claim.
 - The unconstrained element/global stiffness is positive semidefinite because of rigid
   body modes; test positive definiteness only after sufficient supports are applied.
 
