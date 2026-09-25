@@ -88,6 +88,7 @@ Because `max_iterations` is part of `ExperimentCase.case_id`, derive a new
 SHA-256 of canonical JSON containing the old source ID, the new physical
 case ID, `topolab.simp.physical_plateau.v1`, and the B2.3 label version.
 The source-to-new-case mapping is frozen by a content-derived plan hash
+`45baa0f74c74fca3ea3d7594b7576f1150a6dc950b23daafdab5acc8e1f5c289`
 before the 61-case execution. Old B2.2 and M2 labels are incompatible.
 
 The 53 previously accepted cases should stop at exactly their old iteration
