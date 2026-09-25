@@ -1,8 +1,8 @@
 # B2.3 bounded data-feasibility repair protocol
 
-Status: fixed diagnostic boundary before any extended B2.3 solve. This
-document will receive exactly one candidate amendment, committed before
-corrected sentinel execution. B2.2's failed 61-case result remains historical.
+Status: fixed diagnostic boundary before the extended B2.3 solve; the one
+candidate amendment below is fixed before corrected sentinel execution.
+B2.2's failed 61-case result remains historical.
 
 ## Fixed boundary and read-only diagnosis
 
@@ -54,3 +54,46 @@ later independent 522-case materialization/data gate; it does not establish
 that all 522 labels will succeed or that learned acceleration is achieved.
 Every later uniform, learned, and non-ML comparison must use the same
 selected policy and cap. Final B3 evidence remains sealed.
+
+## Read-only trajectory result and one candidate
+
+The committed eight-case diagnostic reproduced each B2.2 state at update 120
+exactly, including compliance, design maximum, and ten-step physical change.
+Its metadata-only JSON remains outside Git at
+`/tmp/topolab-b23-diagnosis.json` (SHA-256
+`33e709d68aea3754f0789bf0d1eb9e6e18a4086f9435eb5dfc0b930e3348cbb2`).
+All eight trajectories eventually met an
+**unchanged** stop rule within the previously fixed diagnostic ceiling: the
+seven small `y/0.45` cases at update **125** and the one large `z/0.20` case
+at update **170**. The large case's terminal maximum design change was
+`0.009727`, below the unchanged `0.01` design criterion. The seven small
+cases stopped by the unchanged ten-step physical plateau criterion, with
+terminal ten-step compliance improvements between `0.0001828` and
+`0.0001899`, below the unchanged `0.0002` bound. No divergent or oscillating
+terminal trajectory was observed in this bounded extension.
+
+Test exactly one budget intervention: set `max_iterations = 240` on each of
+the **same 61 source problems**, and retain
+`topolab.simp.physical_plateau.v1` unchanged. The value 240 was committed as
+the diagnostic ceiling before observing the extended results; it is reused
+as a finite budget rather than tuning a new threshold to 125 or 170. This
+changes neither OC, filtering, stiffness, nor any stopping tolerance. It
+also does not claim the old 120-update result passed.
+
+Because `max_iterations` is part of `ExperimentCase.case_id`, derive a new
+`ExperimentCase` for each source, retaining the original ID as
+`b2_2_source_case_id`. The new plan version is
+`topolab.b2_3.budget240.plan.v1`, and prospective labels have version
+`topolab.b2_3.label.v1`. A result ID with prefix `tlcase-b23-v1-` is the
+SHA-256 of canonical JSON containing the old source ID, the new physical
+case ID, `topolab.simp.physical_plateau.v1`, and the B2.3 label version.
+The source-to-new-case mapping is frozen by a content-derived plan hash
+before the 61-case execution. Old B2.2 and M2 labels are incompatible.
+
+The 53 previously accepted cases should stop at exactly their old iteration
+because each stopped before 120; require their final compliance to agree
+within relative `1e-10` as declared above. The eight former failures must
+pass the same independent quality audit within 240. Compare only
+version-matched uniform, learned, and non-ML methods in later slices. The
+future 522-case plan and two-hour generation budget require a separate
+read-only plan and review; this 61-case result cannot guarantee them.
