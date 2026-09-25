@@ -25,10 +25,14 @@ accelerated claim is allowed.
 Track B has development-only warm-start feasibility evidence in
 `docs/validation/ml_feasibility_probe.md`, B1 failure diagnosis in
 `docs/validation/b1_failure_diagnosis.md`, and A3 solver-ordering evidence in
-`docs/validation/a3_solver_ordering.md`. The next independent slice is B2:
-pilot the repeated-query workload and scale headroom against the optimized
-uniform solver before freezing a new ML contract. Follow the v2 English roadmap
-for later gates and slice order.
+`docs/validation/a3_solver_ordering.md`. The fixed B2 workload pilot is recorded
+in `docs/validation/b2_workload_pilot.md`: Gate B2 failed because three of six
+larger uniform references did not converge at the frozen limit and the five
+unchanged M1 starts were slower after fallback charges. The next independent
+slice is B2.1, a bounded numerical convergence intervention for the large,
+high-volume cases. Do not freeze a new ML contract until the workload and
+quality-feasible comparison denominator are established. Follow the v2 English
+roadmap for later gates and slice order.
 
 ## Provenance boundary
 
