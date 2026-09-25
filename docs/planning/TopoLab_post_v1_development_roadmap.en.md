@@ -236,10 +236,12 @@ Based on admissions value, risk, and dependencies:
 8. **M3.2–M3.4**, only if M3.1 passes; and
 9. **A2.3, A3, A4** when profiling and deployment needs justify them.
 
-**Gate A1 is complete:** The canonical case, local stack, architecture and demo,
-and clean Linux smoke passed their separate validation slices. The next independent
-slice is **M3.0**, limited to exposed-failure diagnosis and a bounded, versioned
-pre-registration; it performs no new data generation or model fitting.
+**Gate A1 and Gate M3.0 are complete:** The canonical case, local stack,
+architecture and demo, and clean Linux smoke passed their separate validation
+slices. Exposed-failure diagnosis and the bounded M3 pre-registration are recorded
+in `docs/validation/m3_preregistration.md` and `docs/m3_preregistration.md`.
+No new data generation or model fitting occurred in M3.0. The next independent
+slice is **A2.1**, limited to the separate-process worker protocol.
 
 ## 7. Stage completion evidence
 
