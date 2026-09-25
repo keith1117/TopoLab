@@ -2,7 +2,7 @@
 
 English counterpart of [the Chinese roadmap](./TopoLab_post_v1_development_roadmap.md).
 
-Status: **v1.x planning draft, starting from the released `v1.0.0`; A1.1 completed**
+Status: **v1.x plan, starting from the released `v1.0.0`; Gate A1 passed on 2026-09-25**
 
 Prepared: 2026-09-24
 
@@ -14,6 +14,7 @@ Related documents:
 - [M1 held-out evaluation](../validation/m1_held_out_evaluation.md)
 - [M2 materialization outcome](../validation/m2_catalog_materialization.md)
 - [A1.1 canonical demo validation](../validation/a1_1_canonical_demo.md)
+- [A1.4 clean Linux validation and Gate A1 decision](../validation/a1_4_clean_linux_smoke.md)
 
 ## 1. Current baseline
 

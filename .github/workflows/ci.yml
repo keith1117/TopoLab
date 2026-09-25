@@ -33,3 +33,30 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+
+  clean-linux-smoke:
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Record runner environment
+        run: |
+          uname -srm
+          python3 --version
+          docker version --format 'Docker server {{.Server.Version}} {{.Server.Os}}/{{.Server.Arch}}'
+          docker compose version
+      - name: Build and start the local stack
+        run: |
+          docker compose -p topolab-a14 config -q
+          start=$SECONDS
+          docker compose -p topolab-a14 up --build --wait -d
+          printf 'build_and_start_seconds=%s\n' "$((SECONDS - start))"
+      - name: Exercise frontend, canonical run, and SQLite restart recovery
+        run: python3 scripts/a1_clean_linux_smoke.py
+      - name: Container diagnostics on failure
+        if: failure()
+        run: docker compose -p topolab-a14 logs --no-color --tail=120
+      - name: Remove disposable run state
+        if: always()
+        run: docker compose -p topolab-a14 down -v

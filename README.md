@@ -124,6 +124,29 @@ restart behavior, cancellation, convergence, and 3D result view. Their evidence 
 limits are recorded in
 [`docs/validation/a1_3_architecture_demo.md`](docs/validation/a1_3_architecture_demo.md).
 
+## Clean Linux stack smoke
+
+From a fresh Linux checkout with Docker Engine, Compose, and Python 3 installed, use
+this disposable project to repeat the A1.4 end-to-end check:
+
+```bash
+docker compose -p topolab-a14 up --build --wait -d
+python3 scripts/a1_clean_linux_smoke.py
+docker compose -p topolab-a14 down -v
+```
+
+The build installs locked Python and frontend dependencies inside the images. The
+smoke reads the built frontend and its JavaScript asset, submits the unchanged
+canonical problem through `/runs`, checks its result and the SQLite file, restarts
+the API, and verifies that the terminal result and run-history entry survive. It
+prints one JSON summary with elapsed times. The final command removes only this
+project's disposable database volume. Run it on a machine where local port `8080`
+is available; the stack serves only `127.0.0.1`.
+
+The same path runs on a fresh Ubuntu runner in CI. Its recorded environment,
+timings, and Gate A1 decision are in
+[`docs/validation/a1_4_clean_linux_smoke.md`](docs/validation/a1_4_clean_linux_smoke.md).
+
 ## Repository map
 
 ```text
