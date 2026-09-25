@@ -112,7 +112,7 @@ change was above the frozen `0.01` convergence tolerance.
 | Test | y | `(1,2)` | `0.015050465758360332` | `tlcase-v1-208428786bd5f2848382f53adde4daf7597fccff972137f570b363c4ce819429` |
 | Train | y | `(0,2)` | `0.014945729295980925` | `tlcase-v1-24b747bb3124e5a73377d242f3495ba21eafcae733951d71825959df9cc5db46` |
 | Train | y | `(0,1)` | `0.014945729295677501` | `tlcase-v1-30e4d8d6e46e95725d887bb2ea1358670b6652087dd247ef1b7c36ce54ddeede` |
-| Train | y | `(5,2)` | `0.015050465758114084` | `tlcase-v1-7e3a39ed50f58afcaaa5dd1a629cfa50a7ec4cef6188cec0417770c99d2b3f72` |
+| Train | y | `(5,2)` | `0.015050465758114084` | `tlcase-v1-7e3a39ed50d58afcaaa5dd1a629cfa50a7ec4cef6188cec0417770c99d2b3f72` |
 | OOD | x | `(3,2)` | `0.01214422876308685` | `tlcase-v1-7f23d9d86e8a22ed9aa6d13d16fea2c85b5a87aa5d85ff16b94ee316d4b8b17f` |
 | Train | y | `(6,2)` | `0.01494572929580662` | `tlcase-v1-a94c489359cea9ca6511cff800362deac849af8804fca28d90b889e6b8bb6dfe` |
 | Train | y | `(1,1)` | `0.015050465758032927` | `tlcase-v1-ae72ada0ed6dc2623ce41a4da79c99ac4a01bc6a2953eef4e5c857616de98ade` |
@@ -123,6 +123,10 @@ change was above the frozen `0.01` convergence tolerance.
 The repeated values across symmetric locations support a numerical limit-cycle or
 slow-convergence interpretation at this volume fraction. They do not justify
 loosening the tolerance after observation. No failure was converted to a label.
+
+The B2.2 metadata audit corrected a one-character transcription error in the
+`(5,2)` training case ID above (`50f58a` to `50d58a`); the frozen catalog,
+materialization, failure count, and numerical outcome did not change.
 
 ## Gate result and next action
 
