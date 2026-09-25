@@ -1,8 +1,9 @@
 # B2.1 large-mesh convergence intervention protocol
 
-Status: acceptance cohort frozen before the B2.1 trajectory diagnosis or any
-corrected solve. This is development-only evidence, not an amendment of B2,
-M1, or M2 and not an ML experiment registration.
+Status: acceptance cohort frozen at `312e3a4` before the B2.1 trajectory
+diagnosis. The single candidate below is fixed before any corrected solve.
+This is development-only evidence, not an amendment of B2, M1, or M2 and not
+an ML experiment registration.
 
 ## Fixed cases and historical boundary
 
@@ -62,3 +63,36 @@ If the single candidate does not make the intended two-scale workload
 quality-feasible, record the failed intervention and version a different
 development pilot in a later slice. Passing the uniform gate alone does not
 pass B2's learned-prototype requirement or the v2 ML delivery gate.
+
+## Read-only diagnosis and one frozen candidate
+
+The unchanged solver reproduced all twelve B2 uniform iteration counts and
+compliances from the same projected uniform starts. The external trace JSON
+has SHA-256
+`7f9d25dc6459d46982dbfb81c6f52573f552b38533a01503bd10754227d0873b`.
+At iteration 120, the three failed large cases had maximum **design** changes
+of `0.02275`, `0.02221`, and `0.01145`, but maximum **physical** changes of
+only `0.00134`, `0.00096`, and `0.00065`. Their respective ten-step relative
+compliance improvements were `0.000120`, `0.000142`, and `0.000091`.
+The filter therefore hides a slowly moving design component that has a much
+smaller effect on the analyzed physical state. A raw physical-change rule
+alone is too permissive: it would also stop successful large cases early,
+before their final compliance is within the `1.001` comparison limit.
+
+Test exactly one opt-in termination policy,
+`topolab.simp.physical_plateau.v1`. Keep the historical design-maximum rule
+as its first stopping path. Otherwise, after at least eleven completed
+updates, allow stopping only if **all ten most recent per-update maximum
+physical-density changes are at most the unchanged `0.01` density scale**
+and the relative compliance improvement from update `k-10` to `k` lies in
+`[0, 0.0002]`. The second bound means at most `0.02%` improvement over ten
+updates, not a relaxed design-density tolerance. Volume and independent
+compliance acceptance remain mandatory. The policy changes only termination,
+not OC updates, SIMP stiffness, filtering, or the 120-update budget.
+
+The frozen candidate can be run once over the full cohort. If it misses a
+case or breaches the compliance guard, record the miss; do not retune the
+`0.0002` threshold within B2.1. The new output identity is the SHA-256 of
+canonical JSON containing the B2 physical case ID and this exact solver
+policy string, prefixed `tlcase-b21-v1-`. It is separate from the historical
+`tlcase-v1` identity even when the physical problem is identical.
