@@ -327,16 +327,17 @@ Gate M3.3：冻结 artifact 可以从 clean revision 和锁定环境重建；任
 
 1. **A1.1 canonical demo case 与端到端 smoke**；
 2. **A1.2 Docker/Compose 本地栈**；
-3. **A1.3 架构图、演示视频与 clean-machine 报告**；
-4. **M3.0 诊断与预注册 contract**；
-5. **A2.1–A2.2 独立进程 worker 与 durable ownership**；
-6. **M3.1 新 catalog、exposure ledger 与 data gate**；
-7. 根据 M3.1 结果决定是否执行 **M3.2–M3.4**；
-8. 再根据 profile 和部署需求选择 **A2.3、A3、A4**。
+3. **A1.3 架构图与演示视频**；
+4. **A1.4 干净 Linux 环境验证与 Gate A1 结论**；
+5. **M3.0 诊断与预注册 contract**；
+6. **A2.1–A2.2 独立进程 worker 与 durable ownership**；
+7. **M3.1 新 catalog、exposure ledger 与 data gate**；
+8. 根据 M3.1 结果决定是否执行 **M3.2–M3.4**；
+9. 再根据 profile 和部署需求选择 **A2.3、A3、A4**。
 
-第一个实现切片 **A1.1** 已完成：版本化 canonical demo problem、窄运行入口和
-端到端测试均已通过，输出保留在 Git 之外。下一个独立切片是 **A1.2**，只建立
-API 与前端的本地 Docker/Compose 运行路径，不同时引入 worker、ML 或托管部署。
+**Gate A1 已完成**：canonical case、本地栈、架构与演示，以及干净 Linux
+环境验证分别通过。下一个独立切片是 **M3.0**，只分析已暴露失败并冻结有界、
+版本化的预注册方案，不生成新数据或训练模型。
 
 ## 7. 阶段完成定义
 
