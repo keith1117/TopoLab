@@ -190,6 +190,26 @@ as a success.
 - Exact identity, encoding, projection, label, split, OOD, baseline, quality,
   statistics, and fallback rules are frozen in `docs/ml_experiment_contract.md`.
 
+## B2.4 development-label representation
+
+- The 240-update development cases retain the B2.3 physical-plateau policy,
+  label identity, and result-ID mapping. Their input and target tensors retain
+  the M0 channel-first `(z, y, x)` spatial order and x-fast flattening.
+- Audit the solver's full-precision terminal compliance against an independent
+  solve before float32 serialization. Recompute the filtered physical density
+  from the stored float32 design, then independently solve that stored state
+  and record its own compliance. This avoids equating the two distinct density
+  precisions at the full-precision `1e-9` tolerance.
+- At the stored physical state, compute the absolute compliance derivative
+  with respect to design density through the transpose density filter. Divide
+  by its within-case mean, clip to `[0.25, 4]`, then divide by the clipped
+  mean. Store the float32 weights with each label and independently recompute
+  them during the complete artifact audit. The weights are loss weights only;
+  they are not inference inputs.
+- The [B2.4 protocol](planning/b2_4_development_labels_protocol.md) fixes the
+  522-case population, identity, quality and resource Gate. Generated labels
+  and checkpoints stay outside Git.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
