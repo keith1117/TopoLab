@@ -1,9 +1,9 @@
 # M3 warm-start experiment pre-registration
 
 Status: **historical M3 v1 pre-registration, superseded before M3.1, fitting, or
-final evaluation.** The active v1.x plan now requires measured ML acceleration
+final evaluation.** The active v2 plan now requires measured ML acceleration
 for full flagship delivery; see
-`docs/planning/TopoLab_post_v1_development_roadmap.en.md` and
+`docs/planning/TopoLab_v2_development_roadmap.md` and
 `docs/validation/ml_feasibility_probe.md`. The frozen v1 plan and catalog below
 remain an audit record; they are not the active production plan. This contract
 supersedes neither the failed M1 claim gate nor the failed M2 data gate.

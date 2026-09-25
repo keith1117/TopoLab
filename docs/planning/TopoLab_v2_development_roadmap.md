@@ -1,18 +1,16 @@
-# TopoLab v1.x Development Roadmap
+# TopoLab v2 Development Roadmap
 
-Active English roadmap. [The Chinese document](./TopoLab_post_v1_development_roadmap.md)
-is a historical translation of the earlier plan.
-
-Status: **active v1.x flagship delivery plan; Gate A1 passed; ML acceleration is a
+Status: **active v2 flagship delivery plan; Gate A1 passed; ML acceleration is a
 required delivery gate, not an optional enhancement.** The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
+Revised: 2026-09-25
 
 Related documents:
 
-- [Graduate admissions fit assessment](./TopoLab_admissions_fit_assessment.en.md)
-- [Development timeline and resources](./TopoLab_development_timeline_and_resources.en.md)
+- [Graduate admissions fit assessment](./TopoLab_admissions_fit_assessment.md)
+- [Development timeline and resources](./TopoLab_development_timeline_and_resources.md)
 - [v1.0.0 release validation](../validation/v1_release_validation.md)
 - [M1 held-out evaluation](../validation/m1_held_out_evaluation.md)
 - [M2 materialization outcome](../validation/m2_catalog_materialization.md)
@@ -43,7 +41,7 @@ Future work must not rewrite or erase historical `v1.0.0`, M1, or M2 conclusions
 
 ## 2. Flagship delivery condition and priorities
 
-**The full v1.x flagship project is not delivered until a learned method achieves
+**The full v2 flagship project is not delivered until a learned method achieves
 reproducible, same-quality, end-to-end acceleration on a workload defined before
 final evidence is opened.** A completed platform and an honest negative ML result
 remain valuable engineering outputs, but they do not satisfy this project's
@@ -133,7 +131,7 @@ Upgrade the current thread pool and “interruption means failure” semantics t
 
 **Gate A2:** Deterministic tests cover worker crash, API restart, duplicate claim, and cancellation; two concurrent runs isolate memory, results, errors, and checkpoints; resumed final compliance, volume, and density meet consistency checks; defaults do not permit unlimited concurrency or unbounded problems.
 
-Suggested milestone: `v1.2.0`. Consider `v2.0.0` only if the public API becomes incompatible; do not increment the major version merely for perceived importance.
+Suggested interim milestone: `v1.2.0`. Reserve the `v2.0.0` project milestone for the full flagship delivery gate; document API compatibility separately.
 
 ### A3: Performance engineering and wider evidence
 
@@ -302,7 +300,7 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 1. **A1.1–A1.4 and Gate A1:** completed as separate slices.
 2. **M3 v1 planning gate:** completed, then superseded before fitting or final
    evidence because it does not address the full delivery objective.
-3. **B0 development-only feasibility probe and roadmap correction:** this slice.
+3. **B0 development-only feasibility probe and roadmap correction:** completed.
 4. **B1 numerical convergence and learned-quality root cause:** next slice; no
    new training or final evidence.
 5. **A3 baseline-affecting solver performance:** freeze numerical changes and
@@ -333,6 +331,6 @@ Measure later work by evidence rather than feature count:
 
 Platform and numerical milestones remain separately valuable and truthfully
 reportable. They do not substitute for the required positive ML result in the
-full v1.x flagship delivery decision. A failed ML experiment is retained as
+full v2 flagship delivery decision. A failed ML experiment is retained as
 evidence and informs the next explicitly bounded intervention; no final project
 completion claim follows from a failed ML gate.

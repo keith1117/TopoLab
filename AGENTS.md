@@ -9,7 +9,7 @@ Read these files in order:
 3. `docs/reference_baseline.md`
 4. `docs/planning/TopoLab_reimplementation_strategy.md`
 5. `docs/planning/TopoLab_development_timeline_and_resources.md`
-6. `docs/planning/TopoLab_post_v1_development_roadmap.en.md`
+6. `docs/planning/TopoLab_v2_development_roadmap.md`
 7. The contracts and latest validation reports relevant to the requested slice.
 
 ## Current project state
@@ -17,7 +17,7 @@ Read these files in order:
 The historical `v1.0.0` release and Gates N1, N2, P1, M0, and A1 are complete.
 M1 did not establish learned acceleration; M2 failed its data gate; the bounded
 M3 v1 pre-registration was superseded before fitting or final evaluation. The
-active v1.x roadmap requires reproducible, same-quality ML end-to-end acceleration
+active v2 roadmap requires reproducible, same-quality ML end-to-end acceleration
 on a predefined workload before the full flagship project is delivered. Until
 that evidence exists, uniform initialization is the operational default and no
 accelerated claim is allowed.
@@ -25,7 +25,7 @@ accelerated claim is allowed.
 The current Track B sequence begins with development-only warm-start feasibility
 evidence in `docs/validation/ml_feasibility_probe.md`. The next independent slice
 is B1: diagnose numerical convergence and learned-quality failures before new
-training. Follow the active English roadmap for later gates and slice order.
+training. Follow the v2 English roadmap for later gates and slice order.
 
 ## Provenance boundary
 

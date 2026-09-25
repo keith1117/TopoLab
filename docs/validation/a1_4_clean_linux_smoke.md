@@ -70,7 +70,7 @@ the smoke checked the API, SQLite restart behavior, and served frontend assets; 
 the frontend's separate Linux CI job built and tested the UI. The A1.1–A1.3
 reports cover the canonical case, container packaging, architecture, and recorded
 interaction. Together these meet Gate A1 as defined in the
-[v1.x roadmap](../planning/TopoLab_post_v1_development_roadmap.en.md).
+[v2 roadmap](../planning/TopoLab_v2_development_roadmap.md).
 
 This evidence covers one fresh Ubuntu x86-64 runner. The Linux smoke reads built
 assets but does not automate browser interaction; the A1.3 video shows that flow on

@@ -6,7 +6,7 @@ Source revision before this slice: `8601908e2afa9a538ad8c8f0a5e9da1132acce09`
 
 Status: **Gate B0 passes for actual conditional warm-start headroom. No learned
 acceleration claim follows.** The next slice must diagnose the numerical and
-learned-quality gap before any new fitting. The full v1.x flagship ML delivery
+learned-quality gap before any new fitting. The full v2 flagship ML delivery
 gate remains open.
 
 ## Evidence boundary
@@ -93,7 +93,7 @@ meeting the frozen quality contract on all development validation cases. This
 supports further *targeted* ML work rather than extra MSE epochs as a default.
 The old `topolab.m3.experiment.v1` pre-registration is superseded before fitting
 or final evidence. The active
-`docs/planning/TopoLab_post_v1_development_roadmap.en.md` requires positive
+`docs/planning/TopoLab_v2_development_roadmap.md` requires positive
 learned end-to-end acceleration for full flagship delivery, with a fresh
 versioned experiment and sealed final cohort.
 

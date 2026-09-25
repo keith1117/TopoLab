@@ -8,11 +8,11 @@ that historical v1 decision is `docs/m3_preregistration.md`. M1 and M2 retain
 their failed gates; uniform remains the operational default.
 
 Historical update: that bounded M3 v1 follow-up was superseded before M3.1,
-fitting, or final evaluation when the full v1.x flagship delivery condition was
+fitting, or final evaluation when the full v2 flagship delivery condition was
 changed to require positive learned acceleration. This planning-gate result is
 preserved, not promoted to evidence of acceleration. The active plan and new
 development-only feasibility evidence are in
-`docs/planning/TopoLab_post_v1_development_roadmap.en.md` and
+`docs/planning/TopoLab_v2_development_roadmap.md` and
 `docs/validation/ml_feasibility_probe.md`.
 
 ## Evidence and method
@@ -122,5 +122,5 @@ tolerance or source behavior changed in this document-only slice.
 
 At the time of this report, the next recommended independent slice was **A2.1
 worker protocol**, followed by A2.2 and M3.1. This historical sequencing was
-superseded before M3.1; consult the active v1.x roadmap for the current next
+superseded before M3.1; consult the active v2 roadmap for the current next
 slice.

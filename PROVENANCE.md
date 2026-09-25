@@ -40,7 +40,7 @@ Hex8 finite elements, density filtering, or the Optimality Criteria method.
 
 ## ML planning references, not implemented results
 
-The v1.x acceleration roadmap considers, as possible future interventions, the
+The v2 acceleration roadmap considers, as possible future interventions, the
 published ideas of theory-guided topology learning
 ([Cang, Yao, and Ren, 2019](https://arxiv.org/abs/1807.10787)),
 algorithm-aware 3D learning from intermediate states
