@@ -3,6 +3,13 @@
 English counterpart of [the Chinese assessment](./TopoLab_development_timeline_and_resources.md).
 Related documents: [Admissions fit](./TopoLab_admissions_fit_assessment.en.md) · [Numerical Core reimplementation strategy](./TopoLab_reimplementation_strategy.en.md)
 
+Current v1.x scheduling override: this document retains the original estimates
+and `v1.0.0` closeout as historical planning evidence. The active
+[v1.x roadmap](./TopoLab_post_v1_development_roadmap.en.md) makes reproducible
+learned end-to-end acceleration a required full-flagship delivery gate. Its
+research duration is uncertain and cannot be guaranteed by the 10–14-week
+historical estimate.
+
 ## Target project
 
 **TopoLab — Reproducible 3D Topology Optimization Platform**
@@ -140,7 +147,12 @@ If a gate fails, fix that layer before building over it.
 
 ### Level 3: Full flagship project
 
-**Estimated 10–14 weeks.** Extend Level 2 with a reproducible generation pipeline, a density-field warm-start model, uniform/physics/nearest-neighbor baselines, OOD tests, ablations, multiple seeds, time/iteration/compliance/volume/failure statistics, deployment, a technical report, and a demo.
+**Historical estimate: 10–14 weeks, now open-ended for delivery.** Extend Level 2
+with a reproducible generation pipeline, a learned acceleration method,
+uniform/physics/nearest-neighbor baselines, OOD tests, ablations, multiple seeds,
+time/iteration/compliance/volume/failure statistics, deployment, a technical
+report, and a demo. Full v1.x flagship delivery additionally requires the positive
+ML gate in the active roadmap.
 
 Estimated fit under that *hypothetical complete scope*:
 
@@ -154,7 +166,12 @@ Estimated fit under that *hypothetical complete scope*:
 
 ## Main schedule risk
 
-Whether ML beats conventional initialization is the biggest uncertainty. If the first model fails to beat uniform or physics-based baselines, another **2–4 weeks** might be needed to change the input representation, model, dataset balance, leakage controls, training target, or failure analysis. A negative ML result does not negate a strong numerical/platform contribution, though it limits AI/ML positioning.
+Whether ML beats conventional initialization is the biggest uncertainty. The
+original **2–4 additional weeks** was a planning estimate, not a bound on the
+remaining research. If a model fails, preserve the result, diagnose the cause,
+and register a finite new intervention with fresh final evidence. A negative ML
+result does not erase numerical/platform contributions, but it means the full
+v1.x flagship project has not met its delivery condition.
 
 ## Physical equipment and materials
 
@@ -213,18 +230,28 @@ G0 then releases Numerical Core work; no GPU, cloud server, printer, or addition
 
 The success criterion is independently testable, repeatable numerical behavior, not attractive 3D images.
 
-## ML stopping and downgrade rules
+## ML experiment stopping and flagship delivery rules
 
 - Establish uniform, physics-based, and nearest-neighbor baselines before neural training.
 - Use one lightweight model family, a bounded hyperparameter budget, and at least three seeds in the first round.
 - Warm starts must meet the same volume and final compliance tolerance, with inference charged to end-to-end time.
-- If held-out/OOD cases show no stable gain, freeze the result and write a failure analysis; drop `with Learned Warm Starts` from the project title.
-- Do not expand models, data, or cloud spending indefinitely to obtain a resume number.
+- If held-out/OOD cases show no stable gain, freeze that experiment and write a
+  failure analysis. Keep the existing truthful public title, but do not mark the
+  full v1.x flagship delivered.
+- Use a measured root cause, a new finite contract, and fresh final evidence for
+  each subsequent attempt. Do not expand models, data, or cloud spending without
+  a reviewable budget to obtain a resume number.
 
-## Recommended execution strategy
+## Current execution strategy
 
-1. Spend **6–9 weeks** first on a strong CS/SWE version whose numerical core, architecture, tests, and performance evidence stand on their own.
-2. Spend another **3–5 weeks** on ML warm starts, baselines, OOD, and ablations.
-3. If ML does not produce stable acceleration, report the negative result and keep standard SIMP fallback.
+1. Keep the completed numerical and platform milestones as independently
+   validated interim outputs.
+2. Prioritize measured warm-start feasibility, numerical failure repair, and a
+   meaningful workload/scale pilot before any new production ML fitting.
+3. Freeze a new bounded experiment only after the pilot identifies attainable
+   quality-preserving savings. Run final evaluation once on new evidence.
+4. If the ML gate fails, retain the negative result, plan a finite new versioned
+   intervention, and keep the full flagship delivery status open.
 
-This sequence avoids making the whole project depend on a positive ML experiment while preserving distinct CS, SWE, AI, ML, Information Systems, and Scientific Computing narratives.
+The active roadmap defines the detailed gates. These stages do not promise a
+completion date or a positive empirical result in advance.

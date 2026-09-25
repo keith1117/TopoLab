@@ -3,9 +3,17 @@
 Date: 2026-09-25
 
 Status: **Gate M3.0 passes for a bounded, falsifiable follow-up. No new label,
-checkpoint, model fit, or final evaluation was produced.** The binding plan is
-`docs/m3_preregistration.md`. M1 and M2 retain their failed gates; uniform remains
-the operational default.
+checkpoint, model fit, or final evaluation was produced.** The binding plan for
+that historical v1 decision is `docs/m3_preregistration.md`. M1 and M2 retain
+their failed gates; uniform remains the operational default.
+
+Historical update: that bounded M3 v1 follow-up was superseded before M3.1,
+fitting, or final evaluation when the full v1.x flagship delivery condition was
+changed to require positive learned acceleration. This planning-gate result is
+preserved, not promoted to evidence of acceleration. The active plan and new
+development-only feasibility evidence are in
+`docs/planning/TopoLab_post_v1_development_roadmap.en.md` and
+`docs/validation/ml_feasibility_probe.md`.
 
 ## Evidence and method
 
@@ -112,6 +120,7 @@ Repository validation before commit: `uv sync --dev --locked`,
 `git diff --check`, and `git diff --cached --check` all passed. No numerical
 tolerance or source behavior changed in this document-only slice.
 
-The next independent slice in the recommended v1.x sequence is **A2.1 worker
-protocol**. A2.2 durability follows it; M3.1 returns to the frozen data gate
-after those platform slices. Start each only on a new user instruction.
+At the time of this report, the next recommended independent slice was **A2.1
+worker protocol**, followed by A2.2 and M3.1. This historical sequencing was
+superseded before M3.1; consult the active v1.x roadmap for the current next
+slice.

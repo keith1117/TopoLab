@@ -1,8 +1,11 @@
 # TopoLab v1.x Development Roadmap
 
-English counterpart of [the Chinese roadmap](./TopoLab_post_v1_development_roadmap.md).
+Active English roadmap. [The Chinese document](./TopoLab_post_v1_development_roadmap.md)
+is a historical translation of the earlier plan.
 
-Status: **v1.x plan, starting from the released `v1.0.0`; Gate A1 passed on 2026-09-25**
+Status: **active v1.x flagship delivery plan; Gate A1 passed; ML acceleration is a
+required delivery gate, not an optional enhancement.** The released `v1.0.0` and
+its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
 
@@ -13,6 +16,8 @@ Related documents:
 - [v1.0.0 release validation](../validation/v1_release_validation.md)
 - [M1 held-out evaluation](../validation/m1_held_out_evaluation.md)
 - [M2 materialization outcome](../validation/m2_catalog_materialization.md)
+- [M3 v1 pre-registration](../m3_preregistration.md)
+- [Development-only warm-start feasibility probe](../validation/ml_feasibility_probe.md)
 - [A1.1 canonical demo validation](../validation/a1_1_canonical_demo.md)
 - [A1.4 clean Linux validation and Gate A1 decision](../validation/a1_4_clean_linux_smoke.md)
 
@@ -36,37 +41,57 @@ Remaining gaps fall into two groups:
 
 Future work must not rewrite or erase historical `v1.0.0`, M1, or M2 conclusions. New experiments, numerical conventions, and platform contracts need fresh version identities and separate validation reports.
 
-## 2. Goals and priorities
+## 2. Flagship delivery condition and priorities
 
-Two independent tracks:
+**The full v1.x flagship project is not delivered until a learned method achieves
+reproducible, same-quality, end-to-end acceleration on a workload defined before
+final evidence is opened.** A completed platform and an honest negative ML result
+remain valuable engineering outputs, but they do not satisfy this project's
+requested final delivery condition. Do not rename or describe the whole project as
+fully delivered while this ML gate is open. The historical `v1.0.0` release is not
+retroactively withdrawn or relabeled.
 
-- **Track A: Productization and scientific software engineering.** Improve reproducibility, demonstrations, run isolation, recovery, and performance evidence for CS/SWE/Scientific Computing applications.
-- **Track B: M3 learned warm starts.** Within a bounded pre-registered budget, address data availability and generalization and seek a new positive ML result while keeping failures auditable.
+The minimum ML delivery gate requires a fresh, physically disjoint final cohort;
+an optimized, version-matched uniform reference and fixed non-ML baselines; all
+inference, projection, decision, refinement, rejection, and fallback costs in the
+paired end-to-end comparison; the frozen compliance, convergence, and volume
+quality checks; zero accepted learned quality failures; and an upper 95% confidence
+limit below `1.0` for the predeclared primary mean time ratio **at each of at
+least two predeclared 3D mesh scales**. The predeclared OOD cohort must have zero
+accepted quality failures and an upper 95% time-ratio limit `<= 1.05`; safe
+rejection is allowed but its full cost is charged. Before any final evaluation,
+the new experiment contract must additionally fix its meaningful repeated-query
+workload, mesh/volume/load strata, hardware, seeds, minimum effect worth
+claiming, independent replication, and OOD definition. Report generation,
+training, and checkpoint-loading cost separately and provide an amortization
+analysis. A favorable subgroup found after evaluation cannot replace the declared
+primary cohort. `Accelerated` wording remains restricted to the exact workload and
+environment that pass; broader stability claims require their own evidence.
 
-| Priority | Stage | Rationale |
+Track A continues to improve the platform. Track B is now a **success-directed ML
+engineering program** with a finite budget and an explicit decision at each
+versioned experiment gate. A failed gate triggers diagnosis and a new independently
+registered intervention; it does not count as project completion or permit an
+unregistered search on an exposed final set. Time and compute estimates beyond the
+next diagnostic gate remain provisional: an empirical positive result cannot be
+guaranteed by scheduling more epochs.
+
+| Priority | Stage | Reason |
 |---|---|---|
-| P0 | A1 reproducible demo | Low cost and high presentation value without new experimental results |
-| P0 | M3.0 diagnosis and pre-registration | Freeze scope and compute budget before more training |
-| P1 | A2 process isolation and recovery | Address the clearest platform gap |
-| P1 | M3.1 data gate | Decide whether M3 may proceed to fitting |
-| P1 | A3 performance/cross-environment evidence | Expand evidence without a broad scalability claim |
-| P2 | M3.2–M3.4 fitting and final evaluation | Only after the data gate passes |
-| P2 | A4 controlled deployment and feedback | Only after isolation and resource limits |
+| P0 | B0 measured warm-start feasibility | Establish actual solver headroom on development cases |
+| P0 | B1 convergence and learned-failure diagnosis | Fix numerical failures and identify the quality bottleneck before expanding training |
+| P0 | A3 baseline-affecting solver performance | Freeze a fair optimized uniform denominator before workload selection |
+| P0 | B2 workload and scale pilot | Select a real repeated-query task with room for fair end-to-end gain |
+| P0 | B3 new versioned experiment contract | Freeze data, model/loss, compute, reliability, and final evidence before fitting |
+| P1 | A2 process isolation and recovery | Keep the platform safe for longer runs |
+| P1 | B4 data, fitting, and validation | Improve and screen the learned method without final-data feedback |
+| P1 | B5 one-time final evaluation and replication | Decide the ML delivery gate on new evidence |
+| P2 | A4 deployment and feedback | Follow isolation and resource limits |
 
-Rough effective development effort for scheduling, not a commitment; production generation and evaluation wait time are additional:
-
-| Stage | Estimated effort |
-|---|---:|
-| A1 reproducible demo | 4–7 days |
-| A2 process isolation and recovery | 8–15 days |
-| A3 performance engineering | 4–8 days |
-| A4 controlled deployment | 3–7 days |
-| M3.0 diagnosis and pre-registration | 2–4 days |
-| M3.1 data gate | 3–6 days plus materialization |
-| M3.2–M3.3 fitting and freeze | 7–14 days plus training |
-| M3.4 final evaluation | 2–4 days plus evaluation |
-
-The tracks may alternate, but each PR handles one verifiable behavior. Do not mix platform restructuring, numerical-semantic changes, data generation, and model training in one slice.
+Each slice remains independently reviewable. Numerical-semantic changes, platform
+work, data materialization, and model training stay in separate PRs. Report actual
+time, memory, and data-generation cost at every gate; do not turn old estimates
+into a promise of a positive result.
 
 ## 3. Track A: Work outside ML
 
@@ -122,6 +147,10 @@ Profile first, optimize one bounded bottleneck, and expand benchmark environment
 
 **Gate A3:** Compare before/after on the same problem, environment, thread count, and protocol; preserve frozen small-mesh tolerances; obtain a stable gain on the target metric without obvious regression at other scales. Use `faster` or `lower-memory` only within measured scope, and avoid a broad `scalable` claim without larger cross-platform evidence.
 
+Complete any A3 change that affects the uniform solver's timing or numerical
+behavior before B2's workload pilot and B3's ML contract. Later measurements
+cannot silently change the final comparison denominator.
+
 Suggested milestone: `v1.3.0`.
 
 ### A4: Controlled deployment and external feedback
@@ -136,81 +165,125 @@ After A2 isolation and limits, offer a safe, low-cost public demonstration or a 
 
 **Gate A4:** Deployment cannot bypass Numerical Core input validation or limits; internal paths, device identifiers, databases, and external experiment artifacts are not exposed; shutdown, cleanup, and cost bounds are clear; README distinguishes local demo, hosted demo, and production service.
 
-## 4. Track B: M3 learned warm starts
+## 4. Track B: required learned acceleration
 
-### M3 evidence boundary
+### Historical boundary and M3 v1 disposition
 
-M3 is a new experiment, not a rerun or retrospective “fix” of M2:
+M1's six ID-test and 80 OOD cases are exposed; M2's complete 756-case outcome
+index is development information. M1/M2 artifacts, negative conclusions, and
+their original gates remain immutable. The bounded `topolab.m3.experiment.v1`
+contract passed its *planning* gate but is **superseded before M3.1, fitting, or
+final evaluation**. Its 425-label MSE control plus one dilated 11,281-parameter
+CNN was a legitimate small experiment, but it did not repair the M2 convergence
+issue or establish that prediction quality would reach the actual warm-start
+headroom. No M3 v1 final label or learned outcome was opened. Its final case
+definitions were published in the contract, so mark them **design-exposed** and
+keep them out of the next final cohort. Do not quietly edit that historical
+pre-registration or treat its planning gate as an acceleration gate. The next
+experiment must use a new contract/catalog identity and ledger of all
+development-exposed physical cases; all new final labels and outcomes remain
+sealed until the new freeze.
 
-- M1's six ID-test and 80 OOD cases have been exposed and may be used only for diagnosis.
-- M2 materialization outcomes, failure patterns, and inspected statistics are development information.
-- Successful M2 labels may be considered for development train/validation only after a new contract records their provenance. This does not turn M2 into a passed gate.
-- M3 needs new, physically disjoint final ID-test and OOD sets.
-- Final labels cannot inform fitting, selection, reliability thresholds, or stopping.
-- M1/M2 artifacts and reports remain immutable.
+### B0: Actual warm-start feasibility — complete development probe
 
-### M3.0: Failure diagnosis and pre-registration
+The read-only probe in `docs/validation/ml_feasibility_probe.md` used only the 36
+M2 validation labels as an impossible label-informed initialization, plus the seven
+failed M2 training case definitions. All 36 oracle starts passed the frozen quality
+checks after one SIMP iteration; the mean paired projected-start/uniform time ratio
+was about `0.072` in two local runs. This shows that the frozen solver has
+substantial *conditional* warm-start headroom when an essentially exact solution
+is supplied. It does **not** show a learned or deployable speedup. All seven failed
+training cases still missed the 120-iteration tolerance; their final ten density
+changes and compliances decreased, which points to slow terminal progress on these
+cases but does not identify a general solver fix.
 
-Before writing new model code or training, determine whether failure arises from data, representation, objective, optimization budget, or the warm-start approach itself.
+### B1: Fix the numerical and learned-failure bottlenecks
 
-Allowed diagnosis: stratify exposed M1/M2 cases by direction, volume, load location, and convergence; examine projection before/after, initial compliance, final quality failures, and refinement iterations; study the ten M2 non-convergent cases without silently turning them into successful labels; estimate an ideal warm start's speedup ceiling; and use a train/validation-only pilot for data loading and loss computation without opening new final evidence.
+1. Reproduce the seven development-only `y, 0.45` traces and analyze the ten
+   exposed M2 terminal failures without using M2 test/OOD label values.
+2. Distinguish finite-budget slow convergence, periodic behavior, and optimizer
+   instability using density/compliance trajectories and independent volume checks.
+3. If a solver change is justified, predefine its numerical acceptance tests,
+   version the solver and labels, and rerun **every compared method** under the
+   same revision. Do not silently raise the iteration budget or loosen tolerance.
+4. On development-only cases, replay M1 predictions to compare raw and projected
+   fields, initial compliance, final quality, and refinement trajectory against the
+   known label oracle. Identify whether data coverage, representation, density MSE,
+   or warm-start basin behavior dominates the gap.
 
-Pre-registration must freeze one main question and success metric; case schema/catalog/split/exposure ledger/artifact version; label success/failure policy and maximum solver budget; at most two model candidates, one main loss, and one defined ablation; seeds, epochs, early stopping, selection, and hardware budget; a finite set of reliability/fallback strategies; and the final ID/OOD gates and one-time opening order.
+**Gate B1:** A reproducible failure mechanism and a tested correction or explicit
+unchanged-solver decision are recorded. The next model intervention targets a
+measured bottleneck; simply doubling epochs is not a correction.
 
-**Gate M3.0:** The diagnosis yields one falsifiable main hypothesis and a bounded budget. If no proposed intervention plausibly improves end-to-end time, stop M3 and continue Track A.
+### B2: Choose a workload with measured attainable savings
 
-### M3.1: Data availability and a new evidence boundary
+After the baseline-affecting A3 work is frozen, pilot a small, fixed
+development-only mesh ladder and representative repeated-query
+load/support/volume families. Run optimized uniform, the frozen non-ML baselines,
+label-informed oracle starts, and current learned starts on matched numerical
+settings. Record per-iteration FEM, inference, projection, memory, and fallback
+costs. Include difficult volume strata rather than choosing only favorable
+low-volume cases. Select a meaningful workload and mesh range for the new claim
+*before* any new final labels or outcomes exist.
 
-Establish the data gate before fitting:
+**Gate B2:** A quality-feasible oracle and at least one attainable development
+prototype have enough measured savings to justify training and final evaluation.
+If exact-label warm starts cannot beat an optimized uniform reference on the
+intended workload, pivot to a separately versioned learned optimizer-step or
+numerical-cost intervention; more final-density MSE training is not warranted.
 
-1. Build an exposure ledger of every physical case seen in M0/M1/M2.
-2. Freeze new train/validation/final-ID/OOD generation and a content-derived catalog ID.
-3. Specify solver termination, failure retention, and usable-label policy in the contract.
-4. Run a read-only production plan before authorized materialization outside the repository.
-5. Audit manifest, index, checksums, split counts, failure strata, and label quality.
-6. Implement or run fitting only after the data gate passes.
+### B3: New versioned contract, exposure ledger, and data gate
 
-M3 need not demand universal label success, but it must choose one rule before seeing outcomes:
+Freeze a new experiment identity rather than amending M3 v1. Specify the primary
+workload and all train/validation/final-ID/OOD physical-case strata, content-derived
+catalog, solver revision, label-success rule, and complete exposure ledger. Use
+physically disjoint final cases and prevent their labels/outcomes from reaching
+model development. Any new data generation has a read-only clean-revision plan,
+external artifact root, fixed compute budget, and checksum audit before fitting.
+Preserve every failed case and its denominator. A solver fix or new workload needs
+new labels; known M2 successes may be reused only under an explicit provenance and
+compatibility rule.
 
-- **Complete-label gate:** Every train/validation case converges; or
-- **Pre-registered availability gate:** Retain each failure, apply a fixed split-independent rule for usable successful labels, and require minimum coverage by stratum.
+The bounded model program must directly address B1/B2 evidence. Candidate
+interventions may include a physics-conditioned input, an intermediate-state
+target, or a quality-aligned objective rather than a larger CNN by default.
+[Theory-guided learning](https://arxiv.org/abs/1807.10787),
+[3D algorithm-aware intermediate-state learning](https://arxiv.org/abs/2012.05359),
+and [strain-energy conditioning](https://arxiv.org/abs/2305.10460) motivate
+testable options; their published outcomes are not TopoLab evidence. Freeze a small
+control/candidate/ablation set, seeds, epochs, selection metric, hardware and memory
+budget, stopping rule, and finite reliability policies before training. Charge any
+physics feature's FEM solve at query time.
 
-Do not raise iterations, remove cases, change splits, or issue a second catalog under the same name after observing particular failures.
+**Gate B3:** Provenance, disjointness, label quality, per-stratum availability, and
+the compute budget pass audit; otherwise do not fit.
 
-**Gate M3.1:** All artifacts pass audit; train/validation coverage meets pre-registration; final cases remain unread by model-development code. Otherwise stop before training.
+### B4: Fit, screen, and freeze on development data only
 
-### M3.2: Bounded model improvement
+Compare each model to uniform and non-ML baselines on fallback-inclusive
+validation time, independent compliance, convergence, volume, and failure strata.
+Calibrate only predeclared reliability thresholds. Rejected candidates pay all
+inference/decision plus uniform time; accepted failures retain a full fallback
+charge. A candidate that improves image MSE but not operational quality and time
+does not advance. Retain every case and seed. Freeze code, checkpoints, thresholds,
+statistics, environment, and source revision before final evaluation.
 
-Test one main intervention rather than an unbounded architecture search:
+**Gate B4:** A meaningful validation gain over the optimized uniform and fixed
+non-ML alternatives survives all charges and quality checks. Otherwise diagnose,
+version a new hypothesis, and leave final evidence sealed.
 
-1. **Control:** Retrain the small M1 CNN on M3 training data to isolate the benefit of more data.
-2. **Primary candidate:** Choose one change from M3.0 diagnosis, such as direction/geometry-aware representation, a solution-quality-aligned objective, or a small multiscale network.
-3. **One ablation:** Remove only the candidate's core new component.
-4. Use the same fixed seeds, data boundary, and selection rule for each candidate.
-5. Record training cost, parameter count, peak memory, and checkpoints.
+### B5: One-time final comparison and project delivery gate
 
-Do not combine large models, generative models, reinforcement learning, a surrogate solver, and GPU FEM in M3. If the primary candidate cannot improve both quality reliability and the prospect of end-to-end time on validation, do not open final test.
-
-**Gate M3.2:** Selection uses only train/validation. Retain every seed; no apparent validation gain may depend on deleting seeds or cases or ignoring fallback.
-
-### M3.3: Reliability strategy and freeze
-
-Reduce poor warm starts without hiding cost. Pre-register a finite list of reliability scores and thresholds and choose on validation only. Reject-to-uniform charges inference, decision, and full uniform cost. Accepted failures remain visible and charge a fresh uniform fallback. Freeze model, checkpoint, threshold, statistics code, and runtime before final evaluation.
-
-**Gate M3.3:** Rebuild frozen artifacts from a clean revision and locked environment. No final case may undergo a learned comparison before the freeze.
-
-### M3.4: One-time final evaluation
-
-Answer whether learned warm starts help on fresh untouched evidence. Report uniform, physics heuristic, training-only nearest neighbor, M1 control, and M3 candidate; setup/inference/projection/refinement/fallback/end-to-end times; compliance, volume error, iterations, failures, rejections, and fallback; physical-case-cluster bootstrap intervals; and ID and OOD separately.
-
-Suggested conservative claim gate carried from M2:
-
-- Upper 95% confidence limit for the ID mean candidate/uniform time ratio `< 1.0`;
-- Zero quality failures/fallbacks among accepted learned attempts;
-- Every operational result meets convergence, volume, and compliance quality bounds; and
-- No post-observation removal of cases, seeds, methods, or timing phases.
-
-Use `OOD-safe` only if OOD failures are zero and the upper 95% limit for the OOD mean time ratio is `<= 1.05`. Otherwise publish the negative result, keep uniform as default, and do not start an unregistered M3.5 search for a favorable answer.
+Open the new ID cohort once after B4, followed by predeclared OOD and independent
+replication in the frozen order. Report phase costs, paired physical-case bootstrap
+intervals, quality, volume, iterations, failed/rejected/fallback cases, memory,
+training/generation cost, and amortization. The exact workload-specific claim gate
+must have been fixed in B3 and must meet the minimum in Section 2. If any required
+stratum or independent replication fails, publish the negative result without
+changing the cohort, threshold, solver, or model. The project remains **in
+development**, not fully delivered. Plan a finite new versioned experiment from
+the diagnosed cause and reserve new final evidence. Do not start an unregistered
+search on B5 outcomes.
 
 ## 5. Version, branch, and validation rules
 
@@ -224,24 +297,27 @@ Use `OOD-safe` only if OOD failures are zero and the upper 95% limit for the OOD
 
 ## 6. Recommended sequence
 
-Based on admissions value, risk, and dependencies:
+The user-defined ML delivery condition changes the order, not PR size or gates:
 
-1. **A1.1 canonical demo and end-to-end smoke**;
-2. **A1.2 Docker/Compose local stack**;
-3. **A1.3 architecture diagram and demo video**;
-4. **A1.4 clean Linux smoke and Gate A1 decision**;
-5. **M3.0 diagnosis and pre-registration**;
-6. **A2.1–A2.2 separate-process worker and durable ownership**;
-7. **M3.1 new catalog, exposure ledger, and data gate**;
-8. **M3.2–M3.4**, only if M3.1 passes; and
-9. **A2.3, A3, A4** when profiling and deployment needs justify them.
+1. **A1.1–A1.4 and Gate A1:** completed as separate slices.
+2. **M3 v1 planning gate:** completed, then superseded before fitting or final
+   evidence because it does not address the full delivery objective.
+3. **B0 development-only feasibility probe and roadmap correction:** this slice.
+4. **B1 numerical convergence and learned-quality root cause:** next slice; no
+   new training or final evidence.
+5. **A3 baseline-affecting solver performance:** freeze numerical changes and
+   a fair optimized uniform reference before selecting the ML workload.
+6. **B2 workload/mesh headroom pilot:** one bounded development-only slice.
+7. **B3 new versioned ML contract and data gate:** first freeze the new final
+   boundary, then implement and audit data in independently reviewable slices.
+8. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+   separate PRs.
+9. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+   evaluation** only after B4 passes.
+10. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
-**Gate A1 and Gate M3.0 are complete:** The canonical case, local stack,
-architecture and demo, and clean Linux smoke passed their separate validation
-slices. Exposed-failure diagnosis and the bounded M3 pre-registration are recorded
-in `docs/validation/m3_preregistration.md` and `docs/m3_preregistration.md`.
-No new data generation or model fitting occurred in M3.0. The next independent
-slice is **A2.1**, limited to the separate-process worker protocol.
+After each completed independent slice, report its gate, evidence, limitations,
+and the next slice, then wait for a new user instruction before starting it.
 
 ## 7. Stage completion evidence
 
@@ -252,7 +328,11 @@ Measure later work by evidence rather than feature count:
 | Easier reproduction | One clean-environment path, fixed demo, smoke, run report |
 | More reliable platform | Crash/restart/cancel/concurrency/duplicate-claim tests and an explicit state machine |
 | Stronger performance | Phased profile, cross-environment benchmark, numerical equivalence |
-| More credible ML | New exposure boundary, pre-registered budget, one-time final evaluation |
+| Required ML acceleration | Correct numerical baseline, measured headroom, new exposure boundary, bounded interventions, and a passed fresh end-to-end claim gate |
 | Better application presentation | Traceable resume numbers; demos and README within claims boundaries |
 
-Even if M3 fails, completed A1–A3 would strengthen the CS/SWE/Scientific Computing project. A positive ML result is an added benefit, not a single point of failure for the development program.
+Platform and numerical milestones remain separately valuable and truthfully
+reportable. They do not substitute for the required positive ML result in the
+full v1.x flagship delivery decision. A failed ML experiment is retained as
+evidence and informs the next explicitly bounded intervention; no final project
+completion claim follows from a failed ML gate.

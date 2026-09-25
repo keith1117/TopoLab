@@ -38,6 +38,18 @@ and license compatibility are documented here and in the affected files.
 These sources define standard methods; they do not imply that TopoLab invented SIMP,
 Hex8 finite elements, density filtering, or the Optimality Criteria method.
 
+## ML planning references, not implemented results
+
+The v1.x acceleration roadmap considers, as possible future interventions, the
+published ideas of theory-guided topology learning
+([Cang, Yao, and Ren, 2019](https://arxiv.org/abs/1807.10787)),
+algorithm-aware 3D learning from intermediate states
+([Rade et al., 2021](https://arxiv.org/abs/2012.05359)), and strain-energy
+conditioning ([Chen, Joglekar, and Kara, 2023](https://arxiv.org/abs/2305.10460)).
+They motivated hypotheses only; no architecture, code, dataset, weights, figures,
+or reported speedup was imported. Any later implementation needs its own
+independent design, provenance entry, and TopoLab validation.
+
 ## Contribution log
 
 | Date | Component | Source/derivation | Notes |
@@ -91,3 +103,4 @@ Hex8 finite elements, density filtering, or the Optimality Criteria method.
 | 2026-09-24 | A1.2 local container stack | Original TopoLab Compose topology, API persistence entry point, and static frontend proxy configuration, informed by [Docker Compose](https://docs.docker.com/compose/how-tos/startup-order/), [uv's Docker guide](https://docs.astral.sh/uv/guides/integration/docker/), and the [NGINX unprivileged image](https://github.com/nginx/docker-nginx-unprivileged/blob/main/README.md) documentation | No upstream project code, figure, dataset, result, or model artifact used; runtime SQLite data stays in a Docker named volume outside Git |
 | 2026-09-24 | A1.3 architecture and demo evidence | Original TopoLab SVG architecture diagram and screen recording of the existing local Compose stack, derived from this repository's code and contracts | No upstream figure, media, source code, dataset, checkpoint, or generated run artifact used; captured run records remain outside Git |
 | 2026-09-25 | A1.4 clean Linux stack smoke | Original TopoLab CI and standard-library smoke checker for the existing Compose stack and canonical public problem, with environment and timing evidence recorded separately | No upstream source code, test script, dataset, result, or figure used; the disposable SQLite volume and run result are removed after the smoke |
+| 2026-09-25 | Development-only warm-start feasibility probe | Original TopoLab read-only comparison using the frozen M2 validation labels, public SIMP adapter, projection, and quality boundary; seven failed training case definitions were re-solved without changing their status | No M2 test/OOD or M3 final label read; no upstream code, dataset, result, model weight, or figure used; generated summaries stayed out of Git |
