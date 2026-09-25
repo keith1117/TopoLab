@@ -10,7 +10,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from topolab.fem import build_constrained_dofs, build_load_vector
 from topolab.mesh import generate_structured_hex8
 from topolab.model import FaceLoad, FixedFaceSupport, PointLoad
-from topolab.simp import SimpConfig, SimpIteration, optimize_simp
+from topolab.simp import SimpConfig, SimpIteration, TerminationPolicy, optimize_simp
 
 type Axis = Literal["x", "y", "z"]
 type Direction = Literal["x", "y", "z", 0, 1, 2]
@@ -190,6 +190,7 @@ def solve_problem(
     *,
     iteration_callback: IterationCallback | None = None,
     should_cancel: CancellationCheck | None = None,
+    termination_policy: TerminationPolicy = "design_max",
 ) -> TopologyResult:
     """Translate one public problem contract and run the numerical core."""
 
@@ -216,6 +217,7 @@ def solve_problem(
         move_limit=settings.move_limit,
         convergence_tolerance=settings.convergence_tolerance,
         max_iterations=settings.max_iterations,
+        termination_policy=termination_policy,
     )
     initial_density = (
         None if problem.initial_density is None else _as_float_array(problem.initial_density)
