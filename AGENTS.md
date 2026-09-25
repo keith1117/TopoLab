@@ -37,10 +37,12 @@ sentinels converged at 120 updates. B2.3 preserved all 61 source cases,
 versioned their iteration cap to 240, and passed 61/61 independent quality
 checks without changing the previous 53 accepted outcomes. See
 `docs/validation/b2_2_data_feasibility.md` and
-`docs/validation/b2_3_data_feasibility.md`. The next independent slice is
-B2.4: a complete, versioned 522-case development-label materialization and
-data gate. Do not fit a model or freeze a new final ML contract until its
-development data gate and prototype screening pass. Follow the v2 English
+`docs/validation/b2_3_data_feasibility.md`. B2.4 passed the complete 522/522
+development-label and resource Gate; see
+`docs/validation/b2_4_development_labels.md`. The next independent slice is
+B2.5: fixed control/candidate prototype fitting and two-scale validation
+screening. Do not freeze a new final ML contract until its development
+prototype screening passes. Follow the v2 English
 roadmap for later gates and slice order.
 
 ## Provenance boundary

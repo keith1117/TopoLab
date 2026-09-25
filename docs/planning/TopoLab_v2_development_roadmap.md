@@ -1,7 +1,8 @@
 # TopoLab v2 Development Roadmap
 
 Status: **active v2 flagship delivery plan; Gates A1 and A3 passed; B2.2's
-120-update data gate failed, and B2.3's versioned 240-update sentinel passed;
+120-update data gate failed, B2.3's versioned 240-update sentinel passed,
+and B2.4's complete 522-label development data Gate passed;
 the B2 learned-prototype gate remains open;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
@@ -26,6 +27,7 @@ Related documents:
 - [B2.1 versioned convergence correction and matched audit](../validation/b2_1_convergence.md)
 - [B2.2 prototype plan and data-feasibility outcome](../validation/b2_2_data_feasibility.md)
 - [B2.3 budget repair and sentinel audit](../validation/b2_3_data_feasibility.md)
+- [B2.4 complete development-label audit](../validation/b2_4_development_labels.md)
 
 ## 1. Current baseline
 
@@ -288,10 +290,17 @@ case/result a new identity, and passed **61/61** independent quality checks.
 The former seven small failures stopped at update 125 and the new large
 failure at 170. The 53 previously accepted cases retained exactly their old
 stop iterations and final compliance. This is a sampled data-feasibility
-result, not a complete 522-label gate. **B2.4** is the next independent
-slice: freeze and materialize the full 522-case development catalog under
-the new budget, preserving every failure and resource cost. B2.5 prototype
-fitting follows only after that full data gate passes. B3 final-cohort
+result, not a complete 522-label gate.
+
+**B2.4 complete development-data Gate passed:** The
+[frozen 522-case materialization and audit](../validation/b2_4_development_labels.md)
+produced **522/522** valid labels across both mesh scales and every
+development stratum, with 0 failures. All artifact checksums, persisted
+float32 states, sensitivity weights, and independent compliance checks passed.
+Generation plus audit took 1,149.58 s and peaked at 402.5 MiB, within the
+frozen two-hour and 1 GiB caps. **B2.5** is the next independent slice:
+compare the predeclared control and candidate using these verified labels,
+matched budget-240 uniform references, and full fallback charges. B3 final-cohort
 registration remains premature until a development prototype establishes
 meaningful same-quality end-to-end savings.
 
@@ -382,10 +391,9 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 9. **B2.3 bounded data-feasibility repair:** completed; one versioned
    240-update budget passed all 61 fixed sentinel cases while preserving the
    previous 53 accepted outputs.
-10. **B2.4 development labels:** next independent slice; version the full
-    522-case catalog, materialize every required label from a clean revision,
-    and enforce the complete data and resource gate.
-11. **B2.5 prototype fitting:** only after B2.4 passes; compare the fixed
+10. **B2.4 development labels:** completed; all 522 versioned labels and their
+    artifact, numerical, population, and resource audits passed.
+11. **B2.5 prototype fitting:** next independent slice; compare the fixed
     control/candidate, retain all cases and failed attempts, and charge all
     inference, refinement, and fallback costs.
 12. **B3 new versioned ML contract and data gate:** after a successful
