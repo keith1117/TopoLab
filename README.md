@@ -164,9 +164,9 @@ frontend/                      React/TypeScript optimization workspace
 The platform contract and run lifecycle are documented in
 [`docs/platform_contract.md`](docs/platform_contract.md); the additive persistence
 contract is in [`docs/run_persistence.md`](docs/run_persistence.md).
-The English [v1.x development roadmap](docs/planning/TopoLab_post_v1_development_roadmap.en.md)
-links to English counterparts of the other three planning documents; the original
-Chinese versions remain alongside them.
+The [v2 development roadmap](docs/planning/TopoLab_v2_development_roadmap.md)
+and the other three English planning documents are the working references; Chinese
+companion versions are available in the same directory for reading.
 Frontend scope and local development are documented in
 [`docs/frontend.md`](docs/frontend.md).
 The first M0 data and evaluation contract is documented in
