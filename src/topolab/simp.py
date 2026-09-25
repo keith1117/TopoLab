@@ -4,6 +4,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from math import ceil, isfinite, sqrt
 from numbers import Integral, Real
+from typing import Literal
 
 import numpy as np
 from numpy.typing import NDArray
@@ -16,6 +17,12 @@ from topolab.fem import (
     solve_linear_static,
 )
 from topolab.mesh import Hex8Mesh
+
+type TerminationPolicy = Literal["design_max", "physical_plateau"]
+
+PHYSICAL_PLATEAU_SOLVER_VERSION = "topolab.simp.physical_plateau.v1"
+_PHYSICAL_PLATEAU_WINDOW = 10
+_PHYSICAL_PLATEAU_COMPLIANCE_RELATIVE_LIMIT = 2e-4
 
 
 @dataclass(frozen=True, slots=True)
@@ -47,6 +54,7 @@ class SimpConfig:
     move_limit: float = 0.2
     convergence_tolerance: float = 0.01
     max_iterations: int = 100
+    termination_policy: TerminationPolicy = "design_max"
 
 
 @dataclass(frozen=True, slots=True)
@@ -374,6 +382,7 @@ def optimize_simp(
         physical_volume_gradient,
     )
     history: list[SimpIteration] = []
+    recent_physical_changes: list[float] = []
     converged = False
 
     for iteration in range(1, config.max_iterations + 1):
@@ -393,6 +402,12 @@ def optimize_simp(
         )
         density_change = float(np.max(np.abs(updated_design - design_density)))
         updated_physical = apply_density_filter(density_filter, updated_design)
+        if config.termination_policy == "physical_plateau":
+            recent_physical_changes.append(
+                float(np.max(np.abs(updated_physical - physical_density)))
+            )
+            if len(recent_physical_changes) > _PHYSICAL_PLATEAU_WINDOW:
+                recent_physical_changes.pop(0)
         updated_analysis = evaluate_compliance(
             mesh,
             updated_physical,
@@ -418,7 +433,18 @@ def optimize_simp(
         design_density = updated_design
         physical_density = updated_physical
         analysis = updated_analysis
-        if density_change <= config.convergence_tolerance:
+        if density_change <= config.convergence_tolerance or (
+            config.termination_policy == "physical_plateau"
+            and len(history) >= _PHYSICAL_PLATEAU_WINDOW + 1
+            and max(recent_physical_changes) <= config.convergence_tolerance
+            and 0.0
+            <= (
+                history[-_PHYSICAL_PLATEAU_WINDOW - 1].compliance
+                - analysis.compliance
+            )
+            / history[-_PHYSICAL_PLATEAU_WINDOW - 1].compliance
+            <= _PHYSICAL_PLATEAU_COMPLIANCE_RELATIVE_LIMIT
+        ):
             converged = True
             break
 
@@ -517,6 +543,8 @@ def _validate_optimizer_config(config: SimpConfig) -> None:
         raise TypeError("max_iterations must be an integer")
     if config.max_iterations <= 0:
         raise ValueError("max_iterations must be positive")
+    if config.termination_policy not in {"design_max", "physical_plateau"}:
+        raise ValueError("unsupported termination_policy")
 
 
 def _positive_finite(name: str, value: float) -> float:

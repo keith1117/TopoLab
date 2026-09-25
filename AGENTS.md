@@ -28,11 +28,14 @@ Track B has development-only warm-start feasibility evidence in
 `docs/validation/a3_solver_ordering.md`. The fixed B2 workload pilot is recorded
 in `docs/validation/b2_workload_pilot.md`: Gate B2 failed because three of six
 larger uniform references did not converge at the frozen limit and the five
-unchanged M1 starts were slower after fallback charges. The next independent
-slice is B2.1, a bounded numerical convergence intervention for the large,
-high-volume cases. Do not freeze a new ML contract until the workload and
-quality-feasible comparison denominator are established. Follow the v2 English
-roadmap for later gates and slice order.
+unchanged M1 starts were slower after fallback charges. B2.1's opt-in,
+versioned physical-plateau policy made all twelve uniform references
+quality-feasible; its matched five-seed M1 panel remains slower after fallback
+charges. See `docs/validation/b2_1_convergence.md`. The next independent slice
+is B2.2: freeze a bounded development-only quality-aligned learned-prototype
+plan and data-feasibility gate. Do not freeze a new final ML contract until a
+development prototype has measured same-quality end-to-end savings. Follow
+the v2 English roadmap for later gates and slice order.
 
 ## Provenance boundary
 

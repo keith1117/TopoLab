@@ -122,6 +122,18 @@ to a frozen convention requires a documented reason and regression-test update.
   describe the same optimization state.
 - Re-solve the final density before returning final compliance.
 
+The historical `topolab.simp.v1` contract and public default use the maximum
+**design** density change above. B2.1 has a separate opt-in termination policy,
+`topolab.simp.physical_plateau.v1`, for development comparison only. It retains
+that design-change stop. Otherwise, after at least eleven completed updates,
+it may stop when each of the last ten maximum per-update **physical** density
+changes is at most the same `0.01` density scale and the compliance improvement
+over those ten updates is nonnegative and at most `0.0002` relative to the
+earlier compliance. This measures stability of the analyzed filtered state;
+it does not redefine an old design-change pass. OC updates, filtering,
+stiffness, and the configured iteration cap are unchanged. Results under this
+policy require its solver version alongside the physical-case identity.
+
 ## Reproducibility
 
 - A case records mesh, material, supports, loads, volume fraction, filter, optimizer,

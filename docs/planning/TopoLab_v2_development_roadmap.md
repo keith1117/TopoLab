@@ -1,8 +1,9 @@
 # TopoLab v2 Development Roadmap
 
-Status: **active v2 flagship delivery plan; Gates A1 and A3 passed; B2 pilot
-completed without passing its gate; ML acceleration is a required delivery
-gate, not an optional enhancement.** The released `v1.0.0` and
+Status: **active v2 flagship delivery plan; Gates A1 and A3 passed; B2.1
+numerical correction passed, while the B2 learned-prototype gate remains open;
+ML acceleration is a required delivery gate, not an optional enhancement.**
+The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
@@ -21,6 +22,7 @@ Related documents:
 - [A1.4 clean Linux validation and Gate A1 decision](../validation/a1_4_clean_linux_smoke.md)
 - [A3 solver-ordering audit](../validation/a3_solver_ordering.md)
 - [B2 workload pilot and gate decision](../validation/b2_workload_pilot.md)
+- [B2.1 versioned convergence correction and matched audit](../validation/b2_1_convergence.md)
 
 ## 1. Current baseline
 
@@ -254,14 +256,26 @@ passed, but three of six large references did not converge within the frozen
 120-iteration limit. The impossible own-result oracle showed conditional
 headroom on valid references; the five unchanged M1 seeds had mean
 fallback-inclusive time ratios of 1.64 (small) and 1.77 (valid large cases).
-These results do not establish a quality-feasible two-scale workload or a
-viable learned prototype. The next independent slice is **B2.1**, a bounded
-large-mesh/high-volume convergence intervention: freeze acceptance cases,
-evaluate one explicit OC or termination-policy correction, version any changed
-solver/case identity, and rerun every compared method on matched settings. If
-the intended workload remains infeasible, version a different development pilot.
-Then test a separately bounded, quality-aligned learned prototype before B3.
-The fixed-support pilot cannot support a claim about other support families.
+Those historical results did not establish a quality-feasible two-scale
+workload or a viable learned prototype. The fixed-support pilot cannot support
+a claim about other support families.
+
+**B2.1 numerical gate passed; learned-prototype gate still open:** The
+[versioned physical-plateau intervention](../validation/b2_1_convergence.md)
+retained the historical solver as the default and gave the new policy and
+results separate identities. All six small and six large uniform references
+passed the predeclared numerical acceptance checks within 120 updates; the
+three formerly invalid large cases now have matched denominators. Under the
+same new policy, the impossible oracle passed all cases with mean charged
+ratios 0.074 and 0.109, while the unchanged five-seed M1 panel passed 20/30
+and 16/30 candidate quality checks and averaged charged ratios 1.56 and 1.72.
+The next independent slice is **B2.2**, a bounded development-only
+quality-aligned learned-prototype plan and data-feasibility gate addressing
+the measured `z`-direction coverage and warm-start quality-basin gaps.
+Freeze its control/candidate, exposure ledger, label/training budget, and
+fallback-inclusive validation rule before fitting. B3 final-cohort
+registration remains premature until a development prototype establishes
+meaningful same-quality end-to-end savings.
 
 ### B3: New versioned contract, exposure ledger, and data gate
 
@@ -341,16 +355,20 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 6. **B2 workload/mesh headroom pilot:** completed; Gate B2 failed. Conditional
    oracle headroom did not overcome large-reference nonconvergence or the
    unchanged learned panel's charged time gap.
-7. **B2.1 large-mesh/high-volume convergence intervention:** next independent
-   slice; establish a quality-feasible denominator before a separate learned
-   prototype and any B3 registration.
-8. **B3 new versioned ML contract and data gate:** first freeze the new final
+7. **B2.1 large-mesh/high-volume convergence intervention:** completed; all
+   twelve uniform references passed under a separately versioned opt-in rule,
+   but the unchanged learned panel remained slower after full charges.
+8. **B2.2 bounded learned-prototype plan and data-feasibility gate:** next
+   independent slice; address direction coverage and quality-basin behavior
+   with a fixed development-only control/candidate and data boundary.
+9. **B3 new versioned ML contract and data gate:** after a successful
+   development prototype, freeze the new final
    boundary, then implement and audit data in independently reviewable slices.
-9. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+10. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
    separate PRs.
-10. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+11. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
    evaluation** only after B4 passes.
-11. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+12. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.
