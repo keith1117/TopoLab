@@ -2,7 +2,7 @@
 
 English version: [v1.x Development Roadmap](./TopoLab_post_v1_development_roadmap.en.md)
 
-状态：**v1.x 规划草案，起点为已发布的 `v1.0.0`；A1.1 已完成**
+状态：**v1.x 路线图，起点为已发布的 `v1.0.0`；Gate A1 于 2026-09-25 通过**
 
 制定日期：2026-09-24
 
@@ -14,6 +14,7 @@ English version: [v1.x Development Roadmap](./TopoLab_post_v1_development_roadma
 - [M1 held-out 评估](../validation/m1_held_out_evaluation.md)
 - [M2 materialization 结果](../validation/m2_catalog_materialization.md)
 - [A1.1 canonical demo 验证](../validation/a1_1_canonical_demo.md)
+- [A1.4 clean Linux 验证与 Gate A1 结论](../validation/a1_4_clean_linux_smoke.md)
 
 ## 1. 当前基线
 
