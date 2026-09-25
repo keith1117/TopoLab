@@ -1,7 +1,8 @@
 # TopoLab v2 Development Roadmap
 
-Status: **active v2 flagship delivery plan; Gate A1 passed; ML acceleration is a
-required delivery gate, not an optional enhancement.** The released `v1.0.0` and
+Status: **active v2 flagship delivery plan; Gates A1 and A3 passed; B2 pilot
+completed without passing its gate; ML acceleration is a required delivery
+gate, not an optional enhancement.** The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
@@ -18,6 +19,8 @@ Related documents:
 - [Development-only warm-start feasibility probe](../validation/ml_feasibility_probe.md)
 - [A1.1 canonical demo validation](../validation/a1_1_canonical_demo.md)
 - [A1.4 clean Linux validation and Gate A1 decision](../validation/a1_4_clean_linux_smoke.md)
+- [A3 solver-ordering audit](../validation/a3_solver_ordering.md)
+- [B2 workload pilot and gate decision](../validation/b2_workload_pilot.md)
 
 ## 1. Current baseline
 
@@ -154,8 +157,8 @@ Suggested milestone: `v1.3.0`.
 **A3 completed:** The [paired Apple arm64 and Linux x86-64 audit](../validation/a3_solver_ordering.md)
 selected a larger-system SuperLU ordering with an explicit historical fallback.
 The measured sparse-solve gate passed without changing the frozen small-mesh
-solver path or the old M1/M2 outcomes. B2 is the next independent slice; it must
-use the optimized ordering equally in every compared method.
+solver path or the old M1/M2 outcomes. The subsequent B2 pilot used the
+optimized ordering equally in every compared method.
 
 ### A4: Controlled deployment and external feedback
 
@@ -226,7 +229,7 @@ The unchanged-solver decision is explicit. Across 36 M2 validation cases and fiv
 fixed M1 seeds, 46/180 learned attempts failed quality, with a larger gap on the
 unseen `z` direction and persistent failures on `y`. Projection and initial
 compliance alone did not predict final quality. A3 then froze the larger-mesh
-uniform solver ordering; B2 is the next independent slice.
+uniform solver ordering, and B2 tested the resulting denominator.
 
 ### B2: Choose a workload with measured attainable savings
 
@@ -244,6 +247,21 @@ prototype have enough measured savings to justify training and final evaluation.
 If exact-label warm starts cannot beat an optimized uniform reference on the
 intended workload, pivot to a separately versioned learned optimizer-step or
 numerical-cost intervention; more final-density MSE training is not warranted.
+
+**B2 completed; gate failed:** The [fixed development-only pilot](../validation/b2_workload_pilot.md)
+tested six cases at each of two mesh scales. All six small uniform references
+passed, but three of six large references did not converge within the frozen
+120-iteration limit. The impossible own-result oracle showed conditional
+headroom on valid references; the five unchanged M1 seeds had mean
+fallback-inclusive time ratios of 1.64 (small) and 1.77 (valid large cases).
+These results do not establish a quality-feasible two-scale workload or a
+viable learned prototype. The next independent slice is **B2.1**, a bounded
+large-mesh/high-volume convergence intervention: freeze acceptance cases,
+evaluate one explicit OC or termination-policy correction, version any changed
+solver/case identity, and rerun every compared method on matched settings. If
+the intended workload remains infeasible, version a different development pilot.
+Then test a separately bounded, quality-aligned learned prototype before B3.
+The fixed-support pilot cannot support a claim about other support families.
 
 ### B3: New versioned contract, exposure ledger, and data gate
 
@@ -320,14 +338,19 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
    new training, final evidence, or solver changes.
 5. **A3 baseline-affecting solver performance:** completed with paired
    cross-platform evidence and a frozen larger-mesh uniform ordering policy.
-6. **B2 workload/mesh headroom pilot:** next bounded development-only slice.
-7. **B3 new versioned ML contract and data gate:** first freeze the new final
+6. **B2 workload/mesh headroom pilot:** completed; Gate B2 failed. Conditional
+   oracle headroom did not overcome large-reference nonconvergence or the
+   unchanged learned panel's charged time gap.
+7. **B2.1 large-mesh/high-volume convergence intervention:** next independent
+   slice; establish a quality-feasible denominator before a separate learned
+   prototype and any B3 registration.
+8. **B3 new versioned ML contract and data gate:** first freeze the new final
    boundary, then implement and audit data in independently reviewable slices.
-8. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+9. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
    separate PRs.
-9. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+10. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
    evaluation** only after B4 passes.
-10. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+11. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.
