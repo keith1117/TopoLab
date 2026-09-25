@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
 
-from topolab.fem import build_constrained_dofs, build_load_vector
+from topolab.fem import FactorizationOrdering, build_constrained_dofs, build_load_vector
 from topolab.mesh import Hex8Mesh, generate_structured_hex8
-from topolab.model import FixedFaceSupport, PointLoad
+from topolab.model import FaceLoad, FixedFaceSupport, PointLoad
 from topolab.simp import (
     OptimizationCancelledError,
     SimpConfig,
@@ -363,3 +363,74 @@ def _run_optimizer(
         config=config,
         initial_density=initial_density,
     )
+
+
+def test_optimizer_factorization_orderings_preserve_final_state() -> None:
+    mesh, loads, constrained_dofs, config = _optimization_case()
+    reference = optimize_simp(
+        mesh,
+        loads,
+        constrained_dofs,
+        solid_modulus=1000.0,
+        minimum_modulus=1.0,
+        poisson_ratio=0.3,
+        config=config,
+        ordering="COLAMD",
+    )
+    candidate = optimize_simp(
+        mesh,
+        loads,
+        constrained_dofs,
+        solid_modulus=1000.0,
+        minimum_modulus=1.0,
+        poisson_ratio=0.3,
+        config=config,
+        ordering="MMD_AT_PLUS_A",
+    )
+    assert candidate.converged == reference.converged
+    assert len(candidate.history) == len(reference.history)
+    np.testing.assert_allclose(
+        candidate.design_density, reference.design_density, rtol=1e-9, atol=1e-12
+    )
+    np.testing.assert_allclose(
+        candidate.physical_density, reference.physical_density, rtol=1e-9, atol=1e-12
+    )
+    assert candidate.compliance == pytest.approx(reference.compliance, rel=1e-9)
+
+
+def test_large_mesh_automatic_ordering_preserves_three_step_state() -> None:
+    mesh = generate_structured_hex8(30, 12, 6, lengths=(1.0, 0.4, 0.2))
+    loads = build_load_vector(
+        mesh,
+        [FaceLoad(axis="x", side="max", direction="y", total=-1000.0)],
+    )
+    fixed = build_constrained_dofs(mesh, [FixedFaceSupport(axis="x", side="min")])
+    config = SimpConfig(
+        volume_fraction=0.5,
+        filter_radius=0.06,
+        max_iterations=3,
+        convergence_tolerance=1e-12,
+    )
+
+    def run(ordering: FactorizationOrdering) -> SimpResult:
+        return optimize_simp(
+            mesh,
+            loads,
+            fixed,
+            solid_modulus=2.0e11,
+            minimum_modulus=2.0e8,
+            poisson_ratio=0.3,
+            config=config,
+            ordering=ordering,
+        )
+
+    reference = run("COLAMD")
+    candidate = run("auto")
+    assert len(candidate.history) == len(reference.history) == 3
+    np.testing.assert_allclose(
+        candidate.design_density, reference.design_density, rtol=1e-9, atol=1e-12
+    )
+    np.testing.assert_allclose(
+        candidate.physical_density, reference.physical_density, rtol=1e-9, atol=1e-12
+    )
+    assert candidate.compliance == pytest.approx(reference.compliance, rel=1e-9)

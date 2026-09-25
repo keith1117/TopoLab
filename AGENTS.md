@@ -23,10 +23,12 @@ that evidence exists, uniform initialization is the operational default and no
 accelerated claim is allowed.
 
 Track B has development-only warm-start feasibility evidence in
-`docs/validation/ml_feasibility_probe.md` and B1 failure diagnosis in
-`docs/validation/b1_failure_diagnosis.md`. The next independent slice is A3:
-profile and freeze baseline-affecting solver performance before selecting the ML
-workload. Follow the v2 English roadmap for later gates and slice order.
+`docs/validation/ml_feasibility_probe.md`, B1 failure diagnosis in
+`docs/validation/b1_failure_diagnosis.md`, and A3 solver-ordering evidence in
+`docs/validation/a3_solver_ordering.md`. The next independent slice is B2:
+pilot the repeated-query workload and scale headroom against the optimized
+uniform solver before freezing a new ML contract. Follow the v2 English roadmap
+for later gates and slice order.
 
 ## Provenance boundary
 

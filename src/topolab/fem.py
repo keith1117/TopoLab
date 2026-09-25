@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from itertools import product
 from math import isfinite, sqrt
 from numbers import Integral, Real
+from typing import Literal
 
 import numpy as np
 from numpy.typing import NDArray
@@ -16,6 +17,8 @@ from topolab.model import Axis, FaceLoad, FaceSide, FixedFaceSupport, Load, Poin
 
 _HEX8_REFERENCE_COORDINATES = 2.0 * np.asarray(HEX8_LOCAL_NODE_OFFSETS, dtype=np.float64) - 1.0
 _GAUSS_POINTS = (-1.0 / sqrt(3.0), 1.0 / sqrt(3.0))
+_LARGE_SOLVE_FREE_DOFS = 5000
+FactorizationOrdering = Literal["auto", "COLAMD", "MMD_AT_PLUS_A"]
 
 
 @dataclass(frozen=True, slots=True)
@@ -136,6 +139,8 @@ def solve_linear_static(
     stiffness: csr_matrix,
     loads: NDArray[np.float64],
     constrained_dofs: NDArray[np.int64],
+    *,
+    ordering: FactorizationOrdering = "auto",
 ) -> LinearStaticResult:
     """Solve a sparse linear-elastic system with zero prescribed displacements."""
 
@@ -171,10 +176,20 @@ def solve_linear_static(
     free_dofs = np.flatnonzero(free_mask)
     if free_dofs.size == 0:
         raise ValueError("at least one unconstrained DOF is required")
+    if ordering not in ("auto", "COLAMD", "MMD_AT_PLUS_A"):
+        raise ValueError("ordering must be 'auto', 'COLAMD', or 'MMD_AT_PLUS_A'")
 
     reduced_stiffness = stiffness[free_dofs][:, free_dofs].tocsc()
+    if ordering == "auto":
+        selected_ordering = (
+            "MMD_AT_PLUS_A"
+            if free_dofs.size >= _LARGE_SOLVE_FREE_DOFS
+            else "COLAMD"
+        )
+    else:
+        selected_ordering = ordering
     try:
-        factorization = splu(reduced_stiffness)
+        factorization = splu(reduced_stiffness, permc_spec=selected_ordering)
     except RuntimeError as error:
         raise ValueError(
             "reduced stiffness is singular; constraints may leave rigid body modes"

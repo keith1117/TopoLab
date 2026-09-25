@@ -151,6 +151,12 @@ cannot silently change the final comparison denominator.
 
 Suggested milestone: `v1.3.0`.
 
+**A3 completed:** The [paired Apple arm64 and Linux x86-64 audit](../validation/a3_solver_ordering.md)
+selected a larger-system SuperLU ordering with an explicit historical fallback.
+The measured sparse-solve gate passed without changing the frozen small-mesh
+solver path or the old M1/M2 outcomes. B2 is the next independent slice; it must
+use the optimized ordering equally in every compared method.
+
 ### A4: Controlled deployment and external feedback
 
 After A2 isolation and limits, offer a safe, low-cost public demonstration or a complete recording instead.
@@ -219,7 +225,8 @@ iterations in a separate in-memory extension without changing the frozen outcome
 The unchanged-solver decision is explicit. Across 36 M2 validation cases and five
 fixed M1 seeds, 46/180 learned attempts failed quality, with a larger gap on the
 unseen `z` direction and persistent failures on `y`. Projection and initial
-compliance alone did not predict final quality. A3 is the next independent slice.
+compliance alone did not predict final quality. A3 then froze the larger-mesh
+uniform solver ordering; B2 is the next independent slice.
 
 ### B2: Choose a workload with measured attainable savings
 
@@ -311,9 +318,9 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 3. **B0 development-only feasibility probe and roadmap correction:** completed.
 4. **B1 numerical convergence and learned-quality root cause:** completed without
    new training, final evidence, or solver changes.
-5. **A3 baseline-affecting solver performance:** next slice; freeze numerical changes and
-   a fair optimized uniform reference before selecting the ML workload.
-6. **B2 workload/mesh headroom pilot:** one bounded development-only slice.
+5. **A3 baseline-affecting solver performance:** completed with paired
+   cross-platform evidence and a frozen larger-mesh uniform ordering policy.
+6. **B2 workload/mesh headroom pilot:** next bounded development-only slice.
 7. **B3 new versioned ML contract and data gate:** first freeze the new final
    boundary, then implement and audit data in independently reviewable slices.
 8. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
