@@ -22,10 +22,11 @@ on a predefined workload before the full flagship project is delivered. Until
 that evidence exists, uniform initialization is the operational default and no
 accelerated claim is allowed.
 
-The current Track B sequence begins with development-only warm-start feasibility
-evidence in `docs/validation/ml_feasibility_probe.md`. The next independent slice
-is B1: diagnose numerical convergence and learned-quality failures before new
-training. Follow the v2 English roadmap for later gates and slice order.
+Track B has development-only warm-start feasibility evidence in
+`docs/validation/ml_feasibility_probe.md` and B1 failure diagnosis in
+`docs/validation/b1_failure_diagnosis.md`. The next independent slice is A3:
+profile and freeze baseline-affecting solver performance before selecting the ML
+workload. Follow the v2 English roadmap for later gates and slice order.
 
 ## Provenance boundary
 
