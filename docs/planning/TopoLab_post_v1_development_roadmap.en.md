@@ -228,14 +228,18 @@ Based on admissions value, risk, and dependencies:
 
 1. **A1.1 canonical demo and end-to-end smoke**;
 2. **A1.2 Docker/Compose local stack**;
-3. **A1.3 architecture, video, and clean-machine evidence**;
-4. **M3.0 diagnosis and pre-registration**;
-5. **A2.1–A2.2 separate-process worker and durable ownership**;
-6. **M3.1 new catalog, exposure ledger, and data gate**;
-7. **M3.2–M3.4**, only if M3.1 passes; and
-8. **A2.3, A3, A4** when profiling and deployment needs justify them.
+3. **A1.3 architecture diagram and demo video**;
+4. **A1.4 clean Linux smoke and Gate A1 decision**;
+5. **M3.0 diagnosis and pre-registration**;
+6. **A2.1–A2.2 separate-process worker and durable ownership**;
+7. **M3.1 new catalog, exposure ledger, and data gate**;
+8. **M3.2–M3.4**, only if M3.1 passes; and
+9. **A2.3, A3, A4** when profiling and deployment needs justify them.
 
-**A1.1 is complete:** The versioned canonical problem, narrow entry point, and end-to-end test passed, with outputs outside Git. The next independent slice is **A1.2**, limited to the local Docker/Compose path for API and frontend, without worker, ML, or hosted deployment.
+**Gate A1 is complete:** The canonical case, local stack, architecture and demo,
+and clean Linux smoke passed their separate validation slices. The next independent
+slice is **M3.0**, limited to exposed-failure diagnosis and a bounded, versioned
+pre-registration; it performs no new data generation or model fitting.
 
 ## 7. Stage completion evidence
 
