@@ -210,6 +210,23 @@ as a success.
   522-case population, identity, quality and resource Gate. Generated labels
   and checkpoints stay outside Git.
 
+## B2.5 mixed-shape development fitting and screening
+
+- Keep the M1 10-channel shape-preserving CNN and CPU `float32` representation.
+  Small `(3,6,12)` and large `(6,12,24)` spatial tensors form separate
+  batches; neither mesh is resized or interpolated. Each train case is seen
+  once per epoch. Both fixed arms use the same seed-specific shuffle and
+  optimizer-step order, and each selects its own earliest strict validation
+  objective minimum. The candidate's audited sensitivity weights multiply
+  design-density squared error and are not inference inputs.
+- Every B2.5 validation case uses a projected-uniform reference and all other
+  methods under the same 240-update physical-plateau solver. Charge setup,
+  projection, full refinement, quality decision, and a fresh uniform fallback
+  for every failed candidate; preserve the failed status. Matched independent
+  compliance, physical volume, and `1.001` uniform-quality checks precede
+  acceptance. Exact population and thresholds are in the
+  [B2.5 protocol](planning/b2_5_prototype_protocol.md).
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
