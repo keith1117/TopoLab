@@ -134,6 +134,15 @@ it does not redefine an old design-change pass. OC updates, filtering,
 stiffness, and the configured iteration cap are unchanged. Results under this
 policy require its solver version alongside the physical-case identity.
 
+B2.3 tests a separate, development-only **iteration-budget contract**:
+`topolab.b2_3.budget240.plan.v1` retains the B2.1 physical-plateau solver
+policy and every stopping tolerance, but changes each selected case's
+`max_iterations` from 120 to 240. This field is part of the physical-case
+identity, so B2.3 cases, prospective labels, and results require new IDs
+linked explicitly to their B2.2 source IDs. The public default and old
+case/result identities are unchanged. No 120-update failure is relabeled
+as a success.
+
 ## Reproducibility
 
 - A case records mesh, material, supports, loads, volume fraction, filter, optimizer,

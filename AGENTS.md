@@ -31,11 +31,17 @@ larger uniform references did not converge at the frozen limit and the five
 unchanged M1 starts were slower after fallback charges. B2.1's opt-in,
 versioned physical-plateau policy made all twelve uniform references
 quality-feasible; its matched five-seed M1 panel remains slower after fallback
-charges. See `docs/validation/b2_1_convergence.md`. The next independent slice
-is B2.2: freeze a bounded development-only quality-aligned learned-prototype
-plan and data-feasibility gate. Do not freeze a new final ML contract until a
-development prototype has measured same-quality end-to-end savings. Follow
-the v2 English roadmap for later gates and slice order.
+charges. See `docs/validation/b2_1_convergence.md`. B2.2 froze a bounded
+quality-aligned development-prototype plan, but only 53/61 uniform data
+sentinels converged at 120 updates. B2.3 preserved all 61 source cases,
+versioned their iteration cap to 240, and passed 61/61 independent quality
+checks without changing the previous 53 accepted outcomes. See
+`docs/validation/b2_2_data_feasibility.md` and
+`docs/validation/b2_3_data_feasibility.md`. The next independent slice is
+B2.4: a complete, versioned 522-case development-label materialization and
+data gate. Do not fit a model or freeze a new final ML contract until its
+development data gate and prototype screening pass. Follow the v2 English
+roadmap for later gates and slice order.
 
 ## Provenance boundary
 

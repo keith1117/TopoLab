@@ -1,7 +1,7 @@
 # TopoLab v2 Development Roadmap
 
-Status: **active v2 flagship delivery plan; Gates A1 and A3 passed; B2.1
-numerical correction passed, but the B2.2 data-feasibility gate failed and
+Status: **active v2 flagship delivery plan; Gates A1 and A3 passed; B2.2's
+120-update data gate failed, and B2.3's versioned 240-update sentinel passed;
 the B2 learned-prototype gate remains open;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
@@ -25,6 +25,7 @@ Related documents:
 - [B2 workload pilot and gate decision](../validation/b2_workload_pilot.md)
 - [B2.1 versioned convergence correction and matched audit](../validation/b2_1_convergence.md)
 - [B2.2 prototype plan and data-feasibility outcome](../validation/b2_2_data_feasibility.md)
+- [B2.3 budget repair and sentinel audit](../validation/b2_3_data_feasibility.md)
 
 ## 1. Current baseline
 
@@ -278,12 +279,21 @@ candidate on new-policy `y/z` labels, with an explicit exposure and compute
 boundary. Only 53/61 fixed uniform sentinel cases passed independent quality
 checks. Seven historically failed small `y/0.45` training cases and one new
 large `z/0.20` case remained non-convergent at 120 updates. No labels were
-materialized and no model was fitted. **B2.3** is the next independent slice:
-diagnose those fixed failures and test one separately versioned numerical or
-budget correction against all 61 cases. Full data materialization and fitting
-remain separate later slices. B3 final-cohort registration remains premature
-until a development prototype establishes meaningful same-quality end-to-end
-savings.
+materialized and no model was fitted.
+
+**B2.3 bounded sentinel gate passed:** The
+[versioned 240-update budget repair](../validation/b2_3_data_feasibility.md)
+retained the B2.1 stopping policy and all numerical tolerances, gave each
+case/result a new identity, and passed **61/61** independent quality checks.
+The former seven small failures stopped at update 125 and the new large
+failure at 170. The 53 previously accepted cases retained exactly their old
+stop iterations and final compliance. This is a sampled data-feasibility
+result, not a complete 522-label gate. **B2.4** is the next independent
+slice: freeze and materialize the full 522-case development catalog under
+the new budget, preserving every failure and resource cost. B2.5 prototype
+fitting follows only after that full data gate passes. B3 final-cohort
+registration remains premature until a development prototype establishes
+meaningful same-quality end-to-end savings.
 
 ### B3: New versioned contract, exposure ledger, and data gate
 
@@ -369,20 +379,23 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 8. **B2.2 bounded learned-prototype plan and data-feasibility gate:** completed;
    the control/candidate and 522-case development boundary are fixed, but the
    61-case sentinel failed 53/61 and fitting did not begin.
-9. **B2.3 bounded data-feasibility repair:** next independent slice; preserve
-   the 61-case denominator, version one numerical/budget intervention, and
-   rerun the sentinel before full materialization or fitting.
-10. **B2.4 development labels and B2.5 prototype fitting:** conditional,
-    independently reviewable slices only after the preceding data gate passes;
-    retain all cases, costs, and failed model attempts.
-11. **B3 new versioned ML contract and data gate:** after a successful
+9. **B2.3 bounded data-feasibility repair:** completed; one versioned
+   240-update budget passed all 61 fixed sentinel cases while preserving the
+   previous 53 accepted outputs.
+10. **B2.4 development labels:** next independent slice; version the full
+    522-case catalog, materialize every required label from a clean revision,
+    and enforce the complete data and resource gate.
+11. **B2.5 prototype fitting:** only after B2.4 passes; compare the fixed
+    control/candidate, retain all cases and failed attempts, and charge all
+    inference, refinement, and fallback costs.
+12. **B3 new versioned ML contract and data gate:** after a successful
    development prototype, freeze the new final
    boundary, then implement and audit data in independently reviewable slices.
-12. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+13. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
    separate PRs.
-13. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+14. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
    evaluation** only after B4 passes.
-14. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+15. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.
