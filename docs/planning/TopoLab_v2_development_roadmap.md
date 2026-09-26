@@ -2,14 +2,14 @@
 
 Status: **active v2 flagship delivery plan; Gates A1 and A3 passed; B2.2's
 120-update data gate failed, B2.3's versioned 240-update sentinel passed,
-B2.4's complete 522-label development data Gate passed, and B2.5's fixed
-learned-prototype Gate failed;
+B2.4's complete 522-label development data Gate passed, and B2.5/B2.6's
+fixed learned-prototype feasibility Gates failed;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-09-25
+Revised: 2026-09-26
 
 Related documents:
 
@@ -29,6 +29,7 @@ Related documents:
 - [B2.3 budget repair and sentinel audit](../validation/b2_3_data_feasibility.md)
 - [B2.4 complete development-label audit](../validation/b2_4_development_labels.md)
 - [B2.5 fixed prototype and full development screen](../validation/b2_5_prototype.md)
+- [B2.6 intermediate-trajectory target and new development screen](../validation/b2_6_trajectory.md)
 
 ## 1. Current baseline
 
@@ -309,11 +310,21 @@ and 1.336 times its matched uniform reference on small and large meshes;
 all six learned seeds exceeded 1.0 at both scales. There were zero accepted
 quality failures, but 40 learned attempts failed and paid fallback. The
 sensitivity-weighted candidate did not correct the convergence, compliance,
-or refinement-time bottleneck. **B2.6** is the next independent slice: freeze
-a new development evidence boundary and one versioned intervention targeted
-at the measured quality and solver-trajectory gap. B3 final-cohort
-registration remains premature until a development prototype establishes
-meaningful same-quality end-to-end savings.
+or refinement-time bottleneck.
+
+**B2.6 complete; development feasibility Gate failed:** The
+[frozen intermediate-trajectory target intervention](../validation/b2_6_trajectory.md)
+captured 480/480 targets and completed three fits plus a new, disjoint 12-case
+screen. All three new seeds were slower than matched uniform at both scales
+after complete fallback charges. Seed 17, the least slow, averaged 1.486 on
+small and 1.701 on large meshes; seeds 29 and 43 had more failures. The
+impossible true-trajectory oracle averaged 0.490 and 0.748, demonstrating
+conditional headroom without a deployable learned result. **B2.7** is the
+next independent slice: pre-register one targeted repair for the measured
+direction-dependent prediction/quality and refinement gap, then screen on
+fresh disjoint development cases. B3 final-cohort registration remains
+premature until a development prototype establishes meaningful same-quality
+end-to-end savings.
 
 ### B3: New versioned contract, exposure ledger, and data gate
 
@@ -407,18 +418,21 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 11. **B2.5 prototype fitting and screen:** completed; the six fixed fits and
     all 54 validation cases were audited, but the learned-prototype Gate
     failed after full fallback charges.
-12. **B2.6 targeted development intervention:** next independent slice;
-    freeze a new development boundary and a single versioned target that
-    addresses solver refinement and quality before further fitting. Keep the
-    historical B2.5 negative result intact.
-13. **B3 new versioned ML contract and data gate:** after a successful
+12. **B2.6 intermediate-trajectory target:** completed; 480 targets, three
+    fits, and the full new 12-case screen were audited, but no new seed met
+    the fallback-inclusive two-scale feasibility Gate.
+13. **B2.7 targeted development repair:** next independent slice; freeze one
+    intervention aimed at the observed direction-dependent quality and
+    refinement gap and test it on fresh disjoint cases. Preserve B2.6's
+    negative result and the final-evidence boundary.
+14. **B3 new versioned ML contract and data gate:** after a successful
     development prototype, freeze the new final boundary, then implement and
     audit data in independently reviewable slices.
-14. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+15. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-15. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+16. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-16. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+17. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.
