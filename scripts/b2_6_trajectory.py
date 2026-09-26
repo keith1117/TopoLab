@@ -37,6 +37,7 @@ from b2_5_prototype import (
 from b2_workload_pilot import scaled_case
 from safetensors.torch import load as load_tensors
 from safetensors.torch import save as save_tensors
+from torch import nn
 
 from topolab.b2_5_evaluation import (
     _attempt,
@@ -508,7 +509,7 @@ def fit_models(
 
 def _case_outcomes(
     case: ExperimentCase,
-    models: dict[int, WarmStartCNN],
+    models: dict[int, nn.Module],
     control: WarmStartCNN,
     neighbors: Any,
     *,
