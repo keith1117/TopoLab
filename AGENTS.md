@@ -51,9 +51,15 @@ the point-load representation, reused all
 480 B2.6 targets, completed three fits and a fresh 12-case, 132-outcome
 screen. It improved seeds 17/29 substantially against B2.6, but its Gate
 failed: no new seed met the required two-scale and direction-wise charged
-speed limits. See `docs/validation/b2_7_global_load.md`. The next independent
-slice is B2.8: a separately versioned intervention aimed at the measured
-`y`-direction quality/solver-basin gap. Do not freeze a new final ML contract
+speed limits. See `docs/validation/b2_7_global_load.md`. B2.8 tested an
+opt-in y-direction midpoint between each fixed B2.7 prediction and uniform
+start on 12 new cases. All 132 outcomes were audited, but its Gate failed:
+no seed met the two-scale/direction bounds, the three seeds retained the
+same 2/3/4 failure counts as the controls, and the unchanged z predictions
+were slow on this fresh load-position/volume cohort. See
+`docs/validation/b2_8_basin.md`. The next independent slice is B2.9: one
+versioned learning-side quality and load-position transfer correction with
+fresh development screening. Do not freeze a new final ML contract
 until a development prototype screening passes. Follow the v2 English roadmap
 for later gates and slice order.
 
