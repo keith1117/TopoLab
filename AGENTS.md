@@ -42,11 +42,15 @@ development-label and resource Gate; see
 `docs/validation/b2_4_development_labels.md`. B2.5 completed six fixed fits
 and all 54 development validation cases, but every learned seed was slower
 than matched uniform on both mesh scales after complete fallback charges; see
-`docs/validation/b2_5_prototype.md`. The next independent slice is B2.6: a
-versioned development-only intervention addressing B2.5's measured quality
-and refinement-cost gap. Do not freeze a new final ML contract until a
-development prototype screening passes. Follow the v2 English
-roadmap for later gates and slice order.
+`docs/validation/b2_5_prototype.md`. B2.6 then captured all 480 fixed
+intermediate-trajectory targets, completed three fits and all 12 new-case
+screen outcomes, but its development feasibility Gate failed: all three new
+seeds were slower than matched uniform at both mesh scales after complete
+fallback charges. See `docs/validation/b2_6_trajectory.md`. The next
+independent slice is B2.7: a separately versioned repair targeting the
+measured direction-dependent quality and refinement gap. Do not freeze a new
+final ML contract until a development prototype screening passes. Follow the
+v2 English roadmap for later gates and slice order.
 
 ## Provenance boundary
 
