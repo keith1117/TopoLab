@@ -61,10 +61,14 @@ were slow on this fresh load-position/volume cohort. See
 completed three fits and all 132 new-case outcomes. Seeds 29 and 43 had
 zero fallbacks and met both scale-mean charged-speed bounds, but their
 large-y direction means exceeded 1.0, so the frozen Gate failed. See
-`docs/validation/b2_9_vector_load.md`. The next independent slice is B2.10:
-freeze one quality/cost-aligned intervention addressing the measured
-large-y refinement burden and screen fresh disjoint development cases.
-Do not freeze a new final ML contract
+`docs/validation/b2_9_vector_load.md`. B2.10 completed all 480
+sensitivity-weight artifacts and three fits, but its frozen screen stopped
+after 9/12 cases and 99/132 outcomes: the tenth case's mandatory uniform
+reference did not converge at 240 updates. The failed Gate and partial
+learning-side evidence are retained in
+`docs/validation/b2_10_weighted_trajectory.md`. The next independent slice
+is B2.11: a versioned reference-iteration repair and fresh, disjoint
+development confirmation of unchanged models. Do not freeze a new final ML contract
 until a development prototype screening passes. Follow the v2 English roadmap
 for later gates and slice order.
 
