@@ -46,11 +46,16 @@ than matched uniform on both mesh scales after complete fallback charges; see
 intermediate-trajectory targets, completed three fits and all 12 new-case
 screen outcomes, but its development feasibility Gate failed: all three new
 seeds were slower than matched uniform at both mesh scales after complete
-fallback charges. See `docs/validation/b2_6_trajectory.md`. The next
-independent slice is B2.7: a separately versioned repair targeting the
-measured direction-dependent quality and refinement gap. Do not freeze a new
-final ML contract until a development prototype screening passes. Follow the
-v2 English roadmap for later gates and slice order.
+fallback charges. See `docs/validation/b2_6_trajectory.md`. B2.7 changed only
+the point-load representation, reused all
+480 B2.6 targets, completed three fits and a fresh 12-case, 132-outcome
+screen. It improved seeds 17/29 substantially against B2.6, but its Gate
+failed: no new seed met the required two-scale and direction-wise charged
+speed limits. See `docs/validation/b2_7_global_load.md`. The next independent
+slice is B2.8: a separately versioned intervention aimed at the measured
+`y`-direction quality/solver-basin gap. Do not freeze a new final ML contract
+until a development prototype screening passes. Follow the v2 English roadmap
+for later gates and slice order.
 
 ## Provenance boundary
 
