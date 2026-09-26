@@ -57,9 +57,14 @@ start on 12 new cases. All 132 outcomes were audited, but its Gate failed:
 no seed met the two-scale/direction bounds, the three seeds retained the
 same 2/3/4 failure counts as the controls, and the unchanged z predictions
 were slow on this fresh load-position/volume cohort. See
-`docs/validation/b2_8_basin.md`. The next independent slice is B2.9: one
-versioned learning-side quality and load-position transfer correction with
-fresh development screening. Do not freeze a new final ML contract
+`docs/validation/b2_8_basin.md`. B2.9's vector point-load conditioning
+completed three fits and all 132 new-case outcomes. Seeds 29 and 43 had
+zero fallbacks and met both scale-mean charged-speed bounds, but their
+large-y direction means exceeded 1.0, so the frozen Gate failed. See
+`docs/validation/b2_9_vector_load.md`. The next independent slice is B2.10:
+freeze one quality/cost-aligned intervention addressing the measured
+large-y refinement burden and screen fresh disjoint development cases.
+Do not freeze a new final ML contract
 until a development prototype screening passes. Follow the v2 English roadmap
 for later gates and slice order.
 

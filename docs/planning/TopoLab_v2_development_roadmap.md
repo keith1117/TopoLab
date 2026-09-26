@@ -2,7 +2,7 @@
 
 Status: **active v2 flagship delivery plan; Gates A1 and A3 passed; B2.2's
 120-update data gate failed, B2.3's versioned 240-update sentinel passed,
-B2.4's complete 522-label development data Gate passed, and B2.5–B2.8's
+B2.4's complete 522-label development data Gate passed, and B2.5–B2.9's
 fixed learned-prototype feasibility Gates failed;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
@@ -32,6 +32,7 @@ Related documents:
 - [B2.6 intermediate-trajectory target and new development screen](../validation/b2_6_trajectory.md)
 - [B2.7 global-load input and new development screen](../validation/b2_7_global_load.md)
 - [B2.8 y-load basin recentering and new development screen](../validation/b2_8_basin.md)
+- [B2.9 vector point-load conditioning and new development screen](../validation/b2_9_vector_load.md)
 
 ## 1. Current baseline
 
@@ -346,9 +347,20 @@ reduce the three seeds' 2/3/4 failed-attempt counts. No seed met the frozen
 two-scale and direction-wise charged-speed limits. The unchanged z predictions
 were slow on several new load-position/volume cases, while the impossible
 own-trajectory oracle retained conditional headroom. The next independent
-slice is **B2.9**: freeze and execute one learning-side quality and
-load-position transfer correction, then test it on fresh disjoint development
-cases with full charges. Do not enter B3 before a development prototype passes.
+slice was **B2.9**: a learning-side quality and load-position transfer
+correction tested on fresh disjoint development cases with full charges.
+
+**B2.9 complete; development feasibility Gate failed:** The
+[vector point-load conditioning intervention](../validation/b2_9_vector_load.md)
+reused the 480 audited B2.6 targets, completed three deterministic fits,
+and retained all 132 outcomes on twelve fresh cases. Seeds 29 and 43 had
+zero fallbacks and charged small/large mean ratios of 0.613/0.871 and
+0.639/0.882. Both missed the frozen large-y direction bound: their means
+were 1.032 and 1.080, above 1.0. Accepted large-y starts at volume
+0.5625 still needed more solver updates than uniform. The next independent
+slice is **B2.10**: freeze one quality/cost-aligned intervention addressing
+that measured refinement burden and screen it on fresh disjoint cases.
+Do not enter B3 before a development prototype passes.
 
 ### B3: New versioned contract, exposure ledger, and data gate
 
@@ -451,16 +463,20 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 14. **B2.8 quality/solver-basin intervention:** completed; the fixed y-load
     midpoint start changed actual trajectories but did not reduce failures
     or pass the two-scale/direction-wise charged-speed Gate on 12 new cases.
-15. **B2.9 learning-side quality and transfer correction:** next independent
-    slice; freeze one model-side correction and test fresh disjoint cases.
-16. **B3 new versioned ML contract and data gate:** after a successful
+15. **B2.9 vector point-load conditioning:** completed; two seeds had
+    zero fallbacks and passed both scale-mean bounds, but both exceeded the
+    large-y direction bound, so the fixed feasibility Gate failed.
+16. **B2.10 quality/cost-aligned intervention:** next independent slice;
+    freeze one response to the measured large-y refinement burden and
+    screen fresh disjoint cases with complete charges.
+17. **B3 new versioned ML contract and data gate:** after a successful
     development prototype, freeze the new final boundary, then implement and
     audit data in independently reviewable slices.
-17. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+18. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-18. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+19. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-19. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+20. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.

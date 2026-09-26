@@ -270,6 +270,23 @@ paths are unaffected; B2.8 results require their own experiment identity.
   charged to B2.7's complete candidate time. The [B2.7 protocol](planning/b2_7_global_load_protocol.md)
   freezes its fitting artifacts, screen, resource caps, and Gate.
 
+## B2.9 opt-in vector point-load representation
+
+- The B2.9 candidate alone uses 13 CPU float32 channels in `(channel,z,y,x)`
+  order. Keep the historical support channels 0–2, normalized element-center
+  coordinates 6–8, and target-volume channel 9. Replace load channels 3–5
+  with a spatially constant signed one-hot load direction. Append channels
+  10–12 as the normalized element-center position minus the normalized
+  loaded-node position, one coordinate per axis. Require exactly one valid
+  point load and reject nonfinite or out-of-range relative coordinates.
+- The opt-in encoding version is `topolab.b2_9.vector_load.v1`. Its
+  shape-preserving CNN is `topolab.b2_9.vector_cnn.v1`, with two local 3³
+  convolutions, 16 hidden channels, and 12,577 parameters. Historical
+  encodings and checkpoints retain their original identities. Charge all
+  encoding and inference setup to the candidate. The
+  [B2.9 protocol](planning/b2_9_vector_load_protocol.md) fixes the targets,
+  fit, screen, resource caps, and development Gate before execution.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with

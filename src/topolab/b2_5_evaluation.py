@@ -7,6 +7,7 @@ from typing import Any, Literal
 import numpy as np
 import torch
 from numpy.typing import NDArray
+from torch import nn
 
 from topolab.b2_5_training import SEEDS, B25Arm, B25Sample
 from topolab.baselines import (
@@ -17,7 +18,6 @@ from topolab.baselines import (
 )
 from topolab.experiment import EncodedCase, ExperimentCase, encode_case, project_design_density
 from topolab.problem import TopologyProblem, TopologyResult, solve_problem
-from topolab.training import WarmStartCNN
 
 type B25Method = Literal[
     "uniform", "physics_heuristic", "nearest_neighbor", "control", "candidate"
@@ -51,7 +51,7 @@ def _raw_uniform(case: ExperimentCase) -> NDArray[np.float32]:
 
 def _predict(
     case: ExperimentCase,
-    model: WarmStartCNN,
+    model: nn.Module,
     *,
     encoder: Callable[[ExperimentCase], EncodedCase] = encode_case,
 ) -> NDArray[np.float32]:
@@ -86,7 +86,7 @@ def _attempt(
     *,
     method: B25Method,
     reference_compliance: float | None,
-    model: WarmStartCNN | None = None,
+    model: nn.Module | None = None,
     neighbors: NearestNeighborIndex | None = None,
     encoder: Callable[[ExperimentCase], EncodedCase] = encode_case,
     raw_transform: (
@@ -179,7 +179,7 @@ def _charged_result(
     seed: int | None,
     reference: dict[str, Any],
     *,
-    model: WarmStartCNN | None = None,
+    model: nn.Module | None = None,
     neighbors: NearestNeighborIndex | None = None,
     encoder: Callable[[ExperimentCase], EncodedCase] = encode_case,
     raw_transform: (
@@ -230,7 +230,7 @@ def _charged_result(
 def evaluate_b25_case(
     case: ExperimentCase,
     *,
-    models: dict[tuple[B25Arm, int], WarmStartCNN],
+    models: dict[tuple[B25Arm, int], nn.Module],
     neighbors: NearestNeighborIndex,
 ) -> tuple[dict[str, Any], ...]:
     """Evaluate one complete nine-method, version-matched physical case."""
