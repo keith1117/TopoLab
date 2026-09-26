@@ -227,6 +227,25 @@ as a success.
   acceptance. Exact population and thresholds are in the
   [B2.5 protocol](planning/b2_5_prototype_protocol.md).
 
+## B2.6 intermediate-trajectory development target
+
+- The B2.6 target is the uniform solver's post-update, re-solved **design**
+  density at update 30 under the unchanged 240-update physical-plateau policy.
+  If uniform converges earlier, use the earlier terminal state and record its
+  actual update. Capturing through the public iteration callback changes no
+  OC, filter, stiffness, solve, or stopping rule.
+- Persist target density as CPU float32 in `(1, nz, ny, nx)` order. Independently
+  reconstruct filtered physical volume from that persisted design and require
+  error `<=0.005`. The target is for offline training only, never an inference
+  input. Checksum-bind its case ID, split, solver/plan revision, and source
+  revision; keep artifacts outside Git.
+- The separately selected CNN prediction undergoes the existing filtered-
+  volume projection, full SIMP refinement, matched uniform quality check,
+  and fresh uniform fallback. The label-informed own-trajectory oracle is
+  explicitly nondeployable and its target-generation cost is separate. Exact
+  populations, resource caps, and Gate are frozen in the
+  [B2.6 protocol](planning/b2_6_trajectory_protocol.md).
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
