@@ -246,6 +246,21 @@ as a success.
   populations, resource caps, and Gate are frozen in the
   [B2.6 protocol](planning/b2_6_trajectory_protocol.md).
 
+## B2.7 opt-in global point-load representation
+
+- Keep the historical ten-channel case encoding unchanged. The B2.7 candidate
+  alone replaces channels 3–5 with a signed, globally visible load-distance
+  field for exactly one point load. For normalized element center `c` and load
+  node `q`, use `1 - sqrt(sum_axis((c_axis-q_axis)^2)/3)` in the selected load
+  direction, multiplied by the load sign; set other load channels to zero.
+  Support, coordinate, and volume channels, CPU float32, `(z,y,x)` tensor
+  order, and x-fast flattening are unchanged.
+- The opt-in encoding version is `topolab.b2_7.global_load_distance.v1`.
+  Historical checkpoints still use their original encoding. This feature
+  requires no FEM solve at query time, but all encoding/inference setup is
+  charged to B2.7's complete candidate time. The [B2.7 protocol](planning/b2_7_global_load_protocol.md)
+  freezes its fitting artifacts, screen, resource caps, and Gate.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with

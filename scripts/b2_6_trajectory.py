@@ -618,7 +618,13 @@ def _case_outcomes(
     }
 
 
-def _screen_summary(root: Path, index: dict[str, Any]) -> dict[str, Any]:
+def _screen_summary(
+    root: Path,
+    index: dict[str, Any],
+    *,
+    learned_prefix: str = "trajectory_",
+    summary_version: str = "topolab.b2_6.screen_summary.v1",
+) -> dict[str, Any]:
     ratios: defaultdict[tuple[str, str], list[float]] = defaultdict(list)
     directions: defaultdict[tuple[str, str, str], list[float]] = defaultdict(list)
     volumes: defaultdict[tuple[str, str, str, float], list[float]] = defaultdict(list)
@@ -660,7 +666,7 @@ def _screen_summary(root: Path, index: dict[str, Any]) -> dict[str, Any]:
     passing: list[int] = []
     if len(index["rows"]) == 12 and accepted_quality_failures == 0:
         for seed in SEEDS:
-            method = f"trajectory_{seed}"
+            method = f"{learned_prefix}{seed}"
             if all(
                 means[f"{method}_{scale}"] <= 0.90
                 and all(
@@ -678,7 +684,7 @@ def _screen_summary(root: Path, index: dict[str, Any]) -> dict[str, Any]:
         and index["peak_rss_bytes"] <= MAX_RSS
     )
     return {
-        "version": "topolab.b2_6.screen_summary.v1",
+        "version": summary_version,
         "context": index["context"],
         "screen_index_sha256": sha256((root / "screen_index.json").read_bytes()),
         "cases": len(index["rows"]),
