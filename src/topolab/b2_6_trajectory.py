@@ -1,5 +1,6 @@
 """B2.6 development target: predict a reachable uniform SIMP trajectory state."""
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from time import perf_counter
 from typing import Literal
@@ -7,7 +8,7 @@ from typing import Literal
 import numpy as np
 import torch
 from numpy.typing import NDArray
-from torch import Tensor
+from torch import Tensor, nn
 from torch.optim import AdamW
 
 from topolab.experiment import ExperimentCase, encode_case
@@ -103,6 +104,7 @@ class TrajectorySample:
     split: Literal["train", "validation"]
     inputs: Tensor
     target: Tensor
+    input_channels: int = 10
 
     @classmethod
     def from_target(
@@ -121,7 +123,7 @@ class TrajectorySample:
         shape = tuple(self.inputs.shape[1:])
         if (
             shape not in SHAPES
-            or tuple(self.inputs.shape) != (10, *shape)
+            or tuple(self.inputs.shape) != (self.input_channels, *shape)
             or tuple(self.target.shape) != (1, *shape)
         ):
             raise ValueError("trajectory sample shape differs from the frozen meshes")
@@ -174,7 +176,10 @@ def _tensors(
 
 
 def fit_trajectory_seed(
-    train: tuple[TrajectorySample, ...], validation: tuple[TrajectorySample, ...], *, seed: int
+    train: tuple[TrajectorySample, ...], validation: tuple[TrajectorySample, ...], *, seed: int,
+    model_factory: Callable[[], nn.Module] = WarmStartCNN,
+    expected_parameter_count: int = M1_MODEL_PARAMETER_COUNT,
+    input_channels: int = 10,
 ) -> TrajectoryFit:
     """Fit one fixed-seed CNN to the 30-update design target."""
 
@@ -193,6 +198,8 @@ def fit_trajectory_seed(
             raise ValueError("trajectory samples must have sorted case IDs")
         for sample in partition:
             sample.validate()
+            if sample.input_channels != input_channels:
+                raise ValueError("trajectory sample input channels differ from the model")
 
     started = perf_counter()
     generator = torch.Generator(device="cpu")
@@ -203,10 +210,10 @@ def fit_trajectory_seed(
         torch.manual_seed(seed)
         torch.use_deterministic_algorithms(True)
         try:
-            model = WarmStartCNN()
+            model = model_factory()
             if (
                 sum(parameter.numel() for parameter in model.parameters())
-                != M1_MODEL_PARAMETER_COUNT
+                != expected_parameter_count
             ):
                 raise ValueError("trajectory model differs from the fixed CNN")
             optimizer = AdamW(
