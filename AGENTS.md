@@ -39,10 +39,13 @@ checks without changing the previous 53 accepted outcomes. See
 `docs/validation/b2_2_data_feasibility.md` and
 `docs/validation/b2_3_data_feasibility.md`. B2.4 passed the complete 522/522
 development-label and resource Gate; see
-`docs/validation/b2_4_development_labels.md`. The next independent slice is
-B2.5: fixed control/candidate prototype fitting and two-scale validation
-screening. Do not freeze a new final ML contract until its development
-prototype screening passes. Follow the v2 English
+`docs/validation/b2_4_development_labels.md`. B2.5 completed six fixed fits
+and all 54 development validation cases, but every learned seed was slower
+than matched uniform on both mesh scales after complete fallback charges; see
+`docs/validation/b2_5_prototype.md`. The next independent slice is B2.6: a
+versioned development-only intervention addressing B2.5's measured quality
+and refinement-cost gap. Do not freeze a new final ML contract until a
+development prototype screening passes. Follow the v2 English
 roadmap for later gates and slice order.
 
 ## Provenance boundary
