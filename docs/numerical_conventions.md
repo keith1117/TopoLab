@@ -287,6 +287,24 @@ paths are unaffected; B2.8 results require their own experiment identity.
   [B2.9 protocol](planning/b2_9_vector_load_protocol.md) fixes the targets,
   fit, screen, resource caps, and development Gate before execution.
 
+## B2.10 offline sensitivity-weighted trajectory objective
+
+- Keep the B2.9 vector input, CNN, update-30 design-density target, and all
+  query-time projection, solver, quality, and fallback conventions. At each
+  stored B2.6 train/selection target, independently filter and re-solve its
+  float32 design state. Back-propagate the absolute physical-compliance
+  sensitivity through the density filter to design density. Divide by its
+  within-case mean, clip to `[0.25,4]`, and divide by the clipped mean.
+  Persist the resulting positive CPU float32 weights in target tensor order;
+  their within-case mean must be within `1e-6` of one. This is the B2.4
+  sensitivity-weight rule evaluated at the intermediate target state.
+- Fit and select each seed by the elementwise mean of
+  `weight * (prediction - target)**2`. Weights are offline loss data, never
+  query inputs. Version the weights and model selection separately from B2.9;
+  historical checkpoints retain their original MSE objective. The
+  [B2.10 protocol](planning/b2_10_weighted_trajectory_protocol.md) freezes
+  the source artifacts, fresh screen, resource limits, and development Gate.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
