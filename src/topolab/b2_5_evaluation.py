@@ -1,5 +1,6 @@
 """Version-matched B2.5 validation with fully charged uniform fallback."""
 
+from collections.abc import Callable
 from time import perf_counter
 from typing import Any, Literal
 
@@ -14,7 +15,7 @@ from topolab.baselines import (
     safe_refinement_metrics,
     validate_refinement_quality,
 )
-from topolab.experiment import ExperimentCase, encode_case, project_design_density
+from topolab.experiment import EncodedCase, ExperimentCase, encode_case, project_design_density
 from topolab.problem import TopologyProblem, TopologyResult, solve_problem
 from topolab.training import WarmStartCNN
 
@@ -48,8 +49,13 @@ def _raw_uniform(case: ExperimentCase) -> NDArray[np.float32]:
     )
 
 
-def _predict(case: ExperimentCase, model: WarmStartCNN) -> NDArray[np.float32]:
-    inputs = torch.from_numpy(encode_case(case).input_tensor.copy()).unsqueeze(0)
+def _predict(
+    case: ExperimentCase,
+    model: WarmStartCNN,
+    *,
+    encoder: Callable[[ExperimentCase], EncodedCase] = encode_case,
+) -> NDArray[np.float32]:
+    inputs = torch.from_numpy(encoder(case).input_tensor.copy()).unsqueeze(0)
     model.eval()
     with torch.no_grad():
         prediction = model(inputs)
@@ -82,6 +88,7 @@ def _attempt(
     reference_compliance: float | None,
     model: WarmStartCNN | None = None,
     neighbors: NearestNeighborIndex | None = None,
+    encoder: Callable[[ExperimentCase], EncodedCase] = encode_case,
 ) -> dict[str, Any]:
     phases = {
         "setup_seconds": 0.0,
@@ -109,7 +116,7 @@ def _attempt(
             else:
                 if model is None:
                     raise ValueError("B2.5 learned model is missing")
-                raw = _predict(case, model)
+                raw = _predict(case, model, encoder=encoder)
         finally:
             phases["setup_seconds"] = perf_counter() - started
 
@@ -169,6 +176,7 @@ def _charged_result(
     *,
     model: WarmStartCNN | None = None,
     neighbors: NearestNeighborIndex | None = None,
+    encoder: Callable[[ExperimentCase], EncodedCase] = encode_case,
 ) -> dict[str, Any]:
     reference_compliance = float(reference["operational"]["final_compliance"])
     attempt = _attempt(
@@ -177,6 +185,7 @@ def _charged_result(
         reference_compliance=reference_compliance,
         model=model,
         neighbors=neighbors,
+        encoder=encoder,
     )
     phases = attempt["timing"]
     if attempt["succeeded"]:
