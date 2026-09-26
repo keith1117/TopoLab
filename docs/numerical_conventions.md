@@ -143,6 +143,15 @@ linked explicitly to their B2.2 source IDs. The public default and old
 case/result identities are unchanged. No 120-update failure is relabeled
 as a success.
 
+B2.8 tests an opt-in, development-only **initial-design contract**,
+`topolab.b2_8.y_midpoint_start.v1`. For one `y` point load, blend the finite
+CPU-float32 B2.7 prediction elementwise with the uniform volume-fraction
+field at fixed equal weights before the unchanged filtered-volume projection.
+For `z`, copy the B2.7 prediction. Keep the B2.3/B2.4 240-update
+physical-plateau solver, independent quality acceptance, and fully charged
+fresh uniform fallback unchanged. The historical and public initial-density
+paths are unaffected; B2.8 results require their own experiment identity.
+
 ## Reproducibility
 
 - A case records mesh, material, supports, loads, volume fraction, filter, optimizer,
