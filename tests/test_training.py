@@ -1,3 +1,4 @@
+from collections.abc import Iterator
 from pathlib import Path
 
 import pytest
@@ -117,7 +118,21 @@ def test_design_density_mse_is_elementwise_mean_and_differentiable() -> None:
         design_density_mse(prediction.detach().double(), target.double())
 
 
-def test_short_fitting_loop_is_repeatable_and_restores_rng_state() -> None:
+@pytest.fixture
+def single_torch_intraop_thread() -> Iterator[None]:
+    """Match the one-thread environment of the frozen M1 production fitting."""
+
+    previous = torch.get_num_threads()
+    torch.set_num_threads(1)
+    try:
+        yield
+    finally:
+        torch.set_num_threads(previous)
+
+
+def test_short_fitting_loop_is_repeatable_and_restores_rng_state(
+    single_torch_intraop_thread: None,
+) -> None:
     training = _tensor_dataset("train", ("case-a", "case-b"), offset=0.0)
     validation = _tensor_dataset("validation", ("case-c",), offset=0.1)
     torch.manual_seed(999)
