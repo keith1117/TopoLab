@@ -105,6 +105,7 @@ class TrajectorySample:
     inputs: Tensor
     target: Tensor
     input_channels: int = 10
+    weight: Tensor | None = None
 
     @classmethod
     def from_target(
@@ -132,6 +133,18 @@ class TrajectorySample:
                 raise ValueError("trajectory sample must be CPU float32")
             if not torch.isfinite(tensor).all():
                 raise ValueError("trajectory sample contains nonfinite values")
+        if self.weight is not None:
+            if (
+                self.weight.shape != self.target.shape
+                or self.weight.dtype != torch.float32
+                or self.weight.device.type != "cpu"
+                or not torch.isfinite(self.weight).all()
+                or not torch.all(self.weight > 0)
+                or not torch.isclose(
+                    torch.mean(self.weight), torch.tensor(1.0), rtol=0.0, atol=1e-6
+                )
+            ):
+                raise ValueError("trajectory sample weight differs from the fixed contract")
 
     @property
     def shape(self) -> tuple[int, int, int]:
@@ -175,11 +188,31 @@ def _tensors(
     )
 
 
+def trajectory_loss(prediction: Tensor, target: Tensor, weight: Tensor | None = None) -> Tensor:
+    """Elementwise target MSE, optionally weighted by audited sensitivity."""
+
+    if prediction.shape != target.shape or (weight is not None and weight.shape != target.shape):
+        raise ValueError("trajectory loss target or weight shape differs")
+    squared = torch.square(prediction - target)
+    return torch.mean(squared if weight is None else squared * weight)
+
+
+def _batch_weights(samples: tuple[TrajectorySample, ...], indices: tuple[int, ...]) -> Tensor:
+    weights: list[Tensor] = []
+    for index in indices:
+        weight = samples[index].weight
+        if weight is None:
+            raise ValueError("weighted trajectory fit requires every sensitivity weight")
+        weights.append(weight)
+    return torch.stack(weights)
+
+
 def fit_trajectory_seed(
     train: tuple[TrajectorySample, ...], validation: tuple[TrajectorySample, ...], *, seed: int,
     model_factory: Callable[[], nn.Module] = WarmStartCNN,
     expected_parameter_count: int = M1_MODEL_PARAMETER_COUNT,
     input_channels: int = 10,
+    weighted_loss: bool = False,
 ) -> TrajectoryFit:
     """Fit one fixed-seed CNN to the 30-update design target."""
 
@@ -200,6 +233,8 @@ def fit_trajectory_seed(
             sample.validate()
             if sample.input_channels != input_channels:
                 raise ValueError("trajectory sample input channels differ from the model")
+            if weighted_loss and sample.weight is None:
+                raise ValueError("weighted trajectory fit requires every sensitivity weight")
 
     started = perf_counter()
     generator = torch.Generator(device="cpu")
@@ -243,7 +278,10 @@ def fit_trajectory_seed(
                 for batch in batches:
                     inputs, targets = _tensors(train, batch)
                     optimizer.zero_grad(set_to_none=True)
-                    loss = torch.mean(torch.square(model(inputs) - targets))
+                    loss = trajectory_loss(
+                        model(inputs), targets,
+                        _batch_weights(train, batch) if weighted_loss else None,
+                    )
                     torch.autograd.backward(loss)
                     optimizer.step()
                     train_sum += loss.item() * targets.numel()
@@ -258,7 +296,11 @@ def fit_trajectory_seed(
                             inputs, targets = _tensors(
                                 validation, indices[start : start + BATCH_SIZE]
                             )
-                            loss = torch.mean(torch.square(model(inputs) - targets))
+                            loss = trajectory_loss(
+                                model(inputs), targets,
+                                _batch_weights(validation, indices[start : start + BATCH_SIZE])
+                                if weighted_loss else None,
+                            )
                             val_sum += loss.item() * targets.numel()
                             val_elements += targets.numel()
                 if train_elements == 0 or val_elements == 0:
