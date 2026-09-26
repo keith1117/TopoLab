@@ -7,6 +7,7 @@ import json
 import resource
 import sys
 from collections import Counter, defaultdict
+from collections.abc import Callable
 from pathlib import Path
 from time import perf_counter
 from typing import Any, Literal
@@ -53,7 +54,7 @@ from topolab.b2_6_trajectory import (
     fit_trajectory_seed,
 )
 from topolab.baselines import validate_refinement_quality
-from topolab.experiment import ExperimentCase, project_design_density
+from topolab.experiment import EncodedCase, ExperimentCase, encode_case, project_design_density
 from topolab.m2_dataset import build_m2_case_catalog
 from topolab.mesh import generate_structured_hex8
 from topolab.problem import (
@@ -510,6 +511,8 @@ def _case_outcomes(
     models: dict[int, WarmStartCNN],
     control: WarmStartCNN,
     neighbors: Any,
+    *,
+    encoder: Callable[[ExperimentCase], EncodedCase] = encode_case,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     first = _attempt(case, method="uniform", reference_compliance=None)
     if not first["succeeded"]:
@@ -536,7 +539,9 @@ def _case_outcomes(
     old["method"] = "control_43"
     outcomes.append(old)
     for seed in SEEDS:
-        item = _charged_result(case, "candidate", seed, reference, model=models[seed])
+        item = _charged_result(
+            case, "candidate", seed, reference, model=models[seed], encoder=encoder
+        )
         item["method"] = f"trajectory_{seed}"
         outcomes.append(item)
 

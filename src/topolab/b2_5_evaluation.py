@@ -89,6 +89,9 @@ def _attempt(
     model: WarmStartCNN | None = None,
     neighbors: NearestNeighborIndex | None = None,
     encoder: Callable[[ExperimentCase], EncodedCase] = encode_case,
+    raw_transform: (
+        Callable[[ExperimentCase, NDArray[np.float32]], NDArray[np.float32]] | None
+    ) = None,
 ) -> dict[str, Any]:
     phases = {
         "setup_seconds": 0.0,
@@ -117,6 +120,8 @@ def _attempt(
                 if model is None:
                     raise ValueError("B2.5 learned model is missing")
                 raw = _predict(case, model, encoder=encoder)
+                if raw_transform is not None:
+                    raw = raw_transform(case, raw)
         finally:
             phases["setup_seconds"] = perf_counter() - started
 
@@ -177,6 +182,9 @@ def _charged_result(
     model: WarmStartCNN | None = None,
     neighbors: NearestNeighborIndex | None = None,
     encoder: Callable[[ExperimentCase], EncodedCase] = encode_case,
+    raw_transform: (
+        Callable[[ExperimentCase, NDArray[np.float32]], NDArray[np.float32]] | None
+    ) = None,
 ) -> dict[str, Any]:
     reference_compliance = float(reference["operational"]["final_compliance"])
     attempt = _attempt(
@@ -186,6 +194,7 @@ def _charged_result(
         model=model,
         neighbors=neighbors,
         encoder=encoder,
+        raw_transform=raw_transform,
     )
     phases = attempt["timing"]
     if attempt["succeeded"]:
