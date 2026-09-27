@@ -42,6 +42,7 @@ Related documents:
 - [B2.11 versioned reference budget and fixed-model confirmation](../validation/b2_11_reference_budget.md)
 - [B2.12 spatial-context model and new development screen](../validation/b2_12_context_cnn.md)
 - [B2.13 workload routing and safe rejection](../validation/b2_13_routing.md)
+- [B2.14 frozen larger development confirmation protocol](./b2_14_development_confirmation_protocol.md)
 
 ## 1. Current baseline
 
@@ -427,6 +428,9 @@ router on both scales and also met the descriptive direction bounds.
 The next independent slice is a larger, disjoint **B2.14 development
 confirmation** with predeclared router and single-model comparators and
 a fixed selection rule. B3 and any final acceleration claim remain closed.
+The [B2.14 protocol](./b2_14_development_confirmation_protocol.md) freezes
+24 disjoint cases, complete charged comparators, resources, and selection
+before new outcomes are opened. Its Gate outcome is pending.
 
 ### B3: New versioned contract, exposure ledger, and data gate
 
