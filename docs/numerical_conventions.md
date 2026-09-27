@@ -333,6 +333,20 @@ paths are unaffected; B2.8 results require their own experiment identity.
   fixes source artifacts, fresh references, fitting, complete screen, caps,
   and Gate before execution.
 
+## B2.13 opt-in workload routing
+
+- B2.13 changes only the query-time choice among audited B2.9/B2.12
+  checkpoints and a metadata-only safe rejection to fresh uniform. The fixed
+  small/large mesh, y/z direction, volume range, and `0.55` large-y rejection
+  boundary are in the [B2.13 protocol](planning/b2_13_routing_protocol.md).
+  Unsupported case metadata also rejects to uniform. No new weights, encoder,
+  SIMP behavior, or quality tolerance are introduced.
+- Charge the route decision before a selected model's full existing query
+  path. A rejected case pays decision plus fresh uniform time without being
+  counted as a failed learned attempt. A selected model failing independent
+  quality pays its full attempt plus a separate fresh uniform fallback and
+  retains failed status. All B2.13 results have a new experiment identity.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with

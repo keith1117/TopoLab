@@ -76,10 +76,15 @@ completed three fits plus all 132 new-case outcomes. Its validation MSE and
 small-z refinement improved, but every new seed exceeded the large-scale
 charged-speed bound; the high-volume y quality gap and large-z refinement
 regression persisted. See `docs/validation/b2_12_context_cnn.md`. The next
-independent slice is B2.13: a frozen workload-aware model routing and safe
-rejection policy on fresh disjoint development cases. Do not freeze a new
-final ML contract until a development prototype screening passes. Follow
-the v2 English roadmap for later gates and slice order.
+independent slice, B2.13, froze a workload-aware routing/safe-rejection
+policy. Its 12 fresh uniform references and all 144 screen outcomes passed
+the bounded development Gate, but the routed policy did not beat the best
+fixed context model on this cohort. See `docs/validation/b2_13_routing.md`.
+The next independent slice is a larger, physically disjoint development
+confirmation with predeclared fixed-model comparators and selection rule.
+Do not freeze a new final ML contract or claim acceleration before that
+confirmation and the later final Gates. Follow the v2 English roadmap for
+later gates and slice order.
 
 ## Provenance boundary
 
