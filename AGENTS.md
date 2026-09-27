@@ -66,9 +66,14 @@ sensitivity-weight artifacts and three fits, but its frozen screen stopped
 after 9/12 cases and 99/132 outcomes: the tenth case's mandatory uniform
 reference did not converge at 240 updates. The failed Gate and partial
 learning-side evidence are retained in
-`docs/validation/b2_10_weighted_trajectory.md`. The next independent slice
-is B2.11: a versioned reference-iteration repair and fresh, disjoint
-development confirmation of unchanged models. Do not freeze a new final ML contract
+`docs/validation/b2_10_weighted_trajectory.md`. B2.11's versioned 360-update
+budget passed its twelve-pair old/new sentinel and all twelve fresh uniform
+references, then retained all 132 fixed-model outcomes. Neither B2.9 nor
+B2.10's three-seed panel met the two-scale/direction-wise charged-speed
+Gate; see `docs/validation/b2_11_reference_budget.md`. The next independent
+slice is B2.12: one measured learning-side intervention for the high-volume
+y compliance basin and low-volume z refinement burden, with fresh disjoint
+development evidence. Do not freeze a new final ML contract
 until a development prototype screening passes. Follow the v2 English roadmap
 for later gates and slice order.
 
