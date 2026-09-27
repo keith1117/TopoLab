@@ -70,12 +70,16 @@ learning-side evidence are retained in
 budget passed its twelve-pair old/new sentinel and all twelve fresh uniform
 references, then retained all 132 fixed-model outcomes. Neither B2.9 nor
 B2.10's three-seed panel met the two-scale/direction-wise charged-speed
-Gate; see `docs/validation/b2_11_reference_budget.md`. The next independent
-slice is B2.12: one measured learning-side intervention for the high-volume
-y compliance basin and low-volume z refinement burden, with fresh disjoint
-development evidence. Do not freeze a new final ML contract
-until a development prototype screening passes. Follow the v2 English roadmap
-for later gates and slice order.
+Gate; see `docs/validation/b2_11_reference_budget.md`. B2.12's fixed
+spatial-context CNN passed 12/12 new uniform references and
+completed three fits plus all 132 new-case outcomes. Its validation MSE and
+small-z refinement improved, but every new seed exceeded the large-scale
+charged-speed bound; the high-volume y quality gap and large-z refinement
+regression persisted. See `docs/validation/b2_12_context_cnn.md`. The next
+independent slice is B2.13: a frozen workload-aware model routing and safe
+rejection policy on fresh disjoint development cases. Do not freeze a new
+final ML contract until a development prototype screening passes. Follow
+the v2 English roadmap for later gates and slice order.
 
 ## Provenance boundary
 

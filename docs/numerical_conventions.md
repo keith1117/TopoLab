@@ -318,6 +318,21 @@ paths are unaffected; B2.8 results require their own experiment identity.
   the old/new sentinel, independently checked new references, fresh screen,
   resource caps, and two unchanged-model panel Gates before execution.
 
+## B2.12 opt-in spatial-context model
+
+- Keep the B2.9 13-channel vector-load encoding, B2.6 update-30 design-density
+  target, unweighted MSE, filtered-volume projection, full SIMP refinement,
+  360-update B2.11 comparison budget, independent quality re-solve, and fully
+  charged fresh uniform fallback unchanged. The B2.12 intervention changes
+  only the learned CNN's spatial context: four 3³ convolutions of width 16
+  with `(z,y,x)` dilations `(1,1,1)`, `(1,1,2)`, `(1,2,4)`, `(1,2,8)`,
+  matching padding, ReLU between them, and a one-channel sigmoid head.
+- The model version is `topolab.b2_12.context_cnn.v1` with 26,433 trainable
+  parameters. It is opt-in development evidence; historical checkpoints and
+  public defaults are unchanged. The [B2.12 protocol](planning/b2_12_context_cnn_protocol.md)
+  fixes source artifacts, fresh references, fitting, complete screen, caps,
+  and Gate before execution.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
