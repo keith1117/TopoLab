@@ -3,8 +3,9 @@
 Status: **active v2 flagship delivery plan; Gates A1 and A3 passed; B2.2's
 120-update data gate failed, B2.3's versioned 240-update sentinel passed,
 B2.4's complete 522-label development data Gate passed, B2.5–B2.9's
-fixed learned-prototype feasibility Gates failed, and B2.10's screen stopped
-at a failed mandatory uniform reference after nine cases;
+fixed learned-prototype feasibility Gates failed, B2.10's screen stopped
+at a failed mandatory uniform reference after nine cases, and B2.11 passed
+its reference repair but failed the fixed-model development Gate;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -35,6 +36,7 @@ Related documents:
 - [B2.8 y-load basin recentering and new development screen](../validation/b2_8_basin.md)
 - [B2.9 vector point-load conditioning and new development screen](../validation/b2_9_vector_load.md)
 - [B2.10 sensitivity-weighted objective and reference-feasibility stop](../validation/b2_10_weighted_trajectory.md)
+- [B2.11 versioned reference budget and fixed-model confirmation](../validation/b2_11_reference_budget.md)
 
 ## 1. Current baseline
 
@@ -372,10 +374,24 @@ not silently exclude the case or compute a partial Gate. Among the nine
 completed cases, the new weighted seeds did not consistently improve over
 the unchanged B2.9 vector controls. A separate 360-update diagnostic
 converged at update 282 under a new case identity; it is not B2.10 evidence.
-The next independent slice is **B2.11**: version a bounded reference-budget
+The next independent slice was **B2.11**: version a bounded reference-budget
 repair, establish full reference feasibility, and compare the unchanged
-models on a fresh disjoint development screen. Do not enter B3 before a
-development prototype passes.
+models on a fresh disjoint development screen.
+
+**B2.11 reference repair passed; learned-prototype Gate failed:** The
+[versioned 360-update comparison](../validation/b2_11_reference_budget.md)
+passed all twelve old/new uniform sentinel pairs and all twelve fresh
+uniform references. The fresh references stopped by update 189, so their
+denominators were not lengthened by the higher cap. All 132 fixed-method
+outcomes were retained, but neither B2.9 nor B2.10's three-seed panel had
+one seed meeting every scale/direction bound. At large `y/0.5975`, all six
+learned starts converged to final compliance about 0.55%–0.63% worse than
+uniform, failed the unchanged 0.1% quality allowance, and paid full
+fallback. At small `z/0.2975`, all six accepted starts required more
+updates than uniform. The next independent slice is **B2.12**: freeze one
+learning-side correction for these measured quality-basin and refinement
+gaps, then screen it on fresh disjoint development evidence. Do not enter
+B3 before a development prototype passes.
 
 ### B3: New versioned contract, exposure ledger, and data gate
 
@@ -484,17 +500,20 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 16. **B2.10 sensitivity-weighted trajectory objective:** completed 480 weights
     and three fits; the frozen screen stopped at 9/12 cases because a
     mandatory uniform reference failed at 240 updates. Its Gate failed.
-17. **B2.11 versioned reference-budget repair:** next independent slice;
-    restore reference feasibility, then screen unchanged models on fresh
-    disjoint development cases with complete charges and fixed quality.
-18. **B3 new versioned ML contract and data gate:** after a successful
+17. **B2.11 versioned reference-budget repair:** completed; twelve old/new
+    sentinel pairs and twelve fresh references passed, but neither fixed
+    model panel passed the full 132-outcome charged-speed Gate.
+18. **B2.12 learning-side basin/cost intervention:** next independent
+    slice; target the measured high-volume y quality gap and low-volume z
+    refinement burden with one frozen correction and fresh evidence.
+19. **B3 new versioned ML contract and data gate:** after a successful
     development prototype, freeze the new final boundary, then implement and
     audit data in independently reviewable slices.
-19. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+20. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-20. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+21. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-21. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+22. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.

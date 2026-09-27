@@ -305,6 +305,19 @@ paths are unaffected; B2.8 results require their own experiment identity.
   [B2.10 protocol](planning/b2_10_weighted_trajectory_protocol.md) freezes
   the source artifacts, fresh screen, resource limits, and development Gate.
 
+## B2.11 opt-in reference iteration budget
+
+- B2.11 keeps the `topolab.simp.physical_plateau.v1` numerical solver and all
+  OC, filter, stiffness, material, load, stopping, and independent quality
+  tolerances unchanged. Only the development comparison's per-case
+  `optimization.max_iterations` changes from 240 to 360 for **every** method.
+  The public default and all historical 240-update outcomes remain intact.
+- Since the cap is part of the physical-case identity, a 360-update case gets
+  a new ID, explicitly mapped to its 240-update source where applicable.
+  The [B2.11 protocol](planning/b2_11_reference_budget_protocol.md) freezes
+  the old/new sentinel, independently checked new references, fresh screen,
+  resource caps, and two unchanged-model panel Gates before execution.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
