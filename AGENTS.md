@@ -97,7 +97,11 @@ see `docs/validation/b2_16_method_class.md`. B2.17's frozen two-update
 online signal stayed within its cost cap but missed all three known
 terminal failures on the four-case exposed sentinel; its stop rule kept
 all 24 new cases sealed. See `docs/validation/b2_17_early_reliability.md`.
-The next independent slice is B2.18, a bounded new-mechanism assessment.
+The B2.18 solver-anchored start modestly improved compliance and update
+counts, but all three historically failing cases still missed terminal
+quality and paid fallback; its frozen stop rule kept four new cases sealed.
+See `docs/validation/b2_18_solver_anchor.md`. The next independent slice
+is B2.19, a bounded learning-side quality-basin repair.
 Do not freeze a new final ML contract or claim acceleration before fresh
 development feasibility, separate confirmation, and the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.
