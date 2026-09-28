@@ -104,8 +104,12 @@ See `docs/validation/b2_18_solver_anchor.md`. B2.19's paid uniform-state
 sensitivity input passed twelve new uniform references and three fits,
 but its complete 84-outcome screen failed the learned Gate despite lower
 validation MSE for all three seeds. See
-`docs/validation/b2_19_physics_input.md`. The next independent slice is
-B2.20, a bounded target/objective-alignment intervention.
+`docs/validation/b2_19_physics_input.md`. B2.20's operational checkpoint
+selection completed 12 selection cases and 24 independent screen cases,
+with all 132/168 outcomes audited; no selected seed passed, and 0/6
+high-volume large-y selected attempts passed terminal quality. See
+`docs/validation/b2_20_operational_selection.md`. The next independent
+slice is B2.21, a bounded learning-side quality-basin intervention.
 Do not freeze a new final ML contract or claim acceleration before fresh
 development feasibility, separate confirmation, and the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.
