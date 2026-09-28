@@ -88,9 +88,13 @@ See `docs/validation/b2_14_development_confirmation.md`. B2.15's fixed
 position-aware route passed 24/24 fresh uniform references and retained all
 192 outcomes, but failed its development Gate: the large-y charged mean
 exceeded 1.0 and the overall gain over the old route was below the frozen
-5% requirement. See `docs/validation/b2_15_position_routing.md`. The next
-independent slice is B2.16, a bounded method-class reassessment and
-same-quality speed-headroom decision. Do not freeze a new final ML
+5% requirement. See `docs/validation/b2_15_position_routing.md`. B2.16's
+read-only audit of the 48 exposed B2.14/B2.15 cases found optimistic
+fixed-checkpoint headroom but failed coarse-cell transfer in both
+directions. Its ordered decision permits one bounded online early-reliability
+probe while stopping further exposed-cohort routing-threshold searches;
+see `docs/validation/b2_16_method_class.md`. The next independent slice is
+B2.17, a bounded query-time early-reliability probe. Do not freeze a new final ML
 contract or claim acceleration before a new development confirmation and
 the later final Gates. Follow the v2 English roadmap for later gates and
 slice order.

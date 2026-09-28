@@ -9,8 +9,10 @@ its reference repair but failed the fixed-model development Gate, B2.12's
 spatial-context model passed reference/fit Gates but failed the fresh
 development acceleration Gate, B2.13's fixed routing policy passed its
 small fresh development screen, B2.14's larger confirmation failed with
-no eligible routed or fixed policy, and B2.15's position-aware route failed
-its fresh development Gate;
+no eligible routed or fixed policy, B2.15's position-aware route failed
+its fresh development Gate, and B2.16's read-only method-class audit
+supports one bounded early-reliability probe while ruling out further
+coarse metadata threshold tuning;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -48,6 +50,8 @@ Related documents:
 - [B2.14 completed larger development confirmation](../validation/b2_14_development_confirmation.md)
 - [B2.15 frozen position-aware routing protocol](./b2_15_position_routing_protocol.md)
 - [B2.15 completed position-aware routing screen](../validation/b2_15_position_routing.md)
+- [B2.16 frozen method-class reassessment protocol](./b2_16_method_class_protocol.md)
+- [B2.16 completed method-class reassessment](../validation/b2_16_method_class.md)
 
 ## 1. Current baseline
 
@@ -456,6 +460,20 @@ slice is **B2.16**, a bounded method-class reassessment and attainable
 same-quality speed-headroom decision. Stop local routing-threshold search;
 B3 and any final claim remain closed.
 
+**B2.16 method-class reassessment completed:** The
+[frozen read-only audit](../validation/b2_16_method_class.md) checked
+48 exposed B2.14/B2.15 cases and 384 fully charged outcomes without a
+new solver or learned run. Impossible per-case successful selectors
+retained speed headroom on both cohorts, but optimistic coarse-cell
+routes failed transfer in both directions with 15/24 different choices.
+An impossible zero-cost early rejection of B2.15's one failed learned
+attempt would pass its development arithmetic Gate; the strict
+old-route-improvement limit leaves less than 2.8101 s per high-volume
+large-y query for an actual two-position diagnostic. The ordered B2.16
+decision permits **one bounded online early-reliability probe** as B2.17
+and stops further exposed-cohort position/volume threshold searches.
+This is not a new acceleration pass; B3 and any final claim remain closed.
+
 ### B3: New versioned contract, exposure ledger, and data gate
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
@@ -578,19 +596,23 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 21. **B2.15 position-aware routing/reliability intervention:** completed;
     24/24 references and 192/192 outcomes passed completeness and quality
     audits, but the new route failed its direction and improvement Gate.
-22. **B2.16 method-class reassessment:** next independent slice; freeze a
-    finite question, compute bound, and decision rule for whether the
-    current learned warm-start family has attainable same-quality speed
-    headroom. Do not search more position thresholds on exposed cohorts.
-23. **B3 new versioned ML contract and data gate:** only after a new
+22. **B2.16 method-class reassessment:** completed; 48 exposed cases and
+    384 outcomes passed independent read-only audits. Perfect selection
+    has headroom, but coarse-cell transfer failed in both directions;
+    one bounded online early-reliability probe is warranted.
+23. **B2.17 early-reliability probe:** next independent slice; freeze one
+    query-time signal, full cost cap, reliability rule, fresh cases, and
+    stopping condition before execution. Keep B3 closed until separate
+    development feasibility and confirmation pass.
+24. **B3 new versioned ML contract and data gate:** only after a new
     development confirmation passes, freeze the new final boundary, then
     implement and audit data in
     independently reviewable slices.
-24. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+25. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-25. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+26. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-26. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+27. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.
