@@ -80,11 +80,16 @@ independent slice, B2.13, froze a workload-aware routing/safe-rejection
 policy. Its 12 fresh uniform references and all 144 screen outcomes passed
 the bounded development Gate, but the routed policy did not beat the best
 fixed context model on this cohort. See `docs/validation/b2_13_routing.md`.
-The next independent slice is a larger, physically disjoint development
-confirmation with predeclared fixed-model comparators and selection rule.
-Do not freeze a new final ML contract or claim acceleration before that
-confirmation and the later final Gates. Follow the v2 English roadmap for
-later gates and slice order.
+B2.14 then froze and completed a larger, physically disjoint 24-case
+development confirmation: 24/24 new uniform references and all 192
+outcomes passed completeness and quality audits, but no routed or fixed
+single-model policy met the predeclared two-scale/direction-wise Gate.
+See `docs/validation/b2_14_development_confirmation.md`. The next
+independent slice is B2.15, a bounded position-aware routing/reliability
+intervention on fresh development cases. Do not freeze a new final ML
+contract or claim acceleration before a new development confirmation and
+the later final Gates. Follow the v2 English roadmap for later gates and
+slice order.
 
 ## Provenance boundary
 
@@ -104,6 +109,8 @@ new source in `PROVENANCE.md`.
 - Do not claim `validated`, `scalable`, or `accelerated` until the documented evidence
   gate is complete.
 - Never commit generated datasets, run artifacts, caches, secrets, or device IDs.
+- Name branches by deliverable without `codex` or other agent-name tokens;
+  merge PRs only after CI passes and report the next slice after each slice.
 
 ## Required validation
 

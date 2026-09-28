@@ -347,6 +347,16 @@ paths are unaffected; B2.8 results require their own experiment identity.
   quality pays its full attempt plus a separate fresh uniform fallback and
   retains failed status. All B2.13 results have a new experiment identity.
 
+## B2.14 development confirmation
+
+- Keep the B2.13 route, four already audited single-model checkpoints,
+  360-update solver, independent quality check, and fully charged rejection
+  and fallback semantics unchanged. The [B2.14 protocol](planning/b2_14_development_confirmation_protocol.md)
+  freezes 24 disjoint physical cases, uniform references, comparators,
+  resource limits, eligibility criteria, and deterministic policy selection
+  before opening new outcomes. This is development evidence only; public
+  uniform initialization and earlier case/result identities remain unchanged.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
