@@ -23,6 +23,9 @@ fits but failed its 84-outcome learned Gate despite lower validation MSE;
 the B2.20 operational checkpoint selection completed its 12-case
 selection and 24-case independent screen, but no selected seed passed
 and all six high-volume large-y selected attempts failed terminal quality;
+the B2.21 terminal-design target passed all reference, target, fit, and
+screen completeness/resource checks but still failed its learned Gate,
+with 0/6 high-volume large-y new attempts passing terminal quality;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -70,6 +73,8 @@ Related documents:
 - [B2.19 complete physical-input fit and screen](../validation/b2_19_physics_input.md)
 - [B2.20 frozen operational checkpoint-selection protocol](./b2_20_operational_selection_protocol.md)
 - [B2.20 complete selection and independent screen](../validation/b2_20_operational_selection.md)
+- [B2.21 frozen terminal-design target protocol](./b2_21_terminal_target_protocol.md)
+- [B2.21 complete fit and independent screen](../validation/b2_21_terminal_target.md)
 
 ## 1. Current baseline
 
@@ -540,6 +545,17 @@ remains closed. The next slice is **B2.21**, a bounded learning-side
 quality-basin intervention with a frozen mechanism, stop rule, and new
 development evidence.
 
+**B2.21 terminal-design target Gate failed:** The
+[frozen final-design target](../validation/b2_21_terminal_target.md)
+passed 24/24 new uniform references, 12/12 independent validation
+targets, three fits, and all 168 charged screen outcomes. Large-z time
+improved for all three new seeds against matched B2.12 controls, but
+none passed both scale means and four direction means. The highest
+volume large-y cases still failed terminal quality for all six new
+attempts, and seed 17 added two failures overall. B3 remains closed.
+The next slice is **B2.22**, a bounded high-volume y-direction specialist
+learning intervention with a fixed route and disjoint screen.
+
 ### B3: New versioned contract, exposure ledger, and data gate
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
@@ -679,19 +695,23 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     12-case operational selection, and 24-case independent screen were
     complete, but no selected seed passed, and 0/6 high-volume large-y
     selected attempts passed terminal quality.
-27. **B2.21 learning-side quality-basin intervention:** next independent
-    slice; freeze one bounded mechanism and stop rule addressing the
-    high-volume large-y failures, then test on disjoint development
-    evidence. A separate larger confirmation remains required before B3.
-28. **B3 new versioned ML contract and data gate:** only after a new
+27. **B2.21 terminal-design learning target:** completed; 24 new
+    references, twelve validation targets, three fits, and 168 screen
+    outcomes passed completeness audits, but the learned Gate failed
+    and 0/6 high-volume large-y new attempts passed terminal quality.
+28. **B2.22 high-volume y-direction specialist:** next independent
+    slice; freeze a bounded specialist training mechanism, its fixed
+    route, stop rule, and disjoint screen before execution. A separate
+    larger confirmation remains required before B3.
+29. **B3 new versioned ML contract and data gate:** only after a new
     development confirmation passes, freeze the new final boundary, then
     implement and audit data in
     independently reviewable slices.
-29. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+30. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-30. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+31. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-31. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+32. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.

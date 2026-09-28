@@ -409,6 +409,24 @@ paths are unaffected; B2.8 results require their own experiment identity.
   mean ratio, and earliest epoch. The [B2.20 protocol](planning/b2_20_operational_selection_protocol.md)
   fixes both selection and later screen populations and resource Gates.
 
+## B2.21 opt-in terminal-design learning target
+
+- Keep B2.12's 13-channel vector-load input, context CNN, unweighted
+  MSE/AdamW fitting recipe, three seeds, projection, 360-update
+  physical-plateau query solver, independent quality checks, and fully
+  charged fallback unchanged. Replace only the supervised update-30
+  design-density target with the uniform solver's converged terminal
+  **design** density. Historical B2.12/B2.20 weights and results retain
+  their own identities.
+- Read the 468 audited B2.4 `train` terminal labels by checksum. For the
+  same twelve B2.6 validation case definitions, generate new budget-240
+  terminal targets and require independent convergence, compliance, and
+  physical-volume quality before fitting. Persist CPU float32 targets
+  in `(1,nz,ny,nx)` order, bound to case/source context and checksum.
+  Labels are offline loss data, never query inputs. The
+  [B2.21 protocol](planning/b2_21_terminal_target_protocol.md) freezes
+  case separation, resource caps, comparison methods, and Gate.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
