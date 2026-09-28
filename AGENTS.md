@@ -84,9 +84,13 @@ B2.14 then froze and completed a larger, physically disjoint 24-case
 development confirmation: 24/24 new uniform references and all 192
 outcomes passed completeness and quality audits, but no routed or fixed
 single-model policy met the predeclared two-scale/direction-wise Gate.
-See `docs/validation/b2_14_development_confirmation.md`. The next
-independent slice is B2.15, a bounded position-aware routing/reliability
-intervention on fresh development cases. Do not freeze a new final ML
+See `docs/validation/b2_14_development_confirmation.md`. B2.15's fixed
+position-aware route passed 24/24 fresh uniform references and retained all
+192 outcomes, but failed its development Gate: the large-y charged mean
+exceeded 1.0 and the overall gain over the old route was below the frozen
+5% requirement. See `docs/validation/b2_15_position_routing.md`. The next
+independent slice is B2.16, a bounded method-class reassessment and
+same-quality speed-headroom decision. Do not freeze a new final ML
 contract or claim acceleration before a new development confirmation and
 the later final Gates. Follow the v2 English roadmap for later gates and
 slice order.
