@@ -372,6 +372,26 @@ paths are unaffected; B2.8 results require their own experiment identity.
   uniform fallback charges remain unchanged. See the
   [B2.18 protocol](planning/b2_18_solver_anchor_protocol.md).
 
+## B2.19 opt-in uniform-state sensitivity input
+
+- For the fixed one-point-load development workload, solve linear elasticity
+  exactly once at the case's constant physical density equal to its volume
+  fraction, using the unchanged mesh, supports, signed load, material, SIMP
+  penalty, and factorization ordering. Take the negative compliance derivative
+  per x-fast element as nonnegative strain-energy information. Reject
+  nonfinite, negative, or all-zero energy.
+- Divide each energy by its positive case mean, apply `log1p`, then divide by
+  the maximum `log1p` value in that case. Reshape x-fast values to `(nz,ny,nx)`
+  and append them as channel 14 to the unchanged 13-channel B2.9 input.
+  The feature lies in `[0,1]`. This solve is part of every learned query's
+  measured setup cost, including attempts that fail and pay uniform fallback.
+- Keep the B2.12 four-convolution topology, B2.6 update-30 target, unweighted
+  MSE, fixed seeds and training recipe, projection, 360-update refinement,
+  and independent terminal quality and fallback rules. Only the first
+  convolution expands from 13 to 14 channels, making 26,865 parameters.
+  The [B2.19 protocol](planning/b2_19_physics_input_protocol.md) freezes
+  disjoint development cases and all resource and performance Gates.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
