@@ -113,8 +113,14 @@ slice was B2.21: its terminal-design learning target passed 24/24 fresh
 uniform references, 12/12 validation targets, three fits, and all 168
 screen outcomes, but no new seed met the full Gate and 0/6 high-volume
 large-y new attempts passed terminal quality. See
-`docs/validation/b2_21_terminal_target.md`. The next independent slice
-is B2.22, a bounded high-volume y-direction specialist intervention.
+`docs/validation/b2_21_terminal_target.md`. B2.22's high-volume y-direction
+specialist completed 24/24 new references, three fits, and all 168
+fully charged screen outcomes. Its matched high-volume large-y quality
+improved from 2/6 fixed-control successes to 3/6, below the frozen
+4/6 minimum; no seed met the two-scale and direction-wise speed Gate.
+See `docs/validation/b2_22_y_specialist.md`. The next independent
+slice is B2.23, a bounded large-y load-position coverage and label-
+feasibility audit before another model fit.
 Do not freeze a new final ML contract or claim acceleration before fresh
 development feasibility, separate confirmation, and the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.

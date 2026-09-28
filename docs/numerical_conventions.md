@@ -427,6 +427,23 @@ paths are unaffected; B2.8 results require their own experiment identity.
   [B2.21 protocol](planning/b2_21_terminal_target_protocol.md) freezes
   case separation, resource caps, comparison methods, and Gate.
 
+## B2.22 opt-in high-volume y specialist
+
+- Reuse B2.21's audited terminal **design** labels, B2.9 thirteen-channel
+  input, and B2.12 context CNN. In each training batch, calculate one
+  elementwise MSE per case; weight the 52 y-direction cases with volume
+  fraction `>=0.55` by `8` and the other cases by `1`, then divide by the
+  sum of those case weights. Select by earliest strict minimum unweighted
+  MSE on the two y-direction, volume-`0.525` validation targets, one per
+  mesh scale. The unchanged B2.21 targets and B2.12 checkpoints remain
+  separate artifacts.
+- Route to the specialist only for `(24,12,6)` mesh, y direction, and
+  volume fraction `>=0.55`; use the matched B2.12 context model elsewhere.
+  Charge routing, encoding, inference, projection, full refinement,
+  quality decision, and fresh uniform fallback. The
+  [B2.22 protocol](planning/b2_22_y_specialist_protocol.md) freezes the
+  disjoint screen, numerical quality, timing, resources, and Gate.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with

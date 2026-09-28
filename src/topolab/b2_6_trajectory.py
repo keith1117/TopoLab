@@ -198,6 +198,18 @@ def trajectory_loss(prediction: Tensor, target: Tensor, weight: Tensor | None = 
     return torch.mean(squared if weight is None else squared * weight)
 
 
+def case_weighted_loss(prediction: Tensor, target: Tensor, case_weights: Tensor) -> Tensor:
+    """Mean voxel MSE per case, normalized over positive case weights."""
+
+    if (prediction.shape != target.shape or prediction.ndim != 5
+            or case_weights.shape != (prediction.shape[0],)
+            or not torch.isfinite(case_weights).all()
+            or not torch.all(case_weights > 0)):
+        raise ValueError("case-weighted loss shapes or weights differ")
+    per_case = torch.square(prediction - target).mean(dim=(1, 2, 3, 4))
+    return torch.sum(per_case * case_weights) / torch.sum(case_weights)
+
+
 def _batch_weights(samples: tuple[TrajectorySample, ...], indices: tuple[int, ...]) -> Tensor:
     weights: list[Tensor] = []
     for index in indices:
@@ -215,8 +227,10 @@ def fit_trajectory_seed(
     input_channels: int = 10,
     weighted_loss: bool = False,
     capture_epochs: tuple[int, ...] = (),
+    case_weights: dict[str, float] | None = None,
+    selection_case_ids: frozenset[str] | None = None,
 ) -> TrajectoryFit:
-    """Fit one fixed-seed CNN to the 30-update design target."""
+    """Fit one fixed-seed CNN to audited design targets."""
 
     if (len(capture_epochs) > 4 or tuple(sorted(set(capture_epochs))) != capture_epochs
             or any(epoch < 1 or epoch > MAX_EPOCHS for epoch in capture_epochs)):
@@ -240,6 +254,20 @@ def fit_trajectory_seed(
                 raise ValueError("trajectory sample input channels differ from the model")
             if weighted_loss and sample.weight is None:
                 raise ValueError("weighted trajectory fit requires every sensitivity weight")
+    if case_weights is not None and (
+        set(case_weights) != {sample.case_id for sample in train}
+        or any(not np.isfinite(value) or value <= 0 for value in case_weights.values())
+    ):
+        raise ValueError("case weights must cover training cases with positive finite values")
+    if selection_case_ids is not None and (
+        not selection_case_ids
+        or not selection_case_ids <= {sample.case_id for sample in validation}
+        or {sample.shape for sample in validation if sample.case_id in selection_case_ids}
+        != set(SHAPES)
+    ):
+        raise ValueError("selection cases must be nonempty validation cases at both scales")
+    if case_weights is not None and weighted_loss:
+        raise ValueError("case and element weights cannot be combined")
 
     started = perf_counter()
     generator = torch.Generator(device="cpu")
@@ -271,27 +299,37 @@ def fit_trajectory_seed(
             best_state: dict[str, Tensor] = {}
             stale = 0
             val_by_shape = {
-                shape: tuple(i for i, sample in enumerate(validation) if sample.shape == shape)
+                shape: tuple(i for i, sample in enumerate(validation)
+                             if sample.shape == shape and (selection_case_ids is None
+                             or sample.case_id in selection_case_ids))
                 for shape in SHAPES
             }
             for epoch in range(1, MAX_EPOCHS + 1):
                 model.train()
                 train_sum = 0.0
-                train_elements = 0
+                train_elements = 0.0
                 batches = _batches(train, generator)
                 if len(batches) != 59:
                     raise ValueError("trajectory training must have 59 batches per epoch")
                 for batch in batches:
                     inputs, targets = _tensors(train, batch)
                     optimizer.zero_grad(set_to_none=True)
-                    loss = trajectory_loss(
-                        model(inputs), targets,
-                        _batch_weights(train, batch) if weighted_loss else None,
-                    )
+                    prediction = model(inputs)
+                    if case_weights is None:
+                        loss = trajectory_loss(
+                            prediction, targets,
+                            _batch_weights(train, batch) if weighted_loss else None,
+                        )
+                    else:
+                        weights = torch.tensor([case_weights[train[index].case_id]
+                                                for index in batch], dtype=torch.float32)
+                        loss = case_weighted_loss(prediction, targets, weights)
                     torch.autograd.backward(loss)
                     optimizer.step()
-                    train_sum += loss.item() * targets.numel()
-                    train_elements += targets.numel()
+                    objective_elements = (targets.numel() if case_weights is None else
+                                          float(torch.sum(weights).item()) * targets[0].numel())
+                    train_sum += loss.item() * objective_elements
+                    train_elements += objective_elements
                 model.eval()
                 val_sum = 0.0
                 val_elements = 0
