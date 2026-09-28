@@ -18,6 +18,8 @@ terminal quality failures and stopped before opening fresh cases;
 the B2.18 solver-anchored start modestly improved all four exposed
 solutions but retained three terminal quality failures and stopped
 before fresh cases;
+the B2.19 physical-input model passed twelve fresh references and three
+fits but failed its 84-outcome learned Gate despite lower validation MSE;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -61,6 +63,8 @@ Related documents:
 - [B2.17 exposed-sentinel outcome](../validation/b2_17_early_reliability.md)
 - [B2.18 frozen solver-anchor protocol](./b2_18_solver_anchor_protocol.md)
 - [B2.18 solver-anchor sentinel outcome](../validation/b2_18_solver_anchor.md)
+- [B2.19 frozen physical-input protocol](./b2_19_physics_input_protocol.md)
+- [B2.19 complete physical-input fit and screen](../validation/b2_19_physics_input.md)
 
 ## 1. Current baseline
 
@@ -507,6 +511,18 @@ stop rule kept four new cases sealed. B3 remains closed. The next slice
 is **B2.19**, a bounded learning-side quality-basin repair rather than
 another local blend or early-score threshold.
 
+**B2.19 physical-input development Gate failed:** The
+[frozen uniform-state sensitivity channel](../validation/b2_19_physics_input.md)
+passed 12/12 fresh uniform references, completed three fixed fits, and
+retained all 84 fully charged outcomes. All three validation MSE values
+improved against B2.12, but no new seed met the full two-scale,
+direction-wise and reliability Gate. Seed 17 added one quality failure;
+seed 29's large-y mean was 1.188; seed 43 had two failures and large-y
+mean 1.546. The fixed B2.12 controls performed better on this one
+cohort, which does not reverse B2.14's negative larger confirmation.
+B3 remains closed. The next slice is **B2.20**, a bounded intervention
+on target or selection alignment with terminal quality and full cost.
+
 ### B3: New versioned contract, exposure ledger, and data gate
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
@@ -639,19 +655,23 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 24. **B2.18 solver-anchored new-mechanism assessment:** completed; the
     four exposed cases retained three terminal failures after a paid
     physical-state anchor, so no fresh case was opened.
-25. **B2.19 learning-side quality-basin repair:** next independent slice;
-    freeze a materially different model input or target, full query
-    charges, fitting and screen budgets, and fresh development evidence.
-    A separate larger confirmation remains required before B3.
-26. **B3 new versioned ML contract and data gate:** only after a new
+25. **B2.19 learning-side quality-basin repair:** completed; a paid
+    uniform-state sensitivity input improved held-out density MSE but
+    failed the 12-case, 84-outcome development Gate.
+26. **B2.20 target/objective alignment:** next independent slice; freeze
+    one bounded training-target or model-selection change motivated by
+    B2.19's lower MSE but worse operational quality/cost, then test on
+    fresh development evidence. A separate larger confirmation remains
+    required before B3.
+27. **B3 new versioned ML contract and data gate:** only after a new
     development confirmation passes, freeze the new final boundary, then
     implement and audit data in
     independently reviewable slices.
-27. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+28. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-28. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+29. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-29. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+30. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.

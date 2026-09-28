@@ -100,8 +100,12 @@ all 24 new cases sealed. See `docs/validation/b2_17_early_reliability.md`.
 The B2.18 solver-anchored start modestly improved compliance and update
 counts, but all three historically failing cases still missed terminal
 quality and paid fallback; its frozen stop rule kept four new cases sealed.
-See `docs/validation/b2_18_solver_anchor.md`. The next independent slice
-is B2.19, a bounded learning-side quality-basin repair.
+See `docs/validation/b2_18_solver_anchor.md`. B2.19's paid uniform-state
+sensitivity input passed twelve new uniform references and three fits,
+but its complete 84-outcome screen failed the learned Gate despite lower
+validation MSE for all three seeds. See
+`docs/validation/b2_19_physics_input.md`. The next independent slice is
+B2.20, a bounded target/objective-alignment intervention.
 Do not freeze a new final ML contract or claim acceleration before fresh
 development feasibility, separate confirmation, and the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.
