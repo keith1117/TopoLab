@@ -45,6 +45,7 @@ Related documents:
 - [B2.13 workload routing and safe rejection](../validation/b2_13_routing.md)
 - [B2.14 frozen larger development confirmation protocol](./b2_14_development_confirmation_protocol.md)
 - [B2.14 completed larger development confirmation](../validation/b2_14_development_confirmation.md)
+- [B2.15 frozen position-aware routing protocol](./b2_15_position_routing_protocol.md)
 
 ## 1. Current baseline
 
