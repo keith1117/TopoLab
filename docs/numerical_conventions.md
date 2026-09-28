@@ -357,6 +357,21 @@ paths are unaffected; B2.8 results require their own experiment identity.
   before opening new outcomes. This is development evidence only; public
   uniform initialization and earlier case/result identities remain unchanged.
 
+## B2.18 opt-in solver-anchored initialization
+
+- Independently project the verified B2.12 context-17 prediction and run two
+  uniform post-update SIMP states under the unchanged physical-plateau policy.
+  Blend their **design** densities elementwise with fixed weights `0.5/0.5`,
+  then project the blend to the existing filtered physical-volume target.
+  This differs from blending with the constant initial uniform field.
+- Start a fresh 360-update SIMP solve at the projected blend. The two-update
+  anchor is charged query work, not a reference or terminal-quality decision.
+  The new solve's own history and plateau state begin at its first update;
+  its predecessor's two updates do not count toward that history. Existing
+  independent terminal compliance/convergence/volume checks and fresh
+  uniform fallback charges remain unchanged. See the
+  [B2.18 protocol](planning/b2_18_solver_anchor_protocol.md).
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with

@@ -15,6 +15,9 @@ supports one bounded early-reliability probe while ruling out further
 coarse metadata threshold tuning;
 the B2.17 paid two-update sentinel then failed to detect three of three
 terminal quality failures and stopped before opening fresh cases;
+the B2.18 solver-anchored start modestly improved all four exposed
+solutions but retained three terminal quality failures and stopped
+before fresh cases;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -56,6 +59,8 @@ Related documents:
 - [B2.16 completed method-class reassessment](../validation/b2_16_method_class.md)
 - [B2.17 frozen online early-reliability protocol](./b2_17_early_reliability_protocol.md)
 - [B2.17 exposed-sentinel outcome](../validation/b2_17_early_reliability.md)
+- [B2.18 frozen solver-anchor protocol](./b2_18_solver_anchor_protocol.md)
+- [B2.18 solver-anchor sentinel outcome](../validation/b2_18_solver_anchor.md)
 
 ## 1. Current baseline
 
@@ -490,6 +495,18 @@ cases. The next independent slice is **B2.18**, a bounded assessment of
 a genuinely different quality-predictive or solver-aware mechanism.
 Do not retune the two-update cutoff on exposed cases. B3 remains closed.
 
+**B2.18 solver-anchored mechanism sentinel failed:** The
+[frozen physical-state blend](../validation/b2_18_solver_anchor.md)
+combined the audited context-17 prediction with a paid two-update uniform
+state and reran full refinement on the same four exposed high-risk cases.
+All candidate terminal compliance ratios improved slightly and refinement
+shortened by 5–30 updates, but the same three cases still failed the
+unchanged quality limit and paid full fallback. The sentinel's charged
+mean ratio was 1.575 despite sub-0.90 s pre-refinement costs. Its frozen
+stop rule kept four new cases sealed. B3 remains closed. The next slice
+is **B2.19**, a bounded learning-side quality-basin repair rather than
+another local blend or early-score threshold.
+
 ### B3: New versioned contract, exposure ledger, and data gate
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
@@ -619,19 +636,22 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 23. **B2.17 early-reliability probe:** completed; the four-case exposed
     sentinel met cost caps but missed three terminal failures and stopped
     before fresh-case execution.
-24. **B2.18 new-mechanism assessment:** next independent slice; bound and
-    freeze a different intervention, query costs, evidence boundary, and
-    stop rule. Require fresh development feasibility and a separate
-    confirmation before B3.
-25. **B3 new versioned ML contract and data gate:** only after a new
+24. **B2.18 solver-anchored new-mechanism assessment:** completed; the
+    four exposed cases retained three terminal failures after a paid
+    physical-state anchor, so no fresh case was opened.
+25. **B2.19 learning-side quality-basin repair:** next independent slice;
+    freeze a materially different model input or target, full query
+    charges, fitting and screen budgets, and fresh development evidence.
+    A separate larger confirmation remains required before B3.
+26. **B3 new versioned ML contract and data gate:** only after a new
     development confirmation passes, freeze the new final boundary, then
     implement and audit data in
     independently reviewable slices.
-26. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+27. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-27. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+28. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-28. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+29. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.
