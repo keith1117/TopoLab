@@ -48,6 +48,7 @@ Related documents:
 - [B2.14 completed larger development confirmation](../validation/b2_14_development_confirmation.md)
 - [B2.15 frozen position-aware routing protocol](./b2_15_position_routing_protocol.md)
 - [B2.15 completed position-aware routing screen](../validation/b2_15_position_routing.md)
+- [B2.16 frozen method-class reassessment protocol](./b2_16_method_class_protocol.md)
 
 ## 1. Current baseline
 
