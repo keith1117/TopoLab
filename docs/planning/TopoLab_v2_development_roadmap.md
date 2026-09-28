@@ -8,8 +8,9 @@ at a failed mandatory uniform reference after nine cases, and B2.11 passed
 its reference repair but failed the fixed-model development Gate, B2.12's
 spatial-context model passed reference/fit Gates but failed the fresh
 development acceleration Gate, B2.13's fixed routing policy passed its
-small fresh development screen, and B2.14's larger confirmation failed with
-no eligible routed or fixed policy;
+small fresh development screen, B2.14's larger confirmation failed with
+no eligible routed or fixed policy, and B2.15's position-aware route failed
+its fresh development Gate;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -45,6 +46,8 @@ Related documents:
 - [B2.13 workload routing and safe rejection](../validation/b2_13_routing.md)
 - [B2.14 frozen larger development confirmation protocol](./b2_14_development_confirmation_protocol.md)
 - [B2.14 completed larger development confirmation](../validation/b2_14_development_confirmation.md)
+- [B2.15 frozen position-aware routing protocol](./b2_15_position_routing_protocol.md)
+- [B2.15 completed position-aware routing screen](../validation/b2_15_position_routing.md)
 
 ## 1. Current baseline
 
@@ -418,7 +421,7 @@ measured complementary scale/direction behavior, then test it on fresh
 disjoint development cases. This is not a post hoc passing result; B3
 remains closed until a new prototype and larger confirmation pass.
 
-**B2.13 small development Gate passed; larger confirmation remains open:**
+**B2.13 small development Gate passed; later confirmation failed:**
 The [frozen metadata-only route](../validation/b2_13_routing.md) reused
 audited B2.9/B2.12 checkpoints, passed 12/12 fresh uniform references,
 and retained 144/144 fully charged outcomes. Its small/large mean paired
@@ -439,6 +442,19 @@ the large-scale and large-y bounds. The fixed selection rule chose no
 policy. The next independent slice is **B2.15**, a bounded position-aware
 routing/reliability intervention on fresh development cases. B3 and any
 final acceleration claim remain closed.
+
+**B2.15 position-aware routing Gate failed:** The
+[frozen 24-case development screen](../validation/b2_15_position_routing.md)
+passed 24/24 new uniform references and retained all 192 fully charged
+outcomes. The new route improved small-y speed and avoided one old-route
+quality fallback, but its large-y mean was `1.006428` against the `1.0`
+bound. Its overall paired mean was `0.661286` versus the old route's
+`0.686491`, a 3.67% gain below the frozen strict 5% requirement. A
+high-volume large-y position still failed candidate quality and paid a
+full fallback. Independent audit confirmed failure. The next independent
+slice is **B2.16**, a bounded method-class reassessment and attainable
+same-quality speed-headroom decision. Stop local routing-threshold search;
+B3 and any final claim remain closed.
 
 ### B3: New versioned contract, exposure ledger, and data gate
 
@@ -559,18 +575,22 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 20. **B2.14 larger development confirmation:** completed; 24/24 fresh
     references and 192/192 outcomes passed completeness/quality/resource
     audits, but no policy passed the fixed scale/direction Gate.
-21. **B2.15 position-aware routing/reliability intervention:** next
-    independent slice; freeze one bounded policy and fresh disjoint
-    development evidence before execution. Keep B3 closed until a new
-    development confirmation passes.
-22. **B3 new versioned ML contract and data gate:** after confirmation,
-    freeze the new final boundary, then implement and audit data in
+21. **B2.15 position-aware routing/reliability intervention:** completed;
+    24/24 references and 192/192 outcomes passed completeness and quality
+    audits, but the new route failed its direction and improvement Gate.
+22. **B2.16 method-class reassessment:** next independent slice; freeze a
+    finite question, compute bound, and decision rule for whether the
+    current learned warm-start family has attainable same-quality speed
+    headroom. Do not search more position thresholds on exposed cohorts.
+23. **B3 new versioned ML contract and data gate:** only after a new
+    development confirmation passes, freeze the new final boundary, then
+    implement and audit data in
     independently reviewable slices.
-23. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+24. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-24. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+25. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-25. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+26. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.
