@@ -392,6 +392,23 @@ paths are unaffected; B2.8 results require their own experiment identity.
   The [B2.19 protocol](planning/b2_19_physics_input_protocol.md) freezes
   disjoint development cases and all resource and performance Gates.
 
+## B2.20 opt-in operational checkpoint selection
+
+- Keep B2.12's 13-channel vector-load input, four-layer spatial CNN,
+  B2.6 update-30 density target, unweighted MSE optimizer/shuffle/early-stop
+  recipe, three seeds, 360-update physical-plateau solver, filtered-volume
+  projection, and independent quality/fallback rules. Capture CPU `float32`
+  weights at fixed epochs `80,120,160` when reached, plus the unchanged
+  earliest minimum-MSE checkpoint. Capturing copies weights without changing
+  gradient updates or random-number consumption; verify the MSE-best weights
+  elementwise against audited B2.12 checkpoints.
+- On disjoint development selection cases, evaluate each fixed checkpoint
+  with full refinement and complete fallback charges. Per seed, select
+  lexicographically by fewest terminal quality failures, then lowest worst
+  mesh-scale/direction mean paired time ratio, lowest overall arithmetic
+  mean ratio, and earliest epoch. The [B2.20 protocol](planning/b2_20_operational_selection_protocol.md)
+  fixes both selection and later screen populations and resource Gates.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with

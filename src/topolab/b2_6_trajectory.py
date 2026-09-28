@@ -159,6 +159,7 @@ class TrajectoryFit:
     selected_validation_loss: float
     seconds: float
     state: dict[str, Tensor]
+    captured_states: dict[int, dict[str, Tensor]] | None = None
 
 
 def _batches(
@@ -213,9 +214,13 @@ def fit_trajectory_seed(
     expected_parameter_count: int = M1_MODEL_PARAMETER_COUNT,
     input_channels: int = 10,
     weighted_loss: bool = False,
+    capture_epochs: tuple[int, ...] = (),
 ) -> TrajectoryFit:
     """Fit one fixed-seed CNN to the 30-update design target."""
 
+    if (len(capture_epochs) > 4 or tuple(sorted(set(capture_epochs))) != capture_epochs
+            or any(epoch < 1 or epoch > MAX_EPOCHS for epoch in capture_epochs)):
+        raise ValueError("trajectory capture epochs must be ordered, unique, and bounded")
     if seed not in SEEDS or len(train) != 468 or len(validation) != 12:
         raise ValueError("trajectory fit seed or population differs from the plan")
     if (
@@ -260,6 +265,7 @@ def fit_trajectory_seed(
                 amsgrad=False,
             )
             history: list[dict[str, float | int]] = []
+            captured_states: dict[int, dict[str, Tensor]] = {}
             best = float("inf")
             best_epoch = 0
             best_state: dict[str, Tensor] = {}
@@ -310,6 +316,11 @@ def fit_trajectory_seed(
                 history.append(
                     {"epoch": epoch, "training_loss": train_loss, "validation_loss": val_loss}
                 )
+                if epoch in capture_epochs:
+                    captured_states[epoch] = {
+                        name: tensor.detach().cpu().clone().contiguous()
+                        for name, tensor in sorted(model.state_dict().items())
+                    }
                 if val_loss < best:
                     best = val_loss
                     best_epoch = epoch
@@ -327,5 +338,6 @@ def fit_trajectory_seed(
     if best_epoch == 0:
         raise ValueError("trajectory fit produced no selection")
     return TrajectoryFit(
-        seed, tuple(history), best_epoch, best, perf_counter() - started, best_state
+        seed, tuple(history), best_epoch, best, perf_counter() - started, best_state,
+        captured_states,
     )
