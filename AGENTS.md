@@ -93,11 +93,14 @@ read-only audit of the 48 exposed B2.14/B2.15 cases found optimistic
 fixed-checkpoint headroom but failed coarse-cell transfer in both
 directions. Its ordered decision permits one bounded online early-reliability
 probe while stopping further exposed-cohort routing-threshold searches;
-see `docs/validation/b2_16_method_class.md`. The next independent slice is
-B2.17, a bounded query-time early-reliability probe. Do not freeze a new final ML
-contract or claim acceleration before a new development confirmation and
-the later final Gates. Follow the v2 English roadmap for later gates and
-slice order.
+see `docs/validation/b2_16_method_class.md`. B2.17's frozen two-update
+online signal stayed within its cost cap but missed all three known
+terminal failures on the four-case exposed sentinel; its stop rule kept
+all 24 new cases sealed. See `docs/validation/b2_17_early_reliability.md`.
+The next independent slice is B2.18, a bounded new-mechanism assessment.
+Do not freeze a new final ML contract or claim acceleration before fresh
+development feasibility, separate confirmation, and the later final Gates.
+Follow the v2 English roadmap for later gates and slice order.
 
 ## Provenance boundary
 
