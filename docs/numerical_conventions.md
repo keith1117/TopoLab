@@ -481,6 +481,20 @@ paths are unaffected; B2.8 results require their own experiment identity.
   **speed-only** arithmetic bounds. Failed learned attempts remain failures;
   no solver, quality, routing, or operational-default convention changes.
 
+## B2.26 opt-in weighted terminal generalist
+
+- Retain B2.21's terminal-design target, input, context CNN, train and
+  validation case identities, and unweighted twelve-case checkpoint
+  selection. Give exactly the 78 y-direction train cases at volume
+  `>=0.5` case weight `8`, the other 390 weight `1`. The
+  [B2.26 protocol](planning/b2_26_weighted_generalist_protocol.md)
+  fixes the new fit and physically disjoint screen.
+- On the high-volume large-y route, reuse the unchanged B2.24 expanded
+  specialist for all three panels; elsewhere compare B2.12 context,
+  B2.21 unweighted terminal, and B2.26 weighted terminal generalists.
+  Projection, solver, terminal quality, full fallback accounting, and
+  the uniform operational default do not change.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
