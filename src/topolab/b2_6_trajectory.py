@@ -229,18 +229,24 @@ def fit_trajectory_seed(
     capture_epochs: tuple[int, ...] = (),
     case_weights: dict[str, float] | None = None,
     selection_case_ids: frozenset[str] | None = None,
+    expected_train_count: int = 468,
+    expected_validation_count: int = 12,
+    expected_batches: int = 59,
 ) -> TrajectoryFit:
     """Fit one fixed-seed CNN to audited design targets."""
 
     if (len(capture_epochs) > 4 or tuple(sorted(set(capture_epochs))) != capture_epochs
             or any(epoch < 1 or epoch > MAX_EPOCHS for epoch in capture_epochs)):
         raise ValueError("trajectory capture epochs must be ordered, unique, and bounded")
-    if seed not in SEEDS or len(train) != 468 or len(validation) != 12:
+    if (seed not in SEEDS or expected_train_count < 1 or expected_validation_count < 1
+            or expected_batches < 1 or len(train) != expected_train_count
+            or len(validation) != expected_validation_count):
         raise ValueError("trajectory fit seed or population differs from the plan")
     if (
         any(sample.split != "train" for sample in train)
         or any(sample.split != "validation" for sample in validation)
-        or len({sample.case_id for sample in (*train, *validation)}) != 480
+        or len({sample.case_id for sample in (*train, *validation)})
+        != expected_train_count + expected_validation_count
     ):
         raise ValueError("trajectory fitting partitions overlap or differ")
     for partition in (train, validation):
@@ -309,8 +315,8 @@ def fit_trajectory_seed(
                 train_sum = 0.0
                 train_elements = 0.0
                 batches = _batches(train, generator)
-                if len(batches) != 59:
-                    raise ValueError("trajectory training must have 59 batches per epoch")
+                if len(batches) != expected_batches:
+                    raise ValueError("trajectory training batch count differs from the plan")
                 for batch in batches:
                     inputs, targets = _tensors(train, batch)
                     optimizer.zero_grad(set_to_none=True)

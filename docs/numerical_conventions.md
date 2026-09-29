@@ -457,6 +457,21 @@ paths are unaffected; B2.8 results require their own experiment identity.
   Its labels are offline development data and never query inputs. No model
   fitting or learned comparison occurs in B2.23.
 
+## B2.24 opt-in expanded-position specialist
+
+- Add exactly 20 audited B2.23 **train** terminal-design labels to the
+  unchanged 468-case B2.22 training population. Keep the case-weight-8
+  high-volume y objective, thirteen-channel input, context CNN, optimizer,
+  seeds, batch size, epoch/patience caps, and B2.22's two-case checkpoint
+  selection rule. The opt-in training population has 488 cases and 61
+  shape-bucketed batches per epoch; historical fitting retains 468 and 59.
+- Audit the ten B2.23 **validation** labels as fixed-checkpoint diagnostic
+  targets only. Preserve B2.22's route, projection, 360-update
+  physical-plateau refinement, independent compliance/volume checks,
+  failure status, and complete uniform fallback charges. The
+  [B2.24 protocol](planning/b2_24_expanded_training_protocol.md) fixes
+  exposure, disjoint screen, resource caps, and development Gate.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
