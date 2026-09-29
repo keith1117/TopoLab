@@ -100,6 +100,7 @@ Related documents:
 - [B2.25 complete read-only cost audit](../validation/b2_25_residual_cost.md)
 - [B2.26 frozen weighted generalist protocol](./b2_26_weighted_generalist_protocol.md)
 - [B2.26 complete fit and matched screen](../validation/b2_26_weighted_generalist.md)
+- [B2.27 frozen middle-volume position-label protocol](./b2_27_middle_volume_labels_protocol.md)
 
 ## 1. Current baseline
 
@@ -810,9 +811,9 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     matched outcomes passed completeness/resource checks. No seed met
     the large-scale speed Gate despite one improved seed; B3 stays closed.
 33. **B2.27 middle-volume position coverage and label feasibility:**
-    next independent slice; freeze physically disjoint large-grid y/z
-    positions and an unchanged-quality uniform-label data Gate before
-    any further fit or learned screen.
+    protocol frozen for 60 physically disjoint large-grid y/z cases;
+    execute the unchanged-quality uniform-label data Gate before any
+    further fit or learned screen.
 34. **B3 new versioned ML contract and data gate:** only after a new
     development confirmation passes, freeze the new final boundary, then
     implement and audit data in

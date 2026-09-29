@@ -495,6 +495,18 @@ paths are unaffected; B2.8 results require their own experiment identity.
   Projection, solver, terminal quality, full fallback accounting, and
   the uniform operational default do not change.
 
+## B2.27 development-only middle-volume position labels
+
+- Keep the B2.3/B2.4 240-update physical-plateau uniform label solver,
+  convergence tolerance, B2.4 CPU float32 terminal-design and physical-
+  density artifact schema, independent stored-state compliance check,
+  and physical-volume error limit `0.005` unchanged. Give every new
+  label a B2.27 result identity linked to its 120-update source definition.
+- Materialize only the fixed large-mesh middle-volume y/z train and
+  validation position grid in the [B2.27 protocol](planning/b2_27_middle_volume_labels_protocol.md).
+  The labels are offline development data and never query inputs. No
+  model fitting or learned comparison occurs in B2.27.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
