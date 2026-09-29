@@ -118,9 +118,13 @@ specialist completed 24/24 new references, three fits, and all 168
 fully charged screen outcomes. Its matched high-volume large-y quality
 improved from 2/6 fixed-control successes to 3/6, below the frozen
 4/6 minimum; no seed met the two-scale and direction-wise speed Gate.
-See `docs/validation/b2_22_y_specialist.md`. The next independent
-slice is B2.23, a bounded large-y load-position coverage and label-
-feasibility audit before another model fit.
+See `docs/validation/b2_22_y_specialist.md`. B2.23's bounded large-y
+load-position expansion passed its data Gate: 30/30 independently audited
+new uniform labels, with 20 train and 10 validation labels, within the
+frozen time and memory caps. It made no model fit or acceleration claim;
+see `docs/validation/b2_23_position_labels.md`. The next independent
+slice is B2.24, a separately frozen training intervention and fresh
+development screen using the expanded labels.
 Do not freeze a new final ML contract or claim acceleration before fresh
 development feasibility, separate confirmation, and the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.
