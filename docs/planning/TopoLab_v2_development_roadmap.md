@@ -32,6 +32,10 @@ from 2/6 to 3/6 but failing its four-of-six quality and two-scale speed Gates;
 the B2.23 large-y load-position expansion passed its 30/30 independent
 development-label quality and resource Gate, without a model fit or learned
 speed claim;
+the B2.24 expanded-position specialist completed 24 fresh references,
+three fits, ten diagnostic labels, and 168 outcomes, improving matched
+high-volume large-y quality from 0/6 to 6/6 but failing the full
+two-scale and direction-wise charged-speed Gate;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -85,6 +89,8 @@ Related documents:
 - [B2.22 complete specialist fit and independent screen](../validation/b2_22_y_specialist.md)
 - [B2.23 frozen position-coverage and label protocol](./b2_23_position_labels_protocol.md)
 - [B2.23 complete position-label feasibility audit](../validation/b2_23_position_labels.md)
+- [B2.24 frozen expanded-position specialist protocol](./b2_24_expanded_training_protocol.md)
+- [B2.24 complete fit and independent screen](../validation/b2_24_expanded_training.md)
 
 ## 1. Current baseline
 
@@ -592,6 +598,20 @@ fully charged speed remain unresolved. B3 remains closed. The next slice
 is **B2.24**, a separately frozen training intervention using the new
 labels and a fresh, physically disjoint development screen.
 
+**B2.24 expanded-position specialist Gate failed:** The
+[frozen 20-label training expansion](../validation/b2_24_expanded_training.md)
+passed 24/24 new uniform references, three fits, all ten fixed-checkpoint
+diagnostic labels, and all 168 fully charged matched outcomes. The new
+experts reduced matched high-volume large-y terminal failures from 6/6
+to zero and all six successful attempts beat their uniform references
+on those two cases. Nevertheless, every new seed exceeded the `0.90`
+large-scale charged-time mean, and no seed met every direction bound.
+The new route retained lower-volume y failures and costly large-z
+refinement. The complete development Gate failed; B3 remains closed.
+The next slice is **B2.25**, a bounded read-only diagnosis of residual
+large-grid y failures and z refinement cost before freezing another
+mechanism and fresh screen.
+
 ### B3: New versioned contract, exposure ledger, and data gate
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
@@ -741,18 +761,21 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 29. **B2.23 large-y load-position coverage and label feasibility:**
     completed; all 30 new uniform labels and independent numerical,
     identity, resource, and artifact audits passed the frozen data Gate.
-30. **B2.24 expanded-label training intervention:** next independent
-    slice; freeze one bounded fit and a fresh disjoint development screen
-    before opening learned outcomes.
-31. **B3 new versioned ML contract and data gate:** only after a new
+30. **B2.24 expanded-label training intervention:** completed; the
+    24-reference, three-fit, 168-outcome screen repaired 0/6 to 6/6
+    matched high-volume large-y quality but failed the full speed Gate.
+31. **B2.25 residual large-grid quality and cost diagnosis:** next
+    independent slice; audit the B2.24 fixed outcomes without fitting or
+    tuning to select one mechanism for a later fresh screen.
+32. **B3 new versioned ML contract and data gate:** only after a new
     development confirmation passes, freeze the new final boundary, then
     implement and audit data in
     independently reviewable slices.
-32. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+33. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-33. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+34. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-34. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+35. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.
