@@ -472,6 +472,15 @@ paths are unaffected; B2.8 results require their own experiment identity.
   [B2.24 protocol](planning/b2_24_expanded_training_protocol.md) fixes
   exposure, disjoint screen, resource caps, and development Gate.
 
+## B2.25 read-only residual diagnosis
+
+- The [B2.25 protocol](planning/b2_25_residual_cost_protocol.md) reads only
+  B2.24's already exposed, checksum-bound development indices. It recomputes
+  paid timing and quality invariants before any cost decomposition.
+- Its fallback-free, large-z-zero, and combined values are optimistic
+  **speed-only** arithmetic bounds. Failed learned attempts remain failures;
+  no solver, quality, routing, or operational-default convention changes.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
