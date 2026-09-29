@@ -507,6 +507,20 @@ paths are unaffected; B2.8 results require their own experiment identity.
   The labels are offline development data and never query inputs. No
   model fitting or learned comparison occurs in B2.27.
 
+## B2.28 opt-in expanded middle-volume generalist
+
+- Add exactly 40 audited B2.27 train terminal-design labels to the
+  468-case B2.26 generalist population. Keep case weight `8` for y
+  cases at volume `>=0.5` and `1` elsewhere, giving 98 weighted cases
+  and 410 other cases. Keep the thirteen-channel input, context CNN,
+  optimizer, seeds, and twelve-case unweighted MSE selection rule.
+  The 508 cases form 64 shape-bucketed batches per epoch.
+- Read the 20 B2.27 validation labels only as diagnostic targets for
+  fixed selected checkpoints. Retain the B2.24 specialist route,
+  360-update physical-plateau refinement, terminal quality checks,
+  and full fallback charges. The [B2.28 protocol](planning/b2_28_expanded_generalist_protocol.md)
+  fixes the fresh screen, resource limits, and development Gate.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with

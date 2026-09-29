@@ -104,6 +104,7 @@ Related documents:
 - [B2.26 complete fit and matched screen](../validation/b2_26_weighted_generalist.md)
 - [B2.27 frozen middle-volume position-label protocol](./b2_27_middle_volume_labels_protocol.md)
 - [B2.27 complete position-label feasibility audit](../validation/b2_27_middle_volume_labels.md)
+- [B2.28 frozen middle-volume generalist expansion](./b2_28_expanded_generalist_protocol.md)
 
 ## 1. Current baseline
 
@@ -827,9 +828,9 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     completed; all 60 disjoint large-grid y/z labels passed independent
     numerical, artifact, identity, and resource checks, with no fit or
     learned screen.
-34. **B2.28 middle-volume training intervention:** next independent
-    slice; freeze one fit change and a fresh, physically disjoint
-    development screen before opening any new outcomes.
+34. **B2.28 middle-volume training intervention:** protocol frozen;
+    add 40 audited train labels to the weighted generalist, keep new
+    validation labels diagnostic, and test on 24 fresh physical cases.
 35. **B3 new versioned ML contract and data gate:** only after a new
     development confirmation passes, freeze the new final boundary, then
     implement and audit data in
