@@ -41,6 +41,8 @@ non-specialist quality/refinement intervention for one fresh B2.26 screen;
 the B2.26 weighted terminal generalist completed 24 fresh references,
 three fits, and 240 outcomes but failed the two-seed large-scale speed
 Gate, with all residual learned failures at middle-volume y cases;
+the B2.27 middle-volume y/z position expansion passed its 60/60
+development-label quality and resource Gate without fitting a model;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -101,6 +103,7 @@ Related documents:
 - [B2.26 frozen weighted generalist protocol](./b2_26_weighted_generalist_protocol.md)
 - [B2.26 complete fit and matched screen](../validation/b2_26_weighted_generalist.md)
 - [B2.27 frozen middle-volume position-label protocol](./b2_27_middle_volume_labels_protocol.md)
+- [B2.27 complete position-label feasibility audit](../validation/b2_27_middle_volume_labels.md)
 
 ## 1. Current baseline
 
@@ -650,6 +653,16 @@ closed. **B2.27** is a separately frozen middle-volume large-grid y/z
 position-coverage and uniform-label feasibility audit before another
 fit or learned screen.
 
+**B2.27 middle-volume y/z label data Gate passed:** The
+[frozen position expansion](../validation/b2_27_middle_volume_labels.md)
+produced 60/60 independently audited new uniform labels, with 40
+train and 20 validation cases and exact y/z balance, inside its time
+and memory caps. It made no model fit or learned comparison. B3 and
+final evidence remain closed. **B2.28** must separately freeze a
+bounded training intervention using the new train labels and test it
+on fresh development cases with unchanged numerical quality and
+complete fallback charges.
+
 ### B3: New versioned contract, exposure ledger, and data gate
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
@@ -811,18 +824,21 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     matched outcomes passed completeness/resource checks. No seed met
     the large-scale speed Gate despite one improved seed; B3 stays closed.
 33. **B2.27 middle-volume position coverage and label feasibility:**
-    protocol frozen for 60 physically disjoint large-grid y/z cases;
-    execute the unchanged-quality uniform-label data Gate before any
-    further fit or learned screen.
-34. **B3 new versioned ML contract and data gate:** only after a new
+    completed; all 60 disjoint large-grid y/z labels passed independent
+    numerical, artifact, identity, and resource checks, with no fit or
+    learned screen.
+34. **B2.28 middle-volume training intervention:** next independent
+    slice; freeze one fit change and a fresh, physically disjoint
+    development screen before opening any new outcomes.
+35. **B3 new versioned ML contract and data gate:** only after a new
     development confirmation passes, freeze the new final boundary, then
     implement and audit data in
     independently reviewable slices.
-35. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+36. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-36. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+37. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-37. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+38. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.
