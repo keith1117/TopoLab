@@ -444,6 +444,19 @@ paths are unaffected; B2.8 results require their own experiment identity.
   [B2.22 protocol](planning/b2_22_y_specialist_protocol.md) freezes the
   disjoint screen, numerical quality, timing, resources, and Gate.
 
+## B2.23 development-label position expansion
+
+- Preserve the B2.3/B2.4 240-update physical-plateau label solver,
+  convergence tolerance, uniform initialization, B2.4 CPU float32
+  terminal-design/physical-density artifact schema, independent stored-state
+  compliance check, and physical-volume error limit `0.005`. Give each
+  B2.23 case a new result identity linked to its own 120-update source
+  definition; previous B2.4 labels retain their IDs and outcomes.
+- Materialize only the fixed large-mesh high-volume y train/validation
+  position grid in the [B2.23 protocol](planning/b2_23_position_labels_protocol.md).
+  Its labels are offline development data and never query inputs. No model
+  fitting or learned comparison occurs in B2.23.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
