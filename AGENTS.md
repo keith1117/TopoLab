@@ -122,16 +122,24 @@ See `docs/validation/b2_22_y_specialist.md`. B2.23's bounded large-y
 load-position expansion passed its data Gate: 30/30 independently audited
 new uniform labels, with 20 train and 10 validation labels, within the
 frozen time and memory caps. It made no model fit or acceleration claim;
-see `docs/validation/b2_23_position_labels.md`. The next independent
-slice is B2.24, a separately frozen training intervention and fresh
-development screen using the expanded labels. B2.24 completed 24/24
+see `docs/validation/b2_23_position_labels.md`. B2.24 completed 24/24
 fresh references, three fits, ten independent diagnostic validation
 labels, and all 168 fully charged screen outcomes. The expanded route
 improved matched high-volume large-y terminal quality from 0/6 to 6/6,
 but no new seed met the two-scale and direction-wise speed Gate; see
-`docs/validation/b2_24_expanded_training.md`. The next independent
-slice is B2.25, a bounded read-only diagnosis of residual large-grid
-y failures and z refinement cost before another intervention.
+`docs/validation/b2_24_expanded_training.md`. B2.25's read-only cost
+audit found all ten expanded-model failures in y, while large-z
+refinement remained costly; see `docs/validation/b2_25_residual_cost.md`.
+B2.26 then completed 24/24 references, three weighted terminal fits,
+and 240 fully charged outcomes, but no seed met the large-scale speed
+Gate; see `docs/validation/b2_26_weighted_generalist.md`. B2.27's
+middle-volume large-grid y/z position expansion passed its data Gate:
+60/60 independently audited uniform labels, with 40 train and 20
+validation labels, within frozen time and memory caps. It performed no
+model fit or learned comparison; see
+`docs/validation/b2_27_middle_volume_labels.md`. The next independent
+slice is B2.28, a separately frozen training intervention and fresh
+development screen using the new labels.
 Do not freeze a new final ML contract or claim acceleration before fresh
 development feasibility, separate confirmation, and the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.
