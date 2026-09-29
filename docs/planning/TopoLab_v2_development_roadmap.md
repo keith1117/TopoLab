@@ -36,6 +36,8 @@ the B2.24 expanded-position specialist completed 24 fresh references,
 three fits, ten diagnostic labels, and 168 outcomes, improving matched
 high-volume large-y quality from 0/6 to 6/6 but failing the full
 two-scale and direction-wise charged-speed Gate;
+the B2.25 read-only audit bound all B2.24 outcomes and selected a joint
+non-specialist quality/refinement intervention for one fresh B2.26 screen;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -91,6 +93,8 @@ Related documents:
 - [B2.23 complete position-label feasibility audit](../validation/b2_23_position_labels.md)
 - [B2.24 frozen expanded-position specialist protocol](./b2_24_expanded_training_protocol.md)
 - [B2.24 complete fit and independent screen](../validation/b2_24_expanded_training.md)
+- [B2.25 frozen residual-cost diagnosis protocol](./b2_25_residual_cost_protocol.md)
+- [B2.25 complete read-only cost audit](../validation/b2_25_residual_cost.md)
 
 ## 1. Current baseline
 
@@ -612,6 +616,20 @@ The next slice is **B2.25**, a bounded read-only diagnosis of residual
 large-grid y failures and z refinement cost before freezing another
 mechanism and fresh screen.
 
+**B2.25 residual-cost diagnosis completed:** The
+[frozen read-only audit](../validation/b2_25_residual_cost.md) verified
+B2.24's 24 exposed cases and 168 outcomes. All ten expanded-model
+failures were y cases, including six small-grid high-volume attempts
+and four lower-volume large-grid attempts. All large-z attempts passed
+quality but retained costly refinement. Removing all fallback time
+optimistically left zero of three seeds meeting the speed bounds;
+setting all large-z times to zero left only one. Only their combined,
+unattainably optimistic limit gave three speed-eligible seeds while
+leaving all quality failures unresolved. The ordered next mechanism is
+one joint non-specialist generalist intervention with the repaired
+high-volume large-y specialist fixed. B3 remains closed. **B2.26**
+must freeze and test that mechanism on a fresh development cohort.
+
 ### B3: New versioned contract, exposure ledger, and data gate
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
@@ -764,18 +782,24 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 30. **B2.24 expanded-label training intervention:** completed; the
     24-reference, three-fit, 168-outcome screen repaired 0/6 to 6/6
     matched high-volume large-y quality but failed the full speed Gate.
-31. **B2.25 residual large-grid quality and cost diagnosis:** next
-    independent slice; audit the B2.24 fixed outcomes without fitting or
-    tuning to select one mechanism for a later fresh screen.
-32. **B3 new versioned ML contract and data gate:** only after a new
+31. **B2.25 residual large-grid quality and cost diagnosis:** completed;
+    all B2.24 fixed outcomes were checksum-bound and audited without
+    fitting or tuning. The frozen speed-only bounds select one joint
+    generalist mechanism for a fresh screen; no acceleration claim follows.
+32. **B2.26 joint non-specialist quality and refinement intervention:**
+    next independent slice; freeze one generalist change for y terminal
+    quality on both scales and large-z refinement, keep B2.24's expanded
+    high-volume large-y specialist fixed, and screen on disjoint fresh
+    development cases with full charges and unchanged quality rules.
+33. **B3 new versioned ML contract and data gate:** only after a new
     development confirmation passes, freeze the new final boundary, then
     implement and audit data in
     independently reviewable slices.
-33. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+34. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-34. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+35. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-35. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+36. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.
