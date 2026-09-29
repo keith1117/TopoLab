@@ -124,7 +124,14 @@ new uniform labels, with 20 train and 10 validation labels, within the
 frozen time and memory caps. It made no model fit or acceleration claim;
 see `docs/validation/b2_23_position_labels.md`. The next independent
 slice is B2.24, a separately frozen training intervention and fresh
-development screen using the expanded labels.
+development screen using the expanded labels. B2.24 completed 24/24
+fresh references, three fits, ten independent diagnostic validation
+labels, and all 168 fully charged screen outcomes. The expanded route
+improved matched high-volume large-y terminal quality from 0/6 to 6/6,
+but no new seed met the two-scale and direction-wise speed Gate; see
+`docs/validation/b2_24_expanded_training.md`. The next independent
+slice is B2.25, a bounded read-only diagnosis of residual large-grid
+y failures and z refinement cost before another intervention.
 Do not freeze a new final ML contract or claim acceleration before fresh
 development feasibility, separate confirmation, and the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.
