@@ -142,11 +142,17 @@ slice was B2.28: its fixed forty-label generalist expansion completed
 24/24 fresh references, three fits, twenty diagnostic labels, and all
 168 charged outcomes. All three seeds passed the bounded development
 Gate with zero new-panel failures and 6/6 middle-volume large-y
-successes; see `docs/validation/b2_28_expanded_generalist.md`. The next
-independent slice is B2.29, a separately frozen larger physically
-disjoint development confirmation with fixed checkpoints and route.
-Do not freeze a new final ML contract or claim acceleration before fresh
-development feasibility, separate confirmation, and the later final Gates.
+successes; see `docs/validation/b2_28_expanded_generalist.md`. B2.29's
+larger independent confirmation completed 48/48 new references and all
+432 fully charged outcomes with unchanged checkpoints and route. Seeds
+17 and 43 passed the frozen Gate; seed 29 failed the small-scale and
+small-z speed bounds. The expanded panel passed 9/9 middle-volume and
+9/9 high-volume large-y attempts; see
+`docs/validation/b2_29_development_confirmation.md`. The next independent
+slice is B3.1, freezing the new versioned ML contract and final exposure
+boundary. Gate B3 still requires its separate data and provenance audit;
+uniform remains the operational default, and no final acceleration claim
+is allowed before the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.
 
 ## Provenance boundary
