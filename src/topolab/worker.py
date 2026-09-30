@@ -43,6 +43,7 @@ def main() -> int:
                 cancellation.set()
                 return
             cancellation.set()
+        cancellation.set()
 
     Thread(target=read_controls, daemon=True).start()
 

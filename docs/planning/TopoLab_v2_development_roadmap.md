@@ -63,7 +63,8 @@ the B3.4 production data Gate passed with all 560 labels and 48 screening
 references independently audited, zero failures, 5,325.353116 charged
 seconds and 500,154,368-byte peak RSS; no fit or final artifact access;
 A2.1 added a versioned JSON-line manager/worker boundary and separate local
-process for default numerical runs, with A2.2 durable recovery still open;
+process for default numerical runs; A2.2 added leased SQLite ownership,
+fencing, queued recovery and schema migrations; later A2 work remains open;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -135,6 +136,7 @@ Related documents:
 - [B3.3 guarded data materializer](../validation/b3_3_data_materializer.md)
 - [B3.4 production data Gate](../validation/b3_4_data_gate.md)
 - [A2.1 local worker protocol and validation](../validation/a2_1_worker_protocol.md)
+- [A2.2 durable ownership and validation](../validation/a2_2_run_ownership.md)
 
 ## 1. Current baseline
 
@@ -765,7 +767,9 @@ See the [B3.4 validation report](../validation/b3_4_data_gate.md).
 No fitting or final artifact access occurred. **A2.1** then added the
 [versioned local worker protocol](../platform_worker_protocol.md) and
 [process-boundary validation](../validation/a2_1_worker_protocol.md).
-The next slice is **A2.2** durable ownership and recovery. B4 fitting is
+**A2.2** then added [leased run ownership](../run_ownership.md) and
+[recovery validation](../validation/a2_2_run_ownership.md). The next slice is
+**B4.1**, the fixed twelve fits and artifact audit. B4 fitting is
 permitted by the passed data Gate;
 later final Gates still determine acceleration. Uniform remains the default.
 
@@ -949,8 +953,8 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     complete independent quality/provenance/stratum audits and resources
     within the frozen caps. No model fit or final artifact access.
 37. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
-    separate PRs. **A2.1 worker protocol** is complete; **A2.2 durable
-    ownership and recovery** is the next independent slice.
+    separate PRs. A2.1 worker protocol and A2.2 durable ownership/recovery
+    are complete. Gate A2 remains open pending A2.3–A2.4.
 38. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.

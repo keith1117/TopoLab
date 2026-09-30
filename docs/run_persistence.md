@@ -1,6 +1,6 @@
 # Run persistence and restart recovery
 
-Status: **stable in v1.0.0**.
+Status: **v1.0.0 historical persistence contract, extended by A2.2**.
 
 ## Scope
 
@@ -47,20 +47,22 @@ persisted lifecycle transition and is returned as a timezone-aware UTC timestamp
 Databases created by the first persistence slice are upgraded in place by adding and
 backfilling the two timestamp columns.
 
-## Restart semantics
+## Current restart semantics
 
-On construction, a manager with a store loads all existing records:
+Under the [A2.2 ownership contract](run_ownership.md), a manager loads all
+existing records and checks their lease:
 
 - `succeeded`, `failed`, and `cancelled` records retain their exact terminal state,
   progress, result, cancellation flag, and error;
-- a persisted `queued` or `running` record means the previous process stopped before
-  reaching a terminal state. It is atomically changed to `failed`, keeps its last
-  iteration number, exposes no result, and records
+- unowned queued work can be claimed once and executed under its original run ID;
+- a running record with a live lease remains assigned to its current owner;
+- an unowned or expired running record is atomically changed to `failed`, keeps
+  its last committed iteration number, exposes no result, and records
   `RunInterruptedError: process exited before run reached a terminal state`.
 
-The second rule avoids reporting abandoned work as still active. It is recovery of a
-durable record, not automatic retry or numerical checkpoint/resume. A caller may
-submit a new run from the persisted problem after making that retry decision explicit.
+The historical v1.0.0 rule marked every queued/running row failed at startup.
+A2.2 distinguishes recoverable queued work from an interrupted numerical solve.
+It still does not retry a solve or provide optimizer checkpoint/resume.
 
 ## Run history pagination
 
@@ -78,13 +80,13 @@ validation with HTTP `422`.
 
 ## Current limits
 
-- The schema has one built-in additive timestamp migration but no general migration
-  framework yet.
+- Schema changes use ordered versioned migrations; this is not a distributed
+  transaction or an optimizer checkpoint format.
 - Startup still loads all run records into memory; pagination bounds the HTTP response,
   not database memory use. Filtering, search, deletion, and archival are not present.
-- A2.1 provides local process-isolated numerical execution, but SQLite still has no
-  durable worker ownership, distributed claims, authentication, quotas, or artifact
-  storage. See [the worker protocol](platform_worker_protocol.md).
-- Optimizer checkpoint/resume is not implemented; interruption recovery deliberately
-  terminates abandoned runs as failed.
+- A2.1 provides local process-isolated numerical execution and A2.2 adds leased
+  record ownership. Distributed compute, authentication, quotas and artifact
+  storage are not present.
+- Optimizer checkpoint/resume is not implemented; interrupted running work fails
+  after its lease expires.
 - Database files and other run artifacts are ignored by Git and must not be committed.

@@ -173,8 +173,10 @@ peak RSS was 500,154,368 bytes; see `docs/validation/b3_4_data_gate.md`.
 Gate B3 passed without a model fit or final artifact access. A2.1 then
 introduced a versioned JSON-line manager/worker protocol and local separate
 process for default numerical runs; see
-`docs/validation/a2_1_worker_protocol.md`. The next slice is A2.2 durable
-ownership and recovery before later final evaluation. B4 fitting and
+`docs/validation/a2_1_worker_protocol.md`. A2.2 then added leased SQLite
+ownership, heartbeat, fenced writes, queued-record recovery and versioned
+schema migrations; see `docs/validation/a2_2_run_ownership.md`. The next
+slice is B4 fitting and artifact audit. B4 fitting and
 screening require the passed B3 data Gate;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.

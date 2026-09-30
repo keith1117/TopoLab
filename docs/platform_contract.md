@@ -57,6 +57,8 @@ At Gate P1 the executor used a bounded thread pool. A2.1 adds a default local
 process boundary for numerical execution while keeping the public run states and
 API unchanged. See [the versioned worker protocol](platform_worker_protocol.md).
 An injected custom runner still executes in-process.
+The [A2.2 ownership contract](run_ownership.md) adds leased SQLite claims and
+recovery without changing these public states.
 
 ## HTTP surface
 

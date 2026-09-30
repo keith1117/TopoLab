@@ -71,6 +71,20 @@ def test_local_worker_process_accepts_cooperative_cancel() -> None:
     assert all(event.run_id == "cancel-run" for event in events)
 
 
+def test_worker_cancels_when_manager_pipe_closes() -> None:
+    with _worker_process() as process:
+        assert process.stdin is not None
+        assert process.stdout is not None
+        process.stdin.write(encode(Start(run_id="orphan", problem=_problem())))
+        process.stdin.flush()
+        assert isinstance(parse_event(process.stdout.readline()), Started)
+        process.stdin.close()
+        events = [parse_event(line) for line in process.stdout]
+        assert process.wait(timeout=10) == 0
+
+    assert isinstance(events[-1], Cancelled)
+
+
 def _worker_process() -> subprocess.Popen[str]:
     environment = os.environ.copy()
     source_root = str(Path(__file__).resolve().parents[1] / "src")
