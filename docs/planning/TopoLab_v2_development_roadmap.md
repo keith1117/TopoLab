@@ -110,6 +110,7 @@ Related documents:
 - [B2.27 complete position-label feasibility audit](../validation/b2_27_middle_volume_labels.md)
 - [B2.28 frozen middle-volume generalist expansion](./b2_28_expanded_generalist_protocol.md)
 - [B2.28 complete expanded fit and fresh screen](../validation/b2_28_expanded_generalist.md)
+- [B2.29 frozen larger independent confirmation](./b2_29_development_confirmation_protocol.md)
 
 ## 1. Current baseline
 
@@ -853,9 +854,9 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     references, three fits, twenty diagnostics, and 168 charged outcomes.
     All three expanded seeds passed the bounded development Gate with
     zero failures; larger independent confirmation remains required.
-35. **B2.29 larger independent development confirmation:** next;
-    separately freeze a physically disjoint cohort with fixed B2.28
-    checkpoints, route, quality, and complete fallback costs before B3.
+35. **B2.29 larger independent development confirmation:** protocol frozen;
+    48 disjoint cases, fixed B2.28 checkpoints and specialist route,
+    two non-ML comparators, and 432 fully charged outcomes before B3.
 36. **B3 new versioned ML contract and data gate:** only after a new
     development confirmation passes, freeze the new final boundary, then
     implement and audit data in
