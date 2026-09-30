@@ -533,6 +533,30 @@ paths are unaffected; B2.8 results require their own experiment identity.
   compliance to agree with the mandatory reference within `rtol=1e-9`.
   Quality tolerances and full fallback charges remain unchanged.
 
+## B3 versioned formal experiment boundary
+
+- The [B3 contract](b3_experiment_contract.md) retains the physical-plateau
+  equations, A3 ordering, projection, independent terminal-state checks,
+  and all numerical tolerances. It freezes 360 updates for both newly
+  generated labels and query refinement; 240-update source definitions
+  receive explicitly linked new case IDs. Historical labels are not B3
+  fitting inputs.
+- The supplementary B3 exposure fingerprint hashes the normalized full
+  problem with only `optimization.max_iterations` removed, using compact,
+  sorted-key ASCII JSON and one terminal newline. It prevents a budget
+  variant from crossing training/validation/final exposure boundaries.
+  Case IDs retain their existing complete-problem convention.
+- B3's fixed twelve CPU fits use the existing thirteen-channel context CNN
+  and terminal design targets. Case weights affect fitting only; earliest
+  strict minimum unweighted per-case MSE selects each checkpoint on its
+  frozen fit-validation subset. A separate screen selects the deployment
+  seed by the prospective rule, with every seed and failure retained.
+- Final per-case costs include all routing, inference, projection,
+  refinement, quality decision, rejection, and fresh uniform fallback.
+  The selected primary and paired statistics are frozen before final
+  access; independent replication uses the same artifacts and fresh local
+  references. Planning completion is distinct from Gate B3 and B5 evidence.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with

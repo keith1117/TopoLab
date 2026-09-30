@@ -149,8 +149,16 @@ larger independent confirmation completed 48/48 new references and all
 small-z speed bounds. The expanded panel passed 9/9 middle-volume and
 9/9 high-volume large-y attempts; see
 `docs/validation/b2_29_development_confirmation.md`. The next independent
-slice is B3.1, freezing the new versioned ML contract and final exposure
-boundary. Gate B3 still requires its separate data and provenance audit;
+slice was B3.1: its new `topolab.b3.experiment.v1` contract freezes 752
+case definitions, 1,376 historical exposure fingerprints, twelve fits,
+prospective validation-only primary selection, finite compute limits,
+and final ID/OOD plus independent replication criteria; see
+`docs/b3_experiment_contract.md` and
+`docs/validation/b3_1_contract_boundary.md`. Its metadata-only planning
+audit passed without a solver call, fitting, or label access. The next
+slice is B3.2, implementing the frozen catalog, memberships, exposure
+fingerprints, and access boundary. Gate B3 still requires its separate
+complete data and provenance audit;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.

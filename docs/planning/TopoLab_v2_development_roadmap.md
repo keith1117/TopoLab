@@ -50,12 +50,16 @@ the B2.29 larger independent confirmation then completed 48 new
 references and all 432 charged outcomes; expanded seeds 17 and 43
 passed, while seed 29 failed the small-scale and small-z speed bounds,
 permitting B3.1 contract planning with final evidence still sealed;
+the B3.1 formal contract now freezes its 752-case catalog, complete
+historical exposure boundary, fixed model program, prospective primary
+selection, final claim/replication rules, and finite compute budget;
+its metadata planning audit passed, with Gate B3 data audit still pending;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-09-29
+Revised: 2026-09-30
 
 Related documents:
 
@@ -115,6 +119,8 @@ Related documents:
 - [B2.28 complete expanded fit and fresh screen](../validation/b2_28_expanded_generalist.md)
 - [B2.29 frozen larger independent confirmation](./b2_29_development_confirmation_protocol.md)
 - [B2.29 completed independent confirmation and audit](../validation/b2_29_development_confirmation.md)
+- [B3 frozen formal experiment contract](../b3_experiment_contract.md)
+- [B3.1 contract and exposure planning audit](../validation/b3_1_contract_boundary.md)
 
 ## 1. Current baseline
 
@@ -707,6 +713,22 @@ acceleration evidence. Uniform remains the operational default.
 
 ### B3: New versioned contract, exposure ledger, and data gate
 
+**B3.1 planning Gate passed:** The
+[new formal contract](../b3_experiment_contract.md) freezes 528 train,
+32 fit-validation, 48 screen-validation, 96 final-ID, and 48 final-OOD
+definitions. A metadata-only audit reproduced the superseded M3 catalog
+and verified the 1,376-fingerprint historical ledger, exact memberships,
+strata, matched OOD pairs, and zero new-role exposure intersections.
+All labels will be regenerated under the fixed 360-update policy.
+The contract permits exactly twelve fits, keeps all three seeds, selects
+the primary only on new B4 development outcomes, and requires final
+quality, two-scale gains, non-ML comparisons, OOD safety, and independent
+Linux execution. Its 28-hour cumulative stage budget has explicit stop
+rules; failure does not authorize extra tuning or a final-set search.
+The next slice is **B3.2**, implementing catalog and exposure/access
+contracts without solver execution. Gate B3 remains pending complete
+data execution and audit; uniform remains the operational default.
+
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
 catalog, solver revision, label-success rule, and complete exposure ledger. Use
@@ -877,10 +899,11 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     48 references and 432 charged outcomes passed complete audit.
     Expanded seeds 17 and 43 passed the frozen Gate; seed 29 failed.
     Both expanded large-y quality cells passed 9/9.
-36. **B3 new versioned ML contract and data gate:** next slice **B3.1**
-    freezes the contract and final exposure boundary after the passed
-    confirmation; then implement and audit data in independently
-    reviewable slices before any B4 fitting.
+36. **B3 new versioned ML contract and data gate:** **B3.1** completed
+    the contract and metadata exposure audit. Next **B3.2** implements
+    the frozen catalog, memberships, fingerprints, and access boundary;
+    **B3.3** implements guarded label/reference materialization;
+    **B3.4** executes and audits the complete data Gate before B4 fitting.
 37. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
 38. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
