@@ -45,8 +45,11 @@ the B2.27 middle-volume y/z position expansion passed its 60/60
 development-label quality and resource Gate without fitting a model;
 the B2.28 forty-label generalist expansion completed 24 fresh references,
 three fits, twenty diagnostics, and 168 charged outcomes; all three
-seeds passed its bounded development Gate, requiring larger independent
-confirmation before B3;
+seeds passed its bounded development Gate;
+the B2.29 larger independent confirmation then completed 48 new
+references and all 432 charged outcomes; expanded seeds 17 and 43
+passed, while seed 29 failed the small-scale and small-z speed bounds,
+permitting B3.1 contract planning with final evidence still sealed;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -111,6 +114,7 @@ Related documents:
 - [B2.28 frozen middle-volume generalist expansion](./b2_28_expanded_generalist_protocol.md)
 - [B2.28 complete expanded fit and fresh screen](../validation/b2_28_expanded_generalist.md)
 - [B2.29 frozen larger independent confirmation](./b2_29_development_confirmation_protocol.md)
+- [B2.29 completed independent confirmation and audit](../validation/b2_29_development_confirmation.md)
 
 ## 1. Current baseline
 
@@ -686,6 +690,21 @@ disjoint development confirmation with the same checkpoints and route.
 Uniform remains the operational default; B3 and final evidence remain
 closed until that confirmation passes.
 
+**B2.29 independent confirmation Gate passed:** The
+[larger fixed-policy confirmation](../validation/b2_29_development_confirmation.md)
+completed 48/48 fresh references and all 432 fully charged outcomes,
+including both non-ML comparators. Expanded seeds `17,43` met every
+frozen seed criterion, with small/large means `0.776/0.645` and
+`0.611/0.759`, zero and two failures, and overall paired means below
+both non-ML policies. Seed 29 remained reported and failed the small
+and small-z speed bounds (`1.196` and `1.768`). The expanded panel
+passed 9/9 middle-volume large-y attempts versus old 3/9; both passed
+9/9 high-volume specialist attempts. Independent audit reproduced the
+complete decision. **B3.1** is now the next slice: separately freeze
+the new versioned ML contract and final exposure boundary. This is
+bounded development confirmation, not Gate B3 completion or final
+acceleration evidence. Uniform remains the operational default.
+
 ### B3: New versioned contract, exposure ledger, and data gate
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
@@ -854,13 +873,14 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     references, three fits, twenty diagnostics, and 168 charged outcomes.
     All three expanded seeds passed the bounded development Gate with
     zero failures; larger independent confirmation remains required.
-35. **B2.29 larger independent development confirmation:** protocol frozen;
-    48 disjoint cases, fixed B2.28 checkpoints and specialist route,
-    two non-ML comparators, and 432 fully charged outcomes before B3.
-36. **B3 new versioned ML contract and data gate:** only after a new
-    development confirmation passes, freeze the new final boundary, then
-    implement and audit data in
-    independently reviewable slices.
+35. **B2.29 larger independent development confirmation:** completed;
+    48 references and 432 charged outcomes passed complete audit.
+    Expanded seeds 17 and 43 passed the frozen Gate; seed 29 failed.
+    Both expanded large-y quality cells passed 9/9.
+36. **B3 new versioned ML contract and data gate:** next slice **B3.1**
+    freezes the contract and final exposure boundary after the passed
+    confirmation; then implement and audit data in independently
+    reviewable slices before any B4 fitting.
 37. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
 38. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
