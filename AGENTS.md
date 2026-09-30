@@ -164,10 +164,16 @@ versioned label/reference contracts, external content-addressed artifacts,
 charged single-writer recovery, independent numerical audits, and a
 read-only planning/explicit execution CLI; see
 `docs/validation/b3_3_data_materializer.md`. Its tests used synthetic
-states, and no production B3 case was optimized. The next slice is B3.4:
-execute all 560 labels and 48 screening references from one clean merged
-revision and independently audit complete quality, provenance and resources.
-Gate B3 still requires that separate complete data audit;
+states, and no production B3 case was optimized in that slice. B3.4 then
+executed all 560 labels and 48 screening references from clean merged
+revision `cc151b014f9034ccc7093ef592021003d7dec252`. All 608 outcomes passed
+complete independent quality, provenance, stratum and resource audits with
+zero failures. The total charged data phase was 5,325.353116 seconds and
+peak RSS was 500,154,368 bytes; see `docs/validation/b3_4_data_gate.md`.
+Gate B3 passed without a model fit or final artifact access. The next slice
+is A2.1: a minimal serialized manager/worker protocol with a separate local
+process, followed by A2.2 durable ownership and recovery before later final
+evaluation. B4 fitting and screening require the passed B3 data Gate;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.
