@@ -43,6 +43,10 @@ three fits, and 240 outcomes but failed the two-seed large-scale speed
 Gate, with all residual learned failures at middle-volume y cases;
 the B2.27 middle-volume y/z position expansion passed its 60/60
 development-label quality and resource Gate without fitting a model;
+the B2.28 forty-label generalist expansion completed 24 fresh references,
+three fits, twenty diagnostics, and 168 charged outcomes; all three
+seeds passed its bounded development Gate, requiring larger independent
+confirmation before B3;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -105,6 +109,7 @@ Related documents:
 - [B2.27 frozen middle-volume position-label protocol](./b2_27_middle_volume_labels_protocol.md)
 - [B2.27 complete position-label feasibility audit](../validation/b2_27_middle_volume_labels.md)
 - [B2.28 frozen middle-volume generalist expansion](./b2_28_expanded_generalist_protocol.md)
+- [B2.28 complete expanded fit and fresh screen](../validation/b2_28_expanded_generalist.md)
 
 ## 1. Current baseline
 
@@ -664,6 +669,22 @@ bounded training intervention using the new train labels and test it
 on fresh development cases with unchanged numerical quality and
 complete fallback charges.
 
+**B2.28 expanded generalist development Gate passed:** The
+[fixed expansion and fresh screen](../validation/b2_28_expanded_generalist.md)
+completed 24/24 uniform references, three fits, twenty diagnostic
+labels, and all 168 fully charged outcomes. Seeds `17,29,43` all met
+the frozen two-scale/direction speed and reliability bounds, with
+small/large means `0.532/0.585`, `0.580/0.665`, and `0.493/0.587`.
+The new panel had zero quality failures or fallbacks and passed all
+six middle-volume large-y attempts, compared with three of six for
+old; both panels passed all six high-volume specialist attempts.
+All six diagnostic MSE means improved, although seed 29's small-scale
+charged mean regressed against its old control. This is one bounded
+development cohort. **B2.29** must separately freeze a larger physically
+disjoint development confirmation with the same checkpoints and route.
+Uniform remains the operational default; B3 and final evidence remain
+closed until that confirmation passes.
+
 ### B3: New versioned contract, exposure ledger, and data gate
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
@@ -828,18 +849,22 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     completed; all 60 disjoint large-grid y/z labels passed independent
     numerical, artifact, identity, and resource checks, with no fit or
     learned screen.
-34. **B2.28 middle-volume training intervention:** protocol frozen;
-    add 40 audited train labels to the weighted generalist, keep new
-    validation labels diagnostic, and test on 24 fresh physical cases.
-35. **B3 new versioned ML contract and data gate:** only after a new
+34. **B2.28 middle-volume training intervention:** completed; 24 fresh
+    references, three fits, twenty diagnostics, and 168 charged outcomes.
+    All three expanded seeds passed the bounded development Gate with
+    zero failures; larger independent confirmation remains required.
+35. **B2.29 larger independent development confirmation:** next;
+    separately freeze a physically disjoint cohort with fixed B2.28
+    checkpoints, route, quality, and complete fallback costs before B3.
+36. **B3 new versioned ML contract and data gate:** only after a new
     development confirmation passes, freeze the new final boundary, then
     implement and audit data in
     independently reviewable slices.
-36. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
+37. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
-37. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
+38. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
-38. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
 and the next slice, then wait for a new user instruction before starting it.
