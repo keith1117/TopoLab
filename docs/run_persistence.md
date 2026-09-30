@@ -82,8 +82,9 @@ validation with HTTP `422`.
   framework yet.
 - Startup still loads all run records into memory; pagination bounds the HTTP response,
   not database memory use. Filtering, search, deletion, and archival are not present.
-- SQLite persistence does not provide process-isolated execution, distributed workers,
-  authentication, quotas, or artifact storage.
+- A2.1 provides local process-isolated numerical execution, but SQLite still has no
+  durable worker ownership, distributed claims, authentication, quotas, or artifact
+  storage. See [the worker protocol](platform_worker_protocol.md).
 - Optimizer checkpoint/resume is not implemented; interruption recovery deliberately
   terminates abandoned runs as failed.
 - Database files and other run artifacts are ignored by Git and must not be committed.
