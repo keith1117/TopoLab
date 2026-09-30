@@ -159,10 +159,15 @@ audit passed without a solver call, fitting, or label access. B3.2 then
 implemented the exact catalog/ledger and membership-specific access
 guards, matching both frozen hashes and rejecting forbidden roles,
 changed-budget origins, and incomplete NN populations before byte reads;
-see `docs/validation/b3_2_catalog_boundary.md`. The next slice is B3.3,
-implementing B3 label/reference artifacts and guarded materialization.
-Gate B3 still requires its separate
-complete data and provenance audit;
+see `docs/validation/b3_2_catalog_boundary.md`. B3.3 then implemented
+versioned label/reference contracts, external content-addressed artifacts,
+charged single-writer recovery, independent numerical audits, and a
+read-only planning/explicit execution CLI; see
+`docs/validation/b3_3_data_materializer.md`. Its tests used synthetic
+states, and no production B3 case was optimized. The next slice is B3.4:
+execute all 560 labels and 48 screening references from one clean merged
+revision and independently audit complete quality, provenance and resources.
+Gate B3 still requires that separate complete data audit;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.

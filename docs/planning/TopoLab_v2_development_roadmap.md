@@ -56,6 +56,9 @@ selection, final claim/replication rules, and finite compute budget;
 its metadata planning audit passed, with Gate B3 data audit still pending;
 the B3.2 implementation reproduced both frozen metadata hashes and
 passed consumer-specific access and complete-population rejection tests;
+the B3.3 implementation added versioned data/artifact contracts, guarded
+materialization, charged recovery and independent audits; its implementation
+tests passed, with actual B3 data generation reserved for B3.4;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -124,6 +127,7 @@ Related documents:
 - [B3 frozen formal experiment contract](../b3_experiment_contract.md)
 - [B3.1 contract and exposure planning audit](../validation/b3_1_contract_boundary.md)
 - [B3.2 catalog and access boundary](../validation/b3_2_catalog_boundary.md)
+- [B3.3 guarded data materializer](../validation/b3_3_data_materializer.md)
 
 ## 1. Current baseline
 
@@ -736,9 +740,16 @@ labels for NN, and check returned artifact checksums. Synthetic tests
 cover the permission table and malformed/incomplete metadata; no solver
 or generated data artifact was used for this slice. See the
 [B3.2 validation report](../validation/b3_2_catalog_boundary.md).
-The next slice is **B3.3**, implementing B3 label/reference artifacts
-and guarded materialization. Gate B3 remains pending complete data
-execution and audit; uniform remains the operational default.
+**B3.3 implementation Gate passed:** Versioned full-precision and float32
+label/reference contracts, content-addressed external artifacts, single-writer
+prefix recovery, cumulative resource charges, independent audits and the
+read-only planning/explicit execution entrypoint are implemented. Synthetic
+FEM states test quality/corruption boundaries; a historical B2.4 before/after
+label is byte-identical. No production B3 case was optimized. See the
+[B3.3 validation report](../validation/b3_3_data_materializer.md).
+The next slice is **B3.4**, executing all 560 labels and 48 screening
+references from one clean merged source and independently auditing the
+complete data Gate. Uniform remains the operational default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -913,9 +924,10 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 36. **B3 new versioned ML contract and data gate:** **B3.1** completed
     the contract and metadata exposure audit. **B3.2** completed the
     frozen catalog, memberships, fingerprints, and access guards with
-    exact hash and byte comparisons. Next **B3.3** implements guarded
-    label/reference materialization;
-    **B3.4** executes and audits the complete data Gate before B4 fitting.
+    exact hash and byte comparisons. **B3.3** completed guarded versioned
+    label/reference materialization and charged recovery/audits, tested with
+    synthetic states. Next **B3.4** executes and audits the complete data
+    Gate before B4 fitting.
 37. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
 38. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
