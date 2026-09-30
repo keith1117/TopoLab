@@ -521,6 +521,18 @@ paths are unaffected; B2.8 results require their own experiment identity.
   and full fallback charges. The [B2.28 protocol](planning/b2_28_expanded_generalist_protocol.md)
   fixes the fresh screen, resource limits, and development Gate.
 
+## B2.29 fixed-checkpoint development confirmation
+
+- Preserve all B2.28 selected checkpoints and the B2.24 specialist
+  route. The larger independent cohort introduces no fitting or
+  numerical intervention; its [frozen protocol](planning/b2_29_development_confirmation_protocol.md)
+  binds 48 cases and all 432 outcomes.
+- Retain the fixed physics heuristic and the original B2.4 train-only
+  nearest neighbor. Use a fresh timed uniform per screen case after
+  all mandatory references pass; require its independently checked
+  compliance to agree with the mandatory reference within `rtol=1e-9`.
+  Quality tolerances and full fallback charges remain unchanged.
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
