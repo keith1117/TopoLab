@@ -6,10 +6,11 @@ import sys
 from collections.abc import Callable
 from concurrent.futures import CancelledError, Future, ThreadPoolExecutor
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from enum import StrEnum
 from pathlib import Path
-from threading import Event, Lock
+from threading import Event, Lock, Thread
+from time import monotonic, sleep
 from uuid import uuid4
 
 from pydantic import AwareDatetime, BaseModel, ConfigDict, ValidationError
@@ -96,7 +97,12 @@ class _WorkerFailure(Exception):
     """A failure already formatted by the worker protocol."""
 
 
-_RESTART_ERROR = "RunInterruptedError: process exited before run reached a terminal state"
+class _OwnershipLost(Exception):
+    """The durable run lease was lost before a state write."""
+
+
+_LEASE_DURATION = timedelta(seconds=10)
+_HEARTBEAT_INTERVAL = 1.0
 
 
 @dataclass(slots=True)
@@ -111,6 +117,9 @@ class _RunState:
     cancel_event: Event = field(default_factory=Event)
     future: Future[None] | None = None
     process: subprocess.Popen[str] | None = None
+    owner_id: str | None = None
+    lease_expires_at: datetime | None = None
+    submitted_here: bool = False
 
 
 class RunManager:
@@ -129,14 +138,26 @@ class RunManager:
             raise ValueError("max_workers must be positive")
         self._runner = runner
         self._store = store
+        self._owner_id = uuid4().hex
         self._runs: dict[str, _RunState] = {}
         self._lock = Lock()
         self._closed = False
-        self._restore_runs()
         self._executor = ThreadPoolExecutor(
             max_workers=max_workers,
             thread_name_prefix="topolab-run",
         )
+        self._heartbeat_stop = Event()
+        self._heartbeat_thread: Thread | None = None
+        if self._store is not None:
+            self._store.recover_expired(datetime.now(UTC))
+        self._restore_runs()
+        if self._store is not None:
+            self._heartbeat_thread = Thread(
+                target=self._heartbeat_loop,
+                name="topolab-run-heartbeat",
+                daemon=True,
+            )
+            self._heartbeat_thread.start()
 
     def submit(self, problem: TopologyProblem) -> RunSnapshot:
         """Queue one immutable problem and return its initial snapshot."""
@@ -152,10 +173,12 @@ class RunManager:
                 problem=problem,
                 created_at=timestamp,
                 updated_at=timestamp,
+                submitted_here=True,
             )
             self._runs[run_id] = state
             try:
-                self._persist(run_id, state)
+                if self._store is not None:
+                    self._store.insert_queued(self._stored_run(run_id, state))
             except Exception:
                 del self._runs[run_id]
                 raise
@@ -167,6 +190,10 @@ class RunManager:
 
         with self._lock:
             state = self._get_state(run_id)
+            if self._store is not None:
+                stored = self._store.load_one(run_id)
+                if stored is not None:
+                    self._sync_state(state, stored)
             return self._snapshot(run_id, state)
 
     def list_runs(self, *, limit: int = 20, cursor: str | None = None) -> RunPage:
@@ -177,6 +204,13 @@ class RunManager:
         if limit <= 0 or limit > 100:
             raise ValueError("limit must lie within [1, 100]")
         with self._lock:
+            if self._store is not None:
+                for stored in self._store.load_all():
+                    state = self._runs.get(stored.run_id)
+                    if state is None:
+                        self._runs[stored.run_id] = self._state_from_stored(stored)
+                    else:
+                        self._sync_state(state, stored)
             ordered = sorted(
                 self._runs.items(),
                 key=lambda item: (item[1].created_at, item[0]),
@@ -206,6 +240,19 @@ class RunManager:
 
         with self._lock:
             state = self._get_state(run_id)
+            if self._store is not None:
+                stored, accepted = self._store.request_cancel(run_id, datetime.now(UTC))
+                if stored is None:
+                    raise RunNotFoundError(run_id)
+                self._sync_state(state, stored)
+                if not accepted:
+                    return False
+                state.cancel_event.set()
+                if state.owner_id == self._owner_id:
+                    self._send_cancel(run_id, state)
+                if state.future is not None and state.future.cancel():
+                    state.future = None
+                return True
             if state.status in {
                 RunStatus.SUCCEEDED,
                 RunStatus.FAILED,
@@ -231,7 +278,15 @@ class RunManager:
                 future.result(timeout=timeout)
             except (CancelledError, OptimizationCancelledError):
                 pass
-        return self.get(run_id)
+            return self.get(run_id)
+        deadline = None if timeout is None else monotonic() + timeout
+        while True:
+            snapshot = self.get(run_id)
+            if snapshot.status in {RunStatus.SUCCEEDED, RunStatus.FAILED, RunStatus.CANCELLED}:
+                return snapshot
+            if deadline is not None and monotonic() >= deadline:
+                raise TimeoutError("run did not reach a terminal state")
+            sleep(0.05)
 
     def shutdown(self, *, wait: bool = True) -> None:
         """Stop accepting work and cancel active local workers."""
@@ -241,6 +296,23 @@ class RunManager:
             for run_id, state in self._runs.items():
                 if state.status not in {RunStatus.QUEUED, RunStatus.RUNNING}:
                     continue
+                if self._store is not None:
+                    if state.status is RunStatus.QUEUED and not state.submitted_here:
+                        continue
+                    current = self._store.load_one(run_id)
+                    if current is None:
+                        continue
+                    self._sync_state(state, current)
+                    if state.status not in {RunStatus.QUEUED, RunStatus.RUNNING}:
+                        continue
+                    if state.owner_id not in {None, self._owner_id}:
+                        continue
+                    stored, _ = self._store.request_cancel(run_id, datetime.now(UTC))
+                    if stored is not None:
+                        self._sync_state(state, stored)
+                    state.cancel_event.set()
+                    self._send_cancel(run_id, state)
+                    continue
                 state.cancel_event.set()
                 self._send_cancel(run_id, state)
                 if state.status is RunStatus.QUEUED:
@@ -248,6 +320,9 @@ class RunManager:
                 _touch(state)
                 self._persist(run_id, state)
         self._executor.shutdown(wait=wait, cancel_futures=True)
+        self._heartbeat_stop.set()
+        if self._heartbeat_thread is not None and wait:
+            self._heartbeat_thread.join()
 
     def __enter__(self) -> "RunManager":
         return self
@@ -256,16 +331,41 @@ class RunManager:
         self.shutdown()
 
     def _execute(self, run_id: str) -> None:
+        try:
+            self._execute_claimed(run_id)
+        except _OwnershipLost:
+            if self._store is not None:
+                stored = self._store.load_one(run_id)
+                if stored is not None:
+                    with self._lock:
+                        self._sync_state(self._get_state(run_id), stored)
+
+    def _execute_claimed(self, run_id: str) -> None:
         with self._lock:
             state = self._get_state(run_id)
             if state.cancel_event.is_set():
                 state.status = RunStatus.CANCELLED
                 _touch(state)
-                self._persist(run_id, state)
+                if self._store is not None:
+                    stored, _ = self._store.request_cancel(run_id, state.updated_at)
+                    if stored is not None:
+                        self._sync_state(state, stored)
                 return
+            timestamp = datetime.now(UTC)
+            if self._store is not None:
+                lease_expires_at = timestamp + _LEASE_DURATION
+                if not self._store.claim(
+                    run_id, self._owner_id, timestamp, lease_expires_at
+                ):
+                    stored = self._store.load_one(run_id)
+                    if stored is not None:
+                        self._sync_state(state, stored)
+                    state.future = None
+                    return
+                state.owner_id = self._owner_id
+                state.lease_expires_at = lease_expires_at
             state.status = RunStatus.RUNNING
-            _touch(state)
-            self._persist(run_id, state)
+            state.updated_at = timestamp
 
         def on_iteration(iteration: SimpIteration) -> None:
             with self._lock:
@@ -291,6 +391,8 @@ class RunManager:
                 state.error = str(error)
                 _touch(state)
                 self._persist(run_id, state)
+        except _OwnershipLost:
+            raise
         except Exception as error:
             with self._lock:
                 state.status = RunStatus.FAILED
@@ -387,46 +489,124 @@ class RunManager:
         if self._store is None:
             return
         for stored in self._store.load_all():
-            state = _RunState(
-                problem=stored.problem,
-                created_at=stored.created_at,
-                updated_at=stored.updated_at,
-                status=RunStatus(stored.status),
-                iteration=stored.iteration,
-                result=stored.result,
-                error=stored.error,
-            )
-            if stored.cancel_requested:
-                state.cancel_event.set()
-            if state.status in {RunStatus.QUEUED, RunStatus.RUNNING}:
-                state.status = RunStatus.FAILED
-                state.result = None
-                state.error = _RESTART_ERROR
-                _touch(state)
-                self._persist(stored.run_id, state)
+            state = self._state_from_stored(stored)
             self._runs[stored.run_id] = state
+            if state.status is RunStatus.QUEUED and not state.cancel_event.is_set():
+                state.future = self._executor.submit(self._execute, stored.run_id)
+
+    def _heartbeat_loop(self) -> None:
+        assert self._store is not None
+        while not self._heartbeat_stop.wait(_HEARTBEAT_INTERVAL):
+            now = datetime.now(UTC)
+            with self._lock:
+                for run_id, state in self._runs.items():
+                    if state.status is not RunStatus.RUNNING:
+                        continue
+                    if state.owner_id != self._owner_id:
+                        continue
+                    expires_at = now + _LEASE_DURATION
+                    renewed, cancel_requested = self._store.renew(
+                        run_id, self._owner_id, now, expires_at
+                    )
+                    if not renewed:
+                        state.cancel_event.set()
+                        if state.process is not None and state.process.poll() is None:
+                            try:
+                                state.process.kill()
+                            except OSError:
+                                pass
+                    else:
+                        state.lease_expires_at = expires_at
+                        if cancel_requested and not state.cancel_event.is_set():
+                            state.cancel_event.set()
+                            self._send_cancel(run_id, state)
+            self._store.recover_expired(datetime.now(UTC))
+            with self._lock:
+                for stored in self._store.load_active():
+                    active_state = self._runs.get(stored.run_id)
+                    if active_state is None:
+                        active_state = self._state_from_stored(stored)
+                        self._runs[stored.run_id] = active_state
+                    elif active_state.owner_id != self._owner_id:
+                        self._sync_state(active_state, stored)
+                    if active_state.status is RunStatus.QUEUED and active_state.future is None:
+                        if not self._closed:
+                            active_state.future = self._executor.submit(
+                                self._execute, stored.run_id
+                            )
 
     def _persist(self, run_id: str, state: _RunState) -> None:
         if self._store is None:
             return
-        self._store.save(
-            StoredRun(
-                run_id=run_id,
-                problem=state.problem,
-                status=state.status.value,
-                iteration=state.iteration,
-                cancel_requested=state.cancel_event.is_set(),
-                result=state.result,
-                error=state.error,
-                created_at=state.created_at,
-                updated_at=state.updated_at,
-            )
+        if state.owner_id != self._owner_id:
+            raise _OwnershipLost(run_id)
+        saved = self._store.save_owned(
+            self._stored_run(run_id, state), self._owner_id, datetime.now(UTC)
         )
+        if not saved:
+            raise _OwnershipLost(run_id)
+        if state.status in {RunStatus.SUCCEEDED, RunStatus.FAILED, RunStatus.CANCELLED}:
+            stored = self._store.load_one(run_id)
+            if stored is not None:
+                self._sync_state(state, stored)
+
+    @staticmethod
+    def _stored_run(run_id: str, state: _RunState) -> StoredRun:
+        return StoredRun(
+            run_id=run_id,
+            problem=state.problem,
+            status=state.status.value,
+            iteration=state.iteration,
+            cancel_requested=state.cancel_event.is_set(),
+            result=state.result,
+            error=state.error,
+            created_at=state.created_at,
+            updated_at=state.updated_at,
+            owner_id=state.owner_id,
+            lease_expires_at=state.lease_expires_at,
+        )
+
+    @staticmethod
+    def _state_from_stored(stored: StoredRun) -> _RunState:
+        state = _RunState(
+            problem=stored.problem,
+            created_at=stored.created_at,
+            updated_at=stored.updated_at,
+            status=RunStatus(stored.status),
+            iteration=stored.iteration,
+            result=stored.result,
+            error=stored.error,
+            owner_id=stored.owner_id,
+            lease_expires_at=stored.lease_expires_at,
+        )
+        if stored.cancel_requested:
+            state.cancel_event.set()
+        return state
+
+    @staticmethod
+    def _sync_state(state: _RunState, stored: StoredRun) -> None:
+        state.status = RunStatus(stored.status)
+        state.iteration = stored.iteration
+        state.result = stored.result
+        state.error = stored.error
+        state.updated_at = stored.updated_at
+        state.owner_id = stored.owner_id
+        state.lease_expires_at = stored.lease_expires_at
+        if stored.cancel_requested:
+            state.cancel_event.set()
 
     def _get_state(self, run_id: str) -> _RunState:
         try:
             return self._runs[run_id]
         except KeyError as error:
+            if self._store is not None:
+                stored = self._store.load_one(run_id)
+                if stored is not None:
+                    state = self._state_from_stored(stored)
+                    self._runs[run_id] = state
+                    if state.status is RunStatus.QUEUED and not self._closed:
+                        state.future = self._executor.submit(self._execute, run_id)
+                    return state
             raise RunNotFoundError(run_id) from error
 
     @staticmethod

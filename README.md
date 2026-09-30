@@ -114,9 +114,8 @@ The response contains a `run_id`; inspect it at
 the named volume remains for later starts. `docker compose down -v` also deletes the
 database and run history. The stack is bound to loopback and is intended for local
 demonstration. The current default uses the A2.1
-[local process worker](docs/platform_worker_protocol.md) and retains the restart
-semantics described in [`docs/run_persistence.md`](docs/run_persistence.md). It has no
-authentication,
+[local process worker](docs/platform_worker_protocol.md) and A2.2
+[leased run ownership](docs/run_ownership.md). It has no authentication,
 resource quotas, or optimizer checkpoint/resume. Build and smoke evidence is recorded
 in [`docs/validation/a1_2_local_stack.md`](docs/validation/a1_2_local_stack.md).
 

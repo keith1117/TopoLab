@@ -36,12 +36,13 @@ the worker through standard input and is observed between solver iterations.
 An active sparse solve may finish before cancellation takes effect, as in the
 existing public lifecycle contract.
 
-## Boundary of this slice
+## A2.1 boundary and A2.2 extension
 
-Queued work remains in the bounded manager executor. SQLite still records a
-single latest run row; on API restart, previously queued/running rows are
-marked failed under the existing v1.0.0 rule. There is no durable ownership,
+At A2.1, queued work remained in the bounded manager executor. SQLite still
+recorded a single latest run row; on API restart, previously queued/running
+rows were marked failed under the v1.0.0 rule. There was no durable ownership,
 lease, heartbeat, duplicate-claim protocol, automatic retry, or optimizer
-checkpoint. A2.2 will own durable claims and recovery; A2.3 will separately
-define optimizer checkpoint/resume. The numerical core remains independent of
-Web, queue, and worker transport code.
+checkpoint. [A2.2](run_ownership.md) subsequently added durable claims,
+heartbeat, fencing and queued-record recovery. A2.3 will separately define
+optimizer checkpoint/resume. The numerical core remains independent of Web,
+queue, and worker transport code.
