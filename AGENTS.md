@@ -155,9 +155,13 @@ prospective validation-only primary selection, finite compute limits,
 and final ID/OOD plus independent replication criteria; see
 `docs/b3_experiment_contract.md` and
 `docs/validation/b3_1_contract_boundary.md`. Its metadata-only planning
-audit passed without a solver call, fitting, or label access. The next
-slice is B3.2, implementing the frozen catalog, memberships, exposure
-fingerprints, and access boundary. Gate B3 still requires its separate
+audit passed without a solver call, fitting, or label access. B3.2 then
+implemented the exact catalog/ledger and membership-specific access
+guards, matching both frozen hashes and rejecting forbidden roles,
+changed-budget origins, and incomplete NN populations before byte reads;
+see `docs/validation/b3_2_catalog_boundary.md`. The next slice is B3.3,
+implementing B3 label/reference artifacts and guarded materialization.
+Gate B3 still requires its separate
 complete data and provenance audit;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.

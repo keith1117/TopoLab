@@ -54,6 +54,8 @@ the B3.1 formal contract now freezes its 752-case catalog, complete
 historical exposure boundary, fixed model program, prospective primary
 selection, final claim/replication rules, and finite compute budget;
 its metadata planning audit passed, with Gate B3 data audit still pending;
+the B3.2 implementation reproduced both frozen metadata hashes and
+passed consumer-specific access and complete-population rejection tests;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -121,6 +123,7 @@ Related documents:
 - [B2.29 completed independent confirmation and audit](../validation/b2_29_development_confirmation.md)
 - [B3 frozen formal experiment contract](../b3_experiment_contract.md)
 - [B3.1 contract and exposure planning audit](../validation/b3_1_contract_boundary.md)
+- [B3.2 catalog and access boundary](../validation/b3_2_catalog_boundary.md)
 
 ## 1. Current baseline
 
@@ -725,9 +728,17 @@ the primary only on new B4 development outcomes, and requires final
 quality, two-scale gains, non-ML comparisons, OOD safety, and independent
 Linux execution. Its 28-hour cumulative stage budget has explicit stop
 rules; failure does not authorize extra tuning or a final-set search.
-The next slice is **B3.2**, implementing catalog and exposure/access
-contracts without solver execution. Gate B3 remains pending complete
-data execution and audit; uniform remains the operational default.
+**B3.2 implementation Gate passed:** The catalog and historical ledger
+reproduce the exact frozen hashes and independent B3.1 identity bytes.
+Access guards verify case/role/source/membership and derived origins,
+reject forbidden requests before opening bytes, require all 528 train
+labels for NN, and check returned artifact checksums. Synthetic tests
+cover the permission table and malformed/incomplete metadata; no solver
+or generated data artifact was used for this slice. See the
+[B3.2 validation report](../validation/b3_2_catalog_boundary.md).
+The next slice is **B3.3**, implementing B3 label/reference artifacts
+and guarded materialization. Gate B3 remains pending complete data
+execution and audit; uniform remains the operational default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -900,9 +911,10 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     Expanded seeds 17 and 43 passed the frozen Gate; seed 29 failed.
     Both expanded large-y quality cells passed 9/9.
 36. **B3 new versioned ML contract and data gate:** **B3.1** completed
-    the contract and metadata exposure audit. Next **B3.2** implements
-    the frozen catalog, memberships, fingerprints, and access boundary;
-    **B3.3** implements guarded label/reference materialization;
+    the contract and metadata exposure audit. **B3.2** completed the
+    frozen catalog, memberships, fingerprints, and access guards with
+    exact hash and byte comparisons. Next **B3.3** implements guarded
+    label/reference materialization;
     **B3.4** executes and audits the complete data Gate before B4 fitting.
 37. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs.
