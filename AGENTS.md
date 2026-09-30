@@ -170,10 +170,12 @@ revision `cc151b014f9034ccc7093ef592021003d7dec252`. All 608 outcomes passed
 complete independent quality, provenance, stratum and resource audits with
 zero failures. The total charged data phase was 5,325.353116 seconds and
 peak RSS was 500,154,368 bytes; see `docs/validation/b3_4_data_gate.md`.
-Gate B3 passed without a model fit or final artifact access. The next slice
-is A2.1: a minimal serialized manager/worker protocol with a separate local
-process, followed by A2.2 durable ownership and recovery before later final
-evaluation. B4 fitting and screening require the passed B3 data Gate;
+Gate B3 passed without a model fit or final artifact access. A2.1 then
+introduced a versioned JSON-line manager/worker protocol and local separate
+process for default numerical runs; see
+`docs/validation/a2_1_worker_protocol.md`. The next slice is A2.2 durable
+ownership and recovery before later final evaluation. B4 fitting and
+screening require the passed B3 data Gate;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.

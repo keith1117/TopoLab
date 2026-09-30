@@ -53,10 +53,10 @@ queued ----------------> cancelled
   may finish before the state becomes `cancelled`.
 - Terminal states cannot be cancelled again.
 
-The current executor uses a bounded thread pool. Each run owns an immutable problem,
-private numerical arrays, cancellation event, status, and result. This establishes
-data and failure isolation for concurrent in-process runs, but it is not process
-isolation and does not survive application restart.
+At Gate P1 the executor used a bounded thread pool. A2.1 adds a default local
+process boundary for numerical execution while keeping the public run states and
+API unchanged. See [the versioned worker protocol](platform_worker_protocol.md).
+An injected custom runner still executes in-process.
 
 ## HTTP surface
 

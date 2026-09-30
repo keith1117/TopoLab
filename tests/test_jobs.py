@@ -1,3 +1,5 @@
+import os
+import time
 from collections.abc import Callable
 from threading import Barrier, Event
 
@@ -27,6 +29,35 @@ def test_run_manager_completes_a_numerical_problem() -> None:
     assert completed.result is not None
     assert completed.result.converged
     assert completed.error is None
+
+
+def test_default_manager_cancels_its_separate_worker() -> None:
+    with RunManager(max_workers=1) as manager:
+        run_id = manager.submit(_make_problem()).run_id
+        process = _started_process(manager, run_id)
+        assert process.pid != os.getpid()
+        assert manager.cancel(run_id)
+        cancelled = manager.wait(run_id, timeout=10.0)
+
+    assert cancelled.status is RunStatus.CANCELLED
+    assert cancelled.cancel_requested
+    assert cancelled.result is None
+
+
+def test_unexpected_worker_exit_fails_only_its_run() -> None:
+    with RunManager(max_workers=2) as manager:
+        interrupted_id = manager.submit(_make_problem()).run_id
+        process = _started_process(manager, interrupted_id)
+        process.kill()
+        completed_id = manager.submit(_make_problem()).run_id
+        interrupted = manager.wait(interrupted_id, timeout=10.0)
+        completed = manager.wait(completed_id, timeout=10.0)
+
+    assert interrupted.status is RunStatus.FAILED
+    assert interrupted.error is not None
+    assert interrupted.error.startswith("WorkerProcessError: worker exited")
+    assert interrupted.result is None
+    assert completed.status is RunStatus.SUCCEEDED
 
 
 def test_two_runs_execute_concurrently_and_keep_results_isolated() -> None:
@@ -184,6 +215,17 @@ def _result(marker: float) -> TopologyResult:
         history=(),
         converged=True,
     )
+
+
+def _started_process(manager: RunManager, run_id: str):
+    deadline = time.monotonic() + 5.0
+    while True:
+        with manager._lock:
+            process = manager._runs[run_id].process
+        if process is not None:
+            return process
+        assert time.monotonic() < deadline
+        time.sleep(0.01)
 
 
 def _make_problem(

@@ -1,18 +1,33 @@
-"""In-process optimization job lifecycle and isolated result storage."""
+"""Optimization job lifecycle and isolated result storage."""
 
+import os
+import subprocess
+import sys
 from collections.abc import Callable
 from concurrent.futures import CancelledError, Future, ThreadPoolExecutor
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from enum import StrEnum
+from pathlib import Path
 from threading import Event, Lock
 from uuid import uuid4
 
-from pydantic import AwareDatetime, BaseModel, ConfigDict
+from pydantic import AwareDatetime, BaseModel, ConfigDict, ValidationError
 
 from topolab.persistence import RunStore, StoredRun
-from topolab.problem import TopologyProblem, TopologyResult, solve_problem
+from topolab.problem import TopologyProblem, TopologyResult
 from topolab.simp import OptimizationCancelledError, SimpIteration
+from topolab.worker_protocol import (
+    Cancel,
+    Cancelled,
+    Failed,
+    Progress,
+    Start,
+    Started,
+    Succeeded,
+    encode,
+    parse_event,
+)
 
 type JobRunner = Callable[
     [TopologyProblem, Callable[[], bool], Callable[[SimpIteration], None]],
@@ -77,6 +92,10 @@ class RunCursorError(ValueError):
     """Raised when a run-history cursor is unknown."""
 
 
+class _WorkerFailure(Exception):
+    """A failure already formatted by the worker protocol."""
+
+
 _RESTART_ERROR = "RunInterruptedError: process exited before run reached a terminal state"
 
 
@@ -91,6 +110,7 @@ class _RunState:
     error: str | None = None
     cancel_event: Event = field(default_factory=Event)
     future: Future[None] | None = None
+    process: subprocess.Popen[str] | None = None
 
 
 class RunManager:
@@ -107,7 +127,7 @@ class RunManager:
             raise TypeError("max_workers must be an integer")
         if max_workers <= 0:
             raise ValueError("max_workers must be positive")
-        self._runner = _run_problem if runner is None else runner
+        self._runner = runner
         self._store = store
         self._runs: dict[str, _RunState] = {}
         self._lock = Lock()
@@ -193,6 +213,7 @@ class RunManager:
             }:
                 return False
             state.cancel_event.set()
+            self._send_cancel(run_id, state)
             if state.future is not None and state.future.cancel():
                 state.status = RunStatus.CANCELLED
             _touch(state)
@@ -213,7 +234,7 @@ class RunManager:
         return self.get(run_id)
 
     def shutdown(self, *, wait: bool = True) -> None:
-        """Stop accepting work and close worker threads."""
+        """Stop accepting work and cancel active local workers."""
 
         with self._lock:
             self._closed = True
@@ -221,6 +242,7 @@ class RunManager:
                 if state.status not in {RunStatus.QUEUED, RunStatus.RUNNING}:
                     continue
                 state.cancel_event.set()
+                self._send_cancel(run_id, state)
                 if state.status is RunStatus.QUEUED:
                     state.status = RunStatus.CANCELLED
                 _touch(state)
@@ -254,10 +276,19 @@ class RunManager:
                 raise OptimizationCancelledError("optimization was cancelled")
 
         try:
-            result = self._runner(state.problem, state.cancel_event.is_set, on_iteration)
+            if self._runner is None:
+                result = self._run_worker(run_id, state)
+            else:
+                result = self._runner(state.problem, state.cancel_event.is_set, on_iteration)
         except OptimizationCancelledError:
             with self._lock:
                 state.status = RunStatus.CANCELLED
+                _touch(state)
+                self._persist(run_id, state)
+        except _WorkerFailure as error:
+            with self._lock:
+                state.status = RunStatus.FAILED
+                state.error = str(error)
                 _touch(state)
                 self._persist(run_id, state)
         except Exception as error:
@@ -275,6 +306,82 @@ class RunManager:
                     state.result = result
                 _touch(state)
                 self._persist(run_id, state)
+
+    def _run_worker(self, run_id: str, state: _RunState) -> TopologyResult:
+        environment = os.environ.copy()
+        source_root = str(Path(__file__).resolve().parent.parent)
+        environment["PYTHONPATH"] = os.pathsep.join(
+            part for part in (source_root, environment.get("PYTHONPATH", "")) if part
+        )
+        process = subprocess.Popen(
+            [sys.executable, "-m", "topolab.worker"],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            text=True,
+            bufsize=1,
+            env=environment,
+        )
+        assert process.stdin is not None
+        assert process.stdout is not None
+        terminal: Succeeded | Failed | Cancelled | None = None
+        started = False
+        try:
+            process.stdin.write(encode(Start(run_id=run_id, problem=state.problem)))
+            process.stdin.flush()
+            with self._lock:
+                state.process = process
+                if state.cancel_event.is_set():
+                    self._send_cancel(run_id, state)
+            for line in process.stdout:
+                try:
+                    event = parse_event(line)
+                except ValidationError as error:
+                    raise _WorkerFailure("WorkerProtocolError: invalid worker event") from error
+                if event.run_id != run_id or terminal is not None:
+                    raise _WorkerFailure("WorkerProtocolError: unexpected worker event")
+                if isinstance(event, Started):
+                    if started or event.pid != process.pid:
+                        raise _WorkerFailure("WorkerProtocolError: invalid worker start")
+                    started = True
+                elif not started:
+                    raise _WorkerFailure("WorkerProtocolError: missing worker start")
+                elif isinstance(event, Progress):
+                    with self._lock:
+                        if event.iteration <= state.iteration:
+                            raise _WorkerFailure("WorkerProtocolError: nonincreasing iteration")
+                        state.iteration = event.iteration
+                        _touch(state)
+                        self._persist(run_id, state)
+                else:
+                    terminal = event
+            exit_code = process.wait()
+            if exit_code != 0 or terminal is None:
+                raise _WorkerFailure(f"WorkerProcessError: worker exited with status {exit_code}")
+            if isinstance(terminal, Failed):
+                raise _WorkerFailure(terminal.error)
+            if isinstance(terminal, Cancelled):
+                raise OptimizationCancelledError("optimization was cancelled")
+            return terminal.result
+        finally:
+            with self._lock:
+                state.process = None
+            if process.poll() is None:
+                process.kill()
+                process.wait()
+            process.stdin.close()
+            process.stdout.close()
+
+    @staticmethod
+    def _send_cancel(run_id: str, state: _RunState) -> None:
+        process = state.process
+        if process is None or process.stdin is None:
+            return
+        try:
+            process.stdin.write(encode(Cancel(run_id=run_id)))
+            process.stdin.flush()
+        except (BrokenPipeError, OSError):
+            pass
 
     def _restore_runs(self) -> None:
         if self._store is None:
@@ -351,15 +458,3 @@ class RunManager:
 
 def _touch(state: _RunState) -> None:
     state.updated_at = datetime.now(UTC)
-
-
-def _run_problem(
-    problem: TopologyProblem,
-    should_cancel: Callable[[], bool],
-    iteration_callback: Callable[[SimpIteration], None],
-) -> TopologyResult:
-    return solve_problem(
-        problem,
-        should_cancel=should_cancel,
-        iteration_callback=iteration_callback,
-    )
