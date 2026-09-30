@@ -138,8 +138,13 @@ middle-volume large-grid y/z position expansion passed its data Gate:
 validation labels, within frozen time and memory caps. It performed no
 model fit or learned comparison; see
 `docs/validation/b2_27_middle_volume_labels.md`. The next independent
-slice is B2.28, a separately frozen training intervention and fresh
-development screen using the new labels.
+slice was B2.28: its fixed forty-label generalist expansion completed
+24/24 fresh references, three fits, twenty diagnostic labels, and all
+168 charged outcomes. All three seeds passed the bounded development
+Gate with zero new-panel failures and 6/6 middle-volume large-y
+successes; see `docs/validation/b2_28_expanded_generalist.md`. The next
+independent slice is B2.29, a separately frozen larger physically
+disjoint development confirmation with fixed checkpoints and route.
 Do not freeze a new final ML contract or claim acceleration before fresh
 development feasibility, separate confirmation, and the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.
