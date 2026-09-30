@@ -59,6 +59,9 @@ passed consumer-specific access and complete-population rejection tests;
 the B3.3 implementation added versioned data/artifact contracts, guarded
 materialization, charged recovery and independent audits; its implementation
 tests passed, with actual B3 data generation reserved for B3.4;
+the B3.4 production data Gate passed with all 560 labels and 48 screening
+references independently audited, zero failures, 5,325.353116 charged
+seconds and 500,154,368-byte peak RSS; no fit or final artifact access;
 ML acceleration is a required delivery gate, not an optional enhancement.**
 The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
@@ -747,9 +750,18 @@ read-only planning/explicit execution entrypoint are implemented. Synthetic
 FEM states test quality/corruption boundaries; a historical B2.4 before/after
 label is byte-identical. No production B3 case was optimized. See the
 [B3.3 validation report](../validation/b3_3_data_materializer.md).
-The next slice is **B3.4**, executing all 560 labels and 48 screening
-references from one clean merged source and independently auditing the
-complete data Gate. Uniform remains the operational default.
+**B3.4 data Gate passed:** All 560 labels and 48 screening references were
+regenerated from uniform on clean merged revision
+`cc151b014f9034ccc7093ef592021003d7dec252`. Complete production and supplemental
+independent audits passed exact identity, exposure, mesh/direction/volume
+availability, full-precision and float32 quality, sensitivity and resource
+checks. Zero cases failed or were replaced. The cumulative data charge was
+5,325.353116 seconds and peak RSS 500,154,368 bytes, within the frozen caps.
+See the [B3.4 validation report](../validation/b3_4_data_gate.md).
+No fitting or final artifact access occurred. The next slice is **A2.1**,
+the minimal separate-process worker protocol in recommended sequence step 37,
+followed by A2.2 recovery. B4 fitting is permitted by the passed data Gate;
+later final Gates still determine acceleration. Uniform remains the default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -926,10 +938,12 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     frozen catalog, memberships, fingerprints, and access guards with
     exact hash and byte comparisons. **B3.3** completed guarded versioned
     label/reference materialization and charged recovery/audits, tested with
-    synthetic states. Next **B3.4** executes and audits the complete data
-    Gate before B4 fitting.
+    synthetic states. **B3.4** then passed the complete production data
+    Gate: 560/560 labels and 48/48 screening references, zero failures,
+    complete independent quality/provenance/stratum audits and resources
+    within the frozen caps. No model fit or final artifact access.
 37. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
-    separate PRs.
+    separate PRs. **A2.1 worker protocol** is the next independent slice.
 38. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
     evaluation** only after B4 passes.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
