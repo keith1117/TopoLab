@@ -1,7 +1,7 @@
 """Consumer-specific B3 metadata and byte-read guards for later artifact adapters."""
 
 import hashlib
-from collections.abc import Callable, Iterable
+from collections.abc import Callable, Iterable, Iterator
 from typing import Literal
 
 from pydantic import model_validator
@@ -148,6 +148,16 @@ class B3Access(ContractModel):
     ) -> tuple[bytes, ...]:
         """Require the complete permitted population before opening its first artifact."""
 
+        return tuple(self.iter_population(references, kind, opener))
+
+    def iter_population(
+        self,
+        references: Iterable[B3ArtifactReference],
+        kind: B3ArtifactKind,
+        opener: Callable[[B3ArtifactReference], bytes],
+    ) -> Iterator[bytes]:
+        """Authorize the full population eagerly, then stream verified bytes."""
+
         references = tuple(self._authorize_bytes(ref) for ref in references)
         expected = {
             entry.case.case_id
@@ -164,7 +174,7 @@ class B3Access(ContractModel):
             or set(actual) != expected
         ):
             raise ValueError("artifact population must match every permitted case exactly")
-        return tuple(
+        return (
             self._read_verified(ref, opener)
             for ref in sorted(references, key=lambda r: r.entry.case.case_id)
         )

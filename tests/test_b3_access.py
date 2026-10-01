@@ -188,3 +188,21 @@ def test_wrong_checksum_and_invalid_consumer_scope() -> None:
         B3Access(consumer="fitting")
     with pytest.raises(ValueError, match="training_set"):
         B3Access(consumer="screen", training_set="base")
+
+
+def test_streaming_population_authorizes_all_metadata_before_lazy_reads() -> None:
+    access = B3Access(consumer="nearest_neighbor")
+    references = tuple(_reference(e) for e in access.case_entries())
+    opened = []
+
+    def opener(ref):
+        opened.append(ref.entry.case.case_id)
+        return _BYTES
+
+    with pytest.raises(ValueError, match="population"):
+        access.iter_population(references[:-1], "label", opener)
+    assert not opened
+    stream = access.iter_population(references, "label", opener)
+    assert not opened
+    assert next(stream) == _BYTES and len(opened) == 1
+    assert len(tuple(stream)) == 527 and len(opened) == 528
