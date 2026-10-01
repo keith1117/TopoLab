@@ -799,6 +799,15 @@ the compute budget pass audit; otherwise do not fit.
 
 ### B4: Fit, screen, and freeze on development data only
 
+**B4.1 implementation:** The [fixed fitting boundary](../b3_training_contract.md)
+implements all twelve preregistered CPU fits, membership-specific label reads,
+equal-case validation selection, checkpoint/history verification and cumulative
+resource recovery. Production execution and its independent audit follow only
+from a clean merged runner revision; see the
+[B4.1 report](../validation/b4_1_fixed_fitting.md). The next independent slice
+after that completion is **B4.2**, the fixed 48-case/720-outcome screen,
+prospective primary selection and freeze audit. Gate B4 remains open.
+
 Compare each model to uniform and non-ML baselines on fallback-inclusive
 validation time, independent compliance, convergence, volume, and failure strata.
 Calibrate only predeclared reliability thresholds. Rejected candidates pay all
