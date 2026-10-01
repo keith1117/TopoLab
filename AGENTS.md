@@ -179,8 +179,14 @@ schema migrations; see `docs/validation/a2_2_run_ownership.md`. B4.1 then
 completed all twelve fixed CPU fits and their independent artifact/selection
 audit, retaining all 1,902 attempted epochs and 24 artifacts within the
 7,200-second and 4-GiB caps; see `docs/validation/b4_1_fixed_fitting.md`.
-The next slice is B4.2: the fixed 48-case, 720-outcome development screen,
-prospective primary selection and freeze audit. Gate B4 remains open;
+B4.2 then completed all 48 screening cases and 720 fully charged outcomes.
+Its independent numerical/artifact/selection audit passed after repairing a
+supplemental audit's forbidden single-label NN read; the rejected attempt,
+cost and permanent ledger marker remain retained. No P seed passed the
+frozen direction/reliability Gate, so no primary or freeze was produced;
+see `docs/validation/b4_2_development_screen.md`. The next slice is B4.3:
+bounded read-only failure/cost diagnosis and a new-contract decision.
+Gate B4 failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.

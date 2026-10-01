@@ -770,10 +770,11 @@ No fitting or final artifact access occurred. **A2.1** then added the
 **A2.2** then added [leased run ownership](../run_ownership.md) and
 [recovery validation](../validation/a2_2_run_ownership.md). **B4.1** then
 completed the twelve fixed CPU fits and independent artifact/selection
-audit within its frozen epoch/time/memory caps. The next slice is
-**B4.2**, the fixed development screen and prospective freeze. B4 screening is
-permitted by the passed data and fitting Gates;
-later final Gates still determine acceleration. Uniform remains the default.
+audit within its frozen epoch/time/memory caps. **B4.2** completed the fixed
+development screen but failed its direction/reliability Gate, with no primary
+or freeze. The next slice is **B4.3**, bounded read-only failure/cost diagnosis
+and a new-contract decision. Final evaluation remains sealed; uniform remains
+the default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -809,17 +810,27 @@ All 1,902 attempted epochs and 24 artifacts were retained, with zero failed
 fits or production restarts. The final fitting-stage charge was 3,870.204341
 seconds and peak RSS 437,878,784 bytes, within the frozen 7,200-second and
 4-GiB caps; see the [B4.1 report](../validation/b4_1_fixed_fitting.md).
-No screening query or final artifact was opened. The next slice is
-**B4.2**, the fixed 48-case/720-outcome screen,
-prospective primary selection and freeze audit. Gate B4 remains open.
+That fitting slice opened no screening query or final artifact.
+The subsequent **B4.2** screen is recorded below.
 
-**B4.2 implementation:** The [fixed screening boundary](../b3_screening_contract.md)
-implements all 48 cases and 720 outcomes, complete guarded train-only NN setup,
-paid query/fallback semantics, independent compact terminal evidence, charged
-atomic recovery and prospective selection/freeze. Production execution follows
-only from a clean merged runner revision; see the
-[B4.2 report](../validation/b4_2_development_screen.md). Actual Gate B4 remains
-open until complete production and independent acceptance evidence exists.
+**B4.2 complete screen; Gate B4 failed:** The
+[fixed screening boundary](../b3_screening_contract.md) retained all 48 cases
+and 720 outcomes from clean merged source
+`4279d20c4922cc2cbfaba0bca722aba8868cd914`. Independent byte, NN, terminal,
+charge and selection audits passed for all outcomes. All 25 candidate failures
+paid successful fresh uniform fallback. P/17 exceeded the small-z direction
+bound (1.130297); P/29 exceeded the large-scale mean (0.926609) and matched-C
+failure count; P/43 exceeded matched C's failure/non-specialist-y counts.
+Neither a primary nor a freeze was produced. Both pooled large-y quality cells
+passed at 9/9. The complete charge was 9,869.911762 seconds and peak RSS
+602,587,136 bytes, within the frozen caps. A supplemental audit's initial
+forbidden single-label NN read was rejected before label bytes; its cost and
+permanent integrity marker remain retained after the corrected full-population
+audit passed. See the [B4.2 report](../validation/b4_2_development_screen.md).
+**B4.3** is next: bounded read-only failure/cost diagnosis and a new-contract
+decision, including timing fidelity and callback/checkpoint costs. Preserve
+every result and keep final evidence sealed. No new fitting, retiming or
+selection-rule change follows from this failed contract.
 
 Compare each model to uniform and non-ML baselines on fallback-inclusive
 validation time, independent compliance, convergence, volume, and failure strata.
@@ -979,8 +990,9 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     are complete. Gate A2 remains open pending A2.3–A2.4.
 38. **B4 fitting, reliability, and freeze** only after B3 passes. **B4.1**
     completed twelve fixed fits and independent artifact/selection/resource
-    audits; **B4.2** is next for the fixed development screen, prospective
-    primary selection and freeze. **B5 final evaluation** only after B4 passes.
+    audits; **B4.2** completed all 720 fixed screen outcomes but failed Gate B4.
+    **B4.3** is next for bounded read-only failure/cost diagnosis and a
+    new-contract decision. **B5 final evaluation** only after B4 passes.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
