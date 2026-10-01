@@ -663,3 +663,16 @@ are in the [B4.2 implementation contract](b3_screening_contract.md).
 - M2 ID-test and OOD label artifacts are forbidden to fitting, calibration, and final
   evaluation adapters. Exact cohort, split, calibration, statistics, and stopping
   rules are frozen in `docs/m2_experiment_contract.md`.
+
+## B4.4 versioned engineering timing boundary
+
+`topolab.b4_4.engineering.v1` preserves the B3 numerical solver, termination and
+quality conventions. Its outer wall and process-CPU clocks include the full
+query, terminal-witness construction, callbacks and any fresh uniform fallback.
+Callback/flush durations are inclusive diagnostic channels and are never
+subtracted from reported wall time. Immutable result serialization/publication,
+independent terminal audits and boundary progress are additional charged stage
+costs. Report that residual and the full stage charge; do not silently treat
+persistence or failure recovery as free. The stopped B4.2 phase timings remain
+unchanged. The finite matched sentinel and acceptance thresholds are frozen in
+`docs/planning/b4_4_engineering_protocol.md`.
