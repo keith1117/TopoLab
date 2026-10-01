@@ -19,8 +19,9 @@ all twelve preregistered fits retained. The complete
 all 720 outcomes but failed its direction/reliability Gate. No primary was
 frozen; final evaluation remains sealed. The
 [B4.3 diagnosis](docs/validation/b4_3_failure_cost.md) found timing dispersion
-and distinct terminal-quality/convergence failures. B4.4 next freezes and
-verifies a timing/checkpoint repair before a fresh learning-side intervention;
+and distinct terminal-quality/convergence failures. The
+[B4.4 engineering protocol](docs/planning/b4_4_engineering_protocol.md) freezes
+a timing/checkpoint repair and matched sentinel before a fresh learning-side intervention;
 the complete B4 Gate must pass before final evaluation.
 
 ## Scope
