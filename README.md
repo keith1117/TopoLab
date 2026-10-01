@@ -17,8 +17,11 @@ The [B3 data Gate](docs/validation/b3_4_data_gate.md) and
 all twelve preregistered fits retained. The complete
 [B4.2 development screen](docs/validation/b4_2_development_screen.md) retained
 all 720 outcomes but failed its direction/reliability Gate. No primary was
-frozen; final evaluation remains sealed. B4.3 is the next bounded diagnosis
-and new-contract decision.
+frozen; final evaluation remains sealed. The
+[B4.3 diagnosis](docs/validation/b4_3_failure_cost.md) found timing dispersion
+and distinct terminal-quality/convergence failures. B4.4 next freezes and
+verifies a timing/checkpoint repair before a fresh learning-side intervention;
+the complete B4 Gate must pass before final evaluation.
 
 ## Scope
 
