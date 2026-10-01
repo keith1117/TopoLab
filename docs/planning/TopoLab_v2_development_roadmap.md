@@ -70,7 +70,7 @@ The released `v1.0.0` and
 its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-09-30
+Revised: 2026-10-01
 
 Related documents:
 
@@ -768,9 +768,11 @@ No fitting or final artifact access occurred. **A2.1** then added the
 [versioned local worker protocol](../platform_worker_protocol.md) and
 [process-boundary validation](../validation/a2_1_worker_protocol.md).
 **A2.2** then added [leased run ownership](../run_ownership.md) and
-[recovery validation](../validation/a2_2_run_ownership.md). The next slice is
-**B4.1**, the fixed twelve fits and artifact audit. B4 fitting is
-permitted by the passed data Gate;
+[recovery validation](../validation/a2_2_run_ownership.md). **B4.1** then
+completed the twelve fixed CPU fits and independent artifact/selection
+audit within its frozen epoch/time/memory caps. The next slice is
+**B4.2**, the fixed development screen and prospective freeze. B4 screening is
+permitted by the passed data and fitting Gates;
 later final Gates still determine acceleration. Uniform remains the default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
@@ -799,13 +801,16 @@ the compute budget pass audit; otherwise do not fit.
 
 ### B4: Fit, screen, and freeze on development data only
 
-**B4.1 implementation:** The [fixed fitting boundary](../b3_training_contract.md)
-implements all twelve preregistered CPU fits, membership-specific label reads,
-equal-case validation selection, checkpoint/history verification and cumulative
-resource recovery. Production execution and its independent audit follow only
-from a clean merged runner revision; see the
-[B4.1 report](../validation/b4_1_fixed_fitting.md). The next independent slice
-after that completion is **B4.2**, the fixed 48-case/720-outcome screen,
+**B4.1 fitting Gate passed:** The [fixed fitting boundary](../b3_training_contract.md)
+completed all twelve preregistered CPU fits from clean merged source
+`428c96fd718a78496bcfafcc85a3d82401925ab4`. Complete independent label,
+checkpoint/history and equal-case selection audits passed for every seed.
+All 1,902 attempted epochs and 24 artifacts were retained, with zero failed
+fits or production restarts. The final fitting-stage charge was 3,870.204341
+seconds and peak RSS 437,878,784 bytes, within the frozen 7,200-second and
+4-GiB caps; see the [B4.1 report](../validation/b4_1_fixed_fitting.md).
+No screening query or final artifact was opened. The next slice is
+**B4.2**, the fixed 48-case/720-outcome screen,
 prospective primary selection and freeze audit. Gate B4 remains open.
 
 Compare each model to uniform and non-ML baselines on fallback-inclusive
@@ -964,8 +969,10 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 37. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
     separate PRs. A2.1 worker protocol and A2.2 durable ownership/recovery
     are complete. Gate A2 remains open pending A2.3–A2.4.
-38. **B4 fitting, reliability, and freeze** only after B3 passes; **B5 final
-    evaluation** only after B4 passes.
+38. **B4 fitting, reliability, and freeze** only after B3 passes. **B4.1**
+    completed twelve fixed fits and independent artifact/selection/resource
+    audits; **B4.2** is next for the fixed development screen, prospective
+    primary selection and freeze. **B5 final evaluation** only after B4 passes.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
