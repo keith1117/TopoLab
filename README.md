@@ -14,8 +14,11 @@ remains the operational default; TopoLab makes no learned-acceleration claim.
 Current v2 work follows the [active roadmap](docs/planning/TopoLab_v2_development_roadmap.md).
 The [B3 data Gate](docs/validation/b3_4_data_gate.md) and
 [B4.1 fixed fitting audit](docs/validation/b4_1_fixed_fitting.md) passed with
-all twelve preregistered fits retained. B4 development screening and the
-later final acceleration Gates remain open.
+all twelve preregistered fits retained. The complete
+[B4.2 development screen](docs/validation/b4_2_development_screen.md) retained
+all 720 outcomes but failed its direction/reliability Gate. No primary was
+frozen; final evaluation remains sealed. B4.3 is the next bounded diagnosis
+and new-contract decision.
 
 ## Scope
 
