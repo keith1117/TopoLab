@@ -772,9 +772,11 @@ No fitting or final artifact access occurred. **A2.1** then added the
 completed the twelve fixed CPU fits and independent artifact/selection
 audit within its frozen epoch/time/memory caps. **B4.2** completed the fixed
 development screen but failed its direction/reliability Gate, with no primary
-or freeze. The next slice is **B4.3**, bounded read-only failure/cost diagnosis
-and a new-contract decision. Final evaluation remains sealed; uniform remains
-the default.
+or freeze. **B4.3** completed the bounded read-only failure/cost diagnosis.
+The next slice is **B4.4**, a new finite timing/checkpoint repair contract and
+matched engineering verification, followed by a separately registered
+generalist reliability intervention. Final evaluation remains sealed until
+the complete new B4 Gate passes; uniform remains the default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -827,10 +829,31 @@ passed at 9/9. The complete charge was 9,869.911762 seconds and peak RSS
 forbidden single-label NN read was rejected before label bytes; its cost and
 permanent integrity marker remain retained after the corrected full-population
 audit passed. See the [B4.2 report](../validation/b4_2_development_screen.md).
-**B4.3** is next: bounded read-only failure/cost diagnosis and a new-contract
-decision, including timing fidelity and callback/checkpoint costs. Preserve
-every result and keep final evidence sealed. No new fitting, retiming or
-selection-rule change follows from this failed contract.
+**B4.3 diagnostic acceptance passed:** The
+[read-only diagnosis](../validation/b4_3_failure_cost.md) verified all 720
+outcomes and 162 identical-model comparisons, with an independent 745-status
+and arithmetic audit. All paired numerical witnesses were identical, but
+31/162 paired times differed by at least 25%, with maximum spread 14.423499.
+P/17's small-z update ratio was 0.500483 while its measured time mean was
+1.130297; its identical ablation measured 0.730870. The frozen refinement
+timer includes periodic full-index checkpoint writes; no isolated callback
+or host scheduling durations were retained, so corrected timing cannot be
+inferred. P/29 had a converged low-volume large-y quality gap and a
+middle-volume large-z 360-update nonconvergence; P/43 had a converged
+middle-volume large-y quality gap. All original costs and failures remain
+retained. The new analysis charged 50 seconds and peaked at 445,284,352 bytes,
+without a solver, fit, model/label byte read or final access.
+
+**B4.4** is next: freeze a new finite repair contract, implement faithful
+complete timing and bounded checkpoint persistence, and verify numerical
+identity, cost accounting and crash/recovery on a matched engineering sentinel.
+This sentinel cannot establish acceleration. After it passes, separately
+freeze one generalist quality/trajectory intervention and fresh development
+screen; the leading untested hypothesis is sensitivity-weighted terminal
+design learning with fixed specialist and unchanged numerical quality limits.
+Require independent confirmation and the complete new B4 Gate before B5.
+No retiming, new fit or selection-rule change is allowed under the failed
+original contract. Preserve every result and keep final evidence sealed.
 
 Compare each model to uniform and non-ML baselines on fallback-inclusive
 validation time, independent compliance, convergence, volume, and failure strata.
@@ -991,8 +1014,10 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 38. **B4 fitting, reliability, and freeze** only after B3 passes. **B4.1**
     completed twelve fixed fits and independent artifact/selection/resource
     audits; **B4.2** completed all 720 fixed screen outcomes but failed Gate B4.
-    **B4.3** is next for bounded read-only failure/cost diagnosis and a
-    new-contract decision. **B5 final evaluation** only after B4 passes.
+    **B4.3** completed its read-only diagnosis. **B4.4** next freezes and
+    verifies a timing/checkpoint repair, followed by a separately registered
+    generalist reliability intervention on fresh development evidence.
+    **B5 final evaluation** only after the complete new B4 Gate passes.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
