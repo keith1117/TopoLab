@@ -773,10 +773,13 @@ completed the twelve fixed CPU fits and independent artifact/selection
 audit within its frozen epoch/time/memory caps. **B4.2** completed the fixed
 development screen but failed its direction/reliability Gate, with no primary
 or freeze. **B4.3** completed the bounded read-only failure/cost diagnosis.
-The next slice is **B4.4**, a new finite timing/checkpoint repair contract and
-matched engineering verification, followed by a separately registered
-generalist reliability intervention. Final evaluation remains sealed until
-the complete new B4 Gate passes; uniform remains the default.
+**B4.4** passed its finite timing/checkpoint engineering sentinel with all
+76 queries and 100 terminal states independently audited and numerical/failure
+identity preserved; see [the engineering report](../validation/b4_4_engineering.md).
+The next slice is **B4.5**, a separately frozen sensitivity-weighted terminal-design
+generalist intervention with fixed specialist and fresh development validation.
+Final evaluation remains sealed until the complete new B4 Gate and independent
+confirmation pass; uniform remains the default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -844,14 +847,21 @@ middle-volume large-y quality gap. All original costs and failures remain
 retained. The new analysis charged 50 seconds and peaked at 445,284,352 bytes,
 without a solver, fit, model/label byte read or final access.
 
-**B4.4** is next: freeze a new finite repair contract, implement faithful
-complete timing and bounded checkpoint persistence, and verify numerical
-identity, cost accounting and crash/recovery on a matched engineering sentinel.
-This sentinel cannot establish acceleration. After it passes, separately
-freeze one generalist quality/trajectory intervention and fresh development
-screen; the leading untested hypothesis is sensitivity-weighted terminal
-design learning with fixed specialist and unchanged numerical quality limits.
-Require independent confirmation and the complete new B4 Gate before B5.
+**B4.4 engineering acceptance passed:** its separately frozen 76-query,
+two-arm/two-round sentinel retained all 100 candidate/fallback states and passed
+independent byte, numerical, chain and cost audits. Every numerical outcome and
+known failed status was identical to B4.2. Compact progress reduced inclusive
+callback wall by 99.8243% and complete-query wall by 25.3881% in the deliberate
+checkpoint-stress fixture. Final charge was 2,406.653985 seconds and peak RSS
+705,953,792 bytes, within 7,200 seconds / 2 GiB. Actual process-crash and both
+publication windows passed synthetic tests. See
+[the engineering report](../validation/b4_4_engineering.md). This establishes
+no learned acceleration and does not retime the failed B4.2 experiment.
+**B4.5** is next: separately freeze and implement one bounded sensitivity-weighted
+terminal-design generalist intervention with fixed specialist, unchanged numerical
+quality limits and fresh development validation under a new contract. This is an
+untested hypothesis. Require independent confirmation and the complete new B4 Gate
+before B5.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
 
@@ -1014,10 +1024,12 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
 38. **B4 fitting, reliability, and freeze** only after B3 passes. **B4.1**
     completed twelve fixed fits and independent artifact/selection/resource
     audits; **B4.2** completed all 720 fixed screen outcomes but failed Gate B4.
-    **B4.3** completed its read-only diagnosis. **B4.4** next freezes and
-    verifies a timing/checkpoint repair, followed by a separately registered
-    generalist reliability intervention on fresh development evidence.
-    **B5 final evaluation** only after the complete new B4 Gate passes.
+    **B4.3** completed its read-only diagnosis. **B4.4** passed the frozen
+    timing/checkpoint engineering Gate with 76/76 numerical outcomes and
+    100/100 terminal audits. **B4.5** next freezes and implements a bounded
+    sensitivity-weighted terminal-design generalist intervention with fixed
+    specialist and fresh development evidence. **B5 final evaluation** only
+    after the complete new B4 Gate and independent confirmation pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
