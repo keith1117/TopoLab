@@ -11,6 +11,12 @@ negative or inconclusive, and the pre-registered M2 follow-up stopped at its fai
 data gate after 10 of 756 cases did not converge. Uniform initialization therefore
 remains the operational default; TopoLab makes no learned-acceleration claim.
 
+Current v2 work follows the [active roadmap](docs/planning/TopoLab_v2_development_roadmap.md).
+The [B3 data Gate](docs/validation/b3_4_data_gate.md) and
+[B4.1 fixed fitting audit](docs/validation/b4_1_fixed_fitting.md) passed with
+all twelve preregistered fits retained. B4 development screening and the
+later final acceleration Gates remain open.
+
 ## Scope
 
 The first implementation targets a structured rectangular Hex8 mesh, isotropic

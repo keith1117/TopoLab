@@ -175,9 +175,12 @@ introduced a versioned JSON-line manager/worker protocol and local separate
 process for default numerical runs; see
 `docs/validation/a2_1_worker_protocol.md`. A2.2 then added leased SQLite
 ownership, heartbeat, fenced writes, queued-record recovery and versioned
-schema migrations; see `docs/validation/a2_2_run_ownership.md`. The next
-slice is B4 fitting and artifact audit. B4 fitting and
-screening require the passed B3 data Gate;
+schema migrations; see `docs/validation/a2_2_run_ownership.md`. B4.1 then
+completed all twelve fixed CPU fits and their independent artifact/selection
+audit, retaining all 1,902 attempted epochs and 24 artifacts within the
+7,200-second and 4-GiB caps; see `docs/validation/b4_1_fixed_fitting.md`.
+The next slice is B4.2: the fixed 48-case, 720-outcome development screen,
+prospective primary selection and freeze audit. Gate B4 remains open;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.
