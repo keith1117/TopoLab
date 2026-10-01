@@ -7,7 +7,7 @@ from collections.abc import Callable
 from dataclasses import replace
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from threading import Event, Lock
+from threading import Condition, Event, Lock
 
 import pytest
 
@@ -212,9 +212,33 @@ def test_heartbeat_keeps_a_live_owner_from_false_recovery(
 ) -> None:
     monkeypatch.setattr(jobs, "_LEASE_DURATION", timedelta(milliseconds=300))
     monkeypatch.setattr(jobs, "_HEARTBEAT_INTERVAL", 0.05)
+    clock = [datetime(2026, 9, 30, tzinfo=UTC)]
+    renewed = Condition()
+    renewal_times: list[datetime] = []
+
+    class ControlledDatetime(datetime):
+        @classmethod
+        def now(cls, tz=None):  # type: ignore[no-untyped-def]
+            with renewed:
+                return clock[0].astimezone(tz) if tz is not None else clock[0].replace(tzinfo=None)
+
+    monkeypatch.setattr(jobs, "datetime", ControlledDatetime)
     path = tmp_path / "runs.sqlite3"
     store_a = SqliteRunStore(path)
     store_b = SqliteRunStore(path)
+    original_renew = store_a.renew
+
+    def observe_renew(
+        run_id: str, owner_id: str, now: datetime, expires_at: datetime
+    ) -> tuple[bool, bool]:
+        result = original_renew(run_id, owner_id, now, expires_at)
+        if result[0]:
+            with renewed:
+                renewal_times.append(now)
+                renewed.notify_all()
+        return result
+
+    monkeypatch.setattr(store_a, "renew", observe_renew)
     started = Event()
     release = Event()
 
@@ -231,7 +255,16 @@ def test_heartbeat_keeps_a_live_owner_from_false_recovery(
     with RunManager(store=store_a, runner=runner) as owner:
         run_id = owner.submit(_problem()).run_id
         assert started.wait(timeout=5.0)
-        time.sleep(0.7)
+        # Cross the initial lease only after each real heartbeat has renewed it.
+        # Scheduler delays do not advance this clock or create false expiry.
+        for _ in range(4):
+            with renewed:
+                clock[0] += timedelta(milliseconds=200)
+                target = clock[0]
+                assert renewed.wait_for(
+                    lambda target=target: bool(renewal_times) and renewal_times[-1] >= target,
+                    timeout=5.0
+                )
         with RunManager(store=store_b, runner=runner) as observer:
             assert observer.get(run_id).status is RunStatus.RUNNING
         release.set()
