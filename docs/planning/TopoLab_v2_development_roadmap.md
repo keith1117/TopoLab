@@ -813,6 +813,14 @@ No screening query or final artifact was opened. The next slice is
 **B4.2**, the fixed 48-case/720-outcome screen,
 prospective primary selection and freeze audit. Gate B4 remains open.
 
+**B4.2 implementation:** The [fixed screening boundary](../b3_screening_contract.md)
+implements all 48 cases and 720 outcomes, complete guarded train-only NN setup,
+paid query/fallback semantics, independent compact terminal evidence, charged
+atomic recovery and prospective selection/freeze. Production execution follows
+only from a clean merged runner revision; see the
+[B4.2 report](../validation/b4_2_development_screen.md). Actual Gate B4 remains
+open until complete production and independent acceptance evidence exists.
+
 Compare each model to uniform and non-ML baselines on fallback-inclusive
 validation time, independent compliance, convergence, volume, and failure strata.
 Calibrate only predeclared reliability thresholds. Rejected candidates pay all

@@ -557,6 +557,16 @@ paths are unaffected; B2.8 results require their own experiment identity.
   access; independent replication uses the same artifacts and fresh local
   references. Planning completion is distinct from Gate B3 and B5 evidence.
 
+## B4 query evidence and prospective screening
+
+The B4 development query boundary preserves the B3 equations and tolerances.
+Its versioned outcome witness retains the full terminal state, complete scalar
+trajectory and last eleven full density states, sufficient for independent
+terminal filtering, volume, design-change and physical-plateau reconstruction.
+Query failures and fresh uniform fallback retain separate status and full
+phase charges. Exact query, audit, recovery and prospective-freeze semantics
+are in the [B4.2 implementation contract](b3_screening_contract.md).
+
 ## M1 deterministic fitting and artifacts
 
 - Production M1 fitting accepts only the frozen catalog-v2 materialization with
