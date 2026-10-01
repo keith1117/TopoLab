@@ -188,12 +188,17 @@ see `docs/validation/b4_2_development_screen.md`. B4.3 then completed the
 read-only diagnosis of all 720 outcomes and 162 identical-model pairs.
 It found substantial timing dispersion, two converged generalist quality
 gaps and one 360-update generalist convergence failure, without changing
-any prior result; see `docs/validation/b4_3_failure_cost.md`. The next
-slice is B4.4: separately freeze a finite repair contract, implement faithful
-timing and bounded checkpoint persistence, and verify matched numerical
-identity on an engineering sentinel. After that passes, test a separately
-registered quality/trajectory-aligned generalist intervention on fresh
-development cases. Passing the complete new B4 Gate is required before B5.
+any prior result; see `docs/validation/b4_3_failure_cost.md`. B4.4 then
+passed its frozen engineering sentinel: all 76 queries and 100 terminal states
+were independently audited with unchanged numerical outcomes and failures.
+Bounded progress and full query timing reduced callback wall by 99.8243%
+and query wall by 25.3881% in the checkpoint-stress sentinel, within its
+7,200-second / 2-GiB caps; see `docs/validation/b4_4_engineering.md`.
+This establishes no learned acceleration. The next slice is B4.5: separately
+freeze and implement a bounded sensitivity-weighted terminal-design generalist
+intervention with fixed specialist and unchanged numerical quality limits,
+then fit and validate on fresh development evidence under the new contract.
+Passing the complete new B4 Gate and independent confirmation is required before B5.
 Gate B4 failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
