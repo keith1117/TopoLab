@@ -190,3 +190,13 @@ B4.5 evidence. No new external source or Hack3D code, structure, comment or
 figure was consulted. The 96-case plan is development metadata; execution
 and generated records remain external and require a clean merged revision.
 The shared helpers preserve B4.5's full timing/recording and quality boundaries.
+
+B4.6 executed only from clean merged revision
+`a6c01acccebdd2e02c4155a1a0b4abe83a755dae`, with unchanged B3/B4.1/B4.5
+inputs. The complete 96-reference/1,152-outcome cohort and its 1,291 independent
+terminal/classification checks are recorded in
+`docs/validation/b4_6_development_confirmation.md`. All upstream indices and
+B4.5 receipts remained unchanged. The confirmation Gate failed and every
+candidate failure/fallback remains retained; no final artifact was accessed.
+The next rollback proposal is based on these independently derived TopoLab
+controlled comparisons and is not executed or claimed passing here.

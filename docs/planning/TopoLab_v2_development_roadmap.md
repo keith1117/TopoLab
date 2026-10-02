@@ -781,10 +781,13 @@ three fits, 48 fresh uniform references and all 576 charged outcomes completed;
 644 terminal states and the complete artifact/arithmetic/resource audit passed.
 W/17 and W/43 passed with zero fallbacks; W/29 failed reliability. W/17 is the
 prospective development primary. See [the B4.5 report](../validation/b4_5_weighted_terminal.md).
-The next slice is **B4.6**, a separately frozen larger physically disjoint
-confirmation using unchanged checkpoints and route. Final evaluation remains
-sealed until independent confirmation and the complete new B4 Gate pass;
-uniform remains the default.
+**B4.6** completed 96 new references and all 1,152 outcomes, but the independent
+confirmation Gate failed: fixed W/17 had two failures/fallbacks, W/29 four,
+and W/43 one. Only W/43 met single-seed criteria; no primary was eligible.
+See [the confirmation report](../validation/b4_6_development_confirmation.md).
+**B4.7** next freezes a bounded spatial-objective rollback and fresh reliability
+test. Final evaluation remains sealed until a repair, independent confirmation
+and the complete new B4 Gate pass; uniform remains the default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -873,12 +876,23 @@ development primary by the frozen worst-scale ordering; W/43 has a lower overall
 mean but a higher worst-scale mean and remains retained. Final charge was
 7,578.184891 seconds and peak RSS 453,132,288 bytes. See
 [the complete B4.5 report](../validation/b4_5_weighted_terminal.md).
-The next slice is **B4.6**: separately freeze a larger physically disjoint
-development confirmation with unchanged models, specialist route, quality
-thresholds and full timing. Retain all seeds/comparators without tuning or
-replacing the primary on confirmation results. One bounded development panel
-does not establish final ID/OOD or end-to-end acceleration; independent
-confirmation and the complete new B4 Gate remain required before B5.
+**B4.6 larger independent confirmation Gate failed:** all 96 new uniform
+references, 1,152 fixed outcomes and 1,250 audit units completed. Independent
+checks retained all 1,291 terminal states/classifications and 43 paid failures.
+All W scale/direction speed bounds and both pooled large-y cells (18/18)
+passed, but W/17's two failures exceeded P/17's zero and violated fixed-primary
+reliability; W/29 had four failures, and W/43 had one. Only W/43 passed its
+single-seed Gate and no W primary was eligible. Total final charge was
+12,528.446019750 seconds and peak RSS 1,492,172,800 bytes. See
+[the complete confirmation report](../validation/b4_6_development_confirmation.md).
+The next slice is **B4.7**: separately freeze and test a bounded rollback of the
+spatial weighting using unchanged P/17 and the same specialist, on fresh
+physically disjoint development cases. Keep all P/W/C seeds and non-ML
+comparators, including P/43's worse reliability. P/17's zero-failure and lower
+cost on this cohort supports that next hypothesis but cannot rescue the failed
+W/17 confirmation or erase historical P failures. A passing repair and
+independent confirmation remain required before a compatible final contract
+and B5; diagnosis alone does not authorize progression.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
 
@@ -1046,9 +1060,12 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     100/100 terminal audits. **B4.5** passed its bounded weighted-terminal
     development Gate after three fits, 48 references, 576 charged outcomes and
     all 644 terminal-state audits. W/17 and W/43 passed; W/29 failed reliability;
-    W/17 is the development primary. **B4.6** next freezes a larger independent
-    disjoint confirmation with unchanged checkpoints and route. **B5 final evaluation** only
-    after the complete new B4 Gate and independent confirmation pass.
+    W/17 was the fixed development primary. **B4.6** completed 96 references,
+    1,152 outcomes and 1,291 independent terminal checks but failed confirmation:
+    W/17 had two failures, W/29 four and W/43 one, with no eligible W primary.
+    **B4.7** next freezes and tests a bounded spatial-objective rollback with
+    P/17 fixed on fresh development cases. **B5 final evaluation** only after
+    a repair, independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
