@@ -219,3 +219,14 @@ checkpoint selection, upstream code or final artifact was used. Generated
 records and independent audit sources remain external. This is bounded repair
 evidence; independent B4.8 confirmation remains required before any compatible
 final contract and B5. Historical B4.2/B4.6 failures remain failed.
+
+## B4.8 independent rollback confirmation contract
+
+The B4.8 larger catalog, receipt guard, fixed-primary Gate and execution
+wrapper derive solely from original TopoLab B4.7/B4.6 contracts and measured
+B4.7 evidence. Its six-position grid completes geometric mirrors of the
+previous three positions; its fixed new volumes are chosen from metadata
+before any new numerical work. Existing shared charged execution and query
+quality are unchanged. No external code, data, fit or final artifact is used.
+Execution requires the clean merged contract/runner; generated records remain
+outside Git. Historical failed Gates and every P/W failure remain retained.
