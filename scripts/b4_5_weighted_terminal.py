@@ -2,37 +2,34 @@
 
 import argparse
 import json
-from functools import partial
 from pathlib import Path
 from time import perf_counter
-from typing import Any, cast
+from typing import Any
 
 from torch import nn
 
+from topolab import b4_evidence as evidence
 from topolab.b3_access import B3Access
 from topolab.b3_artifacts import read_b3_record, safe_path
 from topolab.b3_catalog import canonical_metadata_bytes
 from topolab.b3_dataset import audit_b3_record
 from topolab.b3_materialization import B3DataSuccess
-from topolab.b3_queries import QueryMethod, QueryOutcome, audit_witness, evaluate_query
+from topolab.b3_queries import QueryOutcome, evaluate_query
 from topolab.b3_screen_cli import screening_preflight
 from topolab.b3_screening import B3ScreenContext, load_neighbors
 from topolab.b3_training import SEEDS, Recipe, fitting_entries, validation_mse
 from topolab.b3_training_artifacts import read_selected_model
-from topolab.b4_telemetry import CheckpointMeter, Journal, digest, durable_write, timed_query
+from topolab.b4_telemetry import Journal, digest, durable_write
 from topolab.b4_weighted_terminal import (
     CAPS,
     MAX_EPOCH_ATTEMPTS,
-    RECORDING_ALLOWANCE,
     VERSION,
     assignments,
     development_gate,
     fit_weighted,
     fresh_cases,
     plan,
-    publish_blob,
     publish_weighted_fit,
-    read_blob,
     read_units,
     read_weighted_model,
     weighted_samples,
@@ -58,43 +55,12 @@ def units(stage: str) -> tuple[str, ...]:
 def read_packet(
     root: Path, ref: dict[str, Any], context_sha: str, case_id: str, policy: str
 ) -> dict[str, Any]:
-    raw = read_blob(root, ref, "outcome")
-    packet = json.loads(raw)
-    if (
-        raw != canonical_metadata_bytes(packet)
-        or packet["version"] != VERSION
-        or packet["context_sha256"] != context_sha
-        or packet["case_id"] != case_id
-        or packet["policy"] != policy
-    ):
-        raise ValueError("outcome source, case, policy or canonical bytes differ")
-    return cast(dict[str, Any], packet)
+    return evidence.read_packet(root, ref, context_sha, case_id, policy, VERSION)
 
 
 def check_packet(packet: dict[str, Any], reference: float | None) -> int:
-    cases = {c.case_id: c for c in fresh_cases()}
-    outcome = QueryOutcome.model_validate(packet["outcome"])
-    audited = 0
-    for attempt in (outcome.attempt, outcome.fallback):
-        if attempt is not None:
-            if attempt.state is None:
-                raise ValueError("complete screen requires each attempt's terminal witness")
-            metrics = audit_witness(
-                cases[packet["case_id"]], attempt.state, reference, accepted=attempt.succeeded
-            )
-            if metrics != attempt.metrics:
-                raise ValueError("independent terminal metrics differ")
-            if attempt is outcome.fallback or packet["policy"] == "uniform":
-                if (
-                    not attempt.succeeded
-                    or reference is not None
-                    and abs(metrics.final_compliance / reference - 1) > 1e-9
-                ):
-                    raise ValueError("uniform or fallback differs from mandatory reference")
-            audited += 1
-    if outcome.operational is None:
-        raise ValueError("mandatory uniform or operational fallback failed")
-    return audited
+    case = next(c for c in fresh_cases() if c.case_id == packet["case_id"])
+    return evidence.check_packet(packet, reference, case)
 
 
 def query(
@@ -106,69 +72,23 @@ def query(
     neighbors: Any,
     context_sha: str,
 ) -> dict[str, Any]:
-    ordinal = journal.state.completed
     case = next(c for c in fresh_cases() if c.case_id == case_id)
-    # Charge the full allowance in addition to actual elapsed resource wall.
-    # begin durably records it before any numerical work; repeats pay it again.
-    journal.prior += RECORDING_ALLOWANCE
-    boundary = perf_counter()
-    journal.begin(journal.units[ordinal])
-    opening = perf_counter() - boundary
-    # B4.4's meter records inclusively; the stress force is deliberately ignored.
-    meter = CheckpointMeter(lambda _: journal.pulse())
-    name, _, text = policy.partition("/")
-    method = cast(QueryMethod, "P" if name == "W" else name)
-    outcome, timing = timed_query(
-        partial(
-            evaluate_query,
-            case,
-            method,
-            int(text) if text else None,
-            reference,
-            models,
-            neighbors,
-            meter,
-        )
+    return evidence.query(
+        journal,
+        case,
+        policy,
+        reference,
+        models,
+        neighbors,
+        context_sha,
+        VERSION,
+        "topolab.b4_5.recording.v1",
+        evaluate_query,
     )
-    publication = perf_counter()
-    packet = {
-        "version": VERSION,
-        "context_sha256": context_sha,
-        "case_id": case_id,
-        "policy": policy,
-        "outcome": outcome.model_dump(mode="json"),
-        "timing": timing,
-        "callback": meter.summary(),
-        "recording_allowance_seconds": RECORDING_ALLOWANCE,
-    }
-    ref = publish_blob(journal.root, "outcome", canonical_metadata_bytes(packet))
-    journal.publish(journal.units[ordinal], ref)
-    recording = opening + perf_counter() - publication
-    receipt = {
-        "version": "topolab.b4_5.recording.v1",
-        "context_sha256": context_sha,
-        "outcome_sha256": ref["sha256"],
-        "recording_seconds_before_receipt": recording,
-    }
-    durable_write(
-        safe_path(journal.root, f"recording/{ordinal:04d}.json"), canonical_metadata_bytes(receipt)
-    )
-    if opening + perf_counter() - publication > RECORDING_ALLOWANCE:
-        raise ValueError("query recording exceeded its frozen conservative allowance")
-    return packet
 
 
 def recording_receipt(root: Path, ordinal: int, ref: dict[str, Any], context_sha: str) -> None:
-    raw = safe_path(root, f"recording/{ordinal:04d}.json").read_bytes()
-    receipt = json.loads(raw)
-    if (
-        canonical_metadata_bytes(receipt) != raw
-        or receipt["version"] != "topolab.b4_5.recording.v1"
-        or receipt["context_sha256"] != context_sha
-        or receipt["outcome_sha256"] != ref["sha256"]
-        or not 0 <= receipt["recording_seconds_before_receipt"] <= RECORDING_ALLOWANCE
-    ):
-        raise ValueError("recording receipt lacks its bound or complete query binding")
+    evidence.recording_receipt(root, ordinal, ref, context_sha, "topolab.b4_5.recording.v1")
 
 
 def run(

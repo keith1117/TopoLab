@@ -278,7 +278,14 @@ def read_weighted_model(
     return history, model
 
 
-def read_units(root: Path, context_sha: str, units: tuple[str, ...]) -> list[dict[str, Any]]:
+def read_units(
+    root: Path,
+    context_sha: str,
+    units: tuple[str, ...],
+    *,
+    caps: dict[str, tuple[float, int]] | None = None,
+) -> list[dict[str, Any]]:
+    limits = CAPS if caps is None else caps
     raw = safe_path(root, "progress.json").read_bytes()
     progress = Progress.model_validate_json(raw)
     if (
@@ -290,8 +297,8 @@ def read_units(root: Path, context_sha: str, units: tuple[str, ...]) -> list[dic
         or progress.completed != len(units)
         or progress.integrity_failed
         or progress.resource_failed
-        or progress.charged_seconds > CAPS[root.name][0]
-        or progress.peak_rss_bytes > CAPS[root.name][1]
+        or progress.charged_seconds > limits[root.name][0]
+        or progress.peak_rss_bytes > limits[root.name][1]
     ):
         raise ValueError("source journal lacks a closed complete passed prefix")
     records, previous = [], "0" * 64
@@ -313,9 +320,16 @@ def read_units(root: Path, context_sha: str, units: tuple[str, ...]) -> list[dic
     return records
 
 
-def development_gate(packets: Iterable[dict[str, Any]]) -> dict[str, Any]:
-    expected = assignments()
-    cases = {c.case_id: c for c in fresh_cases()}
+def development_gate(
+    packets: Iterable[dict[str, Any]],
+    *,
+    cohort: tuple[ExperimentCase, ...] | None = None,
+    expected: tuple[tuple[str, str], ...] | None = None,
+    quality_volumes: tuple[float, float] = (0.5397, 0.5977),
+    quality_minimum: int = 6,
+) -> dict[str, Any]:
+    expected = assignments() if expected is None else expected
+    cases = {c.case_id: c for c in (fresh_cases() if cohort is None else cohort)}
     by_method: dict[str, list[tuple[ExperimentCase, dict[str, Any], float]]] = {
         m: [] for m in METHODS
     }
@@ -431,7 +445,7 @@ def development_gate(packets: Iterable[dict[str, Any]]) -> dict[str, Any]:
             and c.problem.loads[0].direction == "y"
             and c.problem.optimization.volume_fraction == v
         )
-        for v in (0.5397, 0.5977)
+        for v in quality_volumes
     }
     selected = (
         min(
@@ -453,6 +467,6 @@ def development_gate(packets: Iterable[dict[str, Any]]) -> dict[str, Any]:
         "quality_cells": cells,
         "development_gate_passed": len(passing) >= 2
         and selected is not None
-        and min(cells.values()) >= 6,
+        and min(cells.values()) >= quality_minimum,
         "final_access": False,
     }
