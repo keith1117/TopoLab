@@ -207,13 +207,19 @@ larger confirmation Gate failed: fixed W/17 had two failures/fallbacks,
 W/29 had four and only W/43 passed single-seed criteria with one fallback.
 Both pooled large-y cells passed 18/18, but no W primary was eligible.
 Final charge was 12,528.446019750 seconds with peak RSS 1,492,172,800 bytes;
-see `docs/validation/b4_6_development_confirmation.md`. The next slice is
-B4.7: freeze and test a bounded spatial-objective rollback using unchanged
-P/17 and the fixed specialist on fresh physically disjoint development cases,
-retaining all P/W/C seeds and non-ML controls. P/17's zero-failure descriptive
-result on B4.6 cannot replace its failed fixed W primary or historical P failures.
-A passing repair and independent confirmation are required before a compatible
-final contract and B5. Diagnosis alone does not authorize progression.
+see `docs/validation/b4_6_development_confirmation.md`. B4.7 then completed
+48/48 fresh references, all 576 fully charged outcomes, 626 production audit
+units and 646 independent terminal/classification checks. Its bounded
+spatial-objective rollback Gate passed for P/17 and P/43. Prospectively fixed
+P/17 had zero failures/fallbacks and small/large charged means 0.857511/0.681739;
+P/29 retained three failures and P/43 one. Both pooled large-y cells passed 9/9.
+Final charge was 6,536.080252125 seconds with peak RSS 829,194,240 bytes;
+see `docs/validation/b4_7_spatial_rollback.md`. The next slice is B4.8:
+separately freeze a larger physically disjoint development confirmation with
+unchanged P/17, checkpoints, specialist route and complete-cost/quality criteria.
+This passing repair cannot rescue the failed W primary or erase historical P
+failures. Independent confirmation remains required before a compatible final
+contract and B5. Diagnosis alone does not authorize progression.
 The original B4.2 Gate remains failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.

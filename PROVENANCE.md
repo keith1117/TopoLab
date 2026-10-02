@@ -202,3 +202,20 @@ B4.5 receipts remained unchanged. The confirmation Gate failed and every
 candidate failure/fallback remains retained; no final artifact was accessed.
 The next rollback proposal is based on these independently derived TopoLab
 controlled comparisons and is not executed or claimed passing here.
+
+## B4.7 bounded spatial-objective rollback evidence
+
+B4.7 executed from clean merged `ea7e56ada9d552954f95756f59af16debea694e2`
+with unchanged B4.1 P/C/S and B4.5 W checkpoints. Its 48 fresh references,
+576 fully charged outcomes, 626 production audit units and independently
+recomputed 646 terminal states/classifications are retained in
+`docs/validation/b4_7_spatial_rollback.md`. The fixed P/17 repair Gate passed;
+P/29's three failures and P/43's one remain charged and retained. Total final
+charge was 6,536.080252125 seconds and peak RSS 829,194,240 bytes. The failed
+1.60-second sandbox runtime preflight preceded all model/label/solver work,
+remains retained and is additionally charged. All upstream indices/receipts
+remained unchanged. No new external source, fit, label, numerical convention,
+checkpoint selection, upstream code or final artifact was used. Generated
+records and independent audit sources remain external. This is bounded repair
+evidence; independent B4.8 confirmation remains required before any compatible
+final contract and B5. Historical B4.2/B4.6 failures remain failed.

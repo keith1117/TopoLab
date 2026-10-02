@@ -28,9 +28,13 @@ completed three fits, 48 fresh references and 576 fully charged outcomes. Seeds
 reliability. The development primary was seed 17. The
 [B4.6 independent confirmation](docs/validation/b4_6_development_confirmation.md)
 completed 96 references and all 1,152 outcomes but failed: W/17 had two
-fallbacks, W/29 four and W/43 one. B4.7 next freezes and tests a bounded
-spatial-objective rollback on fresh development cases. Final evaluation
-remains sealed until a repair and independent confirmation pass.
+fallbacks, W/29 four and W/43 one. The
+[B4.7 spatial-objective rollback](docs/validation/b4_7_spatial_rollback.md)
+completed 48 fresh references and 576 fully charged outcomes. P/17 and P/43
+passed the bounded repair Gate; fixed P/17 had zero failures/fallbacks, while
+P/29 retained three and P/43 one. B4.8 next freezes a larger physically
+disjoint confirmation with unchanged P/17 and route. Uniform remains the
+operational default and final evaluation remains sealed.
 
 ## Scope
 
