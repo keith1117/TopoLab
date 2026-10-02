@@ -776,10 +776,15 @@ or freeze. **B4.3** completed the bounded read-only failure/cost diagnosis.
 **B4.4** passed its finite timing/checkpoint engineering sentinel with all
 76 queries and 100 terminal states independently audited and numerical/failure
 identity preserved; see [the engineering report](../validation/b4_4_engineering.md).
-The next slice is **B4.5**, a separately frozen sensitivity-weighted terminal-design
-generalist intervention with fixed specialist and fresh development validation.
-Final evaluation remains sealed until the complete new B4 Gate and independent
-confirmation pass; uniform remains the default.
+**B4.5** then passed its separately frozen weighted-terminal development Gate:
+three fits, 48 fresh uniform references and all 576 charged outcomes completed;
+644 terminal states and the complete artifact/arithmetic/resource audit passed.
+W/17 and W/43 passed with zero fallbacks; W/29 failed reliability. W/17 is the
+prospective development primary. See [the B4.5 report](../validation/b4_5_weighted_terminal.md).
+The next slice is **B4.6**, a separately frozen larger physically disjoint
+confirmation using unchanged checkpoints and route. Final evaluation remains
+sealed until independent confirmation and the complete new B4 Gate pass;
+uniform remains the default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -857,11 +862,23 @@ checkpoint-stress fixture. Final charge was 2,406.653985 seconds and peak RSS
 publication windows passed synthetic tests. See
 [the engineering report](../validation/b4_4_engineering.md). This establishes
 no learned acceleration and does not retime the failed B4.2 experiment.
-**B4.5** is next: separately freeze and implement one bounded sensitivity-weighted
-terminal-design generalist intervention with fixed specialist, unchanged numerical
-quality limits and fresh development validation under a new contract. This is an
-untested hypothesis. Require independent confirmation and the complete new B4 Gate
-before B5.
+**B4.5 bounded development Gate passed:** its new sensitivity-weighted
+terminal-design objective retained the exact 508/32 expanded membership, all
+three fixed fits (466 epochs), 48 new uniform references and 576 fully charged
+outcomes. Complete label/model, 644-terminal-state, arithmetic, timing and resource
+audits passed. W/17 and W/43 met both scale/direction speed and reliability bounds
+with zero failures; W/29 met speed bounds but its two failures exceeded matched
+C/29's one. Both pooled large-y cells passed 9/9. W/17 is the prospective
+development primary by the frozen worst-scale ordering; W/43 has a lower overall
+mean but a higher worst-scale mean and remains retained. Final charge was
+7,578.184891 seconds and peak RSS 453,132,288 bytes. See
+[the complete B4.5 report](../validation/b4_5_weighted_terminal.md).
+The next slice is **B4.6**: separately freeze a larger physically disjoint
+development confirmation with unchanged models, specialist route, quality
+thresholds and full timing. Retain all seeds/comparators without tuning or
+replacing the primary on confirmation results. One bounded development panel
+does not establish final ID/OOD or end-to-end acceleration; independent
+confirmation and the complete new B4 Gate remain required before B5.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
 
@@ -1026,9 +1043,11 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     audits; **B4.2** completed all 720 fixed screen outcomes but failed Gate B4.
     **B4.3** completed its read-only diagnosis. **B4.4** passed the frozen
     timing/checkpoint engineering Gate with 76/76 numerical outcomes and
-    100/100 terminal audits. **B4.5** next freezes and implements a bounded
-    sensitivity-weighted terminal-design generalist intervention with fixed
-    specialist and fresh development evidence. **B5 final evaluation** only
+    100/100 terminal audits. **B4.5** passed its bounded weighted-terminal
+    development Gate after three fits, 48 references, 576 charged outcomes and
+    all 644 terminal-state audits. W/17 and W/43 passed; W/29 failed reliability;
+    W/17 is the development primary. **B4.6** next freezes a larger independent
+    disjoint confirmation with unchanged checkpoints and route. **B5 final evaluation** only
     after the complete new B4 Gate and independent confirmation pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
