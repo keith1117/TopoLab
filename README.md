@@ -21,9 +21,12 @@ frozen; final evaluation remains sealed. The
 [B4.3 diagnosis](docs/validation/b4_3_failure_cost.md) found timing dispersion
 and distinct terminal-quality/convergence failures. The
 [B4.4 engineering repair](docs/validation/b4_4_engineering.md) passed its fixed
-76-query numerical, timing, persistence and resource checks. B4.5 now freezes
-and implements a generalist learning intervention with fresh validation;
-the complete new B4 Gate and independent confirmation must pass before final evaluation.
+76-query numerical, timing, persistence and resource checks. The
+[B4.5 weighted-terminal experiment](docs/validation/b4_5_weighted_terminal.md)
+completed three fits, 48 fresh references and 576 fully charged outcomes. Seeds
+17/43 passed its bounded development Gate with zero fallbacks; seed 29 failed
+reliability. The development primary is seed 17. B4.6 must independently confirm
+the unchanged models and route on a larger disjoint cohort before final evaluation.
 
 ## Scope
 

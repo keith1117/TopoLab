@@ -194,12 +194,18 @@ were independently audited with unchanged numerical outcomes and failures.
 Bounded progress and full query timing reduced callback wall by 99.8243%
 and query wall by 25.3881% in the checkpoint-stress sentinel, within its
 7,200-second / 2-GiB caps; see `docs/validation/b4_4_engineering.md`.
-This establishes no learned acceleration. The next slice is B4.5: separately
-freeze and implement a bounded sensitivity-weighted terminal-design generalist
-intervention with fixed specialist and unchanged numerical quality limits,
-then fit and validate on fresh development evidence under the new contract.
-Passing the complete new B4 Gate and independent confirmation is required before B5.
-Gate B4 failed and final evaluation remains sealed;
+This establishes no learned acceleration. B4.5 then completed three fixed
+sensitivity-weighted terminal-design fits (466 attempted epochs), 48 fresh
+uniform references and all 576 fully charged outcomes. Independent audits
+passed all 644 terminal states and resource closure. W/17 and W/43 passed the
+bounded development Gate with zero failures/fallbacks; W/29 failed reliability.
+W/17 is the development primary. Final charge was 7,578.184891 seconds and peak
+RSS 453,132,288 bytes; see `docs/validation/b4_5_weighted_terminal.md`.
+The next slice is B4.6: separately freeze a larger physically disjoint
+development confirmation with unchanged checkpoints, fixed specialist route,
+quality limits and complete timing. Keep all seeds, including failed W/29.
+Passing independent confirmation and the complete new B4 Gate is required before B5.
+The original B4.2 Gate remains failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
 Follow the v2 English roadmap for later gates and slice order.
