@@ -180,3 +180,13 @@ independent design, provenance entry, and TopoLab validation.
 | 2026-10-01 | B4.5 finite sensitivity-weighted terminal generalist | Original TopoLab combination of its audited terminal sensitivity weights and fixed case-normalized objective, separate artifact identity, exposure-disjoint cohort and compact charged runner | No external code, data, model or figure imported; preserves old failures and numerical limits. Synthetic objective/gradient, artifact, membership, timing and Gate tests precede production from clean merged source; final evidence stays sealed |
 
 | 2026-10-02 | B4.5 complete weighted-terminal development evidence | Original TopoLab three-seed fixed fits, 48 exposure-disjoint references, 576 fully charged queries and separate 644-terminal-state/selection/arithmetic/resource audits from clean merged `ed1acd4aa60fba62607874f6c888663747c1c595`, recorded in `docs/validation/b4_5_weighted_terminal.md` | Bounded development Gate passed for W/17 and W/43; W/29's two converged quality failures remain charged and retained. Primary W/17 awaits larger independent confirmation; 7,578.184891 seconds and 453,132,288-byte peak stayed within caps. Original inputs/failed flags unchanged; generated artifacts external; no final access or end-to-end acceleration claim |
+
+## B4.6 independent development confirmation
+
+The new confirmation contract/cohort, immutable upstream receipt checks,
+fixed-primary decision and shared query publication/audit helpers were derived
+from TopoLab's independently implemented B3/B4.5 contracts and measured
+B4.5 evidence. No new external source or Hack3D code, structure, comment or
+figure was consulted. The 96-case plan is development metadata; execution
+and generated records remain external and require a clean merged revision.
+The shared helpers preserve B4.5's full timing/recording and quality boundaries.

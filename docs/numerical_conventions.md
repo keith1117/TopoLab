@@ -688,3 +688,15 @@ specialist routing. Its new query timing pays the complete outer envelope plus
 a fixed conservative one-second recording allowance for every method, verified
 against actual durable recording wall. Independent audits and preparation are
 additional charged offline stage costs. Old contracts and timings are unchanged.
+
+## B4.6 independent confirmation boundary
+
+The [B4.6 protocol](planning/b4_6_confirmation_protocol.md) doubles the fixed
+B4.5 development workload to 96 physically disjoint cases while retaining
+all twelve methods and the same query/quality conventions. W/17 is fixed
+before confirmation; there is no fitting or outcome-based primary reselection.
+The unchanged paired seed criteria require two passing seeds; the pooled
+large-y minimum remains two-thirds (12/18 per middle/high volume). W/17 also
+requires total charged time ratio <=0.90 at each scale. Recording, fallback,
+startup and independent audits remain fully charged. No numerical tolerance
+or solver behavior changes, and no final artifact is opened in this slice.
