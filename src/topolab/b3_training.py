@@ -121,6 +121,7 @@ def fit_b3_seed(
 def _fit_samples(
     train: tuple[TrajectorySample, ...], validation: tuple[TrajectorySample, ...], *,
     seed: int, weights: dict[str, float], checkpoint: Callable[[bool], None],
+    element_weighted: bool = False,
 ) -> B3Fit:
     started = perf_counter()
     generator = torch.Generator(device="cpu").manual_seed(seed)
@@ -148,7 +149,18 @@ def _fit_samples(
                     batch_weights = torch.tensor([weights[train[i].case_id] for i in batch],
                                                  dtype=torch.float32)
                     optimizer.zero_grad(set_to_none=True)
-                    loss = case_weighted_loss(model(inputs), targets, batch_weights)
+                    prediction = model(inputs)
+                    if element_weighted:
+                        spatial = []
+                        for i in batch:
+                            weight = train[i].weight
+                            if weight is None:
+                                raise ValueError("element-weighted fit requires every label weight")
+                            spatial.append(weight)
+                        loss = weighted_terminal_loss(
+                            prediction, targets, torch.stack(spatial), batch_weights)
+                    else:
+                        loss = case_weighted_loss(prediction, targets, batch_weights)
                     if not torch.isfinite(loss):
                         raise ValueError("nonfinite training objective")
                     torch.autograd.backward(loss)
@@ -173,3 +185,16 @@ def _fit_samples(
     if not best_state:
         raise ValueError("fit produced no selected checkpoint")
     return B3Fit(tuple(history), best_epoch, best, perf_counter() - started, best_state)
+
+
+def weighted_terminal_loss(
+    prediction: Tensor, target: Tensor, spatial_weights: Tensor, case_weight: Tensor,
+) -> Tensor:
+    """B4.5: sensitivity-weighted voxel mean followed by the fixed case mean."""
+    if (prediction.shape != target.shape or spatial_weights.shape != target.shape
+            or prediction.ndim != 5 or case_weight.shape != (prediction.shape[0],)
+            or not torch.isfinite(spatial_weights).all() or not torch.all(spatial_weights > 0)
+            or not torch.isfinite(case_weight).all() or not torch.all(case_weight > 0)):
+        raise ValueError("weighted terminal loss shapes or positive finite weights differ")
+    per_case = (torch.square(prediction - target) * spatial_weights).mean(dim=(1, 2, 3, 4))
+    return torch.sum(per_case * case_weight) / torch.sum(case_weight)

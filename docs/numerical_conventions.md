@@ -676,3 +676,15 @@ costs. Report that residual and the full stage charge; do not silently treat
 persistence or failure recovery as free. The stopped B4.2 phase timings remain
 unchanged. The finite matched sentinel and acceptance thresholds are frozen in
 `docs/planning/b4_4_engineering_protocol.md`.
+
+## B4.5 opt-in spatially weighted terminal loss
+
+The [B4.5 contract](planning/b4_5_weighted_terminal_protocol.md) multiplies
+elementwise squared terminal-design error by the audited B3 mean-one spatial
+sensitivity weights, averages within each case, then uses the unchanged P
+case-weight-normalized batch objective. It retains unweighted equal-case
+validation selection, all numerical equations, query quality thresholds and
+specialist routing. Its new query timing pays the complete outer envelope plus
+a fixed conservative one-second recording allowance for every method, verified
+against actual durable recording wall. Independent audits and preparation are
+additional charged offline stage costs. Old contracts and timings are unchanged.
