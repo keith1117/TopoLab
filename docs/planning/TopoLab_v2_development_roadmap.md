@@ -785,9 +785,13 @@ prospective development primary. See [the B4.5 report](../validation/b4_5_weight
 confirmation Gate failed: fixed W/17 had two failures/fallbacks, W/29 four,
 and W/43 one. Only W/43 met single-seed criteria; no primary was eligible.
 See [the confirmation report](../validation/b4_6_development_confirmation.md).
-**B4.7** next freezes a bounded spatial-objective rollback and fresh reliability
-test. Final evaluation remains sealed until a repair, independent confirmation
-and the complete new B4 Gate pass; uniform remains the default.
+**B4.7** passed its bounded spatial-objective rollback Gate on 48 fresh
+references and 576 charged outcomes. P/17 and P/43 passed; prospectively fixed
+P/17 had zero failures/fallbacks, while P/29 retained three and P/43 one.
+See [the rollback report](../validation/b4_7_spatial_rollback.md).
+**B4.8** next separately freezes a larger physically disjoint confirmation with
+unchanged P/17 and route. Final evaluation remains sealed until independent
+confirmation and the complete new B4 Gate pass; uniform remains the default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -885,13 +889,23 @@ reliability; W/29 had four failures, and W/43 had one. Only W/43 passed its
 single-seed Gate and no W primary was eligible. Total final charge was
 12,528.446019750 seconds and peak RSS 1,492,172,800 bytes. See
 [the complete confirmation report](../validation/b4_6_development_confirmation.md).
-The next slice is **B4.7**: separately freeze and test a bounded rollback of the
-spatial weighting using unchanged P/17 and the same specialist, on fresh
-physically disjoint development cases. Keep all P/W/C seeds and non-ML
-comparators, including P/43's worse reliability. P/17's zero-failure and lower
-cost on this cohort supports that next hypothesis but cannot rescue the failed
-W/17 confirmation or erase historical P failures. A passing repair and
-independent confirmation remain required before a compatible final contract
+**B4.7 bounded rollback Gate passed:** unchanged P generalists and the same
+specialists completed 48 exposure-disjoint uniform references and all 576
+fully charged outcomes. The 626 production audit units and independent
+646-terminal-state/classification audit passed, with unchanged upstream receipts.
+P/17 and P/43 met the frozen seed criteria; P/29's three failures exceeded
+matched C/29's two and W/29's one, including two non-specialist-y failures.
+Prospectively fixed P/17 had zero failures/fallbacks, charged small/large means
+0.857511/0.681739 and total ratios 0.847199/0.665699. It strictly improved the
+matched C/17 and W/17 overall means. P/43 retained one failure and was not
+primary-eligible. Both pooled large-y quality cells passed 9/9.
+Final charge was 6,536.080252125 seconds with peak RSS 829,194,240 bytes. See
+[the complete rollback report](../validation/b4_7_spatial_rollback.md).
+The next slice is **B4.8**: separately freeze a larger physically disjoint
+development confirmation using unchanged fixed P/17, every retained checkpoint,
+the same specialist route and full quality/cost criteria. This one repair
+cohort cannot rescue failed W/17 confirmation or erase historical P failures.
+Independent confirmation remains required before a compatible final contract
 and B5; diagnosis alone does not authorize progression.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
@@ -1063,9 +1077,12 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     W/17 was the fixed development primary. **B4.6** completed 96 references,
     1,152 outcomes and 1,291 independent terminal checks but failed confirmation:
     W/17 had two failures, W/29 four and W/43 one, with no eligible W primary.
-    **B4.7** next freezes and tests a bounded spatial-objective rollback with
-    P/17 fixed on fresh development cases. **B5 final evaluation** only after
-    a repair, independent confirmation and the complete new B4 Gate pass.
+    **B4.7** passed its bounded spatial-objective rollback Gate with 48 references,
+    576 outcomes and fixed P/17 zero failures/fallbacks. P/17 and P/43 passed;
+    P/29 retained three failures and P/43 one. **B4.8** next separately freezes
+    a larger physically disjoint confirmation with unchanged P/17 and route.
+    **B5 final evaluation** only after independent confirmation and the complete
+    new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
