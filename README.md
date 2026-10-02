@@ -32,9 +32,14 @@ fallbacks, W/29 four and W/43 one. The
 [B4.7 spatial-objective rollback](docs/validation/b4_7_spatial_rollback.md)
 completed 48 fresh references and 576 fully charged outcomes. P/17 and P/43
 passed the bounded repair Gate; fixed P/17 had zero failures/fallbacks, while
-P/29 retained three and P/43 one. B4.8 next freezes a larger physically
-disjoint confirmation with unchanged P/17 and route. Uniform remains the
-operational default and final evaluation remains sealed.
+P/29 retained three and P/43 one. The
+[B4.8 larger rollback confirmation](docs/validation/b4_8_rollback_confirmation.md)
+completed 96 new references, 1,152 outcomes and all independent audits, but
+failed: fixed P/17 had one quality failure/fallback, violating its zero-failure
+requirement. P/17 and P/43 passed single-seed criteria; P/29 retained four
+failures and P/43 one. B4.9 next performs bounded read-only diagnosis of the
+complete failed confirmation. Uniform remains the operational default and
+final evaluation remains sealed.
 
 ## Scope
 

@@ -230,3 +230,21 @@ before any new numerical work. Existing shared charged execution and query
 quality are unchanged. No external code, data, fit or final artifact is used.
 Execution requires the clean merged contract/runner; generated records remain
 outside Git. Historical failed Gates and every P/W failure remain retained.
+
+## B4.8 complete independent confirmation evidence
+
+B4.8 executed from clean merged `c185caffd5f3b3cd16b2f2f80948caee1e836784`
+after contract/runner PR #115 passed all required CI. All 96 new uniform
+references, 1,152 fixed outcomes, 1,250 production audit units and 1,295
+independent terminal/classification checks are retained in
+`docs/validation/b4_8_rollback_confirmation.md`. The frozen confirmation Gate
+failed: fixed P/17 paid one quality fallback despite passing single-seed speed
+and reliability criteria; its prospectively fixed zero-failure requirement
+was not met. P/29's four and P/43's one failures remain retained. Final charge
+was 14,105.836381712 seconds and peak RSS 1,036,238,848 bytes. Whole-command
+floors, all recording receipts and unchanged upstream hashes passed closure.
+The entire new cohort is now development-exposed. No new external source,
+fit, input label, solver, quality tolerance, checkpoint selection, upstream
+code or final artifact was used. Generated artifacts, profiles and independent
+audit sources remain external. B4.9 is bounded read-only diagnosis; the failed
+confirmation cannot authorize final evaluation or a substituted primary.
