@@ -1,4 +1,4 @@
-"""Shared charged fixed-model development execution for B4.6 and B4.7."""
+"""Shared charged execution for fixed-model development experiments."""
 
 import json
 from collections.abc import Callable, Iterable

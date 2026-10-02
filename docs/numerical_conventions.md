@@ -709,3 +709,13 @@ new development cases. It removes only B4.5's spatial loss weighting through
 checkpoint reuse; no fitting, solver, tolerance, projection or route changes.
 Complete query/recording/fallback charges retain B4.6's timing conventions.
 Its independent repair Gate cannot change historical failures or open B5.
+
+## B4.8 independent rollback confirmation boundary
+
+The [B4.8 protocol](planning/b4_8_rollback_confirmation_protocol.md) doubles
+B4.7's case count to 96 new physically disjoint development cases while
+preserving every checkpoint, route, numerical rule and query/recording/fallback
+charge. P/17 stays fixed; another confirmation seed cannot replace it.
+The pooled large-y minimum remains two-thirds (12/18 per volume), with
+unchanged seed/primary speed and reliability bounds. This slice changes no
+solver or tolerance and opens no final artifact.
