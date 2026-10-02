@@ -181,6 +181,8 @@ independent design, provenance entry, and TopoLab validation.
 
 | 2026-10-02 | B4.5 complete weighted-terminal development evidence | Original TopoLab three-seed fixed fits, 48 exposure-disjoint references, 576 fully charged queries and separate 644-terminal-state/selection/arithmetic/resource audits from clean merged `ed1acd4aa60fba62607874f6c888663747c1c595`, recorded in `docs/validation/b4_5_weighted_terminal.md` | Bounded development Gate passed for W/17 and W/43; W/29's two converged quality failures remain charged and retained. Primary W/17 awaits larger independent confirmation; 7,578.184891 seconds and 453,132,288-byte peak stayed within caps. Original inputs/failed flags unchanged; generated artifacts external; no final access or end-to-end acceleration claim |
 
+| 2026-10-02 | B4.7 spatial-objective rollback contract and runner | Original TopoLab physically disjoint development catalog, fixed P/17 policy and matched P/W/C/non-ML Gate; shares the existing charged execution loop with B4.6 | No new model fit, upstream code, external dataset or final artifact access; historical P/W failures stay retained; generated evidence remains outside Git |
+
 ## B4.6 independent development confirmation
 
 The new confirmation contract/cohort, immutable upstream receipt checks,
