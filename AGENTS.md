@@ -201,10 +201,19 @@ passed all 644 terminal states and resource closure. W/17 and W/43 passed the
 bounded development Gate with zero failures/fallbacks; W/29 failed reliability.
 W/17 is the development primary. Final charge was 7,578.184891 seconds and peak
 RSS 453,132,288 bytes; see `docs/validation/b4_5_weighted_terminal.md`.
-The next slice is B4.6: separately freeze a larger physically disjoint
-development confirmation with unchanged checkpoints, fixed specialist route,
-quality limits and complete timing. Keep all seeds, including failed W/29.
-Passing independent confirmation and the complete new B4 Gate is required before B5.
+B4.6 then completed 96/96 new uniform references, all 1,152 outcomes,
+1,250 audit units and 1,291 independent terminal/classification checks. Its
+larger confirmation Gate failed: fixed W/17 had two failures/fallbacks,
+W/29 had four and only W/43 passed single-seed criteria with one fallback.
+Both pooled large-y cells passed 18/18, but no W primary was eligible.
+Final charge was 12,528.446019750 seconds with peak RSS 1,492,172,800 bytes;
+see `docs/validation/b4_6_development_confirmation.md`. The next slice is
+B4.7: freeze and test a bounded spatial-objective rollback using unchanged
+P/17 and the fixed specialist on fresh physically disjoint development cases,
+retaining all P/W/C seeds and non-ML controls. P/17's zero-failure descriptive
+result on B4.6 cannot replace its failed fixed W primary or historical P failures.
+A passing repair and independent confirmation are required before a compatible
+final contract and B5. Diagnosis alone does not authorize progression.
 The original B4.2 Gate remains failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
