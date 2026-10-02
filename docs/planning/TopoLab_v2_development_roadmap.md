@@ -789,9 +789,14 @@ See [the confirmation report](../validation/b4_6_development_confirmation.md).
 references and 576 charged outcomes. P/17 and P/43 passed; prospectively fixed
 P/17 had zero failures/fallbacks, while P/29 retained three and P/43 one.
 See [the rollback report](../validation/b4_7_spatial_rollback.md).
-**B4.8** next separately freezes a larger physically disjoint confirmation with
-unchanged P/17 and route. Final evaluation remains sealed until independent
-confirmation and the complete new B4 Gate pass; uniform remains the default.
+**B4.8** completed 96 new references and all 1,152 fixed outcomes, but failed
+the larger confirmation Gate: fixed P/17 paid one quality fallback and violated
+its zero-failure requirement. P/17 and P/43 passed single-seed criteria;
+P/29 retained four failures and P/43 one. See
+[the B4.8 confirmation report](../validation/b4_8_rollback_confirmation.md).
+**B4.9** next performs bounded read-only diagnosis of the complete failed
+confirmation. Final evaluation remains sealed until a passing repair,
+independent confirmation and the complete new B4 Gate; uniform remains default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -901,12 +906,22 @@ matched C/17 and W/17 overall means. P/43 retained one failure and was not
 primary-eligible. Both pooled large-y quality cells passed 9/9.
 Final charge was 6,536.080252125 seconds with peak RSS 829,194,240 bytes. See
 [the complete rollback report](../validation/b4_7_spatial_rollback.md).
-The next slice is **B4.8**: separately freeze a larger physically disjoint
-development confirmation using unchanged fixed P/17, every retained checkpoint,
-the same specialist route and full quality/cost criteria. This one repair
-cohort cannot rescue failed W/17 confirmation or erase historical P failures.
-Independent confirmation remains required before a compatible final contract
-and B5; diagnosis alone does not authorize progression.
+**B4.8 larger rollback confirmation Gate failed:** unchanged fixed P/17 and the
+complete P/W/C/non-ML panel completed 96 fresh references, all 1,152 outcomes,
+1,250 production audit units and 1,295 independent terminal/classification
+checks. P/17 and P/43 passed single-seed criteria; P/29's four failures exceeded
+its matched reliability limit. Fixed P/17 paid one quality fallback, violating
+its zero-failure requirement; P/43 also retained one failure, so no P primary
+was eligible. P/17's small/large charged means were 0.820141/0.668344 and total
+ratios 0.786037/0.639162. Pooled large-y quality passed 17/18 and 18/18.
+Final charge was 14,105.836381712 seconds with peak RSS 1,036,238,848 bytes.
+All complete-cost, numerical, artifact and resource audits passed. See
+[the complete B4.8 report](../validation/b4_8_rollback_confirmation.md).
+The next slice is **B4.9**: bounded read-only diagnosis binding the complete
+failed confirmation and all costs, before any independently preregistered
+intervention. No new fit, exposed-cohort threshold search, seed substitution
+or final access follows from diagnosis. A passing repair and independent
+confirmation remain required before a compatible final contract and B5.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
 
@@ -1079,10 +1094,12 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     W/17 had two failures, W/29 four and W/43 one, with no eligible W primary.
     **B4.7** passed its bounded spatial-objective rollback Gate with 48 references,
     576 outcomes and fixed P/17 zero failures/fallbacks. P/17 and P/43 passed;
-    P/29 retained three failures and P/43 one. **B4.8** next separately freezes
-    a larger physically disjoint confirmation with unchanged P/17 and route.
-    **B5 final evaluation** only after independent confirmation and the complete
-    new B4 Gate pass.
+    P/29 retained three failures and P/43 one. **B4.8** completed 96 references,
+    1,152 outcomes and all 1,295 independent terminal checks, but failed larger
+    confirmation: fixed P/17 paid one quality fallback; P/29 had four and P/43
+    one. **B4.9** next performs bounded read-only diagnosis of the complete
+    failed confirmation. **B5 final evaluation** only after a passing repair,
+    independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
 
 After each completed independent slice, report its gate, evidence, limitations,
