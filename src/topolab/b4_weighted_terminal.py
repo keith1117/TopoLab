@@ -327,6 +327,7 @@ def development_gate(
     expected: tuple[tuple[str, str], ...] | None = None,
     quality_volumes: tuple[float, float] = (0.5397, 0.5977),
     quality_minimum: int = 6,
+    candidate: Literal["W", "P"] = "W",
 ) -> dict[str, Any]:
     expected = assignments() if expected is None else expected
     cases = {c.case_id: c for c in (fresh_cases() if cohort is None else cohort)}
@@ -413,9 +414,10 @@ def development_gate(
                 if c.problem.loads[0].direction == "y" and q["route"] != "specialist"
             ),
         }
+    comparison = "P" if candidate == "W" else "W"
     passing, eligible = [], []
     for seed in SEEDS:
-        w, c, p = (table[f"{name}/{seed}"] for name in ("W", "C", "P"))
+        w, c, p = (table[f"{name}/{seed}"] for name in (candidate, "C", comparison))
         passed = (
             max(w["scale_means"].values()) <= 0.9
             and max(w["direction_means"].values()) <= 1.0
@@ -440,7 +442,7 @@ def development_gate(
         str(v): sum(
             not q["failed"]
             for seed in SEEDS
-            for c, q, _ in by_method[f"W/{seed}"]
+            for c, q, _ in by_method[f"{candidate}/{seed}"]
             if c.problem.mesh.element_counts[0] == 24
             and c.problem.loads[0].direction == "y"
             and c.problem.optimization.volume_fraction == v
@@ -451,9 +453,9 @@ def development_gate(
         min(
             eligible,
             key=lambda seed: (
-                max(table[f"W/{seed}"]["scale_means"].values()),
-                max(table[f"W/{seed}"]["direction_means"].values()),
-                table[f"W/{seed}"]["overall_mean"],
+                max(table[f"{candidate}/{seed}"]["scale_means"].values()),
+                max(table[f"{candidate}/{seed}"]["direction_means"].values()),
+                table[f"{candidate}/{seed}"]["overall_mean"],
                 SEEDS.index(seed),
             ),
         )

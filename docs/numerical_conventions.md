@@ -700,3 +700,12 @@ large-y minimum remains two-thirds (12/18 per middle/high volume). W/17 also
 requires total charged time ratio <=0.90 at each scale. Recording, fallback,
 startup and independent audits remain fully charged. No numerical tolerance
 or solver behavior changes, and no final artifact is opened in this slice.
+
+## B4.7 spatial-objective rollback boundary
+
+The [B4.7 protocol](planning/b4_7_spatial_rollback_protocol.md) uses unchanged
+B4.1 P checkpoints and same-seed specialist, with P/17 fixed before its 48
+new development cases. It removes only B4.5's spatial loss weighting through
+checkpoint reuse; no fitting, solver, tolerance, projection or route changes.
+Complete query/recording/fallback charges retain B4.6's timing conventions.
+Its independent repair Gate cannot change historical failures or open B5.

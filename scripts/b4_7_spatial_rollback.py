@@ -1,4 +1,4 @@
-"""Metadata-only B4.6 plan or explicit fixed-policy confirmation and audit."""
+"""Metadata-only B4.7 plan or explicit fixed-policy rollback and audit."""
 
 import argparse
 import json
@@ -16,19 +16,19 @@ from topolab.b3_screen_cli import screening_preflight
 from topolab.b3_screening import B3ScreenContext
 from topolab.b3_training import SEEDS, Recipe
 from topolab.b3_training_artifacts import read_selected_model
-from topolab.b4_confirmation import (
+from topolab.b4_confirmation import UPSTREAM_CONTEXT
+from topolab.b4_development import DevelopmentSpec, run_development
+from topolab.b4_rollback import (
     CAPS,
     RECEIPT_VERSION,
-    UPSTREAM_CONTEXT,
     UPSTREAM_FILES,
     VERSION,
     assignments,
-    confirmation_gate,
     fresh_cases,
     plan,
+    rollback_gate,
     upstream_fits,
 )
-from topolab.b4_development import DevelopmentSpec, run_development
 from topolab.b4_telemetry import digest, durable_write
 from topolab.b4_weighted_terminal import read_weighted_model
 from topolab.dataset_cli import validate_external_output_root
@@ -75,13 +75,7 @@ def run(
 ) -> dict[str, Any]:
     prepared = perf_counter()
     spec = DevelopmentSpec(
-        VERSION,
-        RECEIPT_VERSION,
-        CAPS,
-        fresh_cases(),
-        assignments(),
-        confirmation_gate,
-        upstream_fits,
+        VERSION, RECEIPT_VERSION, CAPS, fresh_cases(), assignments(), rollback_gate, upstream_fits
     )
     return run_development(
         stage,
@@ -120,17 +114,17 @@ def main() -> None:
     weighted_root = validate_external_output_root(repository, args.weighted_root)
     parent = args.data_root.resolve().parent
     if (
-        output != parent / "b4-6-development-confirmation"
+        output != parent / "b4-7-spatial-rollback"
         or weighted_root != parent / "b4-5-weighted-terminal"
     ):
-        raise ValueError("confirmation requires its fixed external siblings")
+        raise ValueError("rollback requires its fixed external siblings")
     roots = (args.data_root.resolve(), args.fit_root.resolve(), weighted_root, output)
     if any(
         a.is_relative_to(b) or b.is_relative_to(a)
         for i, a in enumerate(roots)
         for b in roots[i + 1 :]
     ):
-        raise ValueError("confirmation output must be separate from immutable inputs")
+        raise ValueError("rollback output must be separate from immutable inputs")
     upstream_fits(weighted_root)
     payload = {
         "version": VERSION,
@@ -140,14 +134,14 @@ def main() -> None:
         "fixed_fits_sha256": context.training_index_sha256,
         "upstream_files": UPSTREAM_FILES,
         "protocol_sha256": digest(
-            (repository / "docs/planning/b4_6_confirmation_protocol.md").read_bytes()
+            (repository / "docs/planning/b4_7_spatial_rollback_protocol.md").read_bytes()
         ),
     }
     raw = canonical_metadata_bytes(payload)
     output.mkdir(parents=True, exist_ok=True)
     path = safe_path(output, "context.json")
     if path.exists() and path.read_bytes() != raw:
-        raise ValueError("existing confirmation context differs")
+        raise ValueError("existing rollback context differs")
     if not path.exists():
         durable_write(path, raw)
     print(
