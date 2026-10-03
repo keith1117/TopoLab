@@ -223,10 +223,22 @@ four failures and P/43 one. P/17's charged small/large means were
 0.820141/0.668344 and total ratios 0.786037/0.639162; both pooled large-y
 cells passed 17/18 and 18/18. Final charge was 14,105.836381712 seconds with
 peak RSS 1,036,238,848 bytes; see
-`docs/validation/b4_8_rollback_confirmation.md`. The next slice is B4.9:
-bounded read-only diagnosis of the complete failed confirmation, retaining every
-outcome, cost and fixed-primary failure. No new fit, threshold search, seed
-substitution or final access is authorized by that diagnosis. A passing repair
+`docs/validation/b4_8_rollback_confirmation.md`. B4.9 then completed bounded
+read-only diagnosis of all 96 references and 1,152 outcomes, with 1,295 independent
+quality classifications, 48 strata and 54 identical-specialist pairs audited.
+Its diagnostic acceptance passed within 81.608446500 seconds / 277,626,880 bytes,
+including the retained failed metadata preflight. Fixed P/17's converged
+physical-plateau stop retained a compliance ratio of 1.001056679441 above 1.001;
+all original failures, costs and the failed confirmation remain unchanged. See
+`docs/validation/b4_9_confirmation_diagnosis.md`. The next slice is B4.10:
+freeze and test one bounded, candidate-only 20-update post-plateau polish probe
+on large-y generalist stops, with unchanged checkpoints, route, quality
+tolerances and 360-update total cap. Preserve specialist, z and design-change
+stop paths as controls.
+Use candidate stop evidence rather than matched uniform compliance as an online
+oracle; freeze an exposed regression sentinel and stop rule before a fresh
+physically disjoint development panel. No length/threshold search, fit, seed
+substitution or final access follows from diagnosis alone. A passing repair
 and independent confirmation remain required before a compatible final contract
 and B5. Diagnosis alone does not authorize progression.
 The original B4.2 Gate remains failed and final evaluation remains sealed;

@@ -248,3 +248,38 @@ fit, input label, solver, quality tolerance, checkpoint selection, upstream
 code or final artifact was used. Generated artifacts, profiles and independent
 audit sources remain external. B4.9 is bounded read-only diagnosis; the failed
 confirmation cannot authorize final evaluation or a substituted primary.
+
+## B4.9 bounded confirmation diagnosis contract
+
+The B4.9 receipt guard and arithmetic reader derive only from original TopoLab
+B4.3 diagnostic helpers, B4.8 artifacts/contracts and existing quality and
+recording conventions. No new external source or Hack3D content was consulted.
+The committed protocol binds the complete failed B4.8 population before new
+individual outcome reads. It permits no solver, fitting, label/checkpoint byte
+reads or final access. Generated diagnosis and independent audit sources remain
+external. Its ordered recommendation is a prospective hypothesis; all original
+P/W failures, measured costs and the failed fixed-primary decision stay retained.
+
+The first B4.9 metadata preflight from `9dfcd7512b1637dd3b85395578e7a35866782fd4`
+incorrectly demanded compact JSON for the original indented plan/release
+receipts. It stopped before all journal/outcome/numerical reads. Its 2.31-second
+wall plus ten-second allowance is retained and carried into the versioned v2
+plan. The v2 guard preserves the exact original SHA-256 bindings and fixes only
+serialization validation; scientific analyses, input bytes and caps are unchanged.
+
+## B4.9 complete read-only diagnostic evidence
+
+Active v2 diagnosis executed from clean committed
+`714c0035fc227da25c3c8cdff7cc6ac918479aec`. All 96 references, 1,152 outcomes,
+1,250 production audit journal units, 1,295 arithmetic quality classifications,
+48 strata and 54 same-specialist pairs passed guarded reads and independent
+raw-JSON arithmetic audit. The complete acceptance and unchanged failed B4.8
+decision are recorded in `docs/validation/b4_9_confirmation_diagnosis.md`.
+The new diagnostic charge is 81.608446500 seconds with peak RSS 277,626,880 bytes,
+including the retained 12.31-second failed metadata preflight. All eleven B4.8
+receipts, four protected indices and original 14,105.836381712-second charge
+remain unchanged. No FEM re-solve, model/label byte access, fit, continuation,
+new external source or final access occurred. Generated evidence and independent
+audit/closure sources remain external. The fixed twenty-update post-plateau
+polish is only the frozen diagnostic recommendation for a separately versioned
+B4.10 probe; no repair or final acceleration is established here.
