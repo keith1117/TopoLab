@@ -358,3 +358,19 @@ def test_independent_raw_arithmetic_reproduces_both_gates_without_helpers(b3_ref
     result = probe.fresh_gate(fresh)
     assert not result["polish_gate_passed"] and result["passing_seeds"] == [29, 43]
     module.close(result, module.fresh_decision(fresh, raw_cases))
+
+
+@pytest.mark.parametrize(
+    "elapsed", ["real 0.13", "        0.13 real         0.05 user         0.02 sys"]
+)
+def test_resource_closure_reads_native_bsd_and_posix_whole_command_profiles(tmp_path, elapsed):
+    path = Path(__file__).resolve().parents[1] / "scripts/b4_10_resource_close.py"
+    spec = importlib.util.spec_from_file_location("polish_resource_close", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    profile = tmp_path / "command.time"
+    profile.write_text(elapsed + "\n            35340288  maximum resident set size\n")
+    assert module.profile(profile) == (0.13, 35340288)
+    profile.write_text("real NaN\n35340288 maximum resident set size\n")
+    with pytest.raises(ValueError, match="unsupported"):
+        module.profile(profile)

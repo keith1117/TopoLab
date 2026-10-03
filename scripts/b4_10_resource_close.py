@@ -28,8 +28,12 @@ def read(path):
 
 def profile(path):
     text = path.read_text()
-    wall = float(re.search(r"^real\s+([0-9.]+)$", text, re.MULTILINE)[1])
-    rss = int(re.search(r"([0-9]+)\s+maximum resident set size", text)[1])
+    elapsed = re.search(r"^(?:real\s+([0-9.]+)|\s*([0-9.]+)\s+real\b)", text, re.MULTILINE)
+    memory = re.search(r"([0-9]+)\s+maximum resident set size", text)
+    if elapsed is None or memory is None:
+        raise ValueError("unsupported whole-command time profile")
+    wall = float(elapsed[1] or elapsed[2])
+    rss = int(memory[1])
     return wall, rss
 
 
