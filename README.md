@@ -37,8 +37,12 @@ P/29 retained three and P/43 one. The
 completed 96 new references, 1,152 outcomes and all independent audits, but
 failed: fixed P/17 had one quality failure/fallback, violating its zero-failure
 requirement. P/17 and P/43 passed single-seed criteria; P/29 retained four
-failures and P/43 one. B4.9 next performs bounded read-only diagnosis of the
-complete failed confirmation. Uniform remains the operational default and
+failures and P/43 one. The
+[B4.9 read-only diagnosis](docs/validation/b4_9_confirmation_diagnosis.md)
+audited the complete confirmation and identified a physical-plateau quality
+gap in fixed P/17. B4.10 next tests a separately frozen, bounded 20-update
+post-plateau polish; no repair has been demonstrated. Uniform remains the
+operational default and
 final evaluation remains sealed.
 
 ## Scope
