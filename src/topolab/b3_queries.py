@@ -213,6 +213,8 @@ def _attempt(
     checkpoint: Callable[[], None],
     model: nn.Module | None = None,
     neighbors: NearestNeighborIndex | None = None,
+    refinement: Callable[[ExperimentCase, TopologyResult, Callable[[], None]], TopologyResult]
+    | None = None,
 ) -> QueryAttempt:
     phases = {
         name: 0.0
@@ -263,6 +265,8 @@ def _attempt(
                 termination_policy="physical_plateau",
                 iteration_callback=lambda _: checkpoint(),
             )
+            if refinement is not None:
+                result = refinement(case, result, checkpoint)
         finally:
             phases["refinement_seconds"] = perf_counter() - started
         phase = "quality_error"
@@ -308,6 +312,9 @@ def evaluate_query(
     models: dict[tuple[Recipe, int], nn.Module],
     neighbors: NearestNeighborIndex | None,
     checkpoint: Callable[[], None],
+    *,
+    refinement: Callable[[ExperimentCase, TopologyResult, Callable[[], None]], TopologyResult]
+    | None = None,
 ) -> QueryOutcome:
     checkpoint()
     started = perf_counter()
@@ -321,11 +328,14 @@ def evaluate_query(
             raise ValueError("learned queries require a frozen seed")
         model = models[(recipe, seed)]
     route_seconds = perf_counter() - started
-    attempt = (
-        None
-        if route == "reject"
-        else _attempt(case, method, reference, checkpoint, model, neighbors)
-    )
+    attempt = None
+    if route != "reject":
+        if refinement is not None and method == "P" and route == "generalist":
+            attempt = _attempt(
+                case, method, reference, checkpoint, model, neighbors, refinement=refinement
+            )
+        else:
+            attempt = _attempt(case, method, reference, checkpoint, model, neighbors)
     fallback = None
     if route == "reject" or (attempt is not None and not attempt.succeeded and method != "uniform"):
         fallback = _attempt(case, "uniform", reference, checkpoint)

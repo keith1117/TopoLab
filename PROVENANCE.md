@@ -283,3 +283,16 @@ new external source or final access occurred. Generated evidence and independent
 audit/closure sources remain external. The fixed twenty-update post-plateau
 polish is only the frozen diagnostic recommendation for a separately versioned
 B4.10 probe; no repair or final acceleration is established here.
+
+## B4.10 fixed candidate continuation implementation (2026-10-03)
+
+The independently implemented TopoLab OC/FEM/filter operations are reused by
+one opt-in, candidate-only twenty-update continuation after an original
+large-grid y generalist physical-plateau stop. No numerical-anchor source,
+uniform data, selected checkpoint or original result is changed. The
+[protocol](docs/planning/b4_10_post_plateau_protocol.md) freezes compatibility,
+the exposed stop sentinel, conditional disjoint cohort and resource caps
+before execution. Numerical tests compare the extension with an uninterrupted
+run of TopoLab's unchanged core. No upstream repository/source, comment, figure
+or file structure was consulted, copied or translated. This implementation
+records no production repair or learned acceleration result.

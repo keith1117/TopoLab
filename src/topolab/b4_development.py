@@ -62,6 +62,7 @@ def run_development(
     spec: DevelopmentSpec,
     load_models: Callable[[B3ScreenContext, Path, Path], tuple[ModelPanel, ModelPanel]],
     evaluate_query: Callable[..., QueryOutcome],
+    evaluate_weighted_query: Callable[..., QueryOutcome] | None = None,
 ) -> dict[str, Any]:
     def receipt(root: Path, ordinal: int, ref: dict[str, Any], sha: str) -> None:
         evidence.recording_receipt(root, ordinal, ref, sha, spec.receipt_version)
@@ -138,7 +139,9 @@ def run_development(
                         sha,
                         spec.version,
                         spec.receipt_version,
-                        evaluate_query,
+                        (evaluate_weighted_query or evaluate_query)
+                        if policy.startswith("W/")
+                        else evaluate_query,
                     )
                     evidence.check_packet(packet, compliance[case_id], case)
                     print(
