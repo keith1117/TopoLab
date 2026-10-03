@@ -1,5 +1,6 @@
 """Diagnostic byte boundaries, fixed primary and unchanged charged failure evidence."""
 
+import json
 import sys
 from pathlib import Path
 
@@ -27,7 +28,7 @@ def test_metadata_plan_reads_no_artifacts_or_output(monkeypatch, tmp_path, capsy
     assert '"new_solver_calls": 0' in capsys.readouterr().out
     plan = diagnosis.plan_payload()
     assert plan["plan_sha256"] == (
-        "c9fc08dd3b05c335ee11569bff5caca7a75a468a061147e648ae66aa3c6e87b8"
+        "eb669182ad41bb0db4e34baa8f160218bd1fbd6289615b64afe583d44e0db46b"
     )
     assert len(set(plan["case_ids"])) == 96
     assert plan["label_and_model_byte_reads"] == plan["final_artifact_reads"] == 0
@@ -40,6 +41,24 @@ def test_changed_receipt_rejected_before_any_unit_or_outcome(tmp_path):  # type:
     first.write_bytes(b"{}")
     with pytest.raises(ValueError, match="input checksum"):
         diagnosis.input_receipts(tmp_path)
+
+
+@pytest.mark.parametrize("path", diagnosis.ORIGINAL_SERIALIZATION)
+def test_original_plan_and_release_serialization_is_hash_bound(tmp_path, path):  # type: ignore[no-untyped-def]
+    raw = (json.dumps({"passed": True}, indent=2) + "\n").encode()
+    target = tmp_path / path
+    target.parent.mkdir()
+    target.write_bytes(raw)
+    assert diagnosis.read_bound_receipt(tmp_path, path, diagnosis.digest(raw)) == {"passed": True}
+    with pytest.raises(ValueError, match="checksum"):
+        diagnosis.read_bound_receipt(tmp_path, path, "0" * 64)
+
+
+def test_execution_metadata_still_requires_canonical_bytes(tmp_path):  # type: ignore[no-untyped-def]
+    raw = b'{\n  "passed": true\n}\n'
+    (tmp_path / "context.json").write_bytes(raw)
+    with pytest.raises(ValueError, match="canonical"):
+        diagnosis.read_bound_receipt(tmp_path, "context.json", diagnosis.digest(raw))
 
 
 @pytest.mark.parametrize("nested", [True, False])

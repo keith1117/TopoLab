@@ -259,3 +259,10 @@ individual outcome reads. It permits no solver, fitting, label/checkpoint byte
 reads or final access. Generated diagnosis and independent audit sources remain
 external. Its ordered recommendation is a prospective hypothesis; all original
 P/W failures, measured costs and the failed fixed-primary decision stay retained.
+
+The first B4.9 metadata preflight from `9dfcd7512b1637dd3b85395578e7a35866782fd4`
+incorrectly demanded compact JSON for the original indented plan/release
+receipts. It stopped before all journal/outcome/numerical reads. Its 2.31-second
+wall plus ten-second allowance is retained and carried into the versioned v2
+plan. The v2 guard preserves the exact original SHA-256 bindings and fixes only
+serialization validation; scientific analyses, input bytes and caps are unchanged.

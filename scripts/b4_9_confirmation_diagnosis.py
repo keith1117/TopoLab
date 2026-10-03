@@ -26,12 +26,14 @@ from topolab.b4_telemetry import digest
 from topolab.b4_weighted_terminal import METHODS, RECORDING_ALLOWANCE, read_units
 from topolab.dataset_cli import validate_external_output_root
 
-VERSION = "topolab.b4_9.confirmation-diagnosis.v1"
+VERSION = "topolab.b4_9.confirmation-diagnosis.v2"
 SOURCE_REVISION = "c185caffd5f3b3cd16b2f2f80948caee1e836784"
 SOURCE_PLAN = "1981e64c41fc6b958d530a161bc6d41739e668ca04a3cd2dcdc623aee59dec15"
 MAX_SECONDS = 360.0
 MAX_RSS_BYTES = 1_073_741_824
 SEEDS = (17, 29, 43)
+ORIGINAL_SERIALIZATION = ("audit_receipts/plan.json", "audit_receipts/production_release.json")
+PRIOR_FAILED_PREFLIGHT_SECONDS = 12.31
 BINDINGS = {
     "audit_receipts/plan.json": "31dece2979a469ea600911036d9e2ab15ae45c593c7b22cf770a4d135758f56f",
     "audit_receipts/production_release.json": (
@@ -55,6 +57,8 @@ def plan_payload() -> dict[str, Any]:
         "source_revision": SOURCE_REVISION,
         "source_plan_sha256": SOURCE_PLAN,
         "bindings": BINDINGS,
+        "original_serialization_receipts": ORIGINAL_SERIALIZATION,
+        "prior_failed_preflight_seconds": PRIOR_FAILED_PREFLIGHT_SECONDS,
         "case_ids": [c.case_id for c in fresh_cases()],
         "methods": METHODS,
         "bounds": ["measured", "fallback_free", "failed_to_uniform"],
@@ -81,12 +85,7 @@ def input_receipts(root: Path) -> dict[str, Any]:
     """Bind every closed receipt before a journal unit or outcome is opened."""
     bound = {}
     for path, expected in BINDINGS.items():
-        raw = safe_path(root, path).read_bytes()
-        if digest(raw) != expected:
-            raise ValueError(f"B4.9 input checksum differs: {path}")
-        bound[path] = json.loads(raw)
-        if canonical_metadata_bytes(bound[path]) != raw:
-            raise ValueError("B4.9 input canonical bytes differ")
+        bound[path] = read_bound_receipt(root, path, expected)
     context, decision = bound["context.json"], bound["audit/summary.json"]["decision"]
     if (
         context["version"] != SOURCE_VERSION
@@ -107,6 +106,17 @@ def input_receipts(root: Path) -> dict[str, Any]:
         ):
             raise ValueError("B4.9 summary differs from its closed journal")
     return bound
+
+
+def read_bound_receipt(root: Path, path: str, expected: str) -> dict[str, Any]:
+    raw = safe_path(root, path).read_bytes()
+    if digest(raw) != expected:
+        raise ValueError(f"B4.9 input checksum differs: {path}")
+    receipt = json.loads(raw)
+    canonical = canonical_metadata_bytes(receipt)
+    if path not in ORIGINAL_SERIALIZATION and canonical != raw:
+        raise ValueError("B4.9 input canonical bytes differ")
+    return receipt
 
 
 def match_numbers(actual: Any, expected: Any) -> None:
@@ -457,7 +467,8 @@ def main(argv: list[str] | None = None) -> int:
         (repository / "docs/planning/b4_9_confirmation_diagnosis_protocol.md").read_bytes()
     )
     report["elapsed_seconds"] = perf_counter() - started
-    report["charged_seconds"] = report["elapsed_seconds"] + 10
+    report["prior_failed_preflight_seconds"] = PRIOR_FAILED_PREFLIGHT_SECONDS
+    report["charged_seconds"] = report["elapsed_seconds"] + 10 + PRIOR_FAILED_PREFLIGHT_SECONDS
     if report["charged_seconds"] > MAX_SECONDS or report["peak_rss_bytes"] > MAX_RSS_BYTES:
         raise RuntimeError("B4.9 complete diagnostic resource cap exceeded")
     atomic_write(output / "diagnosis.json", canonical_metadata_bytes(report))

@@ -8,8 +8,19 @@ failed Gate, substitute another primary, fit a model or open B5/final bytes.
 Uniform remains the operational default.
 
 The protocol and reader are committed before individual outcome bytes are
-opened for this diagnosis. Identity: `topolab.b4_9.confirmation-diagnosis.v1`;
-plan SHA-256: `c9fc08dd3b05c335ee11569bff5caca7a75a468a061147e648ae66aa3c6e87b8`.
+opened for this diagnosis. Active identity: `topolab.b4_9.confirmation-diagnosis.v2`;
+plan SHA-256: `eb669182ad41bb0db4e34baa8f160218bd1fbd6289615b64afe583d44e0db46b`.
+
+The original v1 reader at `9dfcd7512b1637dd3b85395578e7a35866782fd4`
+stopped at the first metadata receipt: it incorrectly required the original
+indented plan/release receipts to use compact serialization. Its 2.31-second
+whole-command wall, 262,930,432-byte RSS and ten-second close allowance are
+retained: **12.31 seconds** are carried into the active plan. No journal unit,
+individual outcome, model, label or numerical state was read by that attempt.
+V2 corrects only this serialization guard before individual outcome access;
+the bound source bytes/hashes, analysis population, decisions and caps do not
+change. Both original-serialization receipts remain byte-hash bound. New tests
+reject changed bytes and still reject noncanonical execution metadata.
 
 ## Immutable population and inputs
 
@@ -17,8 +28,11 @@ Bind B4.8 execution source `c185caffd5f3b3cd16b2f2f80948caee1e836784`
 and original plan `1981e64c41fc6b958d530a161bc6d41739e668ca04a3cd2dcdc623aee59dec15`.
 The exact eleven receipt hashes in `scripts/b4_9_confirmation_diagnosis.py`
 bind the plan, production release, context, all three stage progress/summary
-pairs, independent numerical audit and final resource closure. All hashes and
-canonical metadata are checked before any unit or outcome bytes. Require the
+pairs, independent numerical audit and final resource closure. All hashes are
+checked before any unit or outcome bytes. Context, progress, summary, numerical
+audit and closure metadata additionally require canonical bytes; the two
+externally saved plan/release receipts preserve their original serialization.
+Require the
 unchanged complete failed fixed-P/17 decision and agreement with the retained
 independent audit. This slice does not repeat its FEM numerical solves.
 
