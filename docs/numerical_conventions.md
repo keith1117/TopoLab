@@ -719,3 +719,13 @@ charge. P/17 stays fixed; another confirmation seed cannot replace it.
 The pooled large-y minimum remains two-thirds (12/18 per volume), with
 unchanged seed/primary speed and reliability bounds. This slice changes no
 solver or tolerance and opens no final artifact.
+
+## B4.9 read-only diagnosis boundary
+
+The [B4.9 protocol](planning/b4_9_confirmation_diagnosis_protocol.md) performs
+arithmetic diagnosis on the complete failed B4.8 development evidence. It
+preserves all solver, quality, routing and full-charge conventions. Stored
+trajectory comparisons and optimistic cost scenarios cannot change an
+attempt's status or the fixed-primary Gate. A proposed candidate-only
+post-plateau polish is an unexecuted later hypothesis, with unchanged quality
+tolerances and no reference-compliance oracle in operational stopping.

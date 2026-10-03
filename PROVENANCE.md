@@ -248,3 +248,14 @@ fit, input label, solver, quality tolerance, checkpoint selection, upstream
 code or final artifact was used. Generated artifacts, profiles and independent
 audit sources remain external. B4.9 is bounded read-only diagnosis; the failed
 confirmation cannot authorize final evaluation or a substituted primary.
+
+## B4.9 bounded confirmation diagnosis contract
+
+The B4.9 receipt guard and arithmetic reader derive only from original TopoLab
+B4.3 diagnostic helpers, B4.8 artifacts/contracts and existing quality and
+recording conventions. No new external source or Hack3D content was consulted.
+The committed protocol binds the complete failed B4.8 population before new
+individual outcome reads. It permits no solver, fitting, label/checkpoint byte
+reads or final access. Generated diagnosis and independent audit sources remain
+external. Its ordered recommendation is a prospective hypothesis; all original
+P/W failures, measured costs and the failed fixed-primary decision stay retained.
