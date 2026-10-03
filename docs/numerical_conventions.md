@@ -729,3 +729,15 @@ trajectory comparisons and optimistic cost scenarios cannot change an
 attempt's status or the fixed-primary Gate. A proposed candidate-only
 post-plateau polish is an unexecuted later hypothesis, with unchanged quality
 tolerances and no reference-compliance oracle in operational stopping.
+
+## B4.10 candidate continuation boundary
+
+`topolab.b4_10.large-y-post-plateau.v1` is an opt-in development query policy
+for P generalists on `(24,12,6)` y cases below volume 0.55. It first runs the
+unchanged anchored physical-plateau solver. A converged physical-plateau stop
+with design change >0.01 receives exactly twenty existing OC/FEM updates,
+without an intermediate stop or reference-compliance oracle. The 360 total cap,
+original terminal convergence and all volume/compliance tolerances remain.
+An incomplete continuation is nonconverged. Uniform labels/references/fallbacks,
+specialists, z and design-change stops retain their original semantics.
+See the [frozen protocol](planning/b4_10_post_plateau_protocol.md).
