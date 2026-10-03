@@ -296,3 +296,28 @@ before execution. Numerical tests compare the extension with an uninterrupted
 run of TopoLab's unchanged core. No upstream repository/source, comment, figure
 or file structure was consulted, copied or translated. This implementation
 records no production repair or learned acceleration result.
+
+## B4.10 complete fixed-polish sentinel evidence (2026-10-03)
+
+The frozen probe executed from clean, CI-passed merged TopoLab revision
+`fd13aa1c85a05e638ea02e74712c216319c7488d`, with the original six numerical
+anchor modules, checkpoints, route and quality tolerances unchanged. Nine
+uniform references, 108 queries, 119 numerical/input audit units, 117 policy
+units and 132 independent terminal classifications completed. The guarded NN
+audit read the complete 528-label training population and twelve fixed
+checkpoints. All 24 prepolish witnesses matched immutable B4.8 states; twelve
+fixed twenty-update continuations and 96 unchanged query identities passed
+policy/independent audits. No new fit or source-label modification occurred.
+
+The sentinel Gate failed: its four known large-y failures were repaired, but
+one originally accepted fixed P/17 attempt became nonconverged and paid fresh
+fallback. Both fixed-primary charged cost bounds failed. All 48 fresh cases
+remain sealed, as do final artifacts; no primary or polish length was replaced.
+All eighteen protected historical metadata/index hashes and original charges
+remain unchanged. Final charge was 2,106.109270792 seconds and peak RSS
+635,076,608 bytes. The complete report is
+`docs/validation/b4_10_post_plateau_polish.md`; generated evidence remains at
+`/Users/keith1117/Documents/TopoLab-data/b4-10-post-plateau-polish` outside Git.
+No external or upstream source, comment, figure or file structure was consulted,
+copied or translated. This failed development probe establishes no acceleration
+and permits only the next bounded B4.11 read-only failure/cost review.
