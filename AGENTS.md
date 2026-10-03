@@ -230,16 +230,21 @@ Its diagnostic acceptance passed within 81.608446500 seconds / 277,626,880 bytes
 including the retained failed metadata preflight. Fixed P/17's converged
 physical-plateau stop retained a compliance ratio of 1.001056679441 above 1.001;
 all original failures, costs and the failed confirmation remain unchanged. See
-`docs/validation/b4_9_confirmation_diagnosis.md`. The next slice is B4.10:
-freeze and test one bounded, candidate-only 20-update post-plateau polish probe
-on large-y generalist stops, with unchanged checkpoints, route, quality
-tolerances and 360-update total cap. Preserve specialist, z and design-change
-stop paths as controls.
-Use candidate stop evidence rather than matched uniform compliance as an online
-oracle; freeze an exposed regression sentinel and stop rule before a fresh
-physically disjoint development panel. No length/threshold search, fit, seed
-substitution or final access follows from diagnosis alone. A passing repair
-and independent confirmation remain required before a compatible final contract
+`docs/validation/b4_9_confirmation_diagnosis.md`. B4.10 then completed its
+frozen nine-case post-plateau sentinel: 9 references, 108 outcomes, 119 numerical/
+input audit units, 117 policy audit units and 132 independent terminal
+classifications. All 24 prepolish witnesses, 12 fixed twenty-update continuations
+and 96 unchanged outcome identities passed integrity audits. Its Gate failed:
+all four known large-y P failures were repaired, but fixed P/17 gained one new
+convergence failure/fallback on an originally accepted case. Its four-case
+large-y generalist mean charged ratio was 1.222377 and ratio of charged sums
+1.226342, both above 1.0. All 48 fresh cases remain sealed. Final charge was
+2,106.109270792 seconds with peak RSS 635,076,608 bytes; see
+`docs/validation/b4_10_post_plateau_polish.md`. The next slice is B4.11: a
+bounded read-only polish failure/cost review before another method-class
+decision. No length/threshold search, fit, seed substitution, fresh execution
+or final access is authorized by this failed probe. A passing repair and
+independent confirmation remain required before a compatible final contract
 and B5. Diagnosis alone does not authorize progression.
 The original B4.2 Gate remains failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim

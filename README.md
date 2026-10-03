@@ -40,10 +40,13 @@ requirement. P/17 and P/43 passed single-seed criteria; P/29 retained four
 failures and P/43 one. The
 [B4.9 read-only diagnosis](docs/validation/b4_9_confirmation_diagnosis.md)
 audited the complete confirmation and identified a physical-plateau quality
-gap in fixed P/17. B4.10 next tests a separately frozen, bounded 20-update
-post-plateau polish; no repair has been demonstrated. Uniform remains the
-operational default and
-final evaluation remains sealed.
+gap in fixed P/17. The
+[B4.10 fixed post-plateau probe](docs/validation/b4_10_post_plateau_polish.md)
+completed nine references and all 108 sentinel outcomes. It repaired four known
+large-y failures but introduced one P/17 convergence failure and exceeded both
+fixed-primary cost bounds, so its Gate failed and all 48 fresh cases remain
+sealed. B4.11 is a bounded read-only failure/cost review. Uniform remains the
+operational default and final evaluation remains sealed.
 
 ## Scope
 

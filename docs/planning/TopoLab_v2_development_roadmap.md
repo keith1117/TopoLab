@@ -799,9 +799,14 @@ confirmation, independently auditing 1,295 classifications, 48 strata and
 54 same-specialist pairs. Fixed P/17's failure is a converged physical-plateau
 quality gap; all original failures/costs remain unchanged. See
 [the diagnosis report](../validation/b4_9_confirmation_diagnosis.md).
-**B4.10** next freezes and tests one bounded 20-update post-plateau polish
-probe. Final evaluation remains sealed until a passing repair,
-independent confirmation and the complete new B4 Gate; uniform remains default.
+**B4.10** completed its frozen nine-reference, 108-outcome post-plateau sentinel
+but failed: four known large-y failures were repaired, one new fixed P/17
+convergence failure appeared, and both fixed-primary cost bounds were exceeded.
+All 48 fresh cases remain sealed. See
+[the polish report](../validation/b4_10_post_plateau_polish.md).
+**B4.11** is a bounded read-only polish failure/cost review. Final evaluation
+remains sealed until a passing repair, independent confirmation and the complete
+new B4 Gate; uniform remains default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -933,17 +938,29 @@ specialist charged spreads reached the fixed 1.25 descriptive flag. Diagnostic
 charge was 81.608446500 seconds with peak RSS 277,626,880 bytes, including the
 retained failed metadata preflight. Original B4.8 charges and failures remain
 unchanged. See [the complete diagnosis](../validation/b4_9_confirmation_diagnosis.md).
-The next slice is **B4.10**: separately freeze one candidate-only, fixed
-20-update post-plateau polish probe with unchanged checkpoints, route, quality
-tolerances and 360-update total cap. Focus it on large-y generalist stops,
-preserving specialist, z and design-change paths as controls. Candidate stop evidence triggers it;
-matched uniform compliance cannot be an online stopping oracle. Freeze an
-exposed regression sentinel, complete added-work charges and resource/quality/
-cost stop rules before opening a physically disjoint new development panel.
-This hypothesis has not been executed or demonstrated as a repair. No new fit,
-exposed-cohort length/threshold search, seed substitution or final access
-follows from diagnosis. A passing repair and independent
-confirmation remain required before a compatible final contract and B5.
+**B4.10's frozen polish sentinel failed:** nine unchanged uniform references
+and all 108 queries completed; 119 numerical/input audit units, 117 policy units
+and 132 independent terminal classifications passed integrity audits. All 24
+prepolish witnesses matched B4.8; twelve qualifying P generalists received
+exactly twenty updates and 96 other query identities remained unchanged. All
+four known large-y failed P attempts became quality successes. However, an
+originally accepted P/17 case became nonconverged: its compliance improved,
+but its terminal ten-update relative gain exceeded the unchanged plateau
+tolerance. It paid a fresh uniform fallback. Fixed P/17's four-case large-y
+generalist mean paired charged ratio was 1.222377 and ratio of charged sums
+1.226342, both above 1.0. Final charge was 2,106.109270792 seconds with peak
+RSS 635,076,608 bytes. All completeness, numerical, policy and resource audits
+passed; all 48 fresh cases remain sealed under the frozen stop rule. Original
+failures and charges remain unchanged. See
+[the complete polish report](../validation/b4_10_post_plateau_polish.md).
+The next slice is **B4.11**: separately freeze a bounded read-only review of
+the complete nine-reference/108-outcome sentinel, its convergence regression
+and fully charged costs before another method-class decision. Preserve the
+failed fixed-primary decision and every historical failure. No additional
+polish lengths, exposed-cohort threshold search, fit, seed substitution, fresh
+optimization or final access follows from this result or diagnosis. A passing
+repair and independent confirmation remain required before a compatible final
+contract and B5.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
 
@@ -1121,8 +1138,10 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     confirmation: fixed P/17 paid one quality fallback; P/29 had four and P/43
     one. **B4.9** completed independently audited read-only diagnosis of the
     complete failed confirmation, preserving all failures and costs.
-    **B4.10** next freezes and tests one bounded twenty-update post-plateau
-    polish probe with fixed checkpoints/primary and unchanged quality bounds.
+    **B4.10** completed nine references and 108 sentinel outcomes but failed:
+    four known failures were repaired, one new P/17 convergence failure appeared,
+    and both fixed-primary cost bounds were exceeded. All 48 fresh cases remain
+    sealed. **B4.11** next performs a bounded read-only polish failure/cost review.
     **B5 final evaluation** only after a passing repair,
     independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
