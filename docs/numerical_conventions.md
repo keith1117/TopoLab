@@ -765,3 +765,13 @@ even if it later fails matched-reference quality. No reference is supplied to
 the choice. Both witnesses, selected and performed iteration counts, full
 continuation/decision/I/O costs and all failures remain retained. Uniform,
 checkpoint, route, numerical tolerances and the 360-update cap stay unchanged.
+
+## B4.13 read-only preservation review boundary
+
+The [B4.13 protocol](planning/b4_13_preservation_diagnosis_protocol.md) reviews
+both closed B4.12 panels, all candidate witnesses and complete charged costs.
+Selected and performed updates remain distinct; convergence does not imply
+matched-reference compliance quality. Stored-state arithmetic and optimistic
+cost bounds cannot change historical statuses, numerical tolerances, fixed P/17,
+the failed fresh Gate or final-access seal. This slice changes no numerical
+behavior and performs no length/threshold search.
