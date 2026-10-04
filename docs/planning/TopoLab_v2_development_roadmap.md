@@ -815,7 +815,13 @@ Its fresh Gate failed: fixed P/17 retained one converged quality failure/
 fallback, so no primary was eligible. Full resource closure charged 8,486.600
 seconds, including a retained closure-only recovery without numerical reruns.
 See [the preservation report](../validation/b4_12_terminal_preservation.md).
-The next slice is **B4.13**, bounded read-only preservation failure/cost review.
+**B4.13** completed the independently audited read-only preservation review:
+57 references, 684 queries and 1,101 terminal classifications retain all
+historical failures and costs. Fixed P/17's fresh endpoint remains converged
+but misses compliance quality; its large-y generalist fallback-free mean is
+1.012013. Diagnostic charge was 107.78 seconds. See
+[the review](../validation/b4_13_preservation_diagnosis.md).
+**B4.14** is the next bounded generalist reliability/refinement method review.
 Final evaluation remains sealed until a passing repair, independent confirmation
 and the complete new B4 Gate; uniform remains default.
 
@@ -1000,15 +1006,31 @@ numerical rerun, scientific tolerance or Gate changed. Complete charge is
 8,486.600 seconds with peak kernel RSS 1,017,036,800 bytes, within frozen
 limits. See [the full B4.12 report](../validation/b4_12_terminal_preservation.md).
 
-The next slice is **B4.13**: bounded read-only preservation failure/cost review
-of the complete retained sentinel and fresh panel, fixed P/17, all P/W/C seeds,
-non-ML controls, both witnesses and full charged costs. Preserve checkpoints,
-starts, route, twenty-update length, iteration cap, all quality limits and
-every historical result. No larger confirmation, new fit, length/threshold
-search, seed substitution or reference-compliance oracle follows from this
-failed Gate. All 48 B4.10 fresh cases remain sealed. A passing repair and
-separate independent confirmation remain required before a compatible final
-contract and B5; diagnosis alone does not authorize progression.
+**B4.13 diagnostic acceptance passed:** both complete retained panels,
+1,101 terminal classifications, 159 original/endpoint pairs, 96 strata and
+36 same-specialist pairs passed independent raw-JSON arithmetic audit.
+Fixed P/17's fresh original and twenty-update endpoint both retain their
+physical-plateau certificate but fail compliance quality. Its nine-case
+large-y generalist measured mean/sum ratios remain 1.117567/1.115091;
+fallback-free ratios are 1.012013/0.980559, retaining the observed failure.
+Two accepted target refinements remain slower than uniform at ratios 1.713
+and 1.505. No specialist pair reaches the frozen descriptive timing flag.
+New charge is 107.78 seconds with peak RSS 109,936,640 bytes; original
+B4.12's 8,486.600-second charge and all thirty metadata/38 historical guards
+remain unchanged. No solver, fit, continuation, label/model byte read,
+threshold/length search or final access occurred. See
+[the complete B4.13 review](../validation/b4_13_preservation_diagnosis.md).
+
+The next slice is **B4.14**: bounded generalist reliability/refinement method
+review, assessing a different quality-basin or reliability mechanism and its
+complete attainable cost before freezing another repair. Retain fixed P/17,
+all P/W/C seeds, non-ML controls, both candidate witnesses and slower accepted
+refinements. No larger confirmation, new fit, extra continuation, route/
+threshold/length search, seed substitution or reference-compliance oracle
+follows from diagnostic acceptance. All 48 B4.10 fresh cases remain sealed.
+A passing versioned repair and separate independent confirmation remain
+required before a compatible final contract and B5; diagnosis alone cannot
+advance that boundary.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
 
@@ -1196,8 +1218,11 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     576 outcomes and all independent audits. Its fresh Gate failed: fixed
     P/17 retained one converged quality fallback, so no primary was eligible.
     Full closure, including its retained recovery without numerical reruns,
-    charged 8,486.600 seconds. **B4.13** next freezes a bounded read-only
-    preservation failure/cost review of the complete retained population.
+    charged 8,486.600 seconds. **B4.13** completed independently audited
+    read-only review of both complete panels and all 1,101 classifications,
+    preserving every failure and charge within 107.78 seconds / 109,936,640
+    bytes. **B4.14** next freezes a bounded generalist reliability/refinement
+    method review before any new repair.
     **B5 final evaluation** only after a passing repair,
     independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.

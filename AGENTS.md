@@ -263,12 +263,20 @@ primary requirement failed. Native resource closure retained and charged its
 initial exact-float-comparison failure, then recovered from separately
 CI-passed merged source without numerical reruns. Final charge was 8,486.600
 seconds and peak RSS 1,017,036,800 bytes; see
-`docs/validation/b4_12_terminal_preservation.md`. The next slice is B4.13:
-bounded read-only preservation failure/cost review of the complete retained
-panel and fixed P/17. No larger confirmation, fit, seed replacement or
-threshold/length search follows from the failed Gate. A passing repair and
-independent confirmation remain required before a compatible final contract
-and B5; all 48 B4.10 fresh cases remain sealed.
+`docs/validation/b4_12_terminal_preservation.md`. B4.13 then completed the
+bounded read-only review of both complete panels: 57 references, 684 queries,
+1,101 terminal classifications, 159 candidate witness pairs, 96 strata and
+36 same-specialist pairs passed independent arithmetic audit. Fixed P/17's
+fresh original and twenty-update endpoint both retain plateau certificates
+but fail compliance quality. The nine-case large-y generalist fallback-free
+mean remains 1.012013; observed failures and all original charges remain
+unchanged. Diagnostic charge is 107.78 seconds and peak RSS 109,936,640 bytes;
+see `docs/validation/b4_13_preservation_diagnosis.md`. The next slice is B4.14:
+bounded generalist reliability/refinement method review before freezing any
+new repair. No larger confirmation, fit, seed replacement, added continuation
+or threshold/length search follows from diagnostic acceptance. A passing
+repair and independent confirmation remain required before a compatible final
+contract and B5; all 48 B4.10 fresh cases remain sealed.
 The original B4.2 Gate remains failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
