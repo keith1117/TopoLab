@@ -114,6 +114,12 @@ audit, failed attempts and closure. Diagnosis and independent audit each have
 failed attempt/profile, with no uncharged retry. Preserve B4.10's
 2,106.109270792-second and B4.8's 14,105.836381712-second charges unchanged.
 
+The closure process reserves its entire 30-second cap because its own complete
+command profile is available only after exit. Verify afterwards that command
+wall +10 seconds and internal elapsed +10 seconds both fit that reservation,
+and that its whole-command RSS fits the retained peak. A violated reservation
+invalidates acceptance; do not silently reopen or rewrite the closed ledger.
+
 Acceptance requires complete independent arithmetic agreement, unchanged
 inputs and failed scientific decision, sealed fresh/final access, resource
 closure and a concrete prospective next slice. It establishes diagnosis

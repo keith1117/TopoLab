@@ -80,10 +80,12 @@ def main(argv=None):
                 "peak_rss_bytes": rss,
             }
         )
-    charge = perf_counter() - started + 10
+    internal_charge = perf_counter() - started + 10
+    # Its complete command profile exists only after exit; reserve the full cap.
+    charge = 30.0
     peak = max(peak, peak_rss())
     total = sum(p["closed_charge_seconds"] for p in processes) + charge
-    assert charge <= 30 and total <= MAX_SECONDS and peak <= MAX_RSS_BYTES
+    assert internal_charge <= charge and total <= MAX_SECONDS and peak <= MAX_RSS_BYTES
     result = {
         "version": plan_payload()["version"],
         "closed": True,
@@ -94,6 +96,7 @@ def main(argv=None):
         "processes": processes,
         "profile_sha256": hashes,
         "close_charge_seconds": charge,
+        "close_internal_charge_seconds": internal_charge,
         "charged_seconds": total,
         "peak_rss_bytes": peak,
         "prior_b4_10_charge_seconds_unchanged": inputs["resource_close.json"]["charged_seconds"],
