@@ -360,3 +360,16 @@ remain unchanged. The ordered decision permits only separately frozen B4.12
 candidate terminal-witness preservation probing and subsequent independent
 confirmation, with uniform still default. No upstream/external code or new
 scientific source was consulted or copied.
+
+## B4.12 candidate witness preservation implementation (2026-10-04)
+
+The new contract, candidate-only terminal choice, two-witness recording and
+independent raw-JSON audit derive from original TopoLab B4.10/B4.11 evidence
+and the existing independently implemented solver and charged runner. The
+twenty-update continuation remains unchanged; only a fully paid endpoint
+losing its own convergence certificate may return its original converged
+candidate witness. No reference-compliance oracle, fit, threshold/length
+search, external implementation or new scientific source is introduced.
+The fresh 48-case metadata cohort also excludes the still-sealed B4.10 panel.
+Clean merged execution follows CI; all generated records remain external,
+historical failures remain intact and final evidence stays sealed.
