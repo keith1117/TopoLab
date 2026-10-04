@@ -1,5 +1,6 @@
 """Own-certificate rollback, fully paid continuation and exposure boundaries."""
 
+import copy
 import importlib.util
 import json
 import sys
@@ -282,3 +283,120 @@ def test_default_is_metadata_only_and_failed_sentinel_keeps_fresh_sealed(
     )
     with pytest.raises(ValueError, match="sealed"):
         runner.require_sentinel(tmp_path, "a" * 64)
+
+
+@pytest.fixture
+def closure_receipts(tmp_path, monkeypatch):
+    closer = script("b4_12_resource_close")
+    root = tmp_path / "b4-12-terminal-preservation"
+
+    def write(path, value):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(closer.canonical(value))
+
+    caps = {name: [1000, 2**31] for name in ("reference", "screen", "audit", "policy-audit")}
+    write(
+        root / "audit_receipts/plan.json",
+        {
+            "version": probe.VERSION,
+            "plan_sha256": "a" * 64,
+            "caps": caps,
+            "independent_audit_cap_seconds": 1800,
+            "resource_close_cap_seconds": 180,
+            "whole_slice_cap_seconds": 43200,
+            "whole_slice_rss_bytes": 2**31,
+        },
+    )
+    write(root / "context.json", {"plan_sha256": "a" * 64})
+    # This synthetic receipt test does not substitute external production inputs.
+    monkeypatch.setattr(closer, "protected_inputs", lambda plan: {})
+    for cohort in ("sentinel", "fresh"):
+        passed = cohort == "sentinel"
+        decision = {
+            "fixed_primary": 17,
+            "passed": passed,
+            "passing_seeds": [17, 43],
+            "mean": 0.8333415351017107,
+        }
+        policy = {"passed": passed, "decision": decision}
+        path = root / cohort / "policy-audit/summary.json"
+        write(path, policy)
+        independent = copy.deepcopy(decision)
+        independent["mean"] = 0.8333415351017105
+        write(
+            root / cohort / "independent_audit.json",
+            {
+                "passed": True,
+                "decision": independent,
+                "gate_passed": passed,
+                "policy_summary_sha256": closer.digest(path.read_bytes()),
+                "charged_seconds": 10,
+                "peak_rss_bytes": 1024,
+            },
+        )
+        for name in (*caps, "independent"):
+            profile = root / "profiles" / f"{cohort}_{name}.time"
+            profile.parent.mkdir(parents=True, exist_ok=True)
+            profile.write_text("0.10 real\n1024 maximum resident set size\n")
+            if name != "independent":
+                write(
+                    root / cohort / name / "progress.json",
+                    {
+                        "attempted": 1,
+                        "charged_seconds": 10,
+                        "peak_rss_bytes": 1024,
+                        "resource_failed": False,
+                        "integrity_failed": False,
+                        "active_at": None,
+                        "pending": None,
+                    },
+                )
+    (root / "profiles/closure.time").write_text(
+        "0.06 real\n1024 maximum resident set size\n"
+    )
+    write(
+        root / "audit_receipts/execution_commands.json",
+        [{"exit_code": 1, "profile": "profiles/closure.time"}],
+    )
+    monkeypatch.setattr(sys, "argv", ["close", "--output", str(root)])
+    return closer, root, write
+
+
+def test_closure_accepts_frozen_roundoff_retains_failure_and_charges_recovery(closure_receipts):
+    closer, root, _ = closure_receipts
+    closer.main()
+    result = closer.read(root / "resource_close.json")
+    assert result["closed"] and not result["preservation_gate_passed"]
+    assert result["next_slice"] == "B4.13 read-only preservation failure/cost review"
+    failures = [r for r in result["processes"] if r["process"].startswith("failed_")]
+    assert len(failures) == 1 and failures[0]["closed_charge_seconds"] == 10.06
+    assert result["close_charge_seconds"] == 180
+    assert result["charged_seconds"] == sum(
+        row["closed_charge_seconds"] for row in result["processes"]
+    ) + 180
+    assert "closure.time" in result["profile_sha256"]
+    with pytest.raises(AssertionError, match="overwritten"):
+        closer.main()
+
+
+@pytest.mark.parametrize("field,value", [("mean", 0.8333415352), ("passed", True)])
+def test_closure_rejects_changed_arithmetic_or_gate(closure_receipts, field, value):
+    closer, root, write = closure_receipts
+    path = root / "fresh/independent_audit.json"
+    audit = closer.read(path)
+    audit["decision"][field] = value
+    write(path, audit)
+    with pytest.raises(AssertionError):
+        closer.main()
+    assert not (root / "resource_close.json").exists()
+
+
+def test_closure_rejects_failed_command_profile_outside_root(closure_receipts):
+    closer, root, write = closure_receipts
+    write(
+        root / "audit_receipts/execution_commands.json",
+        [{"exit_code": 1, "profile": "../unbound.time"}],
+    )
+    with pytest.raises(AssertionError):
+        closer.main()
+    assert not (root / "resource_close.json").exists()
