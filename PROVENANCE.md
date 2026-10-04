@@ -321,3 +321,17 @@ remain unchanged. Final charge was 2,106.109270792 seconds and peak RSS
 No external or upstream source, comment, figure or file structure was consulted,
 copied or translated. This failed development probe establishes no acceleration
 and permits only the next bounded B4.11 read-only failure/cost review.
+
+## B4.11 read-only polish diagnosis implementation (2026-10-04)
+
+The frozen B4.11 reader, independent arithmetic auditor and resource closer
+derive only from original TopoLab B4.10 development receipts, witness formats
+and unchanged numerical conventions. Their fourteen metadata bindings and
+eighteen historical guards are checked before new outcome access. They
+reconstruct terminal certificates and complete costs without FEM, model/label
+byte reads, polish-length search or final access. No new external scientific
+source or upstream code, comments, layout or figures were consulted or copied.
+The candidate terminal-witness preservation recommendation is a prospective
+mechanism hypothesis; this implementation changes no numerical behavior or
+historical scientific decision. Execution and independent evidence follow
+only from clean merged source after CI passes.
