@@ -53,9 +53,14 @@ passed its nine-reference/108-query exposed sentinel, then completed 48 fresh
 references, all 576 outcomes and independent audits. Its fresh Gate failed:
 fixed P/17 retained one converged quality failure/fallback, violating the
 zero-failure primary requirement. Full resource closure, including a retained
-closure-only recovery, charged 8,486.600 seconds within frozen caps. The next
-slice is B4.13's bounded read-only preservation failure/cost review; a passing
-repair and independent confirmation are still required before B5.
+closure-only recovery, charged 8,486.600 seconds within frozen caps. The
+[B4.13 read-only preservation review](docs/validation/b4_13_preservation_diagnosis.md)
+independently audited both complete panels and 1,101 terminal classifications.
+The fresh P/17 failure retains convergence but misses compliance quality;
+the fallback-free large-y generalist mean remains 1.012013. Diagnostic charge
+was 107.78 seconds. B4.14 is the next bounded generalist reliability/refinement
+method review; a passing repair and independent confirmation remain required
+before B5.
 Uniform remains the operational default and final evaluation remains sealed.
 
 ## Scope

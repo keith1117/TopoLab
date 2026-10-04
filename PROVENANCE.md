@@ -421,3 +421,25 @@ Synthetic tests precede clean merged execution after CI; this implementation
 makes no new numerical claim. No solver, fit, threshold/length search, model/
 label byte read, external scientific source or upstream code, comment, figure
 or file structure is used. Generated diagnosis and receipts remain external.
+
+## B4.13 complete read-only diagnostic evidence (2026-10-04)
+
+Clean merged source `b24e7ee3674ed11711b0a86b5d239d2615ed63c1` completed both
+retained B4.12 panels after PR #125's exact-head CI passed. The separate
+stdlib-only raw-JSON auditor reproduced all 1,101 terminal classifications,
+159 original/endpoint pairs, 96 strata, 36 same-specialist pairs, original Gate
+arithmetic and the frozen cost/recommendation analyses. All thirty B4.12
+bindings, 38 historical guards, 34 recovery-protected receipts/profiles and
+original 8,486.600-second charge stayed unchanged. P/17's fresh original and
+endpoint retain convergence but miss compliance quality; optimistic fallback
+removal leaves its target mean above 1. All failures and failed Gates persist.
+
+Native whole-command closure charged 107.78 seconds with peak RSS 109,936,640
+bytes, retaining the entire thirty-second closer reservation and passing its
+post-exit profile check without a failed attempt or retry. No solver, numerical
+continuation, fit, label/model byte read, threshold/length search, new scientific
+source or final access occurred. The ordered next slice is only B4.14 bounded
+generalist reliability/refinement method review before any new repair. See
+`docs/validation/b4_13_preservation_diagnosis.md`; generated records remain
+external. All unused B4.10 fresh cases and final evidence stay sealed. No
+upstream/external code, comments, layout or figures were consulted or copied.
