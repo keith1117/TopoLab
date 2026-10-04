@@ -240,12 +240,24 @@ convergence failure/fallback on an originally accepted case. Its four-case
 large-y generalist mean charged ratio was 1.222377 and ratio of charged sums
 1.226342, both above 1.0. All 48 fresh cases remain sealed. Final charge was
 2,106.109270792 seconds with peak RSS 635,076,608 bytes; see
-`docs/validation/b4_10_post_plateau_polish.md`. The next slice is B4.11: a
-bounded read-only polish failure/cost review before another method-class
-decision. No length/threshold search, fit, seed substitution, fresh execution
-or final access is authorized by this failed probe. A passing repair and
+`docs/validation/b4_10_post_plateau_polish.md`. B4.11 then completed the
+bounded read-only review: nine references, 108 outcomes, 132 terminal
+classifications, 24 prepolish certificates, 48 strata and nine specialist
+pairs passed independent arithmetic audit. The P/17 regression loses its
+terminal convergence certificate after 97 updates despite better compliance;
+it is not iteration-cap exhaustion. Fixed-primary measured target ratios
+remain 1.222377/1.226342; fallback-free diagnostic bounds are
+0.980302/0.948499, with all observed failures preserved. Charge was 59.88
+seconds and peak kernel RSS 92,798,976 bytes; the retained outer diagnosis
+profiler limitation is documented in `docs/validation/b4_11_polish_diagnosis.md`.
+The next slice is B4.12: freeze a bounded candidate terminal-witness
+preservation probe before execution, using the candidate's own evidence and
+no reference-compliance oracle. Retain fixed P/17, unchanged checkpoints,
+twenty-update polish length, thresholds, starts, routes, all P/W/C seeds and
+non-ML controls, a regression sentinel, fresh disjoint cases and charged costs.
+No repair or final access follows from diagnosis alone. A passing repair and
 independent confirmation remain required before a compatible final contract
-and B5. Diagnosis alone does not authorize progression.
+and B5; all 48 B4.10 fresh cases remain sealed.
 The original B4.2 Gate remains failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
