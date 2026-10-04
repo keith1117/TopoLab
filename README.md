@@ -47,8 +47,15 @@ large-y failures but introduced one P/17 convergence failure and exceeded both
 fixed-primary cost bounds, so its Gate failed and all 48 fresh cases remain
 sealed. The [B4.11 read-only review](docs/validation/b4_11_polish_diagnosis.md)
 independently audited all 132 terminal classifications and 24 prepolish
-certificates, preserving the failed Gate. It recommends B4.12's bounded
-candidate terminal-witness preservation probe; no repair has been demonstrated.
+certificates, preserving the failed Gate. The
+[B4.12 candidate terminal-witness preservation probe](docs/validation/b4_12_terminal_preservation.md)
+passed its nine-reference/108-query exposed sentinel, then completed 48 fresh
+references, all 576 outcomes and independent audits. Its fresh Gate failed:
+fixed P/17 retained one converged quality failure/fallback, violating the
+zero-failure primary requirement. Full resource closure, including a retained
+closure-only recovery, charged 8,486.600 seconds within frozen caps. The next
+slice is B4.13's bounded read-only preservation failure/cost review; a passing
+repair and independent confirmation are still required before B5.
 Uniform remains the operational default and final evaluation remains sealed.
 
 ## Scope

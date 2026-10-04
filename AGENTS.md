@@ -250,12 +250,23 @@ remain 1.222377/1.226342; fallback-free diagnostic bounds are
 0.980302/0.948499, with all observed failures preserved. Charge was 59.88
 seconds and peak kernel RSS 92,798,976 bytes; the retained outer diagnosis
 profiler limitation is documented in `docs/validation/b4_11_polish_diagnosis.md`.
-The next slice is B4.12: freeze a bounded candidate terminal-witness
-preservation probe before execution, using the candidate's own evidence and
-no reference-compliance oracle. Retain fixed P/17, unchanged checkpoints,
-twenty-update polish length, thresholds, starts, routes, all P/W/C seeds and
-non-ML controls, a regression sentinel, fresh disjoint cases and charged costs.
-No repair or final access follows from diagnosis alone. A passing repair and
+B4.12 then passed its exposed nine-reference/108-query preservation sentinel:
+all four historical P failures were repaired, fixed P/17 had zero fallbacks,
+and its target mean/sum charged ratios were 0.958024/0.938039. All 48 fresh
+uniform references, 576 outcomes, 626 numerical/input audit units, 624 policy
+audit units and 922 independent terminal classifications completed. Its fresh
+Gate failed: P/17 and P/43 passed individual criteria but each retained one
+converged quality failure/fallback on the same new large-y case; P/29 retained
+two and exceeded the large-y direction bound. All 26 fresh continuations paid
+520 updates; no fresh original witness was selected. Fixed P/17's zero-failure
+primary requirement failed. Native resource closure retained and charged its
+initial exact-float-comparison failure, then recovered from separately
+CI-passed merged source without numerical reruns. Final charge was 8,486.600
+seconds and peak RSS 1,017,036,800 bytes; see
+`docs/validation/b4_12_terminal_preservation.md`. The next slice is B4.13:
+bounded read-only preservation failure/cost review of the complete retained
+panel and fixed P/17. No larger confirmation, fit, seed replacement or
+threshold/length search follows from the failed Gate. A passing repair and
 independent confirmation remain required before a compatible final contract
 and B5; all 48 B4.10 fresh cases remain sealed.
 The original B4.2 Gate remains failed and final evaluation remains sealed;
