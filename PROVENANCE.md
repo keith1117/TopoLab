@@ -409,3 +409,15 @@ remain external. The next slice is only bounded B4.13 read-only preservation
 failure/cost review. Uniform remains default, and a passing repair plus
 separate independent confirmation are still required before final access.
 No upstream/external code or new scientific source was consulted or copied.
+
+## B4.13 read-only preservation diagnosis implementation (2026-10-04)
+
+The thirty-binding reader, separate raw-JSON arithmetic auditor and finite
+resource closer derive solely from original TopoLab B4.12 evidence and earlier
+independent format/certificate/cost helpers. The frozen protocol retains the
+complete sentinel and fresh populations, both candidate witnesses, actual work,
+all failure/fallback costs, unchanged fixed P/17 and historical/final seals.
+Synthetic tests precede clean merged execution after CI; this implementation
+makes no new numerical claim. No solver, fit, threshold/length search, model/
+label byte read, external scientific source or upstream code, comment, figure
+or file structure is used. Generated diagnosis and receipts remain external.
