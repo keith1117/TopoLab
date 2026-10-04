@@ -741,3 +741,14 @@ original terminal convergence and all volume/compliance tolerances remain.
 An incomplete continuation is nonconverged. Uniform labels/references/fallbacks,
 specialists, z and design-change stops retain their original semantics.
 See the [frozen protocol](planning/b4_10_post_plateau_protocol.md).
+
+## B4.11 read-only terminal-certificate boundary
+
+The [B4.11 protocol](planning/b4_11_polish_diagnosis_protocol.md) reconstructs
+the unchanged design-change and physical-plateau certificates from retained
+terminal states only. A nonconverged fixed-polish endpoint below 360 updates
+is recorded as post-polish nonconvergence, rather than iteration-cap exhaustion.
+It preserves the 0.01/0.0002 convergence limits and 0.005/1.001 quality bounds.
+Fallback-free arithmetic retains observed failure status and cannot clear a
+Gate. Candidate witness preservation is a later prospective hypothesis, with
+no new solver behavior, reference oracle or final access in this slice.
