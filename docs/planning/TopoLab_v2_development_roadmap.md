@@ -809,6 +809,13 @@ terminal classifications, 24 prepolish certificates, 48 strata and nine
 same-specialist pairs. Its ordered review recommends **B4.12**, a bounded
 candidate terminal-witness preservation probe, while preserving the failed
 fixed-primary decision. See [the review](../validation/b4_11_polish_diagnosis.md).
+**B4.12** passed its exposed nine-reference/108-query preservation sentinel,
+then completed 48 fresh references, 576 outcomes and all independent audits.
+Its fresh Gate failed: fixed P/17 retained one converged quality failure/
+fallback, so no primary was eligible. Full resource closure charged 8,486.600
+seconds, including a retained closure-only recovery without numerical reruns.
+See [the preservation report](../validation/b4_12_terminal_preservation.md).
+The next slice is **B4.13**, bounded read-only preservation failure/cost review.
 Final evaluation remains sealed until a passing repair, independent confirmation
 and the complete new B4 Gate; uniform remains default.
 
@@ -970,15 +977,37 @@ RSS 92,798,976 bytes; the initial outer profiler limitation and its kernel
 self-RSS normalization are retained explicitly. No solver call, fit,
 checkpoint/label byte read or fresh/final execution occurred. See
 [the full B4.11 review](../validation/b4_11_polish_diagnosis.md).
-The next slice is **B4.12**: separately freeze a bounded candidate terminal-witness
-preservation probe, with candidate-only choice, paid guard costs, an exposed
-regression sentinel, fresh physically disjoint cases, all P/W/C seeds and
-non-ML controls, finite resources and a stop rule. Keep fixed P/17, checkpoints,
-starts, route, twenty-update polish length, iteration cap and quality thresholds
-unchanged. Preserve the failed fixed-primary decision and every historical
-failure. No length/threshold search, seed substitution or reference-compliance
-oracle is authorized. All 48 B4.10 fresh cases remain sealed. A passing repair
-and separate independent confirmation remain required before a compatible final
+**B4.12 preservation repair failed its fresh Gate:** candidate-only selection
+passed the complete nine-reference/108-query exposed sentinel, repairing all
+four historical P failures without accepted-query regressions. Fixed P/17
+had zero sentinel fallbacks and target mean/sum charged ratios
+0.958024/0.938039. The independently admitted 48-case physically disjoint
+panel completed 48 references, 576 outcomes, 626 numerical/input audit units,
+624 policy audit units and 922 independent terminal classifications. All 26
+fresh continuations paid twenty updates; no fresh original witness was selected.
+P/17 and P/43 passed individual seed criteria but each retained one converged
+quality failure/fallback on the same new large-y case. P/29 retained two and
+missed the large-y direction limit (1.001002). The pooled middle/high large-y
+cells passed 6/9 and 9/9, and P/17 scale charged-sum ratios passed
+0.871709/0.770209, but its zero-failure primary requirement failed. No P
+primary is eligible and no seed replaces fixed P/17.
+
+The original resource-close command incorrectly required exact float equality
+for independently computed means (maximum difference 2.22e-16). Its profile
+and cost were retained; separately CI-passed merged source recovered only
+resource closure using the already frozen 1e-14 arithmetic agreement. No
+numerical rerun, scientific tolerance or Gate changed. Complete charge is
+8,486.600 seconds with peak kernel RSS 1,017,036,800 bytes, within frozen
+limits. See [the full B4.12 report](../validation/b4_12_terminal_preservation.md).
+
+The next slice is **B4.13**: bounded read-only preservation failure/cost review
+of the complete retained sentinel and fresh panel, fixed P/17, all P/W/C seeds,
+non-ML controls, both witnesses and full charged costs. Preserve checkpoints,
+starts, route, twenty-update length, iteration cap, all quality limits and
+every historical result. No larger confirmation, new fit, length/threshold
+search, seed substitution or reference-compliance oracle follows from this
+failed Gate. All 48 B4.10 fresh cases remain sealed. A passing repair and
+separate independent confirmation remain required before a compatible final
 contract and B5; diagnosis alone does not authorize progression.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
@@ -1162,8 +1191,13 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     and both fixed-primary cost bounds were exceeded. All 48 fresh cases remain
     sealed. **B4.11** completed its independently audited read-only review of
     132 terminal classifications and 24 prepolish certificates, preserving
-    every failure and charge. **B4.12** next freezes a bounded candidate
-    terminal-witness preservation probe before execution.
+    every failure and charge. **B4.12** passed its nine-reference/108-query
+    exposed preservation sentinel, then completed 48 fresh references,
+    576 outcomes and all independent audits. Its fresh Gate failed: fixed
+    P/17 retained one converged quality fallback, so no primary was eligible.
+    Full closure, including its retained recovery without numerical reruns,
+    charged 8,486.600 seconds. **B4.13** next freezes a bounded read-only
+    preservation failure/cost review of the complete retained population.
     **B5 final evaluation** only after a passing repair,
     independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.

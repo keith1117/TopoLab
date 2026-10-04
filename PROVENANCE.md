@@ -387,3 +387,25 @@ threshold, plan, checkpoint, outcome or scientific Gate. Source review and
 CI precede the closure-only recovery; the original failed command, native
 profile and every numerical receipt remain retained. No new scientific
 source or external implementation was consulted or copied.
+
+## B4.12 complete terminal-preservation evidence (2026-10-04)
+
+Clean merged numerical revision `44cdb7e8b17692bc3b87300b383b478836d2fac8`
+passed the frozen nine-reference/108-query exposed sentinel and retained all
+48 physically disjoint fresh references and 576 method outcomes. Complete
+independent audits checked 1,101 terminal classifications across both panels,
+including both candidate witnesses. The fresh Gate failed: fixed P/17 retains
+one converged quality failure/fallback; no P primary is eligible. All historical
+results, checkpoints, 38 protected metadata hashes, the unused B4.10 fresh
+panel and final seal remain unchanged.
+
+The original failed resource-close command remains retained and charged.
+CI-passed merged closure revision `5716279c08a47432bd5abcc31b5382ebf84d893e`
+performed only read-only resource recovery, preserving 34 original B4.12
+receipts/profiles and performing zero numerical retries. Final charge is
+8,486.600 seconds and peak kernel RSS 1,017,036,800 bytes, within frozen
+limits. See `docs/validation/b4_12_terminal_preservation.md`; all artifacts
+remain external. The next slice is only bounded B4.13 read-only preservation
+failure/cost review. Uniform remains default, and a passing repair plus
+separate independent confirmation are still required before final access.
+No upstream/external code or new scientific source was consulted or copied.
