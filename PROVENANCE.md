@@ -373,3 +373,17 @@ search, external implementation or new scientific source is introduced.
 The fresh 48-case metadata cohort also excludes the still-sealed B4.10 panel.
 Clean merged execution follows CI; all generated records remain external,
 historical failures remain intact and final evidence stays sealed.
+
+## B4.12 resource-closure arithmetic repair (2026-10-04)
+
+The complete B4.12 numerical and independent audits retained a failed fresh
+development Gate. The first resource closer incorrectly required byte-exact
+float equality between independently recomputed timing means; their maximum
+difference was 2.220446049250313e-16. The repair uses the existing independent
+auditor's frozen 1e-14 arithmetic agreement, with exact non-float fields and
+Gate flags, and charges retained unsuccessful command profiles from the
+execution ledger. It changes no solver, terminal choice, quality/compute
+threshold, plan, checkpoint, outcome or scientific Gate. Source review and
+CI precede the closure-only recovery; the original failed command, native
+profile and every numerical receipt remain retained. No new scientific
+source or external implementation was consulted or copied.

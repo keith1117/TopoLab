@@ -8,6 +8,8 @@ import resource
 from pathlib import Path
 from time import perf_counter
 
+from b4_10_independent_audit import close
+
 
 def canonical(value):
     return (
@@ -37,16 +39,7 @@ def profile(path):
     return wall, rss
 
 
-def main():
-    started = perf_counter()
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, required=True)
-    args = parser.parse_args()
-    root = args.output.resolve()
-    assert root.name == "b4-12-terminal-preservation"
-    plan = read(root / "audit_receipts/plan.json")
-    context = read(root / "context.json")
-    assert context["plan_sha256"] == plan["plan_sha256"]
+def protected_inputs(plan):
     protected = {
         "b3-v1-data/b3_materialization.json": (
             "b78e85f5bab56f2b05e06b43b8fd77f2bfd556150b95643e443a566165d8fc26"
@@ -64,13 +57,24 @@ def main():
     for sibling, bindings in (
         ("b4-8-rollback-confirmation", plan["source_files"]),
         ("b4-9-diagnosis", plan["diagnosis_files"]),
-    ):
-        protected.update({sibling + "/" + key: value for key, value in bindings.items()})
-    for sibling, bindings in (
         ("b4-10-post-plateau-polish", plan["polish_files"]),
         ("b4-11-polish-diagnosis", plan["review_files"]),
     ):
         protected.update({sibling + "/" + key: value for key, value in bindings.items()})
+    return protected
+
+
+def main():
+    started = perf_counter()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    root = args.output.resolve()
+    assert root.name == "b4-12-terminal-preservation"
+    plan = read(root / "audit_receipts/plan.json")
+    context = read(root / "context.json")
+    assert context["plan_sha256"] == plan["plan_sha256"]
+    protected = protected_inputs(plan)
     assert not (root.parent / "b4-10-post-plateau-polish/fresh").exists()
     for path, sha in protected.items():
         assert digest((root.parent / path).read_bytes()) == sha, path
@@ -87,7 +91,10 @@ def main():
         assert audit["passed"] and audit["policy_summary_sha256"] == digest(
             (root / cohort / "policy-audit/summary.json").read_bytes()
         )
-        assert audit["decision"] == policy["decision"] and audit["gate_passed"] == policy["passed"]
+        # Use the independent auditor's already frozen arithmetic agreement;
+        # gate flags, integer counts and identities still compare exactly.
+        close(audit["decision"], policy["decision"])
+        assert audit["gate_passed"] == policy["passed"]
         for stage in (*plan["caps"], "independent"):
             path = root / "profiles" / f"{cohort}_{stage}.time"
             wall, rss = profile(path)
@@ -111,13 +118,21 @@ def main():
                     "peak_rss_bytes": rss,
                 }
             )
-    for path in sorted((root / "profiles").glob("failed_*.time")):
+    failed_profiles = set((root / "profiles").glob("failed_*.time"))
+    commands = root / "audit_receipts/execution_commands.json"
+    if commands.exists():
+        for command in read(commands):
+            if command["exit_code"] != 0:
+                path = (root / command["profile"]).resolve()
+                assert path.is_relative_to((root / "profiles").resolve())
+                failed_profiles.add(path)
+    for path in sorted(failed_profiles):
         wall, rss = profile(path)
         hashes[path.name] = digest(path.read_bytes())
         peak = max(peak, rss)
         rows.append(
             {
-                "process": path.stem,
+                "process": path.stem if path.stem.startswith("failed_") else "failed_" + path.stem,
                 "command_wall_seconds": wall,
                 "closed_charge_seconds": wall + 10,
                 "peak_rss_bytes": rss,
