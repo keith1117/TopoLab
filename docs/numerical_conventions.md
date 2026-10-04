@@ -752,3 +752,16 @@ It preserves the 0.01/0.0002 convergence limits and 0.005/1.001 quality bounds.
 Fallback-free arithmetic retains observed failure status and cannot clear a
 Gate. Candidate witness preservation is a later prospective hypothesis, with
 no new solver behavior, reference oracle or final access in this slice.
+
+## B4.12 candidate terminal-witness preservation boundary
+
+The [B4.12 protocol](planning/b4_12_terminal_preservation_protocol.md) retains
+the exact B4.10 twenty-update continuation and changes only which of the
+candidate's original/endpoint witnesses reaches ordinary quality classification.
+After a complete twenty, an endpoint losing its own unchanged convergence
+certificate may return the original valid converged candidate witness. An
+incomplete extension stays failed; a converged endpoint proceeds unchanged,
+even if it later fails matched-reference quality. No reference is supplied to
+the choice. Both witnesses, selected and performed iteration counts, full
+continuation/decision/I/O costs and all failures remain retained. Uniform,
+checkpoint, route, numerical tolerances and the 360-update cap stay unchanged.
