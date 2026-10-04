@@ -335,3 +335,28 @@ The candidate terminal-witness preservation recommendation is a prospective
 mechanism hypothesis; this implementation changes no numerical behavior or
 historical scientific decision. Execution and independent evidence follow
 only from clean merged source after CI passes.
+
+## B4.11 complete read-only diagnostic evidence (2026-10-04)
+
+Clean merged source `eb248a62829f4fdd3d8f1508421d7e91352da172` completed the
+frozen nine-reference/108-query read-only diagnosis after PR #120's final-head
+CI passed. A separate stdlib auditor reproduced 132 terminal classifications,
+24 prepolish certificates, 48 strata, nine same-specialist pairs and all cost
+bounds. It preserved fourteen B4.10 bindings, eighteen historical metadata
+hashes and the failed fixed-P/17 decision. The observed convergence regression
+occurs at 97 updates despite improved compliance, rather than iteration-cap
+exhaustion. Fallback-free arithmetic leaves only prospective guard headroom;
+no failure was reclassified or primary replaced.
+
+All new artifacts remain external. Final diagnostic charge is 59.88 seconds
+and peak retained kernel RSS 92,798,976 bytes. The initial outer profiler's
+sandbox sysctl failure, raw partial profile and explicitly sourced normalization
+are retained: complete wall plus the successful diagnostic process's kernel
+self-RSS, with no analysis rerun. Independent audit and closure have complete
+native profiles; closure reserves thirty seconds and passes its post-exit check.
+No solver, fit, model/label byte read, numerical continuation or final access
+occurred. All 48 B4.10 fresh cases remain sealed; original charges and failures
+remain unchanged. The ordered decision permits only separately frozen B4.12
+candidate terminal-witness preservation probing and subsequent independent
+confirmation, with uniform still default. No upstream/external code or new
+scientific source was consulted or copied.

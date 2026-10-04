@@ -45,8 +45,11 @@ gap in fixed P/17. The
 completed nine references and all 108 sentinel outcomes. It repaired four known
 large-y failures but introduced one P/17 convergence failure and exceeded both
 fixed-primary cost bounds, so its Gate failed and all 48 fresh cases remain
-sealed. B4.11 is a bounded read-only failure/cost review. Uniform remains the
-operational default and final evaluation remains sealed.
+sealed. The [B4.11 read-only review](docs/validation/b4_11_polish_diagnosis.md)
+independently audited all 132 terminal classifications and 24 prepolish
+certificates, preserving the failed Gate. It recommends B4.12's bounded
+candidate terminal-witness preservation probe; no repair has been demonstrated.
+Uniform remains the operational default and final evaluation remains sealed.
 
 ## Scope
 

@@ -804,9 +804,13 @@ but failed: four known large-y failures were repaired, one new fixed P/17
 convergence failure appeared, and both fixed-primary cost bounds were exceeded.
 All 48 fresh cases remain sealed. See
 [the polish report](../validation/b4_10_post_plateau_polish.md).
-**B4.11** is a bounded read-only polish failure/cost review. Final evaluation
-remains sealed until a passing repair, independent confirmation and the complete
-new B4 Gate; uniform remains default.
+**B4.11** completed independently audited read-only diagnosis of all 132
+terminal classifications, 24 prepolish certificates, 48 strata and nine
+same-specialist pairs. Its ordered review recommends **B4.12**, a bounded
+candidate terminal-witness preservation probe, while preserving the failed
+fixed-primary decision. See [the review](../validation/b4_11_polish_diagnosis.md).
+Final evaluation remains sealed until a passing repair, independent confirmation
+and the complete new B4 Gate; uniform remains default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -953,14 +957,29 @@ RSS 635,076,608 bytes. All completeness, numerical, policy and resource audits
 passed; all 48 fresh cases remain sealed under the frozen stop rule. Original
 failures and charges remain unchanged. See
 [the complete polish report](../validation/b4_10_post_plateau_polish.md).
-The next slice is **B4.11**: separately freeze a bounded read-only review of
-the complete nine-reference/108-outcome sentinel, its convergence regression
-and fully charged costs before another method-class decision. Preserve the
-failed fixed-primary decision and every historical failure. No additional
-polish lengths, exposed-cohort threshold search, fit, seed substitution, fresh
-optimization or final access follows from this result or diagnosis. A passing
-repair and independent confirmation remain required before a compatible final
-contract and B5.
+**B4.11 diagnostic acceptance passed:** the complete nine-reference/108-query
+population, all 132 terminal classifications, 24 prepolish certificates,
+48 strata and nine specialist pairs passed independent arithmetic audit.
+Fixed P/17's new failure loses the plateau certificate at 97 updates despite
+better compliance; it does not exhaust the 360-update cap. The measured target
+ratios remain 1.222377/1.226342. Fallback-free bounds are 0.980302/0.948499,
+preserving the observed failure and leaving only 0.382504 seconds of optimistic
+constant guard-cost headroom per target query. No specialist timing pair reaches
+the 1.25 descriptive flag. Diagnostic charge is 59.88 seconds and peak kernel
+RSS 92,798,976 bytes; the initial outer profiler limitation and its kernel
+self-RSS normalization are retained explicitly. No solver call, fit,
+checkpoint/label byte read or fresh/final execution occurred. See
+[the full B4.11 review](../validation/b4_11_polish_diagnosis.md).
+The next slice is **B4.12**: separately freeze a bounded candidate terminal-witness
+preservation probe, with candidate-only choice, paid guard costs, an exposed
+regression sentinel, fresh physically disjoint cases, all P/W/C seeds and
+non-ML controls, finite resources and a stop rule. Keep fixed P/17, checkpoints,
+starts, route, twenty-update polish length, iteration cap and quality thresholds
+unchanged. Preserve the failed fixed-primary decision and every historical
+failure. No length/threshold search, seed substitution or reference-compliance
+oracle is authorized. All 48 B4.10 fresh cases remain sealed. A passing repair
+and separate independent confirmation remain required before a compatible final
+contract and B5; diagnosis alone does not authorize progression.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
 
@@ -1141,7 +1160,10 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     **B4.10** completed nine references and 108 sentinel outcomes but failed:
     four known failures were repaired, one new P/17 convergence failure appeared,
     and both fixed-primary cost bounds were exceeded. All 48 fresh cases remain
-    sealed. **B4.11** next performs a bounded read-only polish failure/cost review.
+    sealed. **B4.11** completed its independently audited read-only review of
+    132 terminal classifications and 24 prepolish certificates, preserving
+    every failure and charge. **B4.12** next freezes a bounded candidate
+    terminal-witness preservation probe before execution.
     **B5 final evaluation** only after a passing repair,
     independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
