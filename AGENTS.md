@@ -271,12 +271,20 @@ fresh original and twenty-update endpoint both retain plateau certificates
 but fail compliance quality. The nine-case large-y generalist fallback-free
 mean remains 1.012013; observed failures and all original charges remain
 unchanged. Diagnostic charge is 107.78 seconds and peak RSS 109,936,640 bytes;
-see `docs/validation/b4_13_preservation_diagnosis.md`. The next slice is B4.14:
-bounded generalist reliability/refinement method review before freezing any
-new repair. No larger confirmation, fit, seed replacement, added continuation
-or threshold/length search follows from diagnostic acceptance. A passing
-repair and independent confirmation remain required before a compatible final
-contract and B5; all 48 B4.10 fresh cases remain sealed.
+see `docs/validation/b4_13_preservation_diagnosis.md`. B4.14 then passed its
+bounded read-only generalist method review: all 684 certified compact rows,
+159 prior witness pairs, 96 prior strata and six mechanism dispositions passed
+independent cost/headroom reconstruction. The 1,101 terminal classifications
+remain prior B4.13 evidence, with no new raw state reads or numerical checks.
+All failures and original charges remain unchanged. New charge is 50.39
+seconds and peak RSS 42,287,104 bytes; see
+`docs/validation/b4_14_generalist_method_review.md`. The next slice is B4.15:
+bounded offline compliance-adjoint feasibility probe, with train-only gradient,
+physical-volume and complete cost checks registered before execution. No fit,
+new repair, seed replacement, extra continuation or threshold/length search
+follows from method-review acceptance. A passing repair and independent
+confirmation remain required before a compatible final contract and B5;
+all 48 B4.10 fresh cases remain sealed.
 The original B4.2 Gate remains failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.

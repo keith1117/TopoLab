@@ -821,9 +821,16 @@ historical failures and costs. Fixed P/17's fresh endpoint remains converged
 but misses compliance quality; its large-y generalist fallback-free mean is
 1.012013. Diagnostic charge was 107.78 seconds. See
 [the review](../validation/b4_13_preservation_diagnosis.md).
-**B4.14** is the next bounded generalist reliability/refinement method review.
-Final evaluation remains sealed until a passing repair, independent confirmation
-and the complete new B4 Gate; uniform remains default.
+**B4.14** passed its bounded read-only method review: all 684 certified rows,
+159 prior witness pairs, 96 prior strata and six fixed mechanism dispositions
+passed independent arithmetic reconstruction within 50.39 seconds /
+42,287,104 bytes. All failed Gates and original charges remain unchanged; the
+1,101 terminal classifications remain prior B4.13 evidence. See
+[the method review](../validation/b4_14_generalist_method_review.md).
+**B4.15** is the next bounded offline compliance-adjoint feasibility probe;
+it must separately register train-only gradient, volume and complete cost checks
+before execution. Final evaluation remains sealed until a passing repair,
+independent confirmation and the complete new B4 Gate; uniform remains default.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -1021,16 +1028,31 @@ remain unchanged. No solver, fit, continuation, label/model byte read,
 threshold/length search or final access occurred. See
 [the complete B4.13 review](../validation/b4_13_preservation_diagnosis.md).
 
-The next slice is **B4.14**: bounded generalist reliability/refinement method
-review, assessing a different quality-basin or reliability mechanism and its
-complete attainable cost before freezing another repair. Retain fixed P/17,
-all P/W/C seeds, non-ML controls, both candidate witnesses and slower accepted
-refinements. No larger confirmation, new fit, extra continuation, route/
-threshold/length search, seed substitution or reference-compliance oracle
-follows from diagnostic acceptance. All 48 B4.10 fresh cases remain sealed.
-A passing versioned repair and separate independent confirmation remain
-required before a compatible final contract and B5; diagnosis alone cannot
-advance that boundary.
+**B4.14 method-review acceptance passed:** all 684 independently certified
+compact rows, 159 prior witness pairs and 96 prior strata remain complete.
+A separate auditor reconstructs three cost scenarios, conditional constant-query
+overhead and complete-uniform-shadow floors, retaining every failed status.
+The nine-target fallback-free mean remains 1.012013, requiring improvement even
+at zero added overhead. Perfect rejection leaves slower accepted refinements;
+always-paid full uniform plus positive candidate work cannot accelerate. These
+are diagnostic bounds, not new Gate criteria or terminal numerical checks.
+The six fixed mechanisms recommend one separately registered offline direct-
+compliance feasibility probe. Charge is 50.39 seconds / 42,287,104 bytes;
+all ten B4.13 bindings and prior B4.12/historical/recovery guards are unchanged.
+See [the complete method review](../validation/b4_14_generalist_method_review.md).
+
+The next slice is **B4.15**: bounded offline compliance-adjoint feasibility
+probe. Freeze eight train-only cases before label access; independently derive
+and finite-difference verify the current-prediction FEM/adjoint gradient through
+projection/active bounds/filter, physical volume and complete forward/backward
+cost. Register finite resource and stop rules before execution. No network fit,
+new label or fresh/final outcome access belongs to that feasibility slice.
+Retain fixed P/17, all seeds/controls and slower accepted refinements. B4.15
+has not started; no fit, larger confirmation, added continuation, exposed-cohort
+route/threshold/length search or seed replacement follows from method review.
+All 48 B4.10 fresh cases remain sealed. A passing versioned repair and separate
+independent confirmation remain required before a compatible final contract
+and B5; method review alone cannot advance that boundary.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
 
@@ -1221,8 +1243,11 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     charged 8,486.600 seconds. **B4.13** completed independently audited
     read-only review of both complete panels and all 1,101 classifications,
     preserving every failure and charge within 107.78 seconds / 109,936,640
-    bytes. **B4.14** next freezes a bounded generalist reliability/refinement
-    method review before any new repair.
+    bytes. **B4.14** passed its independently reconstructed read-only review
+    of 684 certified compact rows and six fixed mechanisms within 50.39
+    seconds / 42,287,104 bytes, preserving every failed Gate and charge.
+    **B4.15** next registers a bounded offline compliance-adjoint feasibility
+    probe before any fit or new repair.
     **B5 final evaluation** only after a passing repair,
     independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
