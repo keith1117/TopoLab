@@ -75,8 +75,12 @@ budget; phase costs were unmeasured at that stage. New charge was 55.99 seconds.
 measurements, six phases per fixture and 256 new FEM solves with all 768
 independent numerical conditions passing. Its prepared-setup prospective
 cost Gate failed: 58,257.458 seconds versus 7,200, with complete new
-charge 112.34 seconds. Next is B4.18's bounded offline FEM bottleneck
-and training-objective method review. P/17 remains unrepaired and B5 sealed.
+charge 112.34 seconds.
+[B4.18](docs/validation/b4_18_fem_objective_method_review.md) independently
+reviewed all paired timings/phases and six methods within 86.13 charged seconds,
+preserving the failed cost Gate. Next is B4.19's bounded train-only local
+compliance-surrogate feasibility probe, before any fit. P/17 remains unrepaired
+and B5 sealed.
 Uniform remains the operational default.
 
 ## Scope
