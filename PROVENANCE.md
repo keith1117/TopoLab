@@ -522,3 +522,19 @@ The separately versioned offline projection does not change the query path.
 B4.14 and all earlier results/charges/guards are unchanged. The next slice is
 B4.16's bounded offline adjoint cost-feasibility review; correctness is no
 repair or acceleration claim. See `docs/validation/b4_15_offline_compliance_adjoint.md`.
+
+
+### B4.16 bounded offline adjoint cost-review implementation (2026-10-05)
+
+The new protocol and read-only review/auditor/closer use only our complete,
+closed B4.15 timing/resource JSON, native profiles and prior metadata guards.
+All 48 observations, including the first, and the original maximum-time
+proxy are preserved. Independently derived diagnostic arithmetic quantifies
+unit-cost requirements without changing epochs, populations or any Gate.
+Static inspection of our own FEM/projection code identifies possible immutable
+setup reuse, with no measured phase attribution or promised saving. No
+upstream reference code, new external source, FEM solve, label/model artifact,
+fit, retiming or final access is used. Numerical conventions and query paths
+are unchanged. Production review follows only from CI-passed merged source;
+B4.15 remains cost-infeasible and P/17 unrepaired. See
+`docs/planning/b4_16_offline_adjoint_cost_review_protocol.md`.
