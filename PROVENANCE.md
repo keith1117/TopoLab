@@ -598,3 +598,18 @@ artifact, fit, query repair, continuation or final access occurred. No upstream
 code or new external reference was used. The ordered next slice is B4.18
 bounded offline FEM bottleneck and training-objective method review; it
 authorizes no fit or search. P/17 and all historical failures stay unchanged.
+
+## B4.18 bounded FEM/objective method-review implementation (2026-10-05)
+
+The thirteen-binding read-only timing/phase reader, separate scalar arithmetic
+reconstructor and native resource closer derive solely from TopoLab's closed
+B4.17 evidence and prior guarded own-code helpers. The local signed compliance
+Taylor hypothesis follows independently from our frozen SIMP/filter adjoint;
+it is not a global error bound, implemented loss, fitted repair or query policy.
+No external code, data, weights, figures, new scientific source or Hack3D
+content was used. The prospective protocol freezes complete populations,
+diagnostic sample scenarios, six method dispositions and a finite stop before
+production access. Original Gates/charges, fixed P/17 and all final seals stay
+unchanged. Execution follows only from separately CI-passed merged source;
+generated evidence remains external. No FEM, loss/gradient evaluation, new
+label/model artifact, fit, retiming or final access occurs in this slice.
