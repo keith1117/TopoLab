@@ -538,3 +538,25 @@ fit, retiming or final access is used. Numerical conventions and query paths
 are unchanged. Production review follows only from CI-passed merged source;
 B4.15 remains cost-infeasible and P/17 unrepaired. See
 `docs/planning/b4_16_offline_adjoint_cost_review_protocol.md`.
+
+
+### B4.16 complete read-only cost evidence (2026-10-05)
+
+The CI-passed merged implementation independently reconstructed all 48
+retained wall/CPU observations and 818 cost/identity/boundary conditions.
+B4.15's original maximum-wall proxy remains 60,339.39413004646 seconds;
+its failed Gate and 84.33-second charge are unchanged. Zero small cost plus
+minimum observed large wall gives 13325.669211 seconds with fixed costs,
+a diagnostic sample quantity rather than a rigorous performance bound.
+All native process CPU/wall/RSS and setup observations remain complete.
+The new review charges 55.99 seconds and peaks at 305,807,360 bytes,
+including native command floors and the full 30-second closure reservation.
+There were no failed production attempts or retries. No FEM call, retiming,
+label/model artifact, optimized terminal-state read, fit or final access
+occurred. Static setup-reuse hypotheses come solely from our bound source;
+no component timing or saving is inferred. No upstream code or new external
+source was used. The ordered next slice is B4.17 bounded offline FEM
+phase-cost and setup-reuse feasibility probe; it needs its own finite
+contract and permits no fitting. P/17 stays unrepaired, all previous
+failures/charges remain unchanged, and final/48 unused B4.10 cases stay sealed.
+See `docs/validation/b4_16_offline_adjoint_cost_review.md`.

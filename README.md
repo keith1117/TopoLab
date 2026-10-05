@@ -66,10 +66,14 @@ scientific Gate and recommended the bounded offline compliance-adjoint probe.
 [B4.15](docs/validation/b4_15_offline_compliance_adjoint.md) completed eight
 training cases and 200 FEM solves with all 64 directional checks passing, but
 failed the frozen prospective fit-cost Gate: 60,339.394 seconds versus 7,200.
-Its complete charge was 84.33 seconds. The next slice is B4.16's bounded
-offline adjoint cost-feasibility review, before any fit or repair. A passing
-repair and independent confirmation remain required before B5.
-Uniform remains the operational default and final evaluation remains sealed.
+Its complete charge was 84.33 seconds.
+[B4.16](docs/validation/b4_16_offline_adjoint_cost_review.md) independently
+reviewed all 48 retained timings and preserved that failed cost Gate.
+Even zero small physics plus minimum observed large cost remains above the
+budget; phase costs are unmeasured. New charge was 55.99 seconds.
+Next is B4.17's bounded offline FEM phase-cost/setup-reuse feasibility probe,
+under a separately frozen contract. P/17 remains unrepaired and B5 sealed.
+Uniform remains the operational default.
 
 ## Scope
 

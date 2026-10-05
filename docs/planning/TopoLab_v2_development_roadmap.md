@@ -832,8 +832,12 @@ passed independent arithmetic reconstruction within 50.39 seconds /
 200 FEM solves. Its prospective fit-cost Gate failed: the frozen full-population
 proxy was 60,339.394 seconds versus 7,200. Charge was 84.33 seconds / peak RSS
 510,836,736 bytes. See [the probe](../validation/b4_15_offline_compliance_adjoint.md).
-**B4.16** is the next bounded offline adjoint cost-feasibility review. No fit,
-repair, new label, seed replacement or screen/final access follows automatically.
+**B4.16** completed independently audited read-only review of all 48 retained
+timings and 818 arithmetic/boundary conditions within 55.99 seconds /
+305,807,360 bytes, preserving the failed proxy. See
+[the cost review](../validation/b4_16_offline_adjoint_cost_review.md).
+**B4.17** next freezes a bounded offline FEM phase-cost/setup-reuse feasibility
+probe, with no automatic fit, repair, new label, seed replacement or final access.
 Final evaluation remains sealed until a passing repair, independent confirmation
 and the complete new B4 Gate; uniform remains default.
 
@@ -1066,16 +1070,30 @@ shared data, screening and later final/replication costs remain additionally
 required. Sequential probe RSS does not certify full fit memory.
 See [the frozen probe evidence](../validation/b4_15_offline_compliance_adjoint.md).
 
-The next slice is **B4.16: bounded offline adjoint cost-feasibility review**.
-It has not started. Review the retained timing/resource evidence before freezing
-any new intervention; preserve the original maximum-time proxy and failed Gate.
-Do not discard warmups, change epochs/populations or claim a revised Gate from
-post-hoc cheaper arithmetic. Any later method change needs its own prospective
-finite contract and independent evidence. No automatic fit, repair, seed
-replacement, continuation or threshold/step/length search is allowed. Fixed
-P/17, all controls and slower accepted refinements remain unchanged. All 48
-B4.10 fresh cases remain sealed. A passing versioned repair and independent
-confirmation remain required before a compatible final contract and B5.
+**B4.16 cost-review acceptance passed:** all eight cases, sixteen fixtures and
+48 complete wall/CPU observations, including the first, were independently
+reconstructed with 818 arithmetic/boundary conditions. The original
+60,339.394-second maximum proxy and failed 7,200-second Gate remain unchanged.
+Even zero small physics plus minimum observed large wall gives 13325.669
+seconds with the original fixed costs. This descriptive sample arithmetic is
+not an optimized-method lower bound or a revised Gate. Setup, complete native
+CPU/wall/RSS and every original observation remain retained. No new FEM solve,
+benchmark, label/model artifact, fit, continuation or final access occurred.
+New charge is 55.99 seconds / peak RSS 305,807,360 bytes; see
+[the complete review](../validation/b4_16_offline_adjoint_cost_review.md).
+
+The next slice is **B4.17: bounded offline FEM phase-cost and setup-reuse
+feasibility probe**. It has not started. Current records lack phase timers;
+static immutable-setup reuse is an unmeasured hypothesis. Separately freeze
+one finite candidate, full projection/compliance/gradient parity and complete
+setup/process/memory costs before execution. Numeric factorization must remain
+fresh for changing predictions; no solver-ordering change or stale factor
+reuse follows from this review. A failed candidate stops and stays charged.
+No fit, seed replacement, continuation, epoch/population/physics-frequency
+search, quality threshold change or final access is automatic. Fixed P/17
+and all controls remain unchanged/unrepaired. All 48 B4.10 fresh cases stay
+sealed. A passing versioned learned repair and independent confirmation
+remain required before a compatible final contract and B5.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
 
@@ -1272,9 +1290,11 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     **B4.15** completed the frozen eight-train-case / 200-solve adjoint probe
     with 64/64 directional checks and 408/408 numerical conditions passing,
     but failed its prospective fit-cost Gate (60,339.394 versus 7,200 seconds).
-    Complete new charge was 84.33 seconds / 510,836,736 bytes. **B4.16** next
-    performs bounded offline adjoint cost-feasibility review before any fit
-    or new repair.
+    Complete new charge was 84.33 seconds / 510,836,736 bytes. **B4.16** passed
+    independent read-only reconstruction of all 48 observations and 818
+    arithmetic conditions within 55.99 seconds / 305,807,360 bytes,
+    preserving the failed Gate. **B4.17** next freezes a bounded offline FEM
+    phase-cost/setup-reuse feasibility probe before any fit or learned repair.
     **B5 final evaluation** only after a passing repair,
     independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.

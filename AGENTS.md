@@ -288,11 +288,21 @@ fit Gate failed: the predeclared three-seed / 200-epoch / 508-case planning
 proxy was 60,339.394 seconds, above 7,200. No fit, new label, checkpoint or
 screen/final access occurred. Complete charge is 84.33 seconds and peak RSS
 510,836,736 bytes; see `docs/validation/b4_15_offline_compliance_adjoint.md`.
-The next slice is B4.16: bounded offline adjoint cost-feasibility review.
-Preserve the failed prospective Gate; no automatic fit, repair, seed
-replacement, extra continuation or threshold/step/length search follows.
-A passing repair and independent confirmation remain required before a
-compatible final contract and B5; all 48 B4.10 fresh cases remain sealed.
+B4.16 then passed its bounded read-only cost review: all 48 retained wall/CPU
+observations, sixteen fixtures and 818 independent arithmetic/boundary
+conditions passed. The original 60,339.394-second prospective proxy and
+failed Gate remain unchanged. Even zero small physics plus observed minimum
+large wall gives 13325.669 seconds, above 7,200; this is diagnostic
+sample arithmetic, not a rigorous optimized-method bound or revised Gate.
+No FEM solve, new benchmark, label/model artifact read, fit or final access
+occurred. New charge is 55.99 seconds and peak RSS 305,807,360 bytes; see
+`docs/validation/b4_16_offline_adjoint_cost_review.md`.
+The next slice is B4.17: bounded offline FEM phase-cost and setup-reuse
+feasibility probe. It requires a separate finite prospective numerical/cost
+contract and authorizes no fit. Immutable setup reuse is an unmeasured
+hypothesis; density-dependent numeric factorization remains fresh. Fixed P/17
+is unrepaired; passing repair and independent confirmation remain required
+before a compatible final contract and B5. All 48 B4.10 fresh cases stay sealed.
 The original B4.2 Gate remains failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
