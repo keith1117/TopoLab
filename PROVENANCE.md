@@ -443,3 +443,22 @@ generalist reliability/refinement method review before any new repair. See
 `docs/validation/b4_13_preservation_diagnosis.md`; generated records remain
 external. All unused B4.10 fresh cases and final evidence stay sealed. No
 upstream/external code, comments, layout or figures were consulted or copied.
+
+## B4.14 bounded generalist method-review implementation (2026-10-04)
+
+The compact-row reader, independent cost/headroom auditor and resource closer
+derive solely from TopoLab's closed B4.13 records and prior guarded arithmetic
+helpers. They preserve fixed P/17 and all original controls, failed statuses,
+charges and seals. The method matrix consults primary-source abstracts and
+Cang et al.'s discussion of direct theory-driven learning
+([v3](https://arxiv.org/abs/1807.10787v3)), algorithm-consistent learning
+([Rade et al., v2](https://arxiv.org/abs/2012.05359v2)) and per-problem energy
+conditioning ([Chen et al., v1](https://arxiv.org/abs/2305.10460v1)). These
+motivate hypotheses only; no paper's implementation, architecture, data,
+weights, figures or speedup is imported. The prospective current-prediction
+compliance objective uses TopoLab's frozen SIMP/filter/adjoint equations and
+requires a separate projection-gradient and resource feasibility probe.
+No Hack3D source, comments, structure or figures were consulted or copied.
+B4.14 implements no numerical loss/gradient, solver call, fit, continuation,
+label/checkpoint/final read or acceleration claim. Production follows clean
+CI-passed merged source and keeps all generated artifacts external.

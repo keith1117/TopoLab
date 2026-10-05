@@ -775,3 +775,13 @@ matched-reference compliance quality. Stored-state arithmetic and optimistic
 cost bounds cannot change historical statuses, numerical tolerances, fixed P/17,
 the failed fresh Gate or final-access seal. This slice changes no numerical
 behavior and performs no length/threshold search.
+
+## B4.14 read-only generalist method review boundary
+
+The [B4.14 protocol](planning/b4_14_generalist_method_review_protocol.md)
+reuses only B4.13's closed, independently classified compact rows. Signed
+query-overhead margins and complete-uniform-shadow floors are diagnostic
+arithmetic, preserving every failure and full original charge. They change
+no solver, tolerance, seed, route or scientific Gate. An offline direct
+compliance/adjoint objective is a prospective separately registered feasibility
+hypothesis; no new gradient, fit, continuation or final access occurs here.
