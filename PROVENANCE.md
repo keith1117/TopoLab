@@ -637,3 +637,15 @@ B4.19 train-only local compliance-surrogate fidelity/gradient/cost feasibility;
 no fit or repaired P/17 is claimed. See the complete validation report. No
 external source, upstream code, comments, file structure or figure was used;
 all new evidence remains external.
+
+## B4.19 local compliance-surrogate probe implementation (2026-10-05)
+
+One training-only signed terminal-state Taylor tangent is independently derived
+from our SIMP/filter adjoint and continuous volume projection. The kernel pays
+one anchor FEM solve, retains un-clipped signed normalized derivatives and
+releases FEM state; it never uses serialized positive/clipped loss weights.
+The finite eight-train-case fidelity/gradient/cost protocol, guarded runner,
+uncached independent assembly/Brent auditor and native closer authorize no fit,
+new label, model read, solver repair or final access. Exact physics and query
+quality tolerances remain unchanged. No upstream code, layout, comments,
+figures or new external source is used. Generated artifacts remain external.

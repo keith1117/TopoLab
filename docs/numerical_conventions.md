@@ -831,3 +831,16 @@ intervals are diagnostic; complete forward/backward and native process costs
 remain paid without subtracting instrumentation. Numerical agreement and the
 finite population/cost stop are frozen in the
 [B4.17 protocol](planning/b4_17_prepared_fem_probe_protocol.md).
+
+## B4.19 local compliance tangent boundary
+
+`topolab.local-compliance-tangent.v1` is training-only. It pays one exact FEM
+solve at an audited stored train design x*, retains the signed un-clipped
+filter-transpose sensitivity g*=F.T(dC/drho)/C*, and evaluates
+`1+g*.T(P(z)-x*)` with the existing B4.15 continuous projection and pullback.
+It releases FEM factors/mesh/displacements after preparation. Predictions
+require no FEM; negative estimates are preserved, never clipped. This affine
+estimate has zero design-coordinate Hessian and is not a global bound or a
+terminal-quality oracle. No query, label, solver or stopping behavior changes.
+Its finite fidelity, first-order correctness and resource stop are frozen in
+[the B4.19 protocol](planning/b4_19_local_compliance_surrogate_protocol.md).
