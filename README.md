@@ -78,9 +78,14 @@ cost Gate failed: 58,257.458 seconds versus 7,200, with complete new
 charge 112.34 seconds.
 [B4.18](docs/validation/b4_18_fem_objective_method_review.md) independently
 reviewed all paired timings/phases and six methods within 86.13 charged seconds,
-preserving the failed cost Gate. Next is B4.19's bounded train-only local
-compliance-surrogate feasibility probe, before any fit. P/17 remains unrepaired
-and B5 sealed.
+preserving the failed cost Gate.
+[B4.19](docs/validation/b4_19_local_compliance_surrogate.md) froze a signed
+train-only tangent but stopped at its anchor-normalizer integrity check.
+The full numerical panel, local fidelity and fit-cost proxy remain unevaluated;
+the failed attempt and unknown numerical fields are retained. Metadata-only
+resource closure paid 73.93 seconds. Next is B4.20's bounded surrogate
+correctness review, before any further numerical probe or fit.
+P/17 remains unrepaired and B5 sealed.
 Uniform remains the operational default.
 
 ## Scope
