@@ -297,12 +297,23 @@ sample arithmetic, not a rigorous optimized-method bound or revised Gate.
 No FEM solve, new benchmark, label/model artifact read, fit or final access
 occurred. New charge is 55.99 seconds and peak RSS 305,807,360 bytes; see
 `docs/validation/b4_16_offline_adjoint_cost_review.md`.
-The next slice is B4.17: bounded offline FEM phase-cost and setup-reuse
-feasibility probe. It requires a separate finite prospective numerical/cost
-contract and authorizes no fit. Immutable setup reuse is an unmeasured
-hypothesis; density-dependent numeric factorization remains fresh. Fixed P/17
-is unrepaired; passing repair and independent confirmation remain required
-before a compatible final contract and B5. All 48 B4.10 fresh cases stay sealed.
+B4.17 then completed its frozen prepared-FEM probe: eight canonical train
+cases, sixteen synthetic fixtures, all 96 paired full Torch measurements,
+96 phase intervals and 256 new FEM solves were retained without new label
+or model bytes. All 768 independent numerical/gradient conditions and
+64 fixed directional differences passed. Immutable setup is reused while
+current-density assembly and numeric factorization remain fresh. Its new
+full-population/three-seed/200-epoch cost proxy failed: 58,257.457957
+seconds versus 7,200, including full-population preparations and all
+B4.15/B4.16/current charges. Original Gates and P/17 remain unchanged.
+Complete new charge is 112.34 seconds and peak RSS 486,866,944 bytes; see
+`docs/validation/b4_17_prepared_fem_probe.md`.
+The next slice is B4.18: bounded offline FEM bottleneck and training-objective
+method review. The failed candidate stops; no fitting, alternate cache/ordering,
+epoch/population/physics-frequency search or final access is automatic. Full
+training memory feasibility remains pending. Fixed P/17 is unrepaired; passing
+repair and independent confirmation remain required before a compatible final
+contract and B5. All 48 B4.10 fresh cases stay sealed.
 The original B4.2 Gate remains failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.
