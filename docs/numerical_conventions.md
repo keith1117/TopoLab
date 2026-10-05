@@ -817,3 +817,17 @@ Directional checks use fixed steps `1e-4` and `2e-4`, with error
 `abs(FD-adjoint)/max(abs(FD),abs(adjoint),1e-8) <= 1e-4`. That floor
 covers normalized near-zero directional derivatives, not terminal quality.
 Independent FEM compliance checks retain relative tolerance `1e-9`.
+
+## B4.17 prepared offline compliance boundary
+
+`topolab.prepared-offline-compliance.v1` caches only immutable case-local
+unit Hex8 stiffness, COO indices, free-DOF/load maps and physical-volume
+weights. It preserves the B4.15 continuous projection/adjoint and first-order
+CPU Torch bridge. Each changing prediction gets new numeric coefficients,
+CSR/CSC reduction and fresh A3-ordered factorization with unchanged pivot
+checks. Read-only setup is charged; no density/factorization is cached.
+The original query and B4.15 paths remain unchanged. Six sequential phase
+intervals are diagnostic; complete forward/backward and native process costs
+remain paid without subtracting instrumentation. Numerical agreement and the
+finite population/cost stop are frozen in the
+[B4.17 protocol](planning/b4_17_prepared_fem_probe_protocol.md).

@@ -560,3 +560,16 @@ phase-cost and setup-reuse feasibility probe; it needs its own finite
 contract and permits no fitting. P/17 stays unrepaired, all previous
 failures/charges remain unchanged, and final/48 unused B4.10 cases stay sealed.
 See `docs/validation/b4_16_offline_adjoint_cost_review.md`.
+
+## B4.17 prepared offline FEM probe
+
+B4.17 independently prepares immutable indices, unit Hex8 stiffness, free-DOF
+maps and physical-volume weights from TopoLab's own FEM and B4.15 equations.
+It preserves fresh density assembly, A3 ordering and numeric factorization,
+with an opt-in training-only kernel and six diagnostic phase timers. The
+frozen probe reuses eight metadata-defined synthetic train fixtures and prior
+certified normalizers without new label bytes. Independent uncached energy/
+Brent-root checks and fixed directional differences test numerical identity.
+No upstream code, comments, structure or figures, or new external source, is
+used. Source/test completion is distinct from production feasibility evidence;
+fixed P/17, all historical failures/charges and final seals stay unchanged.
