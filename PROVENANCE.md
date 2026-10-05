@@ -462,3 +462,28 @@ No Hack3D source, comments, structure or figures were consulted or copied.
 B4.14 implements no numerical loss/gradient, solver call, fit, continuation,
 label/checkpoint/final read or acceleration claim. Production follows clean
 CI-passed merged source and keeps all generated artifacts external.
+
+
+## B4.14 complete bounded method-review evidence (2026-10-04)
+
+Execution from clean CI-passed merged source `258423eb5c93af2d31bdcdfc7ac95a844de160d0`
+(source PR #127) retained all 684 B4.13-certified compact rows, 159 prior
+witness pairs and 96 prior strata. The prior 1,101 terminal classifications
+were not repeated. Independent cost/headroom/shadow reconstruction and all
+six fixed mechanism dispositions passed; no original outcome/density, label,
+model or final bytes, solver, continuation, fit or new label was used.
+All ten B4.13 metadata bindings and prior B4.12/historical/recovery guards
+remain unchanged. New closed charge is 50.39 seconds and peak retained
+RSS 42,287,104 bytes, within 180 seconds / 1 GiB; native post-exit closure proof
+fits the full thirty-second reservation without rewriting the closed ledger.
+All original failures and charges remain unchanged, including B4.12's
+8,486.600-second recovery-inclusive cost and B4.13's 107.78 seconds.
+The primary-source context remains limited to the hypotheses recorded above
+and in the frozen protocol; no source code, data, weights, figures or speedup
+result is imported.
+The ordered next slice is B4.15 bounded offline compliance-adjoint feasibility,
+separately registered before train-only gradient/volume/cost checks, with no fit
+or fresh/final outcome access. It has not started. B4.12 remains failed,
+uniform remains default, and all unused B4.10/final cases stay sealed.
+See `docs/validation/b4_14_generalist_method_review.md`; generated receipts,
+profiles, logs and results remain external and are not committed.

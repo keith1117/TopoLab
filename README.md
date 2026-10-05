@@ -58,9 +58,13 @@ closure-only recovery, charged 8,486.600 seconds within frozen caps. The
 independently audited both complete panels and 1,101 terminal classifications.
 The fresh P/17 failure retains convergence but misses compliance quality;
 the fallback-free large-y generalist mean remains 1.012013. Diagnostic charge
-was 107.78 seconds. B4.14 is the next bounded generalist reliability/refinement
-method review; a passing repair and independent confirmation remain required
-before B5.
+was 107.78 seconds. The
+[B4.14 generalist method review](docs/validation/b4_14_generalist_method_review.md)
+passed independent reconstruction of all 684 certified rows and six fixed
+mechanism dispositions within 50.39 charged seconds. It preserves the failed
+scientific Gate and recommends B4.15's bounded offline compliance-adjoint
+feasibility probe before any fit or repair. A passing repair and independent
+confirmation remain required before B5.
 Uniform remains the operational default and final evaluation remains sealed.
 
 ## Scope
