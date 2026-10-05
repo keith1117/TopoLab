@@ -278,13 +278,21 @@ independent cost/headroom reconstruction. The 1,101 terminal classifications
 remain prior B4.13 evidence, with no new raw state reads or numerical checks.
 All failures and original charges remain unchanged. New charge is 50.39
 seconds and peak RSS 42,287,104 bytes; see
-`docs/validation/b4_14_generalist_method_review.md`. The next slice is B4.15:
-bounded offline compliance-adjoint feasibility probe, with train-only gradient,
-physical-volume and complete cost checks registered before execution. No fit,
-new repair, seed replacement, extra continuation or threshold/length search
-follows from method-review acceptance. A passing repair and independent
-confirmation remain required before a compatible final contract and B5;
-all 48 B4.10 fresh cases remain sealed.
+`docs/validation/b4_14_generalist_method_review.md`. B4.15 then completed its
+frozen eight-train-case offline compliance-adjoint probe: 16 fixed states,
+48 full CPU forward/backward measurements, 64 directional differences and
+200 FEM solves were retained. All 408 independent numerical conditions passed;
+maximum directional error was 3.32609e-6. The separately versioned training
+projection leaves the existing query path unchanged. Its bounded prospective
+fit Gate failed: the predeclared three-seed / 200-epoch / 508-case planning
+proxy was 60,339.394 seconds, above 7,200. No fit, new label, checkpoint or
+screen/final access occurred. Complete charge is 84.33 seconds and peak RSS
+510,836,736 bytes; see `docs/validation/b4_15_offline_compliance_adjoint.md`.
+The next slice is B4.16: bounded offline adjoint cost-feasibility review.
+Preserve the failed prospective Gate; no automatic fit, repair, seed
+replacement, extra continuation or threshold/step/length search follows.
+A passing repair and independent confirmation remain required before a
+compatible final contract and B5; all 48 B4.10 fresh cases remain sealed.
 The original B4.2 Gate remains failed and final evaluation remains sealed;
 uniform remains the operational default, and no final acceleration claim
 is allowed before the later final Gates.

@@ -62,9 +62,13 @@ was 107.78 seconds. The
 [B4.14 generalist method review](docs/validation/b4_14_generalist_method_review.md)
 passed independent reconstruction of all 684 certified rows and six fixed
 mechanism dispositions within 50.39 charged seconds. It preserves the failed
-scientific Gate and recommends B4.15's bounded offline compliance-adjoint
-feasibility probe before any fit or repair. A passing repair and independent
-confirmation remain required before B5.
+scientific Gate and recommended the bounded offline compliance-adjoint probe.
+[B4.15](docs/validation/b4_15_offline_compliance_adjoint.md) completed eight
+training cases and 200 FEM solves with all 64 directional checks passing, but
+failed the frozen prospective fit-cost Gate: 60,339.394 seconds versus 7,200.
+Its complete charge was 84.33 seconds. The next slice is B4.16's bounded
+offline adjoint cost-feasibility review, before any fit or repair. A passing
+repair and independent confirmation remain required before B5.
 Uniform remains the operational default and final evaluation remains sealed.
 
 ## Scope
