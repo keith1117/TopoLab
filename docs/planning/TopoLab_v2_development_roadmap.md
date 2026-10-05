@@ -836,8 +836,13 @@ proxy was 60,339.394 seconds versus 7,200. Charge was 84.33 seconds / peak RSS
 timings and 818 arithmetic/boundary conditions within 55.99 seconds /
 305,807,360 bytes, preserving the failed proxy. See
 [the cost review](../validation/b4_16_offline_adjoint_cost_review.md).
-**B4.17** next freezes a bounded offline FEM phase-cost/setup-reuse feasibility
-probe, with no automatic fit, repair, new label, seed replacement or final access.
+**B4.17** completed its bounded prepared-FEM probe: all 96 paired observations,
+96 phase intervals, 256 new solves and 768 independent numerical conditions
+passed, but the new prospective cost Gate failed (58,257.458 versus 7,200).
+Complete charge was 112.34 seconds / 486,866,944 bytes. See
+[the probe](../validation/b4_17_prepared_fem_probe.md). **B4.18** next reviews
+the offline FEM bottleneck and training-objective method under a finite new
+contract, with no automatic fit, repair, search or final access.
 Final evaluation remains sealed until a passing repair, independent confirmation
 and the complete new B4 Gate; uniform remains default.
 
@@ -1082,18 +1087,29 @@ benchmark, label/model artifact, fit, continuation or final access occurred.
 New charge is 55.99 seconds / peak RSS 305,807,360 bytes; see
 [the complete review](../validation/b4_16_offline_adjoint_cost_review.md).
 
-The next slice is **B4.17: bounded offline FEM phase-cost and setup-reuse
-feasibility probe**. It has not started. Current records lack phase timers;
-static immutable-setup reuse is an unmeasured hypothesis. Separately freeze
-one finite candidate, full projection/compliance/gradient parity and complete
-setup/process/memory costs before execution. Numeric factorization must remain
-fresh for changing predictions; no solver-ordering change or stale factor
-reuse follows from this review. A failed candidate stops and stays charged.
-No fit, seed replacement, continuation, epoch/population/physics-frequency
-search, quality threshold change or final access is automatic. Fixed P/17
-and all controls remain unchanged/unrepaired. All 48 B4.10 fresh cases stay
-sealed. A passing versioned learned repair and independent confirmation
-remain required before a compatible final contract and B5.
+**B4.17 numerical parity passed; prospective cost Gate failed:** one frozen
+candidate caches immutable unit stiffness, COO indices, free-DOF maps and
+physical-volume weights while freshly assembling and factorizing every
+changing prediction. Eight previously certified training cases and sixteen
+fixed synthetic inputs produced 96 complete paired original/prepared Torch
+measurements, 96 exclusive phase intervals and 256 new FEM solves; no label
+or model bytes were reopened. All 768 independent numerical/gradient
+conditions and 64 fixed directional checks passed with unchanged tolerances.
+The three-seed/200-epoch/508-case proxy totals 58,257.457957 seconds including
+all per-case preparation extrapolation, prior B4.15/B4.16 and complete new
+cost, above 7,200. B4.15's original 60,339.394130 proxy remains failed.
+Complete new charge is 112.34 seconds / 486,866,944 bytes, with all native
+plan/probe/audit/closure/controller profiles and reservations retained.
+Sequential RSS and static-array population estimates do not certify full
+training memory. See [the probe](../validation/b4_17_prepared_fem_probe.md).
+
+The next slice is **B4.18: bounded offline FEM bottleneck and training-objective
+method review**. It has not started. The failed candidate stops; no fit, new
+cache/ordering candidate, seed replacement, continuation, epoch/population/
+physics-frequency search, quality threshold change or final access follows.
+Fixed P/17 and all controls remain unchanged/unrepaired. All 48 B4.10 fresh
+cases stay sealed. A passing versioned learned repair and independent
+confirmation remain required before a compatible final contract and B5.
 No retiming, new fit or selection-rule change is allowed under the failed
 original contract. Preserve every result and keep final evidence sealed.
 
@@ -1293,8 +1309,11 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     Complete new charge was 84.33 seconds / 510,836,736 bytes. **B4.16** passed
     independent read-only reconstruction of all 48 observations and 818
     arithmetic conditions within 55.99 seconds / 305,807,360 bytes,
-    preserving the failed Gate. **B4.17** next freezes a bounded offline FEM
-    phase-cost/setup-reuse feasibility probe before any fit or learned repair.
+    preserving the failed Gate. **B4.17** completed all 96 paired measurements,
+    96 phase intervals, 256 new solves and 768 independent numerical conditions,
+    but failed its new cost Gate (58,257.458 versus 7,200) within
+    112.34 seconds / 486,866,944 bytes. **B4.18** next reviews the offline
+    FEM bottleneck and training-objective method before any fit or learned repair.
     **B5 final evaluation** only after a passing repair,
     independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.

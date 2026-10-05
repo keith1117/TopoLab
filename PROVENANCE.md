@@ -567,9 +567,34 @@ B4.17 independently prepares immutable indices, unit Hex8 stiffness, free-DOF
 maps and physical-volume weights from TopoLab's own FEM and B4.15 equations.
 It preserves fresh density assembly, A3 ordering and numeric factorization,
 with an opt-in training-only kernel and six diagnostic phase timers. The
-frozen probe reuses eight metadata-defined synthetic train fixtures and prior
-certified normalizers without new label bytes. Independent uncached energy/
+frozen probe reuses eight train cases and sixteen metadata-defined synthetic
+fixtures with prior certified normalizers without new label bytes. Independent uncached energy/
 Brent-root checks and fixed directional differences test numerical identity.
 No upstream code, comments, structure or figures, or new external source, is
 used. Source/test completion is distinct from production feasibility evidence;
 fixed P/17, all historical failures/charges and final seals stay unchanged.
+
+
+### B4.17 complete prepared-FEM evidence (2026-10-05)
+
+B4.17 then completed its frozen prepared-FEM probe: eight canonical train
+cases, sixteen synthetic fixtures, all 96 paired full Torch measurements,
+96 phase intervals and 256 new FEM solves were retained without new label
+or model bytes. All 768 independent numerical/gradient conditions and
+64 fixed directional differences passed. Immutable setup is reused while
+current-density assembly and numeric factorization remain fresh. Its new
+full-population/three-seed/200-epoch cost proxy failed: 58,257.457957
+seconds versus 7,200, including full-population preparations and all
+B4.15/B4.16/current charges. Original Gates and P/17 remain unchanged.
+Complete new charge is 112.34 seconds and peak RSS 486,866,944 bytes; see
+`docs/validation/b4_17_prepared_fem_probe.md`.
+The separately CI-passed merged candidate reuses only immutable own-code
+preparation; all changing-density numeric factorizations remain fresh. The
+independent auditor uses uncached own FEM energies and Brent projection,
+never the candidate assembly/projection/pullback. All first observations,
+paired control times, six sequential phase intervals, complete setup and
+native CPU/wall/RSS remain retained. No label/model bytes, optimized-state
+artifact, fit, query repair, continuation or final access occurred. No upstream
+code or new external reference was used. The ordered next slice is B4.18
+bounded offline FEM bottleneck and training-objective method review; it
+authorizes no fit or search. P/17 and all historical failures stay unchanged.
