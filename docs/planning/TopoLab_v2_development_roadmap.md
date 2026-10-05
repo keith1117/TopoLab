@@ -844,9 +844,14 @@ Complete charge was 112.34 seconds / 486,866,944 bytes. See
 its independently audited read-only review of all 96 paired timings, 96 phases
 and six method dispositions within 86.13 seconds / 301252608 bytes,
 without changing any failed Gate or charge. See
-[the review](../validation/b4_18_fem_objective_method_review.md). **B4.19** next
-freezes a bounded train-only local compliance-surrogate feasibility probe;
-no fit, learned repair, search or final access follows automatically.
+[the review](../validation/b4_18_fem_objective_method_review.md). **B4.19**
+froze and executed the single signed tangent but stopped at its anchor-
+normalizer integrity check. No complete numerical panel was published,
+so local fidelity and prospective cost remain unevaluated. Metadata-only
+resource closure paid 73.93 seconds / 311902208 bytes. See
+[the early-stop evidence](../validation/b4_19_local_compliance_surrogate.md).
+Next: **B4.20 bounded surrogate correctness review**.
+No fit, learned repair, search or final access follows automatically.
 Final evaluation remains sealed until a passing repair, independent confirmation
 and the complete new B4 Gate; uniform remains default.
 
@@ -1118,11 +1123,25 @@ sequential RSS do not certify full training memory. Complete new charge is
 86.13 seconds / 301252608 bytes. See
 [the full review](../validation/b4_18_fem_objective_method_review.md).
 
-The next slice is **B4.19: bounded train-only local compliance-surrogate
-feasibility probe**. It has not started. Its local signed training-state tangent
-requires a finite new fidelity/gradient/cost contract before any probe, and
-passing feasibility would still require separate fitting/repair/confirmation.
-It is not a global compliance bound or terminal-quality oracle.
+**B4.19 stopped; feasibility did not pass:** the single production attempt
+rejected anchor compliance versus the stored normalizer at relative1e-9.
+No complete `probe.json` was emitted and the planned numerical auditor did
+not run. The 72 states, 216 measurements, 64 directional rows and 416 total
+solves remain planned evidence, with no local fidelity or fit-cost result.
+Failed case, numerical gap, exact opened-label/FEM counts and buffered
+fields were not published; they remain unknown rather than inferred from
+timing. The source-level stored float32 physical-density versus unquantized
+filtered-anchor boundary requires separate correctness verification.
+No tolerance or normalizer change, new numerical invocation, fit or final
+access followed the stop. Metadata-only independent early-stop audit and
+native resource verification passed within 73.93 seconds / 311902208 bytes.
+Full training memory remains pending. See
+[the complete early-stop report](../validation/b4_19_local_compliance_surrogate.md).
+
+The next slice is **B4.20 bounded surrogate correctness review**. It has
+not started; representation/normalization and durable failure evidence must
+be frozen before a new probe. Fitting/repair/confirmation still require
+separate evidence. The tangent is not a global bound or quality oracle.
 The failed exact-FEM candidate stops; no fit, new
 cache/ordering candidate, seed replacement, continuation, epoch/population/
 physics-frequency search, quality threshold change or final access follows.
@@ -1334,9 +1353,13 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     112.34 seconds / 486,866,944 bytes. **B4.18** passed its independently
     audited read-only review of all 96 paired observations, 96 phase intervals
     and six fixed methods, preserving all failed Gates and charges within
-    86.13 seconds / 301252608 bytes. **B4.19** next freezes a bounded
-    train-only local compliance-surrogate feasibility probe before any fit or
-    learned repair; local approximation fidelity and full memory remain unproven.
+    86.13 seconds / 301252608 bytes. **B4.19** froze one signed tangent
+    and stopped at its anchor-normalizer integrity check. No complete
+    numerical panel, local fidelity or fit-cost proxy was produced. Missing
+    case/count/value fields remain unknown; no rerun or tolerance change
+    occurred. Metadata-only resource closure paid 73.93 seconds /
+    311902208 bytes. Next: **B4.20 bounded surrogate correctness review**;
+    no further numerical probe or fit starts automatically.
     **B5 final evaluation** only after a passing repair,
     independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.

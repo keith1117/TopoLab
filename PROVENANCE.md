@@ -649,3 +649,26 @@ uncached independent assembly/Brent auditor and native closer authorize no fit,
 new label, model read, solver repair or final access. Exact physics and query
 quality tolerances remain unchanged. No upstream code, layout, comments,
 figures or new external source is used. Generated artifacts remain external.
+
+## B4.19 retained train-only anchor rejection (2026-10-05)
+
+Clean CI-passed merged source invoked the frozen signed tangent once,
+but its anchor-compliance versus stored-normalizer rtol1e-9 check
+rejected the attempt. No full numerical probe or independent numerical
+audit was published; local fidelity and prospective cost are unevaluated.
+Failure case, gap, exact label/FEM counts and buffered fields were not
+emitted and remain unavailable. Source inspection identifies distinct
+serialized float32 physical density and unquantized filtered-anchor
+states as a representation hypothesis, not measured diagnosis.
+
+Separate metadata-only traceback/source/guard audit and native early-
+stop closure paid 73.93 seconds / 311902208 bytes. Original command,
+failure profile, unchanged source, CI cancellations/interruption/retries
+and procedural metadata-controller sources remain external. No numerical
+rerun, new normalizer/tolerance, fit, new label, model bytes, reference,
+continuation or screen/final access occurred. No upstream code or new
+external implementation/source was used. Prior failures and charges,
+P/17, uniform default and all sealed evidence remain unchanged.
+The next slice is B4.20 bounded surrogate correctness review, before
+any new numerical invocation. See
+`docs/validation/b4_19_local_compliance_surrogate.md`.

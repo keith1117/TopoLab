@@ -317,10 +317,19 @@ label/model artifact read or fit. New charge is 86.13 seconds and peak RSS
 301252608 observed bytes; the charged initial static-plan timer failure has
 unavailable RSS, explicitly retained in
 `docs/validation/b4_18_fem_objective_method_review.md`.
-The next slice is B4.19: bounded train-only local compliance-surrogate
-feasibility probe. It has not started; one finite train-only fidelity/gradient/
-cost protocol is required before any numerical probe or fit. The candidate
-is a local signed tangent, not a global compliance bound or repair certificate.
+B4.19 froze and executed its single train-only signed tangent candidate,
+but stopped at the anchor-compliance/normalizer rtol1e-9 integrity check.
+No complete numerical probe was published; the planned independent
+numerical audit, local fidelity and prospective fit cost remain unevaluated.
+Failed case, numerical gap, exact label/FEM counts and buffered fields
+were not emitted and remain unavailable; no numerical rerun or tolerance/
+normalizer change occurred. The source exposes a stored float32 physical-
+density versus unquantized filtered-anchor boundary for B4.20 to verify.
+Metadata-only early-stop audit and native resource closure passed, paying
+73.93 seconds / 311902208 bytes; no fit, new label, model
+bytes, continuation, reference, screen or final access occurred. See
+`docs/validation/b4_19_local_compliance_surrogate.md`.
+The next slice is B4.20 bounded surrogate correctness review. It has not started.
 The failed exact-FEM candidate stops; no fitting, alternate cache/ordering,
 epoch/population/physics-frequency search or final access is automatic. Full
 training memory feasibility remains pending. Fixed P/17 is unrepaired; passing
