@@ -503,3 +503,22 @@ Hack3D source, structure, comments or figures were consulted or reused; no
 new external implementation source was introduced. This implementation
 establishes neither a fitted repair nor learned acceleration. Production
 results and complete cost closure follow only from CI-passed merged source.
+
+
+### B4.15 complete numerical probe and negative cost evidence (2026-10-05)
+
+Source PR #129 merged as `2450b0c754f0c9ba1ed17b7ef7cacce913147d81`
+after all applicable exact-head CI passed. The complete eight-train-label,
+sixteen-fixture, 48 forward/backward, 64 difference and 200 FEM-solve population
+passed all 408 independent numerical conditions, maximum directional error
+3.3260894088978595e-6. No projection step or numerical tolerance was adjusted
+after production access. The frozen prospective fit-cost Gate failed at
+60,339.39413004646 seconds versus 7,200; the original maximum-time proxy is
+preserved. New charge is 84.33 seconds / peak RSS 510,836,736 bytes, including
+whole-command floors and the full 30-second closure reservation. All three
+production processes exited zero with no retry. No network fit, checkpoint,
+new label/reference, screening/final artifact or unused B4.10 case was opened.
+The separately versioned offline projection does not change the query path.
+B4.14 and all earlier results/charges/guards are unchanged. The next slice is
+B4.16's bounded offline adjoint cost-feasibility review; correctness is no
+repair or acceleration claim. See `docs/validation/b4_15_offline_compliance_adjoint.md`.
