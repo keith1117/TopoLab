@@ -785,3 +785,35 @@ arithmetic, preserving every failure and full original charge. They change
 no solver, tolerance, seed, route or scientific Gate. An offline direct
 compliance/adjoint objective is a prospective separately registered feasibility
 hypothesis; no new gradient, fit, continuation or final access occurs here.
+
+## B4.15 offline compliance adjoint (training-only, v1)
+
+`topolab.offline-compliance-adjoint.v1` evaluates the continuous float64
+objective `C(F(P(z)))/C_train` without changing the existing query projection,
+solver, stopping policy, or labels. `C_train` is the audited stored float32
+terminal-state compliance of the same training case; it is a constant in this
+objective. This is a feasibility kernel, not a fitted model or query repair.
+
+With row-normalized density filter `F`, let `w = F.T @ ones / n` and
+`x = clip(z+s, minimum_density, 1)`. Bisection fixes `w.T @ x = volume`
+to absolute `1e-12` (100 iterations). The gradient is of the mathematical
+volume-constrained projection on a stable clipping active set, not of finite
+bisection branching or the legacy `1e-6` query projection program. Points
+within `1e-10` of a clipping kink are rejected; no subgradient is silently
+selected. Let `a` indicate strictly free entries and `D=w.T@a > 0`.
+The Jacobian is `diag(a)-a@(w*a).T/D`. For a design cotangent `g`,
+`dL/dz = a*g - (w*a)*sum(a*g)/D`. First propagate the physical SIMP
+adjoint through `F.T`, then this projection Jacobian, and divide by
+`C_train`. Constant shifts and physical volume have zero derivatives;
+clipped coordinates have zero raw cotangent. There is no stop-gradient
+through the offset, filter, or free entries.
+
+The optional CPU Torch bridge computes FEM and the adjoint in float64 and
+returns the loss/gradient in the input's float32 or float64 dtype. It supports
+first derivatives only. The float32 cast is a representation boundary, not
+a claim to differentiate quantization. Projection and FEM are charged to
+training; the existing query path receives no additional physics work.
+Directional checks use fixed steps `1e-4` and `2e-4`, with error
+`abs(FD-adjoint)/max(abs(FD),abs(adjoint),1e-8) <= 1e-4`. That floor
+covers normalized near-zero directional derivatives, not terminal quality.
+Independent FEM compliance checks retain relative tolerance `1e-9`.

@@ -487,3 +487,19 @@ or fresh/final outcome access. It has not started. B4.12 remains failed,
 uniform remains default, and all unused B4.10/final cases stay sealed.
 See `docs/validation/b4_14_generalist_method_review.md`; generated receipts,
 profiles, logs and results remain external and are not committed.
+
+### B4.15 offline compliance-adjoint feasibility implementation (2026-10-05)
+
+The training-only clipped additive projection Jacobian and normalized
+current-prediction compliance objective were independently derived from
+TopoLab's frozen SIMP/filter equations. The kernel versions a tighter
+`1e-12` physical-volume projection separately from the unchanged query path.
+A CPU first-order Torch boundary propagates the analytical FEM/filter/offset
+adjoint. Synthetic central-difference, clipping, shift/volume and independent
+assembly tests exercise the chain; an exact eight-train-case probe and
+independent 24-solve auditor are frozen before label access. B4.14's released
+method review and the complete B3 index are immutable hashed inputs. No
+Hack3D source, structure, comments or figures were consulted or reused; no
+new external implementation source was introduced. This implementation
+establishes neither a fitted repair nor learned acceleration. Production
+results and complete cost closure follow only from CI-passed merged source.
