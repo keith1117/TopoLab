@@ -308,8 +308,20 @@ seconds versus 7,200, including full-population preparations and all
 B4.15/B4.16/current charges. Original Gates and P/17 remain unchanged.
 Complete new charge is 112.34 seconds and peak RSS 486,866,944 bytes; see
 `docs/validation/b4_17_prepared_fem_probe.md`.
-The next slice is B4.18: bounded offline FEM bottleneck and training-objective
-method review. The failed candidate stops; no fitting, alternate cache/ordering,
+B4.18 then passed its bounded read-only FEM/objective method review: all 96
+paired observations, 96 phase intervals and six method dispositions passed
+1286 independent arithmetic/identity/boundary conditions. Original failed
+cost Gates and charges remain unchanged; the large instrumented factorization
+share is 82.3882%. The review performs no FEM, loss/gradient evaluation,
+label/model artifact read or fit. New charge is 86.13 seconds and peak RSS
+301252608 observed bytes; the charged initial static-plan timer failure has
+unavailable RSS, explicitly retained in
+`docs/validation/b4_18_fem_objective_method_review.md`.
+The next slice is B4.19: bounded train-only local compliance-surrogate
+feasibility probe. It has not started; one finite train-only fidelity/gradient/
+cost protocol is required before any numerical probe or fit. The candidate
+is a local signed tangent, not a global compliance bound or repair certificate.
+The failed exact-FEM candidate stops; no fitting, alternate cache/ordering,
 epoch/population/physics-frequency search or final access is automatic. Full
 training memory feasibility remains pending. Fixed P/17 is unrepaired; passing
 repair and independent confirmation remain required before a compatible final

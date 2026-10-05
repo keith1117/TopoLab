@@ -840,9 +840,13 @@ timings and 818 arithmetic/boundary conditions within 55.99 seconds /
 96 phase intervals, 256 new solves and 768 independent numerical conditions
 passed, but the new prospective cost Gate failed (58,257.458 versus 7,200).
 Complete charge was 112.34 seconds / 486,866,944 bytes. See
-[the probe](../validation/b4_17_prepared_fem_probe.md). **B4.18** next reviews
-the offline FEM bottleneck and training-objective method under a finite new
-contract, with no automatic fit, repair, search or final access.
+[the probe](../validation/b4_17_prepared_fem_probe.md). **B4.18** completed
+its independently audited read-only review of all 96 paired timings, 96 phases
+and six method dispositions within 86.13 seconds / 301252608 bytes,
+without changing any failed Gate or charge. See
+[the review](../validation/b4_18_fem_objective_method_review.md). **B4.19** next
+freezes a bounded train-only local compliance-surrogate feasibility probe;
+no fit, learned repair, search or final access follows automatically.
 Final evaluation remains sealed until a passing repair, independent confirmation
 and the complete new B4 Gate; uniform remains default.
 
@@ -1103,8 +1107,23 @@ plan/probe/audit/closure/controller profiles and reservations retained.
 Sequential RSS and static-array population estimates do not certify full
 training memory. See [the probe](../validation/b4_17_prepared_fem_probe.md).
 
-The next slice is **B4.18: bounded offline FEM bottleneck and training-objective
-method review**. It has not started. The failed candidate stops; no fit, new
+**B4.18 read-only method-review acceptance passed:** all eight cases, sixteen
+synthetic states, 96 paired Torch observations, 96 instrumented phase intervals
+and six frozen method dispositions passed 1286 independent scalar conditions.
+The original 58,257.457957-second prepared proxy remains failed. Zero small
+plus minimum observed large still exceeds 7,200; sampled large factorization/
+pivot wall share is 82.3882%. Ideal phase-deletion arithmetic is diagnostic,
+not a revised Gate or optimized-method lower bound. Static array estimates and
+sequential RSS do not certify full training memory. Complete new charge is
+86.13 seconds / 301252608 bytes. See
+[the full review](../validation/b4_18_fem_objective_method_review.md).
+
+The next slice is **B4.19: bounded train-only local compliance-surrogate
+feasibility probe**. It has not started. Its local signed training-state tangent
+requires a finite new fidelity/gradient/cost contract before any probe, and
+passing feasibility would still require separate fitting/repair/confirmation.
+It is not a global compliance bound or terminal-quality oracle.
+The failed exact-FEM candidate stops; no fit, new
 cache/ordering candidate, seed replacement, continuation, epoch/population/
 physics-frequency search, quality threshold change or final access follows.
 Fixed P/17 and all controls remain unchanged/unrepaired. All 48 B4.10 fresh
@@ -1312,8 +1331,12 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     preserving the failed Gate. **B4.17** completed all 96 paired measurements,
     96 phase intervals, 256 new solves and 768 independent numerical conditions,
     but failed its new cost Gate (58,257.458 versus 7,200) within
-    112.34 seconds / 486,866,944 bytes. **B4.18** next reviews the offline
-    FEM bottleneck and training-objective method before any fit or learned repair.
+    112.34 seconds / 486,866,944 bytes. **B4.18** passed its independently
+    audited read-only review of all 96 paired observations, 96 phase intervals
+    and six fixed methods, preserving all failed Gates and charges within
+    86.13 seconds / 301252608 bytes. **B4.19** next freezes a bounded
+    train-only local compliance-surrogate feasibility probe before any fit or
+    learned repair; local approximation fidelity and full memory remain unproven.
     **B5 final evaluation** only after a passing repair,
     independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.

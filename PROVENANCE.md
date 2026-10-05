@@ -613,3 +613,27 @@ production access. Original Gates/charges, fixed P/17 and all final seals stay
 unchanged. Execution follows only from separately CI-passed merged source;
 generated evidence remains external. No FEM, loss/gradient evaluation, new
 label/model artifact, fit, retiming or final access occurs in this slice.
+
+
+## B4.18 complete read-only method-review evidence (2026-10-05)
+
+Clean separately CI-passed merged source completed the frozen review of eight
+canonical training cases, sixteen synthetic states, 96 paired observations,
+96 sequential phases and six method dispositions. All 1286 independent scalar
+arithmetic/identity/boundary conditions passed. The original prepared
+58,257.457957-second proxy and every previous failed Gate/charge stay unchanged.
+Large instrumented factorization/pivot wall share is 82.3882%; hypothetical phase
+removal is diagnostic sample arithmetic, not a revised Gate or timing bound.
+No FEM, benchmark, loss/gradient evaluation, label/model artifact, fit or final
+access occurred. Complete native charge is 86.13 seconds and retained peak RSS
+301252608 bytes, including the full sixty-second plan/closure/controller
+reservation and unchanged closed ledger. The failed static metadata-plan native
+timer is retained and pays 12.76 seconds inside that reservation; its RSS is
+unavailable and is not imputed. Complete successful native profiles certify the
+reported observed peak, with that failed-attempt memory limitation explicit.
+All prior hashes and final/unused
+B4.10 seals remain intact. The ordered next slice is only separately registered
+B4.19 train-only local compliance-surrogate fidelity/gradient/cost feasibility;
+no fit or repaired P/17 is claimed. See the complete validation report. No
+external source, upstream code, comments, file structure or figure was used;
+all new evidence remains external.
