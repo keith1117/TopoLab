@@ -5,14 +5,15 @@ Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
 B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
 initialization is the operational default and final evaluation stays sealed.
 
-Latest completed: **B4.22 versioned correctness — Gate passed**;
-B4.20 remains failed. Next: **B4.23 bounded versioned local-surrogate fidelity and cost probe**, not started.
+Latest completed: **B4.23 versioned local-surrogate feasibility — Gate failed**;
+B4.20 remains failed. Next: **B4.24 bounded versioned surrogate correctness
+failure review**, not started.
 [Project status](../project_status.md) holds the current boundary;
 [development history](../development_history.md) retains the complete chronology.
 The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-10-06 (B4.22 closeout and current-status pointers)
+Revised: 2026-10-06 (B4.23 closeout and current-status pointers)
 
 Related documents:
 
@@ -1027,11 +1028,24 @@ all old operators, labels, normalizers and thresholds intact. New charge is
 104.62 seconds; peak RSS 433274880 bytes. No fidelity/cost or full training-memory
 acceptance follows. See [the probe](../validation/b4_22_stable_projection_correctness.md).
 
+#### B4.23: Versioned local-surrogate feasibility Gate failed
+
+Integrity passed 3907/3976, with 35 side-mask and 34 finite-difference conditions
+failed. All 32 LOCAL states met the observed fidelity criteria, which cannot
+clear failed integrity or authorize fitting. Complete cost proxy is
+57546.072069 seconds against 7200. All 72 states, 216 timings and 64 directional
+rows remain; 432 FEM solves and 816 projections were paid. No failed state,
+first timing, historical charge or original step was removed. New charge is
+143.47 seconds; peak RSS 550502400 bytes.
+Full training memory and learned repair remain pending. See
+[the finite probe](../validation/b4_23_versioned_surrogate_feasibility.md).
+
 #### Current stop and next slice
 
-Next is **B4.23 bounded versioned local-surrogate fidelity and cost probe**, not started.
-Require its own prospective finite boundary; preserve every failed Gate, unknown
-and charge. Correctness alone does not authorize fitting or learned repair.
+Next is **B4.24 bounded versioned surrogate correctness failure review**,
+not started.
+Require a separate prospective boundary; no fitting or final access follows
+finite feasibility alone. Preserve every failure, unknown, charge and seal.
 The failed exact-FEM candidate stops; no fit, new
 cache/ordering candidate, seed replacement, continuation, epoch/population/
 physics-frequency search, quality threshold change or final access follows.
@@ -1084,12 +1098,13 @@ search on B5 outcomes.
 ## 6. Recommended sequence
 
 The completed sequence is retained in [development history](../development_history.md)
-and the per-slice validation reports. The remaining work follows the frozen B4.22 result;
+and the per-slice validation reports. The remaining work follows the frozen B4.23 result;
 B4.20 remains failed and documentation maintenance does not start a research slice.
 
-1. **B4.23 bounded versioned local-surrogate fidelity and cost probe:** separately register the exact finite
-   population, unchanged criteria, resource closure and ordered stop. No fit,
-   final access or change to old failures/seals follows correctness alone.
+1. **B4.24 bounded versioned surrogate correctness failure review:** separately
+   register the exact finite boundary and ordered stop. Preserve all original
+   inputs, criteria, costs,
+   failures and seals; no fit or final access follows automatically.
 2. **Any subsequent correctness or objective-feasibility intervention:** require a
    separate prospective contract and its own correctness, fidelity, compute and
    full training-memory evidence. The failed exact-FEM candidate remains stopped;

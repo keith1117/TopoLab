@@ -768,3 +768,14 @@ Synthetic public-case inputs precede production; no production label bytes,
 model, fit, learned repair, new label/reference or final evidence was accessed
 during implementation. Full training memory remains pending regardless of the
 finite probe's later outcome.
+
+## B4.23 versioned surrogate execution evidence
+
+The original TopoLab v3 tangent completed its frozen attempt; the feasibility
+Gate failed. Actual fidelity/correctness observations, complete first-inclusive
+timings, uncached energy/Brent audit, native profiles and durable prefixes stay
+external, bound to the committed source/report by hashes. Every original failed
+Gate, unknown field and complete charge remains. No upstream content, new
+external scientific/implementation source, model bytes, fit, generated label,
+reference, learned repair, continuation or final evidence was accessed.
+Full training memory and later independent learned confirmation remain pending.

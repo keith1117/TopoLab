@@ -1,6 +1,6 @@
 # Development history
 
-Retained project-state summaries through B4.22. This history was moved from
+Retained project-state summaries through B4.23. This history was moved from
 `AGENTS.md` during the 2026-10-06 documentation cleanup; all recorded results,
 failures, costs and stopping boundaries are preserved. Statements about the
 next slice or a development primary describe their historical context.
@@ -540,3 +540,24 @@ occurred. See [validation/b4_22_stable_projection_correctness.md](validation/b4_
 Next is B4.23 bounded versioned local-surrogate fidelity and cost probe, separately frozen before execution.
 Full training memory, learned repair and confirmation remain pending; P/17 is
 unrepaired, uniform remains default and final/48 unused B4.10 cases stay sealed.
+
+## B4.23
+
+B4.23 completed its separately frozen versioned local-surrogate fidelity/cost
+attempt; feasibility Gate failed. Integrity passed 3907/3976, with 35 side-mask
+and 34 finite-difference conditions failed. All 32 LOCAL states met the observed
+fidelity criteria, which cannot clear the failed integrity Gate. Complete cost
+proxy is 57546.072069 seconds against 7200, retaining the first timing and all
+707.91 seconds of B4.15–22 charges. All 72 states, 216 timings and 64 directional
+rows remain; 432 FEM solves and 816 projections were paid.
+New charge is 143.47 seconds; peak RSS 550502400 bytes. Complete counts,
+native profiles, first-inclusive costs, root scalars and numerical prefixes
+remain external. The v3 kernel and all original criteria are unchanged;
+B4.19 unknowns, B4.20 failure and every prior charge remain. See
+[validation/b4_23_versioned_surrogate_feasibility.md](validation/b4_23_versioned_surrogate_feasibility.md).
+
+Next is B4.24 bounded versioned surrogate correctness failure review, separately
+frozen before execution.
+No fit, new label/reference, model, learned repair, continuation or final access
+occurred. Full training memory and confirmation remain pending; P/17 is unrepaired,
+uniform remains default and final/48 unused B4.10 cases remain sealed.
