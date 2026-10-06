@@ -83,8 +83,14 @@ preserving the failed cost Gate.
 train-only tangent but stopped at its anchor-normalizer integrity check.
 The full numerical panel, local fidelity and fit-cost proxy remain unevaluated;
 the failed attempt and unknown numerical fields are retained. Metadata-only
-resource closure paid 73.93 seconds. Next is B4.20's bounded surrogate
-correctness review, before any further numerical probe or fit.
+resource closure paid 73.93 seconds.
+[B4.20](docs/validation/b4_20_surrogate_correctness.md) completed its finite
+stored-normalizer tangent correctness review:32 new FEM solves and
+984 independent conditions, with983/984 passing and one directional
+error above1e-4. The correctness Gate failed; durable counters/prefixes are retained.
+New charge was 100.30 seconds. Local fidelity, fit cost and full training
+memory remain unevaluated/pending. Next is B4.21's bounded surrogate
+correctness failure review.
 P/17 remains unrepaired and B5 sealed.
 Uniform remains the operational default.
 

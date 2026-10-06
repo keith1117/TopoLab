@@ -685,3 +685,20 @@ energy derivatives and Brent projection, with exclusive fsync'ed before-call
 FEM/label records and durable partial numerical prefixes. All artifacts remain
 external. No upstream code, comments, layout or figures are used. No fidelity,
 fit-cost, fitting, learned repair or final claim follows from implementation.
+
+## B4.20 independently audited representation correctness (2026-10-05)
+
+The prospectively fixed stored-denominator/continuous-intercept tangent completed
+984 independent numerical conditions on eight guarded train cases,
+sixteen synthetic inputs, 64 directions and 32 new FEM solves. Of those
+conditions, 983 passed; one directional error exceeded the unchanged 1e-4
+threshold, so the frozen correctness Gate failed. Separate stored
+physical/continuous anchor analyses showed 6/8 current anchors reject the old
+equality; B4.19's actual failed case, gap and counters remain unknown.
+Uncached energy/Brent reconstruction and durable before-call journals retain
+the complete failed panel. It establishes no fidelity, fit cost, full training
+memory or learned repair. New charge 100.30 seconds / 447741952 bytes preserves all
+prior failed Gates/charges and P/17. No upstream material or new external
+source was used; no model fit, new label, optimization or final access occurred.
+See `docs/validation/b4_20_surrogate_correctness.md`. Next is
+B4.21 bounded surrogate correctness failure review, not started.
