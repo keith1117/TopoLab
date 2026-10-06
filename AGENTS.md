@@ -30,8 +30,11 @@ Full training memory and learned repair remain pending. **B4.24 is active but
 incomplete**: v1 review stopped on a field-schema error; registered recovery
 planning then lacked native RSS. Recovery review/audit were not invoked.
 Known time charge 76.19 and reserve use 50.53/60 remain; whole peak RSS is unknown.
-Resume only after an explicit resource/execution decision and separate frozen
-boundary. Do not mark B4.24 closed or start B4.25; see the
+The owner approved a separate paid 60-second reserve under the
+[v3 continuation](docs/planning/b4_24_registered_continuation_protocol.md),
+keeping whole240/cumulative-review60 and historical unknown RSS. Execute only
+after its separately merged source and CI pass. B4.24 is not yet closed; stop
+after its registered continuation without starting B4.25. Preserve the
 [interrupted report](docs/validation/b4_24_versioned_correctness_failure_review.md).
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed

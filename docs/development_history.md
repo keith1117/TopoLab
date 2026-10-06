@@ -577,8 +577,10 @@ bindings. Whole-slice peak RSS, memory-cap compliance and full resource closure
 remain unknown. B4.24 is not fully closed; B4.25 has not started. See
 [the interrupted report](validation/b4_24_versioned_correctness_failure_review.md).
 
-Resume requires an explicit separate resource/execution decision preserving
-the failures, complete charges and missing RSS. No scientific criterion,
+The owner approved the [v3 continuation](planning/b4_24_registered_continuation_protocol.md)
+with one separate fully paid60 reserve, keeping whole240/cumulative-review60.
+Its source and exact-head/main CI must pass before the one remaining review/audit.
+Old failures, complete charges and missing RSS remain. No scientific criterion,
 input, role, model or seal changed. B4.23/B4.20 failures and B4.19 unknowns
 remain; no fit, learned repair, full memory acceptance or final access occurred.
 Uniform remains default, P/17 unrepaired and all final/48 unused cases sealed.

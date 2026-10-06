@@ -56,13 +56,15 @@ case, gap and counters remain unknown. Every prior failure and charge remains.
 
 ## Current stop and next slice
 
-**B4.24 remains active and incomplete.** Stop before its dependent recovery
-review/audit; continuing requires an explicit resource/execution decision and
-separate registration preserving both failures, costs and unknown RSS.
-The current 60-second reserve has 9.47 seconds left, below another native
-invocation's minimum 10 startup charge. No automatic retry, budget reset or
-resource waiver is permitted. B4.25 has not started. No fit or full training
-memory acceptance follows from the software implementation.
+**B4.24 remains active and incomplete.** The owner approved the separate
+[v3 continuation](planning/b4_24_registered_continuation_protocol.md): one
+additional fully paid 60-second reserve, with whole240 and cumulative-review60
+unchanged. The old reserve, both failures,76.19 charge and unknown historic RSS
+remain. This is the same slice; no recovery review/audit has yet executed.
+Its source/protocol must merge with exact-head/main CI before the one remaining
+saved-panel review and independent audit. No automatic retry or further reserve
+is permitted. B4.25 has not started. No fit or full training-memory acceptance
+follows from the software implementation.
 
 The failed exact-FEM candidate stops. Alternate cache/ordering, continuation,
 epoch/population/physics-frequency searches, threshold changes and seed replacement
