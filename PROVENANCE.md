@@ -724,3 +724,19 @@ it does not establish cause or revise the old correctness Gate. All execution
 receipts, profiles and scalar payloads remain external; the report preserves
 source/plan/hash/resource identities. No external source or upstream Hack3D
 code, structure, figure, dataset or implementation was accessed or imported.
+
+## B4.22 stable-projection correctness implementation (2026-10-06)
+
+Independently derive one affine free-set refinement of TopoLab's existing
+continuous clipped additive volume projection, with compensated summation.
+The stored normalizer, continuous intercept, signed tangent and implicit
+cotangent retain their equations and frozen criteria. Existing v1/v2 and query
+paths remain unchanged. Reuse only TopoLab's own durable journal, guarded
+training lookup, original Hex8 energy auditor and native-resource machinery;
+the independent root uses Brent arithmetic rather than the candidate kernel.
+The prospectively fixed complete correctness panel retains both original
+steps and adds saved offset/residual/kink evidence. Synthetic regression,
+complete-panel, tampering and interrupted-call tests precede production.
+No upstream content or new external implementation/scientific source is used.
+No production label/model artifact was read during implementation; no fit,
+local fidelity/cost, learned repair or final claim follows from source tests.
