@@ -29,6 +29,21 @@ results/
 *.sqlite3
 *.sqlite3-*
 
+# Personal notes and local credentials; public environment templates are allowed.
+/local/
+.env
+.env.*
+!.env.example
+
+# Generated numerical arrays and learned-model payloads belong in external roots.
+*.npy
+*.npz
+*.pt
+*.pth
+*.safetensors
+*.pkl
+*.pickle
+
 # Small, reviewed numerical fixtures may be committed under tests/fixtures/.
 !tests/fixtures/
 !tests/fixtures/**
