@@ -857,3 +857,19 @@ The new kernel consumes an explicitly paid anchor analysis and applies the
 unchanged continuous projection/pullback. Its correctness-only panel and
 durable failure boundary are frozen in
 [the B4.20 protocol](planning/b4_20_surrogate_correctness_protocol.md).
+
+## B4.22 opt-in stable projection boundary
+
+`topolab.stable-projection-tangent.v3` retains the B4.20 stored denominator,
+continuous intercept and signed cotangent. Its only change is one affine
+free-set root refinement of the same B4.15 clipped additive projection.
+After the original bisection supplies a kink-free lower/free/upper partition,
+compute `s=[v-sum_L(w_i*rho_min)-sum_U(w_i)-sum_A(w_i*z_i)]/sum_A(w_i)`
+with float64 products and compensated scalar summation. Require positive free
+denominator, unchanged partition, kink margin above 1e-10 and both weighted and
+filtered-physical volume errors at most 1e-12. Reject rather than iterate if the
+partition changes or a bound fails. The implicit Jacobian and affine value
+formula remain unchanged. No old projection, query, normalizer, label or solver
+behavior changes. Both original FD steps and the 1e-4/floor 1e-8 criterion remain;
+fresh actual offsets/residuals and independent Brent/uncached FEM acceptance are
+frozen in [the B4.22 protocol](planning/b4_22_stable_projection_correctness_protocol.md).
