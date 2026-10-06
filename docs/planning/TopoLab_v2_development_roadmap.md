@@ -5,14 +5,15 @@ Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
 B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
 initialization is the operational default and final evaluation stays sealed.
 
-Latest completed: **B4.20 correctness review — Gate failed**. Next:
-**B4.21 bounded surrogate correctness failure review**, not started.
+Latest completed: **B4.21 read-only failure review — acceptance passed**;
+B4.20 correctness remains failed. Next: **B4.22 bounded stable-projection
+correctness probe**, not started.
 [Project status](../project_status.md) holds the current boundary;
 [development history](../development_history.md) retains the complete chronology.
 The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-10-06 (documentation structure and current-status pointers)
+Revised: 2026-10-06 (B4.21 closeout and current-status pointers)
 
 Related documents:
 
@@ -1007,10 +1008,23 @@ closure passed within 100.30 seconds / 447741952 bytes. No local fidelity,
 fit-cost proxy or full training memory evidence follows. See
 [the review](../validation/b4_20_surrogate_correctness.md).
 
+#### B4.21: Read-only review acceptance passed
+
+The complete failed panel retained all 64 rows and both steps. All 80 saved
+gradient/mask conditions and 1152 independent scalar comparisons passed.
+The original failure fits the fixed diagnostic root/arithmetic envelope;
+missing side offsets/residuals prevent a causal claim. No root/FEM or label/model
+artifact read occurred. New charge is 90.27 seconds; peak RSS 300400640 bytes.
+B4.20's failed Gate and every earlier unknown/charge remain; see
+[the review](../validation/b4_21_correctness_failure_review.md).
+
 #### Current stop and next slice
 
-The next slice is **B4.21 bounded surrogate correctness failure review**.
-It has not started. Fitting/repair/confirmation still require
+The next slice is **B4.22 bounded stable-projection correctness probe**, not started.
+Separately freeze one versioned affine free-set root refinement of the same
+continuous clipped projection, preserving denominator/intercept, cotangent,
+volume 1e-12, kink 1e-10 and FD 1e-4. Fidelity/cost and full training memory require
+later evidence. Fitting/repair/confirmation still require
 separate evidence. The tangent is not a global bound or quality oracle.
 The failed exact-FEM candidate stops; no fit, new
 cache/ordering candidate, seed replacement, continuation, epoch/population/
@@ -1064,13 +1078,13 @@ search on B5 outcomes.
 ## 6. Recommended sequence
 
 The completed sequence is retained in [development history](../development_history.md)
-and the per-slice validation reports. The remaining work follows the current failed
-correctness Gate; documentation maintenance does not start a research slice.
+and the per-slice validation reports. The remaining work follows the read-only B4.21 decision;
+B4.20 remains failed and documentation maintenance does not start a research slice.
 
-1. **B4.21 bounded surrogate correctness failure review:** separately register its
-   finite read-only boundary. Preserve the complete failed B4.20 panel, B4.19's
-   unknown fields, original tolerances and every prior charge. No numerical rerun,
-   fidelity/cost probe or fit begins automatically.
+1. **B4.22 bounded stable-projection correctness probe:** separately register one
+   affine free-set root refinement of the same projection and independently audit
+   the complete fixed panel. Keep volume 1e-12, kink 1e-10 and FD 1e-4, B4.20's failure,
+   B4.19's unknown fields and every charge. No fidelity/cost or fit is automatic.
 2. **Any subsequent correctness or objective-feasibility intervention:** require a
    separate prospective contract and its own correctness, fidelity, compute and
    full training-memory evidence. The failed exact-FEM candidate remains stopped;

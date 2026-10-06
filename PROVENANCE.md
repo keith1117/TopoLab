@@ -714,3 +714,13 @@ upstream content, external implementation or new scientific source is used.
 Synthetic arithmetic, tampering, independent-weight and resource tests precede
 production from clean CI-passed merged source. No FEM, new root, objective
 invocation, label/model artifact, fit or final access occurs in this review.
+
+## B4.21 read-only execution evidence
+
+The original TopoLab scalar review retained the complete bound B4.20 failed
+panel and independently reconstructed filter weights from Cartesian geometry.
+Diagnostic envelope compatibility selects a separate prospective hypothesis;
+it does not establish cause or revise the old correctness Gate. All execution
+receipts, profiles and scalar payloads remain external; the report preserves
+source/plan/hash/resource identities. No external source or upstream Hack3D
+code, structure, figure, dataset or implementation was accessed or imported.

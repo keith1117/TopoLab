@@ -6,8 +6,9 @@ resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) for the latest boundary and
 [development history](../development_history.md) for the chronology. The latest
-completed research report is [B4.20](b4_20_surrogate_correctness.md): correctness
-Gate failed; B4.21's bounded failure review has not started. Final evidence stays
+completed research report is [B4.21](b4_21_correctness_failure_review.md): read-only
+review acceptance passed; B4.20 correctness remains failed. B4.22 stable-projection
+correctness requires a separate frozen protocol. Final evidence stays
 sealed and uniform remains the operational default.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
@@ -111,6 +112,7 @@ contracts. Generated evidence remains external under the
 - [B4.18 bounded offline FEM bottleneck and training-objective method review](b4_18_fem_objective_method_review.md)
 - [B4.19 bounded train-only local compliance-surrogate feasibility probe](b4_19_local_compliance_surrogate.md)
 - [B4.20 bounded surrogate representation and correctness review](b4_20_surrogate_correctness.md)
+- [B4.21 bounded surrogate correctness failure review](b4_21_correctness_failure_review.md)
 
 Add each new report to its stage group, including failed and stopped experiments.
 Do not replace old results or publish generated artifacts to tidy the directory.
