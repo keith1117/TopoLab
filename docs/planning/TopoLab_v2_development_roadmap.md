@@ -5,15 +5,14 @@ Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
 B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
 initialization is the operational default and final evaluation stays sealed.
 
-Latest completed: **B4.21 read-only failure review — acceptance passed**;
-B4.20 correctness remains failed. Next: **B4.22 bounded stable-projection
-correctness probe**, not started.
+Latest completed: **B4.22 versioned correctness — Gate passed**;
+B4.20 remains failed. Next: **B4.23 bounded versioned local-surrogate fidelity and cost probe**, not started.
 [Project status](../project_status.md) holds the current boundary;
 [development history](../development_history.md) retains the complete chronology.
 The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-10-06 (B4.21 closeout and current-status pointers)
+Revised: 2026-10-06 (B4.22 closeout and current-status pointers)
 
 Related documents:
 
@@ -1018,14 +1017,21 @@ artifact read occurred. New charge is 90.27 seconds; peak RSS 300400640 bytes.
 B4.20's failed Gate and every earlier unknown/charge remain; see
 [the review](../validation/b4_21_correctness_failure_review.md).
 
+#### B4.22: Versioned stable-projection correctness Gate passed
+
+1704/1704 independent conditions passed across eight cases, sixteen fixtures
+and 64 rows at both steps. Maximum directional error is 5.64e-9; 32 FEM solves
+and 304 projections were paid. Actual root offsets, residuals and kink margins are retained with
+durable before/after counts. The single free-set affine root refinement leaves
+all old operators, labels, normalizers and thresholds intact. New charge is
+104.62 seconds; peak RSS 433274880 bytes. No fidelity/cost or full training-memory
+acceptance follows. See [the probe](../validation/b4_22_stable_projection_correctness.md).
+
 #### Current stop and next slice
 
-The next slice is **B4.22 bounded stable-projection correctness probe**, not started.
-Separately freeze one versioned affine free-set root refinement of the same
-continuous clipped projection, preserving denominator/intercept, cotangent,
-volume 1e-12, kink 1e-10 and FD 1e-4. Fidelity/cost and full training memory require
-later evidence. Fitting/repair/confirmation still require
-separate evidence. The tangent is not a global bound or quality oracle.
+Next is **B4.23 bounded versioned local-surrogate fidelity and cost probe**, not started.
+Require its own prospective finite boundary; preserve every failed Gate, unknown
+and charge. Correctness alone does not authorize fitting or learned repair.
 The failed exact-FEM candidate stops; no fit, new
 cache/ordering candidate, seed replacement, continuation, epoch/population/
 physics-frequency search, quality threshold change or final access follows.
@@ -1078,13 +1084,12 @@ search on B5 outcomes.
 ## 6. Recommended sequence
 
 The completed sequence is retained in [development history](../development_history.md)
-and the per-slice validation reports. The remaining work follows the read-only B4.21 decision;
+and the per-slice validation reports. The remaining work follows the frozen B4.22 result;
 B4.20 remains failed and documentation maintenance does not start a research slice.
 
-1. **B4.22 bounded stable-projection correctness probe:** separately register one
-   affine free-set root refinement of the same projection and independently audit
-   the complete fixed panel. Keep volume 1e-12, kink 1e-10 and FD 1e-4, B4.20's failure,
-   B4.19's unknown fields and every charge. No fidelity/cost or fit is automatic.
+1. **B4.23 bounded versioned local-surrogate fidelity and cost probe:** separately register the exact finite
+   population, unchanged criteria, resource closure and ordered stop. No fit,
+   final access or change to old failures/seals follows correctness alone.
 2. **Any subsequent correctness or objective-feasibility intervention:** require a
    separate prospective contract and its own correctness, fidelity, compute and
    full training-memory evidence. The failed exact-FEM candidate remains stopped;
