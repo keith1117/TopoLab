@@ -22,12 +22,13 @@ The historical `v1.0.0` release remains complete, with its negative M1/M2 eviden
 preserved. B3's data Gate and B4.1 fitting passed; the original B4.2 Gate failed.
 Fixed P/17 remains unrepaired and cannot be replaced after seeing outcomes.
 
-The latest completed slice is **B4.22**: versioned stable-projection correctness
-passed all 1704 conditions at the unchanged FD 1e-4 bound. B4.20 remains failed;
-B4.21's diagnostic compatibility is not a causal finding. B4.19's failed case,
-gap and counts stay unknown. No local fidelity, fit-cost or full training-memory
-acceptance is established. Next is **B4.23 bounded versioned local-surrogate
-fidelity and cost probe**, not started; freeze a separate boundary before execution.
+The latest completed slice is **B4.23**: versioned local-surrogate feasibility
+Gate failed, with integrity 3907/3976 and cost 57546.072069 seconds against 7200.
+LOCAL observations do not clear the failed integrity Gate or authorize fitting.
+B4.20 remains failed; B4.21 is noncausal; B4.19's case/gap/counts stay unknown.
+Full training memory and learned repair remain pending. Next is **B4.24 bounded
+versioned surrogate correctness failure review**, not started; freeze a separate
+boundary before execution.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
 exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,

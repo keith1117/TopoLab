@@ -1,7 +1,7 @@
 # Current project status
 
-Updated: 2026-10-06. Latest completed research slice: **B4.22**.
-Next: **B4.23 bounded versioned local-surrogate fidelity and cost probe**, not started.
+Updated: 2026-10-06. Latest completed research slice: **B4.23**.
+Next: **B4.24 bounded versioned surrogate correctness failure review**, not started.
 
 ## Delivery and operational boundary
 
@@ -25,32 +25,36 @@ replacement is forbidden. The [complete history](development_history.md) and
 
 ## Latest result and unresolved evidence
 
-[B4.22's versioned correctness probe](validation/b4_22_stable_projection_correctness.md)
-passed its frozen correctness Gate. 1704/1704 independent conditions passed across eight cases, sixteen fixtures
-and 64 rows at both steps. Maximum directional error is 5.64e-9; 32 FEM solves
-and 304 projections were paid.
-Complete new charge is 104.62 seconds; peak RSS 433274880 bytes.
+[B4.23's versioned fidelity/cost probe](validation/b4_23_versioned_surrogate_feasibility.md)
+failed its frozen feasibility Gate: integrity 3907/3976, with 35 side-mask and
+34 finite-difference conditions failed. All 32 LOCAL states met the four observed
+fidelity criteria, but failed integrity prevents method acceptance or fitting.
+The complete cost proxy is 57546.072069 seconds against 7200. All 72 states,
+216 first-inclusive timings and 64 directional rows remain; 432 FEM solves
+and 816 projections were paid.
+Complete charge: 143.47 seconds; peak RSS: 550502400 bytes.
+Full training memory, learned repair and independent confirmation remain pending.
 
-[B4.20](validation/b4_20_surrogate_correctness.md) remains failed 983/984 at the
-unchanged 1e-4 bound, with 32 solves and 100.30-second charge.
-[B4.21](validation/b4_21_correctness_failure_review.md) passed read-only acceptance,
-but its envelope compatibility did not establish a cause. B4.19's failed case,
-gap and exact counters remain unknown. All prior failures and charges remain.
-No local fidelity, fit-cost or full training-memory acceptance is established.
+[B4.22](validation/b4_22_stable_projection_correctness.md) passed bounded
+1704-condition correctness. [B4.20](validation/b4_20_surrogate_correctness.md)
+remains failed 983/984 at unchanged 1e-4, paying 100.30 seconds.
+[B4.21](validation/b4_21_correctness_failure_review.md) passed read-only acceptance;
+its diagnostic compatibility did not establish a cause. B4.19's actual failed
+case, gap and counters remain unknown. Every prior failure and charge remains.
 
 ## Current stop and next slice
 
-Only **B4.23 bounded versioned local-surrogate fidelity and cost probe** is next, not started.
-Freeze its separate finite boundary before any new invocation. Existing stored
-normalizer/intercept, cotangent, root/gradient criteria and all prior outcomes
-remain. No fitting or learned repair follows correctness alone.
+Only **B4.24 bounded versioned surrogate correctness failure review** is next,
+not started.
+Freeze its separate boundary before any new invocation. No fitting follows this
+finite probe automatically, and full training-memory acceptance is still absent.
 
 The failed exact-FEM candidate stops. Alternate cache/ordering, continuation,
 epoch/population/physics-frequency searches, threshold changes and seed replacement
-are not authorized. Preserve every failure, unknown field and complete charge.
+are not authorized. Preserve every failure, unknown and complete charge.
 Final evidence and all **48 unused B4.10 fresh cases stay sealed**. Passing learned
 repair, independent confirmation, the complete new B4 Gate and a compatible final
 contract remain required before B5. The
 [English roadmap](planning/TopoLab_v2_development_roadmap.md) controls Gate order;
-the [B4.22 protocol](planning/b4_22_stable_projection_correctness_protocol.md) and
-result control the current stop.
+the [B4.23 protocol](planning/b4_23_versioned_surrogate_feasibility_protocol.md)
+and its result control the current stop.
