@@ -702,3 +702,15 @@ prior failed Gates/charges and P/17. No upstream material or new external
 source was used; no model fit, new label, optimization or final access occurred.
 See `docs/validation/b4_20_surrogate_correctness.md`. Next is
 B4.21 bounded surrogate correctness failure review, not started.
+
+## B4.21 bounded correctness failure-review implementation (2026-10-06)
+
+The frozen complete-panel scalar review and independent Cartesian-neighbor
+filter-weight reconstruction derive from TopoLab's own SIMP/filter/projection
+equations and retained B4.20 format. Diagnostic root-residual and floating
+arithmetic envelopes preserve the original failed Gate and absent side-state
+fields; they do not assert a measured cause or replace any observation. No
+upstream content, external implementation or new scientific source is used.
+Synthetic arithmetic, tampering, independent-weight and resource tests precede
+production from clean CI-passed merged source. No FEM, new root, objective
+invocation, label/model artifact, fit or final access occurs in this review.
