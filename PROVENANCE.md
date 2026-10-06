@@ -792,3 +792,13 @@ and paid-resource checks precede access to production numerical evidence.
 No new scientific source or upstream Hack3D code, comments, structure, figures
 or implementation is accessed or imported. No new numerical invocation, model,
 label payload, fit or final access is authorized; all old Gates remain intact.
+
+## B4.24 saved-schema compatibility recovery implementation
+
+The first released read-only attempt stopped because it expected three legacy
+names while TopoLab's own B4.23 writer retained surrogate-prefixed names. Preserve
+that source, failure and charge. A separately registered literal adapter reuses
+the original candidate and independent scalar mathematics, with separate schema
+adapters and cumulative original resource caps. Tests inspect the actual original
+writer as well as synthetic records. No upstream/external source, changed
+numerical method, new root/FEM, tolerance, data/model role or final access occurs.

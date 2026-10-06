@@ -85,6 +85,7 @@ B4.1/B4.2 use those contracts; later B4 slices have the protocols below.
 - [B4.22 bounded stable-projection correctness probe](b4_22_stable_projection_correctness_protocol.md)
 - [B4.23 bounded versioned local-surrogate fidelity and cost probe](b4_23_versioned_surrogate_feasibility_protocol.md)
 - [B4.24 bounded versioned surrogate correctness failure review](b4_24_versioned_correctness_failure_review_protocol.md)
+- [B4.24 registered saved-schema compatibility recovery](b4_24_saved_schema_recovery_protocol.md)
 
 Add a link here when freezing a new protocol. A protocol listing records its
 existence; its validation report determines whether its Gate passed or failed.
