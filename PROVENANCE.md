@@ -779,3 +779,16 @@ Gate, unknown field and complete charge remains. No upstream content, new
 external scientific/implementation source, model bytes, fit, generated label,
 reference, learned repair, continuation or final evidence was accessed.
 Full training memory and later independent learned confirmation remain pending.
+
+## B4.24 versioned correctness failure-review implementation (2026-10-06)
+
+Independently derive a saved projected-secant decomposition from TopoLab's own
+clipped additive projection, signed affine tangent and physical-volume weights.
+Read-only arithmetic retains every B4.23 row, original failure identity,
+first timing, cost and unknown. A separate Cartesian-neighbor/math.fsum auditor
+uses no candidate decomposition, sparse filter, root, FEM or objective function.
+Synthetic complete-row, finite-interval clipping, tampering, independent-weight
+and paid-resource checks precede access to production numerical evidence.
+No new scientific source or upstream Hack3D code, comments, structure, figures
+or implementation is accessed or imported. No new numerical invocation, model,
+label payload, fit or final access is authorized; all old Gates remain intact.
