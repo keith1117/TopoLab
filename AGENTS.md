@@ -329,7 +329,19 @@ Metadata-only early-stop audit and native resource closure passed, paying
 73.93 seconds / 311902208 bytes; no fit, new label, model
 bytes, continuation, reference, screen or final access occurred. See
 `docs/validation/b4_19_local_compliance_surrogate.md`.
-The next slice is B4.20 bounded surrogate correctness review. It has not started.
+B4.20 then completed its frozen stored-normalizer tangent correctness review:
+eight guarded train cases, sixteen projected synthetic inputs,64 directional
+rows and32 new FEM solves completed 984 independent numerical conditions;
+983/984 passed, and one FD error exceeded the unchanged1e-4 bound.
+The new intercept retains the audited stored denominator while separately
+analyzing float32 physical and continuous filtered states; 6/8 current anchors
+would reject the old equality. The original B4.19 failure/count/gap fields stay
+unknown. Durable before-call journals retain complete current counters/prefixes.
+New charge is 100.30 seconds and peak RSS 447741952 bytes; see
+`docs/validation/b4_20_surrogate_correctness.md`.
+The next slice is B4.21 bounded surrogate correctness failure review.
+It has not started. No fidelity or fit proxy was measured; no fitting or final
+access occurred. All prior failures, P/17 and sealed cohorts stay unchanged.
 The failed exact-FEM candidate stops; no fitting, alternate cache/ordering,
 epoch/population/physics-frequency search or final access is automatic. Full
 training memory feasibility remains pending. Fixed P/17 is unrepaired; passing

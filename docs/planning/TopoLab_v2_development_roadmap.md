@@ -850,7 +850,11 @@ normalizer integrity check. No complete numerical panel was published,
 so local fidelity and prospective cost remain unevaluated. Metadata-only
 resource closure paid 73.93 seconds / 311902208 bytes. See
 [the early-stop evidence](../validation/b4_19_local_compliance_surrogate.md).
-Next: **B4.20 bounded surrogate correctness review**.
+**B4.20** then completed representation/gradient correctness on eight train cases,
+32 new FEM solves and 984 independent conditions (983/984 passed; Gate failed), preserving B4.19's unknown
+failed fields. Complete new charge was 100.30 seconds / 447741952 bytes. See
+[the review](../validation/b4_20_surrogate_correctness.md).
+Next: **B4.21 bounded surrogate correctness failure review**.
 No fit, learned repair, search or final access follows automatically.
 Final evaluation remains sealed until a passing repair, independent confirmation
 and the complete new B4 Gate; uniform remains default.
@@ -1138,9 +1142,20 @@ native resource verification passed within 73.93 seconds / 311902208 bytes.
 Full training memory remains pending. See
 [the complete early-stop report](../validation/b4_19_local_compliance_surrogate.md).
 
-The next slice is **B4.20 bounded surrogate correctness review**. It has
-not started; representation/normalization and durable failure evidence must
-be frozen before a new probe. Fitting/repair/confirmation still require
+**B4.20 correctness Gate failed:** all eight guarded train cases, sixteen
+synthetic projected inputs,64 directional rows and32 fresh FEM solves completed
+984 independent numerical conditions. One FD error1.2525436e-4 exceeded
+the unchanged1e-4 limit;983/984 conditions passed. No rerun or tolerance change
+followed. Retaining the stored denominator with
+the continuous anchor's nonunit intercept handles the precision boundary;
+6/8 current anchors reject the old equality. The original B4.19 failed case,
+gap and counts remain unknown. Durable before-call/prefix evidence and native
+closure passed within 100.30 seconds / 447741952 bytes. No local fidelity,
+fit-cost proxy or full training memory evidence follows. See
+[the review](../validation/b4_20_surrogate_correctness.md).
+
+The next slice is **B4.21 bounded surrogate correctness failure review**.
+It has not started. Fitting/repair/confirmation still require
 separate evidence. The tangent is not a global bound or quality oracle.
 The failed exact-FEM candidate stops; no fit, new
 cache/ordering candidate, seed replacement, continuation, epoch/population/
@@ -1358,8 +1373,13 @@ The user-defined ML delivery condition changes the order, not PR size or gates:
     numerical panel, local fidelity or fit-cost proxy was produced. Missing
     case/count/value fields remain unknown; no rerun or tolerance change
     occurred. Metadata-only resource closure paid 73.93 seconds /
-    311902208 bytes. Next: **B4.20 bounded surrogate correctness review**;
-    no further numerical probe or fit starts automatically.
+    311902208 bytes. **B4.20** then completed its finite correctness review with
+    32 new FEM solves and 984 independent numerical conditions (983/984
+    passing; one FD bound failure retained), durable
+    before-call records and separately audited serialized/continuous states.
+    Complete new charge was 100.30 seconds / 447741952 bytes; original failed
+    fields remain unknown. Next: **B4.21 bounded surrogate correctness failure review**;
+    no further probe or fit starts automatically.
     **B5 final evaluation** only after a passing repair,
     independent confirmation and the complete new B4 Gate pass.
 39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
