@@ -1,6 +1,6 @@
 # Development history
 
-Retained project-state summaries through B4.21. This history was moved from
+Retained project-state summaries through B4.22. This history was moved from
 `AGENTS.md` during the 2026-10-06 documentation cleanup; all recorded results,
 failures, costs and stopping boundaries are preserved. Statements about the
 next slice or a development primary describe their historical context.
@@ -524,3 +524,19 @@ Next is B4.22 bounded stable-projection correctness probe, separately frozen
 before numerical invocation. Full training memory, learned repair and independent
 confirmation remain pending; fixed P/17 is unrepaired, uniform remains default
 and all final/48 unused B4.10 cases stay sealed.
+
+## B4.22
+
+B4.22 completed the separately versioned stable-projection correctness probe;
+Gate passed. 1704/1704 independent conditions passed across eight cases, sixteen fixtures
+and 64 rows at both steps. Maximum directional error is 5.64e-9; 32 FEM solves
+and 304 projections were paid. The one affine free-set root refinement preserves the
+stored denominator, continuous intercept and mathematical projection/cotangent.
+Offsets/residuals/kink margins, original steps and durable prefixes remain.
+New charge is 104.62 seconds; peak RSS 433274880 bytes. All earlier failures,
+B4.19 unknowns and complete charges remain; no fidelity/cost, fit or final access
+occurred. See [validation/b4_22_stable_projection_correctness.md](validation/b4_22_stable_projection_correctness.md).
+
+Next is B4.23 bounded versioned local-surrogate fidelity and cost probe, separately frozen before execution.
+Full training memory, learned repair and confirmation remain pending; P/17 is
+unrepaired, uniform remains default and final/48 unused B4.10 cases stay sealed.

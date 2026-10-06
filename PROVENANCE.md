@@ -740,3 +740,13 @@ complete-panel, tampering and interrupted-call tests precede production.
 No upstream content or new external implementation/scientific source is used.
 No production label/model artifact was read during implementation; no fit,
 local fidelity/cost, learned repair or final claim follows from source tests.
+
+## B4.22 versioned stable-projection execution evidence
+
+The original TopoLab root refinement passed its frozen correctness Gate.
+All actual numerical results/prefixes, root scalar evidence and independent
+uncached energy/Brent audit remain external. Source, plan, command, native resource
+and closure hashes bind the committed report. Every earlier failed Gate, charge
+and unknown remains; this does not establish local fidelity/cost, training memory
+or learned repair. No upstream material, new external implementation/scientific
+source, model fit, generated label or final evidence was accessed.

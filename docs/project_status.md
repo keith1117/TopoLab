@@ -1,7 +1,7 @@
 # Current project status
 
-Updated: 2026-10-06. Latest completed research slice: **B4.21**.
-Next: **B4.22 bounded stable-projection correctness probe**, not started.
+Updated: 2026-10-06. Latest completed research slice: **B4.22**.
+Next: **B4.23 bounded versioned local-surrogate fidelity and cost probe**, not started.
 
 ## Delivery and operational boundary
 
@@ -25,37 +25,32 @@ replacement is forbidden. The [complete history](development_history.md) and
 
 ## Latest result and unresolved evidence
 
-[B4.21's read-only review](validation/b4_21_correctness_failure_review.md) passed
-its complete saved-panel arithmetic and independent reconstruction acceptance.
-All eight cases, sixteen fixtures and 64 rows at both original steps remain.
-All 80 gradient/mask checks passed. The one old failed discrepancy fits the
-prospectively declared root-tolerance/arithmetic envelope, but its original side
-offsets and volume residuals were not saved; a root-error cause is not established.
-Complete new charge is 90.27 seconds; peak RSS 300400640 bytes.
+[B4.22's versioned correctness probe](validation/b4_22_stable_projection_correctness.md)
+passed its frozen correctness Gate. 1704/1704 independent conditions passed across eight cases, sixteen fixtures
+and 64 rows at both steps. Maximum directional error is 5.64e-9; 32 FEM solves
+and 304 projections were paid.
+Complete new charge is 104.62 seconds; peak RSS 433274880 bytes.
 
-[B4.20's original correctness Gate](validation/b4_20_surrogate_correctness.md)
-remains failed: 983/984 passed and one error exceeded the unchanged 1e-4 bound.
-Its 32 FEM solves and 100.30-second charge are preserved. B4.19's unpublished
-failed case, gap and exact label/FEM counts remain unknown. No local fidelity,
-fit-cost or full training-memory acceptance is established; no fitting or final
-access occurred.
+[B4.20](validation/b4_20_surrogate_correctness.md) remains failed 983/984 at the
+unchanged 1e-4 bound, with 32 solves and 100.30-second charge.
+[B4.21](validation/b4_21_correctness_failure_review.md) passed read-only acceptance,
+but its envelope compatibility did not establish a cause. B4.19's failed case,
+gap and exact counters remain unknown. All prior failures and charges remain.
+No local fidelity, fit-cost or full training-memory acceptance is established.
 
 ## Current stop and next slice
 
-Only **B4.22 bounded stable-projection correctness probe** is next. Its finite
-contract must be separately registered before any new numerical invocation.
-The hypothesis replaces only early root termination with a versioned affine
-free-set root refinement of the same continuous clipped additive projection.
-Stored denominator/nonunit intercept, cotangent, volume 1e-12, kink 1e-10 and
-FD 1e-4 criteria remain. Fidelity/cost and full training memory require later
-evidence; no fit follows this diagnostic compatibility decision.
+Only **B4.23 bounded versioned local-surrogate fidelity and cost probe** is next, not started.
+Freeze its separate finite boundary before any new invocation. Existing stored
+normalizer/intercept, cotangent, root/gradient criteria and all prior outcomes
+remain. No fitting or learned repair follows correctness alone.
 
 The failed exact-FEM candidate stops. Alternate cache/ordering, continuation,
 epoch/population/physics-frequency searches, threshold changes and seed replacement
-are not authorized by prior failures. Preserve every failure, unknown field and
-complete charge. Final evidence and all **48 unused B4.10 fresh cases stay sealed**.
-Passing versioned learned repair, independent confirmation, the complete new B4
-Gate and a compatible final contract remain required before B5. The
+are not authorized. Preserve every failure, unknown field and complete charge.
+Final evidence and all **48 unused B4.10 fresh cases stay sealed**. Passing learned
+repair, independent confirmation, the complete new B4 Gate and a compatible final
+contract remain required before B5. The
 [English roadmap](planning/TopoLab_v2_development_roadmap.md) controls Gate order;
-the [B4.21 protocol](planning/b4_21_correctness_failure_review_protocol.md) and its
+the [B4.22 protocol](planning/b4_22_stable_projection_correctness_protocol.md) and
 result control the current stop.
