@@ -1,7 +1,7 @@
 # Development history
 
-Retained project-state summaries through the B4.24 interruption. This history
-was moved from
+Retained project-state summaries through the B4.24 registered continuation.
+This history was moved from
 `AGENTS.md` during the 2026-10-06 documentation cleanup; all recorded results,
 failures, costs and stopping boundaries are preserved. Statements about the
 next slice or a development primary describe their historical context.
@@ -563,24 +563,33 @@ No fit, new label/reference, model, learned repair, continuation or final access
 occurred. Full training memory and confirmation remain pending; P/17 is unrepaired,
 uniform remains default and final/48 unused B4.10 cases remain sealed.
 
-## B4.24 (interrupted; incomplete)
+## B4.24 (registered continuation; scoped review acceptance passed)
 
-B4.24 froze a complete read-only failure review, but its v1 reader stopped at
-a three-field schema mismatch; its 16.19-second charge and unavailable complete
-arithmetic remain. A separately registered compatibility source passed 1086
-tests and all applicable source/main CI. Its default planning wrapper then
-failed native instrumentation inside the sandbox, retaining wall 4.73,
-user 1.95/system 0.40 and unknown RSS. No registered recovery review or independent
-arithmetic audit was invoked. Metadata/time accounting passed with 76.19 known
-charge and 50.53/60 reserve use, preserving both failures and all source/hash
-bindings. Whole-slice peak RSS, memory-cap compliance and full resource closure
-remain unknown. B4.24 is not fully closed; B4.25 has not started. See
-[the interrupted report](validation/b4_24_versioned_correctness_failure_review.md).
+The v1 reader stopped at a three-field schema mismatch, preserving its 16.19-second
+charge and unavailable complete arithmetic. Separately registered v2 source
+passed 1086 tests/source/main CI, but its default planning wrapper lost RSS
+inside the sandbox: wall 4.73/user 1.95/system 0.40, child exit unknown. V2 arithmetic
+review/audit were not invoked. Original metadata accounting 76.19 and reserved
+use 50.53/60, both failures and every original binding remain unchanged; see
+[the immutable interrupted report](validation/b4_24_versioned_correctness_failure_review.md).
 
-The owner approved the [v3 continuation](planning/b4_24_registered_continuation_protocol.md)
-with one separate fully paid60 reserve, keeping whole240/cumulative-review60.
-Its source and exact-head/main CI must pass before the one remaining review/audit.
-Old failures, complete charges and missing RSS remain. No scientific criterion,
-input, role, model or seal changed. B4.23/B4.20 failures and B4.19 unknowns
-remain; no fit, learned repair, full memory acceptance or final access occurred.
-Uniform remains default, P/17 unrepaired and all final/48 unused cases sealed.
+The owner approved one separately paid 60-second reserve under the
+[v3 registration](planning/b4_24_registered_continuation_protocol.md), keeping
+whole 240-second and cumulative 60-second review caps and all scientific criteria. Clean CI-passed merged
+source invoked exactly one unused compatibility review and one independent
+auditor: all 2104 saved-state predicates and 1728 field comparisons passed.
+The 35 mask/34 FD failures overlap on 34 rows; all failed FD intervals cross
+clipping sets and fit the frozen signed decomposition, without a global causal
+or wrong-pointwise-gradient claim. Every original failure, first timing and
+57546.072069>7200 cost remains. See [the complete v3 report](validation/b4_24_registered_continuation.md).
+
+Total B4.24 charge 200.98 includes both paid 60-second reserves; new reserved use 42.49/60
+and measured continuation RSS 415268864 bytes satisfy the registered scope. Historical
+missing RSS, whole peak and global memory compliance remain unknown; the old
+memory proof stays incomplete. B4.24's approved continuation is closed; full training memory
+remains pending and the old scientific Gates stay failed. Next is B4.25 bounded active-set
+objective-method review, not started and requiring a separately frozen read-only
+boundary. B4.23/B4.20 failures, B4.19 unknowns and all 851.38 earlier seconds
+remain. No new root/FEM/objective/gradient/prediction timing, label/model bytes,
+fit or final access occurred. Uniform stays default, P/17 unrepaired and all
+final/48 unused cases sealed. Ordinary single-slice stopping remains unchanged.

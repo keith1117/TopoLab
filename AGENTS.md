@@ -22,20 +22,20 @@ The historical `v1.0.0` release remains complete, with its negative M1/M2 eviden
 preserved. B3's data Gate and B4.1 fitting passed; the original B4.2 Gate failed.
 Fixed P/17 remains unrepaired and cannot be replaced after seeing outcomes.
 
-The latest completed slice is **B4.23**: versioned local-surrogate feasibility
-Gate failed, with integrity 3907/3976 and cost 57546.072069 seconds against 7200.
-LOCAL observations do not clear the failed integrity Gate or authorize fitting.
-B4.20 remains failed; B4.21 is noncausal; B4.19's case/gap/counts stay unknown.
-Full training memory and learned repair remain pending. **B4.24 is active but
-incomplete**: v1 review stopped on a field-schema error; registered recovery
-planning then lacked native RSS. Recovery review/audit were not invoked.
-Known time charge 76.19 and reserve use 50.53/60 remain; whole peak RSS is unknown.
-The owner approved a separate paid 60-second reserve under the
-[v3 continuation](docs/planning/b4_24_registered_continuation_protocol.md),
-keeping whole240/cumulative-review60 and historical unknown RSS. Execute only
-after its separately merged source and CI pass. B4.24 is not yet closed; stop
-after its registered continuation without starting B4.25. Preserve the
-[interrupted report](docs/validation/b4_24_versioned_correctness_failure_review.md).
+The latest completed slice is **B4.24**: the owner-approved v3 saved-panel
+review acceptance passed 2104 predicates and 1728 independent field comparisons.
+All 34 failed FD rows cross the central clipping set and are clipping-compatible;
+this describes saved intervals, not a global cause or repaired scientific Gate.
+B4.23 remains failed 3907/3976 and cost 57546.072069>7200. B4.20 remains failed;
+B4.19's actual case/gap/counts stay unknown. B4.24's total charge is 200.98,
+with new reserve use 42.49/60 and continuation peak RSS 415268864 bytes.
+Historical missing RSS and whole-slice memory compliance remain unknown; the
+original memory proof stays incomplete. See the [scoped v3 report](docs/validation/b4_24_registered_continuation.md)
+and preserved [interrupted report](docs/validation/b4_24_versioned_correctness_failure_review.md).
+The next slice is **B4.25 bounded active-set objective-method review**; it has
+not started and needs a separately frozen read-only boundary. No new objective,
+root, FEM, fit or final access follows from this review.
+Full training memory, learned repair and independent confirmation remain pending.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
 exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,
