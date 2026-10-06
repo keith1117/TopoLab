@@ -81,6 +81,7 @@ B4.1/B4.2 use those contracts; later B4 slices have the protocols below.
 - [B4.18 bounded offline FEM bottleneck and training-objective method review](b4_18_fem_objective_method_review_protocol.md)
 - [B4.19 bounded train-only local compliance-surrogate feasibility probe](b4_19_local_compliance_surrogate_protocol.md)
 - [B4.20 bounded surrogate representation and correctness review](b4_20_surrogate_correctness_protocol.md)
+- [B4.21 bounded surrogate correctness failure review](b4_21_correctness_failure_review_protocol.md)
 
 Add a link here when freezing a new protocol. A protocol listing records its
 existence; its validation report determines whether its Gate passed or failed.
