@@ -1,6 +1,6 @@
 # Development history
 
-Retained project-state summaries through B4.20. This history was moved from
+Retained project-state summaries through B4.21. This history was moved from
 `AGENTS.md` during the 2026-10-06 documentation cleanup; all recorded results,
 failures, costs and stopping boundaries are preserved. Statements about the
 next slice or a development primary describe their historical context.
@@ -506,3 +506,21 @@ compatible final contract and B5. All 48 B4.10 fresh cases stay sealed. The orig
 B4.2 Gate remains failed and final evaluation remains sealed; uniform remains the
 operational default, and no final acceleration claim is allowed before the later final
 Gates. Follow the v2 English roadmap for later gates and slice order.
+
+## B4.21
+
+B4.21 completed the frozen read-only correctness failure review. All 80 saved
+gradient/mask checks and 1152 independent scalar comparisons passed across
+eight cases, sixteen fixtures and 64 original rows at both steps. The old failed
+discrepancy fits the predeclared root/arithmetic envelope; missing side offsets
+and volume residuals remain unknown and no cause is established. B4.20 remains
+failed 983/984, with unchanged tolerance, 32 solves and 100.30-second charge. B4.19's
+missing case/gap/counts and every prior charge remain. No new root/FEM,
+label/model read, fit, fidelity/cost or final access occurred. New charge is
+90.27 seconds; peak RSS 300400640 bytes. See
+[validation/b4_21_correctness_failure_review.md](validation/b4_21_correctness_failure_review.md).
+
+Next is B4.22 bounded stable-projection correctness probe, separately frozen
+before numerical invocation. Full training memory, learned repair and independent
+confirmation remain pending; fixed P/17 is unrepaired, uniform remains default
+and all final/48 unused B4.10 cases stay sealed.

@@ -1,7 +1,7 @@
 # Current project status
 
-Updated: 2026-10-06. Latest completed research slice: **B4.20**.
-Next: **B4.21 bounded surrogate correctness failure review**, not started.
+Updated: 2026-10-06. Latest completed research slice: **B4.21**.
+Next: **B4.22 bounded stable-projection correctness probe**, not started.
 
 ## Delivery and operational boundary
 
@@ -25,36 +25,37 @@ replacement is forbidden. The [complete history](development_history.md) and
 
 ## Latest result and unresolved evidence
 
-[B4.20's fixed correctness panel](validation/b4_20_surrogate_correctness.md)
-completed eight guarded train cases, sixteen projected synthetic inputs,
-64 directional rows and 32 new FEM solves. All 984 independent numerical
-conditions completed; 983 passed. One directional error, `0.000125254361629`,
-exceeded the unchanged `1e-4` bound, so **the correctness Gate failed**. Complete
-new charge was 100.30 seconds and observed peak RSS 447,741,952 bytes.
+[B4.21's read-only review](validation/b4_21_correctness_failure_review.md) passed
+its complete saved-panel arithmetic and independent reconstruction acceptance.
+All eight cases, sixteen fixtures and 64 rows at both original steps remain.
+All 80 gradient/mask checks passed. The one old failed discrepancy fits the
+prospectively declared root-tolerance/arithmetic envelope, but its original side
+offsets and volume residuals were not saved; a root-error cause is not established.
+Complete new charge is 90.27 seconds; peak RSS 300400640 bytes.
 
-The stored-denominator tangent separates serialized physical density from the
-continuous filtered anchor; 6/8 current anchors would reject the old equality.
-This does not recover [B4.19's](validation/b4_19_local_compliance_surrogate.md)
-unpublished failed case, gap or exact label/FEM counts. Those fields stay unknown.
-Durable before-call journals preserve the complete current B4.20 population.
-No local fidelity, prospective fit-cost or full training-memory acceptance is
-established; no fitting or final access occurred.
+[B4.20's original correctness Gate](validation/b4_20_surrogate_correctness.md)
+remains failed: 983/984 passed and one error exceeded the unchanged 1e-4 bound.
+Its 32 FEM solves and 100.30-second charge are preserved. B4.19's unpublished
+failed case, gap and exact label/FEM counts remain unknown. No local fidelity,
+fit-cost or full training-memory acceptance is established; no fitting or final
+access occurred.
 
 ## Current stop and next slice
 
-Only **B4.21 bounded surrogate correctness failure review** is next. Its finite
-boundary must be separately registered before execution. This documentation
-maintenance does not start it. No fidelity/cost probe, numerical rerun or fit
-follows the failed correctness Gate automatically.
+Only **B4.22 bounded stable-projection correctness probe** is next. Its finite
+contract must be separately registered before any new numerical invocation.
+The hypothesis replaces only early root termination with a versioned affine
+free-set root refinement of the same continuous clipped additive projection.
+Stored denominator/nonunit intercept, cotangent, volume 1e-12, kink 1e-10 and
+FD 1e-4 criteria remain. Fidelity/cost and full training memory require later
+evidence; no fit follows this diagnostic compatibility decision.
 
 The failed exact-FEM candidate stops. Alternate cache/ordering, continuation,
 epoch/population/physics-frequency searches, threshold changes and seed replacement
-are not authorized by prior failures. Preserve all historical statuses, unknown
-fields, complete charges and access guards.
-
-All final evidence and the **48 unused B4.10 fresh cases remain sealed**. Passing
-versioned learned repair, independent confirmation, the complete new B4 Gate and
-a compatible final contract remain required before B5. The
-[English v2 roadmap](planning/TopoLab_v2_development_roadmap.md) controls the later
-Gate order; the [B4.20 protocol](planning/b4_20_surrogate_correctness_protocol.md)
-and its result control this current stop.
+are not authorized by prior failures. Preserve every failure, unknown field and
+complete charge. Final evidence and all **48 unused B4.10 fresh cases stay sealed**.
+Passing versioned learned repair, independent confirmation, the complete new B4
+Gate and a compatible final contract remain required before B5. The
+[English roadmap](planning/TopoLab_v2_development_roadmap.md) controls Gate order;
+the [B4.21 protocol](planning/b4_21_correctness_failure_review_protocol.md) and its
+result control the current stop.

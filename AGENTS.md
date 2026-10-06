@@ -22,12 +22,12 @@ The historical `v1.0.0` release remains complete, with its negative M1/M2 eviden
 preserved. B3's data Gate and B4.1 fitting passed; the original B4.2 Gate failed.
 Fixed P/17 remains unrepaired and cannot be replaced after seeing outcomes.
 
-The latest completed slice is **B4.20**: its correctness Gate failed, with
-983/984 independent conditions passing and one error above the unchanged `1e-4`
-bound. B4.19's unpublished failure case, gap and exact counts remain unknown.
-No local fidelity, fit-cost or full training-memory acceptance is established.
-The next slice is **B4.21 bounded surrogate correctness failure review**; it
-has not started and requires a separately frozen boundary before execution.
+The latest completed slice is **B4.21**: its read-only review acceptance passed.
+B4.20 remains failed (983/984 at unchanged `1e-4`); diagnostic envelope
+compatibility does not establish a root-error cause. B4.19's failed case, gap
+and exact counts stay unknown. No local fidelity, fit-cost or full training-memory
+acceptance is established. Next is **B4.22 bounded stable-projection correctness
+probe**, not started; freeze a separate boundary before numerical invocation.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
 exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,
