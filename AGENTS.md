@@ -26,9 +26,13 @@ The latest completed slice is **B4.23**: versioned local-surrogate feasibility
 Gate failed, with integrity 3907/3976 and cost 57546.072069 seconds against 7200.
 LOCAL observations do not clear the failed integrity Gate or authorize fitting.
 B4.20 remains failed; B4.21 is noncausal; B4.19's case/gap/counts stay unknown.
-Full training memory and learned repair remain pending. Next is **B4.24 bounded
-versioned surrogate correctness failure review**, not started; freeze a separate
-boundary before execution.
+Full training memory and learned repair remain pending. **B4.24 is active but
+incomplete**: v1 review stopped on a field-schema error; registered recovery
+planning then lacked native RSS. Recovery review/audit were not invoked.
+Known time charge 76.19 and reserve use 50.53/60 remain; whole peak RSS is unknown.
+Resume only after an explicit resource/execution decision and separate frozen
+boundary. Do not mark B4.24 closed or start B4.25; see the
+[interrupted report](docs/validation/b4_24_versioned_correctness_failure_review.md).
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
 exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,

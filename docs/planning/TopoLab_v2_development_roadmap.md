@@ -6,14 +6,16 @@ B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
 initialization is the operational default and final evaluation stays sealed.
 
 Latest completed: **B4.23 versioned local-surrogate feasibility — Gate failed**;
-B4.20 remains failed. Next: **B4.24 bounded versioned surrogate correctness
-failure review**, not started.
+B4.20 remains failed. **B4.24 bounded versioned surrogate correctness failure
+review is active but incomplete** after compatibility and native planning
+instrumentation interruptions; recovery review/audit were not invoked.
+An explicit resource/execution decision is required before continuing.
 [Project status](../project_status.md) holds the current boundary;
 [development history](../development_history.md) retains the complete chronology.
 The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-10-06 (B4.23 closeout and current-status pointers)
+Revised: 2026-10-06 (B4.24 interruption and explicit resource stop)
 
 Related documents:
 
@@ -1040,12 +1042,26 @@ first timing, historical charge or original step was removed. New charge is
 Full training memory and learned repair remain pending. See
 [the finite probe](../validation/b4_23_versioned_surrogate_feasibility.md).
 
+#### B4.24: Interrupted read-only review; full resource proof incomplete
+
+V1 stopped on a saved-field schema error and retained 16.19-second charge. The separate
+compatibility source passed software checks and CI, but native recovery planning
+lost RSS because /usr/bin/time -l was sandboxed. Its 4.73 wall and wrapper exit 1
+remain. Recovery review/audit were not invoked; no 2104/1728 acceptance result
+or clipping explanation exists. Known time 76.19 includes full 60 reserve;
+reserved use 50.53 passes time accounting, while whole peak RSS and 1 GiB
+compliance remain unknown. Both failures, source versions and metadata audit
+are retained in [the interrupted report](../validation/b4_24_versioned_correctness_failure_review.md).
+
 #### Current stop and next slice
 
-Next is **B4.24 bounded versioned surrogate correctness failure review**,
-not started.
-Require a separate prospective boundary; no fitting or final access follows
-finite feasibility alone. Preserve every failure, unknown, charge and seal.
+**B4.24 is active and incomplete.** Resume only after an explicit resource/
+execution decision and separate prospective registration, preserving the
+unknown native RSS and all charges. The remaining 9.47 reserved seconds cannot
+pay another invocation's minimum 10 startup charge. No automatic retry, budget
+reset or resource waiver; B4.25 has not started. No fitting or final access
+follows software checks or finite feasibility alone. Preserve every failure,
+unknown, charge and seal.
 The failed exact-FEM candidate stops; no fit, new
 cache/ordering candidate, seed replacement, continuation, epoch/population/
 physics-frequency search, quality threshold change or final access follows.
@@ -1098,13 +1114,14 @@ search on B5 outcomes.
 ## 6. Recommended sequence
 
 The completed sequence is retained in [development history](../development_history.md)
-and the per-slice validation reports. The remaining work follows the frozen B4.23 result;
-B4.20 remains failed and documentation maintenance does not start a research slice.
+and the per-slice validation reports. The active B4.24 interruption requires
+an explicit resource/execution decision; B4.23/B4.20 remain failed and
+documentation maintenance does not complete or start a research slice.
 
-1. **B4.24 bounded versioned surrogate correctness failure review:** separately
-   register the exact finite boundary and ordered stop. Preserve all original
-   inputs, criteria, costs,
-   failures and seals; no fit or final access follows automatically.
+1. **B4.24 interrupted correctness failure review:** preserve both failures,
+   incomplete resource proof and known 76.19-second charge. Explicitly decide and
+   separately register any continuation; its recovery review/audit were not
+   invoked, and B4.25 is not open. Keep all scientific inputs, criteria and seals.
 2. **Any subsequent correctness or objective-feasibility intervention:** require a
    separate prospective contract and its own correctness, fidelity, compute and
    full training-memory evidence. The failed exact-FEM candidate remains stopped;

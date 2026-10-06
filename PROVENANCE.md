@@ -802,3 +802,19 @@ the original candidate and independent scalar mathematics, with separate schema
 adapters and cumulative original resource caps. Tests inspect the actual original
 writer as well as synthetic records. No upstream/external source, changed
 numerical method, new root/FEM, tolerance, data/model role or final access occurs.
+
+## B4.24 interrupted execution and unknown native memory
+
+Own-code v1 read-only review stopped on a saved-field serialization mismatch;
+its source, unavailable complete result and 16.19-second charge remain. A separately
+registered own-code compatibility source passed exact-head/main CI but its
+default planning wrapper lost native RSS at sandboxed sysctl kern.clockrate.
+The failed profile, wall 4.73, stdout and source version remain; no recovered
+arithmetic review/audit was invoked. A separate metadata-only controller
+verified immutable identities and 50.53/60 reserved time, retaining 76.19 known
+time charge and unknown whole peak RSS. It establishes no scientific acceptance
+or complete memory proof. The controllers and logs are bound externally;
+the [interrupted report](docs/validation/b4_24_versioned_correctness_failure_review.md)
+retains the exact source/CI/failure hashes. No new numerical source, upstream
+Hack3D code, data/model payload, fit, altered criterion or final access occurred.
+B4.24 remains incomplete pending an explicit resource/execution decision.
