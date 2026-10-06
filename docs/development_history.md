@@ -1,6 +1,7 @@
 # Development history
 
-Retained project-state summaries through B4.23. This history was moved from
+Retained project-state summaries through the B4.24 interruption. This history
+was moved from
 `AGENTS.md` during the 2026-10-06 documentation cleanup; all recorded results,
 failures, costs and stopping boundaries are preserved. Statements about the
 next slice or a development primary describe their historical context.
@@ -561,3 +562,23 @@ frozen before execution.
 No fit, new label/reference, model, learned repair, continuation or final access
 occurred. Full training memory and confirmation remain pending; P/17 is unrepaired,
 uniform remains default and final/48 unused B4.10 cases remain sealed.
+
+## B4.24 (interrupted; incomplete)
+
+B4.24 froze a complete read-only failure review, but its v1 reader stopped at
+a three-field schema mismatch; its 16.19-second charge and unavailable complete
+arithmetic remain. A separately registered compatibility source passed 1086
+tests and all applicable source/main CI. Its default planning wrapper then
+failed native instrumentation inside the sandbox, retaining wall 4.73,
+user 1.95/system 0.40 and unknown RSS. No registered recovery review or independent
+arithmetic audit was invoked. Metadata/time accounting passed with 76.19 known
+charge and 50.53/60 reserve use, preserving both failures and all source/hash
+bindings. Whole-slice peak RSS, memory-cap compliance and full resource closure
+remain unknown. B4.24 is not fully closed; B4.25 has not started. See
+[the interrupted report](validation/b4_24_versioned_correctness_failure_review.md).
+
+Resume requires an explicit separate resource/execution decision preserving
+the failures, complete charges and missing RSS. No scientific criterion,
+input, role, model or seal changed. B4.23/B4.20 failures and B4.19 unknowns
+remain; no fit, learned repair, full memory acceptance or final access occurred.
+Uniform remains default, P/17 unrepaired and all final/48 unused cases sealed.

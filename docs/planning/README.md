@@ -87,5 +87,9 @@ B4.1/B4.2 use those contracts; later B4 slices have the protocols below.
 - [B4.24 bounded versioned surrogate correctness failure review](b4_24_versioned_correctness_failure_review_protocol.md)
 - [B4.24 registered saved-schema compatibility recovery](b4_24_saved_schema_recovery_protocol.md)
 
+B4.24 is active but incomplete; its [interrupted report](../validation/b4_24_versioned_correctness_failure_review.md)
+retains unknown native RSS and unexecuted recovery review/audit. The registrations
+remain frozen; any continuation requires an explicit resource/execution decision.
+
 Add a link here when freezing a new protocol. A protocol listing records its
 existence; its validation report determines whether its Gate passed or failed.
