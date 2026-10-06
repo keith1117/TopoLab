@@ -4,6 +4,11 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
+B4.24's owner-approved [v3 continuation](b4_24_registered_continuation_protocol.md)
+adds a separate paid execution reserve and preserves the original interruption,
+unknown historical RSS and all scientific criteria. It requires merged-source CI
+before its single remaining saved-panel review; B4.25 is not authorized.
+
 ## Overall project plans
 
 | Plan | English working document | Chinese reading companion |
@@ -86,10 +91,12 @@ B4.1/B4.2 use those contracts; later B4 slices have the protocols below.
 - [B4.23 bounded versioned local-surrogate fidelity and cost probe](b4_23_versioned_surrogate_feasibility_protocol.md)
 - [B4.24 bounded versioned surrogate correctness failure review](b4_24_versioned_correctness_failure_review_protocol.md)
 - [B4.24 registered saved-schema compatibility recovery](b4_24_saved_schema_recovery_protocol.md)
+- [B4.24 owner-approved registered continuation v3](b4_24_registered_continuation_protocol.md)
 
 B4.24 is active but incomplete; its [interrupted report](../validation/b4_24_versioned_correctness_failure_review.md)
 retains unknown native RSS and unexecuted recovery review/audit. The registrations
-remain frozen; any continuation requires an explicit resource/execution decision.
+remain frozen; the owner-approved v3 continuation requires its own merged source
+and CI before the single remaining review/audit. The old RSS stays unknown.
 
 Add a link here when freezing a new protocol. A protocol listing records its
 existence; its validation report determines whether its Gate passed or failed.

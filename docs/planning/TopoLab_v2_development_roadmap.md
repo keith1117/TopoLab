@@ -9,7 +9,9 @@ Latest completed: **B4.23 versioned local-surrogate feasibility — Gate failed*
 B4.20 remains failed. **B4.24 bounded versioned surrogate correctness failure
 review is active but incomplete** after compatibility and native planning
 instrumentation interruptions; recovery review/audit were not invoked.
-An explicit resource/execution decision is required before continuing.
+The owner approved one additional paid execution reserve under the separately
+registered [v3 boundary](b4_24_registered_continuation_protocol.md); its source
+and CI must pass before the single remaining saved-panel review/audit.
 [Project status](../project_status.md) holds the current boundary;
 [development history](../development_history.md) retains the complete chronology.
 The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
@@ -1055,11 +1057,12 @@ are retained in [the interrupted report](../validation/b4_24_versioned_correctne
 
 #### Current stop and next slice
 
-**B4.24 is active and incomplete.** Resume only after an explicit resource/
-execution decision and separate prospective registration, preserving the
-unknown native RSS and all charges. The remaining 9.47 reserved seconds cannot
-pay another invocation's minimum 10 startup charge. No automatic retry, budget
-reset or resource waiver; B4.25 has not started. No fitting or final access
+**B4.24 is active and incomplete.** The owner approved one separate paid60
+reserve in the [v3 registration](b4_24_registered_continuation_protocol.md),
+keeping whole240/cumulative-review60. The old50.53/60 reserve,76.19 charge,
+both failures and unknown native RSS remain untouched. Require separately
+merged source and CI before the one still-unused compatibility review/audit.
+No automatic retry, further reserve or historical memory claim; B4.25 has not started. No fitting or final access
 follows software checks or finite feasibility alone. Preserve every failure,
 unknown, charge and seal.
 The failed exact-FEM candidate stops; no fit, new
@@ -1114,14 +1117,15 @@ search on B5 outcomes.
 ## 6. Recommended sequence
 
 The completed sequence is retained in [development history](../development_history.md)
-and the per-slice validation reports. The active B4.24 interruption requires
-an explicit resource/execution decision; B4.23/B4.20 remain failed and
+and the per-slice validation reports. The active B4.24 continuation now has an
+explicit owner-approved v3 resource boundary; B4.23/B4.20 remain failed and
 documentation maintenance does not complete or start a research slice.
 
 1. **B4.24 interrupted correctness failure review:** preserve both failures,
-   incomplete resource proof and known 76.19-second charge. Explicitly decide and
-   separately register any continuation; its recovery review/audit were not
-   invoked, and B4.25 is not open. Keep all scientific inputs, criteria and seals.
+   incomplete historic resource proof and known76.19 charge. Merge and validate
+   the separately registered v3 source before its one remaining review/audit.
+   Its arithmetic is not yet invoked; B4.25 is not open. Keep all scientific inputs,
+   criteria and seals, and stop after this same slice's continuation.
 2. **Any subsequent correctness or objective-feasibility intervention:** require a
    separate prospective contract and its own correctness, fidelity, compute and
    full training-memory evidence. The failed exact-FEM candidate remains stopped;

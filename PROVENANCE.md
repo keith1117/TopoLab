@@ -818,3 +818,15 @@ the [interrupted report](docs/validation/b4_24_versioned_correctness_failure_rev
 retains the exact source/CI/failure hashes. No new numerical source, upstream
 Hack3D code, data/model payload, fit, altered criterion or final access occurred.
 B4.24 remains incomplete pending an explicit resource/execution decision.
+
+## B4.24 owner-approved continuation registration
+
+The owner approved one additional fully paid 60-second execution reserve while
+retaining the whole 240-second and cumulative review caps. The v3 wrapper reuses
+TopoLab's byte-frozen v1 scalar equations and separate v2 schema adapters; it adds
+only prospectively registered resource/source/history boundaries. The two exact
+SHA-bound standard-JSON metadata receipts retain their original bytes. Historical
+missing RSS remains unknown; only the new continuation can establish its own
+complete native memory evidence. Original protocols, interruption, charges and
+scientific failures remain. No external implementation, upstream material,
+changed numerical criterion, label/model payload, fit or final access occurs.
