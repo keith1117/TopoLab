@@ -844,3 +844,16 @@ estimate has zero design-coordinate Hessian and is not a global bound or a
 terminal-quality oracle. No query, label, solver or stopping behavior changes.
 Its finite fidelity, first-order correctness and resource stop are frozen in
 [the B4.19 protocol](planning/b4_19_local_compliance_surrogate_protocol.md).
+
+## B4.20 stored-normalizer tangent boundary
+
+`topolab.stored-normalizer-tangent.v2` retains B4.15's constant audited stored
+compliance C_s. The serialized physical state float32(F(float64(x*))) is
+audited separately from the continuous anchor F(float64(x*)). Its tangent
+intercept is C(F(x*))/C_s, with signed derivative F.T(dC/drho)/C_s, rather
+than assuming that intercept is one. Quantization is not differentiated.
+Both exact-state checks retain relative1e-9; no old label or v1 result changes.
+The new kernel consumes an explicitly paid anchor analysis and applies the
+unchanged continuous projection/pullback. Its correctness-only panel and
+durable failure boundary are frozen in
+[the B4.20 protocol](planning/b4_20_surrogate_correctness_protocol.md).

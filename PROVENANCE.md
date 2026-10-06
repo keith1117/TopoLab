@@ -672,3 +672,16 @@ P/17, uniform default and all sealed evidence remain unchanged.
 The next slice is B4.20 bounded surrogate correctness review, before
 any new numerical invocation. See
 `docs/validation/b4_19_local_compliance_surrogate.md`.
+
+## B4.20 stored-normalizer tangent correctness implementation (2026-10-05)
+
+Independently derive the continuous tangent of the existing B4.15 objective
+with its stored audited constant denominator. Separately analyze serialized
+float32 physical density and the continuous filtered anchor; use the latter's
+normalized intercept and signed filter-transpose derivative. Existing v1
+checks, labels, numerical tolerances and query behavior stay unchanged.
+The frozen eight-train-case correctness panel uses independent uncached Hex8
+energy derivatives and Brent projection, with exclusive fsync'ed before-call
+FEM/label records and durable partial numerical prefixes. All artifacts remain
+external. No upstream code, comments, layout or figures are used. No fidelity,
+fit-cost, fitting, learned repair or final claim follows from implementation.
