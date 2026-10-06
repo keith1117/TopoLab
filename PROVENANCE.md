@@ -750,3 +750,21 @@ and closure hashes bind the committed report. Every earlier failed Gate, charge
 and unknown remains; this does not establish local fidelity/cost, training memory
 or learned repair. No upstream material, new external implementation/scientific
 source, model fit, generated label or final evidence was accessed.
+
+## B4.23 versioned local-surrogate feasibility implementation (2026-10-06)
+
+Reuse TopoLab's original v3 stable projection and stored-normalizer tangent,
+without a new numerical candidate. Restore the prospectively frozen B4.19
+finite fidelity/cost population with explicit separate stored/continuous anchor
+physics, unchanged approximation/exact thresholds and both original steps.
+Our independent uncached Hex8 energy adjoint and Brent reconstruction verify
+the full panel without the candidate tangent, projection, pullback, fidelity
+or cost functions. Durable label/FEM/root journals retain complete timings and
+central/directional prefixes, pending calls and errors; native closure preserves
+all prior charges and the original full-population cost formula.
+Only TopoLab's independently implemented equations and source are reused.
+No upstream content or new external implementation/scientific source is used.
+Synthetic public-case inputs precede production; no production label bytes,
+model, fit, learned repair, new label/reference or final evidence was accessed
+during implementation. Full training memory remains pending regardless of the
+finite probe's later outcome.
