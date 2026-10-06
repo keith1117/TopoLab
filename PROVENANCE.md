@@ -830,3 +830,16 @@ missing RSS remains unknown; only the new continuation can establish its own
 complete native memory evidence. Original protocols, interruption, charges and
 scientific failures remain. No external implementation, upstream material,
 changed numerical criterion, label/model payload, fit or final access occurs.
+
+## B4.24 registered continuation evidence
+
+TopoLab's frozen candidate and separately adapted independent scalar mathematics
+completed the original saved panel, with all 2104 predicates and 1728 row-field
+comparisons passing. The finite-interval clipping identity preserves original
+scientific failures and does not assert a global cause or altered pointwise
+gradient. Owner-approved v3 time/native scope closes at 200.98 seconds; missing
+historic RSS stays unknown and the original memory proof remains incomplete.
+All old sources, interruptions, profiles, charges and numerical fields retain
+their identities. No upstream material, new external scientific/implementation
+source, numerical root/FEM/objective/gradient/prediction timing, label/model bytes,
+fit or final evidence is accessed or imported. Raw evidence remains external.

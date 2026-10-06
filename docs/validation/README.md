@@ -6,13 +6,13 @@ resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) for the latest boundary and
 [development history](../development_history.md) for the chronology. The latest
-completed research slice is [B4.23](b4_23_versioned_surrogate_feasibility.md):
-versioned finite feasibility Gate failed; B4.20 remains failed.
-[B4.24's interrupted report](b4_24_versioned_correctness_failure_review.md)
-records an active incomplete slice with unknown native RSS and unexecuted
-recovery review/audit. Continuation needs an explicit resource/execution
-decision; B4.25 has not started. Final evidence stays sealed and uniform
-remains the operational default.
+completed research slice is [B4.24's registered continuation](b4_24_registered_continuation.md):
+complete read-only acceptance passed under the owner-approved v3 time/native
+scope. The [original interruption](b4_24_versioned_correctness_failure_review.md),
+both failures, historical missing RSS and incomplete original memory proof remain.
+B4.23/B4.20 scientific Gates remain failed. Next B4.25 bounded active-set
+objective-method review has not started and requires a separately frozen
+read-only boundary. Final evidence stays sealed; uniform remains default.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -119,6 +119,7 @@ contracts. Generated evidence remains external under the
 - [B4.22 bounded stable-projection correctness probe](b4_22_stable_projection_correctness.md)
 - [B4.23 bounded versioned local-surrogate fidelity and cost probe](b4_23_versioned_surrogate_feasibility.md)
 - [B4.24 interrupted correctness failure review and incomplete resource proof](b4_24_versioned_correctness_failure_review.md)
+- [B4.24 owner-approved registered continuation and complete saved-panel review](b4_24_registered_continuation.md)
 
 Add each new report to its stage group, including failed and stopped experiments.
 Do not replace old results or publish generated artifacts to tidy the directory.

@@ -5,19 +5,19 @@ Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
 B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
 initialization is the operational default and final evaluation stays sealed.
 
-Latest completed: **B4.23 versioned local-surrogate feasibility — Gate failed**;
-B4.20 remains failed. **B4.24 bounded versioned surrogate correctness failure
-review is active but incomplete** after compatibility and native planning
-instrumentation interruptions; recovery review/audit were not invoked.
-The owner approved one additional paid execution reserve under the separately
-registered [v3 boundary](b4_24_registered_continuation_protocol.md); its source
-and CI must pass before the single remaining saved-panel review/audit.
+Latest completed: **B4.24 registered read-only correctness failure review —
+acceptance passed** under its owner-approved v3 scope. All 2104 predicates and
+1728 independent field comparisons passed; original B4.23/B4.20 Gates remain
+failed. Historical RSS and global memory compliance remain unknown; the original
+memory proof is incomplete. Complete
+B4.24 time charge is 200.98 seconds; see [the new report](../validation/b4_24_registered_continuation.md)
+and retained [interruption](../validation/b4_24_versioned_correctness_failure_review.md).
 [Project status](../project_status.md) holds the current boundary;
 [development history](../development_history.md) retains the complete chronology.
 The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-10-06 (B4.24 interruption and explicit resource stop)
+Revised: 2026-10-06 (B4.24 scoped v3 closure; historical RSS remains unknown)
 
 Related documents:
 
@@ -1044,27 +1044,38 @@ first timing, historical charge or original step was removed. New charge is
 Full training memory and learned repair remain pending. See
 [the finite probe](../validation/b4_23_versioned_surrogate_feasibility.md).
 
-#### B4.24: Interrupted read-only review; full resource proof incomplete
+#### B4.24: Registered saved-panel review acceptance passed
 
-V1 stopped on a saved-field schema error and retained 16.19-second charge. The separate
-compatibility source passed software checks and CI, but native recovery planning
-lost RSS because /usr/bin/time -l was sandboxed. Its 4.73 wall and wrapper exit 1
-remain. Recovery review/audit were not invoked; no 2104/1728 acceptance result
-or clipping explanation exists. Known time 76.19 includes full 60 reserve;
-reserved use 50.53 passes time accounting, while whole peak RSS and 1 GiB
-compliance remain unknown. Both failures, source versions and metadata audit
-are retained in [the interrupted report](../validation/b4_24_versioned_correctness_failure_review.md).
+All 2104 saved-state predicates and 1728 independent row-field comparisons
+passed across eight cases, 72 central states, 128 sides and 64 directional rows.
+All 216 first timings and exact original 69 failed condition identities remain.
+35 mask and 34 FD failures overlap on 34 rows; all failed FD rows cross the
+central active set and their signed gaps are clipping-compatible within the
+frozen diagnostic envelope. This is a finite-interval description, not a global
+cause, changed pointwise gradient or repaired scientific Gate. B4.23 remains
+failed 3907/3976 and cost 57546.072069>7200.
+
+Original v1 field mismatch and v2 sandboxed planning lost-RSS failures remain,
+with old 76.19 charge, old 50.53/60 reserve and zero v2 recovery review/audit.
+The owner-approved v3 continuation paid another full 60 reserve under unchanged
+whole 240/cumulative-review 60. One review and one independent audit completed
+from clean merged CI-passed source. Total B4.24 charge is 200.98; new reserve
+use 42.49/60 and continuation peak 415268864 bytes pass the scoped requirements.
+Historic planning RSS/child exit, whole peak and global memory compliance remain
+unknown; the original memory proof stays incomplete. Full training memory and
+learned repair remain pending. See [the complete new report](../validation/b4_24_registered_continuation.md)
+and unchanged [interrupted report](../validation/b4_24_versioned_correctness_failure_review.md).
 
 #### Current stop and next slice
 
-**B4.24 is active and incomplete.** The owner approved one separate paid60
-reserve in the [v3 registration](b4_24_registered_continuation_protocol.md),
-keeping whole240/cumulative-review60. The old50.53/60 reserve,76.19 charge,
-both failures and unknown native RSS remain untouched. Require separately
-merged source and CI before the one still-unused compatibility review/audit.
-No automatic retry, further reserve or historical memory claim; B4.25 has not started. No fitting or final access
-follows software checks or finite feasibility alone. Preserve every failure,
-unknown, charge and seal.
+**B4.24's owner-approved registered continuation is complete.** The frozen
+ordered decision selects **B4.25 bounded active-set objective-method review**,
+not started. Require a separately frozen read-only decision boundary; no new
+objective, criterion, root/FEM, numerical run, fit or search follows automatically.
+Keep both original failures, old 76.19 charge/reserve, all historical unknowns and
+complete 200.98 B4.24 time. V3's measured memory applies only to the continuation;
+it does not complete the original memory proof. Ordinary single-slice stopping
+remains unchanged. No final access follows finite scalar acceptance.
 The failed exact-FEM candidate stops; no fit, new
 cache/ordering candidate, seed replacement, continuation, epoch/population/
 physics-frequency search, quality threshold change or final access follows.
@@ -1117,15 +1128,15 @@ search on B5 outcomes.
 ## 6. Recommended sequence
 
 The completed sequence is retained in [development history](../development_history.md)
-and the per-slice validation reports. The active B4.24 continuation now has an
-explicit owner-approved v3 resource boundary; B4.23/B4.20 remain failed and
-documentation maintenance does not complete or start a research slice.
+and the per-slice validation reports. B4.24 completed the registered scalar review
+and owner-approved v3 resource scope; B4.23/B4.20 remain failed and historic RSS
+unknown. Documentation maintenance does not start another research slice.
 
-1. **B4.24 interrupted correctness failure review:** preserve both failures,
-   incomplete historic resource proof and known76.19 charge. Merge and validate
-   the separately registered v3 source before its one remaining review/audit.
-   Its arithmetic is not yet invoked; B4.25 is not open. Keep all scientific inputs,
-   criteria and seals, and stop after this same slice's continuation.
+1. **B4.25 bounded active-set objective-method review:** separately freeze its
+   read-only decision boundary before execution. B4.24's saved finite intervals
+   do not authorize a new objective, correctness criterion, root/FEM candidate,
+   numerical run, fit or search. Preserve all failed rows, first timings,
+   charges, historic missing RSS and seals. B4.25 has not started.
 2. **Any subsequent correctness or objective-feasibility intervention:** require a
    separate prospective contract and its own correctness, fidelity, compute and
    full training-memory evidence. The failed exact-FEM candidate remains stopped;

@@ -5,9 +5,11 @@ The English v2 roadmap is the working development plan. Start with
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
 B4.24's owner-approved [v3 continuation](b4_24_registered_continuation_protocol.md)
-adds a separate paid execution reserve and preserves the original interruption,
-unknown historical RSS and all scientific criteria. It requires merged-source CI
-before its single remaining saved-panel review; B4.25 is not authorized.
+completed saved-panel review acceptance and its scoped time/native proof; see
+[the new report](../validation/b4_24_registered_continuation.md). Original
+interruptions, unknown historical RSS and all scientific failures remain.
+Next B4.25 bounded active-set objective-method review has not started and needs
+a separately frozen read-only boundary. The current authorization ends at B4.24.
 
 ## Overall project plans
 
@@ -93,10 +95,11 @@ B4.1/B4.2 use those contracts; later B4 slices have the protocols below.
 - [B4.24 registered saved-schema compatibility recovery](b4_24_saved_schema_recovery_protocol.md)
 - [B4.24 owner-approved registered continuation v3](b4_24_registered_continuation_protocol.md)
 
-B4.24 is active but incomplete; its [interrupted report](../validation/b4_24_versioned_correctness_failure_review.md)
-retains unknown native RSS and unexecuted recovery review/audit. The registrations
-remain frozen; the owner-approved v3 continuation requires its own merged source
-and CI before the single remaining review/audit. The old RSS stays unknown.
+B4.24's [original interrupted report](../validation/b4_24_versioned_correctness_failure_review.md)
+and all three registrations retain their paths and bytes. The
+[complete v3 report](../validation/b4_24_registered_continuation.md) records
+accepted arithmetic, complete continuation profiles and reconciled time;
+historical missing RSS and the original memory proof remain incomplete.
 
 Add a link here when freezing a new protocol. A protocol listing records its
 existence; its validation report determines whether its Gate passed or failed.
