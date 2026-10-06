@@ -1,142 +1,27 @@
 # TopoLab v2 Development Roadmap
 
-Status: **active v2 flagship delivery plan; Gates A1 and A3 passed; B2.2's
-120-update data gate failed, B2.3's versioned 240-update sentinel passed,
-B2.4's complete 522-label development data Gate passed, B2.5–B2.9's
-fixed learned-prototype feasibility Gates failed, B2.10's screen stopped
-at a failed mandatory uniform reference after nine cases, and B2.11 passed
-its reference repair but failed the fixed-model development Gate, B2.12's
-spatial-context model passed reference/fit Gates but failed the fresh
-development acceleration Gate, B2.13's fixed routing policy passed its
-small fresh development screen, B2.14's larger confirmation failed with
-no eligible routed or fixed policy, B2.15's position-aware route failed
-its fresh development Gate, and B2.16's read-only method-class audit
-supports one bounded early-reliability probe while ruling out further
-coarse metadata threshold tuning;
-the B2.17 paid two-update sentinel then failed to detect three of three
-terminal quality failures and stopped before opening fresh cases;
-the B2.18 solver-anchored start modestly improved all four exposed
-solutions but retained three terminal quality failures and stopped
-before fresh cases;
-the B2.19 physical-input model passed twelve fresh references and three
-fits but failed its 84-outcome learned Gate despite lower validation MSE;
-the B2.20 operational checkpoint selection completed its 12-case
-selection and 24-case independent screen, but no selected seed passed
-and all six high-volume large-y selected attempts failed terminal quality;
-the B2.21 terminal-design target passed all reference, target, fit, and
-screen completeness/resource checks but still failed its learned Gate,
-with 0/6 high-volume large-y new attempts passing terminal quality;
-the B2.22 high-volume y specialist completed 24 references, three fits,
-and 168 screen outcomes, improving matched high-volume large-y quality
-from 2/6 to 3/6 but failing its four-of-six quality and two-scale speed Gates;
-the B2.23 large-y load-position expansion passed its 30/30 independent
-development-label quality and resource Gate, without a model fit or learned
-speed claim;
-the B2.24 expanded-position specialist completed 24 fresh references,
-three fits, ten diagnostic labels, and 168 outcomes, improving matched
-high-volume large-y quality from 0/6 to 6/6 but failing the full
-two-scale and direction-wise charged-speed Gate;
-the B2.25 read-only audit bound all B2.24 outcomes and selected a joint
-non-specialist quality/refinement intervention for one fresh B2.26 screen;
-the B2.26 weighted terminal generalist completed 24 fresh references,
-three fits, and 240 outcomes but failed the two-seed large-scale speed
-Gate, with all residual learned failures at middle-volume y cases;
-the B2.27 middle-volume y/z position expansion passed its 60/60
-development-label quality and resource Gate without fitting a model;
-the B2.28 forty-label generalist expansion completed 24 fresh references,
-three fits, twenty diagnostics, and 168 charged outcomes; all three
-seeds passed its bounded development Gate;
-the B2.29 larger independent confirmation then completed 48 new
-references and all 432 charged outcomes; expanded seeds 17 and 43
-passed, while seed 29 failed the small-scale and small-z speed bounds,
-permitting B3.1 contract planning with final evidence still sealed;
-the B3.1 formal contract now freezes its 752-case catalog, complete
-historical exposure boundary, fixed model program, prospective primary
-selection, final claim/replication rules, and finite compute budget;
-its metadata planning audit passed, with Gate B3 data audit still pending;
-the B3.2 implementation reproduced both frozen metadata hashes and
-passed consumer-specific access and complete-population rejection tests;
-the B3.3 implementation added versioned data/artifact contracts, guarded
-materialization, charged recovery and independent audits; its implementation
-tests passed, with actual B3 data generation reserved for B3.4;
-the B3.4 production data Gate passed with all 560 labels and 48 screening
-references independently audited, zero failures, 5,325.353116 charged
-seconds and 500,154,368-byte peak RSS; no fit or final artifact access;
-A2.1 added a versioned JSON-line manager/worker boundary and separate local
-process for default numerical runs; A2.2 added leased SQLite ownership,
-fencing, queued recovery and schema migrations; later A2 work remains open;
-ML acceleration is a required delivery gate, not an optional enhancement.**
-The released `v1.0.0` and
-its negative M1/M2 conclusions remain historical evidence.
+Status: **active v2 flagship delivery plan; the ML delivery Gate remains open.**
+Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
+B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
+initialization is the operational default and final evaluation stays sealed.
+
+Latest completed: **B4.20 correctness review — Gate failed**. Next:
+**B4.21 bounded surrogate correctness failure review**, not started.
+[Project status](../project_status.md) holds the current boundary;
+[development history](../development_history.md) retains the complete chronology.
+The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-10-01
+Revised: 2026-10-06 (documentation structure and current-status pointers)
 
 Related documents:
 
-- [Graduate admissions fit assessment](./TopoLab_admissions_fit_assessment.md)
-- [Development timeline and resources](./TopoLab_development_timeline_and_resources.md)
-- [v1.0.0 release validation](../validation/v1_release_validation.md)
-- [M1 held-out evaluation](../validation/m1_held_out_evaluation.md)
-- [M2 materialization outcome](../validation/m2_catalog_materialization.md)
-- [M3 v1 pre-registration](../m3_preregistration.md)
-- [Development-only warm-start feasibility probe](../validation/ml_feasibility_probe.md)
-- [A1.1 canonical demo validation](../validation/a1_1_canonical_demo.md)
-- [A1.4 clean Linux validation and Gate A1 decision](../validation/a1_4_clean_linux_smoke.md)
-- [A3 solver-ordering audit](../validation/a3_solver_ordering.md)
-- [B2 workload pilot and gate decision](../validation/b2_workload_pilot.md)
-- [B2.1 versioned convergence correction and matched audit](../validation/b2_1_convergence.md)
-- [B2.2 prototype plan and data-feasibility outcome](../validation/b2_2_data_feasibility.md)
-- [B2.3 budget repair and sentinel audit](../validation/b2_3_data_feasibility.md)
-- [B2.4 complete development-label audit](../validation/b2_4_development_labels.md)
-- [B2.5 fixed prototype and full development screen](../validation/b2_5_prototype.md)
-- [B2.6 intermediate-trajectory target and new development screen](../validation/b2_6_trajectory.md)
-- [B2.7 global-load input and new development screen](../validation/b2_7_global_load.md)
-- [B2.8 y-load basin recentering and new development screen](../validation/b2_8_basin.md)
-- [B2.9 vector point-load conditioning and new development screen](../validation/b2_9_vector_load.md)
-- [B2.10 sensitivity-weighted objective and reference-feasibility stop](../validation/b2_10_weighted_trajectory.md)
-- [B2.11 versioned reference budget and fixed-model confirmation](../validation/b2_11_reference_budget.md)
-- [B2.12 spatial-context model and new development screen](../validation/b2_12_context_cnn.md)
-- [B2.13 workload routing and safe rejection](../validation/b2_13_routing.md)
-- [B2.14 frozen larger development confirmation protocol](./b2_14_development_confirmation_protocol.md)
-- [B2.14 completed larger development confirmation](../validation/b2_14_development_confirmation.md)
-- [B2.15 frozen position-aware routing protocol](./b2_15_position_routing_protocol.md)
-- [B2.15 completed position-aware routing screen](../validation/b2_15_position_routing.md)
-- [B2.16 frozen method-class reassessment protocol](./b2_16_method_class_protocol.md)
-- [B2.16 completed method-class reassessment](../validation/b2_16_method_class.md)
-- [B2.17 frozen online early-reliability protocol](./b2_17_early_reliability_protocol.md)
-- [B2.17 exposed-sentinel outcome](../validation/b2_17_early_reliability.md)
-- [B2.18 frozen solver-anchor protocol](./b2_18_solver_anchor_protocol.md)
-- [B2.18 solver-anchor sentinel outcome](../validation/b2_18_solver_anchor.md)
-- [B2.19 frozen physical-input protocol](./b2_19_physics_input_protocol.md)
-- [B2.19 complete physical-input fit and screen](../validation/b2_19_physics_input.md)
-- [B2.20 frozen operational checkpoint-selection protocol](./b2_20_operational_selection_protocol.md)
-- [B2.20 complete selection and independent screen](../validation/b2_20_operational_selection.md)
-- [B2.21 frozen terminal-design target protocol](./b2_21_terminal_target_protocol.md)
-- [B2.21 complete fit and independent screen](../validation/b2_21_terminal_target.md)
-- [B2.22 frozen high-volume y specialist protocol](./b2_22_y_specialist_protocol.md)
-- [B2.22 complete specialist fit and independent screen](../validation/b2_22_y_specialist.md)
-- [B2.23 frozen position-coverage and label protocol](./b2_23_position_labels_protocol.md)
-- [B2.23 complete position-label feasibility audit](../validation/b2_23_position_labels.md)
-- [B2.24 frozen expanded-position specialist protocol](./b2_24_expanded_training_protocol.md)
-- [B2.24 complete fit and independent screen](../validation/b2_24_expanded_training.md)
-- [B2.25 frozen residual-cost diagnosis protocol](./b2_25_residual_cost_protocol.md)
-- [B2.25 complete read-only cost audit](../validation/b2_25_residual_cost.md)
-- [B2.26 frozen weighted generalist protocol](./b2_26_weighted_generalist_protocol.md)
-- [B2.26 complete fit and matched screen](../validation/b2_26_weighted_generalist.md)
-- [B2.27 frozen middle-volume position-label protocol](./b2_27_middle_volume_labels_protocol.md)
-- [B2.27 complete position-label feasibility audit](../validation/b2_27_middle_volume_labels.md)
-- [B2.28 frozen middle-volume generalist expansion](./b2_28_expanded_generalist_protocol.md)
-- [B2.28 complete expanded fit and fresh screen](../validation/b2_28_expanded_generalist.md)
-- [B2.29 frozen larger independent confirmation](./b2_29_development_confirmation_protocol.md)
-- [B2.29 completed independent confirmation and audit](../validation/b2_29_development_confirmation.md)
-- [B3 frozen formal experiment contract](../b3_experiment_contract.md)
-- [B3.1 contract and exposure planning audit](../validation/b3_1_contract_boundary.md)
-- [B3.2 catalog and access boundary](../validation/b3_2_catalog_boundary.md)
-- [B3.3 guarded data materializer](../validation/b3_3_data_materializer.md)
-- [B3.4 production data Gate](../validation/b3_4_data_gate.md)
-- [A2.1 local worker protocol and validation](../validation/a2_1_worker_protocol.md)
-- [A2.2 durable ownership and validation](../validation/a2_2_run_ownership.md)
+- [Overall plans and frozen slice protocols](./README.md)
+- [Validation evidence index](../validation/README.md)
+- [Current status and stopping boundary](../project_status.md)
+- [Retained development history](../development_history.md)
+- [Formal B3 experiment contract](../b3_experiment_contract.md)
+- [Repository and publication policy](../repository_policy.md)
 
 ## 1. Current baseline
 
@@ -383,6 +268,7 @@ three formerly invalid large cases now have matched denominators. Under the
 same new policy, the impossible oracle passed all cases with mean charged
 ratios 0.074 and 0.109, while the unchanged five-seed M1 panel passed 20/30
 and 16/30 candidate quality checks and averaged charged ratios 1.56 and 1.72.
+
 **B2.2 data-feasibility gate failed:** The
 [frozen prototype plan and sentinel](../validation/b2_2_data_feasibility.md)
 fixed a same-architecture design-MSE control and sensitivity-weighted
@@ -519,6 +405,7 @@ predeclared uniform rejection, zero learned failures, and zero accepted
 quality violations. The negative B2.12 screen remains immutable. On this
 fresh cohort, however, the fixed context-43 model was faster than the
 router on both scales and also met the descriptive direction bounds.
+
 **B2.14 larger development confirmation failed:** The
 [frozen protocol and audit](../validation/b2_14_development_confirmation.md)
 passed 24/24 new uniform references and retained all 192 fully charged
@@ -741,6 +628,7 @@ the primary only on new B4 development outcomes, and requires final
 quality, two-scale gains, non-ML comparisons, OOD safety, and independent
 Linux execution. Its 28-hour cumulative stage budget has explicit stop
 rules; failure does not authorize extra tuning or a final-set search.
+
 **B3.2 implementation Gate passed:** The catalog and historical ledger
 reproduce the exact frozen hashes and independent B3.1 identity bytes.
 Access guards verify case/role/source/membership and derived origins,
@@ -749,6 +637,7 @@ labels for NN, and check returned artifact checksums. Synthetic tests
 cover the permission table and malformed/incomplete metadata; no solver
 or generated data artifact was used for this slice. See the
 [B3.2 validation report](../validation/b3_2_catalog_boundary.md).
+
 **B3.3 implementation Gate passed:** Versioned full-precision and float32
 label/reference contracts, content-addressed external artifacts, single-writer
 prefix recovery, cumulative resource charges, independent audits and the
@@ -756,6 +645,7 @@ read-only planning/explicit execution entrypoint are implemented. Synthetic
 FEM states test quality/corruption boundaries; a historical B2.4 before/after
 label is byte-identical. No production B3 case was optimized. See the
 [B3.3 validation report](../validation/b3_3_data_materializer.md).
+
 **B3.4 data Gate passed:** All 560 labels and 48 screening references were
 regenerated from uniform on clean merged revision
 `cc151b014f9034ccc7093ef592021003d7dec252`. Complete production and supplemental
@@ -768,96 +658,11 @@ No fitting or final artifact access occurred. **A2.1** then added the
 [versioned local worker protocol](../platform_worker_protocol.md) and
 [process-boundary validation](../validation/a2_1_worker_protocol.md).
 **A2.2** then added [leased run ownership](../run_ownership.md) and
-[recovery validation](../validation/a2_2_run_ownership.md). **B4.1** then
-completed the twelve fixed CPU fits and independent artifact/selection
-audit within its frozen epoch/time/memory caps. **B4.2** completed the fixed
-development screen but failed its direction/reliability Gate, with no primary
-or freeze. **B4.3** completed the bounded read-only failure/cost diagnosis.
-**B4.4** passed its finite timing/checkpoint engineering sentinel with all
-76 queries and 100 terminal states independently audited and numerical/failure
-identity preserved; see [the engineering report](../validation/b4_4_engineering.md).
-**B4.5** then passed its separately frozen weighted-terminal development Gate:
-three fits, 48 fresh uniform references and all 576 charged outcomes completed;
-644 terminal states and the complete artifact/arithmetic/resource audit passed.
-W/17 and W/43 passed with zero fallbacks; W/29 failed reliability. W/17 is the
-prospective development primary. See [the B4.5 report](../validation/b4_5_weighted_terminal.md).
-**B4.6** completed 96 new references and all 1,152 outcomes, but the independent
-confirmation Gate failed: fixed W/17 had two failures/fallbacks, W/29 four,
-and W/43 one. Only W/43 met single-seed criteria; no primary was eligible.
-See [the confirmation report](../validation/b4_6_development_confirmation.md).
-**B4.7** passed its bounded spatial-objective rollback Gate on 48 fresh
-references and 576 charged outcomes. P/17 and P/43 passed; prospectively fixed
-P/17 had zero failures/fallbacks, while P/29 retained three and P/43 one.
-See [the rollback report](../validation/b4_7_spatial_rollback.md).
-**B4.8** completed 96 new references and all 1,152 fixed outcomes, but failed
-the larger confirmation Gate: fixed P/17 paid one quality fallback and violated
-its zero-failure requirement. P/17 and P/43 passed single-seed criteria;
-P/29 retained four failures and P/43 one. See
-[the B4.8 confirmation report](../validation/b4_8_rollback_confirmation.md).
-**B4.9** completed bounded read-only diagnosis of the complete failed
-confirmation, independently auditing 1,295 classifications, 48 strata and
-54 same-specialist pairs. Fixed P/17's failure is a converged physical-plateau
-quality gap; all original failures/costs remain unchanged. See
-[the diagnosis report](../validation/b4_9_confirmation_diagnosis.md).
-**B4.10** completed its frozen nine-reference, 108-outcome post-plateau sentinel
-but failed: four known large-y failures were repaired, one new fixed P/17
-convergence failure appeared, and both fixed-primary cost bounds were exceeded.
-All 48 fresh cases remain sealed. See
-[the polish report](../validation/b4_10_post_plateau_polish.md).
-**B4.11** completed independently audited read-only diagnosis of all 132
-terminal classifications, 24 prepolish certificates, 48 strata and nine
-same-specialist pairs. Its ordered review recommends **B4.12**, a bounded
-candidate terminal-witness preservation probe, while preserving the failed
-fixed-primary decision. See [the review](../validation/b4_11_polish_diagnosis.md).
-**B4.12** passed its exposed nine-reference/108-query preservation sentinel,
-then completed 48 fresh references, 576 outcomes and all independent audits.
-Its fresh Gate failed: fixed P/17 retained one converged quality failure/
-fallback, so no primary was eligible. Full resource closure charged 8,486.600
-seconds, including a retained closure-only recovery without numerical reruns.
-See [the preservation report](../validation/b4_12_terminal_preservation.md).
-**B4.13** completed the independently audited read-only preservation review:
-57 references, 684 queries and 1,101 terminal classifications retain all
-historical failures and costs. Fixed P/17's fresh endpoint remains converged
-but misses compliance quality; its large-y generalist fallback-free mean is
-1.012013. Diagnostic charge was 107.78 seconds. See
-[the review](../validation/b4_13_preservation_diagnosis.md).
-**B4.14** passed its bounded read-only method review: all 684 certified rows,
-159 prior witness pairs, 96 prior strata and six fixed mechanism dispositions
-passed independent arithmetic reconstruction within 50.39 seconds /
-42,287,104 bytes. All failed Gates and original charges remain unchanged; the
-1,101 terminal classifications remain prior B4.13 evidence. See
-[the method review](../validation/b4_14_generalist_method_review.md).
-**B4.15** completed its frozen eight-train-case offline adjoint probe: all
-64 directional checks and 408 independent numerical conditions passed across
-200 FEM solves. Its prospective fit-cost Gate failed: the frozen full-population
-proxy was 60,339.394 seconds versus 7,200. Charge was 84.33 seconds / peak RSS
-510,836,736 bytes. See [the probe](../validation/b4_15_offline_compliance_adjoint.md).
-**B4.16** completed independently audited read-only review of all 48 retained
-timings and 818 arithmetic/boundary conditions within 55.99 seconds /
-305,807,360 bytes, preserving the failed proxy. See
-[the cost review](../validation/b4_16_offline_adjoint_cost_review.md).
-**B4.17** completed its bounded prepared-FEM probe: all 96 paired observations,
-96 phase intervals, 256 new solves and 768 independent numerical conditions
-passed, but the new prospective cost Gate failed (58,257.458 versus 7,200).
-Complete charge was 112.34 seconds / 486,866,944 bytes. See
-[the probe](../validation/b4_17_prepared_fem_probe.md). **B4.18** completed
-its independently audited read-only review of all 96 paired timings, 96 phases
-and six method dispositions within 86.13 seconds / 301252608 bytes,
-without changing any failed Gate or charge. See
-[the review](../validation/b4_18_fem_objective_method_review.md). **B4.19**
-froze and executed the single signed tangent but stopped at its anchor-
-normalizer integrity check. No complete numerical panel was published,
-so local fidelity and prospective cost remain unevaluated. Metadata-only
-resource closure paid 73.93 seconds / 311902208 bytes. See
-[the early-stop evidence](../validation/b4_19_local_compliance_surrogate.md).
-**B4.20** then completed representation/gradient correctness on eight train cases,
-32 new FEM solves and 984 independent conditions (983/984 passed; Gate failed), preserving B4.19's unknown
-failed fields. Complete new charge was 100.30 seconds / 447741952 bytes. See
-[the review](../validation/b4_20_surrogate_correctness.md).
-Next: **B4.21 bounded surrogate correctness failure review**.
-No fit, learned repair, search or final access follows automatically.
-Final evaluation remains sealed until a passing repair, independent confirmation
-and the complete new B4 Gate; uniform remains default.
+[recovery validation](../validation/a2_2_run_ownership.md).
+
+The subsequent fitting, development-screen failures and repair reviews are
+recorded once in [B4](#b4-fit-screen-and-freeze-on-development-data-only).
+Their completion does not reopen the final evidence boundary.
 
 Freeze a new experiment identity rather than amending M3 v1. Specify the primary
 workload and all train/validation/final-ID/OOD physical-case strata, content-derived
@@ -885,7 +690,9 @@ the compute budget pass audit; otherwise do not fit.
 
 ### B4: Fit, screen, and freeze on development data only
 
-**B4.1 fitting Gate passed:** The [fixed fitting boundary](../b3_training_contract.md)
+#### B4.1: Fitting Gate passed
+
+The [fixed fitting boundary](../b3_training_contract.md)
 completed all twelve preregistered CPU fits from clean merged source
 `428c96fd718a78496bcfafcc85a3d82401925ab4`. Complete independent label,
 checkpoint/history and equal-case selection audits passed for every seed.
@@ -896,7 +703,9 @@ seconds and peak RSS 437,878,784 bytes, within the frozen 7,200-second and
 That fitting slice opened no screening query or final artifact.
 The subsequent **B4.2** screen is recorded below.
 
-**B4.2 complete screen; Gate B4 failed:** The
+#### B4.2: Complete screen; Gate B4 failed
+
+The
 [fixed screening boundary](../b3_screening_contract.md) retained all 48 cases
 and 720 outcomes from clean merged source
 `4279d20c4922cc2cbfaba0bca722aba8868cd914`. Independent byte, NN, terminal,
@@ -910,7 +719,10 @@ passed at 9/9. The complete charge was 9,869.911762 seconds and peak RSS
 forbidden single-label NN read was rejected before label bytes; its cost and
 permanent integrity marker remain retained after the corrected full-population
 audit passed. See the [B4.2 report](../validation/b4_2_development_screen.md).
-**B4.3 diagnostic acceptance passed:** The
+
+#### B4.3: Diagnostic acceptance passed
+
+The
 [read-only diagnosis](../validation/b4_3_failure_cost.md) verified all 720
 outcomes and 162 identical-model comparisons, with an independent 745-status
 and arithmetic audit. All paired numerical witnesses were identical, but
@@ -925,7 +737,9 @@ middle-volume large-y quality gap. All original costs and failures remain
 retained. The new analysis charged 50 seconds and peaked at 445,284,352 bytes,
 without a solver, fit, model/label byte read or final access.
 
-**B4.4 engineering acceptance passed:** its separately frozen 76-query,
+#### B4.4: Engineering acceptance passed
+
+Its separately frozen 76-query,
 two-arm/two-round sentinel retained all 100 candidate/fallback states and passed
 independent byte, numerical, chain and cost audits. Every numerical outcome and
 known failed status was identical to B4.2. Compact progress reduced inclusive
@@ -935,7 +749,10 @@ checkpoint-stress fixture. Final charge was 2,406.653985 seconds and peak RSS
 publication windows passed synthetic tests. See
 [the engineering report](../validation/b4_4_engineering.md). This establishes
 no learned acceleration and does not retime the failed B4.2 experiment.
-**B4.5 bounded development Gate passed:** its new sensitivity-weighted
+
+#### B4.5: Bounded development Gate passed
+
+Its new sensitivity-weighted
 terminal-design objective retained the exact 508/32 expanded membership, all
 three fixed fits (466 epochs), 48 new uniform references and 576 fully charged
 outcomes. Complete label/model, 644-terminal-state, arithmetic, timing and resource
@@ -946,7 +763,10 @@ development primary by the frozen worst-scale ordering; W/43 has a lower overall
 mean but a higher worst-scale mean and remains retained. Final charge was
 7,578.184891 seconds and peak RSS 453,132,288 bytes. See
 [the complete B4.5 report](../validation/b4_5_weighted_terminal.md).
-**B4.6 larger independent confirmation Gate failed:** all 96 new uniform
+
+#### B4.6: Larger independent confirmation Gate failed
+
+All 96 new uniform
 references, 1,152 fixed outcomes and 1,250 audit units completed. Independent
 checks retained all 1,291 terminal states/classifications and 43 paid failures.
 All W scale/direction speed bounds and both pooled large-y cells (18/18)
@@ -955,7 +775,10 @@ reliability; W/29 had four failures, and W/43 had one. Only W/43 passed its
 single-seed Gate and no W primary was eligible. Total final charge was
 12,528.446019750 seconds and peak RSS 1,492,172,800 bytes. See
 [the complete confirmation report](../validation/b4_6_development_confirmation.md).
-**B4.7 bounded rollback Gate passed:** unchanged P generalists and the same
+
+#### B4.7: Bounded rollback Gate passed
+
+Unchanged P generalists and the same
 specialists completed 48 exposure-disjoint uniform references and all 576
 fully charged outcomes. The 626 production audit units and independent
 646-terminal-state/classification audit passed, with unchanged upstream receipts.
@@ -967,7 +790,10 @@ matched C/17 and W/17 overall means. P/43 retained one failure and was not
 primary-eligible. Both pooled large-y quality cells passed 9/9.
 Final charge was 6,536.080252125 seconds with peak RSS 829,194,240 bytes. See
 [the complete rollback report](../validation/b4_7_spatial_rollback.md).
-**B4.8 larger rollback confirmation Gate failed:** unchanged fixed P/17 and the
+
+#### B4.8: Larger rollback confirmation Gate failed
+
+Unchanged fixed P/17 and the
 complete P/W/C/non-ML panel completed 96 fresh references, all 1,152 outcomes,
 1,250 production audit units and 1,295 independent terminal/classification
 checks. P/17 and P/43 passed single-seed criteria; P/29's four failures exceeded
@@ -978,7 +804,10 @@ ratios 0.786037/0.639162. Pooled large-y quality passed 17/18 and 18/18.
 Final charge was 14,105.836381712 seconds with peak RSS 1,036,238,848 bytes.
 All complete-cost, numerical, artifact and resource audits passed. See
 [the complete B4.8 report](../validation/b4_8_rollback_confirmation.md).
-**B4.9 read-only diagnostic acceptance passed:** all 96 references and 1,152
+
+#### B4.9: Read-only diagnostic acceptance passed
+
+All 96 references and 1,152
 outcomes, 1,295 stored quality classifications, 48 strata and 54 shared-specialist
 pairs passed guarded reads and independent raw-JSON arithmetic audit. The fixed
 P/17 failure stopped correctly at physical plateau after 40 updates while its
@@ -989,7 +818,10 @@ specialist charged spreads reached the fixed 1.25 descriptive flag. Diagnostic
 charge was 81.608446500 seconds with peak RSS 277,626,880 bytes, including the
 retained failed metadata preflight. Original B4.8 charges and failures remain
 unchanged. See [the complete diagnosis](../validation/b4_9_confirmation_diagnosis.md).
-**B4.10's frozen polish sentinel failed:** nine unchanged uniform references
+
+#### B4.10: Frozen polish sentinel failed
+
+Nine unchanged uniform references
 and all 108 queries completed; 119 numerical/input audit units, 117 policy units
 and 132 independent terminal classifications passed integrity audits. All 24
 prepolish witnesses matched B4.8; twelve qualifying P generalists received
@@ -1004,7 +836,10 @@ RSS 635,076,608 bytes. All completeness, numerical, policy and resource audits
 passed; all 48 fresh cases remain sealed under the frozen stop rule. Original
 failures and charges remain unchanged. See
 [the complete polish report](../validation/b4_10_post_plateau_polish.md).
-**B4.11 diagnostic acceptance passed:** the complete nine-reference/108-query
+
+#### B4.11: Diagnostic acceptance passed
+
+The complete nine-reference/108-query
 population, all 132 terminal classifications, 24 prepolish certificates,
 48 strata and nine specialist pairs passed independent arithmetic audit.
 Fixed P/17's new failure loses the plateau certificate at 97 updates despite
@@ -1017,7 +852,10 @@ RSS 92,798,976 bytes; the initial outer profiler limitation and its kernel
 self-RSS normalization are retained explicitly. No solver call, fit,
 checkpoint/label byte read or fresh/final execution occurred. See
 [the full B4.11 review](../validation/b4_11_polish_diagnosis.md).
-**B4.12 preservation repair failed its fresh Gate:** candidate-only selection
+
+#### B4.12: Preservation repair failed its fresh Gate
+
+Candidate-only selection
 passed the complete nine-reference/108-query exposed sentinel, repairing all
 four historical P failures without accepted-query regressions. Fixed P/17
 had zero sentinel fallbacks and target mean/sum charged ratios
@@ -1040,7 +878,9 @@ numerical rerun, scientific tolerance or Gate changed. Complete charge is
 8,486.600 seconds with peak kernel RSS 1,017,036,800 bytes, within frozen
 limits. See [the full B4.12 report](../validation/b4_12_terminal_preservation.md).
 
-**B4.13 diagnostic acceptance passed:** both complete retained panels,
+#### B4.13: Diagnostic acceptance passed
+
+Both complete retained panels,
 1,101 terminal classifications, 159 original/endpoint pairs, 96 strata and
 36 same-specialist pairs passed independent raw-JSON arithmetic audit.
 Fixed P/17's fresh original and twenty-update endpoint both retain their
@@ -1055,7 +895,9 @@ remain unchanged. No solver, fit, continuation, label/model byte read,
 threshold/length search or final access occurred. See
 [the complete B4.13 review](../validation/b4_13_preservation_diagnosis.md).
 
-**B4.14 method-review acceptance passed:** all 684 independently certified
+#### B4.14: Method-review acceptance passed
+
+All 684 independently certified
 compact rows, 159 prior witness pairs and 96 prior strata remain complete.
 A separate auditor reconstructs three cost scenarios, conditional constant-query
 overhead and complete-uniform-shadow floors, retaining every failed status.
@@ -1068,7 +910,8 @@ compliance feasibility probe. Charge is 50.39 seconds / 42,287,104 bytes;
 all ten B4.13 bindings and prior B4.12/historical/recovery guards are unchanged.
 See [the complete method review](../validation/b4_14_generalist_method_review.md).
 
-**B4.15 numerical correctness passed, prospective fit feasibility failed:**
+#### B4.15: Numerical correctness passed, prospective fit feasibility failed
+
 the frozen training-only version implements the current-prediction FEM adjoint
 through clipped additive projection, physical-volume offset and density filter.
 Eight exact expanded-train cases, sixteen fixed fixtures and all three repeated
@@ -1088,7 +931,9 @@ shared data, screening and later final/replication costs remain additionally
 required. Sequential probe RSS does not certify full fit memory.
 See [the frozen probe evidence](../validation/b4_15_offline_compliance_adjoint.md).
 
-**B4.16 cost-review acceptance passed:** all eight cases, sixteen fixtures and
+#### B4.16: Cost-review acceptance passed
+
+All eight cases, sixteen fixtures and
 48 complete wall/CPU observations, including the first, were independently
 reconstructed with 818 arithmetic/boundary conditions. The original
 60,339.394-second maximum proxy and failed 7,200-second Gate remain unchanged.
@@ -1100,7 +945,9 @@ benchmark, label/model artifact, fit, continuation or final access occurred.
 New charge is 55.99 seconds / peak RSS 305,807,360 bytes; see
 [the complete review](../validation/b4_16_offline_adjoint_cost_review.md).
 
-**B4.17 numerical parity passed; prospective cost Gate failed:** one frozen
+#### B4.17: Numerical parity passed; prospective cost Gate failed
+
+One frozen
 candidate caches immutable unit stiffness, COO indices, free-DOF maps and
 physical-volume weights while freshly assembling and factorizing every
 changing prediction. Eight previously certified training cases and sixteen
@@ -1116,7 +963,9 @@ plan/probe/audit/closure/controller profiles and reservations retained.
 Sequential RSS and static-array population estimates do not certify full
 training memory. See [the probe](../validation/b4_17_prepared_fem_probe.md).
 
-**B4.18 read-only method-review acceptance passed:** all eight cases, sixteen
+#### B4.18: Read-only method-review acceptance passed
+
+All eight cases, sixteen
 synthetic states, 96 paired Torch observations, 96 instrumented phase intervals
 and six frozen method dispositions passed 1286 independent scalar conditions.
 The original 58,257.457957-second prepared proxy remains failed. Zero small
@@ -1127,8 +976,10 @@ sequential RSS do not certify full training memory. Complete new charge is
 86.13 seconds / 301252608 bytes. See
 [the full review](../validation/b4_18_fem_objective_method_review.md).
 
-**B4.19 stopped; feasibility did not pass:** the single production attempt
-rejected anchor compliance versus the stored normalizer at relative1e-9.
+#### B4.19: Stopped; feasibility did not pass
+
+The single production attempt
+rejected anchor compliance versus the stored normalizer at relative 1e-9.
 No complete `probe.json` was emitted and the planned numerical auditor did
 not run. The 72 states, 216 measurements, 64 directional rows and 416 total
 solves remain planned evidence, with no local fidelity or fit-cost result.
@@ -1142,10 +993,12 @@ native resource verification passed within 73.93 seconds / 311902208 bytes.
 Full training memory remains pending. See
 [the complete early-stop report](../validation/b4_19_local_compliance_surrogate.md).
 
-**B4.20 correctness Gate failed:** all eight guarded train cases, sixteen
-synthetic projected inputs,64 directional rows and32 fresh FEM solves completed
-984 independent numerical conditions. One FD error1.2525436e-4 exceeded
-the unchanged1e-4 limit;983/984 conditions passed. No rerun or tolerance change
+#### B4.20: Correctness Gate failed
+
+All eight guarded train cases, sixteen
+synthetic projected inputs, 64 directional rows and 32 fresh FEM solves completed
+984 independent numerical conditions. One FD error 1.2525436e-4 exceeded
+the unchanged 1e-4 limit; 983/984 conditions passed. No rerun or tolerance change
 followed. Retaining the stored denominator with
 the continuous anchor's nonunit intercept handles the precision boundary;
 6/8 current anchors reject the old equality. The original B4.19 failed case,
@@ -1153,6 +1006,8 @@ gap and counts remain unknown. Durable before-call/prefix evidence and native
 closure passed within 100.30 seconds / 447741952 bytes. No local fidelity,
 fit-cost proxy or full training memory evidence follows. See
 [the review](../validation/b4_20_surrogate_correctness.md).
+
+#### Current stop and next slice
 
 The next slice is **B4.21 bounded surrogate correctness failure review**.
 It has not started. Fitting/repair/confirmation still require
@@ -1197,195 +1052,39 @@ search on B5 outcomes.
 - Version new platform contracts, checkpoints, and ML artifacts explicitly.
 - Write a failing test or independent acceptance case before changing numerical behavior.
 - Commit a production contract/runner first; run a read-only plan from its clean merged revision before production execution.
-- Never commit datasets, checkpoints, databases, logs, screenshots, or run results.
+- Keep generated datasets, checkpoints, databases, logs, raw experiment screenshots
+  and run results external. Commit protocols, validation reports and reviewed original
+  presentation assets according to the [repository policy](../repository_policy.md).
 - Close each stage with a validation report, including failed gates.
-- Update README, resume, or title claims only after their supporting gate actually passes.
+- Update current status and the evidence/history indices at slice closeout. Keep
+  AGENTS.md focused on constraints and README focused on stable public usage.
+- Update README, resume, or title claims only after their supporting gate actually passes;
+  routine slice results belong in the linked status and evidence documents.
 
 ## 6. Recommended sequence
 
-The user-defined ML delivery condition changes the order, not PR size or gates:
+The completed sequence is retained in [development history](../development_history.md)
+and the per-slice validation reports. The remaining work follows the current failed
+correctness Gate; documentation maintenance does not start a research slice.
 
-1. **A1.1–A1.4 and Gate A1:** completed as separate slices.
-2. **M3 v1 planning gate:** completed, then superseded before fitting or final
-   evidence because it does not address the full delivery objective.
-3. **B0 development-only feasibility probe and roadmap correction:** completed.
-4. **B1 numerical convergence and learned-quality root cause:** completed without
-   new training, final evidence, or solver changes.
-5. **A3 baseline-affecting solver performance:** completed with paired
-   cross-platform evidence and a frozen larger-mesh uniform ordering policy.
-6. **B2 workload/mesh headroom pilot:** completed; Gate B2 failed. Conditional
-   oracle headroom did not overcome large-reference nonconvergence or the
-   unchanged learned panel's charged time gap.
-7. **B2.1 large-mesh/high-volume convergence intervention:** completed; all
-   twelve uniform references passed under a separately versioned opt-in rule,
-   but the unchanged learned panel remained slower after full charges.
-8. **B2.2 bounded learned-prototype plan and data-feasibility gate:** completed;
-   the control/candidate and 522-case development boundary are fixed, but the
-   61-case sentinel failed 53/61 and fitting did not begin.
-9. **B2.3 bounded data-feasibility repair:** completed; one versioned
-   240-update budget passed all 61 fixed sentinel cases while preserving the
-   previous 53 accepted outputs.
-10. **B2.4 development labels:** completed; all 522 versioned labels and their
-    artifact, numerical, population, and resource audits passed.
-11. **B2.5 prototype fitting and screen:** completed; the six fixed fits and
-    all 54 validation cases were audited, but the learned-prototype Gate
-    failed after full fallback charges.
-12. **B2.6 intermediate-trajectory target:** completed; 480 targets, three
-    fits, and the full new 12-case screen were audited, but no new seed met
-    the fallback-inclusive two-scale feasibility Gate.
-13. **B2.7 global-load representation repair:** completed; the complete
-    three-fit, 12-case screen improved seeds 17/29 over B2.6 but failed the
-    two-scale and direction-wise feasibility Gate.
-14. **B2.8 quality/solver-basin intervention:** completed; the fixed y-load
-    midpoint start changed actual trajectories but did not reduce failures
-    or pass the two-scale/direction-wise charged-speed Gate on 12 new cases.
-15. **B2.9 vector point-load conditioning:** completed; two seeds had
-    zero fallbacks and passed both scale-mean bounds, but both exceeded the
-    large-y direction bound, so the fixed feasibility Gate failed.
-16. **B2.10 sensitivity-weighted trajectory objective:** completed 480 weights
-    and three fits; the frozen screen stopped at 9/12 cases because a
-    mandatory uniform reference failed at 240 updates. Its Gate failed.
-17. **B2.11 versioned reference-budget repair:** completed; twelve old/new
-    sentinel pairs and twelve fresh references passed, but neither fixed
-    model panel passed the full 132-outcome charged-speed Gate.
-18. **B2.12 spatial-context CNN:** completed; 12 fresh references, three
-    fits, and 132 outcomes passed their completion/resource audits, but
-    no new seed met the two-scale/direction-wise learned Gate.
-19. **B2.13 workload-aware routing/rejection policy:** completed; twelve
-    fresh references and 144 fully charged outcomes passed the small
-    development Gate, but the router did not beat context 43 on this cohort.
-20. **B2.14 larger development confirmation:** completed; 24/24 fresh
-    references and 192/192 outcomes passed completeness/quality/resource
-    audits, but no policy passed the fixed scale/direction Gate.
-21. **B2.15 position-aware routing/reliability intervention:** completed;
-    24/24 references and 192/192 outcomes passed completeness and quality
-    audits, but the new route failed its direction and improvement Gate.
-22. **B2.16 method-class reassessment:** completed; 48 exposed cases and
-    384 outcomes passed independent read-only audits. Perfect selection
-    has headroom, but coarse-cell transfer failed in both directions;
-    one bounded online early-reliability probe is warranted.
-23. **B2.17 early-reliability probe:** completed; the four-case exposed
-    sentinel met cost caps but missed three terminal failures and stopped
-    before fresh-case execution.
-24. **B2.18 solver-anchored new-mechanism assessment:** completed; the
-    four exposed cases retained three terminal failures after a paid
-    physical-state anchor, so no fresh case was opened.
-25. **B2.19 learning-side quality-basin repair:** completed; a paid
-    uniform-state sensitivity input improved held-out density MSE but
-    failed the 12-case, 84-outcome development Gate.
-26. **B2.20 operational checkpoint selection:** completed; three fits,
-    12-case operational selection, and 24-case independent screen were
-    complete, but no selected seed passed, and 0/6 high-volume large-y
-    selected attempts passed terminal quality.
-27. **B2.21 terminal-design learning target:** completed; 24 new
-    references, twelve validation targets, three fits, and 168 screen
-    outcomes passed completeness audits, but the learned Gate failed
-    and 0/6 high-volume large-y new attempts passed terminal quality.
-28. **B2.22 high-volume y-direction specialist:** completed; 24 references,
-    three fits, and 168 fully charged screen outcomes passed completeness,
-    but the route failed its 4/6 high-y quality and two-scale speed Gates.
-29. **B2.23 large-y load-position coverage and label feasibility:**
-    completed; all 30 new uniform labels and independent numerical,
-    identity, resource, and artifact audits passed the frozen data Gate.
-30. **B2.24 expanded-label training intervention:** completed; the
-    24-reference, three-fit, 168-outcome screen repaired 0/6 to 6/6
-    matched high-volume large-y quality but failed the full speed Gate.
-31. **B2.25 residual large-grid quality and cost diagnosis:** completed;
-    all B2.24 fixed outcomes were checksum-bound and audited without
-    fitting or tuning. The frozen speed-only bounds select one joint
-    generalist mechanism for a fresh screen; no acceleration claim follows.
-32. **B2.26 joint non-specialist quality and refinement intervention:**
-    completed; 24 references, three weighted terminal fits, and 240
-    matched outcomes passed completeness/resource checks. No seed met
-    the large-scale speed Gate despite one improved seed; B3 stays closed.
-33. **B2.27 middle-volume position coverage and label feasibility:**
-    completed; all 60 disjoint large-grid y/z labels passed independent
-    numerical, artifact, identity, and resource checks, with no fit or
-    learned screen.
-34. **B2.28 middle-volume training intervention:** completed; 24 fresh
-    references, three fits, twenty diagnostics, and 168 charged outcomes.
-    All three expanded seeds passed the bounded development Gate with
-    zero failures; larger independent confirmation remains required.
-35. **B2.29 larger independent development confirmation:** completed;
-    48 references and 432 charged outcomes passed complete audit.
-    Expanded seeds 17 and 43 passed the frozen Gate; seed 29 failed.
-    Both expanded large-y quality cells passed 9/9.
-36. **B3 new versioned ML contract and data gate:** **B3.1** completed
-    the contract and metadata exposure audit. **B3.2** completed the
-    frozen catalog, memberships, fingerprints, and access guards with
-    exact hash and byte comparisons. **B3.3** completed guarded versioned
-    label/reference materialization and charged recovery/audits, tested with
-    synthetic states. **B3.4** then passed the complete production data
-    Gate: 560/560 labels and 48/48 screening references, zero failures,
-    complete independent quality/provenance/stratum audits and resources
-    within the frozen caps. No model fit or final artifact access.
-37. **A2.1–A2.2 process isolation** before expensive final ML evaluation, in
-    separate PRs. A2.1 worker protocol and A2.2 durable ownership/recovery
-    are complete. Gate A2 remains open pending A2.3–A2.4.
-38. **B4 fitting, reliability, and freeze** only after B3 passes. **B4.1**
-    completed twelve fixed fits and independent artifact/selection/resource
-    audits; **B4.2** completed all 720 fixed screen outcomes but failed Gate B4.
-    **B4.3** completed its read-only diagnosis. **B4.4** passed the frozen
-    timing/checkpoint engineering Gate with 76/76 numerical outcomes and
-    100/100 terminal audits. **B4.5** passed its bounded weighted-terminal
-    development Gate after three fits, 48 references, 576 charged outcomes and
-    all 644 terminal-state audits. W/17 and W/43 passed; W/29 failed reliability;
-    W/17 was the fixed development primary. **B4.6** completed 96 references,
-    1,152 outcomes and 1,291 independent terminal checks but failed confirmation:
-    W/17 had two failures, W/29 four and W/43 one, with no eligible W primary.
-    **B4.7** passed its bounded spatial-objective rollback Gate with 48 references,
-    576 outcomes and fixed P/17 zero failures/fallbacks. P/17 and P/43 passed;
-    P/29 retained three failures and P/43 one. **B4.8** completed 96 references,
-    1,152 outcomes and all 1,295 independent terminal checks, but failed larger
-    confirmation: fixed P/17 paid one quality fallback; P/29 had four and P/43
-    one. **B4.9** completed independently audited read-only diagnosis of the
-    complete failed confirmation, preserving all failures and costs.
-    **B4.10** completed nine references and 108 sentinel outcomes but failed:
-    four known failures were repaired, one new P/17 convergence failure appeared,
-    and both fixed-primary cost bounds were exceeded. All 48 fresh cases remain
-    sealed. **B4.11** completed its independently audited read-only review of
-    132 terminal classifications and 24 prepolish certificates, preserving
-    every failure and charge. **B4.12** passed its nine-reference/108-query
-    exposed preservation sentinel, then completed 48 fresh references,
-    576 outcomes and all independent audits. Its fresh Gate failed: fixed
-    P/17 retained one converged quality fallback, so no primary was eligible.
-    Full closure, including its retained recovery without numerical reruns,
-    charged 8,486.600 seconds. **B4.13** completed independently audited
-    read-only review of both complete panels and all 1,101 classifications,
-    preserving every failure and charge within 107.78 seconds / 109,936,640
-    bytes. **B4.14** passed its independently reconstructed read-only review
-    of 684 certified compact rows and six fixed mechanisms within 50.39
-    seconds / 42,287,104 bytes, preserving every failed Gate and charge.
-    **B4.15** completed the frozen eight-train-case / 200-solve adjoint probe
-    with 64/64 directional checks and 408/408 numerical conditions passing,
-    but failed its prospective fit-cost Gate (60,339.394 versus 7,200 seconds).
-    Complete new charge was 84.33 seconds / 510,836,736 bytes. **B4.16** passed
-    independent read-only reconstruction of all 48 observations and 818
-    arithmetic conditions within 55.99 seconds / 305,807,360 bytes,
-    preserving the failed Gate. **B4.17** completed all 96 paired measurements,
-    96 phase intervals, 256 new solves and 768 independent numerical conditions,
-    but failed its new cost Gate (58,257.458 versus 7,200) within
-    112.34 seconds / 486,866,944 bytes. **B4.18** passed its independently
-    audited read-only review of all 96 paired observations, 96 phase intervals
-    and six fixed methods, preserving all failed Gates and charges within
-    86.13 seconds / 301252608 bytes. **B4.19** froze one signed tangent
-    and stopped at its anchor-normalizer integrity check. No complete
-    numerical panel, local fidelity or fit-cost proxy was produced. Missing
-    case/count/value fields remain unknown; no rerun or tolerance change
-    occurred. Metadata-only resource closure paid 73.93 seconds /
-    311902208 bytes. **B4.20** then completed its finite correctness review with
-    32 new FEM solves and 984 independent numerical conditions (983/984
-    passing; one FD bound failure retained), durable
-    before-call records and separately audited serialized/continuous states.
-    Complete new charge was 100.30 seconds / 447741952 bytes; original failed
-    fields remain unknown. Next: **B4.21 bounded surrogate correctness failure review**;
-    no further probe or fit starts automatically.
-    **B5 final evaluation** only after a passing repair,
-    independent confirmation and the complete new B4 Gate pass.
-39. **A2.3–A2.4 and A4** as platform requirements and resources justify them.
+1. **B4.21 bounded surrogate correctness failure review:** separately register its
+   finite read-only boundary. Preserve the complete failed B4.20 panel, B4.19's
+   unknown fields, original tolerances and every prior charge. No numerical rerun,
+   fidelity/cost probe or fit begins automatically.
+2. **Any subsequent correctness or objective-feasibility intervention:** require a
+   separate prospective contract and its own correctness, fidelity, compute and
+   full training-memory evidence. The failed exact-FEM candidate remains stopped;
+   no cache/ordering, epoch/population/physics-frequency search is authorized.
+3. **Learned repair and independent confirmation:** preserve fixed P/17, all
+   controls, failures and charged comparisons. A bounded development pass alone
+   cannot open final evaluation or substitute another seed for the fixed primary.
+4. **Compatible final contract and B5:** only after the complete new B4 Gate passes,
+   freeze the compatible method and run the one-time ID/OOD/replication sequence.
+5. **A2.3–A2.4 and A4:** complete optimizer recovery, cancellation/resource bounds
+   and controlled delivery in separate platform slices as requirements justify.
 
-After each completed independent slice, report its gate, evidence, limitations,
-and the next slice, then wait for a new user instruction before starting it.
+After each completed independent slice, report its Gate, evidence, limitations
+and next slice, then wait for a new user instruction before starting it.
 
 ## 7. Stage completion evidence
 

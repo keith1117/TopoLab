@@ -1,328 +1,58 @@
 # TopoLab — Reproducible 3D Topology Optimization Platform
 
-TopoLab is an independently implemented 3D SIMP topology-optimization platform. It
-combines a validated sparse finite-element and optimization core, typed HTTP and
-persistence boundaries, a React results workspace, and reproducible learned
-warm-start experiments.
+TopoLab independently implements structured Hex8 finite elements and 3D SIMP
+minimum-compliance optimization, with a local web workspace and reproducible
+ML warm-start experiments.
 
-Version `1.0.0` consolidates the completed numerical, platform, benchmark, and
-experiment evidence. Gates N1, N2, P1, and M0 passed. The frozen M1 comparison was
-negative or inconclusive, and the pre-registered M2 follow-up stopped at its failed
-data gate after 10 of 756 cases did not converge. Uniform initialization therefore
-remains the operational default; TopoLab makes no learned-acceleration claim.
+**Active v2 development.** The historical `v1.0.0` release is complete; full v2
+flagship delivery still requires reproducible, same-quality learned end-to-end
+acceleration. Uniform initialization remains the operational default. Current
+progress and evidence are maintained in the [documentation](docs/README.md).
 
-Current v2 work follows the [active roadmap](docs/planning/TopoLab_v2_development_roadmap.md).
-The [B3 data Gate](docs/validation/b3_4_data_gate.md) and
-[B4.1 fixed fitting audit](docs/validation/b4_1_fixed_fitting.md) passed with
-all twelve preregistered fits retained. The complete
-[B4.2 development screen](docs/validation/b4_2_development_screen.md) retained
-all 720 outcomes but failed its direction/reliability Gate. No primary was
-frozen; final evaluation remains sealed. The
-[B4.3 diagnosis](docs/validation/b4_3_failure_cost.md) found timing dispersion
-and distinct terminal-quality/convergence failures. The
-[B4.4 engineering repair](docs/validation/b4_4_engineering.md) passed its fixed
-76-query numerical, timing, persistence and resource checks. The
-[B4.5 weighted-terminal experiment](docs/validation/b4_5_weighted_terminal.md)
-completed three fits, 48 fresh references and 576 fully charged outcomes. Seeds
-17/43 passed its bounded development Gate with zero fallbacks; seed 29 failed
-reliability. The development primary was seed 17. The
-[B4.6 independent confirmation](docs/validation/b4_6_development_confirmation.md)
-completed 96 references and all 1,152 outcomes but failed: W/17 had two
-fallbacks, W/29 four and W/43 one. The
-[B4.7 spatial-objective rollback](docs/validation/b4_7_spatial_rollback.md)
-completed 48 fresh references and 576 fully charged outcomes. P/17 and P/43
-passed the bounded repair Gate; fixed P/17 had zero failures/fallbacks, while
-P/29 retained three and P/43 one. The
-[B4.8 larger rollback confirmation](docs/validation/b4_8_rollback_confirmation.md)
-completed 96 new references, 1,152 outcomes and all independent audits, but
-failed: fixed P/17 had one quality failure/fallback, violating its zero-failure
-requirement. P/17 and P/43 passed single-seed criteria; P/29 retained four
-failures and P/43 one. The
-[B4.9 read-only diagnosis](docs/validation/b4_9_confirmation_diagnosis.md)
-audited the complete confirmation and identified a physical-plateau quality
-gap in fixed P/17. The
-[B4.10 fixed post-plateau probe](docs/validation/b4_10_post_plateau_polish.md)
-completed nine references and all 108 sentinel outcomes. It repaired four known
-large-y failures but introduced one P/17 convergence failure and exceeded both
-fixed-primary cost bounds, so its Gate failed and all 48 fresh cases remain
-sealed. The [B4.11 read-only review](docs/validation/b4_11_polish_diagnosis.md)
-independently audited all 132 terminal classifications and 24 prepolish
-certificates, preserving the failed Gate. The
-[B4.12 candidate terminal-witness preservation probe](docs/validation/b4_12_terminal_preservation.md)
-passed its nine-reference/108-query exposed sentinel, then completed 48 fresh
-references, all 576 outcomes and independent audits. Its fresh Gate failed:
-fixed P/17 retained one converged quality failure/fallback, violating the
-zero-failure primary requirement. Full resource closure, including a retained
-closure-only recovery, charged 8,486.600 seconds within frozen caps. The
-[B4.13 read-only preservation review](docs/validation/b4_13_preservation_diagnosis.md)
-independently audited both complete panels and 1,101 terminal classifications.
-The fresh P/17 failure retains convergence but misses compliance quality;
-the fallback-free large-y generalist mean remains 1.012013. Diagnostic charge
-was 107.78 seconds. The
-[B4.14 generalist method review](docs/validation/b4_14_generalist_method_review.md)
-passed independent reconstruction of all 684 certified rows and six fixed
-mechanism dispositions within 50.39 charged seconds. It preserves the failed
-scientific Gate and recommended the bounded offline compliance-adjoint probe.
-[B4.15](docs/validation/b4_15_offline_compliance_adjoint.md) completed eight
-training cases and 200 FEM solves with all 64 directional checks passing, but
-failed the frozen prospective fit-cost Gate: 60,339.394 seconds versus 7,200.
-Its complete charge was 84.33 seconds.
-[B4.16](docs/validation/b4_16_offline_adjoint_cost_review.md) independently
-reviewed all 48 retained timings and preserved that failed cost Gate.
-Even zero small physics plus minimum observed large cost remains above the
-budget; phase costs were unmeasured at that stage. New charge was 55.99 seconds.
-[B4.17](docs/validation/b4_17_prepared_fem_probe.md) retained all 96 paired
-measurements, six phases per fixture and 256 new FEM solves with all 768
-independent numerical conditions passing. Its prepared-setup prospective
-cost Gate failed: 58,257.458 seconds versus 7,200, with complete new
-charge 112.34 seconds.
-[B4.18](docs/validation/b4_18_fem_objective_method_review.md) independently
-reviewed all paired timings/phases and six methods within 86.13 charged seconds,
-preserving the failed cost Gate.
-[B4.19](docs/validation/b4_19_local_compliance_surrogate.md) froze a signed
-train-only tangent but stopped at its anchor-normalizer integrity check.
-The full numerical panel, local fidelity and fit-cost proxy remain unevaluated;
-the failed attempt and unknown numerical fields are retained. Metadata-only
-resource closure paid 73.93 seconds.
-[B4.20](docs/validation/b4_20_surrogate_correctness.md) completed its finite
-stored-normalizer tangent correctness review:32 new FEM solves and
-984 independent conditions, with983/984 passing and one directional
-error above1e-4. The correctness Gate failed; durable counters/prefixes are retained.
-New charge was 100.30 seconds. Local fidelity, fit cost and full training
-memory remain unevaluated/pending. Next is B4.21's bounded surrogate
-correctness failure review.
-P/17 remains unrepaired and B5 sealed.
-Uniform remains the operational default.
+## Capabilities
 
-## Scope
+- Sparse finite-element assembly and solving, density filtering and OC updates.
+- Typed API, local process workers, cancellation and SQLite run persistence.
+- React workspace for problem setup, run history, convergence and 3D density views.
+- Versioned experiment contracts, independent quality audits and charged fallbacks.
 
-The first implementation targets a structured rectangular Hex8 mesh, isotropic
-linear elasticity, small deformation, single-load-case minimum-compliance SIMP,
-point and face loads, density filtering, and an Optimality Criteria
-update.
+Scope: structured rectangular meshes, isotropic linear elasticity, small
+deformation and a single load case with point or face loads. Optimizer
+checkpoint/resume, hosted production operation and general ML acceleration
+remain outside the current delivery evidence.
 
-Development is gated in this order:
+## Run locally
 
-1. validate the finite-element and SIMP numerical core;
-2. benchmark sparse assembly and solving;
-3. add API, job execution, persistence, and visualization;
-4. generate versioned cases and evaluate learned density-field warm starts.
-
-## Version 1 limits
-
-- unstructured meshes or CAD import;
-- nonlinear, dynamic, thermal, or multi-physics analysis;
-- multiple materials or manufacturing constraints;
-- GPU finite-element solving;
-- an end-to-end neural replacement for the physics solver;
-- distributed or process-isolated workers, authentication, and quotas; and
-- a hosted production deployment or public online demo.
-
-The sparse numerical path has reproducible performance evidence, but the project does
-not claim universal scalability. SQLite restart recovery preserves run records; it is
-not optimizer checkpoint/resume.
-
-## Release evidence
-
-| Area | Evidence | Decision |
-|---|---|---|
-| Hex8 finite elements | [`docs/validation/n1_fem_validation.md`](docs/validation/n1_fem_validation.md) | Gate N1 passed |
-| SIMP optimization | [`docs/validation/n2_optimization_validation.md`](docs/validation/n2_optimization_validation.md) | Gate N2 passed |
-| API and run isolation | [`docs/validation/p1_platform_validation.md`](docs/validation/p1_platform_validation.md) | Gate P1 passed |
-| Sparse performance | [`docs/validation/sparse_solver_benchmark.md`](docs/validation/sparse_solver_benchmark.md) | Four scales benchmarked |
-| M0 data foundation | [`docs/validation/m0_catalog_v2_materialization.md`](docs/validation/m0_catalog_v2_materialization.md) | Gate M0 passed, 160/160 labels |
-| M1 training and held-out evaluation | [`docs/validation/m1_training.md`](docs/validation/m1_training.md), [`docs/validation/m1_held_out_evaluation.md`](docs/validation/m1_held_out_evaluation.md) | No learned-acceleration claim |
-| M2 bounded follow-up | [`docs/validation/m2_catalog_materialization.md`](docs/validation/m2_catalog_materialization.md) | Data gate failed; fitting not started |
-| v1 release verification | [`docs/validation/v1_release_validation.md`](docs/validation/v1_release_validation.md) | Full locked test, build, package, and repository audit passed |
-
-## Development setup
-
-Requirements: Python 3.12, [`uv`](https://docs.astral.sh/uv/), and Node.js 24 or later.
+For the numerical demo, install Python 3.12 and [uv](https://docs.astral.sh/uv/):
 
 ```bash
 uv sync --dev --locked
-uv run ruff check .
-uv run mypy src
-uv run pytest
-
-cd frontend
-npm ci
-npm run typecheck
-npm test
-npm run build
-```
-
-## Canonical local demo
-
-Run the versioned `canonical-demo.v1` problem with one command after installing the
-locked Python environment:
-
-```bash
 PYTHONPATH=src uv run --locked python -m topolab.demo --output-dir /tmp/topolab-demo
 ```
 
-The command prints one JSON line with the run ID, terminal status, convergence flag,
-compliance, final physical volume fraction, and absolute result path. The result file
-contains the complete public run snapshot, including the problem, iteration history,
-and final density fields. Choose an output directory outside any Git repository;
-omitting `--output-dir` creates a new temporary directory. The example input is
-[`src/topolab/examples/canonical_demo_v1.json`](src/topolab/examples/canonical_demo_v1.json)
-and can also be submitted unchanged to `POST /runs`.
-
-This small `4 x 2 x 2` cantilever is a local numerical demonstration. It does not
-establish a hosted demo, production service, or broad performance claim. A1.1 smoke
-evidence is recorded in
-[`docs/validation/a1_1_canonical_demo.md`](docs/validation/a1_1_canonical_demo.md).
-
-## Local API and frontend stack
-
-With Docker and Compose installed, start the A1.2 local stack from the repository root:
+For the API and frontend, use Docker with Compose from the repository root:
 
 ```bash
 docker compose up --build -d
 ```
 
-Open <http://127.0.0.1:8080>. The frontend serves its built assets and sends `/runs`
-requests through the same-origin proxy to the API. The API persists run records in a
-Docker named volume. For a command-line check, submit the unchanged canonical case:
+Open <http://127.0.0.1:8080>. See [getting started](docs/getting_started.md) for the
+walkthrough, result format and local-stack limits.
 
-```bash
-curl -fsS -X POST -H 'Content-Type: application/json' \
-  --data-binary @src/topolab/examples/canonical_demo_v1.json \
-  http://127.0.0.1:8080/runs
-```
+## Documentation
 
-The response contains a `run_id`; inspect it at
-`http://127.0.0.1:8080/runs/<run_id>`. Stop containers with `docker compose down`;
-the named volume remains for later starts. `docker compose down -v` also deletes the
-database and run history. The stack is bound to loopback and is intended for local
-demonstration. The current default uses the A2.1
-[local process worker](docs/platform_worker_protocol.md) and A2.2
-[leased run ownership](docs/run_ownership.md). It has no authentication,
-resource quotas, or optimizer checkpoint/resume. Build and smoke evidence is recorded
-in [`docs/validation/a1_2_local_stack.md`](docs/validation/a1_2_local_stack.md).
+| Entry | Purpose |
+|---|---|
+| [Documentation guide](docs/README.md) | Architecture, usage, contracts and evidence |
+| [Project status](docs/project_status.md) | Current gate, stopping boundary and next slice |
+| [Planning](docs/planning/README.md) | Roadmap, overall plans and frozen slice protocols |
+| [Validation](docs/validation/README.md) | Numerical checks, experiments and retained failures |
+| [Contributing](CONTRIBUTING.md) | Development checks and repository policy |
 
-The [architecture diagram](docs/architecture.md) and
-[recorded local walkthrough](docs/demo.md) explain the implemented data flow,
-restart behavior, cancellation, convergence, and 3D result view. Their evidence and
-limits are recorded in
-[`docs/validation/a1_3_architecture_demo.md`](docs/validation/a1_3_architecture_demo.md).
+## Provenance and license
 
-## Clean Linux stack smoke
+TopoLab's implementation is independently derived from published SIMP and Hex8
+equations. The unlicensed Hack3D reference is used only for historical behavior
+comparison; see [PROVENANCE.md](PROVENANCE.md).
 
-From a fresh Linux checkout with Docker Engine, Compose, and Python 3 installed, use
-this disposable project to repeat the A1.4 end-to-end check:
-
-```bash
-docker compose -p topolab-a14 up --build --wait -d
-python3 scripts/a1_clean_linux_smoke.py
-docker compose -p topolab-a14 down -v
-```
-
-The build installs locked Python and frontend dependencies inside the images. The
-smoke reads the built frontend and its JavaScript asset, submits the unchanged
-canonical problem through `/runs`, checks its result and the SQLite file, restarts
-the API, and verifies that the terminal result and run-history entry survive. It
-prints one JSON summary with elapsed times. The final command removes only this
-project's disposable database volume. Run it on a machine where local port `8080`
-is available; the stack serves only `127.0.0.1`.
-
-The same path runs on a fresh Ubuntu runner in CI. Its recorded environment,
-timings, and Gate A1 decision are in
-[`docs/validation/a1_4_clean_linux_smoke.md`](docs/validation/a1_4_clean_linux_smoke.md).
-
-## Repository map
-
-```text
-docs/
-  numerical_conventions.md     Numerical definitions that code and tests must follow
-  ml_experiment_contract.md    Frozen M0 case, representation, split, and evaluation rules
-  reference_baseline.md        Frozen upstream reference and known limitations
-  planning/                    Admissions, schedule, and implementation planning
-  validation/                  Gate evidence, thresholds, results, and limitations
-src/topolab/                   TopoLab package and finite-element foundation
-tests/                         Package and numerical convention tests
-frontend/                      React/TypeScript optimization workspace
-```
-
-The platform contract and run lifecycle are documented in
-[`docs/platform_contract.md`](docs/platform_contract.md); the additive persistence
-contract is in [`docs/run_persistence.md`](docs/run_persistence.md).
-The [v2 development roadmap](docs/planning/TopoLab_v2_development_roadmap.md)
-and the other three English planning documents are the working references; Chinese
-companion versions are available in the same directory for reading.
-Frontend scope and local development are documented in
-[`docs/frontend.md`](docs/frontend.md).
-The first M0 data and evaluation contract is documented in
-[`docs/ml_experiment_contract.md`](docs/ml_experiment_contract.md). Its typed manifest,
-recoverable executor, bounded content-identified catalog, and safe production
-entrypoint are implemented, together with the fixed uniform, physics-heuristic, and
-training-only nearest-neighbor runner. The v1 attempt and its four terminal
-non-convergence failures are documented in
-[`docs/validation/m0_catalog_materialization.md`](docs/validation/m0_catalog_materialization.md);
-the zero-failure v2 execution and Gate M0 decision are documented in
-[`docs/validation/m0_catalog_v2_materialization.md`](docs/validation/m0_catalog_v2_materialization.md).
-The frozen M1 fitting boundary, model, loss, budget, and checkpoint-selection rule
-are documented in [`docs/m1_training_contract.md`](docs/m1_training_contract.md).
-Plan the production fit without opening label artifacts or writing checkpoints with:
-
-```bash
-PYTHONPATH=src uv run python -m topolab.training_cli \
-  --data-root <external-m0-v2-root> \
-  --artifact-root <external-m1-root>
-```
-
-Add `--execute` only for the reviewed five-seed production run. Test and OOD labels
-remain outside this entrypoint's fitting path.
-The completed production run, five selection/checkpoint hashes, runtime, resource
-use, and current claims boundary are recorded in
-[`docs/validation/m1_training.md`](docs/validation/m1_training.md).
-The completed held-out comparison, artifact hash, per-seed results, failure audit,
-and negative/inconclusive M1 gate decision are recorded in
-[`docs/validation/m1_held_out_evaluation.md`](docs/validation/m1_held_out_evaluation.md).
-A single bounded follow-up is pre-registered in
-[`docs/m2_experiment_contract.md`](docs/m2_experiment_contract.md). It changes data
-coverage and adds a finite validation-calibrated reliability gate while keeping the
-M1 model and fitting recipe fixed. Its materialization audit and failed data-gate
-decision are recorded in
-[`docs/validation/m2_catalog_materialization.md`](docs/validation/m2_catalog_materialization.md);
-the experiment stopped before fitting so the reserved ID-test and OOD evidence was
-not used for learned evaluation.
-
-## Sparse solver benchmark
-
-The fixed local benchmark uses isolated single-threaded workers, one cold numerical
-run, and three repeated runs at each of four mesh sizes. On the recorded Apple M2
-environment, the `45 x 18 x 9` case completed with 726.44 MiB peak process RSS; one
-equivalent dense global `float64` matrix would require an estimated 5.12 GiB before
-factorization or workspace. These results support the sparse solver design without
-claiming that the entire platform is universally scalable.
-
-Reproduce the machine-readable report with:
-
-```bash
-PYTHONPATH=src uv run python -m topolab.benchmark \
-  --repeated-runs 3 \
-  --output results/sparse_solver_benchmark.json
-```
-
-Methodology, full measurements, numerical guards, and limitations are recorded in
-[`docs/validation/sparse_solver_benchmark.md`](docs/validation/sparse_solver_benchmark.md).
-
-## Provenance
-
-TopoLab is not a fork or redistribution of the Hack3D reference implementation.
-That repository declares no open-source license. Its behavior and fixed commit are
-documented in [PROVENANCE.md](PROVENANCE.md); TopoLab's code was implemented
-independently from published SIMP and Hex8 references.
-
-## Claims policy
-
-`Validated` refers only to the numerical behaviors covered by the N1/N2 evidence.
-`Benchmark` claims refer only to the recorded sparse cases and environment. The
-project does not describe the platform as universally scalable or ML-accelerated.
-
-## License
-
-TopoLab's original code and documentation are licensed under the [MIT License](LICENSE).
-This license does not apply to external repositories, papers, or datasets.
+Original TopoLab code and documentation use the [MIT License](LICENSE).
