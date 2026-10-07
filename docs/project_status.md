@@ -1,86 +1,85 @@
 # Current project status
 
-Updated: 2026-10-06. Latest completed research slice: **B4.25 bounded active-set method review**.
-Read-only acceptance/native resource proof passed; all original scientific failures remain.
+Updated: 2026-10-07. Latest completed slice: **B4.26 bounded active-set-aware
+correctness and cost preregistration**. Read-only contract acceptance passed;
+all original scientific failures remain and no numerical execution occurred.
 
 ## Delivery and operational boundary
 
-The historical `v1.0.0` release and Gates N1, N2, P1, M0, A1 and A3 are complete.
-A2.1–A2.2 implemented local process workers and durable run ownership; the full
-A2 Gate remains open pending optimizer recovery and cancellation/resource bounds.
-M1 did not establish acceleration; M2 failed its data Gate. M3 v1 was superseded
-before fitting or final evaluation. Their results and exposure boundaries remain.
+The historical `v1.0.0` release and Gates N1, N2, P1, M0, A1 and A3 remain
+complete. A2.1–A2.2 are complete; the full A2 Gate awaits optimizer recovery
+and cancellation/resource bounds. M1 did not establish acceleration; M2
+failed its data Gate; M3 v1 was superseded before fitting/final evaluation.
+Full v2 flagship delivery still requires reproducible, same-quality learned
+end-to-end acceleration on a prospectively defined workload. **Uniform remains
+the operational default.** No learned-acceleration/full-delivery claim is allowed.
 
-Full v2 flagship delivery requires reproducible, same-quality learned end-to-end
-acceleration on a prospectively defined workload. **Uniform remains the operational
-default.** No final acceleration or full-delivery claim is allowed.
-
-B3's [complete data Gate](validation/b3_4_data_gate.md) and the twelve fixed
+B3's [complete data Gate](validation/b3_4_data_gate.md) and twelve fixed
 [B4.1 fits](validation/b4_1_fixed_fitting.md) passed. The original
-[B4.2 development Gate](validation/b4_2_development_screen.md) failed and produced
-no primary or freeze. Later bounded development passes did not clear the required
-independent confirmations. Fixed P/17 remains unrepaired; outcome-based primary
-replacement is forbidden. The [complete history](development_history.md) and
-[validation index](validation/README.md) retain every intervening result.
+[B4.2 Gate](validation/b4_2_development_screen.md) failed, producing no primary
+or freeze. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
+All subsequent failures are retained in [history](development_history.md).
 
-## Latest completed result and bounded resource closure
+## Latest completed preregistration
 
-[B4.25's complete method review](validation/b4_25_active_set_method_review.md)
-passed 448 scalar predicates and 2222 independent field comparisons under
-its [prospective protocol](planning/b4_25_active_set_method_review_protocol.md).
-All 64 rows, 35 mask/34 FD failures and 69 exact original failed positions remain,
-with 34 overlapping failed rows. All failed FD rows cross central clipping sets
-and their signed gaps remain compatible with the frozen finite-interval
-decomposition. This establishes no global cause or pointwise-gradient failure
-and repairs no scientific Gate. The six frozen method dispositions select
-preregistration only; no new objective, root, derivative or criterion was implemented.
-All 216 first-inclusive timings are inherited by hash/count from the accepted
-B4.24 audit, not reopened or retimed here. Original rows/cost are byte-identical.
+[B4.26's report](validation/b4_26_active_set_preregistration.md) records
+66 static metadata predicates and 28 independently implemented document/
+metadata checks under the [read-only protocol](planning/b4_26_active_set_preregistration_protocol.md)
+and [authored acceptance contract](planning/b4_26_active_set_acceptance_contract.json).
+This is document acceptance, not numerical correctness or feasible fitting.
+No production artifact payload, root, FEM, objective/gradient, prediction timing,
+fit or final evidence was accessed. Required software validation and publication
+remain separate from scientific evidence.
 
-Exactly one review and one separate stdlib audit ran from clean CI-passed merged
-source. B4.25 pays **80.34<=180 seconds**, including the entire 60 reserve;
-reserve use **40.41/60**, peak new RSS **26492928 bytes**. All five native
-wall/user/system/RSS profiles and final post-exit/ledger proofs passed; no retry.
-The original 57546.072069>7200 proxy remains failed. Two fixed zero-work scenarios
-are sample arithmetic, not feasible-method bounds or new Gates. B4.24's 200.98
-and this charge are additional in a separate prospective accounting view.
+Future evidence must independently check the full pointwise cotangent and
+the complete same-step intervals, including every crossing/piece. Keep all
+original 64 rows/69 failures and 1e-4/2e-4 steps; no smaller-step selection or
+legacy reclassification. Undefined central derivatives and incomplete interval
+coverage stop acceptance. All 32 LOCAL criteria remain unchanged. Prospective
+cost retains three seeds, 200 FULL epochs, 432/76 cases, factor1.25, every
+first timing, failure/reserve and all prior charges, against 7200 seconds.
+Full training memory remains PENDING under the unchanged 4-GiB cap; static
+arrays and sequential RSS cannot certify it. These requirements grant no trial.
 
-[B4.24's scoped v3 acceptance](validation/b4_24_registered_continuation.md)
-remains 2104 predicates/1728 comparisons and total 200.98, new reserve 42.49/60,
-continuation peak 415268864 bytes. Its [original interruption](validation/b4_24_versioned_correctness_failure_review.md),
-both failures, old 76.19 and old 50.53/60 remain unchanged. Historic failed planning
-RSS/child exit, whole-slice peak and memory compliance remain **UNKNOWN**; the
-original memory proof stays incomplete. B4.25's bounded read-only RSS cannot
-complete historical or full training-memory feasibility.
+## Preserved evidence and unresolved failures
 
-## Preserved scientific failures and unresolved evidence
+[B4.25](validation/b4_25_active_set_method_review.md) remains accepted at
+448 predicates/2222 comparisons, new charge 80.34/180, reserve 40.41/60 and
+peak 26492928 bytes. All 64 rows and 69 failed positions remain; the 34 failed
+FD intervals cross clipping sets and are clipping-compatible. This establishes
+no global cause, incorrect pointwise gradient or repaired scientific Gate.
 
-[B4.23](validation/b4_23_versioned_surrogate_feasibility.md) remains failed:
-integrity 3907/3976, with 35 side-mask and 34 FD failures, and full cost
-57546.072069>7200. All 32 LOCAL observations cannot clear failed integrity or
-authorize fitting. Its 432 FEM solves, 816 projections, 143.47-second charge,
-all first timings and original cost object remain. All 851.38 earlier B4.15–23
-charged seconds remain; B4.24 and B4.25 are additional.
+[B4.24 v3](validation/b4_24_registered_continuation.md) retains scoped
+2104/1728 acceptance, total 200.98, new reserve 42.49/60 and continuation
+peak 415268864 bytes. Its [original interruption](validation/b4_24_versioned_correctness_failure_review.md),
+both failures, old 76.19 and old 50.53/60 remain unchanged. Historic failed
+planning RSS/child exit, whole peak and whole memory compliance remain
+**UNKNOWN**; the original memory proof remains incomplete.
 
-[B4.22](validation/b4_22_stable_projection_correctness.md) passed bounded
-1704-condition correctness. [B4.20](validation/b4_20_surrogate_correctness.md)
-remains failed 983/984 at unchanged 1e-4, paying 100.30 seconds. [B4.21](validation/b4_21_correctness_failure_review.md)
-is noncausal. B4.19's actual failed case, gap and counters remain unknown.
-Fixed P/17, all controls and every prior failure/charge are preserved.
+[B4.23](validation/b4_23_versioned_surrogate_feasibility.md) stays failed
+3907/3976: 35 mask/34 FD conditions, all 72 states/216 first-inclusive timings,
+432 FEM/816 projections and 143.47 charge remain. Its original full cost
+57546.072069>7200 remains failed; historical 32/32 LOCAL observations cannot
+clear integrity or authorize fitting. All 851.38 B4.15–23 seconds, B4.24's200.98,
+B4.25's80.34 and all twelve B4.1 fits 3870.204341 remain in later accounting.
+[B4.22](validation/b4_22_stable_projection_correctness.md) passed its bounded
+1704-condition panel. [B4.20](validation/b4_20_surrogate_correctness.md) stays
+failed 983/984 at 1e-4/floor1e-8, paying 100.30. B4.21 remains noncausal;
+B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and next slice
 
-Next is **B4.26 bounded active-set-aware correctness and cost preregistration**, not started.
-Require a separate prospective read-only contract, explicit criteria and research/
-execution boundary. B4.25 grants no new objective, derivative, correctness rule,
-projection/root/FEM candidate, numerical trial, fit or research search. See the
-[English roadmap](planning/TopoLab_v2_development_roadmap.md) and
-[complete report](validation/b4_25_active_set_method_review.md). Stop after B4.25.
+Next is **B4.27 bounded active-set evidence implementation**, not started.
+It is software only under a separate frozen contract: implement and test the
+preregistered evidence checks on synthetic public fixtures. B4.26 grants no
+production payload, objective/root/FEM, timing, numerical trial, fit or search.
+Any later numerical execution requires separate explicit authorization,
+finite budgets, complete independent evidence and clean CI-passed merged source.
+See the [English roadmap](planning/TopoLab_v2_development_roadmap.md). Stop after B4.26.
 
-The failed exact-FEM candidate stops. Alternate cache/ordering, continuation,
-epoch/population/physics-frequency searches, threshold changes and seed replacement
-are not authorized. Preserve every failure, unknown and complete charge.
-Final evidence and all **48 unused B4.10 fresh cases stay sealed**. Passing learned
-repair, independent confirmation, the complete new B4 Gate and a compatible final
-contract remain required before B5. Full v2 delivery remains open and uniform
-remains the operational default; fixed P/17 remains unrepaired.
+The failed exact-FEM candidate stays stopped. No alternate cache/ordering,
+continuation, epoch/population/physics-frequency search, threshold change or
+seed replacement follows. Final evidence and all **48 unused B4.10 fresh cases
+stay sealed**. Preserve every failure, unknown and complete charge. Passing
+learned repair, independent confirmation, the complete new B4 Gate and a
+compatible final contract remain required before B5.

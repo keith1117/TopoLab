@@ -872,3 +872,18 @@ failures/memory unknowns and final/unused-fresh seals remain. No Hack3D material
 or new external scientific/implementation source, production label/model or
 final artifact was accessed or imported. See the
 [complete report](docs/validation/b4_25_active_set_method_review.md).
+
+## B4.26 active-set-aware evidence preregistration
+
+The separately versioned read-only protocol and authored acceptance JSON derive
+prospective evidence requirements from our frozen clipped-volume equations and
+B4.25's strictly fixed-set derivation. They prescribe independently reconstructed
+pointwise cotangents and complete transition-piece intervals while retaining
+every old row, step, tolerance, failure and charge. No numerical map, derivative,
+root, FEM, model or production artifact is implemented or evaluated in this
+slice. The 66/28 checks are document/metadata acceptance, not scientific evidence.
+Local fidelity, complete first-inclusive costs and full training-memory bounds
+remain separate future prerequisites. No new upstream source/code/figure or
+external scientific reference was read or copied. See the
+[protocol](docs/planning/b4_26_active_set_preregistration_protocol.md) and
+[validation report](docs/validation/b4_26_active_set_preregistration.md).

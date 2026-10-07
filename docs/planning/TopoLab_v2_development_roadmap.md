@@ -5,20 +5,20 @@ Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
 B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
 initialization is the operational default and final evaluation stays sealed.
 
-Latest completed: **B4.25 bounded active-set objective-method review —
-read-only acceptance passed**: 448 predicates and 2222 independent field
-comparisons. All 64 rows/69 original failures remain; six method dispositions
-select preregistration only. New charge 80.34/180, reserve 40.41/60,
-peak 26492928 bytes. Original B4.23/B4.20 Gates remain failed; historical
-RSS/whole-memory unknowns and B4.24's 200.98 remain unchanged. See
-[the complete review](../validation/b4_25_active_set_method_review.md) and
-[B4.24's scoped evidence](../validation/b4_24_registered_continuation.md).
+Latest completed: **B4.26 bounded active-set-aware correctness and cost
+preregistration — read-only contract acceptance passed**: 66 static predicates
+and 28 independently implemented document/metadata checks. The prospective
+pointwise/complete-interval, local fidelity, full-cost and training-memory
+requirements grant no numerical execution. B4.23/B4.20 remain failed;
+B4.24 historical RSS/whole-memory unknowns and all charges remain. See
+[the report](../validation/b4_26_active_set_preregistration.md) and
+[frozen protocol](b4_26_active_set_preregistration_protocol.md).
 [Project status](../project_status.md) holds the current boundary;
 [development history](../development_history.md) retains the complete chronology.
 The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-10-06 (B4.25 read-only method review; original scientific Gates remain failed)
+Revised: 2026-10-07 (B4.26 read-only preregistration; original scientific Gates remain failed)
 
 Related documents:
 
@@ -1086,24 +1086,39 @@ missing RSS/whole-memory unknowns remain; full training-memory evidence, fixed
 P/17 repair and independent confirmation stay pending. See
 [the complete report](../validation/b4_25_active_set_method_review.md).
 
+#### B4.26: Read-only correctness and cost preregistration accepted
+
+The separate [protocol](b4_26_active_set_preregistration_protocol.md) and
+[authored acceptance contract](b4_26_active_set_acceptance_contract.json) passed
+66 static metadata predicates and 28 independent document/metadata checks.
+Future evidence separately requires full pointwise cotangents and complete
+same-step interval/transition coverage; all legacy rows, failures and both
+steps remain. Undefined central derivatives or incomplete coverage stop.
+The 32 LOCAL criteria, complete first-inclusive maxima, all prior charges,
+three seeds/200 FULL epochs/432+76 cases/factor1.25 and 7200-second limit remain.
+Full training memory remains pending under 4 GiB; static/sequential evidence
+cannot certify it. No production or numerical execution occurred. This is
+preregistration acceptance, not scientific correctness, cost feasibility or
+learned repair; see [the report](../validation/b4_26_active_set_preregistration.md).
+
 #### Current stop and next slice
 
-**B4.25 is complete.** The frozen ordered decision selects
-**B4.26 bounded active-set-aware correctness and cost preregistration**, not started.
-Require a separately frozen read-only contract and prospective correctness/cost
-criteria; B4.25 grants no new objective, criterion, derivative, root/FEM,
-numerical trial, fit or search. Preserve every original failure, first timing,
-full cost, all historic memory unknowns and seals. B4.25's native arithmetic
-acceptance clears no scientific Gate or full training-memory requirement.
-Ordinary single-slice stopping continues; stop after B4.25.
-The failed exact-FEM candidate stops; no fit, new
-cache/ordering candidate, seed replacement, continuation, epoch/population/
-physics-frequency search, quality threshold change or final access follows.
-Fixed P/17 and all controls remain unchanged/unrepaired. All 48 B4.10 fresh
-cases stay sealed. A passing versioned learned repair and independent
-confirmation remain required before a compatible final contract and B5.
-No retiming, new fit or selection-rule change is allowed under the failed
-original contract. Preserve every result and keep final evidence sealed.
+**B4.26 is complete.** Next is **B4.27 bounded active-set evidence implementation**,
+not started, software only under a separate frozen contract. Implement/test
+these evidence requirements on synthetic public fixtures; no production
+payload, root/FEM, objective/gradient, prediction timing, numerical trial or
+fit is inherited. A later numerical contract needs separate explicit
+authorization, finite stage/whole/reserve budgets, independent evidence,
+durable failures and clean locked CI-passed merged source.
+
+B4.23's 3907/3976 and 57546.072069>7200 remain failed, all 69 failures/first timings
+and every charge retained. B4.20 remains failed; B4.19 case/gap/counts unknown;
+B4.24's historical missing RSS/whole-memory proof remains incomplete. Fixed
+P/17 stays unrepaired and cannot be replaced. No cache/ordering, continuation,
+epoch/population/physics-frequency or quality-threshold search follows. Final
+evidence and all 48 unused B4.10 fresh cases stay sealed. Learned repair,
+independent confirmation, full new B4 Gate and compatible final contract
+remain required before B5. Stop after B4.26.
 
 Compare each model to uniform and non-ML baselines on fallback-inclusive
 validation time, independent compliance, convergence, volume, and failure strata.
@@ -1148,17 +1163,15 @@ search on B5 outcomes.
 ## 6. Recommended sequence
 
 The completed sequence is retained in [development history](../development_history.md)
-and the per-slice validation reports. B4.25 completed its bounded read-only method
-review and native proof; B4.23/B4.20 remain failed, full training memory pending
-and historic RSS unknown. Documentation maintenance starts no research slice.
+and the per-slice validation reports. B4.26 completed read-only preregistration;
+B4.23/B4.20 remain failed, full training memory pending and historic RSS
+unknown. Documentation maintenance starts no numerical research slice.
 
-1. **B4.26 bounded active-set-aware correctness and cost preregistration:** separately
-   freeze the prospective criteria and read-only research/execution boundary.
-   Require independent pointwise/transition evidence, retained original failures,
-   local fidelity, complete first-inclusive cost and full training-memory
-   boundaries before any numerical permission or fit. No new objective,
-   derivative, root/FEM, criterion or numerical trial follows from B4.25.
-   Preserve all charges, historic missing RSS and seals; B4.26 has not started.
+1. **B4.27 bounded active-set evidence implementation:** software only under
+   a separate frozen contract. Implement/test the preregistered independent
+   pointwise and complete-interval evidence on synthetic public fixtures;
+   retain all legacy failures/steps and full fidelity/cost/memory requirements.
+   No production payload or numerical execution is authorized by B4.26.
 2. **Any subsequent correctness or objective-feasibility intervention:** require a
    separate prospective contract and its own correctness, fidelity, compute and
    full training-memory evidence. The failed exact-FEM candidate remains stopped;

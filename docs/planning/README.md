@@ -4,13 +4,15 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-B4.25's [complete read-only method review](../validation/b4_25_active_set_method_review.md)
-passed 448 predicates/2222 independent comparisons and its bounded native proof.
-All original scientific failures, first timings, complete costs and historic
-memory unknowns remain. Its [frozen protocol](b4_25_active_set_method_review_protocol.md)
-grants no new objective, criterion, numerical trial, fit or final access.
-Next **B4.26 bounded active-set-aware correctness and cost preregistration** has not
-started and requires a separate prospective read-only contract. Stop after B4.25.
+B4.26's [read-only preregistration](../validation/b4_26_active_set_preregistration.md)
+passed 66 static metadata predicates and 28 independent document checks. Its
+[protocol](b4_26_active_set_preregistration_protocol.md) and
+[authored acceptance contract](b4_26_active_set_acceptance_contract.json)
+freeze future pointwise/interval, fidelity, full-cost and memory requirements;
+all original failures/charges/unknowns remain. No production or numerical
+execution occurred. Next **B4.27 bounded active-set evidence implementation**
+is software only, not started and requiring a separate frozen contract.
+Stop after B4.26; no payload, trial, fit or final access is inherited.
 
 ## Overall project plans
 
@@ -26,9 +28,8 @@ promises of a completion date or empirical acceleration.
 
 ## Frozen slice protocols
 
-The latest completed slice is [B4.25 bounded active-set objective-method
-review](b4_25_active_set_method_review_protocol.md); its report retains the exact
-source/CI/native boundary and every original failure.
+The latest completed slice is [B4.26 bounded active-set-aware preregistration](b4_26_active_set_preregistration_protocol.md); its report distinguishes
+document acceptance from pending numerical evidence and every old failed Gate.
 
 These preregistrations stay in GitHub so declared methods, populations, resource
 caps and stop rules remain reviewable before execution. Keep existing paths and
@@ -100,6 +101,7 @@ B4.1/B4.2 use those contracts; later B4 slices have the protocols below.
 - [B4.24 registered saved-schema compatibility recovery](b4_24_saved_schema_recovery_protocol.md)
 - [B4.24 owner-approved registered continuation v3](b4_24_registered_continuation_protocol.md)
 - [B4.25 bounded active-set objective-method review](b4_25_active_set_method_review_protocol.md)
+- [B4.26 bounded active-set-aware correctness and cost preregistration](b4_26_active_set_preregistration_protocol.md) · [Acceptance contract](b4_26_active_set_acceptance_contract.json)
 
 B4.24's [original interrupted report](../validation/b4_24_versioned_correctness_failure_review.md)
 and all three registrations retain their paths and bytes. The

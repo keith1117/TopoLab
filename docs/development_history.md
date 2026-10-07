@@ -1,6 +1,6 @@
 # Development history
 
-Retained project-state summaries through the B4.25 bounded active-set method review.
+Retained project-state summaries through the B4.26 bounded active-set preregistration.
 This history was moved from
 `AGENTS.md` during the 2026-10-06 documentation cleanup; all recorded results,
 failures, costs and stopping boundaries are preserved. Statements about the
@@ -622,3 +622,24 @@ access occurred. Uniform stays default, P/17 unrepaired and all final/48 unused
 fresh cases sealed. Next is **B4.26 bounded active-set-aware correctness and cost preregistration**,
 not started; require a separate prospective read-only contract and explicit
 research/execution criteria. Stop after B4.25.
+
+## B4.26 (read-only active-set-aware correctness and cost preregistration)
+
+The separately frozen protocol and authored acceptance contract passed 66 static
+metadata predicates and 28 independently implemented document/metadata checks.
+They retain the unchanged v3 mathematical map, full 64-row/69-failure legacy
+panel and both steps, requiring independent pointwise cotangents and complete
+transition-interval evidence. Undefined central derivatives or incomplete piece
+coverage stop acceptance. LOCAL fidelity, first-inclusive maximum costs, all
+prior charges and 4-GiB full training-memory requirements remain separate.
+No production payload, root/FEM, objective/gradient, prediction timing, fit or
+final access occurred. This passes only preregistration, clearing no scientific
+Gate; B4.23/B4.20 failures, B4.19 unknowns, B4.24's historic memory gap and all
+previous charges remain. See [the report](validation/b4_26_active_set_preregistration.md)
+and [protocol](planning/b4_26_active_set_preregistration_protocol.md).
+
+Next is **B4.27 bounded active-set evidence implementation**, not started and
+software only under a separate frozen contract. No numerical execution or fit
+is inherited. Uniform stays default, P/17 unrepaired and final/all 48 unused
+B4.10 cases sealed. Full training memory, learned repair and independent
+confirmation remain pending. Stop after B4.26.
