@@ -927,3 +927,15 @@ and retain those observed values in durable runtime events. Public metadata-only
 abort regressions verify zero input/numerical calls and rejection before any
 output when the settings are not frozen. This changes no mathematical map,
 tolerance, case, role, budget or seal and opens no production artifact.
+
+## B4.28 closed finite numerical evidence
+
+The separately approved bounded producer and independently implemented auditor
+use the same original TopoLab v3 equations/public FEM primitives and frozen
+eight expanded-train population. New integrity PASS, LOCAL PASS; all
+prior failures/costs/unknowns remain. Generated input/output/journal/profile
+evidence stays external and is hash-bound by the
+[report](docs/validation/b4_28_active_set_numerical_evidence.md). No Hack3D
+material or new external scientific/implementation source was read or copied.
+No model fitting, novel label/reference, retiming, learned repair or final
+access occurred. Full costs/memory and learned confirmation remain unresolved.

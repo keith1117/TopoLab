@@ -22,23 +22,20 @@ The historical `v1.0.0` release remains complete, with its negative M1/M2 eviden
 preserved. B3's data Gate and B4.1 fitting passed; the original B4.2 Gate failed.
 Fixed P/17 remains unrepaired and cannot be replaced after seeing outcomes.
 
-The latest completed slice is **B4.27 bounded active-set evidence implementation**:
-42 synthetic software tests passed for independent full cotangents and exact
-complete-interval certificates. No production evidence/payload, FEM, timing,
-fit or scientific Gate occurred. See the [protocol](docs/planning/b4_27_active_set_evidence_protocol.md)
-and [report](docs/validation/b4_27_active_set_evidence.md).
-B4.23 stays failed 3907/3976 and 57546.072069>7200, retaining all 69 failures;
-B4.20 stays failed and B4.19's actual case/gap/counts unknown. B4.24's 200.98,
-both failures and missing historical RSS/whole-memory proof remain; B4.25's
-80.34 and B4.26's frozen fidelity/cost/full-memory requirements remain unchanged.
-Full training memory, learned repair and independent confirmation stay pending.
-B4.28 is in progress under its separately owner-authorized
-[numerical protocol](docs/planning/b4_28_active_set_numerical_evidence_protocol.md)
-and [finite execution contract](docs/planning/b4_28_active_set_execution_contract.json).
-Production remains pending clean merged exact-head/main-CI-passed source.
-No fit/search/final access follows. Ordinary single-slice waiting remains the
-repository default; the owner's temporary three-slice session may finish B4.28
-then its separately frozen read-only B4.29 review after complete closure/main CI.
+The latest completed slice is **B4.28 bounded active-set numerical evidence**:
+new integrity PASS, LOCAL PASS;
+[report](docs/validation/b4_28_active_set_numerical_evidence.md) binds the single
+attempt and independent audit. New charge 234.60, added cost
+58061.992069>7200; full training memory PENDING/4GiB.
+Preparation native RSS/child-exit proof remains UNKNOWN after its
+retained sandbox sysctl failure; whole resource acceptance is INCOMPLETE.
+B4.23 remains failed3907/3976, all69 failures and old costs/counts remain.
+B4.20 failed; B4.19 actual case/gap/counts unknown; B4.24's200.98, both failures
+and historical RSS/whole-memory gaps remain; B4.25's80.34 remains.
+Next is **B4.29 bounded active-set outcome and cost/full-memory review**,
+separately frozen/read-only after B4.28 closure/main CI. Ordinary waiting
+remains default; the temporary three-slice session may complete this final
+review. No fourth slice, new payload/numerical trial, fit, search or final access.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
 exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,

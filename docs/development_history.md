@@ -666,3 +666,23 @@ execution**, not started and requiring separate explicit numerical authorization
 and a frozen finite execution contract. Uniform stays default, P/17 unrepaired
 and final/48 unused B4.10 cases sealed. Ordinary repository stopping rules remain;
 the owner's temporary at-most-three-slice authorization applies only to this chat.
+
+## B4.28 (bounded active-set numerical evidence and finite execution)
+
+The separately authorized finite eight-train-case protocol executed one native
+attempt under clean merged exact-head/main-CI-passed source. New integrity
+**PASS**, LOCAL **PASS**; new charge **234.60** including FULL60 reserve,
+native resource acceptance **FAIL / INCOMPLETE**. Added cost
+**58061.992069>7200** and full training memory remains
+PENDING/4GiB. Preparation native wrapper exited1 after sandbox sysctl denial;
+its RSS/child-exit proof stays UNKNOWN, with no retry and the full60 reserve
+paid. Later chain peak674037760 cannot repair that gap. All old3976 flags/69 failures,216 first timings,432/816 counts,
+851.38/200.98/80.34 charges, historical memory unknowns and B4.19 unknown actual
+case/gap/counts remain. No retry, retiming, fitted repair, search or final access.
+See [the complete report](validation/b4_28_active_set_numerical_evidence.md) and
+[protocol](planning/b4_28_active_set_numerical_evidence_protocol.md). Source
+PR157, its pre-production thread correction and closed release bind hashes/CI;41 public focused and1241 complete
+software tests passed with earlier software failures preserved. Next is the
+separately frozen read-only **B4.29 outcome and cost/full-memory review**, after
+full closure/main CI and the final permitted session slice. Uniform stays
+default, P/17 unrepaired, final/48 unused cases sealed; no fourth slice follows.

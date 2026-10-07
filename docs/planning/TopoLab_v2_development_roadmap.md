@@ -5,20 +5,18 @@ Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
 B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
 initialization is the operational default and final evaluation stays sealed.
 
-Latest completed: **B4.27 bounded active-set evidence implementation — synthetic
-software acceptance passed**. 42 independent analytic/exhaustive/tampering
-and unchanged-v3 tests cover full pointwise and exact complete-interval proofs.
-No production payload/numerical trial, FEM, timing or fitting occurred.
-B4.26's unchanged fidelity/cost/full-memory requirements, all B4.23/B4.20
-failures, historical unknowns and charges remain. See
-[the report](../validation/b4_27_active_set_evidence.md) and
-[frozen protocol](b4_27_active_set_evidence_protocol.md).
+Latest completed: **B4.28 bounded active-set numerical evidence**. New
+integrity **PASS**, LOCAL **PASS**, new charge **234.60**; added
+cost **58061.992069>7200**, full memory PENDING. All
+old failures/counts/costs/unknowns stay. See
+[the report](../validation/b4_28_active_set_numerical_evidence.md) and
+[frozen protocol](b4_28_active_set_numerical_evidence_protocol.md).
 [Project status](../project_status.md) holds the current boundary;
 [development history](../development_history.md) retains the complete chronology.
 The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-10-07 (B4.27 software implementation; original scientific Gates remain failed)
+Revised: 2026-10-07 (B4.28 finite numerical evidence; original failures retained)
 
 Related documents:
 
@@ -1113,17 +1111,21 @@ payload, FEM, timing, numerical trial or fit occurred. Independent physical/FEM
 origins remain future numerical-audit prerequisites. See
 [the software report](../validation/b4_27_active_set_evidence.md).
 
+#### B4.28: Finite numerical evidence executed and closed
+
+New integrity PASS, LOCAL PASS; single registered attempt and
+independent audit under source main `db9460a743b5` after CI.
+All original populations, steps, tolerances,69 failures and first/failure-inclusive
+costs remain. New charge 234.60, added view 58061.992069>7200.
+Preparation native RSS/child-exit proof remains UNKNOWN after its
+retained sandbox sysctl failure; whole resource acceptance is INCOMPLETE.
+Full training memory PENDING; no fit/search/final access. See
+[report](../validation/b4_28_active_set_numerical_evidence.md).
 #### Current stop and next slice
 
-**B4.27 is complete. B4.28 is in progress**, separately owner-authorized under
-its [finite numerical protocol](b4_28_active_set_numerical_evidence_protocol.md)
-and [execution contract](b4_28_active_set_execution_contract.json). Production
-is pending clean locked CI-passed merged source. Preserve exact populations,
-roles, sources, hashes, tolerances and all original failures/costs. New caps are
-600/stage,1260 whole,1GiB including FULL60 metadata reserve; no budget transfer.
-No fit/search/final follows. The temporary final session slice B4.29 is a
-separately frozen read-only outcome and cost/full-memory review after full
-B4.28 closure/main CI. Session permission does not change the repository default.
+Next is separately frozen/read-only **B4.29 outcome and cost/full-memory review**,
+after full closure/main CI, the last session slice. The ordered route is
+cost-and-full-memory-review. Ordinary waiting remains default; no fourth slice follows.
 
 B4.23 remains failed 3907/3976 and 57546.072069>7200; all 69 failures, first
 timings and charges remain. B4.20 stays failed, B4.19 fields unknown, B4.24's
@@ -1177,15 +1179,14 @@ search on B5 outcomes.
 ## 6. Recommended sequence
 
 The completed sequence remains in [development history](../development_history.md)
-and validation reports. B4.27 passes software acceptance only; original failed
-Gates/costs/unknowns and full-memory/learned-repair requirements remain.
+and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
+cost remains failed and complete native resource acceptance is INCOMPLETE.
+All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **B4.28 bounded active-set numerical evidence preregistration and execution:**
-   in progress under separate explicit owner authorization and frozen finite contract;
-   bind complete original populations/roles/steps, exact source/input hashes,
-   independent physical/pointwise/interval proof and durable full native costs.
-   No permission or budget is inherited from software acceptance. Preserve every
-   original failure and stop dependent work on failed/unknown prerequisites.
+1. **B4.29 bounded active-set outcome and cost/full-memory review:** require
+   complete B4.28 closure/main CI, a separately frozen read-only contract and
+   compact scalar/native/resource metadata only. Retain every prior failure,
+   cost and unknown; no numerical payload, fit, search or final access.
 2. **Any subsequent correctness or objective-feasibility intervention:** require a
    separate prospective contract and its own correctness, fidelity, compute and
    full training-memory evidence. The failed exact-FEM candidate remains stopped;

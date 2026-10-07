@@ -4,15 +4,13 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-[B4.27 software evidence implementation](../validation/b4_27_active_set_evidence.md) passed 42 synthetic
-analytic/exhaustive/tampering and unchanged-v3 checks. No production payload,
-FEM, timing, numerical trial or fit occurred. Its [protocol](b4_27_active_set_evidence_protocol.md) retains original
-criteria, failures, costs and unknowns; full memory and learned repair remain
-pending. B4.28 is now in progress under separate owner authorization and its
-[frozen numerical contract](b4_28_active_set_execution_contract.json). Production
-is pending clean merged source/main CI; software acceptance transfers no permission
-or budget. The final session slice B4.29 is a separately frozen read-only review.
-Uniform remains default, P/17 unrepaired and final/unused B4.10 cases sealed.
+[B4.28 numerical evidence](../validation/b4_28_active_set_numerical_evidence.md)
+closed with integrity PASS, LOCAL PASS, added cost over7200 and
+full-memory PENDING. All prior failure/count/cost/unknown identities remain.
+Preparation native RSS/child-exit proof remains UNKNOWN after its
+retained sandbox sysctl failure; whole resource acceptance is INCOMPLETE.
+Next is the separately frozen read-only B4.29 review after complete closure/main
+CI, the final session slice. Uniform/P17/final/unused-case boundaries stay.
 
 ## Overall project plans
 
@@ -28,7 +26,7 @@ promises of a completion date or empirical acceleration.
 
 ## Frozen slice protocols
 
-The latest completed slice is [B4.27 software evidence implementation](b4_27_active_set_evidence_protocol.md); B4.28 numerical evidence is in progress.
+The latest completed numerical slice is [B4.28](b4_28_active_set_numerical_evidence_protocol.md); its report separates new evidence from all old failed Gates.
 
 These preregistrations stay in GitHub so declared methods, populations, resource
 caps and stop rules remain reviewable before execution. Keep existing paths and
