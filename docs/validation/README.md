@@ -6,13 +6,16 @@ resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) for the latest boundary and
 [development history](../development_history.md) for the chronology. The latest
-completed research slice is [B4.24's registered continuation](b4_24_registered_continuation.md):
-complete read-only acceptance passed under the owner-approved v3 time/native
-scope. The [original interruption](b4_24_versioned_correctness_failure_review.md),
-both failures, historical missing RSS and incomplete original memory proof remain.
-B4.23/B4.20 scientific Gates remain failed. Next B4.25 bounded active-set
-objective-method review has not started and requires a separately frozen
-read-only boundary. Final evidence stays sealed; uniform remains default.
+completed research slice is [B4.25's bounded active-set method review](b4_25_active_set_method_review.md):
+448 scalar predicates and 2222 independent comparisons passed, with complete
+native/post-exit resource proof. All 64 rows/69 original failures and the full
+failed cost remain. [B4.24's v3 scope](b4_24_registered_continuation.md), its
+[original interruption](b4_24_versioned_correctness_failure_review.md), both
+failures and historical missing RSS/incomplete original memory proof remain.
+B4.23/B4.20 scientific Gates stay failed. Next **B4.26 bounded active-set-aware correctness and cost preregistration**
+has not started and needs a separate prospective read-only contract. No new
+objective, criterion, numerical trial or fit follows. Final evidence stays
+sealed; uniform remains default and P/17 unrepaired.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -120,6 +123,7 @@ contracts. Generated evidence remains external under the
 - [B4.23 bounded versioned local-surrogate fidelity and cost probe](b4_23_versioned_surrogate_feasibility.md)
 - [B4.24 interrupted correctness failure review and incomplete resource proof](b4_24_versioned_correctness_failure_review.md)
 - [B4.24 owner-approved registered continuation and complete saved-panel review](b4_24_registered_continuation.md)
+- [B4.25 bounded active-set objective-method review](b4_25_active_set_method_review.md)
 
 Add each new report to its stage group, including failed and stopped experiments.
 Do not replace old results or publish generated artifacts to tidy the directory.

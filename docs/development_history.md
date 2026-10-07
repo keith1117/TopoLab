@@ -1,6 +1,6 @@
 # Development history
 
-Retained project-state summaries through the B4.24 registered continuation.
+Retained project-state summaries through the B4.25 bounded active-set method review.
 This history was moved from
 `AGENTS.md` during the 2026-10-06 documentation cleanup; all recorded results,
 failures, costs and stopping boundaries are preserved. Statements about the
@@ -593,3 +593,32 @@ boundary. B4.23/B4.20 failures, B4.19 unknowns and all 851.38 earlier seconds
 remain. No new root/FEM/objective/gradient/prediction timing, label/model bytes,
 fit or final access occurred. Uniform stays default, P/17 unrepaired and all
 final/48 unused cases sealed. Ordinary single-slice stopping remains unchanged.
+
+## B4.25 (bounded active-set method review; read-only acceptance passed)
+
+The separately frozen stdlib review and auditor ran once from clean merged
+CI-passed source. All 448 scalar predicates and 2222 independent field
+comparisons passed. All 64 original rows, 35 mask/34 FD failures, 69 failed
+positions, original fields/cost and 216 inherited first timings remain. All
+failed FD intervals cross clipping sets and remain compatible with the frozen
+decomposition, without global cause, pointwise-gradient failure or repaired Gate.
+The strictly fixed-set derivative and six method dispositions select separate
+active-set-aware evidence preregistration only. Two fixed zero-work scenarios
+are sample arithmetic; original 57546.072069>7200 cost and all failures remain.
+See [the complete report](validation/b4_25_active_set_method_review.md) and
+[prospective protocol](planning/b4_25_active_set_method_review_protocol.md).
+
+New charge 80.34/180 includes the entire paid 60 reserve, use 40.41/60
+and peak 26492928 bytes. All five native wall/user/system/RSS profiles, unchanged
+ledger and final post-exit proof passed. B4.24's 200.98, both old failures,
+old 76.19/50.53 reserve and historic missing RSS/whole-memory unknowns remain;
+old memory proof/full fitting-memory feasibility is not completed. All 851.38
+B4.15–23 charges, B4.20 failure and B4.19 unknowns are preserved.
+The source's producer-order and binary-charge compatibility issues were caught
+before production, covered by 50 focused regressions and all 1158 tests; no
+scientific tolerance or prior byte binding changed. No new root/FEM/objective/
+gradient/prediction timing, label/model payload, fit, learned repair or final
+access occurred. Uniform stays default, P/17 unrepaired and all final/48 unused
+fresh cases sealed. Next is **B4.26 bounded active-set-aware correctness and cost preregistration**,
+not started; require a separate prospective read-only contract and explicit
+research/execution criteria. Stop after B4.25.
