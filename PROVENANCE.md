@@ -939,3 +939,14 @@ evidence stays external and is hash-bound by the
 material or new external scientific/implementation source was read or copied.
 No model fitting, novel label/reference, retiming, learned repair or final
 access occurred. Full costs/memory and learned confirmation remain unresolved.
+
+## B4.29 prospective read-only outcome review
+
+The [finite protocol](docs/planning/b4_29_active_set_outcome_review_protocol.md)
+and [contract](docs/planning/b4_29_active_set_outcome_review_contract.json) bind
+only compact scalar/native/resource metadata from closed B4.28. The standard
+library float reviewer and separately implemented Decimal audit enumerate
+counts/summary predicates and inherited cost without raw arrays or numerical
+kernels. No new external scientific or implementation source, Hack3D material,
+label/reference or model was read/copied. Metadata execution waits for clean
+locked merged source and exact-head/main CI; old failures and unknowns remain.

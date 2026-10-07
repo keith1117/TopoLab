@@ -63,19 +63,23 @@ B4.25's80.34 and all twelve B4.1 fits 3870.204341 remain in later accounting.
 failed 983/984 at 1e-4/floor1e-8, paying 100.30. B4.21 remains noncausal;
 B4.19's actual failed case/gap/counts remain unknown.
 
-## Current stop and next slice
+## Current stop and active slice
 
-Next is **B4.29 bounded active-set outcome and cost/full-memory review**,
-separately frozen/read-only after complete B4.28 closure/main CI and the final
-slice of this owner's temporary three-slice session. Allowed route is the
-ordered compact-metadata review from B4.28's report; no new numerical payload,
-label/model, root/FEM/objective, fit or final access. New budget60/stage,180whole,
-1GiB includes FULL60 reserve. Ordinary repository single-slice waiting remains
-the default outside the temporary authorization.
+B4.29 bounded active-set outcome and cost/full-memory review is in progress,
+the final third slice in this owner's temporary session. Its separately
+[frozen protocol](planning/b4_29_active_set_outcome_review_protocol.md) and
+[contract](planning/b4_29_active_set_outcome_review_contract.json) select the
+cost-and-full-memory route. B4.27/B4.28 are fully closed; B4.28 publication main
+`a374603b20fe` and all three main checks passed. Source/tests precede metadata
+access; require clean locked merged source and all applicable exact-head/main CI.
+Only ten hash-bound compact scalar/native/resource paths are permitted. No raw
+arrays, labels/models, root/FEM/objective, fit, retiming, search or final access.
+One review and one independent scalar audit each60, whole180/1GiB including
+FULL60 reserve. Do not repair B4.28/B4.24 memory/exit unknowns with new small RSS.
 
-The failed exact-FEM candidate stays stopped. Uniform remains operational
-default, fixed P/17 unrepaired and final/all48 unused B4.10 cases sealed. No
-alternate cache/ordering, continuation, radius/epoch/population/physics-frequency
-search, criterion change or seed replacement follows. Preserve all failures,
-unknowns and charges. Learned repair, independent confirmation, complete new
-B4 Gate and compatible final contract remain required before B5.
+The failed exact-FEM candidate remains stopped. Uniform stays operational
+default, fixed P/17 unrepaired and final/all48 unused B4.10 cases sealed. All
+failures, unknowns and charges remain. Learned repair, independent confirmation,
+full new B4 Gate and compatible final contract remain required before B5. No
+fourth slice is authorized; ordinary single-slice waiting remains the default
+outside this temporary session.

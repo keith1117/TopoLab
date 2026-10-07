@@ -1127,6 +1127,13 @@ Next is separately frozen/read-only **B4.29 outcome and cost/full-memory review*
 after full closure/main CI, the last session slice. The ordered route is
 cost-and-full-memory-review. Ordinary waiting remains default; no fourth slice follows.
 
+**B4.29 is in progress**, after complete B4.28 closure and main CI. Its
+[finite protocol](b4_29_active_set_outcome_review_protocol.md) and
+[separate contract](b4_29_active_set_outcome_review_contract.json) freeze the
+cost-and-full-memory route and ten compact scalar/native/resource inputs.
+Source/tests first, clean merged exact-head/main CI before metadata execution;
+no raw/numerical access. This is the final third session slice, with no fourth.
+
 B4.23 remains failed 3907/3976 and 57546.072069>7200; all 69 failures, first
 timings and charges remain. B4.20 stays failed, B4.19 fields unknown, B4.24's
 historical memory proof incomplete. Full training memory, fixed P/17 repair,
