@@ -917,3 +917,13 @@ and B4.27 checker remain unchanged. No Hack3D material, external implementation
 or new scientific reference is consulted or copied. Production evidence is
 pending clean merged CI-passed source; no label/model/production payload was
 opened during authoring. See the [prospective protocol](docs/planning/b4_28_active_set_numerical_evidence_protocol.md).
+
+## B4.28 pre-production CPU pool boundary correction
+
+Source review before first production access found that the independent auditor
+indirectly imports Torch through the established guarded label reader. Both
+producer and auditor now explicitly set and verify intra/inter-op pools at one
+and retain those observed values in durable runtime events. Public metadata-only
+abort regressions verify zero input/numerical calls and rejection before any
+output when the settings are not frozen. This changes no mathematical map,
+tolerance, case, role, budget or seal and opens no production artifact.
