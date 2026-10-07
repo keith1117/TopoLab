@@ -900,3 +900,16 @@ remain. Independent FEM/filter origin and complete coverage are mandatory.
 Old failures/first timings/costs remain; no retiming, query/root/objective change,
 fit or final access occurs. Its separate600/1260/1GiB allocation and full60
 reserve are owner-approved; full training memory remains PENDING at4GiB.
+
+## B4.29 read-only outcome/cost review (2026-10-07)
+
+The [frozen protocol](planning/b4_29_active_set_outcome_review_protocol.md) and
+[finite contract](planning/b4_29_active_set_outcome_review_contract.json) permit
+only ten hash-bound compact scalar/native/resource metadata paths after source
+release. Float review and separately implemented Decimal audit preserve the
+unchanged LOCAL criteria and inherited first-inclusive cost; Q28 and Q29 are
+added exactly once. No numerical kernel, raw array, label, model, fit, retiming
+or final access occurs. Own metadata native RSS cannot fill B4.28/B4.24 historical
+memory/exit unknowns or PENDING4GiB full-training memory. One review/audit each60,
+whole180 with FULL60 reserve, peak1GiB; all failures/costs remain. This is the
+final session slice; no fourth slice or permanent waiting-rule change follows.

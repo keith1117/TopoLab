@@ -12,6 +12,11 @@ PASS，新增费用234.60，加入费用后58061.992069>7200。
 收尾和 main CI；它是本轮最后一片。无拟合、搜索、final 或第四片授权。
 uniform 默认，P/17 未修复，final 与48未用病例封存；仓库逐片等待默认不变。
 
+B4.29 已进入本轮最后第三片，独立[协议](b4_29_active_set_outcome_review_protocol.md)
+和[只读合同](b4_29_active_set_outcome_review_contract.json)已冻结。源码与测试须先
+合并且 exact-head/main CI 通过；只读取十个哈希绑定的标量/native/资源元数据。
+不补做数值实验，不填补历史 RSS/退出证明未知；无第四片授权。
+
 本文件是中文阅读伴随版。早期阶段描述保留其历史语境；当前停止条件以
 [项目状态](../project_status.md)为入口，完整切片进度与执行顺序以
 [英文工作路线图](./TopoLab_v2_development_roadmap.md)和

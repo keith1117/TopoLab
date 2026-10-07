@@ -12,6 +12,10 @@ retained sandbox sysctl failure; whole resource acceptance is INCOMPLETE.
 Next is the separately frozen read-only B4.29 review after complete closure/main
 CI, the final session slice. Uniform/P17/final/unused-case boundaries stay.
 
+B4.29 is in progress under the [separate read-only protocol](b4_29_active_set_outcome_review_protocol.md)
+and [finite contract](b4_29_active_set_outcome_review_contract.json). Source/tests
+precede CI-passed release and ten fixed metadata inputs; no raw/numerical access.
+
 ## Overall project plans
 
 | Plan | English working document | Chinese reading companion |
@@ -111,3 +115,5 @@ historical missing RSS and the original memory proof remain incomplete.
 
 Add a link here when freezing a new protocol. A protocol listing records its
 existence; its validation report determines whether its Gate passed or failed.
+
+- [B4.29 bounded read-only outcome/cost/full-memory review](b4_29_active_set_outcome_review_protocol.md) · [Finite contract](b4_29_active_set_outcome_review_contract.json)

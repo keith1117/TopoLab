@@ -32,8 +32,10 @@ retained sandbox sysctl failure; whole resource acceptance is INCOMPLETE.
 B4.23 remains failed3907/3976, all69 failures and old costs/counts remain.
 B4.20 failed; B4.19 actual case/gap/counts unknown; B4.24's200.98, both failures
 and historical RSS/whole-memory gaps remain; B4.25's80.34 remains.
-Next is **B4.29 bounded active-set outcome and cost/full-memory review**,
-separately frozen/read-only after B4.28 closure/main CI. Ordinary waiting
+B4.29 is now in progress: bounded active-set outcome and cost/full-memory
+review under its [frozen protocol](docs/planning/b4_29_active_set_outcome_review_protocol.md)
+and separate read-only contract after B4.28 closure/main CI. Source/tests first;
+metadata execution requires clean locked merged exact-head/main-CI-passed source. Ordinary waiting
 remains default; the temporary three-slice session may complete this final
 review. No fourth slice, new payload/numerical trial, fit, search or final access.
 

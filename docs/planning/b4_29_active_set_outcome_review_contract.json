@@ -1,0 +1,161 @@
+{
+  "version": "topolab.b4_29.active-set-outcome-review.v1",
+  "status": "PROSPECTIVE_FROZEN_READONLY_CONTRACT",
+  "starting_main": "a374603b20fe5cf84ce8c74b7ec6b5f30342f594",
+  "created_at_utc": "2026-10-07T21:00:35.219644+00:00",
+  "quota": {
+    "limit": 3,
+    "entered_before": [
+      "B4.27",
+      "B4.28"
+    ],
+    "closed_before": [
+      "B4.27",
+      "B4.28"
+    ],
+    "this_is_final_third_slice": true,
+    "fourth_authorized": false
+  },
+  "authority": {
+    "owner_approved_proposal_sha256": "bdf81a7b5c0f9e50b679d68491820edb47b3c9df8075a1cb3d8173ee77897831",
+    "owner_authorization_sha256": "bbb9bb32317039dd8d63025bf0f441994042a05c73624f50992a6b0489299384",
+    "b4_28_closed_main_ci_required": true,
+    "prior_budget_transferable": false
+  },
+  "source_and_report_sha256": {
+    "docs/planning/b4_28_active_set_execution_contract.json": "acfb9cac7dedd01270bee301cf807b27c68585cd4b9f0ee55baf2f4af830642d",
+    "docs/planning/b4_28_active_set_numerical_evidence_protocol.md": "6b204aef56dba53233befc03275f24f1c646234ffda606c41f6c52864caf672a",
+    "docs/validation/b4_28_active_set_numerical_evidence.md": "60a6e3899276ebbffaf97b7f61f80caf607bde0c8ed03b67df57e7216e57ccc4",
+    "docs/planning/b4_26_active_set_acceptance_contract.json": "552e9ce56a3a64e1737eea43ad1ad9ce38c09ca094b44b01e92b636fae367a63",
+    "docs/planning/b4_27_active_set_evidence_protocol.md": "4bf7664cec3b9e6643229902ef12a0b0ac7ba14c0c27928841fd44f2f557b9e8",
+    "docs/validation/b4_27_active_set_evidence.md": "d426ad28f653d5b2b4a778c0c6d27b677fe575fc95279e736a8e1387a846682c"
+  },
+  "route": "cost-and-full-memory-review",
+  "allowed_input_root_name": "b4-28-active-set-numerical-evidence",
+  "inputs_sha256": {
+    "compact_outcome.json": "a5a1b530e1fcd677050841d6b741893cc97419caf403a1f1cb809b6afb46c0f5",
+    "resource_close.json": "3ed0e16f814a48ef4bebbf29b2f4abb355fe7161abf4765ad93ae4e90a02dd5e",
+    "audit_receipts/final_scope_summary.json": "1225e681353cd3140e631ccd517f4972e818051abc0d8ad4ed21f4ca1613970d",
+    "audit_receipts/platform_exit_binding.json": "d3fb2440b6e942978ed86ea205ca2ab5de9388b16b1e8f3badc144c738c46006",
+    "audit_receipts/platform_prepare_command.json": "ac177eed3e44a036df1327187fcdbed78b00e22ec75b532292637b4f886b3de8",
+    "audit_receipts/platform_launcher_command.json": "cb651ac225fda4f8a39aff533952590bd77ee0b9bd9f1eede3bf19fa50f49ba9",
+    "audit_receipts/execution_commands.json": "3eceb718e1f80e9e2dc4734cfe924f6b10a264c0cbb89ce0e7c4e12e423223db",
+    "audit_receipts/final_postexit_proof.json": "c0b7d35c3f0f51dd7d79a337607114fefaf90c634cf6a7581dd3e264910be702",
+    "profiles/producer.time": "3aeeb67511304ba2bdb3e6f42e6d8680db152edf8e3e498b786a3a9fcb5b00fe",
+    "profiles/independent.time": "a0a6bf6b97b225deb0ba94917015c3ad14303e4736a032def06dbdb3c6b2e18b"
+  },
+  "max_input_file_bytes": 262144,
+  "access": "Only source/contracts/reports and fixed hash-bound compact scalar/native/resource metadata after clean locked merged source and exact head/main CI. No directory discovery, dereferencing raw result hashes or other evidence inputs.",
+  "new_budget": {
+    "review_seconds": 60,
+    "independent_seconds": 60,
+    "whole_seconds": 180,
+    "paid_reserve_seconds": 60,
+    "peak_rss_bytes": 1073741824
+  },
+  "stage_charge": "max(native wall+10,internal observed runtime); incomplete native proof fails resource acceptance; failures remain fully charged",
+  "reserve": "FULL60 includes preparation, plan, launcher, closure, verification and post-exit; combine observed outer wall, subtract stage wall only once and retain final metadata exit floor10; all native profiles through exit; no refund/retry/overwrite",
+  "legacy": {
+    "predicates": 3976,
+    "passed": 3907,
+    "failed": 69,
+    "mask_failed": 35,
+    "fd_failed": 34,
+    "first_timings": 216,
+    "fem": 432,
+    "projections": 816,
+    "b4_24_seconds": 200.98,
+    "b4_25_seconds": 80.34,
+    "original_failed_proxy": 57546.0720687792,
+    "b4_19_case_gap_counts": "UNKNOWN",
+    "b4_24_planning_rss": null,
+    "b4_24_whole_peak_rss": null,
+    "b4_24_whole_memory_proof": false
+  },
+  "cost": {
+    "original_failed_proxy_immutable": 57546.0720687792,
+    "cost_cap": 7200,
+    "formula": "3870.204341+851.38+200.98+80.34+Q_new+3*1.25*(432*p_small+76*p_large)+3*200*1.25*(432*u_small+76*u_large)",
+    "inherited_first_inclusive_maxima": {
+      "p_small": 0.23081650002859533,
+      "p_large": 1.2690526249352843,
+      "u_small": 0.1597956670448184,
+      "u_large": 0.005527875036932528
+    },
+    "q_new": "every new method stage/failure/full paid reserve, no double count; later authorized reviews included",
+    "new_prediction_maximum_or_retiming": false,
+    "unknown_required_cost_fails": true,
+    "full_training_memory": "PENDING",
+    "fit_cap_bytes": 4294967296,
+    "static_arrays_or_sequential_rss_proves_full_memory": false,
+    "b4_24_historical_missing_rss_whole_memory_and_b4_19_unknowns_preserved": true
+  },
+  "b4_28": {
+    "source_revision": "db9460a743b5913010fbdd7d2a6caa8e20d44b88",
+    "q_seconds": 234.6,
+    "predicates": 3232,
+    "local_states": 32,
+    "pointwise_states": 200,
+    "intervals": 64,
+    "central_diagnostics": 72,
+    "stable": 29,
+    "crossing": 35,
+    "max_pieces": 81,
+    "numeric_counts": {
+      "producer": {
+        "label": 8,
+        "fem": 16,
+        "projection": 400,
+        "pointwise": 200,
+        "interval": 64
+      },
+      "independent": {
+        "label": 8,
+        "fem": 216,
+        "projection": 200,
+        "pointwise": 200,
+        "interval": 64
+      }
+    },
+    "stage_charges": {
+      "producer": 89.94,
+      "independent": 84.66
+    },
+    "complete_resource_acceptance": false,
+    "preparation_native_rss": null,
+    "preparation_child_exit_proof": "UNKNOWN",
+    "whole_peak_rss": null,
+    "full_training_memory": "PENDING"
+  },
+  "retained_local_criteria": {
+    "all_32_required": true,
+    "value_error_max": 0.0001,
+    "increment_relative_max": 0.25,
+    "increment_floor": 1e-05,
+    "gradient_relative_l2_max": 0.25,
+    "gradient_floor": 1e-08,
+    "sign_agreement_above": 1e-05,
+    "stored_normalized_baseline": 1,
+    "outside_uniform_negative_diagnostics_retained": true,
+    "historic_32_not_a_fresh_pass": true
+  },
+  "audit_scalar_agreement": {
+    "rtol": 1e-12,
+    "atol": 1e-12
+  },
+  "algorithm": "Review float scalar counts, all finite interval/LOCAL/diagnostic summaries, legacy failed positions, native Q28 and inherited cost; independent Decimal/explicit per-row audit reads same whitelist and never calls reviewer. No numerical kernels. Carry historical gaps unchanged. Add Q29 exactly once at native closure.",
+  "ordered_stops": "Unknown/inconsistent hash/scalar => failed review retained; no raw fallback or numeric verification. Regardless review acceptance, inherited cost/full-memory/whole-resource failures stop this candidate; any new research intervention needs separate owner decision and contract.",
+  "forbidden": [
+    "raw arrays",
+    "labels/references",
+    "weights/models",
+    "FEM/objective/root/projection kernels",
+    "retiming",
+    "fit",
+    "search/continuation",
+    "final/48 unused cases",
+    "retry/overwrite/reset",
+    "fourth slice"
+  ],
+  "publication": "Source/tests/protocol/contract before execution; failure-inclusive report/status/one history/roadmaps/indices after execution; all five checks every commit, all uploaded commits guarded, protected exact-head/main CI, external backup and owned-branch cleanup. README unchanged."
+}
