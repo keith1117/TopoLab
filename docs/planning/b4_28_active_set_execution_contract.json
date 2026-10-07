@@ -1,0 +1,729 @@
+{
+  "version": "topolab.b4_28.active-set-numerical-evidence.v1",
+  "status": "AUTHORED_FROZEN_EXECUTION_CONTRACT",
+  "starting_main": "2781093a5b1e4ed1e47efd8e338262f6c9ca5f0a",
+  "created_at_utc": "2026-10-07T07:09:36.495616+00:00",
+  "quota": {
+    "limit": 3,
+    "entered": [
+      "B4.27"
+    ],
+    "closed": [
+      "B4.27"
+    ],
+    "remaining_starts": 2
+  },
+  "authority_required": {
+    "owner_approval_recorded": true,
+    "existing_slice_budgets_transferable": false,
+    "production_requires_frozen_plan_released_merged_ci_source": true
+  },
+  "source_and_contract_sha256": {
+    "src/topolab/stable_projection.py": "cbb6c66eab7ea3750e94da6bd9ab0f2996761f822cd3ae83edfb02f5638f243a",
+    "src/topolab/local_compliance.py": "34f4fb7e38a078103c3a7455a9da467273301d1abcf5e0c1f072072a4cee423a",
+    "src/topolab/active_set_evidence.py": "884826797e918352e1a47917383162c3c5cb816de2748e1474df655b38255f20",
+    "scripts/b4_27_fixture_oracle.py": "f3a4d1dc406fe0e83bbf3e6cf41e1ee73a39c1094fcb388170bf5f15e6d25e4d",
+    "docs/planning/b4_26_active_set_preregistration_protocol.md": "597c81e2e897edb35fd06bb4ec6089fb8da48d5445b4f5b5c0ef912beacb09c3",
+    "docs/planning/b4_26_active_set_acceptance_contract.json": "552e9ce56a3a64e1737eea43ad1ad9ce38c09ca094b44b01e92b636fae367a63",
+    "docs/planning/b4_27_active_set_evidence_protocol.md": "4bf7664cec3b9e6643229902ef12a0b0ac7ba14c0c27928841fd44f2f557b9e8",
+    "docs/validation/b4_27_active_set_evidence.md": "d426ad28f653d5b2b4a778c0c6d27b677fe575fc95279e736a8e1387a846682c",
+    "docs/planning/b4_23_versioned_surrogate_feasibility_protocol.md": "eebab42c919656d7f58f09e63e9ca894d83ded4c7ac6642bd13d9b3f58aed343",
+    "docs/validation/b4_23_versioned_surrogate_feasibility.md": "37313a824cea44f5993309b829934cfcdbc9501f32fdc4ba0ba59fc32b43230b"
+  },
+  "versions": {
+    "objective": "topolab.stable-projection-tangent.v3",
+    "evidence": "topolab.active-set-evidence.v1"
+  },
+  "population": {
+    "entries": [
+      {
+        "case": {
+          "schema_version": "topolab.m0.case.v1",
+          "case_id": "tlcase-v1-0079bd9f0d927e20866f2c73be19e1f57471576f7cd0494b6898a46f7fab9858",
+          "problem": {
+            "mesh": {
+              "element_counts": [
+                12,
+                6,
+                3
+              ],
+              "lengths": [
+                12.0,
+                6.0,
+                3.0
+              ]
+            },
+            "material": {
+              "solid_modulus": 1000.0,
+              "minimum_modulus": 1.0,
+              "poisson_ratio": 0.3
+            },
+            "supports": [
+              {
+                "axis": "x",
+                "side": "min",
+                "directions": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            ],
+            "loads": [
+              {
+                "kind": "point",
+                "node": 311,
+                "direction": "y",
+                "magnitude": -1.0
+              }
+            ],
+            "optimization": {
+              "volume_fraction": 0.2,
+              "filter_radius": 1.5,
+              "penalty": 3.0,
+              "minimum_density": 0.05,
+              "move_limit": 0.2,
+              "convergence_tolerance": 0.01,
+              "max_iterations": 360
+            },
+            "initial_density": null
+          }
+        },
+        "physical_fingerprint": "de4b139553b91c6d3c5ac2d9ac8b2bda7df5f56717f304647b5f4111b8eee50f",
+        "role": "train",
+        "source_case_id": "tlcase-v1-2f917c64c7012c48ff191c6a8d8f2b3c2b4c5c942fca21df0e2197d34945d3be",
+        "training_sets": [
+          "base",
+          "expanded",
+          "specialist"
+        ]
+      },
+      {
+        "case": {
+          "schema_version": "topolab.m0.case.v1",
+          "case_id": "tlcase-v1-01504c9e63d2dfa11017438a813a3dfd23f27f9f9997bb59edfc3a24a3d21f50",
+          "problem": {
+            "mesh": {
+              "element_counts": [
+                12,
+                6,
+                3
+              ],
+              "lengths": [
+                12.0,
+                6.0,
+                3.0
+              ]
+            },
+            "material": {
+              "solid_modulus": 1000.0,
+              "minimum_modulus": 1.0,
+              "poisson_ratio": 0.3
+            },
+            "supports": [
+              {
+                "axis": "x",
+                "side": "min",
+                "directions": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            ],
+            "loads": [
+              {
+                "kind": "point",
+                "node": 194,
+                "direction": "y",
+                "magnitude": -1.0
+              }
+            ],
+            "optimization": {
+              "volume_fraction": 0.25,
+              "filter_radius": 1.5,
+              "penalty": 3.0,
+              "minimum_density": 0.05,
+              "move_limit": 0.2,
+              "convergence_tolerance": 0.01,
+              "max_iterations": 360
+            },
+            "initial_density": null
+          }
+        },
+        "physical_fingerprint": "83fac1f7d5ba58d6bb4b0f762efe78df77e50a456ff631fdd41915b48cefa33b",
+        "role": "train",
+        "source_case_id": "tlcase-v1-fe0fcc469e85dcab07ed22be7b663a6f8672cdc4c258b949b994435730ea69e3",
+        "training_sets": [
+          "base",
+          "expanded",
+          "specialist"
+        ]
+      },
+      {
+        "case": {
+          "schema_version": "topolab.m0.case.v1",
+          "case_id": "tlcase-v1-03a2c40639cc65aedf22d7ddc65359616807735e87c680949b09638d4eaa1e8f",
+          "problem": {
+            "mesh": {
+              "element_counts": [
+                12,
+                6,
+                3
+              ],
+              "lengths": [
+                12.0,
+                6.0,
+                3.0
+              ]
+            },
+            "material": {
+              "solid_modulus": 1000.0,
+              "minimum_modulus": 1.0,
+              "poisson_ratio": 0.3
+            },
+            "supports": [
+              {
+                "axis": "x",
+                "side": "min",
+                "directions": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            ],
+            "loads": [
+              {
+                "kind": "point",
+                "node": 337,
+                "direction": "z",
+                "magnitude": -1.0
+              }
+            ],
+            "optimization": {
+              "volume_fraction": 0.3,
+              "filter_radius": 1.5,
+              "penalty": 3.0,
+              "minimum_density": 0.05,
+              "move_limit": 0.2,
+              "convergence_tolerance": 0.01,
+              "max_iterations": 360
+            },
+            "initial_density": null
+          }
+        },
+        "physical_fingerprint": "6e598b168c6c109d99f9212d32f2b3a60578a6df10472ef9f9819d5aaabd137c",
+        "role": "train",
+        "source_case_id": "tlcase-v1-980f7a0f27d2a770c42d84feec87527ec5490c7ea2df0f29d6d7a7a87787b429",
+        "training_sets": [
+          "base",
+          "expanded",
+          "specialist"
+        ]
+      },
+      {
+        "case": {
+          "schema_version": "topolab.m0.case.v1",
+          "case_id": "tlcase-v1-04ab9b94039197973b9e3ca5b1a855528197f30cce70635b1c1014002673461c",
+          "problem": {
+            "mesh": {
+              "element_counts": [
+                12,
+                6,
+                3
+              ],
+              "lengths": [
+                12.0,
+                6.0,
+                3.0
+              ]
+            },
+            "material": {
+              "solid_modulus": 1000.0,
+              "minimum_modulus": 1.0,
+              "poisson_ratio": 0.3
+            },
+            "supports": [
+              {
+                "axis": "x",
+                "side": "min",
+                "directions": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            ],
+            "loads": [
+              {
+                "kind": "point",
+                "node": 12,
+                "direction": "z",
+                "magnitude": -1.0
+              }
+            ],
+            "optimization": {
+              "volume_fraction": 0.6,
+              "filter_radius": 1.5,
+              "penalty": 3.0,
+              "minimum_density": 0.05,
+              "move_limit": 0.2,
+              "convergence_tolerance": 0.01,
+              "max_iterations": 360
+            },
+            "initial_density": null
+          }
+        },
+        "physical_fingerprint": "48fb7d47eb341199b89c702d56774bb949f40325da69702b1a064aa42829aec5",
+        "role": "train",
+        "source_case_id": "tlcase-v1-3b35cf34a39219a87b7342573cd556b0f9c10beb79bf71638ebbac6f028adef0",
+        "training_sets": [
+          "base",
+          "expanded",
+          "specialist"
+        ]
+      },
+      {
+        "case": {
+          "schema_version": "topolab.m0.case.v1",
+          "case_id": "tlcase-v1-0ca7ef4d765a4e8403221471f98c061684e99dde777b047a1a3f5f0642fc47b6",
+          "problem": {
+            "mesh": {
+              "element_counts": [
+                24,
+                12,
+                6
+              ],
+              "lengths": [
+                12.0,
+                6.0,
+                3.0
+              ]
+            },
+            "material": {
+              "solid_modulus": 1000.0,
+              "minimum_modulus": 1.0,
+              "poisson_ratio": 0.3
+            },
+            "supports": [
+              {
+                "axis": "x",
+                "side": "min",
+                "directions": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            ],
+            "loads": [
+              {
+                "kind": "point",
+                "node": 924,
+                "direction": "y",
+                "magnitude": -1.0
+              }
+            ],
+            "optimization": {
+              "volume_fraction": 0.5425,
+              "filter_radius": 1.5,
+              "penalty": 3.0,
+              "minimum_density": 0.05,
+              "move_limit": 0.2,
+              "convergence_tolerance": 0.01,
+              "max_iterations": 360
+            },
+            "initial_density": null
+          }
+        },
+        "physical_fingerprint": "86f38a21e770b35a4775568d7e5a30177a4d0233a9e73cfe1af5c7abe8505a1c",
+        "role": "train",
+        "source_case_id": "tlcase-v1-f28540fed43b313d16aa68d03c2dae43a062f5d97123eca647f151787c6fab32",
+        "training_sets": [
+          "expanded"
+        ]
+      },
+      {
+        "case": {
+          "schema_version": "topolab.m0.case.v1",
+          "case_id": "tlcase-v1-144d548fd53ff9798a62251e0d02258eda28d17fdf6fb87ff5979b3f0b904900",
+          "problem": {
+            "mesh": {
+              "element_counts": [
+                24,
+                12,
+                6
+              ],
+              "lengths": [
+                12.0,
+                6.0,
+                3.0
+              ]
+            },
+            "material": {
+              "solid_modulus": 1000.0,
+              "minimum_modulus": 1.0,
+              "poisson_ratio": 0.3
+            },
+            "supports": [
+              {
+                "axis": "x",
+                "side": "min",
+                "directions": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            ],
+            "loads": [
+              {
+                "kind": "point",
+                "node": 724,
+                "direction": "y",
+                "magnitude": -1.0
+              }
+            ],
+            "optimization": {
+              "volume_fraction": 0.4,
+              "filter_radius": 1.5,
+              "penalty": 3.0,
+              "minimum_density": 0.05,
+              "move_limit": 0.2,
+              "convergence_tolerance": 0.01,
+              "max_iterations": 360
+            },
+            "initial_density": null
+          }
+        },
+        "physical_fingerprint": "537cbd00c3c622b30d89ed6e2e5904e4928d9cfc340fb4c96143f5f708529313",
+        "role": "train",
+        "source_case_id": "tlcase-v1-f40b17ec683ec84533e85f70b61b395ffb82c3fd41a4ae4b492686215f1c4a6b",
+        "training_sets": [
+          "base",
+          "expanded",
+          "specialist"
+        ]
+      },
+      {
+        "case": {
+          "schema_version": "topolab.m0.case.v1",
+          "case_id": "tlcase-v1-0294749064eb3e7aacc57d5f4a3ce11b01133fb2e10d01fa44722dfdb3860f26",
+          "problem": {
+            "mesh": {
+              "element_counts": [
+                24,
+                12,
+                6
+              ],
+              "lengths": [
+                12.0,
+                6.0,
+                3.0
+              ]
+            },
+            "material": {
+              "solid_modulus": 1000.0,
+              "minimum_modulus": 1.0,
+              "poisson_ratio": 0.3
+            },
+            "supports": [
+              {
+                "axis": "x",
+                "side": "min",
+                "directions": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            ],
+            "loads": [
+              {
+                "kind": "point",
+                "node": 1424,
+                "direction": "z",
+                "magnitude": -1.0
+              }
+            ],
+            "optimization": {
+              "volume_fraction": 0.5175,
+              "filter_radius": 1.5,
+              "penalty": 3.0,
+              "minimum_density": 0.05,
+              "move_limit": 0.2,
+              "convergence_tolerance": 0.01,
+              "max_iterations": 360
+            },
+            "initial_density": null
+          }
+        },
+        "physical_fingerprint": "66e8848b25bae094fda4158336e94bc2dcbe6ed7b16445971fff3ea486e8e279",
+        "role": "train",
+        "source_case_id": "tlcase-v1-64acbe174e488886ccfc8baaf098a5d0f8e10b18018303e5bfdb4f210a538bf1",
+        "training_sets": [
+          "expanded"
+        ]
+      },
+      {
+        "case": {
+          "schema_version": "topolab.m0.case.v1",
+          "case_id": "tlcase-v1-0ea4104dcf6c16b35ef4c239eb34a1341a4e554813a1ad8c15cc1eade6d54768",
+          "problem": {
+            "mesh": {
+              "element_counts": [
+                24,
+                12,
+                6
+              ],
+              "lengths": [
+                12.0,
+                6.0,
+                3.0
+              ]
+            },
+            "material": {
+              "solid_modulus": 1000.0,
+              "minimum_modulus": 1.0,
+              "poisson_ratio": 0.3
+            },
+            "supports": [
+              {
+                "axis": "x",
+                "side": "min",
+                "directions": [
+                  "x",
+                  "y",
+                  "z"
+                ]
+              }
+            ],
+            "loads": [
+              {
+                "kind": "point",
+                "node": 1374,
+                "direction": "z",
+                "magnitude": -1.0
+              }
+            ],
+            "optimization": {
+              "volume_fraction": 0.5175,
+              "filter_radius": 1.5,
+              "penalty": 3.0,
+              "minimum_density": 0.05,
+              "move_limit": 0.2,
+              "convergence_tolerance": 0.01,
+              "max_iterations": 360
+            },
+            "initial_density": null
+          }
+        },
+        "physical_fingerprint": "52a355a08977eae49528b29824b781f92da9c5978dad084cd141317a3a740afb",
+        "role": "train",
+        "source_case_id": "tlcase-v1-534015d490d29e335d291413e0ba9291049804d5d1b8c3b72e1b31382e41f98a",
+        "training_sets": [
+          "expanded"
+        ]
+      }
+    ],
+    "role": "train",
+    "membership": "expanded",
+    "cases": 8,
+    "central_states": 72,
+    "side_states": 128,
+    "intervals": 64,
+    "local_states": 32,
+    "directions": [
+      "unit-max-sin(.37*i)",
+      "unit-max-cos(.13*i)"
+    ],
+    "amplitudes": [
+      0.001,
+      0.05
+    ],
+    "sign_order": [
+      "+",
+      "-"
+    ],
+    "raw_bounds": [
+      0.0005,
+      0.9995
+    ],
+    "steps": [
+      0.0001,
+      0.0002
+    ],
+    "directional_centers": [
+      0,
+      4
+    ],
+    "side_order": [
+      "+h",
+      "-h"
+    ],
+    "center_order": "case -> amplitude -> direction -> sign; uniform last",
+    "legacy_predicates": 3976,
+    "legacy_failed_positions": 69,
+    "legacy_mask_failures": 35,
+    "legacy_fd_failures": 34,
+    "legacy_timings": 216,
+    "new_case_direction_step_subset_or_order": false
+  },
+  "tolerances": {
+    "gradient_rtol": 1e-09,
+    "gradient_atol": 1e-10,
+    "pointwise_value_rtol": 1e-09,
+    "pointwise_value_atol": 1e-10,
+    "density_offset_kink_atol": 2e-11,
+    "volume_and_residual_atol": 1e-12,
+    "shift_derivative_max": 1e-10,
+    "central_kink_min_exclusive": 1e-10,
+    "compliance_rtol": 1e-09,
+    "direct_torch_exact": true,
+    "interval_normalized_max": 0.0001,
+    "interval_floor": 1e-08,
+    "interval_signed_continuity_rtol_atol": 1e-12
+  },
+  "local_fidelity": {
+    "all_32_required": true,
+    "value_error_max": 0.0001,
+    "increment_relative_max": 0.25,
+    "increment_floor": 1e-05,
+    "gradient_relative_l2_max": 0.25,
+    "gradient_floor": 1e-08,
+    "sign_agreement_above": 1e-05,
+    "stored_normalized_baseline": 1,
+    "outside_uniform_negative_diagnostics_retained": true,
+    "historic_32_not_a_fresh_pass": true
+  },
+  "cost_memory_and_legacy": {
+    "original_failed_proxy_immutable": 57546.0720687792,
+    "cost_cap": 7200,
+    "formula": "3870.204341+851.38+200.98+80.34+Q_new+3*1.25*(432*p_small+76*p_large)+3*200*1.25*(432*u_small+76*u_large)",
+    "inherited_first_inclusive_maxima": {
+      "p_small": 0.23081650002859533,
+      "p_large": 1.2690526249352843,
+      "u_small": 0.1597956670448184,
+      "u_large": 0.005527875036932528
+    },
+    "q_new": "every new method stage/failure/full paid reserve, no double count; later authorized reviews included",
+    "new_prediction_maximum_or_retiming": false,
+    "unknown_required_cost_fails": true,
+    "full_training_memory": "PENDING",
+    "fit_cap_bytes": 4294967296,
+    "static_arrays_or_sequential_rss_proves_full_memory": false,
+    "b4_24_historical_missing_rss_whole_memory_and_b4_19_unknowns_preserved": true
+  },
+  "release_and_stops": {
+    "new_frozen_contract_plan_and_source_pr_before_payload": true,
+    "source": "clean tracked locked merged main; all three exact PR-head/main CI pass; untracked user work excluded and preserved",
+    "literal_plan_source_contract_input_role_hashes": true,
+    "durable_fsync_before_after_counters": true,
+    "exclusive_immutable_outputs": true,
+    "complete_prefix_tracebacks_native_failures_retained": true,
+    "producer_exception": "abort; independent metadata-only; no fresh root/FEM/label calls after abort",
+    "failed_integrity": "stop before fidelity acceptance; preserve applicable evidence and first failed predicate; no further dependent numerical stage",
+    "failed_fidelity": "stop before cost acceptance",
+    "cost_failed_unknown_or_memory_pending": "stop before fitting",
+    "no_retry_overwrite_reset_or_fourth_slice": true,
+    "draft_is_payload_free": true
+  },
+  "forbidden": [
+    "new labels/references",
+    "model weights",
+    "fit",
+    "objective/root change",
+    "cache/ordering",
+    "numerical retry/continuation",
+    "epoch/population/frequency search",
+    "threshold/radius/coefficient/seed selection",
+    "screen/final access",
+    "48 unused B4.10 cases",
+    "rewriting old failures/costs/unknowns"
+  ],
+  "owner_authorized": true,
+  "owner_authority": "Direct human approval of the exact payload-free B4.28/B4.29 proposal in this chat; separate new allocation, not inherited permission",
+  "approved_proposal_sha256": "bdf81a7b5c0f9e50b679d68491820edb47b3c9df8075a1cb3d8173ee77897831",
+  "allowed_inputs_after_released_source": {
+    "b3_index_sha256": "b78e85f5bab56f2b05e06b43b8fd77f2bfd556150b95643e443a566165d8fc26",
+    "b3_labels": "eight literal entries only; reject role/membership before artifact lookup",
+    "b4_23_root": "/Users/keith1117/Documents/TopoLab-data/b4-23-versioned-surrogate-feasibility",
+    "b4_23_sha256": {
+      "probe.json": "211bec69650f8b3783a29527d9621eec05173ed952b8f5b7f70f0f3ee1287608",
+      "independent_audit.json": "445d51fef08191b0e988bb9c76a1863a061c4e392db35c5a76ff812234942440",
+      "probe.events.jsonl": "e6d9438c0d26d69f26ab1f02f4d51b9fd836305ee965b7789e5a58469dc2d0b9",
+      "independent.events.jsonl": "a5a66a7336d720648a4770a7643ab919d6fec15934baab225d22b4893c3611a5",
+      "resource_close.json": "5b7f5440a81922fb6afa65c6976dac74552b33f64a6d29e46702ca2f3c4f9276"
+    },
+    "prior_release_backup_metadata_only": true,
+    "b3_and_b4_23_payload_bytes_opened_for_proposal": false
+  },
+  "execution": {
+    "producer_attempts_max": 1,
+    "independent_attempts_max": 1,
+    "producer_fresh_anchor_fem": 16,
+    "producer_state_direct_calls": 200,
+    "producer_state_torch_forward_backward_calls": 200,
+    "producer_objective_projection_calls": 400,
+    "producer_prediction_fem": 0,
+    "producer_pointwise_certificates": 200,
+    "producer_complete_intervals": 64,
+    "auditor_fresh_fem": 216,
+    "auditor_own_numerical_roots": 200,
+    "new_total_fem": 232,
+    "auditor_independent_full_pointwise_and_complete_interval_proofs": true,
+    "certificate_arithmetic_counted_separately_from_numerical_roots": true,
+    "legacy_counts_preserved": {
+      "fem": 432,
+      "projections": 816,
+      "timings": 216
+    },
+    "fresh_head_factory": "unchanged v3 constructor, paid stored/continuous anchor solves; no saved-gradient head reconstruction",
+    "auditor_calls_candidate_projection_tangent_pullback_torch_classifier_fidelity_cost": false,
+    "prediction_timing_or_retiming": false
+  },
+  "interval_method": {
+    "max_open_pieces": 256,
+    "partition": "exact rational offset-breakpoint sweep of the unchanged clipped-volume map",
+    "trace": "exact affine continuation across all simultaneous contacts without epsilon stepping",
+    "audit": "independent affine constraints, endpoint inequalities, strict interiors, exact coverage and continuity, signed piece integrals",
+    "small_public_exhaustive_oracle_before_production": true,
+    "adaptive_steps_piece_budget_or_mask_choice": false,
+    "production_implementation_and_frozen_hash_pending": true
+  },
+  "new_budget": {
+    "numerical_stage_charged_seconds_each": 600,
+    "whole_slice_charged_seconds": 1260,
+    "peak_rss_bytes": 1073741824,
+    "fully_paid_reserve_seconds": 60,
+    "charge": "max(native wall+10,internal) each numerical attempt plus full60 reserve",
+    "reserve_covers": "plan/launch/closure/verification/post-exit; combined observed use<=60",
+    "native_wall_user_system_rss_through_exit": true,
+    "one_thread": [
+      "OMP_NUM_THREADS",
+      "OPENBLAS_NUM_THREADS",
+      "MKL_NUM_THREADS",
+      "VECLIB_MAXIMUM_THREADS",
+      "NUMEXPR_NUM_THREADS",
+      "Torch intra/inter-op"
+    ],
+    "software_authoring_ci_separate_and_unknown_parts_retained": true,
+    "not_reuse_of_closed_b4_23_or_b4_27_budget": true
+  },
+  "third_slice": {
+    "name": "B4.29 bounded active-set outcome and cost/full-memory review",
+    "entry_only_after_b4_28_closed_main_ci_passed": true,
+    "route": "integrity incomplete/fail -> correctness evidence review; integrity pass/fidelity fail -> fidelity review; fidelity pass/cost failed or memory pending -> cost/full-memory review",
+    "access": "source/contracts/reports and B4.28 compact scalar/native/resource metadata; no raw arrays/labels/models/numerical calls",
+    "new_budget": {
+      "review_seconds": 60,
+      "independent_seconds": 60,
+      "whole_seconds": 180,
+      "paid_reserve_seconds": 60,
+      "peak_rss_bytes": 1073741824
+    },
+    "separate_prospective_contract_required": true,
+    "fourth_slice_authorized": false
+  }
+}

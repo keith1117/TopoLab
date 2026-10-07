@@ -902,3 +902,18 @@ fidelity, feasible full costs/memory, learned repair or acceleration. See the
 [protocol](docs/planning/b4_27_active_set_evidence_protocol.md) and
 [report](docs/validation/b4_27_active_set_evidence.md); generated software receipts
 and command profiles remain external.
+
+## B4.28 bounded active-set numerical evidence implementation
+
+The separately owner-authorized finite numerical contract implements exact
+rational volume-offset tracing from our own frozen equations. The independently
+authored auditor assembles density filters, solves numerical volume roots and
+reconstructs uncached FEM energy/adjoints with the established original public
+FEM primitives; it calls no candidate projection/tangent/certificate classifier.
+Synthetic public fixtures compare complete partitions to the independent small
+exhaustive oracle and exercise full pipeline/legacy fields, access guards,
+durable failed calls and native budget limits. The original v3/root/objective
+and B4.27 checker remain unchanged. No Hack3D material, external implementation
+or new scientific reference is consulted or copied. Production evidence is
+pending clean merged CI-passed source; no label/model/production payload was
+opened during authoring. See the [prospective protocol](docs/planning/b4_28_active_set_numerical_evidence_protocol.md).
