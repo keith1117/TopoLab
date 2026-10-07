@@ -293,3 +293,53 @@ def test_default_plan_reaches_neither_release_nor_payload_and_creates_no_output(
     )
     assert '"final_access":false' in capsys.readouterr().out
     assert list(tmp_path.iterdir()) == []
+
+
+@pytest.mark.parametrize("reported", [1, 2])
+def test_aborted_producer_audit_freezes_torch_before_metadata_without_numeric_access(
+    tmp_path, monkeypatch, reported
+):
+    import json
+    from types import SimpleNamespace
+
+    import b4_28_independent_audit
+
+    calls = []
+    fake_torch = SimpleNamespace(
+        set_num_threads=lambda n: calls.append(("intra_op", n)),
+        set_num_interop_threads=lambda n: calls.append(("inter_op", n)),
+        get_num_threads=lambda: reported,
+        get_num_interop_threads=lambda: reported,
+    )
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+    monkeypatch.setattr(
+        b4_28_independent_audit,
+        "arguments",
+        lambda _argv: (
+            SimpleNamespace(execute=True),
+            tmp_path / "unopened-legacy",
+            tmp_path / "unopened-data",
+            tmp_path,
+        ),
+    )
+    monkeypatch.setattr(b4_28_independent_audit, "release", lambda _output: "a" * 40)
+    monkeypatch.setattr(b4_28_independent_audit, "read", lambda _path: {"exit_code": 1})
+    for name in ("train_label", "label_index", "legacy_inputs", "root", "energy", "audit"):
+        monkeypatch.setattr(
+            b4_28_independent_audit,
+            name,
+            lambda *_a, **_k: pytest.fail("numeric or input access reached"),
+        )
+    if reported != 1:
+        with pytest.raises(ValueError, match="one-thread"):
+            b4_28_independent_audit.main([])
+        assert calls == [("intra_op", 1), ("inter_op", 1)]
+        assert list(tmp_path.iterdir()) == []
+        return
+    assert b4_28_independent_audit.main([]) == 0
+    result = json.loads((tmp_path / "independent.json").read_text())
+    assert calls == [("intra_op", 1), ("inter_op", 1)]
+    assert result["torch_threads"] == {"intra_op": 1, "inter_op": 1} and result["metadata_only"]
+    assert all(c == {"attempted": 0, "completed": 0} for c in result["counts"].values())
+    events, _, pending = event_prefix(tmp_path / "independent.events.jsonl", "a" * 40)
+    assert events[1]["event"] == "runtime_threads" and not pending

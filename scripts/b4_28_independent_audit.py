@@ -764,9 +764,19 @@ def main(argv=None):
         print(canonical(plan_payload()).decode(), end="")
         return 0
     revision = release(output)
+    # The original guarded label reader imports Torch. Freeze both pools before
+    # any reader or numerical call, including the metadata-only abort path.
+    import torch
+
+    torch.set_num_threads(1)
+    torch.set_num_interop_threads(1)
+    threads = {"intra_op": torch.get_num_threads(), "inter_op": torch.get_num_interop_threads()}
+    if threads != {"intra_op": 1, "inter_op": 1}:
+        raise ValueError("frozen Torch one-thread runtime required")
     if (output / "independent.json").exists() or (output / "independent.events.jsonl").exists():
         raise ValueError("refuses second independent attempt")
     journal = Journal(output / "independent.events.jsonl", revision)
+    journal.emit("runtime_threads", torch=threads)
     try:
         command = read(output / "audit_receipts/producer_command.json")
         path = output / "producer.events.jsonl"
@@ -813,6 +823,7 @@ def main(argv=None):
                 raise ValueError("durable original numerical prefix differs from final panel")
             legacy, prior = legacy_inputs(old)
             result = audit(produced, legacy, prior, data, label_index(data), journal, started)
+        result["torch_threads"] = threads
         finish(output, "independent", result, journal, started)
     except Exception as error:
         failed(journal, error)

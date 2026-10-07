@@ -362,13 +362,18 @@ def main(argv=None):
     revision = release(output)
     torch.set_num_threads(1)
     torch.set_num_interop_threads(1)
+    threads = {"intra_op": torch.get_num_threads(), "inter_op": torch.get_num_interop_threads()}
+    if threads != {"intra_op": 1, "inter_op": 1}:
+        raise ValueError("frozen Torch one-thread runtime required")
     journal = Journal(output / "producer.events.jsonl", revision)
+    journal.emit("runtime_threads", torch=threads)
     try:
         legacy, prior = legacy_inputs(old)
         result = producer(data, legacy, label_index(data), journal, started)
         result["legacy_condition_results"] = prior["condition_results"]
         result["legacy_failed_positions"] = prior["failed_condition_indices"]
         result["legacy_probe_sha256"] = digest(old / "probe.json")
+        result["torch_threads"] = threads
         finish(output, "producer", result, journal, started)
     except Exception as error:
         failed(journal, error)
