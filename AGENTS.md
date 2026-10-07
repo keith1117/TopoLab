@@ -22,22 +22,18 @@ The historical `v1.0.0` release remains complete, with its negative M1/M2 eviden
 preserved. B3's data Gate and B4.1 fitting passed; the original B4.2 Gate failed.
 Fixed P/17 remains unrepaired and cannot be replaced after seeing outcomes.
 
-The latest completed slice is **B4.28 bounded active-set numerical evidence**:
-new integrity PASS, LOCAL PASS;
-[report](docs/validation/b4_28_active_set_numerical_evidence.md) binds the single
-attempt and independent audit. New charge 234.60, added cost
-58061.992069>7200; full training memory PENDING/4GiB.
-Preparation native RSS/child-exit proof remains UNKNOWN after its
-retained sandbox sysctl failure; whole resource acceptance is INCOMPLETE.
-B4.23 remains failed3907/3976, all69 failures and old costs/counts remain.
-B4.20 failed; B4.19 actual case/gap/counts unknown; B4.24's200.98, both failures
-and historical RSS/whole-memory gaps remain; B4.25's80.34 remains.
-B4.29 is now in progress: bounded active-set outcome and cost/full-memory
-review under its [frozen protocol](docs/planning/b4_29_active_set_outcome_review_protocol.md)
-and separate read-only contract after B4.28 closure/main CI. Source/tests first;
-metadata execution requires clean locked merged exact-head/main-CI-passed source. Ordinary waiting
-remains default; the temporary three-slice session may complete this final
-review. No fourth slice, new payload/numerical trial, fit, search or final access.
+The latest completed slice is **B4.29 bounded read-only outcome/cost review**:
+metadata review PASS, own resource PASS;
+[report](docs/validation/b4_29_active_set_outcome_review.md) binds one review/audit,
+new charge 80.26, known added cost 58142.252069>7200 and full memory PENDING/4GiB.
+B4.28 new integrity3232/3232 and LOCAL32/32 stay passed; its preparation
+RSS/child exit and whole peak stay UNKNOWN/resource INCOMPLETE. Old B4.23
+3907/3976 and all69 failures,851.38/200.98/80.34 costs remain. B4.24 memory
+gaps/both failures, B4.20 failure and B4.19 actual case/gap/count UNKNOWN remain.
+The temporary three-slice authorization is exhausted at complete B4.29 closure;
+no fourth slice. Next research intervention is undecided and needs an owner
+decision plus separate finite contract. Ordinary single-slice waiting remains.
+No new numerical/payload trial, fit, retiming, search, model/seed change or final access.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
 exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,

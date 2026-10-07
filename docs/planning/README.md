@@ -4,17 +4,11 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-[B4.28 numerical evidence](../validation/b4_28_active_set_numerical_evidence.md)
-closed with integrity PASS, LOCAL PASS, added cost over7200 and
-full-memory PENDING. All prior failure/count/cost/unknown identities remain.
-Preparation native RSS/child-exit proof remains UNKNOWN after its
-retained sandbox sysctl failure; whole resource acceptance is INCOMPLETE.
-Next is the separately frozen read-only B4.29 review after complete closure/main
-CI, the final session slice. Uniform/P17/final/unused-case boundaries stay.
-
-B4.29 is in progress under the [separate read-only protocol](b4_29_active_set_outcome_review_protocol.md)
-and [finite contract](b4_29_active_set_outcome_review_contract.json). Source/tests
-precede CI-passed release and ten fixed metadata inputs; no raw/numerical access.
+[B4.29 read-only review](../validation/b4_29_active_set_outcome_review.md) is
+closed: metadata PASS, own resource PASS, known cost over7200/full-memory
+PENDING. All old failures/costs/unknowns and B4.28 resource gap remain. The
+three-slice session ends; next research direction needs an owner decision and
+separate finite contract, with no fourth slice. Uniform/P17/final boundaries stay.
 
 ## Overall project plans
 

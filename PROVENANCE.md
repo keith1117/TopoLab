@@ -950,3 +950,12 @@ counts/summary predicates and inherited cost without raw arrays or numerical
 kernels. No new external scientific or implementation source, Hack3D material,
 label/reference or model was read/copied. Metadata execution waits for clean
 locked merged source and exact-head/main CI; old failures and unknowns remain.
+
+## B4.29 closed read-only scalar evidence
+
+One standard-library reviewer and independent Decimal audit read only fixed
+B4.28 compact scalar/native/resource metadata under the prospective contract.
+The [report](docs/validation/b4_29_active_set_outcome_review.md) binds original
+and new hashes, retained costs and unknowns. No upstream code, new scientific
+source, raw arrays, labels/references, models or numerical kernel was accessed.
+Metadata review cannot establish learned repair, acceleration or full fit-memory.

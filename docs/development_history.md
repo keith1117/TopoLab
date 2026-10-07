@@ -686,3 +686,21 @@ software tests passed with earlier software failures preserved. Next is the
 separately frozen read-only **B4.29 outcome and cost/full-memory review**, after
 full closure/main CI and the final permitted session slice. Uniform stays
 default, P/17 unrepaired, final/48 unused cases sealed; no fourth slice follows.
+
+## B4.29 (bounded read-only outcome and cost/full-memory review)
+
+The separate frozen final-third protocol executed one float scalar reviewer
+and independently implemented Decimal audit on ten hash-bound B4.28 metadata
+paths, under clean merged exact-head/main-CI-passed source. Metadata review
+PASS, own native resources PASS; Q29=80.26 including FULL60 reserve,
+known added cost58142.252069>7200, full fit-memory PENDING/4GiB. B4.28 new
+3232/3232 and32/32 stay passed; its preparation RSS/exit/whole-memory gaps
+remain UNKNOWN/INCOMPLETE. Every old failure,69 positions,216 first timings,
+432/816 counts and all851.38/200.98/80.34 costs/unknowns remain. No raw input,
+label/model, numerical call, fit, retiming, search or final access occurred.
+46 public focused/1287 full software tests pass. Source/evidence PRs,
+all-upload publication review, immutable native receipts and external verified
+backup bind the [report](validation/b4_29_active_set_outcome_review.md). The
+temporary three-slice authorization ends here; no fourth slice. Next research
+intervention is undecided, requiring an owner decision and finite contract.
+Uniform/P17/final/48-unused boundaries and ordinary waiting remain unchanged.
