@@ -8,9 +8,10 @@ slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 analytic/exhaustive/tampering and unchanged-v3 checks. No production payload,
 FEM, timing, numerical trial or fit occurred. Its [protocol](b4_27_active_set_evidence_protocol.md) retains original
 criteria, failures, costs and unknowns; full memory and learned repair remain
-pending. Next **B4.28 bounded active-set numerical evidence preregistration and
-execution** requires separate explicit numerical authorization and a frozen
-finite contract. Software acceptance transfers no permission or budget.
+pending. B4.28 is now in progress under separate owner authorization and its
+[frozen numerical contract](b4_28_active_set_execution_contract.json). Production
+is pending clean merged source/main CI; software acceptance transfers no permission
+or budget. The final session slice B4.29 is a separately frozen read-only review.
 Uniform remains default, P/17 unrepaired and final/unused B4.10 cases sealed.
 
 ## Overall project plans
@@ -27,8 +28,7 @@ promises of a completion date or empirical acceleration.
 
 ## Frozen slice protocols
 
-The latest completed slice is [B4.26 bounded active-set-aware preregistration](b4_26_active_set_preregistration_protocol.md); its report distinguishes
-document acceptance from pending numerical evidence and every old failed Gate.
+The latest completed slice is [B4.27 software evidence implementation](b4_27_active_set_evidence_protocol.md); B4.28 numerical evidence is in progress.
 
 These preregistrations stay in GitHub so declared methods, populations, resource
 caps and stop rules remain reviewable before execution. Keep existing paths and
@@ -108,6 +108,8 @@ and all three registrations retain their paths and bytes. The
 accepted arithmetic, complete continuation profiles and reconciled time;
 historical missing RSS and the original memory proof remain incomplete.
 - [B4.27 bounded active-set evidence software protocol](b4_27_active_set_evidence_protocol.md)
+
+- [B4.28 bounded active-set numerical evidence protocol](b4_28_active_set_numerical_evidence_protocol.md) · [Execution contract](b4_28_active_set_execution_contract.json)
 
 Add a link here when freezing a new protocol. A protocol listing records its
 existence; its validation report determines whether its Gate passed or failed.

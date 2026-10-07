@@ -888,3 +888,15 @@ smaller step, gap tolerance or automatic bound extension is selected.
 Pointwise and interval predicates retain the B4.26 tolerances and separate
 legacy failure flags. Synthetic software evidence authorizes no production
 payload/root/FEM/timing, fitting, scientific Gate or final access.
+
+## B4.28 complete finite numerical-evidence boundary
+
+The [B4.28 protocol](planning/b4_28_active_set_numerical_evidence_protocol.md)
+adds only an exact active-set trace and independent finite evidence for the
+unchanged v3 operator. Exact offset breakpoints and one-sided simultaneous
+contact equations determine every open affine partition without epsilon steps.
+All original pointwise/interval/fidelity tolerances, steps and256-piece bound
+remain. Independent FEM/filter origin and complete coverage are mandatory.
+Old failures/first timings/costs remain; no retiming, query/root/objective change,
+fit or final access occurs. Its separate600/1260/1GiB allocation and full60
+reserve are owner-approved; full training memory remains PENDING at4GiB.

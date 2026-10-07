@@ -68,12 +68,18 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and next slice
 
-Next is **B4.28 bounded active-set numerical evidence preregistration and
-execution**, not started. Require separate explicit numerical authorization,
-a frozen finite contract, exact source/plan/input/role hashes and complete
-independent evidence. Production requires clean locked merged source with
-exact-head/main CI passed, durable failures/counters and full native paid
-resources. B4.27 grants no production access, fit, search or final permission.
+**B4.28 bounded active-set numerical evidence preregistration and execution**
+is in progress under separate explicit owner authorization and its
+[frozen finite contract](planning/b4_28_active_set_execution_contract.json) and
+[prospective protocol](planning/b4_28_active_set_numerical_evidence_protocol.md).
+The source implementation and public software checks precede any production
+access. Production has not started. Require clean locked merged source with
+exact-head/main CI, complete independent evidence, durable failures/counters
+and full native charges (600/stage,1260 whole,1GiB,FULL60 reserve).
+No fit, search or final access is authorized. After complete B4.28 closure and
+main CI, the separately frozen read-only B4.29 review is the final available
+slice in this owner's temporary three-slice session. Ordinary repository
+single-slice waiting remains the default outside that authorization.
 See the [English roadmap](planning/TopoLab_v2_development_roadmap.md).
 
 The failed exact-FEM candidate stays stopped. No alternate cache/ordering,

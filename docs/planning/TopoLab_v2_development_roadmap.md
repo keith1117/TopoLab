@@ -1115,12 +1115,15 @@ origins remain future numerical-audit prerequisites. See
 
 #### Current stop and next slice
 
-**B4.27 is complete.** Next is **B4.28 bounded active-set numerical evidence
-preregistration and execution**, not started. A separate explicit numerical
-authorization and frozen finite contract must bind exact roles/population/hashes,
-complete independent proof, durable failures/counters and full paid native
-resources. Production follows only clean locked CI-passed merged source.
-B4.27 transfers no production permission, budget, fit or final access.
+**B4.27 is complete. B4.28 is in progress**, separately owner-authorized under
+its [finite numerical protocol](b4_28_active_set_numerical_evidence_protocol.md)
+and [execution contract](b4_28_active_set_execution_contract.json). Production
+is pending clean locked CI-passed merged source. Preserve exact populations,
+roles, sources, hashes, tolerances and all original failures/costs. New caps are
+600/stage,1260 whole,1GiB including FULL60 metadata reserve; no budget transfer.
+No fit/search/final follows. The temporary final session slice B4.29 is a
+separately frozen read-only outcome and cost/full-memory review after full
+B4.28 closure/main CI. Session permission does not change the repository default.
 
 B4.23 remains failed 3907/3976 and 57546.072069>7200; all 69 failures, first
 timings and charges remain. B4.20 stays failed, B4.19 fields unknown, B4.24's
@@ -1178,7 +1181,7 @@ and validation reports. B4.27 passes software acceptance only; original failed
 Gates/costs/unknowns and full-memory/learned-repair requirements remain.
 
 1. **B4.28 bounded active-set numerical evidence preregistration and execution:**
-   require a separate explicit numerical authorization and frozen finite contract;
+   in progress under separate explicit owner authorization and frozen finite contract;
    bind complete original populations/roles/steps, exact source/input hashes,
    independent physical/pointwise/interval proof and durable full native costs.
    No permission or budget is inherited from software acceptance. Preserve every
