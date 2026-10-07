@@ -1,9 +1,9 @@
 # Current project status
 
-Updated: 2026-10-07. Latest completed slice: **B4.28 bounded active-set
-numerical evidence and finite execution**. New integrity **PASS**, LOCAL
-**PASS**, costs still fail7200/full training memory PENDING. See
-[the complete report](validation/b4_28_active_set_numerical_evidence.md).
+Updated: 2026-10-07. Latest completed slice: **B4.29 bounded read-only outcome
+and cost/full-memory review**. Metadata review **PASS**, own resource **PASS**;
+known cost **58142.252069>7200**, full training memory PENDING/4GiB. See
+[the complete report](validation/b4_29_active_set_outcome_review.md).
 
 ## Delivery and operational boundary
 
@@ -21,21 +21,25 @@ B3's [complete data Gate](validation/b3_4_data_gate.md) and twelve fixed
 or freeze. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
 All subsequent failures are retained in [history](development_history.md).
 
-## Latest bounded numerical evidence
+## Latest bounded outcome review
 
-[B4.28](validation/b4_28_active_set_numerical_evidence.md) follows its separately
-authorized [finite protocol](planning/b4_28_active_set_numerical_evidence_protocol.md)
-and [execution contract](planning/b4_28_active_set_execution_contract.json),
-using clean merged source `db9460a743b5` after exact-head/main CI.
-Integrity **PASS**, LOCAL **PASS**. New method charge **234.60**
-includes FULL60 reserve; native resource acceptance **FAIL / INCOMPLETE**. Added cost
-**58061.992069>7200**; full training memory PENDING/4GiB.
-Preparation native RSS/child-exit proof remains UNKNOWN after its
-retained sandbox sysctl failure; whole resource acceptance is INCOMPLETE.
-All3976 old flags/69 failures,216 first timings,432 old FEM/816 projections,
-original steps/tolerances and all32 LOCAL criteria retain their original
-identities. New finite point/interval evidence never clears the old Gate.
-B4.27's42 synthetic tests and all historical frozen records remain.
+[B4.29](validation/b4_29_active_set_outcome_review.md) executed one readonly
+review and independent scalar audit under clean merged source
+`17c739837051` after all applicable exact-head/main CI. Its
+[protocol](planning/b4_29_active_set_outcome_review_protocol.md) and
+[contract](planning/b4_29_active_set_outcome_review_contract.json) fixed ten
+compact metadata inputs, unchanged criteria and cost maxima. Metadata review
+**PASS**, own resource **PASS**, Q29 **80.26** including FULL60 reserve.
+Known added cost **58142.252069>7200**; full training memory PENDING/4GiB.
+No raw arrays, labels/models, numerical kernels, fit, retiming, search or final
+access. New review RSS does not establish full fit memory or fill old gaps.
+
+[B4.28](validation/b4_28_active_set_numerical_evidence.md) stays new integrity
+3232/3232 PASS and LOCAL32/32 PASS, Q28=234.60. Preparation sandbox sysctl
+failure/RSS/child-exit proof and whole peak remain UNKNOWN; whole resource
+acceptance INCOMPLETE. Old3976 flags/69 failures,216 first timings,432 FEM/816
+projections,200 points/64 intervals/72 diagnostics and all tolerances remain.
+B4.27's42 synthetic tests and every historical frozen identity remain.
 
 ## Preserved evidence and unresolved failures
 
@@ -63,23 +67,18 @@ B4.25's80.34 and all twelve B4.1 fits 3870.204341 remain in later accounting.
 failed 983/984 at 1e-4/floor1e-8, paying 100.30. B4.21 remains noncausal;
 B4.19's actual failed case/gap/counts remain unknown.
 
-## Current stop and active slice
+## Current stop and next decision
 
-B4.29 bounded active-set outcome and cost/full-memory review is in progress,
-the final third slice in this owner's temporary session. Its separately
-[frozen protocol](planning/b4_29_active_set_outcome_review_protocol.md) and
-[contract](planning/b4_29_active_set_outcome_review_contract.json) select the
-cost-and-full-memory route. B4.27/B4.28 are fully closed; B4.28 publication main
-`a374603b20fe` and all three main checks passed. Source/tests precede metadata
-access; require clean locked merged source and all applicable exact-head/main CI.
-Only ten hash-bound compact scalar/native/resource paths are permitted. No raw
-arrays, labels/models, root/FEM/objective, fit, retiming, search or final access.
-One review and one independent scalar audit each60, whole180/1GiB including
-FULL60 reserve. Do not repair B4.28/B4.24 memory/exit unknowns with new small RSS.
+The owner's three-slice session ends at complete B4.29 publication/main CI/backup.
+No fourth slice is started. The next research intervention is undecided and
+requires an owner decision plus separate prospective finite contract. Current
+exact-FEM candidate remains stopped for unchanged cost and missing full-training
+memory; full B4 scientific delivery remains open. No automatic numerical retry,
+cache/ordering, continuation, radius/epoch/population/physics-frequency search,
+model/seed/tolerance/role change, fit or final access. Ordinary single-slice
+waiting remains the repository default outside the exhausted temporary session.
 
-The failed exact-FEM candidate remains stopped. Uniform stays operational
-default, fixed P/17 unrepaired and final/all48 unused B4.10 cases sealed. All
-failures, unknowns and charges remain. Learned repair, independent confirmation,
-full new B4 Gate and compatible final contract remain required before B5. No
-fourth slice is authorized; ordinary single-slice waiting remains the default
-outside this temporary session.
+Uniform stays operational default, P/17 unrepaired, final/all48 unused B4.10
+cases sealed. Preserve all failures, unknowns and charges. Learned repair,
+independent confirmation, full new B4 Gate and a compatible final contract
+remain required before B5.

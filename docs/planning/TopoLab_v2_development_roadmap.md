@@ -5,18 +5,18 @@ Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
 B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
 initialization is the operational default and final evaluation stays sealed.
 
-Latest completed: **B4.28 bounded active-set numerical evidence**. New
-integrity **PASS**, LOCAL **PASS**, new charge **234.60**; added
-cost **58061.992069>7200**, full memory PENDING. All
-old failures/counts/costs/unknowns stay. See
-[the report](../validation/b4_28_active_set_numerical_evidence.md) and
-[frozen protocol](b4_28_active_set_numerical_evidence_protocol.md).
+Latest completed: **B4.29 bounded read-only outcome/cost/full-memory review**.
+Metadata review PASS, own resources PASS, Q29=80.26, known cost
+58142.252069>7200 and full training memory PENDING. B4.28 new integrity/LOCAL
+stay passed, its whole-resource gap and all old failures/unknowns remain. See
+[the report](../validation/b4_29_active_set_outcome_review.md). The temporary
+three-slice session ends; no fourth slice or automatic research intervention.
 [Project status](../project_status.md) holds the current boundary;
 [development history](../development_history.md) retains the complete chronology.
 The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-10-07 (B4.28 finite numerical evidence; original failures retained)
+Revised: 2026-10-07 (B4.29 read-only review; three-slice boundary)
 
 Related documents:
 
@@ -1127,12 +1127,17 @@ Next is separately frozen/read-only **B4.29 outcome and cost/full-memory review*
 after full closure/main CI, the last session slice. The ordered route is
 cost-and-full-memory-review. Ordinary waiting remains default; no fourth slice follows.
 
-**B4.29 is in progress**, after complete B4.28 closure and main CI. Its
-[finite protocol](b4_29_active_set_outcome_review_protocol.md) and
-[separate contract](b4_29_active_set_outcome_review_contract.json) freeze the
-cost-and-full-memory route and ten compact scalar/native/resource inputs.
-Source/tests first, clean merged exact-head/main CI before metadata execution;
-no raw/numerical access. This is the final third session slice, with no fourth.
+#### B4.29: Read-only outcome and cost/full-memory review closed
+
+One review and independent Decimal audit under separate finite contract and
+clean merged CI-passed source; only ten hash-bound compact metadata paths.
+Metadata review PASS, own resource PASS, Q29=80.26, added known
+cost58142.252069>7200. B4.28's3232/3232 and32/32 observations remain bounded;
+its preparation RSS/exit/whole-resource proof stays UNKNOWN/INCOMPLETE. Every
+prior failure/charge/unknown remains; no raw/numerical/fit/final access. See
+[report](../validation/b4_29_active_set_outcome_review.md). At full publication
+closure, the three-slice session stops; next intervention requires an owner
+decision and independent finite contract. No fourth slice is authorized.
 
 B4.23 remains failed 3907/3976 and 57546.072069>7200; all 69 failures, first
 timings and charges remain. B4.20 stays failed, B4.19 fields unknown, B4.24's
@@ -1190,14 +1195,13 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **B4.29 bounded active-set outcome and cost/full-memory review:** require
-   complete B4.28 closure/main CI, a separately frozen read-only contract and
-   compact scalar/native/resource metadata only. Retain every prior failure,
-   cost and unknown; no numerical payload, fit, search or final access.
-2. **Any subsequent correctness or objective-feasibility intervention:** require a
-   separate prospective contract and its own correctness, fidelity, compute and
-   full training-memory evidence. The failed exact-FEM candidate remains stopped;
-   no cache/ordering, epoch/population/physics-frequency search is authorized.
+1. **Owner decision for a next research intervention:** B4.29 is closed; the
+   three-slice authorization is exhausted and no fourth slice starts. Research
+   direction is undecided; require a separate prospective finite contract.
+2. **Any later correctness/objective-feasibility intervention:** preserve all
+   evidence and require independent correctness, fidelity, compute and full
+   training-memory proof. The unchanged exact-FEM candidate remains stopped.
+   No cache/ordering, epoch/population/frequency search or fit is authorized.
 3. **Learned repair and independent confirmation:** preserve fixed P/17, all
    controls, failures and charged comparisons. A bounded development pass alone
    cannot open final evaluation or substitute another seed for the fixed primary.
