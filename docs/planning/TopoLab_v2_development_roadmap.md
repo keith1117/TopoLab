@@ -1070,7 +1070,8 @@ and unchanged [interrupted report](../validation/b4_24_versioned_correctness_fai
 
 **B4.24's owner-approved registered continuation is complete.** The frozen
 ordered decision selects **B4.25 bounded active-set objective-method review**,
-not started. Require a separately frozen read-only decision boundary; no new
+now in separate [protocol/source preparation](b4_25_active_set_method_review_protocol.md).
+Production review/audit have not started and require clean CI-passed merged source; no new
 objective, criterion, root/FEM, numerical run, fit or search follows automatically.
 Keep both original failures, old 76.19 charge/reserve, all historical unknowns and
 complete 200.98 B4.24 time. V3's measured memory applies only to the continuation;
@@ -1136,7 +1137,8 @@ unknown. Documentation maintenance does not start another research slice.
    read-only decision boundary before execution. B4.24's saved finite intervals
    do not authorize a new objective, correctness criterion, root/FEM candidate,
    numerical run, fit or search. Preserve all failed rows, first timings,
-   charges, historic missing RSS and seals. B4.25 has not started.
+   charges, historic missing RSS and seals. Its protocol/source is being prepared;
+   production review/audit have not started.
 2. **Any subsequent correctness or objective-feasibility intervention:** require a
    separate prospective contract and its own correctness, fidelity, compute and
    full training-memory evidence. The failed exact-FEM candidate remains stopped;

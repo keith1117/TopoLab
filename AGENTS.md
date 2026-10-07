@@ -32,9 +32,10 @@ with new reserve use 42.49/60 and continuation peak RSS 415268864 bytes.
 Historical missing RSS and whole-slice memory compliance remain unknown; the
 original memory proof stays incomplete. See the [scoped v3 report](docs/validation/b4_24_registered_continuation.md)
 and preserved [interrupted report](docs/validation/b4_24_versioned_correctness_failure_review.md).
-The next slice is **B4.25 bounded active-set objective-method review**; it has
-not started and needs a separately frozen read-only boundary. No new objective,
-root, FEM, fit or final access follows from this review.
+The current slice is **B4.25 bounded active-set objective-method review**:
+its [read-only protocol](docs/planning/b4_25_active_set_method_review_protocol.md)
+is prepared; production has not started. Clean merged source and CI must precede
+execution. No new objective, criterion, root, FEM, fit or final access follows.
 Full training memory, learned repair and independent confirmation remain pending.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
