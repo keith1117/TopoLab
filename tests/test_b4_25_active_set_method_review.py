@@ -473,6 +473,19 @@ def test_input_guard_reads_only_frozen_compact_files_and_original_source_hashes(
     assert profiled == ["plan", "review", "independent", "closure", "verification"]
 
 
+def test_input_guard_accepts_original_binary_charge_without_rewriting(tmp_path, monkeypatch):
+    bound = metadata_fixture()
+    charge = 16.19 + 120 + sum((31.37, 33.42))
+    assert charge != 200.98
+    bound["resource_close.json"]["charged_seconds"] = charge
+    before = candidate.canonical(bound)
+    monkeypatch.setattr(candidate, "read", lambda root, name, expected=None: bound[name])
+    monkeypatch.setattr(candidate, "safe_hash", lambda *args: None)
+    monkeypatch.setattr(candidate, "check_command", lambda *args: {"rss_bytes": 415268864})
+    assert candidate.check_inputs(tmp_path) == bound
+    assert candidate.canonical(bound) == before
+
+
 def test_applicable_ci_requires_pr_smoke_and_no_pending_or_failed_checks():
     ci = metadata_fixture()["audit_receipts/source_final_head_ci.json"]
     assert candidate.ci_passed(ci, False) and candidate.ci_passed(ci, True)

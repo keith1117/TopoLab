@@ -251,7 +251,7 @@ def check_inputs(root):
         or audit["review_sha256"] != BINDINGS["review.json"]
         or not closed["closed"]
         or not closed["review_acceptance_passed"]
-        or closed["charged_seconds"] != 200.98
+        or not math.isclose(closed["charged_seconds"], 200.98, rel_tol=1e-12, abs_tol=1e-12)
         or closed["historical_resource_proof_complete"]
         or closed["whole_slice_peak_rss_bytes"] is not None
         or closed["whole_slice_memory_compliance"] is not None

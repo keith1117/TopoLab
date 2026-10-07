@@ -9,7 +9,8 @@ Review only B4.24 v3's closed compact scalar review, independent audit, source/
 head/main/evidence CI releases, native closure and post-exit receipts: fifteen
 literal SHA-256 bindings in the static plan. Require its accepted 2104 predicates,
 1728 independent comparisons, complete 64-row population and 200.98-second
-charge. Check its native profiles/logs and original source bindings without
+charge (scalar arithmetic1e-12; its bound original bytes are never rewritten).
+Check its native profiles/logs and original source bindings without
 calling the prior numerical implementations. Historical source/protocol/report
 identities and B4.24's two failures, old76.19, old50.53/60 and missing historic
 RSS remain. The original B4.23 arrays, journals, label/model payloads, B3 data,
