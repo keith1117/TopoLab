@@ -4,14 +4,13 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-B4.24's owner-approved [v3 continuation](b4_24_registered_continuation_protocol.md)
-completed saved-panel review acceptance and its scoped time/native proof; see
-[the new report](../validation/b4_24_registered_continuation.md). Original
-interruptions, unknown historical RSS and all scientific failures remain.
-B4.25's [bounded active-set method review](b4_25_active_set_method_review_protocol.md)
-is prepared for separate source/CI publication; production review/audit have not
-started. Its read-only boundary grants no new objective, criterion, numerical
-trial, fit or final access. Ordinary single-slice stopping continues.
+B4.25's [complete read-only method review](../validation/b4_25_active_set_method_review.md)
+passed 448 predicates/2222 independent comparisons and its bounded native proof.
+All original scientific failures, first timings, complete costs and historic
+memory unknowns remain. Its [frozen protocol](b4_25_active_set_method_review_protocol.md)
+grants no new objective, criterion, numerical trial, fit or final access.
+Next **B4.26 bounded active-set-aware correctness and cost preregistration** has not
+started and requires a separate prospective read-only contract. Stop after B4.25.
 
 ## Overall project plans
 
@@ -27,9 +26,9 @@ promises of a completion date or empirical acceleration.
 
 ## Frozen slice protocols
 
-The current prepared slice is [B4.25 bounded active-set objective-method
-review](b4_25_active_set_method_review_protocol.md); execution follows only after
-its clean merged source and applicable CI pass.
+The latest completed slice is [B4.25 bounded active-set objective-method
+review](b4_25_active_set_method_review_protocol.md); its report retains the exact
+source/CI/native boundary and every original failure.
 
 These preregistrations stay in GitHub so declared methods, populations, resource
 caps and stop rules remain reviewable before execution. Keep existing paths and
@@ -100,6 +99,7 @@ B4.1/B4.2 use those contracts; later B4 slices have the protocols below.
 - [B4.24 bounded versioned surrogate correctness failure review](b4_24_versioned_correctness_failure_review_protocol.md)
 - [B4.24 registered saved-schema compatibility recovery](b4_24_saved_schema_recovery_protocol.md)
 - [B4.24 owner-approved registered continuation v3](b4_24_registered_continuation_protocol.md)
+- [B4.25 bounded active-set objective-method review](b4_25_active_set_method_review_protocol.md)
 
 B4.24's [original interrupted report](../validation/b4_24_versioned_correctness_failure_review.md)
 and all three registrations retain their paths and bytes. The

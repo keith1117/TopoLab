@@ -1,7 +1,7 @@
 # Current project status
 
-Updated: 2026-10-06. Latest completed research slice: **B4.24 registered continuation**.
-Read-only review acceptance passed; historical whole-slice memory proof remains incomplete.
+Updated: 2026-10-06. Latest completed research slice: **B4.25 bounded active-set method review**.
+Read-only acceptance/native resource proof passed; all original scientific failures remain.
 
 ## Delivery and operational boundary
 
@@ -23,27 +23,35 @@ independent confirmations. Fixed P/17 remains unrepaired; outcome-based primary
 replacement is forbidden. The [complete history](development_history.md) and
 [validation index](validation/README.md) retain every intervening result.
 
-## Latest completed result and scoped resource closure
+## Latest completed result and bounded resource closure
 
-[B4.24's registered continuation](validation/b4_24_registered_continuation.md)
-passed complete read-only review acceptance: 2104/2104 saved-state predicates and
-1728 independent row-field comparisons. All eight cases, 72 central states,
-128 sides, 64 directional rows and 216 first-inclusive timings remain.
-The original 35 mask and 34 FD failures overlap on 34 rows; every failed FD
-row crosses the central clipping set and its signed gap is compatible with the
-frozen clipping-departure decomposition. This is a finite-interval description,
-not a global cause, pointwise-gradient failure or repaired scientific Gate.
+[B4.25's complete method review](validation/b4_25_active_set_method_review.md)
+passed 448 scalar predicates and 2222 independent field comparisons under
+its [prospective protocol](planning/b4_25_active_set_method_review_protocol.md).
+All 64 rows, 35 mask/34 FD failures and 69 exact original failed positions remain,
+with 34 overlapping failed rows. All failed FD rows cross central clipping sets
+and their signed gaps remain compatible with the frozen finite-interval
+decomposition. This establishes no global cause or pointwise-gradient failure
+and repairs no scientific Gate. The six frozen method dispositions select
+preregistration only; no new objective, root, derivative or criterion was implemented.
+All 216 first-inclusive timings are inherited by hash/count from the accepted
+B4.24 audit, not reopened or retimed here. Original rows/cost are byte-identical.
 
-The owner-approved [v3 boundary](planning/b4_24_registered_continuation_protocol.md)
-added one fully paid 60-second reserve while keeping whole 240, cumulative
-review 60, audit 60 and future 1 GiB. Total B4.24 charge is **200.98 seconds**;
-new reserve use **42.49/60**, old **50.53/60**, measured continuation peak
-**415268864 bytes**. The [original interruption](validation/b4_24_versioned_correctness_failure_review.md),
-both failures, old 76.19 charge and all original files remain unchanged.
-Historical failed planning RSS and child exit, whole-slice peak RSS and global
-memory compliance remain **unknown**. V3 closes only its approved continuation
-and reconciled time; historical_resource_proof_complete remains false.
-Full training-memory feasibility remains pending.
+Exactly one review and one separate stdlib audit ran from clean CI-passed merged
+source. B4.25 pays **80.34<=180 seconds**, including the entire 60 reserve;
+reserve use **40.41/60**, peak new RSS **26492928 bytes**. All five native
+wall/user/system/RSS profiles and final post-exit/ledger proofs passed; no retry.
+The original 57546.072069>7200 proxy remains failed. Two fixed zero-work scenarios
+are sample arithmetic, not feasible-method bounds or new Gates. B4.24's 200.98
+and this charge are additional in a separate prospective accounting view.
+
+[B4.24's scoped v3 acceptance](validation/b4_24_registered_continuation.md)
+remains 2104 predicates/1728 comparisons and total 200.98, new reserve 42.49/60,
+continuation peak 415268864 bytes. Its [original interruption](validation/b4_24_versioned_correctness_failure_review.md),
+both failures, old 76.19 and old 50.53/60 remain unchanged. Historic failed planning
+RSS/child exit, whole-slice peak and memory compliance remain **UNKNOWN**; the
+original memory proof stays incomplete. B4.25's bounded read-only RSS cannot
+complete historical or full training-memory feasibility.
 
 ## Preserved scientific failures and unresolved evidence
 
@@ -52,7 +60,7 @@ integrity 3907/3976, with 35 side-mask and 34 FD failures, and full cost
 57546.072069>7200. All 32 LOCAL observations cannot clear failed integrity or
 authorize fitting. Its 432 FEM solves, 816 projections, 143.47-second charge,
 all first timings and original cost object remain. All 851.38 earlier B4.15–23
-charged seconds remain; B4.24 is additional.
+charged seconds remain; B4.24 and B4.25 are additional.
 
 [B4.22](validation/b4_22_stable_projection_correctness.md) passed bounded
 1704-condition correctness. [B4.20](validation/b4_20_surrogate_correctness.md)
@@ -62,15 +70,12 @@ Fixed P/17, all controls and every prior failure/charge are preserved.
 
 ## Current stop and next slice
 
-Current is **B4.25 bounded active-set objective-method review**, in protocol/source
-preparation. Its [prospective read-only boundary](planning/b4_25_active_set_method_review_protocol.md)
-requires clean CI-passed merged source before production review/audit; neither
-has started. B4.24 authorizes
-no new objective, correctness criterion, projection/root candidate, numerical
-run, fit or research search. The owner-approved continuation ends at B4.24.
-The [English roadmap](planning/TopoLab_v2_development_roadmap.md) controls Gate order;
-the [new report](validation/b4_24_registered_continuation.md) and frozen
-[v3 protocol](planning/b4_24_registered_continuation_protocol.md) define its scope.
+Next is **B4.26 bounded active-set-aware correctness and cost preregistration**, not started.
+Require a separate prospective read-only contract, explicit criteria and research/
+execution boundary. B4.25 grants no new objective, derivative, correctness rule,
+projection/root/FEM candidate, numerical trial, fit or research search. See the
+[English roadmap](planning/TopoLab_v2_development_roadmap.md) and
+[complete report](validation/b4_25_active_set_method_review.md). Stop after B4.25.
 
 The failed exact-FEM candidate stops. Alternate cache/ordering, continuation,
 epoch/population/physics-frequency searches, threshold changes and seed replacement
@@ -78,4 +83,4 @@ are not authorized. Preserve every failure, unknown and complete charge.
 Final evidence and all **48 unused B4.10 fresh cases stay sealed**. Passing learned
 repair, independent confirmation, the complete new B4 Gate and a compatible final
 contract remain required before B5. Full v2 delivery remains open and uniform
-remains the operational default.
+remains the operational default; fixed P/17 remains unrepaired.

@@ -857,3 +857,18 @@ label, checkpoint or final artifact is accessed or imported. Synthetic public
 scalar records test independent enumeration, immutable failure/cost identities,
 metadata roles and native-resource boundaries before merged-source production.
 All generated review/audit/resource evidence remains external.
+
+## B4.25 closed scalar method review and immutable prior evidence
+
+The registered read-only review passed 448 predicates and 2222 independently
+enumerated scalar/identity/disposition comparisons. It retained every original
+row/failure/cost and inherited first timing identity without reopening raw
+numerical panels. New complete native charge 80.34, reserve use 40.41/60
+and peak 26492928 bytes remain separate from B4.24's 200.98 and all prior charges.
+The fixed-set derivative and six method dispositions use only TopoLab's frozen
+equations/closed scalar evidence; they implement no new mathematical map,
+derivative, criterion, objective, root/FEM or fitted model. All historical
+failures/memory unknowns and final/unused-fresh seals remain. No Hack3D material
+or new external scientific/implementation source, production label/model or
+final artifact was accessed or imported. See the
+[complete report](docs/validation/b4_25_active_set_method_review.md).

@@ -22,20 +22,21 @@ The historical `v1.0.0` release remains complete, with its negative M1/M2 eviden
 preserved. B3's data Gate and B4.1 fitting passed; the original B4.2 Gate failed.
 Fixed P/17 remains unrepaired and cannot be replaced after seeing outcomes.
 
-The latest completed slice is **B4.24**: the owner-approved v3 saved-panel
-review acceptance passed 2104 predicates and 1728 independent field comparisons.
-All 34 failed FD rows cross the central clipping set and are clipping-compatible;
-this describes saved intervals, not a global cause or repaired scientific Gate.
-B4.23 remains failed 3907/3976 and cost 57546.072069>7200. B4.20 remains failed;
-B4.19's actual case/gap/counts stay unknown. B4.24's total charge is 200.98,
-with new reserve use 42.49/60 and continuation peak RSS 415268864 bytes.
-Historical missing RSS and whole-slice memory compliance remain unknown; the
-original memory proof stays incomplete. See the [scoped v3 report](docs/validation/b4_24_registered_continuation.md)
-and preserved [interrupted report](docs/validation/b4_24_versioned_correctness_failure_review.md).
-The current slice is **B4.25 bounded active-set objective-method review**:
-its [read-only protocol](docs/planning/b4_25_active_set_method_review_protocol.md)
-is prepared; production has not started. Clean merged source and CI must precede
-execution. No new objective, criterion, root, FEM, fit or final access follows.
+The latest completed slice is **B4.25 bounded active-set objective-method review**:
+read-only acceptance passed 448 predicates and 2222 independent field comparisons.
+All 64 rows and 69 original failed positions remain; all 34 failed FD rows cross
+clipping sets and are clipping-compatible. This is finite-interval evidence,
+not a global cause or repaired scientific Gate. B4.23 stays failed 3907/3976 and
+cost 57546.072069>7200; B4.20 stays failed, B4.19's actual case/gap/counts unknown.
+B4.25's complete charge is 80.34/180, paid reserve 60 with use 40.41/60,
+new peak RSS 26492928 bytes. B4.24's 200.98, both old failures and historical
+missing RSS/whole-memory unknowns remain; its original memory proof is incomplete.
+See the [B4.25 report](docs/validation/b4_25_active_set_method_review.md) and
+[B4.24 scoped report](docs/validation/b4_24_registered_continuation.md).
+Next is **B4.26 bounded active-set-aware correctness and cost preregistration**, not started and
+requiring a separately frozen read-only boundary and prospective criteria.
+The [B4.25 protocol](docs/planning/b4_25_active_set_method_review_protocol.md)
+grants no new objective, criterion, root/FEM, numerical trial, fit or final access.
 Full training memory, learned repair and independent confirmation remain pending.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
