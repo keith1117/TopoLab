@@ -5,20 +5,20 @@ Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
 B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
 initialization is the operational default and final evaluation stays sealed.
 
-Latest completed: **B4.26 bounded active-set-aware correctness and cost
-preregistration — read-only contract acceptance passed**: 66 static predicates
-and 28 independently implemented document/metadata checks. The prospective
-pointwise/complete-interval, local fidelity, full-cost and training-memory
-requirements grant no numerical execution. B4.23/B4.20 remain failed;
-B4.24 historical RSS/whole-memory unknowns and all charges remain. See
-[the report](../validation/b4_26_active_set_preregistration.md) and
-[frozen protocol](b4_26_active_set_preregistration_protocol.md).
+Latest completed: **B4.27 bounded active-set evidence implementation — synthetic
+software acceptance passed**. 42 independent analytic/exhaustive/tampering
+and unchanged-v3 tests cover full pointwise and exact complete-interval proofs.
+No production payload/numerical trial, FEM, timing or fitting occurred.
+B4.26's unchanged fidelity/cost/full-memory requirements, all B4.23/B4.20
+failures, historical unknowns and charges remain. See
+[the report](../validation/b4_27_active_set_evidence.md) and
+[frozen protocol](b4_27_active_set_evidence_protocol.md).
 [Project status](../project_status.md) holds the current boundary;
 [development history](../development_history.md) retains the complete chronology.
 The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
 
 Prepared: 2026-09-24
-Revised: 2026-10-07 (B4.26 read-only preregistration; original scientific Gates remain failed)
+Revised: 2026-10-07 (B4.27 software implementation; original scientific Gates remain failed)
 
 Related documents:
 
@@ -1101,24 +1101,35 @@ cannot certify it. No production or numerical execution occurred. This is
 preregistration acceptance, not scientific correctness, cost feasibility or
 learned repair; see [the report](../validation/b4_26_active_set_preregistration.md).
 
+#### B4.27: Synthetic software implementation acceptance passed
+
+The separate [software protocol](b4_27_active_set_evidence_protocol.md) implements
+independent full cotangents and exact complete affine-interval certificates.
+42 analytic/exhaustive/tampering and unchanged-v3 tests pass. Complete
+coverage, continuity, signed integrals and simultaneous transitions are proven;
+central kinks, degenerate partitions and missing/overlapping pieces reject.
+All original tolerances/steps and the 256-piece bound remain. No production
+payload, FEM, timing, numerical trial or fit occurred. Independent physical/FEM
+origins remain future numerical-audit prerequisites. See
+[the software report](../validation/b4_27_active_set_evidence.md).
+
 #### Current stop and next slice
 
-**B4.26 is complete.** Next is **B4.27 bounded active-set evidence implementation**,
-not started, software only under a separate frozen contract. Implement/test
-these evidence requirements on synthetic public fixtures; no production
-payload, root/FEM, objective/gradient, prediction timing, numerical trial or
-fit is inherited. A later numerical contract needs separate explicit
-authorization, finite stage/whole/reserve budgets, independent evidence,
-durable failures and clean locked CI-passed merged source.
+**B4.27 is complete.** Next is **B4.28 bounded active-set numerical evidence
+preregistration and execution**, not started. A separate explicit numerical
+authorization and frozen finite contract must bind exact roles/population/hashes,
+complete independent proof, durable failures/counters and full paid native
+resources. Production follows only clean locked CI-passed merged source.
+B4.27 transfers no production permission, budget, fit or final access.
 
-B4.23's 3907/3976 and 57546.072069>7200 remain failed, all 69 failures/first timings
-and every charge retained. B4.20 remains failed; B4.19 case/gap/counts unknown;
-B4.24's historical missing RSS/whole-memory proof remains incomplete. Fixed
-P/17 stays unrepaired and cannot be replaced. No cache/ordering, continuation,
-epoch/population/physics-frequency or quality-threshold search follows. Final
-evidence and all 48 unused B4.10 fresh cases stay sealed. Learned repair,
-independent confirmation, full new B4 Gate and compatible final contract
-remain required before B5. Stop after B4.26.
+B4.23 remains failed 3907/3976 and 57546.072069>7200; all 69 failures, first
+timings and charges remain. B4.20 stays failed, B4.19 fields unknown, B4.24's
+historical memory proof incomplete. Full training memory, fixed P/17 repair,
+independent confirmation, complete new B4 Gate and compatible final contract
+remain required. Uniform stays default; final/48 unused B4.10 cases sealed.
+No cache/ordering, continuation, epoch/population/physics-frequency or
+quality-threshold search follows. Ordinary single-slice waiting remains the
+repository default; session-specific authorization does not amend it.
 
 Compare each model to uniform and non-ML baselines on fallback-inclusive
 validation time, independent compliance, convergence, volume, and failure strata.
@@ -1162,16 +1173,16 @@ search on B5 outcomes.
 
 ## 6. Recommended sequence
 
-The completed sequence is retained in [development history](../development_history.md)
-and the per-slice validation reports. B4.26 completed read-only preregistration;
-B4.23/B4.20 remain failed, full training memory pending and historic RSS
-unknown. Documentation maintenance starts no numerical research slice.
+The completed sequence remains in [development history](../development_history.md)
+and validation reports. B4.27 passes software acceptance only; original failed
+Gates/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **B4.27 bounded active-set evidence implementation:** software only under
-   a separate frozen contract. Implement/test the preregistered independent
-   pointwise and complete-interval evidence on synthetic public fixtures;
-   retain all legacy failures/steps and full fidelity/cost/memory requirements.
-   No production payload or numerical execution is authorized by B4.26.
+1. **B4.28 bounded active-set numerical evidence preregistration and execution:**
+   require a separate explicit numerical authorization and frozen finite contract;
+   bind complete original populations/roles/steps, exact source/input hashes,
+   independent physical/pointwise/interval proof and durable full native costs.
+   No permission or budget is inherited from software acceptance. Preserve every
+   original failure and stop dependent work on failed/unknown prerequisites.
 2. **Any subsequent correctness or objective-feasibility intervention:** require a
    separate prospective contract and its own correctness, fidelity, compute and
    full training-memory evidence. The failed exact-FEM candidate remains stopped;

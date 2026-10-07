@@ -1,6 +1,6 @@
 # Development history
 
-Retained project-state summaries through the B4.26 bounded active-set preregistration.
+Retained project-state summaries through B4.27 active-set evidence implementation.
 This history was moved from
 `AGENTS.md` during the 2026-10-06 documentation cleanup; all recorded results,
 failures, costs and stopping boundaries are preserved. Statements about the
@@ -643,3 +643,26 @@ software only under a separate frozen contract. No numerical execution or fit
 is inherited. Uniform stays default, P/17 unrepaired and final/all 48 unused
 B4.10 cases sealed. Full training memory, learned repair and independent
 confirmation remain pending. Stop after B4.26.
+
+## B4.27 (bounded active-set evidence implementation; software acceptance passed)
+
+The separately frozen software contract implements independent full pointwise
+cotangents and complete exact affine-piece interval certificates. 42 public
+synthetic analytic/exhaustive/tampering and unchanged-v3 checks passed. Every
+piece retains offsets, residuals, signed one-sided slopes and simultaneous
+transitions; exact coverage rejects even sub-tolerance gaps. Undefined central
+states and incomplete/degenerate certificates stop; at most 256 pieces and both
+original steps remain. Legacy mask/FD failures are separately retained.
+See the [report](validation/b4_27_active_set_evidence.md) and
+[protocol](planning/b4_27_active_set_evidence_protocol.md).
+
+No production payload, FEM, prediction timing, numerical trial, fit or final
+access occurred. The old v3/query source and 147 historical frozen records,
+B4.23/B4.20 failures, all charges and historical unknowns remain. Full training
+memory and learned repair/confirmation stay pending. Software resources are
+separately retained; unmeasured authoring/remote resources remain unknown.
+Next is **B4.28 bounded active-set numerical evidence preregistration and
+execution**, not started and requiring separate explicit numerical authorization
+and a frozen finite execution contract. Uniform stays default, P/17 unrepaired
+and final/48 unused B4.10 cases sealed. Ordinary repository stopping rules remain;
+the owner's temporary at-most-three-slice authorization applies only to this chat.
