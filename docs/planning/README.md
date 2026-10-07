@@ -8,8 +8,10 @@ B4.24's owner-approved [v3 continuation](b4_24_registered_continuation_protocol.
 completed saved-panel review acceptance and its scoped time/native proof; see
 [the new report](../validation/b4_24_registered_continuation.md). Original
 interruptions, unknown historical RSS and all scientific failures remain.
-Next B4.25 bounded active-set objective-method review has not started and needs
-a separately frozen read-only boundary. The current authorization ends at B4.24.
+B4.25's [bounded active-set method review](b4_25_active_set_method_review_protocol.md)
+is prepared for separate source/CI publication; production review/audit have not
+started. Its read-only boundary grants no new objective, criterion, numerical
+trial, fit or final access. Ordinary single-slice stopping continues.
 
 ## Overall project plans
 
@@ -24,6 +26,10 @@ The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.
 
 ## Frozen slice protocols
+
+The current prepared slice is [B4.25 bounded active-set objective-method
+review](b4_25_active_set_method_review_protocol.md); execution follows only after
+its clean merged source and applicable CI pass.
 
 These preregistrations stay in GitHub so declared methods, populations, resource
 caps and stop rules remain reviewable before execution. Keep existing paths and

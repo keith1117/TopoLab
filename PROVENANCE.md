@@ -843,3 +843,17 @@ All old sources, interruptions, profiles, charges and numerical fields retain
 their identities. No upstream material, new external scientific/implementation
 source, numerical root/FEM/objective/gradient/prediction timing, label/model bytes,
 fit or final evidence is accessed or imported. Raw evidence remains external.
+
+## B4.25 bounded active-set method-review implementation
+
+The prospective scalar review and separate stdlib auditor derive from TopoLab's
+closed B4.24 compact evidence and its original clipped additive projection,
+signed tangent and full-population cost equations. They preserve every saved
+row, exact failed position, first-inclusive maximum, prior charge and historical
+unknown. The finite method matrix recommends preregistration only; it introduces
+no numerical objective, root, gradient, fit or changed scientific criterion.
+No upstream Hack3D material or new external scientific/implementation source,
+label, checkpoint or final artifact is accessed or imported. Synthetic public
+scalar records test independent enumeration, immutable failure/cost identities,
+metadata roles and native-resource boundaries before merged-source production.
+All generated review/audit/resource evidence remains external.

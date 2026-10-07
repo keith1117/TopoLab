@@ -62,8 +62,10 @@ Fixed P/17, all controls and every prior failure/charge are preserved.
 
 ## Current stop and next slice
 
-Next is **B4.25 bounded active-set objective-method review**, not started.
-Require a separate prospective read-only decision boundary; B4.24 authorizes
+Current is **B4.25 bounded active-set objective-method review**, in protocol/source
+preparation. Its [prospective read-only boundary](planning/b4_25_active_set_method_review_protocol.md)
+requires clean CI-passed merged source before production review/audit; neither
+has started. B4.24 authorizes
 no new objective, correctness criterion, projection/root candidate, numerical
 run, fit or research search. The owner-approved continuation ends at B4.24.
 The [English roadmap](planning/TopoLab_v2_development_roadmap.md) controls Gate order;
