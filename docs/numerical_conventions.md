@@ -873,3 +873,18 @@ formula remain unchanged. No old projection, query, normalizer, label or solver
 behavior changes. Both original FD steps and the 1e-4/floor 1e-8 criterion remain;
 fresh actual offsets/residuals and independent Brent/uncached FEM acceptance are
 frozen in [the B4.22 protocol](planning/b4_22_stable_projection_correctness_protocol.md).
+
+## B4.27 independent active-set evidence certificates (software only)
+
+The [B4.27 protocol](planning/b4_27_active_set_evidence_protocol.md) implements
+`topolab.active-set-evidence.v1` without changing any numerical operator.
+An independently supplied lower/free/upper partition determines its own affine
+volume offset and full signed cotangent. Exact rational arithmetic on finite
+input numbers proves every interval piece over both endpoints and its strict
+interior, exact coverage, transition continuity and the signed integral.
+Preserve at most 256 pieces and original steps1e-4/2e-4. A central kink,
+degenerate partition or incomplete certificate rejects; no subgradient,
+smaller step, gap tolerance or automatic bound extension is selected.
+Pointwise and interval predicates retain the B4.26 tolerances and separate
+legacy failure flags. Synthetic software evidence authorizes no production
+payload/root/FEM/timing, fitting, scientific Gate or final access.

@@ -4,15 +4,14 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-B4.26's [read-only preregistration](../validation/b4_26_active_set_preregistration.md)
-passed 66 static metadata predicates and 28 independent document checks. Its
-[protocol](b4_26_active_set_preregistration_protocol.md) and
-[authored acceptance contract](b4_26_active_set_acceptance_contract.json)
-freeze future pointwise/interval, fidelity, full-cost and memory requirements;
-all original failures/charges/unknowns remain. No production or numerical
-execution occurred. Next **B4.27 bounded active-set evidence implementation**
-is software only, not started and requiring a separate frozen contract.
-Stop after B4.26; no payload, trial, fit or final access is inherited.
+[B4.27 software evidence implementation](../validation/b4_27_active_set_evidence.md) passed 42 synthetic
+analytic/exhaustive/tampering and unchanged-v3 checks. No production payload,
+FEM, timing, numerical trial or fit occurred. Its [protocol](b4_27_active_set_evidence_protocol.md) retains original
+criteria, failures, costs and unknowns; full memory and learned repair remain
+pending. Next **B4.28 bounded active-set numerical evidence preregistration and
+execution** requires separate explicit numerical authorization and a frozen
+finite contract. Software acceptance transfers no permission or budget.
+Uniform remains default, P/17 unrepaired and final/unused B4.10 cases sealed.
 
 ## Overall project plans
 
@@ -108,6 +107,7 @@ and all three registrations retain their paths and bytes. The
 [complete v3 report](../validation/b4_24_registered_continuation.md) records
 accepted arithmetic, complete continuation profiles and reconciled time;
 historical missing RSS and the original memory proof remain incomplete.
+- [B4.27 bounded active-set evidence software protocol](b4_27_active_set_evidence_protocol.md)
 
 Add a link here when freezing a new protocol. A protocol listing records its
 existence; its validation report determines whether its Gate passed or failed.

@@ -6,15 +6,14 @@ resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) for the latest boundary and
 [development history](../development_history.md) for the chronology. The latest
-completed slice is [B4.26 read-only active-set-aware preregistration](b4_26_active_set_preregistration.md):
-66 static predicates and 28 independent document/metadata checks passed.
-Future pointwise/interval evidence, local fidelity, full first-inclusive cost
-and full training-memory requirements are frozen; none was numerically
-executed here. B4.23/B4.20 stay failed, all 69 failed positions and costs
-remain, B4.19 fields and historical B4.24 memory remain unknown. Next
-**B4.27 bounded active-set evidence implementation** is software only under
-a separate contract, not started. No production payload, trial, fit or final
-access follows. Uniform stays default and P/17 unrepaired.
+completed slice is [B4.27 software evidence implementation](b4_27_active_set_evidence.md).
+42 synthetic analytic/exhaustive/tampering and unchanged-v3 checks passed. No production payload,
+FEM, timing, numerical trial or fit occurred. Its [protocol](../planning/b4_27_active_set_evidence_protocol.md) retains original
+criteria, failures, costs and unknowns; full memory and learned repair remain
+pending. Next **B4.28 bounded active-set numerical evidence preregistration and
+execution** requires separate explicit numerical authorization and a frozen
+finite contract. Software acceptance transfers no permission or budget.
+Uniform remains default, P/17 unrepaired and final/unused B4.10 cases sealed.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -124,6 +123,7 @@ contracts. Generated evidence remains external under the
 - [B4.24 owner-approved registered continuation and complete saved-panel review](b4_24_registered_continuation.md)
 - [B4.25 bounded active-set objective-method review](b4_25_active_set_method_review.md)
 - [B4.26 read-only active-set-aware correctness and cost preregistration](b4_26_active_set_preregistration.md)
+- [B4.27 bounded active-set evidence implementation](b4_27_active_set_evidence.md)
 
 Add each new report to its stage group, including failed and stopped experiments.
 Do not replace old results or publish generated artifacts to tidy the directory.

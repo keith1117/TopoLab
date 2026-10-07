@@ -887,3 +887,18 @@ remain separate future prerequisites. No new upstream source/code/figure or
 external scientific reference was read or copied. See the
 [protocol](docs/planning/b4_26_active_set_preregistration_protocol.md) and
 [validation report](docs/validation/b4_26_active_set_preregistration.md).
+
+## B4.27 independent active-set evidence implementation
+
+The in-memory pointwise and exact rational interval certificate checker derives
+solely from TopoLab's frozen clipped-volume equations and B4.26 criteria.
+An independently authored exhaustive rational small-vector fixture oracle and
+analytic/tampering tests use no candidate checker or production artifact reader.
+No upstream Hack3D code, comments, structure, figure, new scientific reference,
+external implementation, production label/model or final evidence is consulted
+or imported. The original numerical kernels/queries and historical evidence
+stay unchanged. Synthetic software acceptance is not numerical-panel correctness,
+fidelity, feasible full costs/memory, learned repair or acceleration. See the
+[protocol](docs/planning/b4_27_active_set_evidence_protocol.md) and
+[report](docs/validation/b4_27_active_set_evidence.md); generated software receipts
+and command profiles remain external.

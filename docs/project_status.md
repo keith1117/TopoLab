@@ -1,8 +1,8 @@
 # Current project status
 
-Updated: 2026-10-07. Latest completed slice: **B4.26 bounded active-set-aware
-correctness and cost preregistration**. Read-only contract acceptance passed;
-all original scientific failures remain and no numerical execution occurred.
+Updated: 2026-10-07. Latest completed slice: **B4.27 bounded active-set evidence
+implementation**. Synthetic software acceptance passed; all original scientific
+failures remain and no production evidence or numerical experiment occurred.
 
 ## Delivery and operational boundary
 
@@ -20,26 +20,25 @@ B3's [complete data Gate](validation/b3_4_data_gate.md) and twelve fixed
 or freeze. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
 All subsequent failures are retained in [history](development_history.md).
 
-## Latest completed preregistration
+## Latest completed software implementation
 
-[B4.26's report](validation/b4_26_active_set_preregistration.md) records
-66 static metadata predicates and 28 independently implemented document/
-metadata checks under the [read-only protocol](planning/b4_26_active_set_preregistration_protocol.md)
-and [authored acceptance contract](planning/b4_26_active_set_acceptance_contract.json).
-This is document acceptance, not numerical correctness or feasible fitting.
-No production artifact payload, root, FEM, objective/gradient, prediction timing,
-fit or final evidence was accessed. Required software validation and publication
-remain separate from scientific evidence.
+[B4.27's report](validation/b4_27_active_set_evidence.md) records 42 independent
+analytic/exhaustive/tampering and unchanged-v3 synthetic checks under its
+[software protocol](planning/b4_27_active_set_evidence_protocol.md).
+The in-memory checker proves full pointwise cotangents and exact complete
+piece coverage, continuous offsets/designs, simultaneous transitions and signed
+integrals. Central kinks, nonpositive free mass, missing/overlapping pieces,
+changed steps and more than 256 pieces reject. Legacy failures stay separate.
+No production panel, label/model, FEM, timing, fit or final payload was accessed.
+Physical/FEM input origin remains a future independent numerical-audit duty.
 
-Future evidence must independently check the full pointwise cotangent and
-the complete same-step intervals, including every crossing/piece. Keep all
-original 64 rows/69 failures and 1e-4/2e-4 steps; no smaller-step selection or
-legacy reclassification. Undefined central derivatives and incomplete interval
-coverage stop acceptance. All 32 LOCAL criteria remain unchanged. Prospective
-cost retains three seeds, 200 FULL epochs, 432/76 cases, factor1.25, every
-first timing, failure/reserve and all prior charges, against 7200 seconds.
-Full training memory remains PENDING under the unchanged 4-GiB cap; static
-arrays and sequential RSS cannot certify it. These requirements grant no trial.
+[B4.26's preregistration](validation/b4_26_active_set_preregistration.md) and
+[acceptance contract](planning/b4_26_active_set_acceptance_contract.json) remain
+unchanged: all eight train cases, 72 central/128 sides, 64 rows/69 failures and
+both steps are mandatory. All 32 LOCAL criteria, full first/failure-inclusive
+costs, three seeds/200 FULL epochs/432+76 cases/factor1.25/7200 and the 4-GiB
+full training-memory boundary remain. Static/sequential evidence cannot clear
+PENDING full memory. Software acceptance clears no scientific Gate.
 
 ## Preserved evidence and unresolved failures
 
@@ -69,13 +68,13 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and next slice
 
-Next is **B4.27 bounded active-set evidence implementation**, not started.
-It is software only under a separate frozen contract: implement and test the
-preregistered evidence checks on synthetic public fixtures. B4.26 grants no
-production payload, objective/root/FEM, timing, numerical trial, fit or search.
-Any later numerical execution requires separate explicit authorization,
-finite budgets, complete independent evidence and clean CI-passed merged source.
-See the [English roadmap](planning/TopoLab_v2_development_roadmap.md). Stop after B4.26.
+Next is **B4.28 bounded active-set numerical evidence preregistration and
+execution**, not started. Require separate explicit numerical authorization,
+a frozen finite contract, exact source/plan/input/role hashes and complete
+independent evidence. Production requires clean locked merged source with
+exact-head/main CI passed, durable failures/counters and full native paid
+resources. B4.27 grants no production access, fit, search or final permission.
+See the [English roadmap](planning/TopoLab_v2_development_roadmap.md).
 
 The failed exact-FEM candidate stays stopped. No alternate cache/ordering,
 continuation, epoch/population/physics-frequency search, threshold change or

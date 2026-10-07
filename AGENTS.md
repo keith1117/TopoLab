@@ -22,21 +22,19 @@ The historical `v1.0.0` release remains complete, with its negative M1/M2 eviden
 preserved. B3's data Gate and B4.1 fitting passed; the original B4.2 Gate failed.
 Fixed P/17 remains unrepaired and cannot be replaced after seeing outcomes.
 
-The latest completed slice is **B4.26 bounded active-set-aware correctness and
-cost preregistration**: the read-only contract passed 66 metadata predicates
-and 28 independently implemented document/metadata checks. It freezes separate
-pointwise/complete-interval evidence, unchanged local fidelity, full first-inclusive
-cost and full training-memory requirements; no numerical execution occurred.
-See the [protocol](docs/planning/b4_26_active_set_preregistration_protocol.md) and
-[report](docs/validation/b4_26_active_set_preregistration.md).
+The latest completed slice is **B4.27 bounded active-set evidence implementation**:
+42 synthetic software tests passed for independent full cotangents and exact
+complete-interval certificates. No production evidence/payload, FEM, timing,
+fit or scientific Gate occurred. See the [protocol](docs/planning/b4_27_active_set_evidence_protocol.md)
+and [report](docs/validation/b4_27_active_set_evidence.md).
 B4.23 stays failed 3907/3976 and 57546.072069>7200, retaining all 69 failures;
 B4.20 stays failed and B4.19's actual case/gap/counts unknown. B4.24's 200.98,
-both original failures and missing historical RSS/whole-memory proof remain;
-B4.25's 80.34 and accepted finite-interval description remain unchanged.
+both failures and missing historical RSS/whole-memory proof remain; B4.25's
+80.34 and B4.26's frozen fidelity/cost/full-memory requirements remain unchanged.
 Full training memory, learned repair and independent confirmation stay pending.
-Next is **B4.27 bounded active-set evidence implementation**, not started,
-software only under a separate frozen contract. B4.26 authorizes no production
-payload, objective/root/FEM, prediction timing, numerical trial, fit or final access.
+Next is **B4.28 bounded active-set numerical evidence preregistration and execution**,
+not started; a separate explicit numerical authorization and frozen finite
+contract are required. B4.27 grants no production payload/trial, fit or final access.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
 exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,
