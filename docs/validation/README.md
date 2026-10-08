@@ -5,16 +5,18 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) for the latest boundary and
-[development history](../development_history.md) for the chronology. The latest
-completed slice is [B4.29 read-only outcome/cost/full-memory review](b4_29_active_set_outcome_review.md).
-Metadata review PASS, own resource PASS, cost over7200/full training memory
-PENDING. Active [B4.30 fixed-P/17 repair](b4_30_z_reflection_repair.md) is
-unfinished after0-reference/query preflight rejection, paid191.9666532080155.
-Scientific NOT ESTABLISHED, resource FAIL/INCOMPLETE; strict entry correction
-and clean checkout prepared. An owner decision is needed for a paid same-slice
-continuation covering the consumed one-campaign limit; no new slice starts.
-All historical failures/costs/memory unknowns remain. Uniform/P17/final/unused
-B4.10 boundaries remain; no B5 permission follows.
+[development history](../development_history.md) for chronology. Latest complete
+numerical/audit slice is [B4.30 paid continuation](b4_30_paid_continuation.md):
+scientific FAIL, scoped v2 numerical/native resource PASS,18/270/all audits
+complete,7323.1004352501081506/43200 retaining the first failure/both FULL180.
+Fixed R17 still fails1.00197094375>1.001 and target mean1.01605313078>1.0;
+conditional48/720 unopened. The [original interruption](b4_30_z_reflection_repair.md)
+remains0-numerical/resource FAIL/INCOMPLETE. Four historical target predicates
+pass already in matched P; no currently failed P target newly repaired.
+All old failures/costs/memory gaps and full-fit PENDING/4GiB remain. The old3/3
+and separate B4.30/2-invocation counters stand; no third trial or later slice is
+authorized. Proposed B4.31 metadata-only failure/cost review needs owner decision
+and finite preregistration. Uniform/P17/final/unused boundaries and no B5 remain.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -131,6 +133,8 @@ contracts. Generated evidence remains external under the
 - [B4.29 bounded read-only outcome and cost/full-memory review](b4_29_active_set_outcome_review.md)
 
 - [B4.30 fixed-P/17 reflection repair: interrupted preflight and strict-source correction](b4_30_z_reflection_repair.md)
+
+- [B4.30 complete paid reflection-repair continuation: scientific FAIL, scoped native resource PASS](b4_30_paid_continuation.md)
 
 Add each new report to its stage group, including failed and stopped experiments.
 Do not replace old results or publish generated artifacts to tidy the directory.

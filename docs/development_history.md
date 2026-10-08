@@ -740,3 +740,26 @@ FULL180 and deducted sentinel reference/fresh-reservation caps are explicit.
 Only paid execution compatibility/accounting changes; fixed P/17 reflection
 mathematics and all original cases/controls stay unchanged. Source/CI release
 and complete numerical/audit/publication closure are pending.
+
+
+**Same B4.30 subsequent finite closure (2026-10-08):** PR164 tested head
+`a8ab5a1bc278`/main `f561f31303ec`, all applicable exact-head/main CI and whole-clean
+locked independent source preceded the only additional paid invocation. All18
+references/270 queries,290 numerical/input units,288 policy units and the
+independent raw-JSON/native exit audits complete. Scientific FAIL: fixed R17
+original case55c1b3e… ratio1.0019709437499813>1.001, target mean
+1.016053130777518>1.0; pooled0.9853173206553424 does not clear either failure.
+Four historical target predicates pass already in matched P; no currently
+failed P target newly repaired, paired P/R failures1/3/1. All35 attempt failures/
+fallbacks,323 terminal/204 guard classifications,78 prediction replays/249
+old identities retained. Fresh48/720 and final/unused panels unopened. Scoped
+complete v2 resource PASS, cumulative7323.1004352501081506/43200 includes
+old191.9666532080154866 and both FULL180; conservative complete chain peak
+800047104<2GiB. Original failed16/software115/131-file backup and old memory
+gaps/FAIL/INCOMPLETE remain. Source48 focused/1335 full tests pass; evidence
+publishes the [complete report](validation/b4_30_paid_continuation.md), all5
+checks, protected exact-head/main CI, all-upload guards and new byte backup.
+This appends the final phase to the same historical interruption entry; it is
+one slice,2 paid administrative invocations/1 numerical campaign. Old3/3 stays
+exhausted. Proposed B4.31 metadata-only failure/cost review is not started and
+needs owner authorization/finite contract; no third trial, fit/search or B5.

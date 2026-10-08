@@ -5,24 +5,25 @@ Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
 B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
 initialization is the operational default and final evaluation stays sealed.
 
-Latest completed: **B4.29 bounded read-only outcome/cost/full-memory review**.
-Metadata review PASS, own resources PASS, Q29=80.26, known cost
-58142.252069>7200 and full training memory PENDING. B4.28 new integrity/LOCAL
-stay passed, its whole-resource gap and all old failures/unknowns remain. See
-[the report](../validation/b4_29_active_set_outcome_review.md). The temporary
-three-slice session ends; no fourth slice or automatic research intervention.
-[Project status](../project_status.md) holds the current boundary;
-[development history](../development_history.md) retains the complete chronology.
-The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
+Latest completed numerical/audit slice: **B4.30 fixed-P/17 reflection repair**,
+scientific **FAIL**, complete v2 numerical/native resource **PASS**. All18/270
+and prescribed audits complete; fixed R17 still fails case55c1b3e… at
+1.00197094375>1.001 and target mean1.01605313078>1.0. Cumulative7323.1004352501081506
+includes the original failed191.9666532080154866 and both FULL180 reserves.
+See [report](../validation/b4_30_paid_continuation.md). Conditional48/720 remains
+unopened. Original failed preflight, all historical evidence/unknowns and
+full-training memory PENDING/4GiB remain; uniform stays default.
 
-Active B4.30 is **unfinished after zero-numerical source-preflight rejection**:
-[report](../validation/b4_30_z_reflection_repair.md), paid191.9666532080155,
-scientific NOT ESTABLISHED/resource FAIL/INCOMPLETE. Its consumed one-campaign
-limit requires an owner decision for a paid technical continuation of that same
-slice; no new slice or final access. Entry correction and clean source are prepared.
+The original B4.27–29 quota stays exhausted3/3; this separately authorized
+B4.30 used2 administrative invocations/1 numerical campaign. Proposed B4.31
+read-only reflection-failure/cost review is not started or authorized; a finite
+metadata-only contract and owner decision precede it. The reflection mechanism
+stops. No third invocation or final access. [Project status](../project_status.md)
+holds the current boundary; [history](../development_history.md) preserves the
+chronology and the historical `v1.0.0`/negative M1/M2 results.
 
 Prepared: 2026-09-24
-Revised: 2026-10-07 (B4.30 interrupted preflight; same-slice continuation decision)
+Revised: 2026-10-08 (B4.30 complete paid continuation; repair Gate failed)
 
 Related documents:
 
@@ -1173,21 +1174,32 @@ See [report](../validation/b4_30_z_reflection_repair.md). No outcome was seen fo
 adaptation; repair/full new B4/independent confirmation/final compatibility
 remain before B5. The three-slice old quota stays exhausted and waiting remains.
 
-#### B4.30 paid continuation preregistered; same slice still unfinished
+#### B4.30 paid continuation complete; fixed-primary repair failed
 
-After the zero-numerical interruption, the owner explicitly approved one paid
-technical continuation under a separate [v2 protocol](b4_30_paid_continuation_protocol.md)
-and [finite contract](b4_30_paid_continuation_contract.json). Original R/P/S
-weights, fixed17, all case/control/order/Gate/tolerance/role/seal values remain.
-Retain failed191.9666532080154866 and FULL180; pay another FULL180 under whole43200/
-2GiB. Deduct the first reference floor from cumulative3600 and reserve the full
-fresh34200 before access. Maximum2 administrative invocations including failure,
-at most1 completed numerical campaign; no third or new slice. Publish tested
-protected-merged/main-CI-passed source before execution from a whole-clean locked
-independent main checkout. Preserve owner files and the immutable original root.
-Further fatal failure stops; complete ordinary sentinel failure retains all18/270
-and keeps fresh sealed. B5 still needs repair, independent confirmation, full new
-B4 and compatible final contract. Software/source release and execution remain pending.
+The owner's one paid technical continuation used the separately frozen
+[v2 protocol](b4_30_paid_continuation_protocol.md) and
+[contract](b4_30_paid_continuation_contract.json), retaining every original
+scientific criterion/model/role/seal. PR164 tested/protected-merged/main-CI-passed
+source and whole-clean locked independent checkout preceded access. All18/270
+and numerical/input290/290, policy288/288, independent raw-JSON and native exit
+verification complete. Scientific FAIL: common large-y case55c1b3e… still fails
+R17/29/43; R17 ratio1.0019709437499813>1.001 and thirteen-target mean
+1.016053130777518>1.0. Pooled0.9853173206553424 passes only its separate predicate.
+Four historical target predicates pass already in current P; no currently
+failed P target newly repaired, P/R failures1/3/1. Retain35 failures/fallbacks,
+323 terminal/204 guard classifications,78 prediction replays/249 old identities.
+No accepted regression; two negative controls and all non-target identities remain.
+
+Complete v2 chain resource PASS, cumulative7323.1004352501081506/43200 retaining
+old191.9666532080154866 and both FULL180, conservative whole-chain bound
+800047104<2GiB. Conditional48/720 remains unopened; original failed prefix,
+all old memory gaps and full-fit PENDING/4GiB stay. See
+[complete report](../validation/b4_30_paid_continuation.md). Report/indices,
+all5 validations, evidence PR/exact-head/main CI/byte backup close this same
+slice; exactly2 administrative invocations/1 numerical campaign, old3/3 retained.
+The reflection mechanism stops. Proposed B4.31 read-only failure/cost review is
+not started and needs owner authorization/frozen metadata-only scope; no third
+trial, changed math/model/budget/tolerance/role/seal, fit/search or B5 follows.
 
 Compare each model to uniform and non-ML baselines on fallback-inclusive
 validation time, independent compliance, convergence, volume, and failure strata.
@@ -1236,12 +1248,12 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **B4.30 one owner-approved paid technical continuation:** freeze/test/publish
-   the separate v2 compatibility contract and execute the same scientific recipe
-   from clean locked merged/main-CI-passed source. Retain failed191.9666532080154866,
-   whole43200/2GiB/66/990, both FULL180 reserves and every scientific boundary.
-   Maximum2 administrative invocations/1 completed numerical campaign; no third.
-   This same slice remains unfinished; no later slice is authorized.
+1. **Proposed B4.31 bounded read-only reflection-failure and cost review:**
+   not started or authorized. Preserve complete B4.30 scientific FAIL, scoped
+   v2 resource PASS,7323.1004352501081506 charge and both failed/complete roots.
+   Freeze a finite metadata-only contract after an owner decision. No new
+   payload, predictor/FEM, fit, profile/retiming, seed/weight/length/objective
+   or cache/ordering search. The reflection mechanism and old exact-FEM route stop.
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.
