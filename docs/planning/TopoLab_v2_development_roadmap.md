@@ -1173,6 +1173,22 @@ See [report](../validation/b4_30_z_reflection_repair.md). No outcome was seen fo
 adaptation; repair/full new B4/independent confirmation/final compatibility
 remain before B5. The three-slice old quota stays exhausted and waiting remains.
 
+#### B4.30 paid continuation preregistered; same slice still unfinished
+
+After the zero-numerical interruption, the owner explicitly approved one paid
+technical continuation under a separate [v2 protocol](b4_30_paid_continuation_protocol.md)
+and [finite contract](b4_30_paid_continuation_contract.json). Original R/P/S
+weights, fixed17, all case/control/order/Gate/tolerance/role/seal values remain.
+Retain failed191.9666532080154866 and FULL180; pay another FULL180 under whole43200/
+2GiB. Deduct the first reference floor from cumulative3600 and reserve the full
+fresh34200 before access. Maximum2 administrative invocations including failure,
+at most1 completed numerical campaign; no third or new slice. Publish tested
+protected-merged/main-CI-passed source before execution from a whole-clean locked
+independent main checkout. Preserve owner files and the immutable original root.
+Further fatal failure stops; complete ordinary sentinel failure retains all18/270
+and keeps fresh sealed. B5 still needs repair, independent confirmation, full new
+B4 and compatible final contract. Software/source release and execution remain pending.
+
 Compare each model to uniform and non-ML baselines on fallback-inclusive
 validation time, independent compliance, convergence, volume, and failure strata.
 Calibrate only predeclared reliability thresholds. Rejected candidates pay all
@@ -1220,11 +1236,12 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Owner decision for B4.30 paid technical continuation:** one zero-numerical
-   preflight consumed its one-campaign bound. Entry correction, clean checkout
-   and failure report are prepared. Keep failed191.9666532080154866, whole43200/
-   2GiB,66/990 and all scientific criteria; freeze/merge v2 compatibility/source
-   before access if explicitly approved. This same slice remains unfinished.
+1. **B4.30 one owner-approved paid technical continuation:** freeze/test/publish
+   the separate v2 compatibility contract and execute the same scientific recipe
+   from clean locked merged/main-CI-passed source. Retain failed191.9666532080154866,
+   whole43200/2GiB/66/990, both FULL180 reserves and every scientific boundary.
+   Maximum2 administrative invocations/1 completed numerical campaign; no third.
+   This same slice remains unfinished; no later slice is authorized.
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.

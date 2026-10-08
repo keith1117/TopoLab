@@ -240,6 +240,10 @@ def audit(output, cohort):
     guard_inputs(output.parent, output, cohort + "_independent")
     spec = contract()
     plan = read(output / "audit_receipts/plan.json")
+    attempt = read(output / "audit_receipts/one_attempt.json")
+    assert attempt["campaigns"] == 2 and attempt["previous_failed_campaigns"] == 1
+    assert attempt["completed_numerical_campaigns_maximum"] == 1 and attempt["no_third_campaign"]
+    assert plan["scientific_contract_sha256"] == spec["continuation"]["original_contract_sha256"]
     assert plan["plan_sha256"] == sha(
         canonical({k: v for k, v in plan.items() if k != "plan_sha256"})
     )
@@ -434,6 +438,8 @@ def audit(output, cohort):
         "charged_seconds": seconds,
         "peak_rss_bytes": rss,
         "source_sha256": digest(Path(__file__)),
+        "administrative_campaigns": 2,
+        "retained_failed_charge_decimal": spec["continuation"]["original_failed_charge_decimal"],
     }
     assert record["gate_passed"] == policy_summary["passed"]
     save(root / "independent_audit.json", record)

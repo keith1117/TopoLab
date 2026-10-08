@@ -987,3 +987,15 @@ Original failed native profiles and191.9666532080154866 charge remain; no repair
 or acceleration evidence is claimed. A clean independent checkout contains only
 TopoLab's own committed source. A separate paid continuation requires an owner
 decision covering the consumed one-campaign limit before new numerical access.
+
+
+## B4.30 owner-approved paid source compatibility
+
+The separately versioned [v2 protocol](docs/planning/b4_30_paid_continuation_protocol.md)
+binds the owner's one paid continuation following zero-numerical preflight.
+Original TopoLab reflection/Gate/population mathematical source stays unchanged;
+only versioned clean-source access, immutable-prefix identity and cumulative
+Decimal resource accounting change. Both failed cost and full-chain reserves
+remain paid. No new external scientific/implementation source, Hack3D material,
+model/label payload, fit, result adaptation or final evidence was used during
+authoring. New production waits for clean locked merged main after all CI.

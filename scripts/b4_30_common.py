@@ -6,11 +6,12 @@ import math
 import os
 import re
 import subprocess
+from decimal import Decimal
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-CONTRACT_PATH = REPO / "docs/planning/b4_30_z_reflection_repair_contract.json"
-CONTRACT_SHA = "ddb69d4947c01e849306b387bac5e23dbf9fd5fa42b896b29edac376b6bb63d3"
+CONTRACT_PATH = REPO / "docs/planning/b4_30_paid_continuation_contract.json"
+CONTRACT_SHA = "ed52a1f725f0592f7f8e752ba802764e85ab987c107743379703a09ed033bb8a"
 THREADS = (
     "OMP_NUM_THREADS",
     "OPENBLAS_NUM_THREADS",
@@ -67,18 +68,92 @@ def contract():
     return read(CONTRACT_PATH, CONTRACT_SHA)
 
 
+def stage_cap(cohort, stage):
+    c = contract()
+    if cohort not in ("sentinel", "fresh"):
+        raise ValueError("fixed continuation cohort required")
+    if cohort == "sentinel" and stage == "reference":
+        return Decimal(c["continuation"]["continuation_sentinel_reference_cap_decimal"])
+    key = {
+        "reference": "reference",
+        "screen": "screen",
+        "audit": "numerical_input_audit",
+        "policy-audit": "policy_two_witness_audit",
+        "independent": "independent_json_audit",
+    }[stage]
+    return Decimal(c["resources"]["per_cohort_stage_caps_seconds"][key])
+
+
+def whole_charge(rows):
+    c = contract()
+    return sum(
+        (Decimal(r["closed_charge_decimal"]) for r in rows),
+        Decimal(c["continuation"]["original_failed_charge_decimal"])
+        + Decimal(c["continuation"]["new_paid_FULL_reserve_seconds"]),
+    )
+
+
+def fresh_admissible(rows, complete):
+    c = contract()
+    return bool(
+        complete
+        and whole_charge(rows)
+        + Decimal(c["resources"]["fresh_admission_maximum_reservation_seconds"])
+        <= Decimal(c["resources"]["new_separate_whole_charge_cap_seconds"])
+    )
+
+
+def guard_failed_prefix(parent):
+    """Retain all original failed bytes and their paid Decimal identity."""
+    frozen = contract()["continuation"]
+    root = Path(parent) / frozen["original_failed_root_name"]
+    expected = frozen["original_failed_evidence_sha256"]
+    actual = {str(p.relative_to(root)) for p in root.rglob("*") if p.is_file()}
+    if actual != set(expected):
+        raise ValueError("original failed prefix inventory changed")
+    for name, value in expected.items():
+        if digest(contained(root, name)) != value:
+            raise ValueError("original failed prefix changed: " + name)
+    prior = read(root / "resource_close.json", expected["resource_close.json"])
+    if (
+        Decimal(prior["charged_decimal"]) != Decimal(frozen["original_failed_charge_decimal"])
+        or not prior["closed"]
+        or not prior["fresh_sealed"]
+        or prior["source_revision"] != frozen["original_failed_source"]
+    ):
+        raise ValueError("original failure, cost and seal must remain")
+    audit = frozen["original_independent_metadata_audit"]
+    if digest(contained(parent, audit["path"])) != audit["sha256"]:
+        raise ValueError("original independent failed-prefix audit changed")
+
+
 def plan_payload():
     c = contract()
-    paths = subprocess.check_output(
-        ["git", "ls-files", "src", "scripts", "pyproject.toml", "uv.lock", ".github/workflows"],
-        cwd=REPO,
-        text=True,
-    ).splitlines()
+    paths = (
+        subprocess.check_output(
+            [
+                "git",
+                "ls-files",
+                "-z",
+                "src",
+                "scripts",
+                "pyproject.toml",
+                "uv.lock",
+                ".github/workflows",
+            ],
+            cwd=REPO,
+            text=True,
+        )
+        .rstrip("\0")
+        .split("\0")
+    )
     paths.extend(
         (
             "docs/numerical_conventions.md",
             "docs/planning/b4_30_z_reflection_repair_protocol.md",
             "docs/planning/b4_30_z_reflection_repair_contract.json",
+            "docs/planning/b4_30_paid_continuation_protocol.md",
+            "docs/planning/b4_30_paid_continuation_contract.json",
         )
     )
     # Untracked source is not allowed at release; defaults still work before staging.
@@ -139,10 +214,30 @@ def validate_release_source(value):
         raise ValueError("clean locked merged tested source and exact-head/main CI required")
     if any(os.environ.get(name) != "1" for name in THREADS):
         raise ValueError("all frozen BLAS/OpenMP variables must equal1")
+    c = contract()
+    authority = read(
+        value["owner_authorization_path"], c["authority"]["owner_authorization_sha256"]
+    )
+    if (
+        not authority["authorized"]
+        or authority["administrative_campaign_invocations_maximum"] != 2
+        or authority["additional_paid_invocations_authorized"] != 1
+        or authority["already_used_administrative_invocations"] != 1
+        or authority["completed_numerical_campaigns_maximum"] != 1
+        or value["administrative_invocation"] != 2
+        or value["retained_failed_charge_decimal"]
+        != c["continuation"]["original_failed_charge_decimal"]
+        or authority["approved_machine_proposal_sha256"]
+        != c["authority"]["owner_approved_machine_proposal_sha256"]
+        or authority["next_slice_authorized"]
+        or authority["final_access"]
+    ):
+        raise ValueError("exactly one paid same-slice continuation; no third invocation")
     return head
 
 
 def guard_inputs(parent, output, stage):
+    guard_failed_prefix(parent)
     journal = Path(output) / "audit_receipts" / (stage + ".access.jsonl")
     with journal.open("xb"):
         pass

@@ -8,7 +8,15 @@ from time import perf_counter
 
 import numpy as np
 from b4_8_rollback_confirmation import load_models as legacy_models
-from b4_30_common import guard_inputs, release, save
+from b4_30_common import (
+    CONTRACT_SHA,
+    contract,
+    fresh_admissible,
+    guard_inputs,
+    release,
+    save,
+    stage_cap,
+)
 
 from topolab import b4_evidence as evidence
 from topolab import b4_reflection_repair as probe
@@ -29,6 +37,26 @@ from topolab.b4_weighted_terminal import publish_blob, read_blob, read_units
 from topolab.dataset_cli import validate_external_output_root
 from topolab.experiment import ExperimentCase
 from topolab.problem import TopologyProblem
+
+EXECUTION_VERSION = contract()["version"]
+
+
+def cohort_caps(cohort):
+    return {stage: (float(stage_cap(cohort, stage)), rss) for stage, (_, rss) in probe.CAPS.items()}
+
+
+def execution_plan():
+    """Bind the unchanged scientific v1 recipe to the paid v2 execution boundary."""
+    value = {k: v for k, v in probe.plan().items() if k != "plan_sha256"}
+    value.update(
+        version=EXECUTION_VERSION,
+        scientific_contract_sha256=probe.CONTRACT_SHA256,
+        contract_sha256=CONTRACT_SHA,
+        resources=contract()["resources"],
+        continuation=contract()["continuation"],
+        caps_by_cohort={name: cohort_caps(name) for name in ("sentinel", "fresh")},
+    )
+    return {**value, "plan_sha256": digest(canonical_metadata_bytes(value))}
 
 
 def load_models(context, old, weighted):
@@ -154,9 +182,9 @@ def old_packet(mapping, key):
 
 
 def packets(root, sha, spec):
-    refs = read_units(root / "screen", sha, spec.units("screen"), caps=probe.CAPS)
+    refs = read_units(root / "screen", sha, spec.units("screen"), caps=spec.caps)
     return (
-        evidence.read_packet(root / "screen", ref, sha, c, m, probe.VERSION)
+        evidence.read_packet(root / "screen", ref, sha, c, m, EXECUTION_VERSION)
         for (c, m), ref in zip(spec.assignments, refs, strict=True)
     )
 
@@ -207,11 +235,11 @@ def policy_audit(output, cohort, sha, spec, context, old, weighted, startup):
         *("policy:" + u for u in spec.units("screen")),
     )
     journal = Journal(
-        root / "policy-audit", sha, units, *probe.CAPS["policy-audit"], opening_seconds=startup
+        root / "policy-audit", sha, units, *spec.caps["policy-audit"], opening_seconds=startup
     )
     try:
         refs = {
-            stage: read_units(root / stage, sha, spec.units(stage), caps=probe.CAPS)
+            stage: read_units(root / stage, sha, spec.units(stage), caps=spec.caps)
             for stage in ("reference", "screen", "audit")
         }
         original = original_references(output.parent) if cohort == "sentinel" else {}
@@ -229,7 +257,12 @@ def policy_audit(output, cohort, sha, spec, context, old, weighted, startup):
                 case_id = unit.removeprefix("reference:")
                 i = spec.units("reference").index(case_id)
                 packet = evidence.read_packet(
-                    root / "reference", refs["reference"][i], sha, case_id, "uniform", probe.VERSION
+                    root / "reference",
+                    refs["reference"][i],
+                    sha,
+                    case_id,
+                    "uniform",
+                    EXECUTION_VERSION,
                 )
                 if original and identity(packet["outcome"]) != identity(
                     old_packet(original, (case_id, "uniform"))["outcome"]
@@ -245,7 +278,7 @@ def policy_audit(output, cohort, sha, spec, context, old, weighted, startup):
                     sha,
                     case_id,
                     policy,
-                    probe.VERSION,
+                    EXECUTION_VERSION,
                 )
                 outcome = QueryOutcome.model_validate(packet["outcome"])
                 family, _, seed_text = policy.partition("/")
@@ -265,7 +298,7 @@ def policy_audit(output, cohort, sha, spec, context, old, weighted, startup):
                     else:
                         p_ref = refs["screen"][indices[(case_id, f"P/{seed}")]]
                         p = evidence.read_packet(
-                            root / "screen", p_ref, sha, case_id, f"P/{seed}", probe.VERSION
+                            root / "screen", p_ref, sha, case_id, f"P/{seed}", EXECUTION_VERSION
                         )
                         if identity(packet["outcome"]) != identity(p["outcome"]):
                             raise ValueError("non-target R differs from same-seed P")
@@ -323,7 +356,7 @@ def policy_audit(output, cohort, sha, spec, context, old, weighted, startup):
         gate = spec.gate(packets(root, sha, spec))
         journal.close()
         summary = {
-            "version": probe.VERSION,
+            "version": EXECUTION_VERSION,
             "cohort": cohort,
             "context_sha256": sha,
             "passed": gate["repair_gate_passed"],
@@ -357,8 +390,8 @@ def require_sentinel(output):
         raise ValueError("fresh remains sealed until all sentinel audits pass")
     from b4_30_native_execution import stage_charges
 
-    spent, complete, _ = stage_charges(output, "sentinel")
-    if not complete or spent + 34200 + 180 > 43200:
+    _, complete, rows = stage_charges(output, "sentinel")
+    if not fresh_admissible(rows, complete):
         raise ValueError("sentinel native floors cannot reserve the full fresh budget")
 
 
@@ -372,7 +405,7 @@ def main():
         parser.add_argument("--" + name, type=Path)
     args = parser.parse_args()
     if not args.execute:
-        print(json.dumps(probe.plan(), sort_keys=True))
+        print(json.dumps(execution_plan(), sort_keys=True))
         return
     if any(x is None for x in (args.data_root, args.fit_root, args.weighted_root, args.output)):
         parser.error("execution requires the fixed external data/fit/weighted/output roots")
@@ -391,12 +424,13 @@ def main():
     validate_external_output_root(repository, output)
     probe.upstream_fits(args.weighted_root)
     payload = {
-        "version": probe.VERSION,
-        "plan_sha256": probe.plan()["plan_sha256"],
+        "version": EXECUTION_VERSION,
+        "plan_sha256": execution_plan()["plan_sha256"],
         "source": context.source.model_dump(mode="json"),
         "fixed_fits_sha256": context.training_index_sha256,
         "data_sha256": context.training_index.context.data_index_sha256,
-        "contract_sha256": probe.CONTRACT_SHA256,
+        "contract_sha256": CONTRACT_SHA,
+        "scientific_contract_sha256": probe.CONTRACT_SHA256,
     }
     raw = canonical_metadata_bytes(payload)
     path = output / "context.json"
@@ -408,9 +442,9 @@ def main():
     if args.cohort == "fresh":
         require_sentinel(output)
     spec = DevelopmentSpec(
-        probe.VERSION,
+        EXECUTION_VERSION,
         probe.RECEIPT_VERSION,
-        probe.CAPS,
+        cohort_caps(args.cohort),
         probe.cases(args.cohort),
         probe.assignments(args.cohort),
         partial(probe.decision, cohort=args.cohort),
