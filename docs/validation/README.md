@@ -5,22 +5,23 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) for the latest boundary and
-[history](../development_history.md) for chronology. Latest completed read-only
-slice [B4.32](b4_32_generalist_method_preregistration.md):69/32 static/independent
-Decimal document PASS, no production/new candidate evaluation. Six dispositions,
-one conditional unimplemented reciprocal-energy hypothesis and8 future toy
-fixtures are preregistration only. Real-state admissibility/fidelity/cost/memory
-and learned repair remain pending; scientific FAIL/P17 unrepaired stay.
+[history](../development_history.md) for chronology. Latest software slice
+[B4.33](b4_33_reciprocal_energy_evidence.md):47 focused/849 candidate-free exact
+rational/scalar predicates PASS on8 public toys/76 fixed points. This is finite
+software algebra/access acceptance; real FEM admissibility/fidelity/cost/memory
+and learned repair remain unresolved, scientific FAIL/P17 unrepaired unchanged.
 
-[B4.31](b4_31_reflection_failure_cost_review.md)118/430 metadata/native PASS,
+B4.32's [69/32 preregistration](b4_32_generalist_method_preregistration.md),
+B4.31's [118/430 metadata/native review](b4_31_reflection_failure_cost_review.md),
 Q31=80.29939475003629922 and separate7403.39983000014444982 remain. Latest
 numerical [B4.30](b4_30_paid_continuation.md) scientific FAIL/scoped resource
 PASS retains7323.1004352501081506 and its original
 [failed interruption](b4_30_z_reflection_repair.md). Known paid-stage subtotal
 12721.16417100014444982>7200 changes neither ledger/cap. All prior failures,
 unknowns, memory gaps and B4.31's source-premerge process failure remain.
-Next proposed B4.33 is separately authorized/frozen software only, not started;
-no production/fit/search/final/fresh access. Uniform and all seals remain.
+Next proposed B4.34 admissibility/full-cost preregistration needs separate owner
+continuation and a finite metadata-only contract, not started; no production/
+integration/fit/search/final/fresh access. Uniform and all seals remain.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -146,3 +147,5 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 - [B4.31 bounded read-only reflection failure and cost review](b4_31_reflection_failure_cost_review.md)
 
 - [B4.32 bounded generalist method review and preregistration](b4_32_generalist_method_preregistration.md):69/32 static document PASS; conditional theory and future software checks, scientific FAIL/P17 unrepaired unchanged.
+
+- [B4.33 bounded reciprocal-energy algebra and access evidence](b4_33_reciprocal_energy_evidence.md):47 focused/849 independent exact-rational predicates PASS on8 public toys/76 fixed points; scientific FAIL/P17 unrepaired, real-state certificates/cost/memory remain unresolved.
