@@ -6,20 +6,21 @@ resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) for the latest boundary and
 [development history](../development_history.md) for chronology. Latest complete
-numerical/audit slice is [B4.30 paid continuation](b4_30_paid_continuation.md):
-scientific FAIL, scoped v2 numerical/native resource PASS,18/270/all audits
-complete,7323.1004352501081506/43200 retaining the first failure/both FULL180.
-Fixed R17 still fails1.00197094375>1.001 and target mean1.01605313078>1.0;
-conditional48/720 unopened. The [original interruption](b4_30_z_reflection_repair.md)
-remains0-numerical/resource FAIL/INCOMPLETE. Four historical target predicates
-pass already in matched P; no currently failed P target newly repaired.
-All old failures/costs/memory gaps and full-fit PENDING/4GiB remain. The old3/3
-and separate B4.30/2-invocation counters stand; no third B4.30 trial is authorized.
-The owner explicitly authorized the separate B4.31 metadata-only review. Its
-[protocol](../planning/b4_31_reflection_failure_cost_review_protocol.md) and
-[contract](../planning/b4_31_reflection_failure_cost_review_contract.json) are
-preregistered; production waits for clean merged CI-passed source. No later
-slice is authorized. Uniform/P17/final/unused boundaries and no B5 remain.
+read-only slice [B4.31](b4_31_reflection_failure_cost_review.md):118/118 metadata
+and430/430 independent Decimal PASS, own native resource PASS,
+Q31=80.29939475003629922/FULL60/180, conservative219463680<1GiB. Old B4.30
+ledger7323.1004352501081506 remains byte-immutable; separate campaign-plus-review
+view7403.39983000014444982 adds once. All15 methods/seven historical P/R statuses
+and35 failures/fallbacks remain; four passes already in P, no newly repaired P.
+Latest numerical [B4.30 paid continuation](b4_30_paid_continuation.md) stays
+scientific FAIL/scoped v2 resource PASS,18/270/all audits complete, fixed R17
+quality and13-target mean failed, conditional48/720 unopened. Original
+[interruption](b4_30_z_reflection_repair.md) remains resource FAIL/INCOMPLETE.
+Source premerge-driver failure and postmerge verification are explicitly kept,
+not rewritten as premerge PASS. All old failures/costs/memory gaps/full-fit
+PENDING/4GiB remain. Proposed B4.32 bounded read-only generalist reliability/cost
+method review/preregistration is not started/authorized; new finite contract and
+owner instruction precede it. Uniform/P17/final/unused boundaries and no B5 remain.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -141,3 +142,5 @@ contracts. Generated evidence remains external under the
 
 Add each new report to its stage group, including failed and stopped experiments.
 Do not replace old results or publish generated artifacts to tidy the directory.
+
+- [B4.31 bounded read-only reflection failure and cost review](b4_31_reflection_failure_cost_review.md)

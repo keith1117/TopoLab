@@ -14,16 +14,23 @@ See [report](../validation/b4_30_paid_continuation.md). Conditional48/720 remain
 unopened. Original failed preflight, all historical evidence/unknowns and
 full-training memory PENDING/4GiB remain; uniform stays default.
 
-The original B4.27–29 quota stays exhausted3/3; this separately authorized
-B4.30 used2 administrative invocations/1 numerical campaign. The owner now
-explicitly authorizes only B4.31 read-only reflection-failure/cost review; its finite
-metadata-only contract is preregistered; production awaits clean merged CI-passed
-source. The reflection mechanism stops. No third B4.30 invocation or final access. [Project status](../project_status.md)
-holds the current boundary; [history](../development_history.md) preserves the
-chronology and the historical `v1.0.0`/negative M1/M2 results.
+Latest completed read-only slice **B4.31**: metadata118/118 and independent
+Decimal430/430 PASS, own resource PASS, Q31=80.29939475003629922/FULL60/180,
+conservative native chain219463680<1GiB. See
+[report](../validation/b4_31_reflection_failure_cost_review.md). Original B4.30
+ledger7323.1004352501081506 remains; separate campaign-plus-review view
+7403.39983000014444982 adds Q31 once. Old3/3 and B4.30's2 administrative
+invocations/1 numerical campaign stand. Source premerge-driver failure and later
+postmerge protection/tree/CI-time audit are retained without a premerge PASS claim.
+Proposed next B4.32 bounded read-only generalist reliability/cost method review
+and preregistration needs new owner authorization and a finite contract. No
+numerical method is selected; reflection/exact-FEM candidates stop. Uniform/P17,
+all old failures/unknowns/costs and final/fresh/unused seals remain. No B5 access.
+[Project status](../project_status.md) holds the current boundary;
+[history](../development_history.md) preserves the chronology.
 
 Prepared: 2026-09-24
-Revised: 2026-10-08 (B4.31 authorized metadata-only preregistration; prior repair FAIL)
+Revised: 2026-10-08 (B4.31 finite read-only review complete; scientific FAIL remains)
 
 Related documents:
 
@@ -1215,16 +1222,36 @@ version a new hypothesis, and leave final evidence sealed.
 
 ### B4.31: Bounded read-only reflection failure and cost review
 
-The owner explicitly authorized this single slice on 2026-10-08. The
+The owner's 2026-10-08 single-slice takeover froze the
 [protocol](b4_31_reflection_failure_cost_review_protocol.md) and
-[finite contract](b4_31_reflection_failure_cost_review_contract.json) bind exactly
-eight certified scalar/resource inputs, all15 methods/seven historical units,
-failed-case P/R scalars, unchanged mean/sum predicates and the immutable prior
-cost ledger. One float reviewer and one separate Decimal auditor,180s/1GiB and
-FULL60; no production access before whole-clean locked merged CI-passed source.
-Production and resource/publication closure are pending. No raw/model/label,
-new predictor/FEM/fit, retiming/search or final/fresh access. Reflection and the
-old exact-FEM route stop; scientific FAIL cannot be cleared by metadata or CI.
+[contract](b4_31_reflection_failure_cost_review_contract.json). Source PR166
+head13af1a4/main4a51ebe6fbe6, all exact-head/main CI and whole-clean locked
+independent source preceded the only metadata campaign. Eight scalar inputs
+per role,118/118 float review and430/430 separate Decimal/status audit PASS.
+No old raw/model/label/profile dereference, predictor/FEM/fit, retiming/search,
+final/fresh/unused access. See [report](../validation/b4_31_reflection_failure_cost_review.md).
+
+All15 methods/270 outcomes/35 failures/fallbacks and all seven historical units
+retain matched P/R statuses: four passes already in P, no currently failed P
+target newly repaired. Fixed R17 ratio1.0019709437499813>1.001 and13-target mean
+1.016053130777518>1.0 remain failed. Pooled0.9853173206553424 cannot substitute.
+Per-target costs/fallback phase times stay outside scope/UNKNOWN; cause remains
+unestablished. Reflection stops, fixed primary17 cannot be replaced.
+
+Own native resource PASS, Q31=80.29939475003629922 including FULL60, reserve
+observed+floor11.16154991695657376<60, conservative complete native sum219463680
+<1GiB. Last verifier actual exit checked; original PENDING receipts stay.
+Old7323.1004352501081506 ledger unchanged, separate campaign-plus-review
+7403.39983000014444982. Preserve old cost/memory failures, full fit PENDING/4GiB.
+Source premerge-driver failure/incorrect continuation and later protection/tree/
+CI-time audit remain explicit.58 focused/1393 source/1393 evidence tests and
+all5 checks, all-upload guards, protected evidence/main CI and byte backup close
+only this slice. Metadata/resource/CI PASS never repairs scientific FAIL.
+
+Proposed B4.32 read-only generalist reliability/cost method review and
+preregistration requires new owner authorization/finite contract. No numerical
+intervention is selected, fit/search or final access granted. Full learned
+repair, independent confirmation and compatible final contract remain before B5.
 
 ### B5: One-time final comparison and project delivery gate
 
@@ -1261,12 +1288,12 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Authorized B4.31 bounded read-only reflection-failure and cost review:**
-   preregistered; production awaits clean merged CI-passed source. Preserve
-   complete B4.30 scientific FAIL, scoped v2 resource PASS,7323.1004352501081506
-   charge and both failed/complete roots under the eight-input contract. No new
-   payload, predictor/FEM, fit, profile/retiming, seed/weight/length/objective
-   or cache/ordering search. The reflection mechanism and old exact-FEM route stop.
+1. **Proposed B4.32 bounded read-only generalist reliability/cost method review
+   and preregistration:** not started/authorized. Preserve B4.31 metadata/resource
+   PASS, Q31 and B4.30 scientific FAIL, immutable old ledger/failed and complete
+   roots. New owner instruction and finite read-only contract precede it. No
+   numerical intervention, payload, predictor/FEM, fit, retiming or seed/weight/
+   length/objective/cache/ordering search is selected or granted.
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.

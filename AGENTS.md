@@ -38,13 +38,18 @@ Original failed preflight resource FAIL/INCOMPLETE and all original bytes remain
 
 The B4.27–29 quota remains closed3/3. The separate B4.30 used exactly2 paid
 administrative invocations/1 numerical campaign; no third invocation is authorized.
-The reflection mechanism stops. The owner authorized only **B4.31 bounded
-read-only reflection-failure and cost review** in the 2026-10-08 takeover request.
-Its [protocol](docs/planning/b4_31_reflection_failure_cost_review_protocol.md) and
-[finite contract](docs/planning/b4_31_reflection_failure_cost_review_contract.json)
-preregister eight scalar inputs, one review/one independent audit,180s/1GiB and
-FULL60. Production awaits whole-clean merged CI-passed source; no later slice
-is authorized. No new payload, predictor,
+The reflection mechanism stops. Latest completed read-only slice **B4.31**:
+[report](docs/validation/b4_31_reflection_failure_cost_review.md),
+[protocol](docs/planning/b4_31_reflection_failure_cost_review_protocol.md) and
+[contract](docs/planning/b4_31_reflection_failure_cost_review_contract.json).
+Eight scalar inputs, one review118/118 and independent Decimal audit430/430 PASS;
+own resource PASS, Q31=80.29939475003629922/FULL60/180 and219463680<1GiB.
+Old7323.1004352501081506 unchanged; separate campaign-plus-review view
+7403.39983000014444982. Scientific FAIL/P17 unrepaired/unknowns remain. Source
+premerge-driver failure and postmerge audit are preserved, not rewritten as a
+premerge PASS. Proposed next **B4.32 bounded read-only generalist reliability/
+cost method review and preregistration**, not started; new owner authorization
+and a finite contract precede it. No new payload, predictor,
 FEM, fit, profile/retiming, objective/seed/weight/length/cache/ordering search
 or final access follows. B4.23 remains3907/3976 with all69 failures and
 57546.072069>7200; known added58142.252069>7200, B4.24 memory gaps/both failures,
