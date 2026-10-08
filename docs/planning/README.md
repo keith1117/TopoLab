@@ -4,15 +4,14 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-Latest completed software [B4.33 reciprocal-energy algebra/access](../validation/b4_33_reciprocal_energy_evidence.md):
-47 focused/849 independent exact-rational PASS on8 public toys/76 fixed points.
-No production/real FEM/integration/fit. Real-state certificates/fidelity/cost/
-reliability UNKNOWN, scientific FAIL/P17 unrepaired/full fit PENDING4GiB remain.
-B4.32's69/32 preregistration, B4.31 metadata/native and latest numerical failed
-B4.30 remain. All old failures/unknowns/paid ledgers/reserves remain; diagnostic
-12721.16417100014444982>7200 is no reset. Next proposed B4.34 read-only
-admissibility/full-cost preregistration needs separate owner instruction and
-finite metadata contract, not started. Uniform and all seals remain; no B5.
+Latest documentation [B4.34 admissibility/full-cost preregistration](../validation/b4_34_admissibility_full_cost_preregistration.md):
+129/43 static document/Decimal PASS only. Real PSD/coercivity/residual/rounding/
+normalizer evidence UNKNOWN_STOP, known paid12721.16417100014444982>7200,
+full fit PENDING4GiB. No real implementation/numerical/payload/FEM/integration/
+fit/timing/search. B4.33 remains public software47/849; all historical failures/
+costs/unknowns/quotas/P17/seals remain. Next proposed B4.35 bounded public
+admissibility-certificate software evidence requires owner continuation and
+finite public-fixture contract, not started. Uniform/default/no B5 remain.
 
 ## Overall project plans
 
@@ -125,3 +124,5 @@ existence; its validation report determines whether its Gate passed or failed.
 - [B4.32 bounded generalist method review and preregistration](b4_32_generalist_method_preregistration_protocol.md) · [Authored finite contract](b4_32_generalist_method_preregistration_contract.json):69/32 static document PASS only; real-state bounds/fidelity/cost/fit permission remain pending.
 
 - [B4.33 bounded reciprocal-energy software protocol](b4_33_reciprocal_energy_evidence_protocol.md) · [Finite contract](b4_33_reciprocal_energy_evidence_contract.json):47 software tests/849 independent predicates on8 public toys only; no real numerical/data/fit permission.
+
+- [B4.34 bounded read-only admissibility/full-cost preregistration](b4_34_admissibility_full_cost_preregistration_protocol.md) · [Authored finite contract](b4_34_admissibility_full_cost_preregistration_contract.json):129/43 documentary PASS only; real certificates/cost/memory unresolved, no production or fit budget.

@@ -4,24 +4,17 @@ Reports retain completed checks, failed Gates, source revisions, complete charge
 limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
-Read [current status](../project_status.md) for the latest boundary and
-[history](../development_history.md) for chronology. Latest software slice
-[B4.33](b4_33_reciprocal_energy_evidence.md):47 focused/849 candidate-free exact
-rational/scalar predicates PASS on8 public toys/76 fixed points. This is finite
-software algebra/access acceptance; real FEM admissibility/fidelity/cost/memory
-and learned repair remain unresolved, scientific FAIL/P17 unrepaired unchanged.
-
-B4.32's [69/32 preregistration](b4_32_generalist_method_preregistration.md),
-B4.31's [118/430 metadata/native review](b4_31_reflection_failure_cost_review.md),
-Q31=80.29939475003629922 and separate7403.39983000014444982 remain. Latest
-numerical [B4.30](b4_30_paid_continuation.md) scientific FAIL/scoped resource
-PASS retains7323.1004352501081506 and its original
-[failed interruption](b4_30_z_reflection_repair.md). Known paid-stage subtotal
-12721.16417100014444982>7200 changes neither ledger/cap. All prior failures,
-unknowns, memory gaps and B4.31's source-premerge process failure remain.
-Next proposed B4.34 admissibility/full-cost preregistration needs separate owner
-continuation and a finite metadata-only contract, not started; no production/
-integration/fit/search/final/fresh access. Uniform and all seals remain.
+Read [current status](../project_status.md) and [history](../development_history.md).
+Latest documentation [B4.34](b4_34_admissibility_full_cost_preregistration.md):
+129/43 static/independent document/Decimal PASS, real certificates UNKNOWN_STOP,
+all-paid12721.16417100014444982>7200, full fit PENDING4GiB. No actual numerical/
+production/payload/scalar replay/integration/fit/timing/search or final access.
+B4.33 remains public toy software47/849; B4.32/B4.31/latest numerical B4.30
+retain their separate scopes and scientific FAIL/P17 unrepaired. All failures,
+UNKNOWN/memory gaps/premerge process failure, paid ledgers/reserves/quotas/seals
+remain. Proposed next B4.35 public certificate software evidence requires new
+owner continuation/finite public-fixture contract; no real-data/FEM/fit/new cap.
+Uniform remains default; no later slice or B5 started.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -149,3 +142,5 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 - [B4.32 bounded generalist method review and preregistration](b4_32_generalist_method_preregistration.md):69/32 static document PASS; conditional theory and future software checks, scientific FAIL/P17 unrepaired unchanged.
 
 - [B4.33 bounded reciprocal-energy algebra and access evidence](b4_33_reciprocal_energy_evidence.md):47 focused/849 independent exact-rational predicates PASS on8 public toys/76 fixed points; scientific FAIL/P17 unrepaired, real-state certificates/cost/memory remain unresolved.
+
+- [B4.34 bounded read-only admissibility and full-cost preregistration](b4_34_admissibility_full_cost_preregistration.md):129/43 documentary PASS; real certificates UNKNOWN_STOP, unchanged all-paid7200 infeasible, full fit PENDING4GiB, scientific FAIL/P17 unrepaired.

@@ -49,10 +49,14 @@ remains69/32 static PASS. Latest software **B4.33 reciprocal-energy algebra/acce
 Exact toy anchor/PSD/SPD only; real floating residual/spectral/rounding certificates,
 fidelity/cost/reliability UNKNOWN. No production or actual FEM/integration/fit.
 Scientific FAIL/P17 unrepaired remain. Known-paid12721.16417100014444982>7200
-is diagnostic, not a cap/ledger reset. Proposed next **B4.34 bounded read-only
-admissibility and full-cost preregistration**, not started: new owner continuation
-and finite metadata-only contract first. No payload/FEM/predictor/projection/root/
-network integration, fit, profile/retiming/search or final grant is inherited.
+is diagnostic, not a cap/ledger reset. Latest documentation **B4.34**
+[preregistration](docs/validation/b4_34_admissibility_full_cost_preregistration.md):
+129/43 static document PASS; real PSD/coercivity/residual/rounding/normalizer
+certificates UNKNOWN_STOP, all-paid7200 infeasible, full fit PENDING4GiB.
+No real implementation/payload/production/integration/fit/timing or new cap.
+Proposed next **B4.35 bounded public admissibility-certificate software evidence**,
+not started: owner continuation and finite public-fixture contract first.
+No actual FEM, projection/root/network integration, fit/search or sealed grant.
 B4.23 stays3907/3976/all69 failures and57546.072069>7200; known-added58142.252069>7200,
 B4.24/28 memory gaps/both failures, B4.20 failure and B4.19 UNKNOWN remain.
 Full training memory PENDING/4GiB; software RSS fills no historical gap.

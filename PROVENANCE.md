@@ -1070,3 +1070,21 @@ No new external scientific/implementation source, Hack3D content, figure, code,
 label/model/old generated payload, real FEM or learned result was consulted or
 imported.47 software tests and849 predicates establish public toy algebra only;
 real admissibility/fidelity/cost/memory/learned repair remain unresolved.
+
+## B4.34 conditional real-admissibility and full-cost preregistration
+
+The [protocol](docs/planning/b4_34_admissibility_full_cost_preregistration_protocol.md)
+and [authored contract](docs/planning/b4_34_admissibility_full_cost_preregistration_contract.json)
+derive one conditional uniform coercivity route and residual-energy enclosure
+from TopoLab's own B4.32 PSD/SIMP proof and B4.33 exact toy boundary. For the
+same intended operators, certified G>=lower_G*I>0 and E>=E_min give a uniform
+lower spectral bound; triangle inequality bounds f using the approximate anchor's
+f+r energy plus independently enclosed residual. Outward arithmetic and SAME
+stored-normalizer lower enclosure remain unimplemented blocking obligations.
+The corrected bound is diagnostic, never a replacement objective/gradient or
+approximate anchor-equality claim.129/43 checks accept documentary consistency
+only; no real certificate, numerical payload/FEM/integration/fit/timing or
+scientific repair is performed. Full costs/unknowns and PENDING4GiB remain.
+No new external scientific/implementation source, Hack3D code/comment/structure/
+figure, dataset, model or final evidence was consulted or imported. Historical
+equation references and frozen records retain their identities.
