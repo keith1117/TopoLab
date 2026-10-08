@@ -14,23 +14,23 @@ See [report](../validation/b4_30_paid_continuation.md). Conditional48/720 remain
 unopened. Original failed preflight, all historical evidence/unknowns and
 full-training memory PENDING/4GiB remain; uniform stays default.
 
-Latest completed read-only slice **B4.31**: metadata118/118 and independent
-Decimal430/430 PASS, own resource PASS, Q31=80.29939475003629922/FULL60/180,
-conservative native chain219463680<1GiB. See
-[report](../validation/b4_31_reflection_failure_cost_review.md). Original B4.30
-ledger7323.1004352501081506 remains; separate campaign-plus-review view
-7403.39983000014444982 adds Q31 once. Old3/3 and B4.30's2 administrative
-invocations/1 numerical campaign stand. Source premerge-driver failure and later
-postmerge protection/tree/CI-time audit are retained without a premerge PASS claim.
-Proposed next B4.32 bounded read-only generalist reliability/cost method review
-and preregistration needs new owner authorization and a finite contract. No
-numerical method is selected; reflection/exact-FEM candidates stop. Uniform/P17,
-all old failures/unknowns/costs and final/fresh/unused seals remain. No B5 access.
+Latest completed read-only slice **B4.32 method review/preregistration**:
+69 static/32 independent Decimal document checks PASS, with zero production
+or candidate numerical evaluations. See [report](../validation/b4_32_generalist_method_preregistration.md).
+Six dispositions preserve all earlier stops; one prospective fixed-anchor
+reciprocal-energy hypothesis requires exact equilibrium, while real floating
+admissibility/residual certificates, fidelity/cost/memory/reliability are UNKNOWN.
+Known disjoint paid-stage subtotal12721.16417100014444982>7200 grants no cap
+reset or fit. B4.31 Q31/original7323.1004352501081506/combined7403.39983000014444982
+and its source-premerge process failure remain. Old3/3 and B4.30's2/1 stand.
+Next proposed B4.33 reciprocal-energy algebra/access implementation is software
+only on8 public toy fixtures, separately authorized/frozen and not started.
+Uniform/P17, all failures/costs/unknowns/final/fresh/unused seals and no B5 remain.
 [Project status](../project_status.md) holds the current boundary;
 [history](../development_history.md) preserves the chronology.
 
 Prepared: 2026-09-24
-Revised: 2026-10-08 (B4.31 finite read-only review complete; scientific FAIL remains)
+Revised: 2026-10-08 (B4.32 finite method preregistration; scientific FAIL remains)
 
 Related documents:
 
@@ -1253,6 +1253,39 @@ preregistration requires new owner authorization/finite contract. No numerical
 intervention is selected, fit/search or final access granted. Full learned
 repair, independent confirmation and compatible final contract remain before B5.
 
+### B4.32: Bounded generalist method review and preregistration
+
+The owner's continuation after closed B4.31 authorized one documentation slice.
+The [protocol](b4_32_generalist_method_preregistration_protocol.md) and
+[authored contract](b4_32_generalist_method_preregistration_contract.json) passed
+69/69 static and32/32 independent Decimal/document checks. See
+[report](../validation/b4_32_generalist_method_preregistration.md). No production
+scalar replay, payload, numerical candidate evaluation, objective/FEM/root/
+projection, fit, retiming/search or final/fresh/unused access occurs.
+
+Six dispositions stop historical reflection/exact-FEM/signed-tangent candidates
+and preregister only one fixed-anchor reciprocal-element-energy hypothesis.
+Conditional PSD/Cauchy–Schwarz proof gives an upper bound/equality/anchor gradient
+under exact equilibrium; approximate anchors require independent residual/
+spectral/rounding certification, still UNKNOWN. No global tightness, convexity,
+fitted quality or affordable training follows. Eight future public toy fixtures
+and candidate-free algebra/role rejection checks are prospective software only.
+
+All original failures/unknowns/costs stay, including old69 predicate positions,
+57546.072069/58142.252069>7200, old7323.1004352501081506 and Q31 once. Known
+disjoint actual-stage subtotal12721.16417100014444982>7200 is diagnostic
+accounting, not new budget permission or ledger reset. Full fit PENDING/4GiB
+and real-state fidelity/cost/memory/learned repair/confirmation remain separate.
+Runtime/tests/conventions/README and historical frozen bytes are unchanged.
+All five checks, document/per-path/all-upload guards, protected exact-head/main
+CI, owned-branch cleanup and byte backup govern publication closure.
+
+Next proposed **B4.33 bounded reciprocal-energy algebra and access evidence
+implementation**, software only, needs a separate owner instruction and frozen
+contract. No actual training input, FEM, projection/root/network integration,
+fit, retiming/search or changed budget follows. Uniform/P17 and seals remain;
+report the next proposal and stop after B4.32.
+
 ### B5: One-time final comparison and project delivery gate
 
 Open the new ID cohort once after B4, followed by predeclared OOD and independent
@@ -1288,12 +1321,11 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.32 bounded read-only generalist reliability/cost method review
-   and preregistration:** not started/authorized. Preserve B4.31 metadata/resource
-   PASS, Q31 and B4.30 scientific FAIL, immutable old ledger/failed and complete
-   roots. New owner instruction and finite read-only contract precede it. No
-   numerical intervention, payload, predictor/FEM, fit, retiming or seed/weight/
-   length/objective/cache/ordering search is selected or granted.
+1. **Proposed B4.33 bounded reciprocal-energy algebra and access evidence
+   implementation:** not started/authorized; software only on8 public toy
+   fixtures after a separate finite contract. B4.32 is preregistration PASS
+   only. Preserve all failed Gates/costs/unknowns; no production or fitting.
+
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.

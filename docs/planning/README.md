@@ -4,16 +4,17 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-Latest completed numerical/audit slice is
-[B4.30 complete paid continuation](../validation/b4_30_paid_continuation.md):
-scientific FAIL, complete v2 chain resource PASS,18/270 and all prescribed audits
-complete,7323.1004352501081506/43200 including original191.9666532080154866/both
-FULL180. Fixed17 remains unrepaired; conditional48/720/final/unused panels sealed.
-The original interrupted report and all frozen records remain. Old3/3 stays
-exhausted; separate B4.30 used2 administrative invocations/1 numerical campaign,
-no third or later slice authorized. Proposed B4.31 bounded metadata-only
-reflection-failure/cost review is not started; owner authorization and a finite
-contract precede it. Old failures/costs/memory gaps and uniform default remain.
+Latest completed read-only slice [B4.32 method review/preregistration](../validation/b4_32_generalist_method_preregistration.md):
+69/32 static/independent document PASS only; no production or new candidate
+numerical evaluation. One conditional reciprocal-energy hypothesis remains
+unimplemented/uncertified for real states. Scientific FAIL/P17 unrepaired,
+all old costs/failures/unknowns and full training PENDING/4GiB remain.
+Latest numerical [B4.30](../validation/b4_30_paid_continuation.md) failed repair,
+B4.31 metadata/native PASS and immutable ledgers remain. Known paid subtotal
+12721.16417100014444982>7200 is diagnostic, not permission or a reset.
+Next B4.33 is proposed software-only algebra/access implementation on8 public
+toy fixtures, separately authorized/frozen and not started. Uniform and all
+conditional/final/fresh/unused seals remain; no fit/search or B5 follows.
 
 ## Overall project plans
 
@@ -122,3 +123,5 @@ existence; its validation report determines whether its Gate passed or failed.
 - [B4.30 one paid technical continuation protocol and finite v2 contract](b4_30_paid_continuation_protocol.md): complete failed repair in the same slice, immutable failed prefix and cumulative original budget; no changed science or third invocation.
 
 - [B4.31 bounded read-only reflection failure and cost review](b4_31_reflection_failure_cost_review_protocol.md) · [Finite eight-input contract](b4_31_reflection_failure_cost_review_contract.json): complete118/430 metadata/native PASS, original scientific FAIL unchanged; see [report](../validation/b4_31_reflection_failure_cost_review.md).
+
+- [B4.32 bounded generalist method review and preregistration](b4_32_generalist_method_preregistration_protocol.md) · [Authored finite contract](b4_32_generalist_method_preregistration_contract.json):69/32 static document PASS only; real-state bounds/fidelity/cost/fit permission remain pending.

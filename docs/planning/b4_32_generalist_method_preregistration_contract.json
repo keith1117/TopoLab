@@ -1,0 +1,264 @@
+{
+  "version": "topolab.b4_32.generalist-method-preregistration.v1",
+  "status": "preregistration-only",
+  "starting_main": "4763124495ee2137f4b220a678da49648fed6987",
+  "authority": "b4_32_generalist_method_preregistration_protocol.md",
+  "slice_limit": 1,
+  "current_access": {
+    "allowed": [
+      "versioned-source-contract-report",
+      "closed-handoff-publication-backup-metadata",
+      "github-source-ci-metadata",
+      "one-primary-paper-equations-metadata",
+      "existing-software-synthetic-public-fixtures"
+    ],
+    "production_execution": false,
+    "generated_scalar_evidence_replay": false,
+    "new_candidate_numerical_evaluation": false,
+    "raw_arrays_or_journals": false,
+    "label_or_model_payload": false,
+    "prediction_or_fem_or_fit": false,
+    "projection_or_root_evaluation": false,
+    "profile_or_retime_or_search": false,
+    "screen_final_fresh_unused_access": false
+  },
+  "versioned_inputs_sha256": {
+    "docs/numerical_conventions.md": "0607ce06a0e386e820563b6abf4164660bfe719e5783fd83f406ff39356c53a8",
+    "docs/planning/b4_14_generalist_method_review_protocol.md": "a32747b4f9ceb16de8cd5ac6155e2fe000918a54b89875618c0e968c12f275b7",
+    "docs/validation/b4_14_generalist_method_review.md": "98ce603b4e8803f39e7cc448d3ae4ecdc0b95b18e3ce88b777ad2fe521df1576",
+    "docs/planning/b4_18_fem_objective_method_review_protocol.md": "0341f30b9a76c316bc2a7568e68873bf917483100d52a6c5ac0b72a34be68246",
+    "docs/validation/b4_18_fem_objective_method_review.md": "e0ddef430deb212cd7ff35865a179758a2a20e0182421094922872da6f596711",
+    "docs/planning/b4_23_versioned_surrogate_feasibility_protocol.md": "eebab42c919656d7f58f09e63e9ca894d83ded4c7ac6642bd13d9b3f58aed343",
+    "docs/validation/b4_23_versioned_surrogate_feasibility.md": "37313a824cea44f5993309b829934cfcdbc9501f32fdc4ba0ba59fc32b43230b",
+    "docs/planning/b4_26_active_set_preregistration_protocol.md": "597c81e2e897edb35fd06bb4ec6089fb8da48d5445b4f5b5c0ef912beacb09c3",
+    "docs/planning/b4_26_active_set_acceptance_contract.json": "552e9ce56a3a64e1737eea43ad1ad9ce38c09ca094b44b01e92b636fae367a63",
+    "docs/validation/b4_26_active_set_preregistration.md": "c9d54de31053c556989c5a754c02089299c7c640e4b50e4a5e54e4a0fb40cb98",
+    "docs/validation/b4_29_active_set_outcome_review.md": "b2538149b29e14a71b11b15ac34a666b1c51cd5e7e968c7000419c7d6cede11c",
+    "docs/validation/b4_30_paid_continuation.md": "c045c90a2c7f2ed9b7a60f1a446941f65e5ffced72f4589192788b474077e780",
+    "docs/planning/b4_31_reflection_failure_cost_review_protocol.md": "d8d5d812b2ead347369256b9cada940508bf24a9b4441b41c9da4f0f7be837f8",
+    "docs/planning/b4_31_reflection_failure_cost_review_contract.json": "54b99d649ad53edc0c2afbe32a87bb4c87354e97a1d6c86e851c1d0b91a895c2",
+    "docs/validation/b4_31_reflection_failure_cost_review.md": "724a91bc98d6b0cd68fbfa48dfa73b48d65a79fce99f6ef93962a23df996c874"
+  },
+  "primary_source": {
+    "title": "A compliance approximation method applied to variable stiffness composite optimisation",
+    "authors": [
+      "Daniel Peeters",
+      "Zhi Hong",
+      "Mostafa Abdalla"
+    ],
+    "published": "2018-07-19",
+    "url": "https://link.springer.com/article/10.1007/s00158-018-2007-2",
+    "consulted_scope": "sections 3-4 equations 19-25; complementary-energy principle only",
+    "transferred_results_or_code_or_figures": false
+  },
+  "mechanisms": [
+    {
+      "id": "uniform-operational-baseline",
+      "disposition": "RETAIN_DEFAULT",
+      "evidence": "full learned delivery Gate open"
+    },
+    {
+      "id": "fixed-terminal-positive-weight-mse",
+      "disposition": "STOP_RELIABILITY",
+      "evidence": "B4.5 bounded pass; B4.6 independent primary reliability failure"
+    },
+    {
+      "id": "reflection-or-post-plateau-continuation",
+      "disposition": "STOP_REPAIR",
+      "evidence": "B4.10/12/30 failure; no currently failed P repaired by R"
+    },
+    {
+      "id": "exact-current-density-fem-with-setup-reuse",
+      "disposition": "STOP_COST",
+      "evidence": "B4.15/17/23 cost failure; no cache/ordering/frequency search"
+    },
+    {
+      "id": "signed-affine-local-tangent",
+      "disposition": "STOP_OLD_CANDIDATE",
+      "evidence": "B4.28 scoped integrity does not clear B4.23 failure/cost/memory"
+    },
+    {
+      "id": "fixed-anchor-reciprocal-energy",
+      "disposition": "PREREGISTER_SOFTWARE_ONLY",
+      "evidence": "independent conditional derivation; fidelity/cost/reliability UNKNOWN"
+    }
+  ],
+  "prospective_candidate": {
+    "version": "topolab.fixed-anchor-reciprocal-energy.v1",
+    "implemented": false,
+    "anchor_role": "prospective-expanded-train-only-no-payload-now",
+    "equilibrium": "K(rho_star)*u_star=f on identical free DOFs",
+    "modulus": "E(rho)=E_min+(E_0-E_min)*rho**p",
+    "coefficient": "a_e=E(rho_star_e)**2*(u_star_e.T*K0_e*u_star_e)",
+    "value": "U(rho)=sum_e(a_e/E(rho_e))",
+    "physical_gradient": "dU/drho_e=-a_e*p*(E_0-E_min)*rho_e**(p-1)/E(rho_e)**2",
+    "normalized_value": "U(rho)/C_s; anchor intercept C_continuous_star/C_s",
+    "volume_projection_version": "unchanged-existing-v3-no-evaluation-now",
+    "assumptions": [
+      "same-load-support-element-space",
+      "homogeneous-Dirichlet-force-loading",
+      "positive-moduli",
+      "symmetric-positive-semidefinite-element-matrices",
+      "assembled-free-matrix-positive-definite",
+      "exact-statically-admissible-anchor"
+    ],
+    "claimed_only_under_assumptions": [
+      "C(rho)<=U(rho)",
+      "U(rho_star)=C(rho_star)",
+      "anchor-physical-gradient-equals-SIMP-adjoint"
+    ],
+    "floating_residual_policy": "UNCERTIFIED_STOP; nonzero residual tolerance alone is not a bound",
+    "residual_bound_obligation": "(sqrt(U_tilde)+norm(r,2)/sqrt(m_rho))**2 with independently certified m_rho>0; otherwise UNKNOWN_STOP",
+    "nonnegative_coefficient_not_clipped_design_gradient": true,
+    "one_anchor_no_refresh_ensemble_radius_or_coefficient_search": true,
+    "density_convexity_or_terminal_repair_or_speed_claim": false
+  },
+  "future_software_panel": {
+    "execution_authorized": false,
+    "next_slice": "B4.33 bounded reciprocal-energy algebra and access evidence implementation",
+    "scope": "synthetic-public-algebra-and-access-only-separate-frozen-contract",
+    "max_fixtures": 8,
+    "max_free_dofs": 2,
+    "max_elements": 3,
+    "fixture_ids": [
+      "single-soften",
+      "single-stiffen",
+      "parallel-two",
+      "series-two",
+      "coupled-two",
+      "common-modulus-ratio",
+      "zero-energy-element",
+      "three-element-coupling"
+    ],
+    "anchor_density_choices": [
+      "1/4",
+      "1/2",
+      "3/4"
+    ],
+    "current_density_choices": [
+      "1/4",
+      "1/2",
+      "3/4"
+    ],
+    "modulus_constants": {
+      "E_0": "1",
+      "E_min": "1/1000",
+      "p": 3
+    },
+    "independent_exact_rational_oracle": true,
+    "candidate_free_auditor": true,
+    "checks": [
+      "anchor-value",
+      "anchor-gradient",
+      "exact-upper-inequality",
+      "gap-square-identity",
+      "uniform-modulus-scaling",
+      "zero-energy-element",
+      "physical-fd-both-steps",
+      "role-and-schema-tampering"
+    ],
+    "floating_value_rtol": "1e-9",
+    "floating_value_atol": "1e-10",
+    "fd_steps": [
+      "1e-4",
+      "2e-4"
+    ],
+    "fd_normalized_max": "1e-4",
+    "fd_floor": "1e-8",
+    "negative_modulus_nonfinite_bad_support_or_uncertified_residual": "REJECT_STOP",
+    "tolerance_justifies_exact_admissibility": false,
+    "clipping_or_root_or_fem_or_network_integration": false,
+    "production_timing_or_training_permission": false
+  },
+  "preserved_failures": {
+    "fixed_p17_repaired": false,
+    "scientific_gate": "FAIL",
+    "r17_quality": "1.0019709437499813",
+    "quality_limit": "1.001",
+    "target_mean": "1.016053130777518",
+    "target_mean_limit": "1.0",
+    "pooled_sum": "0.9853173206553424",
+    "mean_replaced_by_sum": false,
+    "p_r_seed_failures": [
+      1,
+      3,
+      1
+    ],
+    "b4_23_passed_predicates": 3907,
+    "b4_23_total_predicates": 3976,
+    "mask_failures": 35,
+    "fd_failures": 34,
+    "b4_20_gate": "FAIL",
+    "b4_19_actual_case_gap_counts": "UNKNOWN",
+    "b4_24_old_memory_proof": "INCOMPLETE",
+    "b4_28_old_whole_resource": "INCOMPLETE",
+    "b4_31_source_premerge_driver_passed": false,
+    "b4_31_source_postmerge_audit_passed_before_metadata": true
+  },
+  "cost": {
+    "new_production_budget_granted": false,
+    "b4_23_original_proxy_seconds": "57546.0720687792",
+    "b4_29_known_added_proxy_seconds": "58142.252069",
+    "old_proxy_cap_seconds": "7200",
+    "b4_30_immutable_seconds": "7323.1004352501081506",
+    "b4_30_original_cap_seconds": "43200",
+    "b4_30_failed_prefix_seconds": "191.9666532080154866",
+    "b4_30_full_reserves_seconds": [
+      "180",
+      "180"
+    ],
+    "b4_31_seconds": "80.29939475003629922",
+    "b4_31_campaign_plus_review_seconds": "7403.39983000014444982",
+    "known_actual_stage_components_seconds": {
+      "all_twelve_b4_1_fits": "3870.204341",
+      "b4_15_through_23": "851.38",
+      "b4_24": "200.98",
+      "b4_25": "80.34",
+      "b4_28": "234.60",
+      "b4_29": "80.26",
+      "b4_30": "7323.1004352501081506",
+      "b4_31": "80.29939475003629922"
+    },
+    "cross_route_known_paid_floor_seconds": "12721.16417100014444982",
+    "cross_route_view": "diagnostic known-paid subtotal, not replacement of either immutable ledger or authorization of a new cap",
+    "future_full_seeds": [
+      17,
+      29,
+      43
+    ],
+    "future_full_epochs": 200,
+    "future_small_large_population": [
+      432,
+      76
+    ],
+    "future_factor": "1.25",
+    "future_preparation": "3*1.25*(432*p_small+76*p_large)",
+    "future_forward_backward": "3*200*1.25*(432*u_small+76*u_large)",
+    "aggregation": "complete-first-failure-inclusive-per-scale-maxima",
+    "all_prior_costs_failed_calls_full_reserves_io_audit_native_start_exit_required": true,
+    "unknown_required_cost": "BLOCK_FEASIBILITY",
+    "cap_population_schedule_or_ledger_reset_to_pass": false,
+    "software_authoring_ci_separately_retained_unknown_not_zero": true
+  },
+  "memory": {
+    "full_training_status": "PENDING",
+    "fit_cap_bytes": 4294967296,
+    "separate_prefit_complete_process_contract_required": true,
+    "old_gaps_filled_by_software_checks": false
+  },
+  "future_release": {
+    "separate_owner_authorization_and_finite_merged_ci_passed_contract": true,
+    "literal_training_inputs_roles_hashes_and_no_final_access": true,
+    "independent_admissibility_gradient_fidelity_cost_memory_audit": true,
+    "durable_attempted_completed_io_fem_counters_and_native_exit": true,
+    "finite_stage_whole_reserve_caps_and_failure_closure": true,
+    "stop_before_fit_if_any_required_failure_or_unknown": true,
+    "fixed_primary_seeds_controls_and_all_legacy_failures_retained": true
+  },
+  "next_slice_started": false,
+  "uniform_default": true,
+  "final_evidence_sealed": true,
+  "b4_30_conditional_cases_sealed": 48,
+  "unused_b4_10_cases_sealed": 48,
+  "full_v2_delivery_gate_passed": false
+}

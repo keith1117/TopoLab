@@ -1031,3 +1031,27 @@ material was used. Original source-premerge-driver failure and subsequent
 postmerge verification retain distinct timing, without a premerge PASS claim.
 No scientific tolerance/model/population/role/seal changed. B4.32 is only a
 proposed later read-only method review/preregistration requiring new authority.
+
+## B4.32 reciprocal-energy method preregistration provenance
+
+B4.32 reviews six fixed method dispositions using fifteen starting-main-bound
+versioned inputs. No generated evidence replay, label/model/raw payload,
+objective/gradient/FEM/projection/root, fit or final/fresh access occurs.
+
+New primary reference: Peeters, Hong and Abdalla,
+[A compliance approximation method applied to variable stiffness composite optimisation](https://link.springer.com/article/10.1007/s00158-018-2007-2)
+(2018), sections3–4/equations19–25. Its complementary-energy principle motivates
+a fixed-admissible-force reciprocal approximation. Composite/truss performance,
+code, figures and optimizer/damping choices are not imported. The conditional
+discrete PSD/SIMP Cauchy–Schwarz proof, square-gap identity and residual-bound
+obligation are independently derived from TopoLab's existing equations.
+No new Hack3D comparison or content is used.
+
+The [protocol](docs/planning/b4_32_generalist_method_preregistration_protocol.md)
+and [authored contract](docs/planning/b4_32_generalist_method_preregistration_contract.json)
+preregister one unimplemented training-only hypothesis and eight future public
+toy fixtures. Exact anchor equilibrium is essential; floating residuals need
+an independent admissibility/spectral/rounding certificate. No real-state
+upper bound, cost feasibility, P17 repair or learned acceleration is claimed.
+Old signed-tangent/exact-FEM/reflection failures, costs and unknowns remain.
+B4.33 software implementation is only proposed under a separate contract.

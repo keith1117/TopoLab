@@ -1,51 +1,51 @@
 # Current project status
 
-Updated: 2026-10-08. Latest completed read-only slice **B4.31 reflection failure
-and cost review**: metadata118/118 and independent Decimal430/430 **PASS**, own
-native resource **PASS**, Q31 **80.29939475003629922/180** including FULL60;
-conservative complete chain219463680<1GiB. See the
-[report](validation/b4_31_reflection_failure_cost_review.md).
-Latest numerical slice B4.30 remains scientific **FAIL**/scoped v2 resource PASS;
-its7323.1004352501081506/43200 ledger and both FULL180 stay unchanged. Full
-publication closure binds evidence PR/main CI and a verified external byte backup.
+Updated: 2026-10-08. Latest completed read-only slice **B4.32 generalist
+reliability/cost method review and preregistration**:69/69 static and32/32
+independently implemented Decimal/document checks **PASS**. This is a
+documentation Gate only; scientific **FAIL**, fixed P/17 unrepaired and full
+training memory **PENDING/4GiB** remain. See the
+[report](validation/b4_32_generalist_method_preregistration.md). Latest numerical
+slice B4.30 remains failed; B4.31 metadata/native PASS and original costs stay.
 
-## B4.31 finite metadata review complete
+## B4.32 method preregistration complete
 
-The owner's explicit single-slice takeover was frozen in the
-[protocol](planning/b4_31_reflection_failure_cost_review_protocol.md) and
-[contract](planning/b4_31_reflection_failure_cost_review_contract.json).
-Source PR166 tested13af1a4/main4a51ebe6fbe6 equal-tree/locked/whole-clean and all
-applicable exact-head/main CI preceded production. Each reviewer/auditor opened
-exactly eight SHA-bound compact JSON files once with16 fsync'ed access events;
-no old directory discovery, outcome hash dereference, payload, predictor/FEM,
-fit, retiming/search, final or unused/fresh access. One campaign/reviewer/auditor;
-no retry or overwrite. Both owner documents remain in the primary checkout.
+Owner-authorized one continuation slice from main4763124495ee, all three main
+CI checks passed/no open PR/no existing B4.32 work. The
+[protocol](planning/b4_32_generalist_method_preregistration_protocol.md) and
+[authored finite contract](planning/b4_32_generalist_method_preregistration_contract.json)
+freeze15 versioned inputs, six dispositions and one future hypothesis. This
+follows B4.26's documentation-only workflow: no production runner, scalar
+evidence replay, numerical candidate evaluation, predictor/FEM/root/projection,
+fit, retiming/search, label/model/raw payload or sealed evidence access.
 
-All15 methods/270 outcomes/35 failures and35 fallbacks, all seven historical
-units, two negative controls and prior323/204/78/249 counts remain. Four historical
-target predicates pass already in matched P; zero currently failed P target
-newly repaired. P/R failures both1/3/1; R17 ratio1.0019709437499813>1.001 and
-target mean1.016053130777518>1.0 remain failed. Sum0.9853173206553424 cannot
-replace the mean. Attempt iterations and full paid query costs retain fallbacks.
-Per-target cost vectors/fallback phase costs stay outside scope/UNKNOWN; no
-failure cause or fallback-free bound is established.
+Uniform remains default. Reflection, exact current-density FEM and the old
+signed affine tangent stop at their retained failures. The prospective
+fixed-anchor reciprocal-energy value uses element-energy coefficients and
+reciprocal SIMP stiffness. A conditional independent Cauchy–Schwarz proof gives
+a compliance upper bound and exact anchor value/gradient for an EXACT
+equilibrium anchor with positive moduli/assembled SPD. Small floating residuals
+alone do not certify it: admissibility/spectral/rounding obligations remain
+UNCERTIFIED/UNKNOWN. No real-state fidelity, affordability, convexity, fitted
+reliability, P17 repair or acceleration is established. Eight future public
+toy fixtures and candidate-free algebra/role tests are only preregistered.
 
-New Q31=80.29939475003629922, reserve observed plus exit floor11.16154991695657376
-of FULL60, conservative native sum219463680<=1073741824. All native exits,
-including the last verifier's own, are checked. Earlier PENDING close/bind/verify
-receipts retain their lifecycle bytes. Separate B4.30 campaign-plus-review view
-7403.39983000014444982 adds Q31 once and does not alter the old budget or ledger.
-Full training memory stays PENDING/4GiB; old gaps and failed cost stay.
+All69 old predicate failures, scientific failures, B4.19 unknowns, B4.24/28
+resource gaps and B4.31's failed source-premerge driver remain. B4.23 original
+57546.0720687792>7200 and B4.29 known-added58142.252069>7200 stay failed.
+B4.30 immutable7323.1004352501081506 includes failed191.9666532080154866 and
+both FULL180; Q31=80.29939475003629922 stays paid once, separate combined view
+7403.39983000014444982. A diagnostic disjoint known-paid subtotal including
+twelve fits and B4.15–31 stages is12721.16417100014444982>7200; it changes
+neither ledger nor cap and cannot authorize a fit or erase earlier costs.
+Unknown full-project/software/CI resources stay separately recorded, not zero.
 
-The first local source-premerge driver failed on a handoff field and orchestration
-incorrectly proceeded with merge. Preserve this process failure as failure, not
-premerge PASS. Every path/all-upload guard and exact-head CI had already passed;
-gh used the expected SHA without bypass. Later protection/resolved-thread/
-equal-tree/premerge-CI-time audit passed before metadata, and main CI passed.
-The field was corrected; evidence publication stops on any failed preflight.
-58 focused/1393 full source and1393 full evidence tests pass. Final documentation
-checks, protected evidence CI/main, owned branches and byte backup close this
-same single slice; scientific FAIL is independent of technical publication CI.
+Runtime/tests/numerical conventions/public README and all historical frozen
+bytes stay unchanged. Nine primary untracked files remain in place; independent
+clone authoring avoids altering them. Current indices and the Chinese roadmap
+are corrected against authoritative merged reports. Publication closure binds
+all five checks, relative links/spacing/ignore/per-path/all-upload review, exact
+protected PR/main CI, owned-branch cleanup and an external byte-verified backup.
 
 ## Delivery and operational boundary
 
@@ -157,20 +157,17 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and proposed successor
 
-B4.31 is the only slice entered under the takeover authorization: one bounded
-metadata campaign,118 review and430 independent predicates accepted; own native resource
-PASS. The B4.27–29 quota stays closed3/3, and B4.30 stays2 administrative
-invocations/1 numerical campaign; no third B4.30 invocation or count reset.
-No later slice is authorized or started. All prior failures and unknowns remain.
+B4.32 closes only this finite documentation preregistration. B4.31 remains one
+metadata campaign; B4.27–29 closed3/3 and B4.30's2 paid administrative invocations/
+1 numerical campaign remain unchanged. No later slice is authorized or started.
 
-Reflection stops at scientific FAIL. Proposed next is **B4.32 bounded read-only
-generalist reliability/cost method review and preregistration**, after a new
-owner instruction and its own finite contract. No mathematical/model/numerical
-intervention is selected here. No new model/label payload, predictor/FEM, fit,
-objective/length/weight/seed/cache/ordering/frequency search or retiming is granted.
-The old exact-FEM cost/full-memory failure remains stopped. Ordinary single-slice
-waiting remains the repository default; report this next proposal and stop.
+Next proposed **B4.33 bounded reciprocal-energy algebra and access evidence
+implementation** is software only under a separate owner continuation and frozen
+contract, using the eight authored toy fixtures. No production data, FEM,
+projection/root/network integration, fit, retiming/search or budget change is
+inherited. Actual residual certificates, training-case fidelity, complete new
+cost/memory and any compatible fit contract remain pending and separately gated.
 
-Uniform stays operational default, P/17 unrepaired, B4.30 conditional48/720 and
-final/all48 unused B4.10 cases sealed. Learned repair, independent confirmation,
-full new B4 Gate and compatible final contract remain required before B5.
+Uniform stays default, P/17 unrepaired, B4.30 conditional48/720 and final/all48
+unused B4.10 cases sealed. Learned repair, independent confirmation, the complete
+new B4 Gate and compatible final contract remain required before B5. Stop here.
