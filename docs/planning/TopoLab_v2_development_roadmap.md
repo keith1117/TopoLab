@@ -1148,6 +1148,22 @@ No cache/ordering, continuation, epoch/population/physics-frequency or
 quality-threshold search follows. Ordinary single-slice waiting remains the
 repository default; session-specific authorization does not amend it.
 
+#### B4.30: Owner-approved fixed-primary z-reflection repair in preparation
+
+Separately authorized one bounded slice after exhausted B4.27–29 closure.
+The [protocol](b4_30_z_reflection_repair_protocol.md) and
+[contract](b4_30_z_reflection_repair_contract.json) freeze one deterministic
+same-checkpoint P z-reflection mean only for existing large-y volume<0.55
+initialization. Keep seeds17/29/43, fixed primary17, all C/P/W/non-ML controls,
+projection, physical-plateau solver,20-update continuation and own-certificate
+choice. No fit or new parameter; production has not started. Source and synthetic
+verification precede clean merged CI-passed execution. Complete18 sentinel/270
+queries; only their full Gate/resource acceptance permits the exact48/720 fresh
+panel. Whole charge<=43200 seconds/FULL180, native peak<=2GiB. Failure stops with
+all results and charges retained. Passing cannot grant final access: later
+independent confirmation/full B4/compatible final contract remain. No next slice
+is authorized; ordinary waiting remains. Old exact-FEM failure/unknowns remain.
+
 Compare each model to uniform and non-ML baselines on fallback-inclusive
 validation time, independent compliance, convergence, volume, and failure strata.
 Calibrate only predeclared reliability thresholds. Rejected candidates pay all
@@ -1195,9 +1211,10 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Owner decision for a next research intervention:** B4.29 is closed; the
-   three-slice authorization is exhausted and no fourth slice starts. Research
-   direction is undecided; require a separate prospective finite contract.
+1. **B4.30 separately approved repair:** freeze and merge tested source, then
+   execute/audit the one finite fixed-P/17 reflection hypothesis. Complete
+   regression precedes conditional fresh; stop at failure or full slice closure.
+   The exhausted three-slice session is not reset. No next slice follows.
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.

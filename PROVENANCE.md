@@ -959,3 +959,17 @@ The [report](docs/validation/b4_29_active_set_outcome_review.md) binds original
 and new hashes, retained costs and unknowns. No upstream code, new scientific
 source, raw arrays, labels/references, models or numerical kernel was accessed.
 Metadata review cannot establish learned repair, acceleration or full fit-memory.
+
+## B4.30 prospective fixed-checkpoint reflection repair
+
+The [protocol](docs/planning/b4_30_z_reflection_repair_protocol.md) derives
+a two-element z-reflection average from TopoLab's own isotropic elasticity,
+structured mesh and Euclidean-filter equations. The same original P checkpoint
+predicts the original and re-encoded mirror; the inverse-mapped raw float32
+predictions are averaged before the unchanged projection/refinement. No
+Hack3D material, external code, architecture, weight, data, figure or new
+scientific source was consulted or imported. Geometric equivariance does not
+establish the failure's cause or an improvement in quality or complete cost.
+The owner approved one new finite contract, fixed primary17 and unchanged
+seals; old exact-FEM failures/cost/memory gaps remain. Production awaits
+clean locked merged CI-passed source.

@@ -913,3 +913,27 @@ or final access occurs. Own metadata native RSS cannot fill B4.28/B4.24 historic
 memory/exit unknowns or PENDING4GiB full-training memory. One review/audit each60,
 whole180 with FULL60 reserve, peak1GiB; all failures/costs remain. This is the
 final session slice; no fourth slice or permanent waiting-rule change follows.
+
+## B4.30 opt-in same-weight z-reflection initialization
+
+The [B4.30 protocol](planning/b4_30_z_reflection_repair_protocol.md) and
+[finite contract](planning/b4_30_z_reflection_repair_contract.json) introduce
+only the fixed two-prediction mean for large `(24,12,6)` y generalists below
+volume0.55. Reflect load-node z to `nz-z`, retain y force and x-min support,
+re-encode all thirteen channels, predict with the same P checkpoint and invert
+the second raw density's z axis. Independently validate each CPU float32
+prediction before exactly `float32(0.5)*(first+inverse_second)`, then apply
+legacy1e-6 physical-volume projection once. Absolute/load-relative coordinates
+are not a simple encoded-tensor flip. Other P/S routes, original solver,
+B4.10 fixed20 updates, B4.12 own-certificate selection, max360 and all
+convergence/quality/volume criteria remain. Fixed primary17 cannot be replaced.
+
+The signed displacement permutation and Euclidean filter commute with the
+physical z symmetry in exact arithmetic; the fixed group-average prediction
+is equivariant there. This proves no improved compliance, terminal reliability
+or timing. Check each raw input before averaging so invalid values cannot
+cancel. Both predictions and complete refinement/fallback costs are charged.
+Synthetic checks authorize no production before clean merged exact-head/main CI.
+All final/48 unused B4.10 cases remain sealed; prior failures/cost/memory gaps
+are unchanged. B4.30 has a new separate43200/2GiB allocation with FULL180,
+not continuation or retiming of the stopped exact-FEM candidate.
