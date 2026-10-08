@@ -121,4 +121,4 @@ existence; its validation report determines whether its Gate passed or failed.
 
 - [B4.30 one paid technical continuation protocol and finite v2 contract](b4_30_paid_continuation_protocol.md): complete failed repair in the same slice, immutable failed prefix and cumulative original budget; no changed science or third invocation.
 
-- [B4.31 bounded read-only reflection failure and cost review](b4_31_reflection_failure_cost_review_protocol.md) · [Finite eight-input contract](b4_31_reflection_failure_cost_review_contract.json): owner-authorized metadata review; production awaits clean merged source and CI.
+- [B4.31 bounded read-only reflection failure and cost review](b4_31_reflection_failure_cost_review_protocol.md) · [Finite eight-input contract](b4_31_reflection_failure_cost_review_contract.json): complete118/430 metadata/native PASS, original scientific FAIL unchanged; see [report](../validation/b4_31_reflection_failure_cost_review.md).

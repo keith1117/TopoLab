@@ -763,3 +763,35 @@ This appends the final phase to the same historical interruption entry; it is
 one slice,2 paid administrative invocations/1 numerical campaign. Old3/3 stays
 exhausted. Proposed B4.31 metadata-only failure/cost review is not started and
 needs owner authorization/finite contract; no third trial, fit/search or B5.
+
+
+## B4.31 bounded read-only reflection failure and cost review (2026-10-08)
+
+Owner-authorized one slice, prospectively frozen [protocol](planning/b4_31_reflection_failure_cost_review_protocol.md)
+and [contract](planning/b4_31_reflection_failure_cost_review_contract.json);
+[report](validation/b4_31_reflection_failure_cost_review.md). PR166 head13af1a4/
+main4a51ebe6fbe6, all exact-head/main CI and whole-clean locked source preceded
+one reviewer/one separate Decimal audit. Eight SHA-bound scalar/resource files
+per role,118/118 and430/430 PASS; no raw/model/label, predictor/FEM/fit, retiming/
+search or final/fresh/unused access. All15 methods/270 outcomes/35 failures/
+fallbacks and seven historical P/R statuses preserved. Four historical target
+predicates pass already in P; zero currently failed P target newly repaired.
+R17 quality1.0019709437499813>1.001 and mean1.016053130777518>1.0 still fail;
+pooled0.9853173206553424 cannot replace mean. Cause/per-target/fallback costs
+stay unestablished/outside scope/UNKNOWN. Reflection and exact-FEM routes stop.
+
+Own native resource PASS, Q31=80.29939475003629922/FULL60/180; reserve
+11.16154991695657376<60, conservative native sum219463680<1GiB, last verifier
+actual exit checked and original PENDING bytes retained. Old7323.1004352501081506
+unchanged incl. failed191.9666532080154866/both FULL180. Separate campaign-plus-
+review7403.39983000014444982 adds once. All prior failures/unknowns/memory gaps
+and full fit PENDING/4GiB remain.58 focused/1393 source/1393 evidence full tests,
+all5 checks and per-path/all-upload guards support protected evidence/main CI,
+owned-branch cleanup and byte-verified external backup. Both owner documents and
+README preserved. The source premerge driver KeyError/incorrect continuation
+into merge is retained as a process failure; postmerge protection/equal-tree/
+CI-time/resolved-thread audit passed before metadata, not a premerge PASS.
+This closes only B4.31; old3/3 and B4.30's2-invocation/1-campaign counters stand.
+Proposed B4.32 read-only generalist reliability/cost method review and
+preregistration needs new owner authorization and a finite contract; no numerical
+method selected, fit/search/final grant, learned acceleration claim or B5.

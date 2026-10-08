@@ -1015,3 +1015,19 @@ or imported. Synthetic software checks do not rerun FEM/prediction or establish
 learned repair, causality, full fit memory or acceleration. Every old failure,
 unknown, cost, fixed primary and sealed boundary remains. Production awaits
 whole-clean locked merged main after applicable exact-head/main CI.
+
+## B4.31 completed scalar evidence boundary
+
+Clean locked source PR166/main4a51ebe6fbe6 and all exact-head/main CI preceded
+the only eight-input review and separate Decimal audit. Metadata118/118 and
+430/430 PASS, own native resource PASS; no payload/model/label, predictor/FEM,
+fit, retiming, root/objective search or final/fresh access. The
+[report](docs/validation/b4_31_reflection_failure_cost_review.md) retains all
+failed P/R statuses, mean versus sum, the original immutable cost ledger,
+full reserves and every unknown. Small attempted-compliance changes do not
+establish a cause or repair; four historical predicate passes already occurred
+in matched P. No new external scientific or implementation source or Hack3D
+material was used. Original source-premerge-driver failure and subsequent
+postmerge verification retain distinct timing, without a premerge PASS claim.
+No scientific tolerance/model/population/role/seal changed. B4.32 is only a
+proposed later read-only method review/preregistration requiring new authority.

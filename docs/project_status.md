@@ -1,24 +1,51 @@
 # Current project status
 
-Updated: 2026-10-08. Latest completed numerical/audit slice:
-**B4.30 fixed-P/17 reflection repair, paid continuation**. Scientific Gate
-**FAIL**, scoped complete v2 numerical/native resource **PASS**, cumulative
-charge **7323.1004352501081506/43200**. See the
-[complete failure-inclusive report](validation/b4_30_paid_continuation.md).
-Full publication closure binds the evidence PR/main CI and external byte backup.
+Updated: 2026-10-08. Latest completed read-only slice **B4.31 reflection failure
+and cost review**: metadata118/118 and independent Decimal430/430 **PASS**, own
+native resource **PASS**, Q31 **80.29939475003629922/180** including FULL60;
+conservative complete chain219463680<1GiB. See the
+[report](validation/b4_31_reflection_failure_cost_review.md).
+Latest numerical slice B4.30 remains scientific **FAIL**/scoped v2 resource PASS;
+its7323.1004352501081506/43200 ledger and both FULL180 stay unchanged. Full
+publication closure binds evidence PR/main CI and a verified external byte backup.
 
-## Authorized B4.31 preregistration, production not entered
+## B4.31 finite metadata review complete
 
-The owner's 2026-10-08 takeover authorizes exactly B4.31. Its
+The owner's explicit single-slice takeover was frozen in the
 [protocol](planning/b4_31_reflection_failure_cost_review_protocol.md) and
-[finite contract](planning/b4_31_reflection_failure_cost_review_contract.json)
-bind eight already certified scalar/resource JSON inputs, one reviewer and one
-separate Decimal audit,180 seconds/1GiB including FULL60 reserve. Source-only
-planning/synthetic validation opens no production metadata. Production requires
-whole-clean locked merged main with all exact-head/main CI passed. Preserve the
-two owner's untracked documents in the primary checkout. No payload, numerical
-call, fit, retiming or final/fresh access is authorized. B4.30's complete FAIL and
-all unknowns/costs remain. Source release, actual review and closure are pending.
+[contract](planning/b4_31_reflection_failure_cost_review_contract.json).
+Source PR166 tested13af1a4/main4a51ebe6fbe6 equal-tree/locked/whole-clean and all
+applicable exact-head/main CI preceded production. Each reviewer/auditor opened
+exactly eight SHA-bound compact JSON files once with16 fsync'ed access events;
+no old directory discovery, outcome hash dereference, payload, predictor/FEM,
+fit, retiming/search, final or unused/fresh access. One campaign/reviewer/auditor;
+no retry or overwrite. Both owner documents remain in the primary checkout.
+
+All15 methods/270 outcomes/35 failures and35 fallbacks, all seven historical
+units, two negative controls and prior323/204/78/249 counts remain. Four historical
+target predicates pass already in matched P; zero currently failed P target
+newly repaired. P/R failures both1/3/1; R17 ratio1.0019709437499813>1.001 and
+target mean1.016053130777518>1.0 remain failed. Sum0.9853173206553424 cannot
+replace the mean. Attempt iterations and full paid query costs retain fallbacks.
+Per-target cost vectors/fallback phase costs stay outside scope/UNKNOWN; no
+failure cause or fallback-free bound is established.
+
+New Q31=80.29939475003629922, reserve observed plus exit floor11.16154991695657376
+of FULL60, conservative native sum219463680<=1073741824. All native exits,
+including the last verifier's own, are checked. Earlier PENDING close/bind/verify
+receipts retain their lifecycle bytes. Separate B4.30 campaign-plus-review view
+7403.39983000014444982 adds Q31 once and does not alter the old budget or ledger.
+Full training memory stays PENDING/4GiB; old gaps and failed cost stay.
+
+The first local source-premerge driver failed on a handoff field and orchestration
+incorrectly proceeded with merge. Preserve this process failure as failure, not
+premerge PASS. Every path/all-upload guard and exact-head CI had already passed;
+gh used the expected SHA without bypass. Later protection/resolved-thread/
+equal-tree/premerge-CI-time audit passed before metadata, and main CI passed.
+The field was corrected; evidence publication stops on any failed preflight.
+58 focused/1393 full source and1393 full evidence tests pass. Final documentation
+checks, protected evidence CI/main, owned branches and byte backup close this
+same single slice; scientific FAIL is independent of technical publication CI.
 
 ## Delivery and operational boundary
 
@@ -82,7 +109,7 @@ checkout. An unused143-unit progress snapshot of UNKNOWN origin is preserved
 alongside the audited final270-unit chain; its matching prefix is documented.
 All new raw records stay external. README keeps its stable public role.
 
-## Latest bounded outcome review
+## Earlier bounded active-set outcome review
 
 [B4.29](validation/b4_29_active_set_outcome_review.md) executed one readonly
 review and independent scalar audit under clean merged source
@@ -130,23 +157,20 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and proposed successor
 
-The B4.27–29 session remains closed3/3. This separate B4.30 used exactly2 paid
-administrative invocations, including the initial failure, and1 numerical
-campaign; its full execution/audits/resource result is complete. Report and
-state/index publication, exact-head/main CI, owned-branch cleanup and verified
-external backup close the same single slice. No count reset or third invocation.
-No additional B4.30 invocation is authorized.
+B4.31 is the only slice entered under the takeover authorization: one bounded
+metadata campaign,118 review and430 independent predicates accepted; own native resource
+PASS. The B4.27–29 quota stays closed3/3, and B4.30 stays2 administrative
+invocations/1 numerical campaign; no third B4.30 invocation or count reset.
+No later slice is authorized or started. All prior failures and unknowns remain.
 
-The reflection mechanism stops at scientific FAIL. The separate B4.31 metadata
-review is now owner-authorized and preregistered as above; production is pending.
-No later slice is authorized. Any
-later mathematical repair/model change, budget, tolerance, role or seal change
-requires an explicit owner decision. No new model/label payload, predictor/FEM,
-fit, objective/length/weight/seed/cache/ordering/frequency search or retiming is
-granted. Old exact-FEM cost/full-memory failure remains stopped. Ordinary
-single-slice waiting remains the repository default.
+Reflection stops at scientific FAIL. Proposed next is **B4.32 bounded read-only
+generalist reliability/cost method review and preregistration**, after a new
+owner instruction and its own finite contract. No mathematical/model/numerical
+intervention is selected here. No new model/label payload, predictor/FEM, fit,
+objective/length/weight/seed/cache/ordering/frequency search or retiming is granted.
+The old exact-FEM cost/full-memory failure remains stopped. Ordinary single-slice
+waiting remains the repository default; report this next proposal and stop.
 
-Uniform stays operational default, P/17 unrepaired, final/all48 unused B4.10
-cases sealed. Preserve all failures, unknowns and charges. Learned repair,
-independent confirmation, full new B4 Gate and a compatible final contract
-remain required before B5.
+Uniform stays operational default, P/17 unrepaired, B4.30 conditional48/720 and
+final/all48 unused B4.10 cases sealed. Learned repair, independent confirmation,
+full new B4 Gate and compatible final contract remain required before B5.
