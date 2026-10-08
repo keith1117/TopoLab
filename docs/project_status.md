@@ -7,6 +7,19 @@ charge **7323.1004352501081506/43200**. See the
 [complete failure-inclusive report](validation/b4_30_paid_continuation.md).
 Full publication closure binds the evidence PR/main CI and external byte backup.
 
+## Authorized B4.31 preregistration, production not entered
+
+The owner's 2026-10-08 takeover authorizes exactly B4.31. Its
+[protocol](planning/b4_31_reflection_failure_cost_review_protocol.md) and
+[finite contract](planning/b4_31_reflection_failure_cost_review_contract.json)
+bind eight already certified scalar/resource JSON inputs, one reviewer and one
+separate Decimal audit,180 seconds/1GiB including FULL60 reserve. Source-only
+planning/synthetic validation opens no production metadata. Production requires
+whole-clean locked merged main with all exact-head/main CI passed. Preserve the
+two owner's untracked documents in the primary checkout. No payload, numerical
+call, fit, retiming or final/fresh access is authorized. B4.30's complete FAIL and
+all unknowns/costs remain. Source release, actual review and closure are pending.
+
 ## Delivery and operational boundary
 
 The historical `v1.0.0` release and Gates N1, N2, P1, M0, A1 and A3 remain
@@ -122,11 +135,11 @@ administrative invocations, including the initial failure, and1 numerical
 campaign; its full execution/audits/resource result is complete. Report and
 state/index publication, exact-head/main CI, owned-branch cleanup and verified
 external backup close the same single slice. No count reset or third invocation.
-No later research slice is authorized.
+No additional B4.30 invocation is authorized.
 
-The reflection mechanism stops at scientific FAIL. Proposed next is **B4.31
-bounded read-only reflection-failure and cost review**, not started. A new owner
-authorization and frozen finite metadata-only contract must precede it. Any
+The reflection mechanism stops at scientific FAIL. The separate B4.31 metadata
+review is now owner-authorized and preregistered as above; production is pending.
+No later slice is authorized. Any
 later mathematical repair/model change, budget, tolerance, role or seal change
 requires an explicit owner decision. No new model/label payload, predictor/FEM,
 fit, objective/length/weight/seed/cache/ordering/frequency search or retiming is

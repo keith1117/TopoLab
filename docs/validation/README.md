@@ -14,9 +14,12 @@ conditional48/720 unopened. The [original interruption](b4_30_z_reflection_repai
 remains0-numerical/resource FAIL/INCOMPLETE. Four historical target predicates
 pass already in matched P; no currently failed P target newly repaired.
 All old failures/costs/memory gaps and full-fit PENDING/4GiB remain. The old3/3
-and separate B4.30/2-invocation counters stand; no third trial or later slice is
-authorized. Proposed B4.31 metadata-only failure/cost review needs owner decision
-and finite preregistration. Uniform/P17/final/unused boundaries and no B5 remain.
+and separate B4.30/2-invocation counters stand; no third B4.30 trial is authorized.
+The owner explicitly authorized the separate B4.31 metadata-only review. Its
+[protocol](../planning/b4_31_reflection_failure_cost_review_protocol.md) and
+[contract](../planning/b4_31_reflection_failure_cost_review_contract.json) are
+preregistered; production waits for clean merged CI-passed source. No later
+slice is authorized. Uniform/P17/final/unused boundaries and no B5 remain.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the

@@ -15,15 +15,15 @@ unopened. Original failed preflight, all historical evidence/unknowns and
 full-training memory PENDING/4GiB remain; uniform stays default.
 
 The original B4.27–29 quota stays exhausted3/3; this separately authorized
-B4.30 used2 administrative invocations/1 numerical campaign. Proposed B4.31
-read-only reflection-failure/cost review is not started or authorized; a finite
-metadata-only contract and owner decision precede it. The reflection mechanism
-stops. No third invocation or final access. [Project status](../project_status.md)
+B4.30 used2 administrative invocations/1 numerical campaign. The owner now
+explicitly authorizes only B4.31 read-only reflection-failure/cost review; its finite
+metadata-only contract is preregistered; production awaits clean merged CI-passed
+source. The reflection mechanism stops. No third B4.30 invocation or final access. [Project status](../project_status.md)
 holds the current boundary; [history](../development_history.md) preserves the
 chronology and the historical `v1.0.0`/negative M1/M2 results.
 
 Prepared: 2026-09-24
-Revised: 2026-10-08 (B4.30 complete paid continuation; repair Gate failed)
+Revised: 2026-10-08 (B4.31 authorized metadata-only preregistration; prior repair FAIL)
 
 Related documents:
 
@@ -1197,9 +1197,9 @@ all old memory gaps and full-fit PENDING/4GiB stay. See
 [complete report](../validation/b4_30_paid_continuation.md). Report/indices,
 all5 validations, evidence PR/exact-head/main CI/byte backup close this same
 slice; exactly2 administrative invocations/1 numerical campaign, old3/3 retained.
-The reflection mechanism stops. Proposed B4.31 read-only failure/cost review is
-not started and needs owner authorization/frozen metadata-only scope; no third
-trial, changed math/model/budget/tolerance/role/seal, fit/search or B5 follows.
+The reflection mechanism stops. B4.31 was proposed at this historical closure;
+its current owner-authorized preregistration is below. No third B4.30 trial,
+changed math/model/budget/tolerance/role/seal, fit/search or B5 follows.
 
 Compare each model to uniform and non-ML baselines on fallback-inclusive
 validation time, independent compliance, convergence, volume, and failure strata.
@@ -1212,6 +1212,19 @@ statistics, environment, and source revision before final evaluation.
 **Gate B4:** A meaningful validation gain over the optimized uniform and fixed
 non-ML alternatives survives all charges and quality checks. Otherwise diagnose,
 version a new hypothesis, and leave final evidence sealed.
+
+### B4.31: Bounded read-only reflection failure and cost review
+
+The owner explicitly authorized this single slice on 2026-10-08. The
+[protocol](b4_31_reflection_failure_cost_review_protocol.md) and
+[finite contract](b4_31_reflection_failure_cost_review_contract.json) bind exactly
+eight certified scalar/resource inputs, all15 methods/seven historical units,
+failed-case P/R scalars, unchanged mean/sum predicates and the immutable prior
+cost ledger. One float reviewer and one separate Decimal auditor,180s/1GiB and
+FULL60; no production access before whole-clean locked merged CI-passed source.
+Production and resource/publication closure are pending. No raw/model/label,
+new predictor/FEM/fit, retiming/search or final/fresh access. Reflection and the
+old exact-FEM route stop; scientific FAIL cannot be cleared by metadata or CI.
 
 ### B5: One-time final comparison and project delivery gate
 
@@ -1248,10 +1261,10 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.31 bounded read-only reflection-failure and cost review:**
-   not started or authorized. Preserve complete B4.30 scientific FAIL, scoped
-   v2 resource PASS,7323.1004352501081506 charge and both failed/complete roots.
-   Freeze a finite metadata-only contract after an owner decision. No new
+1. **Authorized B4.31 bounded read-only reflection-failure and cost review:**
+   preregistered; production awaits clean merged CI-passed source. Preserve
+   complete B4.30 scientific FAIL, scoped v2 resource PASS,7323.1004352501081506
+   charge and both failed/complete roots under the eight-input contract. No new
    payload, predictor/FEM, fit, profile/retiming, seed/weight/length/objective
    or cache/ordering search. The reflection mechanism and old exact-FEM route stop.
 2. **Any later correctness/objective-feasibility intervention:** preserve all

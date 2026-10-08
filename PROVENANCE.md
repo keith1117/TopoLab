@@ -999,3 +999,19 @@ Decimal resource accounting change. Both failed cost and full-chain reserves
 remain paid. No new external scientific/implementation source, Hack3D material,
 model/label payload, fit, result adaptation or final evidence was used during
 authoring. New production waits for clean locked merged main after all CI.
+
+## B4.31 scalar review and source preregistration
+
+The owner authorized one bounded read-only reflection failure/cost review. The
+[protocol](docs/planning/b4_31_reflection_failure_cost_review_protocol.md) and
+[contract](docs/planning/b4_31_reflection_failure_cost_review_contract.json) bind
+eight existing compact JSON files by published SHA before any production access.
+Schema preparation used TopoLab's committed B4.30 writer source and the actual
+prior chat's reporting commands; no new production metadata was opened during
+authoring. Original float review and separate Decimal/status enumeration use
+only the Python standard library and unchanged TopoLab scalar IO/native helpers.
+No new external scientific/implementation source or Hack3D material was consulted
+or imported. Synthetic software checks do not rerun FEM/prediction or establish
+learned repair, causality, full fit memory or acceleration. Every old failure,
+unknown, cost, fixed primary and sealed boundary remains. Production awaits
+whole-clean locked merged main after applicable exact-head/main CI.

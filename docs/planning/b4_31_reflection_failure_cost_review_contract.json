@@ -1,0 +1,187 @@
+{
+  "version": "topolab.b4_31.reflection-failure-cost-review.v1",
+  "status": "PROSPECTIVE_FROZEN_READONLY_CONTRACT",
+  "starting_main": "ecf64165ffb72b26073183d20ba6b998ff587e84",
+  "created_at_utc": "2026-10-08T07:18:31.318233+00:00",
+  "authority": {
+    "slice": "B4.31",
+    "slice_limit": 1,
+    "owner_authorization_sha256": "1d29d6ddff91eb51e498e8fd2ec5db122470910e67f1c57aa35434ae23b89b62",
+    "direct_owner_request": "2026-10-08 takeover request explicitly names B4.31 and all single-slice constraints",
+    "prior_budget_transferable": false,
+    "next_slice_authorized": false
+  },
+  "allowed_input_root_name": "TopoLab-data",
+  "output_root_name": "b4-31-reflection-failure-cost-review",
+  "inputs_sha256": {
+    "b4-30-z-reflection-repair-v2/sentinel/independent_audit.json": "e9a8278b9a7d521992f7f5d62f3aef626e0767cd717f3ee134c2c4cc58b5ca2a",
+    "b4-30-z-reflection-repair-v2/resource_close.json": "ec187df8919404ea6a2b59f4e1a671bd17df0ba16d9976a6df0d6f3d5a065fb5",
+    "b4-30-software-validation-v2/final_native_profile_review.json": "ff8594eb9865e0966123965d89926abd513ab4135ec447fecd63695dfd36fc05",
+    "b4-30-software-validation-v2/report_failure_scalars.json": "f9f856c8f3837d326583bd3395598ddc06d36639a9252048a6724c25ca2ad8c7",
+    "b4-30-software-validation-v2/report_method_failure_counts.json": "c343d907bec2567e0186d8540a34afd4daf6e7876b2a0b1aae1384405bbf50c9",
+    "b4-30-software-validation-v2/historical_target_status_reporting.json": "695000ecbb3c7f65cdefd890bee64bd91ababd87071625d1d7fbeda99e2d3d76",
+    "b4-30-software-validation-v2/extra_progress_snapshot_preservation.json": "b06c52471c4d75f50a6dbda9609869f1df51548b170b0849d788ffe3256db21d",
+    "b4-30-z-reflection-repair/resource_close.json": "f4163bff1f5da3c7ccecbe9206eb0845761710f167f88c73afacc1a0980151b2"
+  },
+  "source_and_report_sha256": {
+    "docs/planning/b4_30_z_reflection_repair_contract.json": "ddb69d4947c01e849306b387bac5e23dbf9fd5fa42b896b29edac376b6bb63d3",
+    "docs/planning/b4_30_z_reflection_repair_protocol.md": "ff3eb610ac99635518ec2800114a8e1dfb9f61da7690777ebadf8c2f8c761ae0",
+    "docs/planning/b4_30_paid_continuation_contract.json": "ed52a1f725f0592f7f8e752ba802764e85ab987c107743379703a09ed033bb8a",
+    "docs/planning/b4_30_paid_continuation_protocol.md": "05045fd1030edf1491a1702927c819525216f8d499ebd61293ac5c389a8aa0c6",
+    "docs/validation/b4_30_z_reflection_repair.md": "5312601fbdcd97654c82baa16f72b2a47304c14de95dd9e2b500505b848b9664",
+    "docs/validation/b4_30_paid_continuation.md": "c045c90a2c7f2ed9b7a60f1a446941f65e5ffced72f4589192788b474077e780",
+    "docs/validation/b4_29_active_set_outcome_review.md": "b2538149b29e14a71b11b15ac34a666b1c51cd5e7e968c7000419c7d6cede11c"
+  },
+  "max_input_file_bytes": 262144,
+  "access": "Eight literal SHA-bound scalar/resource JSON inputs only. No directory discovery, outcome hash dereference, raw arrays, labels, models, final or unused fresh access. Stdlib only. Schema derived from existing writer source and prior reporting commands; no production bytes opened before source release.",
+  "new_budget": {
+    "review_seconds": 60,
+    "independent_seconds": 60,
+    "whole_seconds": 180,
+    "paid_reserve_seconds": 60,
+    "peak_rss_bytes": 1073741824
+  },
+  "execution_limits": {
+    "review_attempts": 1,
+    "independent_audit_attempts": 1,
+    "campaigns": 1,
+    "stage_watchdog_seconds": 45,
+    "controller_watchdog_seconds": 150,
+    "auxiliary_watchdog_seconds": 15,
+    "new_numerical_calls": 0,
+    "new_fits": 0,
+    "new_payload_reads": 0,
+    "no_retry_profile_repeat_or_overwrite": true
+  },
+  "stage_charge": "max(native wall, observed outer wall)+10 versus internal elapsed, whichever larger; complete wall/user/system/RSS/exit required, failures charged and UNKNOWN retained",
+  "reserve": "FULL60, no refund: native source-only plan/preparation/launcher/closure/binder/verifier and through-exit check. Controller outer minus stage outer once, plus binder/verifier outer and final exit floor10 must fit60. Last verifier own native exit/profile checked before publication.",
+  "arithmetic_rtol_atol": 1e-14,
+  "b4_30": {
+    "source_revision": "f561f31303ecd5e14a8fb7c16c104dc5ab5c95f1",
+    "references": 18,
+    "outcomes": 270,
+    "fixed_primary": 17,
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "methods": [
+      "uniform",
+      "physics_heuristic",
+      "nearest_neighbor",
+      "C/17",
+      "C/29",
+      "C/43",
+      "P/17",
+      "P/29",
+      "P/43",
+      "W/17",
+      "W/29",
+      "W/43",
+      "R/17",
+      "R/29",
+      "R/43"
+    ],
+    "method_failures": [
+      0,
+      0,
+      7,
+      5,
+      4,
+      3,
+      1,
+      3,
+      1,
+      3,
+      1,
+      2,
+      1,
+      3,
+      1
+    ],
+    "failed_case_id": "tlcase-v1-55c1b3e64135c23125fc286de5d780fc5d9a1e226d5e43ff0dbc8925b423936a",
+    "historical_target_units": [
+      {
+        "case_id": "tlcase-v1-d9dc312497ba5ade125c1b6d432ca029e375718fe301909a75a5db8f9c7b3e3f",
+        "policy": "R/17"
+      },
+      {
+        "case_id": "tlcase-v1-033f380c2181d9d1f94fc7f3d4b4a6507992c5e1a5004018bff779ca92add82a",
+        "policy": "R/29"
+      },
+      {
+        "case_id": "tlcase-v1-033f380c2181d9d1f94fc7f3d4b4a6507992c5e1a5004018bff779ca92add82a",
+        "policy": "R/43"
+      },
+      {
+        "case_id": "tlcase-v1-838e2ccc7891b194c1ab5d5b9854c658320e5b191a3d4ca38b78bbb4fc04d16e",
+        "policy": "R/29"
+      },
+      {
+        "case_id": "tlcase-v1-55c1b3e64135c23125fc286de5d780fc5d9a1e226d5e43ff0dbc8925b423936a",
+        "policy": "R/17"
+      },
+      {
+        "case_id": "tlcase-v1-55c1b3e64135c23125fc286de5d780fc5d9a1e226d5e43ff0dbc8925b423936a",
+        "policy": "R/29"
+      },
+      {
+        "case_id": "tlcase-v1-55c1b3e64135c23125fc286de5d780fc5d9a1e226d5e43ff0dbc8925b423936a",
+        "policy": "R/43"
+      }
+    ],
+    "negative_controls": [
+      [
+        "tlcase-v1-53c7cbca434bdf62c946bb2bcfcf62728c39e1600be373afca82567d77191e7b",
+        "R/29"
+      ],
+      [
+        "tlcase-v1-d9431c1421f2408accd5db0614722f1842c3c7f7630db10b3d316dfde5148e80",
+        "R/29"
+      ]
+    ],
+    "terminal_classifications": 323,
+    "guard_classifications": 204,
+    "prediction_replays": 78,
+    "old_outcome_identities": 249,
+    "quality_limit": 1.001,
+    "volume_error_limit": 0.005,
+    "target_cases": 13,
+    "target_mean_limit": 1.0,
+    "target_sum_limit": 1.0,
+    "original_failed_charge_decimal": "191.9666532080154866",
+    "cumulative_charge_decimal": "7323.1004352501081506",
+    "FULL_reserves": 360,
+    "scientific_gate": "FAIL",
+    "complete_v2_resource": "PASS"
+  },
+  "analyses": [
+    "All 15 method counts and all seven historical target statuses compared to matched P; never rename predicate pass as new repair",
+    "All seven failed-case scalar rows: quality excess, same-seed P-R compliance change, iteration delta, fully charged cost ratio/delta; statuses remain failed",
+    "Retain aggregate 13-target mean and sum; signed distance to unchanged bound. Underlying per-target costs and fallback phase costs are outside whitelist, so no fallback-free bound or cause claim",
+    "Independent Decimal enumeration of five native-stage charges plus retained failed191.9666532080154866 and FULL180; preserve both FULL reserves. Add Q31 once in a separate campaign-plus-review view, never rewrite B4.30 ledger",
+    "Reflection stops. If metadata accepts, propose B4.32 bounded read-only generalist reliability/cost method review and preregistration; no numerical intervention selected or authorized"
+  ],
+  "unknowns": {
+    "failure_mechanism_cause": "NOT_ESTABLISHED",
+    "fallback_phase_costs": "UNKNOWN_IN_THIS_METADATA_SCOPE",
+    "per_target_cost_vector": "OUTSIDE_ALLOWED_SCOPE",
+    "b4_19_actual_case_gap_counts": "UNKNOWN",
+    "b4_24_historical_whole_memory": "UNKNOWN/INCOMPLETE",
+    "b4_28_preparation_memory_exit_whole_resource": "UNKNOWN/INCOMPLETE",
+    "full_training_memory": "PENDING/4GiB",
+    "aggregate_original_FEM_model_label_reads": "UNKNOWN",
+    "extra_snapshot_origin": "UNKNOWN"
+  },
+  "stops": {
+    "metadata_failure": "retain prefix; audit same whitelist once if technically possible; no expansion or repeat",
+    "reflection_mechanism": "STOPPED_SCIENTIFIC_FAIL",
+    "exact_FEM_candidate": "STOPPED_COST_AND_MEMORY_FAILURE",
+    "next_proposed_slice": "B4.32 bounded read-only generalist reliability/cost method review and preregistration, after owner authorization and its own finite contract",
+    "final_access": false,
+    "fresh_B4_30_access": false,
+    "unused_B4_10_access": false,
+    "fits_or_new_numerical_intervention": false
+  }
+}
