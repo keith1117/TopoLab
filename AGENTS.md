@@ -31,14 +31,19 @@ RSS/child exit and whole peak stay UNKNOWN/resource INCOMPLETE. Old B4.23
 3907/3976 and all69 failures,851.38/200.98/80.34 costs remain. B4.24 memory
 gaps/both failures, B4.20 failure and B4.19 actual case/gap/count UNKNOWN remain.
 The temporary B4.27–29 session remains exhausted at three complete slices.
-The owner separately approved **one B4.30 fixed-P/17 z-reflection repair**:
+Separately authorized **B4.30 fixed-P/17 z-reflection repair is unfinished**:
+[report](docs/validation/b4_30_z_reflection_repair.md),
 [protocol](docs/planning/b4_30_z_reflection_repair_protocol.md),
 [finite contract](docs/planning/b4_30_z_reflection_repair_contract.json).
-Source/software preparation is active; production has not started. Execute only
-from clean merged CI-passed locked source: complete18 sentinels/270 queries,
-conditional48 fresh/720 queries, same P weights/seeds17/29/43, fixed primary17,
-43200 charged seconds/FULL180/2GiB. Gate failure stops; no trial retry/search,
-fit, final access or next slice. Ordinary single-slice waiting remains.
+Its one native campaign stopped at strict untracked-file source preflight:
+0 references/queries/predictions/FEM/model/label reads; paid191.9666532080155
+including FULL180. Metadata/native-prefix audit passes; scientific Gate
+NOT ESTABLISHED, production resource FAIL/INCOMPLETE. Preserve both owner files.
+The entry correction rejects all dirty paths before output/input preparation;
+clean independent source is prepared. The one-campaign limit is consumed:
+next is an explicit owner decision for one paid technical continuation of this
+same B4.30, with retained failed cost and unchanged43200/2GiB/66/990/Gates.
+No second campaign, count reset, new slice, fit/search or final access follows.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
 exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,

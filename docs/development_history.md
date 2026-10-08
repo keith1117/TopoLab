@@ -704,3 +704,27 @@ backup bind the [report](validation/b4_29_active_set_outcome_review.md). The
 temporary three-slice authorization ends here; no fourth slice. Next research
 intervention is undecided, requiring an owner decision and finite contract.
 Uniform/P17/final/48-unused boundaries and ordinary waiting remain unchanged.
+
+## B4.30 (fixed-P/17 reflection repair, interrupted preflight; unfinished)
+
+Separately authorized after complete/exhausted B4.27–29. Protocol and same-weight
+reflection implementation merged via PR162 after34 focused/1321 full tests,
+all applicable exact-head/main CI and tested-tree equality. One campaign under
+source `d40e0198802c` stopped at the strict legacy untracked-file cleanliness
+check, preserving both owner documents. Zero references/queries/predictions/
+encoders/FEM/model/label payload reads;68 metadata guards/136 events matched.
+Paid191.9666532080154866 includes FULL180 and failed/whole native exits.
+Independent metadata-prefix audit PASS; scientific Gate NOT ESTABLISHED,
+production resources FAIL/INCOMPLETE. All18/270 scientific work and conditional
+48/720 remain unexecuted, full slice unfinished. Entry correction checks all
+dirty paths before output/input preparation;36 focused/1323 complete software
+checks and all five mandatory commands pass before the correction commit.
+A separate clean checkout passed the unchanged inspector. Failed evidence and
+verified66-file backup stay external, bound by the
+[report](validation/b4_30_z_reflection_repair.md) and unchanged
+[contract](planning/b4_30_z_reflection_repair_contract.json). The consumed
+one-campaign limit needs an explicit owner decision for a paid continuation
+of this same slice, retaining failed cost and43200/2GiB/66/990 limits.
+No retry/count reset/new slice/fit/search/final access; uniform/P17/seals and
+all old failures/cost/memory unknowns remain. This entry records an interruption,
+not scientific acceptance or full B4.30 completion.

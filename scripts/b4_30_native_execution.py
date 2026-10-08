@@ -22,6 +22,7 @@ from b4_30_common import (
     read,
     release,
     save,
+    validate_release_source,
 )
 
 STAGES = ("reference", "screen", "audit", "policy-audit", "independent")
@@ -180,6 +181,7 @@ def prepare(output, release_input):
     value = read(release_input)
     if value["plan"] != plan_payload():
         raise ValueError("prospective tested release source differs before production")
+    validate_release_source(value)
     for name in ("profiles", "logs", "audit_receipts"):
         (output / name).mkdir(parents=True)
     save(output / "audit_receipts/production_release.json", value)

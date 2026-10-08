@@ -374,3 +374,45 @@ def test_final_native_binder_exit_is_required(
     value = native.verify_binder_exit(tmp_path, profile, log, exit_code)
     assert value["passed"] is expected and value["repair_gate_passed"] is expected
     assert value["final_verifier_native_exit_required_before_publication"]
+
+
+def test_untracked_owner_document_rejects_before_output_creation(scripts, monkeypatch, tmp_path):
+    native = scripts["native_execution"]
+    common = scripts["common"]
+    output = tmp_path / probe.contract()["evidence_root_name"]
+    value = {"plan": common.plan_payload()}
+    source = tmp_path / "release.json"
+    common.save(source, value)
+    calls = []
+
+    def git(argv, **kwargs):
+        if argv[1] == "rev-parse":
+            return "a" * 40
+        if argv[1] == "branch":
+            return "main"
+        calls.append(argv)
+        return b'?? "CHANGELOG 2.md"'
+
+    monkeypatch.setattr(common.subprocess, "check_output", git)
+    monkeypatch.setattr(native, "plan_payload", lambda: value["plan"])
+    with pytest.raises(ValueError, match="clean locked merged"):
+        native.prepare(output, source)
+    assert calls == [["git", "status", "--porcelain", "--untracked-files=all"]]
+    assert not output.exists()
+
+
+def test_clean_source_inspector_is_not_relaxed_for_owned_untracked_files(
+    scripts, monkeypatch, tmp_path
+):
+    from topolab import dataset_cli
+
+    def git(cwd, *args):
+        if args[:2] == ("rev-parse", "--show-toplevel"):
+            return str(tmp_path)
+        if args[0] == "rev-parse":
+            return "a" * 40
+        return '?? "CHANGELOG 2.md"'
+
+    monkeypatch.setattr(dataset_cli, "_git_output", git)
+    with pytest.raises(dataset_cli.DatasetEntrypointError, match="must be clean"):
+        dataset_cli.inspect_repository(tmp_path)

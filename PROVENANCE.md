@@ -973,3 +973,17 @@ establish the failure's cause or an improvement in quality or complete cost.
 The owner approved one new finite contract, fixed primary17 and unchanged
 seals; old exact-FEM failures/cost/memory gaps remain. Production awaits
 clean locked merged CI-passed source.
+
+## B4.30 interrupted entry and strict-source correction
+
+The [failed-prefix report](docs/validation/b4_30_z_reflection_repair.md) records
+zero numerical/model/label calls: the legacy clean-source entry rejected the
+preserved untracked owner documents. The correction checks all dirty paths
+before output creation/input preparation and leaves that legacy requirement
+unchanged. Same P weights/reflection formula, Gates, roles and seals remain;
+no new scientific source/upstream material or model/label payload was consulted
+or imported.
+Original failed native profiles and191.9666532080154866 charge remain; no repair
+or acceleration evidence is claimed. A clean independent checkout contains only
+TopoLab's own committed source. A separate paid continuation requires an owner
+decision covering the consumed one-campaign limit before new numerical access.
