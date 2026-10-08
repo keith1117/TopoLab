@@ -1,55 +1,60 @@
 # Current project status
 
-Updated: 2026-10-08. Latest completed software slice **B4.33 bounded
-reciprocal-energy algebra and access evidence implementation**:47 focused
-checks and849 independent exact-rational/scalar predicates **PASS** on eight
-public toy systems/76 fixed points. This is software acceptance only;
-scientific **FAIL**, fixed P/17 unrepaired, real-state certification UNKNOWN
-and full training memory **PENDING/4GiB** remain. See the
-[report](validation/b4_33_reciprocal_energy_evidence.md).
+Updated: 2026-10-08. Latest documentation slice **B4.34 bounded read-only admissibility and full-cost
+preregistration**:129 static/43 independent document/Decimal predicates PASS.
+[Report](validation/b4_34_admissibility_full_cost_preregistration.md),
+[protocol](planning/b4_34_admissibility_full_cost_preregistration_protocol.md),
+[finite contract](planning/b4_34_admissibility_full_cost_preregistration_contract.json).
+Twelve source identities,12 certificate obligations/16 cost categories/8 memory
+categories/10 stop dispositions are frozen. No real certificate implementation,
+numerical/production/payload replay, integration, fitting or timing/search.
+Scientific FAIL/P17 unrepaired and full training memory PENDING/4GiB remain.
 
-## B4.33 public software evidence complete
+## B4.34 finite read-only preregistration accepted
 
-One owner continuation from main0dcf79ed615b after closed B4.32/all three main
-CI/no open PR/no existing B4.33 work. The
-[protocol](planning/b4_33_reciprocal_energy_evidence_protocol.md),
-[finite contract](planning/b4_33_reciprocal_energy_evidence_contract.json) and
-[eight reviewed public fixtures](../tests/fixtures/b4_33_reciprocal_energy.json)
-were frozen before implementation/evaluation. Six input identities and all old
-frozen contracts/reports/conventions remain. Public kernel/oracle are stdlib
-only, <=2 free DOFs/3 elements, exact Fraction equilibrium/PSD/free-SPD checks.
-No actual FEM/predictor/projection/root/network integration or production reader.
+Owner “开始” after fully closed B4.33/main148a72a9c9d5/all three main CI/no open
+PR authorized one documentation slice. Actual root/override inventory and ordered
+required docs/contracts/reports/history were read. Closed B4.33 handoff, release
+and backup-manifest identities were verified without replaying backup members.
+Nine primary untracked files/unrelated refs and old clone copy remain. A separate
+clean clone holds docs/b4-34-admissibility-full-cost-preregistration.
 
-The candidate-free exact oracle independently proves toy upper inequality,
-anchor equality/adjoint, square-gap, common-modulus scaling and zero-energy
-contribution; float values/gradients agree at original1e-9/1e-10. Both FD
-steps1e-4/2e-4 cover30 intervals, maximum error1.6918219473355736e-6<1e-4.
-The fixed toy C_s=(11/10)*C_star gives10/11 anchor intercept, never forced1.
-Eight forbidden/mismatched role/schema/ID/hash/unknown-field bindings deny
-before bytes; only literal SHA-bound public inputs enter. Nonzero residuals,
-mutable/tampered certificates and outside finite points reject. Floating values
-are not directed-rounding real-state bound certificates. Real FEM spectral/
-residual/rounding proof, fidelity/cost/memory/learned reliability remain UNKNOWN.
+The same intended PSD operators/load/support/free-DOF map and positive SIMP
+moduli are mandatory. A certified positive lower_G for G=sum(R.T*K0*R) would
+give uniform m_global=E_min_lower*lower_G. For approximate anchor residual
+r=K_star*u_tilde-f, outward U_plus/r_plus/m_minus permit only the conditional
+corrected bound (sqrt_up(U_plus)+r_plus/sqrt_down(m_minus))**2, rounded up.
+Real PSD/coercivity/residual/rounding/normalizer evidence remains UNKNOWN_STOP.
+Small residual does not certify unmodified U; diagnostic bound changes no loss/
+gradient, anchor-equality claim, stored/continuous normalizer or original criteria.
 
-No production campaign, label/model/raw/old scalar payload, fit, profiling/
-retiming/search or sealed evidence access occurred. Full pytest remains its
-existing public/synthetic software population. Initial mypy tuple-type and
-one Ruff line-width failure plus two metadata read errors remain external with
-all source snapshots/logs/native costs; fixes preserve criteria and literal
-hashes. Numerical conventions/query/ML/locks/README stay unchanged. Nine primary
-untracked files and unrelated refs are preserved; previous clone's late copy
-remains there. All5 mandatory checks passed, including1440 full tests in663.67s.
-Publication closure requires reviewed all-upload commits/guards, protected
-exact-head/main CI and independent byte backup.
+Independent Decimal accounting retains known paid12721.16417100014444982>7200:
+unchanged all-paid feasibility FAIL_KNOWN_PAID_FLOOR even at zero new work.
+It is not whole-project cost, a new cap, ledger reset or permission to fit.
+Original57546.0720687792/58142.252069 failed proxies, immutable B4.30
+7323.1004352501081506 (failed191.9666532080154866/both FULL180), Q31
+80.29939475003629922 and separate7403.39983000014444982 remain. Actual new
+mechanism maxima/certification cost UNKNOWN;3 seeds/200 FULL epochs/432+76/
+factor1.25, first/failure-inclusive complete envelopes/all reserves are required.
+Eight simultaneous memory categories, independent prefit and through-exit fit
+peak remain PENDING4GiB. Software RSS fills no old gap. No numerical/fit budget.
 
-All historical failed Gates/69 predicates/unknowns and paid costs remain.
-B4.32 stays69/32 preregistration PASS only; B4.31 stays118/430 metadata/native
-PASS with original source-premerge failure. B4.30 immutable7323.1004352501081506
-retains failed191.9666532080154866/both FULL180; Q31 stays80.29939475003629922,
-separate combined7403.39983000014444982. Diagnostic known-paid subtotal
-12721.16417100014444982>7200 is neither whole-project accounting nor a cap reset.
-B4.23 original57546.0720687792>7200/known-added58142.252069>7200 remain FAIL;
-full fit memory PENDING/4GiB. New software cost cannot erase old costs/gaps.
+Static acceptance is documentation only. Two authoring metadata lookup errors
+remain external with UNKNOWN costs; no criteria or frozen bytes changed.
+First full pytest1439/1440 failed on the original5s jobs wait; unchanged module
+followup9/9 passed. Cause UNKNOWN; failed1035.096664667013s wall/RSS/logs remain
+separate from one complete mandatory-check recovery, with no timeout change.
+All5 mandatory checks PASS, complete1440 public/synthetic tests in932.81s;
+software observations remain separate, unprofiled authoring/CI UNKNOWN.
+Publication requires every-path/staged/all-upload/squash guards, exact-head
+protected CI, main CI/tree identity, only owned cleanup and independent byte
+backup. Runtime/tests/conventions/locks/CI and public README remain unchanged.
+
+B4.33 remains public software47/849 PASS on8 toys/76 points/30 FD intervals,
+max1.6918219473355736e-6; it certifies no real floating FEM bound or repair.
+B4.32 stays69/32 static, B4.31 stays118/430 metadata/native with original
+source-premerge process failure. All historical69 failures/UNKNOWN/memory gaps,
+old3/3 and B4.30's2/1 remain; uniform and all seals unchanged.
 
 ## Delivery and operational boundary
 
@@ -161,15 +166,12 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and proposed successor
 
-B4.33 closes only this finite public software slice. Old B4.27–29 closed3/3,
-B4.30 exactly2 paid invocations/1 numerical campaign and the B4.31/B4.32 closed
-records remain. No later slice is started or authorized.
-
-Next proposed **B4.34 bounded read-only admissibility and full-cost preregistration**
-is a separate documentation slice after owner continuation and frozen finite
-contract. It must specify real-state certificates and complete historical/new
-cost/memory requirements before any finite numerical proposal. B4.33 transfers
-no production payload, FEM/candidate/projection/root/network integration, fit,
-retiming/search, changed budget or final access. Uniform/P17 and all seals remain;
-learned repair/independent confirmation/full new B4/compatible final contract
-remain before B5. Stop after B4.33.
+B4.34 closes exactly this documentation slice after publication/main CI/backup.
+No later slice is started or authorized. Proposed **B4.35 bounded public
+admissibility-certificate software evidence** needs a new owner continuation
+and finite small public-fixture contract. It may test certificate rejection/
+conditional-bound logic only. No real input/FEM, timing trial, projection/root/
+network integration, fit, new cap, retiming/search or sealed access follows.
+Real certificates/full cost/memory still block numerical acceptance/fitting;
+learned repair, independent confirmation/full new B4 and compatible final
+contract remain before B5. Report B4.35 and stop after B4.34.

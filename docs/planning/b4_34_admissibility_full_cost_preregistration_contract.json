@@ -1,0 +1,407 @@
+{
+  "version": "topolab.b4_34.admissibility-full-cost-preregistration.v1",
+  "status": "preregistration-only",
+  "authority": "b4_34_admissibility_full_cost_preregistration_protocol.md",
+  "starting_main": "148a72a9c9d5fa053d9d12e3542f80a9cb458c85",
+  "slice_limit": 1,
+  "current_access": {
+    "allowed": [
+      "versioned-source-contract-report",
+      "mandatory-project-instructions",
+      "literal-closed-publication-backup-metadata-only",
+      "github-source-ci-metadata",
+      "existing-public-synthetic-software-suite"
+    ],
+    "production_execution": false,
+    "generated_scalar_evidence_replay": false,
+    "previous_backup_member_dereference": false,
+    "raw_arrays_journals_historical_native_profiles": false,
+    "label_or_model_payload": false,
+    "candidate_numerical_evaluation": false,
+    "prediction_fem_objective_gradient_projection_root": false,
+    "Torch_network_integration_or_fit": false,
+    "profile_retime_or_search": false,
+    "screen_final_fresh_unused_access": false
+  },
+  "versioned_inputs_sha256": {
+    "docs/numerical_conventions.md": "0607ce06a0e386e820563b6abf4164660bfe719e5783fd83f406ff39356c53a8",
+    "docs/planning/b4_32_generalist_method_preregistration_protocol.md": "31657ab6dc8693d5bd5e0f9a82d8e98fa587ed42ace990b8c85bba2c2f6ffced",
+    "docs/planning/b4_32_generalist_method_preregistration_contract.json": "30c8dc008b0990556d597552f0472cc2bc645995df988cd94a12429fe660ea22",
+    "docs/validation/b4_32_generalist_method_preregistration.md": "32602a6035d7ab3b8993ad4a0c54cab38de05930071adf982236fa991f28953c",
+    "docs/planning/b4_33_reciprocal_energy_evidence_protocol.md": "11312dce4270e770c73e7edfbe1392956dd50daf48d1feef58a26efd48a16772",
+    "docs/planning/b4_33_reciprocal_energy_evidence_contract.json": "e6592ce47ce4eee143ced8188cc6902dc5629ad6ad2c9fc4831407b8f2397928",
+    "docs/validation/b4_33_reciprocal_energy_evidence.md": "53892295031ce866d0c60d8d17b1583f2310725af8f7c5c94003b15890a80919",
+    "docs/planning/b4_23_versioned_surrogate_feasibility_protocol.md": "eebab42c919656d7f58f09e63e9ca894d83ded4c7ac6642bd13d9b3f58aed343",
+    "docs/validation/b4_23_versioned_surrogate_feasibility.md": "37313a824cea44f5993309b829934cfcdbc9501f32fdc4ba0ba59fc32b43230b",
+    "docs/validation/b4_29_active_set_outcome_review.md": "b2538149b29e14a71b11b15ac34a666b1c51cd5e7e968c7000419c7d6cede11c",
+    "docs/validation/b4_30_paid_continuation.md": "c045c90a2c7f2ed9b7a60f1a446941f65e5ffced72f4589192788b474077e780",
+    "docs/validation/b4_31_reflection_failure_cost_review.md": "724a91bc98d6b0cd68fbfa48dfa73b48d65a79fce99f6ef93962a23df996c874"
+  },
+  "closed_recovery_metadata_sha256": {
+    "b4-33-software-validation/closed_main_release.json": "d20f285aed00b914c6a3bf6377b87e321b21611d9431c4e69d24c69234e9243a",
+    "backups/b4-33-2026-10-08/closed-release-148a72a9c9d5/manifest.json": "a7d9c645ba9022a9794c2cc776e193ed452ff3258531e807330957e02bd9633d",
+    "b4-33-software-validation/verified_backup.json": "c367400feda13663ae6e7fffd3b35b75d89df4dd9a5dff54ff878967a801c795",
+    "b4-33-software-validation/final_recovery_verification.json": "c1c7b5297b2b9dec6ca3268bead42d6c2d4fc961eb9b01ced8bffe468ec74b24"
+  },
+  "previous_handoffs_sha256": {
+    "local/b4-32-handoff-2026-10-08.json": "4168843eefec19da5b86b376862017f9200e872fe893d8cb3073bd59d558b1e6",
+    "local/b4-33-handoff-2026-10-08.json": "9fd057f88267487c03e694384441d740b9b79cb2b902e1dfdf4e19497f744a72"
+  },
+  "certificate_obligations": [
+    {
+      "id": "identity",
+      "required_fields": [
+        "same-load-support-free-dofs-mesh-element-space",
+        "homogeneous-zero-Dirichlet",
+        "source-case-role-hash-schema-before-bytes"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    },
+    {
+      "id": "element-psd",
+      "required_fields": [
+        "intended-symmetric-PSD-unit-elements",
+        "independent-representation-assembly-enclosure",
+        "no-symmetrization-shift-clipping-or-inversion"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    },
+    {
+      "id": "positive-moduli",
+      "required_fields": [
+        "same-SIMP-E_min-E_0-p",
+        "positive-lower-modulus-enclosure"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    },
+    {
+      "id": "uniform-coercivity",
+      "required_fields": [
+        "G=sum(R_e.T*K0_e*R_e)",
+        "certified-G-lower_G*I-PSD",
+        "lower_G>0",
+        "m_global=E_min_lower*lower_G>0"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    },
+    {
+      "id": "anchor-residual",
+      "required_fields": [
+        "one-fixed-approximate-anchor",
+        "r=K_star*u_tilde-f",
+        "independent-outward-r_plus>=norm(r,2)",
+        "exact-zero-must-be-proved"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    },
+    {
+      "id": "energy-enclosure",
+      "required_fields": [
+        "q_tilde_e>=0",
+        "U_plus>=sum(E_star_e**2*q_tilde_e/E_e)",
+        "no-negative-coefficient-clipping"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    },
+    {
+      "id": "outward-arithmetic",
+      "required_fields": [
+        "powers-matvec-norm-products-sums",
+        "sqrt_up-and-sqrt_down",
+        "division-square-normalization",
+        "no-generic-epsilon-certificate"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    },
+    {
+      "id": "bound-normalizer",
+      "required_fields": [
+        "B_plus=round_up((sqrt_up(U_plus)+r_plus/sqrt_down(m_minus))**2)",
+        "m_minus=round_down(m_global)>0",
+        "C_s_minus>0-same-stored-normalizer",
+        "round_up(B_plus/C_s_minus)",
+        "B_plus-diagnostic-only-not-loss"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    },
+    {
+      "id": "original-gradient",
+      "required_fields": [
+        "original-signed-U_tilde-physical-gradient",
+        "no-approximate-anchor-equality-or-adjoint-claim",
+        "stored-continuous-intercept-not-forced-one",
+        "original-FD-and-LOCAL-and-active-set-criteria"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    },
+    {
+      "id": "independent-audit",
+      "required_fields": [
+        "candidate-free-intended-operator-residual-spectral-rounding",
+        "independent-compliance-gradient-fidelity-cost-memory",
+        "no-producer-Gate-or-cost-helper"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    },
+    {
+      "id": "failure-accounting",
+      "required_fields": [
+        "before-after-attempted-completed-pending-counters",
+        "all-failures-prefixes-native-start-through-exit",
+        "no-retry-overwrite-or-budget-reset"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    },
+    {
+      "id": "unknown-stop",
+      "required_fields": [
+        "missing-uncertified-field-remains-UNKNOWN_STOP",
+        "small-residual-never-certifies-unmodified-U",
+        "no-production-fit-or-final-grant"
+      ],
+      "real_evidence_status": "UNKNOWN_STOP"
+    }
+  ],
+  "certificate": {
+    "implemented_or_evaluated": false,
+    "anchor_count": 1,
+    "same_operator_not_repaired_to_pass": true,
+    "uniform_coercivity_route": "G-lower_G*I PSD; lower_G>0; m_global=E_min_lower*lower_G>0",
+    "nominal_eigenvalue_pivot_or_small_residual_is_certificate": false,
+    "residual": "r=K_star*u_tilde-f",
+    "load_carried_by_approximate_element_forces": "f+r",
+    "uncorrected_upper_if_nonzero_residual": "UNCERTIFIED_STOP",
+    "bound": "C(rho)<=round_up((sqrt_up(U_plus)+r_plus/sqrt_down(m_minus))**2)",
+    "bound_used_as_loss_or_gradient": false,
+    "approximate_anchor_equality_or_adjoint_claim": false,
+    "normalizer": "round_up(B_plus/C_s_minus); certified positive SAME stored C_s; original U_tilde/C_s intercept never forced 1",
+    "spectral_residual_rounding_status": "UNKNOWN_STOP",
+    "refresh_radius_envelope_coefficient_damping_search": false
+  },
+  "unchanged_future_criteria": {
+    "compliance_rtol": "1e-9",
+    "gradient_rtol": "1e-9",
+    "gradient_atol": "1e-10",
+    "fd_steps": [
+      "1e-4",
+      "2e-4"
+    ],
+    "fd_normalized_max": "1e-4",
+    "fd_floor": "1e-8",
+    "LOCAL_absolute_max": "1e-4",
+    "LOCAL_increment_relative_max": "0.25",
+    "LOCAL_increment_floor": "1e-5",
+    "LOCAL_gradient_relative_max": "0.25",
+    "LOCAL_gradient_floor": "1e-8",
+    "LOCAL_increment_sign_agreement_above_floor": true,
+    "active_set_pointwise_and_full_interval_obligations_preserved": true,
+    "new_admissibility_tolerance": null
+  },
+  "preserved_failures": {
+    "fixed_p17_repaired": false,
+    "scientific_gate": "FAIL",
+    "r17_quality": "1.0019709437499813",
+    "quality_limit": "1.001",
+    "target_mean": "1.016053130777518",
+    "target_mean_limit": "1.0",
+    "pooled_sum": "0.9853173206553424",
+    "mean_replaced_by_sum": false,
+    "p_r_seed_failures": [
+      1,
+      3,
+      1
+    ],
+    "b4_23_passed_predicates": 3907,
+    "b4_23_total_predicates": 3976,
+    "mask_failures": 35,
+    "fd_failures": 34,
+    "b4_20_gate": "FAIL",
+    "b4_19_actual_case_gap_counts": "UNKNOWN",
+    "b4_24_old_memory_proof": "INCOMPLETE",
+    "b4_28_old_whole_resource": "INCOMPLETE",
+    "b4_31_source_premerge_driver_passed": false,
+    "b4_31_source_postmerge_audit_passed_before_metadata": true
+  },
+  "cost": {
+    "new_production_budget_granted": false,
+    "b4_23_original_proxy_seconds": "57546.0720687792",
+    "b4_29_known_added_proxy_seconds": "58142.252069",
+    "old_proxy_cap_seconds": "7200",
+    "b4_30_immutable_seconds": "7323.1004352501081506",
+    "b4_30_original_cap_seconds": "43200",
+    "b4_30_failed_prefix_seconds": "191.9666532080154866",
+    "b4_30_full_reserves_seconds": [
+      "180",
+      "180"
+    ],
+    "b4_31_seconds": "80.29939475003629922",
+    "b4_31_campaign_plus_review_seconds": "7403.39983000014444982",
+    "known_actual_stage_components_seconds": {
+      "all_twelve_b4_1_fits": "3870.204341",
+      "b4_15_through_23": "851.38",
+      "b4_24": "200.98",
+      "b4_25": "80.34",
+      "b4_28": "234.60",
+      "b4_29": "80.26",
+      "b4_30": "7323.1004352501081506",
+      "b4_31": "80.29939475003629922"
+    },
+    "cross_route_known_paid_floor_seconds": "12721.16417100014444982",
+    "cross_route_view": "diagnostic known-paid subtotal, not replacement of either immutable ledger or authorization of a new cap",
+    "future_full_seeds": [
+      17,
+      29,
+      43
+    ],
+    "future_full_epochs": 200,
+    "future_small_large_population": [
+      432,
+      76
+    ],
+    "future_factor": "1.25",
+    "future_preparation": "3*1.25*(432*p_small+76*p_large)",
+    "future_forward_backward": "3*200*1.25*(432*u_small+76*u_large)",
+    "aggregation": "complete-first-failure-inclusive-per-scale-maxima",
+    "all_prior_costs_failed_calls_full_reserves_io_audit_native_start_exit_required": true,
+    "unknown_required_cost": "BLOCK_FEASIBILITY",
+    "cap_population_schedule_or_ledger_reset_to_pass": false,
+    "software_authoring_ci_separately_retained_unknown_not_zero": true,
+    "full_cost_categories": [
+      "applicable-paid-history-and-old-full-reserves",
+      "guarded-input-IO-and-checksums",
+      "immutable-case-setup",
+      "one-fixed-anchor-solve",
+      "intended-operator-PSD-coercivity-certificate",
+      "residual-and-rounding-enclosures",
+      "retained-energy-coefficients-and-storage",
+      "complete-first-failure-inclusive-preparation-maxima",
+      "complete-first-failure-inclusive-forward-backward-maxima",
+      "projection-filter-active-set-pullback",
+      "original-loss-gradient-casts-network-bridge-if-later-authorized",
+      "independent-numerical-fidelity-cost-memory-audit",
+      "native-controller-launch-child-start-through-exit",
+      "persistence-serialization-publication",
+      "failed-calls-recovery-and-every-new-FULL-reserve",
+      "earlier-data-query-research-and-separate-software-CI-UNKNOWN-records"
+    ],
+    "real_preparation_small_large_maxima_seconds": [
+      "UNKNOWN",
+      "UNKNOWN"
+    ],
+    "real_forward_backward_small_large_maxima_seconds": [
+      "UNKNOWN",
+      "UNKNOWN"
+    ],
+    "real_certification_cost_seconds": "UNKNOWN",
+    "current_all_paid_feasibility": "FAIL_KNOWN_PAID_FLOOR",
+    "preparation_coefficients": [
+      "1620",
+      "285"
+    ],
+    "forward_backward_coefficients": [
+      "324000",
+      "57000"
+    ],
+    "inclusive_envelopes_not_double_added_or_subtracted": true,
+    "earlier_data_query_research_and_software_CI_unknowns_additional": true
+  },
+  "memory": {
+    "full_training_status": "PENDING",
+    "fit_cap_bytes": 4294967296,
+    "complete_simultaneous_categories": [
+      "simultaneous-process-controller-child",
+      "labels-input-IO-resident-data",
+      "anchor-PSD-coercivity-residual-certificate-arrays",
+      "network-optimizer-gradients",
+      "activations-autograd",
+      "projection-filter-work-buffers",
+      "Python-storage-objects",
+      "transient-assembly-factorization-serialization"
+    ],
+    "independent_prefit_and_through_exit_fit_peak_required": true,
+    "new_memory_trial": false,
+    "historical_gaps_filled": false
+  },
+  "stop_dispositions": [
+    {
+      "trigger": "wrong-role-source-case-hash-schema",
+      "decision": "DENY_BEFORE_BYTES"
+    },
+    {
+      "trigger": "unknown-or-duplicate-field",
+      "decision": "REJECT_DOCUMENT_OR_CERTIFICATE"
+    },
+    {
+      "trigger": "wrong-load-support-element-space",
+      "decision": "STOP_IDENTITY"
+    },
+    {
+      "trigger": "missing-intended-PSD-or-positive-moduli",
+      "decision": "UNKNOWN_STOP_BOUND"
+    },
+    {
+      "trigger": "missing-positive-certified-coercivity",
+      "decision": "UNKNOWN_STOP_BOUND"
+    },
+    {
+      "trigger": "nonfinite-unenclosed-residual-energy-arithmetic",
+      "decision": "UNKNOWN_STOP_BOUND"
+    },
+    {
+      "trigger": "small-nonzero-residual-used-for-unmodified-upper",
+      "decision": "STOP_UNMODIFIED_BOUND"
+    },
+    {
+      "trigger": "missing-required-cost-or-paid-floor-over-cap",
+      "decision": "BLOCK_FEASIBILITY_NO_FIT"
+    },
+    {
+      "trigger": "missing-full-prefit-fit-memory-proof",
+      "decision": "STOP_FIT_PENDING_4GiB"
+    },
+    {
+      "trigger": "all-written-obligations-listed",
+      "decision": "PREREGISTRATION_ONLY_NO_EXECUTION_GRANT"
+    }
+  ],
+  "finite_static_review": {
+    "primary_invocations": 1,
+    "independent_invocations": 1,
+    "max_primary_predicates": 160,
+    "max_independent_predicates": 100,
+    "certificate_obligation_count": 12,
+    "cost_category_count": 16,
+    "memory_category_count": 8,
+    "stop_disposition_count": 10,
+    "duplicate_unknown_keys": "REJECT",
+    "independent_reviewer_imports_candidate_or_primary_review": false,
+    "independent_Decimal_precision": 50,
+    "static_acceptance_certifies_real_bounds_or_affordability": false
+  },
+  "software_resources": {
+    "production_allocation_or_reservation": "NONE_DOCUMENTATION_ONLY",
+    "native_wall_user_system_RSS_and_failed_attempts_retained": true,
+    "authoring_metadata_remote_CI_complete_elapsed_coverage": "UNKNOWN_NOT_ZERO",
+    "software_peak_is_full_training_memory": false
+  },
+  "uniform_default": true,
+  "scientific_gate": "FAIL",
+  "fixed_p17_repaired": false,
+  "full_v2_delivery_gate_passed": false,
+  "old_b4_27_29_quota_closed": [
+    3,
+    3
+  ],
+  "b4_30_paid_invocations_numerical_campaigns": [
+    2,
+    1
+  ],
+  "final_evidence_sealed": true,
+  "b4_30_conditional_cases_sealed": 48,
+  "unused_b4_10_cases_sealed": 48,
+  "next_proposed": "B4.35 bounded public admissibility-certificate software evidence",
+  "next_authorized": false,
+  "next_started": false,
+  "next_requires_owner_and_finite_public_software_contract": true,
+  "future_production_requires_new_authority_finite_whole_clean_locked_merged_head_main_CI": true
+}

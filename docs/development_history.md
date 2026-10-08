@@ -851,3 +851,38 @@ old69 failures/UNKNOWN/memory gaps and all ledgers/reserves remain. Diagnostic
 known-paid12721.16417100014444982>7200 grants no fit or new cap. Proposed next
 B4.34 bounded read-only admissibility/full-cost preregistration, separate finite
 metadata contract/owner continuation, not started. Uniform and all seals remain.
+
+## B4.34 bounded read-only admissibility/full-cost preregistration (2026-10-08)
+
+Owner “开始” after closed B4.33/main148a72a9c9d5/all main CI/no open PR
+authorized one documentation slice. The [protocol](planning/b4_34_admissibility_full_cost_preregistration_protocol.md)
+and [contract](planning/b4_34_admissibility_full_cost_preregistration_contract.json)
+freeze12 versioned inputs,12 certificate/16 cost/8 memory obligations and10
+stops. Static129/129 and independent document/Decimal43/43 PASS; see
+[report](validation/b4_34_admissibility_full_cost_preregistration.md).
+Conditional intended-PSD/uniform-coercivity/residual/outward-rounding bound and
+positive SAME stored normalizer remain UNKNOWN_STOP. No real certificate
+implementation/evaluation, payload/scalar replay, FEM/projection/root/network
+integration, fit, profiling/retiming/search or final access occurs. Exact toy
+equality does not transfer to approximate anchors; diagnostic bound changes no
+original objective, gradient, normalizer, tolerance or active-set requirement.
+
+Known paid12721.16417100014444982>7200 independently reconciles; all-paid
+feasibility FAIL_KNOWN_PAID_FLOOR, actual new maxima/certification costs UNKNOWN,
+full fit PENDING4GiB. No cap/ledger/history/population/epoch reset or budget grant.
+All old69 failures/failed proxies, original7323.1004352501081506/both FULL180,
+Q31 once, UNKNOWN/memory gaps/premerge process failure/P17/seals remain. Two
+authoring metadata lookup failures retain UNKNOWN costs, without scope changes.
+Initial full pytest1439/1440 failed the unchanged5s jobs wait; unchanged9-test
+followup passed. Root cause UNKNOWN; failed1035.096664667013s wall/native
+RSS/log/source and one unchanged full-check recovery remain, no criterion change.
+Five mandatory checks, explicit-path/all-upload/squash guards, protected exact-
+head/main CI, only owned cleanup and verified external backup govern closure.
+Nine primary files/old clone copy/unrelated refs and all frozen historical bytes
+remain; README/runtime/tests/conventions/locks/CI unchanged.
+
+Next proposed **B4.35 bounded public admissibility-certificate software evidence**
+needs new owner continuation/finite public-fixture contract, not started. No
+actual data/FEM/timing/integration/fit/new cap or seal grant. Uniform default;
+real certification/full cost/memory and learned repair/confirmation/full B4/
+compatible final contract remain required. Stop after B4.34.
