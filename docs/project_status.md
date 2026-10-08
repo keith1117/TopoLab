@@ -69,14 +69,28 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and next decision
 
-The owner's three-slice session ends at complete B4.29 publication/main CI/backup.
-No fourth slice is started. The next research intervention is undecided and
-requires an owner decision plus separate prospective finite contract. Current
-exact-FEM candidate remains stopped for unchanged cost and missing full-training
-memory; full B4 scientific delivery remains open. No automatic numerical retry,
-cache/ordering, continuation, radius/epoch/population/physics-frequency search,
-model/seed/tolerance/role change, fit or final access. Ordinary single-slice
-waiting remains the repository default outside the exhausted temporary session.
+The owner's B4.27–29 three-slice session is closed and its quota exhausted.
+A separate owner decision approved **one B4.30 fixed-P/17 z-reflection repair**,
+including source, execution, audits and publication; this does not reset that
+quota or change the permanent single-slice waiting rule. Its
+[protocol](planning/b4_30_z_reflection_repair_protocol.md) and
+[finite contract](planning/b4_30_z_reflection_repair_contract.json) are frozen
+before implementation/production. Software preparation is active; no production
+payload/trial has occurred. The same original P checkpoints, seeds17/29/43 and
+fixed primary17 remain. Only one re-encoded z-reflection pair mean in existing
+large-y volume<0.55 generalist queries changes initialization. All twelve
+original controls, legacy projection/solver/continuation/own-witness rule remain.
+
+Clean merged exact-head/main CI-passed locked source precedes eighteen complete
+regression cases/270 queries. A scientific failure closes B4.30 failed with the
+conditional48 fresh cases unopened. Only all sentinel/resource audits passing
+and full fresh reservation allow that exact48/720 panel. Whole new charge
+<=43200 seconds includes FULL180 chain reserve; native peak<=2GiB. No new fit,
+model/seed/tolerance/role change, threshold/search, final access or next slice.
+The old exact-FEM candidate remains stopped for unchanged cost and missing full
+training memory; uniform remains operational default and B4 scientific delivery
+remains open. A repair pass still requires separate independent confirmation,
+a complete new B4 Gate and compatible final contract before B5.
 
 Uniform stays operational default, P/17 unrepaired, final/all48 unused B4.10
 cases sealed. Preserve all failures, unknowns and charges. Learned repair,
