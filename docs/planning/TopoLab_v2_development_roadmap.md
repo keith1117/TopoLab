@@ -15,8 +15,14 @@ three-slice session ends; no fourth slice or automatic research intervention.
 [development history](../development_history.md) retains the complete chronology.
 The released `v1.0.0` and its negative M1/M2 conclusions remain historical evidence.
 
+Active B4.30 is **unfinished after zero-numerical source-preflight rejection**:
+[report](../validation/b4_30_z_reflection_repair.md), paid191.9666532080155,
+scientific NOT ESTABLISHED/resource FAIL/INCOMPLETE. Its consumed one-campaign
+limit requires an owner decision for a paid technical continuation of that same
+slice; no new slice or final access. Entry correction and clean source are prepared.
+
 Prepared: 2026-09-24
-Revised: 2026-10-07 (B4.29 read-only review; three-slice boundary)
+Revised: 2026-10-07 (B4.30 interrupted preflight; same-slice continuation decision)
 
 Related documents:
 
@@ -1121,7 +1127,7 @@ Preparation native RSS/child-exit proof remains UNKNOWN after its
 retained sandbox sysctl failure; whole resource acceptance is INCOMPLETE.
 Full training memory PENDING; no fit/search/final access. See
 [report](../validation/b4_28_active_set_numerical_evidence.md).
-#### Current stop and next slice
+#### B4.28 historical successor boundary
 
 Next is separately frozen/read-only **B4.29 outcome and cost/full-memory review**,
 after full closure/main CI, the last session slice. The ordered route is
@@ -1148,21 +1154,24 @@ No cache/ordering, continuation, epoch/population/physics-frequency or
 quality-threshold search follows. Ordinary single-slice waiting remains the
 repository default; session-specific authorization does not amend it.
 
-#### B4.30: Owner-approved fixed-primary z-reflection repair in preparation
+#### B4.30: Fixed-primary reflection repair interrupted before numerical work
 
-Separately authorized one bounded slice after exhausted B4.27–29 closure.
-The [protocol](b4_30_z_reflection_repair_protocol.md) and
-[contract](b4_30_z_reflection_repair_contract.json) freeze one deterministic
-same-checkpoint P z-reflection mean only for existing large-y volume<0.55
-initialization. Keep seeds17/29/43, fixed primary17, all C/P/W/non-ML controls,
-projection, physical-plateau solver,20-update continuation and own-certificate
-choice. No fit or new parameter; production has not started. Source and synthetic
-verification precede clean merged CI-passed execution. Complete18 sentinel/270
-queries; only their full Gate/resource acceptance permits the exact48/720 fresh
-panel. Whole charge<=43200 seconds/FULL180, native peak<=2GiB. Failure stops with
-all results and charges retained. Passing cannot grant final access: later
-independent confirmation/full B4/compatible final contract remain. No next slice
-is authorized; ordinary waiting remains. Old exact-FEM failure/unknowns remain.
+The owner-approved [protocol](b4_30_z_reflection_repair_protocol.md) and
+[finite contract](b4_30_z_reflection_repair_contract.json) remain unchanged.
+Same P checkpoint/re-encoded mirror/0.5 mean only in large-y volume<0.55,
+fixed17/seeds17/29/43, all C/P/W/non-ML controls and old solver/witness criteria.
+Tested merged source passed CI, but the one native campaign's legacy entry
+rejected preserved untracked owner documents before numerical/payload access.
+0/18 refs,0/270 queries, fresh48/720 unopened; paid191.9666532080154866/FULL180.
+Scientific NOT ESTABLISHED, production resource FAIL/INCOMPLETE; independent
+metadata-prefix audit PASS. A strict early source check and clean independent
+checkout are prepared; the old clean requirement is not relaxed. The consumed
+one-campaign limit needs an owner decision for exactly one paid technical
+continuation of this unfinished slice. Whole cap43200/2GiB and66/990 remain,
+failed cost is retained; no count reset, third attempt or new research slice.
+See [report](../validation/b4_30_z_reflection_repair.md). No outcome was seen for
+adaptation; repair/full new B4/independent confirmation/final compatibility
+remain before B5. The three-slice old quota stays exhausted and waiting remains.
 
 Compare each model to uniform and non-ML baselines on fallback-inclusive
 validation time, independent compliance, convergence, volume, and failure strata.
@@ -1211,10 +1220,11 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **B4.30 separately approved repair:** freeze and merge tested source, then
-   execute/audit the one finite fixed-P/17 reflection hypothesis. Complete
-   regression precedes conditional fresh; stop at failure or full slice closure.
-   The exhausted three-slice session is not reset. No next slice follows.
+1. **Owner decision for B4.30 paid technical continuation:** one zero-numerical
+   preflight consumed its one-campaign bound. Entry correction, clean checkout
+   and failure report are prepared. Keep failed191.9666532080154866, whole43200/
+   2GiB,66/990 and all scientific criteria; freeze/merge v2 compatibility/source
+   before access if explicitly approved. This same slice remains unfinished.
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.

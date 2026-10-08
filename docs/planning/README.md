@@ -4,11 +4,13 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-[B4.29 read-only review](../validation/b4_29_active_set_outcome_review.md) is
-closed: metadata PASS, own resource PASS, known cost over7200/full-memory
-PENDING. All old failures/costs/unknowns and B4.28 resource gap remain. The
-three-slice session ends; next research direction needs an owner decision and
-separate finite contract, with no fourth slice. Uniform/P17/final boundaries stay.
+Latest completed remains [B4.29 read-only review](../validation/b4_29_active_set_outcome_review.md).
+Separately authorized [B4.30](../validation/b4_30_z_reflection_repair.md) is
+unfinished: zero-numerical source preflight rejection,191.9666532080154866
+paid/FULL180, scientific NOT ESTABLISHED and resource FAIL/INCOMPLETE.
+The entry correction and clean checkout are prepared; the consumed one-campaign
+limit needs an owner decision for one paid technical continuation of the same
+slice. No quota reset/new slice/final access; old failures/cost/memory gaps remain.
 
 ## Overall project plans
 

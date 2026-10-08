@@ -8,10 +8,13 @@ Read [current status](../project_status.md) for the latest boundary and
 [development history](../development_history.md) for the chronology. The latest
 completed slice is [B4.29 read-only outcome/cost/full-memory review](b4_29_active_set_outcome_review.md).
 Metadata review PASS, own resource PASS, cost over7200/full training memory
-PENDING. B4.28 bounded integrity/LOCAL pass; preparation RSS/exit/whole-resource
-UNKNOWN/INCOMPLETE and all historical failures/costs/unknowns remain. No fourth
-session slice; next research intervention needs a new owner decision/contract.
-Uniform stays default, P/17 unrepaired and final/all48 unused cases sealed.
+PENDING. Active [B4.30 fixed-P/17 repair](b4_30_z_reflection_repair.md) is
+unfinished after0-reference/query preflight rejection, paid191.9666532080155.
+Scientific NOT ESTABLISHED, resource FAIL/INCOMPLETE; strict entry correction
+and clean checkout prepared. An owner decision is needed for a paid same-slice
+continuation covering the consumed one-campaign limit; no new slice starts.
+All historical failures/costs/memory unknowns remain. Uniform/P17/final/unused
+B4.10 boundaries remain; no B5 permission follows.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -126,6 +129,8 @@ contracts. Generated evidence remains external under the
 - [B4.28 bounded active-set numerical evidence and finite execution](b4_28_active_set_numerical_evidence.md)
 
 - [B4.29 bounded read-only outcome and cost/full-memory review](b4_29_active_set_outcome_review.md)
+
+- [B4.30 fixed-P/17 reflection repair: interrupted preflight and strict-source correction](b4_30_z_reflection_repair.md)
 
 Add each new report to its stage group, including failed and stopped experiments.
 Do not replace old results or publish generated artifacts to tidy the directory.

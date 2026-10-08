@@ -112,12 +112,17 @@ def release(output):
     if Path(output).resolve().name != contract()["evidence_root_name"]:
         raise ValueError("fixed external evidence root required")
     value = read(Path(output) / "audit_receipts/production_release.json")
+    return validate_release_source(value)
+
+
+def validate_release_source(value):
+    """Reject every dirty path before preparation or protected input access."""
     head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO, text=True).strip()
     branch = subprocess.check_output(
         ["git", "branch", "--show-current"], cwd=REPO, text=True
     ).strip()
     dirty = subprocess.check_output(
-        ["git", "status", "--porcelain", "--untracked-files=no"], cwd=REPO
+        ["git", "status", "--porcelain", "--untracked-files=all"], cwd=REPO
     )
     if (
         dirty
