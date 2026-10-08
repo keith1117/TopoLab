@@ -795,3 +795,33 @@ This closes only B4.31; old3/3 and B4.30's2-invocation/1-campaign counters stand
 Proposed B4.32 read-only generalist reliability/cost method review and
 preregistration needs new owner authorization and a finite contract; no numerical
 method selected, fit/search/final grant, learned acceleration claim or B5.
+
+## B4.32 bounded generalist method review and preregistration (2026-10-08)
+
+The owner's continuation after closed B4.31 authorized one documentation slice.
+The finite [protocol](planning/b4_32_generalist_method_preregistration_protocol.md)
+and [authored contract](planning/b4_32_generalist_method_preregistration_contract.json)
+passed69 static and32 independent Decimal/document predicates. Six method
+dispositions preserve stopped reflection/exact-FEM/signed-tangent candidates
+and propose only a fixed-anchor reciprocal-energy algebra/access hypothesis.
+Its conditional PSD/Cauchy–Schwarz bound and anchor gradient require exact
+equilibrium; approximate FEM states remain UNCERTIFIED without independent
+residual/spectral/rounding evidence. Eight future authored toy fixtures are
+preregistered, with no new candidate evaluation, production payload, fit,
+retiming/search or final/fresh/unused access. See [report](validation/b4_32_generalist_method_preregistration.md).
+
+Known disjoint paid-stage subtotal12721.16417100014444982 exceeds7200 before
+new work; it is diagnostic accounting, not a new cap or replacement of old
+57546.072069/58142.252069 failed proxies or the7323.1004352501081506 ledger.
+Q31=80.29939475003629922 remains paid once. All failed statuses,69 predicate
+positions, B4.19 unknowns, historical memory gaps and B4.31 premerge process
+failure remain. Scientific FAIL/P17 unrepaired/full fit PENDING/4GiB persist.
+Runtime, tests, numerical conventions, all historical frozen files and README
+remain unchanged. All five checks, document/per-path/all-upload guards and
+protected exact-head/main CI plus a verified external backup govern closure.
+Nine primary-checkout untracked files and unrelated branches are preserved.
+
+Next proposed **B4.33 bounded reciprocal-energy algebra and access evidence
+implementation** is software only, separately authorized/frozen and not started.
+No production, fitting or new-budget permission follows. Uniform remains default;
+conditional48/720, final and all48 unused B4.10 cases stay sealed. Stop here.

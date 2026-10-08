@@ -5,22 +5,22 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) for the latest boundary and
-[development history](../development_history.md) for chronology. Latest complete
-read-only slice [B4.31](b4_31_reflection_failure_cost_review.md):118/118 metadata
-and430/430 independent Decimal PASS, own native resource PASS,
-Q31=80.29939475003629922/FULL60/180, conservative219463680<1GiB. Old B4.30
-ledger7323.1004352501081506 remains byte-immutable; separate campaign-plus-review
-view7403.39983000014444982 adds once. All15 methods/seven historical P/R statuses
-and35 failures/fallbacks remain; four passes already in P, no newly repaired P.
-Latest numerical [B4.30 paid continuation](b4_30_paid_continuation.md) stays
-scientific FAIL/scoped v2 resource PASS,18/270/all audits complete, fixed R17
-quality and13-target mean failed, conditional48/720 unopened. Original
-[interruption](b4_30_z_reflection_repair.md) remains resource FAIL/INCOMPLETE.
-Source premerge-driver failure and postmerge verification are explicitly kept,
-not rewritten as premerge PASS. All old failures/costs/memory gaps/full-fit
-PENDING/4GiB remain. Proposed B4.32 bounded read-only generalist reliability/cost
-method review/preregistration is not started/authorized; new finite contract and
-owner instruction precede it. Uniform/P17/final/unused boundaries and no B5 remain.
+[history](../development_history.md) for chronology. Latest completed read-only
+slice [B4.32](b4_32_generalist_method_preregistration.md):69/32 static/independent
+Decimal document PASS, no production/new candidate evaluation. Six dispositions,
+one conditional unimplemented reciprocal-energy hypothesis and8 future toy
+fixtures are preregistration only. Real-state admissibility/fidelity/cost/memory
+and learned repair remain pending; scientific FAIL/P17 unrepaired stay.
+
+[B4.31](b4_31_reflection_failure_cost_review.md)118/430 metadata/native PASS,
+Q31=80.29939475003629922 and separate7403.39983000014444982 remain. Latest
+numerical [B4.30](b4_30_paid_continuation.md) scientific FAIL/scoped resource
+PASS retains7323.1004352501081506 and its original
+[failed interruption](b4_30_z_reflection_repair.md). Known paid-stage subtotal
+12721.16417100014444982>7200 changes neither ledger/cap. All prior failures,
+unknowns, memory gaps and B4.31's source-premerge process failure remain.
+Next proposed B4.33 is separately authorized/frozen software only, not started;
+no production/fit/search/final/fresh access. Uniform and all seals remain.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -144,3 +144,5 @@ Add each new report to its stage group, including failed and stopped experiments
 Do not replace old results or publish generated artifacts to tidy the directory.
 
 - [B4.31 bounded read-only reflection failure and cost review](b4_31_reflection_failure_cost_review.md)
+
+- [B4.32 bounded generalist method review and preregistration](b4_32_generalist_method_preregistration.md):69/32 static document PASS; conditional theory and future software checks, scientific FAIL/P17 unrepaired unchanged.
