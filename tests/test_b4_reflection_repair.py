@@ -325,7 +325,7 @@ def test_unknown_native_profile_never_passes_resource_admission(scripts, tmp_pat
 
 def test_dirty_source_release_rejects_before_payload_access(scripts, monkeypatch, tmp_path):
     common = scripts["common"]
-    output = tmp_path / probe.contract()["evidence_root_name"]
+    output = tmp_path / common.contract()["evidence_root_name"]
     record = {
         "source_revision": "a" * 40,
         "passed": True,
@@ -359,6 +359,7 @@ def test_final_native_binder_exit_is_required(
     native = scripts["native_execution"]
     common = scripts["common"]
     monkeypatch.setattr(native, "release", lambda output: "a" * 40)
+    monkeypatch.setattr(native, "guard_failed_prefix", lambda parent: None)
     common.save(
         tmp_path / "audit_receipts/platform_exit_binding.json",
         {
@@ -379,7 +380,7 @@ def test_final_native_binder_exit_is_required(
 def test_untracked_owner_document_rejects_before_output_creation(scripts, monkeypatch, tmp_path):
     native = scripts["native_execution"]
     common = scripts["common"]
-    output = tmp_path / probe.contract()["evidence_root_name"]
+    output = tmp_path / common.contract()["evidence_root_name"]
     value = {"plan": common.plan_payload()}
     source = tmp_path / "release.json"
     common.save(source, value)

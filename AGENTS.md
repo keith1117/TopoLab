@@ -39,11 +39,19 @@ Its one native campaign stopped at strict untracked-file source preflight:
 0 references/queries/predictions/FEM/model/label reads; paid191.9666532080155
 including FULL180. Metadata/native-prefix audit passes; scientific Gate
 NOT ESTABLISHED, production resource FAIL/INCOMPLETE. Preserve both owner files.
-The entry correction rejects all dirty paths before output/input preparation;
-clean independent source is prepared. The one-campaign limit is consumed:
-next is an explicit owner decision for one paid technical continuation of this
-same B4.30, with retained failed cost and unchanged43200/2GiB/66/990/Gates.
-No second campaign, count reset, new slice, fit/search or final access follows.
+The entry correction rejects all dirty paths before output/input preparation.
+The owner now approved exactly one paid technical continuation of the same
+unfinished B4.30: [v2 protocol](docs/planning/b4_30_paid_continuation_protocol.md)
+and [v2 contract](docs/planning/b4_30_paid_continuation_contract.json).
+Maximum two administrative invocations including the first failure, one
+completed numerical campaign, no third attempt. Retain191.9666532080154866,
+whole43200/2GiB/66/990, fixed17 and every scientific criterion/seal. A new
+FULL180 and cumulative sentinel reference cap3588.0333467919845134 apply.
+Publish tested protected-merged/main-CI-passed v2 source and use a whole-clean
+independent main checkout before any payload/numerical access. Preserve both
+owner files and the original failed root; use a new immutable v2 root. A further
+fatal failure stops; a complete ordinary sentinel failure keeps fresh unopened.
+No next slice, fit/search or final access is authorized.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
 exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,

@@ -21,7 +21,7 @@ B3's [complete data Gate](validation/b3_4_data_gate.md) and twelve fixed
 or freeze. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
 All subsequent failures are retained in [history](development_history.md).
 
-## Active B4.30 interruption and technical correction
+## Active B4.30 paid technical continuation
 
 The separate [B4.30 report](validation/b4_30_z_reflection_repair.md) records
 one interrupted zero-numerical preflight under clean tracked, merged and
@@ -90,18 +90,27 @@ B4.25's80.34 and all twelve B4.1 fits 3870.204341 remain in later accounting.
 failed 983/984 at 1e-4/floor1e-8, paying 100.30. B4.21 remains noncausal;
 B4.19's actual failed case/gap/counts remain unknown.
 
-## Current stop and next decision
+## Current authorized step and stops
 
-The B4.27–29 session is closed at three slices. Its quota is not reset. The
-separate single B4.30 remains active/unfinished after one interrupted preflight.
-The [frozen contract](planning/b4_30_z_reflection_repair_contract.json) caps
-production campaigns at1, now consumed. No second campaign is authorized.
-Next is an owner decision on the concrete paid technical-continuation proposal
-for **this same B4.30**, retaining the first191.9666532080154866 and whole43200
-cap (remaining43008.0333467919845134),2GiB and total66/990 counts. All R/Gate/
-seed/model/role/tolerance/population/order/seal boundaries remain. A separately
-frozen v2 finite compatibility/release contract and clean merged tested source
-would precede numerical access after that permission. No new slice starts.
+The B4.27–29 session remains closed at three slices. The separate single
+B4.30 remains active/unfinished; the original preflight is invocation1 with
+zero numerical work and retained191.9666532080154866 charge. The owner explicitly
+approved one additional paid technical continuation of this same slice, bound
+by the [v2 protocol](planning/b4_30_paid_continuation_protocol.md) and
+[v2 finite contract](planning/b4_30_paid_continuation_contract.json).
+The original contract/protocol/interrupted report retain their bytes. Maximum
+administrative invocations is2, completed numerical campaigns1, with no third
+attempt or counter reset. No later research slice is authorized.
+
+Current step is v2 compatibility/resource preregistration and software validation,
+then protected source PR and all exact-head/main CI before any new payload or
+numerical access. Execute from the independent whole-clean locked main checkout,
+preserving both owner documents and the immutable original failure root. Whole
+cap stays43200/2GiB and total66/990/132 predictions; remaining43008.0333467919845134
+includes a new FULL180, cumulative sentinel reference remainder3588.0333467919845134
+and full34200 conditional-fresh reservation. Candidate/model/Gates/tolerances/
+seeds/roles/population/order/seals remain. A further fatal/integrity/resource
+failure stops; complete ordinary sentinel failure keeps fresh unopened.
 
 No scientific outcome exists to diagnose or use for adaptation. Original P/17
 is unrepaired; uniform remains default. The old exact-FEM cost/full-memory

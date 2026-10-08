@@ -115,3 +115,5 @@ existence; its validation report determines whether its Gate passed or failed.
 - [B4.29 bounded read-only outcome/cost/full-memory review](b4_29_active_set_outcome_review_protocol.md) · [Finite contract](b4_29_active_set_outcome_review_contract.json)
 
 - [B4.30 bounded fixed-P/17 z-reflection initialization repair](b4_30_z_reflection_repair_protocol.md) · [Finite contract](b4_30_z_reflection_repair_contract.json)
+
+- [B4.30 one paid technical continuation protocol and finite v2 contract](b4_30_paid_continuation_protocol.md): same unfinished slice, immutable failed prefix and cumulative original budget; no changed science or third invocation.

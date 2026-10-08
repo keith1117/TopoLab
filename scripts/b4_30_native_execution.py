@@ -17,12 +17,16 @@ from b4_30_common import (
     canonical,
     contract,
     digest,
+    fresh_admissible,
+    guard_failed_prefix,
     native,
     plan_payload,
     read,
     release,
     save,
+    stage_cap,
     validate_release_source,
+    whole_charge,
 )
 
 STAGES = ("reference", "screen", "audit", "policy-audit", "independent")
@@ -142,7 +146,7 @@ def stage_charges(output, cohort):
             and command["exit_code"] == 0
             and not command["terminated"]
             and receipt
-            and charge <= CAPS[stage]
+            and charge <= stage_cap(cohort, stage)
             and peak <= 2147483648
         )
         if receipt and stage != "independent":
@@ -182,6 +186,7 @@ def prepare(output, release_input):
     if value["plan"] != plan_payload():
         raise ValueError("prospective tested release source differs before production")
     validate_release_source(value)
+    guard_failed_prefix(output.parent)
     for name in ("profiles", "logs", "audit_receipts"):
         (output / name).mkdir(parents=True)
     save(output / "audit_receipts/production_release.json", value)
@@ -189,7 +194,10 @@ def prepare(output, release_input):
     save(
         output / "audit_receipts/one_attempt.json",
         {
-            "campaigns": 1,
+            "campaigns": 2,
+            "previous_failed_campaigns": 1,
+            "completed_numerical_campaigns_maximum": 1,
+            "no_third_campaign": True,
             "source_revision": value["source_revision"],
             "new_fits": 0,
             "final_access": False,
@@ -218,7 +226,7 @@ def close(output):
         _, ok, added = stage_charges(output, cohort)
         rows.extend(added)
         complete = bool(complete and ok)
-    amount = sum((Decimal(r["closed_charge_decimal"]) for r in rows), Decimal(180))
+    amount = whole_charge(rows)
     independent = output / cohorts[-1] / "independent_audit.json"
     audit = read(independent) if independent.exists() else None
     gate = bool(
@@ -236,6 +244,15 @@ def close(output):
         "processes": rows,
         "charged_seconds": float(amount),
         "charged_decimal": str(amount),
+        "continuation_stage_charge_decimal": str(
+            sum((Decimal(r["closed_charge_decimal"]) for r in rows), Decimal(0))
+        ),
+        "retained_failed_charge_decimal": contract()["continuation"][
+            "original_failed_charge_decimal"
+        ],
+        "retained_failed_paid_chain_reserve_seconds": 180,
+        "aggregate_fully_paid_chain_reserve_seconds": 360,
+        "administrative_campaigns": 2,
         "fully_paid_chain_reserve_seconds": 180,
         "own_stage_resource_acceptance": complete and amount <= 43200 and peak <= 2147483648,
         "whole_resource_acceptance": "PENDING_POSTEXIT",
@@ -261,14 +278,14 @@ def campaign(output, release_input):
         if cohort == "fresh":
             policy = read(output / "sentinel/policy-audit/summary.json")
             independent = read(output / "sentinel/independent_audit.json")
-            spent, valid, _ = stage_charges(output, "sentinel")
+            _, valid, rows = stage_charges(output, "sentinel")
             if not (
                 policy["passed"]
                 and policy["policy_integrity_passed"]
                 and independent["passed"]
                 and independent["gate_passed"]
                 and valid
-                and spent + 34200 + 180 <= 43200
+                and fresh_admissible(rows, valid)
             ):
                 break
         for stage in STAGES:
@@ -305,7 +322,7 @@ def campaign(output, release_input):
                     if stage in ("reference", "screen")
                     else 0
                 )
-                timeout = CAPS[stage] - allowance - 15
+                timeout = float(stage_cap(cohort, stage)) - allowance - 15
             command = invoke(output, cohort + "_" + stage, argv, timeout)
             commands.append(command)
             print(
@@ -330,6 +347,7 @@ def campaign(output, release_input):
 def bind_postexit(output, campaign_profile, campaign_log, exit_code):
     started = perf_counter()
     release(output)
+    guard_failed_prefix(output.parent)
     # The outer profile includes native preparation, source-only plan and closure,
     # and all child exits. It is preserved independently of the pre-exit receipt.
     measured = native(campaign_profile.read_text())
@@ -345,7 +363,7 @@ def bind_postexit(output, campaign_profile, campaign_log, exit_code):
         },
     )
     closed = read(output / "resource_close.json")
-    amount, stage_outer, peak, complete = Decimal(180), 0.0, measured["rss_bytes"], True
+    amount, stage_outer, peak, complete = whole_charge([]), 0.0, measured["rss_bytes"], True
     cohorts = ["sentinel", "fresh"] if not closed["fresh_sealed"] else ["sentinel"]
     for cohort in cohorts:
         _, ok, rows = stage_charges(output, cohort)
@@ -387,6 +405,10 @@ def bind_postexit(output, campaign_profile, campaign_log, exit_code):
         "source_revision": release(output),
         "independent_decimal_charge": str(amount),
         "charged_seconds": float(amount),
+        "retained_failed_charge_decimal": contract()["continuation"][
+            "original_failed_charge_decimal"
+        ],
+        "aggregate_fully_paid_chain_reserve_seconds": 360,
         "fully_paid_chain_reserve_seconds": 180,
         "observed_chain_reserve_plus_final_exit_floor_seconds": reserve,
         "final_metadata_exit_floor_seconds": 10,
@@ -405,6 +427,7 @@ def bind_postexit(output, campaign_profile, campaign_log, exit_code):
 def verify_binder_exit(output, binder_profile, binder_log, exit_code):
     started = perf_counter()
     revision = release(output)
+    guard_failed_prefix(output.parent)
     binding_path = output / "audit_receipts/platform_exit_binding.json"
     binding = read(binding_path)
     measured = native(binder_profile.read_text())

@@ -728,3 +728,15 @@ of this same slice, retaining failed cost and43200/2GiB/66/990 limits.
 No retry/count reset/new slice/fit/search/final access; uniform/P17/seals and
 all old failures/cost/memory unknowns remain. This entry records an interruption,
 not scientific acceptance or full B4.30 completion.
+
+
+The owner subsequently approved one paid technical continuation of this same
+unfinished slice, with separately versioned [v2 protocol](planning/b4_30_paid_continuation_protocol.md)
+and [contract](planning/b4_30_paid_continuation_contract.json) before new access.
+Retain invocation1/191.9666532080154866 and all original bytes; at most2 total
+administrative invocations and1 completed numerical campaign, with no third.
+Whole43200/2GiB/66/990 and every scientific criterion/role/seal remain. The new
+FULL180 and deducted sentinel reference/fresh-reservation caps are explicit.
+Only paid execution compatibility/accounting changes; fixed P/17 reflection
+mathematics and all original cases/controls stay unchanged. Source/CI release
+and complete numerical/audit/publication closure are pending.
