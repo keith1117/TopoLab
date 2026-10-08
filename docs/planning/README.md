@@ -4,13 +4,16 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-Latest completed remains [B4.29 read-only review](../validation/b4_29_active_set_outcome_review.md).
-Separately authorized [B4.30](../validation/b4_30_z_reflection_repair.md) is
-unfinished: zero-numerical source preflight rejection,191.9666532080154866
-paid/FULL180, scientific NOT ESTABLISHED and resource FAIL/INCOMPLETE.
-The entry correction and clean checkout are prepared; the consumed one-campaign
-limit needs an owner decision for one paid technical continuation of the same
-slice. No quota reset/new slice/final access; old failures/cost/memory gaps remain.
+Latest completed numerical/audit slice is
+[B4.30 complete paid continuation](../validation/b4_30_paid_continuation.md):
+scientific FAIL, complete v2 chain resource PASS,18/270 and all prescribed audits
+complete,7323.1004352501081506/43200 including original191.9666532080154866/both
+FULL180. Fixed17 remains unrepaired; conditional48/720/final/unused panels sealed.
+The original interrupted report and all frozen records remain. Old3/3 stays
+exhausted; separate B4.30 used2 administrative invocations/1 numerical campaign,
+no third or later slice authorized. Proposed B4.31 bounded metadata-only
+reflection-failure/cost review is not started; owner authorization and a finite
+contract precede it. Old failures/costs/memory gaps and uniform default remain.
 
 ## Overall project plans
 
@@ -26,7 +29,7 @@ promises of a completion date or empirical acceleration.
 
 ## Frozen slice protocols
 
-The latest completed numerical slice is [B4.28](b4_28_active_set_numerical_evidence_protocol.md); its report separates new evidence from all old failed Gates.
+The latest completed numerical/audit slice is [B4.30](b4_30_paid_continuation_protocol.md); its report preserves the failed repair Gate and every historical failure.
 
 These preregistrations stay in GitHub so declared methods, populations, resource
 caps and stop rules remain reviewable before execution. Keep existing paths and
@@ -116,4 +119,4 @@ existence; its validation report determines whether its Gate passed or failed.
 
 - [B4.30 bounded fixed-P/17 z-reflection initialization repair](b4_30_z_reflection_repair_protocol.md) · [Finite contract](b4_30_z_reflection_repair_contract.json)
 
-- [B4.30 one paid technical continuation protocol and finite v2 contract](b4_30_paid_continuation_protocol.md): same unfinished slice, immutable failed prefix and cumulative original budget; no changed science or third invocation.
+- [B4.30 one paid technical continuation protocol and finite v2 contract](b4_30_paid_continuation_protocol.md): complete failed repair in the same slice, immutable failed prefix and cumulative original budget; no changed science or third invocation.

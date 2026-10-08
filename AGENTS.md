@@ -22,36 +22,29 @@ The historical `v1.0.0` release remains complete, with its negative M1/M2 eviden
 preserved. B3's data Gate and B4.1 fitting passed; the original B4.2 Gate failed.
 Fixed P/17 remains unrepaired and cannot be replaced after seeing outcomes.
 
-The latest completed slice is **B4.29 bounded read-only outcome/cost review**:
-metadata review PASS, own resource PASS;
-[report](docs/validation/b4_29_active_set_outcome_review.md) binds one review/audit,
-new charge 80.26, known added cost 58142.252069>7200 and full memory PENDING/4GiB.
-B4.28 new integrity3232/3232 and LOCAL32/32 stay passed; its preparation
-RSS/child exit and whole peak stay UNKNOWN/resource INCOMPLETE. Old B4.23
-3907/3976 and all69 failures,851.38/200.98/80.34 costs remain. B4.24 memory
-gaps/both failures, B4.20 failure and B4.19 actual case/gap/count UNKNOWN remain.
-The temporary B4.27–29 session remains exhausted at three complete slices.
-Separately authorized **B4.30 fixed-P/17 z-reflection repair is unfinished**:
-[report](docs/validation/b4_30_z_reflection_repair.md),
-[protocol](docs/planning/b4_30_z_reflection_repair_protocol.md),
-[finite contract](docs/planning/b4_30_z_reflection_repair_contract.json).
-Its one native campaign stopped at strict untracked-file source preflight:
-0 references/queries/predictions/FEM/model/label reads; paid191.9666532080155
-including FULL180. Metadata/native-prefix audit passes; scientific Gate
-NOT ESTABLISHED, production resource FAIL/INCOMPLETE. Preserve both owner files.
-The entry correction rejects all dirty paths before output/input preparation.
-The owner now approved exactly one paid technical continuation of the same
-unfinished B4.30: [v2 protocol](docs/planning/b4_30_paid_continuation_protocol.md)
-and [v2 contract](docs/planning/b4_30_paid_continuation_contract.json).
-Maximum two administrative invocations including the first failure, one
-completed numerical campaign, no third attempt. Retain191.9666532080154866,
-whole43200/2GiB/66/990, fixed17 and every scientific criterion/seal. A new
-FULL180 and cumulative sentinel reference cap3588.0333467919845134 apply.
-Publish tested protected-merged/main-CI-passed v2 source and use a whole-clean
-independent main checkout before any payload/numerical access. Preserve both
-owner files and the original failed root; use a new immutable v2 root. A further
-fatal failure stops; a complete ordinary sentinel failure keeps fresh unopened.
-No next slice, fit/search or final access is authorized.
+The latest completed numerical/audit slice is **B4.30 fixed-P/17 reflection repair**:
+scientific **FAIL**, complete v2 numerical/native resource **PASS**. See
+[report](docs/validation/b4_30_paid_continuation.md),
+[v2 protocol](docs/planning/b4_30_paid_continuation_protocol.md) and
+[finite contract](docs/planning/b4_30_paid_continuation_contract.json).
+All18/270 and prescribed audits complete:323 terminal/204 guard classifications,
+78 prediction replays/249 old identities. R17 retains one quality failure
+(1.00197094375>1.001) and target mean1.01605313078>1.0; paired P/R failures
+remain1/3/1. Four historical target predicates pass already in matched P;
+no currently failed P target is newly repaired. Conditional48/720 unopened.
+Cumulative7323.1004352501081506/43200 retains failed191.9666532080154866 and
+both FULL180 reserves; conservative new whole-chain peak800047104<2GiB.
+Original failed preflight resource FAIL/INCOMPLETE and all original bytes remain.
+
+The B4.27–29 quota remains closed3/3. The separate B4.30 used exactly2 paid
+administrative invocations/1 numerical campaign; no third or later slice is
+authorized. The reflection mechanism stops. Proposed next is **B4.31 bounded
+read-only reflection-failure and cost review**, not started; owner authorization
+and a finite metadata-only contract precede it. No new payload, predictor,
+FEM, fit, profile/retiming, objective/seed/weight/length/cache/ordering search
+or final access follows. B4.23 remains3907/3976 with all69 failures and
+57546.072069>7200; known added58142.252069>7200, B4.24 memory gaps/both failures,
+B4.20 failure and B4.19 fields UNKNOWN remain. Full fit memory PENDING/4GiB.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
 exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,
