@@ -1055,3 +1055,18 @@ an independent admissibility/spectral/rounding certificate. No real-state
 upper bound, cost feasibility, P17 repair or learned acceleration is claimed.
 Old signed-tangent/exact-FEM/reflection failures, costs and unknowns remain.
 B4.33 software implementation is only proposed under a separate contract.
+
+## B4.33 finite public reciprocal-energy software provenance
+
+The [software protocol](docs/planning/b4_33_reciprocal_energy_evidence_protocol.md)
+and [contract](docs/planning/b4_33_reciprocal_energy_evidence_contract.json) were
+frozen before implementation/evaluation. Eight small original authored systems
+retain B4.32's exact matrices/loads/densities/materials. Original stdlib candidate
+uses the already derived reciprocal energy and exact input validation; a
+separately authored Fraction oracle independently assembles/solves1x1/2x2 and
+checks compliance/adjoint/square-gap. No candidate imports in the oracle/auditor.
+Toy C_s=(11/10)*C_star independently exposes the stored-normalizer distinction.
+No new external scientific/implementation source, Hack3D content, figure, code,
+label/model/old generated payload, real FEM or learned result was consulted or
+imported.47 software tests and849 predicates establish public toy algebra only;
+real admissibility/fidelity/cost/memory/learned repair remain unresolved.

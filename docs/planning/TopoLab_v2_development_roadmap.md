@@ -14,23 +14,24 @@ See [report](../validation/b4_30_paid_continuation.md). Conditional48/720 remain
 unopened. Original failed preflight, all historical evidence/unknowns and
 full-training memory PENDING/4GiB remain; uniform stays default.
 
-Latest completed read-only slice **B4.32 method review/preregistration**:
-69 static/32 independent Decimal document checks PASS, with zero production
-or candidate numerical evaluations. See [report](../validation/b4_32_generalist_method_preregistration.md).
-Six dispositions preserve all earlier stops; one prospective fixed-anchor
-reciprocal-energy hypothesis requires exact equilibrium, while real floating
-admissibility/residual certificates, fidelity/cost/memory/reliability are UNKNOWN.
-Known disjoint paid-stage subtotal12721.16417100014444982>7200 grants no cap
-reset or fit. B4.31 Q31/original7323.1004352501081506/combined7403.39983000014444982
-and its source-premerge process failure remain. Old3/3 and B4.30's2/1 stand.
-Next proposed B4.33 reciprocal-energy algebra/access implementation is software
-only on8 public toy fixtures, separately authorized/frozen and not started.
-Uniform/P17, all failures/costs/unknowns/final/fresh/unused seals and no B5 remain.
+Latest completed software slice **B4.33 reciprocal-energy algebra/access**:
+47 focused tests/849 independent exact-rational predicates PASS on8 public
+systems/76 points; [report](../validation/b4_33_reciprocal_energy_evidence.md).
+Original1e-9/1e-10 and both1e-4/2e-4 steps remain; exact toy anchor required,
+nonzero residual and unauthorized roles/points reject. This proves no real
+FEM admissibility/fidelity/cost/memory/reliability or learned repair. B4.32's69/32
+preregistration, B4.31's118/430 metadata/native and all original ledgers remain.
+Known-paid12721.16417100014444982>7200 is diagnostic, not a reset. Scientific
+FAIL/P17 unrepaired/full fit PENDING4GiB remain; no production/integration/fit.
+Next proposed B4.34 bounded read-only admissibility/full-cost preregistration
+is separate metadata-only authority/finite contract, not started. Uniform,
+old3/3/B4.30's2/1, all failures/UNKNOWN/costs and conditional/final/fresh/unused
+seals remain; no B5.
 [Project status](../project_status.md) holds the current boundary;
 [history](../development_history.md) preserves the chronology.
 
 Prepared: 2026-09-24
-Revised: 2026-10-08 (B4.32 finite method preregistration; scientific FAIL remains)
+Revised: 2026-10-08 (B4.33 public software evidence; scientific FAIL remains)
 
 Related documents:
 
@@ -1286,6 +1287,34 @@ contract. No actual training input, FEM, projection/root/network integration,
 fit, retiming/search or changed budget follows. Uniform/P17 and seals remain;
 report the next proposal and stop after B4.32.
 
+### B4.33: Bounded reciprocal-energy algebra and access evidence
+
+The owner's continuation after closed B4.32 authorized one public software
+slice. The [protocol](b4_33_reciprocal_energy_evidence_protocol.md),
+[finite contract](b4_33_reciprocal_energy_evidence_contract.json) and eight
+small authored public systems were frozen before candidate implementation.
+47 focused tests/849 independent exact rational/scalar predicates PASS;
+76 fixed points/30 FD intervals retain all original thresholds/steps. Exact
+anchor/adjoint/upper/square-gap, common scaling, zero energy and10/11 stored
+normalizer intercept pass. Pre-byte closed-role/schema/hash/ID binding denies
+all eight frozen wrong bindings; nonzero residual/mutation/outside panel stops.
+Stdlib candidate/oracle perform no real FEM, projection/root/network integration
+or production artifact access. See [report](../validation/b4_33_reciprocal_energy_evidence.md).
+
+This is software acceptance only, not directed-rounding or real-state bound
+certification, actual fidelity/affordability/full memory, fitted reliability or
+repair. All old frozen failures/69 predicates/UNKNOWN/gaps/costs/ledgers/reserves,
+fixed P17/full fit PENDING4GiB/conditional/final/fresh/unused seals remain.
+Initial type/line-width/inventory errors retain logs/snapshots/native cost;
+software fixes change no criteria. All5 checks, complete upload guards,
+protected PR/main CI/tree identity/owned cleanup/byte backup govern publication.
+
+Proposed next **B4.34 bounded read-only admissibility and full-cost preregistration**
+is separately authorized/frozen metadata only, not started. It must specify
+real certificates and complete paid history/new cost/memory before any finite
+numerical proposal. No actual data/FEM/integration/fit/search or new cap follows;
+learned repair/independent confirmation/full new B4/compatible final precede B5.
+
 ### B5: One-time final comparison and project delivery gate
 
 Open the new ID cohort once after B4, followed by predeclared OOD and independent
@@ -1321,10 +1350,11 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.33 bounded reciprocal-energy algebra and access evidence
-   implementation:** not started/authorized; software only on8 public toy
-   fixtures after a separate finite contract. B4.32 is preregistration PASS
-   only. Preserve all failed Gates/costs/unknowns; no production or fitting.
+1. **Proposed B4.34 bounded read-only admissibility and full-cost preregistration:**
+   not started/authorized; metadata only after separate owner continuation and
+   finite contract. B4.33 passes public software algebra/access only; real
+   certification/fidelity/cost/full memory remain unresolved. Preserve all
+   failures/costs/unknowns; no production/integration/fitting grant.
 
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full

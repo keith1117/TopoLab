@@ -1,0 +1,270 @@
+{
+  "version": "topolab.b4_33.public-toy-bundle.v1",
+  "role": "public-toy-software",
+  "modulus": {
+    "E_0": "1",
+    "E_min": "1/1000",
+    "p": 3
+  },
+  "normalizer_scale": "11/10",
+  "fixtures": [
+    {
+      "id": "single-soften",
+      "unit_matrices": [
+        [
+          [
+            "1"
+          ]
+        ]
+      ],
+      "load": [
+        "1"
+      ],
+      "anchor_density": [
+        "1/2"
+      ],
+      "current_density": [
+        "1/4"
+      ],
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "single-stiffen",
+      "unit_matrices": [
+        [
+          [
+            "1"
+          ]
+        ]
+      ],
+      "load": [
+        "1"
+      ],
+      "anchor_density": [
+        "1/2"
+      ],
+      "current_density": [
+        "3/4"
+      ],
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "parallel-two",
+      "unit_matrices": [
+        [
+          [
+            "1"
+          ]
+        ],
+        [
+          [
+            "2"
+          ]
+        ]
+      ],
+      "load": [
+        "1"
+      ],
+      "anchor_density": [
+        "1/2",
+        "3/4"
+      ],
+      "current_density": [
+        "1/4",
+        "1/2"
+      ],
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "series-two",
+      "unit_matrices": [
+        [
+          [
+            "1",
+            "-1"
+          ],
+          [
+            "-1",
+            "1"
+          ]
+        ],
+        [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      ],
+      "load": [
+        "1",
+        "0"
+      ],
+      "anchor_density": [
+        "1/2",
+        "3/4"
+      ],
+      "current_density": [
+        "3/4",
+        "1/4"
+      ],
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "coupled-two",
+      "unit_matrices": [
+        [
+          [
+            "2",
+            "1"
+          ],
+          [
+            "1",
+            "1"
+          ]
+        ],
+        [
+          [
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "2"
+          ]
+        ]
+      ],
+      "load": [
+        "1",
+        "-1"
+      ],
+      "anchor_density": [
+        "1/4",
+        "3/4"
+      ],
+      "current_density": [
+        "3/4",
+        "1/4"
+      ],
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "common-modulus-ratio",
+      "unit_matrices": [
+        [
+          [
+            "1"
+          ]
+        ],
+        [
+          [
+            "2"
+          ]
+        ]
+      ],
+      "load": [
+        "1"
+      ],
+      "anchor_density": [
+        "1/2",
+        "1/2"
+      ],
+      "current_density": [
+        "1/4",
+        "1/4"
+      ],
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "zero-energy-element",
+      "unit_matrices": [
+        [
+          [
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ],
+        [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      ],
+      "load": [
+        "1",
+        "0"
+      ],
+      "anchor_density": [
+        "1/2",
+        "1/2"
+      ],
+      "current_density": [
+        "1/4",
+        "3/4"
+      ],
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "three-element-coupling",
+      "unit_matrices": [
+        [
+          [
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ],
+        [
+          [
+            "1",
+            "-1"
+          ],
+          [
+            "-1",
+            "1"
+          ]
+        ],
+        [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      ],
+      "load": [
+        "1",
+        "1"
+      ],
+      "anchor_density": [
+        "1/4",
+        "1/2",
+        "3/4"
+      ],
+      "current_density": [
+        "3/4",
+        "1/4",
+        "1/2"
+      ],
+      "dirichlet": "homogeneous-zero"
+    }
+  ]
+}

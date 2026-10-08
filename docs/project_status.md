@@ -1,51 +1,55 @@
 # Current project status
 
-Updated: 2026-10-08. Latest completed read-only slice **B4.32 generalist
-reliability/cost method review and preregistration**:69/69 static and32/32
-independently implemented Decimal/document checks **PASS**. This is a
-documentation Gate only; scientific **FAIL**, fixed P/17 unrepaired and full
-training memory **PENDING/4GiB** remain. See the
-[report](validation/b4_32_generalist_method_preregistration.md). Latest numerical
-slice B4.30 remains failed; B4.31 metadata/native PASS and original costs stay.
+Updated: 2026-10-08. Latest completed software slice **B4.33 bounded
+reciprocal-energy algebra and access evidence implementation**:47 focused
+checks and849 independent exact-rational/scalar predicates **PASS** on eight
+public toy systems/76 fixed points. This is software acceptance only;
+scientific **FAIL**, fixed P/17 unrepaired, real-state certification UNKNOWN
+and full training memory **PENDING/4GiB** remain. See the
+[report](validation/b4_33_reciprocal_energy_evidence.md).
 
-## B4.32 method preregistration complete
+## B4.33 public software evidence complete
 
-Owner-authorized one continuation slice from main4763124495ee, all three main
-CI checks passed/no open PR/no existing B4.32 work. The
-[protocol](planning/b4_32_generalist_method_preregistration_protocol.md) and
-[authored finite contract](planning/b4_32_generalist_method_preregistration_contract.json)
-freeze15 versioned inputs, six dispositions and one future hypothesis. This
-follows B4.26's documentation-only workflow: no production runner, scalar
-evidence replay, numerical candidate evaluation, predictor/FEM/root/projection,
-fit, retiming/search, label/model/raw payload or sealed evidence access.
+One owner continuation from main0dcf79ed615b after closed B4.32/all three main
+CI/no open PR/no existing B4.33 work. The
+[protocol](planning/b4_33_reciprocal_energy_evidence_protocol.md),
+[finite contract](planning/b4_33_reciprocal_energy_evidence_contract.json) and
+[eight reviewed public fixtures](../tests/fixtures/b4_33_reciprocal_energy.json)
+were frozen before implementation/evaluation. Six input identities and all old
+frozen contracts/reports/conventions remain. Public kernel/oracle are stdlib
+only, <=2 free DOFs/3 elements, exact Fraction equilibrium/PSD/free-SPD checks.
+No actual FEM/predictor/projection/root/network integration or production reader.
 
-Uniform remains default. Reflection, exact current-density FEM and the old
-signed affine tangent stop at their retained failures. The prospective
-fixed-anchor reciprocal-energy value uses element-energy coefficients and
-reciprocal SIMP stiffness. A conditional independent Cauchy–Schwarz proof gives
-a compliance upper bound and exact anchor value/gradient for an EXACT
-equilibrium anchor with positive moduli/assembled SPD. Small floating residuals
-alone do not certify it: admissibility/spectral/rounding obligations remain
-UNCERTIFIED/UNKNOWN. No real-state fidelity, affordability, convexity, fitted
-reliability, P17 repair or acceleration is established. Eight future public
-toy fixtures and candidate-free algebra/role tests are only preregistered.
+The candidate-free exact oracle independently proves toy upper inequality,
+anchor equality/adjoint, square-gap, common-modulus scaling and zero-energy
+contribution; float values/gradients agree at original1e-9/1e-10. Both FD
+steps1e-4/2e-4 cover30 intervals, maximum error1.6918219473355736e-6<1e-4.
+The fixed toy C_s=(11/10)*C_star gives10/11 anchor intercept, never forced1.
+Eight forbidden/mismatched role/schema/ID/hash/unknown-field bindings deny
+before bytes; only literal SHA-bound public inputs enter. Nonzero residuals,
+mutable/tampered certificates and outside finite points reject. Floating values
+are not directed-rounding real-state bound certificates. Real FEM spectral/
+residual/rounding proof, fidelity/cost/memory/learned reliability remain UNKNOWN.
 
-All69 old predicate failures, scientific failures, B4.19 unknowns, B4.24/28
-resource gaps and B4.31's failed source-premerge driver remain. B4.23 original
-57546.0720687792>7200 and B4.29 known-added58142.252069>7200 stay failed.
-B4.30 immutable7323.1004352501081506 includes failed191.9666532080154866 and
-both FULL180; Q31=80.29939475003629922 stays paid once, separate combined view
-7403.39983000014444982. A diagnostic disjoint known-paid subtotal including
-twelve fits and B4.15–31 stages is12721.16417100014444982>7200; it changes
-neither ledger nor cap and cannot authorize a fit or erase earlier costs.
-Unknown full-project/software/CI resources stay separately recorded, not zero.
+No production campaign, label/model/raw/old scalar payload, fit, profiling/
+retiming/search or sealed evidence access occurred. Full pytest remains its
+existing public/synthetic software population. Initial mypy tuple-type and
+one Ruff line-width failure plus two metadata read errors remain external with
+all source snapshots/logs/native costs; fixes preserve criteria and literal
+hashes. Numerical conventions/query/ML/locks/README stay unchanged. Nine primary
+untracked files and unrelated refs are preserved; previous clone's late copy
+remains there. All5 mandatory checks passed, including1440 full tests in663.67s.
+Publication closure requires reviewed all-upload commits/guards, protected
+exact-head/main CI and independent byte backup.
 
-Runtime/tests/numerical conventions/public README and all historical frozen
-bytes stay unchanged. Nine primary untracked files remain in place; independent
-clone authoring avoids altering them. Current indices and the Chinese roadmap
-are corrected against authoritative merged reports. Publication closure binds
-all five checks, relative links/spacing/ignore/per-path/all-upload review, exact
-protected PR/main CI, owned-branch cleanup and an external byte-verified backup.
+All historical failed Gates/69 predicates/unknowns and paid costs remain.
+B4.32 stays69/32 preregistration PASS only; B4.31 stays118/430 metadata/native
+PASS with original source-premerge failure. B4.30 immutable7323.1004352501081506
+retains failed191.9666532080154866/both FULL180; Q31 stays80.29939475003629922,
+separate combined7403.39983000014444982. Diagnostic known-paid subtotal
+12721.16417100014444982>7200 is neither whole-project accounting nor a cap reset.
+B4.23 original57546.0720687792>7200/known-added58142.252069>7200 remain FAIL;
+full fit memory PENDING/4GiB. New software cost cannot erase old costs/gaps.
 
 ## Delivery and operational boundary
 
@@ -157,17 +161,15 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and proposed successor
 
-B4.32 closes only this finite documentation preregistration. B4.31 remains one
-metadata campaign; B4.27–29 closed3/3 and B4.30's2 paid administrative invocations/
-1 numerical campaign remain unchanged. No later slice is authorized or started.
+B4.33 closes only this finite public software slice. Old B4.27–29 closed3/3,
+B4.30 exactly2 paid invocations/1 numerical campaign and the B4.31/B4.32 closed
+records remain. No later slice is started or authorized.
 
-Next proposed **B4.33 bounded reciprocal-energy algebra and access evidence
-implementation** is software only under a separate owner continuation and frozen
-contract, using the eight authored toy fixtures. No production data, FEM,
-projection/root/network integration, fit, retiming/search or budget change is
-inherited. Actual residual certificates, training-case fidelity, complete new
-cost/memory and any compatible fit contract remain pending and separately gated.
-
-Uniform stays default, P/17 unrepaired, B4.30 conditional48/720 and final/all48
-unused B4.10 cases sealed. Learned repair, independent confirmation, the complete
-new B4 Gate and compatible final contract remain required before B5. Stop here.
+Next proposed **B4.34 bounded read-only admissibility and full-cost preregistration**
+is a separate documentation slice after owner continuation and frozen finite
+contract. It must specify real-state certificates and complete historical/new
+cost/memory requirements before any finite numerical proposal. B4.33 transfers
+no production payload, FEM/candidate/projection/root/network integration, fit,
+retiming/search, changed budget or final access. Uniform/P17 and all seals remain;
+learned repair/independent confirmation/full new B4/compatible final contract
+remain before B5. Stop after B4.33.

@@ -36,27 +36,26 @@ Cumulative7323.1004352501081506/43200 retains failed191.9666532080154866 and
 both FULL180 reserves; conservative new whole-chain peak800047104<2GiB.
 Original failed preflight resource FAIL/INCOMPLETE and all original bytes remain.
 
-The B4.27–29 quota remains closed3/3. B4.30 used exactly2 paid administrative
-invocations/1 numerical campaign; no third is authorized. Reflection stops.
-B4.31 [review](docs/validation/b4_31_reflection_failure_cost_review.md) remains
-118/430 metadata/native PASS, Q31=80.29939475003629922; old7323.1004352501081506
-unchanged and separate combined7403.39983000014444982. Its source-premerge process
-failure stays failure despite later postmerge audit. Latest read-only slice
-**B4.32 method review/preregistration**:69/32 static document checks PASS; see
-[report](docs/validation/b4_32_generalist_method_preregistration.md),
-[protocol](docs/planning/b4_32_generalist_method_preregistration_protocol.md) and
-[contract](docs/planning/b4_32_generalist_method_preregistration_contract.json).
-One unimplemented reciprocal-energy hypothesis, conditional on exact equilibrium;
-floating residual/admissibility certificates remain UNKNOWN. No production or
-new numerical evaluation. Known paid subtotal12721.16417100014444982>7200 is
-diagnostic, not a ledger/cap reset. Scientific FAIL/P17 unrepaired remain.
-Proposed next **B4.33 bounded reciprocal-energy algebra and access evidence
-implementation**, software only on8 public toy fixtures, not started; a new
-owner instruction and frozen finite contract precede it. No payload/predictor/
-FEM/fit/projection/root/network integration, profile/retiming/search or final
-access is inherited. B4.23 stays3907/3976/all69 failures and57546.072069>7200;
-known-added58142.252069>7200, B4.24/28 memory gaps/both failures, B4.20 failure
-and B4.19 UNKNOWN remain. Full fit memory PENDING/4GiB.
+The B4.27–29 quota remains closed3/3; B4.30 stays2 paid invocations/1 campaign,
+no third. Reflection stops. B4.31 [review](docs/validation/b4_31_reflection_failure_cost_review.md)
+remains118/430 metadata/native PASS, Q31=80.29939475003629922; old7323.1004352501081506
+and separate combined7403.39983000014444982 remain. Its source-premerge process
+failure stays failure. B4.32 [preregistration](docs/validation/b4_32_generalist_method_preregistration.md)
+remains69/32 static PASS. Latest software **B4.33 reciprocal-energy algebra/access**:
+47 focused tests/849 independent exact-rational predicates PASS on8 public toys/
+76 fixed points; [report](docs/validation/b4_33_reciprocal_energy_evidence.md),
+[protocol](docs/planning/b4_33_reciprocal_energy_evidence_protocol.md),
+[contract](docs/planning/b4_33_reciprocal_energy_evidence_contract.json).
+Exact toy anchor/PSD/SPD only; real floating residual/spectral/rounding certificates,
+fidelity/cost/reliability UNKNOWN. No production or actual FEM/integration/fit.
+Scientific FAIL/P17 unrepaired remain. Known-paid12721.16417100014444982>7200
+is diagnostic, not a cap/ledger reset. Proposed next **B4.34 bounded read-only
+admissibility and full-cost preregistration**, not started: new owner continuation
+and finite metadata-only contract first. No payload/FEM/predictor/projection/root/
+network integration, fit, profile/retiming/search or final grant is inherited.
+B4.23 stays3907/3976/all69 failures and57546.072069>7200; known-added58142.252069>7200,
+B4.24/28 memory gaps/both failures, B4.20 failure and B4.19 UNKNOWN remain.
+Full training memory PENDING/4GiB; software RSS fills no historical gap.
 
 All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
 exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,

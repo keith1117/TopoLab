@@ -825,3 +825,29 @@ Next proposed **B4.33 bounded reciprocal-energy algebra and access evidence
 implementation** is software only, separately authorized/frozen and not started.
 No production, fitting or new-budget permission follows. Uniform remains default;
 conditional48/720, final and all48 unused B4.10 cases stay sealed. Stop here.
+
+## B4.33 bounded reciprocal-energy algebra and access evidence (2026-10-08)
+
+Owner continuation from closed B4.32/main0dcf79ed615b authorized one software
+slice. The [protocol](planning/b4_33_reciprocal_energy_evidence_protocol.md),
+[contract](planning/b4_33_reciprocal_energy_evidence_contract.json) and8 public
+toy fixtures were frozen before implementation/evaluation.47 tests/849 independent
+exact-rational/scalar predicates PASS,8 systems/76 points/30 original-step FD
+intervals; maximum1.6918219473355736e-6<1e-4. Anchor/adjoint/upper/square-gap,
+common scaling/zero energy and10/11 normalized intercept pass. Exact equilibrium
+is mandatory; nonzero residual, mutation/unknown/outside panel rejects. Eight
+role/schema/ID/hash denials occur before bytes. No real FEM/predictor/projection/
+root/network integration, production payload, fit/retiming/search/final access.
+See [report](validation/b4_33_reciprocal_energy_evidence.md).
+
+Initial mypy/Ruff and inventory failures retain source/log/cost records; fixes
+change no criteria. Source/tests/independent oracle/small fixtures and frozen
+contract/report enter Git; complete software evidence stays external. All5
+checks, existing per-path/all-upload guards, protected exact-head/main CI,
+owned cleanup and independently verified backup govern closure. Nine primary
+untracked files, prior clone copy, unrelated refs and old frozen bytes remain.
+Scientific FAIL/P17 unrepaired/real certificates UNKNOWN/full fit PENDING4GiB;
+old69 failures/UNKNOWN/memory gaps and all ledgers/reserves remain. Diagnostic
+known-paid12721.16417100014444982>7200 grants no fit or new cap. Proposed next
+B4.34 bounded read-only admissibility/full-cost preregistration, separate finite
+metadata contract/owner continuation, not started. Uniform and all seals remain.
