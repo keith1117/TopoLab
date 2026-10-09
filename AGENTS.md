@@ -60,15 +60,18 @@ Exact intended rational PSD/coercivity/residual and fixed80-bit/outward binary64
 only; tiny nonzero residual never certifies unmodified U. Bound diagnostic, no
 loss/gradient change. Real FEM certificates/costs UNKNOWN_STOP, all-paid7200
 infeasible, full fit PENDING4GiB. No actual payload/FEM/timing/integration/fit.
-Latest document slice **B4.36 certificate limitations/real-route preregistration**:
-141/96 static/independent Decimal document PASS; [report](docs/validation/b4_36_certificate_limitations_real_route.md),
-[protocol](docs/planning/b4_36_certificate_limitations_real_route_protocol.md), [contract](docs/planning/b4_36_certificate_limitations_real_route_contract.json).
-Ten limitations/twelve prospective obligations/ten stops; intended operator-error
-and left-inverse witness route UNIMPLEMENTED/UNEVALUATED. No real algorithm,
-certificate/cost/memory proof or new budget. Next proposed **B4.37 bounded public
-operator-enclosure and coercivity-witness software evidence**, not started:
-new owner/finite public-fixture contract before implementation/evaluation.
-No actual data/FEM/projection/root/network integration/fit/search/new cap or seal.
+Historical B4.36 [document preregistration](docs/validation/b4_36_certificate_limitations_real_route.md)
+remains141/96 PASS, real construction unfrozen. Latest public software **B4.37
+operator-enclosure/coercivity witness**:66 tests/217 independent predicates PASS
+on10 authored systems,6 certificates/4 prescribed stops; [report](docs/validation/b4_37_public_coercivity_witness.md),
+[protocol](docs/planning/b4_37_public_coercivity_witness_protocol.md), [contract](docs/planning/b4_37_public_coercivity_witness_contract.json).
+Exact intended public PSD/norm squares/fixed80-bit/outward binary64 only;
+positive G can stop with a conservative witness. No real construction algorithm,
+FEM certificate/cost/memory proof, loss/gradient change or new budget.
+Next proposed **B4.38 bounded read-only public-witness limitations and
+real-construction preregistration**, not started: new owner/finite text-only
+contract first. No actual data/FEM/witness construction/search/timing/projection/
+root/network integration/fit/new cap or seal.
 B4.23 stays3907/3976/all69 failures and57546.072069>7200; known-added58142.252069>7200,
 B4.24/28 memory gaps/both failures, B4.20 failure and B4.19 UNKNOWN remain.
 Full training memory PENDING/4GiB; software RSS fills no historical gap.

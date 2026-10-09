@@ -1,0 +1,379 @@
+{
+  "version": "topolab.b4_37.public-coercivity-bundle.v1",
+  "role": "public-coercivity-software",
+  "source_main": "71b11bae7c450e46e5e79ed148d35a1e1b2be045",
+  "material": {
+    "E_0": "1",
+    "E_min": "1/1000",
+    "p": 3
+  },
+  "fixtures": [
+    {
+      "id": "scalar-exact",
+      "unit_matrices": [
+        [
+          [
+            "1"
+          ]
+        ]
+      ],
+      "energy_factor": [
+        [
+          "1"
+        ]
+      ],
+      "left_inverse_witness": [
+        [
+          "1"
+        ]
+      ],
+      "free_space": "public-free-space:scalar-exact",
+      "factor_space": "public-free-space:scalar-exact",
+      "witness_space": "public-free-space:scalar-exact",
+      "dirichlet": "homogeneous-zero",
+      "operator_origin": "authored-exact-rational-public-system"
+    },
+    {
+      "id": "scalar-intended-plus",
+      "unit_matrices": [
+        [
+          [
+            "101/100"
+          ]
+        ]
+      ],
+      "energy_factor": [
+        [
+          "1"
+        ]
+      ],
+      "left_inverse_witness": [
+        [
+          "1"
+        ]
+      ],
+      "free_space": "public-free-space:scalar-intended-plus",
+      "factor_space": "public-free-space:scalar-intended-plus",
+      "witness_space": "public-free-space:scalar-intended-plus",
+      "dirichlet": "homogeneous-zero",
+      "operator_origin": "authored-exact-rational-public-system"
+    },
+    {
+      "id": "scalar-intended-minus",
+      "unit_matrices": [
+        [
+          [
+            "99/100"
+          ]
+        ]
+      ],
+      "energy_factor": [
+        [
+          "1"
+        ]
+      ],
+      "left_inverse_witness": [
+        [
+          "1"
+        ]
+      ],
+      "free_space": "public-free-space:scalar-intended-minus",
+      "factor_space": "public-free-space:scalar-intended-minus",
+      "witness_space": "public-free-space:scalar-intended-minus",
+      "dirichlet": "homogeneous-zero",
+      "operator_origin": "authored-exact-rational-public-system"
+    },
+    {
+      "id": "rectangular-singular-elements",
+      "unit_matrices": [
+        [
+          [
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "1"
+          ]
+        ],
+        [
+          [
+            "1",
+            "-1"
+          ],
+          [
+            "-1",
+            "1"
+          ]
+        ],
+        [
+          [
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ]
+      ],
+      "energy_factor": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ],
+      "left_inverse_witness": [
+        [
+          "1/3",
+          "1/3",
+          "1/3"
+        ],
+        [
+          "1/2",
+          "-1/2",
+          "0"
+        ]
+      ],
+      "free_space": "public-free-space:rectangular-singular-elements",
+      "factor_space": "public-free-space:rectangular-singular-elements",
+      "witness_space": "public-free-space:rectangular-singular-elements",
+      "dirichlet": "homogeneous-zero",
+      "operator_origin": "authored-exact-rational-public-system"
+    },
+    {
+      "id": "coupled-intended-error",
+      "unit_matrices": [
+        [
+          [
+            "2",
+            "1"
+          ],
+          [
+            "1",
+            "2"
+          ]
+        ],
+        [
+          [
+            "1/100",
+            "0"
+          ],
+          [
+            "0",
+            "1/200"
+          ]
+        ]
+      ],
+      "energy_factor": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "left_inverse_witness": [
+        [
+          "1/3",
+          "2/3",
+          "-1/3"
+        ],
+        [
+          "1/3",
+          "-1/3",
+          "2/3"
+        ]
+      ],
+      "free_space": "public-free-space:coupled-intended-error",
+      "factor_space": "public-free-space:coupled-intended-error",
+      "witness_space": "public-free-space:coupled-intended-error",
+      "dirichlet": "homogeneous-zero",
+      "operator_origin": "authored-exact-rational-public-system"
+    },
+    {
+      "id": "imperfect-left-inverse",
+      "unit_matrices": [
+        [
+          [
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      ],
+      "energy_factor": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "left_inverse_witness": [
+        [
+          "99/100",
+          "0"
+        ],
+        [
+          "0",
+          "99/100"
+        ]
+      ],
+      "free_space": "public-free-space:imperfect-left-inverse",
+      "factor_space": "public-free-space:imperfect-left-inverse",
+      "witness_space": "public-free-space:imperfect-left-inverse",
+      "dirichlet": "homogeneous-zero",
+      "operator_origin": "authored-exact-rational-public-system"
+    },
+    {
+      "id": "zero-witness",
+      "unit_matrices": [
+        [
+          [
+            "1"
+          ]
+        ]
+      ],
+      "energy_factor": [
+        [
+          "1"
+        ]
+      ],
+      "left_inverse_witness": [
+        [
+          "0"
+        ]
+      ],
+      "free_space": "public-free-space:zero-witness",
+      "factor_space": "public-free-space:zero-witness",
+      "witness_space": "public-free-space:zero-witness",
+      "dirichlet": "homogeneous-zero",
+      "operator_origin": "authored-exact-rational-public-system"
+    },
+    {
+      "id": "eta-boundary",
+      "unit_matrices": [
+        [
+          [
+            "1"
+          ]
+        ]
+      ],
+      "energy_factor": [
+        [
+          "1"
+        ]
+      ],
+      "left_inverse_witness": [
+        [
+          "2"
+        ]
+      ],
+      "free_space": "public-free-space:eta-boundary",
+      "factor_space": "public-free-space:eta-boundary",
+      "witness_space": "public-free-space:eta-boundary",
+      "dirichlet": "homogeneous-zero",
+      "operator_origin": "authored-exact-rational-public-system"
+    },
+    {
+      "id": "positive-but-conservative-stop",
+      "unit_matrices": [
+        [
+          [
+            "1/100",
+            "0"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      ],
+      "energy_factor": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "left_inverse_witness": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "free_space": "public-free-space:positive-but-conservative-stop",
+      "factor_space": "public-free-space:positive-but-conservative-stop",
+      "witness_space": "public-free-space:positive-but-conservative-stop",
+      "dirichlet": "homogeneous-zero",
+      "operator_origin": "authored-exact-rational-public-system"
+    },
+    {
+      "id": "indefinite-element-stop",
+      "unit_matrices": [
+        [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "1"
+          ]
+        ]
+      ],
+      "energy_factor": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "left_inverse_witness": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "free_space": "public-free-space:indefinite-element-stop",
+      "factor_space": "public-free-space:indefinite-element-stop",
+      "witness_space": "public-free-space:indefinite-element-stop",
+      "dirichlet": "homogeneous-zero",
+      "operator_origin": "authored-exact-rational-public-system"
+    }
+  ]
+}
