@@ -1104,3 +1104,19 @@ Hack3D code/comment/structure/figure, real label/model/raw evidence, FEM,
 network integration or fit was consulted/imported. Corrected bound changes no
 original loss/gradient. Real certificates/cost/memory/learned repair remain
 UNKNOWN_STOP/failed/PENDING; all historical frozen evidence/seals stay.
+
+## B4.36 conditional intended-operator witness provenance
+
+The [protocol](docs/planning/b4_36_certificate_limitations_real_route_protocol.md) and
+[contract](docs/planning/b4_36_certificate_limitations_real_route_contract.json) freeze a finite text-only review.
+Independent derivation uses the triangle/operator-norm inequality for a fixed
+represented energy factor A_hat and left-inverse witness Y, Frobenius upper
+bounds and a separately certified intended-operator error delta_plus. This gives
+the conditional lower bound ((1-eta_plus)/M_plus)^2-delta_plus for SAME intended G,
+with independent intended element PSD and strictly positive directed transfer.
+The document/Decimal audits141/96 verify schema, identities and retained criteria;
+they construct/evaluate no witness or real FEM certificate. No new external
+scientific/implementation source or Hack3D content was consulted. Historical
+frozen conventions/records and source stay; B4.35's public arithmetic scope is
+unchanged. This is no real algorithm, loss/gradient change, cost/memory proof,
+learned repair or permission to access sealed evidence.

@@ -51,7 +51,7 @@ fidelity/cost/reliability UNKNOWN. No production or actual FEM/integration/fit.
 Scientific FAIL/P17 unrepaired remain. Known-paid12721.16417100014444982>7200
 is diagnostic, not a cap/ledger reset. B4.34
 [preregistration](docs/validation/b4_34_admissibility_full_cost_preregistration.md)
-remains129/43 document PASS. Latest public software **B4.35 diagnostic certificate**:
+remains129/43 document PASS. Historical public software **B4.35 diagnostic certificate**:
 58 tests/394 independent exact-rational predicates PASS on8 systems/16 points;
 [report](docs/validation/b4_35_public_admissibility_certificate.md),
 [protocol](docs/planning/b4_35_public_admissibility_certificate_protocol.md),
@@ -60,8 +60,14 @@ Exact intended rational PSD/coercivity/residual and fixed80-bit/outward binary64
 only; tiny nonzero residual never certifies unmodified U. Bound diagnostic, no
 loss/gradient change. Real FEM certificates/costs UNKNOWN_STOP, all-paid7200
 infeasible, full fit PENDING4GiB. No actual payload/FEM/timing/integration/fit.
-Proposed next **B4.36 bounded read-only certificate limitations and real-route
-preregistration**, not started: owner continuation/finite metadata contract first.
+Latest document slice **B4.36 certificate limitations/real-route preregistration**:
+141/96 static/independent Decimal document PASS; [report](docs/validation/b4_36_certificate_limitations_real_route.md),
+[protocol](docs/planning/b4_36_certificate_limitations_real_route_protocol.md), [contract](docs/planning/b4_36_certificate_limitations_real_route_contract.json).
+Ten limitations/twelve prospective obligations/ten stops; intended operator-error
+and left-inverse witness route UNIMPLEMENTED/UNEVALUATED. No real algorithm,
+certificate/cost/memory proof or new budget. Next proposed **B4.37 bounded public
+operator-enclosure and coercivity-witness software evidence**, not started:
+new owner/finite public-fixture contract before implementation/evaluation.
 No actual data/FEM/projection/root/network integration/fit/search/new cap or seal.
 B4.23 stays3907/3976/all69 failures and57546.072069>7200; known-added58142.252069>7200,
 B4.24/28 memory gaps/both failures, B4.20 failure and B4.19 UNKNOWN remain.

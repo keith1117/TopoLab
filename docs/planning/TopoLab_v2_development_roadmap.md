@@ -14,23 +14,25 @@ See [report](../validation/b4_30_paid_continuation.md). Conditional48/720 remain
 unopened. Original failed preflight, all historical evidence/unknowns and
 full-training memory PENDING/4GiB remain; uniform stays default.
 
-Latest public software **B4.35 diagnostic certificate evidence**:58 tests/394
-candidate-free exact-rational enclosure predicates PASS on8 systems/16 points;
-see [report](../validation/b4_35_public_admissibility_certificate.md). Intended
-rational PSD/coercivity/residual and fixed80-bit/outward binary64 only. No real
-FEM certification/data/timing/integration/fit/new cap; bound diagnostic, no loss/
-gradient change. Real certificates/costs UNKNOWN_STOP, full fit PENDING4GiB,
-all-paid12721.16417100014444982>7200 remains failed. B4.33 stays47/849 public
-algebra and B4.34 stays129/43 document PASS. All prior failed proxies/ledgers/
-reserves/69 failures/UNKNOWN/gaps/P17/old3/3/B4.30's2/1 and seals remain.
-Next proposed B4.36 bounded read-only certificate limitations and real-route
-preregistration requires new owner continuation/finite metadata contract; not
-started/authorized. No B5.
+Latest document slice **B4.36 certificate limitations/real-route preregistration**:
+141/96 primary/independent document and Decimal predicates PASS; see
+[report](../validation/b4_36_certificate_limitations_real_route.md).18 versioned inputs,10 limitations/12
+prospective obligations/10 stops. Intended operator error and fixed left-inverse
+coercivity witness route UNIMPLEMENTED/UNEVALUATED; no real construction algorithm
+is frozen. No actual payload/FEM/timing/integration/fit/search/new cap or seal.
+Real certificates/costs UNKNOWN_STOP, full fit PENDING4GiB, scientific FAIL/P17
+unrepaired and all-paid12721.16417100014444982>7200 remain. Historical public
+B4.35 stays58/394 on8 systems/16 points; B4.33 stays47/849, B4.34 document129/43.
+No diagnostic bound changes the original loss/gradient. All prior failed proxies/
+ledgers/reserves/69 failures/UNKNOWN/gaps/quotas/seals remain. Next proposed
+B4.37 bounded public operator-enclosure and coercivity-witness software evidence
+requires new owner/finite authored-public-fixture contract; not started/authorized.
+No B5.
 [Project status](../project_status.md) holds the current boundary;
 [history](../development_history.md) preserves the chronology.
 
 Prepared: 2026-09-24
-Revised: 2026-10-08 (B4.35 bounded public certificate software evidence)
+Revised: 2026-10-09 (B4.36 certificate limitations/real-route preregistration)
 
 Related documents:
 
@@ -1377,6 +1379,42 @@ Proposed next **B4.36 bounded read-only certificate limitations and real-route
 preregistration** needs owner continuation/finite metadata contract; not started.
 No real inputs/FEM/fit/new cap or B5 follows. Close B4.35 and stop.
 
+### B4.36: Bounded read-only certificate limitations and real-route preregistration
+
+Owner “开始” from closed B4.35/main45a71fcfcfd1/all main CI/no open PR authorized
+one document slice. The [protocol](b4_36_certificate_limitations_real_route_protocol.md) and
+[contract](b4_36_certificate_limitations_real_route_contract.json) freeze18 versioned text/hash inputs before
+one primary review/one separately implemented stdlib/Decimal audit:141/96 PASS.
+Ten limitations/twelve prospective obligations/ten stops retain the gap from
+authored exact public matrices to intended real Hex8/assembly, residual/spectrum/
+rounding/SAME stored C_s, unchanged fidelity/reliability, all-paid/full memory.
+See [report](../validation/b4_36_certificate_limitations_real_route.md).
+
+An independently derived conditional route bounds ||G-A_hat.T*A_hat|| by
+delta_plus, ||I-Y*A_hat|| by eta_plus<1 and ||Y|| by M_plus>0. A strictly positive
+directed ((1-eta_plus)/M_plus)^2-delta_plus proves a lower bound for SAME intended G;
+element PSD remains separate. No real A_hat/Y or values are constructed/evaluated,
+no real algorithm is frozen, and no alternate witness/precision/factor/order
+search or matrix repair follows a failed premise. Original residual B_plus stays
+diagnostic and replaces no loss/gradient. No old numerical/backup-member replay,
+real payload/FEM/timing/integration/fit/search/new cap or sealed grant.
+
+All original criterion/failure/cost/memory objects match B4.35 unchanged.
+Scientific FAIL/fixed P17 unrepaired,69 old predicate failures/UNKNOWN/gaps/
+ledgers/FULL reserves/old3/3/B4.30's2/1/uniform/seals remain. Known-paid
+12721.16417100014444982>7200 remains infeasible; real costs/certificates UNKNOWN_STOP,
+full fit PENDING/4GiB. One administrative helper-inventory path failure retains
+UNKNOWN costs; both formal audits pass first invocation. All5 checks PASS/full
+1498 tests in703.12s; existing publication guards, protected exact-head/main CI/tree identity/owned cleanup/
+independent byte backup govern closure. Only11 documents enter Git; complete
+native/source/audit/controller/CI receipts stay external. Nine private files,
+unrelated refs, README/runtime/tests/conventions/dependencies/CI and frozen
+historical evidence stay. Software RSS fills no real or historical memory gap.
+Proposed next **B4.37 bounded public operator-enclosure and coercivity-witness
+software evidence** requires separate owner/finite public-fixture contract before
+implementation/evaluation; not started. No real route/fit/budget/final grant or
+B5 follows. Close B4.36 and stop.
+
 ### B5: One-time final comparison and project delivery gate
 
 Open the new ID cohort once after B4, followed by predeclared OOD and independent
@@ -1412,11 +1450,12 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.36 bounded read-only certificate limitations and real-route
-   preregistration:** not started/authorized; new owner continuation and finite
-   metadata-only contract first. B4.35 certifies only authored rational toys;
-   real certificates/cost/memory unresolved, all-paid7200 blocked. No actual
-   input/FEM/timing/integration/fit/new cap or final grant follows.
+1. **Proposed B4.37 bounded public operator-enclosure and coercivity-witness
+   software evidence:** not started/authorized; new owner continuation and finite
+   authored-public-fixture contract before implementation/evaluation. B4.36's
+   witness route is conditional/unimplemented, real certificate/cost/memory still
+   unresolved and all-paid7200 blocked. No actual payload/FEM/construction/search/
+   timing/integration/fit/new cap or final grant follows.
 
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
