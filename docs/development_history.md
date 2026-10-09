@@ -886,3 +886,35 @@ needs new owner continuation/finite public-fixture contract, not started. No
 actual data/FEM/timing/integration/fit/new cap or seal grant. Uniform default;
 real certification/full cost/memory and learned repair/confirmation/full B4/
 compatible final contract remain required. Stop after B4.34.
+
+## B4.35 bounded public admissibility-certificate software evidence (2026-10-08)
+
+Owner continuation from closed B4.34/main e2ebb5121f28/all main CI/no open PR
+authorized one software slice. The [protocol](planning/b4_35_public_admissibility_certificate_protocol.md),
+[contract](planning/b4_35_public_admissibility_certificate_contract.json) and8
+original public systems freeze before implementation/evaluation.58 tests/394
+candidate-free exact-rational predicates PASS over16 fixed anchor/current points.
+Intended PSD/prescribed positive G-lower_G*I, exact residual/energy arithmetic and
+fixed80-bit sqrt/outward binary64 produce diagnostic C<=B and SAME stored
+normalization. Tiny nonzero residual exposes unmodified U<C; no tolerant zero
+or approximate equality/adjoint transfer. Nine pre-byte denial cases and fixed
+negative/tampering families reject. One formal producer/audit,16/16/0 each.
+No actual data/FEM/timing/integration/fit/search/new cap or sealed access.
+See [report](validation/b4_35_public_admissibility_certificate.md).
+
+Four administrative metadata failures and first Ruff style failure retain
+source/diagnostics/native costs; fixes change no criteria or frozen bytes.
+All5 checks PASS/full1498 tests in670.09s; existing per-path/
+staged/all-upload/squash guards, protected exact-head/main CI/tree identity/owned
+cleanup/byte backup govern closure. Source/
+independent oracle/auditor/tests/small public fixtures/protocol/contract/report
+enter Git; generated evidence/controller/CI/native logs stay external. Nine
+private files, unrelated refs and old clone copy remain. README/conventions/
+runtime/query/ML/dependencies/CI and all old frozen evidence stay unchanged.
+Public exact-rational certification does not certify rounded real FEM.
+Scientific FAIL/P17 unrepaired, known-paid12721.16417100014444982>7200/all-paid
+FAIL_KNOWN_PAID_FLOOR, real costs/certificates UNKNOWN_STOP/full fit PENDING4GiB
+and every failure/69 predicates/UNKNOWN/gap/ledger/FULL reserve/quota/seal remain.
+Proposed next **B4.36 bounded read-only certificate limitations and real-route
+preregistration** requires separate owner/finite metadata contract, not started.
+No real payload/FEM/fit/new cap or final grant follows; close B4.35 and stop.

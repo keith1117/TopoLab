@@ -41,7 +41,7 @@ no third. Reflection stops. B4.31 [review](docs/validation/b4_31_reflection_fail
 remains118/430 metadata/native PASS, Q31=80.29939475003629922; old7323.1004352501081506
 and separate combined7403.39983000014444982 remain. Its source-premerge process
 failure stays failure. B4.32 [preregistration](docs/validation/b4_32_generalist_method_preregistration.md)
-remains69/32 static PASS. Latest software **B4.33 reciprocal-energy algebra/access**:
+remains69/32 static PASS. Historical public software **B4.33 reciprocal-energy algebra/access**:
 47 focused tests/849 independent exact-rational predicates PASS on8 public toys/
 76 fixed points; [report](docs/validation/b4_33_reciprocal_energy_evidence.md),
 [protocol](docs/planning/b4_33_reciprocal_energy_evidence_protocol.md),
@@ -49,14 +49,20 @@ remains69/32 static PASS. Latest software **B4.33 reciprocal-energy algebra/acce
 Exact toy anchor/PSD/SPD only; real floating residual/spectral/rounding certificates,
 fidelity/cost/reliability UNKNOWN. No production or actual FEM/integration/fit.
 Scientific FAIL/P17 unrepaired remain. Known-paid12721.16417100014444982>7200
-is diagnostic, not a cap/ledger reset. Latest documentation **B4.34**
-[preregistration](docs/validation/b4_34_admissibility_full_cost_preregistration.md):
-129/43 static document PASS; real PSD/coercivity/residual/rounding/normalizer
-certificates UNKNOWN_STOP, all-paid7200 infeasible, full fit PENDING4GiB.
-No real implementation/payload/production/integration/fit/timing or new cap.
-Proposed next **B4.35 bounded public admissibility-certificate software evidence**,
-not started: owner continuation and finite public-fixture contract first.
-No actual FEM, projection/root/network integration, fit/search or sealed grant.
+is diagnostic, not a cap/ledger reset. B4.34
+[preregistration](docs/validation/b4_34_admissibility_full_cost_preregistration.md)
+remains129/43 document PASS. Latest public software **B4.35 diagnostic certificate**:
+58 tests/394 independent exact-rational predicates PASS on8 systems/16 points;
+[report](docs/validation/b4_35_public_admissibility_certificate.md),
+[protocol](docs/planning/b4_35_public_admissibility_certificate_protocol.md),
+[contract](docs/planning/b4_35_public_admissibility_certificate_contract.json).
+Exact intended rational PSD/coercivity/residual and fixed80-bit/outward binary64
+only; tiny nonzero residual never certifies unmodified U. Bound diagnostic, no
+loss/gradient change. Real FEM certificates/costs UNKNOWN_STOP, all-paid7200
+infeasible, full fit PENDING4GiB. No actual payload/FEM/timing/integration/fit.
+Proposed next **B4.36 bounded read-only certificate limitations and real-route
+preregistration**, not started: owner continuation/finite metadata contract first.
+No actual data/FEM/projection/root/network integration/fit/search/new cap or seal.
 B4.23 stays3907/3976/all69 failures and57546.072069>7200; known-added58142.252069>7200,
 B4.24/28 memory gaps/both failures, B4.20 failure and B4.19 UNKNOWN remain.
 Full training memory PENDING/4GiB; software RSS fills no historical gap.

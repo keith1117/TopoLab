@@ -14,23 +14,23 @@ See [report](../validation/b4_30_paid_continuation.md). Conditional48/720 remain
 unopened. Original failed preflight, all historical evidence/unknowns and
 full-training memory PENDING/4GiB remain; uniform stays default.
 
-Latest software B4.33 remains47/849 PASS on8 public toys/76 points only.
-Latest documentation **B4.34 admissibility/full-cost preregistration** passes
-129 static/43 independent document/Decimal predicates; see
-[report](../validation/b4_34_admissibility_full_cost_preregistration.md).
-Real intended-PSD/coercivity/residual/rounding/normalizer certificates UNKNOWN_STOP;
-no real implementation/evaluation/payload/FEM/integration/fit/timing/search.
-Known paid12721.16417100014444982>7200 makes unchanged ALL-paid feasibility
-FAIL_KNOWN_PAID_FLOOR; real incremental costs UNKNOWN/full fit PENDING4GiB.
-Original failed proxies, ledgers/reserves/69 failures/UNKNOWN/premerge process
-failure, P17/scientific FAIL, old3/3/B4.30's2/1 and all seals remain. Proposed
-next B4.35 bounded public admissibility-certificate software evidence needs
-owner continuation and finite public-fixture contract, not started. No B5.
+Latest public software **B4.35 diagnostic certificate evidence**:58 tests/394
+candidate-free exact-rational enclosure predicates PASS on8 systems/16 points;
+see [report](../validation/b4_35_public_admissibility_certificate.md). Intended
+rational PSD/coercivity/residual and fixed80-bit/outward binary64 only. No real
+FEM certification/data/timing/integration/fit/new cap; bound diagnostic, no loss/
+gradient change. Real certificates/costs UNKNOWN_STOP, full fit PENDING4GiB,
+all-paid12721.16417100014444982>7200 remains failed. B4.33 stays47/849 public
+algebra and B4.34 stays129/43 document PASS. All prior failed proxies/ledgers/
+reserves/69 failures/UNKNOWN/gaps/P17/old3/3/B4.30's2/1 and seals remain.
+Next proposed B4.36 bounded read-only certificate limitations and real-route
+preregistration requires new owner continuation/finite metadata contract; not
+started/authorized. No B5.
 [Project status](../project_status.md) holds the current boundary;
 [history](../development_history.md) preserves the chronology.
 
 Prepared: 2026-09-24
-Revised: 2026-10-08 (B4.34 finite admissibility/full-cost preregistration)
+Revised: 2026-10-08 (B4.35 bounded public certificate software evidence)
 
 Related documents:
 
@@ -1348,6 +1348,35 @@ requires separate owner continuation/finite public-fixture contract, not started
 No actual data/FEM/timing/integration/fit/new cap or sealed grant follows;
 learned repair/independent confirmation/full B4/compatible final precede B5.
 
+### B4.35: Bounded public admissibility-certificate software evidence
+
+Owner continuation after closed B4.34 authorized exactly one software slice.
+The [protocol](b4_35_public_admissibility_certificate_protocol.md),
+[contract](b4_35_public_admissibility_certificate_contract.json) and8 authored
+systems freeze before implementation/evaluation.58 tests/394 independent exact-
+rational predicates PASS on16 fixed points. Intended PSD/G-lower_G*I, same
+positive SIMP and exact energy/residual arithmetic with fixed80-bit/outward
+binary64 bound actual C and SAME stored normalization. Candidate never solves;
+separate oracle uses own assembly/elimination and rational endpoint inequalities.
+Tiny residual shows unmodified U<C; six nonzero fixtures remain uncertified for
+unmodified U, two prove exact zero. Nine pre-byte denials/all fixed negative
+families pass. One formal producer/audit each16/16/0, no formal retry. Diagnostic
+bound changes no original objective/gradient/approximate equality/adjoint claim.
+See [report](../validation/b4_35_public_admissibility_certificate.md).
+
+Only exact intended public rational matrices are certified; rounded real FEM,
+real fidelity/cost/reliability and full fit memory remain UNKNOWN_STOP/PENDING4GiB.
+No actual data/FEM/timing/integration/fit/search/new cap/sealed grant. Known paid
+12721.16417100014444982>7200/all-paid FAIL, all old failures/69 predicates/
+UNKNOWN/gaps/costs/ledgers/FULL reserves/P17/quotas/seals remain. Four metadata
+read failures/one Ruff style failure retain logs/sources/native/UNKNOWN costs;
+same-scope fixes change no scientific criterion. All5 checks/publication guards,
+protected exact-head/main CI/tree identity/owned cleanup/byte backup close only
+this software slice. README/conventions/old runtime/CI/frozen bytes remain.
+Proposed next **B4.36 bounded read-only certificate limitations and real-route
+preregistration** needs owner continuation/finite metadata contract; not started.
+No real inputs/FEM/fit/new cap or B5 follows. Close B4.35 and stop.
+
 ### B5: One-time final comparison and project delivery gate
 
 Open the new ID cohort once after B4, followed by predeclared OOD and independent
@@ -1383,11 +1412,11 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.35 bounded public admissibility-certificate software evidence:**
-   not started/authorized; new owner continuation and finite public-fixture
-   contract first. B4.34 accepts written obligations only; real certificates/
-   costs/memory remain unresolved and all-paid7200 is blocked. No real payload,
-   FEM/timing/integration/fit/new cap or final grant follows.
+1. **Proposed B4.36 bounded read-only certificate limitations and real-route
+   preregistration:** not started/authorized; new owner continuation and finite
+   metadata-only contract first. B4.35 certifies only authored rational toys;
+   real certificates/cost/memory unresolved, all-paid7200 blocked. No actual
+   input/FEM/timing/integration/fit/new cap or final grant follows.
 
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
