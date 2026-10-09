@@ -1050,3 +1050,59 @@ full B4 and compatible final remain before B5. Report B4.39 and stop after B4.38
 
 B4.38 publication also retains the staged report EOF-whitespace failure and its
 known native cost; result prose/EOF corrected before fresh staging/upload guards.
+
+## B4.39 bounded public fixed-construction witness software (2026-10-09)
+
+Owner “继续” after closed B4.38/main d576a9f1f2c5/all three main CI/no open PR
+pins ONE public software slice. Protocol/contract/ten original rational systems
+freeze BEFORE implementation/evaluation,31 starting-main text/hash inputs.
+72 focused tests/993 independent predicates PASS, including692 exact RN-even
+operation checks. One formal producer/audit each,10/10/0 complete:7 strictly
+positive certificates and3 prescribed stops. At most2 free DOFs/3 elements/3
+stack rows; one scalar binary64 unpivoted Householder QR/positive-diagonal sign/
+triangular left inverse with pinned loop/reduction order. Independent Fraction
+midpoint/squared-midpoint proofs consume the complete hex trace, then separately
+prove intended element PSD, BOTH intended-to-stack/stack-to-represented error,
+complete G-A_hat.T*A_hat/left residual/Y norm and fixed80-bit/outward binary64
+positive lower stages. No assumed-zero error. Rank-deficient construction,
+positive conservative bound and indefinite element stop with full traces/errors;
+positive summed G does not replace separate element PSD or prove a new witness.
+See [report](validation/b4_39_public_fixed_construction_witness.md), [protocol](planning/b4_39_public_fixed_construction_witness_protocol.md), [contract](planning/b4_39_public_fixed_construction_witness_contract.json).
+
+Real geometry/constitutive/Hex8/quadrature/scatter/irrational representation/
+construction/certificate/cost remain UNKNOWN_STOP, real executable UNFROZEN.
+Public rational stack and small QR certify only SAME intended authored operators.
+Original residual B_plus remains diagnostic, tiny nonzero never certifies U;
+no loss/gradient/intercept/SAME stored normalizer/fidelity/reliability change.
+ALL four inherited criterion/failure/cost/memory objects equal B4.38 completely.
+Scientific FAIL/P17 unrepaired/all69 failures/UNKNOWN/gaps/old ledgers/FULL
+reserves/closed3/3/B4.30's2/1/uniform/seals stay. Known-paid
+12721.16417100014444982>7200/all-paid FAIL/full fit PENDING4GiB remain.
+Three pre-native administrative lookup/field failures and two native Ruff
+format/strict-zip failures remain with original source/full errors/exits/costs;
+same-scope corrections change no frozen standard, panel or algorithm. Both
+formal calls pass FIRST attempt. Unprofiled authoring/metadata/controller/Git/
+remoteCI costs UNKNOWN_NOT_ZERO, software RSS fills no old or training gap.
+No actual payload/FEM/geometry/construction/timing/integration/fit/search/new cap
+or sealed grant. All software/raw traces/native/CI records remain external.
+
+All5 mandatory commands PASS before commit: `uv sync --dev --locked`,
+`uv run ruff check .`, `uv run mypy src`, `uv run pytest`, `git diff --check`.
+Complete1636/1636 pytest PASS in777.61s under unchanged
+original tolerances/one-thread CPU, including all72 new meaningful public tests.
+Existing per-path/staged/all-upload/actual-squash/protected exact-head/main CI/
+equal tree/owned cleanup/independent byte backup govern closure.
+Only15 reviewed source/oracle/test/fixture/contract/report/current document paths
+enter Git. Existing per-path/staged/every-upload/whole-squash guards, protected
+exact-head/main CI/equal tree/owned cleanup/independent byte backup govern closure.
+README/existing runtime/tests/fixtures/conventions/locks/CI/frozen history and
+nine private files/unrelated refs stay.
+
+Next proposed **B4.40 bounded read-only constructed-witness limitations and
+real-representation preregistration**, NOT STARTED/AUTHORIZED. New owner
+continuation/finite text-only contract FIRST; intended real geometry/constitutive/
+Hex8/quadrature/scatter/irrational representation and complete costs/memory
+obligations only. No actual input/FEM/construction/timing/integration/fit/search/
+new budget or sealed grant. Real certification/full cost/memory, learned repair/
+independent confirmation/full B4 and compatible final remain before B5.
+Report B4.40 and stop after B4.39.
