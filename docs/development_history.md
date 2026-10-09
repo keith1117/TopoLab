@@ -918,3 +918,39 @@ and every failure/69 predicates/UNKNOWN/gap/ledger/FULL reserve/quota/seal remai
 Proposed next **B4.36 bounded read-only certificate limitations and real-route
 preregistration** requires separate owner/finite metadata contract, not started.
 No real payload/FEM/fit/new cap or final grant follows; close B4.35 and stop.
+
+## B4.36 bounded read-only certificate limitations/real-route preregistration (2026-10-09)
+
+Owner “开始” from closed B4.35/main45a71fcfcfd1/all main CI/no open PR authorized
+one document slice. The [protocol](planning/b4_36_certificate_limitations_real_route_protocol.md) and
+[contract](planning/b4_36_certificate_limitations_real_route_contract.json) freeze18 versioned text/hash inputs before
+one primary review/one separately implemented stdlib/Decimal audit:141/96 PASS.
+Ten limitations/twelve prospective obligations/ten stops retain the gap from
+authored exact public matrices to intended real Hex8/assembly, residual/spectrum/
+rounding/SAME stored C_s, unchanged fidelity/reliability, all-paid/full memory.
+See [report](validation/b4_36_certificate_limitations_real_route.md).
+
+An independently derived conditional route bounds ||G-A_hat.T*A_hat|| by
+delta_plus, ||I-Y*A_hat|| by eta_plus<1 and ||Y|| by M_plus>0. A strictly positive
+directed ((1-eta_plus)/M_plus)^2-delta_plus proves a lower bound for SAME intended G;
+element PSD remains separate. No real A_hat/Y or values are constructed/evaluated,
+no real algorithm is frozen, and no alternate witness/precision/factor/order
+search or matrix repair follows a failed premise. Original residual B_plus stays
+diagnostic and replaces no loss/gradient. No old numerical/backup-member replay,
+real payload/FEM/timing/integration/fit/search/new cap or sealed grant.
+
+All original criterion/failure/cost/memory objects match B4.35 unchanged.
+Scientific FAIL/fixed P17 unrepaired,69 old predicate failures/UNKNOWN/gaps/
+ledgers/FULL reserves/old3/3/B4.30's2/1/uniform/seals remain. Known-paid
+12721.16417100014444982>7200 remains infeasible; real costs/certificates UNKNOWN_STOP,
+full fit PENDING/4GiB. One administrative helper-inventory path failure retains
+UNKNOWN costs; both formal audits pass first invocation. All5 checks PASS/full
+1498 tests in703.12s; existing publication guards, protected exact-head/main CI/tree identity/owned cleanup/
+independent byte backup govern closure. Only11 documents enter Git; complete
+native/source/audit/controller/CI receipts stay external. Nine private files,
+unrelated refs, README/runtime/tests/conventions/dependencies/CI and frozen
+historical evidence stay. Software RSS fills no real or historical memory gap.
+Proposed next **B4.37 bounded public operator-enclosure and coercivity-witness
+software evidence** requires separate owner/finite public-fixture contract before
+implementation/evaluation; not started. No real route/fit/budget/final grant or
+B5 follows. Close B4.36 and stop.

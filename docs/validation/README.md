@@ -5,16 +5,17 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
-Latest public software [B4.35](b4_35_public_admissibility_certificate.md):
-58 tests/394 independent exact-rational predicates PASS on8 authored systems/
-16 points only. Intended PSD/coercivity/residual/fixed80-bit/outward binary64;
-diagnostic bound, no loss/gradient or real FEM certificate. Real costs/certificates
-UNKNOWN_STOP, all-paid12721.16417100014444982>7200/full fit PENDING4GiB.
-B4.33's47/849 and B4.34's129/43 retain their scopes; all prior failures/UNKNOWN/
-memory gaps/costs/ledgers/FULL reserves/quotas/P17/seals remain. No actual data/
-FEM/timing/integration/fit/search/new cap. Next proposed B4.36 read-only certificate
-limitations/real-route preregistration requires new owner/finite metadata contract,
-not started. Uniform/default/no B5 remain.
+Latest document slice [B4.36](b4_36_certificate_limitations_real_route.md):141/96 static/independent document
+and Decimal PASS;18 versioned text inputs,10 limitations/12 prospective obligations/
+10 stops. Conditional intended-operator error/left-inverse witness route remains
+UNIMPLEMENTED/UNEVALUATED, real construction algorithm unfrozen. Real certificates/
+costs UNKNOWN_STOP, all-paid12721.16417100014444982>7200/full fit PENDING4GiB;
+scientific FAIL/P17 unrepaired/uniform and all old failures/UNKNOWN/gaps/ledgers/
+FULL reserves/quotas/seals remain. Historical B4.35's58/394 public8 systems/16
+points, B4.33's47/849 and B4.34's129/43 retain their scopes. No actual payload/
+FEM/timing/integration/fit/search/new cap. Next proposed B4.37 bounded public
+operator-enclosure/coercivity-witness software requires new owner/finite public-
+fixture contract before implementation/evaluation; not started. No B5.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -146,3 +147,5 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 - [B4.34 bounded read-only admissibility and full-cost preregistration](b4_34_admissibility_full_cost_preregistration.md):129/43 documentary PASS; real certificates UNKNOWN_STOP, unchanged all-paid7200 infeasible, full fit PENDING4GiB, scientific FAIL/P17 unrepaired.
 
 - [B4.35 bounded public admissibility-certificate software evidence](b4_35_public_admissibility_certificate.md)
+
+- [B4.36 bounded read-only certificate limitations and real-route preregistration](b4_36_certificate_limitations_real_route.md):141/96 document/Decimal PASS; no real construction/evaluation, scientific FAIL/P17 unrepaired, all-paid7200 infeasible, full fit PENDING4GiB.

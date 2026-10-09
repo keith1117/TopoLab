@@ -4,16 +4,17 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-Latest public software [B4.35](../validation/b4_35_public_admissibility_certificate.md):
-58 tests/394 independent exact-rational predicates PASS on8 authored systems/
-16 points only. Intended PSD/coercivity/residual/fixed80-bit/outward binary64;
-diagnostic bound, no loss/gradient or real FEM certificate. Real costs/certificates
-UNKNOWN_STOP, all-paid12721.16417100014444982>7200/full fit PENDING4GiB.
-B4.33's47/849 and B4.34's129/43 retain their scopes; all prior failures/UNKNOWN/
-memory gaps/costs/ledgers/FULL reserves/quotas/P17/seals remain. No actual data/
-FEM/timing/integration/fit/search/new cap. Next proposed B4.36 read-only certificate
-limitations/real-route preregistration requires new owner/finite metadata contract,
-not started. Uniform/default/no B5 remain.
+Latest document slice [B4.36](../validation/b4_36_certificate_limitations_real_route.md):141/96 static/independent document
+and Decimal PASS;18 versioned text inputs,10 limitations/12 prospective obligations/
+10 stops. Conditional intended-operator error/left-inverse witness route remains
+UNIMPLEMENTED/UNEVALUATED, real construction algorithm unfrozen. Real certificates/
+costs UNKNOWN_STOP, all-paid12721.16417100014444982>7200/full fit PENDING4GiB;
+scientific FAIL/P17 unrepaired/uniform and all old failures/UNKNOWN/gaps/ledgers/
+FULL reserves/quotas/seals remain. Historical B4.35's58/394 public8 systems/16
+points, B4.33's47/849 and B4.34's129/43 retain their scopes. No actual payload/
+FEM/timing/integration/fit/search/new cap. Next proposed B4.37 bounded public
+operator-enclosure/coercivity-witness software requires new owner/finite public-
+fixture contract before implementation/evaluation; not started. No B5.
 
 ## Overall project plans
 
@@ -130,3 +131,5 @@ existence; its validation report determines whether its Gate passed or failed.
 - [B4.34 bounded read-only admissibility/full-cost preregistration](b4_34_admissibility_full_cost_preregistration_protocol.md) · [Authored finite contract](b4_34_admissibility_full_cost_preregistration_contract.json):129/43 documentary PASS only; real certificates/cost/memory unresolved, no production or fit budget.
 
 - [B4.35 bounded public admissibility-certificate software evidence](b4_35_public_admissibility_certificate_protocol.md) · [Finite contract](b4_35_public_admissibility_certificate_contract.json)
+
+- [B4.36 bounded read-only certificate limitations and real-route preregistration](b4_36_certificate_limitations_real_route_protocol.md) · [Finite document contract](b4_36_certificate_limitations_real_route_contract.json):141/96 document PASS only; conditional intended-operator error/left-inverse route unimplemented, real certificates/costs UNKNOWN_STOP, full fit PENDING4GiB, no real access or new budget.

@@ -1,49 +1,52 @@
 # Current project status
 
-Updated: 2026-10-08. Latest software slice **B4.35 bounded public admissibility-
-certificate evidence**:58 focused tests/394 independent exact-rational enclosure
-predicates PASS,8 authored systems/16 fixed points. See
-[report](validation/b4_35_public_admissibility_certificate.md),
-[protocol](planning/b4_35_public_admissibility_certificate_protocol.md) and
-[finite contract](planning/b4_35_public_admissibility_certificate_contract.json).
-Real intended FEM/PSD/coercivity/residual/rounding/normalizer certificates remain
-UNKNOWN_STOP. Scientific FAIL/P17 unrepaired, full fit PENDING4GiB and all-paid
-12721.16417100014444982>7200 remain; no real data/numerical campaign/integration/fit.
+Updated: 2026-10-09. Latest document slice **B4.36 bounded read-only certificate
+limitations and real-route preregistration**:141 primary/96 independent document
+and Decimal predicates PASS. See [report](validation/b4_36_certificate_limitations_real_route.md),
+[protocol](planning/b4_36_certificate_limitations_real_route_protocol.md) and [finite contract](planning/b4_36_certificate_limitations_real_route_contract.json).
+The intended operator-error/left-inverse coercivity route is UNIMPLEMENTED and
+UNEVALUATED; no real construction algorithm is frozen. Real FEM certificates and
+costs remain UNKNOWN_STOP, scientific FAIL/P17 unrepaired, unchanged all-paid
+12721.16417100014444982>7200 infeasible, full fit memory PENDING/4GiB. No new
+real payload/FEM/timing/integration/fit/search/budget or sealed access.
 
-## B4.35 bounded public certificate software accepted
+## B4.36 bounded document preregistration accepted
 
-Owner continuation after closed B4.34/main e2ebb5121f28/all required CI/no open
-PR authorizes exactly one slice. Actual rules/current evidence and closed metadata
-were checked without old generated/backup-member replay. Nine private files,
-unrelated refs and old clone copy remain. A clean separate clone uses
-feat/b4-35-public-admissibility-certificates. Protocol/contract/eight public
-definitions freeze before implementation/evaluation;14 source identities,
-16 anchor/current points, one prescribed approximate anchor/lower_G per system,
-same rational operators/material/support/load/C_s and fixed80-bit sqrt enclosure.
+Owner “开始” after closed B4.35/main45a71fcfcfd1/all required CI/no open PR
+authorizes exactly one slice. Root/ancestor/nested rules, ordered documents,
+prior conversation and versioned evidence agree. Nine private files and unrelated
+refs remain; separate clean clone docs/b4-36-certificate-limitations-real-route.
+Protocol/contract/eighteen source identities freeze before one primary and one
+separately implemented stdlib/Decimal document audit,141/96 PASS. Ten limitations,
+twelve prospective obligations and ten closed stop dispositions cover intended
+representation/element PSD/coercivity, arithmetic/residual/label, original
+fidelity/reliability, complete paid cost and simultaneous full memory. No old
+numerical/generated or backup-member replay; source files are text/hash only.
 
-Exact intended PSD/G-lower_G*I proof and Fraction energy/residual/SIMP arithmetic
-yield outward binary64 U_plus/r_plus/m_minus and diagnostic B_plus/SAME stored
-normalization. Candidate never solves. Candidate-free independent assembly and
-1x1/2x2 elimination checks394 exact endpoint/actual-C inequalities; one formal
-producer/audit each complete16/16/0. Tiny nonzero residual explicitly has U<C
-and unmodified bound remains uncertified; only two exact-zero fixtures qualify.
-Nine pre-byte wrong bindings and all fixed negative families reject. No generic
-epsilon/precision/bound search or loss/gradient replacement. Public rational
-assembly certifies ONLY those intended numbers, not rounded real Hex8/FEM.
+One conditional proof uses SAME intended G and independently outward delta_plus
+for ||G-A_hat.T*A_hat||, eta_plus>=||I-Y*A_hat||_F with eta_plus<1,
+and M_plus>=||Y||_F with M_plus>0.
+Directed lower_G<=((1-eta_plus)/M_plus)^2-delta_plus must be strictly positive;
+intended element PSD stays a separate proof. Missing/error-negative/nonfinite,
+wrong identity/space or nonpositive bound STOP; no alternate witness, precision,
+factor/order search or matrix repair. No real A_hat/Y or values are constructed.
+Future real construction needs separate owner/finite algorithm/cost/memory contract.
+Residual B_plus remains diagnostic; original loss/gradient/SAME stored C_s unchanged.
 
-Original B4.33 exact algebra47/849 and B4.34 documentary129/43 retain their
-scope; all frozen original criteria/failures/cost/memory fields are byte-bound.
-No actual input/FEM/timing trial/projection/root/network integration, fit/search,
-new cap or sealed access. Real certification/fidelity/cost/reliability remain
-UNKNOWN_STOP; public software RSS fills no memory gap. Known paid floor blocks
-unchanged all-paid feasibility even at zero new work. Uniform remains default.
-Four administrative metadata failures and first Ruff style failure are retained;
-same-scope corrections change no scientific standard or frozen input.
-All5 mandatory checks PASS, full1498/1498 pytest in670.09s;
-existing per-path/staged/all-upload/squash guards,
+Prior public B4.35's58 tests/394 exact-rational predicates on8 systems/16 points
+and B4.33's47/849 remain limited to authored public inputs; B4.34 stays129/43
+document PASS. All original criterion/failure/cost/memory objects match unchanged.
+Known-paid floor is diagnostic, not a cap or ledger reset; costs UNKNOWN block
+fitting and software RSS fills no old memory gap. All scientific failures,69
+B4.23 predicates, B4.24/28 gaps, B4.31 premerge failure, old3/3 and B4.30's2/1,
+both FULL180 and failed191.9666532080154866, all seals and uniform default remain.
+One administrative helper-inventory path failure is retained with UNKNOWN costs;
+both formal document audits pass on their first invocation. No standard changed.
+All5 required checks PASS/full1498 tests in703.12s;
+reviewed-path/staged/all-upload/squash guards,
 protected exact-head/main CI/tree identity/owned cleanup/independent byte backup
-govern publication closure. Complete logs/native/source/CI records stay external.
-Unprofiled authoring/controller/metadata/remoteCI full costs/RSS stay UNKNOWN.
+govern publication closure. All native logs, source snapshots and receipts stay
+external; unprofiled authoring/metadata/controller/remoteCI UNKNOWN_NOT_ZERO.
 
 ## Delivery and operational boundary
 
@@ -155,11 +158,11 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and proposed successor
 
-B4.35 closes only this public software slice after publication/main CI/backup.
-Next proposed **B4.36 bounded read-only certificate limitations and real-route
-preregistration**, not started/authorized, requires new owner continuation and a
-finite metadata-only contract. It may review the public rational limitation and
-prospective real certificate obligations only. No actual data/FEM/timing trial/
-integration/fit/new budget or sealed grant. Real certification/full cost/memory,
-learned repair/independent confirmation/full new B4 and compatible final remain
-before B5. Report B4.36 and stop after B4.35.
+B4.36 closes only this document slice after publication/main CI/backup.
+Next proposed **B4.37 bounded public operator-enclosure and coercivity-witness
+software evidence**, not started/authorized, requires new owner continuation and
+a finite authored-public-fixture contract before implementation/evaluation.
+It may verify conditional witness algebra/rejections on small public inputs only.
+No real input/FEM/construction/search/timing/integration/fit/new cap or sealed grant.
+Real certification/full cost/memory, learned repair/independent confirmation/full
+new B4 and compatible final remain before B5. Report B4.37 and stop after B4.36.
