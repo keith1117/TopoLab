@@ -1,0 +1,307 @@
+{
+  "version": "topolab.b4_35.public-certificate-bundle.v1",
+  "role": "public-certificate-software",
+  "source_main": "e2ebb5121f28df4f9df0f3295e390c042b146785",
+  "material": {
+    "E_0": "1",
+    "E_min": "1/1000",
+    "p": 3
+  },
+  "fixtures": [
+    {
+      "id": "single-exact",
+      "unit_matrices": [
+        [
+          [
+            "1"
+          ]
+        ]
+      ],
+      "load": [
+        "1"
+      ],
+      "anchor_density": [
+        "1"
+      ],
+      "current_density": [
+        "1/2"
+      ],
+      "approximate_displacement": [
+        "1"
+      ],
+      "lower_G": "1",
+      "stored_normalizer": "11/10",
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "single-tiny-residual",
+      "unit_matrices": [
+        [
+          [
+            "1"
+          ]
+        ]
+      ],
+      "load": [
+        "1"
+      ],
+      "anchor_density": [
+        "1"
+      ],
+      "current_density": [
+        "1/2"
+      ],
+      "approximate_displacement": [
+        "999999999999/1000000000000"
+      ],
+      "lower_G": "1",
+      "stored_normalizer": "11/10",
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "single-overbalanced",
+      "unit_matrices": [
+        [
+          [
+            "1"
+          ]
+        ]
+      ],
+      "load": [
+        "1"
+      ],
+      "anchor_density": [
+        "1"
+      ],
+      "current_density": [
+        "3/4"
+      ],
+      "approximate_displacement": [
+        "3/2"
+      ],
+      "lower_G": "1",
+      "stored_normalizer": "11/10",
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "coupled-singular-elements",
+      "unit_matrices": [
+        [
+          [
+            "1",
+            "-1"
+          ],
+          [
+            "-1",
+            "1"
+          ]
+        ],
+        [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      ],
+      "load": [
+        "1",
+        "0"
+      ],
+      "anchor_density": [
+        "1",
+        "1"
+      ],
+      "current_density": [
+        "1/2",
+        "3/4"
+      ],
+      "approximate_displacement": [
+        "1",
+        "0"
+      ],
+      "lower_G": "1/4",
+      "stored_normalizer": "11/5",
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "zero-energy-element",
+      "unit_matrices": [
+        [
+          [
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ],
+        [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      ],
+      "load": [
+        "1",
+        "0"
+      ],
+      "anchor_density": [
+        "1",
+        "1"
+      ],
+      "current_density": [
+        "1/2",
+        "3/4"
+      ],
+      "approximate_displacement": [
+        "1",
+        "0"
+      ],
+      "lower_G": "1",
+      "stored_normalizer": "11/10",
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "three-element-coupling",
+      "unit_matrices": [
+        [
+          [
+            "2",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ],
+        [
+          [
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "1"
+          ]
+        ],
+        [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      ],
+      "load": [
+        "1",
+        "-1"
+      ],
+      "anchor_density": [
+        "1",
+        "1",
+        "1"
+      ],
+      "current_density": [
+        "1/2",
+        "3/4",
+        "1/4"
+      ],
+      "approximate_displacement": [
+        "1/2",
+        "-3/4"
+      ],
+      "lower_G": "1",
+      "stored_normalizer": "77/50",
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "ill-conditioned-positive",
+      "unit_matrices": [
+        [
+          [
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ]
+        ],
+        [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1/1099511627776"
+          ]
+        ]
+      ],
+      "load": [
+        "1",
+        "1"
+      ],
+      "anchor_density": [
+        "1",
+        "1"
+      ],
+      "current_density": [
+        "1/2",
+        "3/4"
+      ],
+      "approximate_displacement": [
+        "1",
+        "1099511627775"
+      ],
+      "lower_G": "1/1099511627776",
+      "stored_normalizer": "12094627905547/10",
+      "dirichlet": "homogeneous-zero"
+    },
+    {
+      "id": "nonbinary-rational-operator",
+      "unit_matrices": [
+        [
+          [
+            "2/3",
+            "1/10"
+          ],
+          [
+            "1/10",
+            "1/3"
+          ]
+        ]
+      ],
+      "load": [
+        "1",
+        "1"
+      ],
+      "anchor_density": [
+        "1"
+      ],
+      "current_density": [
+        "1/2"
+      ],
+      "approximate_displacement": [
+        "1",
+        "2"
+      ],
+      "lower_G": "1/4",
+      "stored_normalizer": "792/191",
+      "dirichlet": "homogeneous-zero"
+    }
+  ]
+}

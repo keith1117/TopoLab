@@ -5,16 +5,16 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
-Latest documentation [B4.34](b4_34_admissibility_full_cost_preregistration.md):
-129/43 static/independent document/Decimal PASS, real certificates UNKNOWN_STOP,
-all-paid12721.16417100014444982>7200, full fit PENDING4GiB. No actual numerical/
-production/payload/scalar replay/integration/fit/timing/search or final access.
-B4.33 remains public toy software47/849; B4.32/B4.31/latest numerical B4.30
-retain their separate scopes and scientific FAIL/P17 unrepaired. All failures,
-UNKNOWN/memory gaps/premerge process failure, paid ledgers/reserves/quotas/seals
-remain. Proposed next B4.35 public certificate software evidence requires new
-owner continuation/finite public-fixture contract; no real-data/FEM/fit/new cap.
-Uniform remains default; no later slice or B5 started.
+Latest public software [B4.35](b4_35_public_admissibility_certificate.md):
+58 tests/394 independent exact-rational predicates PASS on8 authored systems/
+16 points only. Intended PSD/coercivity/residual/fixed80-bit/outward binary64;
+diagnostic bound, no loss/gradient or real FEM certificate. Real costs/certificates
+UNKNOWN_STOP, all-paid12721.16417100014444982>7200/full fit PENDING4GiB.
+B4.33's47/849 and B4.34's129/43 retain their scopes; all prior failures/UNKNOWN/
+memory gaps/costs/ledgers/FULL reserves/quotas/P17/seals remain. No actual data/
+FEM/timing/integration/fit/search/new cap. Next proposed B4.36 read-only certificate
+limitations/real-route preregistration requires new owner/finite metadata contract,
+not started. Uniform/default/no B5 remain.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -144,3 +144,5 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 - [B4.33 bounded reciprocal-energy algebra and access evidence](b4_33_reciprocal_energy_evidence.md):47 focused/849 independent exact-rational predicates PASS on8 public toys/76 fixed points; scientific FAIL/P17 unrepaired, real-state certificates/cost/memory remain unresolved.
 
 - [B4.34 bounded read-only admissibility and full-cost preregistration](b4_34_admissibility_full_cost_preregistration.md):129/43 documentary PASS; real certificates UNKNOWN_STOP, unchanged all-paid7200 infeasible, full fit PENDING4GiB, scientific FAIL/P17 unrepaired.
+
+- [B4.35 bounded public admissibility-certificate software evidence](b4_35_public_admissibility_certificate.md)

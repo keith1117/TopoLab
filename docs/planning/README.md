@@ -4,14 +4,16 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-Latest documentation [B4.34 admissibility/full-cost preregistration](../validation/b4_34_admissibility_full_cost_preregistration.md):
-129/43 static document/Decimal PASS only. Real PSD/coercivity/residual/rounding/
-normalizer evidence UNKNOWN_STOP, known paid12721.16417100014444982>7200,
-full fit PENDING4GiB. No real implementation/numerical/payload/FEM/integration/
-fit/timing/search. B4.33 remains public software47/849; all historical failures/
-costs/unknowns/quotas/P17/seals remain. Next proposed B4.35 bounded public
-admissibility-certificate software evidence requires owner continuation and
-finite public-fixture contract, not started. Uniform/default/no B5 remain.
+Latest public software [B4.35](../validation/b4_35_public_admissibility_certificate.md):
+58 tests/394 independent exact-rational predicates PASS on8 authored systems/
+16 points only. Intended PSD/coercivity/residual/fixed80-bit/outward binary64;
+diagnostic bound, no loss/gradient or real FEM certificate. Real costs/certificates
+UNKNOWN_STOP, all-paid12721.16417100014444982>7200/full fit PENDING4GiB.
+B4.33's47/849 and B4.34's129/43 retain their scopes; all prior failures/UNKNOWN/
+memory gaps/costs/ledgers/FULL reserves/quotas/P17/seals remain. No actual data/
+FEM/timing/integration/fit/search/new cap. Next proposed B4.36 read-only certificate
+limitations/real-route preregistration requires new owner/finite metadata contract,
+not started. Uniform/default/no B5 remain.
 
 ## Overall project plans
 
@@ -126,3 +128,5 @@ existence; its validation report determines whether its Gate passed or failed.
 - [B4.33 bounded reciprocal-energy software protocol](b4_33_reciprocal_energy_evidence_protocol.md) · [Finite contract](b4_33_reciprocal_energy_evidence_contract.json):47 software tests/849 independent predicates on8 public toys only; no real numerical/data/fit permission.
 
 - [B4.34 bounded read-only admissibility/full-cost preregistration](b4_34_admissibility_full_cost_preregistration_protocol.md) · [Authored finite contract](b4_34_admissibility_full_cost_preregistration_contract.json):129/43 documentary PASS only; real certificates/cost/memory unresolved, no production or fit budget.
+
+- [B4.35 bounded public admissibility-certificate software evidence](b4_35_public_admissibility_certificate_protocol.md) · [Finite contract](b4_35_public_admissibility_certificate_contract.json)

@@ -1088,3 +1088,19 @@ scientific repair is performed. Full costs/unknowns and PENDING4GiB remain.
 No new external scientific/implementation source, Hack3D code/comment/structure/
 figure, dataset, model or final evidence was consulted or imported. Historical
 equation references and frozen records retain their identities.
+
+## B4.35 finite public diagnostic certificate software provenance
+
+The [protocol](docs/planning/b4_35_public_admissibility_certificate_protocol.md)
+and [contract](docs/planning/b4_35_public_admissibility_certificate_contract.json)
+freeze8 original authored rational systems/16 points before implementation.
+Independent derivation from TopoLab's B4.34 proof uses exact principal minors/
+uniform coercivity/residual/energy, fixed80-bit integer sqrt enclosures and
+exact represented-binary64 comparisons for outward diagnostic bounds. Separate
+stdlib oracle/auditor uses its own intended assembly/1x1 or2x2 elimination and
+exact inequality checks without candidate helpers.58 tests/394 predicates pass
+only these public numbers. No new external scientific/implementation source,
+Hack3D code/comment/structure/figure, real label/model/raw evidence, FEM,
+network integration or fit was consulted/imported. Corrected bound changes no
+original loss/gradient. Real certificates/cost/memory/learned repair remain
+UNKNOWN_STOP/failed/PENDING; all historical frozen evidence/seals stay.
