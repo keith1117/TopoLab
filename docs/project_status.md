@@ -1,57 +1,55 @@
 # Current project status
 
-Updated: 2026-10-09. Latest document slice **B4.38 public-witness limitations and
-real-construction preregistration**:197 primary/135 independent document/Decimal
-predicates PASS. See [report](validation/b4_38_public_witness_limitations_real_construction.md), [protocol](planning/b4_38_public_witness_limitations_real_construction_protocol.md)
-and [contract](planning/b4_38_public_witness_limitations_real_construction_contract.json). One fixed prospective construction's
-obligations only; real executable algorithm UNFROZEN, no actual construction.
-Latest public B4.37 remains66/217 on10 systems/6 certificates/4 prescribed stops.
-Real FEM certificates/costs UNKNOWN_STOP, scientific FAIL/P17 unrepaired,
-all-paid12721.16417100014444982>7200/full fit PENDING4GiB/uniform/seals remain.
+Updated: 2026-10-09. Latest public software **B4.39 fixed construction witness**:
+72 focused tests/993 independent predicates PASS,692 exact binary64 operation
+checks,10 authored systems/7 certificates/3 prescribed stops. See
+[report](validation/b4_39_public_fixed_construction_witness.md), [protocol](planning/b4_39_public_fixed_construction_witness_protocol.md), [contract](planning/b4_39_public_fixed_construction_witness_contract.json).
+Public scalar QR/triangular construction and complete intended-error proof only;
+real FEM/representation/certificates/cost UNKNOWN_STOP, executable UNFROZEN.
+Scientific FAIL/P17 unrepaired/all-paid12721.16417100014444982>7200/full fit
+PENDING4GiB/uniform/seals stay. No actual execution or new budget.
 
-## B4.38 bounded document preregistration accepted
+## B4.39 bounded public fixed construction accepted
 
-Owner “继续” after closed B4.37/main6f8d8c5c8d67/all three main CI/no open PR
-authorizes exactly one document slice. The [protocol](planning/b4_38_public_witness_limitations_real_construction_protocol.md) and
-[contract](planning/b4_38_public_witness_limitations_real_construction_contract.json) bind28 starting-main text/hash inputs before one
-primary and one separate stdlib/document/Decimal audit:197/135 PASS. Twelve
-limitations/sixteen prospective obligations/twelve stops retain the gap from
-ten hand-prescribed public witnesses to SAME intended real Hex8 PSD/representation/
-construction/certification. B4.37's66 tests/217 predicates/6 certificates/4 stops
-remain; positive G can stop with a conservative witness, without a singularity
-verdict or alternate-witness permission. No old numerical/native/backup-member
-replay. See [report](validation/b4_38_public_witness_limitations_real_construction.md).
+Owner “继续” after closed B4.38/main d576a9f1f2c5/all three main CI/no open PR
+pins ONE public software slice. Protocol/contract/ten original rational systems
+freeze BEFORE implementation/evaluation,31 starting-main text/hash inputs.
+72 focused tests/993 independent predicates PASS, including692 exact RN-even
+operation checks. One formal producer/audit each,10/10/0 complete:7 strictly
+positive certificates and3 prescribed stops. At most2 free DOFs/3 elements/3
+stack rows; one scalar binary64 unpivoted Householder QR/positive-diagonal sign/
+triangular left inverse with pinned loop/reduction order. Independent Fraction
+midpoint/squared-midpoint proofs consume the complete hex trace, then separately
+prove intended element PSD, BOTH intended-to-stack/stack-to-represented error,
+complete G-A_hat.T*A_hat/left residual/Y norm and fixed80-bit/outward binary64
+positive lower stages. No assumed-zero error. Rank-deficient construction,
+positive conservative bound and indefinite element stop with full traces/errors;
+positive summed G does not replace separate element PSD or prove a new witness.
+See [report](validation/b4_39_public_fixed_construction_witness.md), [protocol](planning/b4_39_public_fixed_construction_witness_protocol.md), [contract](planning/b4_39_public_fixed_construction_witness_contract.json).
 
-One prospective SAME element-quadrature energy stack and unpivoted thin Householder
-QR/triangular left inverse have text-only obligations, UNIMPLEMENTED/UNEVALUATED.
-No actual A0/A_hat/Y/QR/real data are constructed/evaluated; executable library/
-calls/order/roles/population/resources remain UNFROZEN. Intended element PSD,
-ALL intended-to-stack/represented-factor error and outward delta/eta/M/strictly
-positive lower stages require independent proof. Nominal QR pivots certify nothing;
-failed/missing premises STOP, no matrix/witness/precision/order search. Dense A/Y
-alone have schematic16*m*n binary64-byte floor before Q/R/error buffers; actual
-cost/storage/simultaneous full-fit proof UNKNOWN_STOP. Original residual B_plus
-stays diagnostic, no loss/gradient/SAME stored-normalizer change.
+Real geometry/constitutive/Hex8/quadrature/scatter/irrational representation/
+construction/certificate/cost remain UNKNOWN_STOP, real executable UNFROZEN.
+Public rational stack and small QR certify only SAME intended authored operators.
+Original residual B_plus remains diagnostic, tiny nonzero never certifies U;
+no loss/gradient/intercept/SAME stored normalizer/fidelity/reliability change.
+ALL four inherited criterion/failure/cost/memory objects equal B4.38 completely.
+Scientific FAIL/P17 unrepaired/all69 failures/UNKNOWN/gaps/old ledgers/FULL
+reserves/closed3/3/B4.30's2/1/uniform/seals stay. Known-paid
+12721.16417100014444982>7200/all-paid FAIL/full fit PENDING4GiB remain.
+Three pre-native administrative lookup/field failures and two native Ruff
+format/strict-zip failures remain with original source/full errors/exits/costs;
+same-scope corrections change no frozen standard, panel or algorithm. Both
+formal calls pass FIRST attempt. Unprofiled authoring/metadata/controller/Git/
+remoteCI costs UNKNOWN_NOT_ZERO, software RSS fills no old or training gap.
+No actual payload/FEM/geometry/construction/timing/integration/fit/search/new cap
+or sealed grant. All software/raw traces/native/CI records remain external.
 
-All four criteria/failure/cost/memory objects equal B4.37 completely. Scientific
-FAIL/P17 unrepaired, known paid12721.16417100014444982>7200/all-paid FAIL/full
-fit PENDING4GiB remain. Every old failure/69 predicates/UNKNOWN/gap/ledger/FULL
-reserve/closed3/3/B4.30's2/1/uniform/seal stays. No actual payload/FEM/construction/
-timing/integration/fit/search/new cap or seal. Two pre-native wrapper field errors
-retain original source/complete output/exit1 and UNKNOWN_NOT_ZERO native cost;
-both formal document invocations pass first attempt. A later finalizer-authoring
-SyntaxError/partial helper outputs also remain with UNKNOWN costs. No criterion changes.
-A later staged whitespace failure on the new report also remains with known
-native cost; result prose/EOF corrected and fresh publication guards required.
-The staged report whitespace failure/known native cost and subsequent
-result-prose metadata assertion failure/UNKNOWN cost both remain; corrected
-publication text requires fresh staging/upload guards. No formal audit repeated.
-All5 required checks PASS/full1564 tests in683.79s; existing
-publication guards, protected exact-head/main
-CI/equal tree/owned cleanup/independent byte backup govern closure. Only11 documents
-enter Git; all raw source/audit/native/controller/CI receipts remain external.
-Nine private files/unrelated refs/README/runtime/tests/fixtures/conventions/locks/
-CI/frozen historical bytes remain. Software RSS fills no historical or fit gap.
+All5 mandatory commands PASS before commit: `uv sync --dev --locked`,
+`uv run ruff check .`, `uv run mypy src`, `uv run pytest`, `git diff --check`.
+Complete1636/1636 pytest PASS in777.61s under unchanged
+original tolerances/one-thread CPU, including all72 new meaningful public tests.
+Existing per-path/staged/all-upload/actual-squash/protected exact-head/main CI/
+equal tree/owned cleanup/independent byte backup govern closure.
 
 ## Delivery and operational boundary
 
@@ -163,11 +161,12 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and proposed successor
 
-B4.38 closes only this document slice after publication/main CI/backup.
-Next proposed **B4.39 bounded public fixed-construction witness software evidence**,
-not started/authorized. New owner continuation and a finite authored-public-fixture
-contract before implementation/evaluation; only one fixed construction and
-independent intended-error/rejection evidence on small public systems. No actual
-input/FEM/construction/search/timing/integration/fit/new budget or sealed grant.
-Real certification/full costs/memory, learned repair/independent confirmation,
-full B4 and compatible final remain before B5. Report B4.39 and stop after B4.38.
+B4.39 closes only this public software slice after publication/main CI/backup.
+Next proposed **B4.40 bounded read-only constructed-witness limitations and
+real-representation preregistration**, NOT STARTED/AUTHORIZED. New owner
+continuation/finite text-only contract FIRST; intended real geometry/constitutive/
+Hex8/quadrature/scatter/irrational representation and complete costs/memory
+obligations only. No actual input/FEM/construction/timing/integration/fit/search/
+new budget or sealed grant. Real certification/full cost/memory, learned repair/
+independent confirmation/full B4 and compatible final remain before B5.
+Report B4.40 and stop after B4.39.

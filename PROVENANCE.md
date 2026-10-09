@@ -1153,3 +1153,22 @@ positive-operator stop remain; diagnostic bounds change no original loss/gradien
 No new external scientific/implementation source or Hack3D content was consulted
 or imported. Real certificates/cost/memory remain UNKNOWN_STOP/PENDING4GiB,
 all-paid infeasible/scientific FAIL/P17 unrepaired; all old costs/failures/seals stay.
+
+## B4.39 original public fixed-construction witness provenance
+
+The [protocol](docs/planning/b4_39_public_fixed_construction_witness_protocol.md) and [contract](docs/planning/b4_39_public_fixed_construction_witness_contract.json)
+freeze10 original rational matrices/stacks before implementation/evaluation.
+The independent scalar Householder reflection derives v=x-alpha*e_k,
+H=I-2*v*v.T/(v.T*v); left updates form R and Q.T, fixed positive-diagonal signs
+and scalar backward substitution construct ONE represented Y=R_inverse*Q.T.
+Every binary64 operation/order is pinned and recorded; no external implementation,
+scientific source or Hack3D code/comments/structure/figures consulted/copied.
+The separately written stdlib oracle consumes all692 operations with exact
+adjacent midpoint RN-even proofs (sqrt by squared midpoints), separately proves
+intended element PSD, both error components and complete error/left residual/
+Y norms, all fixed80-bit/outward lower stages and intended shifted principal
+minors.72 tests/993 predicates certify only7 authored public witnesses with3
+prescribed stops. Rational A0 does not prove real Hex8 energy/irrational/assembly
+representation or real construction. No actual payload/FEM/geometry/integration/
+fit; original loss/gradient/normalizer and all failures/cost/memory/seals stay.
+Real certification/cost UNKNOWN_STOP/full fit PENDING4GiB/P17 unrepaired remain.
