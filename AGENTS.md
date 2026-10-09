@@ -68,10 +68,15 @@ on10 authored systems,6 certificates/4 prescribed stops; [report](docs/validatio
 Exact intended public PSD/norm squares/fixed80-bit/outward binary64 only;
 positive G can stop with a conservative witness. No real construction algorithm,
 FEM certificate/cost/memory proof, loss/gradient change or new budget.
-Next proposed **B4.38 bounded read-only public-witness limitations and
-real-construction preregistration**, not started: new owner/finite text-only
-contract first. No actual data/FEM/witness construction/search/timing/projection/
-root/network integration/fit/new cap or seal.
+Latest document **B4.38 public-witness limitations/real-construction preregistration**:
+197/135 static/independent Decimal document PASS; [report](docs/validation/b4_38_public_witness_limitations_real_construction.md),
+[protocol](docs/planning/b4_38_public_witness_limitations_real_construction_protocol.md), [contract](docs/planning/b4_38_public_witness_limitations_real_construction_contract.json).
+Twelve limitations/sixteen prospective obligations/twelve stops; one energy-stack/
+unpivoted-QR construction's text-only obligations, UNIMPLEMENTED/UNEVALUATED.
+No executable real algorithm, certificate/cost/memory proof or new budget.
+Next proposed **B4.39 bounded public fixed-construction witness software evidence**,
+not started: new owner/finite public-fixture contract FIRST. No actual data/FEM/
+construction/search/timing/projection/root/network integration/fit/new cap or seal.
 B4.23 stays3907/3976/all69 failures and57546.072069>7200; known-added58142.252069>7200,
 B4.24/28 memory gaps/both failures, B4.20 failure and B4.19 UNKNOWN remain.
 Full training memory PENDING/4GiB; software RSS fills no historical gap.

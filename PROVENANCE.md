@@ -1138,3 +1138,18 @@ Hack3D code/comment/structure/figure, actual label/model/payload/FEM/constructio
 integration or fit was consulted/imported. Real intended representation/element
 proof/construction/cost remain UNKNOWN_STOP, original loss/gradient unchanged,
 P17 unrepaired/full fit PENDING4GiB/all old evidence/charges/seals remain.
+
+## B4.38 public-witness limits and prospective construction obligations
+
+The [protocol](docs/planning/b4_38_public_witness_limitations_real_construction_protocol.md) and
+[contract](docs/planning/b4_38_public_witness_limitations_real_construction_contract.json) freeze a text-only review of28 TopoLab source
+identities. Original derivation from our engineering-Voigt Hex8 energy equations
+describes one prospective canonical quadrature energy stack and unpivoted QR/
+triangular left inverse, with separate intended PSD/representation/outward-error
+proofs. No factor, inverse, geometry, numerical value or executable real algorithm
+is constructed/evaluated.197/135 document/Decimal checks verify schema, preserved
+identities/criteria and stops only. B4.37's public evidence and conservative
+positive-operator stop remain; diagnostic bounds change no original loss/gradient.
+No new external scientific/implementation source or Hack3D content was consulted
+or imported. Real certificates/cost/memory remain UNKNOWN_STOP/PENDING4GiB,
+all-paid infeasible/scientific FAIL/P17 unrepaired; all old costs/failures/seals stay.
