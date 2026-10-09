@@ -954,3 +954,46 @@ Proposed next **B4.37 bounded public operator-enclosure and coercivity-witness
 software evidence** requires separate owner/finite public-fixture contract before
 implementation/evaluation; not started. No real route/fit/budget/final grant or
 B5 follows. Close B4.36 and stop.
+
+## B4.37 bounded public operator-enclosure/coercivity-witness software (2026-10-09)
+
+Owner “继续” after closed B4.36/main71b11bae7c45/all main CI/no open PR
+authorizes exactly one public software slice. Protocol/contract/ten authored
+systems freeze before implementation/evaluation;21 source inputs,2 free DOFs/
+3 elements/3 factor rows maximum, one prescribed factor/witness per system.
+66 focused tests and217 independent exact-rational/identity predicates PASS
+(161 case checks/56 source-contract identities). One formal producer/audit each
+complete10/10/0:6 strictly positive lower bounds,4 prescribed stops. Exact
+intended element PSD remains separate; exact G-A_hat.T*A_hat/I-Y*A_hat/Y norm
+squares with fixed80-bit/outward binary64 endpoints and directed lower stages
+certify only these SAME authored intended public operators. No assumed-zero
+error, factor/inverse construction, solver, matrix repair or witness/precision/
+order search. Positive G can stop because this witness bound is too conservative.
+See [report](validation/b4_37_public_coercivity_witness.md), [protocol](planning/b4_37_public_coercivity_witness_protocol.md) and [contract](planning/b4_37_public_coercivity_witness_contract.json).
+
+Real intended Hex8/representation/certification/construction/cost remain
+UNKNOWN_STOP; no real algorithm is frozen. Original residual B_plus stays
+diagnostic; loss/gradient/SAME stored normalization unchanged, tiny nonzero
+residual never certifies unmodified U. All four prior criterion/failure/cost/
+memory objects match B4.36 completely. Scientific FAIL/P17 unrepaired, known
+paid12721.16417100014444982>7200/all-paid FAIL/full fit PENDING4GiB remain.
+All old failures/69 predicates/UNKNOWN/gaps/ledgers/FULL reserves/3/3/B4.30's2/1/
+uniform/seals stay. No actual payload/FEM/timing/integration/fit/new cap or seal.
+One pre-contract quoted-path inventory failure retains UNKNOWN cost/child exit;
+one native Ruff line-width failure and same-criterion recovery remain. Both
+formal public invocations pass first attempt; no scientific standard changes.
+Mandatory full validation and publication closure are recorded below.
+All native/source/audit/CI records stay external; unprofiled authoring/metadata/
+controller/Git/remoteCI UNKNOWN_NOT_ZERO. Software RSS fills no old or fit gap.
+
+All5 mandatory commands PASS before commit, including complete pytest1564/1564
+in699.00s with unchanged original tests/tolerances and one-thread CPU.
+Reviewed-path/staged/all-upload/actual-squash guards, protected exact-head/main CI/
+equal tested tree, owned-only cleanup and independent byte backup govern closure.
+
+Only15 reviewed source/oracle/tests/original small public fixture/document paths
+enter Git. Existing publication guards, protected exact-head/main CI/equal tree,
+owned-only cleanup and independent byte backup govern closure. README/existing
+runtime/tests/fixtures/conventions/locks/CI/frozen history stay; nine private files
+and unrelated refs remain. Next B4.38 read-only limitations/real-construction
+preregistration needs new owner/finite text-only contract; not started. No B5.

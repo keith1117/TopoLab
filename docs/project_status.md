@@ -1,52 +1,49 @@
 # Current project status
 
-Updated: 2026-10-09. Latest document slice **B4.36 bounded read-only certificate
-limitations and real-route preregistration**:141 primary/96 independent document
-and Decimal predicates PASS. See [report](validation/b4_36_certificate_limitations_real_route.md),
-[protocol](planning/b4_36_certificate_limitations_real_route_protocol.md) and [finite contract](planning/b4_36_certificate_limitations_real_route_contract.json).
-The intended operator-error/left-inverse coercivity route is UNIMPLEMENTED and
-UNEVALUATED; no real construction algorithm is frozen. Real FEM certificates and
-costs remain UNKNOWN_STOP, scientific FAIL/P17 unrepaired, unchanged all-paid
-12721.16417100014444982>7200 infeasible, full fit memory PENDING/4GiB. No new
-real payload/FEM/timing/integration/fit/search/budget or sealed access.
+Updated: 2026-10-09. Latest public software evidence **B4.37 bounded operator-
+enclosure/coercivity witness**:66 tests/217 independent predicates PASS on10
+authored systems,6 prescribed certificates/4 prescribed stops. See
+[report](validation/b4_37_public_coercivity_witness.md), [protocol](planning/b4_37_public_coercivity_witness_protocol.md) and [contract](planning/b4_37_public_coercivity_witness_contract.json).
+Real FEM certificates/construction/cost UNKNOWN_STOP, scientific FAIL/P17
+unrepaired, all-paid12721.16417100014444982>7200 and full fit PENDING/4GiB remain.
+No actual payload/FEM/timing/integration/fit/search/new cap or sealed access.
 
-## B4.36 bounded document preregistration accepted
+## B4.37 bounded public witness software accepted
 
-Owner “开始” after closed B4.35/main45a71fcfcfd1/all required CI/no open PR
-authorizes exactly one slice. Root/ancestor/nested rules, ordered documents,
-prior conversation and versioned evidence agree. Nine private files and unrelated
-refs remain; separate clean clone docs/b4-36-certificate-limitations-real-route.
-Protocol/contract/eighteen source identities freeze before one primary and one
-separately implemented stdlib/Decimal document audit,141/96 PASS. Ten limitations,
-twelve prospective obligations and ten closed stop dispositions cover intended
-representation/element PSD/coercivity, arithmetic/residual/label, original
-fidelity/reliability, complete paid cost and simultaneous full memory. No old
-numerical/generated or backup-member replay; source files are text/hash only.
+Owner “继续” after closed B4.36/main71b11bae7c45/all main CI/no open PR
+authorizes exactly one public software slice. Protocol/contract/ten authored
+systems freeze before implementation/evaluation;21 source inputs,2 free DOFs/
+3 elements/3 factor rows maximum, one prescribed factor/witness per system.
+66 focused tests and217 independent exact-rational/identity predicates PASS
+(161 case checks/56 source-contract identities). One formal producer/audit each
+complete10/10/0:6 strictly positive lower bounds,4 prescribed stops. Exact
+intended element PSD remains separate; exact G-A_hat.T*A_hat/I-Y*A_hat/Y norm
+squares with fixed80-bit/outward binary64 endpoints and directed lower stages
+certify only these SAME authored intended public operators. No assumed-zero
+error, factor/inverse construction, solver, matrix repair or witness/precision/
+order search. Positive G can stop because this witness bound is too conservative.
+See [report](validation/b4_37_public_coercivity_witness.md), [protocol](planning/b4_37_public_coercivity_witness_protocol.md) and [contract](planning/b4_37_public_coercivity_witness_contract.json).
 
-One conditional proof uses SAME intended G and independently outward delta_plus
-for ||G-A_hat.T*A_hat||, eta_plus>=||I-Y*A_hat||_F with eta_plus<1,
-and M_plus>=||Y||_F with M_plus>0.
-Directed lower_G<=((1-eta_plus)/M_plus)^2-delta_plus must be strictly positive;
-intended element PSD stays a separate proof. Missing/error-negative/nonfinite,
-wrong identity/space or nonpositive bound STOP; no alternate witness, precision,
-factor/order search or matrix repair. No real A_hat/Y or values are constructed.
-Future real construction needs separate owner/finite algorithm/cost/memory contract.
-Residual B_plus remains diagnostic; original loss/gradient/SAME stored C_s unchanged.
+Real intended Hex8/representation/certification/construction/cost remain
+UNKNOWN_STOP; no real algorithm is frozen. Original residual B_plus stays
+diagnostic; loss/gradient/SAME stored normalization unchanged, tiny nonzero
+residual never certifies unmodified U. All four prior criterion/failure/cost/
+memory objects match B4.36 completely. Scientific FAIL/P17 unrepaired, known
+paid12721.16417100014444982>7200/all-paid FAIL/full fit PENDING4GiB remain.
+All old failures/69 predicates/UNKNOWN/gaps/ledgers/FULL reserves/3/3/B4.30's2/1/
+uniform/seals stay. No actual payload/FEM/timing/integration/fit/new cap or seal.
+One pre-contract quoted-path inventory failure retains UNKNOWN cost/child exit;
+one native Ruff line-width failure and same-criterion recovery remain. Both
+formal public invocations pass first attempt; no scientific standard changes.
+Mandatory full validation and publication closure are recorded below.
+All native/source/audit/CI records stay external; unprofiled authoring/metadata/
+controller/Git/remoteCI UNKNOWN_NOT_ZERO. Software RSS fills no old or fit gap.
 
-Prior public B4.35's58 tests/394 exact-rational predicates on8 systems/16 points
-and B4.33's47/849 remain limited to authored public inputs; B4.34 stays129/43
-document PASS. All original criterion/failure/cost/memory objects match unchanged.
-Known-paid floor is diagnostic, not a cap or ledger reset; costs UNKNOWN block
-fitting and software RSS fills no old memory gap. All scientific failures,69
-B4.23 predicates, B4.24/28 gaps, B4.31 premerge failure, old3/3 and B4.30's2/1,
-both FULL180 and failed191.9666532080154866, all seals and uniform default remain.
-One administrative helper-inventory path failure is retained with UNKNOWN costs;
-both formal document audits pass on their first invocation. No standard changed.
-All5 required checks PASS/full1498 tests in703.12s;
-reviewed-path/staged/all-upload/squash guards,
-protected exact-head/main CI/tree identity/owned cleanup/independent byte backup
-govern publication closure. All native logs, source snapshots and receipts stay
-external; unprofiled authoring/metadata/controller/remoteCI UNKNOWN_NOT_ZERO.
+All5 mandatory commands PASS before commit, including complete pytest1564/1564
+in699.00s with unchanged original tests/tolerances and one-thread CPU.
+Reviewed-path/staged/all-upload/actual-squash guards, protected exact-head/main CI/
+equal tested tree, owned-only cleanup and independent byte backup govern closure.
+
 
 ## Delivery and operational boundary
 
@@ -158,11 +155,12 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and proposed successor
 
-B4.36 closes only this document slice after publication/main CI/backup.
-Next proposed **B4.37 bounded public operator-enclosure and coercivity-witness
-software evidence**, not started/authorized, requires new owner continuation and
-a finite authored-public-fixture contract before implementation/evaluation.
-It may verify conditional witness algebra/rejections on small public inputs only.
-No real input/FEM/construction/search/timing/integration/fit/new cap or sealed grant.
-Real certification/full cost/memory, learned repair/independent confirmation/full
-new B4 and compatible final remain before B5. Report B4.37 and stop after B4.36.
+B4.37 closes only this public software slice after publication/main CI/backup.
+Next proposed **B4.38 bounded read-only public-witness limitations and
+real-construction preregistration**, not started/authorized, requires new owner
+continuation and finite text-only contract before review. It may specify intended
+element/representation proof and one fixed construction's obligations only.
+No actual input/FEM/witness construction/search/timing/integration/fit/new budget
+or sealed grant follows. Real certification/full cost/memory, learned repair/
+independent confirmation/full B4 and compatible final remain before B5.
+Report B4.38 and stop after B4.37.

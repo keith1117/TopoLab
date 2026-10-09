@@ -1120,3 +1120,21 @@ scientific/implementation source or Hack3D content was consulted. Historical
 frozen conventions/records and source stay; B4.35's public arithmetic scope is
 unchanged. This is no real algorithm, loss/gradient change, cost/memory proof,
 learned repair or permission to access sealed evidence.
+
+## B4.37 authored public coercivity-witness software provenance
+
+The [protocol](docs/planning/b4_37_public_coercivity_witness_protocol.md) and
+[contract](docs/planning/b4_37_public_coercivity_witness_contract.json) freeze10 original rational systems and one
+prescribed factor/left-inverse witness each before implementation/evaluation.
+Independent derivation from TopoLab's B4.36 norm inequality uses intended
+element principal minors, exact intended-to-factor/residual/witness Frobenius
+squares, fixed80-bit integer sqrt enclosures and outward binary64 directed
+lower stages. The separate stdlib oracle imports no candidate and audits exact
+squared endpoints and intended G-lower_G*I principal minors; it uses no shared
+sqrt helper or numerical solver.66 tests/217 independent predicates establish
+only6 prescribed public certificates and4 prescribed stops. Positive G may stop
+with a conservative witness. No new external scientific/implementation source,
+Hack3D code/comment/structure/figure, actual label/model/payload/FEM/construction,
+integration or fit was consulted/imported. Real intended representation/element
+proof/construction/cost remain UNKNOWN_STOP, original loss/gradient unchanged,
+P17 unrepaired/full fit PENDING4GiB/all old evidence/charges/seals remain.
