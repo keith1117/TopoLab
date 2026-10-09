@@ -14,25 +14,23 @@ See [report](../validation/b4_30_paid_continuation.md). Conditional48/720 remain
 unopened. Original failed preflight, all historical evidence/unknowns and
 full-training memory PENDING/4GiB remain; uniform stays default.
 
-Latest public software **B4.37 operator-enclosure/coercivity witness**:66 tests/
-217 independent predicates PASS on10 authored systems,6 certificates/4 stops.
-See [report](../validation/b4_37_public_coercivity_witness.md). Exact intended element PSD, norm-squares,
-fixed80-bit/outward binary64/directly audited positive lower stages only;
-positive G may stop with a conservative witness. No real construction algorithm
-or FEM certificate/cost/memory proof, no original loss/gradient change.
-Historical B4.36 document141/96, B4.35 public58/394, B4.33 public47/849 and
-B4.34 document129/43 retain their scope. All scientific failures/P17/69
-predicates/UNKNOWN/gaps/ledgers/FULL reserves/quotas/seals/uniform remain.
-Real route UNKNOWN_STOP/full fit PENDING4GiB/all-paid12721.16417100014444982>7200.
-No actual payload/FEM/construction/timing/integration/fit/search/new cap or seal.
-Next proposed B4.38 bounded read-only public-witness limitations and real-
-construction preregistration needs new owner/finite text-only contract; not
-started/authorized. No B5.
+Latest document **B4.38 public-witness limitations/real-construction preregistration**:
+197/135 primary/independent document/Decimal PASS,28 text/hash inputs,
+12 limitations/16 prospective obligations/12 stops. See [report](../validation/b4_38_public_witness_limitations_real_construction.md).
+One prospective energy-stack/unpivoted-QR recipe's obligations only; no actual
+construction or executable real algorithm. Intended PSD/representation/real
+certificate/cost UNKNOWN_STOP/full fit PENDING4GiB/all-paid12721.16417100014444982>7200
+remain. Latest public B4.37 retains66/217 on10 systems/6 certificates/4 stops;
+positive G may stop with a conservative witness. Original loss/gradient, all
+scientific failures/P17/69 predicates/UNKNOWN/gaps/ledgers/FULL reserves/quotas/
+uniform/seals stay. Next B4.39 public fixed-construction software needs new owner/
+finite public-fixture contract FIRST; not started. No real input/FEM/construction/
+timing/integration/fit/search/new cap/sealed grant or B5.
 [Project status](../project_status.md) holds the current boundary;
 [history](../development_history.md) preserves the chronology.
 
 Prepared: 2026-09-24
-Revised: 2026-10-09 (B4.37 public operator-enclosure/coercivity-witness software)
+Revised: 2026-10-09 (B4.38 public-witness limitations/real-construction document)
 
 Related documents:
 
@@ -1457,6 +1455,56 @@ independent byte backup govern closure. Proposed next B4.38 read-only public-
 witness limitations and real-construction preregistration needs new owner and
 finite text-only contract; not started. No actual construction/fit/budget/B5.
 
+### B4.38: Bounded public-witness limitations and real-construction preregistration
+
+Owner “继续” after closed B4.37/main6f8d8c5c8d67/all three main CI/no open PR
+authorizes exactly one document slice. The [protocol](b4_38_public_witness_limitations_real_construction_protocol.md) and
+[contract](b4_38_public_witness_limitations_real_construction_contract.json) bind28 starting-main text/hash inputs before one
+primary and one separate stdlib/document/Decimal audit:197/135 PASS. Twelve
+limitations/sixteen prospective obligations/twelve stops retain the gap from
+ten hand-prescribed public witnesses to SAME intended real Hex8 PSD/representation/
+construction/certification. B4.37's66 tests/217 predicates/6 certificates/4 stops
+remain; positive G can stop with a conservative witness, without a singularity
+verdict or alternate-witness permission. No old numerical/native/backup-member
+replay. See [report](../validation/b4_38_public_witness_limitations_real_construction.md).
+
+One prospective SAME element-quadrature energy stack and unpivoted thin Householder
+QR/triangular left inverse have text-only obligations, UNIMPLEMENTED/UNEVALUATED.
+No actual A0/A_hat/Y/QR/real data are constructed/evaluated; executable library/
+calls/order/roles/population/resources remain UNFROZEN. Intended element PSD,
+ALL intended-to-stack/represented-factor error and outward delta/eta/M/strictly
+positive lower stages require independent proof. Nominal QR pivots certify nothing;
+failed/missing premises STOP, no matrix/witness/precision/order search. Dense A/Y
+alone have schematic16*m*n binary64-byte floor before Q/R/error buffers; actual
+cost/storage/simultaneous full-fit proof UNKNOWN_STOP. Original residual B_plus
+stays diagnostic, no loss/gradient/SAME stored-normalizer change.
+
+All four criteria/failure/cost/memory objects equal B4.37 completely. Scientific
+FAIL/P17 unrepaired, known paid12721.16417100014444982>7200/all-paid FAIL/full
+fit PENDING4GiB remain. Every old failure/69 predicates/UNKNOWN/gap/ledger/FULL
+reserve/closed3/3/B4.30's2/1/uniform/seal stays. No actual payload/FEM/construction/
+timing/integration/fit/search/new cap or seal. Two pre-native wrapper field errors
+retain original source/complete output/exit1 and UNKNOWN_NOT_ZERO native cost;
+both formal document invocations pass first attempt. A later finalizer-authoring
+SyntaxError/partial helper outputs also remain with UNKNOWN costs. No criterion changes.
+The staged report whitespace failure/known native cost and subsequent
+result-prose metadata assertion failure/UNKNOWN cost both remain; corrected
+publication text requires fresh staging/upload guards. No formal audit repeated.
+All5 required checks PASS/full1564 tests in683.79s; existing
+publication guards, protected exact-head/main
+CI/equal tree/owned cleanup/independent byte backup govern closure. Only11 documents
+enter Git; all raw source/audit/native/controller/CI receipts remain external.
+Nine private files/unrelated refs/README/runtime/tests/fixtures/conventions/locks/
+CI/frozen historical bytes remain. Software RSS fills no historical or fit gap.
+
+Next proposed **B4.39 bounded public fixed-construction witness software evidence**,
+not started/authorized. New owner continuation and a finite authored-public-fixture
+contract before implementation/evaluation; only one fixed construction and
+independent intended-error/rejection evidence on small public systems. No actual
+input/FEM/construction/search/timing/integration/fit/new budget or sealed grant.
+Real certification/full costs/memory, learned repair/independent confirmation,
+full B4 and compatible final remain before B5. Report B4.39 and stop after B4.38.
+
 ### B5: One-time final comparison and project delivery gate
 
 Open the new ID cohort once after B4, followed by predeclared OOD and independent
@@ -1492,12 +1540,12 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.38 bounded read-only public-witness limitations and real-
-   construction preregistration:** not started/authorized; new owner continuation
-   and finite text-only contract before review. B4.37 establishes only authored
-   public witnesses; intended real Hex8/representation/construction/cost/memory
-   remain UNKNOWN_STOP/PENDING, all-paid7200 failed. No actual data/FEM/witness
-   construction/search/timing/integration/fit/new budget or sealed grant.
+1. **Proposed B4.39 bounded public fixed-construction witness software evidence:**
+   not started/authorized; new owner and finite authored-public-fixture contract
+   BEFORE implementation/evaluation. One fixed construction/independent intended-
+   error and rejection software only; no actual data/FEM/construction/timing/
+   integration/fit/search/new budget or sealed grant. B4.38 is documentary only;
+   real certification/cost UNKNOWN_STOP/full fit PENDING4GiB/all-paid7200 failed.
 
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full

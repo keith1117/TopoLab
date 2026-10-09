@@ -997,3 +997,56 @@ owned-only cleanup and independent byte backup govern closure. README/existing
 runtime/tests/fixtures/conventions/locks/CI/frozen history stay; nine private files
 and unrelated refs remain. Next B4.38 read-only limitations/real-construction
 preregistration needs new owner/finite text-only contract; not started. No B5.
+
+## B4.38 bounded public-witness limitations/real-construction preregistration (2026-10-09)
+
+Owner “继续” after closed B4.37/main6f8d8c5c8d67/all three main CI/no open PR
+authorizes exactly one document slice. The [protocol](planning/b4_38_public_witness_limitations_real_construction_protocol.md) and
+[contract](planning/b4_38_public_witness_limitations_real_construction_contract.json) bind28 starting-main text/hash inputs before one
+primary and one separate stdlib/document/Decimal audit:197/135 PASS. Twelve
+limitations/sixteen prospective obligations/twelve stops retain the gap from
+ten hand-prescribed public witnesses to SAME intended real Hex8 PSD/representation/
+construction/certification. B4.37's66 tests/217 predicates/6 certificates/4 stops
+remain; positive G can stop with a conservative witness, without a singularity
+verdict or alternate-witness permission. No old numerical/native/backup-member
+replay. See [report](validation/b4_38_public_witness_limitations_real_construction.md).
+
+One prospective SAME element-quadrature energy stack and unpivoted thin Householder
+QR/triangular left inverse have text-only obligations, UNIMPLEMENTED/UNEVALUATED.
+No actual A0/A_hat/Y/QR/real data are constructed/evaluated; executable library/
+calls/order/roles/population/resources remain UNFROZEN. Intended element PSD,
+ALL intended-to-stack/represented-factor error and outward delta/eta/M/strictly
+positive lower stages require independent proof. Nominal QR pivots certify nothing;
+failed/missing premises STOP, no matrix/witness/precision/order search. Dense A/Y
+alone have schematic16*m*n binary64-byte floor before Q/R/error buffers; actual
+cost/storage/simultaneous full-fit proof UNKNOWN_STOP. Original residual B_plus
+stays diagnostic, no loss/gradient/SAME stored-normalizer change.
+
+All four criteria/failure/cost/memory objects equal B4.37 completely. Scientific
+FAIL/P17 unrepaired, known paid12721.16417100014444982>7200/all-paid FAIL/full
+fit PENDING4GiB remain. Every old failure/69 predicates/UNKNOWN/gap/ledger/FULL
+reserve/closed3/3/B4.30's2/1/uniform/seal stays. No actual payload/FEM/construction/
+timing/integration/fit/search/new cap or seal. Two pre-native wrapper field errors
+retain original source/complete output/exit1 and UNKNOWN_NOT_ZERO native cost;
+both formal document invocations pass first attempt. A later finalizer-authoring
+SyntaxError/partial helper outputs also remain with UNKNOWN costs. No criterion changes.
+The staged report whitespace failure/known native cost and subsequent
+result-prose metadata assertion failure/UNKNOWN cost both remain; corrected
+publication text requires fresh staging/upload guards. No formal audit repeated.
+All5 required checks PASS/full1564 tests in683.79s; existing
+publication guards, protected exact-head/main
+CI/equal tree/owned cleanup/independent byte backup govern closure. Only11 documents
+enter Git; all raw source/audit/native/controller/CI receipts remain external.
+Nine private files/unrelated refs/README/runtime/tests/fixtures/conventions/locks/
+CI/frozen historical bytes remain. Software RSS fills no historical or fit gap.
+
+Next proposed **B4.39 bounded public fixed-construction witness software evidence**,
+not started/authorized. New owner continuation and a finite authored-public-fixture
+contract before implementation/evaluation; only one fixed construction and
+independent intended-error/rejection evidence on small public systems. No actual
+input/FEM/construction/search/timing/integration/fit/new budget or sealed grant.
+Real certification/full costs/memory, learned repair/independent confirmation,
+full B4 and compatible final remain before B5. Report B4.39 and stop after B4.38.
+
+B4.38 publication also retains the staged report EOF-whitespace failure and its
+known native cost; result prose/EOF corrected before fresh staging/upload guards.
