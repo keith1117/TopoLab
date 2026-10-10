@@ -1172,3 +1172,19 @@ prescribed stops. Rational A0 does not prove real Hex8 energy/irrational/assembl
 representation or real construction. No actual payload/FEM/geometry/integration/
 fit; original loss/gradient/normalizer and all failures/cost/memory/seals stay.
 Real certification/cost UNKNOWN_STOP/full fit PENDING4GiB/P17 unrepaired remain.
+
+## B4.40 intended representation and constructed-public limitations
+
+The [protocol](docs/planning/b4_40_constructed_witness_limitations_real_representation_protocol.md) and
+[contract](docs/planning/b4_40_constructed_witness_limitations_real_representation_contract.json) freeze38 text/hash inputs before one primary205 and one separate
+stdlib/document/Decimal171 static audit. Original derivation from TopoLab's frozen
+rectangular Hex8/engineering-Voigt/isotropic equations specifies accepted-bit
+intended geometry, positive upper constitutive factor, Gauss polynomial exactness,
+canonical energy/scatter identity, BOTH factor errors and DISTINCT actual
+assembly/load/residual error obligations. Gram expansion and triangle/norm
+inequalities supply conditional enclosures only; no real scalar/matrix/FEM/
+interval/factor/witness is evaluated. Full public Q_transpose storage prevents
+a thin-QR memory assumption. No new external source or Hack3D material consulted
+or imported. Document consistency establishes no real representation/certificate/
+cost/memory or learned repair; original loss/gradient/criteria/failures/charges/
+UNKNOWN/seals remain. See [report](docs/validation/b4_40_constructed_witness_limitations_real_representation.md).

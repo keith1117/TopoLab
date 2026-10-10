@@ -72,10 +72,16 @@ PSD/BOTH representation errors/complete error/residual/norm/fixed80-bit/outward
 bounds only. Rank-deficient/positive-conservative/indefinite-element stops stay.
 No real FEM/representation/construction/certificate/cost/memory proof or new cap;
 real executable UNFROZEN, diagnostic only, loss/gradient unchanged.
-Next proposed **B4.40 bounded read-only constructed-witness limitations and
-real-representation preregistration**, not started: new owner/finite text-only
-contract FIRST. No actual data/FEM/construction/timing/projection/root/network
-integration/fit/search/new budget or sealed grant.
+Latest document **B4.40 constructed-witness limitations/real-representation**:
+205/171 static PASS,38 text inputs/14 limits/22 obligations/16 stops; [report](docs/validation/b4_40_constructed_witness_limitations_real_representation.md),
+[protocol](docs/planning/b4_40_constructed_witness_limitations_real_representation_protocol.md), [contract](docs/planning/b4_40_constructed_witness_limitations_real_representation_contract.json).
+Intended bits/geometry/Voigt/PSD/quadrature/scatter/BOTH representation and
+actual assembly/load/residual error/full-Q storage are text obligations ONLY;
+all real values/executable/cost UNKNOWN_STOP/UNFROZEN, no original loss change.
+Next proposed **B4.41 public intended-representation enclosure software**,
+not started: new owner/finite authored-public-fixture contract FIRST. No actual
+data/geometry/FEM/construction/timing/projection/root/network integration/fit/
+search/new budget or sealed grant.
 B4.23 stays3907/3976/all69 failures and57546.072069>7200; known-added58142.252069>7200,
 B4.24/28 memory gaps/both failures, B4.20 failure and B4.19 UNKNOWN remain.
 Full training memory PENDING/4GiB; software RSS fills no historical gap.
