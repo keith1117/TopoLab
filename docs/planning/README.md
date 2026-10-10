@@ -11,9 +11,13 @@ real representation/FEM/certificates/cost UNKNOWN_STOP, executable UNFROZEN,
 all-paid12721.16417100014444982>7200/full fit PENDING4GiB. Diagnostic only,
 loss/gradient unchanged; scientific FAIL/P17/all failures/UNKNOWN/gaps/ledgers/
 reserves/quotas/uniform/seals stay. B4.38 document197/135/B4.37 public66/217 stay.
-Next B4.40 read-only constructed-witness limitations/real-representation
-preregistration needs new owner/finite text contract FIRST; not started. No
-actual data/FEM/construction/timing/integration/fit/search/new budget or B5.
+Latest document [B4.40](../validation/b4_40_constructed_witness_limitations_real_representation.md):205/171 static PASS,
+38 text inputs/14 limits/22 obligations/16 stops. Intended geometry/material/
+Hex8/integral/scatter/irrational representation and actual assembly/load/residual
+errors/full-Q storage remain TEXT_ONLY/UNKNOWN_STOP. Next proposed B4.41 public
+intended-representation enclosure software needs new owner/finite public contract
+FIRST; not started. No actual data/FEM/construction/timing/integration/fit/search/
+new budget, seal or B5.
 
 ## Overall project plans
 
@@ -138,3 +142,5 @@ existence; its validation report determines whether its Gate passed or failed.
 - [B4.38 public-witness limitations and real-construction preregistration](b4_38_public_witness_limitations_real_construction_protocol.md) · [Finite text-only contract](b4_38_public_witness_limitations_real_construction_contract.json):197/135 document PASS; real construction/certification/cost UNKNOWN_STOP, full fit PENDING4GiB, no real access or new budget.
 
 - [B4.39 bounded public fixed-construction witness](b4_39_public_fixed_construction_witness_protocol.md) · [Finite public contract](b4_39_public_fixed_construction_witness_contract.json):72 tests/993 predicates,692 RN-even operation proofs,10 authored systems/7 certificates/3 stops; no real representation/FEM/cost/memory or production grant.
+
+- [B4.40 constructed-witness limitations and real-representation preregistration](b4_40_constructed_witness_limitations_real_representation_protocol.md) · [finite contract](b4_40_constructed_witness_limitations_real_representation_contract.json)

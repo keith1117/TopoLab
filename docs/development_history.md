@@ -1106,3 +1106,56 @@ obligations only. No actual input/FEM/construction/timing/integration/fit/search
 new budget or sealed grant. Real certification/full cost/memory, learned repair/
 independent confirmation/full B4 and compatible final remain before B5.
 Report B4.40 and stop after B4.39.
+
+## B4.40 constructed-witness limitations/real-representation preregistration (2026-10-09)
+
+Owner explicitly requested B4.40 after closed B4.39/main b12216de0004/all
+three main CI/no open PR. Ordered rules/documents, actual prior-chat final and
+literal closed release/final verification/backup manifest agree; nine private
+files/unrelated refs remain. Protocol/contract freeze BEFORE either formal audit:
+38 starting-main text/hash inputs,14 limitations/22 prospective obligations/
+16 stops. One primary205/205 and one separate stdlib/document/Decimal171/171
+PASS; no primary checker/receipt/shared helper read by independent audit.
+
+One prospective intended representation pins accepted scalar bits/exact h=L/n,
+engineering-Voigt24 DOFs, unit isotropic SPD and positive upper factor,
+rectangular2x2x2 integral exactness, SAME free-space canonical stack/scatter.
+Independent structural identity, BOTH factor-error components/complete error,
+irrational/fixed80-bit/outward arithmetic and DISTINCT actual assembly/load/
+residual errors remain text obligations only. All real values/construction/
+executable/calls/roles/population/order/resources UNIMPLEMENTED/UNEVALUATED/
+UNFROZEN/UNKNOWN_STOP. B4.39's72 tests/993 predicates/692 operations/10 systems/
+7 certificates/3 prescribed stops stay; no formal public replay. Positive
+conservative bounds stop without a singularity claim or alternate search.
+Public full m-by-m Q_transpose may add8*m*m bytes to schematic A/Y16*m*n;
+no real storage trial or thin-Q assumption. Original residual B_plus remains
+diagnostic; tiny nonzero never certifies U, no loss/gradient/intercept/SAME C_s
+or fidelity/reliability change.
+
+ALL four B4.39 criterion/failure/cost/memory objects remain identical. Scientific
+FAIL/P17 unrepaired, all69 failures/UNKNOWN/gaps/old ledgers/FULL reserves/
+closed3/3/B4.30's2/1/uniform/seals stay. Known-paid12721.16417100014444982>7200/
+all-paid FAIL, real cost UNKNOWN_STOP/full fit PENDING4GiB remain. No actual
+payload/geometry/material/FEM/construction/projection/root/timing/integration/
+fit/search/new budget or sealed access. Two administrative read-only query
+failures retain complete errors/exits and UNKNOWN_NOT_ZERO native costs; both
+formal document audits pass FIRST attempt. Software RSS fills no historical
+or simultaneous full-fit memory gap.
+
+Only11 reviewed documents enter Git. Raw audit/controller/source/native/CI
+records remain external/ignored with independent backup. All5 mandatory checks,
+existing per-path/staged/every-uploaded-commit/actual-squash guards, protected
+exact-head/main CI/equal tested tree/owned-only cleanup govern publication.
+README/runtime/tests/fixtures/conventions/locks/CI/frozen history remain.
+All5 mandatory checks PASS, complete pytest1636 PASS with unchanged
+population/tolerances; final documentation/publication guards remain required.
+
+See [report](validation/b4_40_constructed_witness_limitations_real_representation.md), [protocol](planning/b4_40_constructed_witness_limitations_real_representation_protocol.md), [contract](planning/b4_40_constructed_witness_limitations_real_representation_contract.json).
+
+Next proposed **B4.41 bounded public intended-representation enclosure software
+evidence**, NOT STARTED/AUTHORIZED. New owner instruction and finite authored-
+public-fixture contract FIRST; independent intended-versus-represented arithmetic/
+error/rejection evidence only. No actual data/geometry/FEM/construction/timing/
+integration/fit/search/new budget or sealed grant. Real certificates/full costs/
+memory, learned repair/independent confirmation/full B4 and compatible final
+contract remain before B5. Report B4.41 and stop after B4.40.
