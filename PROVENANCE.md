@@ -1221,3 +1221,16 @@ external scientific/implementation source or Hack3D code/comment/structure/figur
 payload/model/label/numerical trace/real FEM was consulted/imported. All original
 loss/gradient/normalizer/criteria/failures/charges/UNKNOWN/seals remain. See
 [failed report](docs/validation/b4_42_public_enclosure_limitations_real_assembly.md).
+
+## B4.43 public assembly/residual diagnostic provenance
+
+Ten tiny scalar contribution lists are authored independently before evaluation;
+no mesh/material/actual FEM data/reference source is consulted. Existing original
+TopoLab B4.41 scalar intended-interval helpers retain their exact frozen bytes.
+The separate oracle carries the project's existing independent integer-bisection/
+IEEE midpoint proof method in its own source, with no candidate/producer/shared
+numerical import. Triangle and Frobenius-dominates-spectral inequalities transfer
+separate operator/force/evaluation/norm errors without PSD/Gram or loss changes.
+The formal launch and missing-receipt audit failures remain negative evidence,
+distinct from94 passed regression tests. No Hack3D code/comments/layout/figures,
+external new source, actual geometry/FEM/fit/access or acceleration claim.

@@ -966,3 +966,16 @@ proves element PSD/coercivity nor constructs Y or a real FEM representation.
 Actual geometry/assembly/load/residual errors, original loss/gradient/cost/
 full-fit memory and all seals retain their previous boundaries. See the
 [B4.41 protocol](planning/b4_41_public_intended_representation_enclosure_protocol.md).
+
+## B4.43 public assembly and intended-residual diagnostics
+
+The finite B4.43 authored lists use existing B4.41 exact intended intervals and
+scalar binary64 nodes without changing historical conventions. Actual G/K/f sum
+every contribution starting +0 in ascending order; keep both triangles. Accepted
+u bits define SAME solution. Exact represented-array residual differs from actual
+RN-even multiply/add/subtract residual; retain beta_G/beta_K/beta_f/beta_eval/
+q_hat/u_plus separately. Fixed80-bit sqrt upper/minimal outward binary64 only,
+r_plus=up(up(up(q_hat+beta_eval)+up(beta_K*u_plus))+beta_f). Squared max-endpoint
+sums are upper enclosures. Range/sign failures keep prefixes, no fallback or
+matrix repair. This diagnostic changes no loss/gradient/normalizer, certifies no
+PSD/coercivity/real FEM, and grants no actual access/budget/full-fit memory claim.

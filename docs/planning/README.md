@@ -4,16 +4,18 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-Latest public software [B4.41](../validation/b4_41_public_intended_representation_enclosure.md):84 tests/935 independent
-predicates/66 RN-even nodes on12 authored systems/8 enclosures/4 stops only.
-Latest document [B4.42](../validation/b4_42_public_enclosure_limitations_real_assembly.md): primary FAIL196
-(195 PASS/1 FAIL, incomplete), independent179 static PASS; documentary Gate
-FAIL_PRIMARY_CHECKER.48 texts/16 limits/26 conditional obligations/18 stops.
-Actual assembly/load/residual/norm/storage/cost proofs remain TEXT_ONLY/UNKNOWN_STOP/
-UNFROZEN. Scientific FAIL/P17/uniform/all-paid FAIL/full fit PENDING4GiB/seals stay.
-Next proposed B4.43 tiny public assembled-operator/intended-residual software needs
-new owner/finite fixture contract FIRST and documentary coverage gap resolution;
-not started. No actual data/FEM/timing/integration/fit/new cap/sealed grant or B5.
+Latest public software [B4.43](../validation/b4_43_public_assembled_residual_enclosure.md):94 focused tests PASS;
+new documentary coverage131/109 PASS before arithmetic. Formal producer FAIL at
+import before fixture/case loop, no producer/pending receipt/no retry; independent
+FAIL_INCOMPLETE8 metadata/0 case audits/0RN proofs. Formal Gate FAIL_FORMAL_PRODUCER,
+all10 formal cases unexecuted; regression does not replace formal evidence.
+B4.42 documentary FAIL_PRIMARY_CHECKER/196 incomplete and independent179 stay;
+B4.41 public84/935/66 retains its separate scope. Public G/K/f assembly and actual
+residual error/norm transfer only; real proofs UNKNOWN_STOP/UNFROZEN/full fit
+PENDING4GiB/scientific FAIL/P17/uniform/all-paid FAIL/seals remain. Next proposed
+B4.44 finite read-only limitations/real prerequisites, new owner/TEXT-only contract
+FIRST; review failed launch/missing formal evidence. No actual data/FEM/timing/
+integration/fit/new cap/sealed grant/B5.
 
 ## Overall project plans
 
@@ -143,3 +145,9 @@ existence; its validation report determines whether its Gate passed or failed.
 
 - [B4.41 bounded public intended-representation enclosure](b4_41_public_intended_representation_enclosure_protocol.md) · [Finite public contract](b4_41_public_intended_representation_enclosure_contract.json):84 tests/935 independent predicates/66 RN-even nodes/12 systems/8 enclosures/4 prescribed stops; no real FEM/assembly/certificate/cost/memory or new budget.
 - [B4.42 public-enclosure limitations/real-assembly protocol](b4_42_public_enclosure_limitations_real_assembly_protocol.md) · [finite text contract](b4_42_public_enclosure_limitations_real_assembly_contract.json)
+
+### B4.43: Finite public assembly/residual software
+
+- [Protocol](b4_43_public_assembled_residual_enclosure_protocol.md)
+- [Finite contract](b4_43_public_assembled_residual_enclosure_contract.json)
+- [Failed formal evidence](../validation/b4_43_public_assembled_residual_enclosure.md)

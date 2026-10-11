@@ -1,0 +1,533 @@
+{
+  "version": "topolab.b4_43.public-assembled-residual-bundle.v1",
+  "role": "public-assembled-residual-software",
+  "source_main": "23558c4d2767e2a56cb2f5d12293800ac2d81fa5",
+  "fixtures": [
+    {
+      "id": "exact-dyadic-signed-zero",
+      "free_space": "authored-assembly-space:exact-dyadic-signed-zero",
+      "origin": "original-public-scalar-contributions",
+      "nodes": [
+        {
+          "op": "integer",
+          "value": 0
+        },
+        {
+          "op": "integer",
+          "value": 2
+        },
+        {
+          "op": "integer",
+          "value": 3
+        },
+        {
+          "op": "bits",
+          "value": "3ff8000000000000"
+        },
+        {
+          "op": "bits",
+          "value": "8000000000000000"
+        }
+      ],
+      "G_terms": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "K_terms": [
+        [
+          [
+            2
+          ]
+        ]
+      ],
+      "f_terms": [
+        [
+          3
+        ]
+      ],
+      "u_bits": [
+        "3fe0000000000000"
+      ]
+    },
+    {
+      "id": "separate-unit-anchor",
+      "free_space": "authored-assembly-space:separate-unit-anchor",
+      "origin": "original-public-scalar-contributions",
+      "nodes": [
+        {
+          "op": "integer",
+          "value": 0
+        },
+        {
+          "op": "integer",
+          "value": 2
+        },
+        {
+          "op": "integer",
+          "value": 3
+        },
+        {
+          "op": "bits",
+          "value": "3ff8000000000000"
+        }
+      ],
+      "G_terms": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "K_terms": [
+        [
+          [
+            2
+          ]
+        ]
+      ],
+      "f_terms": [
+        [
+          3
+        ]
+      ],
+      "u_bits": [
+        "3fe0000000000000"
+      ]
+    },
+    {
+      "id": "assembled-cancellation",
+      "free_space": "authored-assembly-space:assembled-cancellation",
+      "origin": "original-public-scalar-contributions",
+      "nodes": [
+        {
+          "op": "integer",
+          "value": 0
+        },
+        {
+          "op": "integer",
+          "value": 1
+        },
+        {
+          "op": "integer",
+          "value": 9007199254740992
+        },
+        {
+          "op": "integer",
+          "value": -9007199254740992
+        }
+      ],
+      "G_terms": [
+        [
+          [
+            2
+          ]
+        ],
+        [
+          [
+            1
+          ]
+        ],
+        [
+          [
+            3
+          ]
+        ]
+      ],
+      "K_terms": [
+        [
+          [
+            2
+          ]
+        ],
+        [
+          [
+            1
+          ]
+        ],
+        [
+          [
+            3
+          ]
+        ]
+      ],
+      "f_terms": [
+        [
+          0
+        ]
+      ],
+      "u_bits": [
+        "3ff0000000000000"
+      ]
+    },
+    {
+      "id": "both-triangles-retained",
+      "free_space": "authored-assembly-space:both-triangles-retained",
+      "origin": "original-public-scalar-contributions",
+      "nodes": [
+        {
+          "op": "integer",
+          "value": 0
+        },
+        {
+          "op": "integer",
+          "value": 1
+        },
+        {
+          "op": "integer",
+          "value": 9007199254740992
+        },
+        {
+          "op": "integer",
+          "value": -9007199254740992
+        }
+      ],
+      "G_terms": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "K_terms": [
+        [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        [
+          [
+            0,
+            1
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      ],
+      "f_terms": [
+        [
+          0,
+          0
+        ]
+      ],
+      "u_bits": [
+        "3ff0000000000000",
+        "3ff0000000000000"
+      ]
+    },
+    {
+      "id": "irrational-and-accepted-load",
+      "free_space": "authored-assembly-space:irrational-and-accepted-load",
+      "origin": "original-public-scalar-contributions",
+      "nodes": [
+        {
+          "op": "integer",
+          "value": 0
+        },
+        {
+          "op": "integer",
+          "value": 2
+        },
+        {
+          "op": "sqrt",
+          "args": [
+            1
+          ]
+        },
+        {
+          "op": "bits",
+          "value": "3fb999999999999a"
+        },
+        {
+          "op": "integer",
+          "value": 3
+        },
+        {
+          "op": "div",
+          "args": [
+            3,
+            4
+          ]
+        }
+      ],
+      "G_terms": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "K_terms": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "f_terms": [
+        [
+          2
+        ],
+        [
+          5
+        ]
+      ],
+      "u_bits": [
+        "3ff0000000000000"
+      ]
+    },
+    {
+      "id": "rounded-residual-cancellation",
+      "free_space": "authored-assembly-space:rounded-residual-cancellation",
+      "origin": "original-public-scalar-contributions",
+      "nodes": [
+        {
+          "op": "integer",
+          "value": 0
+        },
+        {
+          "op": "integer",
+          "value": 1
+        },
+        {
+          "op": "integer",
+          "value": 9007199254740992
+        }
+      ],
+      "G_terms": [
+        [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "K_terms": [
+        [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      ],
+      "f_terms": [
+        [
+          2,
+          2
+        ]
+      ],
+      "u_bits": [
+        "3ff0000000000000",
+        "3ff0000000000000"
+      ]
+    },
+    {
+      "id": "scatter-overflow-stop",
+      "free_space": "authored-assembly-space:scatter-overflow-stop",
+      "origin": "original-public-scalar-contributions",
+      "nodes": [
+        {
+          "op": "integer",
+          "value": 0
+        },
+        {
+          "op": "bits",
+          "value": "7fefffffffffffff"
+        }
+      ],
+      "G_terms": [
+        [
+          [
+            1
+          ]
+        ],
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "K_terms": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "f_terms": [
+        [
+          0
+        ]
+      ],
+      "u_bits": [
+        "3ff0000000000000"
+      ]
+    },
+    {
+      "id": "load-underflow-stop",
+      "free_space": "authored-assembly-space:load-underflow-stop",
+      "origin": "original-public-scalar-contributions",
+      "nodes": [
+        {
+          "op": "bits",
+          "value": "0010000000000000"
+        },
+        {
+          "op": "mul",
+          "args": [
+            0,
+            0
+          ]
+        }
+      ],
+      "G_terms": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "K_terms": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "f_terms": [
+        [
+          1
+        ]
+      ],
+      "u_bits": [
+        "3ff0000000000000"
+      ]
+    },
+    {
+      "id": "residual-overflow-stop",
+      "free_space": "authored-assembly-space:residual-overflow-stop",
+      "origin": "original-public-scalar-contributions",
+      "nodes": [
+        {
+          "op": "integer",
+          "value": 0
+        },
+        {
+          "op": "bits",
+          "value": "7fefffffffffffff"
+        }
+      ],
+      "G_terms": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "K_terms": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "f_terms": [
+        [
+          0
+        ]
+      ],
+      "u_bits": [
+        "4000000000000000"
+      ]
+    },
+    {
+      "id": "residual-underflow-stop",
+      "free_space": "authored-assembly-space:residual-underflow-stop",
+      "origin": "original-public-scalar-contributions",
+      "nodes": [
+        {
+          "op": "integer",
+          "value": 0
+        },
+        {
+          "op": "bits",
+          "value": "0010000000000000"
+        }
+      ],
+      "G_terms": [
+        [
+          [
+            0
+          ]
+        ]
+      ],
+      "K_terms": [
+        [
+          [
+            1
+          ]
+        ]
+      ],
+      "f_terms": [
+        [
+          0
+        ]
+      ],
+      "u_bits": [
+        "0010000000000000"
+      ]
+    }
+  ]
+}
