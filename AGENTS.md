@@ -78,7 +78,7 @@ Historical document **B4.40 constructed-witness limitations/real-representation*
 Intended bits/geometry/Voigt/PSD/quadrature/scatter/BOTH representation and
 actual assembly/load/residual error/full-Q storage are text obligations ONLY;
 all real values/executable/cost UNKNOWN_STOP/UNFROZEN, no original loss change.
-Latest public software **B4.41 intended-representation enclosure**:
+Historical public software **B4.41 intended-representation enclosure**:
 84 tests/935 independent predicates PASS,66 RN-even node proofs on12 systems/
 8 enclosures/2 sign stops/2 arithmetic stops; [report](docs/validation/b4_41_public_intended_representation_enclosure.md),
 [protocol](docs/planning/b4_41_public_intended_representation_enclosure_protocol.md), [contract](docs/planning/b4_41_public_intended_representation_enclosure_contract.json).
@@ -87,7 +87,7 @@ BOTH Gram errors/complete error/factor norms only. Conservative squared upper
 enclosures, inconclusive sign/overflow/underflow stops; no PSD/coercivity/Y or
 real assembly/load/residual proof. Diagnostic, loss/gradient unchanged.
 Real values/executable/cost remain UNKNOWN_STOP/UNFROZEN, no new cap or fit.
-Latest document **B4.42 public-enclosure limitations/real assembly**:
+Historical document **B4.42 public-enclosure limitations/real assembly**:
 primary FAIL196 (195 PASS/1 FAIL, incomplete; no retry), independent179 static PASS;
 documentary Gate FAIL_PRIMARY_CHECKER; [report](docs/validation/b4_42_public_enclosure_limitations_real_assembly.md),
 [protocol](docs/planning/b4_42_public_enclosure_limitations_real_assembly_protocol.md), [contract](docs/planning/b4_42_public_enclosure_limitations_real_assembly_contract.json).
@@ -95,11 +95,21 @@ documentary Gate FAIL_PRIMARY_CHECKER; [report](docs/validation/b4_42_public_enc
 error/full-Q storage remain TEXT_ONLY/UNKNOWN_STOP/UNFROZEN. Two pre-formal helper
 errors/one formal checker failure remain; independent precall full-status fix
 changes no contract/criterion. No original loss/gradient or actual execution.
-Next proposed **B4.43 public assembled-operator/intended-residual enclosure software**,
-not started: new owner/finite authored-public-fixture contract FIRST; preserve and
-address incomplete B4.42 primary coverage before new arithmetic implementation.
-No actual data/geometry/FEM/construction/timing/projection/root/network integration/
-fit/search/new budget or sealed grant.
+Latest public software **B4.43 assembled/residual enclosure**:
+94 focused tests PASS; new primary131/independent109 DOCUMENT coverage PASS BEFORE
+arithmetic, retaining B4.42 FAIL/incomplete. Formal Gate FAIL_FORMAL_PRODUCER:
+external controller top-level import failure before fixture/case loop; no producer
+receipt/all10 formal cases unexecuted. Independent FAIL_INCOMPLETE8 metadata/
+0 case audits/0RN proofs. Both formal calls ONCE/no retry; [report](docs/validation/b4_43_public_assembled_residual_enclosure.md),
+[protocol](docs/planning/b4_43_public_assembled_residual_enclosure_protocol.md), [contract](docs/planning/b4_43_public_assembled_residual_enclosure_contract.json). Public fixed scalar assembly/residual error
+and outward norms only; both triangles/all error terms retained, diagnostic/no
+loss-gradient change. No real certificate/PSD/coercivity/Y/cost/memory proof.
+Real executable UNFROZEN/UNKNOWN_STOP/full fit PENDING4GiB; scientific FAIL stays.
+Next proposed **B4.44 read-only public assembly/residual limitations and real
+certification prerequisites**, not started: new owner/finite TEXT-only contract
+FIRST; retain/review failed formal launch and94-test limits before any future
+arithmetic. No actual data/geometry/FEM/construction/timing/integration/fit/search/
+new budget/sealed grant/B5.
 B4.23 stays3907/3976/all69 failures and57546.072069>7200; known-added58142.252069>7200,
 B4.24/28 memory gaps/both failures, B4.20 failure and B4.19 UNKNOWN remain.
 Full training memory PENDING/4GiB; software RSS fills no historical gap.

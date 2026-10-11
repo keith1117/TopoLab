@@ -5,16 +5,18 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
-Latest public software [B4.41](b4_41_public_intended_representation_enclosure.md):84 tests/935 independent
-predicates/66 RN-even nodes on12 authored systems/8 enclosures/4 stops only.
-Latest document [B4.42](b4_42_public_enclosure_limitations_real_assembly.md): primary FAIL196
-(195 PASS/1 FAIL, incomplete), independent179 static PASS; documentary Gate
-FAIL_PRIMARY_CHECKER.48 texts/16 limits/26 conditional obligations/18 stops.
-Actual assembly/load/residual/norm/storage/cost proofs remain TEXT_ONLY/UNKNOWN_STOP/
-UNFROZEN. Scientific FAIL/P17/uniform/all-paid FAIL/full fit PENDING4GiB/seals stay.
-Next proposed B4.43 tiny public assembled-operator/intended-residual software needs
-new owner/finite fixture contract FIRST and documentary coverage gap resolution;
-not started. No actual data/FEM/timing/integration/fit/new cap/sealed grant or B5.
+Latest public software [B4.43](b4_43_public_assembled_residual_enclosure.md):94 focused tests PASS;
+new documentary coverage131/109 PASS before arithmetic. Formal producer FAIL at
+import before fixture/case loop, no producer/pending receipt/no retry; independent
+FAIL_INCOMPLETE8 metadata/0 case audits/0RN proofs. Formal Gate FAIL_FORMAL_PRODUCER,
+all10 formal cases unexecuted; regression does not replace formal evidence.
+B4.42 documentary FAIL_PRIMARY_CHECKER/196 incomplete and independent179 stay;
+B4.41 public84/935/66 retains its separate scope. Public G/K/f assembly and actual
+residual error/norm transfer only; real proofs UNKNOWN_STOP/UNFROZEN/full fit
+PENDING4GiB/scientific FAIL/P17/uniform/all-paid FAIL/seals remain. Next proposed
+B4.44 finite read-only limitations/real prerequisites, new owner/TEXT-only contract
+FIRST; review failed launch/missing formal evidence. No actual data/FEM/timing/
+integration/fit/new cap/sealed grant/B5.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -159,3 +161,7 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 
 - [B4.41 bounded public intended-representation enclosure](b4_41_public_intended_representation_enclosure.md):84 tests/935 predicates/66 RN-even nodes/8 public enclosures/4 prescribed stops; scientific FAIL/P17 unrepaired, real UNKNOWN_STOP/all-paid FAIL/full fit PENDING4GiB.
 - [B4.42 failed primary review and independent real-assembly document audit](b4_42_public_enclosure_limitations_real_assembly.md)
+
+## B4.43 finite public assembly/residual software
+
+- [Formal launch failure and bounded regression evidence](b4_43_public_assembled_residual_enclosure.md)

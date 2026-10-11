@@ -1,66 +1,76 @@
 # Current project status
 
-Updated: 2026-10-11. Latest document **B4.42 public-enclosure limitations/real
-assembly preregistration**: primary FAIL196 (195 PASS/1 FAIL, incomplete), independent
-179/179 static PASS. Documentary Gate FAIL_PRIMARY_CHECKER; scientific FAIL/P17
-unrepaired/uniform/seals/all-paid7200 FAIL/real certificates-cost UNKNOWN_STOP/
-real executable UNFROZEN/full fit PENDING4GiB remain.
+Updated: 2026-10-11. Latest public software **B4.43 assembled-operator/intended-
+residual enclosure**:94 focused tests PASS; document coverage131/109 PASS before
+implementation; formal Gate FAIL_FORMAL_PRODUCER/independent FAIL_INCOMPLETE8
+metadata predicates/no case audits/no retry. B4.42 documentary FAIL and scientific
+FAIL/P17 unrepaired/uniform/seals/real UNKNOWN_STOP/UNFROZEN/PENDING4GiB remain.
 
-See [report](validation/b4_42_public_enclosure_limitations_real_assembly.md), [protocol](planning/b4_42_public_enclosure_limitations_real_assembly_protocol.md), [contract](planning/b4_42_public_enclosure_limitations_real_assembly_contract.json).
+See [report](validation/b4_43_public_assembled_residual_enclosure.md), [protocol](planning/b4_43_public_assembled_residual_enclosure_protocol.md), [contract](planning/b4_43_public_assembled_residual_enclosure_contract.json).
 
-## B4.42 bounded document evidence and retained failure
+## B4.43 finite software evidence and retained launch failure
 
-Owner “继续” after fully closed B4.41/main f88ad9d2ff61/all three main CI/
-no open PR authorizes ONE document slice. Protocol/contract freeze48 text/hash
-inputs,16 limits/26 prospective obligations/18 stops BEFORE reviewer implementation
-or formal calls. Primary audit **FAIL** at196 evaluations (195 passed/1 failed);
-remaining primary predicates NOT_EVALUATED/UNKNOWN, no formal retry. Independent
-document/Decimal audit **179/179 PASS**, first and only invocation. Documentary
-Gate **FAIL_PRIMARY_CHECKER**; independent PASS does not replace the failed review.
+Owner “继续” after fully closed B4.42/main23558c4d2767/all3 required CI/no
+open PR authorizes ONLY this public software slice.56 starting-main text/hash
+inputs and three literal closure metadata paths; nine private files/ten unrelated
+refs remain. Protocol/contract/10 tiny original fixtures/convention freeze BEFORE
+new document checker or arithmetic implementation. New primary131/131 and separate
+independent109/109 DOCUMENT predicates PASS, each first/only invocation, BEFORE
+arithmetic. They address the FULL inherited real_certificate_status and remaining
+B4.42 boundary/cap/path/successor/text/import/JSON/schema coverage; old primary
+FAIL196(195 PASS/1 FAIL, incomplete)/independent179 PASS/FAIL_PRIMARY_CHECKER stay.
+No old checker run/change/retry or old numerical/backup-member access.
 
-The primary checker wrongly required the short literal UNKNOWN_STOP while the
-unchanged inherited contract stores “UNKNOWN_STOP; conditional route neither
-constructs nor certifies real FEM”. Original checker/receipt/full log/profile/
-exit/cost stay. Independent checker was corrected BEFORE its first call to require
-the ENTIRE old status string unchanged; original precorrection source and both
-freezes stay. No protocol/contract/criterion/role/seal or source program changed.
-Two pre-formal administrative helper errors (quoted Chinese Git path; old profiler
-key) remain with complete returned errors/sources/UNKNOWN_NOT_ZERO costs; completed
-clone/branch were reused, no repeated mutations. The formal failure is additional.
+94 focused public regression tests PASS on10 systems (six enclosures/four
+prescribed arithmetic stops),11 pre-byte denials/17 schema-state denials/8 fixed
+arithmetic probes/42 tamper families/six specific error/symmetry/stop checks.
+One fixed scalar RN-even G/K/f contribution accumulation and residual multiply/
+add/subtract program; exact accepted bits/Fraction intervals/fixed80-bit/outward
+norms. Separate beta_G/beta_K/beta_f/beta_eval/q_hat/u_plus/all transfer terms and
+both actual triangles/symmetry defects stay. G/K are distinct from Gram(A_hat);
+zero r_hat does not erase assembly/evaluation error. Squared values are upper
+enclosures. Diagnostic only, no PSD/coercivity/Y/full-Q/real FEM or original
+loss/gradient/intercept/SAME stored normalizer change.
 
-B4.41 remains public84/935/66 on12 systems/8 enclosures/2 sign/2 arithmetic stops.
-Fixed80-bit absolute resolution/natural dependency/inconclusive sign/full range
-stops/conservative squared upper enclosures/BOTH Gram errors/complete error remain.
-No public PSD/coercivity/Y, real geometry/FEM/assembly/load/residual/cost proof.
-Conditional beta_G/beta_K/beta_f/beta_eval and rounded norm/solution identities
-are TEXT ONLY: actual assembled G/K differ from Gram(A_hat); intended residual
-needs operator, force and actual multiply/subtract/norm errors. Keep both actual
-triangles/symmetry defect, full-Q/storage obligations; no matrix repair/fallback.
-Real executable UNFROZEN/certificates-cost UNKNOWN_STOP/full fit PENDING4GiB.
+Formal public Gate **FAIL_FORMAL_PRODUCER**. First/only producer exits1 with
+ModuleNotFoundError at its top-level `topolab` import BEFORE fixture read/state/
+case loop. Its external controller was launched without an importable source
+path; no arithmetic defect is established. Original producer/pending receipt
+NOT_WRITTEN; raw counters UNKNOWN_NOT_INSTRUMENTED, all10 prescribed cases not
+executed. No formal retry or launcher repair/replay. First/only independent
+invocation exits1: eight source/freeze/bundle metadata predicates PASS, then
+FileNotFoundError for missing producer receipt; case audits0/RN-even proofs0/
+coverage INCOMPLETE. Independent Gate FAIL_INCOMPLETE, no formal numerical PASS.
+The94 regression tests do not replace these failed formal invocations.
 
-ALL four B4.41 criterion/failure/cost/memory objects remain identical. Scientific
-FAIL/P17 unrepaired/R17 quality1.0019709437499813>1.001 and target mean
-1.016053130777518>1.0/P-R1/3/1/all69 old failures/UNKNOWN/gaps/ledgers/FULL reserves/
-closed3/3/B4.30's2/1/uniform/seals stay. Known-paid12721.16417100014444982>7200
-is diagnostic/all-paid FAIL, no cap/reset. Original loss/gradient/intercept/SAME
-stored normalizer unchanged. B4.41 closed5 native/9 administrative failures and
-successful read-only recovery remain separate. No actual data/geometry/FEM/
-construction/timing/projection/root/network integration/fit/search/new budget/
-sealed grant. Sequential software RSS fills no historical/full-fit gap.
+Initial Ruff13 E501 failures retained; only literal/formatting fixes, full AST
+unchanged, no algorithm/criterion/fixture/tolerance change. Original formally
+executed document sources/receipts/hashes remain; later publishing format has
+same AST and does not rerun either document call. Three unprofiled read-inventory
+errors (rg no matches interpreted as failure, guessed oracle path, guessed required-
+helper path) retain complete returned errors/source or command copies and
+UNKNOWN_NOT_ZERO costs. Full formal failure sources/log/native profiles/exits/
+prefix absence/UNKNOWN and every software/CI cost stay external.
 
-Only11 reviewed documents enter Git, including this failed report. README/runtime/
-tests/fixtures/conventions/locks/CI/frozen bytes/nine private files/ten unrelated
-refs stay. Both stale index introductions are corrected. All5 checks, inspected
-per-path/staged/EVERY upload/actual-squash guards, protected exact-head/main CI/
-equal tested tree/owned-only cleanup/independent streamed backup govern closure.
-Technical CI/publication success cannot turn the failed documentary/scientific
-Gate into PASS. Raw source/audit/controller/native/CI/cost records stay external.
+ALL four inherited criterion/failure/cost/full-memory objects stay identical.
+Scientific FAIL/P17 unrepaired/uniform/all seals/closed3/3/B4.30's2/1/no third/
+all69 old failures/UNKNOWN/gaps/B4.31 process failure remain. Old
+7323.1004352501081506 includes failed191.9666532080154866/BOTH FULL180; Q31 once/
+separate7403.39983000014444982. Known-paid12721.16417100014444982>7200 is diagnostic,
+not cap/ledger reset; all-paid FAIL/real certificates-cost UNKNOWN_STOP/executable
+UNFROZEN/full fit PENDING4GiB/all16 costs/all8 simultaneous categories remain.
+No actual data/geometry/FEM/construction/timing/projection/root/network integration/
+fit/search/new cap/sealed grant. Sequential software RSS fills no historical gap.
 
-All5 mandatory checks PASS; complete pytest1720 PASS in704.00s, same full population/tolerances and one-thread setting. No numerical change/new test/panel/formal retry.
+Only18 reviewed source/tests/tiny fixtures/two document checkers/protocol/contract/
+failed report/convention appendix/current documents enter Git. Old frozen evidence/
+runtime/tests/fixtures/locks/CI/README/private files/refs stay. All5 mandatory
+checks, links/spacing/ignore, inspected per-path/staged/EVERY upload commit/full
+predicted and actual squash guards, protected exact-head/main CI/equal tested tree/
+owned-only cleanup/independent streamed external backup govern technical closure.
+CI/publication PASS never clears either formal software or scientific FAIL.
 
-Latest public software [B4.41](validation/b4_41_public_intended_representation_enclosure.md)
-remains84/935/66 and12/8/2/2. Historical B4.40 document205/171, B4.39 public72/993/
-692 and B4.35–38 evidence retain scope and original bytes.
+All5 mandatory checks PASS; complete pytest1814 PASS in681.19s, including all94 new tests with unchanged historical population/tolerances and documented one-thread setting. Formal quotas remain1/1, both failed/incomplete; full regression is not a formal retry.
 
 ## Delivery and operational boundary
 
@@ -172,11 +182,10 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and proposed successor
 
-Next proposed **B4.43 bounded public assembled-operator and intended-residual
-enclosure software evidence**, NOT STARTED/AUTHORIZED. New owner/finite authored-
-public-fixture contract FIRST; retain the incomplete primary review and address
-its documentary coverage gap before new arithmetic implementation. Tiny authored
-operator/force/residual error arithmetic only; no actual data/geometry/FEM/
-construction/timing/integration/fit/search/new budget/sealed grant. Real
-certificate/full cost/memory, learned repair/independent confirmation/full B4
-and compatible final contract remain before B5. Close B4.42 and stop.
+Next proposed **B4.44 bounded read-only public assembly/residual enclosure
+limitations and real-certification prerequisites**, NOT STARTED/AUTHORIZED.
+New owner/finite text-only contract FIRST; retain and review B4.43 failed launch,
+missing formal evidence and94-test scope before any future arithmetic campaign.
+No actual data/geometry/FEM/construction/timing/integration/fit/search/new budget/
+sealed grant; real certificate/full cost/memory/learned repair/independent
+confirmation/full B4/compatible final contract remain before B5. Close B4.43 and stop.
