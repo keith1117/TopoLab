@@ -1362,3 +1362,38 @@ missing formal evidence and94-test scope before any future arithmetic campaign.
 No actual data/geometry/FEM/construction/timing/integration/fit/search/new budget/
 sealed grant; real certificate/full cost/memory/learned repair/independent
 confirmation/full B4/compatible final contract remain before B5. Close B4.43 and stop.
+
+## B4.44 — public assembled-residual limitations and real-certification prerequisites
+
+Owner “开始” after closed B4.43/main5d811f9f5219/all3 required CI/no open PR
+authorizes ONLY this document slice. [Protocol](planning/b4_44_public_assembled_residual_limitations_real_certification_protocol.md) and
+[finite contract](planning/b4_44_public_assembled_residual_limitations_real_certification_contract.json) freeze72 public texts/14 compact metadata/four primary-only failed-launch texts
+before reviewers;18 limits/24 TEXT obligations/20 stops. First/only primary407/407
+and separate independent332/332 PASS, Decimal50, exact access roles/native60s/
+256MiB caps PASS. Independent reads no primary program/receipt or old producer/
+controller/failure logs; no candidate/shared helper import or numerical evaluation.
+All four inherited objects/17 FULL boundary values remain exact. B4.43 formal
+FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE8/0cases/0RN/no original receipt/quota1/1 and
+94-test limits stay; actual interpreter/path UNKNOWN_NOT_RECORDED, detailed
+cause UNKNOWN_NOT_DIAGNOSED. B4.42 FAIL stays, no old formal retry or repair.
+
+One preprofile KeyError and own interrupted local clone310.3799901669845s remain
+with original sources/errors/native SIGTERM/UNKNOWN costs/cause; no partial clone
+remained after Git exit. New GitHub clone succeeded; nine private files/ten refs
+preserved. Real assembly/load/residual/norm/PSD/coercivity/Y/cost remain TEXT_ONLY/
+UNKNOWN_STOP/UNFROZEN; full-Q/all8 memory PENDING4GiB/scientific FAIL/P17/uniform/
+all16 paid costs/all historical failures/reserves/seals remain.13 reviewed paths
+only, all5 mandatory checks/guards/protected exact-head/main CI/equal tested tree/
+owned-only cleanup/streamed verified backup govern technical closure. See [report](validation/b4_44_public_assembled_residual_limitations_real_certification.md).
+
+Prepublication source-content inspection failed at missing explicit PENDING wording in the report; original source/report snapshot/log/native costs retained, report corrected before staging without criterion change or formal retry.
+
+All5 mandatory checks PASS; complete pytest1814 PASS in806.33s, unchanged full population/tolerances and documented one-thread setting. No new numerical test/panel/formal retry. Native observed pytest elapsed830.7645793750416s includes full process overhead; raw profile/log remain external.
+
+Next proposed **B4.45 bounded public launch-context and immutable-receipt
+preflight software**, NOT STARTED/AUTHORIZED. New owner/finite public-text
+software contract FIRST; launcher/import-origin/immutable pending-terminal
+receipt boundaries only. No B4.43 retry/new arithmetic campaign/actual data/
+geometry/FEM/construction/timing/integration/fit/search/new budget/sealed grant.
+Real certificates/full cost/memory/learned repair/independent confirmation/full
+B4/compatible final contract remain before B5. Close B4.44 only and stop.

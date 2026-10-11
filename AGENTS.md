@@ -95,7 +95,7 @@ documentary Gate FAIL_PRIMARY_CHECKER; [report](docs/validation/b4_42_public_enc
 error/full-Q storage remain TEXT_ONLY/UNKNOWN_STOP/UNFROZEN. Two pre-formal helper
 errors/one formal checker failure remain; independent precall full-status fix
 changes no contract/criterion. No original loss/gradient or actual execution.
-Latest public software **B4.43 assembled/residual enclosure**:
+Historical public software **B4.43 assembled/residual enclosure**:
 94 focused tests PASS; new primary131/independent109 DOCUMENT coverage PASS BEFORE
 arithmetic, retaining B4.42 FAIL/incomplete. Formal Gate FAIL_FORMAL_PRODUCER:
 external controller top-level import failure before fixture/case loop; no producer
@@ -105,11 +105,19 @@ receipt/all10 formal cases unexecuted. Independent FAIL_INCOMPLETE8 metadata/
 and outward norms only; both triangles/all error terms retained, diagnostic/no
 loss-gradient change. No real certificate/PSD/coercivity/Y/cost/memory proof.
 Real executable UNFROZEN/UNKNOWN_STOP/full fit PENDING4GiB; scientific FAIL stays.
-Next proposed **B4.44 read-only public assembly/residual limitations and real
-certification prerequisites**, not started: new owner/finite TEXT-only contract
-FIRST; retain/review failed formal launch and94-test limits before any future
-arithmetic. No actual data/geometry/FEM/construction/timing/integration/fit/search/
-new budget/sealed grant/B5.
+Latest document **B4.44 public assembled-residual limitations/real prerequisites**:
+407/332 static PASS,72 public texts/14 compact metadata/four primary-only failure
+texts/18 limits/24 TEXT obligations/20 stops, each call ONCE/no retry; [report](docs/validation/b4_44_public_assembled_residual_limitations_real_certification.md),
+[protocol](docs/planning/b4_44_public_assembled_residual_limitations_real_certification_protocol.md), [contract](docs/planning/b4_44_public_assembled_residual_limitations_real_certification_contract.json).
+Both native60s/256MiB caps and exact role paths PASS. B4.43 formal failures/no
+receipt/all10 unexecuted/UNKNOWN import context and B4.42 FAIL stay. All real
+assembly/load/residual/norm/PSD/coercivity/Y/cost remain UNKNOWN_STOP/UNFROZEN;
+full Q/all8 full-fit categories PENDING4GiB, diagnostic/no original loss change.
+Next proposed **B4.45 bounded public launch-context and immutable-receipt preflight
+software**, not started/authorized: new owner/finite public-text contract FIRST,
+launcher/import-origin/pending-terminal receipt only. No B4.43 retry/new arithmetic
+campaign/actual data/geometry/FEM/construction/timing/integration/fit/search/new
+budget/sealed grant/B5. Close B4.44 only and stop.
 B4.23 stays3907/3976/all69 failures and57546.072069>7200; known-added58142.252069>7200,
 B4.24/28 memory gaps/both failures, B4.20 failure and B4.19 UNKNOWN remain.
 Full training memory PENDING/4GiB; software RSS fills no historical gap.
