@@ -1,0 +1,674 @@
+{
+  "version": "topolab.b4_42.public-enclosure-real-assembly.v1",
+  "authority": "owner \u7ee7\u7eed after fully closed B4.41; all original constraints continue",
+  "starting_main": "f88ad9d2ff61d0b2f1ade9244b1f7af9e345590e",
+  "slice_limit": 1,
+  "scope": "finite-read-only-document-preregistration",
+  "source_inputs_sha256": {
+    "docs/numerical_conventions.md": "57af019495c89cd9f7a5d8fb337f193303858db5e4fd74dfe0ced6033a1b4003",
+    "docs/planning/b4_34_admissibility_full_cost_preregistration_protocol.md": "e8213abfbc08b6725c0fa3f92b380647ad98e21dd7c5410ece22333210ef028d",
+    "docs/planning/b4_34_admissibility_full_cost_preregistration_contract.json": "e01280342f0412ed628a7c11eb88d5a18844844f8ec29973476021b3b48f5623",
+    "docs/validation/b4_34_admissibility_full_cost_preregistration.md": "628b5981308993d735376ac2fef529d42246bad1ccff070e3549eb59b4c29e85",
+    "docs/planning/b4_35_public_admissibility_certificate_protocol.md": "67e81c20d33d1163a099197e45f75ce66b13cd3741e770d348169ab32eb30e75",
+    "docs/planning/b4_35_public_admissibility_certificate_contract.json": "81235df59699dcd6bfc911f7584e9b924fced8a42c1da146f0025d4e33f54add",
+    "docs/validation/b4_35_public_admissibility_certificate.md": "0feafbad4b7b75d60246ad66cd4caafd8da8aaeb91934a7563d924f2d139c800",
+    "src/topolab/admissibility_certificate.py": "7686208937c82df2f9d303e0ef044d1ad76859ff9d12bace0f85ad0be69b157a",
+    "scripts/b4_35_certificate_oracle.py": "8c4be483758703a474de2ffc8a39639dd4ec5950f49dc0341a2ec0a12f390520",
+    "tests/test_admissibility_certificate.py": "744a776a0e735dfd75e3782adb74dcfd0eaaf351cddfda3927c8c7b25a8dbae0",
+    "tests/fixtures/b4_35_admissibility_certificate.json": "9b16325b155f918b3537162f606121fd074b9729ebd4011b624fafc923f76a36",
+    "docs/planning/b4_33_reciprocal_energy_evidence_protocol.md": "11312dce4270e770c73e7edfbe1392956dd50daf48d1feef58a26efd48a16772",
+    "docs/planning/b4_33_reciprocal_energy_evidence_contract.json": "e6592ce47ce4eee143ced8188cc6902dc5629ad6ad2c9fc4831407b8f2397928",
+    "docs/validation/b4_33_reciprocal_energy_evidence.md": "53892295031ce866d0c60d8d17b1583f2310725af8f7c5c94003b15890a80919",
+    "src/topolab/reciprocal_energy.py": "2cb77017295fb29ca5b201993a4b7848cb1026fa432f663312cee85cad13f3c0",
+    "src/topolab/fem.py": "bf525efabd55091ef68893aa82ad8d10d4fa99314c3ef2cd348593abeb14cdc0",
+    "src/topolab/mesh.py": "966f00630387b3513165df32684ac1e3007bf2a9d331def0b21ee4164ca16440",
+    "src/topolab/model.py": "ababba0fc7b8f46e135dfabc5f65a3422a90b834ee3da51bcb7cde85615c265e",
+    "docs/planning/b4_36_certificate_limitations_real_route_protocol.md": "94f63469252cbc4677a099746f09faad96e3bd64b73e3e6bda35effcbe015edb",
+    "docs/planning/b4_36_certificate_limitations_real_route_contract.json": "4b7caa9fd619b22eb99a10cc5358e417de82b138e03021923ff39275f99b029f",
+    "docs/validation/b4_36_certificate_limitations_real_route.md": "86dffd3d71d5f7b186339b376b4bca9d824d4b95afb224a43fe13d7805cb9fc4",
+    "docs/planning/b4_37_public_coercivity_witness_protocol.md": "c71c176d59fbd3a6994dc1acab36f110ab42a15b3dfbb91085a6ed7026af49e3",
+    "docs/planning/b4_37_public_coercivity_witness_contract.json": "0d36f894d8e3aca2bf5a46c7bb8d5a37e46e5fb2cfc4b7be05c47cd4a90b71b4",
+    "docs/validation/b4_37_public_coercivity_witness.md": "772e3e34c4ceecfa21577d01c4d24b507468aa7828082bd18177d871922bd862",
+    "src/topolab/coercivity_witness.py": "57ff56a4444d075e1880569c68bc821805fb879cbc320097565abb3d30ef877e",
+    "scripts/b4_37_coercivity_oracle.py": "d3aa632ec0fcf451a9b88c2e0d893223892349bc5a219db6800495212f4a115f",
+    "tests/test_coercivity_witness.py": "e0ecdf030ea17d4fd76d9e089f8aa78835bd1aa99b7ece4e93cd6971bbbf0f76",
+    "tests/fixtures/b4_37_coercivity_witness.json": "b7d3d0566312d66f8c020116bc6ffd25e4e27c5e9671ee6d3a5ab928d28a89b6",
+    "docs/planning/b4_38_public_witness_limitations_real_construction_protocol.md": "8be696b12ce97641b242300e6e380aa9451ac8e0da69db0c0493608b5c8c069b",
+    "docs/planning/b4_38_public_witness_limitations_real_construction_contract.json": "e7f508eab8c7d2dfe538ca18e2e04b2de3f8b5d32578e3ef1a6632fe1da9e7ba",
+    "docs/validation/b4_38_public_witness_limitations_real_construction.md": "6024b4747caaa72c7faf3090904566c1f7a03ecae5fd97891b15402667f7a9a6",
+    "docs/planning/b4_39_public_fixed_construction_witness_protocol.md": "2157e2afccd4ab3c386562edfd93029c85eb4932cd4fea97aaeea10d115fbb61",
+    "docs/planning/b4_39_public_fixed_construction_witness_contract.json": "80e46140310446c0aa31501db8576054d59aa554fbe27bdd4b5ee9921272bc0f",
+    "docs/validation/b4_39_public_fixed_construction_witness.md": "7c48f2fc56f9e2296044e612c78941cbb165ca8f769f9363cc125f2927145c9d",
+    "src/topolab/fixed_construction_witness.py": "5075c2b175cd5327fec6f65570c45fbe3e10ae2d6ed0add755a5ba6d5f24a396",
+    "scripts/b4_39_construction_oracle.py": "f159a74f722ee384808a1abac3bef8835e0f3e2ac6676b6d3f7b4558e6daaa59",
+    "tests/test_fixed_construction_witness.py": "edb6071a39ea7466e1fe0ac44d19a1d3d64056fc2371d3040da3a16ae9656e21",
+    "tests/fixtures/b4_39_fixed_construction_witness.json": "1d4e87fb13a7f96049cd3db53d824949c27f755210165329084728b5518246ad",
+    "docs/planning/b4_40_constructed_witness_limitations_real_representation_protocol.md": "fc3f2c7f596203986dcdfc49769929e8d5ce1b56c5ab40a4be32a5166774a225",
+    "docs/planning/b4_40_constructed_witness_limitations_real_representation_contract.json": "d4ca879463ce378e84b793725b58380d9247da65e20ae17f1b0b7376873878b5",
+    "docs/validation/b4_40_constructed_witness_limitations_real_representation.md": "545bbabfab121475c0b7de27d1ff633c3be876728d4dad16cfa5c2886be983e4",
+    "docs/planning/b4_41_public_intended_representation_enclosure_protocol.md": "90d9f40e82a47945249d0ca02ce734afa64f5da97ee1a16efd5bd998e8dc5d1a",
+    "docs/planning/b4_41_public_intended_representation_enclosure_contract.json": "06b4d4874c75d5135ec1cd269f2d4473e1dd74f968bed7ab4d454bc410960db8",
+    "docs/validation/b4_41_public_intended_representation_enclosure.md": "f9921fc95d546cf181464f053643a750738d8ae81e936597a27489c42167d741",
+    "src/topolab/intended_representation.py": "e2092a91cc85061b66c66e5a7091f416d02f6b534d75156d0e757f8d6594dda9",
+    "scripts/b4_41_representation_oracle.py": "cbbc763e7e94e9ba255db64ea17cf12489e3a481bf35714ca58749e56ed29a4e",
+    "tests/test_intended_representation.py": "43ce9669482ee715d4f1b4e09b02a39651a3dd386ecb2004563a2148b4c757eb",
+    "tests/fixtures/b4_41_intended_representation.json": "f6f770bd282f8bdfc1ef93b9b1fe8ea38a06a13c9d1499dc8266e591e4b4ffe5"
+  },
+  "closed_recovery_metadata_sha256": {
+    "b4-41-software-validation/closed_main_release.json": "2c9c3462b333f39f53341a14a0ee54b97b3e10a93070d33682e78ecde33d94fa",
+    "b4-41-software-validation/final_recovery_verification.json": "da814426f741bd36f869d92c59425de241dd13efa0ca1f0140414767092ca524",
+    "backups/b4-41-2026-10-11/closed-release-f88ad9d2ff61/manifest.json": "f4334f895397bde0e9ce179866a3aad45a58805229daa76b674d04b44a61c092"
+  },
+  "prior_handoffs_sha256": {
+    "local/b4-41-handoff-2026-10-11.json": "545c57294cb7a7fe17ec06f943b085ad650b514f33c8474f4e933845806c8915"
+  },
+  "limitations": [
+    {
+      "id": "public-only",
+      "obligation": "12 authored tiny DAG systems/8 enclosures/4 stops grant no real Hex8/SIMP/assembly/load/residual certificate.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "accepted-bits",
+      "obligation": "Accepted canonical binary64 bits are intended exact reals; no decimal spelling/rounded-target substitution or expanded role.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "absolute-grid",
+      "obligation": "ONE fixed80-fractional-bit absolute sqrt grid can be loose on tiny quantities; no adaptive precision.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "natural-dependency",
+      "obligation": "Natural intervals may yield nonzero structural enclosure for an exact identity; no assumed zero or identity shortcut.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "sign-not-invalidity",
+      "obligation": "Inconclusive radicand/denominator stops preserve mathematically valid expressions; no singularity/invalidity verdict.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "range-and-cancellation",
+      "obligation": "Overflow/underflow/subnormal/outward range failure stop; represented exact cancellation keeps intended nonzero error/full prefix.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "upper-norms",
+      "obligation": "Squared Frobenius upper enclosures are not exact irrational norm squares; fixed Gram stages/direct complete enclosure remain separate.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "Gram-versus-assembly",
+      "obligation": "BOTH Gram errors/complete error do not bound distinct solver G_assembled/K_star_assembled or symmetry defect.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "PSD-coercivity",
+      "obligation": "No intended element PSD/coercivity/Y proof from B4.41 or successful floating solve/positive pivots.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "geometry-Voigt",
+      "obligation": "Accepted geometry/support mapping/exact spacings/SAME free space/24-DOF engineering gamma remain independent obligations.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "quadrature-SIMP",
+      "obligation": "Rectangular constant material quadrature exactness is limited; intended powers/density/interpolation require separate proof.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "scatter-and-load",
+      "obligation": "Sparse duplicate reduction/casts/force superposition/face resultant division must match intended identities.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "actual-residual",
+      "obligation": "Actual floating residual/norm omit operator/force/product/subtraction/rounding terms; solution bits are not exact equilibrium.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "diagnostic-loss",
+      "obligation": "Tiny nonzero residual never certifies unmodified U; SAME energy/stored C_s proof changes no original loss/gradient/fidelity.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "all-paid-cost",
+      "obligation": "Real representation/assembly/residual/certificate maxima UNKNOWN_STOP; known-paid floor exceeds7200; no cap/reset.",
+      "real_disposition": "UNKNOWN_STOP"
+    },
+    {
+      "id": "simultaneous-memory",
+      "obligation": "Full Q_transpose/assembly/interval/error/trace buffers coexist; public sequential RSS fills no historical/full-fit4GiB proof.",
+      "real_disposition": "UNKNOWN_STOP"
+    }
+  ],
+  "prospective_route_obligations": [
+    {
+      "id": "accepted-bit-identity",
+      "obligation": "Pin accepted scalar/density/solution/load/SIMP bits and integer counts/SAME space before access; no target replacement.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "geometry-free-space",
+      "obligation": "Independent exact h=L/n, positive J/det and rounded coordinate/support/free-space mapping compatibility.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "engineering-Voigt",
+      "obligation": "SAME node-major24 DOFs and xx/yy/zz/xy/yz/xz engineering gamma rows; no shear half-factor.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "constitutive-domain-factor",
+      "obligation": "SAME -1<nu<1/2, intended SPD including auxetic nu and positive upper L0 radicands/denominators.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "quadrature-PSD",
+      "obligation": "Restricted rectangular constant-J/material degree<=2 per-coordinate/degree3 Gauss exactness and independent intended element PSD.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "stack-integral-scatter",
+      "obligation": "Independent SAME intended integral/free-space integer0/1 scatter proves A0.T*A0=G; no assumed structural zero.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "fixed-RN-interval-program",
+      "obligation": "New real program FIRST; ONE scalar RN-even/fixed80-bit/outward order; inconclusive/range STOP without fallback.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "both-Gram-components",
+      "obligation": "Retain G-Gram(A0), Gram(A0)-Gram(A_hat), COMPLETE G-Gram(A_hat) and A0-A_hat separately.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "conservative-norms",
+      "obligation": "Squared Frobenius upper enclosures and directed fixed cross/square/change/delta plus separate direct bound; not exact irrational squares.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "distinct-unit-assembly",
+      "obligation": "Independently certify beta_G for actual G_assembled from intended G; never substitute Gram(A_hat).",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "density-material-K",
+      "obligation": "Separate beta_K covers SAME anchor density casts/SIMP/powers/material/interpolation; unsupported power proof STOP.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "ordered-sparse-reduction",
+      "obligation": "Pin actual element computation/scatter/duplicate sum/CSR-CSC conversion/reduction/library/thread program; full entrywise assembly errors.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "actual-symmetry",
+      "obligation": "Retain both actual triangles/symmetry defect; no averaging/symmetrization/diagonal shift/clipping/support repair.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "same-load",
+      "obligation": "Independent beta_f for SAME represented force, superposition, face resultant distribution and all cast/add/divide errors.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "represented-solution",
+      "obligation": "u_tilde means exact accepted represented solution bits on SAME free space, not exact intended equilibrium; independently bound u_plus.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "dot-subtraction-roundoff",
+      "obligation": "beta_eval encloses actual sparse multiply/reduction/subtraction/casts versus exact represented-array r_arrays.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "residual-norm",
+      "obligation": "q_hat encloses actual r_hat norm and its own rounding; no rounded residual or norm assumed exact.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "intended-residual-transfer",
+      "obligation": "Directed r_plus combines q_hat+beta_eval+beta_K*u_plus+beta_f by fixed nested outward stages; every missing term STOP.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "one-construction-left-residual",
+      "obligation": "ONE prospective unpivoted QR/positive-diagonal/triangular Y; independent full construction products/eta<1/M>0, no search.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "strict-coercivity",
+      "obligation": "Separate intended element PSD and strictly positive directed lower_G/m_minus; failed sufficient bound is not singularity.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "same-energy-normalizer",
+      "obligation": "Independent intended SAME-force U_plus and positive SAME stored C_s_minus; no approximate equality/adjoint transfer.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "diagnostic-no-loss-change",
+      "obligation": "Residual B_plus/normalized_B_plus diagnostic only; tiny nonzero cannot certify unmodified U or change original loss/gradient/intercept.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "unchanged-fidelity",
+      "obligation": "Original pointwise/full-interval/LOCAL/two FD steps/terminal reliability/fixed P17/all failures remain.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "full-cost",
+      "obligation": "All16 first/failure-inclusive costs/3 seeds/200 FULL epochs/432+76/factor1.25/IO/audits/FULL reserves/native startup-through-exit; unknown blocks.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "simultaneous-storage-memory",
+      "obligation": "Freeze actual full-Q/R/assembly/interval/error/trace storage, symbolic16*m*n/8*m*m only; all8 categories/prefit/through-exit4GiB proof.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "separate-real-release",
+      "obligation": "New owner finite executable/roles/population/program/caps/audit/full cost/memory contract and clean locked merged exact-head/main CI FIRST; UNFROZEN.",
+      "status": "UNIMPLEMENTED_UNEVALUATED"
+    }
+  ],
+  "stop_dispositions": [
+    {
+      "trigger": "missing-duplicate-unknown-nonfinite-fields",
+      "disposition": "STOP_SCHEMA",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "source-role-bit-space-target-mismatch",
+      "disposition": "STOP_BINDING",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "unproved-geometry-support-free-map",
+      "disposition": "UNKNOWN_STOP_GEOMETRY",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "unproved-material-domain-SIMP-power",
+      "disposition": "UNKNOWN_STOP_MATERIAL",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "missing-intended-element-PSD",
+      "disposition": "UNKNOWN_STOP_ELEMENT_PSD",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "unproved-integral-quadrature-scatter",
+      "disposition": "UNKNOWN_STOP_QUADRATURE_SCATTER",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "unresolved-radicand-denominator-sign",
+      "disposition": "STOP_SIGN",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "missing-either-Gram-error-or-assumed-zero",
+      "disposition": "UNKNOWN_STOP_REPRESENTATION",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "nonfinite-overflow-underflow-subnormal-outward-range",
+      "disposition": "STOP_ARITHMETIC",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "missing-distinct-assembly-or-symmetry-enclosure",
+      "disposition": "UNKNOWN_STOP_ASSEMBLY",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "unfrozen-real-construction-or-pivot-only",
+      "disposition": "UNKNOWN_STOP_CONSTRUCTION",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "eta>=1-or-M<=0",
+      "disposition": "STOP_WITNESS",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "lower_G<=0-or-m_minus<=0",
+      "disposition": "STOP_COERCIVITY",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "missing-force-operator-product-subtraction-norm-error",
+      "disposition": "STOP_INTENDED_RESIDUAL",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "nonzero-residual-unmodified-U-or-missing-SAME-C_s",
+      "disposition": "STOP_UNCERTIFIED_U_OR_LABEL",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "failed-original-fidelity-or-reliability",
+      "disposition": "FAIL_STOP_SCIENTIFIC",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "unknown-required-cost-or-known-paid-floor>7200",
+      "disposition": "FAIL_STOP_FEASIBILITY",
+      "alternate_search_authorized": false
+    },
+    {
+      "trigger": "incomplete-simultaneous-memory-or-unauthorized-access",
+      "disposition": "PENDING_STOP_MEMORY_OR_ROLE",
+      "alternate_search_authorized": false
+    }
+  ],
+  "witness_route": {
+    "name": "one conditional intended-energy-factor left-inverse enclosure",
+    "G": "sum(R_e.T*K0_e*R_e), SAME intended restricted symmetric operator",
+    "dimensions": "A_hat:m-by-n; Y:n-by-m; n>=1; m>=n; SAME free-space identity",
+    "delta_plus": ">=||G-A_hat.T*A_hat||_2>=0 including ALL intended representation/quadrature/assembly/factor error",
+    "eta_plus": ">=||I-Y*A_hat||_F>=||I-Y*A_hat||_2; <1",
+    "M_plus": ">=||Y||_F>=||Y||_2; >0",
+    "lower_G": "round_down(((1-eta_plus)/M_plus)**2-delta_plus)>0",
+    "m_global": "round_down(E_min_lower*lower_G)>0",
+    "intended_element_PSD_separate": true,
+    "error_assumed_zero": false,
+    "generic_epsilon": null,
+    "actual_witness_constructed": false,
+    "actual_witness_evaluated": false,
+    "real_construction_algorithm_frozen": false,
+    "precision_population_order_or_witness_search": false,
+    "matrix_symmetrization_shift_clipping_or_support_change": false
+  },
+  "residual_bound": "B_plus=round_up((sqrt_up(U_plus)+round_up(r_plus/sqrt_down(m_minus)))**2)",
+  "same_normalizer": "round_up(B_plus/C_s_minus); 0<C_s_minus<=SAME stored C_s",
+  "nonzero_residual": "unmodified_U_certified=false EXACTLY, even tiny; no approximate equality or adjoint transfer",
+  "changes_original_loss_gradient_intercept": false,
+  "static_audits": {
+    "primary_invocations": 1,
+    "primary_max_predicates": 380,
+    "independent_invocations": 1,
+    "independent_max_predicates": 320,
+    "independent": "separately implemented stdlib-only closed-schema/hash/Decimal document audit; reads no primary checker/receipt and imports no TopoLab or shared helper",
+    "decimal_precision": 50,
+    "duplicate_unknown_fields": "REJECT",
+    "source_access": "text-and-hash-only; no imports/evaluation/candidate execution",
+    "scope": "document consistency and preserved exact decimal criteria only; no numerical witness"
+  },
+  "allowed_software_access": [
+    "versioned-text-and-hashes",
+    "literal-closed-recovery-metadata",
+    "ignored-handoff",
+    "existing-complete-public-synthetic-tests",
+    "source-publication-and-CI-metadata"
+  ],
+  "allowed_publish_paths": [
+    "AGENTS.md",
+    "PROVENANCE.md",
+    "docs/project_status.md",
+    "docs/development_history.md",
+    "docs/planning/TopoLab_v2_development_roadmap.md",
+    "docs/planning/TopoLab_v2_\u5f00\u53d1\u8def\u7ebf\u56fe.md",
+    "docs/planning/README.md",
+    "docs/validation/README.md",
+    "docs/planning/b4_42_public_enclosure_limitations_real_assembly_protocol.md",
+    "docs/planning/b4_42_public_enclosure_limitations_real_assembly_contract.json",
+    "docs/validation/b4_42_public_enclosure_limitations_real_assembly.md"
+  ],
+  "future_criteria_unchanged": {
+    "compliance_rtol": "1e-9",
+    "gradient_rtol": "1e-9",
+    "gradient_atol": "1e-10",
+    "fd_steps": [
+      "1e-4",
+      "2e-4"
+    ],
+    "fd_normalized_max": "1e-4",
+    "fd_floor": "1e-8",
+    "LOCAL_absolute_max": "1e-4",
+    "LOCAL_increment_relative_max": "0.25",
+    "LOCAL_increment_floor": "1e-5",
+    "LOCAL_gradient_relative_max": "0.25",
+    "LOCAL_gradient_floor": "1e-8",
+    "LOCAL_increment_sign_agreement_above_floor": true,
+    "active_set_pointwise_and_full_interval_obligations_preserved": true,
+    "new_admissibility_tolerance": null
+  },
+  "preserved_failures": {
+    "fixed_p17_repaired": false,
+    "scientific_gate": "FAIL",
+    "r17_quality": "1.0019709437499813",
+    "quality_limit": "1.001",
+    "target_mean": "1.016053130777518",
+    "target_mean_limit": "1.0",
+    "pooled_sum": "0.9853173206553424",
+    "mean_replaced_by_sum": false,
+    "p_r_seed_failures": [
+      1,
+      3,
+      1
+    ],
+    "b4_23_passed_predicates": 3907,
+    "b4_23_total_predicates": 3976,
+    "mask_failures": 35,
+    "fd_failures": 34,
+    "b4_20_gate": "FAIL",
+    "b4_19_actual_case_gap_counts": "UNKNOWN",
+    "b4_24_old_memory_proof": "INCOMPLETE",
+    "b4_28_old_whole_resource": "INCOMPLETE",
+    "b4_31_source_premerge_driver_passed": false,
+    "b4_31_source_postmerge_audit_passed_before_metadata": true
+  },
+  "preserved_cost": {
+    "new_production_budget_granted": false,
+    "b4_23_original_proxy_seconds": "57546.0720687792",
+    "b4_29_known_added_proxy_seconds": "58142.252069",
+    "old_proxy_cap_seconds": "7200",
+    "b4_30_immutable_seconds": "7323.1004352501081506",
+    "b4_30_original_cap_seconds": "43200",
+    "b4_30_failed_prefix_seconds": "191.9666532080154866",
+    "b4_30_full_reserves_seconds": [
+      "180",
+      "180"
+    ],
+    "b4_31_seconds": "80.29939475003629922",
+    "b4_31_campaign_plus_review_seconds": "7403.39983000014444982",
+    "known_actual_stage_components_seconds": {
+      "all_twelve_b4_1_fits": "3870.204341",
+      "b4_15_through_23": "851.38",
+      "b4_24": "200.98",
+      "b4_25": "80.34",
+      "b4_28": "234.60",
+      "b4_29": "80.26",
+      "b4_30": "7323.1004352501081506",
+      "b4_31": "80.29939475003629922"
+    },
+    "cross_route_known_paid_floor_seconds": "12721.16417100014444982",
+    "cross_route_view": "diagnostic known-paid subtotal, not replacement of either immutable ledger or authorization of a new cap",
+    "future_full_seeds": [
+      17,
+      29,
+      43
+    ],
+    "future_full_epochs": 200,
+    "future_small_large_population": [
+      432,
+      76
+    ],
+    "future_factor": "1.25",
+    "future_preparation": "3*1.25*(432*p_small+76*p_large)",
+    "future_forward_backward": "3*200*1.25*(432*u_small+76*u_large)",
+    "aggregation": "complete-first-failure-inclusive-per-scale-maxima",
+    "all_prior_costs_failed_calls_full_reserves_io_audit_native_start_exit_required": true,
+    "unknown_required_cost": "BLOCK_FEASIBILITY",
+    "cap_population_schedule_or_ledger_reset_to_pass": false,
+    "software_authoring_ci_separately_retained_unknown_not_zero": true,
+    "full_cost_categories": [
+      "applicable-paid-history-and-old-full-reserves",
+      "guarded-input-IO-and-checksums",
+      "immutable-case-setup",
+      "one-fixed-anchor-solve",
+      "intended-operator-PSD-coercivity-certificate",
+      "residual-and-rounding-enclosures",
+      "retained-energy-coefficients-and-storage",
+      "complete-first-failure-inclusive-preparation-maxima",
+      "complete-first-failure-inclusive-forward-backward-maxima",
+      "projection-filter-active-set-pullback",
+      "original-loss-gradient-casts-network-bridge-if-later-authorized",
+      "independent-numerical-fidelity-cost-memory-audit",
+      "native-controller-launch-child-start-through-exit",
+      "persistence-serialization-publication",
+      "failed-calls-recovery-and-every-new-FULL-reserve",
+      "earlier-data-query-research-and-separate-software-CI-UNKNOWN-records"
+    ],
+    "real_preparation_small_large_maxima_seconds": [
+      "UNKNOWN",
+      "UNKNOWN"
+    ],
+    "real_forward_backward_small_large_maxima_seconds": [
+      "UNKNOWN",
+      "UNKNOWN"
+    ],
+    "real_certification_cost_seconds": "UNKNOWN",
+    "current_all_paid_feasibility": "FAIL_KNOWN_PAID_FLOOR",
+    "preparation_coefficients": [
+      "1620",
+      "285"
+    ],
+    "forward_backward_coefficients": [
+      "324000",
+      "57000"
+    ],
+    "inclusive_envelopes_not_double_added_or_subtracted": true,
+    "earlier_data_query_research_and_software_CI_unknowns_additional": true
+  },
+  "full_training_memory": {
+    "full_training_status": "PENDING",
+    "fit_cap_bytes": 4294967296,
+    "complete_simultaneous_categories": [
+      "simultaneous-process-controller-child",
+      "labels-input-IO-resident-data",
+      "anchor-PSD-coercivity-residual-certificate-arrays",
+      "network-optimizer-gradients",
+      "activations-autograd",
+      "projection-filter-work-buffers",
+      "Python-storage-objects",
+      "transient-assembly-factorization-serialization"
+    ],
+    "independent_prefit_and_through_exit_fit_peak_required": true,
+    "new_memory_trial": false,
+    "historical_gaps_filled": false
+  },
+  "production_execution": false,
+  "real_payload_fem_projection_root_network_integration": false,
+  "fit_profile_retime_search": false,
+  "screen_final_fresh_unused_access": false,
+  "previous_backup_member_dereference": false,
+  "software_peak_fills_old_gap": false,
+  "new_production_budget_or_reserve": "NONE_DOCUMENTATION_ONLY",
+  "software_failure_policy": "retain every immutable source/log/profile/failure; same-scope authoring/checker fixes only; unresolved contract/identity/criterion/role/seal conflict STOP",
+  "software_cost_policy": "native command wall/user/system/RSS/exits retained; unprofiled authoring/metadata/controller/remoteCI UNKNOWN_NOT_ZERO; no real feasibility or memory proof",
+  "real_certificate_status": "UNKNOWN_STOP; conditional route neither constructs nor certifies real FEM",
+  "scientific_gate": "FAIL",
+  "fixed_p17_repaired": false,
+  "uniform_default": true,
+  "old_b4_27_29_quota_closed": [
+    3,
+    3
+  ],
+  "b4_30_paid_invocations_numerical_campaigns": [
+    2,
+    1
+  ],
+  "final_evidence_sealed": true,
+  "b4_30_conditional_cases_sealed": 48,
+  "unused_b4_10_cases_sealed": 48,
+  "next_proposed": "B4.43 bounded public assembled-operator and intended-residual enclosure software evidence",
+  "next_authorized": false,
+  "next_started": false,
+  "public_evidence_retained": {
+    "source_slice": "B4.41",
+    "systems": 12,
+    "enclosures": 8,
+    "sign_stops": 2,
+    "arithmetic_stops": 2,
+    "focused_tests": 84,
+    "independent_predicates": 935,
+    "operation_checks": 66,
+    "free_dofs_max": 2,
+    "factor_rows_max": 3,
+    "nodes_max": 64,
+    "sqrt_fractional_bits": 80,
+    "expected_outcomes": {
+      "exact-dyadic": "PASS",
+      "accepted-bit-division": "PASS",
+      "irrational-sqrt-two": "PASS",
+      "inverse-sqrt-three": "PASS",
+      "coupled-irrational": "PASS",
+      "positive-structural-error": "PASS",
+      "negative-structural-error": "PASS",
+      "rounded-cancellation-retained": "PASS",
+      "inconclusive-radicand-stop": "STOP_SIGN",
+      "inconclusive-denominator-stop": "STOP_SIGN",
+      "binary64-overflow-stop": "STOP_ARITHMETIC",
+      "binary64-underflow-stop": "STOP_ARITHMETIC"
+    },
+    "formal_numerical_replayed": false,
+    "real_geometry_constitutive_quadrature_scatter": false,
+    "PSD_coercivity_or_Y_certified": false,
+    "sign_stop_is_invalidity_or_singularity_claim": false,
+    "squared_enclosures_are_exact_irrational_squares": false,
+    "closed_administrative_failures": 9,
+    "closed_native_failures": 5,
+    "post_cleanup_failure": "FAIL_RETAINED",
+    "post_cleanup_readonly_recovery": "PASS_SEPARATELY",
+    "one_historical_query_full_stderr": "UNKNOWN_TOOL_TRUNCATED"
+  },
+  "representation_preregistration": {
+    "scope": "TEXT_ONLY_OBLIGATIONS; UNIMPLEMENTED_UNEVALUATED; real executable UNFROZEN",
+    "target": "SAME accepted scalar binary64 bits interpreted as exact reals, integer counts/support/load/material/SIMP; no original-decimal or rounded-target substitution",
+    "geometry": "h=L/n exact; J=diag(h/2); det(J)=hx*hy*hz/8>0; actual rounded dimensions/linspace/boundary mapping error certified separately",
+    "shape": "N_i=(1+sx*xi)*(1+sy*eta)*(1+sz*zeta)/8; physical derivative uses2/h; original24 DOF engineering-Voigt gamma, no half-factor",
+    "constitutive": "mu0=1/(2*(1+nu)); lambda0=nu/((1+nu)*(1-2*nu)); normal eigenvalues2*mu0 twice and1/(1-2*nu), shear mu0; -1<nu<1/2",
+    "upper_factor": "a=lambda0+2*mu0,b=lambda0; l11=sqrt(a),l12=l13=b/l11,l22=sqrt(a-l12*l12),l23=(b-l12*l13)/l22,l33=sqrt(a-l13*l13-l23*l23); shear sqrt(mu0); L0.T*L0=D0",
+    "quadrature": "SAME +/-1/sqrt(3), weights1; rectangular constant J/D0 gives per-coordinate degree<=2,2-point Gauss exact through degree3; no general geometry/material extension",
+    "element_PSD": "independent intended energy proof using D0 SPD/positive weights/det; singular rigid modes allowed; positive summed G insufficient",
+    "space_stack": "exact integer0/1 R_e on SAME ascending free DOFs, x-fast elements/lexicographic Gauss/engineering-Voigt rows; A0_e,g=sqrt(w_g*det(J))*L0*B_e(g)*R_e",
+    "structural_identity": "A0.T*A0=G only after independent SAME intended integral/scatter proof; BOTH intended-to-stack and stack-to-represented components retained, zero never assumed",
+    "irrational_arithmetic": "ONE later frozen RN-even scalar program; independent fixed80-bit/outward binary64/exact-endpoint enclosures; inconclusive midpoint or sign STOP, no precision/FMA/BLAS/reassociation fallback",
+    "factor_error": "e_plus>=||A0-A_hat||_F, a_plus>=||A_hat||_F, d0_plus>=||G-A0.T*A0||_2; delta_plus=up(d0_plus+up(2*a_plus*e_plus)+up(e_plus**2)); units of G",
+    "assembly_error": "distinct G_assembled/K_star_assembled; independently enclose all intended-to-actual geometry/material/Gauss/SIMP/sparse reduction errors and force/product errors",
+    "intended_residual": "||r||<=||r_assembled||+||K_star-K_star_assembled||*||u_tilde||+||f_assembled-f||; r=K_star*u_tilde-f; rounded residual alone insufficient",
+    "witness_transfer": "ONE prospective unpivoted Householder QR/positive diagonals/triangular Y; certify eta<1,M>0,all positive directed lower stages and independent PSD; public QR not real executable",
+    "storage": "A_hat/Y alone16*m*n bytes; full public Q_transpose may add8*m*m, plus R/interval/Gram/error/trace/work buffers; symbolic only, actual cost/storage UNKNOWN_STOP",
+    "release": "exact executable/library/calls/reduction/roles/population/order/caps/cost/memory/audit UNFROZEN; new owner finite contract and clean locked merged exact-head/main CI source FIRST",
+    "actual_evaluated": false,
+    "real_executable_algorithm_frozen": false,
+    "alternative_search": false
+  },
+  "assembly_preregistration": {
+    "scope": "TEXT_ONLY_OBLIGATIONS; UNIMPLEMENTED_UNEVALUATED; actual real executable UNFROZEN",
+    "identities": "SAME accepted scalar/density/force/solution binary64 bits as exact intended reals, integer counts, zero-Dirichlet free space, geometry/material/SIMP/C_s; no target substitution",
+    "intended_route": "B4.40 geometry/engineering-Voigt/intended SPD/element PSD/rectangular integral/canonical A0/integer scatter proof remains independent; BOTH Gram components/complete error retained",
+    "actual_unit_operator": "beta_G>=||G-G_assembled||_2 independently, distinct from delta or Gram(A_hat); actual element/scatter/reduction errors included",
+    "actual_anchor_operator": "beta_K>=||K_star-K_star_assembled||_2 separately, SAME density/material/SIMP/exact-power interpretation/casts; unsupported proof STOP",
+    "sparse_program": "actual element DOF order, duplicate sums, sparse conversions, product/reduction/library/thread/cast program UNFROZEN; one later frozen program FIRST",
+    "symmetry": "both represented triangles/symmetry defect retained; no averaging/symmetrization/shift/clipping/alternate ordering",
+    "force": "beta_f>=||f-f_assembled||_2 for SAME signed loads/superposition/face resultant distribution/casts",
+    "solution": "u_tilde is exact accepted represented solution bits on SAME free space, not exact equilibrium; u_plus>=||u_tilde||_2 independently",
+    "residual_arrays": "r_arrays=K_star_assembled*u_tilde-f_assembled is exact arithmetic on represented arrays; r_hat=fl(K_star_assembled*u_tilde-f_assembled) is actual computed residual",
+    "evaluation_error": "beta_eval>=||r_arrays-r_hat||_2 covers actual sparse multiply/reduction/subtraction/casts; q_hat>=||r_hat||_2 covers norm rounding independently",
+    "transfer": "r=K_star*u_tilde-f; r_plus=up(up(up(q_hat+beta_eval)+up(beta_K*u_plus))+beta_f); triangle/operator-norm/Frobenius inequalities, no missing term or assumed zero",
+    "energy_normalizer": "intended SAME-force U_plus/residual/coercivity/positive SAME stored C_s_minus and outward B_plus independently; diagnostic, no original loss/gradient/intercept/equality/adjoint change",
+    "storage_release": "16*m*n/8*m*m symbolic only; actual full Q/R/assembly/interval/error/trace/lifetimes UNKNOWN_STOP; all16 cost/all8 simultaneous memory/new owner executable contract/clean locked merged exact-head/main CI FIRST",
+    "actual_evaluated": false,
+    "real_executable_algorithm_frozen": false,
+    "alternative_search": false
+  }
+}

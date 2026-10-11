@@ -4,20 +4,16 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-Latest public software [B4.39](../validation/b4_39_public_fixed_construction_witness.md):72 tests/993 independent predicates,
-692 exact RN-even operation proofs;10 authored systems/7 certificates/3 stops.
-ONE scalar QR/triangular construction and complete intended-error/PSD/bounds;
-real representation/FEM/certificates/cost UNKNOWN_STOP, executable UNFROZEN,
-all-paid12721.16417100014444982>7200/full fit PENDING4GiB. Diagnostic only,
-loss/gradient unchanged; scientific FAIL/P17/all failures/UNKNOWN/gaps/ledgers/
-reserves/quotas/uniform/seals stay. B4.38 document197/135/B4.37 public66/217 stay.
-Latest document [B4.40](../validation/b4_40_constructed_witness_limitations_real_representation.md):205/171 static PASS,
-38 text inputs/14 limits/22 obligations/16 stops. Intended geometry/material/
-Hex8/integral/scatter/irrational representation and actual assembly/load/residual
-errors/full-Q storage remain TEXT_ONLY/UNKNOWN_STOP. Next proposed B4.41 public
-intended-representation enclosure software needs new owner/finite public contract
-FIRST; not started. No actual data/FEM/construction/timing/integration/fit/search/
-new budget, seal or B5.
+Latest public software [B4.41](../validation/b4_41_public_intended_representation_enclosure.md):84 tests/935 independent
+predicates/66 RN-even nodes on12 authored systems/8 enclosures/4 stops only.
+Latest document [B4.42](../validation/b4_42_public_enclosure_limitations_real_assembly.md): primary FAIL196
+(195 PASS/1 FAIL, incomplete), independent179 static PASS; documentary Gate
+FAIL_PRIMARY_CHECKER.48 texts/16 limits/26 conditional obligations/18 stops.
+Actual assembly/load/residual/norm/storage/cost proofs remain TEXT_ONLY/UNKNOWN_STOP/
+UNFROZEN. Scientific FAIL/P17/uniform/all-paid FAIL/full fit PENDING4GiB/seals stay.
+Next proposed B4.43 tiny public assembled-operator/intended-residual software needs
+new owner/finite fixture contract FIRST and documentary coverage gap resolution;
+not started. No actual data/FEM/timing/integration/fit/new cap/sealed grant or B5.
 
 ## Overall project plans
 
@@ -146,3 +142,4 @@ existence; its validation report determines whether its Gate passed or failed.
 - [B4.40 constructed-witness limitations and real-representation preregistration](b4_40_constructed_witness_limitations_real_representation_protocol.md) · [finite contract](b4_40_constructed_witness_limitations_real_representation_contract.json)
 
 - [B4.41 bounded public intended-representation enclosure](b4_41_public_intended_representation_enclosure_protocol.md) · [Finite public contract](b4_41_public_intended_representation_enclosure_contract.json):84 tests/935 independent predicates/66 RN-even nodes/12 systems/8 enclosures/4 prescribed stops; no real FEM/assembly/certificate/cost/memory or new budget.
+- [B4.42 public-enclosure limitations/real-assembly protocol](b4_42_public_enclosure_limitations_real_assembly_protocol.md) · [finite text contract](b4_42_public_enclosure_limitations_real_assembly_contract.json)
