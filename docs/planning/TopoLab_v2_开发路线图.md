@@ -2,22 +2,21 @@
 
 英文工作版：[v2 Development Roadmap](./TopoLab_v2_development_roadmap.md)
 
-状态：**v2 旗舰仍在开发，科研 Gate 未通过。** 最新公开软件 **B4.43 装配算子/预期残差包围**：
-94 专项回归测试通过；算术实现前的新文档覆盖主审131项、独立109项通过。
-正式 producer 首次调用因外置脚本不能导入 topolab 而启动失败，尚未读取 fixture 或进入案例；
-正式回执未写入，原始计数 UNKNOWN_NOT_INSTRUMENTED。唯一独立调用仅8个元数据谓词通过，
-随后因主回执缺失而失败，0案例审计/0RN-even证明；正式 Gate FAIL_FORMAL_PRODUCER/
-FAIL_INCOMPLETE，不重试，不以94回归测试替代。见[报告](../validation/b4_43_public_assembled_residual_enclosure.md)。
-10个预注册手写系统的回归覆盖保留6个包围/4个算术停止；独立 G/K/f 装配误差、实际乘加减
-残差误差、向外范数和全部传递项/两侧三角及不对称误差，只作公开诊断，不证明真实FEM/
-PSD/coercivity/Y，不改loss/梯度/同一分母。初次Ruff13长行问题及3个只读清单错误完整保留。
-B4.42原主审196项FAIL且未完成、独立179通过、文档Gate FAIL_PRIMARY_CHECKER保持；
-本片新覆盖不回填旧PASS。B4.41的84/935/66、既有全部失败/未知/费用/预留/封存保留。
-科学FAIL、固定P17未修复、uniform默认、已知付费12721.16417100014444982>7200/
-无预算重置、真实证书与成本UNKNOWN_STOP/可执行算法UNFROZEN/全训练PENDING4GiB保持。
-下一片仅提议 **B4.44 公开装配/残差限制与真实证书前置条件文本审查**，新指令及有限文本合同
-先行，审查此次正式启动失败及未完成证据；尚未启动。无实际数据/几何/FEM/构造/计时/
-集成/fit/search/新预算/封存或B5授权。仅收尾B4.43后停止。
+状态：**v2 旗舰仍在开发，科研 Gate 未通过。** 最新文档 **B4.44 公开装配/残差局限与真实认证前提**：
+主审407/407、独立332/332静态谓词通过，各首次且唯一调用；72公共文本/14有限元数据/
+4主审专用失败文本、18局限/24文本前提/20停止条件。正式原生60秒/256MiB上限和访问路径通过。
+独立审计不读取主审程序/回执或旧producer/控制器/失败日志，不导入候选或共享审查代码。
+见[报告](../validation/b4_44_public_assembled_residual_limitations_real_certification.md)。无新算术campaign或真实FEM执行；原loss/梯度/同一分母不变。
+B4.43的94回归测试及131/109文档覆盖保留，正式FAIL_FORMAL_PRODUCER、独立FAIL_INCOMPLETE/
+8元数据/0案例/0RN证明、全10案例未执行、原回执NOT_WRITTEN、原始计数UNKNOWN及quota1/1不重试。
+当时sys.path/解释器UNKNOWN_NOT_RECORDED，具体导入原因UNKNOWN_NOT_DIAGNOSED；静态文本不重建运行时。
+B4.42 FAIL_PRIMARY_CHECKER保持；全部旧失败/未知/费用/预留/封存继续保留。
+真实PSD/构造/装配/载荷/残差误差/范数/正coercivity/Y/成本均为TEXT_ONLY、UNKNOWN_STOP/UNFROZEN；
+full-Q与全部8类全训练内存PENDING4GiB。科学FAIL/P17未修复、uniform默认、已知付费
+12721.16417100014444982>7200/无预算重置保持。
+下一片仅提议 **B4.45 有界公共启动上下文与不可变回执预检软件**，新指令及有限公共文本软件合同先行；
+仅启动器/import-origin/导入前pending与不可变terminal边界，未启动/未授权。无B4.43重试/
+新算术campaign/实际数据/FEM/构造/计时/集成/fit/搜索/新预算/封存或B5。仅收尾B4.44后停止。
 
 本文件是中文阅读伴随版。早期阶段描述保留其历史语境；当前停止条件以
 [项目状态](../project_status.md)为入口，完整切片进度与执行顺序以
@@ -25,7 +24,7 @@ B4.42原主审196项FAIL且未完成、独立179通过、文档Gate FAIL_PRIMARY
 [验证报告](../validation/README.md)为准。`v1.0.0` 与 M1/M2 的负面结论继续保留。
 
 制定日期：2026-09-24
-修订日期：2026-10-11（B4.43 正式启动失败/有限软件回归，逐片等待）
+修订日期：2026-10-11（B4.44 只读局限与真实认证前提，逐片等待）
 
 相关文档：
 
@@ -478,10 +477,11 @@ final 证据。不得对 B5 结果展开未预注册搜索。
 已完成的切片保留在[开发历史](../development_history.md)和验证报告中。
 当前执行顺序以[英文工作版第 6 节](./TopoLab_v2_development_roadmap.md#6-recommended-sequence)为准。
 
-1. **下一片仅提议B4.43**：微型自编公开矩阵的装配算子/预期残差包围软件，
-   新用户指令及有限 fixture 合同先行；须保留并处理 B4.42 主审查未完成清单。
-   B4.42 主审查196项（195通过、1失败）保持 FAIL，独立文本审计179项通过；
-   不授权实际数据/几何/FEM/构造/计时/集成/fit/搜索/新预算或封存访问。
+1. **下一片仅提议B4.45**：有界公共启动上下文与不可变回执预检软件，新指令及
+   有限公共文本软件合同先行；仅启动器/import-origin/导入前pending与不可变terminal边界。
+   保留B4.43正式失败/缺失回执/UNKNOWN与各一次不重试；不新增算术campaign。
+   B4.44文档407/332通过不证明真实FEM/证书/成本/全训练内存或科研修复；无实际
+   数据/FEM/构造/计时/集成/fit/搜索/新预算/封存或B5授权。
 
 2. 任何后续正确性/目标可行性干预须保留全部证据，冻结独立正确性、fidelity、
    成本和全训练内存证明；当前 exact-FEM 候选仍停止，无搜索或拟合授权。

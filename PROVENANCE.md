@@ -1234,3 +1234,17 @@ separate operator/force/evaluation/norm errors without PSD/Gram or loss changes.
 The formal launch and missing-receipt audit failures remain negative evidence,
 distinct from94 passed regression tests. No Hack3D code/comments/layout/figures,
 external new source, actual geometry/FEM/fit/access or acceleration claim.
+
+## B4.44 public assembled-residual limitations and real prerequisites
+
+The [protocol](docs/planning/b4_44_public_assembled_residual_limitations_real_certification_protocol.md) and
+[contract](docs/planning/b4_44_public_assembled_residual_limitations_real_certification_contract.json) freeze72 starting-main public TEXT/hash inputs,14 literal compact metadata and four
+primary-only archived failure source/log texts before new reviewers. Independent
+stdlib text/hash/AST/Decimal50 implementations establish407/332 document predicates;
+no old checker/producer/oracle is imported or executed. Existing original TopoLab
+triangle/Frobenius/Gram/energy derivations remain conditional TEXT obligations,
+not evaluated real representation/assembly/residual/coercivity/cost certificates.
+The old import failure and missing runtime are retained without inferred cause,
+new numerical campaign or retry. No new external scientific/reference source or
+Hack3D code/comments/layout/figures consulted/copied. All loss/gradient/SAME
+normalizer/criteria/failures/unknowns/charges/reserves/seals remain. See [report](docs/validation/b4_44_public_assembled_residual_limitations_real_certification.md).

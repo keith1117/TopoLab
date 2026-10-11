@@ -5,18 +5,16 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
-Latest public software [B4.43](b4_43_public_assembled_residual_enclosure.md):94 focused tests PASS;
-new documentary coverage131/109 PASS before arithmetic. Formal producer FAIL at
-import before fixture/case loop, no producer/pending receipt/no retry; independent
-FAIL_INCOMPLETE8 metadata/0 case audits/0RN proofs. Formal Gate FAIL_FORMAL_PRODUCER,
-all10 formal cases unexecuted; regression does not replace formal evidence.
-B4.42 documentary FAIL_PRIMARY_CHECKER/196 incomplete and independent179 stay;
-B4.41 public84/935/66 retains its separate scope. Public G/K/f assembly and actual
-residual error/norm transfer only; real proofs UNKNOWN_STOP/UNFROZEN/full fit
-PENDING4GiB/scientific FAIL/P17/uniform/all-paid FAIL/seals remain. Next proposed
-B4.44 finite read-only limitations/real prerequisites, new owner/TEXT-only contract
-FIRST; review failed launch/missing formal evidence. No actual data/FEM/timing/
-integration/fit/new cap/sealed grant/B5.
+Latest document [B4.44](b4_44_public_assembled_residual_limitations_real_certification.md):407/332 static PASS, each ONCE/no retry;
+72 bound texts/14 compact metadata/4 primary-only failure texts,18 limits/24 TEXT
+obligations/20 stops, native60s/256MiB caps PASS. B4.43 formal FAIL_FORMAL_PRODUCER/
+independent FAIL_INCOMPLETE/no original receipt/all10 unexecuted/UNKNOWN context
+and94-test limits stay; B4.42 FAIL stays. Real proofs/cost UNKNOWN_STOP/executable
+UNFROZEN/full fit PENDING4GiB/scientific FAIL/P17/uniform/all-paid FAIL/seals remain.
+Next proposed B4.45 bounded public launch-context/immutable-receipt preflight,
+new owner/finite public-text software contract FIRST, not started/authorized.
+No B4.43 retry/new arithmetic campaign/actual data/FEM/timing/integration/fit/
+new cap/sealed grant/B5.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -165,3 +163,7 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 ## B4.43 finite public assembly/residual software
 
 - [Formal launch failure and bounded regression evidence](b4_43_public_assembled_residual_enclosure.md)
+
+## B4.44 public residual limitations and real-certification prerequisites
+
+- [Document evidence](b4_44_public_assembled_residual_limitations_real_certification.md):407/332 static PASS; old formal/scientific failures and all real UNKNOWN remain.
