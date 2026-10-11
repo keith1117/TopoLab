@@ -1205,3 +1205,19 @@ structure/figures consulted/copied. Twelve authored systems establish8 public
 enclosures and4 prescribed stops only; no real FEM/assembly/PSD/coercivity/Y,
 certificate/cost/memory or learned repair claim. Original loss/gradient/normalizer,
 all frozen failures/charges/UNKNOWN/reserves/seals stay. See [report](docs/validation/b4_41_public_intended_representation_enclosure.md).
+
+## B4.42 documentary assembly/residual obligations and failed checker
+
+The [protocol](docs/planning/b4_42_public_enclosure_limitations_real_assembly_protocol.md) and
+[contract](docs/planning/b4_42_public_enclosure_limitations_real_assembly_contract.json) freeze48 texts before reviewer implementation/calls.
+Independent derivation from existing TopoLab intended-operator/triangle/Frobenius
+inequalities separates actual assembly/load/residual-product/norm rounding from
+Gram representation error. All formulas remain unimplemented/unevaluated TEXT;
+no real executable/value/cost/memory certificate. Primary formal review FAIL196
+at an erroneous shortened-status equality, no retry; separate document/Decimal
+audit179 PASS after full-status correction BEFORE its first call. Original failed
+source/receipt and independent pre-correction/freeze remain external. No new
+external scientific/implementation source or Hack3D code/comment/structure/figure,
+payload/model/label/numerical trace/real FEM was consulted/imported. All original
+loss/gradient/normalizer/criteria/failures/charges/UNKNOWN/seals remain. See
+[failed report](docs/validation/b4_42_public_enclosure_limitations_real_assembly.md).
