@@ -63,7 +63,7 @@ infeasible, full fit PENDING4GiB. No actual payload/FEM/timing/integration/fit.
 Historical B4.36 [document preregistration](docs/validation/b4_36_certificate_limitations_real_route.md)
 remains141/96; B4.37 [public witness](docs/validation/b4_37_public_coercivity_witness.md)
 remains66/217 on10 systems/6 certificates/4 stops; B4.38 [document](docs/validation/b4_38_public_witness_limitations_real_construction.md)
-remains197/135. Latest public software **B4.39 fixed construction witness**:
+remains197/135. Historical public software **B4.39 fixed construction witness**:
 72 tests/993 independent predicates PASS,692 RN-even operation checks on10
 systems/7 certificates/3 prescribed stops; [report](docs/validation/b4_39_public_fixed_construction_witness.md),
 [protocol](docs/planning/b4_39_public_fixed_construction_witness_protocol.md), [contract](docs/planning/b4_39_public_fixed_construction_witness_contract.json).
@@ -78,10 +78,19 @@ Latest document **B4.40 constructed-witness limitations/real-representation**:
 Intended bits/geometry/Voigt/PSD/quadrature/scatter/BOTH representation and
 actual assembly/load/residual error/full-Q storage are text obligations ONLY;
 all real values/executable/cost UNKNOWN_STOP/UNFROZEN, no original loss change.
-Next proposed **B4.41 public intended-representation enclosure software**,
-not started: new owner/finite authored-public-fixture contract FIRST. No actual
-data/geometry/FEM/construction/timing/projection/root/network integration/fit/
-search/new budget or sealed grant.
+Latest public software **B4.41 intended-representation enclosure**:
+84 tests/935 independent predicates PASS,66 RN-even node proofs on12 systems/
+8 enclosures/2 sign stops/2 arithmetic stops; [report](docs/validation/b4_41_public_intended_representation_enclosure.md),
+[protocol](docs/planning/b4_41_public_intended_representation_enclosure_protocol.md), [contract](docs/planning/b4_41_public_intended_representation_enclosure_contract.json).
+Exact accepted bits/irrational intended intervals/fixed80-bit/outward binary64;
+BOTH Gram errors/complete error/factor norms only. Conservative squared upper
+enclosures, inconclusive sign/overflow/underflow stops; no PSD/coercivity/Y or
+real assembly/load/residual proof. Diagnostic, loss/gradient unchanged.
+Real values/executable/cost remain UNKNOWN_STOP/UNFROZEN, no new cap or fit.
+Next proposed **B4.42 public-enclosure limitations/real-assembly preregistration**,
+not started: new owner/finite text-only contract FIRST. No actual data/geometry/
+FEM/construction/timing/projection/root/network integration/fit/search/new budget
+or sealed grant.
 B4.23 stays3907/3976/all69 failures and57546.072069>7200; known-added58142.252069>7200,
 B4.24/28 memory gaps/both failures, B4.20 failure and B4.19 UNKNOWN remain.
 Full training memory PENDING/4GiB; software RSS fills no historical gap.

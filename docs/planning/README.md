@@ -144,3 +144,5 @@ existence; its validation report determines whether its Gate passed or failed.
 - [B4.39 bounded public fixed-construction witness](b4_39_public_fixed_construction_witness_protocol.md) · [Finite public contract](b4_39_public_fixed_construction_witness_contract.json):72 tests/993 predicates,692 RN-even operation proofs,10 authored systems/7 certificates/3 stops; no real representation/FEM/cost/memory or production grant.
 
 - [B4.40 constructed-witness limitations and real-representation preregistration](b4_40_constructed_witness_limitations_real_representation_protocol.md) · [finite contract](b4_40_constructed_witness_limitations_real_representation_contract.json)
+
+- [B4.41 bounded public intended-representation enclosure](b4_41_public_intended_representation_enclosure_protocol.md) · [Finite public contract](b4_41_public_intended_representation_enclosure_contract.json):84 tests/935 independent predicates/66 RN-even nodes/12 systems/8 enclosures/4 prescribed stops; no real FEM/assembly/certificate/cost/memory or new budget.

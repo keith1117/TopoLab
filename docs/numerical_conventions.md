@@ -937,3 +937,32 @@ Synthetic checks authorize no production before clean merged exact-head/main CI.
 All final/48 unused B4.10 cases remain sealed; prior failures/cost/memory gaps
 are unchanged. B4.30 has a new separate43200/2GiB allocation with FULL180,
 not continuation or retiming of the stopped exact-FEM candidate.
+
+## B4.41 public intended-representation enclosure (software only)
+
+`topolab.public-intended-representation.v1` is restricted to twelve original
+authored expression fixtures, at most64 topologically ordered nodes,3 factor
+rows and2 columns. Integer leaves are exact within2^53; binary64 leaves use
+canonical sixteen-digit IEEE words interpreted as exact real values, preserving
+their accepted identity rather than substituting decimal spelling. Nodes use
+one ascending scalar RN-even add/subtract/multiply/divide/sqrt program; no FMA,
+reassociation, adaptive precision, alternate order or factor/witness search.
+
+Independent intended intervals use exact rational endpoint arithmetic and ONE
+80-fractional-bit grid for every square root. A negative lower radicand or a
+denominator interval containing zero stops as inconclusive, even when a true
+expression might be defined. Nonfinite output, nonzero subnormal result or
+rounding a nonzero represented-operation exact result to zero stops; exact
+cancellation to zero is retained with its intended representation error.
+Finite normal values and exact zero are the public scalar domain only.
+
+Keep BOTH G-Gram(A0), Gram(A0)-Gram(A_hat) and COMPLETE G-Gram(A_hat). Natural
+intervals never assume structural zero. Upper squared Frobenius enclosures,
+fixed80-bit sqrt upper endpoints and exact outward binary64 comparisons give
+e,a,d0,d1,complete bounds. The fixed Gram expansion is
+up(d0+up(up(2*a*e)+up(e^2))). Squared enclosures of irrational expressions are
+upper bounds, not claimed exact squares. This diagnostic software neither
+proves element PSD/coercivity nor constructs Y or a real FEM representation.
+Actual geometry/assembly/load/residual errors, original loss/gradient/cost/
+full-fit memory and all seals retain their previous boundaries. See the
+[B4.41 protocol](planning/b4_41_public_intended_representation_enclosure_protocol.md).

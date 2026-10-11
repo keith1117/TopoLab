@@ -160,3 +160,5 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 - [B4.39 bounded public fixed-construction witness](b4_39_public_fixed_construction_witness.md):72 tests/993 predicates,692 RN-even operation proofs,7 certificates/3 stops; scientific FAIL/P17 unrepaired, real UNKNOWN_STOP/all-paid FAIL/full fit PENDING4GiB.
 
 - [B4.40 constructed-witness limitations and real-representation preregistration](b4_40_constructed_witness_limitations_real_representation.md)
+
+- [B4.41 bounded public intended-representation enclosure](b4_41_public_intended_representation_enclosure.md):84 tests/935 predicates/66 RN-even nodes/8 public enclosures/4 prescribed stops; scientific FAIL/P17 unrepaired, real UNKNOWN_STOP/all-paid FAIL/full fit PENDING4GiB.

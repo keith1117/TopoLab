@@ -1188,3 +1188,20 @@ a thin-QR memory assumption. No new external source or Hack3D material consulted
 or imported. Document consistency establishes no real representation/certificate/
 cost/memory or learned repair; original loss/gradient/criteria/failures/charges/
 UNKNOWN/seals remain. See [report](docs/validation/b4_40_constructed_witness_limitations_real_representation.md).
+
+## B4.41 public intended-versus-represented arithmetic
+
+The [protocol](docs/planning/b4_41_public_intended_representation_enclosure_protocol.md) and
+[contract](docs/planning/b4_41_public_intended_representation_enclosure_contract.json) freeze41 starting-main text/hash inputs, twelve original public scalar-expression
+systems and accepted IEEE bit words before implementation/evaluation. Exact
+Fraction endpoint arithmetic and fixed80-fractional-bit sqrt enclosures follow
+independent squared-endpoint derivation; Gram expansion and Frobenius/spectral
+inequalities yield conservative diagnostic bounds for BOTH intended/represented
+errors and the complete error. The independent stdlib oracle uses its own integer
+binary-search root and exact adjacent midpoint/squared-midpoint RN-even proofs,
+imports no candidate/TopoLab/producer/shared arithmetic, and checks935 predicates/
+66 nodes. No new scientific source, external algorithm or Hack3D code/comments/
+structure/figures consulted/copied. Twelve authored systems establish8 public
+enclosures and4 prescribed stops only; no real FEM/assembly/PSD/coercivity/Y,
+certificate/cost/memory or learned repair claim. Original loss/gradient/normalizer,
+all frozen failures/charges/UNKNOWN/reserves/seals stay. See [report](docs/validation/b4_41_public_intended_representation_enclosure.md).
