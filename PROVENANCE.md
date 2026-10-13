@@ -1248,3 +1248,15 @@ The old import failure and missing runtime are retained without inferred cause,
 new numerical campaign or retry. No new external scientific/reference source or
 Hack3D code/comments/layout/figures consulted/copied. All loss/gradient/SAME
 normalizer/criteria/failures/unknowns/charges/reserves/seals remain. See [report](docs/validation/b4_44_public_assembled_residual_limitations_real_certification.md).
+
+## B4.45 public launch-context and immutable-receipt software
+
+Four tiny original marker texts and12 cases are authored independently before
+implementation. Original stdlib exclusive/fsynced parent-child receipts and
+PathFinder/checked-byte probe execution establish bounded origin/context and
+failure-preserving software behavior; separate stdlib audit277 checks receipt
+identities without candidate/TopoLab/shared imports. No external algorithm,
+Hack3D code/comments/structure/figures, real FEM/data/model/fit or numerical
+source is consulted/imported. New runtime observations do not reconstruct
+B4.43 runtime/cause; every old scientific/formal failure/cost/seal remains.
+See [report](docs/validation/b4_45_public_launch_context_immutable_receipts.md).

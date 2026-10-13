@@ -31,15 +31,38 @@ Actual operator/load/residual/norm errors and full-Q storage remain UNKNOWN_STOP
 UNFROZEN; no real execution/cap/fit. Historical public software **B4.43 assembled/residual enclosure**:94 focused tests,
 new document131/109 PASS; formal FAIL_FORMAL_PRODUCER/independent FAIL_INCOMPLETE8
 metadata/no case/RN proof/no retry. All10 formal cases not executed; B4.42 FAIL
-unchanged. Latest document **B4.44 public residual limitations/real prerequisites**:
-407/332 static PASS,72 texts/14 metadata/4 primary-only texts/18 limits/24 TEXT
-obligations/20 stops; old failures/UNKNOWN remain. Next proposed B4.45 bounded
-public launch-context/immutable-receipt preflight, new owner/finite text-software
-contract FIRST, not started/authorized. No B4.43 retry/new arithmetic/real FEM/
-execution/fit/new budget/B5.
+unchanged. Historical B4.44 document407/332 remains. Latest **B4.45**:
+B4.45 public launch-context/immutable-receipt software Gate
+**PASS_PUBLIC_LAUNCH_PREFLIGHT_ONLY**:12/12 fixed cases,277 independent predicates,
+32 focused tests; each formal role ONCE/no retry. Four hash-bound public texts:
+one clean launch,8 prescribed stops, exit7/timeout retained as FAIL controls,
+one existing-receipt refusal with unchanged bytes. Pending BEFORE child launch,
+started BEFORE probe, terminal AFTER observed exit; missing completion remains
+UNKNOWN_NOT_WRITTEN. Native primary4.29s/21413888bytes and independent0.06s/
+22577152bytes pass60s/256MiB bookkeeping caps; no historical/full-fit proof.
+TopoLab package origin/hash inspected ONLY; eager initialization never imported.
+Actual B4.45 locked CPython3.12.10/-I/cwd/sys.path/origins are new software
+observations, never a reconstruction or diagnosis of B4.43 runtime.
+
+B4.44 document407/332 ONLY, B4.43 FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/
+all10 unexecuted/no original receipt/UNKNOWN runtime+cause, B4.42 FAIL and all
+scientific failures stay. ALL four criterion/failure/cost/full-memory objects,
+17 boundary values and24 TEXT real obligations equal B4.44. Scientific FAIL/
+fixed P17 unrepaired/uniform/all-paid12721.16417100014444982>7200 diagnostic/no
+ledger reset, real executable UNFROZEN/certification+cost UNKNOWN_STOP and full
+Q/all8 full-fit PENDING4GiB remain. No original loss/gradient/normalizer or actual
+data/geometry/FEM/construction/arithmetic campaign/timing/integration/fit/search/
+new paid cap/final or unused/conditional sealed access.
+
+Next proposed **B4.46 bounded read-only public launch-preflight limitations
+and fresh arithmetic-campaign prerequisites**, NOT STARTED/AUTHORIZED. New
+owner/finite text-only contract FIRST. No B4.43 retry/new arithmetic campaign/
+actual FEM/fit/search/new budget/sealed grant. Complete new B4 Gate, learned
+repair/independent confirmation and compatible final contract remain before B5.
+Close B4.45 only and stop.
 
 Prepared: 2026-09-24
-Revised: 2026-10-11 (B4.44 read-only limitations and real-certification prerequisites)
+Revised: 2026-10-13 (B4.45 public launch-context and immutable receipts)
 
 Related documents:
 
@@ -1890,6 +1913,45 @@ geometry/FEM/construction/timing/integration/fit/search/new budget/sealed grant.
 Real certificates/full cost/memory/learned repair/independent confirmation/full
 B4/compatible final contract remain before B5. Close B4.44 only and stop.
 
+### B4.45: Public launch-context and immutable-receipt preflight
+
+B4.45 public launch-context/immutable-receipt software Gate
+**PASS_PUBLIC_LAUNCH_PREFLIGHT_ONLY**:12/12 fixed cases,277 independent predicates,
+32 focused tests; each formal role ONCE/no retry. Four hash-bound public texts:
+one clean launch,8 prescribed stops, exit7/timeout retained as FAIL controls,
+one existing-receipt refusal with unchanged bytes. Pending BEFORE child launch,
+started BEFORE probe, terminal AFTER observed exit; missing completion remains
+UNKNOWN_NOT_WRITTEN. Native primary4.29s/21413888bytes and independent0.06s/
+22577152bytes pass60s/256MiB bookkeeping caps; no historical/full-fit proof.
+TopoLab package origin/hash inspected ONLY; eager initialization never imported.
+Actual B4.45 locked CPython3.12.10/-I/cwd/sys.path/origins are new software
+observations, never a reconstruction or diagnosis of B4.43 runtime.
+
+B4.44 document407/332 ONLY, B4.43 FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/
+all10 unexecuted/no original receipt/UNKNOWN runtime+cause, B4.42 FAIL and all
+scientific failures stay. ALL four criterion/failure/cost/full-memory objects,
+17 boundary values and24 TEXT real obligations equal B4.44. Scientific FAIL/
+fixed P17 unrepaired/uniform/all-paid12721.16417100014444982>7200 diagnostic/no
+ledger reset, real executable UNFROZEN/certification+cost UNKNOWN_STOP and full
+Q/all8 full-fit PENDING4GiB remain. No original loss/gradient/normalizer or actual
+data/geometry/FEM/construction/arithmetic campaign/timing/integration/fit/search/
+new paid cap/final or unused/conditional sealed access.
+
+Three preformal native failures/five administrative failures/two later sandbox publication-control failures and UNKNOWN costs
+remain; no formal retry or frozen-standard change.16 reviewed paths and all5
+mandatory checks/guards/protected exact-head/main CI govern technical closure.
+
+All5 mandatory checks PASS; complete pytest1846 PASS in715.09s, unchanged full population/tolerances and documented one-thread setting. No new numerical test/panel/formal retry. Sandbox observed pytest elapsed723.3643003329635s includes full process overhead; raw stdlib resource counters/log remain external; this method is distinct from the formal native profiles.
+
+See [report](../validation/b4_45_public_launch_context_immutable_receipts.md), [protocol](b4_45_public_launch_context_immutable_receipts_protocol.md), [contract](b4_45_public_launch_context_immutable_receipts_contract.json).
+
+Next proposed **B4.46 bounded read-only public launch-preflight limitations
+and fresh arithmetic-campaign prerequisites**, NOT STARTED/AUTHORIZED. New
+owner/finite text-only contract FIRST. No B4.43 retry/new arithmetic campaign/
+actual FEM/fit/search/new budget/sealed grant. Complete new B4 Gate, learned
+repair/independent confirmation and compatible final contract remain before B5.
+Close B4.45 only and stop.
+
 ### B5: One-time final comparison and project delivery gate
 
 Open the new ID cohort once after B4, followed by predeclared OOD and independent
@@ -1925,15 +1987,13 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.45 public launch-context/immutable-receipt preflight software:**
-   not started/authorized; new owner/finite public-text software contract FIRST.
-   Launcher/import-origin/preimport pending and immutable terminal receipts only.
-   Preserve B4.43 FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/no retry, all10
-   unexecuted/94-test limits and UNKNOWN actual runtime. No old numerical replay,
-   new arithmetic campaign/actual data/FEM/construction/timing/integration/fit/
-   search/new budget/sealed grant. B4.44's407/332 document PASS is not a real
-   certificate; real UNKNOWN_STOP/UNFROZEN/full fit PENDING4GiB/all-paid FAIL/
-   fixed P17 unrepaired/uniform/seals remain. No B5.
+1. **Proposed B4.46 read-only launch-preflight limitations/fresh arithmetic prerequisites:**
+   Next proposed **B4.46 bounded read-only public launch-preflight limitations
+   and fresh arithmetic-campaign prerequisites**, NOT STARTED/AUTHORIZED. New
+   owner/finite text-only contract FIRST. No B4.43 retry/new arithmetic campaign/
+   actual FEM/fit/search/new budget/sealed grant. Complete new B4 Gate, learned
+   repair/independent confirmation and compatible final contract remain before B5.
+   Close B4.45 only and stop.
 
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full

@@ -16,122 +16,44 @@ Read these files in order:
 
 ## Current project state
 
-The full v2 flagship delivery Gate remains open. Uniform initialization is the
-operational default; no learned-acceleration or full-delivery claim is allowed.
-The historical `v1.0.0` release remains complete, with its negative M1/M2 evidence
-preserved. B3's data Gate and B4.1 fitting passed; the original B4.2 Gate failed.
-Fixed P/17 remains unrepaired and cannot be replaced after seeing outcomes.
+Full v2 delivery remains open; uniform is the operational default. No learned
+acceleration/full-delivery claim. Historical v1.0.0 stays complete with negative
+M1/M2 evidence. B3 data/B4.1 fitting passed; original B4.2 and scientific Gate
+failed. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
 
-The latest completed numerical/audit slice is **B4.30 fixed-P/17 reflection repair**:
-scientific **FAIL**, complete v2 numerical/native resource **PASS**. See
-[report](docs/validation/b4_30_paid_continuation.md),
-[v2 protocol](docs/planning/b4_30_paid_continuation_protocol.md) and
-[finite contract](docs/planning/b4_30_paid_continuation_contract.json).
-All18/270 and prescribed audits complete:323 terminal/204 guard classifications,
-78 prediction replays/249 old identities. R17 retains one quality failure
-(1.00197094375>1.001) and target mean1.01605313078>1.0; paired P/R failures
-remain1/3/1. Four historical target predicates pass already in matched P;
-no currently failed P target is newly repaired. Conditional48/720 unopened.
-Cumulative7323.1004352501081506/43200 retains failed191.9666532080154866 and
-both FULL180 reserves; conservative new whole-chain peak800047104<2GiB.
-Original failed preflight resource FAIL/INCOMPLETE and all original bytes remain.
+Latest public software **B4.45 launch-context/immutable receipts**:12 cases/
+277 independent predicates/32 focused tests PASS, each formal role ONCE/no retry.
+See [report](docs/validation/b4_45_public_launch_context_immutable_receipts.md),
+[protocol](docs/planning/b4_45_public_launch_context_immutable_receipts_protocol.md),
+[contract](docs/planning/b4_45_public_launch_context_immutable_receipts_contract.json).
+Origin/text checks and four inert public probes only; no TopoLab eager import or
+new arithmetic/real execution. B4.44 document407/332 remains document-only;
+B4.43 formal producer/independent FAIL, quota1/1/no retry/all10 unexecuted/no
+original receipt/UNKNOWN runtime+cause and B4.42 documentary FAIL remain.
 
-The B4.27–29 quota remains closed3/3; B4.30 stays2 paid invocations/1 campaign,
-no third. Reflection stops. B4.31 [review](docs/validation/b4_31_reflection_failure_cost_review.md)
-remains118/430 metadata/native PASS, Q31=80.29939475003629922; old7323.1004352501081506
-and separate combined7403.39983000014444982 remain. Its source-premerge process
-failure stays failure. B4.32 [preregistration](docs/validation/b4_32_generalist_method_preregistration.md)
-remains69/32 static PASS. Historical public software **B4.33 reciprocal-energy algebra/access**:
-47 focused tests/849 independent exact-rational predicates PASS on8 public toys/
-76 fixed points; [report](docs/validation/b4_33_reciprocal_energy_evidence.md),
-[protocol](docs/planning/b4_33_reciprocal_energy_evidence_protocol.md),
-[contract](docs/planning/b4_33_reciprocal_energy_evidence_contract.json).
-Exact toy anchor/PSD/SPD only; real floating residual/spectral/rounding certificates,
-fidelity/cost/reliability UNKNOWN. No production or actual FEM/integration/fit.
-Scientific FAIL/P17 unrepaired remain. Known-paid12721.16417100014444982>7200
-is diagnostic, not a cap/ledger reset. B4.34
-[preregistration](docs/validation/b4_34_admissibility_full_cost_preregistration.md)
-remains129/43 document PASS. Historical public software **B4.35 diagnostic certificate**:
-58 tests/394 independent exact-rational predicates PASS on8 systems/16 points;
-[report](docs/validation/b4_35_public_admissibility_certificate.md),
-[protocol](docs/planning/b4_35_public_admissibility_certificate_protocol.md),
-[contract](docs/planning/b4_35_public_admissibility_certificate_contract.json).
-Exact intended rational PSD/coercivity/residual and fixed80-bit/outward binary64
-only; tiny nonzero residual never certifies unmodified U. Bound diagnostic, no
-loss/gradient change. Real FEM certificates/costs UNKNOWN_STOP, all-paid7200
-infeasible, full fit PENDING4GiB. No actual payload/FEM/timing/integration/fit.
-Historical B4.36 [document preregistration](docs/validation/b4_36_certificate_limitations_real_route.md)
-remains141/96; B4.37 [public witness](docs/validation/b4_37_public_coercivity_witness.md)
-remains66/217 on10 systems/6 certificates/4 stops; B4.38 [document](docs/validation/b4_38_public_witness_limitations_real_construction.md)
-remains197/135. Historical public software **B4.39 fixed construction witness**:
-72 tests/993 independent predicates PASS,692 RN-even operation checks on10
-systems/7 certificates/3 prescribed stops; [report](docs/validation/b4_39_public_fixed_construction_witness.md),
-[protocol](docs/planning/b4_39_public_fixed_construction_witness_protocol.md), [contract](docs/planning/b4_39_public_fixed_construction_witness_contract.json).
-One fixed public scalar binary64 unpivoted QR/triangular left inverse; intended
-PSD/BOTH representation errors/complete error/residual/norm/fixed80-bit/outward
-bounds only. Rank-deficient/positive-conservative/indefinite-element stops stay.
-No real FEM/representation/construction/certificate/cost/memory proof or new cap;
-real executable UNFROZEN, diagnostic only, loss/gradient unchanged.
-Historical document **B4.40 constructed-witness limitations/real-representation**:
-205/171 static PASS,38 text inputs/14 limits/22 obligations/16 stops; [report](docs/validation/b4_40_constructed_witness_limitations_real_representation.md),
-[protocol](docs/planning/b4_40_constructed_witness_limitations_real_representation_protocol.md), [contract](docs/planning/b4_40_constructed_witness_limitations_real_representation_contract.json).
-Intended bits/geometry/Voigt/PSD/quadrature/scatter/BOTH representation and
-actual assembly/load/residual error/full-Q storage are text obligations ONLY;
-all real values/executable/cost UNKNOWN_STOP/UNFROZEN, no original loss change.
-Historical public software **B4.41 intended-representation enclosure**:
-84 tests/935 independent predicates PASS,66 RN-even node proofs on12 systems/
-8 enclosures/2 sign stops/2 arithmetic stops; [report](docs/validation/b4_41_public_intended_representation_enclosure.md),
-[protocol](docs/planning/b4_41_public_intended_representation_enclosure_protocol.md), [contract](docs/planning/b4_41_public_intended_representation_enclosure_contract.json).
-Exact accepted bits/irrational intended intervals/fixed80-bit/outward binary64;
-BOTH Gram errors/complete error/factor norms only. Conservative squared upper
-enclosures, inconclusive sign/overflow/underflow stops; no PSD/coercivity/Y or
-real assembly/load/residual proof. Diagnostic, loss/gradient unchanged.
-Real values/executable/cost remain UNKNOWN_STOP/UNFROZEN, no new cap or fit.
-Historical document **B4.42 public-enclosure limitations/real assembly**:
-primary FAIL196 (195 PASS/1 FAIL, incomplete; no retry), independent179 static PASS;
-documentary Gate FAIL_PRIMARY_CHECKER; [report](docs/validation/b4_42_public_enclosure_limitations_real_assembly.md),
-[protocol](docs/planning/b4_42_public_enclosure_limitations_real_assembly_protocol.md), [contract](docs/planning/b4_42_public_enclosure_limitations_real_assembly_contract.json).
-48 texts/16 limits/26 obligations/18 stops; actual assembly/load/residual/norm
-error/full-Q storage remain TEXT_ONLY/UNKNOWN_STOP/UNFROZEN. Two pre-formal helper
-errors/one formal checker failure remain; independent precall full-status fix
-changes no contract/criterion. No original loss/gradient or actual execution.
-Historical public software **B4.43 assembled/residual enclosure**:
-94 focused tests PASS; new primary131/independent109 DOCUMENT coverage PASS BEFORE
-arithmetic, retaining B4.42 FAIL/incomplete. Formal Gate FAIL_FORMAL_PRODUCER:
-external controller top-level import failure before fixture/case loop; no producer
-receipt/all10 formal cases unexecuted. Independent FAIL_INCOMPLETE8 metadata/
-0 case audits/0RN proofs. Both formal calls ONCE/no retry; [report](docs/validation/b4_43_public_assembled_residual_enclosure.md),
-[protocol](docs/planning/b4_43_public_assembled_residual_enclosure_protocol.md), [contract](docs/planning/b4_43_public_assembled_residual_enclosure_contract.json). Public fixed scalar assembly/residual error
-and outward norms only; both triangles/all error terms retained, diagnostic/no
-loss-gradient change. No real certificate/PSD/coercivity/Y/cost/memory proof.
-Real executable UNFROZEN/UNKNOWN_STOP/full fit PENDING4GiB; scientific FAIL stays.
-Latest document **B4.44 public assembled-residual limitations/real prerequisites**:
-407/332 static PASS,72 public texts/14 compact metadata/four primary-only failure
-texts/18 limits/24 TEXT obligations/20 stops, each call ONCE/no retry; [report](docs/validation/b4_44_public_assembled_residual_limitations_real_certification.md),
-[protocol](docs/planning/b4_44_public_assembled_residual_limitations_real_certification_protocol.md), [contract](docs/planning/b4_44_public_assembled_residual_limitations_real_certification_contract.json).
-Both native60s/256MiB caps and exact role paths PASS. B4.43 formal failures/no
-receipt/all10 unexecuted/UNKNOWN import context and B4.42 FAIL stay. All real
-assembly/load/residual/norm/PSD/coercivity/Y/cost remain UNKNOWN_STOP/UNFROZEN;
-full Q/all8 full-fit categories PENDING4GiB, diagnostic/no original loss change.
-Next proposed **B4.45 bounded public launch-context and immutable-receipt preflight
-software**, not started/authorized: new owner/finite public-text contract FIRST,
-launcher/import-origin/pending-terminal receipt only. No B4.43 retry/new arithmetic
-campaign/actual data/geometry/FEM/construction/timing/integration/fit/search/new
-budget/sealed grant/B5. Close B4.44 only and stop.
-B4.23 stays3907/3976/all69 failures and57546.072069>7200; known-added58142.252069>7200,
-B4.24/28 memory gaps/both failures, B4.20 failure and B4.19 UNKNOWN remain.
-Full training memory PENDING/4GiB; software RSS fills no historical gap.
+Latest numerical/audit B4.30 scientific FAIL retains R17quality1.00197094375>
+1.001/target mean1.01605313078>1.0/P-R failures1/3/1. Reflection stops; old
+B4.27–29 quota closed3/3, B4.30 two paid invocations/one campaign/no third.
+Old7323.1004352501081506 includes failed191.9666532080154866/BOTH FULL180;
+Q31 once80.29939475003629922/separate7403.39983000014444982. B4.23 all69 failures/
+57546.072069>7200, known-added58142.252069, B4.24/28 memory gaps, B4.20 FAIL/
+B4.19 UNKNOWN/B4.31 premerge process FAIL remain. All prior failures/charges stay.
+Known-paid12721.16417100014444982>7200 is diagnostic, no new cap/ledger reset.
+Real certificates/cost UNKNOWN_STOP/executable UNFROZEN; full-Q/all8 simultaneous
+full fit PENDING4GiB. Software RSS fills no historical/full-fit gap. Original
+loss/gradient/normalizer unchanged. Exact-FEM candidate stops; no cache/order,
+epoch/population/frequency search, fit or actual geometry/FEM/integration follows.
 
-All final evidence and the 48 unused B4.10 fresh cases remain sealed. The failed
-exact-FEM candidate stops; no fit, alternate cache/ordering, continuation,
-epoch/population/physics-frequency search or final access follows automatically.
-Passing learned repair, independent confirmation and a compatible final contract
-remain required before B5. Preserve every prior failure and charge.
+All final evidence, conditional48/720 and48 unused B4.10 cases remain sealed.
+Learned repair/independent confirmation/full new B4 Gate/compatible final contract
+remain before B5. Next proposed **B4.46 bounded read-only public launch-preflight
+limitations and fresh arithmetic-campaign prerequisites**, NOT STARTED/AUTHORIZED:
+new owner/finite text contract FIRST. No B4.43 retry/arithmetic/real FEM/fit/
+search/new budget/sealed grant. Close B4.45 only and stop.
 
-Read [project status](docs/project_status.md) and its linked latest evidence at
-session start. The [development history](docs/development_history.md) retains the
-full earlier record; read the relevant entries when a slice depends on them.
-The English v2 roadmap controls gate order; README is a public entry point.
+Read [project status](docs/project_status.md) and linked latest evidence at session
+start. Retrieve relevant [history](docs/development_history.md) when needed.
+The English v2 roadmap controls gate order; README stays the public entry point.
 
 ## Provenance boundary
 
