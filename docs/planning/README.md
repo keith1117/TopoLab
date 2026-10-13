@@ -4,16 +4,14 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-Latest document [B4.44](../validation/b4_44_public_assembled_residual_limitations_real_certification.md):407/332 static PASS, each ONCE/no retry;
-72 bound texts/14 compact metadata/4 primary-only failure texts,18 limits/24 TEXT
-obligations/20 stops, native60s/256MiB caps PASS. B4.43 formal FAIL_FORMAL_PRODUCER/
-independent FAIL_INCOMPLETE/no original receipt/all10 unexecuted/UNKNOWN context
-and94-test limits stay; B4.42 FAIL stays. Real proofs/cost UNKNOWN_STOP/executable
-UNFROZEN/full fit PENDING4GiB/scientific FAIL/P17/uniform/all-paid FAIL/seals remain.
-Next proposed B4.45 bounded public launch-context/immutable-receipt preflight,
-new owner/finite public-text software contract FIRST, not started/authorized.
-No B4.43 retry/new arithmetic campaign/actual data/FEM/timing/integration/fit/
-new cap/sealed grant/B5.
+Latest public software [B4.45](../validation/b4_45_public_launch_context_immutable_receipts.md):12/12 fixed cases/277 independent
+predicates/32 focused tests PASS, each formal ONCE/no retry. Four public
+texts/origin checks/immutable pending-started-terminal receipts only.
+B4.43 formal/B4.42/scientific FAIL/UNKNOWN/P17/all-paid FAIL/PENDING4GiB
+stay; no real execution or new budget. Next proposed B4.46 read-only
+launch-preflight limitations/fresh arithmetic prerequisites, not started/
+authorized; new owner/finite text contract FIRST, no arithmetic/FEM/fit/B5.
+
 
 ## Overall project plans
 
@@ -155,3 +153,9 @@ existence; its validation report determines whether its Gate passed or failed.
 - [Protocol](b4_44_public_assembled_residual_limitations_real_certification_protocol.md)
 - [Finite text contract](b4_44_public_assembled_residual_limitations_real_certification_contract.json)
 - [Document evidence](../validation/b4_44_public_assembled_residual_limitations_real_certification.md)
+
+### B4.45: Public launch-context and immutable receipts
+
+- [Protocol](b4_45_public_launch_context_immutable_receipts_protocol.md)
+- [Finite public software contract](b4_45_public_launch_context_immutable_receipts_contract.json)
+- [Public software evidence](../validation/b4_45_public_launch_context_immutable_receipts.md)

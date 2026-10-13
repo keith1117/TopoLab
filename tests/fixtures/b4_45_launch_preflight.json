@@ -1,0 +1,79 @@
+{
+  "version": "topolab.b4_45.public-launch-fixtures.v1",
+  "module_name": "b4_45_public_marker",
+  "marker": "topolab.b4_45.public-marker.v1",
+  "source_texts": {
+    "healthy": "MARKER = \"topolab.b4_45.public-marker.v1\"\n",
+    "import_failure": "raise RuntimeError(\"b4_45 prescribed public import failure\")\n",
+    "early_exit": "import os\nos._exit(7)\n",
+    "timeout": "import time\ntime.sleep(10)\n"
+  },
+  "source_sha256": {
+    "healthy": "d36d447dbf7695aa137906cd4a959fb19e99795fa40ab056fd5cdf9803312ae8",
+    "import_failure": "cdcb1a916684b849322d86701888f3728551c2d1502b323f6e4ddf196cb0e231",
+    "early_exit": "93282c58074845b329ab221cf9158983eaa3a9f9701cc6a58ec5cdc7929025f6",
+    "timeout": "fb7f08c90f4813077a6764b43e0c521ecfef80e0dcbba6d0c119a3812f83b342"
+  },
+  "cases": [
+    {
+      "id": "clean_external_launch",
+      "source": "healthy",
+      "expected_status": "PASS_PUBLIC_PREFLIGHT"
+    },
+    {
+      "id": "wrong_interpreter",
+      "source": "healthy",
+      "expected_status": "STOP_INTERPRETER"
+    },
+    {
+      "id": "wrong_cwd",
+      "source": "healthy",
+      "expected_status": "STOP_CWD"
+    },
+    {
+      "id": "wrong_lock",
+      "source": "healthy",
+      "expected_status": "STOP_LOCK"
+    },
+    {
+      "id": "missing_package_origin",
+      "source": "healthy",
+      "expected_status": "STOP_PACKAGE_ORIGIN"
+    },
+    {
+      "id": "shadow_probe_origin",
+      "source": "healthy",
+      "expected_status": "STOP_PROBE_ORIGIN"
+    },
+    {
+      "id": "changed_probe_bytes",
+      "source": "healthy",
+      "expected_status": "STOP_PROBE_HASH"
+    },
+    {
+      "id": "public_import_failure",
+      "source": "import_failure",
+      "expected_status": "STOP_IMPORT"
+    },
+    {
+      "id": "public_early_exit",
+      "source": "early_exit",
+      "expected_status": "FAIL_CHILD_EXIT"
+    },
+    {
+      "id": "public_timeout",
+      "source": "timeout",
+      "expected_status": "FAIL_TIMEOUT"
+    },
+    {
+      "id": "existing_receipt_refusal",
+      "source": "healthy",
+      "expected_status": "REFUSED_EXISTING_OUTPUT"
+    },
+    {
+      "id": "changed_package_hash",
+      "source": "healthy",
+      "expected_status": "STOP_PACKAGE_HASH"
+    }
+  ]
+}
