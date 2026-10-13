@@ -4,13 +4,16 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-Latest public software [B4.45](../validation/b4_45_public_launch_context_immutable_receipts.md):12/12 fixed cases/277 independent
-predicates/32 focused tests PASS, each formal ONCE/no retry. Four public
-texts/origin checks/immutable pending-started-terminal receipts only.
-B4.43 formal/B4.42/scientific FAIL/UNKNOWN/P17/all-paid FAIL/PENDING4GiB
-stay; no real execution or new budget. Next proposed B4.46 read-only
-launch-preflight limitations/fresh arithmetic prerequisites, not started/
-authorized; new owner/finite text contract FIRST, no arithmetic/FEM/fit/B5.
+Latest documentary [B4.46](../validation/b4_46_public_launch_limitations_arithmetic_prerequisites.md):253 primary/257 independent
+predicates PASS, each formal ONCE/no retry;18 limitations/20 fresh arithmetic
+prerequisites/24 unchanged real obligations/20 stops, TEXT ONLY. Formal roles
+import no candidate and execute no probe/new arithmetic/real computation. B4.45 retains12/277/32 inert scope;
+B4.43 formal/B4.42/scientific FAIL/UNKNOWN/P17/all-paid FAIL/PENDING4GiB remain.
+Next proposed B4.47 fresh public assembled-operator/intended-residual arithmetic
+with verified launch/immutable receipts, NOT STARTED/AUTHORIZED; new owner/
+finite public contract FIRST, frozen new cases/source/oracle and clean locked
+merged all-CI-passed source before formal arithmetic. No B4.43 retry/reset/
+actual FEM/fit/search/new production budget/sealed grant. Close B4.46 and stop.
 
 
 ## Overall project plans
@@ -159,3 +162,9 @@ existence; its validation report determines whether its Gate passed or failed.
 - [Protocol](b4_45_public_launch_context_immutable_receipts_protocol.md)
 - [Finite public software contract](b4_45_public_launch_context_immutable_receipts_contract.json)
 - [Public software evidence](../validation/b4_45_public_launch_context_immutable_receipts.md)
+
+### B4.46: Launch limitations and fresh arithmetic prerequisites
+
+- [Frozen text-only protocol](b4_46_public_launch_limitations_arithmetic_prerequisites_protocol.md)
+- [Finite role/limitations/prerequisites contract](b4_46_public_launch_limitations_arithmetic_prerequisites_contract.json)
+- [Documentary Gate report](../validation/b4_46_public_launch_limitations_arithmetic_prerequisites.md)

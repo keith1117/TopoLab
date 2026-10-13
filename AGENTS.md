@@ -21,15 +21,15 @@ acceleration/full-delivery claim. Historical v1.0.0 stays complete with negative
 M1/M2 evidence. B3 data/B4.1 fitting passed; original B4.2 and scientific Gate
 failed. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
 
-Latest public software **B4.45 launch-context/immutable receipts**:12 cases/
-277 independent predicates/32 focused tests PASS, each formal role ONCE/no retry.
-See [report](docs/validation/b4_45_public_launch_context_immutable_receipts.md),
-[protocol](docs/planning/b4_45_public_launch_context_immutable_receipts_protocol.md),
-[contract](docs/planning/b4_45_public_launch_context_immutable_receipts_contract.json).
-Origin/text checks and four inert public probes only; no TopoLab eager import or
-new arithmetic/real execution. B4.44 document407/332 remains document-only;
-B4.43 formal producer/independent FAIL, quota1/1/no retry/all10 unexecuted/no
-original receipt/UNKNOWN runtime+cause and B4.42 documentary FAIL remain.
+Latest document **B4.46 launch limitations/fresh arithmetic prerequisites**:
+253 primary/257 independent predicates PASS, each role ONCE/no retry; TEXT ONLY.
+See [report](docs/validation/b4_46_public_launch_limitations_arithmetic_prerequisites.md),
+[protocol](docs/planning/b4_46_public_launch_limitations_arithmetic_prerequisites_protocol.md),
+[contract](docs/planning/b4_46_public_launch_limitations_arithmetic_prerequisites_contract.json).
+18 limits/20 arithmetic prerequisites/24 real obligations/20 stops; formal text
+roles import no candidate and execute no probe/new arithmetic/real computation. B4.45 retains12/277/32 inert-probe
+scope, B4.44 document407/332; B4.43 formal FAIL/quota1/1/no retry/all10 unexecuted/
+no original receipt/UNKNOWN runtime+cause and B4.42 documentary FAIL remain.
 
 Latest numerical/audit B4.30 scientific FAIL retains R17quality1.00197094375>
 1.001/target mean1.01605313078>1.0/P-R failures1/3/1. Reflection stops; old
@@ -46,10 +46,13 @@ epoch/population/frequency search, fit or actual geometry/FEM/integration follow
 
 All final evidence, conditional48/720 and48 unused B4.10 cases remain sealed.
 Learned repair/independent confirmation/full new B4 Gate/compatible final contract
-remain before B5. Next proposed **B4.46 bounded read-only public launch-preflight
-limitations and fresh arithmetic-campaign prerequisites**, NOT STARTED/AUTHORIZED:
-new owner/finite text contract FIRST. No B4.43 retry/arithmetic/real FEM/fit/
-search/new budget/sealed grant. Close B4.45 only and stop.
+remain before B5. Next proposed **B4.47 fresh public assembled-operator/
+intended-residual arithmetic with verified launch/immutable receipts**, NOT
+STARTED/AUTHORIZED: new owner/finite public contract FIRST. Freeze new cases/
+source/oracle/roles/caps before implementation/outcomes; clean locked merged
+all-CI-passed source before formal arithmetic, actual candidate/dependency import,
+pending before import/case bytes. No B4.43 retry/reset/actual FEM/fit/search/new
+production budget/sealed grant. Close B4.46 only and stop.
 
 Read [project status](docs/project_status.md) and linked latest evidence at session
 start. Retrieve relevant [history](docs/development_history.md) when needed.

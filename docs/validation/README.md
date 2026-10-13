@@ -5,13 +5,16 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
-Latest public software [B4.45](b4_45_public_launch_context_immutable_receipts.md):12/12 fixed cases/277 independent
-predicates/32 focused tests PASS, each formal ONCE/no retry. Four public
-texts/origin checks/immutable pending-started-terminal receipts only.
-B4.43 formal/B4.42/scientific FAIL/UNKNOWN/P17/all-paid FAIL/PENDING4GiB
-stay; no real execution or new budget. Next proposed B4.46 read-only
-launch-preflight limitations/fresh arithmetic prerequisites, not started/
-authorized; new owner/finite text contract FIRST, no arithmetic/FEM/fit/B5.
+Latest documentary [B4.46](b4_46_public_launch_limitations_arithmetic_prerequisites.md):253 primary/257 independent
+predicates PASS, each formal ONCE/no retry;18 limitations/20 fresh arithmetic
+prerequisites/24 unchanged real obligations/20 stops, TEXT ONLY. Formal roles
+import no candidate and execute no probe/new arithmetic/real computation. B4.45 retains12/277/32 inert scope;
+B4.43 formal/B4.42/scientific FAIL/UNKNOWN/P17/all-paid FAIL/PENDING4GiB remain.
+Next proposed B4.47 fresh public assembled-operator/intended-residual arithmetic
+with verified launch/immutable receipts, NOT STARTED/AUTHORIZED; new owner/
+finite public contract FIRST, frozen new cases/source/oracle and clean locked
+merged all-CI-passed source before formal arithmetic. No B4.43 retry/reset/
+actual FEM/fit/search/new production budget/sealed grant. Close B4.46 and stop.
 
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
@@ -169,3 +172,7 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 ## B4.45 public launch-context and immutable receipts
 
 - [Public software Gate and preserved negative controls](b4_45_public_launch_context_immutable_receipts.md)
+
+## B4.46 launch limitations and fresh arithmetic prerequisites
+
+- [253/257 first-only document review; scientific failures and unknowns retained](b4_46_public_launch_limitations_arithmetic_prerequisites.md)

@@ -1,32 +1,40 @@
 # Current project status
 
-Updated: 2026-10-13. Latest public software **B4.45**.
+Updated: 2026-10-13. Latest documentary slice **B4.46**.
 
-B4.45 public launch-context/immutable-receipt software Gate
-**PASS_PUBLIC_LAUNCH_PREFLIGHT_ONLY**:12/12 fixed cases,277 independent predicates,
-32 focused tests; each formal role ONCE/no retry. Four hash-bound public texts:
-one clean launch,8 prescribed stops, exit7/timeout retained as FAIL controls,
-one existing-receipt refusal with unchanged bytes. Pending BEFORE child launch,
-started BEFORE probe, terminal AFTER observed exit; missing completion remains
-UNKNOWN_NOT_WRITTEN. Native primary4.29s/21413888bytes and independent0.06s/
-22577152bytes pass60s/256MiB bookkeeping caps; no historical/full-fit proof.
-TopoLab package origin/hash inspected ONLY; eager initialization never imported.
-Actual B4.45 locked CPython3.12.10/-I/cwd/sys.path/origins are new software
-observations, never a reconstruction or diagnosis of B4.43 runtime.
+B4.46 documentary Gate **PASS_TEXT_ONLY_LIMITATIONS_PREREQUISITES**:
+253 primary/257 independent predicates, each formal role ONCE/no retry.
+Contract/protocol frozen before reviewer implementation; reviewer sources and
+locked CPython3.12.10/-I environment frozen before calls.27 public TEXT inputs,
+5 literal closed B4.45 metadata files and3 primary-only source TEXT inputs;
+independent never reads the primary-only source, primary reviewer or receipt.
+18 launch limitations/20 fresh arithmetic prerequisites/24 unchanged real
+obligations/20 stops are TEXT ONLY. Formal text roles import no candidate/
+TopoLab and execute no probe, arithmetic campaign or real computation. Native through-exit primary
+0.12s/25296896bytes and independent0.05s/25509888bytes pass60s/256MiB caps;
+software RSS fills no historical/full-fit gap. Whole software cost/peak stays
+UNKNOWN_NOT_ZERO; one prefreeze lint failure is preserved, no formal retry.
 
-B4.44 document407/332 ONLY, B4.43 FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/
-all10 unexecuted/no original receipt/UNKNOWN runtime+cause, B4.42 FAIL and all
-scientific failures stay. ALL four criterion/failure/cost/full-memory objects,
-17 boundary values and24 TEXT real obligations equal B4.44. Scientific FAIL/
-fixed P17 unrepaired/uniform/all-paid12721.16417100014444982>7200 diagnostic/no
-ledger reset, real executable UNFROZEN/certification+cost UNKNOWN_STOP and full
-Q/all8 full-fit PENDING4GiB remain. No original loss/gradient/normalizer or actual
-data/geometry/FEM/construction/arithmetic campaign/timing/integration/fit/search/
-new paid cap/final or unused/conditional sealed access.
+B4.45 retains12/277/32 and its negative launch controls, B4.44 document407/332
+ONLY. B4.43 remains FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/no retry/all10
+unexecuted/no original receipt/runtime UNKNOWN_NOT_RECORDED/cause
+UNKNOWN_NOT_DIAGNOSED. B4.42 and scientific FAIL/fixed P17 unrepaired/uniform/old costs/
+unknowns/seals remain. All four criterion/failure/cost/full-memory objects,
+all17 boundaries and24 real obligations equal B4.45. Real executable UNFROZEN,
+certificates/cost UNKNOWN_STOP, full Q/all8 simultaneous fit PENDING4GiB;
+known-paid12721.16417100014444982>7200 remains diagnostic all-paid FAIL, no
+cap/ledger reset. Original loss/gradient/SAME normalizer and tolerances stay.
+All final/conditional48/720/unused48 evidence remains sealed.
 
-See [report](validation/b4_45_public_launch_context_immutable_receipts.md), [protocol](planning/b4_45_public_launch_context_immutable_receipts_protocol.md), [contract](planning/b4_45_public_launch_context_immutable_receipts_contract.json).
+See [report](validation/b4_46_public_launch_limitations_arithmetic_prerequisites.md), [protocol](planning/b4_46_public_launch_limitations_arithmetic_prerequisites_protocol.md), [contract](planning/b4_46_public_launch_limitations_arithmetic_prerequisites_contract.json).
 
-All5 mandatory checks PASS; complete pytest1846 PASS in715.09s, unchanged full population/tolerances and documented one-thread setting. No new numerical test/panel/formal retry. Sandbox observed pytest elapsed723.3643003329635s includes full process overhead; raw stdlib resource counters/log remain external; this method is distinct from the formal native profiles.
+All5 mandatory commands PASS; complete pytest1846 PASS in745.33s,
+unchanged full population/tolerances and documented one-thread setting. No new
+numerical panel/test/formal retry. Sandbox observed pytest elapsed
+764.5115237080026s includes process overhead; stdlib observed
+resource counters/log remain external, separate from formal native profiles.
+Relative links, paragraph separation, ignore behavior, inherited objects,
+frozen programs/old documents, private files and source/publication guards pass.
 
 ## Delivery and operational boundary
 
@@ -138,9 +146,13 @@ B4.19's actual failed case/gap/counts remain unknown.
 
 ## Current stop and proposed successor
 
-Next proposed **B4.46 bounded read-only public launch-preflight limitations
-and fresh arithmetic-campaign prerequisites**, NOT STARTED/AUTHORIZED. New
-owner/finite text-only contract FIRST. No B4.43 retry/new arithmetic campaign/
-actual FEM/fit/search/new budget/sealed grant. Complete new B4 Gate, learned
-repair/independent confirmation and compatible final contract remain before B5.
-Close B4.45 only and stop.
+Next proposed **B4.47 bounded fresh public assembled-operator and
+intended-residual arithmetic campaign with verified launch and immutable
+receipts**, NOT STARTED/AUTHORIZED. New owner/finite public contract FIRST;
+freeze new cases/source/oracle/accepted bits/roles/caps before implementation
+and outcomes. Formal arithmetic requires clean locked merged source and all
+exact-head/main CI, actual candidate/dependency import and pending BEFORE
+candidate/oracle import or case bytes. No B4.43 retry/reset or actual FEM/fit/
+search/new production budget/sealed grant. Complete new B4 Gate, learned repair/
+independent confirmation and compatible final contract remain before B5.
+Close B4.46 only and stop.
