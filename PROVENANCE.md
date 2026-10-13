@@ -1260,3 +1260,17 @@ Hack3D code/comments/structure/figures, real FEM/data/model/fit or numerical
 source is consulted/imported. New runtime observations do not reconstruct
 B4.43 runtime/cause; every old scientific/formal failure/cost/seal remains.
 See [report](docs/validation/b4_45_public_launch_context_immutable_receipts.md).
+
+## B4.46 public launch limitations and fresh arithmetic prerequisites
+
+The [protocol](docs/planning/b4_46_public_launch_limitations_arithmetic_prerequisites_protocol.md) and
+[contract](docs/planning/b4_46_public_launch_limitations_arithmetic_prerequisites_contract.json) freeze27 public TEXT inputs,
+5 literal compact closure metadata and3 primary-only source texts before
+reviewer implementation. Separately authored stdlib JSON/hash/AST/Decimal50
+text reviewers establish253/257 predicates ONCE/no retry. No old controller,
+candidate, TopoLab/shared checker or fixture expression is imported/evaluated;
+independent reads no primary-only source/reviewer/receipt. Existing original
+derivations remain unchanged conditional TEXT, with no new arithmetic or real
+certificate. No external scientific/reference source or Hack3D code/comments/
+structure/figures consulted/copied. Old failures/runtime UNKNOWN/costs/memory/
+loss/gradient/SAME normalizer/seals remain. See [report](docs/validation/b4_46_public_launch_limitations_arithmetic_prerequisites.md).
