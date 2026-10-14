@@ -1297,3 +1297,16 @@ B4.47 first-only formal evidence from clean protected merged source
 costs describe ONLY this public panel; every old failure/unknown/charge/seal
 remains. No external source, actual geometry/FEM/fit or scientific repair. See
 [result](docs/validation/b4_47_public_arithmetic_campaign.md).
+
+## B4.48 public arithmetic limits and conditional real-certification bridge
+
+The [protocol](docs/planning/b4_48_public_arithmetic_limitations_real_certification_protocol.md) and
+[contract](docs/planning/b4_48_public_arithmetic_limitations_real_certification_contract.json) freeze30 public TEXT/four compact
+closure metadata/four primary-only source texts BEFORE separate stdlib reviewers.
+233/231 first-only document/hash/AST/Decimal50 predicates verify consistency,
+not new arithmetic/real values/certificates. Existing original TopoLab intended-
+operator/triangle/Frobenius/Gram/coercivity/residual/SAME-normalizer derivations
+remain conditional TEXT, no loss/gradient change or real execution. No new
+external scientific/implementation source or Hack3D code/comment/structure/
+figure consulted/copied. All old failures/unknowns/costs/full-memory/seals remain.
+See [report](docs/validation/b4_48_public_arithmetic_limitations_real_certification.md).

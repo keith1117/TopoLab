@@ -21,19 +21,17 @@ acceleration/full-delivery claim. Historical v1.0.0 stays complete with negative
 M1/M2 evidence. B3 data/B4.1 fitting passed; original B4.2 and scientific Gate
 failed. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
 
-Latest public **B4.47 fresh arithmetic/verified launch/immutable receipts**:
-Gate PASS_FRESH_PUBLIC_ARITHMETIC_ONLY, independent4328 predicates/104 RN proofs/
-10 case audits; formal controls/producer/independent1/1/1 ONCE/no retry.
-See [report](docs/validation/b4_47_public_arithmetic_campaign.md),
-[protocol](docs/planning/b4_47_public_arithmetic_campaign_protocol.md) and
-[contract](docs/planning/b4_47_public_arithmetic_campaign_contract.json).
-Ten NEW public systems/5 enclosures/2 sign/3 range stops only; actual standalone
-candidate/dependency import with pending before imports/case bytes, clean merged
-all-CI-passed source. Diagnostic only, no eager TopoLab/real FEM certification.
-B4.46 text253/257/B4.45 inert12/277/32/B4.44 document407/332 retain scope;
-B4.43 formal FAIL/quota1/1/all10 unexecuted/no original receipt/UNKNOWN runtime+
-cause and B4.42 FAIL remain. Initial administrative filename scope error and
-whole software cost/peak UNKNOWN_NOT_ZERO remain; no old memory gap filled.
+Latest documentary **B4.48 public arithmetic limitations/real prerequisites**:
+Gate PASS_TEXT_ONLY_PUBLIC_ARITHMETIC_LIMITATIONS, primary233/independent231,
+ONCE/no retry. See [report](docs/validation/b4_48_public_arithmetic_limitations_real_certification.md),
+[protocol](docs/planning/b4_48_public_arithmetic_limitations_real_certification_protocol.md),
+[contract](docs/planning/b4_48_public_arithmetic_limitations_real_certification_contract.json).
+20 limitations/12 conditional bridges/24 unchanged real obligations remain TEXT.
+B4.47 public-only PASS/10 new systems/5 enclosures/2 sign/3 range stops/4328
+predicates/104 RN proofs/quota1/1/1 remain. B4.43 FAIL/quota1/1/all10 unexecuted/
+no original receipt/runtime+cause UNKNOWN and B4.42 FAIL remain. Scientific FAIL/
+P17/uniform/seals stay; real executable UNFROZEN/certificates-cost UNKNOWN_STOP.
+Whole software cost/peak UNKNOWN_NOT_ZERO; software RSS fills no old/full-fit gap.
 
 Latest numerical/audit B4.30 scientific FAIL retains R17quality1.00197094375>
 1.001/target mean1.01605313078>1.0/P-R failures1/3/1. Reflection stops; old
@@ -49,11 +47,12 @@ loss/gradient/normalizer unchanged. Exact-FEM candidate stops; no cache/order,
 epoch/population/frequency search, fit or actual geometry/FEM/integration follows.
 
 All final/conditional48/720/unused48 evidence remains sealed. Next proposed
-**B4.48 read-only fresh public arithmetic limitations/real-certification
-prerequisites**, NOT STARTED/AUTHORIZED; new owner/finite TEXT contract FIRST.
-No B4.47/B4.43 retry/reset or actual FEM/fit/search/new production budget/sealed
-grant. Learned repair/independent confirmation/full new B4/compatible final
-remain before B5. Close B4.47 only and stop.
+**B4.49 public combined residual/coercivity/SAME-normalizer diagnostic certificate
+software**, NOT STARTED/AUTHORIZED; new owner/finite tiny-public-fixture contract,
+ONE recipe/independent oracle/expected stops/caps FIRST. No B4.47/B4.43 retry/reset
+or actual FEM/fit/search/new production budget/sealed grant. Learned repair/
+independent confirmation/full new B4/compatible final remain before B5.
+Close B4.48 only and stop.
 
 Read [project status](docs/project_status.md) and linked latest evidence at session
 start. Retrieve relevant [history](docs/development_history.md) when needed.

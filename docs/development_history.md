@@ -1519,3 +1519,31 @@ and real-certification prerequisites**, NOT STARTED/AUTHORIZED. New owner and
 finite TEXT contract FIRST; no B4.47/B4.43 retry/reset, actual FEM/fit/search/new
 production budget/sealed grant. Learned repair/independent confirmation/full new
 B4 Gate/compatible final contract remain before B5. Close B4.47 only and stop.
+
+## B4.48 — public arithmetic limitations and real-certification prerequisites (2026-10-14)
+
+B4.48 documentary Gate **PASS_TEXT_ONLY_PUBLIC_ARITHMETIC_LIMITATIONS**:
+233 primary/231 independent predicates, each first/only text call, no retry.
+30 bound public TEXT inputs/four literal closure metadata/four primary-only source
+texts; independent reads no primary-only source, primary reviewer/receipt or shared
+helper and neither role imports candidate/TopoLab or evaluates candidate arithmetic/FEM.
+20 public arithmetic limitations/12 conditional bridges/24 unchanged real
+obligations/16 stops remain TEXT ONLY. Scientific Gate **FAIL**, fixed P17
+unrepaired/uniform default/full v2 delivery open.
+
+All four inherited objects/17 boundaries/24 real obligations equal B4.47;
+its public4328/104/10 and every old FAIL/UNKNOWN/paid ledger/reserve/P17/seal remain.
+Native primary0.10s/29278208bytes and independent0.05s/23805952bytes pass scoped
+60s/256MiB caps; no historical/full-fit gap filled. Preparation filename/read/
+network/sandbox/interruption failures and UNKNOWN costs preserved. Whole software
+cost/peak UNKNOWN_NOT_ZERO. All5 checks PASS/full1900 tests in664.23s, unchanged
+population/tolerances. Only13 reviewed paths; inspected
+every-commit/actual-squash guards, protected exact-head/main CI/equal trees/owned
+cleanup/independent backup govern closure. [Report](validation/b4_48_public_arithmetic_limitations_real_certification.md).
+
+Next proposed **B4.49 bounded public combined residual/coercivity/SAME-normalizer diagnostic certificate software evidence**,
+NOT STARTED/AUTHORIZED. New owner/finite tiny-public-fixture contract, ONE recipe,
+independent oracle/expected stops/caps BEFORE implementation/outcomes. Public
+diagnostics only; no B4.47/B4.43 retry/reset or actual FEM/fit/search/new production
+budget/sealed grant. Learned repair/independent confirmation/full new B4/compatible
+final contract remain before B5. Close B4.48 only, report the successor and stop.

@@ -5,21 +5,23 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
-B4.47 public diagnostic Gate **PASS_FRESH_PUBLIC_ARITHMETIC_ONLY**; scientific Gate **FAIL**,
-fixed P17 unrepaired/uniform default/full v2 open. Formal controls/producer/
-independent quotas1/1/1 consumed, each invoked at most ONCE/no retry.
-Ten NEW frozen authored systems retain5 enclosures/2 sign stops/3 range stops;
-actual completed independent case audits10/predicates4328/
-RN-even proofs104.54 focused source regressions and1900 source full tests
-PASS separately; they never replace a missing/failed formal result.
+B4.48 documentary Gate **PASS_TEXT_ONLY_PUBLIC_ARITHMETIC_LIMITATIONS**:
+233 primary/231 independent predicates, each first/only text call, no retry.
+30 bound public TEXT inputs/four literal closure metadata/four primary-only source
+texts; independent reads no primary-only source, primary reviewer/receipt or shared
+helper and neither role imports candidate/TopoLab or evaluates candidate arithmetic/FEM.
+20 public arithmetic limitations/12 conditional bridges/24 unchanged real
+obligations/16 stops remain TEXT ONLY. Scientific Gate **FAIL**, fixed P17
+unrepaired/uniform default/full v2 delivery open.
 
-See [B4.47 report](b4_47_public_arithmetic_campaign.md).
+See [B4.48 report](b4_48_public_arithmetic_limitations_real_certification.md).
 
-Next proposed **B4.48 bounded read-only fresh public arithmetic limitations
-and real-certification prerequisites**, NOT STARTED/AUTHORIZED. New owner and
-finite TEXT contract FIRST; no B4.47/B4.43 retry/reset, actual FEM/fit/search/new
-production budget/sealed grant. Learned repair/independent confirmation/full new
-B4 Gate/compatible final contract remain before B5. Close B4.47 only and stop.
+Next proposed **B4.49 bounded public combined residual/coercivity/SAME-normalizer diagnostic certificate software evidence**,
+NOT STARTED/AUTHORIZED. New owner/finite tiny-public-fixture contract, ONE recipe,
+independent oracle/expected stops/caps BEFORE implementation/outcomes. Public
+diagnostics only; no B4.47/B4.43 retry/reset or actual FEM/fit/search/new production
+budget/sealed grant. Learned repair/independent confirmation/full new B4/compatible
+final contract remain before B5. Close B4.48 only, report the successor and stop.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -184,3 +186,7 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 ## B4.47 fresh public arithmetic and immutable receipts
 
 - [Fresh public arithmetic result; old failures retained](b4_47_public_arithmetic_campaign.md)
+
+## B4.48 public arithmetic limitations and real-certification prerequisites
+
+- [B4.48 public arithmetic limitations and real-certification prerequisites](b4_48_public_arithmetic_limitations_real_certification.md)

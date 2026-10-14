@@ -104,14 +104,26 @@ integration/fit/search/new production budget/sealed grant; all final/conditional
 
 See [B4.47 report](../validation/b4_47_public_arithmetic_campaign.md).
 
-Next proposed **B4.48 bounded read-only fresh public arithmetic limitations
-and real-certification prerequisites**, NOT STARTED/AUTHORIZED. New owner and
-finite TEXT contract FIRST; no B4.47/B4.43 retry/reset, actual FEM/fit/search/new
-production budget/sealed grant. Learned repair/independent confirmation/full new
-B4 Gate/compatible final contract remain before B5. Close B4.47 only and stop.
+B4.48 documentary Gate **PASS_TEXT_ONLY_PUBLIC_ARITHMETIC_LIMITATIONS**:
+233 primary/231 independent predicates, each first/only text call, no retry.
+30 bound public TEXT inputs/four literal closure metadata/four primary-only source
+texts; independent reads no primary-only source, primary reviewer/receipt or shared
+helper and neither role imports candidate/TopoLab or evaluates candidate arithmetic/FEM.
+20 public arithmetic limitations/12 conditional bridges/24 unchanged real
+obligations/16 stops remain TEXT ONLY. Scientific Gate **FAIL**, fixed P17
+unrepaired/uniform default/full v2 delivery open.
+
+See [B4.48 report](../validation/b4_48_public_arithmetic_limitations_real_certification.md).
+
+Next proposed **B4.49 bounded public combined residual/coercivity/SAME-normalizer diagnostic certificate software evidence**,
+NOT STARTED/AUTHORIZED. New owner/finite tiny-public-fixture contract, ONE recipe,
+independent oracle/expected stops/caps BEFORE implementation/outcomes. Public
+diagnostics only; no B4.47/B4.43 retry/reset or actual FEM/fit/search/new production
+budget/sealed grant. Learned repair/independent confirmation/full new B4/compatible
+final contract remain before B5. Close B4.48 only, report the successor and stop.
 
 Prepared: 2026-09-24
-Revised: 2026-10-14 (B4.47 fresh public arithmetic/immutable receipts)
+Revised: 2026-10-14 (B4.48 public arithmetic limitations/real prerequisites)
 
 Related documents:
 
@@ -2093,6 +2105,50 @@ finite TEXT contract FIRST; no B4.47/B4.43 retry/reset, actual FEM/fit/search/ne
 production budget/sealed grant. Learned repair/independent confirmation/full new
 B4 Gate/compatible final contract remain before B5. Close B4.47 only and stop.
 
+### B4.48: Public arithmetic limitations and real-certification prerequisites
+
+B4.48 documentary Gate **PASS_TEXT_ONLY_PUBLIC_ARITHMETIC_LIMITATIONS**:
+233 primary/231 independent predicates, each first/only text call, no retry.
+30 bound public TEXT inputs/four literal closure metadata/four primary-only source
+texts; independent reads no primary-only source, primary reviewer/receipt or shared
+helper and neither role imports candidate/TopoLab or evaluates candidate arithmetic/FEM.
+20 public arithmetic limitations/12 conditional bridges/24 unchanged real
+obligations/16 stops remain TEXT ONLY. Scientific Gate **FAIL**, fixed P17
+unrepaired/uniform default/full v2 delivery open.
+
+B4.47 retains PASS_FRESH_PUBLIC_ARITHMETIC_ONLY/10 NEW systems/5 enclosures/
+2 sign/3 range stops/4328 predicates/104 RN proofs/10 case audits/quota1/1/1.
+All four criterion/failure/cost/full-memory objects,17 boundaries and24 real
+obligations equal B4.47 EXACTLY. B4.43 FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/
+quota1/1/all10 unexecuted/no original receipt/runtime UNKNOWN_NOT_RECORDED/cause
+UNKNOWN_NOT_DIAGNOSED, B4.42 FAIL, all69 old failures/UNKNOWN/memory gaps and
+B4.31 premerge process FAIL remain. Old7323.1004352501081506 includes failed
+191.9666532080154866/BOTH FULL180; Q31 once80.29939475003629922/separate
+7403.39983000014444982. Known-paid12721.16417100014444982>7200 is diagnostic/
+all-paid FAIL, no cap/ledger reset. Original loss/gradient/intercept/SAME normalizer,
+all tolerances/3 seeds/200 FULL epochs/432+76/factor1.25/all16 cost categories stay.
+Real executable UNFROZEN/certificates-cost UNKNOWN_STOP/full Q additional8*m*m/
+A_hat+Y16*m*n/all8 simultaneous full fit PENDING4GiB4294967296bytes. Software
+RSS fills no historical/full-fit gap. Closed3/3/B4.30 two calls one campaign/no
+third/reflection stop and all final/conditional48/720/unused48 seals remain.
+No actual input/geometry/FEM/construction/integration/fit/search/new budget/B5.
+
+Own text-native primary0.10s/29278208bytes, independent0.05s/23805952bytes
+PASS60s/256MiB caps; whole software cost/peak UNKNOWN_NOT_ZERO. Preparation
+scope/read/network/sandbox/interruption failures retain source/prefix/costs.
+No formal retry or numerical execution. All5 mandatory checks PASS/full1900
+tests in664.23s, unchanged population/tolerances. Inspected
+publication guards/protected exact-head/main CI/equal trees/owned cleanup and
+independent backup govern technical closure. See [report](../validation/b4_48_public_arithmetic_limitations_real_certification.md),
+[protocol](b4_48_public_arithmetic_limitations_real_certification_protocol.md), [contract](b4_48_public_arithmetic_limitations_real_certification_contract.json).
+
+Next proposed **B4.49 bounded public combined residual/coercivity/SAME-normalizer diagnostic certificate software evidence**,
+NOT STARTED/AUTHORIZED. New owner/finite tiny-public-fixture contract, ONE recipe,
+independent oracle/expected stops/caps BEFORE implementation/outcomes. Public
+diagnostics only; no B4.47/B4.43 retry/reset or actual FEM/fit/search/new production
+budget/sealed grant. Learned repair/independent confirmation/full new B4/compatible
+final contract remain before B5. Close B4.48 only, report the successor and stop.
+
 ### B5: One-time final comparison and project delivery gate
 
 Open the new ID cohort once after B4, followed by predeclared OOD and independent
@@ -2128,10 +2184,11 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.48 read-only public arithmetic limitations/prerequisites:**
-   NOT STARTED/AUTHORIZED; new owner/finite TEXT contract FIRST. Preserve fresh
-   B4.47 Gate/prefixes/native/UNKNOWN and old B4.43 closed failures; no retry/reset
-   or real access/fit/search/budget/sealed grant. Close B4.47 only and stop.
+1. **Proposed B4.49 public combined diagnostic certificate software:**
+   NOT STARTED/AUTHORIZED; new owner/finite tiny-public-fixture contract/ONE
+   recipe/independent oracle/expected stops/caps FIRST. Preserve B4.48 TEXT
+   PASS/B4.47 public scope/old failures/UNKNOWN/seals; no retry/reset or actual
+   FEM/fit/search/budget/sealed grant. Close B4.48 only and stop.
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.
