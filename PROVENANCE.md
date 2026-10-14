@@ -1290,3 +1290,10 @@ figures consulted/copied. Old mathematical sources/receipts/failures/UNKNOWN/
 loss/gradient/SAME normalizer/costs/memory/seals retain their identities.54 public
 regressions are software only; formal arithmetic awaits clean locked merged
 all-CI-passed source. See the [prospective protocol](docs/planning/b4_47_public_arithmetic_campaign_protocol.md).
+
+B4.47 first-only formal evidence from clean protected merged source
+`cadad75a86548e6f71a87f5444064475a5c23ccc` retains GatePASS_FRESH_PUBLIC_ARITHMETIC_ONLY/4328 independent predicates/
+104 RN proofs/10 case audits. New runtime/immutable prefixes/native
+costs describe ONLY this public panel; every old failure/unknown/charge/seal
+remains. No external source, actual geometry/FEM/fit or scientific repair. See
+[result](docs/validation/b4_47_public_arithmetic_campaign.md).
