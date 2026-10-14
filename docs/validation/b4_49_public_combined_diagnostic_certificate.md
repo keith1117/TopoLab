@@ -1,6 +1,6 @@
 # B4.49 public combined diagnostic certificate software
 
-Date:2026-10-14. **Source phase; formal Gate NOT_RUN**, producer/independent0/0.
+Date:2026-10-14. **Formal public Gate PASS_PUBLIC_COMBINED_DIAGNOSTIC_ONLY**, producer/independent1/1, each first/only invocation/no retry.
 Scientific Gate **FAIL**, fixed P17 unrepaired/uniform/full v2 open remain.
 
 ## Authority, preregistration and fixed recipe
@@ -58,7 +58,7 @@ executed/completed raw values are not accepted-domain or bound success. Every
 stop retains full prefix/reason/unexecuted suffix. The normalizer identity and
 nonpositive controls stay failures, not a substituted denominator.
 
-## Software checks and first-only formal boundary
+## Source validation and prospective boundary (historical before formal calls)
 
 51 focused source tests PASS, including all12 systems/independent inequalities,
 closed binding denials BEFORE callback bytes, mutated prepared-state rejection,
@@ -112,6 +112,65 @@ only the new B4.49 entry retained. Original failed draft/source/log/cost and
 correction remain external; no owner file, contract, criterion or numerical code
 changed. Fresh per-path/staged/all-upload guards are required, formal0/0.
 
+## First-only formal evidence and closed resources
+
+B4.49 public diagnostic Gate **PASS_PUBLIC_COMBINED_DIAGNOSTIC_ONLY**, scientific Gate **FAIL**.
+Producer/independent each first/only invocation, quotas1/1 consumed/no retry.
+All 12 frozen authored systems match their preregistered outcomes: five
+certificates and seven prescribed stops. ONE recipe; 12 independent case audits,
+6059 predicates, 455 RN-even proofs and 143 fixed80 root proofs. Complete failed
+prefixes, stopping reasons and unexecuted suffixes remain external.
+Public intended PSD/coercivity/residual-corrected energy and SAME stored denominator
+remain diagnostic, with all separate errors/BOTH Gram discrepancies/triangles and
+outward stages. Real certificates and cost remain UNKNOWN_STOP; the real executable is
+UNFROZEN, full-fit memory PENDING4GiB and learned repair unresolved; fixed P17/uniform/all seals stay.
+51 focused checks and 1951 source full tests PASS separately. No loss/gradient/
+normalizer change, actual FEM/fit/search/new budget/sealed access or old quota reset.
+
+Clean protected source `1a05cca3ce1bb78e630fc594025a6c78fd987c04` (source PR #186) and all exact-head/
+main CI preceded source/runtime/coordinator freeze and BOTH first-only calls.
+Actual checked standalone candidate and separate oracle imports/direct stdlib
+origins bind this CPython3.12.10/-I/cwd/source only. Parent outer pending preceded
+numerical interpreters/import/fixture bytes, child started preceded imports;
+all before-operation/prefix/observed-exit/native/terminal bytes stay external.
+Source and data snapshots exact; no numerical rerun or changed standards.
+
+| Native profile | real/user/sys seconds | Maximum RSS bytes |
+|---|---|---:|
+| primary_outer | 0.48/0.12/0.21 | 25083904 |
+| primary_child | 0.43/0.09/0.20 | 25083904 |
+| independent_outer | 0.66/0.17/0.26 | 27557888 |
+| independent_child | 0.59/0.14/0.25 | 27557888 |
+
+Formal resource checks PASS; outer role wall sum 1.14s <= 120s,
+conservative all-profile RSS sum 105283584 <= 1073741824 bytes.
+Nested child intervals retained separately, never double-added to role elapsed.
+Software bookkeeping ONLY, no historical/full-fit memory or affordable-fit claim.
+Whole software cost/peak UNKNOWN_NOT_ZERO; failed calls/prefixes/unknowns stay.
+
+| Closed immutable object | SHA256 |
+|---|---|
+| formal_release.json | `fb59f9da4fc5ec9fd23767b69b54dbd16f7714af6a8aaed6edcff8c9b5d254dc` |
+| formal_program_runtime_source_freeze.json | `ac7a892638a5a4b7d36f42a14d22751ea21b560dfc9f7fad1107095394fb7be8` |
+| formal_primary_request.json | `34394670eaac4b3323d77eace26fd729e4723afaf6ff5c4312a7c24a849356cd` |
+| formal_independent_request.json | `ce37587836c0e93e3a14f61bd5846c2c47c149d056d547bf3d92f1b289dde03e` |
+| primary_quota_consumed.json | `e360dbcddcb41327612ec939a74bddda580bf073c2b90b30698b76ff7dd778aa` |
+| primary_outer_pending.json | `40b37f42236722c1fda57dd1d4b2dd5bd1a4ea5e0103a2bedfe178e31b9b72eb` |
+| primary_outer_terminal.json | `fb9273cfe49019135d382c2f95a59d3ee8efa3227706ff5e855cbf8736bcd646` |
+| independent_quota_consumed.json | `57392a370df3dbf666909e78973b7b29d9461b884662185bf4feaf33b34f11dd` |
+| independent_outer_pending.json | `13065cb908fbaaead2418b52b78732b28719672537c31eeafa23fa62e72c258c` |
+| independent_outer_terminal.json | `20d4a5700978714ac89fd2554b914e9803986c4f0c73a404aa2ddc654b775b75` |
+| formal_primary/result.json | `0d8a345a0dd78ef3e0e929909d40da08187a884466468eb9f4bb822376fd1c69` |
+| formal_primary/terminal.json | `e05c5b007344311a139fabe89a45bf4502b6f199a80f7600e9d984b84be6a60c` |
+| formal_independent/result.json | `99cf0252cbb2cd698b159cd4e2f289a7f66f53bf13666e2a1b6e208debeed074` |
+| formal_independent/terminal.json | `96fe2b62588e530146f4e90f7934ab55927b1210b86c15bc66bb2c95a4b6a34e` |
+| closed_formal_combined_resource.json | `545bc70c0833f854a13b65a60e2230e09f5958a55b661a1c6187001316c89156` |
+| pre_evidence_software_cost_metadata.json | `235933b39e361367e563231d1c16594323d560887a02a823c635f6ff10affbc0` |
+
+Source all5 checks/1951 tests remain distinct from formal acceptance. Evidence
+all5 checks/full population and protected latest-head/main CI/guards/equal trees/
+owned cleanup/independent backup remain required before technical closure.
+
 ## Preserved failures, costs, memory and seals
 
 All four criterion/failure/cost/full-memory objects,17 boundaries/24 real
@@ -160,6 +219,29 @@ locks/CI/public README and all historical frozen contracts/reports stay.
 | docs/numerical_conventions.md | `477beec38d50605d5783bfaa360a32a0a9c65829df6fc0a322615c05ddd8b679` |
 
 preregistration_freeze.json SHA256 `ecdb49882af34e9bc845f9d9530593a5a772deed0857543f61abf280a44b5a00`.
+
+| Frozen executed program | SHA256 |
+|---|---|
+| src/topolab/combined_certificate.py | `709ccd392dc02b4baff32c98bf943addefc5bc3f1a9b0df5b43f5d39f6089184` |
+| scripts/b4_49_combined_oracle.py | `791cdc3dad22d788c3ff644bd103d97aff312d189ca3c36ea1f64b810446da90` |
+| scripts/b4_49_certificate_campaign.py | `832b306322c556ae8155d9c3821a12d825caa02d4869ff97206dfb1253a3c884` |
+| scripts/b4_49_certificate_audit.py | `0043c595cae63255567ebd34df2c9d55c045f3d12395b1c28ae2d459921429ad` |
+
+Reproduction entry for ordinary software checks: locked `uv run pytest
+tests/test_combined_certificate.py`; the registered namespace is unprofiled and
+does not consume or replace formal evidence. Formal entry points are the frozen
+campaign/audit scripts with the archived exact request, argv, pending and source
+snapshot; consumed roles MUST NOT be replayed. Inspect the original result and
+operation chains under formal_primary/formal_independent, including native
+profiles, raw failed hex, stop suffixes and explicit UNKNOWN internal Git-read
+counters. No unknown value is recorded as measured zero.
+
+Technical publication/backup closure requires all applicable evidence
+PR/main CI and reviewed squash checks. External final_release_closure.json,
+independent_backup_manifest.json and independent_backup_verification.json record
+the final commit, both PRs, all command-cost methods and the independent byte-copy
+backup. Their post-merge administrative fields do not alter formal evidence.
+
 Inspect exact frozen programs/release/before-call/native/raw prefix identities to
 audit formal evidence; never rerun consumed roles/overwrite their destinations.
 Inspected existing per-path/staged/EVERY-upload/eventual/actual-squash guards,
@@ -168,7 +250,8 @@ merge/all exact-head checks/resolved reviews, main CI/equal tested tree, owned-o
 cleanup and independently verified external backup govern technical closure.
 Technical CI remains distinct from formal public diagnostics and scientific FAIL.
 
-Current B4.49 in progress; formal evidence and technical closure remain pending.
-Proposed B4.50 bounded read-only combined public certificate limitations and real
-prerequisites is NOT STARTED/AUTHORIZED, needs new owner/finite TEXT contract FIRST.
-No replay/real FEM/fit/search/new budget/sealed access. Close B4.49 only and STOP.
+Next proposed **B4.50 bounded read-only combined public certificate limitations
+and real-certification prerequisites**, NOT STARTED/AUTHORIZED. New owner/finite
+TEXT contract FIRST; no B4.49/B4.47/B4.43 retry/reset or real FEM/fit/search/new
+production budget/sealed grant. Learned repair/independent confirmation/full new
+B4/compatible final remain before B5. Close B4.49 only, report the successor and STOP.

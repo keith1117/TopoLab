@@ -1325,3 +1325,8 @@ code/comment/structure/figure/data/model/label/real FEM is consulted/imported.
 51 registered focused checks are software only; formal awaits clean locked
 merged all-CI-passed source. No original loss/gradient/normalizer or scientific
 repair/full-memory/cost claim. [Report](docs/validation/b4_49_public_combined_diagnostic_certificate.md).
+
+B4.49 first-only formal evidence from clean protected merged `1a05cca3ce1bb78e630fc594025a6c78fd987c04`: PASS_PUBLIC_COMBINED_DIAGNOSTIC_ONLY/6059 independent predicates/455 RN proofs/12 case audits.
+New public software observations prove no actual FEM/fidelity/cost/full-memory
+certificate or learned repair. All failed/unknown/paid historical evidence and
+original loss/gradient/SAME normalizer stay; no new external source used.
