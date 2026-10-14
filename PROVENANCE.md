@@ -1274,3 +1274,19 @@ derivations remain unchanged conditional TEXT, with no new arithmetic or real
 certificate. No external scientific/reference source or Hack3D code/comments/
 structure/figures consulted/copied. Old failures/runtime UNKNOWN/costs/memory/
 loss/gradient/SAME normalizer/seals remain. See [report](docs/validation/b4_46_public_launch_limitations_arithmetic_prerequisites.md).
+
+## B4.47 fresh public arithmetic and durable bootstrap implementation
+
+Ten new small contribution lists/accepted IEEE words were authored and frozen
+before candidate/oracle implementation, with no normalized B4.43 input reuse.
+The standalone journal-aware candidate derives from TopoLab's own B4.41 scalar
+conventions and B4.43 assembly/residual/error equations. The separate independent
+oracle retains its own integer-bisection80 and exact adjacent/squared-midpoint
+RN-even proofs, importing no candidate/producer/TopoLab/shared numerical helper.
+Checked actual candidate/dependency import, exclusive fsynced pending/started/
+operation/terminal and exact new input snapshots use original stdlib engineering.
+No new external scientific/implementation source or Hack3D code/comments/layout/
+figures consulted/copied. Old mathematical sources/receipts/failures/UNKNOWN/
+loss/gradient/SAME normalizer/costs/memory/seals retain their identities.54 public
+regressions are software only; formal arithmetic awaits clean locked merged
+all-CI-passed source. See the [prospective protocol](docs/planning/b4_47_public_arithmetic_campaign_protocol.md).

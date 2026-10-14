@@ -44,15 +44,18 @@ full fit PENDING4GiB. Software RSS fills no historical/full-fit gap. Original
 loss/gradient/normalizer unchanged. Exact-FEM candidate stops; no cache/order,
 epoch/population/frequency search, fit or actual geometry/FEM/integration follows.
 
-All final evidence, conditional48/720 and48 unused B4.10 cases remain sealed.
-Learned repair/independent confirmation/full new B4 Gate/compatible final contract
-remain before B5. Next proposed **B4.47 fresh public assembled-operator/
-intended-residual arithmetic with verified launch/immutable receipts**, NOT
-STARTED/AUTHORIZED: new owner/finite public contract FIRST. Freeze new cases/
-source/oracle/roles/caps before implementation/outcomes; clean locked merged
-all-CI-passed source before formal arithmetic, actual candidate/dependency import,
-pending before import/case bytes. No B4.43 retry/reset/actual FEM/fit/search/new
-production budget/sealed grant. Close B4.46 only and stop.
+All final/conditional48/720/unused48 evidence remains sealed. Current authorized
+**B4.47 fresh public arithmetic with verified launch/immutable receipts** is
+SOURCE PREPARATION ONLY: ten new inputs/contract/convention frozen FIRST,
+54 focused regressions PASS, formal roles0/0/0. See [report](docs/validation/b4_47_public_arithmetic_campaign.md)
+and [contract](docs/planning/b4_47_public_arithmetic_campaign_contract.json).
+Clean locked merged source/all exact-head-main CI BEFORE formal arithmetic;
+actual standalone candidate/dependency import and pending BEFORE import/case
+bytes; every role ONCE/no retry including first failure. No B4.43 retry/reset,
+real FEM/fit/search/new production budget/sealed grant. Close B4.47 only;
+proposed B4.48 read-only fresh public arithmetic limitations/real-certification
+prerequisites NOT STARTED/AUTHORIZED. Learned repair/independent confirmation/
+full new B4/compatible final remain before B5. Stop after this slice.
 
 Read [project status](docs/project_status.md) and linked latest evidence at session
 start. Retrieve relevant [history](docs/development_history.md) when needed.

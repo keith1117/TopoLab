@@ -80,16 +80,28 @@ All final/conditional48/720/unused48 evidence remains sealed.
 
 See [B4.46 report](../validation/b4_46_public_launch_limitations_arithmetic_prerequisites.md).
 
-Next proposed **B4.47 bounded fresh public assembled-operator and
-intended-residual arithmetic campaign with verified launch and immutable
-receipts**, NOT STARTED/AUTHORIZED. New owner/finite public contract FIRST;
-freeze new cases/source/oracle/accepted bits/roles/caps before implementation
-and outcomes. Formal arithmetic requires clean locked merged source and all
-exact-head/main CI, actual candidate/dependency import and pending BEFORE
-candidate/oracle import or case bytes. No B4.43 retry/reset or actual FEM/fit/
-search/new production budget/sealed grant. Complete new B4 Gate, learned repair/
-independent confirmation and compatible final contract remain before B5.
-Close B4.46 only and stop.
+B4.47 is the current authorized slice, SOURCE PREPARATION ONLY; formal
+controls/producer/independent quotas0/0/0, no formal arithmetic acceptance yet.
+Ten NEW authored public inputs and convention/contract/protocol froze before
+implementation:5 enclosures/2 sign stops/3 range stops, no old B4.43 input reuse.
+One standalone stdlib candidate, independent oracle and durable launch/case/
+operation journals are implemented;54 focused registered regressions PASS.
+Source PR/full checks/protected exact-head/main CI/whole-clean locked release
+must precede the first formal roles. Each formal role ONCE/no retry, including
+failure before loop. Do not repeat B4.43 or change frozen cases/criteria/recipe.
+
+B4.43 formal FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/all10 unexecuted/
+no original receipt/runtime UNKNOWN_NOT_RECORDED/cause UNKNOWN_NOT_DIAGNOSED,
+B4.42 FAIL and scientific FAIL/fixed P17 unrepaired/uniform remain. All four
+inherited criterion/failure/cost/full-memory objects,17 boundaries and24 real
+obligations equal B4.46. Old charges/69 failures/UNKNOWN/gaps/FULL reserves,
+known-paid12721.16417100014444982>7200 diagnostic/all-paid FAIL/closed quotas/
+final/conditional48/720/unused48 seals stay. Real executable UNFROZEN,
+certificates-cost UNKNOWN_STOP/full Q/all8 simultaneous full fit PENDING4GiB.
+Original loss/gradient/SAME normalizer unchanged; public diagnostic software
+grants no actual data/geometry/FEM/integration/fit/search/new production budget/B5.
+
+See [B4.47 source report](../validation/b4_47_public_arithmetic_campaign.md).
 
 Prepared: 2026-09-24
 Revised: 2026-10-13 (B4.46 launch limitations/fresh arithmetic prerequisites)
@@ -2021,6 +2033,37 @@ search/new production budget/sealed grant. Complete new B4 Gate, learned repair/
 independent confirmation and compatible final contract remain before B5.
 Close B4.46 only and stop.
 
+### B4.47: Fresh public arithmetic source preparation
+
+B4.47 is the current authorized slice, SOURCE PREPARATION ONLY; formal
+controls/producer/independent quotas0/0/0, no formal arithmetic acceptance yet.
+Ten NEW authored public inputs and convention/contract/protocol froze before
+implementation:5 enclosures/2 sign stops/3 range stops, no old B4.43 input reuse.
+One standalone stdlib candidate, independent oracle and durable launch/case/
+operation journals are implemented;54 focused registered regressions PASS.
+Source PR/full checks/protected exact-head/main CI/whole-clean locked release
+must precede the first formal roles. Each formal role ONCE/no retry, including
+failure before loop. Do not repeat B4.43 or change frozen cases/criteria/recipe.
+
+B4.43 formal FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/all10 unexecuted/
+no original receipt/runtime UNKNOWN_NOT_RECORDED/cause UNKNOWN_NOT_DIAGNOSED,
+B4.42 FAIL and scientific FAIL/fixed P17 unrepaired/uniform remain. All four
+inherited criterion/failure/cost/full-memory objects,17 boundaries and24 real
+obligations equal B4.46. Old charges/69 failures/UNKNOWN/gaps/FULL reserves,
+known-paid12721.16417100014444982>7200 diagnostic/all-paid FAIL/closed quotas/
+final/conditional48/720/unused48 seals stay. Real executable UNFROZEN,
+certificates-cost UNKNOWN_STOP/full Q/all8 simultaneous full fit PENDING4GiB.
+Original loss/gradient/SAME normalizer unchanged; public diagnostic software
+grants no actual data/geometry/FEM/integration/fit/search/new production budget/B5.
+
+[Protocol](b4_47_public_arithmetic_campaign_protocol.md) and
+[contract](b4_47_public_arithmetic_campaign_contract.json) fix every input,
+role/origin/cap/stop before implementation.54 focused checks exercise actual
+standalone import, all10 cases/stop prefixes/independent RN proof and closed
+immutable receipts; no formal Gate follows from regression. Source release and
+all CI precede native formal controls/producer/independent ONCE/no retry.
+Close only B4.47; B4.48 read-only limitations/prerequisites is proposed only.
+
 ### B5: One-time final comparison and project delivery gate
 
 Open the new ID cohort once after B4, followed by predeclared OOD and independent
@@ -2056,13 +2099,12 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.47 fresh public assembled-operator/intended-residual arithmetic:**
-   NOT STARTED/AUTHORIZED; new owner/finite public contract FIRST, new frozen
-   cases/source/oracle/accepted bits/roles/caps before implementation/outcomes.
-   Require clean locked merged all-CI-passed source and actual candidate/
-   dependency imports with pending before import/case bytes. Keep all B4.43
-   failures/quota/UNKNOWN; no retry/reset/real FEM/fit/search/production budget/
-   sealed grant. B4.46 closes TEXT ONLY; report the next slice and stop.
+1. **Current authorized B4.47 fresh public arithmetic:** finite input contract
+   frozen before implementation; SOURCE PREPARATION, formal0/0/0. Commit/release
+   clean locked source with protected exact-head/main all CI before each first
+   formal role; actual candidate/dependency import/pending before case bytes,
+   full independent RN/stop/prefix/error/resource evidence. No B4.43 retry/reset
+   or real access/budget/sealed grant. Close only this slice and stop.
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.
