@@ -1479,3 +1479,43 @@ candidate/oracle import or case bytes. No B4.43 retry/reset or actual FEM/fit/
 search/new production budget/sealed grant. Complete new B4 Gate, learned repair/
 independent confirmation and compatible final contract remain before B5.
 Close B4.46 only and stop.
+
+## B4.47 — fresh public arithmetic and immutable receipts (2026-10-13/14)
+
+B4.47 public diagnostic Gate **PASS_FRESH_PUBLIC_ARITHMETIC_ONLY**; scientific Gate **FAIL**,
+fixed P17 unrepaired/uniform default/full v2 open. Formal controls/producer/
+independent quotas1/1/1 consumed, each invoked at most ONCE/no retry.
+Ten NEW frozen authored systems retain5 enclosures/2 sign stops/3 range stops;
+actual completed independent case audits10/predicates4328/
+RN-even proofs104.54 focused source regressions and1900 source full tests
+PASS separately; they never replace a missing/failed formal result.
+
+All four inherited criterion/failure/cost/full-memory objects,17 boundaries
+and24 real obligations equal B4.46. B4.43 FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/
+quota1/1/all10 unexecuted/no original receipt/runtime UNKNOWN_NOT_RECORDED/cause
+UNKNOWN_NOT_DIAGNOSED, B4.42 FAIL and scientific FAIL/P17 remain. Old69 failures/
+UNKNOWN/gaps/ledgers/FULL reserves/closed3/3/B4.30 two calls one campaign/no third
+remain. Old7323.1004352501081506 includes failed191.9666532080154866/BOTH FULL180;
+Q31 once80.29939475003629922/separate7403.39983000014444982; known-paid
+12721.16417100014444982>7200 diagnostic/all-paid FAIL, no cap/ledger reset.
+Real executable UNFROZEN/certificates-cost UNKNOWN_STOP/full Q additional8*m*m/
+A_hat+Y16*m*n/all8 simultaneous full fit PENDING4GiB4294967296bytes. Original
+loss/gradient/intercept/SAME normalizer unchanged. No actual data/geometry/FEM/
+integration/fit/search/new production budget/sealed grant; all final/conditional
+48/720/unused48 evidence remains sealed. Public RSS fills no old/full-fit gap.
+
+Source PR183/all exact-head-main CI/clean locked source precedes formal calls;
+pending before actual candidate/oracle import/case bytes, full independent interval/
+RN-even/signed-zero/range/sign/error/transfer/phase/hash/counter proof. Native
+outer5.59/240s/conservative sum417693696/1GiB, own resourcePASS.
+Original administrative/negative/software failures/UNKNOWN costs retained; whole
+software cost/peak UNKNOWN_NOT_ZERO, initial filename-only scope error not erased.
+54 source focused/1900 source full checks PASS separately. All5 evidence checks,
+every-upload/actual-squash guards/protected exact-head-main CI/equal trees/owned
+cleanup/independent backup govern closure. See [report](validation/b4_47_public_arithmetic_campaign.md).
+
+Next proposed **B4.48 bounded read-only fresh public arithmetic limitations
+and real-certification prerequisites**, NOT STARTED/AUTHORIZED. New owner and
+finite TEXT contract FIRST; no B4.47/B4.43 retry/reset, actual FEM/fit/search/new
+production budget/sealed grant. Learned repair/independent confirmation/full new
+B4 Gate/compatible final contract remain before B5. Close B4.47 only and stop.

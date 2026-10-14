@@ -4,18 +4,21 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-Latest documentary [B4.46](../validation/b4_46_public_launch_limitations_arithmetic_prerequisites.md):253 primary/257 independent
-predicates PASS, each formal ONCE/no retry;18 limitations/20 fresh arithmetic
-prerequisites/24 unchanged real obligations/20 stops, TEXT ONLY. Formal roles
-import no candidate and execute no probe/new arithmetic/real computation. B4.45 retains12/277/32 inert scope;
-B4.43 formal/B4.42/scientific FAIL/UNKNOWN/P17/all-paid FAIL/PENDING4GiB remain.
-Current B4.47 SOURCE PREPARATION is authorized: fresh finite contract/ten
-authored inputs/convention frozen before implementation,54 focused checks PASS,
-formal0/0/0. Clean locked merged all-CI-passed source precedes first formal roles;
-actual candidate/dependency import/pending before case bytes, no retry/reset.
-No actual FEM/fit/search/new production budget/sealed grant. Close B4.47 only.
+B4.47 public diagnostic Gate **PASS_FRESH_PUBLIC_ARITHMETIC_ONLY**; scientific Gate **FAIL**,
+fixed P17 unrepaired/uniform default/full v2 open. Formal controls/producer/
+independent quotas1/1/1 consumed, each invoked at most ONCE/no retry.
+Ten NEW frozen authored systems retain5 enclosures/2 sign stops/3 range stops;
+actual completed independent case audits10/predicates4328/
+RN-even proofs104.54 focused source regressions and1900 source full tests
+PASS separately; they never replace a missing/failed formal result.
 
+See [B4.47 report](../validation/b4_47_public_arithmetic_campaign.md).
 
+Next proposed **B4.48 bounded read-only fresh public arithmetic limitations
+and real-certification prerequisites**, NOT STARTED/AUTHORIZED. New owner and
+finite TEXT contract FIRST; no B4.47/B4.43 retry/reset, actual FEM/fit/search/new
+production budget/sealed grant. Learned repair/independent confirmation/full new
+B4 Gate/compatible final contract remain before B5. Close B4.47 only and stop.
 
 ## Overall project plans
 
@@ -169,6 +172,8 @@ existence; its validation report determines whether its Gate passed or failed.
 - [Frozen text-only protocol](b4_46_public_launch_limitations_arithmetic_prerequisites_protocol.md)
 - [Finite role/limitations/prerequisites contract](b4_46_public_launch_limitations_arithmetic_prerequisites_contract.json)
 - [Documentary Gate report](../validation/b4_46_public_launch_limitations_arithmetic_prerequisites.md)
+
+## B4.47 fresh public arithmetic and immutable receipts
 
 - [B4.47 fresh public arithmetic campaign protocol](b4_47_public_arithmetic_campaign_protocol.md)
 - [B4.47 finite fresh public arithmetic contract](b4_47_public_arithmetic_campaign_contract.json)

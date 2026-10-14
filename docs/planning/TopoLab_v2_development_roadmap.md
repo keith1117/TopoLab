@@ -80,31 +80,38 @@ All final/conditional48/720/unused48 evidence remains sealed.
 
 See [B4.46 report](../validation/b4_46_public_launch_limitations_arithmetic_prerequisites.md).
 
-B4.47 is the current authorized slice, SOURCE PREPARATION ONLY; formal
-controls/producer/independent quotas0/0/0, no formal arithmetic acceptance yet.
-Ten NEW authored public inputs and convention/contract/protocol froze before
-implementation:5 enclosures/2 sign stops/3 range stops, no old B4.43 input reuse.
-One standalone stdlib candidate, independent oracle and durable launch/case/
-operation journals are implemented;54 focused registered regressions PASS.
-Source PR/full checks/protected exact-head/main CI/whole-clean locked release
-must precede the first formal roles. Each formal role ONCE/no retry, including
-failure before loop. Do not repeat B4.43 or change frozen cases/criteria/recipe.
+B4.47 public diagnostic Gate **PASS_FRESH_PUBLIC_ARITHMETIC_ONLY**; scientific Gate **FAIL**,
+fixed P17 unrepaired/uniform default/full v2 open. Formal controls/producer/
+independent quotas1/1/1 consumed, each invoked at most ONCE/no retry.
+Ten NEW frozen authored systems retain5 enclosures/2 sign stops/3 range stops;
+actual completed independent case audits10/predicates4328/
+RN-even proofs104.54 focused source regressions and1900 source full tests
+PASS separately; they never replace a missing/failed formal result.
 
-B4.43 formal FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/all10 unexecuted/
-no original receipt/runtime UNKNOWN_NOT_RECORDED/cause UNKNOWN_NOT_DIAGNOSED,
-B4.42 FAIL and scientific FAIL/fixed P17 unrepaired/uniform remain. All four
-inherited criterion/failure/cost/full-memory objects,17 boundaries and24 real
-obligations equal B4.46. Old charges/69 failures/UNKNOWN/gaps/FULL reserves,
-known-paid12721.16417100014444982>7200 diagnostic/all-paid FAIL/closed quotas/
-final/conditional48/720/unused48 seals stay. Real executable UNFROZEN,
-certificates-cost UNKNOWN_STOP/full Q/all8 simultaneous full fit PENDING4GiB.
-Original loss/gradient/SAME normalizer unchanged; public diagnostic software
-grants no actual data/geometry/FEM/integration/fit/search/new production budget/B5.
+All four inherited criterion/failure/cost/full-memory objects,17 boundaries
+and24 real obligations equal B4.46. B4.43 FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/
+quota1/1/all10 unexecuted/no original receipt/runtime UNKNOWN_NOT_RECORDED/cause
+UNKNOWN_NOT_DIAGNOSED, B4.42 FAIL and scientific FAIL/P17 remain. Old69 failures/
+UNKNOWN/gaps/ledgers/FULL reserves/closed3/3/B4.30 two calls one campaign/no third
+remain. Old7323.1004352501081506 includes failed191.9666532080154866/BOTH FULL180;
+Q31 once80.29939475003629922/separate7403.39983000014444982; known-paid
+12721.16417100014444982>7200 diagnostic/all-paid FAIL, no cap/ledger reset.
+Real executable UNFROZEN/certificates-cost UNKNOWN_STOP/full Q additional8*m*m/
+A_hat+Y16*m*n/all8 simultaneous full fit PENDING4GiB4294967296bytes. Original
+loss/gradient/intercept/SAME normalizer unchanged. No actual data/geometry/FEM/
+integration/fit/search/new production budget/sealed grant; all final/conditional
+48/720/unused48 evidence remains sealed. Public RSS fills no old/full-fit gap.
 
-See [B4.47 source report](../validation/b4_47_public_arithmetic_campaign.md).
+See [B4.47 report](../validation/b4_47_public_arithmetic_campaign.md).
+
+Next proposed **B4.48 bounded read-only fresh public arithmetic limitations
+and real-certification prerequisites**, NOT STARTED/AUTHORIZED. New owner and
+finite TEXT contract FIRST; no B4.47/B4.43 retry/reset, actual FEM/fit/search/new
+production budget/sealed grant. Learned repair/independent confirmation/full new
+B4 Gate/compatible final contract remain before B5. Close B4.47 only and stop.
 
 Prepared: 2026-09-24
-Revised: 2026-10-13 (B4.46 launch limitations/fresh arithmetic prerequisites)
+Revised: 2026-10-14 (B4.47 fresh public arithmetic/immutable receipts)
 
 Related documents:
 
@@ -2033,36 +2040,58 @@ search/new production budget/sealed grant. Complete new B4 Gate, learned repair/
 independent confirmation and compatible final contract remain before B5.
 Close B4.46 only and stop.
 
-### B4.47: Fresh public arithmetic source preparation
+### B4.47: Fresh public arithmetic and immutable receipts
 
-B4.47 is the current authorized slice, SOURCE PREPARATION ONLY; formal
-controls/producer/independent quotas0/0/0, no formal arithmetic acceptance yet.
-Ten NEW authored public inputs and convention/contract/protocol froze before
-implementation:5 enclosures/2 sign stops/3 range stops, no old B4.43 input reuse.
-One standalone stdlib candidate, independent oracle and durable launch/case/
-operation journals are implemented;54 focused registered regressions PASS.
-Source PR/full checks/protected exact-head/main CI/whole-clean locked release
-must precede the first formal roles. Each formal role ONCE/no retry, including
-failure before loop. Do not repeat B4.43 or change frozen cases/criteria/recipe.
+B4.47 public diagnostic Gate **PASS_FRESH_PUBLIC_ARITHMETIC_ONLY**; scientific Gate **FAIL**,
+fixed P17 unrepaired/uniform default/full v2 open. Formal controls/producer/
+independent quotas1/1/1 consumed, each invoked at most ONCE/no retry.
+Ten NEW frozen authored systems retain5 enclosures/2 sign stops/3 range stops;
+actual completed independent case audits10/predicates4328/
+RN-even proofs104.54 focused source regressions and1900 source full tests
+PASS separately; they never replace a missing/failed formal result.
 
-B4.43 formal FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/all10 unexecuted/
-no original receipt/runtime UNKNOWN_NOT_RECORDED/cause UNKNOWN_NOT_DIAGNOSED,
-B4.42 FAIL and scientific FAIL/fixed P17 unrepaired/uniform remain. All four
-inherited criterion/failure/cost/full-memory objects,17 boundaries and24 real
-obligations equal B4.46. Old charges/69 failures/UNKNOWN/gaps/FULL reserves,
-known-paid12721.16417100014444982>7200 diagnostic/all-paid FAIL/closed quotas/
-final/conditional48/720/unused48 seals stay. Real executable UNFROZEN,
-certificates-cost UNKNOWN_STOP/full Q/all8 simultaneous full fit PENDING4GiB.
-Original loss/gradient/SAME normalizer unchanged; public diagnostic software
-grants no actual data/geometry/FEM/integration/fit/search/new production budget/B5.
+All four inherited criterion/failure/cost/full-memory objects,17 boundaries
+and24 real obligations equal B4.46. B4.43 FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/
+quota1/1/all10 unexecuted/no original receipt/runtime UNKNOWN_NOT_RECORDED/cause
+UNKNOWN_NOT_DIAGNOSED, B4.42 FAIL and scientific FAIL/P17 remain. Old69 failures/
+UNKNOWN/gaps/ledgers/FULL reserves/closed3/3/B4.30 two calls one campaign/no third
+remain. Old7323.1004352501081506 includes failed191.9666532080154866/BOTH FULL180;
+Q31 once80.29939475003629922/separate7403.39983000014444982; known-paid
+12721.16417100014444982>7200 diagnostic/all-paid FAIL, no cap/ledger reset.
+Real executable UNFROZEN/certificates-cost UNKNOWN_STOP/full Q additional8*m*m/
+A_hat+Y16*m*n/all8 simultaneous full fit PENDING4GiB4294967296bytes. Original
+loss/gradient/intercept/SAME normalizer unchanged. No actual data/geometry/FEM/
+integration/fit/search/new production budget/sealed grant; all final/conditional
+48/720/unused48 evidence remains sealed. Public RSS fills no old/full-fit gap.
 
-[Protocol](b4_47_public_arithmetic_campaign_protocol.md) and
-[contract](b4_47_public_arithmetic_campaign_contract.json) fix every input,
-role/origin/cap/stop before implementation.54 focused checks exercise actual
-standalone import, all10 cases/stop prefixes/independent RN proof and closed
-immutable receipts; no formal Gate follows from regression. Source release and
-all CI precede native formal controls/producer/independent ONCE/no retry.
-Close only B4.47; B4.48 read-only limitations/prerequisites is proposed only.
+The standalone checked module and eight direct stdlib dependency hashes prove
+only this declared CPython3.12.10/-I/cwd/source environment and fresh panel.
+Normal eager `import topolab`, arbitrary modules, real FEM/library integration,
+cross-platform readiness, authenticated provenance, hostile concurrent mutation
+or cross-machine durability remain outside this evidence. Full-source release
+hashes, checked byte snapshots and local phase/hash receipts retain their actual
+scope. Git-internal content-read counts stay UNKNOWN_NOT_INSTRUMENTED; explicit
+producer fresh-case file reads are20 when complete. Inner Fraction/integer/Python
+instructions are paid but not individual public-operation counters. Executed raw
+range-result operations count completed execution, never accepted domain/bounds;
+every stopped case still retains its failure and unexecuted suffix.
+
+Fixed80-bit absolute sqrt resolution/natural interval dependency can be loose.
+Rounded residual zero never erases beta_K/beta_f/beta_eval; direct intended
+residual and fixed outward transfer remain distinct. Both triangles/symmetry
+defects stay, G/K are not Gram(A_hat). No public PSD/coercivity/Y/real anchor/
+normalizer/cost/fitted reliability claim. Tiny nonzero residual never certifies U.
+
+Source PR183/clean merged all exact-head/main CI precedes first formal roles;
+native outer5.59/240s/RSS conservative sum417693696/1GiB,
+own resourcePASS. All raw prefixes/native/unknowns external; source/evidence complete
+checks/guards/protected CI/backup govern closure. [Report](../validation/b4_47_public_arithmetic_campaign.md).
+
+Next proposed **B4.48 bounded read-only fresh public arithmetic limitations
+and real-certification prerequisites**, NOT STARTED/AUTHORIZED. New owner and
+finite TEXT contract FIRST; no B4.47/B4.43 retry/reset, actual FEM/fit/search/new
+production budget/sealed grant. Learned repair/independent confirmation/full new
+B4 Gate/compatible final contract remain before B5. Close B4.47 only and stop.
 
 ### B5: One-time final comparison and project delivery gate
 
@@ -2099,12 +2128,10 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Current authorized B4.47 fresh public arithmetic:** finite input contract
-   frozen before implementation; SOURCE PREPARATION, formal0/0/0. Commit/release
-   clean locked source with protected exact-head/main all CI before each first
-   formal role; actual candidate/dependency import/pending before case bytes,
-   full independent RN/stop/prefix/error/resource evidence. No B4.43 retry/reset
-   or real access/budget/sealed grant. Close only this slice and stop.
+1. **Proposed B4.48 read-only public arithmetic limitations/prerequisites:**
+   NOT STARTED/AUTHORIZED; new owner/finite TEXT contract FIRST. Preserve fresh
+   B4.47 Gate/prefixes/native/UNKNOWN and old B4.43 closed failures; no retry/reset
+   or real access/fit/search/budget/sealed grant. Close B4.47 only and stop.
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.

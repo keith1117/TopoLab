@@ -21,15 +21,19 @@ acceleration/full-delivery claim. Historical v1.0.0 stays complete with negative
 M1/M2 evidence. B3 data/B4.1 fitting passed; original B4.2 and scientific Gate
 failed. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
 
-Latest document **B4.46 launch limitations/fresh arithmetic prerequisites**:
-253 primary/257 independent predicates PASS, each role ONCE/no retry; TEXT ONLY.
-See [report](docs/validation/b4_46_public_launch_limitations_arithmetic_prerequisites.md),
-[protocol](docs/planning/b4_46_public_launch_limitations_arithmetic_prerequisites_protocol.md),
-[contract](docs/planning/b4_46_public_launch_limitations_arithmetic_prerequisites_contract.json).
-18 limits/20 arithmetic prerequisites/24 real obligations/20 stops; formal text
-roles import no candidate and execute no probe/new arithmetic/real computation. B4.45 retains12/277/32 inert-probe
-scope, B4.44 document407/332; B4.43 formal FAIL/quota1/1/no retry/all10 unexecuted/
-no original receipt/UNKNOWN runtime+cause and B4.42 documentary FAIL remain.
+Latest public **B4.47 fresh arithmetic/verified launch/immutable receipts**:
+Gate PASS_FRESH_PUBLIC_ARITHMETIC_ONLY, independent4328 predicates/104 RN proofs/
+10 case audits; formal controls/producer/independent1/1/1 ONCE/no retry.
+See [report](docs/validation/b4_47_public_arithmetic_campaign.md),
+[protocol](docs/planning/b4_47_public_arithmetic_campaign_protocol.md) and
+[contract](docs/planning/b4_47_public_arithmetic_campaign_contract.json).
+Ten NEW public systems/5 enclosures/2 sign/3 range stops only; actual standalone
+candidate/dependency import with pending before imports/case bytes, clean merged
+all-CI-passed source. Diagnostic only, no eager TopoLab/real FEM certification.
+B4.46 text253/257/B4.45 inert12/277/32/B4.44 document407/332 retain scope;
+B4.43 formal FAIL/quota1/1/all10 unexecuted/no original receipt/UNKNOWN runtime+
+cause and B4.42 FAIL remain. Initial administrative filename scope error and
+whole software cost/peak UNKNOWN_NOT_ZERO remain; no old memory gap filled.
 
 Latest numerical/audit B4.30 scientific FAIL retains R17quality1.00197094375>
 1.001/target mean1.01605313078>1.0/P-R failures1/3/1. Reflection stops; old
@@ -44,18 +48,12 @@ full fit PENDING4GiB. Software RSS fills no historical/full-fit gap. Original
 loss/gradient/normalizer unchanged. Exact-FEM candidate stops; no cache/order,
 epoch/population/frequency search, fit or actual geometry/FEM/integration follows.
 
-All final/conditional48/720/unused48 evidence remains sealed. Current authorized
-**B4.47 fresh public arithmetic with verified launch/immutable receipts** is
-SOURCE PREPARATION ONLY: ten new inputs/contract/convention frozen FIRST,
-54 focused regressions PASS, formal roles0/0/0. See [report](docs/validation/b4_47_public_arithmetic_campaign.md)
-and [contract](docs/planning/b4_47_public_arithmetic_campaign_contract.json).
-Clean locked merged source/all exact-head-main CI BEFORE formal arithmetic;
-actual standalone candidate/dependency import and pending BEFORE import/case
-bytes; every role ONCE/no retry including first failure. No B4.43 retry/reset,
-real FEM/fit/search/new production budget/sealed grant. Close B4.47 only;
-proposed B4.48 read-only fresh public arithmetic limitations/real-certification
-prerequisites NOT STARTED/AUTHORIZED. Learned repair/independent confirmation/
-full new B4/compatible final remain before B5. Stop after this slice.
+All final/conditional48/720/unused48 evidence remains sealed. Next proposed
+**B4.48 read-only fresh public arithmetic limitations/real-certification
+prerequisites**, NOT STARTED/AUTHORIZED; new owner/finite TEXT contract FIRST.
+No B4.47/B4.43 retry/reset or actual FEM/fit/search/new production budget/sealed
+grant. Learned repair/independent confirmation/full new B4/compatible final
+remain before B5. Close B4.47 only and stop.
 
 Read [project status](docs/project_status.md) and linked latest evidence at session
 start. Retrieve relevant [history](docs/development_history.md) when needed.
