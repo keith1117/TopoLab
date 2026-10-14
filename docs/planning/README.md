@@ -4,26 +4,26 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-B4.49 **SOURCE IMPLEMENTED; FORMAL NOT_RUN**. Owner continuation authorizes
-ONLY this slice. Twelve new authored public systems/ONE fixed combined recipe,
-five prescribed certificates/seven stops were frozen BEFORE implementation.
-Candidate/independent oracle retain intended element PSD/BOTH Gram errors/fixed
-coercivity, separate actual assembly/load/residual errors and every upward
-transfer, SAME-force reciprocal energy and SAME positive stored denominator.
-51 registered focused checks PASS separately; formal producer/independent quotas
-remain0/0. First-only formal calls require clean locked merged source and all
-exact-head/main CI FIRST. No real FEM/fit/search/new production budget/sealed grant.
-Scientific Gate FAIL/fixed P17 unrepaired/uniform/full v2 open remain.
+B4.49 public diagnostic Gate **PASS_PUBLIC_COMBINED_DIAGNOSTIC_ONLY**, scientific Gate **FAIL**.
+Producer/independent each first/only invocation, quotas1/1 consumed/no retry.
+All 12 frozen authored systems match their preregistered outcomes: five
+certificates and seven prescribed stops. ONE recipe; 12 independent case audits,
+6059 predicates, 455 RN-even proofs and 143 fixed80 root proofs. Complete failed
+prefixes, stopping reasons and unexecuted suffixes remain external.
+Public intended PSD/coercivity/residual-corrected energy and SAME stored denominator
+remain diagnostic, with all separate errors/BOTH Gram discrepancies/triangles and
+outward stages. Real certificates and cost remain UNKNOWN_STOP; the real executable is
+UNFROZEN, full-fit memory PENDING4GiB and learned repair unresolved; fixed P17/uniform/all seals stay.
+51 focused checks and 1951 source full tests PASS separately. No loss/gradient/
+normalizer change, actual FEM/fit/search/new budget/sealed access or old quota reset.
 
 See [B4.49 report](../validation/b4_49_public_combined_diagnostic_certificate.md).
 
-Current authorized **B4.49 public combined diagnostic certificate software**
-remains in progress; finish source release, first-only formal evidence and its
-publication/backup, then stop. Proposed B4.50 bounded read-only combined public
-certificate limitations and real-certification prerequisites is NOT STARTED/
-AUTHORIZED. New owner/finite TEXT contract FIRST; no formal replay/reset or actual
-FEM/fit/search/new budget/sealed grant. Learned repair/independent confirmation/
-full new B4/compatible final remain before B5.
+Next proposed **B4.50 bounded read-only combined public certificate limitations
+and real-certification prerequisites**, NOT STARTED/AUTHORIZED. New owner/finite
+TEXT contract FIRST; no B4.49/B4.47/B4.43 retry/reset or real FEM/fit/search/new
+production budget/sealed grant. Learned repair/independent confirmation/full new
+B4/compatible final remain before B5. Close B4.49 only, report the successor and STOP.
 
 ## Overall project plans
 

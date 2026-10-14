@@ -1559,3 +1559,10 @@ sealed access or original loss/gradient change; all old failures/charges/UNKNOWN
 full-memory/P17/uniform remain. [Report](validation/b4_49_public_combined_diagnostic_certificate.md),
 [protocol](planning/b4_49_public_combined_diagnostic_certificate_protocol.md),
 [contract](planning/b4_49_public_combined_diagnostic_certificate_contract.json).
+
+B4.49 closure phase (same slice entry):PASS_PUBLIC_COMBINED_DIAGNOSTIC_ONLY/6059 predicates/455 RN proofs/
+12 audits; first-only1/1/no retry from clean protected merged `1a05cca3ce1bb78e630fc594025a6c78fd987c04`.
+Every first/failure/unknown cost and prefix remains external; software-only scope,
+all old failures/P17/ledgers/memory/seals unchanged. Protected evidence CI/guards/
+owned cleanup/independent backup govern technical closure. Proposed B4.50 TEXT
+limitations NOT STARTED/AUTHORIZED; close B4.49 only and STOP.
