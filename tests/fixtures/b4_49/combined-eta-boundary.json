@@ -1,0 +1,46 @@
+{
+  "id": "combined-eta-boundary",
+  "origin": "original-authored-b4-49-public-only",
+  "space": "b4-49-public-space:combined-eta-boundary",
+  "force_id": "b4-49-force:combined-eta-boundary",
+  "elements": [
+    [
+      [
+        "2"
+      ]
+    ]
+  ],
+  "A0": [
+    [
+      "7/5"
+    ]
+  ],
+  "A_hat_bits": [
+    [
+      "3ff6666666666666"
+    ]
+  ],
+  "Y_bits": [
+    [
+      "0000000000000000"
+    ]
+  ],
+  "force": [
+    "1"
+  ],
+  "u_bits": [
+    "3fe0000000000000"
+  ],
+  "rho": [
+    "1/2"
+  ],
+  "anchor_rho": [
+    "1"
+  ],
+  "normalizer": {
+    "force_id": "b4-49-force:combined-eta-boundary",
+    "space": "b4-49-public-space:combined-eta-boundary",
+    "value": "11/20",
+    "kind": "SAME_AUTHORED_STORED_CS"
+  }
+}

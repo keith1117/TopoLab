@@ -2,21 +2,19 @@
 
 英文工作版：[v2 Development Roadmap](./TopoLab_v2_development_roadmap.md)
 
-状态：**v2仍在开发，科研Gate FAIL；uniform默认、P17未修复。** 最新切片B4.48
-只读文档Gate PASS_TEXT_ONLY_PUBLIC_ARITHMETIC_LIMITATIONS：主233/独立231谓词，
-各一次不重试。30份公开文本/4份闭合元数据/4份仅主审查源码文本，独立不读主源码/
-回执或共享审查器，不导入候选/TopoLab或执行算术/FEM。20项局限/12项条件桥接/
-24项原有真实前提/16项停止均为TEXT；真实程序UNFROZEN、证书/成本UNKNOWN_STOP、
-完整Q及全8类同时训练PENDING4GiB。B4.47公共PASS/10新系统/4328谓词/104舍入证明/
-旧额度1/1/1保持；B4.43正式FAIL/旧额度1/1/十例未执行/原始回执缺失/运行时与原因
-UNKNOWN，以及B4.42/科研失败、全部旧费用/内存缺口/封存不变。已付诊断费用
-12721.16417100014444982>7200，无预算/账本重置。新原生文本资源0.10/0.05秒均通过，
-完整软件成本/峰值UNKNOWN_NOT_ZERO，不能填补旧或完整训练内存证明。
-参见[B4.48报告](../validation/b4_48_public_arithmetic_limitations_real_certification.md)。
+状态：**v2仍在开发，科研Gate FAIL；uniform默认、P17未修复。** 当前仅授权B4.49
+公开组合诊断证书软件，SOURCE已实现、正式NOT_RUN。12个新公共小系统/唯一算法
+在实现前冻结：预定5份证书/7项停止，50项聚焦回归通过；主/独立正式额度仍0/0。
+残差、固定见证强制性及SAME存储分母均须独立证明；不修改原始loss/gradient。
+正式调用必须等待干净、已合并、锁定源码及最新PR/main全部CI通过，各一次不重试。
+B4.48文档233/231、B4.47公共4328/104/额度1/1/1、B4.43及科研失败、全部旧费用/
+UNKNOWN/内存缺口/封存保持。真实程序UNFROZEN、证书成本UNKNOWN_STOP、完整训练
+PENDING4GiB；软件资源不能替代旧或完整训练证明。
+参见[B4.49报告](../validation/b4_49_public_combined_diagnostic_certificate.md)。
 
-下一片仅提议B4.49公开残差/强制性/SAME normalizer组合诊断证书软件；未开始/未授权。
-新指令/有限公开小fixture合同/唯一算法/独立oracle/预定停止与资源先行。不重试B4.47/
-B4.43，不做真实FEM/fit/搜索/新生产预算或打开封存；只收尾B4.48后停止。
+本次仅收尾B4.49后停止；B4.50只读组合公共证书局限与真实前提仅为提议，未开始/
+未授权，新指令及有限TEXT合同先行。不重试旧额度、不做真实FEM/fit/搜索/新预算/
+封存访问。科研修复及完整新B4/兼容最终合同仍在B5之前。
 
 本文件是中文阅读伴随版。早期阶段描述保留其历史语境；当前停止条件以
 [项目状态](../project_status.md)为入口，完整切片进度与执行顺序以

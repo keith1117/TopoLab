@@ -21,17 +21,16 @@ acceleration/full-delivery claim. Historical v1.0.0 stays complete with negative
 M1/M2 evidence. B3 data/B4.1 fitting passed; original B4.2 and scientific Gate
 failed. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
 
-Latest documentary **B4.48 public arithmetic limitations/real prerequisites**:
-Gate PASS_TEXT_ONLY_PUBLIC_ARITHMETIC_LIMITATIONS, primary233/independent231,
-ONCE/no retry. See [report](docs/validation/b4_48_public_arithmetic_limitations_real_certification.md),
-[protocol](docs/planning/b4_48_public_arithmetic_limitations_real_certification_protocol.md),
-[contract](docs/planning/b4_48_public_arithmetic_limitations_real_certification_contract.json).
-20 limitations/12 conditional bridges/24 unchanged real obligations remain TEXT.
-B4.47 public-only PASS/10 new systems/5 enclosures/2 sign/3 range stops/4328
-predicates/104 RN proofs/quota1/1/1 remain. B4.43 FAIL/quota1/1/all10 unexecuted/
-no original receipt/runtime+cause UNKNOWN and B4.42 FAIL remain. Scientific FAIL/
-P17/uniform/seals stay; real executable UNFROZEN/certificates-cost UNKNOWN_STOP.
-Whole software cost/peak UNKNOWN_NOT_ZERO; software RSS fills no old/full-fit gap.
+Current **B4.49 source implemented; formal NOT_RUN**:12 new authored public
+systems/ONE combined recipe frozen first; independent oracle/50 focused checks.
+Clean locked merged source/all exact-head/main CI MUST precede first-only
+producer/independent calls. See [report](docs/validation/b4_49_public_combined_diagnostic_certificate.md),
+[protocol](docs/planning/b4_49_public_combined_diagnostic_certificate_protocol.md),
+[contract](docs/planning/b4_49_public_combined_diagnostic_certificate_contract.json).
+B4.48 TEXT233/231 and B4.47 public4328/104/quota1/1/1 remain; B4.43 FAIL/quota1/1/
+all10 unexecuted/no original receipt/runtime+cause UNKNOWN/B4.42 FAIL remain.
+Scientific FAIL/P17/uniform/seals stay; real executable UNFROZEN/certificates-cost
+UNKNOWN_STOP. Whole software cost/peak UNKNOWN_NOT_ZERO; no old/full-fit gap filled.
 
 Latest numerical/audit B4.30 scientific FAIL retains R17quality1.00197094375>
 1.001/target mean1.01605313078>1.0/P-R failures1/3/1. Reflection stops; old
@@ -46,13 +45,12 @@ full fit PENDING4GiB. Software RSS fills no historical/full-fit gap. Original
 loss/gradient/normalizer unchanged. Exact-FEM candidate stops; no cache/order,
 epoch/population/frequency search, fit or actual geometry/FEM/integration follows.
 
-All final/conditional48/720/unused48 evidence remains sealed. Next proposed
-**B4.49 public combined residual/coercivity/SAME-normalizer diagnostic certificate
-software**, NOT STARTED/AUTHORIZED; new owner/finite tiny-public-fixture contract,
-ONE recipe/independent oracle/expected stops/caps FIRST. No B4.47/B4.43 retry/reset
-or actual FEM/fit/search/new production budget/sealed grant. Learned repair/
-independent confirmation/full new B4/compatible final remain before B5.
-Close B4.48 only and stop.
+All final/conditional48/720/unused48 evidence remains sealed. Close ONLY current
+B4.49 after formal/publication/backup; no retry/reset, real FEM/fit/search/new
+production budget or sealed grant. Proposed B4.50 read-only combined public
+certificate limitations/real prerequisites is NOT STARTED/AUTHORIZED; new owner/
+finite TEXT contract FIRST. Learned repair/independent confirmation/full new B4/
+compatible final remain before B5. Report the successor and stop.
 
 Read [project status](docs/project_status.md) and linked latest evidence at session
 start. Retrieve relevant [history](docs/development_history.md) when needed.

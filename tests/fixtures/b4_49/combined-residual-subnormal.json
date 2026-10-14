@@ -1,0 +1,46 @@
+{
+  "id": "combined-residual-subnormal",
+  "origin": "original-authored-b4-49-public-only",
+  "space": "b4-49-public-space:combined-residual-subnormal",
+  "force_id": "b4-49-force:combined-residual-subnormal",
+  "elements": [
+    [
+      [
+        "1/4"
+      ]
+    ]
+  ],
+  "A0": [
+    [
+      "1/2"
+    ]
+  ],
+  "A_hat_bits": [
+    [
+      "3fe0000000000000"
+    ]
+  ],
+  "Y_bits": [
+    [
+      "4000000000000000"
+    ]
+  ],
+  "force": [
+    "1"
+  ],
+  "u_bits": [
+    "0010000000000000"
+  ],
+  "rho": [
+    "1/2"
+  ],
+  "anchor_rho": [
+    "1"
+  ],
+  "normalizer": {
+    "force_id": "b4-49-force:combined-residual-subnormal",
+    "space": "b4-49-public-space:combined-residual-subnormal",
+    "value": "22/5",
+    "kind": "SAME_AUTHORED_STORED_CS"
+  }
+}

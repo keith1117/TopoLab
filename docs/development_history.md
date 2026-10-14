@@ -1547,3 +1547,15 @@ independent oracle/expected stops/caps BEFORE implementation/outcomes. Public
 diagnostics only; no B4.47/B4.43 retry/reset or actual FEM/fit/search/new production
 budget/sealed grant. Learned repair/independent confirmation/full new B4/compatible
 final contract remain before B5. Close B4.48 only, report the successor and stop.
+
+## B4.49 — combined public diagnostic certificate (2026-10-14)
+
+Source phase: owner continuation after closed B4.48 authorizes only B4.49.
+Contract/12 new public systems/ONE recipe/convention froze BEFORE implementation.
+50 focused checks retain5 prescribed certificates/7 stops and candidate-free
+RN/root/compliance/SAME-denominator proof. Formal quotas0/0 await clean locked
+protected merged source/all exact-head/main CI. No real FEM/fit/search/budget/
+sealed access or original loss/gradient change; all old failures/charges/UNKNOWN/
+full-memory/P17/uniform remain. [Report](validation/b4_49_public_combined_diagnostic_certificate.md),
+[protocol](planning/b4_49_public_combined_diagnostic_certificate_protocol.md),
+[contract](planning/b4_49_public_combined_diagnostic_certificate_contract.json).

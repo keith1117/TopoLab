@@ -1,0 +1,53 @@
+{
+  "id": "combined-nondyadic-assembly",
+  "origin": "original-authored-b4-49-public-only",
+  "space": "b4-49-public-space:combined-nondyadic-assembly",
+  "force_id": "b4-49-force:combined-nondyadic-assembly",
+  "elements": [
+    [
+      [
+        "3"
+      ]
+    ],
+    [
+      [
+        "1/10"
+      ]
+    ]
+  ],
+  "A0": [
+    [
+      "7/4"
+    ]
+  ],
+  "A_hat_bits": [
+    [
+      "3ffc000000000000"
+    ]
+  ],
+  "Y_bits": [
+    [
+      "3fe2492492492492"
+    ]
+  ],
+  "force": [
+    "1/10"
+  ],
+  "u_bits": [
+    "0000000000000000"
+  ],
+  "rho": [
+    "1/2",
+    "1/2"
+  ],
+  "anchor_rho": [
+    "1",
+    "1"
+  ],
+  "normalizer": {
+    "force_id": "b4-49-force:combined-nondyadic-assembly",
+    "space": "b4-49-public-space:combined-nondyadic-assembly",
+    "value": "11/3100",
+    "kind": "SAME_AUTHORED_STORED_CS"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "id": "combined-singular-elements",
+  "origin": "original-authored-b4-49-public-only",
+  "space": "b4-49-public-space:combined-singular-elements",
+  "force_id": "b4-49-force:combined-singular-elements",
+  "elements": [
+    [
+      [
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0"
+      ]
+    ],
+    [
+      [
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "4"
+      ]
+    ]
+  ],
+  "A0": [
+    [
+      "1",
+      "0"
+    ],
+    [
+      "0",
+      "2"
+    ]
+  ],
+  "A_hat_bits": [
+    [
+      "3ff0000000000000",
+      "0000000000000000"
+    ],
+    [
+      "0000000000000000",
+      "4000000000000000"
+    ]
+  ],
+  "Y_bits": [
+    [
+      "3ff0000000000000",
+      "0000000000000000"
+    ],
+    [
+      "0000000000000000",
+      "3fe0000000000000"
+    ]
+  ],
+  "force": [
+    "1",
+    "2"
+  ],
+  "u_bits": [
+    "3fe0000000000000",
+    "3fd0000000000000"
+  ],
+  "rho": [
+    "1/2",
+    "1/2"
+  ],
+  "anchor_rho": [
+    "1",
+    "1"
+  ],
+  "normalizer": {
+    "force_id": "b4-49-force:combined-singular-elements",
+    "space": "b4-49-public-space:combined-singular-elements",
+    "value": "11/5",
+    "kind": "SAME_AUTHORED_STORED_CS"
+  }
+}
