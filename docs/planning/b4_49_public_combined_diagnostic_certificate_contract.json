@@ -1,0 +1,831 @@
+{
+  "version": "topolab.b4_49.public-combined-diagnostic-certificate.v1",
+  "authority": "owner typed 继续 after fully closed B4.48; standing section7 authorizes ONLY B4.49",
+  "starting_main": "a3a237fa79e35477f10f0874e5c71d7fa39c9f36",
+  "slice_limit": 1,
+  "scope": "TWELVE_NEW_TINY_AUTHORED_PUBLIC_COMBINED_DIAGNOSTICS_ONLY",
+  "source_inputs_at_starting_main_sha256": {
+    "AGENTS.md": "20541ccc7923bb3b9478adc4d4f695788170aa03bf70d3a3b6a63fbe3d362356",
+    "PROVENANCE.md": "c67ab68cb98a0a214ad19972c8f38764c3c4185fa144cae1be1470fd89e75367",
+    "docs/numerical_conventions.md": "9f8b6de8bb700d8868ded60da0b92e4f1f15b2bcd0c8a951f5a5a7fba6d0217c",
+    "docs/reference_baseline.md": "bcefebbf895e75f9c75b91b4f27b1725ab0b3731ddf1de780e636885781e2470",
+    "docs/planning/TopoLab_reimplementation_strategy.md": "a6bc4272d18e2c06565d6018594666e67a7962112aea7b7fddb36fa08a457b71",
+    "docs/planning/TopoLab_development_timeline_and_resources.md": "22aa607f52922f27138381f5ebc7f316c7ab9c49107e745027c4d2e07f759dd9",
+    "docs/planning/TopoLab_v2_development_roadmap.md": "4866a1ef5edabb8e4091cd4b9de1eb8e67218eb190da281bd926fd308c89df7c",
+    "docs/project_status.md": "737bc58279065c9f369ff4819a40f220133cd3294af27f9edb9c2fc3da5362a7",
+    "docs/repository_policy.md": "b50989d142f0c7e20fbab17b0b54f0e8fe2b75bb837dfef1fa038fdc4dfb1522",
+    "pyproject.toml": "6b32d6c1b0f0134b17595262bc070aa9c29a49dcd5254f08bb805f0d3f86e06f",
+    "uv.lock": "9c84a5ab362e8848d7ccab0142e9fe33aee5700abf5866d843a4c9cb23920292",
+    "docs/planning/b4_34_admissibility_full_cost_preregistration_contract.json": "e01280342f0412ed628a7c11eb88d5a18844844f8ec29973476021b3b48f5623",
+    "docs/planning/b4_34_admissibility_full_cost_preregistration_protocol.md": "e8213abfbc08b6725c0fa3f92b380647ad98e21dd7c5410ece22333210ef028d",
+    "docs/validation/b4_34_admissibility_full_cost_preregistration.md": "628b5981308993d735376ac2fef529d42246bad1ccff070e3549eb59b4c29e85",
+    "docs/planning/b4_35_public_admissibility_certificate_contract.json": "81235df59699dcd6bfc911f7584e9b924fced8a42c1da146f0025d4e33f54add",
+    "docs/planning/b4_35_public_admissibility_certificate_protocol.md": "67e81c20d33d1163a099197e45f75ce66b13cd3741e770d348169ab32eb30e75",
+    "docs/validation/b4_35_public_admissibility_certificate.md": "0feafbad4b7b75d60246ad66cd4caafd8da8aaeb91934a7563d924f2d139c800",
+    "docs/planning/b4_36_certificate_limitations_real_route_contract.json": "4b7caa9fd619b22eb99a10cc5358e417de82b138e03021923ff39275f99b029f",
+    "docs/planning/b4_36_certificate_limitations_real_route_protocol.md": "94f63469252cbc4677a099746f09faad96e3bd64b73e3e6bda35effcbe015edb",
+    "docs/validation/b4_36_certificate_limitations_real_route.md": "86dffd3d71d5f7b186339b376b4bca9d824d4b95afb224a43fe13d7805cb9fc4",
+    "docs/planning/b4_37_public_coercivity_witness_contract.json": "0d36f894d8e3aca2bf5a46c7bb8d5a37e46e5fb2cfc4b7be05c47cd4a90b71b4",
+    "docs/planning/b4_37_public_coercivity_witness_protocol.md": "c71c176d59fbd3a6994dc1acab36f110ab42a15b3dfbb91085a6ed7026af49e3",
+    "docs/validation/b4_37_public_coercivity_witness.md": "772e3e34c4ceecfa21577d01c4d24b507468aa7828082bd18177d871922bd862",
+    "docs/planning/b4_41_public_intended_representation_enclosure_contract.json": "06b4d4874c75d5135ec1cd269f2d4473e1dd74f968bed7ab4d454bc410960db8",
+    "docs/planning/b4_41_public_intended_representation_enclosure_protocol.md": "90d9f40e82a47945249d0ca02ce734afa64f5da97ee1a16efd5bd998e8dc5d1a",
+    "docs/validation/b4_41_public_intended_representation_enclosure.md": "f9921fc95d546cf181464f053643a750738d8ae81e936597a27489c42167d741",
+    "docs/planning/b4_43_public_assembled_residual_enclosure_contract.json": "e6dbf44c12c072ac101a81bc13f21ac4f15875f57283b95631e85b3dd4fc60b0",
+    "docs/planning/b4_43_public_assembled_residual_enclosure_protocol.md": "f4e75cbebf95a690261e70ff199e92a58ec3413d9ab73d7cd01771da1cd05f7f",
+    "docs/validation/b4_43_public_assembled_residual_enclosure.md": "21de6fe04286afbebba2d78b99a3bec26cb4fa215af1b9330255321fc50860bb",
+    "docs/planning/b4_47_public_arithmetic_campaign_contract.json": "cf14fc45b40f70afb81f9c1a3f09bef4fee60d92d5e10e8384e43f42e32b0ac7",
+    "docs/planning/b4_47_public_arithmetic_campaign_protocol.md": "bfac78965722385521c8ee9e92efed883b9ffffab6317e53f1e6605a80a60a7c",
+    "docs/validation/b4_47_public_arithmetic_campaign.md": "a8195415c48b124c30ebccb547b21a7c1c9b4314c4104fe26022bf86be979e85",
+    "docs/planning/b4_48_public_arithmetic_limitations_real_certification_contract.json": "e45557e355c1d4f00ac2a7bf0f9d631697a069b6643b2c352f219a6657d7ad34",
+    "docs/planning/b4_48_public_arithmetic_limitations_real_certification_protocol.md": "98891e73d104cc6cfa7a777d67d811e9ee67b727d6a63bda30885df02d55a9e5",
+    "docs/validation/b4_48_public_arithmetic_limitations_real_certification.md": "52360409b5fe893db2ef9fc8cc9339081f64e90f72c977058aa2b1bddb9cbb94"
+  },
+  "literal_previous_closure": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/b4-48-software-validation/final_release_closure.json",
+    "sha256": "37b445a2fc322eb33a99dc211968382c1a9a34198a188b553504b999cc075c8a",
+    "pointer_dereference": false
+  },
+  "catalog": [
+    {
+      "id": "combined-balanced-scalar",
+      "path": "tests/fixtures/b4_49/combined-balanced-scalar.json",
+      "sha256": "db91b867ced9752ef37c9bdf991d330c2817ab571c1c5e6a803da74be321d52b",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "combined-coupled-anchor",
+      "path": "tests/fixtures/b4_49/combined-coupled-anchor.json",
+      "sha256": "c6cc5167f0205d06a994170665d1c9175ed184bad8eaa0fac46afa9a607b9816",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "combined-rounded-zero-residual",
+      "path": "tests/fixtures/b4_49/combined-rounded-zero-residual.json",
+      "sha256": "36dfee3b48fe56a1ec2f4c0730dd5ef307df7f46cfe4982a170727b674aaa742",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "combined-nondyadic-assembly",
+      "path": "tests/fixtures/b4_49/combined-nondyadic-assembly.json",
+      "sha256": "014ffbc3137703ffb7cf8ba93d11e3a277c440209bf89f18f40ed75c00333ec5",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "combined-singular-elements",
+      "path": "tests/fixtures/b4_49/combined-singular-elements.json",
+      "sha256": "6ab5d958176631956e0b30d16fae85519e9b462d6375367054c1c05ca4c36bba",
+      "expected_status": "PASS"
+    },
+    {
+      "id": "combined-indefinite-element",
+      "path": "tests/fixtures/b4_49/combined-indefinite-element.json",
+      "sha256": "a5cb3cfacb482f44ee8459719b6a12c575fd057ad5d0ac1147a78d3323a4f9be",
+      "expected_status": "STOP_PSD"
+    },
+    {
+      "id": "combined-eta-boundary",
+      "path": "tests/fixtures/b4_49/combined-eta-boundary.json",
+      "sha256": "1a26cf8b60a6ad3221092863aef814a4ec3ea9924897564a3f7070c807050d27",
+      "expected_status": "STOP_ETA"
+    },
+    {
+      "id": "combined-positive-conservative",
+      "path": "tests/fixtures/b4_49/combined-positive-conservative.json",
+      "sha256": "4ef9dd9d2e4770bdf336b03fbc36e0d5dd474c23c758efac770679d2d29f7295",
+      "expected_status": "STOP_COERCIVITY"
+    },
+    {
+      "id": "combined-nonpositive-normalizer",
+      "path": "tests/fixtures/b4_49/combined-nonpositive-normalizer.json",
+      "sha256": "cdc8d94b7611e961d15e6dd6bd45f7193e13e98606087cac51bd960b1d94feae",
+      "expected_status": "STOP_NORMALIZER"
+    },
+    {
+      "id": "combined-wrong-normalizer-force",
+      "path": "tests/fixtures/b4_49/combined-wrong-normalizer-force.json",
+      "sha256": "c8e0c9a1641fedb6a3af155ac6c3cf97d71480e3d9870ee701489f3feb31e149",
+      "expected_status": "STOP_NORMALIZER_IDENTITY"
+    },
+    {
+      "id": "combined-energy-overflow",
+      "path": "tests/fixtures/b4_49/combined-energy-overflow.json",
+      "sha256": "34684193a9ef2a334a0be1fe517daa9075f9b74d9d8b7bb937d796909c8388fb",
+      "expected_status": "STOP_RANGE"
+    },
+    {
+      "id": "combined-residual-subnormal",
+      "path": "tests/fixtures/b4_49/combined-residual-subnormal.json",
+      "sha256": "1fd450cc21ed5d2a2db2e1d49ffd43caad357c5fb00664a70cb88767ee603c70",
+      "expected_status": "STOP_RANGE"
+    }
+  ],
+  "population": {
+    "cases": 12,
+    "certificates": 5,
+    "prescribed_stops": 7,
+    "free_dofs_max": 2,
+    "elements_max": 3,
+    "factor_rows_max": 3,
+    "each_fixture_bytes_max": 32768,
+    "total_fixture_bytes_max": 393216,
+    "trace_per_case_max": 400,
+    "rational_text_bytes_max": 4096,
+    "authored_only": true
+  },
+  "recipe": {
+    "inputs": "canonical exact rational element/A0/force/density/C_s leaves and accepted normal-or-zero IEEE words for A_hat/Y/u; SAME space/force identities; anchor rho=1 fixed",
+    "material": "E0=1; E_min=1/1000; p=3; E(rho)=1/1000+(999/1000)*rho**3; exact rational intended moduli, one scalar cast each",
+    "PSD": "exact symmetry and all1x1/2x2 principal minors of EACH intended element, including singular elements; never infer from summed G",
+    "assembly": "G/K_star/K(rho) exact rational sums; actual G/K_star cast entries/moduli then scalar RN-even multiply/add from +0 ascending element and row-major BOTH triangles; no repair",
+    "witness": "ONE authored A0/A_hat/Y; no construction/search; retain d0=||G-Gram(A0)||F, e=||A0-A_hat||F, a=||A0||F, d1=||Gram(A0)-Gram(A_hat)||F, complete error and cross/square terms",
+    "delta": "delta_plus=up(d0_plus+up(up(2*a_plus*e_plus)+up(e_plus*e_plus))); direct complete norm retained, NEVER select min/another bound",
+    "coercivity": [
+      "eta_plus=norm_up(I-Y*A_hat)",
+      "M_plus=norm_up(Y)",
+      "eta_plus<1;M_plus>0",
+      "one_minus_eta_minus=down(1-eta_plus)",
+      "ratio_minus=down(one_minus_eta_minus/M_plus)",
+      "factor_lower_minus=down(ratio_minus**2)",
+      "lower_G_minus=down(factor_lower_minus-delta_plus)>0",
+      "E_min_minus=down(1/1000)>0",
+      "m_minus=down(E_min_minus*lower_G_minus)>0"
+    ],
+    "residual": "actual RN-even K_star*u-f_hat scalar multiply/+0 ascending-column sums/subtract; retain r_arrays exact represented arrays versus r_hat and direct intended r; separate beta_G/beta_K/beta_f/beta_eval/q_hat/u_plus and BOTH symmetry defects",
+    "transfer": [
+      "q_eval=up(q_hat+beta_eval)",
+      "operator_solution=up(beta_K*u_plus)",
+      "with_operator=up(q_eval+operator_solution)",
+      "r_plus=up(with_operator+beta_f)"
+    ],
+    "anchor": "q_e=u.T*K0_e*u exact; U_tilde=sum(E_star_e**2*q_e/E_e(rho)); element forces carry SAME intended f+r, not f alone; U_plus=up(U_tilde)",
+    "normalizer": "positive SAME authored stored C_s; fixed value is11/10 of exact SAME-force toy anchor compliance except the registered nonpositive/mismatched negative controls; never replace by C_star or assumed1",
+    "final": [
+      "sqrt_U_plus=up(fixed80_sqrt_upper(U_plus))",
+      "sqrt_m_minus=down(fixed80_sqrt_lower(m_minus))>0",
+      "residual_term_plus=up(r_plus/sqrt_m_minus)",
+      "energy_sum_plus=up(sqrt_U_plus+residual_term_plus)",
+      "B_plus=up(energy_sum_plus**2)",
+      "C_s_minus=down(SAME_C_s)>0",
+      "normalized_B_plus=up(B_plus/C_s_minus)"
+    ],
+    "sqrt": "ONE80 fractional-bit grid; candidate integer isqrt/floor; independent own integer binary search and squared-endpoint proof; exact rational bookkeeping only for this panel",
+    "range": "nonfinite, nonzero subnormal or nonzero exact result rounded zero STOP_RANGE, retain failed raw hex and unexecuted suffix; no epsilon/precision/order/fallback search",
+    "scope": "public diagnostic only; direct exact toy solve ONLY independent oracle; no candidate solve, no real PSD/certificate/FEM/fidelity/fit or changed original loss/gradient/normalizer"
+  },
+  "programs": [
+    "src/topolab/combined_certificate.py",
+    "scripts/b4_49_combined_oracle.py",
+    "scripts/b4_49_certificate_campaign.py",
+    "scripts/b4_49_certificate_audit.py"
+  ],
+  "module_names": [
+    "combined_certificate",
+    "b4_49_combined_oracle"
+  ],
+  "roles": {
+    "producer": {
+      "invocations": 1,
+      "reads": "new bound contract/release/actual candidate/stdlib and exactly12 named fixtures ONLY"
+    },
+    "independent": {
+      "invocations": 1,
+      "reads": "new bound contract/release/own oracle/stdlib, exactly12 fixtures and ONLY this slice primary closed receipts/operations/native/log metadata; primary sources HASH/AST only, never import"
+    },
+    "first_failure_consumes_quota": true,
+    "formal_retry": false
+  },
+  "launch": {
+    "before_formal": "clean locked merged all exact-head/main CI passed source FIRST; entire tracked source/lock/program/interpreter/direct stdlib origins+hashes frozen",
+    "pending": "exclusive fsynced parent pending BEFORE numerical interpreter/import/case bytes; child started BEFORE checked PathFinder-origin source import",
+    "journal": "exclusive fsynced before each public arithmetic block/rounding, after immutable result; inner Fraction/Python instructions paid but not individual counters",
+    "terminal": "parent AFTER observed numerical exit/native logs; missing fields UNKNOWN_NOT_WRITTEN never measured zero",
+    "input": "finite exact path/hash/role/version/starting-main bindings before callback bytes; bounded duplicate-aware closed schema after bytes; reject symlink/race/source mutation/existing destination",
+    "runtime": "CPython3.12.10 locked .venv/bin/python -I, exact cwd and standalone checked modules; no topolab eager import",
+    "premerge": "same registered panel and frozen denial/tamper families only, ordinary regression namespace separate; software fixes may retain failures BEFORE program/formal freeze"
+  },
+  "caps": {
+    "each_formal_native_wall_seconds": 60,
+    "whole_formal_native_wall_seconds": 120,
+    "each_formal_native_rss_bytes": 536870912,
+    "conservative_profile_rss_sum_bytes": 1073741824,
+    "independent_predicates_max": 16000,
+    "software_bookkeeping_only": true
+  },
+  "software_tests": {
+    "bindings": [
+      "id",
+      "hash",
+      "role",
+      "version",
+      "source",
+      "space"
+    ],
+    "schema": [
+      "duplicate",
+      "unknown",
+      "missing",
+      "NaN",
+      "bool rational",
+      "ragged matrix",
+      "noncanonical rational",
+      "nonfinite IEEE",
+      "subnormal IEEE",
+      "density outside[0,1]"
+    ],
+    "tamper": [
+      "bound",
+      "trace",
+      "normalizer",
+      "residual",
+      "both Gram errors",
+      "PSD",
+      "coercivity",
+      "flags",
+      "missing case",
+      "receipt identity"
+    ],
+    "launch": [
+      "wrong source",
+      "wrong cwd",
+      "wrong interpreter",
+      "wrong lock",
+      "wrong origin/hash",
+      "failed import",
+      "existing output refusal",
+      "missing completion"
+    ],
+    "extra_systems_or_recipe_search": false
+  },
+  "boundaries": {
+    "production_execution": false,
+    "real_payload_fem_projection_root_network_integration": false,
+    "fit_profile_retime_search": false,
+    "screen_final_fresh_unused_access": false,
+    "previous_backup_member_dereference": false,
+    "software_peak_fills_old_gap": false,
+    "real_certificate_status": "UNKNOWN_STOP; conditional route neither constructs nor certifies real FEM",
+    "real_executable_frozen": false,
+    "scientific_gate": "FAIL",
+    "fixed_p17_repaired": false,
+    "uniform_default": true,
+    "residual_bound_and_original_loss_gradient_unchanged": true,
+    "final_evidence_sealed": true,
+    "old_b4_27_29_quota_closed": [
+      3,
+      3
+    ],
+    "b4_30_paid_invocations_numerical_campaigns": [
+      2,
+      1
+    ],
+    "b4_30_conditional_cases_sealed": 48,
+    "unused_b4_10_cases_sealed": 48
+  },
+  "future_criteria_unchanged": {
+    "compliance_rtol": "1e-9",
+    "gradient_rtol": "1e-9",
+    "gradient_atol": "1e-10",
+    "fd_steps": [
+      "1e-4",
+      "2e-4"
+    ],
+    "fd_normalized_max": "1e-4",
+    "fd_floor": "1e-8",
+    "LOCAL_absolute_max": "1e-4",
+    "LOCAL_increment_relative_max": "0.25",
+    "LOCAL_increment_floor": "1e-5",
+    "LOCAL_gradient_relative_max": "0.25",
+    "LOCAL_gradient_floor": "1e-8",
+    "LOCAL_increment_sign_agreement_above_floor": true,
+    "active_set_pointwise_and_full_interval_obligations_preserved": true,
+    "new_admissibility_tolerance": null
+  },
+  "preserved_failures": {
+    "fixed_p17_repaired": false,
+    "scientific_gate": "FAIL",
+    "r17_quality": "1.0019709437499813",
+    "quality_limit": "1.001",
+    "target_mean": "1.016053130777518",
+    "target_mean_limit": "1.0",
+    "pooled_sum": "0.9853173206553424",
+    "mean_replaced_by_sum": false,
+    "p_r_seed_failures": [
+      1,
+      3,
+      1
+    ],
+    "b4_23_passed_predicates": 3907,
+    "b4_23_total_predicates": 3976,
+    "mask_failures": 35,
+    "fd_failures": 34,
+    "b4_20_gate": "FAIL",
+    "b4_19_actual_case_gap_counts": "UNKNOWN",
+    "b4_24_old_memory_proof": "INCOMPLETE",
+    "b4_28_old_whole_resource": "INCOMPLETE",
+    "b4_31_source_premerge_driver_passed": false,
+    "b4_31_source_postmerge_audit_passed_before_metadata": true
+  },
+  "preserved_cost": {
+    "new_production_budget_granted": false,
+    "b4_23_original_proxy_seconds": "57546.0720687792",
+    "b4_29_known_added_proxy_seconds": "58142.252069",
+    "old_proxy_cap_seconds": "7200",
+    "b4_30_immutable_seconds": "7323.1004352501081506",
+    "b4_30_original_cap_seconds": "43200",
+    "b4_30_failed_prefix_seconds": "191.9666532080154866",
+    "b4_30_full_reserves_seconds": [
+      "180",
+      "180"
+    ],
+    "b4_31_seconds": "80.29939475003629922",
+    "b4_31_campaign_plus_review_seconds": "7403.39983000014444982",
+    "known_actual_stage_components_seconds": {
+      "all_twelve_b4_1_fits": "3870.204341",
+      "b4_15_through_23": "851.38",
+      "b4_24": "200.98",
+      "b4_25": "80.34",
+      "b4_28": "234.60",
+      "b4_29": "80.26",
+      "b4_30": "7323.1004352501081506",
+      "b4_31": "80.29939475003629922"
+    },
+    "cross_route_known_paid_floor_seconds": "12721.16417100014444982",
+    "cross_route_view": "diagnostic known-paid subtotal, not replacement of either immutable ledger or authorization of a new cap",
+    "future_full_seeds": [
+      17,
+      29,
+      43
+    ],
+    "future_full_epochs": 200,
+    "future_small_large_population": [
+      432,
+      76
+    ],
+    "future_factor": "1.25",
+    "future_preparation": "3*1.25*(432*p_small+76*p_large)",
+    "future_forward_backward": "3*200*1.25*(432*u_small+76*u_large)",
+    "aggregation": "complete-first-failure-inclusive-per-scale-maxima",
+    "all_prior_costs_failed_calls_full_reserves_io_audit_native_start_exit_required": true,
+    "unknown_required_cost": "BLOCK_FEASIBILITY",
+    "cap_population_schedule_or_ledger_reset_to_pass": false,
+    "software_authoring_ci_separately_retained_unknown_not_zero": true,
+    "full_cost_categories": [
+      "applicable-paid-history-and-old-full-reserves",
+      "guarded-input-IO-and-checksums",
+      "immutable-case-setup",
+      "one-fixed-anchor-solve",
+      "intended-operator-PSD-coercivity-certificate",
+      "residual-and-rounding-enclosures",
+      "retained-energy-coefficients-and-storage",
+      "complete-first-failure-inclusive-preparation-maxima",
+      "complete-first-failure-inclusive-forward-backward-maxima",
+      "projection-filter-active-set-pullback",
+      "original-loss-gradient-casts-network-bridge-if-later-authorized",
+      "independent-numerical-fidelity-cost-memory-audit",
+      "native-controller-launch-child-start-through-exit",
+      "persistence-serialization-publication",
+      "failed-calls-recovery-and-every-new-FULL-reserve",
+      "earlier-data-query-research-and-separate-software-CI-UNKNOWN-records"
+    ],
+    "real_preparation_small_large_maxima_seconds": [
+      "UNKNOWN",
+      "UNKNOWN"
+    ],
+    "real_forward_backward_small_large_maxima_seconds": [
+      "UNKNOWN",
+      "UNKNOWN"
+    ],
+    "real_certification_cost_seconds": "UNKNOWN",
+    "current_all_paid_feasibility": "FAIL_KNOWN_PAID_FLOOR",
+    "preparation_coefficients": [
+      "1620",
+      "285"
+    ],
+    "forward_backward_coefficients": [
+      "324000",
+      "57000"
+    ],
+    "inclusive_envelopes_not_double_added_or_subtracted": true,
+    "earlier_data_query_research_and_software_CI_unknowns_additional": true
+  },
+  "full_training_memory": {
+    "full_training_status": "PENDING",
+    "fit_cap_bytes": 4294967296,
+    "complete_simultaneous_categories": [
+      "simultaneous-process-controller-child",
+      "labels-input-IO-resident-data",
+      "anchor-PSD-coercivity-residual-certificate-arrays",
+      "network-optimizer-gradients",
+      "activations-autograd",
+      "projection-filter-work-buffers",
+      "Python-storage-objects",
+      "transient-assembly-factorization-serialization"
+    ],
+    "independent_prefit_and_through_exit_fit_peak_required": true,
+    "new_memory_trial": false,
+    "historical_gaps_filled": false
+  },
+  "real_prerequisites": [
+    {
+      "id": "O01",
+      "name": "launch-context",
+      "text": "A future separately authorized public launcher must declare locked interpreter, exact cwd/import/source origins and environment before candidate or fixture access; verify expected source identity without replaying B4.43.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O02",
+      "name": "preimport-receipt",
+      "text": "A future contract must bind pending receipt before imports, append immutable startup/terminal failures and distinguish NOT_WRITTEN/UNKNOWN counters from measured zero; no fabricated completion.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O03",
+      "name": "complete-independent-evidence",
+      "text": "Any later arithmetic contract must freeze finite cases and separate oracle before calls; retain all10 outcomes/prefixes and independent RN proofs, with no shared candidate or producer imports.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O04",
+      "name": "accepted-bits-space",
+      "text": "Bind accepted geometry/material/density/load/u bits, integer counts, units, supports and ascending zero-Dirichlet free space; retain every cast and SAME identities.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O05",
+      "name": "intended-geometry-material",
+      "text": "Independently prove positive rectangular geometry and engineering-Voigt constitutive domain/upper factor from intended accepted inputs; gamma has no half-factor.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O06",
+      "name": "element-PSD",
+      "text": "Independently prove each intended element PSD; positive summed G, small toy minors or a represented Gram matrix cannot replace that premise.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O07",
+      "name": "quadrature-scatter",
+      "text": "Prove intended rectangular constant-J/material polynomial quadrature and canonical24-DOF energy/scatter identity; two-point exactness through degree3 applies only to that domain.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O08",
+      "name": "both-Gram-errors",
+      "text": "Retain G-Gram(A0), Gram(A0)-Gram(A_hat), complete error and fixed outward cross/square/Gram expansion; never assume structural zero or drop either representation error.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O09",
+      "name": "actual-G-K-assembly",
+      "text": "Bind actual element entries, density/SIMP casts and intended powers, duplicate sparse reduction, CSR/CSC conversion, BOTH triangles and beta_G/beta_K separately from Gram delta.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O10",
+      "name": "actual-load",
+      "text": "Bind point/face resultant construction, exactly one distribution, superposition/division/casts and intended-minus-actual beta_f; supplied toy f is insufficient.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O11",
+      "name": "accepted-solution",
+      "text": "Bind the SAME accepted represented free-space solution and actual solver/constraint map; pivot success is not exact intended equilibrium or coercivity.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O12",
+      "name": "actual-residual-evaluation",
+      "text": "Bind actual sparse multiply, reduction, subtraction and casts; independently enclose beta_eval for exact represented r_arrays minus actual r_hat.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O13",
+      "name": "norm-outward-transfer",
+      "text": "Certify q_hat and u_plus norm rounding and every upward q_eval/operator_solution/with_operator/r_plus stage; retain direct intended residual separately.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O14",
+      "name": "fixed-domain-stops",
+      "text": "A future real executable must freeze one range/sign/outward program and unsupported power/domain stops; no adaptive precision/order/solver/witness search after outcomes.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O15",
+      "name": "fixed-construction",
+      "text": "Freeze one Householder QR/positive-diagonal/triangular Y program before actual construction; require independent eta_plus<1 and M_plus>0 with all representation errors.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O16",
+      "name": "positive-coercivity",
+      "text": "Require intended element PSD, strictly positive directed lower_G<=((1-eta_plus)/M_plus)^2-delta_plus and m_minus=down(E_min_lower*lower_G)>0.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O17",
+      "name": "anchor-normalizer",
+      "text": "Independently enclose intended SAME-force U_plus and positive SAME stored C_s_minus; no approximate-anchor equality or normalizer replacement.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O18",
+      "name": "diagnostic-energy",
+      "text": "Retain conditional B_plus=up((sqrt_up(U_plus)+up(r_plus/sqrt_down(m_minus)))^2) and up(B_plus/C_s_minus) as diagnostics only; no original loss/gradient change.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O19",
+      "name": "fidelity-reliability",
+      "text": "Preserve full original fidelity, pointwise/full-interval/two-step FD/LOCAL and terminal reliability criteria; fixed P17 and learned repair/independent confirmation remain before B5.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O20",
+      "name": "full-storage",
+      "text": "Retain A_hat/Y symbolic16*m*n and full Q_transpose additional8*m*m plus R/interval/Gram/actual arrays/traces/work; real dimensions and simultaneous lifetimes stay UNKNOWN.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O21",
+      "name": "full-paid-cost",
+      "text": "Preserve all16 first/failure-inclusive categories, old FULL reserves,3 seeds/200 FULL epochs/432+76/factor1.25/IO/audit/native startup-through-exit; UNKNOWN required maxima BLOCK feasibility.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O22",
+      "name": "full-fit-memory",
+      "text": "Require independent prefit and through-exit fit peak for all8 simultaneous categories and unchanged4294967296-byte cap; sequential software RSS fills no old gap.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O23",
+      "name": "real-release",
+      "text": "Before any future real access require new owner/finite executable and budget contracts, locked clean merged source, all exact-head/main CI and guarded paths/roles; this document grants none.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "O24",
+      "name": "immutable-lineage",
+      "text": "Retain old failures/unknowns/source/native/costs/seals and closed quotas; any future preflight is a new separately authorized slice, never a retry or reset of B4.43.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    }
+  ],
+  "real_certification_bridge": [
+    {
+      "id": "R01",
+      "name": "accepted-identity",
+      "text": "Before any future real certification bind SAME accepted geometry/material/density/load/u bits, integer indexing, units, zero-Dirichlet free space and every cast; supplied public arrays are insufficient.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "R02",
+      "name": "intended-energy",
+      "text": "Independently prove intended engineering-Voigt constitutive/element PSD, rectangular quadrature exactness and canonical24-DOF stack/scatter identity; no inference from public Gram or pivot success.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "R03",
+      "name": "representation-errors",
+      "text": "Independently enclose BOTH G-Gram(A0) and Gram(A0)-Gram(A_hat), complete delta and every cross/square term; retain irrational interval dependency and no assumed structural zero.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "R04",
+      "name": "actual-assembly-force",
+      "text": "Bind actual SIMP powers/casts/duplicate sparse reduction/CSR-CSC and both triangles plus actual point/face force distribution/superposition; certify beta_G/beta_K/beta_f separately.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "R05",
+      "name": "actual-residual-norm",
+      "text": "Bind SAME solver u, actual multiply/reduction/subtract/casts and beta_eval/q_hat/u_plus; prove every upward transfer and retain direct intended residual, never substitute rounded zero.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "R06",
+      "name": "fixed-coercivity",
+      "text": "Freeze ONE construction before outcomes and independently prove intended PSD, eta_plus<1, M_plus>0, strictly positive directed lower_G and m_minus; missing or conservative premises STOP with no witness/precision/order search.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "R07",
+      "name": "anchor-normalizer",
+      "text": "Independently enclose SAME-force U_plus and positive SAME stored C_s_minus; conditional B_plus and up(B_plus/C_s_minus) remain diagnostics, no approximate-anchor equality or changed original loss/gradient.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "R08",
+      "name": "independent-fidelity",
+      "text": "Require separate candidate-free intended-operator/residual/coercivity/normalizer proof and unchanged pointwise/full-interval/two-step FD/LOCAL/terminal criteria; public PASS cannot certify real fidelity or fixed P17 repair.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "R09",
+      "name": "complete-paid-cost",
+      "text": "Preserve all16 first/failure-inclusive costs, immutable history/FULL reserves,3 seeds/200 FULL epochs/432+76/factor1.25 and every IO/audit/native startup-through-exit; UNKNOWN maxima BLOCK feasibility and known all-paid floor already exceeds7200.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "R10",
+      "name": "simultaneous-memory",
+      "text": "Prove all8 simultaneous fit categories and transient lifetimes including full Q additional8*m*m and A_hat/Y16*m*n through independent prefit/through-exit evidence at4294967296bytes; public sequential RSS fills no gap.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "R11",
+      "name": "real-release-authority",
+      "text": "Before real input or numerical access require new owner and finite executable/population/role/path/resource contracts with clean locked merged source/all exact-head/main CI; B4.48 grants no real execution, fit, search, paid cap or sealed access.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    },
+    {
+      "id": "R12",
+      "name": "future-public-only",
+      "text": "Any proposed B4.49 must first freeze new tiny authored public cases, accepted bits, ONE combined certificate program, separate oracle/expected stops/caps; remain public diagnostics with no B4.47/B4.43 retry or real production grant.",
+      "status": "TEXT_ONLY_OBLIGATION; UNKNOWN_STOP; UNIMPLEMENTED_UNEVALUATED"
+    }
+  ],
+  "b4_47_retained": {
+    "gate": "PASS_FRESH_PUBLIC_ARITHMETIC_ONLY",
+    "cases": 10,
+    "enclosures": 5,
+    "sign_stops": 2,
+    "range_stops": 3,
+    "independent_predicates": 4328,
+    "RN_even_proofs": 104,
+    "case_audits": 10,
+    "formal_calls": [
+      1,
+      1,
+      1
+    ],
+    "formal_retry": false,
+    "focused_tests": 54,
+    "source_full_tests": 1900,
+    "whole_native_seconds": "5.59",
+    "whole_native_cap_seconds": 240,
+    "conservative_profile_rss_sum_bytes": 417693696,
+    "profile_rss_cap_bytes": 1073741824,
+    "software_cost_and_peak": "UNKNOWN_NOT_ZERO",
+    "git_internal_reads": "UNKNOWN_NOT_INSTRUMENTED",
+    "explicit_producer_case_file_reads": 20
+  },
+  "public_evidence_retained": {
+    "b4_43_focused_tests": 94,
+    "public_systems": 10,
+    "regression_enclosures_stops": [
+      6,
+      4
+    ],
+    "formal_public_gate": "FAIL_FORMAL_PRODUCER",
+    "independent_formal_gate": "FAIL_INCOMPLETE",
+    "formal_quota_consumed": [
+      1,
+      1
+    ],
+    "formal_case_audits": 0,
+    "formal_RN_even_proofs": 0,
+    "independent_metadata_predicates": 8,
+    "producer_original_receipt": "NOT_WRITTEN",
+    "producer_original_counts": "UNKNOWN_NOT_INSTRUMENTED",
+    "formal_case_loop_reached": false,
+    "runtime_sys_path_sys_executable": "UNKNOWN_NOT_RECORDED",
+    "detailed_import_resolution_cause": "UNKNOWN_NOT_DIAGNOSED",
+    "formal_retry": false,
+    "document_coverage": [
+      131,
+      109
+    ],
+    "b4_42_primary_evaluated_pass_fail": [
+      196,
+      195,
+      1
+    ],
+    "b4_42_primary_incomplete": true,
+    "b4_42_gate": "FAIL_PRIMARY_CHECKER",
+    "b4_42_independent_predicates": 179,
+    "b4_41_tests_predicates_RN": [
+      84,
+      935,
+      66
+    ],
+    "b4_39_tests_predicates_RN": [
+      72,
+      993,
+      692
+    ]
+  },
+  "b4_44_retained": {
+    "documentary_gate": "PASS_DOCUMENT_ONLY",
+    "predicates": [
+      407,
+      332
+    ],
+    "limitations": 18,
+    "text_obligations": 24,
+    "stops": 20
+  },
+  "b4_45_retained": {
+    "software_gate": "PASS_PUBLIC_LAUNCH_PREFLIGHT_ONLY",
+    "cases": 12,
+    "independent_predicates": 277,
+    "focused_tests": 32,
+    "formal_calls": [
+      1,
+      1
+    ],
+    "formal_retry": false,
+    "public_sources": 4,
+    "launch_successes": 1,
+    "prescribed_stops": 8,
+    "failure_controls": 2,
+    "existing_output_refusals": 1,
+    "actual_topolab_imported": false,
+    "new_arithmetic_campaign": false,
+    "missing_completion": "UNKNOWN_NOT_WRITTEN",
+    "runtime_scope": "B4.45_NEW_OBSERVATIONS_ONLY",
+    "premerge_report_administrative_failures": 5,
+    "closed_administrative_failures": 10,
+    "closed_native_failures": 3,
+    "closed_sandbox_failures": 2,
+    "complete_software_cost": "UNKNOWN_NOT_ZERO"
+  },
+  "b4_46_retained": {
+    "gate": "PASS_TEXT_ONLY_LIMITATIONS_PREREQUISITES",
+    "predicates": [
+      253,
+      257
+    ],
+    "formal_calls": [
+      1,
+      1
+    ],
+    "formal_retry": false,
+    "scope": "TEXT_ONLY"
+  },
+  "b4_48_retained": {
+    "gate": "PASS_TEXT_ONLY_PUBLIC_ARITHMETIC_LIMITATIONS",
+    "predicates": [
+      233,
+      231
+    ],
+    "formal_calls": [
+      1,
+      1
+    ],
+    "retry": false
+  },
+  "stops": [
+    "unresolved contract/state/source conflict",
+    "unlisted source/role/path or symlink/change",
+    "incomplete schema/receipt/native/operation/RN/independent proof",
+    "first formal failure consumes role; no retry",
+    "intended element PSD fails",
+    "eta>=1 or M<=0",
+    "directed lower_G/m_minus/sqrt_m<=0",
+    "nonpositive or different force/space SAME normalizer",
+    "arithmetic range failure",
+    "cap exceeded or required resource UNKNOWN",
+    "real data/geometry/FEM/fit/search/sealed access",
+    "altered historical failure/criterion/cost/memory/normalizer",
+    "failed publication guard/pending or failed CI",
+    "automatic successor execution"
+  ],
+  "new_production_budget_or_reserve": "NONE_PUBLIC_SOFTWARE_ONLY",
+  "software_cost_policy": "all first/failure observed/native/CI costs retained by distinct methods; whole authoring/query/controller/Git/backup software cost and peak UNKNOWN_NOT_ZERO; immutable historical ledgers unchanged",
+  "allowed_publish_paths": [
+    "AGENTS.md",
+    "PROVENANCE.md",
+    "docs/project_status.md",
+    "docs/development_history.md",
+    "docs/planning/TopoLab_v2_development_roadmap.md",
+    "docs/planning/TopoLab_v2_开发路线图.md",
+    "docs/planning/README.md",
+    "docs/validation/README.md",
+    "docs/numerical_conventions.md",
+    "docs/planning/b4_49_public_combined_diagnostic_certificate_contract.json",
+    "docs/planning/b4_49_public_combined_diagnostic_certificate_protocol.md",
+    "docs/validation/b4_49_public_combined_diagnostic_certificate.md",
+    "src/topolab/combined_certificate.py",
+    "scripts/b4_49_combined_oracle.py",
+    "scripts/b4_49_certificate_campaign.py",
+    "scripts/b4_49_certificate_audit.py",
+    "tests/test_combined_certificate.py",
+    "tests/fixtures/b4_49/combined-balanced-scalar.json",
+    "tests/fixtures/b4_49/combined-coupled-anchor.json",
+    "tests/fixtures/b4_49/combined-rounded-zero-residual.json",
+    "tests/fixtures/b4_49/combined-nondyadic-assembly.json",
+    "tests/fixtures/b4_49/combined-singular-elements.json",
+    "tests/fixtures/b4_49/combined-indefinite-element.json",
+    "tests/fixtures/b4_49/combined-eta-boundary.json",
+    "tests/fixtures/b4_49/combined-positive-conservative.json",
+    "tests/fixtures/b4_49/combined-nonpositive-normalizer.json",
+    "tests/fixtures/b4_49/combined-wrong-normalizer-force.json",
+    "tests/fixtures/b4_49/combined-energy-overflow.json",
+    "tests/fixtures/b4_49/combined-residual-subnormal.json"
+  ],
+  "next_proposed": "B4.50 bounded read-only combined public certificate limitations and real-certification prerequisites",
+  "next_authorized": false,
+  "next_started": false
+}

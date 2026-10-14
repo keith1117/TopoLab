@@ -1,19 +1,21 @@
 # Current project status
 
-Updated:2026-10-14. Latest completed documentary slice **B4.48**.
+Updated:2026-10-14. Latest completed slice B4.48; current B4.49 IN_PROGRESS.
 
-B4.48 documentary Gate **PASS_TEXT_ONLY_PUBLIC_ARITHMETIC_LIMITATIONS**:
-233 primary/231 independent predicates, each first/only text call, no retry.
-30 bound public TEXT inputs/four literal closure metadata/four primary-only source
-texts; independent reads no primary-only source, primary reviewer/receipt or shared
-helper and neither role imports candidate/TopoLab or evaluates candidate arithmetic/FEM.
-20 public arithmetic limitations/12 conditional bridges/24 unchanged real
-obligations/16 stops remain TEXT ONLY. Scientific Gate **FAIL**, fixed P17
-unrepaired/uniform default/full v2 delivery open.
+B4.49 **SOURCE IMPLEMENTED; FORMAL NOT_RUN**. Owner continuation authorizes
+ONLY this slice. Twelve new authored public systems/ONE fixed combined recipe,
+five prescribed certificates/seven stops were frozen BEFORE implementation.
+Candidate/independent oracle retain intended element PSD/BOTH Gram errors/fixed
+coercivity, separate actual assembly/load/residual errors and every upward
+transfer, SAME-force reciprocal energy and SAME positive stored denominator.
+51 registered focused checks PASS separately; formal producer/independent quotas
+remain0/0. First-only formal calls require clean locked merged source and all
+exact-head/main CI FIRST. No real FEM/fit/search/new production budget/sealed grant.
+Scientific Gate FAIL/fixed P17 unrepaired/uniform/full v2 open remain.
 
-See [report](validation/b4_48_public_arithmetic_limitations_real_certification.md),
-[protocol](planning/b4_48_public_arithmetic_limitations_real_certification_protocol.md) and
-[contract](planning/b4_48_public_arithmetic_limitations_real_certification_contract.json).
+See [report](validation/b4_49_public_combined_diagnostic_certificate.md),
+[protocol](planning/b4_49_public_combined_diagnostic_certificate_protocol.md) and
+[contract](planning/b4_49_public_combined_diagnostic_certificate_contract.json).
 
 ## Preserved evidence and remaining delivery
 
@@ -49,18 +51,17 @@ full v2 still needs learned same-quality end-to-end evidence. [History](developm
 
 ## Resources and publication boundary
 
-Own native TEXT resources PASS: primary0.10s/29278208bytes, independent0.05s/
-23805952bytes under60s/256MiB each. Whole software cost/peak UNKNOWN_NOT_ZERO;
-all first/failure/UNKNOWN records retained. All5 mandatory checks PASS/full1900
-tests in664.23s, unchanged population/tolerances. Guards/protected exact-head/main
-CI/equal trees/owned cleanup/independent backup govern technical
-closure; software RSS proves no historical/full-fit gap. No formal mathematical retry.
+Formal resources NOT_RUN, quotas0/0. All first/failure/unknown software costs and
+registered regression raw prefixes remain external; whole cost/peak UNKNOWN_NOT_ZERO.
+All five checks/guards/protected exact-head/main CI/equal trees/owned cleanup/
+independent backup remain required. Software RSS fills no historical/full-fit gap.
 
 ## Current stop and proposed successor
 
-Next proposed **B4.49 bounded public combined residual/coercivity/SAME-normalizer diagnostic certificate software evidence**,
-NOT STARTED/AUTHORIZED. New owner/finite tiny-public-fixture contract, ONE recipe,
-independent oracle/expected stops/caps BEFORE implementation/outcomes. Public
-diagnostics only; no B4.47/B4.43 retry/reset or actual FEM/fit/search/new production
-budget/sealed grant. Learned repair/independent confirmation/full new B4/compatible
-final contract remain before B5. Close B4.48 only, report the successor and stop.
+Current authorized **B4.49 public combined diagnostic certificate software**
+remains in progress; finish source release, first-only formal evidence and its
+publication/backup, then stop. Proposed B4.50 bounded read-only combined public
+certificate limitations and real-certification prerequisites is NOT STARTED/
+AUTHORIZED. New owner/finite TEXT contract FIRST; no formal replay/reset or actual
+FEM/fit/search/new budget/sealed grant. Learned repair/independent confirmation/
+full new B4/compatible final remain before B5.

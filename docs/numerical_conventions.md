@@ -997,3 +997,18 @@ outward term. Clean locked merged all-CI-passed source and pending BEFORE import
 case bytes precede formal roles ONCE/no retry. This is public diagnostic software,
 not real FEM/PSD/coercivity/fit or loss/gradient/SAME-normalizer change; old FAIL/
 UNKNOWN/costs/quotas/4GiB/seals remain. See the [B4.47 protocol](planning/b4_47_public_arithmetic_campaign_protocol.md).
+
+## B4.49 combined public diagnostic certificate
+
+`topolab.b4_49.public-combined-diagnostic-certificate.v1` freezes12 new authored
+1x1/2x2 rational systems and accepted A_hat/Y/u IEEE words. ONE exact element
+PSD/SIMP/factor-error expansion/coercivity route is combined with separate
+actual scalar assembly/load/residual errors, SAME-force residual-corrected
+reciprocal energy and SAME positive stored denominator. Fixed80-bit square roots,
+minimal directed binary64, BOTH Gram errors/complete error/triangles/symmetry and
+all transfer stages are retained. Conservative/nonpositive/range premises STOP,
+no witness/bound/order/precision search. Rounded residual zero erases no errors;
+tiny nonzero intended residual never certifies unmodified U. This is public
+diagnostic software ONLY, no original loss/gradient/normalizer/real FEM change.
+Clean locked merged all-CI-passed source precedes first-only formal roles. See
+the [B4.49 protocol](planning/b4_49_public_combined_diagnostic_certificate_protocol.md).

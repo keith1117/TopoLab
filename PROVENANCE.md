@@ -1310,3 +1310,18 @@ remain conditional TEXT, no loss/gradient change or real execution. No new
 external scientific/implementation source or Hack3D code/comment/structure/
 figure consulted/copied. All old failures/unknowns/costs/full-memory/seals remain.
 See [report](docs/validation/b4_48_public_arithmetic_limitations_real_certification.md).
+
+## B4.49 public combined diagnostic certificate software
+
+Twelve new original tiny rational systems and accepted A_hat/Y/u IEEE words,
+ONE combined recipe/expected stops/caps were frozen BEFORE implementation.
+Original standalone stdlib candidate combines TopoLab's existing B4.34--37
+PSD/coercivity/residual/SAME-normalizer derivations with separately retained
+assembly/load/residual errors and BOTH Gram discrepancies. Separately authored
+candidate-free oracle uses its own integer binary-search roots/IEEE midpoint
+proofs and exact1x1/2x2 toy solves; immutable checked-byte parent/child receipts
+bind public launch only. No new external scientific/source reference or Hack3D
+code/comment/structure/figure/data/model/label/real FEM is consulted/imported.
+51 registered focused checks are software only; formal awaits clean locked
+merged all-CI-passed source. No original loss/gradient/normalizer or scientific
+repair/full-memory/cost claim. [Report](docs/validation/b4_49_public_combined_diagnostic_certificate.md).

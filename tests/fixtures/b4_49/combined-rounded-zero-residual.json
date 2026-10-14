@@ -1,0 +1,46 @@
+{
+  "id": "combined-rounded-zero-residual",
+  "origin": "original-authored-b4-49-public-only",
+  "space": "b4-49-public-space:combined-rounded-zero-residual",
+  "force_id": "b4-49-force:combined-rounded-zero-residual",
+  "elements": [
+    [
+      [
+        "5"
+      ]
+    ]
+  ],
+  "A0": [
+    [
+      "9/4"
+    ]
+  ],
+  "A_hat_bits": [
+    [
+      "4002000000000000"
+    ]
+  ],
+  "Y_bits": [
+    [
+      "3fdc71c71c71c71c"
+    ]
+  ],
+  "force": [
+    "6"
+  ],
+  "u_bits": [
+    "3ff3333333333333"
+  ],
+  "rho": [
+    "1/2"
+  ],
+  "anchor_rho": [
+    "1"
+  ],
+  "normalizer": {
+    "force_id": "b4-49-force:combined-rounded-zero-residual",
+    "space": "b4-49-public-space:combined-rounded-zero-residual",
+    "value": "198/25",
+    "kind": "SAME_AUTHORED_STORED_CS"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "combined-indefinite-element",
+  "origin": "original-authored-b4-49-public-only",
+  "space": "b4-49-public-space:combined-indefinite-element",
+  "force_id": "b4-49-force:combined-indefinite-element",
+  "elements": [
+    [
+      [
+        "-1"
+      ]
+    ],
+    [
+      [
+        "3"
+      ]
+    ]
+  ],
+  "A0": [
+    [
+      "7/5"
+    ]
+  ],
+  "A_hat_bits": [
+    [
+      "3ff6666666666666"
+    ]
+  ],
+  "Y_bits": [
+    [
+      "3fe6db6db6db6db7"
+    ]
+  ],
+  "force": [
+    "1"
+  ],
+  "u_bits": [
+    "3fe0000000000000"
+  ],
+  "rho": [
+    "1/2",
+    "1/2"
+  ],
+  "anchor_rho": [
+    "1",
+    "1"
+  ],
+  "normalizer": {
+    "force_id": "b4-49-force:combined-indefinite-element",
+    "space": "b4-49-public-space:combined-indefinite-element",
+    "value": "11/20",
+    "kind": "SAME_AUTHORED_STORED_CS"
+  }
+}

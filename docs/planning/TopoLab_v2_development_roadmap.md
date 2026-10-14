@@ -115,15 +115,27 @@ unrepaired/uniform default/full v2 delivery open.
 
 See [B4.48 report](../validation/b4_48_public_arithmetic_limitations_real_certification.md).
 
-Next proposed **B4.49 bounded public combined residual/coercivity/SAME-normalizer diagnostic certificate software evidence**,
-NOT STARTED/AUTHORIZED. New owner/finite tiny-public-fixture contract, ONE recipe,
-independent oracle/expected stops/caps BEFORE implementation/outcomes. Public
-diagnostics only; no B4.47/B4.43 retry/reset or actual FEM/fit/search/new production
-budget/sealed grant. Learned repair/independent confirmation/full new B4/compatible
-final contract remain before B5. Close B4.48 only, report the successor and stop.
+B4.49 **SOURCE IMPLEMENTED; FORMAL NOT_RUN**. Owner continuation authorizes
+ONLY this slice. Twelve new authored public systems/ONE fixed combined recipe,
+five prescribed certificates/seven stops were frozen BEFORE implementation.
+Candidate/independent oracle retain intended element PSD/BOTH Gram errors/fixed
+coercivity, separate actual assembly/load/residual errors and every upward
+transfer, SAME-force reciprocal energy and SAME positive stored denominator.
+51 registered focused checks PASS separately; formal producer/independent quotas
+remain0/0. First-only formal calls require clean locked merged source and all
+exact-head/main CI FIRST. No real FEM/fit/search/new production budget/sealed grant.
+Scientific Gate FAIL/fixed P17 unrepaired/uniform/full v2 open remain.
+
+Current authorized **B4.49 public combined diagnostic certificate software**
+remains in progress; finish source release, first-only formal evidence and its
+publication/backup, then stop. Proposed B4.50 bounded read-only combined public
+certificate limitations and real-certification prerequisites is NOT STARTED/
+AUTHORIZED. New owner/finite TEXT contract FIRST; no formal replay/reset or actual
+FEM/fit/search/new budget/sealed grant. Learned repair/independent confirmation/
+full new B4/compatible final remain before B5.
 
 Prepared: 2026-09-24
-Revised: 2026-10-14 (B4.48 public arithmetic limitations/real prerequisites)
+Revised: 2026-10-14 (B4.49 combined public certificate SOURCE; formal pending)
 
 Related documents:
 
@@ -2149,6 +2161,31 @@ diagnostics only; no B4.47/B4.43 retry/reset or actual FEM/fit/search/new produc
 budget/sealed grant. Learned repair/independent confirmation/full new B4/compatible
 final contract remain before B5. Close B4.48 only, report the successor and stop.
 
+### B4.49: Public combined diagnostic certificate software
+
+B4.49 **SOURCE IMPLEMENTED; FORMAL NOT_RUN**. Owner continuation authorizes
+ONLY this slice. Twelve new authored public systems/ONE fixed combined recipe,
+five prescribed certificates/seven stops were frozen BEFORE implementation.
+Candidate/independent oracle retain intended element PSD/BOTH Gram errors/fixed
+coercivity, separate actual assembly/load/residual errors and every upward
+transfer, SAME-force reciprocal energy and SAME positive stored denominator.
+51 registered focused checks PASS separately; formal producer/independent quotas
+remain0/0. First-only formal calls require clean locked merged source and all
+exact-head/main CI FIRST. No real FEM/fit/search/new production budget/sealed grant.
+Scientific Gate FAIL/fixed P17 unrepaired/uniform/full v2 open remain.
+
+See [report](../validation/b4_49_public_combined_diagnostic_certificate.md),
+[protocol](b4_49_public_combined_diagnostic_certificate_protocol.md),
+[contract](b4_49_public_combined_diagnostic_certificate_contract.json).
+
+Current authorized **B4.49 public combined diagnostic certificate software**
+remains in progress; finish source release, first-only formal evidence and its
+publication/backup, then stop. Proposed B4.50 bounded read-only combined public
+certificate limitations and real-certification prerequisites is NOT STARTED/
+AUTHORIZED. New owner/finite TEXT contract FIRST; no formal replay/reset or actual
+FEM/fit/search/new budget/sealed grant. Learned repair/independent confirmation/
+full new B4/compatible final remain before B5.
+
 ### B5: One-time final comparison and project delivery gate
 
 Open the new ID cohort once after B4, followed by predeclared OOD and independent
@@ -2184,11 +2221,11 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.49 public combined diagnostic certificate software:**
-   NOT STARTED/AUTHORIZED; new owner/finite tiny-public-fixture contract/ONE
-   recipe/independent oracle/expected stops/caps FIRST. Preserve B4.48 TEXT
-   PASS/B4.47 public scope/old failures/UNKNOWN/seals; no retry/reset or actual
-   FEM/fit/search/budget/sealed grant. Close B4.48 only and stop.
+1. **Current B4.49 public combined diagnostic certificate software:**
+   owner authorized ONLY this slice; finite contract/ONE recipe/51 public source
+   checks precede clean merged all-CI-passed source and first-only formal calls.
+   Complete evidence/publication/backup, then stop. Proposed B4.50 read-only TEXT
+   limitations requires a new owner/finite contract; no real execution grant.
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.

@@ -4,23 +4,26 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-B4.48 documentary Gate **PASS_TEXT_ONLY_PUBLIC_ARITHMETIC_LIMITATIONS**:
-233 primary/231 independent predicates, each first/only text call, no retry.
-30 bound public TEXT inputs/four literal closure metadata/four primary-only source
-texts; independent reads no primary-only source, primary reviewer/receipt or shared
-helper and neither role imports candidate/TopoLab or evaluates candidate arithmetic/FEM.
-20 public arithmetic limitations/12 conditional bridges/24 unchanged real
-obligations/16 stops remain TEXT ONLY. Scientific Gate **FAIL**, fixed P17
-unrepaired/uniform default/full v2 delivery open.
+B4.49 **SOURCE IMPLEMENTED; FORMAL NOT_RUN**. Owner continuation authorizes
+ONLY this slice. Twelve new authored public systems/ONE fixed combined recipe,
+five prescribed certificates/seven stops were frozen BEFORE implementation.
+Candidate/independent oracle retain intended element PSD/BOTH Gram errors/fixed
+coercivity, separate actual assembly/load/residual errors and every upward
+transfer, SAME-force reciprocal energy and SAME positive stored denominator.
+51 registered focused checks PASS separately; formal producer/independent quotas
+remain0/0. First-only formal calls require clean locked merged source and all
+exact-head/main CI FIRST. No real FEM/fit/search/new production budget/sealed grant.
+Scientific Gate FAIL/fixed P17 unrepaired/uniform/full v2 open remain.
 
-See [B4.48 report](../validation/b4_48_public_arithmetic_limitations_real_certification.md).
+See [B4.49 report](../validation/b4_49_public_combined_diagnostic_certificate.md).
 
-Next proposed **B4.49 bounded public combined residual/coercivity/SAME-normalizer diagnostic certificate software evidence**,
-NOT STARTED/AUTHORIZED. New owner/finite tiny-public-fixture contract, ONE recipe,
-independent oracle/expected stops/caps BEFORE implementation/outcomes. Public
-diagnostics only; no B4.47/B4.43 retry/reset or actual FEM/fit/search/new production
-budget/sealed grant. Learned repair/independent confirmation/full new B4/compatible
-final contract remain before B5. Close B4.48 only, report the successor and stop.
+Current authorized **B4.49 public combined diagnostic certificate software**
+remains in progress; finish source release, first-only formal evidence and its
+publication/backup, then stop. Proposed B4.50 bounded read-only combined public
+certificate limitations and real-certification prerequisites is NOT STARTED/
+AUTHORIZED. New owner/finite TEXT contract FIRST; no formal replay/reset or actual
+FEM/fit/search/new budget/sealed grant. Learned repair/independent confirmation/
+full new B4/compatible final remain before B5.
 
 ## Overall project plans
 
@@ -181,3 +184,6 @@ existence; its validation report determines whether its Gate passed or failed.
 - [B4.47 finite fresh public arithmetic contract](b4_47_public_arithmetic_campaign_contract.json)
 
 - [B4.48 public arithmetic limitations protocol](b4_48_public_arithmetic_limitations_real_certification_protocol.md) · [finite contract](b4_48_public_arithmetic_limitations_real_certification_contract.json)
+
+- [B4.49 public combined diagnostic certificate protocol](b4_49_public_combined_diagnostic_certificate_protocol.md)
+- [B4.49 finite public contract](b4_49_public_combined_diagnostic_certificate_contract.json)

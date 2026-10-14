@@ -1,0 +1,46 @@
+{
+  "id": "combined-positive-conservative",
+  "origin": "original-authored-b4-49-public-only",
+  "space": "b4-49-public-space:combined-positive-conservative",
+  "force_id": "b4-49-force:combined-positive-conservative",
+  "elements": [
+    [
+      [
+        "1"
+      ]
+    ]
+  ],
+  "A0": [
+    [
+      "1/4"
+    ]
+  ],
+  "A_hat_bits": [
+    [
+      "3fd0000000000000"
+    ]
+  ],
+  "Y_bits": [
+    [
+      "4010000000000000"
+    ]
+  ],
+  "force": [
+    "1"
+  ],
+  "u_bits": [
+    "3fe0000000000000"
+  ],
+  "rho": [
+    "1/2"
+  ],
+  "anchor_rho": [
+    "1"
+  ],
+  "normalizer": {
+    "force_id": "b4-49-force:combined-positive-conservative",
+    "space": "b4-49-public-space:combined-positive-conservative",
+    "value": "11/10",
+    "kind": "SAME_AUTHORED_STORED_CS"
+  }
+}
