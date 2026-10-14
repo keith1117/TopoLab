@@ -34,6 +34,18 @@ def digest(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
+def interpreter_digest(path):
+    """Independent full stream of the same declared interpreter binary."""
+    path = path.resolve()
+    if not path.is_file():
+        raise ValueError("declared interpreter regular file required")
+    result = hashlib.sha256()
+    with path.open("rb") as source:
+        while chunk := source.read(262144):
+            result.update(chunk)
+    return result.hexdigest()
+
+
 def write(path, value):
     raw = (
         value
@@ -534,7 +546,7 @@ def audit_evidence(release_path, controls_root, producer_root, output, *, native
             and sys.path == release["isolated_sys_path"]
             and ".".join(map(str, sys.version_info[:3])) == release["python_version"]
             and (not native or release["python_version"] == "3.12.10")
-            and digest(load(Path(sys.executable).resolve())) == release["executable_sha256"],
+            and interpreter_digest(Path(sys.executable)) == release["executable_sha256"],
         )
         checks.require(
             "clean_exact_released_source",

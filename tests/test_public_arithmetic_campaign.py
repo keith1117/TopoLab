@@ -216,9 +216,12 @@ def runtime():
 from pathlib import Path
 names=['math','fractions','struct','dataclasses','re','json','hashlib','types']
 rows={}
+image_hash=hashlib.sha256(Path(sys.executable).read_bytes()).hexdigest()
 for name in names:
  m=importlib.import_module(name);p=m.__spec__.origin
- rows[name]={'origin':p,'sha256':hashlib.sha256(Path(p).read_bytes()).hexdigest()}
+ digest=(image_hash if p in ('built-in','frozen')
+         else hashlib.sha256(Path(p).read_bytes()).hexdigest())
+ rows[name]={'origin':p,'sha256':digest}
 print(json.dumps({'version':'.'.join(map(str,sys.version_info[:3])),'sys_path':sys.path,'stdlib':rows}))
 """
     return json.loads(subprocess.check_output([sys.executable, "-I", "-c", code], text=True))
@@ -278,6 +281,13 @@ def test_actual_candidate_import_and_registered_negative_launch_controls(entry, 
 
 
 def test_formal_entry_requires_clean_released_ci_and_oracle_imports_are_separate(tmp_path, runtime):
+    binary = tmp_path / "declared-interpreter-bytes"
+    raw = b"registered-runtime-byte" * 500000
+    binary.write_bytes(raw)
+    expected = hashlib.sha256(raw).hexdigest()
+    assert launcher.executable_hash(binary) == auditor.interpreter_digest(binary) == expected
+    with pytest.raises(ValueError, match="bounded file"):
+        launcher.read(binary)  # Text/metadata ceiling remains unchanged.
     release = regression_release(tmp_path, runtime)
     release["execution_kind"] = "FORMAL_B4_47"
     with pytest.raises(ValueError, match="CI"):

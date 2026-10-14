@@ -65,6 +65,18 @@ def sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
+def executable_hash(path):
+    """Hash the complete declared interpreter, without a metadata-text ceiling."""
+    path = path.resolve()
+    if not path.is_file():
+        raise ValueError("declared interpreter regular file required")
+    state = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(262144), b""):
+            state.update(block)
+    return state.hexdigest()
+
+
 def encode(value):
     return (
         json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n"
@@ -296,9 +308,16 @@ def candidate_load(root, release, expectations, output, block_dependency=False):
     for name, expected in release["stdlib_sha256"].items():
         dependency = sys.modules.get(name)
         dependency_origin = getattr(getattr(dependency, "__spec__", None), "origin", None)
-        if dependency_origin in (None, "built-in", "frozen"):
+        if dependency_origin is None:
             raise ValueError("declared actual dependency origin missing: " + name)
-        actual_hash = sha(read(Path(dependency_origin), 8388608))
+        if dependency_origin in ("built-in", "frozen"):
+            # Portable software regressions bind embedded modules to this interpreter image.
+            # The frozen formal Mac environment still requires actual dependency files.
+            if release["execution_kind"] != "REGISTERED_REGRESSION_B4_47":
+                raise ValueError("formal dependency file origin required: " + name)
+            actual_hash = release["executable_sha256"]
+        else:
+            actual_hash = sha(read(Path(dependency_origin), 8388608))
         if actual_hash != expected["sha256"] or dependency_origin != expected["origin"]:
             raise ValueError("changed actual dependency bytes: " + name)
         observed[name] = {"origin": dependency_origin, "sha256": actual_hash}
@@ -359,7 +378,7 @@ def child(request_path, output):
             or sys.flags.isolated != 1
             or ".".join(map(str, sys.version_info[:3])) != release["python_version"]
             or sys.path != release["isolated_sys_path"]
-            or sha(read(Path(sys.executable).resolve())) != release["executable_sha256"]
+            or executable_hash(Path(sys.executable)) != release["executable_sha256"]
         ):
             status = "STOP_INTERPRETER"
         elif str(Path.cwd()) != expectations["cwd"]:

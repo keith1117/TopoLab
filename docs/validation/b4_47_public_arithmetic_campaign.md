@@ -118,7 +118,35 @@ Technical CI success does not substitute for formal arithmetic or scientific Gat
 Close B4.47 only. Proposed B4.48 bounded read-only fresh public arithmetic
 limitations/real-certification prerequisites NOT STARTED/AUTHORIZED; stop.
 
-Source validation receipt SHA256: `735a1d74b649dfb82556beee2a9d7a15fd9ab9c6ab78d91b6490b2737feb8e19`.
+First-source validation receipt SHA256: `735a1d74b649dfb82556beee2a9d7a15fd9ab9c6ab78d91b6490b2737feb8e19`.
 Per-path/source guard PASS:26 paths/173 old frozen documents/603 unaffected
 paths/553 relative links; user files/old handoff/README preserved. Final staging/
 ALL-upload/actual-squash and protected CI conditions remain required.
+
+Preformal source inspection found the interpreter SHA check incorrectly reused
+text/metadata size ceilings. Original source1ff9b91/first1900 checks and CI stay
+retained. Before any formal call, both separate launchers now stream the SAME
+declared executable bytes in fixed blocks; no new path/interpreter/case/role/
+arithmetic/tolerance/cap. Existing source test also covers a large binary stream
+while retaining the metadata text ceiling. Fresh complete five checks and exact-
+head/main CI are required; no formal source repair/retry or inferred CI cause.
+
+First source head `1ff9b91e5bf5` quality CI FAILED:1887 passed/13 setup errors
+in1168.56s. The runtime test fixture treated the known `built-in` module origin
+as a file; this observed cause is distinct from the proactive binary-size fix.
+The first PR/push job logs and their hashes remain external. Before formal
+execution, registered software regressions now bind built-in/frozen origins to
+their observed SAME interpreter image, retaining the actual origin. Formal
+dependency imports still require actual files in the frozen Mac environment.
+An owned second local full regression was interrupted for this repair:321
+passed in170.43s/exit2/observed174.1305652500596s. It is no full acceptance;
+its original command, SIGINT ownership receipt, log and costs remain external.
+No numerical source, fixture, tolerance, standard, cap or formal quota changed.
+Review receipt SHA256: `809c92f13c01989a460a50c3055492b7d3efd3bd8e4a38eaff03b087d602348d`.
+
+Fresh source checks after these preformal corrections:54 focused regressions
+PASS9.83s; complete1900 PASS718.85s/observed722.4461745838635s. Sync/ruff/mypy
+PASS, final diff/publication guards remain required before the correction commit.
+The third-check lint's one line-length failure and format correction also remain
+external. No old population/tolerance, frozen numerical source/input or formal
+quota changed; fresh exact-head/main CI still precedes every formal call.
