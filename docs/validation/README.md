@@ -10,11 +10,12 @@ predicates PASS, each formal ONCE/no retry;18 limitations/20 fresh arithmetic
 prerequisites/24 unchanged real obligations/20 stops, TEXT ONLY. Formal roles
 import no candidate and execute no probe/new arithmetic/real computation. B4.45 retains12/277/32 inert scope;
 B4.43 formal/B4.42/scientific FAIL/UNKNOWN/P17/all-paid FAIL/PENDING4GiB remain.
-Next proposed B4.47 fresh public assembled-operator/intended-residual arithmetic
-with verified launch/immutable receipts, NOT STARTED/AUTHORIZED; new owner/
-finite public contract FIRST, frozen new cases/source/oracle and clean locked
-merged all-CI-passed source before formal arithmetic. No B4.43 retry/reset/
-actual FEM/fit/search/new production budget/sealed grant. Close B4.46 and stop.
+Current B4.47 SOURCE PREPARATION is authorized: fresh finite contract/ten
+authored inputs/convention frozen before implementation,54 focused checks PASS,
+formal0/0/0. Clean locked merged all-CI-passed source precedes first formal roles;
+actual candidate/dependency import/pending before case bytes, no retry/reset.
+No actual FEM/fit/search/new production budget/sealed grant. Close B4.47 only.
+
 
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
@@ -176,3 +177,5 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 ## B4.46 launch limitations and fresh arithmetic prerequisites
 
 - [253/257 first-only document review; scientific failures and unknowns retained](b4_46_public_launch_limitations_arithmetic_prerequisites.md)
+
+- [B4.47 fresh public arithmetic source preparation; formal evidence pending](b4_47_public_arithmetic_campaign.md)

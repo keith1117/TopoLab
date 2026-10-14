@@ -979,3 +979,21 @@ r_plus=up(up(up(q_hat+beta_eval)+up(beta_K*u_plus))+beta_f). Squared max-endpoin
 sums are upper enclosures. Range/sign failures keep prefixes, no fallback or
 matrix repair. This diagnostic changes no loss/gradient/normalizer, certifies no
 PSD/coercivity/real FEM, and grants no actual access/budget/full-fit memory claim.
+
+## B4.47 fresh public arithmetic and receipt boundary
+
+`topolab.b4_47.fresh-public-arithmetic-campaign.v1` freezes ten NEW original
+public contribution systems, five enclosures/two sign/three range stops. Same
+B4.41/B4.43 accepted-bit intended interval FIRST/scalar RN-even SECOND, ascending
++0 sums, fixed80-bit absolute sqrt grid and minimal outward stages; no historical
+numeric behavior changes. Standalone stdlib candidate imports actual dependencies
+under declared checked source; independent oracle imports no candidate/producer/
+TopoLab/shared numerical helper. Before-operation immutable journals include
+interval/scalar, residual, exact-error bookkeeping, norm/outward/transfer and
+independent proof stages; inner Fraction instructions are not separate counters.
+Retain BOTH actual triangles/symmetry defects, beta_G/beta_K/beta_f/beta_eval/
+q_hat/u_plus, exact r_arrays/r_hat, direct intended residual intervals and every
+outward term. Clean locked merged all-CI-passed source and pending BEFORE imports/
+case bytes precede formal roles ONCE/no retry. This is public diagnostic software,
+not real FEM/PSD/coercivity/fit or loss/gradient/SAME-normalizer change; old FAIL/
+UNKNOWN/costs/quotas/4GiB/seals remain. See the [B4.47 protocol](planning/b4_47_public_arithmetic_campaign_protocol.md).

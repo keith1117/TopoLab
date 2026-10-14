@@ -1,6 +1,20 @@
 # Current project status
 
-Updated: 2026-10-13. Latest documentary slice **B4.46**.
+Updated: 2026-10-13. Current slice **B4.47 SOURCE PREPARATION**; latest
+completed documentary slice **B4.46**.
+
+B4.47 is the current authorized slice, SOURCE PREPARATION ONLY; formal
+controls/producer/independent quotas0/0/0, no formal arithmetic acceptance yet.
+Ten NEW authored public inputs and convention/contract/protocol froze before
+implementation:5 enclosures/2 sign stops/3 range stops, no old B4.43 input reuse.
+One standalone stdlib candidate, independent oracle and durable launch/case/
+operation journals are implemented;54 focused registered regressions PASS.
+Source PR/full checks/protected exact-head/main CI/whole-clean locked release
+must precede the first formal roles. Each formal role ONCE/no retry, including
+failure before loop. Do not repeat B4.43 or change frozen cases/criteria/recipe.
+
+See [B4.47 report](validation/b4_47_public_arithmetic_campaign.md), [protocol](planning/b4_47_public_arithmetic_campaign_protocol.md) and [contract](planning/b4_47_public_arithmetic_campaign_contract.json).
+
 
 B4.46 documentary Gate **PASS_TEXT_ONLY_LIMITATIONS_PREREQUISITES**:
 253 primary/257 independent predicates, each formal role ONCE/no retry.
@@ -144,15 +158,30 @@ B4.25's80.34 and all twelve B4.1 fits 3870.204341 remain in later accounting.
 failed 983/984 at 1e-4/floor1e-8, paying 100.30. B4.21 remains noncausal;
 B4.19's actual failed case/gap/counts remain unknown.
 
-## Current stop and proposed successor
+## Current authorized slice and stopping boundary
 
-Next proposed **B4.47 bounded fresh public assembled-operator and
-intended-residual arithmetic campaign with verified launch and immutable
-receipts**, NOT STARTED/AUTHORIZED. New owner/finite public contract FIRST;
-freeze new cases/source/oracle/accepted bits/roles/caps before implementation
-and outcomes. Formal arithmetic requires clean locked merged source and all
-exact-head/main CI, actual candidate/dependency import and pending BEFORE
-candidate/oracle import or case bytes. No B4.43 retry/reset or actual FEM/fit/
-search/new production budget/sealed grant. Complete new B4 Gate, learned repair/
-independent confirmation and compatible final contract remain before B5.
-Close B4.46 only and stop.
+B4.47 is the current authorized slice, SOURCE PREPARATION ONLY; formal
+controls/producer/independent quotas0/0/0, no formal arithmetic acceptance yet.
+Ten NEW authored public inputs and convention/contract/protocol froze before
+implementation:5 enclosures/2 sign stops/3 range stops, no old B4.43 input reuse.
+One standalone stdlib candidate, independent oracle and durable launch/case/
+operation journals are implemented;54 focused registered regressions PASS.
+Source PR/full checks/protected exact-head/main CI/whole-clean locked release
+must precede the first formal roles. Each formal role ONCE/no retry, including
+failure before loop. Do not repeat B4.43 or change frozen cases/criteria/recipe.
+
+B4.43 formal FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/all10 unexecuted/
+no original receipt/runtime UNKNOWN_NOT_RECORDED/cause UNKNOWN_NOT_DIAGNOSED,
+B4.42 FAIL and scientific FAIL/fixed P17 unrepaired/uniform remain. All four
+inherited criterion/failure/cost/full-memory objects,17 boundaries and24 real
+obligations equal B4.46. Old charges/69 failures/UNKNOWN/gaps/FULL reserves,
+known-paid12721.16417100014444982>7200 diagnostic/all-paid FAIL/closed quotas/
+final/conditional48/720/unused48 seals stay. Real executable UNFROZEN,
+certificates-cost UNKNOWN_STOP/full Q/all8 simultaneous full fit PENDING4GiB.
+Original loss/gradient/SAME normalizer unchanged; public diagnostic software
+grants no actual data/geometry/FEM/integration/fit/search/new production budget/B5.
+
+Close B4.47 only. Its later formal Gate and resource/independent evidence must be
+reported without retry or criterion changes. Proposed B4.48 read-only fresh
+public arithmetic limitations/real-certification prerequisites remains
+NOT STARTED/AUTHORIZED; do not start it during B4.47.
