@@ -22,7 +22,7 @@ M1/M2 evidence. B3 data/B4.1 fitting passed; original B4.2 and scientific Gate
 failed. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
 
 Current **B4.49 source implemented; formal NOT_RUN**:12 new authored public
-systems/ONE combined recipe frozen first; independent oracle/50 focused checks.
+systems/ONE combined recipe frozen first; independent oracle/51 focused checks.
 Clean locked merged source/all exact-head/main CI MUST precede first-only
 producer/independent calls. See [report](docs/validation/b4_49_public_combined_diagnostic_certificate.md),
 [protocol](docs/planning/b4_49_public_combined_diagnostic_certificate_protocol.md),

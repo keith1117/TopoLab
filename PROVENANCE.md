@@ -1322,6 +1322,6 @@ candidate-free oracle uses its own integer binary-search roots/IEEE midpoint
 proofs and exact1x1/2x2 toy solves; immutable checked-byte parent/child receipts
 bind public launch only. No new external scientific/source reference or Hack3D
 code/comment/structure/figure/data/model/label/real FEM is consulted/imported.
-50 registered focused checks are software only; formal awaits clean locked
+51 registered focused checks are software only; formal awaits clean locked
 merged all-CI-passed source. No original loss/gradient/normalizer or scientific
 repair/full-memory/cost claim. [Report](docs/validation/b4_49_public_combined_diagnostic_certificate.md).

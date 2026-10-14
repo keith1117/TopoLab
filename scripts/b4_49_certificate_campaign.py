@@ -100,7 +100,14 @@ def runtime():
         spec = importlib.util.find_spec(name)
         if spec is None or spec.origin is None:
             raise ValueError("declared standard-library origin")
-        dependencies[name] = {"origin": spec.origin, "sha256": sha(Path(spec.origin).read_bytes())}
+        dependencies[name] = {
+            "origin": spec.origin,
+            "sha256": (
+                "UNKNOWN_NOT_SEPARATE_ORIGIN_FILE"
+                if spec.origin in ("built-in", "frozen")
+                else sha(Path(spec.origin).read_bytes())
+            ),
+        }
     return {
         "executable": sys.executable,
         "executable_sha256": sha(Path(sys.executable).resolve().read_bytes()),
@@ -169,6 +176,11 @@ def verify_release(release):
         raise ValueError("locked isolated CPython3.12.10 required")
     if release["kind"] == "FORMAL_B4_49" and sys.version_info[:3] != (3, 12, 10):
         raise ValueError("formal CPython3.12.10 required")
+    if release["kind"] == "FORMAL_B4_49" and any(
+        x["origin"] in ("built-in", "frozen") or x["sha256"] == "UNKNOWN_NOT_SEPARATE_ORIGIN_FILE"
+        for x in release["runtime"]["stdlib"].values()
+    ):
+        raise ValueError("formal individually file-backed dependency hashes required")
     if set(release["program_sha256"]) != set(PROGRAMS):
         raise ValueError("closed program set")
     for path, digest in release["program_sha256"].items():

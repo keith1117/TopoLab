@@ -390,3 +390,27 @@ def test_exact_bookkeeping_receipt_precedes_actual_helper_work(panel, monkeypatc
     assert candidate.evaluate(fixture, journal)["status"] == "PASS"
     assert observed == ["intended-operators", "assembly-residual-error-bookkeeping"]
     assert not active
+
+
+def test_builtin_dependency_is_unknown_regression_only_and_denies_formal(tmp_path):
+    source = f"""import importlib.util,types,json,sys
+from pathlib import Path
+root=Path({str(ROOT)!r})
+spec=importlib.util.spec_from_file_location('portable',root/'scripts/b4_49_certificate_campaign.py')
+module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+find=module.importlib.util.find_spec
+def origin(name,*args):
+    if name=='math':return types.SimpleNamespace(origin='built-in')
+    return find(name,*args)
+module.importlib.util.find_spec=origin
+release=module.make_release(root,Path({str(tmp_path)!r}),'REGISTERED_REGRESSION_B4_49')
+assert release['runtime']['stdlib']['math']['sha256']=='UNKNOWN_NOT_SEPARATE_ORIGIN_FILE'
+module.verify_release(release)
+release['kind']='FORMAL_B4_49'
+try:module.verify_release(release)
+except ValueError as e:
+    assert 'formal' in str(e)
+    if sys.version_info[:3]==(3,12,10):assert 'dependency hashes required' in str(e)
+else:raise AssertionError('formal cannot accept an unbound builtin file')
+"""
+    subprocess.run([sys.executable, "-I", "-c", source], cwd=ROOT, check=True)

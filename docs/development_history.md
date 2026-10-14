@@ -1552,7 +1552,7 @@ final contract remain before B5. Close B4.48 only, report the successor and stop
 
 Source phase: owner continuation after closed B4.48 authorizes only B4.49.
 Contract/12 new public systems/ONE recipe/convention froze BEFORE implementation.
-50 focused checks retain5 prescribed certificates/7 stops and candidate-free
+51 focused checks retain5 prescribed certificates/7 stops and candidate-free
 RN/root/compliance/SAME-denominator proof. Formal quotas0/0 await clean locked
 protected merged source/all exact-head/main CI. No real FEM/fit/search/budget/
 sealed access or original loss/gradient change; all old failures/charges/UNKNOWN/

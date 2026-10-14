@@ -298,7 +298,14 @@ def child(request_path, output):
             spec = importlib.util.find_spec(name)
             if spec is None or spec.origin != info["origin"]:
                 raise ValueError("independent dependency origin")
-            assert_hash(Path(spec.origin), info["sha256"])
+            if spec.origin in ("built-in", "frozen"):
+                if (
+                    release["kind"] != "REGISTERED_REGRESSION_B4_49"
+                    or info["sha256"] != "UNKNOWN_NOT_SEPARATE_ORIGIN_FILE"
+                ):
+                    raise ValueError("formal missing independent dependency file hash")
+            else:
+                assert_hash(Path(spec.origin), info["sha256"])
         if any(
             x in sys.modules
             for x in (

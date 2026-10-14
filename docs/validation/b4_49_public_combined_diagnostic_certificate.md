@@ -60,7 +60,7 @@ nonpositive controls stay failures, not a substituted denominator.
 
 ## Software checks and first-only formal boundary
 
-50 focused source tests PASS, including all12 systems/independent inequalities,
+51 focused source tests PASS, including all12 systems/independent inequalities,
 closed binding denials BEFORE callback bytes, mutated prepared-state rejection,
 schema/tampering, actual standalone import/independent process, immutable
 receipts/existing-output refusal, wrong origins/failed actual dependency import
@@ -85,11 +85,32 @@ First complete draft regression1949 PASS/648.86s (observed651.6301807910204s) re
 external. Publication review then added dedicated BEFORE records for intended
 operators, BOTH representation-error vectors and assembly/residual-error bookkeeping;
 independent reconstruction gained its own matching proof blocks. Inputs/formulas/
-tolerances/recipe/caps unchanged, formal0/0;50 focused checks include an actual
+tolerances/recipe/caps unchanged, formal0/0;51 focused checks include an actual
 helper-before-record control. Fixture readers enforce32768 bytes before input reads.
 Fresh complete validation PASS:1950 tests in652.22s, observed655.1971354580019s.
 All five mandatory commands PASS against the unchanged final program bytes;
 source_required_validation.json SHA256 `63837f508dd06906f4a3ae2dffb3226fe1d09ba9a181ee3fece6db92eb50a701`.
+
+## Linux CI portability correction before formal freeze
+
+First source head545ac133a9d8 push quality FAILED:1947 passed/3 failed in697.96s.
+On that declared Linux CPython, math origin is built-in and has no separate file;
+trying to open literal built-in failed during source runtime preparation. Full
+failed CI log/source identity remain external. Same contract/cases/recipe/criteria/
+tolerances/caps, formal0/0. Ordinary REGISTERED_REGRESSION ONLY now explicitly
+records UNKNOWN_NOT_SEPARATE_ORIGIN_FILE; formal calls continue to REJECT any
+non-file-backed dependency/unknown hash, with exact locked Mac interpreter and
+individual origin file hashes unchanged. A registered launch metadata denial
+checks this distinction; no extra numerical system or new formal retry.
+Fresh all5 checks PASS/full1951 tests in651.20s; prior failures stay.
+source_required_validation_portability.json SHA256 `80dd3fcc8b6baac15d77b480e6cf182d1fb2340d763628f38074109f632487d4`.
+Latest-head CI remains required BEFORE formal calls, formal0/0.
+
+Publication guard rejected a broad count-text replacement in an older history
+sentence before publishing. Exact pre-slice historical prefix restored from Git,
+only the new B4.49 entry retained. Original failed draft/source/log/cost and
+correction remain external; no owner file, contract, criterion or numerical code
+changed. Fresh per-path/staged/all-upload guards are required, formal0/0.
 
 ## Preserved failures, costs, memory and seals
 
