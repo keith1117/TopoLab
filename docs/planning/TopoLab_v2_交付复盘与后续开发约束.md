@@ -13,9 +13,12 @@
 保留其当时权限下 NO_ADMISSIBLE_ROUTE；[D1](../validation/d1_physics_resource_feasibility.md)
 保留 STOP_UNKNOWN_PREFIT_BOUND，在实现/真实输入前停止，新角色未启动0/1并关闭，FULL60保留。
 所有者已**关闭当前精确物理救援程序**，保留4GiB、独立预检及完整v2目标。
-[关闭交接](TopoLab_v2_rescue_program_closure_handoff.md)记录本次后续决定，以及唯一尚未授权的
-替代学习路线立项提案。没有可执行后继；“继续”仅展示该提案，不批准立项或重开D1，
-不转移预算、访问或配额。B4.52仍为 NOT_SELECTED_BY_R1。第5–6节保留原始R1历史指令，
+[关闭交接](TopoLab_v2_rescue_program_closure_handoff.md)保留当时决定。所有者随后明确批准其中一次
+求解器内学习更新立项；本片以[REJECTED_CURRENT_RESOURCE_ADMISSION](TopoLab_v2_solver_internal_learning_route_decision.md)收尾。
+必需的真实刷新/精确尾段/独立复核仍无完整独立内存准入；新成本/质量/速度均UNKNOWN_NOT_TESTED。
+无可执行后继。唯一下项是所有者决定是否保留FULL_V2_OPEN_NO_ADMITTED_ROUTE并停止科研工作（推荐）；
+“继续”仅展示该决定。不自动追加第二立项/证明/玩具/守卫/平台片，不增加预算/访问、不重开D1或转移配额。
+B4.52仍为 NOT_SELECTED_BY_R1。第5–6节保留原始R1历史指令，
 不授权重做R1或重开D1；旧Gate、费用、UNKNOWN、配额与封存均不改变。
 
 ## 1. 所有者确认的目标

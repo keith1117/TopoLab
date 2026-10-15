@@ -21,9 +21,15 @@ closed unlaunched0/1, FULL60 retained; no index/label/model read or formal call.
 The owner has now closed the current exact-physics rescue program, retaining
 4GiB, independent preflight and full v2. See the [closure handoff](../planning/TopoLab_v2_rescue_program_closure_handoff.md)
 and [maintenance validation](exact_physics_rescue_program_closure.md).
-The handoff's one alternative-learning-route proposal is the unique next owner
-decision, NOT AUTHORIZED/NOT STARTED; “continue” displays it only. No executable
-successor, D1 reopening, cap/quota transfer or scientific acceptance from software CI.
+The owner then approved that one inception. Its
+[planning validation](solver_internal_learning_route_decision.md) and
+[decision](../planning/TopoLab_v2_solver_internal_learning_route_decision.md)
+record REJECTED_CURRENT_RESOURCE_ADMISSION for the single solver-internal learned-
+update candidate; complete new cost/quality/speed UNKNOWN_NOT_TESTED. No executable
+successor. The next owner route decision is retaining
+FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).
+“Continue” displays that decision only. No second inception/proof/toy/guard/platform
+slice, D1 reopening, cap/quota transfer or scientific acceptance from software CI.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the

@@ -39,10 +39,15 @@ No formal call or label/model/index read; new roles closed unlaunched0/1, FULL60
 retained, no unused cap/quota transfer or reopening. Full fit stays PENDING4GiB.
 The owner has closed the current exact-physics rescue program, retaining4GiB,
 independent preflight and the full-v2 goal. See the [closure handoff](docs/planning/TopoLab_v2_rescue_program_closure_handoff.md).
-There is no executable successor. The unique next item needs explicit owner
-authority: one bounded alternative-learning-route proposal, as scoped in that
-handoff. It is not started or authorized; “continue” displays the proposal only.
-No automatic text/toy/guard chain, D1 reopening or alternate platform slice.
+The owner then approved exactly one solver-internal learned-update inception.
+It closed [REJECTED_CURRENT_RESOURCE_ADMISSION](docs/planning/TopoLab_v2_solver_internal_learning_route_decision.md):
+mandatory exact refresh/tail/audit still lack an independent complete native/
+runtime/lifetime bound. New quality/speed/cost remain UNKNOWN_NOT_TESTED; this is
+no universal impossibility claim or scientific pass. No implementation/real input/
+formal call/new budget. No executable successor; the next owner route decision is
+retaining FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).
+“Continue” displays that decision only. No automatic second proposal/proof/toy/
+guard/platform slice, D1 reopening or unused-cap transfer.
 
 Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility.
 All old failures/costs/UNKNOWN, fixed models, stopped mechanisms, consumed quotas

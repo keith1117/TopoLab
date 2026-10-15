@@ -10,7 +10,7 @@ Start with [project status](project_status.md) for the current stopping boundary
 |---|---|
 | Run or understand the local application | [Getting started](getting_started.md), [recorded demo](demo.md), [architecture](architecture.md), [frontend](frontend.md) |
 | Continue development or hand off | [English delivery reassessment and handoff](planning/TopoLab_v2_delivery_reassessment.md) ([中文阅读版](planning/TopoLab_v2_交付复盘与后续开发约束.md)), [current status](project_status.md), [English v2 roadmap](planning/TopoLab_v2_development_roadmap.md) |
-| Review delivery feasibility and the current route decision | [Rescue-program closure and next proposal](planning/TopoLab_v2_rescue_program_closure_handoff.md), [R1 execution plan](planning/TopoLab_v2_delivery_execution_plan.md), [D1 resource-admission stop](validation/d1_physics_resource_feasibility.md) |
+| Review delivery feasibility and the current route decision | [Solver-internal learning candidate elimination](planning/TopoLab_v2_solver_internal_learning_route_decision.md), [rescue-program closure](planning/TopoLab_v2_rescue_program_closure_handoff.md), [R1 execution plan](planning/TopoLab_v2_delivery_execution_plan.md), [D1 resource-admission stop](validation/d1_physics_resource_feasibility.md) |
 | Browse overall plans and preregistrations | [Planning index](planning/README.md) |
 | Inspect positive and negative evidence | [Validation index](validation/README.md), [development history](development_history.md) |
 | Change or contribute to the repository | [Contributing](../CONTRIBUTING.md), [repository policy](repository_policy.md), [agent instructions](../AGENTS.md) |

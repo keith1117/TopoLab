@@ -1392,3 +1392,20 @@ The missing independent complete pre-input proof triggers STOP_UNKNOWN_PREFIT_BO
 No integration implementation, old evidence/index/label/model read, formal call,
 FEM/fit/search/sealed access or scientific acceptance;all old provenance and
 numerical identities stay. Required ordinary software regression is separate.
+
+
+## Solver-internal learned-update inception (2026-10-15)
+
+One candidate assessment consults Chi et al.,
+[Universal machine learning for topology optimization](https://doi.org/10.1016/j.cma.2019.112739)
+(2021), Sections4.1–4.3, via the author's
+[public full text](https://paulino.scholar.princeton.edu/document/1161).
+It supplies the online sensitivity-learning/physical-refresh mechanism context
+only. No implementation, architecture, weights, dataset, figure or performance
+result is imported. The [decision](docs/planning/TopoLab_v2_solver_internal_learning_route_decision.md)
+uses TopoLab's committed OC/FEM source as TEXT/AST to identify state-consistency,
+full-charge and mandatory independent simultaneous-memory obligations. The
+candidate is REJECTED_CURRENT_RESOURCE_ADMISSION, not numerically tested or a
+universal impossibility result. No new Hack3D comparison/content, old external
+research payload, real input/FEM/fit/search/timing/memory trial, source numerical
+change or formal program occurs. Ordinary software regression remains separate.

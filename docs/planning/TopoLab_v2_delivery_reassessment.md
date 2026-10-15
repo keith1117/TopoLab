@@ -17,10 +17,15 @@ NO_ADMISSIBLE_ROUTE; [D1](../validation/d1_physics_resource_feasibility.md) reta
 STOP_UNKNOWN_PREFIT_BOUND before implementation/real input, roles closed
 unlaunched0/1 and FULL60 retained. The owner has **closed the current exact-physics
 rescue program**, retaining4GiB, independent preflight and the full-v2 goal.
-The [closure handoff](TopoLab_v2_rescue_program_closure_handoff.md) records this
-later decision and one concrete, unapproved alternative-learning-route proposal.
-There is no executable successor; “continue” only displays that proposal.
-B4.52 remains NOT_SELECTED_BY_R1. No D1 reopening or budget/access/quota transfer.
+The [closure handoff](TopoLab_v2_rescue_program_closure_handoff.md) retains that
+historical decision. The owner then approved its one solver-internal learned-update
+inception, which closed [REJECTED_CURRENT_RESOURCE_ADMISSION](TopoLab_v2_solver_internal_learning_route_decision.md).
+Mandatory exact refresh/tail/audit still lack independent complete memory admission;
+new cost/quality/speed remain UNKNOWN_NOT_TESTED. No executable successor. The next
+owner route decision is retaining FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific
+work stopped (recommended); “continue” only displays that decision. No automatic
+second proposal/proof/toy/guard/platform slice, new budget/access or D1 reopening.
+B4.52 remains NOT_SELECTED_BY_R1; old caps/quotas do not transfer.
 Sections5–6 retain original R1 history, not authority to repeat R1 or reopen D1;
 all old Gates, costs, UNKNOWN, quotas and seals remain.
 

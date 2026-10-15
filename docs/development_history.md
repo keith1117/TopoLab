@@ -1755,3 +1755,33 @@ See [maintenance validation](validation/exact_physics_rescue_program_closure.md)
 Mandatory software/publication/backup records stay external at
 `TopoLab-data/exact-physics-rescue-program-closure-2026-10-15`; final closure binds
 actual checks/PR/main/CI/review/backup. Close this maintenance, keep worktree and stop.
+
+
+## 2026-10-15 solver-internal learned-update inception — candidate eliminated
+
+After closure PR194/main06d0b77b8702 and all main CI passed, the owner explicitly
+authorized one bounded solver-internal learned-update inception under closure
+handoff Section4, with no new budget/real input/experiment. The
+[decision](planning/TopoLab_v2_solver_internal_learning_route_decision.md) evaluates
+only online sensitivity learning to replace some internal FEM steps. Primary
+literature and committed TEXT/AST support a distinct mechanism and finite
+functional path, but mandatory exact refresh/tail/audit retain UNKNOWN complete
+native/runtime/lifetime bounds. REJECTED_CURRENT_RESOURCE_ADMISSION removes this
+candidate from the implementation queue; scientific quality/speed and new complete
+cost remain UNKNOWN_NOT_TESTED, not a measured model failure or universal exclusion.
+No implementation, input/label/model/index/old external evidence read, research
+call, FEM/fit/search/timing/memory trial, old reset/retry or scientific Gate.
+
+Keep4GiB/independent preflight, demonstrable v1/full-v2 goal, owner-closed exact-
+physics rescue/D1STOP/unlaunched0/1/FULL60, K+60=12781.16417100014444982 plus all
+other history/software UNKNOWN, fixed P17/scientific FAIL/B4.51 FAIL and every
+old failure/cost/UNKNOWN/quota/seal. Frozen R1/D1/closure evidence and numerical
+source/tests/tolerances/fixtures/locks/CI/public README retain bytes. See
+[planning validation](validation/solver_internal_learning_route_decision.md).
+Required full software checks, all-upload/actual-squash guards, protected PR/main
+CI/equal trees/owned cleanup/verified backup govern publication; new records stay
+external at `TopoLab-data/solver-internal-learning-route-2026-10-15`.
+Unique next item is owner route decision on retaining FULL_V2_OPEN_NO_ADMITTED_ROUTE
+with scientific work stopped (recommended). No executable successor, new-budget/
+access request or automatic second inception/proof/toy/guard/platform slice.
+A plain “continue” displays that decision only. Retain worktree and STOP.
