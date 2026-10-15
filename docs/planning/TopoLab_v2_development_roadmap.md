@@ -3,10 +3,11 @@
 Current scheduling override (owner-approved2026-10-15): read the
 [delivery reassessment and mandatory progress rules](TopoLab_v2_delivery_reassessment.md)
 before every new slice. Historical v1.0.0 remains an interim delivery; full v2
-still requires the unchanged positive learned-acceleration Gate. Next is one
-bounded R1 critical-path feasibility decision and execution plan, on a new owner
-instruction. B4.52 is DEFERRED_PENDING_R1. Neither R1 nor a new experiment starts
-with this documentation maintenance. Historical successor proposals below retain
+still requires the unchanged positive learned-acceleration Gate.
+[R1](TopoLab_v2_delivery_execution_plan.md) closed NO_ADMISSIBLE_ROUTE under
+current authority; next is owner decision D1, not an executable successor.
+B4.52 is NOT_SELECTED_BY_R1. No new experiment/budget/access follows R1.
+Historical successor proposals below retain
 their original context and do not override current status or this sequence.
 
 Status: **active v2 flagship delivery plan; the ML delivery Gate remains open.**
@@ -160,11 +161,13 @@ restore protocol compliance. Overall slice Gate is FAIL_PROCESS_SOURCE_FREEZE;
 217/404 are retained post-stop document checks ONLY,not accepted protocol evidence.
 Both quotas are consumed1/1;no further formal call,source reset or retry follows.
 
-Current next work is **R1: v2 critical-path feasibility decision and delivery
-execution plan**, NOT STARTED. B4.52 is deferred pending that decision. R1 is one
-finite metadata-only planning slice, not a new scientific/TEXT Gate or permission
-for real execution, budget, retry/reset or sealed access. Its finite acceptance
-and single-slice stop are defined in the delivery reassessment.
+Latest planning result is **R1: NO_ADMISSIBLE_ROUTE under current authority**.
+Its acceptance/evidence/blocker matrix and three route dispositions are in the
+[execution plan](TopoLab_v2_delivery_execution_plan.md). Old all-paid7200 is
+impossible; direct dense large-mesh full Q alone exceeds4GiB. This is no
+scientific pass. B4.52 is NOT_SELECTED_BY_R1. The unique next item is explicit
+owner decision D1 on a NEW1260s/4GiB exact-physics integration-feasibility
+capability/limited access, NOT AUTHORIZED; no successor was executed.
 
 Prepared: 2026-09-24
 Revised: 2026-10-15 (owner-approved delivery reassessment and R1 scheduling)
@@ -2350,14 +2353,16 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-1. **R1 critical-path feasibility decision and delivery execution plan:** next
-   on a fresh owner instruction; NOT STARTED. One metadata-only planning slice
-   with at most three materially different routes, one recommendation or
-   NO_ADMISSIBLE_ROUTE, a final-acceptance/evidence/blocker matrix, explicit
-   all-paid cost and simultaneous-memory feasibility, and one next capability
-   or concrete owner decision. Use the [finite R1 scope](TopoLab_v2_delivery_reassessment.md).
-   Do not repeat the retrospective, create formal TEXT review programs or start
-   the recommended successor. B4.52 stays DEFERRED_PENDING_R1.
+1. **R1 closed; owner decision D1 is the unique next item.** The
+   [execution plan](TopoLab_v2_delivery_execution_plan.md) concludes
+   NO_ADMISSIBLE_ROUTE under current contracts/evidence/authority: unchanged
+   all-paid7200 is impossible; direct dense certification fails large-mesh paper
+   memory. B4.52 is NOT_SELECTED_BY_R1. D1 proposes only a NEW identity and
+   incremental1260s/4GiB full-size exact-physics network/backward integration
+   feasibility capability, eight named train labels, no fit/old retry/sealed
+   access. It is NOT AUTHORIZED; “continue” cannot supply the missing owner
+   budget/access/mechanism decisions. Do not repeat R1 or start an automatic
+   text/toy/guard chain. See [R1 validation](../validation/r1_v2_delivery_execution_plan.md).
 2. **Only a justified, authorized capability implementation:** it must remove a
    named delivery blocker or eliminate a route within a finite integration path.
    Registration/resource guards are eligible only when R1 establishes their

@@ -1677,3 +1677,33 @@ roles. No scientific criteria, failure/cost/quota/seal, scheduling or experiment
 authority changed: R1 remains NOT STARTED and B4.52 DEFERRED_PENDING_R1.
 Checks and publication receipts remain external at
 `TopoLab-data/v2-delivery-reassessment-bilingual-2026-10-15`.
+
+## 2026-10-15 R1 — v2 critical-path decision and execution plan
+
+The owner authorized only one R1 planning slice from main502e45caa0f8 in the
+assigned app worktree. The [execution plan](planning/TopoLab_v2_delivery_execution_plan.md)
+closes **NO_ADMISSIBLE_ROUTE under current contracts/evidence/authority**:
+unchanged all-paid7200 is impossible at zero added cost; the direct canonical
+dense certification construction has large full Q alone55037657088>4294967296
+bytes. This is a paper exclusion of that construction, not every possible proof.
+The final-acceptance/evidence/blocker matrix compares three mechanism families,
+preserves all historical failures/UNKNOWN/costs/quotas/seals/fixed P17 and
+separates independently acceptable platform backlog. No scientific Gate passed.
+B4.52 is NOT_SELECTED_BY_R1; no R2/R3, formal TEXT Gate or successor execution.
+
+The unique next item is explicit **owner decision D1**, NOT AUTHORIZED: a new
+identity and incremental1260s/4GiB exact-physics full-size network/backward
+resource-integration feasibility proposal, only eight named train labels,
+no fitting/old campaign replay/sealed access. Old all-paid7200 remains failed;
+K+1260 would be13981.16417100014444982 plus additional history/UNKNOWN.
+The capability's target/scope/acceptance/prerequisites/exit are specified;
+“continue” grants none of the missing decisions. At most two capability slices
+before a material-progress review remains a limit, not a quota grant.
+
+R1 read no old external evidence and invoked no formal/numerical campaign.
+Numerical source/tests/tolerances, frozen protocols/reports and README remain.
+Current English/Chinese scheduling (including the obsolete Chinese Section6)
+and entry points agree. See [R1 validation](validation/r1_v2_delivery_execution_plan.md).
+New software/publication/backup records stay external at
+`TopoLab-data/r1-v2-delivery-execution-plan-2026-10-15`; final closure binds actual
+PR/main/checks/guards. R1 stops; the assigned worktree is retained.

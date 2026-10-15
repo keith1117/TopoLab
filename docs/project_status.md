@@ -1,12 +1,15 @@
 # Current project status
 
-Updated:2026-10-15. Owner-approved delivery reassessment is the latest planning
-maintenance; latest completed B4 slice remains B4.51. Historical v1.0.0 is an
+Updated:2026-10-15. R1's bounded delivery decision is complete:
+**NO_ADMISSIBLE_ROUTE under current contracts/evidence/authority**. See the
+[execution plan](planning/TopoLab_v2_delivery_execution_plan.md) and
+[R1 validation](validation/r1_v2_delivery_execution_plan.md).
+The unique next item is **owner decision D1**, not an executable successor.
+Latest completed B4 slice remains B4.51. Historical v1.0.0 is an
 available interim delivery; the positive learned-acceleration goal for full v2
 remains. Read the [English reassessment and mandatory progress rules](planning/TopoLab_v2_delivery_reassessment.md)
 before further development; the [Chinese companion](planning/TopoLab_v2_交付复盘与后续开发约束.md)
-supports owner reading. The bilingual edition preserves the same decisions and
-starts no experiment or R1.
+supports owner reading. R1 starts no experiment and grants no new resources.
 B4.51's original technical closure remains bound by its external receipt.
 
 B4.51 slice Gate **FAIL_PROCESS_SOURCE_FREEZE**:
@@ -95,25 +98,41 @@ external byte backup govern technical closure.
 
 ## Current stop and next work
 
-The owner's2026-10-15 direction supersedes the historical default successor in
-current scheduling only. **B4.52 is DEFERRED_PENDING_R1**, not started and not
-authorized for implementation. Frozen B4.51 protocol/report successor wording
-stays as historical evidence; it is not the current execution instruction.
+R1 compares query repair, exact-FEM training and fixed-anchor reciprocal training.
+It closes the unchanged all-paid7200 route at zero added cost: known-paid exceeds
+the cap by5521.16417100014444982 seconds. Direct canonical dense-stack/full-Q
+extension also fails paper memory: large Q alone55037657088>4294967296 bytes;
+this excludes that construction, not every possible real certificate. Exact
+training's full simultaneous memory and new maxima remain UNKNOWN/PENDING.
+No scientific Gate passed. **B4.52 is NOT_SELECTED_BY_R1**, unstarted/unauthorized;
+its frozen historical proposal remains unchanged.
 
-Next on a fresh instruction: **R1: v2 critical-path feasibility decision and
-delivery execution plan**, one bounded metadata-only planning slice, NOT STARTED.
-Follow the finite scope and acceptance in the [reassessment](planning/TopoLab_v2_delivery_reassessment.md).
-Produce `docs/planning/TopoLab_v2_delivery_execution_plan.md`: one acceptance/
-evidence/blocker matrix, at most three material routes, one recommendation or
-NO_ADMISSIBLE_ROUTE, the all-paid budget decision and one concrete next capability
-or owner decision. Do not repeat this retrospective or invent another TEXT Gate.
-R1 closes without executing its recommended successor.
+**Unique next item: owner decision D1**, specified in
+[execution-plan Section6](planning/TopoLab_v2_delivery_execution_plan.md#6-single-next-item-owner-decision-d1).
+Approve or decline a NEW exact-physics network/backward resource-integration
+feasibility proposal: incremental1260 charged seconds (600 producer+600
+independent+FULL60), simultaneous4GiB, only eight named train labels and frozen
+admission metadata, no optimizer updates/fitting/old campaign replay/sealed
+access. New identity, stopped-mechanism reconsideration, budget and limited
+access all require explicit owner decisions and a finite contract before work.
+The added ceiling would give known subtotal13981.16417100014444982 plus
+additional history/UNKNOWN, never an old7200 PASS. No full-v2 spending promise.
+A plain “continue” displays D1; it does not approve it. No R2/R3 or automatic
+alternative platform/public/guard slice is scheduled. A2.3–A2.4/A4 remain
+separately acceptable backlog, requiring their own instruction.
 
 Known-paid above unchanged7200, real certification/full-resource unknowns, fixed
 P/17, all old failures/quotas and seals remain. No new budget, real input/FEM/fit/
 search/memory trial, old formal retry/reset or sealed access is granted. Learned
 repair and independent confirmation/full new B4/compatible final remain before B5.
 Platform milestones stay separately deliverable and need their own scope/validation.
+
+R1 read no old external evidence (allowlist/read set empty), ran no formal or
+production numerical program and changed no numerical source/test/tolerance.
+New software/publication records remain external at
+`/Users/keith1117/Documents/TopoLab-data/r1-v2-delivery-execution-plan-2026-10-15`.
+Its final closure binds actual PR/main/CI/guards/backup. R1 stops without
+executing D1; retain the assigned app worktree for later instructions.
 
 Planning-maintenance checks/publication/backup receipts remain external at
 `/Users/keith1117/Documents/TopoLab-data/v2-delivery-reassessment-2026-10-15`.

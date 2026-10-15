@@ -11,6 +11,14 @@ accepted by the owner in the reassessment conversation. It changes delivery
 governance; it is not a new numerical experiment contract, scientific Gate or
 budget authorization.
 
+Current scheduling after R1 (2026-10-15): the
+[execution plan](TopoLab_v2_delivery_execution_plan.md) closes
+NO_ADMISSIBLE_ROUTE under existing authority. B4.52 is NOT_SELECTED_BY_R1;
+the unique next item is owner decision D1 on the proposed1260s/4GiB new
+integration-feasibility capability and limited access, NOT AUTHORIZED.
+Sections5–6 retain the original R1 scope/handoff as historical instructions;
+they do not authorize repeating closed R1. No old Gate/budget/quota/seal changes.
+
 ## 1. Owner-confirmed goals
 
 - `v1.0.0` is a completed milestone that can be demonstrated. Later platform

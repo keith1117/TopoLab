@@ -29,11 +29,14 @@ and [current status](docs/project_status.md) for all retained evidence and stops
 
 The owner-approved [English delivery reassessment](docs/planning/TopoLab_v2_delivery_reassessment.md)
 is the development reference, with a [Chinese reading companion](docs/planning/TopoLab_v2_交付复盘与后续开发约束.md).
-It changes current scheduling only. B4.52 is DEFERRED_PENDING_R1. Next on a new
-instruction is R1: one bounded metadata-only critical-path feasibility decision
-and delivery execution plan; R1 has not started. Do not repeat the retrospective
-or create another automatic text/toy/guard chain. Require a capability/blocker
-outcome and review progress after at most two capability slices.
+Read the [R1 execution plan](docs/planning/TopoLab_v2_delivery_execution_plan.md)
+after that reassessment. R1 closed NO_ADMISSIBLE_ROUTE under current authority;
+unchanged all-paid7200 is impossible and direct dense certification fails the
+large-mesh paper memory bound. B4.52 is NOT_SELECTED_BY_R1. The unique next item
+is owner decision D1: a proposed new1260s/4GiB full-size exact-physics integration
+feasibility capability, with limited eight-train-label access and a new identity.
+It is NOT AUTHORIZED; a plain “continue” grants no budget/access or old retry.
+No automatic text/toy/guard chain. Review progress after at most two capability slices.
 
 Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility.
 All old failures/costs/UNKNOWN, fixed models, stopped mechanisms, consumed quotas
