@@ -1666,3 +1666,14 @@ formal retry/reset or final access. Only the ten reviewed planning/current-rule
 documents change. Mandatory software validation and publication receipts stay
 external at `TopoLab-data/v2-delivery-reassessment-2026-10-15` and must bind the
 actual PR/main/checks/guards at technical closure.
+
+## 2026-10-15 bilingual delivery reassessment (documentation maintenance)
+
+The [English reassessment](planning/TopoLab_v2_delivery_reassessment.md) is now the
+development reference, paired with a [Chinese reading companion](planning/TopoLab_v2_交付复盘与后续开发约束.md).
+Both retain the complete retrospective, progress rules, qualified completion
+estimate and handoff. AGENTS, status and reading indices identify the language
+roles. No scientific criteria, failure/cost/quota/seal, scheduling or experimental
+authority changed: R1 remains NOT STARTED and B4.52 DEFERRED_PENDING_R1.
+Checks and publication receipts remain external at
+`TopoLab-data/v2-delivery-reassessment-bilingual-2026-10-15`.

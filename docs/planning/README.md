@@ -4,8 +4,9 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-The owner-approved2026-10-15 [delivery reassessment](TopoLab_v2_delivery_reassessment.md)
-is required reading before further development. It preserves v1 as a usable
+The owner-approved2026-10-15 [English delivery reassessment](TopoLab_v2_delivery_reassessment.md)
+is required development reading; its [Chinese companion](TopoLab_v2_交付复盘与后续开发约束.md)
+provides the same retrospective and rules for the owner's reading. It preserves v1 as a usable
 interim delivery and the positive full-v2 goal. B4.51 remains
 FAIL_PROCESS_SOURCE_FREEZE;217/404 are post-stop TEXT only, no protocol acceptance.
 See the [failed report](../validation/b4_51_real_certification_executable_full_resource_preregistration.md).
@@ -23,7 +24,7 @@ Historical protocol successor wording remains unchanged, with its original conte
 | Numerical implementation | [Reimplementation strategy](TopoLab_reimplementation_strategy.md) | [数值核心重写策略](TopoLab_数值核心重写策略.md) |
 | Timeline and resources | [Timeline](TopoLab_development_timeline_and_resources.md) | [开发周期与资源评估](TopoLab_开发周期与资源评估.md) |
 | Active v2 delivery | [Development roadmap](TopoLab_v2_development_roadmap.md) | [开发路线图](TopoLab_v2_开发路线图.md) |
-| Mandatory delivery reassessment | [Retrospective, progress rules and R1 handoff](TopoLab_v2_delivery_reassessment.md) | Chinese owner-facing record; scientific Gate order remains in the English roadmap |
+| Mandatory delivery reassessment | [Retrospective, progress rules and R1 handoff](TopoLab_v2_delivery_reassessment.md) | [交付复盘与后续开发约束](TopoLab_v2_交付复盘与后续开发约束.md) |
 
 The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.
