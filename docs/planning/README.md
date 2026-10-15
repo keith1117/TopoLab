@@ -187,3 +187,7 @@ existence; its validation report determines whether its Gate passed or failed.
 - [B4.49 finite public contract](b4_49_public_combined_diagnostic_certificate_contract.json)
 
 - [B4.50 combined public limitations protocol](b4_50_combined_public_certificate_limitations_real_prerequisites_protocol.md) · [finite TEXT contract](b4_50_combined_public_certificate_limitations_real_prerequisites_contract.json)
+
+## B4.51 real executable and full-resource preregistration
+
+- [Frozen TEXT protocol](b4_51_real_certification_executable_full_resource_preregistration_protocol.md) · [finite requirements contract](b4_51_real_certification_executable_full_resource_preregistration_contract.json)

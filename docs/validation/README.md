@@ -196,3 +196,7 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 - [B4.49 public combined diagnostic certificate SOURCE/formal evidence](b4_49_public_combined_diagnostic_certificate.md)
 
 - [B4.50 combined public certificate limitations and real prerequisites](b4_50_combined_public_certificate_limitations_real_prerequisites.md)
+
+## B4.51 real executable and full-resource preregistration
+
+- [Source-freeze process FAIL;217/404 post-stop TEXT checks retained](b4_51_real_certification_executable_full_resource_preregistration.md)

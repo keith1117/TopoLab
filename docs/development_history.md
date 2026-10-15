@@ -1600,3 +1600,43 @@ and STOP.
 
 B4.50 local validation:all5 commands PASS,full1951 tests in668.61s;unchanged
 population/tolerances. Exact-head/main CI and backup remain release requirements.
+
+## B4.51 — real executable and full-resource preregistration (2026-10-14)
+
+B4.51 slice Gate **FAIL_PROCESS_SOURCE_FREEZE**:
+217 primary/404 independent document predicates,each first/only call,no retry.
+39 public TEXT/3 literal compact metadata/2 primary-only source texts;independent
+reads neither primary-only source,primary reviewer/result nor shared helper.
+18 executable/10 domain/5 future-role/12 resource requirements and14 unfilled real
+registration slots remain TEXT ONLY. Real release inadmissible;executable UNFROZEN,
+certificates/cost UNKNOWN_STOP,full fit PENDING4GiB. Scientific Gate **FAIL**,
+fixed P17 unrepaired,uniform default and full v2 delivery open remain.
+
+All16 inherited objects/17 boundaries/22 L/14 C/24 O/12 R stay exactly B4.50.
+Known-paid12721.16417100014444982>7200/all-paid FAIL,real UNFROZEN/UNKNOWN_STOP/
+PENDING4GiB and all old costs/failures/P17/uniform/seals remain. Native TEXT
+primary0.10s/27951104bytes,independent0.05s/25690112bytes pass60s/256MiB only.
+Prefirst-call E721 lint and incorrectly generated v1 source freeze remain FAIL
+at0/0;two style spellings fixed before v2 freeze/first calls,no formal retry.
+Whole software cost/peak UNKNOWN_NOT_ZERO,no production/real numerical access.
+[Report](validation/b4_51_real_certification_executable_full_resource_preregistration.md),
+[protocol](planning/b4_51_real_certification_executable_full_resource_preregistration_protocol.md),[contract](planning/b4_51_real_certification_executable_full_resource_preregistration_contract.json).
+
+All5 checks/full unchanged tests,every-upload/actual-squash guards,protected
+exact-head/main CI/equal tested tree/owned cleanup/independent byte backup govern
+technical closure. Next proposed **B4.52 bounded public executable-registration and full-resource
+guard software**, NOT STARTED/AUTHORIZED. New owner and finite NEW authored
+public-metadata contract FIRST. Only registration/resource guard software is
+proposed;no real executable implementation,input,certificate,fit,search,new paid
+cap,old formal retry/reset or sealed grant. Unchanged all-paid7200 infeasibility
+remains. Learned repair/independent confirmation/full new B4/compatible final
+remain before B5. Close B4.51 ONLY,report successor and STOP.
+
+Frozen S02 applies: changing the reviewer after v1 freeze triggers STOP with no
+automatic alternative. Generating v2 and running the later TEXT checks did not
+restore protocol compliance. Overall slice Gate is FAIL_PROCESS_SOURCE_FREEZE;
+217/404 are retained post-stop document checks ONLY,not accepted protocol evidence.
+Both quotas are consumed1/1;no further formal call,source reset or retry follows.
+
+B4.51 local validation:full1951 tests PASS in704.31s,unchanged population/
+tolerances;all5 checks before commit. Slice process FAIL remains unchanged.
