@@ -18,9 +18,12 @@ NO_ADMISSIBLE_ROUTE under current authority; B4.52 is NOT_SELECTED_BY_R1.
 The owner subsequently approved complete D1; [its admission report](d1_physics_resource_feasibility.md)
 closes STOP_UNKNOWN_PREFIT_BOUND before implementation/real input. New roles
 closed unlaunched0/1, FULL60 retained; no index/label/model read or formal call.
-Unique next owner route decision: close the current exact-physics rescue program
-under unchanged4GiB/prefit requirements (recommended). No executable successor,
-cap/quota transfer or scientific acceptance from software CI.
+The owner has now closed the current exact-physics rescue program, retaining
+4GiB, independent preflight and full v2. See the [closure handoff](../planning/TopoLab_v2_rescue_program_closure_handoff.md)
+and [maintenance validation](exact_physics_rescue_program_closure.md).
+The handoff's one alternative-learning-route proposal is the unique next owner
+decision, NOT AUTHORIZED/NOT STARTED; “continue” displays it only. No executable
+successor, D1 reopening, cap/quota transfer or scientific acceptance from software CI.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the

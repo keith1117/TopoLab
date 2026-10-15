@@ -88,10 +88,13 @@ NO_ADMISSIBLE_ROUTE under its historical authority; B4.52 is NOT_SELECTED_BY_R1.
 The owner subsequently approved complete D1, which
 [closed STOP_UNKNOWN_PREFIT_BOUND](validation/d1_physics_resource_feasibility.md)
 before implementation/real input. Its new roles closed unlaunched0/1;FULL60 stays
-charged and unused caps/quotas do not transfer. The unique next item is an owner
-route decision on closing the current exact-physics rescue program under unchanged
-4GiB/prefit requirements (recommended), not an executable slice. “Continue” neither
-reopens D1 nor grants another budget/access or default proof/guard/platform slice.
+charged and unused caps/quotas do not transfer. The owner has now closed the
+current exact-physics rescue program, retaining4GiB, independent preflight and
+full-v2 acceptance. The [closure handoff](planning/TopoLab_v2_rescue_program_closure_handoff.md)
+scopes one unapproved alternative-learning-route proposal as the unique next
+owner decision. No executable successor; “continue” only displays that proposal.
+It does not approve the proposed slice, reopen D1 or grant budget/access or a
+default proof/guard/platform slice.
 
 Before a slice, identify the delivery blocker/capability, baseline, acceptance,
 dependencies, resource feasibility and failure disposition. A known impossible

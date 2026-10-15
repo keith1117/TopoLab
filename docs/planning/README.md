@@ -18,10 +18,13 @@ The owner subsequently approved complete D1; its
 [contract](d1_physics_resource_feasibility_contract.json) and
 [report](../validation/d1_physics_resource_feasibility.md) close
 STOP_UNKNOWN_PREFIT_BOUND before implementation/real input. New roles closed
-unlaunched0/1 and FULL60 retained; no budget/quota transfer. Unique next owner
-route decision: close the current exact-physics rescue program under unchanged
-4GiB/prefit requirements (recommended). No executable successor or automatic
-text/toy/guard/platform slice. Historical successor wording retains its context.
+unlaunched0/1 and FULL60 retained; no budget/quota transfer. The owner has now
+closed the current exact-physics rescue program, retaining4GiB, independent
+preflight and full v2. See the [closure handoff and finite next proposal](TopoLab_v2_rescue_program_closure_handoff.md).
+The unique next item needs explicit owner authority for that one alternative-
+learning-route proposal; NOT AUTHORIZED/NOT STARTED, no executable successor.
+“Continue” displays the proposal only; no D1 reopening or automatic
+text/toy/guard/platform slice. Historical successors retain their context.
 
 ## Overall project plans
 
@@ -32,7 +35,8 @@ text/toy/guard/platform slice. Historical successor wording retains its context.
 | Timeline and resources | [Timeline](TopoLab_development_timeline_and_resources.md) | [开发周期与资源评估](TopoLab_开发周期与资源评估.md) |
 | Active v2 delivery | [Development roadmap](TopoLab_v2_development_roadmap.md) | [开发路线图](TopoLab_v2_开发路线图.md) |
 | Mandatory delivery reassessment | [Retrospective, progress rules and R1 handoff](TopoLab_v2_delivery_reassessment.md) | [交付复盘与后续开发约束](TopoLab_v2_交付复盘与后续开发约束.md) |
-| R1 delivery decision and execution plan | [Acceptance, three routes and owner decision D1](TopoLab_v2_delivery_execution_plan.md) | [当前中文结论与唯一下一步](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
+| R1 delivery decision and execution plan | [Acceptance, three routes and historical D1 proposal](TopoLab_v2_delivery_execution_plan.md) | [当前中文结论与唯一下一步](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
+| Current rescue-program closure | [Owner decision and full-v2 handoff](TopoLab_v2_rescue_program_closure_handoff.md) | [关闭决定与待授权提案](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 
 The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.

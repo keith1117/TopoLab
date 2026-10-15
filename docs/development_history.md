@@ -1732,3 +1732,26 @@ source/tests/tolerances/locks/CI/public README and R1/frozen history stay unchan
 Mandatory full regression/publication records and final PR/main/CI/backup closure
 remain external at `TopoLab-data/d1-physics-resource-feasibility-software-2026-10-15`.
 Close D1 only;retain worktree and stop.
+
+## 2026-10-15 owner closure of current exact-physics rescue program
+
+After D1 PR193/main5f115c5a27d5 and successful PR/main CI, the owner explicitly
+closed the current exact-physics rescue program while retaining4GiB, independent
+preflight and the full-v2 goal. The [closure handoff](planning/TopoLab_v2_rescue_program_closure_handoff.md)
+resolves the pending owner route decision. D1 STOP_UNKNOWN_PREFIT_BOUND, its
+unlaunched0/1 roles/FULL60, K+60=12781.16417100014444982 plus additional
+history/software/CI UNKNOWN, and all frozen records remain. No scientific or
+resource-proof blocker closed; no universal physical impossibility is claimed.
+Fixed P/17/scientific FAIL, B4.51 FAIL_PROCESS_SOURCE_FREEZE, all costs/UNKNOWN/
+quotas/memory gaps/seals and full-fit PENDING4GiB remain.
+
+Current English/Chinese entry points agree. The unique next item is explicit
+owner authority for one bounded alternative-learning-route proposal specified in
+the handoff, NOT AUTHORIZED/NOT STARTED. It must produce one actionable contract
+proposal or reject its candidate; no default D1 revival, proof/toy/guard chain or
+platform substitute. No new budget/access, formal call, real-input read or trial.
+Numerical source/tests/tolerances/locks/CI/public README and R1/D1 frozen bytes stay.
+See [maintenance validation](validation/exact_physics_rescue_program_closure.md).
+Mandatory software/publication/backup records stay external at
+`TopoLab-data/exact-physics-rescue-program-closure-2026-10-15`; final closure binds
+actual checks/PR/main/CI/review/backup. Close this maintenance, keep worktree and stop.

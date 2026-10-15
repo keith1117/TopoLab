@@ -3,17 +3,18 @@
 Current scheduling override (owner-approved2026-10-15): read the
 [delivery reassessment and mandatory progress rules](TopoLab_v2_delivery_reassessment.md)
 before every new slice. Historical v1.0.0 remains an interim delivery; full v2
-still requires the unchanged positive learned-acceleration Gate.
-[R1](TopoLab_v2_delivery_execution_plan.md) remains NO_ADMISSIBLE_ROUTE under
-its historical authority. The owner subsequently approved complete D1, which
-[closed STOP_UNKNOWN_PREFIT_BOUND](../validation/d1_physics_resource_feasibility.md)
-before implementation/real input. No complete independent native/lifetime bound,
-no formal calls or label/model/index reads; new roles closed unlaunched0/1,
-FULL60 retained. Unique next owner decision: close the current exact-physics
-rescue program under unchanged4GiB/prefit requirements (recommended).
-B4.52 remains NOT_SELECTED_BY_R1; no executable successor or cap/quota transfer.
-Historical successor proposals below retain
-their original context and do not override current status or this sequence.
+requires the unchanged positive learned-acceleration Gate.
+[R1](TopoLab_v2_delivery_execution_plan.md) retains historical NO_ADMISSIBLE_ROUTE.
+[D1](../validation/d1_physics_resource_feasibility.md) retains
+STOP_UNKNOWN_PREFIT_BOUND before implementation/real input, roles closed
+unlaunched0/1 and FULL60 retained. The owner has **closed the current exact-physics
+rescue program**, retaining4GiB and independent preflight. See the
+[closure handoff](TopoLab_v2_rescue_program_closure_handoff.md).
+The unique next item is an explicit owner decision on its finite alternative-
+learning-route proposal, NOT AUTHORIZED/NOT STARTED; no executable successor.
+“Continue” displays that proposal only. B4.52 remains NOT_SELECTED_BY_R1;
+no D1 reopening, automatic text/toy/guard/platform slice or cap/quota transfer.
+Historical successors below retain their context and do not override this decision.
 
 Status: **active v2 flagship delivery plan; the ML delivery Gate remains open.**
 Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
@@ -172,7 +173,7 @@ UNKNOWN stop; it establishes no composed capability or scientific pass. R1 and
 all old failures/seals stay. See [D1 report](../validation/d1_physics_resource_feasibility.md).
 
 Prepared: 2026-09-24
-Revised: 2026-10-15 (owner-approved D1 and resource-admission stop)
+Revised: 2026-10-15 (owner-approved closure of current exact-physics rescue program)
 
 Related documents:
 
@@ -2355,16 +2356,19 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-1. **D1 closed; an owner route decision is the unique next item.** The owner
-   approved complete D1, but its independent simultaneous-memory prerequisite
-   stayed UNKNOWN. No integration implementation, real input or formal call
-   followed; roles closed unlaunched0/1, FULL60 retained. Recommend closing the
-   current exact-physics rescue program under unchanged4GiB/prefit requirements.
-   See [protocol](d1_physics_resource_feasibility_protocol.md),
+1. **The owner closed the current exact-physics rescue program.** Preserve
+   D1 STOP_UNKNOWN_PREFIT_BOUND, its unlaunched0/1 roles/FULL60 and all frozen
+   [protocol](d1_physics_resource_feasibility_protocol.md),
    [contract](d1_physics_resource_feasibility_contract.json) and
-   [report](../validation/d1_physics_resource_feasibility.md). No executable
-   successor; “continue” does not reopen it or transfer its unused cap. Decide
-   the route now, with no default second text/toy/guard capability slice.
+   [report](../validation/d1_physics_resource_feasibility.md) bytes. Retain4GiB,
+   independent preflight and the full-v2 goal. The [closure handoff](TopoLab_v2_rescue_program_closure_handoff.md)
+   resolves the old pending decision; it is not a resource or scientific pass.
+   Unique next item: the owner's explicit decision whether to commission the one
+   alternative-learning-route proposal scoped there (solver-internal learned
+   update hypothesis, one implementation/experiment contract proposal or rejection).
+   NOT AUTHORIZED/NOT STARTED; no executable successor. “Continue” only displays
+   the proposal, without reopening D1 or transferring unused caps. No default
+   second proof/text/toy/guard capability slice.
 2. **Only a justified, authorized capability implementation:** it must remove a
    named delivery blocker or eliminate a route within a finite integration path.
    Registration/resource guards are eligible only when R1 establishes their
