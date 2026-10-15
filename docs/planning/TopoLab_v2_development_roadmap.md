@@ -4,9 +4,14 @@ Current scheduling override (owner-approved2026-10-15): read the
 [delivery reassessment and mandatory progress rules](TopoLab_v2_delivery_reassessment.md)
 before every new slice. Historical v1.0.0 remains an interim delivery; full v2
 still requires the unchanged positive learned-acceleration Gate.
-[R1](TopoLab_v2_delivery_execution_plan.md) closed NO_ADMISSIBLE_ROUTE under
-current authority; next is owner decision D1, not an executable successor.
-B4.52 is NOT_SELECTED_BY_R1. No new experiment/budget/access follows R1.
+[R1](TopoLab_v2_delivery_execution_plan.md) remains NO_ADMISSIBLE_ROUTE under
+its historical authority. The owner subsequently approved complete D1, which
+[closed STOP_UNKNOWN_PREFIT_BOUND](../validation/d1_physics_resource_feasibility.md)
+before implementation/real input. No complete independent native/lifetime bound,
+no formal calls or label/model/index reads; new roles closed unlaunched0/1,
+FULL60 retained. Unique next owner decision: close the current exact-physics
+rescue program under unchanged4GiB/prefit requirements (recommended).
+B4.52 remains NOT_SELECTED_BY_R1; no executable successor or cap/quota transfer.
 Historical successor proposals below retain
 their original context and do not override current status or this sequence.
 
@@ -161,16 +166,13 @@ restore protocol compliance. Overall slice Gate is FAIL_PROCESS_SOURCE_FREEZE;
 217/404 are retained post-stop document checks ONLY,not accepted protocol evidence.
 Both quotas are consumed1/1;no further formal call,source reset or retry follows.
 
-Latest planning result is **R1: NO_ADMISSIBLE_ROUTE under current authority**.
-Its acceptance/evidence/blocker matrix and three route dispositions are in the
-[execution plan](TopoLab_v2_delivery_execution_plan.md). Old all-paid7200 is
-impossible; direct dense large-mesh full Q alone exceeds4GiB. This is no
-scientific pass. B4.52 is NOT_SELECTED_BY_R1. The unique next item is explicit
-owner decision D1 on a NEW1260s/4GiB exact-physics integration-feasibility
-capability/limited access, NOT AUTHORIZED; no successor was executed.
+Latest resource admission: **D1 STOP_UNKNOWN_PREFIT_BOUND**, after explicit
+owner approval of complete D1. This closes the proposed rescue at its prescribed
+UNKNOWN stop; it establishes no composed capability or scientific pass. R1 and
+all old failures/seals stay. See [D1 report](../validation/d1_physics_resource_feasibility.md).
 
 Prepared: 2026-09-24
-Revised: 2026-10-15 (owner-approved delivery reassessment and R1 scheduling)
+Revised: 2026-10-15 (owner-approved D1 and resource-admission stop)
 
 Related documents:
 
@@ -2353,16 +2355,16 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-1. **R1 closed; owner decision D1 is the unique next item.** The
-   [execution plan](TopoLab_v2_delivery_execution_plan.md) concludes
-   NO_ADMISSIBLE_ROUTE under current contracts/evidence/authority: unchanged
-   all-paid7200 is impossible; direct dense certification fails large-mesh paper
-   memory. B4.52 is NOT_SELECTED_BY_R1. D1 proposes only a NEW identity and
-   incremental1260s/4GiB full-size exact-physics network/backward integration
-   feasibility capability, eight named train labels, no fit/old retry/sealed
-   access. It is NOT AUTHORIZED; “continue” cannot supply the missing owner
-   budget/access/mechanism decisions. Do not repeat R1 or start an automatic
-   text/toy/guard chain. See [R1 validation](../validation/r1_v2_delivery_execution_plan.md).
+1. **D1 closed; an owner route decision is the unique next item.** The owner
+   approved complete D1, but its independent simultaneous-memory prerequisite
+   stayed UNKNOWN. No integration implementation, real input or formal call
+   followed; roles closed unlaunched0/1, FULL60 retained. Recommend closing the
+   current exact-physics rescue program under unchanged4GiB/prefit requirements.
+   See [protocol](d1_physics_resource_feasibility_protocol.md),
+   [contract](d1_physics_resource_feasibility_contract.json) and
+   [report](../validation/d1_physics_resource_feasibility.md). No executable
+   successor; “continue” does not reopen it or transfer its unused cap. Decide
+   the route now, with no default second text/toy/guard capability slice.
 2. **Only a justified, authorized capability implementation:** it must remove a
    named delivery blocker or eliminate a route within a finite integration path.
    Registration/resource guards are eligible only when R1 establishes their

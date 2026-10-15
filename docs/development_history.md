@@ -1707,3 +1707,28 @@ and entry points agree. See [R1 validation](validation/r1_v2_delivery_execution_
 New software/publication/backup records stay external at
 `TopoLab-data/r1-v2-delivery-execution-plan-2026-10-15`; final closure binds actual
 PR/main/checks/guards. R1 stops; the assigned worktree is retained.
+
+## 2026-10-15 D1 — owner-approved exact-physics rescue stops at memory admission
+
+The owner explicitly approved complete R1 D1 from main42a6fdae9622 in the same
+assigned worktree: new identity, limited exact-physics reconsideration,1260 charged
+seconds/4GiB/eight named train labels. [D1](validation/d1_physics_resource_feasibility.md)
+closes STOP_UNKNOWN_PREFIT_BOUND: independent complete native convolution/SuperLU,
+runtime/allocator/Python/transient lifetime bounds were not established. This is
+resource UNKNOWN/failed admission, not proof of universal physical infeasibility.
+No integration implementation, external index/label/model access, formal call,
+FEM/fit/search/memory trial or actual source freeze followed. New roles close
+unlaunched0/1;FULL60 conservatively retained, K+60=12781.16417100014444982 plus
+additional history/software/CI UNKNOWN. Unused600 caps are not FULL charges or
+transferable trials;1260 is a ceiling, not incurred time. All old failures/costs/
+UNKNOWN/quotas/P17/seals and full-fit PENDING4GiB remain;no scientific Gate passed.
+
+The finite protocol/incomplete contract document the prescribed stop without a
+new TEXT Gate/checker campaign. No material scientific/resource blocker closed;
+the unique next owner route decision is closing the current exact-physics rescue
+program under unchanged4GiB/prefit requirements (recommended), with v1 retained
+and full v2 open. No automatic second proof/guard/toy/platform slice. Numerical
+source/tests/tolerances/locks/CI/public README and R1/frozen history stay unchanged.
+Mandatory full regression/publication records and final PR/main/CI/backup closure
+remain external at `TopoLab-data/d1-physics-resource-feasibility-software-2026-10-15`.
+Close D1 only;retain worktree and stop.

@@ -30,13 +30,17 @@ and [current status](docs/project_status.md) for all retained evidence and stops
 The owner-approved [English delivery reassessment](docs/planning/TopoLab_v2_delivery_reassessment.md)
 is the development reference, with a [Chinese reading companion](docs/planning/TopoLab_v2_交付复盘与后续开发约束.md).
 Read the [R1 execution plan](docs/planning/TopoLab_v2_delivery_execution_plan.md)
-after that reassessment. R1 closed NO_ADMISSIBLE_ROUTE under current authority;
-unchanged all-paid7200 is impossible and direct dense certification fails the
-large-mesh paper memory bound. B4.52 is NOT_SELECTED_BY_R1. The unique next item
-is owner decision D1: a proposed new1260s/4GiB full-size exact-physics integration
-feasibility capability, with limited eight-train-label access and a new identity.
-It is NOT AUTHORIZED; a plain “continue” grants no budget/access or old retry.
-No automatic text/toy/guard chain. Review progress after at most two capability slices.
+after that reassessment. R1 closed NO_ADMISSIBLE_ROUTE under its then-current
+authority; B4.52 remains NOT_SELECTED_BY_R1. The owner subsequently approved
+complete D1 (new identity/1260s/4GiB/eight-train-label scope). D1 closed
+STOP_UNKNOWN_PREFIT_BOUND before implementation or real input: no independent
+complete native/workspace/lifetime bound. See [report](docs/validation/d1_physics_resource_feasibility.md).
+No formal call or label/model/index read; new roles closed unlaunched0/1, FULL60
+retained, no unused cap/quota transfer or reopening. Full fit stays PENDING4GiB.
+The unique next item is an owner route decision: close the current exact-physics
+rescue program under unchanged4GiB/prefit requirements (recommended). No executable
+successor. A plain “continue” only displays that decision. No automatic text/toy/
+guard chain or alternate platform slice; review material progress now.
 
 Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility.
 All old failures/costs/UNKNOWN, fixed models, stopped mechanisms, consumed quotas

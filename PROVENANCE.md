@@ -1378,3 +1378,17 @@ source was read; no production matrix/mesh/FEM, model, label, fit or formal
 program ran. Mandatory ordinary software regression is separate.
 The direct dense construction's resource exclusion and NO_ADMISSIBLE_ROUTE
 are planning decisions, not numerical acceptance or learned acceleration.
+
+## D1 exact-physics resource-admission stop (2026-10-15)
+
+The owner-approved [D1](docs/validation/d1_physics_resource_feasibility.md) inspected
+TopoLab's existing context CNN, exact FEM/adjoint and prepared immutable setup as
+text, plus installed SciPy/Torch Python wrappers as text. Official SciPy splu,
+PyTorch2.14 Conv3d API documentation and the SuperLU project FAQ supplied interface
+context only;their native programs/workspaces were not evaluated or imported.
+No implementation was copied,translated,vendored or modified. Integer payload
+arithmetic is partial, not a native/lifetime upper bound or memory trial.
+The missing independent complete pre-input proof triggers STOP_UNKNOWN_PREFIT_BOUND.
+No integration implementation, old evidence/index/label/model read, formal call,
+FEM/fit/search/sealed access or scientific acceptance;all old provenance and
+numerical identities stay. Required ordinary software regression is separate.

@@ -11,13 +11,17 @@ accepted by the owner in the reassessment conversation. It changes delivery
 governance; it is not a new numerical experiment contract, scientific Gate or
 budget authorization.
 
-Current scheduling after R1 (2026-10-15): the
-[execution plan](TopoLab_v2_delivery_execution_plan.md) closes
-NO_ADMISSIBLE_ROUTE under existing authority. B4.52 is NOT_SELECTED_BY_R1;
-the unique next item is owner decision D1 on the proposed1260s/4GiB new
-integration-feasibility capability and limited access, NOT AUTHORIZED.
-Sections5–6 retain the original R1 scope/handoff as historical instructions;
-they do not authorize repeating closed R1. No old Gate/budget/quota/seal changes.
+Current scheduling after D1 (2026-10-15): R1's
+[execution plan](TopoLab_v2_delivery_execution_plan.md) remains historical
+NO_ADMISSIBLE_ROUTE under its then-current authority. The owner subsequently
+explicitly approved complete D1. [D1 closed](../validation/d1_physics_resource_feasibility.md)
+STOP_UNKNOWN_PREFIT_BOUND before implementation/real input; no formal call,
+no label/model/index read, new roles closed unlaunched0/1 and FULL60 retained.
+B4.52 remains NOT_SELECTED_BY_R1. The unique next owner decision is to close the
+current exact-physics rescue program under unchanged4GiB/prefit requirements
+(recommended); no executable successor or transferred budget/access/quota.
+Sections5–6 retain historical original R1 instructions, not authority to repeat
+R1/reopen D1. All old Gates, costs, UNKNOWN, quotas and seals remain.
 
 ## 1. Owner-confirmed goals
 

@@ -1,0 +1,202 @@
+{
+  "version": "topolab.v2.physics-resource-feasibility.v1",
+  "baseline_main": "42a6fdae96229fba0d53df252c4da89c03ca2775",
+  "authority": {
+    "owner_text": "批准完整 D1 提案",
+    "scope": "complete R1 Section6 D1 proposal",
+    "new_identity_approved": true,
+    "stopped_mechanism_limited_reconsideration_approved": true,
+    "incremental_ceiling_approved": true,
+    "eight_label_scope_approved": true,
+    "old_contracts_amended": false
+  },
+  "protocol": "d1_physics_resource_feasibility_protocol.md",
+  "registration_status": "INCOMPLETE_STOP_NO_REAL_ACCESS",
+  "admission_outcome": "STOP_UNKNOWN_PREFIT_BOUND",
+  "authored_after_static_gap_identified": true,
+  "formal_or_scientific_text_gate_created": false,
+  "execution_enabled": false,
+  "capability": {
+    "target": "unchanged context CNN -> exact current-prediction FEM objective -> backward",
+    "meshes": [
+      [
+        12,
+        6,
+        3
+      ],
+      [
+        24,
+        12,
+        6
+      ]
+    ],
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "largest_shape_bucket_batch": 8,
+    "batches_per_scale_seed": 1,
+    "full_prospective_population": [
+      432,
+      76
+    ],
+    "per_call_FEM_and_check_counts_order": "UNKNOWN_UNREGISTERED_STOP",
+    "optimizer_updates": false,
+    "epochs_fitting_checkpoint_selection": false,
+    "old_program_replay_or_retry": false,
+    "search_or_new_label": false
+  },
+  "input_scope": [
+    {
+      "case_id": "tlcase-v1-0079bd9f0d927e20866f2c73be19e1f57471576f7cd0494b6898a46f7fab9858",
+      "role": "expanded-train",
+      "literal_path": "UNKNOWN_UNREGISTERED_DENY",
+      "sha256": "UNKNOWN_UNREGISTERED_DENY",
+      "bytes": "UNKNOWN_UNREGISTERED_DENY"
+    },
+    {
+      "case_id": "tlcase-v1-01504c9e63d2dfa11017438a813a3dfd23f27f9f9997bb59edfc3a24a3d21f50",
+      "role": "expanded-train",
+      "literal_path": "UNKNOWN_UNREGISTERED_DENY",
+      "sha256": "UNKNOWN_UNREGISTERED_DENY",
+      "bytes": "UNKNOWN_UNREGISTERED_DENY"
+    },
+    {
+      "case_id": "tlcase-v1-03a2c40639cc65aedf22d7ddc65359616807735e87c680949b09638d4eaa1e8f",
+      "role": "expanded-train",
+      "literal_path": "UNKNOWN_UNREGISTERED_DENY",
+      "sha256": "UNKNOWN_UNREGISTERED_DENY",
+      "bytes": "UNKNOWN_UNREGISTERED_DENY"
+    },
+    {
+      "case_id": "tlcase-v1-04ab9b94039197973b9e3ca5b1a855528197f30cce70635b1c1014002673461c",
+      "role": "expanded-train",
+      "literal_path": "UNKNOWN_UNREGISTERED_DENY",
+      "sha256": "UNKNOWN_UNREGISTERED_DENY",
+      "bytes": "UNKNOWN_UNREGISTERED_DENY"
+    },
+    {
+      "case_id": "tlcase-v1-0ca7ef4d765a4e8403221471f98c061684e99dde777b047a1a3f5f0642fc47b6",
+      "role": "expanded-train",
+      "literal_path": "UNKNOWN_UNREGISTERED_DENY",
+      "sha256": "UNKNOWN_UNREGISTERED_DENY",
+      "bytes": "UNKNOWN_UNREGISTERED_DENY"
+    },
+    {
+      "case_id": "tlcase-v1-144d548fd53ff9798a62251e0d02258eda28d17fdf6fb87ff5979b3f0b904900",
+      "role": "expanded-train",
+      "literal_path": "UNKNOWN_UNREGISTERED_DENY",
+      "sha256": "UNKNOWN_UNREGISTERED_DENY",
+      "bytes": "UNKNOWN_UNREGISTERED_DENY"
+    },
+    {
+      "case_id": "tlcase-v1-0294749064eb3e7aacc57d5f4a3ce11b01133fb2e10d01fa44722dfdb3860f26",
+      "role": "expanded-train",
+      "literal_path": "UNKNOWN_UNREGISTERED_DENY",
+      "sha256": "UNKNOWN_UNREGISTERED_DENY",
+      "bytes": "UNKNOWN_UNREGISTERED_DENY"
+    },
+    {
+      "case_id": "tlcase-v1-0ea4104dcf6c16b35ef4c239eb34a1341a4e554813a1ad8c15cc1eade6d54768",
+      "role": "expanded-train",
+      "literal_path": "UNKNOWN_UNREGISTERED_DENY",
+      "sha256": "UNKNOWN_UNREGISTERED_DENY",
+      "bytes": "UNKNOWN_UNREGISTERED_DENY"
+    }
+  ],
+  "metadata_scope": "only exact admission/index-reference metadata for the eight named labels; never opened",
+  "other_inputs": "DENY: other labels,models,old raw panels,backups,validation,screen,final,conditional48/720,unused48",
+  "resource_limits": {
+    "incremental_charged_wall_seconds": 1260,
+    "producer_cap_seconds": 600,
+    "independent_cap_seconds": 600,
+    "native_allowance_inside_each_cap_seconds": 10,
+    "shared_FULL_reserve_seconds": 60,
+    "simultaneous_bytes": 4294967296,
+    "required_independent_bound_before_real_input": true,
+    "unknown_mandatory_term_stops": true
+  },
+  "admission_missing": [
+    "independent native Conv3d forward/backward workspace and saved-state lifetime bound",
+    "independent SuperLU fill/workspace and conversion lifetime bound",
+    "complete runtime,Python/storage,allocator and simultaneous process envelope",
+    "literal path/hash/byte/call-order/output assignments"
+  ],
+  "independent_prefit_proof": "UNKNOWN_NOT_ESTABLISHED",
+  "formal_role_disposition": {
+    "producer": {
+      "invocations": 0,
+      "maximum": 1,
+      "status": "CLOSED_UNLAUNCHED_NO_TRANSFER"
+    },
+    "independent": {
+      "invocations": 0,
+      "maximum": 1,
+      "status": "CLOSED_UNLAUNCHED_NO_TRANSFER"
+    },
+    "first_failure_consumes_launched_role": true,
+    "retry_reset_extension": false
+  },
+  "formal_source_freeze": "NOT_CREATED",
+  "actual_launch_preflight": "NOT_RUN_ADMISSION_STOP",
+  "production_root": "/Users/keith1117/Documents/TopoLab-data/v2-physics-resource-feasibility-v1",
+  "production_root_created": false,
+  "production_role_destinations": "UNASSIGNED_DENY",
+  "explicit_actions": {
+    "external_index_reads": 0,
+    "label_or_model_reads": 0,
+    "new_FEM_network_integration_fit_search_memory_trials": 0,
+    "old_formal_calls": 0,
+    "new_formal_calls": 0
+  },
+  "unexecuted_native_program_counters_timings_peak": "UNKNOWN_NOT_EXECUTED",
+  "accounting": {
+    "retained_K_seconds": "12721.16417100014444982",
+    "D1_shared_FULL_booked_seconds": "60",
+    "K_plus_booked_reserve_seconds": "12781.16417100014444982",
+    "K_plus_full_ceiling_scenario_not_spend_seconds": "13981.16417100014444982",
+    "other_history_and_all_new_software_CI_cost_peak": "UNKNOWN_NOT_ZERO_ADDITIONAL",
+    "old_all_paid_7200": "FAIL_KNOWN_PAID_FLOOR",
+    "complete_D1_resource_PASS_claim": false,
+    "unused_600_caps_are_FULL_reserves": false
+  },
+  "criteria_unchanged": {
+    "compliance_rtol": "1e-9",
+    "gradient_rtol": "1e-9",
+    "gradient_atol": "1e-10",
+    "projection_atol": "2e-11",
+    "physical_volume_atol": "1e-12",
+    "shift_sum_atol": "1e-10",
+    "FD_steps": [
+      "1e-4",
+      "2e-4"
+    ],
+    "FD_error_max": "1e-4",
+    "FD_floor": "1e-8",
+    "both_steps_active_sets_preserved": true
+  },
+  "preservation": {
+    "fixed_primary": "P/17_UNREPAIRED",
+    "scientific_gate": "FAIL",
+    "b4_51": "FAIL_PROCESS_SOURCE_FREEZE",
+    "old_quotas_costs_failures_UNKNOWN_and_all_seals": "UNCHANGED",
+    "full_fit_memory": "PENDING4GiB",
+    "B4_52": "NOT_SELECTED_BY_R1"
+  },
+  "source_text_sha256": {
+    "src/topolab/b2_12_context_cnn.py": "063bfa622ee2da494b2582f761f2a8f925c9cbb97e1bdd0f7b29ecd969e6ad07",
+    "src/topolab/offline_compliance.py": "d9c287ae6e90424d18168a3a0e677599d794fc8b796771ecbde7b7455fba5186",
+    "src/topolab/prepared_compliance.py": "848f59cf4657b446af5017d8619c92e03c827f0a00a7e1ff4f9dd4ab8d112de4",
+    "src/topolab/fem.py": "bf525efabd55091ef68893aa82ad8d10d4fa99314c3ef2cd348593abeb14cdc0",
+    "src/topolab/simp.py": "35e1e990b1485145a1746aa52096bab7f19070ef4870ada0336e7e6561936248",
+    "src/topolab/mesh.py": "966f00630387b3513165df32684ac1e3007bf2a9d331def0b21ee4164ca16440",
+    "src/topolab/b3_training.py": "c2e5c43c89bed2edc4599ff5be04c5805fc99b54501a6580bcd5f24d81cba02f",
+    "uv.lock": "9c84a5ab362e8848d7ccab0142e9fe33aee5700abf5866d843a4c9cb23920292",
+    "docs/planning/TopoLab_v2_delivery_execution_plan.md": "c32073c36d6f001ea67aa2dabdb86bdf28081da37e082a87cde81339fd962936"
+  },
+  "next_item": "OWNER_DECISION_CLOSE_CURRENT_EXACT_PHYSICS_RESCUE_PROGRAM",
+  "recommended_decision": "CLOSE_UNDER_UNCHANGED_4GiB_AND_INDEPENDENT_PREFIT_REQUIREMENTS",
+  "successor_authorized": false,
+  "successor_started": false
+}

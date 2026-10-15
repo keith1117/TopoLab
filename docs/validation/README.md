@@ -15,9 +15,12 @@ The owner-approved2026-10-15 [delivery reassessment](../planning/TopoLab_v2_deli
 is required reading before development. It changes scheduling, not scientific
 results. [R1 planning validation](r1_v2_delivery_execution_plan.md) records
 NO_ADMISSIBLE_ROUTE under current authority; B4.52 is NOT_SELECTED_BY_R1.
-The [execution plan's D1](../planning/TopoLab_v2_delivery_execution_plan.md#6-single-next-item-owner-decision-d1)
-is the unique next owner decision, NOT AUTHORIZED. No new experiment, budget,
-old formal call or sealed access follows; software CI is not scientific acceptance.
+The owner subsequently approved complete D1; [its admission report](d1_physics_resource_feasibility.md)
+closes STOP_UNKNOWN_PREFIT_BOUND before implementation/real input. New roles
+closed unlaunched0/1, FULL60 retained; no index/label/model read or formal call.
+Unique next owner route decision: close the current exact-physics rescue program
+under unchanged4GiB/prefit requirements (recommended). No executable successor,
+cap/quota transfer or scientific acceptance from software CI.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
