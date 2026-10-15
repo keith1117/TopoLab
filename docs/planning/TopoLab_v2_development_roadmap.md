@@ -136,17 +136,31 @@ receipt.22 limitations/14 combined real prerequisites/24 inherited obligations/
 12 historical bridges/16 stops remain TEXT ONLY. Scientific Gate **FAIL**,
 fixed P17 unrepaired,uniform default and full v2 delivery open remain.
 
-Next proposed **B4.51 bounded read-only real-certification executable and
-full-resource preregistration**, NOT STARTED/AUTHORIZED. New owner/finite TEXT
-contract FIRST; executable/domain/role/path/all-paid-cost/simultaneous-memory
-proof requirements only, before any implementation or real input. No old formal
-retry/reset,actual FEM/fit/search,new budget or sealed grant. Unchanged all-paid
-7200 infeasibility remains a blocker. Learned repair/independent confirmation/
-full new B4/compatible final remain before B5. Close B4.50 only,report the successor
-and STOP.
+B4.51 slice Gate **FAIL_PROCESS_SOURCE_FREEZE**:
+217 primary/404 independent document predicates,each first/only call,no retry.
+39 public TEXT/3 literal compact metadata/2 primary-only source texts;independent
+reads neither primary-only source,primary reviewer/result nor shared helper.
+18 executable/10 domain/5 future-role/12 resource requirements and14 unfilled real
+registration slots remain TEXT ONLY. Real release inadmissible;executable UNFROZEN,
+certificates/cost UNKNOWN_STOP,full fit PENDING4GiB. Scientific Gate **FAIL**,
+fixed P17 unrepaired,uniform default and full v2 delivery open remain.
+
+Frozen S02 applies: changing the reviewer after v1 freeze triggers STOP with no
+automatic alternative. Generating v2 and running the later TEXT checks did not
+restore protocol compliance. Overall slice Gate is FAIL_PROCESS_SOURCE_FREEZE;
+217/404 are retained post-stop document checks ONLY,not accepted protocol evidence.
+Both quotas are consumed1/1;no further formal call,source reset or retry follows.
+
+Next proposed **B4.52 bounded public executable-registration and full-resource
+guard software**, NOT STARTED/AUTHORIZED. New owner and finite NEW authored
+public-metadata contract FIRST. Only registration/resource guard software is
+proposed;no real executable implementation,input,certificate,fit,search,new paid
+cap,old formal retry/reset or sealed grant. Unchanged all-paid7200 infeasibility
+remains. Learned repair/independent confirmation/full new B4/compatible final
+remain before B5. Close B4.51 ONLY,report successor and STOP.
 
 Prepared: 2026-09-24
-Revised: 2026-10-14 (B4.50 combined public limitations and real prerequisites)
+Revised: 2026-10-14 (B4.51 real executable and full-resource preregistration)
 
 Related documents:
 
@@ -2244,6 +2258,55 @@ retry/reset,actual FEM/fit/search,new budget or sealed grant. Unchanged all-paid
 full new B4/compatible final remain before B5. Close B4.50 only,report the successor
 and STOP.
 
+### B4.51: Real executable and full-resource preregistration
+
+Frozen S02 applies: changing the reviewer after v1 freeze triggers STOP with no
+automatic alternative. Generating v2 and running the later TEXT checks did not
+restore protocol compliance. Overall slice Gate is FAIL_PROCESS_SOURCE_FREEZE;
+217/404 are retained post-stop document checks ONLY,not accepted protocol evidence.
+Both quotas are consumed1/1;no further formal call,source reset or retry follows.
+
+B4.51 slice Gate **FAIL_PROCESS_SOURCE_FREEZE**:
+217 primary/404 independent document predicates,each first/only call,no retry.
+39 public TEXT/3 literal compact metadata/2 primary-only source texts;independent
+reads neither primary-only source,primary reviewer/result nor shared helper.
+18 executable/10 domain/5 future-role/12 resource requirements and14 unfilled real
+registration slots remain TEXT ONLY. Real release inadmissible;executable UNFROZEN,
+certificates/cost UNKNOWN_STOP,full fit PENDING4GiB. Scientific Gate **FAIL**,
+fixed P17 unrepaired,uniform default and full v2 delivery open remain.
+
+The owner continued after closed B4.50/main729a69ec6de4/all3 CI/no open PR.
+Finite contract/protocol and44 exact TEXT paths froze before reviewers;separate
+42-input independent view excludes primary-only source/reviewer/result. All16
+inherited B4.50 objects/17 boundaries/22 L/14 C/24 O/12 R stay ENTIRELY unchanged.
+All future literal inputs/outputs UNASSIGNED_DENY,quotas UNALLOCATED_NO_GRANT;
+14 real fields UNKNOWN_STOP_UNFROZEN. This enumerates proof requirements,not a
+real executable algorithm or authority to fill unknowns with invented values.
+Known-paid12721.16417100014444982>7200 blocks unchanged all-paid feasibility even
+at zero additional work. All16 costs/8 simultaneous memory categories and full
+Q/A_hat/Y lifetimes remain independently unproved;no fit/memory-trial/budget grant.
+SAME force/space/positive stored denominator,BOTH Gram errors/all separate errors/
+triangles/outward stages and original loss/gradient/normalizer/fidelity remain.
+Native TEXT primary0.10s/27951104bytes,independent0.05s/25690112bytes pass only
+60s/256MiB bookkeeping caps;whole software cost/peak UNKNOWN_NOT_ZERO. Prefirst-
+call lint/v1 source admission FAIL retained at0/0;two style comparisons fixed
+before v2 freeze/first calls,no contract/criteria/inputs/roles/caps/formal retry.
+Old B4.50/49/47/43 quotas/failures/runtime UNKNOWN/paid history/memory/P17/seals
+remain. All5 checks/full unchanged pytest,13-path publication guards,every-upload/
+actual-squash review,protected exact-head/main CI/equal tested tree/owned cleanup/
+independent byte backup govern closure. No production,real input or numerical work.
+
+See [report](../validation/b4_51_real_certification_executable_full_resource_preregistration.md),
+[protocol](b4_51_real_certification_executable_full_resource_preregistration_protocol.md),[contract](b4_51_real_certification_executable_full_resource_preregistration_contract.json).
+
+Next proposed **B4.52 bounded public executable-registration and full-resource
+guard software**, NOT STARTED/AUTHORIZED. New owner and finite NEW authored
+public-metadata contract FIRST. Only registration/resource guard software is
+proposed;no real executable implementation,input,certificate,fit,search,new paid
+cap,old formal retry/reset or sealed grant. Unchanged all-paid7200 infeasibility
+remains. Learned repair/independent confirmation/full new B4/compatible final
+remain before B5. Close B4.51 ONLY,report successor and STOP.
+
 ### B5: One-time final comparison and project delivery gate
 
 Open the new ID cohort once after B4, followed by predeclared OOD and independent
@@ -2279,11 +2342,10 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.51 read-only real-certification executable/full-resource preregistration:**
-   NOT STARTED/AUTHORIZED;new owner/finite TEXT contract FIRST. Specify executable/
-   domain/roles/paths/all-paid-cost/simultaneous-memory proof requirements only.
-   No implementation,real input,old retry/reset,FEM/fit/search/new budget/sealed
-   grant. Unchanged all-paid7200 infeasibility remains. Close B4.50 only and stop.
+1. **Proposed B4.52 public registration/resource guard software:** NOT STARTED/
+   AUTHORIZED;new owner and finite NEW authored public-metadata contract FIRST.
+   No real executable/input/certificate/fit/search/new paid cap/old retry/reset/
+   sealed grant. Unchanged all-paid7200 infeasibility remains. Close B4.51 only.
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.

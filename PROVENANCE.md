@@ -1344,3 +1344,25 @@ certificate or numerical panel is evaluated. Supplied public A0/A_hat/Y/u are no
 real construction. No new external scientific/implementation source or Hack3D
 code/comment/structure/figure used. All old failures/UNKNOWN/paid costs/full-memory/
 loss/gradient/normalizer/P17/uniform/seals stay. See [report](docs/validation/b4_50_combined_public_certificate_limitations_real_prerequisites.md).
+
+## B4.51 real-executable and full-resource requirement preregistration
+
+The [protocol](docs/planning/b4_51_real_certification_executable_full_resource_preregistration_protocol.md) and
+[contract](docs/planning/b4_51_real_certification_executable_full_resource_preregistration_contract.json) freeze39 public TEXT/3 compact metadata/2 primary-only
+source texts BEFORE separately authored stdlib document reviewers.217/404 first-
+only JSON/hash/AST/Decimal50 predicates accept documentary consistency only.
+18 executable/10 domain/5 role-path/12 resource requirements leave all14 real
+slots UNKNOWN_STOP_UNFROZEN,no real executable algorithm,input,path/quota grant,
+new paid budget or fit-memory evaluation. Existing original intended-PSD/Gram/
+coercivity/residual/SAME-normalizer derivations remain conditional TEXT;original
+loss/gradient/normalizer and all old failures/unknowns/charges/seals stay. Failed
+prefirst-call lint/v1 source admission remains with original bytes;style-only v2
+freeze preceded both first calls,no formal retry. No upstream Hack3D material,
+new external scientific/implementation source or real data/model/label was used.
+See [report](docs/validation/b4_51_real_certification_executable_full_resource_preregistration.md).
+
+Frozen S02 applies: changing the reviewer after v1 freeze triggers STOP with no
+automatic alternative. Generating v2 and running the later TEXT checks did not
+restore protocol compliance. Overall slice Gate is FAIL_PROCESS_SOURCE_FREEZE;
+217/404 are retained post-stop document checks ONLY,not accepted protocol evidence.
+Both quotas are consumed1/1;no further formal call,source reset or retry follows.

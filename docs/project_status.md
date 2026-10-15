@@ -1,19 +1,37 @@
 # Current project status
 
-Updated:2026-10-14. Latest completed documentary slice B4.50; technical publication
-closure is bound by the external final_release_closure.json.
+Updated:2026-10-14. Latest completed documentary slice B4.51;technical publication
+closure is bound by external final_release_closure.json.
 
-B4.50 documentary Gate **PASS_TEXT_ONLY_COMBINED_PUBLIC_LIMITATIONS**:
-250 primary/244 independent predicates, each first/only invocation, no retry.
-36 bound public TEXT inputs/3 literal compact metadata/4 primary-only source
-texts; the independent bundle excludes primary-only source,primary reviewer and
-receipt.22 limitations/14 combined real prerequisites/24 inherited obligations/
-12 historical bridges/16 stops remain TEXT ONLY. Scientific Gate **FAIL**,
+B4.51 slice Gate **FAIL_PROCESS_SOURCE_FREEZE**:
+217 primary/404 independent document predicates,each first/only call,no retry.
+39 public TEXT/3 literal compact metadata/2 primary-only source texts;independent
+reads neither primary-only source,primary reviewer/result nor shared helper.
+18 executable/10 domain/5 future-role/12 resource requirements and14 unfilled real
+registration slots remain TEXT ONLY. Real release inadmissible;executable UNFROZEN,
+certificates/cost UNKNOWN_STOP,full fit PENDING4GiB. Scientific Gate **FAIL**,
 fixed P17 unrepaired,uniform default and full v2 delivery open remain.
 
-See [report](validation/b4_50_combined_public_certificate_limitations_real_prerequisites.md),
-[protocol](planning/b4_50_combined_public_certificate_limitations_real_prerequisites_protocol.md),
-[contract](planning/b4_50_combined_public_certificate_limitations_real_prerequisites_contract.json).
+See [report](validation/b4_51_real_certification_executable_full_resource_preregistration.md),
+[protocol](planning/b4_51_real_certification_executable_full_resource_preregistration_protocol.md),
+[contract](planning/b4_51_real_certification_executable_full_resource_preregistration_contract.json).
+
+Frozen S02 applies: changing the reviewer after v1 freeze triggers STOP with no
+automatic alternative. Generating v2 and running the later TEXT checks did not
+restore protocol compliance. Overall slice Gate is FAIL_PROCESS_SOURCE_FREEZE;
+217/404 are retained post-stop document checks ONLY,not accepted protocol evidence.
+Both quotas are consumed1/1;no further formal call,source reset or retry follows.
+
+## Executable and resource admission
+
+All16 inherited B4.50 objects are ENTIRELY equal,including22 limitations/14 C/
+24 O/12 historical R rows,17 boundaries and all criteria/failures/cost/memory.
+Future role inputs/outputs UNASSIGNED_DENY,quotas UNALLOCATED_NO_GRANT;all14 real
+source/library/call/order/domain/population/path/quota/cost/dimension/lifetime/
+prefit/through-exit slots UNKNOWN_STOP_UNFROZEN. This preregisters requirements,
+not a real algorithm. No implementation or real input was authorized or performed.
+Known-paid12721.16417100014444982>7200 blocks unchanged all-paid feasibility even
+at zero additional work. No new cap,history exclusion or memory trial follows.
 
 ## Preserved evidence and remaining delivery
 
@@ -26,7 +44,7 @@ all separate assembly/load/residual/norm errors,triangles and outward transfers
 stay. Rounded zero erases no error; tiny nonzero never certifies unmodified U.
 
 All four inherited criteria/failure/cost/full-memory objects,17 boundaries,
-24 real obligations,12 historical bridges and B4.43--48 records equal B4.49
+24 real obligations,12 historical bridges and B4.43--49 records equal B4.50
 ENTIRELY. B4.48 TEXT233/231,B4.47 public4328/104/quota1/1/1 remain. B4.43
 FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/all10 unexecuted/no original receipt/
 runtime UNKNOWN_NOT_RECORDED/cause UNKNOWN_NOT_DIAGNOSED,B4.42 FAIL and B4.31
@@ -48,27 +66,32 @@ campaign/no third/reflection stop and final/conditional48/720/unused48 seals sta
 Original loss/gradient/intercept/SAME normalizer unchanged;no actual geometry/
 FEM/construction/integration/fit/search/new budget/B5 or sealed grant.
 
-Historical v1.0.0/N1/N2/P1/M0/A1/A3/B3/B4.1 remain complete within their scopes.
-Full v2 still requires learned same-quality end-to-end evidence.
-[Retained history](development_history.md).
+Historical B4.50 TEXT250/244 first-only remains documentary. Historical
+v1.0.0/N1/N2/P1/M0/A1/A3/B3/B4.1 remain complete in scope;full v2 still needs
+learned same-quality end-to-end evidence. [Retained history](development_history.md).
 
-## Resources and publication boundary
+## Software resources and retained failure
 
-Own text-native primary0.12s/29360128bytes,independent0.05s/25493504bytes PASS
-60s/256MiB per-role caps. Whole software cost/peak UNKNOWN_NOT_ZERO. Prefreeze
-syntax and line-width failures,original sources/logs/exits/observed costs remain;
-neither formal call was repeated. Software resources prove no old or full-fit
-memory result. All five mandatory checks PASS/full1951 tests in668.61s,unchanged population/
-tolerances. Publication guards,protected exact-head/main CI,equal tested trees,
-owned cleanup and independent external byte backup govern technical closure.
+Native primary0.10/0.04/0.01 real/user/sys seconds,RSS27951104bytes;
+independent0.05/0.03/0.01,RSS25690112bytes. Both observed exits0 and native
+startup-through-exit<=60s/256MiB pass only the TEXT bookkeeping caps. Whole software
+cost/peak UNKNOWN_NOT_ZERO;software RSS fills no historic/full-fit gap.
+
+One failed prefirst-call lint and an incorrectly generated v1 source-freeze record
+are retained as FAIL_PRECALL_SOURCE_ADMISSION at quotas0/0. Two style spellings
+were corrected before v2 source freeze/first formal calls;no contract/standard/
+input/role/cap changed. Both formal calls were first/only and passed.
+Local sync/Ruff/mypy/full1951 pytest(704.31s)/diff checks PASS;unchanged population/
+tolerances. This never overrides process FAIL. Existing publication guards,
+protected exact-head/main CI,equal tested trees,owned cleanup and independent
+external byte backup govern technical closure.
 
 ## Current stop and proposed successor
 
-Next proposed **B4.51 bounded read-only real-certification executable and
-full-resource preregistration**, NOT STARTED/AUTHORIZED. New owner/finite TEXT
-contract FIRST; executable/domain/role/path/all-paid-cost/simultaneous-memory
-proof requirements only, before any implementation or real input. No old formal
-retry/reset,actual FEM/fit/search,new budget or sealed grant. Unchanged all-paid
-7200 infeasibility remains a blocker. Learned repair/independent confirmation/
-full new B4/compatible final remain before B5. Close B4.50 only,report the successor
-and STOP.
+Next proposed **B4.52 bounded public executable-registration and full-resource
+guard software**, NOT STARTED/AUTHORIZED. New owner and finite NEW authored
+public-metadata contract FIRST. Only registration/resource guard software is
+proposed;no real executable implementation,input,certificate,fit,search,new paid
+cap,old formal retry/reset or sealed grant. Unchanged all-paid7200 infeasibility
+remains. Learned repair/independent confirmation/full new B4/compatible final
+remain before B5. Close B4.51 ONLY,report successor and STOP.

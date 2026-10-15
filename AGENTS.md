@@ -21,19 +21,26 @@ acceleration/full-delivery claim. Historical v1.0.0 stays complete with negative
 M1/M2 evidence. B3 data/B4.1 fitting passed; original B4.2 and scientific Gate
 failed. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
 
-Latest **B4.50 text limitations/real prerequisites**:Gate
-PASS_TEXT_ONLY_COMBINED_PUBLIC_LIMITATIONS;primary250/independent244,each ONCE/no
-retry.36 public TEXT/3 compact metadata/4 primary-only source texts;independent
-reads no primary-only source/reviewer/result.22 limitations/14 combined real
-prerequisites remain TEXT ONLY. See [report](docs/validation/b4_50_combined_public_certificate_limitations_real_prerequisites.md),
-[protocol](docs/planning/b4_50_combined_public_certificate_limitations_real_prerequisites_protocol.md),
-[contract](docs/planning/b4_50_combined_public_certificate_limitations_real_prerequisites_contract.json).
-B4.49 public12/5 certificates/7 stops/6059 predicates/455 RN/143 roots/quota1/1,
-B4.48 TEXT233/231/B4.47 public4328/104/quota1/1/1/B4.43 FAIL/quota1/1/all10
-unexecuted/no original receipt/runtime+cause UNKNOWN/B4.42 FAIL remain.
-Scientific FAIL/P17/uniform/seals stay;real executable UNFROZEN/certificates-cost
-UNKNOWN_STOP. Whole software cost/peak UNKNOWN_NOT_ZERO;software RSS fills no
-old/full-fit gap. BOTH factor errors/all separate residual errors/SAME denominator stay.
+Latest **B4.51 real executable/full-resource preregistration**:Gate
+FAIL_PROCESS_SOURCE_FREEZE;primary217/independent404,
+217/404 are post-stop TEXT results ONLY,no protocol acceptance. S02 frozen
+reviewer changed after v1 freeze;v2 cannot restore compliance,no further formal
+call/reset/retry. Each ONCE/no retry.39 public TEXT/3 metadata/2 primary-only source texts;
+independent reads no primary-only source/reviewer/result.18 executable/10 domain/
+5 future-role/12 resource requirements,14 real slots UNKNOWN_STOP_UNFROZEN;
+inputs/outputs UNASSIGNED_DENY/quotas UNALLOCATED_NO_GRANT. See
+[report](docs/validation/b4_51_real_certification_executable_full_resource_preregistration.md),
+[protocol](docs/planning/b4_51_real_certification_executable_full_resource_preregistration_protocol.md),
+[contract](docs/planning/b4_51_real_certification_executable_full_resource_preregistration_contract.json).
+Prefirst-call lint/v1 source admission FAIL retained at0/0;style-only v2 freeze
+precedes both first calls,no contract/criteria/input/role/cap change. All16 B4.50
+objects/17 boundaries/22 L/14 C/24 O/12 R remain ENTIRELY unchanged.
+B4.50 TEXT250/244/B4.49 public12/6059/455/143/quota1/1/B4.48 TEXT233/231/
+B4.47 public4328/104/quota1/1/1/B4.43 FAIL/quota1/1/all10 unexecuted/no original
+receipt/runtime+cause UNKNOWN/B4.42 FAIL remain. Scientific FAIL/P17/uniform/seals
+stay. Real release inadmissible/executable UNFROZEN/certificates-cost UNKNOWN_STOP;
+whole software cost/peak UNKNOWN_NOT_ZERO. BOTH factor errors/all separate
+residual errors/SAME denominator stay;software RSS fills no old/full-fit gap.
 
 Latest numerical/audit B4.30 scientific FAIL retains R17quality1.00197094375>
 1.001/target mean1.01605313078>1.0/P-R failures1/3/1. Reflection stops; old
@@ -48,12 +55,13 @@ full fit PENDING4GiB. Software RSS fills no historical/full-fit gap. Original
 loss/gradient/normalizer unchanged. Exact-FEM candidate stops; no cache/order,
 epoch/population/frequency search, fit or actual geometry/FEM/integration follows.
 
-All final/conditional48/720/unused48 evidence remains sealed. Proposed B4.51
-read-only real-certification executable/full-resource preregistration is NOT
-STARTED/AUTHORIZED;new owner/finite TEXT contract FIRST. No implementation/real
-input,formal retry/reset,FEM/fit/search/new budget/sealed grant. Unchanged all-paid
-7200 infeasibility remains. Learned repair/independent confirmation/full new B4/
-compatible final remain before B5. Close B4.50 only and stop.
+All final/conditional48/720/unused48 evidence remains sealed. Proposed B4.52
+public executable-registration/full-resource guard software is NOT STARTED/
+AUTHORIZED;new owner and finite NEW public-metadata contract FIRST. No real
+executable implementation/input/certificate,fit/search,new paid cap,old retry/
+reset or sealed grant. Unchanged all-paid7200 infeasibility remains. Learned
+repair/independent confirmation/full new B4/compatible final remain before B5.
+Close B4.51 only and stop.
 
 Read [project status](docs/project_status.md) and linked latest evidence at session
 start. Retrieve relevant [history](docs/development_history.md) when needed.
