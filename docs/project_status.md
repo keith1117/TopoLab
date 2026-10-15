@@ -3,8 +3,10 @@
 Updated:2026-10-15. Owner-approved delivery reassessment is the latest planning
 maintenance; latest completed B4 slice remains B4.51. Historical v1.0.0 is an
 available interim delivery; the positive learned-acceleration goal for full v2
-remains. Read the [reassessment and mandatory progress rules](planning/TopoLab_v2_delivery_reassessment.md)
-before further development. This maintenance starts no experiment or R1.
+remains. Read the [English reassessment and mandatory progress rules](planning/TopoLab_v2_delivery_reassessment.md)
+before further development; the [Chinese companion](planning/TopoLab_v2_交付复盘与后续开发约束.md)
+supports owner reading. The bilingual edition preserves the same decisions and
+starts no experiment or R1.
 B4.51's original technical closure remains bound by its external receipt.
 
 B4.51 slice Gate **FAIL_PROCESS_SOURCE_FREEZE**:
@@ -117,3 +119,6 @@ Planning-maintenance checks/publication/backup receipts remain external at
 `/Users/keith1117/Documents/TopoLab-data/v2-delivery-reassessment-2026-10-15`.
 Its final closure must bind the actual PR, merged main, checks and reviewed paths;
 software CI or this planning change cannot repair any scientific/process FAIL.
+
+Bilingual documentation checks and publication receipts are recorded separately at
+`/Users/keith1117/Documents/TopoLab-data/v2-delivery-reassessment-bilingual-2026-10-15`.

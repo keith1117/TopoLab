@@ -9,7 +9,7 @@ At session start, slice start and context recovery, read these files in order:
 3. `docs/reference_baseline.md`
 4. `docs/planning/TopoLab_reimplementation_strategy.md`
 5. `docs/planning/TopoLab_development_timeline_and_resources.md`
-6. `docs/planning/TopoLab_v2_delivery_reassessment.md`
+6. `docs/planning/TopoLab_v2_delivery_reassessment.md` (English working reference)
 7. `docs/planning/TopoLab_v2_development_roadmap.md`
 8. `docs/project_status.md`
 9. The contracts and latest validation reports relevant to the requested slice.
@@ -27,8 +27,9 @@ Primary/independent quotas are each1/1 consumed; no further formal call/reset/re
 See [report](docs/validation/b4_51_real_certification_executable_full_resource_preregistration.md)
 and [current status](docs/project_status.md) for all retained evidence and stops.
 
-The owner-approved [delivery reassessment](docs/planning/TopoLab_v2_delivery_reassessment.md)
-changes current scheduling only. B4.52 is DEFERRED_PENDING_R1. Next on a new
+The owner-approved [English delivery reassessment](docs/planning/TopoLab_v2_delivery_reassessment.md)
+is the development reference, with a [Chinese reading companion](docs/planning/TopoLab_v2_交付复盘与后续开发约束.md).
+It changes current scheduling only. B4.52 is DEFERRED_PENDING_R1. Next on a new
 instruction is R1: one bounded metadata-only critical-path feasibility decision
 and delivery execution plan; R1 has not started. Do not repeat the retrospective
 or create another automatic text/toy/guard chain. Require a capability/blocker

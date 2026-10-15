@@ -3,7 +3,8 @@
 英文工作版：[v2 Development Roadmap](./TopoLab_v2_development_roadmap.md)
 
 2026-10-15 所有者确认：v1 是可展示的阶段交付，完整 v2 仍以正向学习加速的旗舰水平为目标。
-后续先读[交付复盘与强制工作规则](./TopoLab_v2_delivery_reassessment.md)。
+后续先读[交付复盘与强制工作规则（中文版）](./TopoLab_v2_交付复盘与后续开发约束.md)，
+开发时参考其[英文工作版](./TopoLab_v2_delivery_reassessment.md)。
 当前排期取代下方历史后继提议：B4.52 暂缓，下一项是尚未开始的 R1 有限关键路径决策。
 这次文档维护不启动 R1、实验或新预算；英文路线图继续控制科学 Gate 顺序。
 
