@@ -37,10 +37,12 @@ STOP_UNKNOWN_PREFIT_BOUND before implementation or real input: no independent
 complete native/workspace/lifetime bound. See [report](docs/validation/d1_physics_resource_feasibility.md).
 No formal call or label/model/index read; new roles closed unlaunched0/1, FULL60
 retained, no unused cap/quota transfer or reopening. Full fit stays PENDING4GiB.
-The unique next item is an owner route decision: close the current exact-physics
-rescue program under unchanged4GiB/prefit requirements (recommended). No executable
-successor. A plain “continue” only displays that decision. No automatic text/toy/
-guard chain or alternate platform slice; review material progress now.
+The owner has closed the current exact-physics rescue program, retaining4GiB,
+independent preflight and the full-v2 goal. See the [closure handoff](docs/planning/TopoLab_v2_rescue_program_closure_handoff.md).
+There is no executable successor. The unique next item needs explicit owner
+authority: one bounded alternative-learning-route proposal, as scoped in that
+handoff. It is not started or authorized; “continue” displays the proposal only.
+No automatic text/toy/guard chain, D1 reopening or alternate platform slice.
 
 Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility.
 All old failures/costs/UNKNOWN, fixed models, stopped mechanisms, consumed quotas
