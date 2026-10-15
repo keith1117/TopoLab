@@ -12,11 +12,16 @@ FAIL_PROCESS_SOURCE_FREEZE;217/404 are post-stop TEXT only, no protocol acceptan
 See the [failed report](../validation/b4_51_real_certification_executable_full_resource_preregistration.md).
 
 Latest planning decision: [R1 delivery execution plan](TopoLab_v2_delivery_execution_plan.md),
-**NO_ADMISSIBLE_ROUTE under current authority**. B4.52 is NOT_SELECTED_BY_R1.
-Unique next item: its explicit owner decision D1 on a proposed NEW1260s/4GiB
-integration-feasibility capability and eight-train-label access, NOT AUTHORIZED.
-No new experiment/budget/retry/reset/sealed grant; “continue” does not approve D1.
-Historical protocol successor wording remains unchanged, with its original context.
+**NO_ADMISSIBLE_ROUTE under its historical authority**. B4.52 is NOT_SELECTED_BY_R1.
+The owner subsequently approved complete D1; its
+[protocol](d1_physics_resource_feasibility_protocol.md),
+[contract](d1_physics_resource_feasibility_contract.json) and
+[report](../validation/d1_physics_resource_feasibility.md) close
+STOP_UNKNOWN_PREFIT_BOUND before implementation/real input. New roles closed
+unlaunched0/1 and FULL60 retained; no budget/quota transfer. Unique next owner
+route decision: close the current exact-physics rescue program under unchanged
+4GiB/prefit requirements (recommended). No executable successor or automatic
+text/toy/guard/platform slice. Historical successor wording retains its context.
 
 ## Overall project plans
 

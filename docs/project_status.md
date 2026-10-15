@@ -1,143 +1,106 @@
 # Current project status
 
-Updated:2026-10-15. R1's bounded delivery decision is complete:
-**NO_ADMISSIBLE_ROUTE under current contracts/evidence/authority**. See the
-[execution plan](planning/TopoLab_v2_delivery_execution_plan.md) and
-[R1 validation](validation/r1_v2_delivery_execution_plan.md).
-The unique next item is **owner decision D1**, not an executable successor.
-Latest completed B4 slice remains B4.51. Historical v1.0.0 is an
-available interim delivery; the positive learned-acceleration goal for full v2
-remains. Read the [English reassessment and mandatory progress rules](planning/TopoLab_v2_delivery_reassessment.md)
-before further development; the [Chinese companion](planning/TopoLab_v2_交付复盘与后续开发约束.md)
-supports owner reading. R1 starts no experiment and grants no new resources.
-B4.51's original technical closure remains bound by its external receipt.
+Updated:2026-10-15. **D1 closed STOP_UNKNOWN_PREFIT_BOUND**, after the owner
+explicitly approved complete D1. See [report](validation/d1_physics_resource_feasibility.md),
+[protocol](planning/d1_physics_resource_feasibility_protocol.md) and
+[contract](planning/d1_physics_resource_feasibility_contract.json).
+The new identity/1260 charged seconds/4GiB/eight-label scope and limited exact-
+physics reconsideration were authorized. The independent complete simultaneous
+allocation/lifetime upper bound was not established. Its required UNKNOWN stop
+applies before implementation/real input. D1 delivered no accepted composed
+network/physics/backward capability. This is resource UNKNOWN/failed admission,
+not a claim that all exact-physics implementations exceed4GiB.
 
-B4.51 slice Gate **FAIL_PROCESS_SOURCE_FREEZE**:
-217 primary/404 independent document predicates,each first/only call,no retry.
-39 public TEXT/3 literal compact metadata/2 primary-only source texts;independent
-reads neither primary-only source,primary reviewer/result nor shared helper.
-18 executable/10 domain/5 future-role/12 resource requirements and14 unfilled real
-registration slots remain TEXT ONLY. Real release inadmissible;executable UNFROZEN,
-certificates/cost UNKNOWN_STOP,full fit PENDING4GiB. Scientific Gate **FAIL**,
-fixed P17 unrepaired,uniform default and full v2 delivery open remain.
+**Unique next item: owner route decision whether to close the current exact-
+physics rescue program under unchanged4GiB/prefit requirements (recommended).**
+D1 is already stopped; this decision concerns the route, not approval to obey STOP.
+No executable successor, default second capability/text/toy/guard slice, reopened
+D1, cap/quota transfer or new platform slice follows “continue”. Keep usable v1
+and the open full-v2 flagship goal. A later materially different scientific route
+needs a concrete proposal and separate explicit authority. A2.3/A2.4/A4 retain
+independent acceptance, requiring their own instruction.
 
-See [report](validation/b4_51_real_certification_executable_full_resource_preregistration.md),
-[protocol](planning/b4_51_real_certification_executable_full_resource_preregistration_protocol.md),
-[contract](planning/b4_51_real_certification_executable_full_resource_preregistration_contract.json).
+## Actual D1 actions and missing prerequisites
 
-Frozen S02 applies: changing the reviewer after v1 freeze triggers STOP with no
-automatic alternative. Generating v2 and running the later TEXT checks did not
-restore protocol compliance. Overall slice Gate is FAIL_PROCESS_SOURCE_FREEZE;
-217/404 are retained post-stop document checks ONLY,not accepted protocol evidence.
-Both quotas are consumed1/1;no further formal call,source reset or retry follows.
+Worktree `/Users/keith1117/.codex/worktrees/a99d/TopoLab`, baseline main
+42a6fdae96229fba0d53df252c4da89c03ca2775, deliverable branch
+`docs/d1-physics-resource-admission`; no primary-checkout edit or second worktree.
+Source/dependency wrappers were inspected as text. There were0 old external
+research/index/label/model reads,0 full-size FEM/network/fit/search/memory trials,
+0 old formal calls and0 new producer/independent calls. Native program counters,
+correctness/FD, actual timings/peak and full-fit forecast are UNKNOWN_NOT_EXECUTED.
+No independent formal audit PASS or scientific acceptance is claimed.
 
-## Executable and resource admission
+Native Conv3d forward/backward saved-state/workspace, SuperLU fill/workspace,
+controller/runtime/allocator, Python/storage and transient lifetime bounds remain
+UNKNOWN. Explicit tensor payloads and B4.17's2287564048-byte sampled population
+array estimate cannot certify the eight-category simultaneous peak. Literal
+input paths/hashes/bytes, FEM/check counts/order, role output paths, actual launch
+preflight and source freeze remain unregistered. The production root is absent;
+no missing receipt is interpreted as successful exit. New roles close unlaunched
+0/1 each with no transferable opportunity. No integration implementation follows
+this failed prerequisite; no frozen-source mutation or post-STOP formal call.
 
-All16 inherited B4.50 objects are ENTIRELY equal,including22 limitations/14 C/
-24 O/12 historical R rows,17 boundaries and all criteria/failures/cost/memory.
-Future role inputs/outputs UNASSIGNED_DENY,quotas UNALLOCATED_NO_GRANT;all14 real
-source/library/call/order/domain/population/path/quota/cost/dimension/lifetime/
-prefit/through-exit slots UNKNOWN_STOP_UNFROZEN. This preregisters requirements,
-not a real algorithm. No implementation or real input was authorized or performed.
-Known-paid12721.16417100014444982>7200 blocks unchanged all-paid feasibility even
-at zero additional work. No new cap,history exclusion or memory trial follows.
+## All-paid accounting and route result
 
-## Preserved evidence and remaining delivery
+R1's [execution plan](planning/TopoLab_v2_delivery_execution_plan.md) remains
+NO_ADMISSIBLE_ROUTE under its historical authority. Known-paid diagnostic subtotal
+K=12721.16417100014444982>7200 permanently fails the unchanged all-paid condition.
+D1 retains the shared FULL60 conservatively: K+60=12781.16417100014444982,
+plus all additional history and every new software/CI/publication cost/UNKNOWN.
+K+1260=13981.16417100014444982 was a maximum-ceiling scenario, not spent time.
+Unused producer/audit600 caps are not FULL reservations or measured calls.
+Whole D1/software cost and peak remain UNKNOWN_NOT_ZERO; no resource PASS claim.
+No old cost exclusion, cap/ledger reset or full-v2 budget allocation.
 
-B4.49 retains PASS_PUBLIC_COMBINED_DIAGNOSTIC_ONLY/12 systems/5 certificates/
-7 prescribed stops/12 audits/6059 predicates/455 RN proofs/143 fixed80 root proofs,
-producer/independent1/1/no retry;51 focused/1951 full source checks stay software
-only. Prescribed A0/A_hat/Y/u and exact tiny intended PSD/energy/SAME denominator
-do not construct or certify real Hex8. BOTH factor errors/complete discrepancy,
-all separate assembly/load/residual/norm errors,triangles and outward transfers
-stay. Rounded zero erases no error; tiny nonzero never certifies unmodified U.
+Direct canonical dense certification remains paper-infeasible: large full Q
+alone55037657088>4294967296 bytes. This excludes that construction, not every
+possible certificate. Exact physics remains inadmissible with the current proof;
+D1 closes at its prescribed UNKNOWN stop. **B4.52 is NOT_SELECTED_BY_R1**.
+No material scientific/resource blocker closed, so make the explicit route
+decision now instead of allocating another default proof/guard/fixture slice.
 
-All four inherited criteria/failure/cost/full-memory objects,17 boundaries,
-24 real obligations,12 historical bridges and B4.43--49 records equal B4.50
-ENTIRELY. B4.48 TEXT233/231,B4.47 public4328/104/quota1/1/1 remain. B4.43
-FAIL_FORMAL_PRODUCER/FAIL_INCOMPLETE/quota1/1/all10 unexecuted/no original receipt/
-runtime UNKNOWN_NOT_RECORDED/cause UNKNOWN_NOT_DIAGNOSED,B4.42 FAIL and B4.31
-premerge process FAIL remain. No historical runtime/cause or quota is repaired.
+## Preserved scientific and process evidence
 
-Original B4.2/fixed-primary confirmations remain FAIL. Scientific B4.30
-FAIL/R17quality1.0019709437499813>1.001/target mean
-1.016053130777518>1.0/P-R failures1/3/1 remain; pooled sum cannot substitute.
-All69 B4.23 failures/57546.0720687792>7200/known-added58142.252069,B4.20 FAIL/
-B4.19 UNKNOWN and B4.24/28 memory gaps remain. Old7323.1004352501081506 includes
-failed191.9666532080154866/BOTH FULL180;Q31 once80.29939475003629922/separate
-7403.39983000014444982 stay. Known-paid12721.16417100014444982>7200 remains
-diagnostic/all-paid FAIL,no cap/ledger reset. All16 first/failure-inclusive cost
-categories/3 seeds/200 FULL epochs/432+76/factor1.25 and UNKNOWN required maxima
-remain. Real executable UNFROZEN/certificates-cost UNKNOWN_STOP;full Q additional
-8*m*m/A_hat+Y16*m*n/all8 simultaneous full fit PENDING4GiB4294967296bytes.
-Software RSS fills no historic/full-fit gap. Closed3/3/B4.30 two calls one
-campaign/no third/reflection stop and final/conditional48/720/unused48 seals stay.
-Original loss/gradient/intercept/SAME normalizer unchanged;no actual geometry/
-FEM/construction/integration/fit/search/new budget/B5 or sealed grant.
+Historical v1.0.0/N1/N2/P1/M0/A1/A3/B3/B4.1 remain complete in scope; uniform
+is default. Full v2 still needs positive same-quality learned end-to-end evidence.
+Original B4.2 and fixed-primary confirmations remain FAIL; P/17 stays unrepaired.
+B4.30 R17quality1.0019709437499813>1.001, target mean1.016053130777518>1.0,
+P/R failures1/3/1 and pooled0.9853173206553424 remain; pooled sum cannot replace mean.
+All69 B4.23 predicate failures, B4.20 FAIL, B4.19 UNKNOWN, B4.24/28 missing
+memory/exit proof and full-fit PENDING4GiB remain.
 
-Historical B4.50 TEXT250/244 first-only remains documentary. Historical
-v1.0.0/N1/N2/P1/M0/A1/A3/B3/B4.1 remain complete in scope;full v2 still needs
-learned same-quality end-to-end evidence. [Retained history](development_history.md).
+B4.51 stays **FAIL_PROCESS_SOURCE_FREEZE**: S02 frozen-reviewer mutation;
+217/404 are post-stop TEXT only, consumed1/1 quotas, no call/reset/retry.
+Real reciprocal executable UNFROZEN/certificates-cost UNKNOWN_STOP and all14 real
+registration slots remain. B4.42 FAIL_PRIMARY_CHECKER, B4.43 FAIL_FORMAL_PRODUCER/
+FAIL_INCOMPLETE/runtime UNKNOWN_NOT_RECORDED/cause UNKNOWN_NOT_DIAGNOSED and
+B4.31 premerge process failure stay. Public B4.47/49 and documentary B4.50
+passes retain only their original scope; software CI never repairs these failures.
+See [B4.51 report](validation/b4_51_real_certification_executable_full_resource_preregistration.md)
+and [history](development_history.md).
 
-## Software resources and retained failure
+Old7323.1004352501081506 includes failed191.9666532080154866 and BOTH FULL180;
+Q31 once80.29939475003629922/separate7403.39983000014444982 remain.
+57546.0720687792/58142.252069 are projections, not spend. All16 cost categories,
+3 seeds17/29/43,200 FULL epochs,432+76,factor1.25 and required UNKNOWN maxima
+remain. Original loss/gradient/intercept/SAME denominator/tolerances stay.
+Old3/3 closed, B4.30 two administrative calls/one campaign/no third and reflection
+stop remain. Final/conditional48/720/unused48 stay sealed. Full new learned B4,
+independent confirmation and compatible final contract remain before B5.
 
-Native primary0.10/0.04/0.01 real/user/sys seconds,RSS27951104bytes;
-independent0.05/0.03/0.01,RSS25690112bytes. Both observed exits0 and native
-startup-through-exit<=60s/256MiB pass only the TEXT bookkeeping caps. Whole software
-cost/peak UNKNOWN_NOT_ZERO;software RSS fills no historic/full-fit gap.
+## Software/publication closure
 
-One failed prefirst-call lint and an incorrectly generated v1 source-freeze record
-are retained as FAIL_PRECALL_SOURCE_ADMISSION at quotas0/0. Two style spellings
-were corrected before v2 source freeze/first formal calls;no contract/standard/
-input/role/cap changed. Both formal TEXT calls were first/only and returned positive checks after STOP;
-there is no protocol acceptance.
-Local sync/Ruff/mypy/full1951 pytest(704.31s)/diff checks PASS;unchanged population/
-tolerances. This never overrides process FAIL. Existing publication guards,
-protected exact-head/main CI,equal tested trees,owned cleanup and independent
-external byte backup govern technical closure.
+Numerical source/tests/tolerances/fixtures/locks/CI and public README stay unchanged.
+All five mandatory checks, reviewed paths/every-upload/actual-squash guards,
+protected exact-head and merged-main CI, equal tested trees, owned cleanup and
+new-record byte backup govern technical closure. D1 software/publication records:
+`/Users/keith1117/Documents/TopoLab-data/d1-physics-resource-feasibility-software-2026-10-15`.
+Its final closure binds actual checks/PR/main/CI/guards/backup. Software/authoring/
+CI cost/peak UNKNOWN_NOT_ZERO remains separate and additional; no scientific proof.
 
-## Current stop and next work
-
-R1 compares query repair, exact-FEM training and fixed-anchor reciprocal training.
-It closes the unchanged all-paid7200 route at zero added cost: known-paid exceeds
-the cap by5521.16417100014444982 seconds. Direct canonical dense-stack/full-Q
-extension also fails paper memory: large Q alone55037657088>4294967296 bytes;
-this excludes that construction, not every possible real certificate. Exact
-training's full simultaneous memory and new maxima remain UNKNOWN/PENDING.
-No scientific Gate passed. **B4.52 is NOT_SELECTED_BY_R1**, unstarted/unauthorized;
-its frozen historical proposal remains unchanged.
-
-**Unique next item: owner decision D1**, specified in
-[execution-plan Section6](planning/TopoLab_v2_delivery_execution_plan.md#6-single-next-item-owner-decision-d1).
-Approve or decline a NEW exact-physics network/backward resource-integration
-feasibility proposal: incremental1260 charged seconds (600 producer+600
-independent+FULL60), simultaneous4GiB, only eight named train labels and frozen
-admission metadata, no optimizer updates/fitting/old campaign replay/sealed
-access. New identity, stopped-mechanism reconsideration, budget and limited
-access all require explicit owner decisions and a finite contract before work.
-The added ceiling would give known subtotal13981.16417100014444982 plus
-additional history/UNKNOWN, never an old7200 PASS. No full-v2 spending promise.
-A plain “continue” displays D1; it does not approve it. No R2/R3 or automatic
-alternative platform/public/guard slice is scheduled. A2.3–A2.4/A4 remain
-separately acceptable backlog, requiring their own instruction.
-
-Known-paid above unchanged7200, real certification/full-resource unknowns, fixed
-P/17, all old failures/quotas and seals remain. No new budget, real input/FEM/fit/
-search/memory trial, old formal retry/reset or sealed access is granted. Learned
-repair and independent confirmation/full new B4/compatible final remain before B5.
-Platform milestones stay separately deliverable and need their own scope/validation.
-
-R1 read no old external evidence (allowlist/read set empty), ran no formal or
-production numerical program and changed no numerical source/test/tolerance.
-New software/publication records remain external at
-`/Users/keith1117/Documents/TopoLab-data/r1-v2-delivery-execution-plan-2026-10-15`.
-Its final closure binds actual PR/main/CI/guards/backup. R1 stops without
-executing D1; retain the assigned app worktree for later instructions.
-
-Planning-maintenance checks/publication/backup receipts remain external at
-`/Users/keith1117/Documents/TopoLab-data/v2-delivery-reassessment-2026-10-15`.
-Its final closure must bind the actual PR, merged main, checks and reviewed paths;
-software CI or this planning change cannot repair any scientific/process FAIL.
-
-Bilingual documentation checks and publication receipts are recorded separately at
-`/Users/keith1117/Documents/TopoLab-data/v2-delivery-reassessment-bilingual-2026-10-15`.
+R1 publication records remain external at
+`/Users/keith1117/Documents/TopoLab-data/r1-v2-delivery-execution-plan-2026-10-15`;
+its PR192/main42a6fdae/all3 CI closed. R1 plan/report and all historical frozen
+contracts/reports retain their bytes. D1 opens no old evidence or backup member.
+Close only this D1 identity, retain the assigned worktree and stop.

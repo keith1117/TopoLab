@@ -84,9 +84,14 @@ is mandatory at session/slice start and context recovery. Preserve usable interi
 platform delivery while the full-v2 positive ML Gate remains open. Current status
 and the English roadmap set current scheduling; old frozen successors remain
 historical evidence. [R1](planning/TopoLab_v2_delivery_execution_plan.md) closed
-NO_ADMISSIBLE_ROUTE under current authority; B4.52 is NOT_SELECTED_BY_R1.
-The unique next item is its explicit owner decision D1, not an executable slice
-or a budget/access grant inferred from “continue”.
+NO_ADMISSIBLE_ROUTE under its historical authority; B4.52 is NOT_SELECTED_BY_R1.
+The owner subsequently approved complete D1, which
+[closed STOP_UNKNOWN_PREFIT_BOUND](validation/d1_physics_resource_feasibility.md)
+before implementation/real input. Its new roles closed unlaunched0/1;FULL60 stays
+charged and unused caps/quotas do not transfer. The unique next item is an owner
+route decision on closing the current exact-physics rescue program under unchanged
+4GiB/prefit requirements (recommended), not an executable slice. “Continue” neither
+reopens D1 nor grants another budget/access or default proof/guard/platform slice.
 
 Before a slice, identify the delivery blocker/capability, baseline, acceptance,
 dependencies, resource feasibility and failure disposition. A known impossible

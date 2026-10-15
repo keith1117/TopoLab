@@ -9,11 +9,14 @@
 本文记录所有者在本对话中认可的复盘、新期望和后续工作规则，属于交付治理调整，
 不是新的数值实验合同、科研 Gate 或预算授权。
 
-R1 收尾后的当前排期（2026-10-15）：[交付执行计划英文版](TopoLab_v2_delivery_execution_plan.md)
-在现有权限下结论为 NO_ADMISSIBLE_ROUTE；B4.52 为 NOT_SELECTED_BY_R1。
-唯一下项是所有者决定 D1：是否批准新的1260秒/4GiB完整尺寸集成可行性能力及有限访问提案，
-尚未授权。第5–6节保留原始 R1 范围与交接提示词的历史语境，不授权重做已关闭的 R1。
-旧 Gate、预算、配额和封存均不改变。
+D1 收尾后的当前排期（2026-10-15）：[R1 执行计划](TopoLab_v2_delivery_execution_plan.md)
+保留其当时权限下 NO_ADMISSIBLE_ROUTE 的历史结论。所有者随后明确批准完整 D1；
+[D1 报告](../validation/d1_physics_resource_feasibility.md)记录 STOP_UNKNOWN_PREFIT_BOUND：
+完整独立同时内存上界未建立，在实现/真实输入前停止；正式调用、索引/标签/模型读取均为0，
+新角色未启动0/1并关闭，FULL60保留。B4.52仍为 NOT_SELECTED_BY_R1。
+唯一下项为所有者路线决定：是否关闭当前精确物理救援程序，保留4GiB/独立预检要求（建议关闭）。
+没有可执行后继，不转移未用预算、访问或配额。第5–6节保留原始 R1 历史指令，
+不授权重做 R1 或重开 D1；旧 Gate、费用、UNKNOWN、配额与封存不改变。
 
 ## 1. 所有者确认的目标
 
