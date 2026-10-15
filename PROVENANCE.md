@@ -1366,3 +1366,15 @@ automatic alternative. Generating v2 and running the later TEXT checks did not
 restore protocol compliance. Overall slice Gate is FAIL_PROCESS_SOURCE_FREEZE;
 217/404 are retained post-stop document checks ONLY,not accepted protocol evidence.
 Both quotas are consumed1/1;no further formal call,source reset or retry follows.
+
+## R1 delivery feasibility decision (2026-10-15)
+
+The [R1 plan](docs/planning/TopoLab_v2_delivery_execution_plan.md) derives integer
+paper storage floors from TopoLab's existing Hex8/Voigt/Gauss conventions,
+B4.38/40 stack equations and committed full-Q public constructor as TEXT only.
+Cost arithmetic uses versioned B4.34/51 components with Decimal precision50.
+No old external evidence, upstream Hack3D content or new external scientific
+source was read; no production matrix/mesh/FEM, model, label, fit or formal
+program ran. Mandatory ordinary software regression is separate.
+The direct dense construction's resource exclusion and NO_ADMISSIBLE_ROUTE
+are planning decisions, not numerical acceptance or learned acceleration.

@@ -11,9 +11,11 @@ interim delivery and the positive full-v2 goal. B4.51 remains
 FAIL_PROCESS_SOURCE_FREEZE;217/404 are post-stop TEXT only, no protocol acceptance.
 See the [failed report](../validation/b4_51_real_certification_executable_full_resource_preregistration.md).
 
-Current next work: **R1 critical-path feasibility decision and delivery execution
-plan**, one bounded metadata-only planning slice on a new instruction; NOT STARTED.
-B4.52 is DEFERRED_PENDING_R1. No new experiment/budget/retry/reset/sealed grant.
+Latest planning decision: [R1 delivery execution plan](TopoLab_v2_delivery_execution_plan.md),
+**NO_ADMISSIBLE_ROUTE under current authority**. B4.52 is NOT_SELECTED_BY_R1.
+Unique next item: its explicit owner decision D1 on a proposed NEW1260s/4GiB
+integration-feasibility capability and eight-train-label access, NOT AUTHORIZED.
+No new experiment/budget/retry/reset/sealed grant; “continue” does not approve D1.
 Historical protocol successor wording remains unchanged, with its original context.
 
 ## Overall project plans
@@ -25,6 +27,7 @@ Historical protocol successor wording remains unchanged, with its original conte
 | Timeline and resources | [Timeline](TopoLab_development_timeline_and_resources.md) | [开发周期与资源评估](TopoLab_开发周期与资源评估.md) |
 | Active v2 delivery | [Development roadmap](TopoLab_v2_development_roadmap.md) | [开发路线图](TopoLab_v2_开发路线图.md) |
 | Mandatory delivery reassessment | [Retrospective, progress rules and R1 handoff](TopoLab_v2_delivery_reassessment.md) | [交付复盘与后续开发约束](TopoLab_v2_交付复盘与后续开发约束.md) |
+| R1 delivery decision and execution plan | [Acceptance, three routes and owner decision D1](TopoLab_v2_delivery_execution_plan.md) | [当前中文结论与唯一下一步](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 
 The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.

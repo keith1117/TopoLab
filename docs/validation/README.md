@@ -13,9 +13,11 @@ Scientific FAIL/fixed P17/uniform, all historical costs/UNKNOWN and seals remain
 
 The owner-approved2026-10-15 [delivery reassessment](../planning/TopoLab_v2_delivery_reassessment.md)
 is required reading before development. It changes scheduling, not scientific
-results: B4.52 is DEFERRED_PENDING_R1; next on a fresh instruction is one bounded
-R1 critical-path decision and execution plan, NOT STARTED. No new experiment,
-budget, old formal call or sealed access follows this planning maintenance.
+results. [R1 planning validation](r1_v2_delivery_execution_plan.md) records
+NO_ADMISSIBLE_ROUTE under current authority; B4.52 is NOT_SELECTED_BY_R1.
+The [execution plan's D1](../planning/TopoLab_v2_delivery_execution_plan.md#6-single-next-item-owner-decision-d1)
+is the unique next owner decision, NOT AUTHORIZED. No new experiment, budget,
+old formal call or sealed access follows; software CI is not scientific acceptance.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the

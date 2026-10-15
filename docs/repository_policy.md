@@ -83,7 +83,10 @@ The owner-approved [delivery reassessment](planning/TopoLab_v2_delivery_reassess
 is mandatory at session/slice start and context recovery. Preserve usable interim
 platform delivery while the full-v2 positive ML Gate remains open. Current status
 and the English roadmap set current scheduling; old frozen successors remain
-historical evidence. B4.52 is deferred pending the finite R1 decision.
+historical evidence. [R1](planning/TopoLab_v2_delivery_execution_plan.md) closed
+NO_ADMISSIBLE_ROUTE under current authority; B4.52 is NOT_SELECTED_BY_R1.
+The unique next item is its explicit owner decision D1, not an executable slice
+or a budget/access grant inferred from “continue”.
 
 Before a slice, identify the delivery blocker/capability, baseline, acceptance,
 dependencies, resource feasibility and failure disposition. A known impossible
