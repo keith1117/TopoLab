@@ -128,14 +128,25 @@ UNFROZEN, full-fit memory PENDING4GiB and learned repair unresolved; fixed P17/u
 51 focused checks and 1951 source full tests PASS separately. No loss/gradient/
 normalizer change, actual FEM/fit/search/new budget/sealed access or old quota reset.
 
-Next proposed **B4.50 bounded read-only combined public certificate limitations
-and real-certification prerequisites**, NOT STARTED/AUTHORIZED. New owner/finite
-TEXT contract FIRST; no B4.49/B4.47/B4.43 retry/reset or real FEM/fit/search/new
-production budget/sealed grant. Learned repair/independent confirmation/full new
-B4/compatible final remain before B5. Close B4.49 only, report the successor and STOP.
+B4.50 documentary Gate **PASS_TEXT_ONLY_COMBINED_PUBLIC_LIMITATIONS**:
+250 primary/244 independent predicates, each first/only invocation, no retry.
+36 bound public TEXT inputs/3 literal compact metadata/4 primary-only source
+texts; the independent bundle excludes primary-only source,primary reviewer and
+receipt.22 limitations/14 combined real prerequisites/24 inherited obligations/
+12 historical bridges/16 stops remain TEXT ONLY. Scientific Gate **FAIL**,
+fixed P17 unrepaired,uniform default and full v2 delivery open remain.
+
+Next proposed **B4.51 bounded read-only real-certification executable and
+full-resource preregistration**, NOT STARTED/AUTHORIZED. New owner/finite TEXT
+contract FIRST; executable/domain/role/path/all-paid-cost/simultaneous-memory
+proof requirements only, before any implementation or real input. No old formal
+retry/reset,actual FEM/fit/search,new budget or sealed grant. Unchanged all-paid
+7200 infeasibility remains a blocker. Learned repair/independent confirmation/
+full new B4/compatible final remain before B5. Close B4.50 only,report the successor
+and STOP.
 
 Prepared: 2026-09-24
-Revised: 2026-10-14 (B4.49 first-only public combined certificate evidence)
+Revised: 2026-10-14 (B4.50 combined public limitations and real prerequisites)
 
 Related documents:
 
@@ -2189,6 +2200,50 @@ TEXT contract FIRST; no B4.49/B4.47/B4.43 retry/reset or real FEM/fit/search/new
 production budget/sealed grant. Learned repair/independent confirmation/full new
 B4/compatible final remain before B5. Close B4.49 only, report the successor and STOP.
 
+### B4.50: Combined public certificate limitations and real prerequisites
+
+B4.50 documentary Gate **PASS_TEXT_ONLY_COMBINED_PUBLIC_LIMITATIONS**:
+250 primary/244 independent predicates, each first/only invocation, no retry.
+36 bound public TEXT inputs/3 literal compact metadata/4 primary-only source
+texts; the independent bundle excludes primary-only source,primary reviewer and
+receipt.22 limitations/14 combined real prerequisites/24 inherited obligations/
+12 historical bridges/16 stops remain TEXT ONLY. Scientific Gate **FAIL**,
+fixed P17 unrepaired,uniform default and full v2 delivery open remain.
+
+The owner explicitly requested one document slice after closed B4.49/main
+a375c111b70e/all main CI/no open PR. Contract/protocol/43 exact text paths froze
+before new reviewer implementation;isolated locked sources froze before first
+calls. Independent has a separate39-input bundle and reads no primary-only
+source/reviewer/result. Supplied public factors/witnesses,u and11/10 normalizer
+do not certify real geometry/PSD/representation/construction/assembly/residual/
+coercivity/energy/SAME stored C_s. BOTH Gram errors/all separate errors/triangles/
+outward stages remain;diagnostics replace no original loss/gradient/normalizer.
+
+All13 inherited objects,17 boundaries,24 O obligations,12 historical R bridges
+equal B4.49 completely. B4.49 public12/5/7/6059/455/143/quota1/1 and all old
+failures/unknowns/paid costs/FULL reserves/closed quotas/P17/uniform/seals stay.
+Known-paid12721.16417100014444982>7200 remains diagnostic/all-paid FAIL;real
+executable UNFROZEN/certificates-cost UNKNOWN_STOP/full Q/all8 fit PENDING4GiB.
+Native primary0.12s/29360128bytes,independent0.05s/25493504bytes pass text-only
+60s/256MiB caps;software RSS fills no historic/full-fit gap. Prefreeze syntax/
+line-width failures remain;both formal calls pass first invocation,no retry.
+Whole software cost/peak UNKNOWN_NOT_ZERO. No actual input/FEM/integration/fit/
+search/new paid budget or sealed grant. Only13 reviewed paths publish;all5 checks,
+full unchanged tests,inspected every-upload/actual-squash guards,protected exact-
+head/main CI/equal tested tree/owned cleanup/independent backup govern closure.
+
+See [report](../validation/b4_50_combined_public_certificate_limitations_real_prerequisites.md),
+[protocol](b4_50_combined_public_certificate_limitations_real_prerequisites_protocol.md),[contract](b4_50_combined_public_certificate_limitations_real_prerequisites_contract.json).
+
+Next proposed **B4.51 bounded read-only real-certification executable and
+full-resource preregistration**, NOT STARTED/AUTHORIZED. New owner/finite TEXT
+contract FIRST; executable/domain/role/path/all-paid-cost/simultaneous-memory
+proof requirements only, before any implementation or real input. No old formal
+retry/reset,actual FEM/fit/search,new budget or sealed grant. Unchanged all-paid
+7200 infeasibility remains a blocker. Learned repair/independent confirmation/
+full new B4/compatible final remain before B5. Close B4.50 only,report the successor
+and STOP.
+
 ### B5: One-time final comparison and project delivery gate
 
 Open the new ID cohort once after B4, followed by predeclared OOD and independent
@@ -2224,10 +2279,11 @@ and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
 cost remains failed and complete native resource acceptance is INCOMPLETE.
 All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
 
-1. **Proposed B4.50 read-only combined public certificate limitations:**
-   NOT STARTED/AUTHORIZED; new owner/finite TEXT contract FIRST. Preserve B4.49
-   public scope/all first failures/costs/UNKNOWN and seals. No formal retry/reset
-   or actual FEM/fit/search/new budget/sealed grant. Close B4.49 only and stop.
+1. **Proposed B4.51 read-only real-certification executable/full-resource preregistration:**
+   NOT STARTED/AUTHORIZED;new owner/finite TEXT contract FIRST. Specify executable/
+   domain/roles/paths/all-paid-cost/simultaneous-memory proof requirements only.
+   No implementation,real input,old retry/reset,FEM/fit/search/new budget/sealed
+   grant. Unchanged all-paid7200 infeasibility remains. Close B4.50 only and stop.
 2. **Any later correctness/objective-feasibility intervention:** preserve all
    evidence and require independent correctness, fidelity, compute and full
    training-memory proof. The unchanged exact-FEM candidate remains stopped.

@@ -2,18 +2,19 @@
 
 英文工作版：[v2 Development Roadmap](./TopoLab_v2_development_roadmap.md)
 
-状态：**v2仍在开发，科研Gate FAIL；uniform默认、P17未修复。** 最新B4.49公共
-组合诊断证书Gate PASS_PUBLIC_COMBINED_DIAGNOSTIC_ONLY，主/独立各首次一次，额度1/1不重试。
-12个冻结小系统/唯一算法，完成12例/12独立审计/6059谓词/455舍入证明。
-干净已合并源码及全部最新PR/main CI先于正式调用；51项聚焦/1951完整源码测试
-仅为软件验证。全部误差、两项Gram差异及SAME分母保持，原始loss/gradient不变。
-真实程序UNFROZEN、证书成本UNKNOWN_STOP、完整训练PENDING4GiB。B4.43及科研失败、
-旧费用/UNKNOWN/内存缺口/封存不变；软件资源不能替代旧或完整训练证明。
-参见[B4.49报告](../validation/b4_49_public_combined_diagnostic_certificate.md)。
+状态：**v2仍在开发，科研Gate FAIL；uniform默认、P17未修复。** 最新B4.50文本
+Gate PASS_TEXT_ONLY_COMBINED_PUBLIC_LIMITATIONS，主250/独立244谓词，各首次一次、无重试。
+36份公共文本/3份元数据/4份主角色源码；独立目录不含主源码或回执。22项局限、
+14项组合真实前提、24项旧义务和12项历史桥接仅为TEXT。B4.49公开12例/5证书/7停止/
+6059谓词/455舍入/143根证明及所有旧失败、费用、UNKNOWN、封存保持。
+真实程序UNFROZEN、证书成本UNKNOWN_STOP、完整训练PENDING4GiB；原始loss/gradient/
+SAME分母及全部独立误差不变。软件RSS不填补旧或完整训练缺口。
+参见[B4.50报告](../validation/b4_50_combined_public_certificate_limitations_real_prerequisites.md)。
 
-下一片仅提议B4.50只读组合公共证书局限与真实前提，未开始/未授权，需新指令及
-有限TEXT合同先行。不重试旧额度、不做真实FEM/fit/搜索/新预算/封存访问。
-只收尾B4.49后停止，科研修复及完整新B4/兼容最终合同仍在B5之前。
+下一片仅提议B4.51只读真实认证可执行程序与完整资源预注册，未开始/未授权，需新指令
+和有限TEXT合同先行。仅列执行器、角色、路径、全部费用及同时内存证明要求；不做实现、
+真实输入/FEM/fit/搜索/旧重试或额度重置/新预算/封存访问。原7200全付费不可行结论保持。
+只收尾B4.50后停止，科研修复及独立确认/完整新B4/兼容最终合同仍在B5之前。
 
 本文件是中文阅读伴随版。早期阶段描述保留其历史语境；当前停止条件以
 [项目状态](../project_status.md)为入口，完整切片进度与执行顺序以
@@ -21,7 +22,7 @@
 [验证报告](../validation/README.md)为准。`v1.0.0` 与 M1/M2 的负面结论继续保留。
 
 制定日期：2026-09-24
-修订日期：2026-10-14（B4.48 公共算术局限与真实证书前提，逐片等待）
+修订日期：2026-10-14（B4.50 公共组合证书局限与真实前提，逐片等待）
 
 相关文档：
 

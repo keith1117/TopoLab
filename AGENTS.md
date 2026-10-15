@@ -21,16 +21,19 @@ acceleration/full-delivery claim. Historical v1.0.0 stays complete with negative
 M1/M2 evidence. B3 data/B4.1 fitting passed; original B4.2 and scientific Gate
 failed. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
 
-Latest **B4.49 combined public diagnostic certificate**:Gate PASS_PUBLIC_COMBINED_DIAGNOSTIC_ONLY,
-producer/independent1/1/no retry;12 cases/12 audits/6059 predicates/455 RN proofs.
-51 focused/1951 full source checks remain software only. See [report](docs/validation/b4_49_public_combined_diagnostic_certificate.md),
-[protocol](docs/planning/b4_49_public_combined_diagnostic_certificate_protocol.md),
-[contract](docs/planning/b4_49_public_combined_diagnostic_certificate_contract.json).
-All separate residual/assembly errors, BOTH factor errors and SAME denominator stay.
-B4.48 TEXT233/231/B4.47 public4328/104/quota1/1/1/B4.43 FAIL/quota1/1/all10 unexecuted/
-no original receipt/runtime+cause UNKNOWN/B4.42 FAIL remain. Scientific FAIL/P17/
-uniform/seals stay; real executable UNFROZEN/certificates-cost UNKNOWN_STOP.
-Whole software cost/peak UNKNOWN_NOT_ZERO; software RSS fills no old/full-fit gap.
+Latest **B4.50 text limitations/real prerequisites**:Gate
+PASS_TEXT_ONLY_COMBINED_PUBLIC_LIMITATIONS;primary250/independent244,each ONCE/no
+retry.36 public TEXT/3 compact metadata/4 primary-only source texts;independent
+reads no primary-only source/reviewer/result.22 limitations/14 combined real
+prerequisites remain TEXT ONLY. See [report](docs/validation/b4_50_combined_public_certificate_limitations_real_prerequisites.md),
+[protocol](docs/planning/b4_50_combined_public_certificate_limitations_real_prerequisites_protocol.md),
+[contract](docs/planning/b4_50_combined_public_certificate_limitations_real_prerequisites_contract.json).
+B4.49 public12/5 certificates/7 stops/6059 predicates/455 RN/143 roots/quota1/1,
+B4.48 TEXT233/231/B4.47 public4328/104/quota1/1/1/B4.43 FAIL/quota1/1/all10
+unexecuted/no original receipt/runtime+cause UNKNOWN/B4.42 FAIL remain.
+Scientific FAIL/P17/uniform/seals stay;real executable UNFROZEN/certificates-cost
+UNKNOWN_STOP. Whole software cost/peak UNKNOWN_NOT_ZERO;software RSS fills no
+old/full-fit gap. BOTH factor errors/all separate residual errors/SAME denominator stay.
 
 Latest numerical/audit B4.30 scientific FAIL retains R17quality1.00197094375>
 1.001/target mean1.01605313078>1.0/P-R failures1/3/1. Reflection stops; old
@@ -45,11 +48,12 @@ full fit PENDING4GiB. Software RSS fills no historical/full-fit gap. Original
 loss/gradient/normalizer unchanged. Exact-FEM candidate stops; no cache/order,
 epoch/population/frequency search, fit or actual geometry/FEM/integration follows.
 
-All final/conditional48/720/unused48 evidence remains sealed. Proposed B4.50
-read-only combined public certificate limitations/real prerequisites is NOT STARTED/
-AUTHORIZED; new owner/finite TEXT contract FIRST. No formal retry/reset or real
-FEM/fit/search/new budget/sealed grant. Learned repair/independent confirmation/
-full new B4/compatible final remain before B5. Close B4.49 only and stop.
+All final/conditional48/720/unused48 evidence remains sealed. Proposed B4.51
+read-only real-certification executable/full-resource preregistration is NOT
+STARTED/AUTHORIZED;new owner/finite TEXT contract FIRST. No implementation/real
+input,formal retry/reset,FEM/fit/search/new budget/sealed grant. Unchanged all-paid
+7200 infeasibility remains. Learned repair/independent confirmation/full new B4/
+compatible final remain before B5. Close B4.50 only and stop.
 
 Read [project status](docs/project_status.md) and linked latest evidence at session
 start. Retrieve relevant [history](docs/development_history.md) when needed.

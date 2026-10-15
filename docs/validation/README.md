@@ -5,26 +5,25 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
-B4.49 public diagnostic Gate **PASS_PUBLIC_COMBINED_DIAGNOSTIC_ONLY**, scientific Gate **FAIL**.
-Producer/independent each first/only invocation, quotas1/1 consumed/no retry.
-All 12 frozen authored systems match their preregistered outcomes: five
-certificates and seven prescribed stops. ONE recipe; 12 independent case audits,
-6059 predicates, 455 RN-even proofs and 143 fixed80 root proofs. Complete failed
-prefixes, stopping reasons and unexecuted suffixes remain external.
-Public intended PSD/coercivity/residual-corrected energy and SAME stored denominator
-remain diagnostic, with all separate errors/BOTH Gram discrepancies/triangles and
-outward stages. Real certificates and cost remain UNKNOWN_STOP; the real executable is
-UNFROZEN, full-fit memory PENDING4GiB and learned repair unresolved; fixed P17/uniform/all seals stay.
-51 focused checks and 1951 source full tests PASS separately. No loss/gradient/
-normalizer change, actual FEM/fit/search/new budget/sealed access or old quota reset.
 
-See [B4.49 report](b4_49_public_combined_diagnostic_certificate.md).
+B4.50 documentary Gate **PASS_TEXT_ONLY_COMBINED_PUBLIC_LIMITATIONS**:
+250 primary/244 independent predicates, each first/only invocation, no retry.
+36 bound public TEXT inputs/3 literal compact metadata/4 primary-only source
+texts; the independent bundle excludes primary-only source,primary reviewer and
+receipt.22 limitations/14 combined real prerequisites/24 inherited obligations/
+12 historical bridges/16 stops remain TEXT ONLY. Scientific Gate **FAIL**,
+fixed P17 unrepaired,uniform default and full v2 delivery open remain.
 
-Next proposed **B4.50 bounded read-only combined public certificate limitations
-and real-certification prerequisites**, NOT STARTED/AUTHORIZED. New owner/finite
-TEXT contract FIRST; no B4.49/B4.47/B4.43 retry/reset or real FEM/fit/search/new
-production budget/sealed grant. Learned repair/independent confirmation/full new
-B4/compatible final remain before B5. Close B4.49 only, report the successor and STOP.
+See [B4.50 report](b4_50_combined_public_certificate_limitations_real_prerequisites.md).
+
+Next proposed **B4.51 bounded read-only real-certification executable and
+full-resource preregistration**, NOT STARTED/AUTHORIZED. New owner/finite TEXT
+contract FIRST; executable/domain/role/path/all-paid-cost/simultaneous-memory
+proof requirements only, before any implementation or real input. No old formal
+retry/reset,actual FEM/fit/search,new budget or sealed grant. Unchanged all-paid
+7200 infeasibility remains a blocker. Learned repair/independent confirmation/
+full new B4/compatible final remain before B5. Close B4.50 only,report the successor
+and STOP.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
@@ -195,3 +194,5 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 - [B4.48 public arithmetic limitations and real-certification prerequisites](b4_48_public_arithmetic_limitations_real_certification.md)
 
 - [B4.49 public combined diagnostic certificate SOURCE/formal evidence](b4_49_public_combined_diagnostic_certificate.md)
+
+- [B4.50 combined public certificate limitations and real prerequisites](b4_50_combined_public_certificate_limitations_real_prerequisites.md)
