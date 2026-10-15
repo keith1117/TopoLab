@@ -1566,3 +1566,37 @@ Every first/failure/unknown cost and prefix remains external; software-only scop
 all old failures/P17/ledgers/memory/seals unchanged. Protected evidence CI/guards/
 owned cleanup/independent backup govern technical closure. Proposed B4.50 TEXT
 limitations NOT STARTED/AUTHORIZED; close B4.49 only and STOP.
+
+## B4.50 — combined public certificate limitations and real prerequisites (2026-10-14)
+
+B4.50 documentary Gate **PASS_TEXT_ONLY_COMBINED_PUBLIC_LIMITATIONS**:
+250 primary/244 independent predicates, each first/only invocation, no retry.
+36 bound public TEXT inputs/3 literal compact metadata/4 primary-only source
+texts; the independent bundle excludes primary-only source,primary reviewer and
+receipt.22 limitations/14 combined real prerequisites/24 inherited obligations/
+12 historical bridges/16 stops remain TEXT ONLY. Scientific Gate **FAIL**,
+fixed P17 unrepaired,uniform default and full v2 delivery open remain.
+
+All inherited four objects/17 boundaries/24 obligations/12 historical bridges
+equal B4.49;its12/5/7/6059/455/143 first-only public evidence and every old
+FAIL/UNKNOWN/paid ledger/reserve/full-memory/P17/seal remain. Native primary
+0.12s/29360128bytes,independent0.05s/25493504bytes pass60s/256MiB text caps only.
+Prefreeze syntax/line-width failures and all observed/unknown costs remain;
+whole software cost/peak UNKNOWN_NOT_ZERO,no numerical/production/real access.
+[Report](validation/b4_50_combined_public_certificate_limitations_real_prerequisites.md),
+[protocol](planning/b4_50_combined_public_certificate_limitations_real_prerequisites_protocol.md),
+[contract](planning/b4_50_combined_public_certificate_limitations_real_prerequisites_contract.json).
+
+All5 checks,unchanged full tests,existing every-commit/actual-squash guards,
+protected exact-head/main CI/equal trees/owned cleanup/independent external backup
+govern technical closure. Next proposed **B4.51 bounded read-only real-certification executable and
+full-resource preregistration**, NOT STARTED/AUTHORIZED. New owner/finite TEXT
+contract FIRST; executable/domain/role/path/all-paid-cost/simultaneous-memory
+proof requirements only, before any implementation or real input. No old formal
+retry/reset,actual FEM/fit/search,new budget or sealed grant. Unchanged all-paid
+7200 infeasibility remains a blocker. Learned repair/independent confirmation/
+full new B4/compatible final remain before B5. Close B4.50 only,report the successor
+and STOP.
+
+B4.50 local validation:all5 commands PASS,full1951 tests in668.61s;unchanged
+population/tolerances. Exact-head/main CI and backup remain release requirements.

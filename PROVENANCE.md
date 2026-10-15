@@ -1330,3 +1330,17 @@ B4.49 first-only formal evidence from clean protected merged `1a05cca3ce1bb78e63
 New public software observations prove no actual FEM/fidelity/cost/full-memory
 certificate or learned repair. All failed/unknown/paid historical evidence and
 original loss/gradient/SAME normalizer stay; no new external source used.
+
+## B4.50 combined public limitations and conditional real prerequisites
+
+The [protocol](docs/planning/b4_50_combined_public_certificate_limitations_real_prerequisites_protocol.md) and
+[contract](docs/planning/b4_50_combined_public_certificate_limitations_real_prerequisites_contract.json) freeze36 public TEXT/3 literal compact
+metadata/4 primary-only source texts before separately authored stdlib reviewers.
+250/244 first-only document/hash/AST/Decimal50 predicates check consistency only;
+independent reads no primary-only source,primary reviewer/result or shared helper.
+Existing original TopoLab intended-PSD/Gram/coercivity/residual/SAME-normalizer
+derivations remain conditional TEXT;no new equation implementation,real value,
+certificate or numerical panel is evaluated. Supplied public A0/A_hat/Y/u are not
+real construction. No new external scientific/implementation source or Hack3D
+code/comment/structure/figure used. All old failures/UNKNOWN/paid costs/full-memory/
+loss/gradient/normalizer/P17/uniform/seals stay. See [report](docs/validation/b4_50_combined_public_certificate_limitations_real_prerequisites.md).
