@@ -4,24 +4,16 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-B4.50 documentary Gate **PASS_TEXT_ONLY_COMBINED_PUBLIC_LIMITATIONS**:
-250 primary/244 independent predicates, each first/only invocation, no retry.
-36 bound public TEXT inputs/3 literal compact metadata/4 primary-only source
-texts; the independent bundle excludes primary-only source,primary reviewer and
-receipt.22 limitations/14 combined real prerequisites/24 inherited obligations/
-12 historical bridges/16 stops remain TEXT ONLY. Scientific Gate **FAIL**,
-fixed P17 unrepaired,uniform default and full v2 delivery open remain.
+The owner-approved2026-10-15 [delivery reassessment](TopoLab_v2_delivery_reassessment.md)
+is required reading before further development. It preserves v1 as a usable
+interim delivery and the positive full-v2 goal. B4.51 remains
+FAIL_PROCESS_SOURCE_FREEZE;217/404 are post-stop TEXT only, no protocol acceptance.
+See the [failed report](../validation/b4_51_real_certification_executable_full_resource_preregistration.md).
 
-See [B4.50 report](../validation/b4_50_combined_public_certificate_limitations_real_prerequisites.md).
-
-Next proposed **B4.51 bounded read-only real-certification executable and
-full-resource preregistration**, NOT STARTED/AUTHORIZED. New owner/finite TEXT
-contract FIRST; executable/domain/role/path/all-paid-cost/simultaneous-memory
-proof requirements only, before any implementation or real input. No old formal
-retry/reset,actual FEM/fit/search,new budget or sealed grant. Unchanged all-paid
-7200 infeasibility remains a blocker. Learned repair/independent confirmation/
-full new B4/compatible final remain before B5. Close B4.50 only,report the successor
-and STOP.
+Current next work: **R1 critical-path feasibility decision and delivery execution
+plan**, one bounded metadata-only planning slice on a new instruction; NOT STARTED.
+B4.52 is DEFERRED_PENDING_R1. No new experiment/budget/retry/reset/sealed grant.
+Historical protocol successor wording remains unchanged, with its original context.
 
 ## Overall project plans
 
@@ -31,6 +23,7 @@ and STOP.
 | Numerical implementation | [Reimplementation strategy](TopoLab_reimplementation_strategy.md) | [数值核心重写策略](TopoLab_数值核心重写策略.md) |
 | Timeline and resources | [Timeline](TopoLab_development_timeline_and_resources.md) | [开发周期与资源评估](TopoLab_开发周期与资源评估.md) |
 | Active v2 delivery | [Development roadmap](TopoLab_v2_development_roadmap.md) | [开发路线图](TopoLab_v2_开发路线图.md) |
+| Mandatory delivery reassessment | [Retrospective, progress rules and R1 handoff](TopoLab_v2_delivery_reassessment.md) | Chinese owner-facing record; scientific Gate order remains in the English roadmap |
 
 The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.
