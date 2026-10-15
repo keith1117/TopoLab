@@ -1,30 +1,33 @@
 # Current project status
 
-Updated:2026-10-15. **The owner closed the current exact-physics rescue program**,
-retaining the 4294967296-byte simultaneous limit, independent preflight and the
-full-v2 flagship goal. This resolves the pending route decision; it does not close
-any scientific or resource-proof gap. See the [closure and handoff](planning/TopoLab_v2_rescue_program_closure_handoff.md)
-and [maintenance validation](validation/exact_physics_rescue_program_closure.md).
+Updated:2026-10-15. **The one owner-authorized solver-internal learned-update
+inception closed REJECTED_CURRENT_RESOURCE_ADMISSION.** See the
+[decision](planning/TopoLab_v2_solver_internal_learning_route_decision.md) and
+[planning validation](validation/solver_internal_learning_route_decision.md).
+The candidate learns internal sensitivities to replace some real FEM steps. Its
+saving mechanism is distinct, but mandatory exact refresh, terminal refinement
+and independent checks still lack a complete independent native/runtime/lifetime
+bound. Complete cost and scientific performance are UNKNOWN_NOT_TESTED. This
+eliminates this candidate from the implementation queue; it does not prove every
+learned update impossible or close a scientific/resource-proof gap.
 
-D1 remains **STOP_UNKNOWN_PREFIT_BOUND**, before implementation or real input;
-its [report](validation/d1_physics_resource_feasibility.md),
-[protocol](planning/d1_physics_resource_feasibility_protocol.md) and
-[contract](planning/d1_physics_resource_feasibility_contract.json) retain their
-original bytes. No composed network/physics/backward capability was accepted.
-Missing proof does not establish that every exact-physics implementation exceeds
-4GiB. The current rescue program is closed, not waiting for another D1 proof.
+The owner's explicit planning grant supersedes only the pending authorization in
+[closure handoff Section4](planning/TopoLab_v2_rescue_program_closure_handoff.md#4-unique-next-item--concrete-owner-decision-not-authorized--not-started).
+That handoff/report and R1/D1 frozen files keep their bytes. The exact-physics
+rescue program remains CLOSED_BY_OWNER_UNCHANGED_4GiB_INDEPENDENT_PREFLIGHT.
+D1 remains STOP_UNKNOWN_PREFIT_BOUND, roles closed unlaunched0/1 and FULL60 retained.
+The 4294967296-byte simultaneous limit, independent preflight, demonstrable v1
+and full-v2 positive same-quality end-to-end goal remain.
 
-**Unique next item: an owner decision whether to commission one bounded
-alternative-learning-route proposal**, as specified in the handoff. Proposed
-question: a solver-internal learned update instead of another terminal warm-start
-rescue. No mechanism is selected or established feasible yet. The proposed slice
-must deliver one actionable implementation/experiment contract proposal or reject
-the candidate. It cannot append another proof/toy/guard successor. This proposal is **NOT AUTHORIZED
-and NOT STARTED**. There is no executable scientific successor. “Continue” displays
-that concrete proposal; it does not approve it, reopen D1, transfer unused caps or
-create scientific budget/access. A2.3/A2.4/A4 remain platform backlog requiring
-their own owner instruction; they are not the default next item. Keep usable v1
-and the unchanged full-v2 positive same-quality learned end-to-end requirement.
+**Unique next item: owner route decision on retaining
+FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).**
+No executable scientific successor or new budget/input/role proposal is issued.
+The rejected candidate gets no automatic resource-proof, second inception,
+public-toy, guard, implementation or experiment slice. A plain “continue” displays
+this decision and the retained blockers; it cannot supply a materially different
+mechanism/resource-admission proposal, new budget, real access or execution grant.
+A2.3/A2.4/A4 remain independent backlog requiring their own instruction; no default
+platform substitution. Retain this worktree and stop after this slice closes.
 
 ## Actual D1 actions and missing prerequisites
 
@@ -97,25 +100,28 @@ independent confirmation and compatible final contract remain before B5.
 
 ## Software/publication closure and handoff
 
-This owner-decision maintenance starts from clean merged main
-`5f115c5a27d54db16a1d63280734e1fac6fd294d` (D1 PR193), all three main CI jobs
-successful, no open PR. It uses the same assigned worktree, on
-`docs/exact-physics-rescue-closure`; no primary-checkout edits or new worktree.
-Numerical source/tests/tolerances/fixtures/locks/CI, public README, R1 plan/report,
-D1 contract/protocol/report and all historical frozen bytes remain unchanged.
-No new scientific Gate, formal call, real-input access or research trial occurs.
+This bounded inception starts from clean merged main
+`06d0b77b8702c386d6b426278511425bdcd941c9` (closure PR194), all three main CI jobs
+successful, no open PR. It uses the same assigned worktree on
+`docs/solver-internal-learning-decision`; no primary-checkout edit or new worktree.
+One primary paper's public mechanism and committed source TEXT/AST were reviewed;
+old external evidence/compact-metadata read sets are empty. No new research call,
+real input, FEM/fit/search/timing/memory trial, integration implementation or
+formal retry occurred. Mandatory public software regression is separate.
 
-All five mandatory checks, reviewed-path/every-upload/actual-squash publication
-guards, protected latest-PR-head and merged-main CI, equal tested trees, owned
-branch cleanup and a backup of new maintenance records govern technical closure.
-New software/publication records:
-`/Users/keith1117/Documents/TopoLab-data/exact-physics-rescue-program-closure-2026-10-15`.
-The final closure binds actual checks/PR/main/CI/review/backup; whole software cost
-and peak remain UNKNOWN_NOT_ZERO_ADDITIONAL, never a scientific memory proof.
+Numerical source/tests/tolerances/fixtures/locks/CI/public README and all frozen
+R1/D1/closure evidence remain byte-identical. One new decision/report, one history
+entry, provenance and current bilingual entry points record the elimination.
+All five mandatory checks, reviewed-path/every-upload/actual-squash guards,
+protected latest-PR-head and merged-main CI, identical tested trees, owned-only
+branch cleanup and verified backup govern publication. New software/search/review/
+CI records remain external at
+`/Users/keith1117/Documents/TopoLab-data/solver-internal-learning-route-2026-10-15`;
+its final closure binds actual PR/main/CI and backup identities. Whole software
+cost/peak stays UNKNOWN_NOT_ZERO_ADDITIONAL, never scientific resource evidence.
 
-D1 PR193 merged as5f115c5a27d5; all three PR/main CI jobs passed. Its literal
-compact final closure was SHA256-checked before parsing; no embedded raw/backup/
-model/label pointer was followed. R1 PR192/main42a6fdae remains closed.
-See the handoff for immutable evidence identities and the finite next proposal.
-This maintenance closes only the owner's route decision. Retain this worktree,
-report the unapproved next item and stop without starting it.
+R1 PR192/main42a6fdae, D1 PR193/main5f115c5a and closure PR194/main06d0b77b remain
+closed with their exact-head/main CI passed. No old external receipt or backup
+member was reopened to manufacture this authority or result.
+This slice closes only the one authorized inception with an explicit candidate
+elimination. Retain this worktree, report the owner route decision and stop.

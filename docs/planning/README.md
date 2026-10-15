@@ -21,10 +21,14 @@ STOP_UNKNOWN_PREFIT_BOUND before implementation/real input. New roles closed
 unlaunched0/1 and FULL60 retained; no budget/quota transfer. The owner has now
 closed the current exact-physics rescue program, retaining4GiB, independent
 preflight and full v2. See the [closure handoff and finite next proposal](TopoLab_v2_rescue_program_closure_handoff.md).
-The unique next item needs explicit owner authority for that one alternative-
-learning-route proposal; NOT AUTHORIZED/NOT STARTED, no executable successor.
-“Continue” displays the proposal only; no D1 reopening or automatic
-text/toy/guard/platform slice. Historical successors retain their context.
+The owner then explicitly approved that one inception; its
+[solver-internal learned-update candidate](TopoLab_v2_solver_internal_learning_route_decision.md)
+closed REJECTED_CURRENT_RESOURCE_ADMISSION. Mandatory exact refresh/tail/audit
+still lack independent complete memory admission; new cost/quality/speed UNKNOWN.
+No executable successor. The next owner route decision is retaining
+FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).
+“Continue” displays that decision only; no D1 reopening or automatic second
+inception/proof/toy/guard/platform slice. Historical successors retain their context.
 
 ## Overall project plans
 
@@ -36,7 +40,8 @@ text/toy/guard/platform slice. Historical successors retain their context.
 | Active v2 delivery | [Development roadmap](TopoLab_v2_development_roadmap.md) | [开发路线图](TopoLab_v2_开发路线图.md) |
 | Mandatory delivery reassessment | [Retrospective, progress rules and R1 handoff](TopoLab_v2_delivery_reassessment.md) | [交付复盘与后续开发约束](TopoLab_v2_交付复盘与后续开发约束.md) |
 | R1 delivery decision and execution plan | [Acceptance, three routes and historical D1 proposal](TopoLab_v2_delivery_execution_plan.md) | [当前中文结论与唯一下一步](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
-| Current rescue-program closure | [Owner decision and full-v2 handoff](TopoLab_v2_rescue_program_closure_handoff.md) | [关闭决定与待授权提案](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
+| Rescue-program closure history | [Owner decision and full-v2 handoff](TopoLab_v2_rescue_program_closure_handoff.md) | [当前中文排期](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
+| Solver-internal learning inception | [Single-candidate resource-admission rejection](TopoLab_v2_solver_internal_learning_route_decision.md) | [淘汰结论与所有者决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 
 The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.

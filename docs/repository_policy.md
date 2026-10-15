@@ -91,10 +91,13 @@ before implementation/real input. Its new roles closed unlaunched0/1;FULL60 stay
 charged and unused caps/quotas do not transfer. The owner has now closed the
 current exact-physics rescue program, retaining4GiB, independent preflight and
 full-v2 acceptance. The [closure handoff](planning/TopoLab_v2_rescue_program_closure_handoff.md)
-scopes one unapproved alternative-learning-route proposal as the unique next
-owner decision. No executable successor; “continue” only displays that proposal.
-It does not approve the proposed slice, reopen D1 or grant budget/access or a
-default proof/guard/platform slice.
+scoped one alternative-learning-route inception, later explicitly approved by the
+owner. Its [single solver-internal learned-update candidate](planning/TopoLab_v2_solver_internal_learning_route_decision.md)
+closed REJECTED_CURRENT_RESOURCE_ADMISSION; new performance/cost remain UNKNOWN.
+No executable successor. The next owner route decision is retaining
+FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).
+“Continue” displays that decision only; no automatic second inception/proof/toy/
+guard/platform slice, D1 reopening, new budget/access or unused-cap transfer.
 
 Before a slice, identify the delivery blocker/capability, baseline, acceptance,
 dependencies, resource feasibility and failure disposition. A known impossible

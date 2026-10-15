@@ -10,10 +10,14 @@ STOP_UNKNOWN_PREFIT_BOUND before implementation/real input, roles closed
 unlaunched0/1 and FULL60 retained. The owner has **closed the current exact-physics
 rescue program**, retaining4GiB and independent preflight. See the
 [closure handoff](TopoLab_v2_rescue_program_closure_handoff.md).
-The unique next item is an explicit owner decision on its finite alternative-
-learning-route proposal, NOT AUTHORIZED/NOT STARTED; no executable successor.
-“Continue” displays that proposal only. B4.52 remains NOT_SELECTED_BY_R1;
-no D1 reopening, automatic text/toy/guard/platform slice or cap/quota transfer.
+The owner then approved one solver-internal learned-update inception; it closed
+[REJECTED_CURRENT_RESOURCE_ADMISSION](TopoLab_v2_solver_internal_learning_route_decision.md).
+Mandatory exact refresh/tail/audit still lack an independent complete native/
+runtime/lifetime bound; new cost/quality/speed remain UNKNOWN_NOT_TESTED. No
+executable successor. The next owner route decision is retaining
+FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).
+“Continue” displays that decision only. B4.52 remains NOT_SELECTED_BY_R1;
+no D1 reopening, automatic second proposal/proof/toy/guard/platform slice or cap/quota transfer.
 Historical successors below retain their context and do not override this decision.
 
 Status: **active v2 flagship delivery plan; the ML delivery Gate remains open.**
@@ -173,7 +177,7 @@ UNKNOWN stop; it establishes no composed capability or scientific pass. R1 and
 all old failures/seals stay. See [D1 report](../validation/d1_physics_resource_feasibility.md).
 
 Prepared: 2026-09-24
-Revised: 2026-10-15 (owner-approved closure of current exact-physics rescue program)
+Revised: 2026-10-15 (bounded solver-internal learning inception rejected at resource admission)
 
 Related documents:
 
@@ -2363,12 +2367,17 @@ search on B5 outcomes.
    [report](../validation/d1_physics_resource_feasibility.md) bytes. Retain4GiB,
    independent preflight and the full-v2 goal. The [closure handoff](TopoLab_v2_rescue_program_closure_handoff.md)
    resolves the old pending decision; it is not a resource or scientific pass.
-   Unique next item: the owner's explicit decision whether to commission the one
-   alternative-learning-route proposal scoped there (solver-internal learned
-   update hypothesis, one implementation/experiment contract proposal or rejection).
-   NOT AUTHORIZED/NOT STARTED; no executable successor. “Continue” only displays
-   the proposal, without reopening D1 or transferring unused caps. No default
-   second proof/text/toy/guard capability slice.
+   The owner subsequently approved exactly that one inception. Its
+   [solver-internal sensitivity-update candidate](TopoLab_v2_solver_internal_learning_route_decision.md)
+   is now REJECTED_CURRENT_RESOURCE_ADMISSION: real refresh/tail/audit retain
+   unresolved complete native/runtime/lifetime bounds. Cost/quality/speed remain
+   UNKNOWN_NOT_TESTED; no new scientific failure or universal impossibility claim.
+   Unique next item: owner route decision on retaining
+   FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).
+   No executable successor; “continue” displays that decision only. No automatic
+   second inception, proof/text/toy/guard/platform slice, D1 reopening, budget/access
+   grant or unused-cap transfer. No material scientific/resource-proof gap closed;
+   this one candidate has been explicitly removed from the implementation queue.
 2. **Only a justified, authorized capability implementation:** it must remove a
    named delivery blocker or eliminate a route within a finite integration path.
    Registration/resource guards are eligible only when R1 establishes their
