@@ -1640,3 +1640,29 @@ Both quotas are consumed1/1;no further formal call,source reset or retry follows
 
 B4.51 local validation:full1951 tests PASS in704.31s,unchanged population/
 tolerances;all5 checks before commit. Slice process FAIL remains unchanged.
+
+
+## 2026-10-15 owner-approved v2 delivery reassessment (planning maintenance)
+
+The owner accepted v1 as a usable showcase milestone and reaffirmed the positive
+full-v2 flagship goal. The [delivery reassessment](planning/TopoLab_v2_delivery_reassessment.md)
+records the G0/current delivery difference, the qualified approximately60%
+management estimate, B4 failure categories and the recent11 text/9 public-software
+slices without real FEM/fit progress. It requires feasibility first, a blocker or
+capability outcome per slice, enforced preflight/freeze stops and a progress
+review after at most two capability slices.
+
+AGENTS/current status/repository policy, the active English/Chinese roadmap and
+entry indices now require this reading. Current scheduling defers B4.52 pending
+one R1 critical-path decision and execution plan; R1 has not started. R1 must
+recommend one route or NO_ADMISSIBLE_ROUTE and a concrete next capability/owner
+decision, without another automatic TEXT/toy/guard chain.
+
+This is no new B4 campaign or scientific Gate. B4.51 FAIL_PROCESS_SOURCE_FREEZE,
+post-stop217/404, quotas1/1, fixed P/17/scientific FAIL, all old costs/UNKNOWN,
+full-fit PENDING4GiB and every seal remain. No runtime/test/contract/fixture or
+public usage change; no new budget, actual data/FEM/fit/search/memory trial,
+formal retry/reset or final access. Only the ten reviewed planning/current-rule
+documents change. Mandatory software validation and publication receipts stay
+external at `TopoLab-data/v2-delivery-reassessment-2026-10-15` and must bind the
+actual PR/main/checks/guards at technical closure.

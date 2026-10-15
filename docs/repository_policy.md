@@ -77,6 +77,24 @@ Documentation maintenance may update these entry points and policies without
 creating a new scientific Gate or repeating a numerical experiment. Preserve
 frozen scientific files and all prior outcomes.
 
+## Delivery progress and planning authority
+
+The owner-approved [delivery reassessment](planning/TopoLab_v2_delivery_reassessment.md)
+is mandatory at session/slice start and context recovery. Preserve usable interim
+platform delivery while the full-v2 positive ML Gate remains open. Current status
+and the English roadmap set current scheduling; old frozen successors remain
+historical evidence. B4.52 is deferred pending the finite R1 decision.
+
+Before a slice, identify the delivery blocker/capability, baseline, acceptance,
+dependencies, resource feasibility and failure disposition. A known impossible
+cost requirement triggers an explicit route/owner decision, not more proofs or a
+ledger reset. Review material progress after at most two capability slices; this
+is no automatic multi-slice or experiment grant. Complete actual launch preflight
+before source freeze; any frozen mutation or stop blocks further formal launch.
+Keep scientific, resource, software/process and UNKNOWN conclusions separate.
+Planning maintenance can update active policy with explicit owner authority; it
+never retroactively amends frozen experiments or grants data/budget access.
+
 ## Slice and GitHub workflow
 
 1. Inspect current `main`, open PRs, current status and relevant contracts. Start

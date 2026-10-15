@@ -1,71 +1,50 @@
 # TopoLab agent instructions
 
-## Read before changing code
+## Read before starting work
 
-Read these files in order:
+At session start, slice start and context recovery, read these files in order:
 
 1. `PROVENANCE.md`
 2. `docs/numerical_conventions.md`
 3. `docs/reference_baseline.md`
 4. `docs/planning/TopoLab_reimplementation_strategy.md`
 5. `docs/planning/TopoLab_development_timeline_and_resources.md`
-6. `docs/planning/TopoLab_v2_development_roadmap.md`
-7. `docs/project_status.md`
-8. The contracts and latest validation reports relevant to the requested slice.
-9. `docs/repository_policy.md` before staging or publishing changes.
+6. `docs/planning/TopoLab_v2_delivery_reassessment.md`
+7. `docs/planning/TopoLab_v2_development_roadmap.md`
+8. `docs/project_status.md`
+9. The contracts and latest validation reports relevant to the requested slice.
+10. `docs/repository_policy.md` before staging or publishing changes.
 
-## Current project state
+## Current project state and delivery direction
 
-Full v2 delivery remains open; uniform is the operational default. No learned
-acceleration/full-delivery claim. Historical v1.0.0 stays complete with negative
-M1/M2 evidence. B3 data/B4.1 fitting passed; original B4.2 and scientific Gate
-failed. Fixed P/17 remains unrepaired and cannot be replaced after outcomes.
+Historical v1.0.0 is complete and usable as an interim delivery. Full v2 remains
+open and still requires reproducible same-quality learned end-to-end acceleration.
+Uniform is the default; original B4.2/scientific FAIL and fixed P/17 remain.
 
-Latest **B4.51 real executable/full-resource preregistration**:Gate
-FAIL_PROCESS_SOURCE_FREEZE;primary217/independent404,
-217/404 are post-stop TEXT results ONLY,no protocol acceptance. S02 frozen
-reviewer changed after v1 freeze;v2 cannot restore compliance,no further formal
-call/reset/retry. Each ONCE/no retry.39 public TEXT/3 metadata/2 primary-only source texts;
-independent reads no primary-only source/reviewer/result.18 executable/10 domain/
-5 future-role/12 resource requirements,14 real slots UNKNOWN_STOP_UNFROZEN;
-inputs/outputs UNASSIGNED_DENY/quotas UNALLOCATED_NO_GRANT. See
-[report](docs/validation/b4_51_real_certification_executable_full_resource_preregistration.md),
-[protocol](docs/planning/b4_51_real_certification_executable_full_resource_preregistration_protocol.md),
-[contract](docs/planning/b4_51_real_certification_executable_full_resource_preregistration_contract.json).
-Prefirst-call lint/v1 source admission FAIL retained at0/0;style-only v2 freeze
-precedes both first calls,no contract/criteria/input/role/cap change. All16 B4.50
-objects/17 boundaries/22 L/14 C/24 O/12 R remain ENTIRELY unchanged.
-B4.50 TEXT250/244/B4.49 public12/6059/455/143/quota1/1/B4.48 TEXT233/231/
-B4.47 public4328/104/quota1/1/1/B4.43 FAIL/quota1/1/all10 unexecuted/no original
-receipt/runtime+cause UNKNOWN/B4.42 FAIL remain. Scientific FAIL/P17/uniform/seals
-stay. Real release inadmissible/executable UNFROZEN/certificates-cost UNKNOWN_STOP;
-whole software cost/peak UNKNOWN_NOT_ZERO. BOTH factor errors/all separate
-residual errors/SAME denominator stay;software RSS fills no old/full-fit gap.
+B4.51 closed FAIL_PROCESS_SOURCE_FREEZE: changing a frozen reviewer triggered
+S02. Its217/404 are post-stop TEXT results only, not protocol acceptance.
+Primary/independent quotas are each1/1 consumed; no further formal call/reset/retry.
+See [report](docs/validation/b4_51_real_certification_executable_full_resource_preregistration.md)
+and [current status](docs/project_status.md) for all retained evidence and stops.
 
-Latest numerical/audit B4.30 scientific FAIL retains R17quality1.00197094375>
-1.001/target mean1.01605313078>1.0/P-R failures1/3/1. Reflection stops; old
-B4.27–29 quota closed3/3, B4.30 two paid invocations/one campaign/no third.
-Old7323.1004352501081506 includes failed191.9666532080154866/BOTH FULL180;
-Q31 once80.29939475003629922/separate7403.39983000014444982. B4.23 all69 failures/
-57546.072069>7200, known-added58142.252069, B4.24/28 memory gaps, B4.20 FAIL/
-B4.19 UNKNOWN/B4.31 premerge process FAIL remain. All prior failures/charges stay.
-Known-paid12721.16417100014444982>7200 is diagnostic, no new cap/ledger reset.
-Real certificates/cost UNKNOWN_STOP/executable UNFROZEN; full-Q/all8 simultaneous
-full fit PENDING4GiB. Software RSS fills no historical/full-fit gap. Original
-loss/gradient/normalizer unchanged. Exact-FEM candidate stops; no cache/order,
-epoch/population/frequency search, fit or actual geometry/FEM/integration follows.
+The owner-approved [delivery reassessment](docs/planning/TopoLab_v2_delivery_reassessment.md)
+changes current scheduling only. B4.52 is DEFERRED_PENDING_R1. Next on a new
+instruction is R1: one bounded metadata-only critical-path feasibility decision
+and delivery execution plan; R1 has not started. Do not repeat the retrospective
+or create another automatic text/toy/guard chain. Require a capability/blocker
+outcome and review progress after at most two capability slices.
 
-All final/conditional48/720/unused48 evidence remains sealed. Proposed B4.52
-public executable-registration/full-resource guard software is NOT STARTED/
-AUTHORIZED;new owner and finite NEW public-metadata contract FIRST. No real
-executable implementation/input/certificate,fit/search,new paid cap,old retry/
-reset or sealed grant. Unchanged all-paid7200 infeasibility remains. Learned
-repair/independent confirmation/full new B4/compatible final remain before B5.
-Close B4.51 only and stop.
+Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility.
+All old failures/costs/UNKNOWN, fixed models, stopped mechanisms, consumed quotas
+and final/conditional48/720/unused48 seals remain. Real executable is UNFROZEN,
+certificates/cost UNKNOWN_STOP, full fit PENDING4GiB. No new budget, real input,
+FEM/integration/fit/search, old retry/reset or sealed grant follows this planning
+change. Software RSS fills no historical/full-fit gap. Read the applicable frozen
+contracts before dependent work; unresolved conflicts stop that work.
 
-Read [project status](docs/project_status.md) and linked latest evidence at session
-start. Retrieve relevant [history](docs/development_history.md) when needed.
-The English v2 roadmap controls gate order; README stays the public entry point.
+A later “continue” finishes the current authorized slice first; after closure it
+authorizes only the next item in current status. Close one slice and stop. The
+English v2 roadmap controls scientific Gate order; README is the public entry.
 
 ## Provenance boundary
 
@@ -77,6 +56,10 @@ new source in `PROVENANCE.md`.
 
 ## Development rules
 
+- Follow the delivery reassessment: feasibility first, an explicit blocker/capability
+  result per slice, and enforced preflight/freeze/stop controls before formal calls.
+- Before commit/push, recheck current rules/status and actual records; do not rely
+  only on memory or rerun completed formal experiments.
 - Keep each change scoped to one numerical behavior with tests.
 - Freeze conventions in `docs/numerical_conventions.md` before relying on them.
 - Prefer the current small module plan; split modules only when stable responsibilities

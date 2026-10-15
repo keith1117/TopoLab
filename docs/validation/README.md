@@ -6,24 +6,16 @@ resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
 
-B4.50 documentary Gate **PASS_TEXT_ONLY_COMBINED_PUBLIC_LIMITATIONS**:
-250 primary/244 independent predicates, each first/only invocation, no retry.
-36 bound public TEXT inputs/3 literal compact metadata/4 primary-only source
-texts; the independent bundle excludes primary-only source,primary reviewer and
-receipt.22 limitations/14 combined real prerequisites/24 inherited obligations/
-12 historical bridges/16 stops remain TEXT ONLY. Scientific Gate **FAIL**,
-fixed P17 unrepaired,uniform default and full v2 delivery open remain.
+Latest completed B4 slice: **B4.51 FAIL_PROCESS_SOURCE_FREEZE**. Its217/404
+checks are post-stop TEXT only, not protocol acceptance; both quotas remain1/1
+consumed with no retry/reset. See the [failed report](b4_51_real_certification_executable_full_resource_preregistration.md).
+Scientific FAIL/fixed P17/uniform, all historical costs/UNKNOWN and seals remain.
 
-See [B4.50 report](b4_50_combined_public_certificate_limitations_real_prerequisites.md).
-
-Next proposed **B4.51 bounded read-only real-certification executable and
-full-resource preregistration**, NOT STARTED/AUTHORIZED. New owner/finite TEXT
-contract FIRST; executable/domain/role/path/all-paid-cost/simultaneous-memory
-proof requirements only, before any implementation or real input. No old formal
-retry/reset,actual FEM/fit/search,new budget or sealed grant. Unchanged all-paid
-7200 infeasibility remains a blocker. Learned repair/independent confirmation/
-full new B4/compatible final remain before B5. Close B4.50 only,report the successor
-and STOP.
+The owner-approved2026-10-15 [delivery reassessment](../planning/TopoLab_v2_delivery_reassessment.md)
+is required reading before development. It changes scheduling, not scientific
+results: B4.52 is DEFERRED_PENDING_R1; next on a fresh instruction is one bounded
+R1 critical-path decision and execution plan, NOT STARTED. No new experiment,
+budget, old formal call or sealed access follows this planning maintenance.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the

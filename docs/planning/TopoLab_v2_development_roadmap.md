@@ -1,5 +1,14 @@
 # TopoLab v2 Development Roadmap
 
+Current scheduling override (owner-approved2026-10-15): read the
+[delivery reassessment and mandatory progress rules](TopoLab_v2_delivery_reassessment.md)
+before every new slice. Historical v1.0.0 remains an interim delivery; full v2
+still requires the unchanged positive learned-acceleration Gate. Next is one
+bounded R1 critical-path feasibility decision and execution plan, on a new owner
+instruction. B4.52 is DEFERRED_PENDING_R1. Neither R1 nor a new experiment starts
+with this documentation maintenance. Historical successor proposals below retain
+their original context and do not override current status or this sequence.
+
 Status: **active v2 flagship delivery plan; the ML delivery Gate remains open.**
 Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
 B4.2 Gate and subsequent fixed-primary confirmations remain failed. Uniform
@@ -151,16 +160,14 @@ restore protocol compliance. Overall slice Gate is FAIL_PROCESS_SOURCE_FREEZE;
 217/404 are retained post-stop document checks ONLY,not accepted protocol evidence.
 Both quotas are consumed1/1;no further formal call,source reset or retry follows.
 
-Next proposed **B4.52 bounded public executable-registration and full-resource
-guard software**, NOT STARTED/AUTHORIZED. New owner and finite NEW authored
-public-metadata contract FIRST. Only registration/resource guard software is
-proposed;no real executable implementation,input,certificate,fit,search,new paid
-cap,old formal retry/reset or sealed grant. Unchanged all-paid7200 infeasibility
-remains. Learned repair/independent confirmation/full new B4/compatible final
-remain before B5. Close B4.51 ONLY,report successor and STOP.
+Current next work is **R1: v2 critical-path feasibility decision and delivery
+execution plan**, NOT STARTED. B4.52 is deferred pending that decision. R1 is one
+finite metadata-only planning slice, not a new scientific/TEXT Gate or permission
+for real execution, budget, retry/reset or sealed access. Its finite acceptance
+and single-slice stop are defined in the delivery reassessment.
 
 Prepared: 2026-09-24
-Revised: 2026-10-14 (B4.51 real executable and full-resource preregistration)
+Revised: 2026-10-15 (owner-approved delivery reassessment and R1 scheduling)
 
 Related documents:
 
@@ -192,6 +199,12 @@ Remaining gaps fall into two groups:
 Future work must not rewrite or erase historical `v1.0.0`, M1, or M2 conclusions. New experiments, numerical conventions, and platform contracts need fresh version identities and separate validation reports.
 
 ## 2. Flagship delivery condition and priorities
+
+The owner reaffirmed on2026-10-15 that v1 is a usable showcase milestone and full
+v2 remains the desired flagship outcome. Apply the delivery reassessment's
+feasibility-first and capability-progress rules. The original priority table
+below records the program's earlier design; Section6 gives current scheduling.
+No management completion percentage changes a Gate, historical budget or result.
 
 **The full v2 flagship project is not delivered until a learned method achieves
 reproducible, same-quality, end-to-end acceleration on a workload defined before
@@ -2335,31 +2348,42 @@ search on B5 outcomes.
 - Update README, resume, or title claims only after their supporting gate actually passes;
   routine slice results belong in the linked status and evidence documents.
 
-## 6. Recommended sequence
+## 6. Current sequence after the delivery reassessment
 
-The completed sequence remains in [development history](../development_history.md)
-and validation reports. B4.28 passes fresh bounded integrity/LOCAL criteria;
-cost remains failed and complete native resource acceptance is INCOMPLETE.
-All old failures/costs/unknowns and full-memory/learned-repair requirements remain.
+1. **R1 critical-path feasibility decision and delivery execution plan:** next
+   on a fresh owner instruction; NOT STARTED. One metadata-only planning slice
+   with at most three materially different routes, one recommendation or
+   NO_ADMISSIBLE_ROUTE, a final-acceptance/evidence/blocker matrix, explicit
+   all-paid cost and simultaneous-memory feasibility, and one next capability
+   or concrete owner decision. Use the [finite R1 scope](TopoLab_v2_delivery_reassessment.md).
+   Do not repeat the retrospective, create formal TEXT review programs or start
+   the recommended successor. B4.52 stays DEFERRED_PENDING_R1.
+2. **Only a justified, authorized capability implementation:** it must remove a
+   named delivery blocker or eliminate a route within a finite integration path.
+   Registration/resource guards are eligible only when R1 establishes their
+   necessity and bounded use. An impossible all-paid7200 requirement cannot be
+   repaired by more proofs or by subtracting history. A proposed new experiment
+   or budget requires explicit owner authority and its own finite contract.
+3. **Correctness, fidelity and actual resource feasibility before fitting:** keep
+   independent audits, first/failure-inclusive cost and simultaneous full-memory
+   requirements. The unchanged exact-FEM/reflection mechanisms remain stopped;
+   no cache/ordering, epoch/population/frequency search or actual trial follows
+   automatically from planning or public software acceptance.
+4. **Learned repair and independent confirmation:** preserve fixed P/17, all
+   controls, failures and full charged comparisons. A bounded development pass
+   cannot substitute another seed or open final evidence.
+5. **Compatible final contract and B5:** only after the complete new B4 Gate,
+   freeze the compatible method and execute the one-time ID/OOD/replication
+   sequence with the existing quality, cost and claim requirements.
+6. **Separate platform delivery:** A2.3–A2.4 and A4 remain independently scoped
+   capabilities; they can advance usable staged delivery after their own owner
+   instruction, without changing numerical comparisons or claiming full v2.
 
-1. **Proposed B4.52 public registration/resource guard software:** NOT STARTED/
-   AUTHORIZED;new owner and finite NEW authored public-metadata contract FIRST.
-   No real executable/input/certificate/fit/search/new paid cap/old retry/reset/
-   sealed grant. Unchanged all-paid7200 infeasibility remains. Close B4.51 only.
-2. **Any later correctness/objective-feasibility intervention:** preserve all
-   evidence and require independent correctness, fidelity, compute and full
-   training-memory proof. The unchanged exact-FEM candidate remains stopped.
-   No cache/ordering, epoch/population/frequency search or fit is authorized.
-3. **Learned repair and independent confirmation:** preserve fixed P/17, all
-   controls, failures and charged comparisons. A bounded development pass alone
-   cannot open final evaluation or substitute another seed for the fixed primary.
-4. **Compatible final contract and B5:** only after the complete new B4 Gate passes,
-   freeze the compatible method and run the one-time ID/OOD/replication sequence.
-5. **A2.3–A2.4 and A4:** complete optimizer recovery, cancellation/resource bounds
-   and controlled delivery in separate platform slices as requirements justify.
-
-After each completed independent slice, report its Gate, evidence, limitations
-and next slice, then wait for a new user instruction before starting it.
+Every slice must declare its blocker/capability baseline, acceptance, dependencies,
+resource scope and failure decision. Reassess after at most two capability slices
+without material progress; do not automatically extend a text/toy/guard chain.
+This review window grants no calls, budget or multi-slice execution. Close one
+slice, report actual evidence and one next step, then wait for a new instruction.
 
 ## 7. Stage completion evidence
 

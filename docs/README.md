@@ -9,7 +9,7 @@ Start with [project status](project_status.md) for the current stopping boundary
 | Purpose | Read |
 |---|---|
 | Run or understand the local application | [Getting started](getting_started.md), [recorded demo](demo.md), [architecture](architecture.md), [frontend](frontend.md) |
-| Find the next permitted research slice | [Current status](project_status.md), [English v2 roadmap](planning/TopoLab_v2_development_roadmap.md) |
+| Continue development or hand off | [Mandatory delivery reassessment and handoff](planning/TopoLab_v2_delivery_reassessment.md), [current status](project_status.md), [English v2 roadmap](planning/TopoLab_v2_development_roadmap.md) |
 | Browse overall plans and preregistrations | [Planning index](planning/README.md) |
 | Inspect positive and negative evidence | [Validation index](validation/README.md), [development history](development_history.md) |
 | Change or contribute to the repository | [Contributing](../CONTRIBUTING.md), [repository policy](repository_policy.md), [agent instructions](../AGENTS.md) |

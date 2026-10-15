@@ -1,7 +1,11 @@
 # Current project status
 
-Updated:2026-10-14. Latest completed documentary slice B4.51;technical publication
-closure is bound by external final_release_closure.json.
+Updated:2026-10-15. Owner-approved delivery reassessment is the latest planning
+maintenance; latest completed B4 slice remains B4.51. Historical v1.0.0 is an
+available interim delivery; the positive learned-acceleration goal for full v2
+remains. Read the [reassessment and mandatory progress rules](planning/TopoLab_v2_delivery_reassessment.md)
+before further development. This maintenance starts no experiment or R1.
+B4.51's original technical closure remains bound by its external receipt.
 
 B4.51 slice Gate **FAIL_PROCESS_SOURCE_FREEZE**:
 217 primary/404 independent document predicates,each first/only call,no retry.
@@ -80,18 +84,36 @@ cost/peak UNKNOWN_NOT_ZERO;software RSS fills no historic/full-fit gap.
 One failed prefirst-call lint and an incorrectly generated v1 source-freeze record
 are retained as FAIL_PRECALL_SOURCE_ADMISSION at quotas0/0. Two style spellings
 were corrected before v2 source freeze/first formal calls;no contract/standard/
-input/role/cap changed. Both formal calls were first/only and passed.
+input/role/cap changed. Both formal TEXT calls were first/only and returned positive checks after STOP;
+there is no protocol acceptance.
 Local sync/Ruff/mypy/full1951 pytest(704.31s)/diff checks PASS;unchanged population/
 tolerances. This never overrides process FAIL. Existing publication guards,
 protected exact-head/main CI,equal tested trees,owned cleanup and independent
 external byte backup govern technical closure.
 
-## Current stop and proposed successor
+## Current stop and next work
 
-Next proposed **B4.52 bounded public executable-registration and full-resource
-guard software**, NOT STARTED/AUTHORIZED. New owner and finite NEW authored
-public-metadata contract FIRST. Only registration/resource guard software is
-proposed;no real executable implementation,input,certificate,fit,search,new paid
-cap,old formal retry/reset or sealed grant. Unchanged all-paid7200 infeasibility
-remains. Learned repair/independent confirmation/full new B4/compatible final
-remain before B5. Close B4.51 ONLY,report successor and STOP.
+The owner's2026-10-15 direction supersedes the historical default successor in
+current scheduling only. **B4.52 is DEFERRED_PENDING_R1**, not started and not
+authorized for implementation. Frozen B4.51 protocol/report successor wording
+stays as historical evidence; it is not the current execution instruction.
+
+Next on a fresh instruction: **R1: v2 critical-path feasibility decision and
+delivery execution plan**, one bounded metadata-only planning slice, NOT STARTED.
+Follow the finite scope and acceptance in the [reassessment](planning/TopoLab_v2_delivery_reassessment.md).
+Produce `docs/planning/TopoLab_v2_delivery_execution_plan.md`: one acceptance/
+evidence/blocker matrix, at most three material routes, one recommendation or
+NO_ADMISSIBLE_ROUTE, the all-paid budget decision and one concrete next capability
+or owner decision. Do not repeat this retrospective or invent another TEXT Gate.
+R1 closes without executing its recommended successor.
+
+Known-paid above unchanged7200, real certification/full-resource unknowns, fixed
+P/17, all old failures/quotas and seals remain. No new budget, real input/FEM/fit/
+search/memory trial, old formal retry/reset or sealed access is granted. Learned
+repair and independent confirmation/full new B4/compatible final remain before B5.
+Platform milestones stay separately deliverable and need their own scope/validation.
+
+Planning-maintenance checks/publication/backup receipts remain external at
+`/Users/keith1117/Documents/TopoLab-data/v2-delivery-reassessment-2026-10-15`.
+Its final closure must bind the actual PR, merged main, checks and reviewed paths;
+software CI or this planning change cannot repair any scientific/process FAIL.
