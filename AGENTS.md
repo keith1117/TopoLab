@@ -44,10 +44,18 @@ It closed [REJECTED_CURRENT_RESOURCE_ADMISSION](docs/planning/TopoLab_v2_solver_
 mandatory exact refresh/tail/audit still lack an independent complete native/
 runtime/lifetime bound. New quality/speed/cost remain UNKNOWN_NOT_TESTED; this is
 no universal impossibility claim or scientific pass. No implementation/real input/
-formal call/new budget. No executable successor; the next owner route decision is
-retaining FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).
-“Continue” displays that decision only. No automatic second proposal/proof/toy/
-guard/platform slice, D1 reopening or unused-cap transfer.
+formal call/new budget. The owner subsequently commissioned one P/17 route
+proposal. Its [bounded-runtime penalty-homotopy proposal](docs/planning/TopoLab_v2_P17_bounded_homotopy_proposal.md)
+is CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED: fixed P/17,8 updates at p=1,
+8 at p=2, then p=3 within360 total; no implementation or repair evidence.
+Explicit fixed-storage native producer/verifier/controller design does not yet
+prove complete binary/runtime admission. No currently admitted executable route.
+Unique next item: owner decision on I1, one bounded native software capability
+and independent data-free preflight, naming a Linux environment. I1 is not
+authorized; it grants no old payload or scientific call/budget. The separate
+later18-reference/342-query pilot proposal (14580s) is also NOT AUTHORIZED and
+requires its own decision after I1. “Continue” displays I1 only. No automatic
+implementation, proof/toy/guard/platform chain, D1 reopening or cap transfer.
 
 Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility.
 All old failures/costs/UNKNOWN, fixed models, stopped mechanisms, consumed quotas

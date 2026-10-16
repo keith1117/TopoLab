@@ -1,33 +1,44 @@
 # Current project status
 
-Updated:2026-10-15. **The one owner-authorized solver-internal learned-update
-inception closed REJECTED_CURRENT_RESOURCE_ADMISSION.** See the
-[decision](planning/TopoLab_v2_solver_internal_learning_route_decision.md) and
-[planning validation](validation/solver_internal_learning_route_decision.md).
-The candidate learns internal sensitivities to replace some real FEM steps. Its
-saving mechanism is distinct, but mandatory exact refresh, terminal refinement
-and independent checks still lack a complete independent native/runtime/lifetime
-bound. Complete cost and scientific performance are UNKNOWN_NOT_TESTED. This
-eliminates this candidate from the implementation queue; it does not prove every
-learned update impossible or close a scientific/resource-proof gap.
+Updated:2026-10-16. **One owner-requested P/17 repair proposal closes
+CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED.** See the
+[proposal](planning/TopoLab_v2_P17_bounded_homotopy_proposal.md) and
+[planning validation](validation/p17_bounded_homotopy_proposal.md).
+Fixed P/17 weights would initialize8 p=1 and8 p=2 OC/FEM updates, then the
+original p=3 terminal problem within360 total. This changes the intermediate
+objective, without reflection, post-plateau rescue, fitting or learned gradients.
+The exact8/8 choice is untested, not literature-prescribed or tuned.
 
-The owner's explicit planning grant supersedes only the pending authorization in
-[closure handoff Section4](planning/TopoLab_v2_rescue_program_closure_handoff.md#4-unique-next-item--concrete-owner-decision-not-authorized--not-started).
-That handoff/report and R1/D1 frozen files keep their bytes. The exact-physics
-rescue program remains CLOSED_BY_OWNER_UNCHANGED_4GiB_INDEPENDENT_PREFLIGHT.
-D1 remains STOP_UNKNOWN_PREFIT_BOUND, roles closed unlaunched0/1 and FULL60 retained.
-The 4294967296-byte simultaneous limit, independent preflight, demonstrable v1
-and full-v2 positive same-quality end-to-end goal remain.
+The proposal specifies a new fixed-storage Linux native query path, independent
+verifier and controller. A geometric z-fast free-DOF permutation gives large
+half-bandwidth299 and15724800 bytes per band. The proposed complete mapped-role
+envelopes sum1140850688<4294967296 bytes. These are **design constraints, not
+implemented allocation/lifetime proof or resource PASS**. Complete source/binary/
+runtime admission, fair optimized denominator, cost and scientific performance
+remain UNKNOWN_UNIMPLEMENTED/UNKNOWN_NOT_TESTED. No currently admitted executable
+repair route; P/17 remains unrepaired and full v2 OPEN.
 
-**Unique next item: owner route decision on retaining
-FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).**
-No executable scientific successor or new budget/input/role proposal is issued.
-The rejected candidate gets no automatic resource-proof, second inception,
-public-toy, guard, implementation or experiment slice. A plain “continue” displays
-this decision and the retained blockers; it cannot supply a materially different
-mechanism/resource-admission proposal, new budget, real access or execution grant.
-A2.3/A2.4/A4 remain independent backlog requiring their own instruction; no default
-platform substitution. Retain this worktree and stop after this slice closes.
+**Unique next item: owner decision on I1**, one integrated bounded native
+software capability plus independent data-free resource preflight, and naming
+a Linux x86-64 environment (existing Ubuntu24.04 CI recommended for public
+software only, not a pilot host grant). I1 is NOT AUTHORIZED, requests no scientific
+budget or old input, and must deliver actual software/full independent closure
+or stop NO_ADMISSIBLE_ROUTE. A plain “continue” displays this proposal only.
+Even an I1 pass stops before the separately proposed physical pilot:18 new
+references/342 queries,14580 charged seconds (10800 producer/3600 independent/
+FULL180),12 fixed checkpoints/528 train-only NN labels/18 legacy reference
+scalars, all literal paths/hashes/bytes UNKNOWN_UNREGISTERED_DENY. That later
+budget/access/role decision is not requested until I1 and is not included in I1.
+No actual budget/reserve, payload grant, implementation or experiment is created.
+
+The prior [solver-internal candidate](planning/TopoLab_v2_solver_internal_learning_route_decision.md)
+stays REJECTED_CURRENT_RESOURCE_ADMISSION. R1/D1/closure/prior-decision frozen
+bytes retain their historical context. The exact-physics training rescue stays
+CLOSED_BY_OWNER_UNCHANGED_4GiB_INDEPENDENT_PREFLIGHT; D1 STOP/unlaunched0/1/FULL60,
+all old costs/UNKNOWN/failures/quotas and final/conditional48/720/unused48 seals
+remain. No old retry/reset or automatic second backend/proof/toy/guard/platform
+slice. A2.3/A2.4/A4 remain independent backlog requiring their own instruction.
+Retain this worktree and stop after publication of this proposal.
 
 ## Actual D1 actions and missing prerequisites
 
@@ -100,28 +111,22 @@ independent confirmation and compatible final contract remain before B5.
 
 ## Software/publication closure and handoff
 
-This bounded inception starts from clean merged main
-`06d0b77b8702c386d6b426278511425bdcd941c9` (closure PR194), all three main CI jobs
-successful, no open PR. It uses the same assigned worktree on
-`docs/solver-internal-learning-decision`; no primary-checkout edit or new worktree.
-One primary paper's public mechanism and committed source TEXT/AST were reviewed;
-old external evidence/compact-metadata read sets are empty. No new research call,
-real input, FEM/fit/search/timing/memory trial, integration implementation or
-formal retry occurred. Mandatory public software regression is separate.
+This proposal starts from clean merged main
+`2ec9303c60919aaaf2f4f3d7611e4be6837fb71c` (PR195), all three main CI jobs
+successful, no open PR. Same assigned worktree on
+`docs/p17-bounded-homotopy-proposal`; no primary-checkout edit/new worktree.
+Primary method/storage/OS documentation and committed TEXT/AST only; old external
+evidence/compact-metadata read sets empty. No implementation, real input,
+FEM/fit/search/timing/memory trial, scientific call or old formal retry.
+Mandatory complete software regression is separate.
 
 Numerical source/tests/tolerances/fixtures/locks/CI/public README and all frozen
-R1/D1/closure evidence remain byte-identical. One new decision/report, one history
-entry, provenance and current bilingual entry points record the elimination.
-All five mandatory checks, reviewed-path/every-upload/actual-squash guards,
-protected latest-PR-head and merged-main CI, identical tested trees, owned-only
-branch cleanup and verified backup govern publication. New software/search/review/
-CI records remain external at
-`/Users/keith1117/Documents/TopoLab-data/solver-internal-learning-route-2026-10-15`;
-its final closure binds actual PR/main/CI and backup identities. Whole software
-cost/peak stays UNKNOWN_NOT_ZERO_ADDITIONAL, never scientific resource evidence.
-
-R1 PR192/main42a6fdae, D1 PR193/main5f115c5a and closure PR194/main06d0b77b remain
-closed with their exact-head/main CI passed. No old external receipt or backup
-member was reopened to manufacture this authority or result.
-This slice closes only the one authorized inception with an explicit candidate
-elimination. Retain this worktree, report the owner route decision and stop.
+R1/D1/closure/prior-decision evidence remain byte-identical. One proposal/report,
+one history/provenance entry and synchronized current bilingual entries record
+the finite request. All five checks, reviewed-path/every-upload/actual-squash
+guards, protected exact-head/main CI, identical tested trees, owned-only cleanup
+and verified new-record backup govern publication. Records stay external at
+`/Users/keith1117/Documents/TopoLab-data/p17-bounded-homotopy-proposal-2026-10-16`;
+its final closure binds actual PR/main/CI/backup. Whole software cost/peak remains
+UNKNOWN_NOT_ZERO_ADDITIONAL. The14580 ceiling is unapproved/unspent, not an added
+ledger charge. Retain the worktree; report the I1 owner decision and STOP.

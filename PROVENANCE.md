@@ -1409,3 +1409,24 @@ candidate is REJECTED_CURRENT_RESOURCE_ADMISSION, not numerically tested or a
 universal impossibility result. No new Hack3D comparison/content, old external
 research payload, real input/FEM/fit/search/timing/memory trial, source numerical
 change or formal program occurs. Ordinary software regression remains separate.
+
+## P/17 bounded-runtime penalty-homotopy proposal (2026-10-16)
+
+The [finite proposal](docs/planning/TopoLab_v2_P17_bounded_homotopy_proposal.md)
+uses Liu and Tovar (2014), Section6.1.6, from the primary article already listed
+above, for penalty-continuation mechanism context only. Its8/8 p=1/p=2 choice
+is an independently specified untested hypothesis, not the paper's schedule or
+a global/TopoLab guarantee. Official Netlib DPBTRF parameter/storage documentation
+supplies band-factor storage context; Linux kernel ELF and /proc documentation
+supplies executable/mapping interface context only. No linked-library workspace
+or complete runtime bound is inferred. A preliminary author-hosted Shewchuk CG
+reference was retrieved; CG is not selected. No reference code, comments, figures,
+data, weights or performance results are imported/copied, and no new Hack3D
+comparison occurs. Bandwidth/storage arithmetic follows TopoLab's own frozen
+Hex8 connectivity and a proposed z-fast internal solve permutation.
+
+The proposal is CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED. No numerical
+source, new native kernel, real input, FEM, inference, fit/search, timing/memory
+trial or formal program is implemented/executed. Old external evidence read sets
+are empty. Model/solver portability, independent complete resource admission and
+all new science/cost remain UNKNOWN. Ordinary complete software checks are separate.

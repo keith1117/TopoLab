@@ -25,10 +25,16 @@ The owner then explicitly approved that one inception; its
 [solver-internal learned-update candidate](TopoLab_v2_solver_internal_learning_route_decision.md)
 closed REJECTED_CURRENT_RESOURCE_ADMISSION. Mandatory exact refresh/tail/audit
 still lack independent complete memory admission; new cost/quality/speed UNKNOWN.
-No executable successor. The next owner route decision is retaining
-FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).
-“Continue” displays that decision only; no D1 reopening or automatic second
-inception/proof/toy/guard/platform slice. Historical successors retain their context.
+The owner subsequently requested one different P/17 proposal. Its
+[bounded-runtime penalty homotopy](TopoLab_v2_P17_bounded_homotopy_proposal.md)
+closes CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED: no implementation,
+complete independent resource admission or repair evidence. Unique next item is
+the owner I1 decision and named Linux environment, one bounded native software
+capability/independent data-free preflight, NOT AUTHORIZED, no old payload or
+scientific budget. The separate later18-reference/342-query/14580s pilot is
+unapproved and requires its own decision after I1. No currently admitted
+executable route; “continue” displays I1 only. No D1 reopening or automatic
+second backend/proof/toy/guard/platform chain. Historical successors retain context.
 
 ## Overall project plans
 
@@ -42,6 +48,7 @@ inception/proof/toy/guard/platform slice. Historical successors retain their con
 | R1 delivery decision and execution plan | [Acceptance, three routes and historical D1 proposal](TopoLab_v2_delivery_execution_plan.md) | [当前中文结论与唯一下一步](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 | Rescue-program closure history | [Owner decision and full-v2 handoff](TopoLab_v2_rescue_program_closure_handoff.md) | [当前中文排期](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 | Solver-internal learning inception | [Single-candidate resource-admission rejection](TopoLab_v2_solver_internal_learning_route_decision.md) | [淘汰结论与所有者决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
+| P/17 bounded-runtime penalty homotopy | [Finite implementation, resource admission and later pilot proposal](TopoLab_v2_P17_bounded_homotopy_proposal.md) | [有条件提案与唯一I1决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 
 The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.

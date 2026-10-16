@@ -26,10 +26,16 @@ The owner then approved that one inception. Its
 [decision](../planning/TopoLab_v2_solver_internal_learning_route_decision.md)
 record REJECTED_CURRENT_RESOURCE_ADMISSION for the single solver-internal learned-
 update candidate; complete new cost/quality/speed UNKNOWN_NOT_TESTED. No executable
-successor. The next owner route decision is retaining
-FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).
-“Continue” displays that decision only. No second inception/proof/toy/guard/platform
-slice, D1 reopening, cap/quota transfer or scientific acceptance from software CI.
+successor from that inception. The owner then requested one different P/17
+proposal. Its [planning validation](p17_bounded_homotopy_proposal.md) and
+[bounded-runtime homotopy proposal](../planning/TopoLab_v2_P17_bounded_homotopy_proposal.md)
+record CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED. No implementation,
+complete independent resource admission or repair result. Unique next item is
+the owner I1 decision and named Linux environment, NOT AUTHORIZED; no old input
+or scientific budget. The separately proposed later18-reference/342-query/14580s
+pilot needs its own decision after I1. No currently admitted executable route;
+“continue” displays I1 only. No automatic implementation, second backend/proof/
+toy/guard/platform chain, D1 reopening, cap transfer or scientific pass from CI.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the

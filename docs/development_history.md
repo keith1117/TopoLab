@@ -1785,3 +1785,34 @@ Unique next item is owner route decision on retaining FULL_V2_OPEN_NO_ADMITTED_R
 with scientific work stopped (recommended). No executable successor, new-budget/
 access request or automatic second inception/proof/toy/guard/platform slice.
 A plain “continue” displays that decision only. Retain worktree and STOP.
+
+## 2026-10-16 P/17 bounded-runtime penalty-homotopy proposal — no execution
+
+After PR195/main2ec9303 and all main CI passed, the owner explicitly requested
+one materially different finite P/17 proposal, retaining4GiB/independent preflight
+and full v2, with no experiment. The [proposal](planning/TopoLab_v2_P17_bounded_homotopy_proposal.md)
+closes CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED. Fixed P/17 would enter
+8 p=1 and8 p=2 updates, then original p=3 terminal checks within360 total. A
+new bounded native query path, independent verifier/controller and complete
+source/binary/runtime lifetime closure are explicit prerequisites; they do not
+exist yet. The geometric band/mapped-role capacities are design constraints,
+not memory PASS, new scientific evidence or a universal feasibility result.
+
+Unique next item is owner I1 scope decision and named Linux environment: one
+integrated software capability/independent data-free preflight, NOT AUTHORIZED,
+no old input/scientific budget. Even an I1 pass stops before a separate later
+18-reference/342-query/14580s pilot budget/access/role decision. All old literal
+payload fields remain UNKNOWN_UNREGISTERED_DENY. No implementation, old external
+evidence/index/model/label/backup/seal read, FEM/fit/search/timing/memory trial,
+formal retry or scientific allocation occurs. Full new B4, independent
+confirmation and compatible final contract remain before B5; no date promised.
+
+P17/scientific FAIL, B4.51 freeze failure/consumed quotas, D1STOP/closed roles/
+FULL60 and owner-closed exact-physics rescue/prior learning rejection remain.
+K+60=12781.16417100014444982 plus all additional history/software UNKNOWN stays;
+the14580 ceiling is unapproved/unspent, not an added charge. Source/tests/
+tolerances/fixtures/locks/CI/public README and all old frozen records retain
+their bytes. See [planning validation](validation/p17_bounded_homotopy_proposal.md).
+Mandatory software/publication/CI/backup evidence stays external at
+`TopoLab-data/p17-bounded-homotopy-proposal-2026-10-16`; final closure binds actual
+release identities. Retain the same assigned worktree, publish and STOP.
