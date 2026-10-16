@@ -59,8 +59,11 @@ native public software and independent verifier/controller are implemented.
 Independent review closes the route NO_ADMISSIBLE_ROUTE: selected-kernel/
 pre-entry exec/argument-stack relocation/lifetime upper bounds remain UNKNOWN.
 No final admission dispatch/freeze or scientific/old-input/pilot grant follows.
-Complete only required ordinary software CI/publication on held source, then
-STOP I1. Next is the owner route decision retaining
+Source PR197 merged5aba9c2 after all four exact-head software CI contexts passed.
+See the [result](docs/validation/i1_bounded_native_software.md) and
+[independent stop](docs/validation/i1_independent_resource_review.md).
+Finish only any remaining required ordinary CI/publication/backup on held source,
+then STOP I1. Next is the owner route decision retaining
 FULL_V2_OPEN_NO_ADMITTED_ROUTE with science stopped (recommended). “Continue”
 finishes publication or, after closure, displays that decision only. No second
 backend/proof/toy/guard/platform chain, D1 reopening or unused-cap transfer.

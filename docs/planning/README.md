@@ -33,8 +33,10 @@ The owner then approved complete [I1 software capability](i1_bounded_native_soft
 x86-64 CI,16 active engineering/review hours,4GiB and independent preflight.
 Integrated software/public regression is implemented. Independent review closes
 the route NO_ADMISSIBLE_ROUTE for selected-kernel/pre-entry startup/lifetime
-UNKNOWN; no final admission dispatch/freeze. Required ordinary software CI and
-publication finish I1, then stop. Next is the owner route decision retaining
+UNKNOWN; no final admission dispatch/freeze. Source PR197/main5aba9c2 publishes
+the capability and independent stop after all four exact-head contexts passed.
+Required ordinary main/report CI and verified new-record backup finish I1
+publication, then stop. Next is the owner route decision retaining
 FULL_V2_OPEN_NO_ADMITTED_ROUTE with science stopped (recommended). No old
 input/scientific/pilot grant, automatic successor or transfer; P/17 unrepaired.
 

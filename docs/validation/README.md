@@ -35,8 +35,10 @@ on existing Ubuntu24.04 x86-64 CI,16 active engineering/review hours,4GiB and
 independent preflight. [I1 implementation validation](i1_bounded_native_software.md)
 records implemented public software; the separate [independent source/binary/lifetime review](i1_independent_resource_review.md)
 stops resource admission NO_ADMISSIBLE_ROUTE on selected-kernel/pre-entry
-startup/lifetime UNKNOWN. No final admission dispatch/freeze. Ordinary required
-software CI/publication closes I1; no old input/scientific/pilot grant or P/17
+startup/lifetime UNKNOWN. No final admission dispatch/freeze. Source PR197/main
+5aba9c2 has all four exact-head contexts passed and the identical tested tree.
+Ordinary required main/report CI and verified new-record backup close publication;
+no old input/scientific/pilot grant or P/17
 repair. Next is the owner route decision retaining full-v2-open/no-admitted-route
 with science stopped (recommended); no automatic second backend/
 proof/toy/guard/platform chain or cap transfer. Software CI cannot pass science.

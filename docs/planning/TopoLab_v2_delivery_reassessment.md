@@ -26,8 +26,13 @@ Independent review now closes the current route **NO_ADMISSIBLE_ROUTE**:
 selected-host pre-entry exec/argument-stack relocation/old-new image transients
 lack a complete bound and actual kernel binding. Post-entry maps/CI cannot fill
 that UNKNOWN. This is no measured4GiB exceedance or scientific failure.
-No final admission dispatch/freeze follows the stop; ordinary required software
-CI/publication closeout continues on held source, then I1 stops.
+No final admission dispatch/freeze follows the stop. Source PR197 merged5aba9c2
+with the exact tested tree after all four PR contexts passed. The
+[implementation result](../validation/i1_bounded_native_software.md) and
+[independent stop](../validation/i1_independent_resource_review.md) retain actual
+software evidence and mandatory UNKNOWN. Remaining ordinary main/report CI and
+verified new-record backup complete publication; their actual identities/results
+are bound externally at I1 closure, never presumed from this text. Then STOP.
 Full v2 remains FULL_V2_OPEN_NO_ADMITTED_ROUTE and P/17 unrepaired. The next
 owner route decision is retaining that state with scientific work stopped
 (recommended), not the unapproved18-reference/342-query/14580s pilot.

@@ -1816,3 +1816,45 @@ their bytes. See [planning validation](validation/p17_bounded_homotopy_proposal.
 Mandatory software/publication/CI/backup evidence stays external at
 `TopoLab-data/p17-bounded-homotopy-proposal-2026-10-16`; final closure binds actual
 release identities. Retain the same assigned worktree, publish and STOP.
+
+
+## 2026-10-16 I1 bounded native software — resource admission stopped
+
+After PR196/main61ed2e1, the owner approved one complete I1 on existing Ubuntu24.04
+x86-64 CI,4GiB/independent preflight and16 active engineering/review hours. The
+opt-in two-scale native CNN/filter/FEM/OC/8+8+p=3 path, matched controls, bounded
+readers/immutable children and separately authored analytic checker/controller
+are implemented. Draft exposure is disclosed; the primary cross-reviewed the
+independent roles. Original numerical/default/fixture/lock identities remain.
+
+The [implementation report](validation/i1_bounded_native_software.md) and
+[independent actual-binary/lifetime report](validation/i1_independent_resource_review.md)
+close **NO_ADMISSIBLE_ROUTE**: selected-host pre-entry exec/argument-stack
+construction/relocation and old/new-image user-page peak lack a complete bound
+and actual kernel binding. Post-entry maps/CI/partial image bounds cannot fill
+that mandatory UNKNOWN. No final admission dispatch/freeze or resource-admission/scientific
+attempt follows; this is not measured>4GiB or universal impossibility.
+
+Local final08 and closeout09 pass all five commands on held source, with1990
+passed/one explicit Linux skip (phase09:664.31s). Source0530210/PR197 passes all
+four exact-head contexts: native40/65.44s, full quality1991/1188.85s, frontend and
+clean Linux smoke. Implementation merge5aba9c2d532b76fb815995116924285750287410 has the
+identical tested tree; actual source-main/report-PR/main CI and final backup
+identities are bound in external publication closure. All72 new
+artifact members were enumerated/hashed before parsing,36 unique files match
+source and all three ELFs equal independently reviewed B. Actual plugin/wrapper
+trace paths and hashes are now bound. Earlier software preparation failures and
+interrupted nonfinal validation remain retained. Exact final PR/main CI, release
+identities and verified new-record backup are recorded at publication closeout.
+
+P/17 unrepaired/scientific FAIL/full-v2 OPEN, B4.51 FAIL_PROCESS_SOURCE_FREEZE/
+consumed1/1 quotas, D1 STOP/unlaunched0/1/FULL60, full-fit PENDING4GiB and all old
+failures/costs/UNKNOWN/seals remain. K=12721.16417100014444982>7200; K+60 remains
+12781.16417100014444982 plus all other history/new software UNKNOWN_NOT_ZERO.
+I1 old external read set and old/new scientific calls are0; pilot14580s/roles/
+views stay unallocated/denied. Unique next item is the owner route decision
+retaining FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific execution stopped
+(recommended), with no executable successor or default proof/backend/platform
+chain. Raw new software/publication evidence stays at
+`TopoLab-data/i1-bounded-native-software-2026-10-16`; the final closure binds actual
+publication/CI/backup. Retain the assigned worktree and STOP after I1 closes.

@@ -104,8 +104,12 @@ or freeze; only required ordinary software CI/publication closes I1. No self-
 certification, old input, scientific budget/experiment or later pilot is granted.
 I1 additionally requires its `i1-native-software` CI on the exact PR head and main;
 the existing three protected contexts and all protection settings remain.
-Finish I1 and stop. Next is the owner route decision retaining full-v2-open/no
-admitted route with science stopped; the14580s pilot remains unapproved.
+Source PR197/main5aba9c2 publishes the software and independent stop after all
+four exact-head contexts passed. Final ordinary main/report CI, review of every
+uploaded commit and actual merge, and verified new-record backup govern closure; raw
+receipts bind their final identities. Finish I1 and stop. Next is the owner route
+decision retaining full-v2-open/no admitted route with science stopped; the14580s
+pilot remains unapproved.
 No D1 reopening, unused-cap transfer or automatic second backend/proof/toy/guard/
 platform chain. All historical failures/costs/UNKNOWN/quotas/seals remain.
 
