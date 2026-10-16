@@ -93,6 +93,7 @@ int rt_arguments(unsigned long *stack,int expected) {
     }
     return 0;
 }
+static const unsigned long *ci_auxv;
 int rt_ci_environment(unsigned long *stack) {
     /* Direct CI entry avoids a resident shell/Python launcher. Include the
      * bounded incoming stack environment in startup proof; never print values. */
@@ -101,6 +102,7 @@ int rt_ci_environment(unsigned long *stack) {
     for(int entry=0;entry<256;++entry) {
         char *value=(char *)environment[entry];
         if(!value) {
+            ci_auxv=environment+entry+1;
             rt_text("CI_INCOMING_ENV_ENTRIES=");rt_uint((unsigned long)entry);
             rt_text("\nCI_INCOMING_ENV_BYTES=");rt_uint(total);rt_text("\n");return 0;
         }
@@ -176,15 +178,13 @@ int rt_preflight(unsigned long bytes,unsigned long *stack) {
     }
     if(!single) return 1;
     rt_text("OBSERVED_THREADS=1\n");
-    n=read_proc("/proc/self/auxv",proc_buffer,sizeof(proc_buffer));
-    if(n<16||n%16) return 1;
-    int terminated=0;rt_text("AUXV_SELECTED_BEGIN\n");
-    for(int offset=0;offset<n;offset+=16) {
-        unsigned long kind=0,value=0;
-        for(int b=7;b>=0;--b) {
-            kind=(kind<<8)|(unsigned char)proc_buffer[offset+b];
-            value=(value<<8)|(unsigned char)proc_buffer[offset+8+b];
-        }
+    /* Dumpability zero makes /proc/self/auxv root-owned. Read the actual
+     * kernel-provided entry stack instead; preserve its position before CI
+     * environment pointers are cleared. No environment values are emitted. */
+    const unsigned long *auxv=ci_auxv?ci_auxv:stack+stack[0]+3;
+    int terminated=0;rt_text("AUXV_ORIGIN=INITIAL_STACK\nAUXV_SELECTED_BEGIN\n");
+    for(int pair=0;pair<64;++pair) {
+        unsigned long kind=auxv[2*pair],value=auxv[2*pair+1];
         if(!kind) {terminated=1;break;}
         /* No UID/GID, random bytes or environment value is recorded. */
         if(kind==3||kind==4||kind==5||kind==6||kind==7||kind==8||kind==9||kind==33||kind==51) {

@@ -103,6 +103,59 @@ checks pass. These checks supply no selected-Linux execution or resource PASS.
 Actual exact-head/source-main CI, manual startup and independent binary review
 remain pending at this first source publication.
 
+## First Ubuntu CI preparation failures — retained before freeze
+
+PR197/source554f6d9 initially produced invalid-workflow run38874749984:
+GitHub rejects `github.workspace` expressions in `shell` at line64. The
+Ubuntu native job116886992902 separately reported40 setup errors because its
+explicit pytest basetemp parent `build/` did not exist. No native builder/role
+ran in that failed job. The initial artifact glob also relied on a basename
+longer than pytest's30-character truncation. The earlier completed local checks
+remain valid development evidence, not selected-Linux acceptance.
+
+Before any source freeze/manual startup, the workflow now resolves the native
+controller through `GITHUB_PATH` populated by the completed build step, passes
+bounded relative child paths under the observed cwd, creates the public test
+parent, and matches only native `bin/` directories under that fresh basetemp.
+Named SHA vector IDs prevent an unnecessary oneMiB fixture expansion in error
+metadata; vector bytes/assertions are unchanged. Exact-head CI must rerun on the
+new source; there is no rerun of an old scientific program or formal opportunity.
+Raw failure logs, precise diagnostic and hashes remain in the new I1 namespace.
+
+The same first PR run's full `quality` job116886993148 subsequently completed:
+**1990 passed,1 failed,1140.54s**. Its standalone controller returned77 at the
+initial public startup, before numerical integration. Captured startup stdout
+was not printed by the original test, so the exact failing substage is not
+retrospectively manufactured. Source inspection and Linux proc ownership rules
+identify a concrete defect: dumpability0 can prevent a non-root process opening
+its root-owned0400 `/proc/self/auxv`. The minimal pre-freeze correction reads
+selected auxv from the actual initial stack, bounds it to64 pairs and requires
+a terminator. CI environment erasure first retains that location; values stay
+unlogged. No dumpability/permission relaxation. The test now preserves startup
+stdout/stderr in a failed assertion and checks its initial-stack provenance.
+Independent review and fresh exact-head Linux regression must verify this fix.
+
+Local phase05, before this native correction, passed all five checks on its
+then-stable bytes:1990 passed/one Linux skip,666.55s pytest,669.321918041911s
+command wall; log SHA256
+`ad46f630574b8de751188c9f53ecf5a9a7210e8dd28bee59e97e0a667d87e682`.
+It remains nonfinal for the next source commit because the startup source/test
+subsequently changed. A fresh full stable regression is required; earlier
+failed CI and all preparation costs remain retained, never an experiment retry.
+
+## Stable source checks after startup correction
+
+Phase06 passes all five required commands with unchanged watched source throughout:
+locked dev sync, Ruff, mypy81 files, complete pytest and diff whitespace. Local
+pytest **1990 passed,1 Linux-only skip in673.15s**; complete command
+wall675.9546540828887s. Pytest log SHA256
+`0fe8c2e22561ab65d9376ae4cf0deb6d98e51aa1282ee0bf0041f2886d593c75`.
+Complete-check manifest SHA256
+`bf632177e381a3a128c548111cc8f15f549cbf760b3554f85339fd768e3750e5`; stable-source receipt SHA256
+`863bd354fc0bf0746ac1432ec318be1e31313aab4cb8a48f1dda69c47d4aa44d`. Independent source-only review accepted the exact runtime fix,
+including its8-byte pointer per role and child seccomp inheritance; it supplied
+no resource PASS. All new exact-head Linux CI remains required before merge.
+
 ## Resource, scientific and accounting conclusion — pending actual review
 
 Do not infer a resource PASS from fixed arrays, ELF LOADs, compiler stack frames,

@@ -1472,3 +1472,9 @@ New public software fixtures/weights and ordinary numerical regressions do not
 read old labels/models/index/raw evidence, run a scientific experiment or repair
 P/17. Old external research/backup read set remains empty. All existing numerical
 identities and full-fit/historical resource gaps stay.
+
+The Linux [proc ownership specification](https://man7.org/linux/man-pages/man5/proc_pid.5.html)
+explains the pre-freeze startup correction: disabling dumping changes proc-file
+ownership. Selected auxv now comes from the actual kernel-provided entry stack,
+with its location retained before bounded CI environment erasure, following the
+ELF stack layout above. No permission escalation or dumpability relaxation.

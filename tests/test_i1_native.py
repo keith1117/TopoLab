@@ -596,7 +596,9 @@ def test_native_compliance_gradient_matches_two_step_finite_difference(lib, step
 
 
 @pytest.mark.parametrize(
-    "data", [b"", b"abc", b"a" * 55, b"a" * 56, b"a" * 64, bytes(range(256)) * 4096]
+    "data",
+    [b"", b"abc", b"a" * 55, b"a" * 56, b"a" * 64, bytes(range(256)) * 4096],
+    ids=["empty", "abc", "padding55", "padding56", "block64", "oneMiB"],
 )
 def test_bounded_sha256_known_answers_and_multiblock_padding(lib, data):
     output = ct.create_string_buffer(32)
@@ -649,8 +651,8 @@ def test_linux_no_libc_programs_preflight_query_and_audit(tmp_path):
         ],
         env={},
         capture_output=True,
-        check=True,
     )
+    assert result.returncode == 0, (result.stdout, result.stderr)
     assert result.stdout.count(b"MAPS_BEGIN") == 3
     assert b"PILOT=DENIED" in result.stdout
     manifest = json.loads((build / "build.json").read_text())
@@ -664,6 +666,7 @@ def test_linux_no_libc_programs_preflight_query_and_audit(tmp_path):
     assert result.stdout.count(b"ROLE_ENV_EMPTY=1") == 3
     assert result.stdout.count(b"DUMPABLE_AFTER_SETUP=0") == 3
     assert result.stdout.count(b"AUXV_SELECTED_BEGIN") == 3
+    assert result.stdout.count(b"AUXV_ORIGIN=INITIAL_STACK") == 3
     assert result.stdout.count(b"LIMITS_BEGIN") == 3
     direct = subprocess.run(
         [

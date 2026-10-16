@@ -119,9 +119,13 @@ Current I1 starts from merged main61ed2e1/PR196 in the same retained worktree,
 branch `feat/i1-bounded-native-query`. Public component regression currently
 passes39 tests on the local host; the standalone Linux integration test is
 explicitly skipped locally and must run on the selected Ubuntu24.04 CI. Final
-stable source phase04 passes all five mandatory checks:1990 passed/1 explicit
-Linux skip,658.10s pytest. New PR/main CI, source freeze and independent admission
-remain pending actual records. Implementation and evidence publication
+stable source phase06 passes all five mandatory checks after the startup fix:
+1990 passed/1 explicit Linux skip,673.15s pytest. Source PR197 is open. First
+source554f6d9 CI failures are retained: missing pytest parent/invalid custom-shell
+expression and initial controller exit77, before numerical integration. The
+pre-freeze correction reads bounded initial-stack auxv without relaxing dumpability,
+with independent source review. Exact new-head/main CI, source freeze and complete
+independent admission remain pending. Implementation and evidence publication
 may use separate PRs within this single I1.
 
 Keep old numerical sources/tests/tolerances/fixtures/locks/public README and all

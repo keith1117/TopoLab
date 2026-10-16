@@ -54,6 +54,7 @@ jobs:
         run: |
           python3 scripts/i1_native_build.py build/i1-preflight/native
           python3 scripts/i1_native_inspect.py build/i1-preflight/native
+          echo "$GITHUB_WORKSPACE/build/i1-preflight/native" >> "$GITHUB_PATH"
       - name: Exclude a core collector in the earliest exec-entry window
         run: |
           sudo sysctl -w kernel.core_pattern=core
@@ -61,7 +62,7 @@ jobs:
           cat /proc/sys/kernel/core_pattern > build/i1-preflight/core-pattern.txt
       - name: Actual native startup with no resident shell or Python role helper
         id: native_startup
-        shell: ${{ github.workspace }}/build/i1-preflight/native/i1-controller --ci-public-preflight ${{ github.workspace }}/build/i1-preflight/native/i1-query ${{ github.workspace }}/build/i1-preflight/native/i1-audit {0}
+        shell: i1-controller --ci-public-preflight build/i1-preflight/native/i1-query build/i1-preflight/native/i1-audit {0}
         run: native-data-free-preflight
       - name: Record the completed native step separately
         if: always()
