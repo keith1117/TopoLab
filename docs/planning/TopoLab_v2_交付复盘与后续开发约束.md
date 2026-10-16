@@ -9,15 +9,20 @@
 本文记录所有者在本对话中认可的复盘、新期望和后续工作规则，属于交付治理调整，
 不是新的数值实验合同、科研 Gate 或预算授权。
 
-所有者路线决定后的当前排期（2026-10-15）：[R1 执行计划](TopoLab_v2_delivery_execution_plan.md)
+所有者另行要求新提案后的当前排期（2026-10-16）：[R1 执行计划](TopoLab_v2_delivery_execution_plan.md)
 保留其当时权限下 NO_ADMISSIBLE_ROUTE；[D1](../validation/d1_physics_resource_feasibility.md)
 保留 STOP_UNKNOWN_PREFIT_BOUND，在实现/真实输入前停止，新角色未启动0/1并关闭，FULL60保留。
 所有者已**关闭当前精确物理救援程序**，保留4GiB、独立预检及完整v2目标。
 [关闭交接](TopoLab_v2_rescue_program_closure_handoff.md)保留当时决定。所有者随后明确批准其中一次
 求解器内学习更新立项；本片以[REJECTED_CURRENT_RESOURCE_ADMISSION](TopoLab_v2_solver_internal_learning_route_decision.md)收尾。
 必需的真实刷新/精确尾段/独立复核仍无完整独立内存准入；新成本/质量/速度均UNKNOWN_NOT_TESTED。
-无可执行后继。唯一下项是所有者决定是否保留FULL_V2_OPEN_NO_ADMITTED_ROUTE并停止科研工作（推荐）；
-“继续”仅展示该决定。不自动追加第二立项/证明/玩具/守卫/平台片，不增加预算/访问、不重开D1或转移配额。
+随后所有者另行要求一份[P/17有界运行时惩罚同伦提案](TopoLab_v2_P17_bounded_homotopy_proposal.md)，
+现以CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED收尾：显式有界原生存储与
+8次p=1/8次p=2/再p=3的政策尚无实现、完整独立资源准入或修复结果。
+唯一下项是所有者决定I1并指定Linux环境：一次集成软件能力/独立无数据预检，尚未授权，
+不含旧输入或科研预算。后续18新参考/342查询/14580秒物理试点须I1后单独决定，不包含在I1内。
+当前无已准入可执行路线；“继续”仅展示I1。不自动实现，不追加第二后端/证明/玩具/守卫/平台链，
+不增加预算/访问、不重开D1或转移配额。
 B4.52仍为 NOT_SELECTED_BY_R1。第5–6节保留原始R1历史指令，
 不授权重做R1或重开D1；旧Gate、费用、UNKNOWN、配额与封存均不改变。
 

@@ -94,10 +94,15 @@ full-v2 acceptance. The [closure handoff](planning/TopoLab_v2_rescue_program_clo
 scoped one alternative-learning-route inception, later explicitly approved by the
 owner. Its [single solver-internal learned-update candidate](planning/TopoLab_v2_solver_internal_learning_route_decision.md)
 closed REJECTED_CURRENT_RESOURCE_ADMISSION; new performance/cost remain UNKNOWN.
-No executable successor. The next owner route decision is retaining
-FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).
-“Continue” displays that decision only; no automatic second inception/proof/toy/
-guard/platform slice, D1 reopening, new budget/access or unused-cap transfer.
+The owner later commissioned one [P/17 bounded-runtime homotopy proposal](planning/TopoLab_v2_P17_bounded_homotopy_proposal.md),
+now CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED. No implementation, complete
+independent resource admission or repair evidence exists. Unique next item is
+the owner I1 decision and named Linux environment: one bounded native software
+capability/independent data-free preflight, NOT AUTHORIZED, no old payload or
+scientific budget. The later18-reference/342-query/14580s pilot is a separate
+unapproved decision after I1, not part of I1. No currently admitted executable
+route; “continue” displays I1 only. No automatic implementation, second backend/
+proof/toy/guard/platform chain, D1 reopening, new access or unused-cap transfer.
 
 Before a slice, identify the delivery blocker/capability, baseline, acceptance,
 dependencies, resource feasibility and failure disposition. A known impossible
