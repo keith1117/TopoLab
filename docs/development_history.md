@@ -1858,3 +1858,35 @@ retaining FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific execution stopped
 chain. Raw new software/publication evidence stays at
 `TopoLab-data/i1-bounded-native-software-2026-10-16`; the final closure binds actual
 publication/CI/backup. Retain the assigned worktree and STOP after I1 closes.
+
+
+## 2026-10-16 finite development-method documentation consolidation
+
+From clean main57c73b8 (I1 closeout PR198), the owner retained
+FULL_V2_OPEN_NO_ADMITTED_ROUTE and authorized only this finite documentation,
+mandatory regression and ordinary publication. Actual GitHub records confirm
+PR197/198 merged and all four main CI contexts passed; stale I1-publication
+handoff wording is resolved in current entries, not rewritten in frozen reports.
+
+The existing bilingual [reassessment](planning/TopoLab_v2_delivery_reassessment.md)
+and [roadmaps](planning/TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment)
+now require acceptance/resource evidence specifications before algorithm choice,
+public actual-launch debugging before freeze, blocker-delta progress and one
+mechanism/cost-grounded hypothesis after separate scientific admission. Repair,
+fresh confirmation, full B4 and B5 keep distinct purposes; at most two ineffective
+capability slices require a route decision. A2.3 has independent checkpoint
+parity/corruption/identity/crash-atomicity acceptance as a candidate only.
+
+Effective methods, pending threshold/assurance advice and historical conclusions
+are explicitly separated. No1.001/zero-failure/fallback/speed/resource standard,
+budget or access changed. Fixed P/17/old FAIL/UNKNOWN/quotas/seals,4GiB/independent
+preflight and K>7200/D1 FULL60 remain. No algorithm/resource-proof/capability
+implementation, old external evidence read, experiment, retry/reset or successor.
+
+[Validation](validation/v2_development_methods_closeout.md) records scope and
+software checks; raw logs/review/PR/main/CI/verified-backup bindings stay in
+`TopoLab-data/v2-development-methods-closeout-2026-10-16`. Unique next item is an
+owner scope decision: current specification/pause or one separately commissioned
+finite prospective resource-assurance specification proposal. Neither it nor
+A2.3 is authorized here; no default I1/D1/B4.52 reopening or pilot14580s. Retain
+the assigned worktree and stop after this documentation publishes.

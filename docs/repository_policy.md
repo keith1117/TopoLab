@@ -80,48 +80,37 @@ frozen scientific files and all prior outcomes.
 ## Delivery progress and planning authority
 
 The owner-approved [delivery reassessment](planning/TopoLab_v2_delivery_reassessment.md)
-is mandatory at session/slice start and context recovery. Preserve usable interim
-platform delivery while the full-v2 positive ML Gate remains open. Current status
-and the English roadmap set current scheduling; old frozen successors remain
-historical evidence. [R1](planning/TopoLab_v2_delivery_execution_plan.md) closed
-NO_ADMISSIBLE_ROUTE under its historical authority; B4.52 is NOT_SELECTED_BY_R1.
-The owner subsequently approved complete D1, which
-[closed STOP_UNKNOWN_PREFIT_BOUND](validation/d1_physics_resource_feasibility.md)
-before implementation/real input. Its new roles closed unlaunched0/1;FULL60 stays
-charged and unused caps/quotas do not transfer. The owner has now closed the
-current exact-physics rescue program, retaining4GiB, independent preflight and
-full-v2 acceptance. The [closure handoff](planning/TopoLab_v2_rescue_program_closure_handoff.md)
-scoped one alternative-learning-route inception, later explicitly approved by the
-owner. Its [single solver-internal learned-update candidate](planning/TopoLab_v2_solver_internal_learning_route_decision.md)
-closed REJECTED_CURRENT_RESOURCE_ADMISSION; new performance/cost remain UNKNOWN.
-The owner later commissioned one [P/17 proposal](planning/TopoLab_v2_P17_bounded_homotopy_proposal.md),
-then approved complete [I1](planning/i1_bounded_native_software_protocol.md) on existing
-Ubuntu24.04 x86-64 CI,16 active engineering/review hours,4GiB and independent
-preflight. Integrated native software/public regression is implemented;
-independent review now stops the route NO_ADMISSIBLE_ROUTE for mandatory
-selected-kernel/pre-entry startup/lifetime UNKNOWN. No final admission dispatch
-or freeze; only required ordinary software CI/publication closes I1. No self-
-certification, old input, scientific budget/experiment or later pilot is granted.
-I1 additionally requires its `i1-native-software` CI on the exact PR head and main;
-the existing three protected contexts and all protection settings remain.
-Source PR197/main5aba9c2 publishes the software and independent stop after all
-four exact-head contexts passed. Final ordinary main/report CI, review of every
-uploaded commit and actual merge, and verified new-record backup govern closure; raw
-receipts bind their final identities. Finish I1 and stop. Next is the owner route
-decision retaining full-v2-open/no admitted route with science stopped; the14580s
-pilot remains unapproved.
-No D1 reopening, unused-cap transfer or automatic second backend/proof/toy/guard/
-platform chain. All historical failures/costs/UNKNOWN/quotas/seals remain.
+is required development reading. Its Section4 methods are effective; the
+[English roadmap Section6](planning/TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment)
+keeps acceptance-linked order, scoped blocker metrics, pending advice and
+platform acceptance separate. Specify requirements/resource evidence before
+algorithm selection, debug public software before freeze and measure actual
+blocker change. At most two ineffective capability slices require a route
+review, not a default sequel or experiment grant. Existing checks and
+preflight/freeze/STOP remain; scientific, resource, process and UNKNOWN outcomes
+stay distinct.
 
-Before a slice, identify the delivery blocker/capability, baseline, acceptance,
-dependencies, resource feasibility and failure disposition. A known impossible
-cost requirement triggers an explicit route/owner decision, not more proofs or a
-ledger reset. Review material progress after at most two capability slices; this
-is no automatic multi-slice or experiment grant. Complete actual launch preflight
-before source freeze; any frozen mutation or stop blocks further formal launch.
-Keep scientific, resource, software/process and UNKNOWN conclusions separate.
-Planning maintenance can update active policy with explicit owner authority; it
-never retroactively amends frozen experiments or grants data/budget access.
+I1 software/independent stop publication is complete through PR197/198/main57c73b8,
+whose four main contexts passed. Mandatory selected-host pre-entry lifetime
+UNKNOWN remains NO_ADMISSIBLE_ROUTE. The owner has decided to retain
+FULL_V2_OPEN_NO_ADMITTED_ROUTE, fixed P/17,4GiB and independent preflight.
+[Current status](project_status.md) gives the single pending owner scope decision;
+retention itself is no longer pending. Only this documentation maintenance,
+required software regression and ordinary publication are commissioned.
+A prospective resource-assurance specification proposal and A2.3 platform
+capability are not commissioned. No scientific threshold, budget, access or
+resource-admission standard changes through these method updates or advice.
+Any such change needs a separately reviewed finite proposal and explicit
+prospective adoption; no old FAIL/contract/ledger changes.
+
+R1/D1, closed exact-physics rescue, rejected solver-internal candidate, I1
+resource stop and B4.52 NOT_SELECTED_BY_R1 retain historical context. All costs,
+UNKNOWN, failures, consumed/closed quotas and seals remain; no old inputs,
+scientific/pilot14580s grant, retry/reset, cap transfer or automatic backend/
+proof/toy/guard/platform chain. A plain “continue” after closure displays the
+concrete decision only. I1 additionally requires its `i1-native-software` context
+on exact PR head and main; all four existing CI jobs run unchanged for this
+publication, alongside the three protected contexts below.
 
 ## Slice and GitHub workflow
 

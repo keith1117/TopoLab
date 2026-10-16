@@ -1,46 +1,30 @@
 # TopoLab v2 Development Roadmap
 
-Current scheduling override (owner-approved2026-10-15): read the
-[delivery reassessment and mandatory progress rules](TopoLab_v2_delivery_reassessment.md)
-before every new slice. Historical v1.0.0 remains an interim delivery; full v2
-requires the unchanged positive learned-acceleration Gate.
-[R1](TopoLab_v2_delivery_execution_plan.md) retains historical NO_ADMISSIBLE_ROUTE.
-[D1](../validation/d1_physics_resource_feasibility.md) retains
-STOP_UNKNOWN_PREFIT_BOUND before implementation/real input, roles closed
-unlaunched0/1 and FULL60 retained. The owner has **closed the current exact-physics
-rescue program**, retaining4GiB and independent preflight. See the
-[closure handoff](TopoLab_v2_rescue_program_closure_handoff.md).
-The owner then approved one solver-internal learned-update inception; it closed
-[REJECTED_CURRENT_RESOURCE_ADMISSION](TopoLab_v2_solver_internal_learning_route_decision.md).
-Mandatory exact refresh/tail/audit still lack an independent complete native/
-runtime/lifetime bound; new cost/quality/speed remain UNKNOWN_NOT_TESTED. No
-executable successor from that inception. The owner subsequently requested one
-[P/17 proposal](TopoLab_v2_P17_bounded_homotopy_proposal.md), retaining its historical
-conditional decision, and then approved I1:
+Current authority (owner-approved documentation consolidation,2026-10-16):
+**FULL_V2_OPEN_NO_ADMITTED_ROUTE is retained by owner decision; science is stopped.**
+I1 software and independent resource-stop publication are complete through
+[PR197](https://github.com/keith1117/TopoLab/pull/197) and
+[PR198](https://github.com/keith1117/TopoLab/pull/198), main
+`57c73b8fc19930f2d7a518e2c4c0cd8d50b3f7b7`; all four contexts of its
+[main CI](https://github.com/keith1117/TopoLab/actions/runs/38891321770) passed.
+The [I1 result](../validation/i1_bounded_native_software.md) and
+[independent review](../validation/i1_independent_resource_review.md) retain
+implemented public software and mandatory selected-host pre-entry lifetime
+UNKNOWN, not measured memory>4GiB, a universal impossibility or P/17 repair.
+R1 NO_ADMISSIBLE_ROUTE, D1 STOP_UNKNOWN_PREFIT_BOUND/unlaunched0/1/FULL60,
+owner-closed exact-physics rescue and rejected solver-internal candidate remain
+historical conclusions. B4.52 remains NOT_SELECTED_BY_R1.
 
-The owner approved complete I1 on existing Ubuntu24.04 x86-64 CI, retaining
-4GiB, independent preflight and16 active engineering/review hours. See its
-[I1 protocol](i1_bounded_native_software_protocol.md) and
-[contract](i1_bounded_native_software_contract.json). The integrated native
-query/control/verifier/controller and public regression are implemented.
-Independent review now closes the current route **NO_ADMISSIBLE_ROUTE**:
-selected-host pre-entry exec/argument-stack relocation/old-new image transients
-lack a complete bound and actual kernel binding. Post-entry maps/CI cannot fill
-that UNKNOWN. This is no measured4GiB exceedance or scientific failure.
-No final admission dispatch/freeze follows the stop. Source PR197 merged5aba9c2
-with the exact tested tree after all four PR contexts passed. The
-[implementation result](../validation/i1_bounded_native_software.md) and
-[independent stop](../validation/i1_independent_resource_review.md) retain actual
-software evidence and mandatory UNKNOWN. Remaining ordinary main/report CI and
-verified new-record backup complete publication; their actual identities/results
-are bound externally at I1 closure, never presumed from this text. Then STOP.
-Full v2 remains FULL_V2_OPEN_NO_ADMITTED_ROUTE and P/17 unrepaired. The next
-owner route decision is retaining that state with scientific work stopped
-(recommended), not the unapproved18-reference/342-query/14580s pilot.
-No old input/scientific budget, D1 reopening, cap transfer or automatic second
-backend/proof/toy/guard/platform slice. A plain “continue” only completes I1's
-remaining publication; after closure it displays the route decision.
-Historical successors below retain their context and do not override this decision.
+Only the reassessment's development methods and this roadmap's current Section6
+are newly effective. Scientific thresholds, budgets, access and resource admission
+are unchanged. The threshold/assurance questions there are **pending advice**,
+not accepted changes. The unique next item after this documentation closes is
+[one concrete owner scope decision](TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment),
+not an executable capability. A2.3 is a separately acceptable platform candidate,
+not an automatic successor. No old inputs, pilot14580s, new scientific budget,
+formal retry/reset, D1/I1 reopening or proof/toy/guard/platform chain is granted.
+Historical stage bodies below retain their original contracts and successors;
+they do not restart a closed program. All failures, costs, UNKNOWN, quotas and seals remain.
 
 Status: **active v2 flagship delivery plan; the ML delivery Gate remains open.**
 Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
@@ -193,13 +177,13 @@ restore protocol compliance. Overall slice Gate is FAIL_PROCESS_SOURCE_FREEZE;
 217/404 are retained post-stop document checks ONLY,not accepted protocol evidence.
 Both quotas are consumed1/1;no further formal call,source reset or retry follows.
 
-Latest resource admission: **D1 STOP_UNKNOWN_PREFIT_BOUND**, after explicit
+Historical resource admission: **D1 STOP_UNKNOWN_PREFIT_BOUND**, after explicit
 owner approval of complete D1. This closes the proposed rescue at its prescribed
 UNKNOWN stop; it establishes no composed capability or scientific pass. R1 and
 all old failures/seals stay. See [D1 report](../validation/d1_physics_resource_feasibility.md).
 
 Prepared: 2026-09-24
-Revised: 2026-10-16 (I1 resource UNKNOWN stop; ordinary source publication closing; no science/pilot)
+Revised: 2026-10-16 (effective development methods; pending acceptance advice; science stopped)
 
 Related documents:
 
@@ -2382,67 +2366,114 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-1. **The owner closed the current exact-physics rescue program.** Preserve
-   D1 STOP_UNKNOWN_PREFIT_BOUND, its unlaunched0/1 roles/FULL60 and all frozen
-   [protocol](d1_physics_resource_feasibility_protocol.md),
-   [contract](d1_physics_resource_feasibility_contract.json) and
-   [report](../validation/d1_physics_resource_feasibility.md) bytes. Retain4GiB,
-   independent preflight and the full-v2 goal. The [closure handoff](TopoLab_v2_rescue_program_closure_handoff.md)
-   resolves the old pending decision; it is not a resource or scientific pass.
-   The owner subsequently approved exactly that one inception. Its
-   [solver-internal sensitivity-update candidate](TopoLab_v2_solver_internal_learning_route_decision.md)
-   is now REJECTED_CURRENT_RESOURCE_ADMISSION: real refresh/tail/audit retain
-   unresolved complete native/runtime/lifetime bounds. Cost/quality/speed remain
-   UNKNOWN_NOT_TESTED; no new scientific failure or universal impossibility claim.
-   The owner then explicitly commissioned one different P/17 proposal. Its
-   [bounded-runtime penalty homotopy](TopoLab_v2_P17_bounded_homotopy_proposal.md)
-   closes CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED. It preserves fixed
-   P/17, prescribes8 p=1 and8 p=2 updates before p=3 within360, and specifies
-   an actual fixed-storage native producer/verifier/controller implementation
-   path. Band storage/mapped-role capacities are not complete independent proof.
-   The owner then approved complete I1, existing Ubuntu24.04 x86-64 CI and16
-   active engineering/review hours. The [I1 protocol](i1_bounded_native_software_protocol.md)
-   and [contract](i1_bounded_native_software_contract.json) cover actual native
-   implementation/public regression and complete independent resource review/
-   data-free preflight. Integrated software/public regression is implemented;
-   independent review closes the route NO_ADMISSIBLE_ROUTE because complete
-   selected-kernel/pre-entry stack/exec lifetime bounds remain UNKNOWN. No
-   final admission dispatch/freeze, old input or scientific/pilot grant follows.
-   Source PR197/main5aba9c2 publishes the implemented capability/independent
-   stop after all four exact-head contexts passed, with tested-tree equality.
-   Only outstanding ordinary main/report CI and verified new-record backup
-   finish this I1 publication, then STOP. Their actual release identities are
-   bound at external closeout. Next is the owner route decision retaining
-   FULL_V2_OPEN_NO_ADMITTED_ROUTE with science stopped (recommended). The hypothetical14580s pilot remains
-   unapproved/unallocated, not the next executable slice. No D1 reopening,
-   transfer or automatic second backend/proof/toy/guard/platform chain. A plain
-   “continue” finishes publication, or after closure displays that decision.
-2. **Only a justified, authorized capability implementation:** it must remove a
-   named delivery blocker or eliminate a route within a finite integration path.
-   Registration/resource guards are eligible only when R1 establishes their
-   necessity and bounded use. An impossible all-paid7200 requirement cannot be
-   repaired by more proofs or by subtracting history. A proposed new experiment
-   or budget requires explicit owner authority and its own finite contract.
-3. **Correctness, fidelity and actual resource feasibility before fitting:** keep
-   independent audits, first/failure-inclusive cost and simultaneous full-memory
-   requirements. The unchanged exact-FEM/reflection mechanisms remain stopped;
-   no cache/ordering, epoch/population/frequency search or actual trial follows
-   automatically from planning or public software acceptance.
-4. **Learned repair and independent confirmation:** preserve fixed P/17, all
-   controls, failures and full charged comparisons. A bounded development pass
-   cannot substitute another seed or open final evidence.
-5. **Compatible final contract and B5:** only after the complete new B4 Gate,
-   freeze the compatible method and execute the one-time ID/OOD/replication
-   sequence with the existing quality, cost and claim requirements.
-6. **Separate platform delivery:** A2.3–A2.4 and A4 remain independently scoped
-   capabilities; they can advance usable staged delivery after their own owner
-   instruction, without changing numerical comparisons or claiming full v2.
+### Effective authority and development order
 
-Every slice must declare its blocker/capability baseline, acceptance, dependencies,
-resource scope and failure decision. Reassess after at most two capability slices
-without material progress; do not automatically extend a text/toy/guard chain.
-This review window grants no calls, budget or multi-slice execution. Close one
-slice, report actual evidence and one next step, then wait for a new instruction.
+The owner has decided to retain **FULL_V2_OPEN_NO_ADMITTED_ROUTE**. That decision
+is resolved; no repeat approval to retain it is required. I1 publication is
+complete at main57c73b8/PR198 with all four main CI contexts passed. Its
+[resource UNKNOWN stop](../validation/i1_independent_resource_review.md),
+D1 STOP/unlaunched0/1/FULL60, owner-closed exact-physics rescue, solver-internal
+candidate rejection and R1/B4.52 dispositions remain. P/17 is unrepaired.
+The present slice only consolidates documentation and required software/GitHub
+checks; it implements no A2.3, algorithm or resource proof. The unapproved
+14580s pilot/old views remain unallocated/denied. No executable successor exists.
+
+The following order applies **only after separate authority and admission**;
+these are purposes/acceptance/exits, not newly commissioned slices or new Gates.
+The [reassessment methods](TopoLab_v2_delivery_reassessment.md#4-effective-development-methods)
+apply to every future slice.
+
+| Order / final-delivery link | Scope and acceptance before advancing | Prerequisites / exit |
+|---|---|---|
+| Acceptance and resource specification → obtainable final evidence | For each requirement identify deliverable, rationale/contract, evidence, environment/independent role and whether evidence is obtainable; agree assurance before selecting an algorithm | Current frozen obligations bind. Unknown mandatory premise, impossible accounting or absent authority stops implementation; present a finite owner decision, not another checker |
+| Public software integration → reliable formal launch | Exercise actual command/cwd/dependencies/permissions, public input/role identities, atomic success/failure records and complete prescribed regression before freeze | No old input grant. Actual production inputs/roles require later access registration and independent launch preflight on clean locked merged all-CI-passed source. Frozen change/STOP refuses launch; quotas never reset |
+| One bounded repair hypothesis → fixed-P/17 reliability | Use exposed cases as development regression, fixed primary and controls; predeclare mechanism, full cost, expected quality/speed margin, zero-regression criteria and finite exit | Scientific budget/access/resource/freeze/independent review separately admitted. Retain every failed attempt/fallback. Inadequate effect, new regression, resource UNKNOWN or cap/STOP closes the attempt; no default search |
+| Fresh independent confirmation → transfer beyond exposed repairs | New independent physical samples, frozen method/primary and complete charges; satisfy the applicable confirmation contract | Repair pass alone is insufficient. No reselection or threshold tuning; failure retains exposed status and stops that identity |
+| Complete new B4 → eligible development freeze | All required controls/seeds/populations, quality/reliability/speed and resource/accounting audits pass the applicable full development Gate | A local repair or confirmation is not full B4. Otherwise final evidence stays sealed |
+| Compatible final contract, then B5 → full-v2 learned claim | Freeze workload/quality/effect/statistics/access/roles/resources; execute once in ID→OOD→independent replication order; meet unchanged Sections2/B3 obligations and publish amortization | Separate authority and clean locked merged CI-passed source/actual preflight required. Any failed required stratum/replication retains FAIL, prohibits post-result selection and leaves full v2 open |
+
+Algorithm-specific certification remains necessary only when the selected
+contract/claim needs it; it is not silently imposed on all learning methods.
+This distinction does not waive complete resource assurance required by current
+contracts. Resource UNKNOWN is neither a measured exceedance nor execution
+permission. After at most two capability slices without material blocker change,
+make an explicit route decision and stop; no automatic third slice follows.
+
+### Progress baseline and mandatory delta record
+
+Use population/method/source identities and before/after blocker changes. The
+following are **historical published observations**, not new measurements or a
+current common test panel. Never pool different panels or variants to claim a
+repair. New H/17 quality/speed/fair-reference results remain UNKNOWN_NOT_TESTED.
+
+| Metric | Last relevant published baseline / current blocker | Next authorized slice must report |
+|---|---|---|
+| Fixed P/17 failures | [B4.8/B4.9](../validation/b4_9_confirmation_diagnosis.md):1/96; [B4.30](../validation/b4_30_paid_continuation.md):P/17 and R/17 each1/18. No new repair evidence | Failed/total attempts, fallback and exposed/fresh identities, regressions and actual delta; unavailable fields UNKNOWN |
+| Worst quality gap within the named panel | B4.8 P/17 ratio1.001056679441; B4.30 P/17 ratio1.0020904310312866, R/17 ratio1.0019709437499813, all>1.001. These are not a claim about the maximum across all history | Worst compliance ratio and signed margin to frozen threshold plus volume/convergence status, separately per fixed variant/panel |
+| Fully charged speed | B4.30 R/17 thirteen-target mean1.016053130777518>1, sum ratio0.9853173206553424; sum cannot replace mean. No complete new B4/B5 result | Applicable scale/direction means, uncertainty, sums, failed attempts/fallback/I/O/audits and offline/amortized costs; no favorable retiming or subgroup replacement |
+| Resource admission | I1 mandatory selected-host pre-entry lifetime UNKNOWN→NO_ADMISSIBLE_ROUTE; full-fit PENDING4GiB; old B4.24/28 gaps remain | Independent complete applicable assurance and actual preflight, or specific UNKNOWN/proved infeasibility; software RSS alone supplies neither |
+| Used / remaining budget | K=12721.16417100014444982>7200; booked D1 FULL60 gives12781.16417100014444982 plus additional history/software/CI UNKNOWN_NOT_ZERO. New scientific allocation:none; pilot14580s unapproved | Applicable identity, old/new disjoint charged costs, cap and remaining authority. Whole-project spend/break-even remain UNKNOWN; unused closed caps do not transfer |
+
+For those three named quality ratios, `ratio - 1.001` is respectively
+`0.000056679441`, `0.0010904310312866` and `0.0009709437499813`.
+These positive margins quantify the retained failures; they are arithmetic on
+published scalars, not new solves or a rationale for changing the threshold.
+
+Test and document counts are auxiliary, not progress substitutes. Unapproved
+measurements stay UNKNOWN; no experiment is launched to complete this table.
+The old B3 twelve-fit7200 stage and later rescue all-paid7200 have different
+scope/identities; neither is retroactively reinterpreted. No whole-project or
+new scientific spending ceiling is supplied by this maintenance.
+
+### Prospective acceptance questions — no change authorized
+
+This table records **pending advice**, not active alternatives. Any change must
+be a separately reviewed finite proposal, justified before new results, with
+compatible new identity and explicit adoption. Observed P/17 margins cannot be
+used to choose a just-passing standard. Historical contracts/FAIL/costs stay.
+
+| Requirement and current basis | Evidence and unanswered question for a future proposal |
+|---|---|
+| Quality:C<=1.001*C_uniform, matched physical-volume error<=0.005, convergence and independent re-solve rtol1e-9. [B3](../b3_experiment_contract.md) protects same-quality comparison;1.001 permits0.1% compliance degradation, not solver roundoff | B4.8's near miss and B4.30's larger gap remain failures. A future use-case/conditioning/error-budget rationale must justify any prospective allowance independently of those observed outcomes; no new limit is chosen here |
+| Zero selected-primary candidate failures/fallbacks on ID, beyond zero accepted quality violations; OOD safe rejection remains charged under [B3](../b3_experiment_contract.md) | Distinguish operational safety from attempt reliability. Whether a new limited-fallback/hybrid service is a useful separate claim needs a finite deployable trigger, fixed failure budget and all attempt/fallback costs; no reference oracle, old failure conversion or current allowance |
+| B3 ID both scales:point mean and sum<=0.90, upper95% mean ratio<1, every direction<=1; non-ML paired difference upper<0; OOD upper<=1.05; both environments | The10% point effect is a prospectively selected meaningful-effect policy, not a mathematical constant. Any revision needs workload/query-volume value, measurement uncertainty and full amortization; it must not select a favorable subgroup/repeat after results |
+| Retained4GiB/4294967296 bytes and independent preflight; current applicable contracts require complete native/startup/simultaneous-lifetime assurance before admission | I1's partial image/stack facts do not close selected-host pre-entry user-page UNKNOWN. First specify the protected resource metric/scope, evidence obtainable on a selected environment and failure behavior. An alternative assurance method needs separate review/adoption; monitors/RSS/RLIMIT are not substitutes under current contracts. UNKNOWN is not universal impossibility |
+
+### Separately acceptable platform candidate — not commissioned
+
+**A2.3 checkpoint/resume** targets usable durable optimization, independent of
+P/17. Scope: version the actual continuation state (density, update/history and
+termination state), problem/solver/source/runtime identities and atomic
+checkpoint publication under A2.1/A2.2 fenced ownership. Before implementation,
+freeze a narrow contract and explicit applicable density/compliance/volume
+comparison tolerances. Accept only if resumed and uninterrupted runs agree within
+those frozen tolerances; corrupt/mismatched checkpoints reject; crashes leave
+an intact prior or complete new checkpoint, never a partially published state;
+stale-owner writes reject. Exit on unverifiable parity/identity/atomicity or
+scope/resource violation, retaining failures. Separate owner instruction is
+required. No automatic scientific retry/resume, changed denominator, P/17 repair
+or scientific Gate credit. A2.4 follows its recovery dependency; A4 follows limits.
+
+### Unique next item — owner scope decision, not an executable capability
+
+Retaining FULL_V2_OPEN_NO_ADMITTED_ROUTE is already decided. The unresolved
+question is: **keep the current admission specification and pause, or commission
+one finite prospective resource-assurance specification proposal before any
+further scientific implementation?**
+
+| Finite option | Consequence after explicit choice |
+|---|---|
+| A — retain current specification and scientific pause (current effective default) | No new capability/proposal/experiment; all current resource obligations remain. Platform A2.3 stays a candidate requiring a separate instruction |
+| B — commission one prospective resource-assurance specification proposal only (recommended if seeking critical-path resumption) | One document slice in existing plans: define4GiB metric/scope, selected environment/evidence obtainable, independent roles/preflight, hard-limit/failure semantics, differences from current proof obligations, and finite adoption/budget/access decisions; deliver one reviewable specification or explicit no adequate proposal, then stop. No algorithm research, proof implementation, checker/toy chain, real input, trial, new scientific budget or standard change follows |
+
+Option B is **NOT AUTHORIZED** by this maintenance. Even a useful proposal needs
+separate adoption of any changed requirement and a later bounded capability
+contract; it does not reopen I1/D1, auto-restore B4.52 or approve the14580s pilot.
+Quality/reliability/speed questions remain separately pending, not bundled
+relaxations. No acceptable proposal means retain the pause, without a default
+second proposal. A plain “continue” after closure displays this concrete decision
+only; it grants neither option B nor A2.3. Close this maintenance, retain the
+assigned worktree and stop without executing its recommendation.
 
 ## 7. Stage completion evidence
 

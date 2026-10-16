@@ -4,41 +4,30 @@ The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
 slice. English/Chinese overall plans stay here alongside frozen slice protocols.
 
-The owner-approved2026-10-15 [English delivery reassessment](TopoLab_v2_delivery_reassessment.md)
-is required development reading; its [Chinese companion](TopoLab_v2_交付复盘与后续开发约束.md)
-provides the same retrospective and rules for the owner's reading. It preserves v1 as a usable
-interim delivery and the positive full-v2 goal. B4.51 remains
-FAIL_PROCESS_SOURCE_FREEZE;217/404 are post-stop TEXT only, no protocol acceptance.
-See the [failed report](../validation/b4_51_real_certification_executable_full_resource_preregistration.md).
+The owner-approved [delivery reassessment](TopoLab_v2_delivery_reassessment.md)
+and [Chinese companion](TopoLab_v2_交付复盘与后续开发约束.md) are required reading.
+The2026-10-16 documentation consolidation makes development methods effective:
+acceptance/resource specification before algorithms, public debug before freeze,
+blocker-based progress and bounded hypothesis/confirmation stages. Scientific
+threshold/resource-assurance questions remain pending advice in
+[roadmap Section6](TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment),
+not changed standards or authority. See [validation](../validation/v2_development_methods_closeout.md).
 
-Latest planning decision: [R1 delivery execution plan](TopoLab_v2_delivery_execution_plan.md),
-**NO_ADMISSIBLE_ROUTE under its historical authority**. B4.52 is NOT_SELECTED_BY_R1.
-The owner subsequently approved complete D1; its
-[protocol](d1_physics_resource_feasibility_protocol.md),
-[contract](d1_physics_resource_feasibility_contract.json) and
-[report](../validation/d1_physics_resource_feasibility.md) close
-STOP_UNKNOWN_PREFIT_BOUND before implementation/real input. New roles closed
-unlaunched0/1 and FULL60 retained; no budget/quota transfer. The owner has now
-closed the current exact-physics rescue program, retaining4GiB, independent
-preflight and full v2. See the [closure handoff and finite next proposal](TopoLab_v2_rescue_program_closure_handoff.md).
-The owner then explicitly approved that one inception; its
-[solver-internal learned-update candidate](TopoLab_v2_solver_internal_learning_route_decision.md)
-closed REJECTED_CURRENT_RESOURCE_ADMISSION. Mandatory exact refresh/tail/audit
-still lack independent complete memory admission; new cost/quality/speed UNKNOWN.
-The owner subsequently requested one different P/17 proposal. Its
-[bounded-runtime penalty homotopy](TopoLab_v2_P17_bounded_homotopy_proposal.md)
-retains CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED as historical evidence.
-The owner then approved complete [I1 software capability](i1_bounded_native_software_protocol.md)
-([contract](i1_bounded_native_software_contract.json)) on existing Ubuntu24.04
-x86-64 CI,16 active engineering/review hours,4GiB and independent preflight.
-Integrated software/public regression is implemented. Independent review closes
-the route NO_ADMISSIBLE_ROUTE for selected-kernel/pre-entry startup/lifetime
-UNKNOWN; no final admission dispatch/freeze. Source PR197/main5aba9c2 publishes
-the capability and independent stop after all four exact-head contexts passed.
-Required ordinary main/report CI and verified new-record backup finish I1
-publication, then stop. Next is the owner route decision retaining
-FULL_V2_OPEN_NO_ADMITTED_ROUTE with science stopped (recommended). No old
-input/scientific/pilot grant, automatic successor or transfer; P/17 unrepaired.
+The owner retains **FULL_V2_OPEN_NO_ADMITTED_ROUTE**, fixed P/17/unrepaired,
+4GiB and independent preflight. I1 public software/independent stop are published
+through PR197/198/main57c73b8, all four main CI contexts passed; its mandatory
+selected-host pre-entry lifetime UNKNOWN remains NO_ADMISSIBLE_ROUTE.
+R1 NO_ADMISSIBLE_ROUTE, D1 STOP_UNKNOWN_PREFIT_BOUND/unlaunched0/1/FULL60,
+owner-closed exact-physics rescue, solver-internal rejection, B4.51 FAIL/consumed
+quotas and all old costs/UNKNOWN/seals remain; B4.52 NOT_SELECTED_BY_R1.
+Historical protocols below retain bytes and old successor context.
+
+The unique next item is a **concrete owner scope decision**: current specification
+and pause, or separately commission one finite prospective resource-assurance
+specification proposal. Retention is already decided; neither the proposal nor
+A2.3 is commissioned. No pilot14580s/old-input/scientific grant, standard change,
+automatic successor or transfer. After this maintenance closes, “continue” only
+displays the decision. No new duplicate retrospective or scientific Gate.
 
 ## Overall project plans
 
@@ -48,12 +37,12 @@ input/scientific/pilot grant, automatic successor or transfer; P/17 unrepaired.
 | Numerical implementation | [Reimplementation strategy](TopoLab_reimplementation_strategy.md) | [数值核心重写策略](TopoLab_数值核心重写策略.md) |
 | Timeline and resources | [Timeline](TopoLab_development_timeline_and_resources.md) | [开发周期与资源评估](TopoLab_开发周期与资源评估.md) |
 | Active v2 delivery | [Development roadmap](TopoLab_v2_development_roadmap.md) | [开发路线图](TopoLab_v2_开发路线图.md) |
-| Mandatory delivery reassessment | [Retrospective, progress rules and R1 handoff](TopoLab_v2_delivery_reassessment.md) | [交付复盘与后续开发约束](TopoLab_v2_交付复盘与后续开发约束.md) |
+| Mandatory delivery reassessment | [Retained retrospective and effective development methods](TopoLab_v2_delivery_reassessment.md) | [交付复盘与后续开发约束](TopoLab_v2_交付复盘与后续开发约束.md) |
 | R1 delivery decision and execution plan | [Acceptance, three routes and historical D1 proposal](TopoLab_v2_delivery_execution_plan.md) | [当前中文结论与唯一下一步](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 | Rescue-program closure history | [Owner decision and full-v2 handoff](TopoLab_v2_rescue_program_closure_handoff.md) | [当前中文排期](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 | Solver-internal learning inception | [Single-candidate resource-admission rejection](TopoLab_v2_solver_internal_learning_route_decision.md) | [淘汰结论与所有者决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
-| I1 bounded native software | [Approved software/resource protocol](i1_bounded_native_software_protocol.md), [contract](i1_bounded_native_software_contract.json), [native source guide](../../native/i1/README.md) | [当前I1排期](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
-| P/17 bounded-runtime penalty homotopy | [Finite implementation, resource admission and later pilot proposal](TopoLab_v2_P17_bounded_homotopy_proposal.md) | [有条件提案与唯一I1决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
+| I1 bounded native software | [Approved software/resource protocol](i1_bounded_native_software_protocol.md), [contract](i1_bounded_native_software_contract.json), [native source guide](../../native/i1/README.md) | [当前停止与所有者决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
+| P/17 bounded-runtime penalty homotopy | [Finite implementation, resource admission and later pilot proposal](TopoLab_v2_P17_bounded_homotopy_proposal.md) | [提案历史与当前决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 
 The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.

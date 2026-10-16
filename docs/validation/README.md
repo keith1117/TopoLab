@@ -11,37 +11,29 @@ checks are post-stop TEXT only, not protocol acceptance; both quotas remain1/1
 consumed with no retry/reset. See the [failed report](b4_51_real_certification_executable_full_resource_preregistration.md).
 Scientific FAIL/fixed P17/uniform, all historical costs/UNKNOWN and seals remain.
 
-The owner-approved2026-10-15 [delivery reassessment](../planning/TopoLab_v2_delivery_reassessment.md)
-is required reading before development. It changes scheduling, not scientific
-results. [R1 planning validation](r1_v2_delivery_execution_plan.md) records
-NO_ADMISSIBLE_ROUTE under current authority; B4.52 is NOT_SELECTED_BY_R1.
-The owner subsequently approved complete D1; [its admission report](d1_physics_resource_feasibility.md)
-closes STOP_UNKNOWN_PREFIT_BOUND before implementation/real input. New roles
-closed unlaunched0/1, FULL60 retained; no index/label/model read or formal call.
-The owner has now closed the current exact-physics rescue program, retaining
-4GiB, independent preflight and full v2. See the [closure handoff](../planning/TopoLab_v2_rescue_program_closure_handoff.md)
-and [maintenance validation](exact_physics_rescue_program_closure.md).
-The owner then approved that one inception. Its
-[planning validation](solver_internal_learning_route_decision.md) and
-[decision](../planning/TopoLab_v2_solver_internal_learning_route_decision.md)
-record REJECTED_CURRENT_RESOURCE_ADMISSION for the single solver-internal learned-
-update candidate; complete new cost/quality/speed UNKNOWN_NOT_TESTED. No executable
-successor from that inception. The owner then requested one different P/17
-proposal. Its [planning validation](p17_bounded_homotopy_proposal.md) and
-[bounded-runtime homotopy proposal](../planning/TopoLab_v2_P17_bounded_homotopy_proposal.md)
-record historical CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED. The owner
-then approved complete [I1 software work](../planning/i1_bounded_native_software_protocol.md)
-on existing Ubuntu24.04 x86-64 CI,16 active engineering/review hours,4GiB and
-independent preflight. [I1 implementation validation](i1_bounded_native_software.md)
-records implemented public software; the separate [independent source/binary/lifetime review](i1_independent_resource_review.md)
-stops resource admission NO_ADMISSIBLE_ROUTE on selected-kernel/pre-entry
-startup/lifetime UNKNOWN. No final admission dispatch/freeze. Source PR197/main
-5aba9c2 has all four exact-head contexts passed and the identical tested tree.
-Ordinary required main/report CI and verified new-record backup close publication;
-no old input/scientific/pilot grant or P/17
-repair. Next is the owner route decision retaining full-v2-open/no-admitted-route
-with science stopped (recommended); no automatic second backend/
-proof/toy/guard/platform chain or cap transfer. Software CI cannot pass science.
+Latest documentation maintenance: [development-method consolidation](v2_development_methods_closeout.md),
+not a scientific Gate. Acceptance/resource specification before algorithms,
+pre-freeze public debugging and blocker-based progress are effective methods;
+[threshold/assurance questions](../planning/TopoLab_v2_development_roadmap.md#prospective-acceptance-questions--no-change-authorized)
+remain pending advice, with no standards/budget/access change.
+
+The owner retains **FULL_V2_OPEN_NO_ADMITTED_ROUTE**, P/17/unrepaired,4GiB and
+independent preflight. [I1 software validation](i1_bounded_native_software.md) and
+[independent review](i1_independent_resource_review.md) are published through
+PR197/198/main57c73b8 with all four main CI contexts passed. Implemented software
+is distinct from mandatory selected-host pre-entry lifetime UNKNOWN and
+NO_ADMISSIBLE_ROUTE; no measured>4GiB, P/17 repair or scientific pass.
+Historical [R1](r1_v2_delivery_execution_plan.md), [D1](d1_physics_resource_feasibility.md),
+[owner closure](exact_physics_rescue_program_closure.md),
+[solver-internal rejection](solver_internal_learning_route_decision.md) and
+[P/17 proposal](p17_bounded_homotopy_proposal.md) retain their original scope.
+B4.52 NOT_SELECTED_BY_R1; all costs/UNKNOWN/failures/quotas/seals remain.
+
+The unique next item is the [concrete owner scope decision](../project_status.md#unique-next-item-concrete-owner-scope-decision):
+retain current specification/pause, or separately commission one finite prospective
+resource-assurance specification proposal. No executable successor/proposal/A2.3
+is commissioned. No old input/scientific/pilot grant or automatic proof/backend/
+toy/guard/platform chain. Software CI cannot pass science.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the
