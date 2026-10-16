@@ -18,17 +18,23 @@ executable successor from that inception. The owner subsequently requested one
 [P/17 proposal](TopoLab_v2_P17_bounded_homotopy_proposal.md), retaining its historical
 conditional decision, and then approved I1:
 
-The owner has now approved complete I1 on existing Ubuntu24.04 x86-64 CI,
-retaining4GiB, independent preflight and16 active engineering/review hours.
-See the [I1 software protocol](i1_bounded_native_software_protocol.md) and
-[contract](i1_bounded_native_software_contract.json). One native query/control/
-verifier/controller capability and public regressions are in progress. Complete
-independent resource admission is not established; the independent review role
-is registered and active. Same-author software/self-tests are not independent PASS.
-No old payload, scientific experiment/budget or later pilot is authorized.
-Finish only I1 and stop. Even I1 success needs a separate later18-reference/
-342-query/14580s pilot decision; no cap transfer, D1 reopening or automatic
-second backend/proof/toy/guard/platform chain. P/17 remains unrepaired.
+The owner approved complete I1 on existing Ubuntu24.04 x86-64 CI, retaining
+4GiB, independent preflight and16 active engineering/review hours. See its
+[I1 protocol](i1_bounded_native_software_protocol.md) and
+[contract](i1_bounded_native_software_contract.json). The integrated native
+query/control/verifier/controller and public regression are implemented.
+Independent review now closes the current route **NO_ADMISSIBLE_ROUTE**:
+selected-host pre-entry exec/argument-stack relocation/old-new image transients
+lack a complete bound and actual kernel binding. Post-entry maps/CI cannot fill
+that UNKNOWN. This is no measured4GiB exceedance or scientific failure.
+No final admission dispatch/freeze follows the stop; ordinary required software
+CI/publication closeout continues on held source, then I1 stops.
+Full v2 remains FULL_V2_OPEN_NO_ADMITTED_ROUTE and P/17 unrepaired. The next
+owner route decision is retaining that state with scientific work stopped
+(recommended), not the unapproved18-reference/342-query/14580s pilot.
+No old input/scientific budget, D1 reopening, cap transfer or automatic second
+backend/proof/toy/guard/platform slice. A plain “continue” only completes I1's
+remaining publication; after closure it displays the route decision.
 Historical successors below retain their context and do not override this decision.
 
 Status: **active v2 flagship delivery plan; the ML delivery Gate remains open.**
@@ -188,7 +194,7 @@ UNKNOWN stop; it establishes no composed capability or scientific pass. R1 and
 all old failures/seals stay. See [D1 report](../validation/d1_physics_resource_feasibility.md).
 
 Prepared: 2026-09-24
-Revised: 2026-10-16 (I1 native software approved/in progress; no old input/science/pilot grant)
+Revised: 2026-10-16 (I1 resource UNKNOWN stop; ordinary source publication closing; no science/pilot)
 
 Related documents:
 
@@ -2393,13 +2399,16 @@ search on B5 outcomes.
    active engineering/review hours. The [I1 protocol](i1_bounded_native_software_protocol.md)
    and [contract](i1_bounded_native_software_contract.json) cover actual native
    implementation/public regression and complete independent resource review/
-   data-free preflight. Work is in progress; independent audit identity is
-   registered, with complete admission pending. No self-certification, old input
-   or scientific/pilot grant. Finish this I1 and stop, including on PASS; the separate later14580s pilot still
-   requires owner budget/access/role decisions. A plain “continue” only finishes
-   I1. No D1 reopening, cap transfer or automatic second backend/proof/toy/guard/
-   platform chain. Review blockers after at most I1 plus one explicitly approved
-   pilot; no currently admitted scientific route or P/17 repair is established.
+   data-free preflight. Integrated software/public regression is implemented;
+   independent review closes the route NO_ADMISSIBLE_ROUTE because complete
+   selected-kernel/pre-entry stack/exec lifetime bounds remain UNKNOWN. No
+   final admission dispatch/freeze, old input or scientific/pilot grant follows.
+   Only ordinary required software CI/publication closes this I1, then STOP.
+   Next is the owner route decision retaining FULL_V2_OPEN_NO_ADMITTED_ROUTE
+   with science stopped (recommended). The hypothetical14580s pilot remains
+   unapproved/unallocated, not the next executable slice. No D1 reopening,
+   transfer or automatic second backend/proof/toy/guard/platform chain. A plain
+   “continue” finishes publication, or after closure displays that decision.
 2. **Only a justified, authorized capability implementation:** it must remove a
    named delivery blocker or eliminate a route within a finite integration path.
    Registration/resource guards are eligible only when R1 establishes their

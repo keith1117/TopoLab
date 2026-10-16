@@ -98,3 +98,24 @@ and origins, with **UNKNOWN** admission. ELF/static capacities, snapshots, sysca
 filters and software CI do not substitute for a complete independently reviewed
 startup/native/stack/lifetime/overlap bound and actual independent preflight.
 No old/full-fit memory gap is filled by this new software.
+
+The separately authored offline [ELF review](../../scripts/i1_independent_elf_review.py)
+and [stack review](../../scripts/i1_independent_stack_review.py) reproduce actual
+binary bytes, source/object correspondence, call graph and constant-RSP facts.
+Both take `--source-sha`, `--repository`, `--evidence-dir`,
+`--identity-manifest`, `--identity-sha256` and `--output-dir`. Supply an explicit
+full committed SHA, absolute repository/evidence paths, the independently checked
+manifest hash, and a fresh output directory for each command. The manifest has
+`source_sha`, a `binaries` map keyed by query/audit/controller, and exactly36
+`files` records with fixed basename, `bytes` and `sha256`. Enumerate and hash the
+new artifact before parsing it; no old payload pointer is an admissible input.
+Use `python3 -B scripts/i1_independent_elf_review.py ...` and the same arguments
+with `i1_independent_stack_review.py`, using distinct fresh output directories.
+The stack tool imports only the sibling independently authored ELF tool; neither
+imports the primary inspector or executes the target binary. Local Git blob
+reads disable transport/lazy fetching/fsmonitor and bound time/output. The
+standard Python/local Git environment is outside the native-role tree; these
+tools make no whole-review-process memory claim. Their successful outputs remain
+**UNKNOWN_NOT_RESOURCE_ADMITTED**. Parser depth/entry/ABI, unsupported instruction
+forms, actual startup/kernel maps, pre-entry transitions and all lifetimes still
+need independent interpretation of the selected source/binary/profile.

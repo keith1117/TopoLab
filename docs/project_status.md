@@ -1,6 +1,6 @@
 # Current project status
 
-Updated:2026-10-16. **I1 is owner-approved and in progress.** Baseline main
+Updated:2026-10-16. **I1 route: NO_ADMISSIBLE_ROUTE; software publication closing.** Baseline main
 `61ed2e1c7fefbb95d6553a6ccf6b25a7e61c881b` (PR196), normal main CI passed.
 The owner selected existing Ubuntu24.04 x86-64 CI and approved16 active engineering
 and independent-review hours for the [I1 software capability](planning/i1_bounded_native_software_protocol.md)
@@ -16,11 +16,17 @@ program runs. The native backend is a new identity; uniform/default and every
 existing numerical source/tolerance remain. This is implementation, not a new
 P/17 repair, learned-quality, speed or scientific PASS.
 
-**Complete resource admission remains UNKNOWN_PENDING_INDEPENDENT_REVIEW.**
+**Complete resource admission stops on mandatory startup/lifetime UNKNOWN.**
+The independent reviewer found no selected-kernel binding/complete upper bound
+for pre-entry exec loading, argument-stack construction/relocation and old/new
+image transitions. Post-entry maps and absence of later native unmap calls
+cannot prove the earlier high water. Even a successful manual workflow would
+leave that term UNKNOWN. No final admission dispatch/freeze is performed;
+this is not measured memory above4GiB, universal impossibility or scientific FAIL.
 Individual static arrays, ELF/frame metadata and software tests are insufficient.
 The owner explicitly authorized the independent audit subagent
 `/root/i1_independent_resource_review`, starting07:54:14UTC. It has independently
-authored verifier/controller source and is reviewing producer/resource closure;
+authored verifier/controller source and reviewed producer/resource closure;
 prior primary draft exposure is disclosed. The primary separately reviews its roles.
 Do not call same-author derivation/self-review independent acceptance. All8
 allocation/lifetime categories, startup/helpers/stacks/recursion and controller/
@@ -28,10 +34,14 @@ sealed-carrier/fork/exec/exit overlap need complete independent proof within4GiB
 followed by actual independent preflight on clean locked merged all-CI-passed
 source. Unresolved mandatory terms stop admission; there is no memory trial.
 
-The unique current task is to finish I1 within its cap, report actual software/
-resource outcomes, then stop. A plain “continue” only
-finishes I1. Even PASS does not start the separate proposed18-reference/342-query/
-14580s pilot or grant its12 checkpoints/528 train labels/18 old reference scalars.
+The unique current task is required ordinary software CI/publication closeout on
+held source, then stop I1. No code/reviewer repair or admission continuation
+follows this STOP. A plain “continue” finishes that closeout. Afterwards the only
+next item is an owner route decision: retain **FULL_V2_OPEN_NO_ADMITTED_ROUTE**
+with scientific execution stopped (recommended); no executable successor is
+admitted. The full-v2 goal and4GiB/independent preflight remain. The proposed
+18-reference/342-query/14580s pilot and its12 checkpoints/528 train labels/
+18 old reference scalars remain unapproved; no access is granted.
 Those literal paths/hashes/views remain UNKNOWN_UNREGISTERED_DENY. No scientific
 allocation, formal quota, FULL reserve, old retry/reset or successor is created.
 
@@ -124,8 +134,16 @@ stable source phase06 passes all five mandatory checks after the startup fix:
 source554f6d9 CI failures are retained: missing pytest parent/invalid custom-shell
 expression and initial controller exit77, before numerical integration. The
 pre-freeze correction reads bounded initial-stack auxv without relaxing dumpability,
-with independent source review. Exact new-head/main CI, source freeze and complete
-independent admission remain pending. Implementation and evidence publication
+with independent source review. Source1e7fff0 then passed all four PR checks:
+native40 tests/59.62s and quality1991 tests/945.83s. Independent actual-binary
+review found an unbound default linker plugin/available wrapper origin; the
+pre-freeze build record is corrected, and the independently authored offline
+ELF/stack analysis source is now published for review. Those new bytes require
+fresh exact-head/main CI. Local phase08 now passes all five checks with stable
+held source:1990 passed/one Linux-only skip. Independent review establishes a
+mandatory selected-host pre-entry UNKNOWN, so the current route closes
+NO_ADMISSIBLE_ROUTE. Final resource dispatch/freeze is not attempted.
+Implementation and evidence publication
 may use separate PRs within this single I1.
 
 Keep old numerical sources/tests/tolerances/fixtures/locks/public README and all

@@ -17,16 +17,18 @@
 求解器内学习更新立项；本片以[REJECTED_CURRENT_RESOURCE_ADMISSION](TopoLab_v2_solver_internal_learning_route_decision.md)收尾。
 必需的真实刷新/精确尾段/独立复核仍无完整独立内存准入；新成本/质量/速度均UNKNOWN_NOT_TESTED。
 随后所有者另行要求一份[P/17有界运行时惩罚同伦提案](TopoLab_v2_P17_bounded_homotopy_proposal.md)，
-现以CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED收尾：显式有界原生存储与
+保留提案时CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED：当时显式有界原生存储与
 8次p=1/8次p=2/再p=3的政策尚无实现、完整独立资源准入或修复结果。
-所有者现已批准完整I1，指定现有Ubuntu24.04 x86-64 CI，保留4GiB、独立预检与16个主动工程/
-独立审查小时上限。见[I1协议](i1_bounded_native_software_protocol.md)及
-[合同](i1_bounded_native_software_contract.json)。原生查询/控制/复核软件及公开数值、解析与失败回归
-正在推进；完整独立资源准入尚未建立。所有者已指定独立审查子代理，独立作者的复核器/控制器已完成，
-二进制/启动资源审查待实际证据。同一作者的不同推导和自测不算独立PASS。
-无旧输入、科研预算/实验或后续试点授权。仅完成I1后收尾停止；通过也不自动启动18新参考/342查询/
-14580秒试点。旧失败/成本/UNKNOWN/配额/封存、P17未修复和完整v2目标均保留，不重开D1或转移额度。
-“继续”仅完成当前I1，不追加第二后端/证明/玩具/守卫/平台链。
+所有者批准的I1保留现有Ubuntu24.04 x86-64 CI、4GiB、独立预检及16个主动工程/独立审查小时。
+见[I1协议](i1_bounded_native_software_protocol.md)及[合同](i1_bounded_native_software_contract.json)。
+集成原生查询/控制/独立复核软件和公开回归已实现。独立审查现将当前路线判为
+**NO_ADMISSIBLE_ROUTE**：所选宿主exec入口前的参数栈构建/重定位及旧新映像过渡期缺完整上界与
+实际内核身份绑定，入口后maps或CI不能补足该UNKNOWN。不是实测超过4GiB，也不是新增科研失败。
+停止后不启动最终准入调用或冻结；仅在保持源码上完成必需普通软件CI及发布收尾，然后停止I1。
+完整v2保留FULL_V2_OPEN_NO_ADMITTED_ROUTE，P/17未修复。唯一下一项为所有者路线决定：
+建议保留该状态并暂停科研执行，不启动未获批的18新参考/342查询/14580秒试点。
+无旧输入/科研预算授权，不重开D1、不转移额度、不自动追加第二后端/证明/玩具/守卫/平台片。
+“继续”仅完成当前I1剩余发布；收尾后仅展示待决定事项。
 
 
 ## 1. 所有者确认的目标

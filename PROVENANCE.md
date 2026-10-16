@@ -1442,8 +1442,9 @@ owner-authorized independent audit role. That role derives Hex8 stiffness from
 analytic one-dimensional basis integrals, writes its own band LDLᵀ/terminal/
 evaluation checker and native controller, and imports no candidate numerical
 helper. Earlier exposure to the primary draft is disclosed, not claimed blinded.
-The primary separately reviews those roles; actual independent resource review
-still requires selected binary/startup evidence. No
+The primary separately reviews those roles. Independent actual-binary review
+retains a decisive selected-host pre-entry startup/lifetime UNKNOWN, closing
+I1's route NO_ADMISSIBLE_ROUTE without final admission dispatch/freeze. No
 Hack3D code/comment/structure/figure is read, copied, translated or compared.
 
 New primary references are the [GCC stack-usage specification](https://gcc.gnu.org/onlinedocs/gcc/Developer-Options.html),
@@ -1478,3 +1479,13 @@ explains the pre-freeze startup correction: disabling dumping changes proc-file
 ownership. Selected auxv now comes from the actual kernel-provided entry stack,
 with its location retained before bounded CI environment erasure, following the
 ELF stack layout above. No permission escalation or dumpability relaxation.
+Actual GCC command traces also expose a default linker LTO plugin and an
+available wrapper. Their exact build-time file origins are recorded separately
+from native runtime closure; no third-party plugin implementation is imported.
+The same independent audit role originally authored the offline ELF/call/frame
+and constant-RSP review tools now published in `scripts/i1_independent_*_review.py`.
+They parse explicit hash-bound new public build evidence and committed native
+blobs without importing the primary inspector or executing target binaries.
+The primary reviewed their read/execute/output boundary and actual source;
+their facts remain UNKNOWN for complete admission. No external implementation
+or old research payload was imported.

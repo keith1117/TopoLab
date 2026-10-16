@@ -54,13 +54,15 @@ prove complete binary/runtime admission. No currently admitted executable route.
 The owner has now approved complete I1 on existing Ubuntu24.04 x86-64 CI,
 retaining4GiB, independent preflight and16 active engineering/review hours. Read
 its [protocol](docs/planning/i1_bounded_native_software_protocol.md) and
-[contract](docs/planning/i1_bounded_native_software_contract.json). Native public
-software is in progress; no complete independent admission or repair evidence.
-The owner registered an independent audit subagent; fresh verifier/controller
-authorship is complete; binary/startup resource review remains pending. Do not
-self-certify. No old payload,
-scientific experiment/budget or later14580s pilot grant. Finish I1 and stop,
-even on PASS; a plain “continue” completes only this current slice. No second
+[contract](docs/planning/i1_bounded_native_software_contract.json). Integrated
+native public software and independent verifier/controller are implemented.
+Independent review closes the route NO_ADMISSIBLE_ROUTE: selected-kernel/
+pre-entry exec/argument-stack relocation/lifetime upper bounds remain UNKNOWN.
+No final admission dispatch/freeze or scientific/old-input/pilot grant follows.
+Complete only required ordinary software CI/publication on held source, then
+STOP I1. Next is the owner route decision retaining
+FULL_V2_OPEN_NO_ADMITTED_ROUTE with science stopped (recommended). “Continue”
+finishes publication or, after closure, displays that decision only. No second
 backend/proof/toy/guard/platform chain, D1 reopening or unused-cap transfer.
 
 Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility.

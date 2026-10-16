@@ -31,9 +31,12 @@ retains CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED as historical evidence.
 The owner then approved complete [I1 software capability](i1_bounded_native_software_protocol.md)
 ([contract](i1_bounded_native_software_contract.json)) on existing Ubuntu24.04
 x86-64 CI,16 active engineering/review hours,4GiB and independent preflight.
-Implementation/public regression and registered independent audit are in
-progress; complete admission is pending. No old input/scientific/pilot grant. Finish I1 and stop; no automatic
-successor or transfer. Full v2 stays open and P/17 unrepaired.
+Integrated software/public regression is implemented. Independent review closes
+the route NO_ADMISSIBLE_ROUTE for selected-kernel/pre-entry startup/lifetime
+UNKNOWN; no final admission dispatch/freeze. Required ordinary software CI and
+publication finish I1, then stop. Next is the owner route decision retaining
+FULL_V2_OPEN_NO_ADMITTED_ROUTE with science stopped (recommended). No old
+input/scientific/pilot grant, automatic successor or transfer; P/17 unrepaired.
 
 ## Overall project plans
 

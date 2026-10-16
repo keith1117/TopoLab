@@ -97,12 +97,15 @@ closed REJECTED_CURRENT_RESOURCE_ADMISSION; new performance/cost remain UNKNOWN.
 The owner later commissioned one [P/17 proposal](planning/TopoLab_v2_P17_bounded_homotopy_proposal.md),
 then approved complete [I1](planning/i1_bounded_native_software_protocol.md) on existing
 Ubuntu24.04 x86-64 CI,16 active engineering/review hours,4GiB and independent
-preflight. Actual opt-in native software/public regression is in progress;
-the independent audit role is registered; complete admission remains pending. No self-
+preflight. Integrated native software/public regression is implemented;
+independent review now stops the route NO_ADMISSIBLE_ROUTE for mandatory
+selected-kernel/pre-entry startup/lifetime UNKNOWN. No final admission dispatch
+or freeze; only required ordinary software CI/publication closes I1. No self-
 certification, old input, scientific budget/experiment or later pilot is granted.
 I1 additionally requires its `i1-native-software` CI on the exact PR head and main;
 the existing three protected contexts and all protection settings remain.
-Finish I1 and stop; even PASS needs a separate14580s pilot/access/role decision.
+Finish I1 and stop. Next is the owner route decision retaining full-v2-open/no
+admitted route with science stopped; the14580s pilot remains unapproved.
 No D1 reopening, unused-cap transfer or automatic second backend/proof/toy/guard/
 platform chain. All historical failures/costs/UNKNOWN/quotas/seals remain.
 

@@ -33,9 +33,12 @@ record historical CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED. The owner
 then approved complete [I1 software work](../planning/i1_bounded_native_software_protocol.md)
 on existing Ubuntu24.04 x86-64 CI,16 active engineering/review hours,4GiB and
 independent preflight. [I1 implementation validation](i1_bounded_native_software.md)
-is in progress, with a separate [independent source/binary/lifetime review](i1_independent_resource_review.md).
-Neither report presumes complete resource admission. No old input/scientific/
-pilot grant or P/17 repair. Finish only I1 and stop; no automatic second backend/
+records implemented public software; the separate [independent source/binary/lifetime review](i1_independent_resource_review.md)
+stops resource admission NO_ADMISSIBLE_ROUTE on selected-kernel/pre-entry
+startup/lifetime UNKNOWN. No final admission dispatch/freeze. Ordinary required
+software CI/publication closes I1; no old input/scientific/pilot grant or P/17
+repair. Next is the owner route decision retaining full-v2-open/no-admitted-route
+with science stopped (recommended); no automatic second backend/
 proof/toy/guard/platform chain or cap transfer. Software CI cannot pass science.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned

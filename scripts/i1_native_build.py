@@ -49,7 +49,7 @@ def build(destination: Path) -> dict[str, object]:
     build_env = {"PATH": "/usr/bin:/bin", "LC_ALL": "C", "SOURCE_DATE_EPOCH": "0"}
     destination.mkdir(parents=True, exist_ok=False)
     components = {}
-    for name in ("cc1", "as", "collect2", "ld"):
+    for name in ("cc1", "as", "collect2", "ld", "lto-wrapper"):
         reported = subprocess.check_output(
             [compiler, f"-print-prog-name={name}"], env=build_env, text=True
         ).strip()
@@ -60,6 +60,17 @@ def build(destination: Path) -> dict[str, object]:
             "path": str(resolved),
             "sha256": hashlib.sha256(resolved.read_bytes()).hexdigest(),
         }
+    plugin = Path(
+        subprocess.check_output(
+            [compiler, "-print-file-name=liblto_plugin.so"], env=build_env, text=True
+        ).strip()
+    ).resolve()
+    if not plugin.is_file() or not str(plugin).startswith(("/usr/", "/bin/", "/lib/")):
+        raise RuntimeError("unregistered default linker plugin")
+    components["liblto_plugin.so"] = {
+        "path": str(plugin),
+        "sha256": hashlib.sha256(plugin.read_bytes()).hexdigest(),
+    }
     specs = subprocess.check_output([compiler, "-dumpspecs"], env=build_env)
     (destination / "gcc-specs.txt").write_bytes(specs)
     records = {}
@@ -115,8 +126,9 @@ def build(destination: Path) -> dict[str, object]:
         "compiler_components": components,
         "gcc_builtin_specs_sha256": hashlib.sha256(specs).hexdigest(),
         "compiler_trace_scope": (
-            "actual -v commands, link map and frame hashes; "
-            "no LTO/plugin requested; no third-party runtime linked"
+            "actual -v commands, link map and frame hashes; default linker plugin "
+            "and available lto-wrapper origins bound, wrapper invocation not inferred; "
+            "no -flto requested; native ELF runtime closure reviewed separately"
         ),
         "compiler_binary": str(Path(compiler).resolve()),
         "compiler_sha256": hashlib.sha256(Path(compiler).resolve().read_bytes()).hexdigest(),
