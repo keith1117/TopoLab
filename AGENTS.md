@@ -15,71 +15,40 @@ At session start, slice start and context recovery, read these files in order:
 9. The contracts and latest validation reports relevant to the requested slice.
 10. `docs/repository_policy.md` before staging or publishing changes.
 
-## Current project state and delivery direction
+## Current state and execution entry
 
-Historical v1.0.0 is complete and usable as an interim delivery. Full v2 remains
-open and still requires reproducible same-quality learned end-to-end acceleration.
-Uniform is the default; original B4.2/scientific FAIL and fixed P/17 remain.
+Historical v1 is a usable interim delivery. The owner retains
+**FULL_V2_OPEN_NO_ADMITTED_ROUTE**, fixed P/17/unrepaired,4GiB and independent
+preflight. Uniform stays default; full v2 still requires reproducible same-quality
+learned end-to-end acceleration. I1 public software is published through PR197/198,
+main57c73b8 and all four main CI contexts passed. Its mandatory selected-host
+pre-entry lifetime UNKNOWN closes NO_ADMISSIBLE_ROUTE, not measured>4GiB or
+scientific acceptance. Read [current status](docs/project_status.md) for evidence,
+retained failures/costs/quotas/seals and the one next item.
 
-B4.51 closed FAIL_PROCESS_SOURCE_FREEZE: changing a frozen reviewer triggered
-S02. Its217/404 are post-stop TEXT results only, not protocol acceptance.
-Primary/independent quotas are each1/1 consumed; no further formal call/reset/retry.
-See [report](docs/validation/b4_51_real_certification_executable_full_resource_preregistration.md)
-and [current status](docs/project_status.md) for all retained evidence and stops.
+Read the [R1 plan](docs/planning/TopoLab_v2_delivery_execution_plan.md) after the
+[English reassessment](docs/planning/TopoLab_v2_delivery_reassessment.md).
+Reassessment Section4 methods are effective; the [roadmap Section6](docs/planning/TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment)
+separates current rules, historical observations and pending acceptance advice.
+The English roadmap controls scientific Gate order; README is the public entry.
+No threshold, budget, access or resource-admission change is authorized.
+B4.51 FAIL_PROCESS_SOURCE_FREEZE/consumed1/1 quotas, D1 STOP/unlaunched0/1/FULL60,
+owner-closed rescue and solver-internal rejection remain; B4.52 NOT_SELECTED_BY_R1.
+Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility;
+full fit PENDING4GiB and every old UNKNOWN/seal remain. Read applicable frozen
+contracts before dependent work; unresolved substantive conflicts stop that work.
 
-The owner-approved [English delivery reassessment](docs/planning/TopoLab_v2_delivery_reassessment.md)
-is the development reference, with a [Chinese reading companion](docs/planning/TopoLab_v2_交付复盘与后续开发约束.md).
-Read the [R1 execution plan](docs/planning/TopoLab_v2_delivery_execution_plan.md)
-after that reassessment. R1 closed NO_ADMISSIBLE_ROUTE under its then-current
-authority; B4.52 remains NOT_SELECTED_BY_R1. The owner subsequently approved
-complete D1 (new identity/1260s/4GiB/eight-train-label scope). D1 closed
-STOP_UNKNOWN_PREFIT_BOUND before implementation or real input: no independent
-complete native/workspace/lifetime bound. See [report](docs/validation/d1_physics_resource_feasibility.md).
-No formal call or label/model/index read; new roles closed unlaunched0/1, FULL60
-retained, no unused cap/quota transfer or reopening. Full fit stays PENDING4GiB.
-The owner has closed the current exact-physics rescue program, retaining4GiB,
-independent preflight and the full-v2 goal. See the [closure handoff](docs/planning/TopoLab_v2_rescue_program_closure_handoff.md).
-The owner then approved exactly one solver-internal learned-update inception.
-It closed [REJECTED_CURRENT_RESOURCE_ADMISSION](docs/planning/TopoLab_v2_solver_internal_learning_route_decision.md):
-mandatory exact refresh/tail/audit still lack an independent complete native/
-runtime/lifetime bound. New quality/speed/cost remain UNKNOWN_NOT_TESTED; this is
-no universal impossibility claim or scientific pass. No implementation/real input/
-formal call/new budget. The owner subsequently commissioned one P/17 route
-proposal. Its [bounded-runtime penalty-homotopy proposal](docs/planning/TopoLab_v2_P17_bounded_homotopy_proposal.md)
-closed CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED at the proposal stage:
-fixed P/17,8 updates at p=1,8 at p=2, then p=3 within360. That historical
-closure had no implementation or repair evidence.
-Explicit fixed-storage native producer/verifier/controller design does not yet
-prove complete binary/runtime admission. No currently admitted executable route.
-The owner has now approved complete I1 on existing Ubuntu24.04 x86-64 CI,
-retaining4GiB, independent preflight and16 active engineering/review hours. Read
-its [protocol](docs/planning/i1_bounded_native_software_protocol.md) and
-[contract](docs/planning/i1_bounded_native_software_contract.json). Integrated
-native public software and independent verifier/controller are implemented.
-Independent review closes the route NO_ADMISSIBLE_ROUTE: selected-kernel/
-pre-entry exec/argument-stack relocation/lifetime upper bounds remain UNKNOWN.
-No final admission dispatch/freeze or scientific/old-input/pilot grant follows.
-Source PR197 merged5aba9c2 after all four exact-head software CI contexts passed.
-See the [result](docs/validation/i1_bounded_native_software.md) and
-[independent stop](docs/validation/i1_independent_resource_review.md).
-Finish only any remaining required ordinary CI/publication/backup on held source,
-then STOP I1. Next is the owner route decision retaining
-FULL_V2_OPEN_NO_ADMITTED_ROUTE with science stopped (recommended). “Continue”
-finishes publication or, after closure, displays that decision only. No second
-backend/proof/toy/guard/platform chain, D1 reopening or unused-cap transfer.
-
-Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility.
-All old failures/costs/UNKNOWN, fixed models, stopped mechanisms, consumed quotas
-and final/conditional48/720/unused48 seals remain. The old reciprocal executable
-is UNFROZEN, certificates/cost UNKNOWN_STOP, full fit PENDING4GiB. No new
-scientific budget, real input, production FEM/fit/search, old retry/reset or
-sealed grant follows I1. New public software regression is separately authorized.
-Software RSS fills no historical/full-fit gap. Read applicable frozen contracts
-before dependent work; unresolved conflicts stop that work.
-
-A later “continue” finishes the current authorized slice first; after closure it
-authorizes only the next item in current status. Close one slice and stop. The
-English v2 roadmap controls scientific Gate order; README is the public entry.
+Current authority is one documentation consolidation, required software regression
+and normal publication only. No algorithm/resource-proof implementation, A2.3,
+old input/model/label/backup/seal access, experiment, new scientific budget or
+formal retry/reset. Use versioned documents and necessary committed-source text;
+do not follow old evidence pointers. After closeout the unique next item is the
+roadmap's concrete owner scope decision: retain current specification/pause, or
+separately commission one finite prospective resource-assurance specification
+proposal. Neither that proposal nor a platform capability is automatically
+commissioned. “Continue” finishes this slice or, once closed, displays the decision
+only. No D1/I1 reopening, cap transfer or backend/proof/toy/guard/platform chain.
+Retain the assigned worktree; close one authorized slice and stop.
 
 ## Provenance boundary
 
@@ -91,8 +60,12 @@ new source in `PROVENANCE.md`.
 
 ## Development rules
 
-- Follow the delivery reassessment: feasibility first, an explicit blocker/capability
-  result per slice, and enforced preflight/freeze/stop controls before formal calls.
+- Specify deliverable-linked acceptance and obtainable resource evidence before
+  choosing an algorithm; satisfy existing applicable contracts. Debug public
+  software and complete checks before freeze; enforce preflight/freeze/STOP.
+- Measure P/17 failures/quality gap, fully charged speed, resource admission and
+  used/remaining budget; unmeasured stays UNKNOWN. At most two ineffective
+  capability slices require a route decision, never automatic continuation.
 - Before commit/push, recheck current rules/status and actual records; do not rely
   only on memory or rerun completed formal experiments.
 - Keep each change scoped to one numerical behavior with tests.

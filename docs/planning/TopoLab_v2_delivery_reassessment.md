@@ -11,36 +11,31 @@ accepted by the owner in the reassessment conversation. It changes delivery
 governance; it is not a new numerical experiment contract, scientific Gate or
 budget authorization.
 
-Current scheduling (owner-approved2026-10-16): R1 retains historical
-NO_ADMISSIBLE_ROUTE; D1 retains STOP_UNKNOWN_PREFIT_BOUND/unlaunched0/1/FULL60.
-The owner-closed exact-physics training rescue and rejected solver-internal
-candidate remain closed. The [P/17 proposal](TopoLab_v2_P17_bounded_homotopy_proposal.md)
-retains its historical conditional decision; its later I1 authority is:
+Current authority (owner-approved documentation consolidation,2026-10-16):
+**FULL_V2_OPEN_NO_ADMITTED_ROUTE is retained by owner decision; science is stopped.**
+I1 software and independent resource-stop publication are complete through
+[PR197](https://github.com/keith1117/TopoLab/pull/197) and
+[PR198](https://github.com/keith1117/TopoLab/pull/198), main
+`57c73b8fc19930f2d7a518e2c4c0cd8d50b3f7b7`; all four contexts of its
+[main CI](https://github.com/keith1117/TopoLab/actions/runs/38891321770) passed.
+The [I1 result](../validation/i1_bounded_native_software.md) and
+[independent review](../validation/i1_independent_resource_review.md) retain
+implemented public software and mandatory selected-host pre-entry lifetime
+UNKNOWN, not measured memory>4GiB, a universal impossibility or P/17 repair.
+R1 NO_ADMISSIBLE_ROUTE, D1 STOP_UNKNOWN_PREFIT_BOUND/unlaunched0/1/FULL60,
+owner-closed exact-physics rescue and rejected solver-internal candidate remain
+historical conclusions. B4.52 remains NOT_SELECTED_BY_R1.
 
-The owner approved complete I1 on existing Ubuntu24.04 x86-64 CI, retaining
-4GiB, independent preflight and16 active engineering/review hours. See its
-[I1 protocol](i1_bounded_native_software_protocol.md) and
-[contract](i1_bounded_native_software_contract.json). The integrated native
-query/control/verifier/controller and public regression are implemented.
-Independent review now closes the current route **NO_ADMISSIBLE_ROUTE**:
-selected-host pre-entry exec/argument-stack relocation/old-new image transients
-lack a complete bound and actual kernel binding. Post-entry maps/CI cannot fill
-that UNKNOWN. This is no measured4GiB exceedance or scientific failure.
-No final admission dispatch/freeze follows the stop. Source PR197 merged5aba9c2
-with the exact tested tree after all four PR contexts passed. The
-[implementation result](../validation/i1_bounded_native_software.md) and
-[independent stop](../validation/i1_independent_resource_review.md) retain actual
-software evidence and mandatory UNKNOWN. Remaining ordinary main/report CI and
-verified new-record backup complete publication; their actual identities/results
-are bound externally at I1 closure, never presumed from this text. Then STOP.
-Full v2 remains FULL_V2_OPEN_NO_ADMITTED_ROUTE and P/17 unrepaired. The next
-owner route decision is retaining that state with scientific work stopped
-(recommended), not the unapproved18-reference/342-query/14580s pilot.
-No old input/scientific budget, D1 reopening, cap transfer or automatic second
-backend/proof/toy/guard/platform slice. A plain “continue” only completes I1's
-remaining publication; after closure it displays the route decision.
-B4.52 remains NOT_SELECTED_BY_R1. Sections5–6 retain original R1 history,
-not authority to repeat R1. All old Gates, costs, UNKNOWN, quotas and seals stay.
+Only the development methods in Section4 and the roadmap's current Section6
+are newly effective. Scientific thresholds, budgets, access and resource admission
+are unchanged. The threshold/assurance questions there are **pending advice**,
+not accepted changes. The unique next item after this documentation closes is
+[one concrete owner scope decision](TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment),
+not an executable capability. A2.3 is a separately acceptable platform candidate,
+not an automatic successor. No old inputs, pilot14580s, new scientific budget,
+formal retry/reset, D1/I1 reopening or proof/toy/guard/platform chain is granted.
+Sections5–7 below retain the original reassessment/handoff history; they do not
+restart R1. All failures, costs, UNKNOWN, quotas and seals remain.
 
 ## 1. Owner-confirmed goals
 
@@ -153,61 +148,91 @@ audit, seals and complete charging remain necessary. Improvement must come from
 route selection and execution quality, without relaxed standards, primary-model
 replacement, deleted history or quota resets.
 
-## 4. Mandatory rules for subsequent work
+## 4. Effective development methods
 
-1. **Recover actual evidence first.** At slice start, context recovery and before
-   commit or push, reread AGENTS, this document, current status and applicable
-   contracts; check latest main, CI, PRs and actual execution records. Current
-   entry points set scheduling; old successor wording in frozen history is not
-   current authorization.
-2. **Each slice must address a delivery blocker or eliminate a route.** Before
-   starting, state the baseline, target capability, acceptance evidence,
-   dependencies, scope, resources and decision after failure. Documentation or
-   guard work must identify what it unlocks and the finite step that reconnects
-   it to actual capability validation. Do not create an endless text/toy/limitation
-   loop.
-3. **Check attainability first.** Review historical paid costs, optimistic added
-   costs and simultaneous memory constraints before implementation. If a
-   requirement is already unreachable, stop investing in implementation under
-   that accounting and present a concrete owner decision. A new contract proposal
-   is not a budget grant and cannot exclude old costs or change an old Gate.
-4. **Separate failure categories.** Report scientific quality/speed failure,
-   resource infeasibility, engineering/process failure and UNKNOWN separately.
-   Technical CI, text consistency and small public-software passes do not
-   establish scientific acceptance. Missing runtime or cause stays UNKNOWN;
-   new runs cannot manufacture historical evidence.
-5. **Complete software integration preflight before formal execution.** Use
-   authorized public tests to verify the actual interpreter, argv, cwd, import
-   and dependency origins, role paths, atomic recording and failure controls.
-   Complete required checks before freezing. Production still requires clean,
-   locked, merged source with all applicable CI passed. Frozen changes, failed
-   preflight or a triggered stop must refuse launch, without automatic repair and
-   continuation. Ordinary development tests are not formal calls, and consumed
-   formal opportunities cannot be restored.
-6. **Limit consecutive ineffective work.** Review changes to critical blockers
-   after at most two capability slices. If no blocker closed and no materially
-   different route was eliminated, stop appending default successors and make
-   an explicit route decision. This two-slice window is a governance review
-   limit, not additional experimental quota, budget or authorization to execute
-   multiple slices automatically.
-7. **Keep interim deliveries available.** Report platform improvements and ML
-   research separately. Platform work needs its own authorization and acceptance
-   and cannot change a frozen numerical comparison denominator. The positive
-   full-v2 delivery condition remains.
-8. **Keep records concise and reproducible.** Current status contains current
-   conclusions, blockers and the next item. Preserve historical and frozen
-   evidence at its original path and contents. Link to details rather than
-   copying the entire history into multiple entry points. Summaries must identify
-   source revisions, reproduction entry points and necessary external hashes;
-   data, models, logs and databases remain outside Git.
+Owner-approved2026-10-16. These are process rules, not acceptance, budget, access
+or resource-standard changes. Existing applicable frozen contracts still bind.
 
-At closeout, prioritize what closed or was eliminated, fixed-primary quality and
-failure changes, end-to-end cost, simultaneous memory evidence, remaining blockers
-and the next step. Check counts are supporting information. All existing required
-checks, publication guards, latest-PR-head CI, main CI and review requirements
-continue to apply.
+1. **Recover actual evidence.** At slice start, recovery and before commit/push,
+   reread AGENTS, this document, current status and applicable contracts; check
+   latest main/CI/PRs and actual records. Current entries set scheduling; a frozen
+   historical successor is not current authority. Stop dependent work on an
+   unresolved substantive conflict.
+2. **Specify acceptance and resource assurance before choosing an algorithm.**
+   For each requirement record the final deliverable it protects, its basis and
+   applicable contract, required evidence, selected environment/role and whether
+   that evidence can actually be obtained there. State the finite capability,
+   baseline, scope, dependencies, cost/memory limits, acceptance and exit before
+   implementation. An algorithm-specific mathematical certificate is not
+   automatically a prerequisite for every learning route. This does not waive
+   that certificate, complete resource proof or any other existing obligation
+   when the selected applicable contract requires it. Missing mandatory evidence
+   stops admission; it is not proof of universal infeasibility.
+3. **Check attainability and full accounting first.** Include historical paid
+   costs, optimistic added costs, complete simultaneous lifetimes and independent
+   review. Known-paid12721.16417100014444982>7200 permanently fails the unchanged
+   all-paid condition; more implementation cannot repair that accounting.
+   Propose a finite owner decision if needed; never exclude history, reset a
+   ledger, transfer unused caps or treat a proposal as a grant. Unknown cost and
+   memory terms remain UNKNOWN, not zero or permission to try.
+4. **Debug public software before formal freeze.** Authorized public tests must
+   exercise the actual startup command/interpreter, argv, cwd, dependencies and
+   import origins, permissions, public input identities, role paths, atomic
+   records and failure prefixes. They grant no old-input access. Complete all
+   prescribed checks before freeze. Production additionally needs clean, locked,
+   merged all-applicable-CI-passed source, registered actual inputs/roles and an
+   independent actual launch preflight. After freeze, mutation or STOP refuses
+   further formal launch; no patch-and-continue or old quota restoration.
+5. **After separate scientific admission, test one finite hypothesis at a time.**
+   State a mechanism, expected quality/cost effect, controls, full charges and a
+   decisive acceptance/exit before outcomes. Exposed samples support development
+   regression; fresh independent samples support confirmation. Repair,
+   confirmation, complete B4 and final B5 serve different purposes in the
+   [roadmap sequence](TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment).
+   Every actual stage separately needs authority, budget, access, preregistration,
+   resource admission, freeze and independent review. No stage opens the next.
+6. **Measure blocker change.** Record fixed-P/17 failure counts, worst quality
+   gaps, fully charged speed, resource admission, used and remaining budget with
+   population/method/source identities and before/after changes. The roadmap
+   keeps the published baseline; unavailable or unapproved measurements stay
+   UNKNOWN. Do not run an experiment to fill a progress cell. Test/document
+   counts are auxiliary. After at most two capability slices without material
+   blocker progress or elimination of a materially different route, make an
+   explicit route decision; do not append a successor by default. That window
+   grants no second slice, calls or budget.
+7. **Separate outcomes.** Scientific quality/speed failure, proved resource
+   infeasibility, engineering/process failure and UNKNOWN must be reported
+   separately. Software CI, text consistency or public tests cannot pass a
+   scientific Gate, reconstruct missing historical evidence or close a full-fit
+   memory gap. No positive model result or repair date is guaranteed.
+8. **Accept platform capabilities independently.** A2.3 checkpoint/resume may be
+   the next platform candidate after its own instruction and frozen contract:
+   resumed/uninterrupted results agree within frozen density/compliance/volume
+   tolerances, corrupt or identity-mismatched checkpoints reject and crash-time
+   publication remains atomic. Preserve fenced ownership and reject stale writes.
+   This is neither P/17 repair nor scientific acceptance; it is not implemented
+   or commissioned by this maintenance. A2.4/A4 retain their dependencies.
+9. **Keep concise, reproducible records and explicit authority classes.** Current
+   status states current blockers and one next item; history/frozen evidence
+   retain their original bytes/paths. Link source revisions, reproduction entries
+   and necessary external hashes; keep data/models/logs/databases external.
+   Distinguish effective rules, pending advice and historical conclusions in
+   every current entry. Apply all existing checks, publication guards, exact-head
+   PR CI and post-merge main CI.
 
-## 5. Current scheduling and next item R1
+### Prospective acceptance advice — not effective changes
+
+The [roadmap's review table](TopoLab_v2_development_roadmap.md#prospective-acceptance-questions--no-change-authorized)
+records the current1.001 quality limit, zero candidate failure/fallback rule,
+speed effect thresholds and resource assurance method, their evidence basis and
+unanswered questions. Any change needs a separately reviewed finite proposal,
+prospective compatible identity and explicit adoption before results. Do not pick
+standards just sufficient for observed P/17, relabel old FAIL, amend historical
+contracts or reset costs. Retaining4GiB/independent preflight is effective;
+changing how it is assured is not approved. No resource UNKNOWN becomes proved
+impossible or an execution grant through wording.
+
+## 5. Historical R1 scheduling (2026-10-15)
 
 The former proposal **B4.52 is deferred (DEFERRED_PENDING_R1)**. It is not an
 automatic repair after this failure and gains no priority from its existing
@@ -256,7 +281,7 @@ numerical route still needs a separate bounded contract, access roles, resource
 limits, stop rules and source conditions first. This document grants no new paid
 cap, historical retry/reset, real certification or final-evidence access.
 
-## 6. Handoff prompt for a new window
+## 6. Historical R1 handoff prompt (not current authority)
 
 Only the R1 work below is authorized when the owner sends this prompt in a new
 window.
@@ -294,7 +319,7 @@ At R1 closeout, report evidence, decisions, limits and the single next step, the
 stop without executing its successor.
 ```
 
-## 7. Validation and evidence boundary for this documentation maintenance
+## 7. Historical reassessment-maintenance validation and evidence boundary
 
 The original reassessment maintenance changed only ten retrospective, current-rule,
 roadmap and entry documents. Numerical source, tests, fixtures, dependencies, CI,
@@ -319,3 +344,12 @@ points only. It does not change reassessment conclusions, work rules, R1 schedul
 or experimental authority. Its checks and publication receipts are recorded
 separately at
 `/Users/keith1117/Documents/TopoLab-data/v2-delivery-reassessment-bilingual-2026-10-15`.
+
+## 8. Documentation consolidation (2026-10-16)
+
+The owner approved the methods in Section4, retaining full v2, fixed P/17,
+4GiB/independent preflight and all old evidence boundaries. This finite change
+updates existing current entries and bilingual plans; no new research route,
+resource proof, capability or scientific Gate is started. See the
+[documentation validation](../validation/v2_development_methods_closeout.md).
+Unchanged historical sections and frozen records keep their original meaning.
