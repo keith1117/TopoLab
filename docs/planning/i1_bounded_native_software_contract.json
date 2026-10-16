@@ -1,0 +1,64 @@
+{
+  "schema": "topolab.i1.native-software.v1",
+  "status": "DEVELOPMENT_PUBLIC_SOFTWARE_ONLY_NOT_RESOURCE_ADMITTED",
+  "baseline": "61ed2e1c7fefbb95d6553a6ccf6b25a7e61c881b",
+  "owner_authority": "Complete I1, existing Ubuntu24.04 x86-64 CI, 16 active engineering and independent-review hours, 4GiB and independent preflight, no old inputs/science/pilot",
+  "proposal": {
+    "path": "docs/planning/TopoLab_v2_P17_bounded_homotopy_proposal.md",
+    "sha256": "f18141d1f4dbd4b7ed33e1bd250d95b86fdb128d568ef90cc93ab922f758d5af"
+  },
+  "active_work": {
+    "limit_seconds": 57600,
+    "started_utc": "2026-10-16T06:30:34Z",
+    "required_regression_CI_closure": "ADDITIONAL_RECORDED_NOT_ZERO"
+  },
+  "scientific_budget_seconds": 0,
+  "old_external_access": false,
+  "old_read_set": [],
+  "pilot_authorized": false,
+  "roles": {
+    "producer": "native/i1/query.c + readers.c + query_main.c",
+    "numerical_checker": "audit.c/audit_main.c freshly authored by independent audit role after disclosed draft exposure; primary separately inspects; no candidate numerical/helper imports",
+    "controller": "controller.c independently authored by audit role; shared bounded runtime/carrier/hash explicitly reviewed",
+    "resource_reviewer": "/root/i1_independent_resource_review; owner-authorized07:54:14UTC; producer resource review independent"
+  },
+  "native_build": {
+    "os": "Ubuntu24.04 Linux",
+    "architecture": "x86_64 little-endian",
+    "compiler": "GCC from selected existing CI; actual path/version/binary hash recorded at build",
+    "runtime": "freestanding static ELF; no libc/libm/BLAS/SuperLU/Torch/GPU or loader; explicit syscalls",
+    "entry": "native/i1/start.S",
+    "scalar_math": "hardware sqrt plus original range-reduced fixed24-term exponential; public parity does not certify all accepted checkpoints",
+    "flags_entrypoint": "scripts/i1_native_build.py",
+    "frozen_production_identity": "NONE_NO_PRODUCTION"
+  },
+  "memory": {
+    "whole_role_limit_bytes": 4294967296,
+    "producer_mapped_envelope_bytes": 536870912,
+    "verifier_mapped_envelope_bytes": 536870912,
+    "controller_mapped_envelope_bytes": 67108864,
+    "payload_arithmetic_or_monitors": "INSUFFICIENT",
+    "required": "all eight categories, linked source/binary code and startup/exit/signal/error/parser recursion/stack/TLS/vDSO/kernel helper process overlap; no unbounded reachable allocation/mapping/thread/child path",
+    "additional_overlap": "Two sealed child carriers <=2MiB each, fixed2MiB copy buffer, controller fork/exec copy, all runtime/reader/global/header/stack components included; three-role paper sum alone insufficient",
+    "startup_evidence": "direct C entry with bounded incoming CI environment wiped, selected auxv/limits/maps/argv/cwd/selfhash/threads, host non-piped core before entry and dumpable0 after setup; complete proof still required"
+  },
+  "public_regression": {
+    "inputs": "new authored software fixtures only; no historical case population or data",
+    "numerical_tolerances": "unchanged N1/N2 physics and projection/OC limits; new float32 port parity <= float32 epsilon absolute and relative",
+    "software_native_modes": [
+      "--preflight",
+      "--public-case",
+      "--public-terminal",
+      "--public-preflight",
+      "--public-run",
+      "--ci-public-preflight",
+      "--public-evaluate",
+      "--public-evaluation"
+    ],
+    "scientific_modes": "NONE_DENIED"
+  },
+  "acceptance": "Actual integrated two-scale capability, controls, public numerical/parsing/failure regression; independent complete bound and actual startup preflight on clean locked merged all-CI-passed source. CI/software success is not scientific or resource acceptance.",
+  "exit": "Missing role/authority, mandatory current resource UNKNOWN, incompatible software/solver or infeasible fair reference, failed final correctness/preflight, resource/work cap or frozen change closes NO_ADMISSIBLE_ROUTE under this proposal; no second backend/proof/toy/guard slice, no pilot even on pass.",
+  "owner_discretionary_authority": "Implementation, review-role and process choices within approved I1; no new budget/input/science/pilot authority",
+  "future_scientific_prerequisites": "Exact old payload views/finite-weight behavior remain denied and untested. Frozen proposal Section4 requires fair optimized-reference comparison before full B4; its current performance UNKNOWN is not resolved by I1 or conflated with component memory admission."
+}

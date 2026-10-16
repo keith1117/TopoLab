@@ -1,0 +1,92 @@
+name: I1 native software preflight
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_sha:
+        description: Exact clean merged main commit whose normal CI has passed
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  public-native-startup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_sha }}
+      - name: Refuse an unmerged, dirty or non-passing source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUESTED_SHA: ${{ inputs.source_sha }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, subprocess
+          from pathlib import Path
+          def gh(path):
+              return json.loads(subprocess.check_output(['gh','api',path]))
+          sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          assert sha == os.environ['REQUESTED_SHA']
+          assert not subprocess.check_output(['git','status','--porcelain'],text=True)
+          repo='repos/'+os.environ['GITHUB_REPOSITORY']
+          assert gh(repo+'/branches/main')['commit']['sha'] == sha
+          runs=gh(repo+'/actions/workflows/ci.yml/runs?head_sha='+sha+'&event=push')['workflow_runs']
+          passed=[r for r in runs if r['status']=='completed' and r['conclusion']=='success']
+          assert passed, 'normal exact-main CI has not passed'
+          Path('build/i1-preflight').mkdir(parents=True,exist_ok=False)
+          bindings={name:hashlib.sha256(Path(name).read_bytes()).hexdigest() for name in
+                    ['uv.lock','docs/planning/i1_bounded_native_software_contract.json',
+                     'docs/planning/i1_bounded_native_software_protocol.md',
+                     '.github/workflows/i1-native-preflight.yml','scripts/i1_native_build.py',
+                     'scripts/i1_native_inspect.py']}
+          tree=subprocess.check_output(['git','rev-parse','HEAD^{tree}'],text=True).strip()
+          Path('build/i1-preflight/source.json').write_text(json.dumps(
+              {'source_sha':sha,'source_tree':tree,'ci_run_id':passed[0]['id'],
+               'workflow_run_id':os.environ['GITHUB_RUN_ID'],'file_sha256':bindings,
+               'scientific_access':False},indent=2)+'\n')
+          PY
+      - name: Build the three source-pinned native roles and collect partial binary evidence
+        run: |
+          python3 scripts/i1_native_build.py build/i1-preflight/native
+          python3 scripts/i1_native_inspect.py build/i1-preflight/native
+          echo "$GITHUB_WORKSPACE/build/i1-preflight/native" >> "$GITHUB_PATH"
+      - name: Exclude a core collector in the earliest exec-entry window
+        run: |
+          sudo sysctl -w kernel.core_pattern=core
+          test "$(cat /proc/sys/kernel/core_pattern)" = core
+          cat /proc/sys/kernel/core_pattern > build/i1-preflight/core-pattern.txt
+      - name: Actual native startup with no resident shell or Python role helper
+        id: native_startup
+        shell: i1-controller --ci-public-preflight build/i1-preflight/native/i1-query build/i1-preflight/native/i1-audit {0}
+        run: native-data-free-preflight
+      - name: Record the completed native step separately
+        if: always()
+        env:
+          I1_NATIVE_OUTCOME: ${{ steps.native_startup.outcome }}
+        run: |
+          python3 - <<'PYCODE'
+          import json, os
+          from pathlib import Path
+          root=Path('build/i1-preflight')
+          root.mkdir(parents=True,exist_ok=True)
+          outcome=os.environ.get('I1_NATIVE_OUTCOME','UNKNOWN')
+          record={'native_step_outcome':outcome,'exit_code':0 if outcome=='success' else 'UNKNOWN_SEE_RAW_JOB_LOG',
+                  'native_root':'direct C custom-shell executable; management runner boundary requires independent scope review',
+                  'overlapping_shell_or_python_helper':False,
+                  'incoming_CI_environment':'bounded and wiped by native root; only counts logged',
+                  'role_environment_after_native_scrub':{},'raw_native_stdout':'GitHub job log, preserved at closure',
+                  'scientific_input_reads':0,'resource_admission':'UNKNOWN_PENDING_INDEPENDENT_REVIEW'}
+          (root/'native-startup.json').write_text(json.dumps(record,indent=2)+'\n')
+          PYCODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: i1-new-public-software-${{ inputs.source_sha }}
+          path: build/i1-preflight/
+          if-no-files-found: error
+          retention-days: 30

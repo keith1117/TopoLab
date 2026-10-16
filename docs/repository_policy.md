@@ -9,7 +9,7 @@ repository, bound to the committed implementation by immutable identities.
 
 | Content | Destination and rule |
 |---|---|
-| Source, tests, small reviewed public fixtures and example inputs | `src/`, `tests/`, `scripts/`, `frontend/`; retain meaningful checks |
+| Source, tests, small reviewed public fixtures and example inputs | `src/`, `native/`, `tests/`, `scripts/`, `frontend/`; retain meaningful checks |
 | Dependency locks, build/CI configuration, license and provenance | Commit so a clean checkout can reproduce the environment and implementation |
 | Overall project plans and English/Chinese reading companions | `docs/planning/`; English controls current development decisions |
 | Frozen slice protocols and numerical/platform/ML contracts | Keep in Git before execution, at their existing paths and version identities |
@@ -94,15 +94,20 @@ full-v2 acceptance. The [closure handoff](planning/TopoLab_v2_rescue_program_clo
 scoped one alternative-learning-route inception, later explicitly approved by the
 owner. Its [single solver-internal learned-update candidate](planning/TopoLab_v2_solver_internal_learning_route_decision.md)
 closed REJECTED_CURRENT_RESOURCE_ADMISSION; new performance/cost remain UNKNOWN.
-The owner later commissioned one [P/17 bounded-runtime homotopy proposal](planning/TopoLab_v2_P17_bounded_homotopy_proposal.md),
-now CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED. No implementation, complete
-independent resource admission or repair evidence exists. Unique next item is
-the owner I1 decision and named Linux environment: one bounded native software
-capability/independent data-free preflight, NOT AUTHORIZED, no old payload or
-scientific budget. The later18-reference/342-query/14580s pilot is a separate
-unapproved decision after I1, not part of I1. No currently admitted executable
-route; “continue” displays I1 only. No automatic implementation, second backend/
-proof/toy/guard/platform chain, D1 reopening, new access or unused-cap transfer.
+The owner later commissioned one [P/17 proposal](planning/TopoLab_v2_P17_bounded_homotopy_proposal.md),
+then approved complete [I1](planning/i1_bounded_native_software_protocol.md) on existing
+Ubuntu24.04 x86-64 CI,16 active engineering/review hours,4GiB and independent
+preflight. Integrated native software/public regression is implemented;
+independent review now stops the route NO_ADMISSIBLE_ROUTE for mandatory
+selected-kernel/pre-entry startup/lifetime UNKNOWN. No final admission dispatch
+or freeze; only required ordinary software CI/publication closes I1. No self-
+certification, old input, scientific budget/experiment or later pilot is granted.
+I1 additionally requires its `i1-native-software` CI on the exact PR head and main;
+the existing three protected contexts and all protection settings remain.
+Finish I1 and stop. Next is the owner route decision retaining full-v2-open/no
+admitted route with science stopped; the14580s pilot remains unapproved.
+No D1 reopening, unused-cap transfer or automatic second backend/proof/toy/guard/
+platform chain. All historical failures/costs/UNKNOWN/quotas/seals remain.
 
 Before a slice, identify the delivery blocker/capability, baseline, acceptance,
 dependencies, resource feasibility and failure disposition. A known impossible
