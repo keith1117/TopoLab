@@ -29,13 +29,14 @@ update candidate; complete new cost/quality/speed UNKNOWN_NOT_TESTED. No executa
 successor from that inception. The owner then requested one different P/17
 proposal. Its [planning validation](p17_bounded_homotopy_proposal.md) and
 [bounded-runtime homotopy proposal](../planning/TopoLab_v2_P17_bounded_homotopy_proposal.md)
-record CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED. No implementation,
-complete independent resource admission or repair result. Unique next item is
-the owner I1 decision and named Linux environment, NOT AUTHORIZED; no old input
-or scientific budget. The separately proposed later18-reference/342-query/14580s
-pilot needs its own decision after I1. No currently admitted executable route;
-“continue” displays I1 only. No automatic implementation, second backend/proof/
-toy/guard/platform chain, D1 reopening, cap transfer or scientific pass from CI.
+record historical CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED. The owner
+then approved complete [I1 software work](../planning/i1_bounded_native_software_protocol.md)
+on existing Ubuntu24.04 x86-64 CI,16 active engineering/review hours,4GiB and
+independent preflight. [I1 implementation validation](i1_bounded_native_software.md)
+is in progress, with a separate [independent source/binary/lifetime review](i1_independent_resource_review.md).
+Neither report presumes complete resource admission. No old input/scientific/
+pilot grant or P/17 repair. Finish only I1 and stop; no automatic second backend/
+proof/toy/guard/platform chain or cap transfer. Software CI cannot pass science.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the

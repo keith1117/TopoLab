@@ -15,15 +15,20 @@ The owner then approved one solver-internal learned-update inception; it closed
 Mandatory exact refresh/tail/audit still lack an independent complete native/
 runtime/lifetime bound; new cost/quality/speed remain UNKNOWN_NOT_TESTED. No
 executable successor from that inception. The owner subsequently requested one
-specific P/17 proposal, now [CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED](TopoLab_v2_P17_bounded_homotopy_proposal.md):
-fixed P/17 plus8 p=1/8 p=2 updates, then p=3 within360; fixed-storage native
-producer/verifier/controller design, without actual resource or repair evidence.
-No currently admitted executable repair route. Unique next item is the owner I1
-decision: one bounded native software capability/independent data-free preflight,
-naming a Linux environment. I1 is NOT AUTHORIZED, no scientific budget/old input.
-The separate later18-reference/342-query/14580s pilot also needs its own decision
-after I1; it is not included. “Continue” displays I1 only. B4.52 remains
-NOT_SELECTED_BY_R1; no D1 reopening, automatic proof/toy/guard/platform chain or cap transfer.
+[P/17 proposal](TopoLab_v2_P17_bounded_homotopy_proposal.md), retaining its historical
+conditional decision, and then approved I1:
+
+The owner has now approved complete I1 on existing Ubuntu24.04 x86-64 CI,
+retaining4GiB, independent preflight and16 active engineering/review hours.
+See the [I1 software protocol](i1_bounded_native_software_protocol.md) and
+[contract](i1_bounded_native_software_contract.json). One native query/control/
+verifier/controller capability and public regressions are in progress. Complete
+independent resource admission is not established; the independent review role
+is registered and active. Same-author software/self-tests are not independent PASS.
+No old payload, scientific experiment/budget or later pilot is authorized.
+Finish only I1 and stop. Even I1 success needs a separate later18-reference/
+342-query/14580s pilot decision; no cap transfer, D1 reopening or automatic
+second backend/proof/toy/guard/platform chain. P/17 remains unrepaired.
 Historical successors below retain their context and do not override this decision.
 
 Status: **active v2 flagship delivery plan; the ML delivery Gate remains open.**
@@ -183,7 +188,7 @@ UNKNOWN stop; it establishes no composed capability or scientific pass. R1 and
 all old failures/seals stay. See [D1 report](../validation/d1_physics_resource_feasibility.md).
 
 Prepared: 2026-09-24
-Revised: 2026-10-16 (one conditional P/17 bounded-runtime homotopy proposal; no execution)
+Revised: 2026-10-16 (I1 native software approved/in progress; no old input/science/pilot grant)
 
 Related documents:
 
@@ -2384,15 +2389,17 @@ search on B5 outcomes.
    P/17, prescribes8 p=1 and8 p=2 updates before p=3 within360, and specifies
    an actual fixed-storage native producer/verifier/controller implementation
    path. Band storage/mapped-role capacities are not complete independent proof.
-   No implementation, real input or resource/quality/speed PASS. Unique next
-   item is the owner I1 decision and named Linux environment: one integrated
-   software capability plus independent data-free preflight, NOT AUTHORIZED,
-   no old payload/scientific budget. An I1 pass stops before a separate decision
-   on the proposed18-reference/342-query/14580s physical pilot and its exact
-   access manifest. No currently admitted executable repair route; “continue”
-   displays I1 only. No automatic implementation, second backend/proof/text/toy/
-   guard/platform chain, D1 reopening or unused-cap transfer. Review material
-   changes after at most I1 plus one explicitly approved pilot, then choose/stop.
+   The owner then approved complete I1, existing Ubuntu24.04 x86-64 CI and16
+   active engineering/review hours. The [I1 protocol](i1_bounded_native_software_protocol.md)
+   and [contract](i1_bounded_native_software_contract.json) cover actual native
+   implementation/public regression and complete independent resource review/
+   data-free preflight. Work is in progress; independent audit identity is
+   registered, with complete admission pending. No self-certification, old input
+   or scientific/pilot grant. Finish this I1 and stop, including on PASS; the separate later14580s pilot still
+   requires owner budget/access/role decisions. A plain “continue” only finishes
+   I1. No D1 reopening, cap transfer or automatic second backend/proof/toy/guard/
+   platform chain. Review blockers after at most I1 plus one explicitly approved
+   pilot; no currently admitted scientific route or P/17 repair is established.
 2. **Only a justified, authorized capability implementation:** it must remove a
    named delivery blocker or eliminate a route within a finite integration path.
    Registration/resource guards are eligible only when R1 establishes their

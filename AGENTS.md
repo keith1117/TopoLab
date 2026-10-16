@@ -46,24 +46,31 @@ runtime/lifetime bound. New quality/speed/cost remain UNKNOWN_NOT_TESTED; this i
 no universal impossibility claim or scientific pass. No implementation/real input/
 formal call/new budget. The owner subsequently commissioned one P/17 route
 proposal. Its [bounded-runtime penalty-homotopy proposal](docs/planning/TopoLab_v2_P17_bounded_homotopy_proposal.md)
-is CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED: fixed P/17,8 updates at p=1,
-8 at p=2, then p=3 within360 total; no implementation or repair evidence.
+closed CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED at the proposal stage:
+fixed P/17,8 updates at p=1,8 at p=2, then p=3 within360. That historical
+closure had no implementation or repair evidence.
 Explicit fixed-storage native producer/verifier/controller design does not yet
 prove complete binary/runtime admission. No currently admitted executable route.
-Unique next item: owner decision on I1, one bounded native software capability
-and independent data-free preflight, naming a Linux environment. I1 is not
-authorized; it grants no old payload or scientific call/budget. The separate
-later18-reference/342-query pilot proposal (14580s) is also NOT AUTHORIZED and
-requires its own decision after I1. “Continue” displays I1 only. No automatic
-implementation, proof/toy/guard/platform chain, D1 reopening or cap transfer.
+The owner has now approved complete I1 on existing Ubuntu24.04 x86-64 CI,
+retaining4GiB, independent preflight and16 active engineering/review hours. Read
+its [protocol](docs/planning/i1_bounded_native_software_protocol.md) and
+[contract](docs/planning/i1_bounded_native_software_contract.json). Native public
+software is in progress; no complete independent admission or repair evidence.
+The owner registered an independent audit subagent; fresh verifier/controller
+authorship is complete; binary/startup resource review remains pending. Do not
+self-certify. No old payload,
+scientific experiment/budget or later14580s pilot grant. Finish I1 and stop,
+even on PASS; a plain “continue” completes only this current slice. No second
+backend/proof/toy/guard/platform chain, D1 reopening or unused-cap transfer.
 
 Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility.
 All old failures/costs/UNKNOWN, fixed models, stopped mechanisms, consumed quotas
-and final/conditional48/720/unused48 seals remain. Real executable is UNFROZEN,
-certificates/cost UNKNOWN_STOP, full fit PENDING4GiB. No new budget, real input,
-FEM/integration/fit/search, old retry/reset or sealed grant follows this planning
-change. Software RSS fills no historical/full-fit gap. Read the applicable frozen
-contracts before dependent work; unresolved conflicts stop that work.
+and final/conditional48/720/unused48 seals remain. The old reciprocal executable
+is UNFROZEN, certificates/cost UNKNOWN_STOP, full fit PENDING4GiB. No new
+scientific budget, real input, production FEM/fit/search, old retry/reset or
+sealed grant follows I1. New public software regression is separately authorized.
+Software RSS fills no historical/full-fit gap. Read applicable frozen contracts
+before dependent work; unresolved conflicts stop that work.
 
 A later “continue” finishes the current authorized slice first; after closure it
 authorizes only the next item in current status. Close one slice and stop. The

@@ -11,30 +11,25 @@ accepted by the owner in the reassessment conversation. It changes delivery
 governance; it is not a new numerical experiment contract, scientific Gate or
 budget authorization.
 
-Current scheduling after the owner's new proposal request (2026-10-16): R1's
-[execution plan](TopoLab_v2_delivery_execution_plan.md) retains historical
-NO_ADMISSIBLE_ROUTE; [D1](../validation/d1_physics_resource_feasibility.md) retains
-STOP_UNKNOWN_PREFIT_BOUND before implementation/real input, roles closed
-unlaunched0/1 and FULL60 retained. The owner has **closed the current exact-physics
-rescue program**, retaining4GiB, independent preflight and the full-v2 goal.
-The [closure handoff](TopoLab_v2_rescue_program_closure_handoff.md) retains that
-historical decision. The owner then approved its one solver-internal learned-update
-inception, which closed [REJECTED_CURRENT_RESOURCE_ADMISSION](TopoLab_v2_solver_internal_learning_route_decision.md).
-Mandatory exact refresh/tail/audit still lack independent complete memory admission;
-new cost/quality/speed remain UNKNOWN_NOT_TESTED. The owner then commissioned one
-[P/17 bounded-runtime penalty-homotopy proposal](TopoLab_v2_P17_bounded_homotopy_proposal.md),
-now CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED. Its fixed-storage native
-design and8 p=1/8 p=2/p=3 policy have no implementation, complete independent
-resource admission or repair result. Unique next item is the owner I1 decision
-and named Linux environment: one integrated software capability/independent
-data-free preflight, NOT AUTHORIZED, no old input/scientific budget. The later
-18-reference/342-query/14580s pilot requires its own decision after I1 and is not
-included. No currently admitted executable route; “continue” displays I1 only.
-No automatic implementation, second backend/proof/toy/guard/platform chain,
-new budget/access or D1 reopening.
-B4.52 remains NOT_SELECTED_BY_R1; old caps/quotas do not transfer.
-Sections5–6 retain original R1 history, not authority to repeat R1 or reopen D1;
-all old Gates, costs, UNKNOWN, quotas and seals remain.
+Current scheduling (owner-approved2026-10-16): R1 retains historical
+NO_ADMISSIBLE_ROUTE; D1 retains STOP_UNKNOWN_PREFIT_BOUND/unlaunched0/1/FULL60.
+The owner-closed exact-physics training rescue and rejected solver-internal
+candidate remain closed. The [P/17 proposal](TopoLab_v2_P17_bounded_homotopy_proposal.md)
+retains its historical conditional decision; its later I1 authority is:
+
+The owner has now approved complete I1 on existing Ubuntu24.04 x86-64 CI,
+retaining4GiB, independent preflight and16 active engineering/review hours.
+See the [I1 software protocol](i1_bounded_native_software_protocol.md) and
+[contract](i1_bounded_native_software_contract.json). One native query/control/
+verifier/controller capability and public regressions are in progress. Complete
+independent resource admission is not established; the independent review role
+is registered and active. Same-author software/self-tests are not independent PASS.
+No old payload, scientific experiment/budget or later pilot is authorized.
+Finish only I1 and stop. Even I1 success needs a separate later18-reference/
+342-query/14580s pilot decision; no cap transfer, D1 reopening or automatic
+second backend/proof/toy/guard/platform chain. P/17 remains unrepaired.
+B4.52 remains NOT_SELECTED_BY_R1. Sections5–6 retain original R1 history,
+not authority to repeat R1. All old Gates, costs, UNKNOWN, quotas and seals stay.
 
 ## 1. Owner-confirmed goals
 

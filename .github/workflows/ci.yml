@@ -34,6 +34,30 @@ jobs:
       - run: npm test
       - run: npm run build
 
+  i1-native-software:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: 1
+      OPENBLAS_NUM_THREADS: 1
+      MKL_NUM_THREADS: 1
+      NUMEXPR_NUM_THREADS: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --dev --locked
+      - name: Public numerical, parser, native process and failure regression
+        run: uv run pytest tests/test_i1_native.py --basetemp build/i1-public-tests -q
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: i1-native-public-regression-${{ github.sha }}
+          path: build/i1-public-tests/test_linux_no_libc_programs_pre*/bin/
+          if-no-files-found: error
+          retention-days: 30
+
   clean-linux-smoke:
     if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04

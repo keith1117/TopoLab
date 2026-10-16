@@ -1,35 +1,39 @@
 # Current project status
 
-Updated:2026-10-16. **One owner-requested P/17 repair proposal closes
-CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED.** See the
-[proposal](planning/TopoLab_v2_P17_bounded_homotopy_proposal.md) and
-[planning validation](validation/p17_bounded_homotopy_proposal.md).
-Fixed P/17 weights would initialize8 p=1 and8 p=2 OC/FEM updates, then the
-original p=3 terminal problem within360 total. This changes the intermediate
-objective, without reflection, post-plateau rescue, fitting or learned gradients.
-The exact8/8 choice is untested, not literature-prescribed or tuned.
+Updated:2026-10-16. **I1 is owner-approved and in progress.** Baseline main
+`61ed2e1c7fefbb95d6553a6ccf6b25a7e61c881b` (PR196), normal main CI passed.
+The owner selected existing Ubuntu24.04 x86-64 CI and approved16 active engineering
+and independent-review hours for the [I1 software capability](planning/i1_bounded_native_software_protocol.md)
+([contract](planning/i1_bounded_native_software_contract.json)). The
+[earlier P/17 proposal](planning/TopoLab_v2_P17_bounded_homotopy_proposal.md) keeps its
+historical CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED decision and bytes.
 
-The proposal specifies a new fixed-storage Linux native query path, independent
-verifier and controller. A geometric z-fast free-DOF permutation gives large
-half-bandwidth299 and15724800 bytes per band. The proposed complete mapped-role
-envelopes sum1140850688<4294967296 bytes. These are **design constraints, not
-implemented allocation/lifetime proof or resource PASS**. Complete source/binary/
-runtime admission, fair optimized denominator, cost and scientific performance
-remain UNKNOWN_UNIMPLEMENTED/UNKNOWN_NOT_TESTED. No currently admitted executable
-repair route; P/17 remains unrepaired and full v2 OPEN.
+New fixed-storage native software implements the two-scale CNN/filter/FEM/OC/
+homotopy path and controls, separately derived numerical checking and a pinned
+native controller. Public numerical/parser/failure regression is being completed.
+No old input/index/model/label/seal is read; no scientific experiment or formal
+program runs. The native backend is a new identity; uniform/default and every
+existing numerical source/tolerance remain. This is implementation, not a new
+P/17 repair, learned-quality, speed or scientific PASS.
 
-**Unique next item: owner decision on I1**, one integrated bounded native
-software capability plus independent data-free resource preflight, and naming
-a Linux x86-64 environment (existing Ubuntu24.04 CI recommended for public
-software only, not a pilot host grant). I1 is NOT AUTHORIZED, requests no scientific
-budget or old input, and must deliver actual software/full independent closure
-or stop NO_ADMISSIBLE_ROUTE. A plain “continue” displays this proposal only.
-Even an I1 pass stops before the separately proposed physical pilot:18 new
-references/342 queries,14580 charged seconds (10800 producer/3600 independent/
-FULL180),12 fixed checkpoints/528 train-only NN labels/18 legacy reference
-scalars, all literal paths/hashes/bytes UNKNOWN_UNREGISTERED_DENY. That later
-budget/access/role decision is not requested until I1 and is not included in I1.
-No actual budget/reserve, payload grant, implementation or experiment is created.
+**Complete resource admission remains UNKNOWN_PENDING_INDEPENDENT_REVIEW.**
+Individual static arrays, ELF/frame metadata and software tests are insufficient.
+The owner explicitly authorized the independent audit subagent
+`/root/i1_independent_resource_review`, starting07:54:14UTC. It has independently
+authored verifier/controller source and is reviewing producer/resource closure;
+prior primary draft exposure is disclosed. The primary separately reviews its roles.
+Do not call same-author derivation/self-review independent acceptance. All8
+allocation/lifetime categories, startup/helpers/stacks/recursion and controller/
+sealed-carrier/fork/exec/exit overlap need complete independent proof within4GiB,
+followed by actual independent preflight on clean locked merged all-CI-passed
+source. Unresolved mandatory terms stop admission; there is no memory trial.
+
+The unique current task is to finish I1 within its cap, report actual software/
+resource outcomes, then stop. A plain “continue” only
+finishes I1. Even PASS does not start the separate proposed18-reference/342-query/
+14580s pilot or grant its12 checkpoints/528 train labels/18 old reference scalars.
+Those literal paths/hashes/views remain UNKNOWN_UNREGISTERED_DENY. No scientific
+allocation, formal quota, FULL reserve, old retry/reset or successor is created.
 
 The prior [solver-internal candidate](planning/TopoLab_v2_solver_internal_learning_route_decision.md)
 stays REJECTED_CURRENT_RESOURCE_ADMISSION. R1/D1/closure/prior-decision frozen
@@ -38,7 +42,7 @@ CLOSED_BY_OWNER_UNCHANGED_4GiB_INDEPENDENT_PREFLIGHT; D1 STOP/unlaunched0/1/FULL
 all old costs/UNKNOWN/failures/quotas and final/conditional48/720/unused48 seals
 remain. No old retry/reset or automatic second backend/proof/toy/guard/platform
 slice. A2.3/A2.4/A4 remain independent backlog requiring their own instruction.
-Retain this worktree and stop after publication of this proposal.
+Retain this worktree and stop after I1 publication.
 
 ## Actual D1 actions and missing prerequisites
 
@@ -109,24 +113,24 @@ Old3/3 closed, B4.30 two administrative calls/one campaign/no third and reflecti
 stop remain. Final/conditional48/720/unused48 stay sealed. Full new learned B4,
 independent confirmation and compatible final contract remain before B5.
 
-## Software/publication closure and handoff
+## I1 software/publication progress and handoff
 
-This proposal starts from clean merged main
-`2ec9303c60919aaaf2f4f3d7611e4be6837fb71c` (PR195), all three main CI jobs
-successful, no open PR. Same assigned worktree on
-`docs/p17-bounded-homotopy-proposal`; no primary-checkout edit/new worktree.
-Primary method/storage/OS documentation and committed TEXT/AST only; old external
-evidence/compact-metadata read sets empty. No implementation, real input,
-FEM/fit/search/timing/memory trial, scientific call or old formal retry.
-Mandatory complete software regression is separate.
+Current I1 starts from merged main61ed2e1/PR196 in the same retained worktree,
+branch `feat/i1-bounded-native-query`. Public component regression currently
+passes39 tests on the local host; the standalone Linux integration test is
+explicitly skipped locally and must run on the selected Ubuntu24.04 CI. Final
+stable source phase04 passes all five mandatory checks:1990 passed/1 explicit
+Linux skip,658.10s pytest. New PR/main CI, source freeze and independent admission
+remain pending actual records. Implementation and evidence publication
+may use separate PRs within this single I1.
 
-Numerical source/tests/tolerances/fixtures/locks/CI/public README and all frozen
-R1/D1/closure/prior-decision evidence remain byte-identical. One proposal/report,
-one history/provenance entry and synchronized current bilingual entries record
-the finite request. All five checks, reviewed-path/every-upload/actual-squash
-guards, protected exact-head/main CI, identical tested trees, owned-only cleanup
-and verified new-record backup govern publication. Records stay external at
-`/Users/keith1117/Documents/TopoLab-data/p17-bounded-homotopy-proposal-2026-10-16`;
-its final closure binds actual PR/main/CI/backup. Whole software cost/peak remains
-UNKNOWN_NOT_ZERO_ADDITIONAL. The14580 ceiling is unapproved/unspent, not an added
-ledger charge. Retain the worktree; report the I1 owner decision and STOP.
+Keep old numerical sources/tests/tolerances/fixtures/locks/public README and all
+frozen historical contracts/reports intact. New native sources, their tests,
+protocol/contract, dedicated Ubuntu software CI and manual post-merge preflight
+belong in Git. Raw new software/binary/startup/review evidence stays external at
+`/Users/keith1117/Documents/TopoLab-data/i1-bounded-native-software-2026-10-16`.
+All five checks, every-upload/publication guards, protected exact-head/main CI,
+tested-tree equality, owned-only branch cleanup and verified new-record backup
+remain required. Whole software cost/peak remains UNKNOWN_NOT_ZERO_ADDITIONAL;
+no scientific budget or FULL reservation is booked. Finish I1 and stop, retaining
+this worktree and reporting the result-specific owner decision.

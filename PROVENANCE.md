@@ -1430,3 +1430,45 @@ source, new native kernel, real input, FEM, inference, fit/search, timing/memory
 trial or formal program is implemented/executed. Old external evidence read sets
 are empty. Model/solver portability, independent complete resource admission and
 all new science/cost remain UNKNOWN. Ordinary complete software checks are separate.
+
+
+## I1 bounded native public software (2026-10-16)
+
+The [I1 protocol](docs/planning/i1_bounded_native_software_protocol.md) implements
+standard Hex8/SIMP/filter/OC equations and TopoLab's committed ContextCNN graph
+with original fixed-storage C. An initial same-primary-author checker draft
+was preserved externally and replaced by a fresh implementation from the
+owner-authorized independent audit role. That role derives Hex8 stiffness from
+analytic one-dimensional basis integrals, writes its own band LDLᵀ/terminal/
+evaluation checker and native controller, and imports no candidate numerical
+helper. Earlier exposure to the primary draft is disclosed, not claimed blinded.
+The primary separately reviews those roles; actual independent resource review
+still requires selected binary/startup evidence. No
+Hack3D code/comment/structure/figure is read, copied, translated or compared.
+
+New primary references are the [GCC stack-usage specification](https://gcc.gnu.org/onlinedocs/gcc/Developer-Options.html),
+Linux [ELF](https://www.kernel.org/doc/html/latest/userspace-api/ELF.html),
+[/proc](https://www.kernel.org/doc/html/latest/filesystems/proc.html),
+[seccomp](https://www.kernel.org/doc/html/latest/userspace-api/seccomp_filter.html),
+[execveat](https://man7.org/linux/man-pages/man2/execveat.2.html),
+[memfd/sealing](https://man7.org/linux/man-pages/man2/memfd_create.2.html),
+[signals](https://man7.org/linux/man-pages/man2/sigaction.2.html),
+[core-dump semantics](https://man7.org/linux/man-pages/man5/core.5.html),
+[GitHub custom-shell interface](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax),
+[runner launch](https://raw.githubusercontent.com/actions/runner/main/src/Runner.Worker/Handlers/ScriptHandler.cs) /
+[process invocation](https://raw.githubusercontent.com/actions/runner/main/src/Runner.Sdk/ProcessInvoker.cs),
+[x86 red-zone ABI](https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html),
+and Linux [ELF loading](https://raw.githubusercontent.com/torvalds/linux/master/fs/binfmt_elf.c),
+[exec setup](https://raw.githubusercontent.com/torvalds/linux/master/fs/exec.c) /
+[mapping relocation](https://raw.githubusercontent.com/torvalds/linux/master/mm/mremap.c),
+and the [x86 UAPI stat layout](https://github.com/torvalds/linux/blob/master/arch/x86/include/uapi/asm/stat.h),
+for interface/layout facts only. Original bounded SHA-256 follows the equations
+and constants in [FIPS180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf);
+no third-party implementation is copied, vendored or called. Known-answer tests
+are not a cryptographic certification. Native binary/startup/stack/lifetime
+admission remains independent work, not inferred from these documents.
+
+New public software fixtures/weights and ordinary numerical regressions do not
+read old labels/models/index/raw evidence, run a scientific experiment or repair
+P/17. Old external research/backup read set remains empty. All existing numerical
+identities and full-fit/historical resource gaps stay.
