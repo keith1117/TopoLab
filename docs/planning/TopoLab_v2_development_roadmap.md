@@ -27,8 +27,13 @@ Independent review now closes the current route **NO_ADMISSIBLE_ROUTE**:
 selected-host pre-entry exec/argument-stack relocation/old-new image transients
 lack a complete bound and actual kernel binding. Post-entry maps/CI cannot fill
 that UNKNOWN. This is no measured4GiB exceedance or scientific failure.
-No final admission dispatch/freeze follows the stop; ordinary required software
-CI/publication closeout continues on held source, then I1 stops.
+No final admission dispatch/freeze follows the stop. Source PR197 merged5aba9c2
+with the exact tested tree after all four PR contexts passed. The
+[implementation result](../validation/i1_bounded_native_software.md) and
+[independent stop](../validation/i1_independent_resource_review.md) retain actual
+software evidence and mandatory UNKNOWN. Remaining ordinary main/report CI and
+verified new-record backup complete publication; their actual identities/results
+are bound externally at I1 closure, never presumed from this text. Then STOP.
 Full v2 remains FULL_V2_OPEN_NO_ADMITTED_ROUTE and P/17 unrepaired. The next
 owner route decision is retaining that state with scientific work stopped
 (recommended), not the unapproved18-reference/342-query/14580s pilot.
@@ -2403,9 +2408,12 @@ search on B5 outcomes.
    independent review closes the route NO_ADMISSIBLE_ROUTE because complete
    selected-kernel/pre-entry stack/exec lifetime bounds remain UNKNOWN. No
    final admission dispatch/freeze, old input or scientific/pilot grant follows.
-   Only ordinary required software CI/publication closes this I1, then STOP.
-   Next is the owner route decision retaining FULL_V2_OPEN_NO_ADMITTED_ROUTE
-   with science stopped (recommended). The hypothetical14580s pilot remains
+   Source PR197/main5aba9c2 publishes the implemented capability/independent
+   stop after all four exact-head contexts passed, with tested-tree equality.
+   Only outstanding ordinary main/report CI and verified new-record backup
+   finish this I1 publication, then STOP. Their actual release identities are
+   bound at external closeout. Next is the owner route decision retaining
+   FULL_V2_OPEN_NO_ADMITTED_ROUTE with science stopped (recommended). The hypothetical14580s pilot remains
    unapproved/unallocated, not the next executable slice. No D1 reopening,
    transfer or automatic second backend/proof/toy/guard/platform chain. A plain
    “continue” finishes publication, or after closure displays that decision.

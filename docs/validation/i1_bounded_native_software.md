@@ -6,7 +6,7 @@ Authority is the owner's complete I1 approval: existing Ubuntu24.04 x86-64 CI,
 16 active engineering/independent-review hours,4GiB and independent preflight;
 no old input, scientific experiment/budget or later pilot.
 
-**Resource route: NO_ADMISSIBLE_ROUTE; software/publication closeout in progress.**
+**I1 decision closed: implemented public software; resource NO_ADMISSIBLE_ROUTE.**
 Independent review identifies a mandatory selected-host pre-entry startup/lifetime
 UNKNOWN. No final admission dispatch/freeze follows that stop; ordinary required
 regression/CI and publication continue on held source only. No future CI or
@@ -217,6 +217,53 @@ check-manifest SHA256 `0753aa1c0df5b31b85634e439e97010f0320fdc1f47246d9e5301dc15
 The independent final report is versioned verbatim from its held draft, SHA256
 `b56ce92d8e2f00d8becf050f4bf77fbb166554b14fcd2018293ea012d05a65c6`.
 
+## Final-source software evidence and bounded handoff
+
+Source C is `053021039e800bf7d72cba98eccca6d45f7cc98b`, tree
+`f69cff517018002bcd07eca474f024b92d4f0314`, in source PR197. Its selected Ubuntu
+native job116917972070 passes **40 tests in65.44s**. The same source's completed
+push quality job passes **1991 tests in1022.26s**. Final PR run38884224227 then
+passes all four contexts: quality **1991 tests in1188.85s**, native40/65.44s,
+frontend and clean Linux smoke. Quality raw-log SHA256
+`e46a9bf01ddd723a13847ee6b16aaef7b673eae6c986f8521b3f14e6a0c43c14`.
+PR197 merged as `5aba9c2d532b76fb815995116924285750287410` with the identical
+tested tree and unchanged protection. Actual source-main and final report
+PR/main CI are separately bound in the new external `final_release_closure.json`;
+no future completion is presumed from the report itself.
+
+Artifact12039061761 has ZIP SHA256
+`8802678c23e29fc7b46eb3991f73689ffab43c3f76a8d0facb2b6f84f3ee906e`.
+All72 regular members were enumerated/hashed before metadata parsing, with
+36 identical unique files in the two pytest output aliases. Source/header/ASM,
+ELF, frame, map, compiler and tool-output identities agree with C. Member-manifest
+SHA256 `36d812f90f8d05a8480e5aec89c54a72af8d8d393e98494d009964de32028a99`;
+primary identity receipt SHA256
+`02d094ab390cb67b694e1dbc7ac548ebc0d5083754178a1f7667b01b1677b708`.
+All three actual C ELFs are byte-identical to independently reviewed B. This
+post-stop check is ordinary publication identity verification, without executing
+a target or resuming resource admission.
+
+The resolved plugin and available wrapper paths now exactly match all three
+actual collect2 traces under `/usr/libexec/gcc/x86_64-linux-gnu/13/`. Their SHA256
+values are respectively
+`14469ff8498fca3871c29dbf678c2330123207fffb8308151314a08395309ddf` and
+`f6d39bcfb1c2798c704e275a4ed2c1fe6374ebfb6aa0c5f3f3b6c669e1ff2e13`.
+The driver/cc1/as/collect2/ld and GCC specs are also bound. A named wrapper is
+available, not inferred invoked. This closes C's software build-origin record;
+B's original missing origin remains historical and is not backfilled.
+Runner image ubuntu-24.04/20261012.334.1 is recorded as software context, not a
+running-kernel/startup proof. No native/build/reviewer program byte changes after
+the explicit resource-stop receipt; source is held for publication, not resource
+frozen or scientifically admitted.
+
+| Delivery condition | Actual result and remaining scope |
+|---|---|
+|Integrated two-scale query/control and independent checker/controller|Implemented; public software regression passes; old numerical/default/lock identities retained|
+|Source/binary/reader/stack reproducibility|Actual B derivation, six offline review-tool checks and C byte/origin identity verified; not full runtime admission|
+|Complete simultaneous4GiB startup/lifetime proof|Mandatory selected-host pre-entry UNKNOWN; NO_ADMISSIBLE_ROUTE; final manual dispatch/freeze0|
+|P/17/learned quality/speed/fair optimized reference|Old fixed-primary FAIL, new scientific outcomes UNKNOWN_NOT_TESTED; no old inputs or scientific calls|
+|Budget and successor|Original all-paid7200 remains failed; new software costs additional UNKNOWN_NOT_ZERO;14580s/roles/access unallocated, no executable successor|
+
 ## Resource, scientific and accounting conclusion
 
 The independent role concludes **NO_ADMISSIBLE_ROUTE under this proposal**.
@@ -261,6 +308,46 @@ failures/costs/UNKNOWN/seals remain. Full fit stays PENDING4GiB. Known-paid
 12721.16417100014444982>7200 and booked D1 FULL60 are retained; all additional
 software/CI/publication costs remain additional UNKNOWN_NOT_ZERO. No all-paid
 PASS, ledger reset, unused-cap transfer or new scientific allocation.
+
+## Closeout checks, retained authority and release binding
+
+Phase09 runs the same five complete mandatory commands after the closeout
+history/report preparation, with held native/build/reviewer/test/workflow/
+contract bytes unchanged. **1990 passed,one explicit Linux skip in664.31s**;
+pytest command wall667.6229852079414s. Pytest raw-log SHA256
+`2d8d16d9c7fca2ae76251827f16d78cee2dbb931f95a265466f683c99ebef74e`;
+check-manifest SHA256 `ec5ead1fbbaa6282e5b73c14b913a25b7da87a0800e2886e30ddfb47d651d22b`;
+stable-source receipt SHA256 `729c5684165e8ada3a26aab5fe64e5a1292de29dc780400551ae5ac63670245f`.
+Local HEAD was held during the complete regression. Afterwards the report
+branch was created from actual latest main5aba9c2; its source tree equals C,
+and all three uncommitted report/history files and every held program byte
+were hash-verified before/after switching. No work was discarded or edited in
+the primary checkout. Native/reviewer source does not change in this closeout.
+
+The independent role records3095 seconds across seven explicit active windows;
+additional bookkeeping is not set to zero. The conservative entire primary plus
+independent wall-time bound includes idle/regression/CI/publication waits and
+remains below57600s at the recorded checkpoints; final closure records the actual
+final bound. This proves the16-hour work ceiling conservatively, not an exact
+active bill. All ordinary software/CI/publication costs remain additional
+UNKNOWN_NOT_ZERO; no old cost, booked D1 FULL60 or consumed quota is removed.
+
+All uploaded source commits554f6d9/1e7fff0/0530210 were individually reviewed,
+with current rules, links, ignored outputs, credentials and immutable historical
+prefixes checked. The final source squash has the identical tested tree. Only
+reviewed closeout documents and one history entry are staged for the final
+report publication. Each final exact-head/main context, actual squash/tree,
+owned branch cleanup and verified new-record backup must be recorded before
+`final_release_closure.json` can state publication complete. CI never changes
+the resource/scientific conclusions. This source/report split stays within I1.
+
+New software artifacts/logs include failed and successful CI, both duplicate
+artifact copies, their member hashes and offline review checks. They stay external;
+no raw binary, weight, model, data, log or cache is uploaded to Git. The new-root
+backup excludes only incidental fetched HTML, preserved in the original root
+with its hash/actual failure diagnostic retained. No old evidence/backup member
+is traversed. The closure binds the verified new backup manifest and actual
+publication identities; missing receipts stay UNKNOWN, never inferred successful.
 
 ## Publication records
 

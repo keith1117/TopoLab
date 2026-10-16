@@ -1,7 +1,13 @@
 # Current project status
 
-Updated:2026-10-16. **I1 route: NO_ADMISSIBLE_ROUTE; software publication closing.** Baseline main
-`61ed2e1c7fefbb95d6553a6ccf6b25a7e61c881b` (PR196), normal main CI passed.
+Updated:2026-10-16. **I1 decision closed: NO_ADMISSIBLE_ROUTE.** Integrated native
+software and independent review are published through [PR197](https://github.com/keith1117/TopoLab/pull/197),
+implementation merge `5aba9c2d532b76fb815995116924285750287410`, tree
+`f69cff517018002bcd07eca474f024b92d4f0314`, identical to tested source0530210.
+All four exact PR-head contexts passed. Remaining ordinary main/report CI and
+verified new-record backup govern final publication; actual results are bound
+in the external I1 closure, not presumed here. I1 began from main
+`61ed2e1c7fefbb95d6553a6ccf6b25a7e61c881b` (PR196), whose main CI passed.
 The owner selected existing Ubuntu24.04 x86-64 CI and approved16 active engineering
 and independent-review hours for the [I1 software capability](planning/i1_bounded_native_software_protocol.md)
 ([contract](planning/i1_bounded_native_software_contract.json)). The
@@ -10,7 +16,8 @@ historical CONDITIONAL_IMPLEMENTATION_PROPOSAL_NOT_ADMITTED decision and bytes.
 
 New fixed-storage native software implements the two-scale CNN/filter/FEM/OC/
 homotopy path and controls, separately derived numerical checking and a pinned
-native controller. Public numerical/parser/failure regression is being completed.
+native controller. Selected Ubuntu public numerical/parser/failure regression
+passes40 tests; full exact-head quality passes1991 tests.
 No old input/index/model/label/seal is read; no scientific experiment or formal
 program runs. The native backend is a new identity; uniform/default and every
 existing numerical source/tolerance remain. This is implementation, not a new
@@ -91,8 +98,10 @@ Direct canonical dense certification remains paper-infeasible: large full Q
 alone55037657088>4294967296 bytes. This excludes that construction, not every
 possible certificate. Exact physics remains inadmissible with the current proof;
 D1 retains its prescribed UNKNOWN stop. **B4.52 is NOT_SELECTED_BY_R1**.
-The owner has now closed this rescue program. No material scientific/resource
-blocker was closed; no proof/guard/fixture successor or unused-cap transfer follows.
+The owner closed that exact-physics rescue program without closing its material
+scientific/resource blocker; no proof/guard/fixture successor or cap transfer
+follows it. I1 separately delivers native software but no complete resource or
+scientific acceptance.
 
 ## Preserved scientific and process evidence
 
@@ -123,36 +132,45 @@ Old3/3 closed, B4.30 two administrative calls/one campaign/no third and reflecti
 stop remain. Final/conditional48/720/unused48 stay sealed. Full new learned B4,
 independent confirmation and compatible final contract remain before B5.
 
-## I1 software/publication progress and handoff
+## I1 software/publication evidence and handoff
 
-Current I1 starts from merged main61ed2e1/PR196 in the same retained worktree,
-branch `feat/i1-bounded-native-query`. Public component regression currently
-passes39 tests on the local host; the standalone Linux integration test is
-explicitly skipped locally and must run on the selected Ubuntu24.04 CI. Final
-stable source phase06 passes all five mandatory checks after the startup fix:
-1990 passed/1 explicit Linux skip,673.15s pytest. Source PR197 is open. First
-source554f6d9 CI failures are retained: missing pytest parent/invalid custom-shell
-expression and initial controller exit77, before numerical integration. The
-pre-freeze correction reads bounded initial-stack auxv without relaxing dumpability,
-with independent source review. Source1e7fff0 then passed all four PR checks:
-native40 tests/59.62s and quality1991 tests/945.83s. Independent actual-binary
-review found an unbound default linker plugin/available wrapper origin; the
-pre-freeze build record is corrected, and the independently authored offline
-ELF/stack analysis source is now published for review. Those new bytes require
-fresh exact-head/main CI. Local phase08 now passes all five checks with stable
-held source:1990 passed/one Linux-only skip. Independent review establishes a
-mandatory selected-host pre-entry UNKNOWN, so the current route closes
-NO_ADMISSIBLE_ROUTE. Final resource dispatch/freeze is not attempted.
-Implementation and evidence publication
-may use separate PRs within this single I1.
+Source PR197 contains all three reviewed source commits554f6d9/1e7fff0/0530210;
+its final exact-head run38884224227 passes quality1991/1188.85s, native40/65.44s,
+frontend and clean Linux smoke. Source main5aba9c2 has the identical tested tree;
+its normal CI and final report PR/main CI are separately bound in external
+`final_release_closure.json`, with no inferred success before actual completion.
+Closeout was prepared in the same retained worktree on report branch
+`docs/i1-native-resource-closeout` from that actual latest main. Actual final
+HEAD/owned-branch cleanup are bound in the closure receipt. Local closeout phase09 passes all five commands,
+1990 passed/one explicit Linux-only skip in664.31s, unchanged held source.
+
+[Implementation validation](validation/i1_bounded_native_software.md) records
+capability, tolerances, corrections and identity evidence. The
+[independent report](validation/i1_independent_resource_review.md) binds B's actual
+ELF/call/frame interpretation and mandatory startup UNKNOWN. C's all72 new
+members/36 unique files were hashed before metadata parsing; its actual binaries
+equal B and plugin/wrapper paths/hashes match compiler traces. These close
+software integration/origin gaps, not the selected-kernel pre-entry memory gap.
+Early setup/invalid-workflow/controller77 failures and interrupted nonfinal
+checks remain retained, with all extra costs/UNKNOWN. No program/reviewer byte
+changes after the stop, no final manual dispatch/resource freeze or science.
+
+Current resource state is UNKNOWN→NO_ADMISSIBLE_ROUTE, not measured>4GiB.
+P/17 remains unrepaired with no repair date; new quality/speed/fair-reference
+results are UNKNOWN_NOT_TESTED. Full v2/4GiB/independent preflight stay unchanged.
+The unique next item after publication is the owner route decision retaining
+FULL_V2_OPEN_NO_ADMITTED_ROUTE with scientific work stopped (recommended).
+The14580s pilot/roles/old views remain unapproved/unallocated/denied; there is no
+executable successor. “Continue” finishes any outstanding I1 publication, or
+once closed displays only that decision. Do not automatically reopen D1, transfer
+unused caps or add a second backend/proof/toy/guard/platform slice.
 
 Keep old numerical sources/tests/tolerances/fixtures/locks/public README and all
-frozen historical contracts/reports intact. New native sources, their tests,
-protocol/contract, dedicated Ubuntu software CI and manual post-merge preflight
-belong in Git. Raw new software/binary/startup/review evidence stays external at
+frozen records intact. New software/test/CI/contracts/reports and this single
+history entry belong in Git. Raw successful/failed software/CI/artifact/review
+records and verified backup stay only in the new external namespace
 `/Users/keith1117/Documents/TopoLab-data/i1-bounded-native-software-2026-10-16`.
-All five checks, every-upload/publication guards, protected exact-head/main CI,
-tested-tree equality, owned-only branch cleanup and verified new-record backup
-remain required. Whole software cost/peak remains UNKNOWN_NOT_ZERO_ADDITIONAL;
-no scientific budget or FULL reservation is booked. Finish I1 and stop, retaining
-this worktree and reporting the result-specific owner decision.
+All five checks, every-upload/actual-merge guards, protected exact-head/main CI,
+tested-tree equality and owned-only cleanup still govern publication. Whole
+software cost/peak remains UNKNOWN_NOT_ZERO_ADDITIONAL; no scientific budget or
+FULL reservation is booked. Retain this worktree; close I1 and STOP.
