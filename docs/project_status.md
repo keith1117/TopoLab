@@ -5,54 +5,50 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current documentation authority and result
+## Current slice: M2 native H stage A, software only
 
-**ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED.** The owner explicitly accepts
-B's complete guest-capacity metric/trust boundary for new future compatible
-contract identities only. Adoption is resolved and requires no repeat decision.
-The [English definition](planning/TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
-and [Chinese companion](planning/TopoLab_v2_开发路线图.md#b-前瞻资源保证规格)
-retain the entire specification: sum of all guest-visible backing capacities
-<=4294967296 bytes, continuously before the first guest instruction through
-verified teardown. Include guest OS, application, required timing/recording/audit
-helpers, ROM/firmware/device/auxiliary memory and all eight categories. Main RAM
-<=3840MiB and other enumerated backings<=256MiB are ceilings, not assumed slack.
-RSS samples, QEMU -m alone or a successful boot do not establish this bound.
+The owner authorized [A](planning/p17_m2_native_homotopy_a_protocol.md), at most
+6 implementation hours plus4 distinct independent-review hours, versioned source
+and new public fixtures/weights only, required regression/normal GitHub publication,
+then STOP. The [revised drafts](planning/p17_m2_native_homotopy_proposal.md) record
+this later grant; they allocate no B/C formal quota, scientific seconds or old access.
+The owner separately adopted B4.30-style RSS/full-exit empirical acceptance for
+this NEW M2 native identity at4294967296 bytes with independent preflight. It is
+not an a-priori complete-allocation/instantaneous-mapping guarantee. No such proof
+is a prerequisite to new A/B. Old I1/D1 obligations and UNKNOWN remain unchanged.
 
-Host virtualization/kernel and related extra overhead are outside that metric,
-additional UNKNOWN, not zero or a whole-host<=4GiB guarantee. This is a material
-prospective metric/trust-boundary change, not equivalent old native proof.
-No old contract, failure, cost, UNKNOWN, quota or seal is amended; no new executable
-contract identity is commissioned. Concrete host qualification/resource admission
-and independent actual preflight remain incomplete; no B resource role is run.
-One Ubuntu capacity definition supplies no Apple resource assurance: B3's Apple
-M2 plus independent Ubuntu24.04, two scales and independent replication stay.
+[A software validation](validation/p17_m2_native_homotopy_a.md) and
+[independent review](validation/p17_m2_native_homotopy_a_independent_review.md)
+record fixed H dispatch/8+8+p3 driver, original backend/controls, phase witnesses,
+new public-only inputs and RSS/watchdog/pending/complete-exit adaptation. All
+historical numerical source, contracts and reports retain bytes. NEW initialized
+weights exercise software; historical fixed P/17 has not been read or repaired.
+The independently checked public command has16 prefix updates,18 total,22
+independent FEM analyses and a552992768-byte recorded RSS envelope; final verifier
+native0.03s/20709376bytes and observed exit0. This is software evidence only,
+not PASS_PREFLIGHT_RSS_EXIT_EMPIRICAL, actual H/17 quality/speed or B/C admission.
+Formal B/C NOT_RUN; old input read set empty. Full-fit PENDING4GiB remains.
 
-The original proposal is published through
-[PR200](https://github.com/keith1117/TopoLab/pull/200), main
-`1da9740bb5c420577dfe9ff028e477942e4a1f1b`; all four
-[main CI contexts](https://github.com/keith1117/TopoLab/actions/runs/39110392591)
-passed. Recovery found that exact latest main, a clean assigned ec0b worktree and
-no open PR/unfinished adoption. The [original B report](validation/b_resource_assurance_specification.md)
-retains its proposal-only outcome. The [adoption report](validation/b_resource_assurance_adoption.md)
-records this separate documentation/regression/publication slice.
+Current technical publication is the PR containing this snapshot; required
+regression and actual publication/CI outcomes are bound in the A report and its
+new external closure record. No merge/main result is presumed at authoring.
+A's6/4-hour role costs and separate regression/CI/publication costs are recorded;
+unknown totals remain UNKNOWN_NOT_ZERO. No purchase/rental/new environment.
 
-Only adoption decision/current-state/handoff documents, prescribed software
-regression and normal protected publication are authorized. No installation,
-availability probe, VM start/manual environment workflow, resource-proof or
-algorithm implementation, old-input access, experiment, formal retry/reset,
-A2.3 or automatic successor. The12-hour (8+4)/4-start/1800-second capability
-remains unapproved, with fees UNKNOWN_NOT_ZERO. Existing GitHub-hosted CI is
-unqualified on available evidence; no claim that KVM is absent or virtualization
-impossible. Mandatory host/provider/control evidence cannot be replaced by trials.
+The distinct B guest-capacity adoption (PR200/201) remains
+ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED for future compatible guest
+contracts only, with excluded host overhead additional UNKNOWN. Its complete
+[definition](planning/TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
+is retained. It is not applied to this native chain; no Ubuntu/KVM procurement,
+VM, install or guest preflight occurs. B's12-hour/4-start/1800-second proposal
+remains unapproved. B3's M2 plus independent Ubuntu24.04, both scales and final
+independent reproduction remain eventual obligations.
 
-[PR199](https://github.com/keith1117/TopoLab/pull/199)/main622d546 methods remain
-effective: evidence before algorithm selection, public debugging before freeze,
-strict STOP and blocker deltas. At most two ineffective capability slices require
-a route decision; that rule commissions none. Quality1.001/zero required failures/
-fallbacks/speed advice stays pending. No observed-P/17 standard or ledger reset.
+PR199 methods remain effective: debug public software before freeze; separate
+science/resource/process/UNKNOWN; at most two ineffective capabilities require
+an explicit route decision. The next item below commissions no further work.
 
-## Latest completed capability and publication
+## Historical I1 capability and publication
 
 I1 public native software and independent resource-stop reports are published:
 [PR197](https://github.com/keith1117/TopoLab/pull/197) implementation merge
@@ -134,31 +130,27 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-concrete-owner-scope-decision"></a>
 
-## Unique next item: host evidence and separate owner authorization
+## Unique next item: bounded registration and separate B authority
 
-The owner and a specifically named provider/host operator must supply the
-[documentary host-eligibility package](planning/TopoLab_v2_development_roadmap.md#unique-next-item--host-eligibility-evidence-and-separate-owner-authorization),
-or retain the pause if it cannot be obtained. No adoption choice remains pending.
+**A publication closes this instruction; STOP.** Before considering B, owner and
+a separately authorized export custodian must register the exact12 fixed
+checkpoints,528 restricted train-only NN exports and18 uniform scalar references:
+source provenance/attestation, bytes/SHA/schema/shape, role views/paths and bounded
+reads. Preparing exports or checking originals needs its own finite input/time/
+fee grant, currently absent. No full old label/history/index discovery is granted.
+The public fixture/model/NN schema exercised in A is not the real scientific
+export schema or a substitute for those identities and two-scale memberships.
 
-| Missing field | Present status / responsibility |
-|---|---|
-| One exact Ubuntu24.04 x86-64 host and provider | UNKNOWN_UNREGISTERED; owner names it, provider/operator supplies stable documentary identity; current GitHub CI not qualified |
-| Permission for required QEMU/KVM and configuration controls | UNKNOWN; provider grants/documents permission, operator establishes required privileges |
-| Fixed host/kernel/KVM/QEMU/machine/device/firmware/guest boot identities | UNKNOWN_UNREGISTERED; provider/operator documents availability and control, later authorized implementer binds actual hashes/configuration, independent reviewer verifies |
-| Complete capacity inventory and no-growth/swap/offload controls | UNKNOWN; operator supplies enforceable evidence, later implementer enumerates every backing and all required in-guest work, independent reviewer accepts before boot |
-| Independent resource admission and actual data-free preflight | NOT_REGISTERED / NOT_RUN; owner separately commissions a distinct reviewer and implementer; no I1 role/quota transfer |
-| Finite fees and later implementation authority | UNAPPROVED / UNKNOWN_NOT_ZERO; provider supplies bounded billing terms; owner sets currency, rate/basis, maximum/payer and exhaustion stop, then explicitly grants a compatible finite public-only scope/roles |
+Implementer and independent reviewer must then close actual role/command/runtime/
+thread identities, units/native/profile/overlap/exit evidence tables and complete
+call/charge/public-start order within the proposed caps. Clean locked merged
+source and all four applicable CI contexts are required. All missing fields stay
+UNKNOWN_UNREGISTERED. The owner must explicitly authorize the finite registration/
+export work and subsequently B's one FULL180 preflight; neither is granted by A.
+Do not consume B before the actual scientific input domain metadata is known,
+or add another preflight after changing it. No C14580s/payload grant exists.
 
-The proposed12 active hours (8 implementation+4 independent review), at most4
-public starts and1800 cumulative guest-wall seconds are still unapproved.
-Documentary host prerequisites precede any such investment; no missing premise
-may be resolved by a trial boot. Actual capacity/configuration acceptance and
-independent preflight remain separately required. Prescribed regression/CI/
-publication costs are additional and recorded, never zero. No cloud purchase,
-old input/model/label/index/backup/seal access,14580s pilot or scientific budget.
-
-All scientific/resource metrics retain their published baseline; no measured
-P/17 repair, quality/speed or full-fit delta. No I1/D1 reopening, B4.52, A2.3,
-cap transfer/reset or backend/proof/toy/guard/platform chain. “Continue” displays
-these missing fields and separate authorization requirements only. Complete this
-adoption slice, retain the worktree and **STOP** without starting its successor.
+No further computer, provider, installation, VM, allocation/kernel proof project,
+scientific experiment, D1/I1 reopening, A2.3, quota transfer/reset or automatic
+successor. Preserve the assigned worktree. A plain “continue” displays the missing
+registration/authority only; it does not start B, C or export preparation.

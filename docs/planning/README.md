@@ -23,25 +23,19 @@ owner-closed exact-physics rescue, solver-internal rejection, B4.51 FAIL/consume
 quotas and all old costs/UNKNOWN/seals remain; B4.52 NOT_SELECTED_BY_R1.
 Historical protocols below retain bytes and old successor context.
 
-B's original specification is published through
-[PR200](https://github.com/keith1117/TopoLab/pull/200)/main1da9740, all four main CI
-contexts passed. The owner explicitly adopts its complete
-[resource metric/trust boundary](TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
-and [Chinese definition](TopoLab_v2_开发路线图.md#b-前瞻资源保证规格):
-**ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED**. New compatible identities
-only; host overhead additional UNKNOWN, old native proof/contracts unchanged.
-The [original B validation](../validation/b_resource_assurance_specification.md)
-retains proposal-only history; [adoption validation](../validation/b_resource_assurance_adoption.md)
-records the current finite documentation/regression/publication slice.
-
-The [unique handoff](TopoLab_v2_development_roadmap.md#unique-next-item--host-eligibility-evidence-and-separate-owner-authorization)
-lists host/provider, permission, fixed identities, capacity/control, independent
-admission and finite fees/authority fields with responsible parties. No concrete
-host is qualified, and no resource preflight is complete. Existing hosted CI
-is unqualified on present evidence, not proved impossible.12-hour/4-start/
-1800-second later public-appliance work remains unapproved. No installation,
-probe/VM/manual workflow, resource-proof/algorithm implementation, old access,
-science, A2.3 or successor. “Continue” displays missing evidence/decisions only.
+The latest commissioned software is [M2 native H stage A](p17_m2_native_homotopy_a_protocol.md),
+with [revised MD/JSON drafts](p17_m2_native_homotopy_proposal.md),
+[software report](../validation/p17_m2_native_homotopy_a.md) and
+[independent review](../validation/p17_m2_native_homotopy_a_independent_review.md).
+The owner prospectively adopted B4.30-style RSS/full-exit empirical evidence for
+this new native identity at4GiB with independent preflight, then granted A6h+4h,
+new public inputs only, regression/normal publication and STOP. No old access,
+formal B preflight/C panel or automatic successor. Actual P/17 remains unrepaired.
+B guest-capacity adoption PR200/201 remains effective in its separate scope,
+host overhead UNKNOWN/environment unadmitted;12-hour/4-start/1800s unapproved.
+The [one next item](../project_status.md#unique-next-item-bounded-registration-and-separate-b-authority)
+is exact restricted input/domain/role/call/fee registration and separate owner
+permission before B; no Ubuntu/KVM procurement is required for native A.
 
 ## Overall project plans
 

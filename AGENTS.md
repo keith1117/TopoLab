@@ -38,26 +38,25 @@ Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibilit
 full fit PENDING4GiB and every old UNKNOWN/seal remain. Read applicable frozen
 contracts before dependent work; unresolved substantive conflicts stop that work.
 
-B specification PR200/main1da9740 and all four main CI contexts passed. The owner
-has explicitly adopted its complete metric/trust boundary prospectively:
-**ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED**. For new compatible contract
-identities only, all guest-visible backing capacities sum to<=4294967296 bytes,
-before the first guest instruction through verified teardown, including guest OS,
-devices/firmware and required helpers. Excluded host overhead stays additional
-UNKNOWN; this is neither native-proof equivalence nor a whole-host4GiB guarantee.
-Old contracts/results remain unchanged. Do not ask for adoption again.
-Current authority is this finite adoption documentation, mandatory regression and
-normal publication only. The [host-evidence handoff](docs/planning/TopoLab_v2_development_roadmap.md#unique-next-item--host-eligibility-evidence-and-separate-owner-authorization)
-lists missing host/provider, permission, identities, capacity/control, independent
-review and finite cost/authority fields with responsible parties. No host is
-admitted; existing CI is unqualified on available evidence, not proved impossible.
-12-hour (8+4)/4-start/1800-second implementation terms remain unapproved. No install,
-probe, VM/manual workflow, appliance/algorithm/proof implementation, A2.3, old input/
-model/label/index/backup/seal access, experiment, formal retry/reset or successor.
-Use versioned documents and necessary committed-source text; follow no old evidence
-pointers. No D1/I1 reopening, cap transfer or backend/proof/toy/guard/platform chain.
-“Continue” displays the missing evidence/decision only. Retain this worktree and
-stop after this adoption slice; do not start the next capability.
+B guest-capacity adoption remains ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED,
+for compatible future guest contracts only; excluded host overhead UNKNOWN.
+The owner separately adopted B4.30-style RSS/full-exit empirical acceptance for
+NEW M2 native identity only, retaining4GiB and independent preflight. This is
+not a-priori allocation assurance or a change to old I1/D1/B contracts.
+
+Current slice is [M2 H stage A](docs/planning/p17_m2_native_homotopy_a_protocol.md):
+owner grants <=6h implementation plus <=4h distinct independent review, versioned
+source/new public fixtures only, then all prescribed regression/normal protected
+publication and STOP. [Drafts](docs/planning/p17_m2_native_homotopy_proposal.md)
+and [A result](docs/validation/p17_m2_native_homotopy_a.md) control this boundary.
+Public H/17 dispatch, original backend and RSS/exit adaptation grant no historical
+P/17 repair, B resource acceptance or C science. No old model/label/index/backup/
+seal access, export preparation, formal preflight/panel, VM/install, new provider,
+A2.3, D1/I1 reopening, quota transfer/reset or automatic successor.
+The one next item is exact restricted input/domain/role/call/fee registration and
+separate owner authorization before B, not Ubuntu/KVM procurement. B/C formal
+allocations remain0; proposed FULL180/14580s stay unapproved. Preserve old costs,
+UNKNOWN and seals, retain this worktree and stop after A publication.
 
 ## Provenance boundary
 

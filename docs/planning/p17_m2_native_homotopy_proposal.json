@@ -1,0 +1,1040 @@
+{
+  "schema": "topolab.v2.p17-m2-native-homotopy.proposal.v1",
+  "status": "A_SOFTWARE_AUTHORIZED_ENVIRONMENT_NOT_ADMITTED_B_C_NOT_AUTHORIZED",
+  "date": "2026-10-18 America/New_York",
+  "baseline_commit": "53f9ebb675ed1fd3cf039b1696a9eaf188290798",
+  "normative_draft": "p17_m2_native_homotopy_proposal.md",
+  "current_authority": {
+    "documentation_revision_only": false,
+    "scope": "A only: <=6h implementation + <=4h distinct independent review; versioned source/new public fixtures, H integration and RSS/exit adaptation; required regression/normal publication then STOP",
+    "prospective_resource_assurance_adoption": true,
+    "implementation": true,
+    "installation": false,
+    "new_environment_identity_query": false,
+    "trial_or_VM_start": false,
+    "resource_preflight": false,
+    "old_resource_metadata": false,
+    "old_model_label_reference_payload": false,
+    "science": false,
+    "old_external_read_set": [],
+    "allocated_formal_quotas": 0,
+    "granted_new_scientific_seconds": 0,
+    "formal_resource_reviewer_appointed": false,
+    "automatic_successor": false,
+    "independent_A_reviewer": "/root/review_m2_contracts; distinct author, full conversation exposure, not blind or formal B resource role",
+    "stage_A_protocol": "p17_m2_native_homotopy_a_protocol.md"
+  },
+  "prospective_identity": {
+    "proposed_new_executable_contract_identity": "topolab.v2.p17-m2-native-homotopy.rss.v1",
+    "resource_assurance_identity": "topolab.v2.m2-native-rss-exit-assurance.v1",
+    "executable_contract": null,
+    "registered_roles": null,
+    "source_freeze": null,
+    "status_of_nulls": "FORMAL_B_C_UNREGISTERED_NOT_FROZEN_NO_GRANT; A separate public protocol applies",
+    "algorithm_and_slice_status": "A_PUBLIC_SOFTWARE_AUTHORIZED; B_C_UNREGISTERED_NOT_FROZEN_NO_EXECUTION_GRANT"
+  },
+  "future_environment": {
+    "scientific_host": "current owner M2 MacBook only, native macOS ARM64 CPU",
+    "software_ci": "existing GitHub CI only; no scientific dispatch",
+    "actual_host_label_macos_build_runtime_library_identities": {
+      "status": "PREVIOUS_READONLY_OBSERVATION_NOT_FROZEN_OR_ADMITTED",
+      "observation_ref": "resource_attainability_check.environment_observation"
+    },
+    "blas_threads": 1,
+    "torch_intraop_threads": 1,
+    "torch_interop_threads": 8,
+    "new_compute_provider": false,
+    "vm": false,
+    "gpu_or_mps": false,
+    "new_numerical_backend": false,
+    "actual_running_thread_settings": null
+  },
+  "compatibility": {
+    "old_B430_reopened": false,
+    "old_I1_reopened": false,
+    "original_H_section3_native_backend_condition": "OLD_H_I1_ONLY; NEW_M2_PYTHON_RSS_SCOPE; ONLY_A_SOFTWARE_GRANTED",
+    "B_guest_capacity_adoption": "RETAINED_NOT_APPLIED_TO_NATIVE_CHAIN",
+    "numerical_tolerances_relaxed": false,
+    "old_source_contract_report_bytes": "PRESERVE",
+    "old_B3_B430_query_limit_bytes_unchanged": 2147483648,
+    "new_M2_only_resource_evidence_change": "owner adopted RSS/complete-exit empirical acceptance; no retrospective equivalence or old proof waiver"
+  },
+  "algorithm": {
+    "same_fixed_P_S_weights": true,
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "primary": "H/17 from P/17",
+    "activation": {
+      "mesh": [
+        24,
+        12,
+        6
+      ],
+      "direction": "y",
+      "volume_strictly_below": 0.55,
+      "route": "generalist"
+    },
+    "start": "unreflected original P prediction and legacy projection",
+    "prefix": [
+      {
+        "penalty": 1,
+        "updates": 8
+      },
+      {
+        "penalty": 2,
+        "updates": 8
+      }
+    ],
+    "reanalyze_at_penalty_transition": true,
+    "final_penalty": 3,
+    "total_update_cap": 360,
+    "final_updates_maximum": 344,
+    "prefix_early_stop": false,
+    "p3_convergence_window_reset": true,
+    "reflection": false,
+    "polish": false,
+    "terminal_witness_rescue": false,
+    "outside_activation": "same-runtime plain-P/S",
+    "p3_terminal_rules": {
+      "design_change_branch": "retain original <=0.01 after a p3 update",
+      "physical_plateau_minimum_completed_p3_updates": 11,
+      "compliance_states": "last 11 post-update p3 states only; entry/transition analysis excluded",
+      "physical_changes": "10 changes between those 11 states, each <=0.01",
+      "relative_gain_range": [
+        0,
+        0.0002
+      ],
+      "p1_p2_states_eligible_for_p3_certificate": false
+    },
+    "uniform_homotopy_control": {
+      "same_activation_and_fixed_schedule": true,
+      "initialization": "original uniform",
+      "outside_activation": "original uniform"
+    }
+  },
+  "proposed_new_source_units": [
+    "src/topolab/p17_m2_homotopy.py",
+    "scripts/p17_m2_homotopy.py",
+    "scripts/p17_m2_independent_audit.py",
+    "scripts/p17_m2_resource_control.py",
+    "new corresponding public tests and separate phase-aware result identity"
+  ],
+  "resource": {
+    "assurance_identity": "topolab.v2.m2-native-rss-exit-assurance.v1",
+    "adoption_status": "ADOPTED_PROSPECTIVELY",
+    "status": "NOT_RUN_ENVIRONMENT_NOT_ADMITTED",
+    "whole_native_role_limit_bytes": 4294967296,
+    "metric": "B430_STYLE_NATIVE_RSS_AND_COMPLETE_EXIT_EMPIRICAL_ACCEPTANCE",
+    "scope": "all registered producer, independent auditor, controllers, timing/recording/binding/final-verifier helpers and descendants; startup through observed complete exit; no required work offloaded outside accounting",
+    "excluded_from_this_RSS_metric": "unrelated Mac background/whole kernel heap and non-RSS memory; unmeasured whole-host terms remain UNKNOWN, not zero; required native helper RSS stays included",
+    "a_priori_complete_allocation_or_mapping_guarantee": false,
+    "all_instantaneous_allocation_or_reservation_capacity_claim": false,
+    "whole_host4GiB_guarantee": false,
+    "historical_B430_limit_bytes": 2147483648,
+    "historical_published_conservative_RSS_bound_bytes": 800047104,
+    "historical_B431_bound_field": "conservative_whole_chain_rss_upper_bound_bytes",
+    "historical_bound_reverified_this_draft": false,
+    "inherited_resource_pass": false,
+    "historical_component_derivation_required_for_implementation": false,
+    "old_resource_export_required": false,
+    "a_priori_complete_bound_required_before_implementation": false,
+    "a_priori_complete_bound_required_before_formal_preflight": false,
+    "generic_Linux_I1_proof_automatically_imposed_on_M2": false,
+    "mandatory_empirical_method_available_in_versioned_sources": [
+      "scripts/b4_30_native_execution.py: native profiles, group/controller RSS, watchdog, charges and exit bindings",
+      "docs/planning/b4_30_paid_continuation_protocol.md: RSS/native wall/complete child and final-verifier exit acceptance"
+    ],
+    "complete_actual_new_RSS_record": "NOT_RUN",
+    "measured_new_RSS_bytes": null,
+    "whole_fit_memory": "PENDING/4GiB",
+    "measurement_plan": {
+      "freeze_before_formal_preflight": [
+        "actual roles/parents/children/helpers, command/argv/cwd, interpreter/lock/module origins, thread policy",
+        "native and ps RSS fields/units, role-overlap composition, target and actual sample interval records",
+        "native wall/RSS/profile/log/exit/pending/atomic records and bounded failure cleanup",
+        "finite preflight fixture/start/order table, exact scientific manifest metadata/role paths and public input schema/byte domain"
+      ],
+      "actual_tables": null,
+      "native_Darwin_RSS_unit": "bytes",
+      "ps_RSS_unit": "KiB; convert by1024",
+      "nominal_watchdog_wait_seconds": 0.5,
+      "strict_sampling_interval_guaranteed": false,
+      "native_statistics": "retained command peak RSS plus native/observed wall and exit/profile identity for every required role coverage",
+      "sampled_statistics": "registered child-group RSS plus controller RSS; retain actual sampling intervals",
+      "parent_profile_assumed_to_cover_all_descendants": false,
+      "chain_RSS_envelope": "independently reconcile registered role coverage; conservative sum of native high-water values for overlapping roles, max across demonstrated disjoint periods; uncertain overlap counted concurrent; no shared-page subtraction",
+      "acceptance_RSS_value": "max(all native command peaks, sampled group-plus-controller peaks, independently reconciled conservative recorded-chain RSS envelope) <=4294967296",
+      "envelope_is_a_priori_allocation_or_all_instantaneous_total_proof": false,
+      "sampling_blindspots_and_statistic_scope_reported": true,
+      "allocation_to4GiB_as_cap_test_required": false,
+      "missing_wall_RSS_unit_role_or_exit_coverage": "RESOURCE_UNKNOWN_STOP",
+      "online_observed_exceedance": "stop complete role tree immediately",
+      "postexit_peak_exceedance": "FAIL_RESOURCE_CAP even with exit0",
+      "OOM_or_MemoryError": "fatal resource STOP, not ordinary candidate failure/fallback"
+    },
+    "lifecycle": {
+      "pending_before_interpreter_candidate_import_input_read": true,
+      "child_start_and_observed_exit_or_signal_required": true,
+      "immutable_preexit_states": [
+        "PENDING_POSTEXIT",
+        "PENDING_BINDER_EXIT"
+      ],
+      "append_only_separate_exit_bindings": true,
+      "last_verifier_own_native_exit_profile_checked_before_acceptance": true,
+      "unknown_exit_means_success": false
+    },
+    "preflight": {
+      "required": true,
+      "data_free_of_old_payload": true,
+      "distinct_from_candidate_author": true,
+      "same_M2_sequential_independent_role_allowed": true,
+      "clean_locked_merged_all_applicable_CI_passed_source": true,
+      "formal_outer_invocations_max": 1,
+      "public_fixture_inner_starts_order_and_cases": null,
+      "unknown_inner_start_table": "NO_FREEZE_NO_LAUNCH",
+      "planned_scientific_exact_manifest_metadata_and_role_paths_registered_before_B": true,
+      "actual_scientific_payload_read_during_B": false,
+      "independent_empirical_coverage_review_required": true,
+      "prior_complete_allocation_proof_required": false,
+      "success_status": "PASS_PREFLIGHT_RSS_EXIT_EMPIRICAL",
+      "failure_or_missing_evidence": "STOP_NO_RETRY",
+      "science_resource_PASS_inherited_from_preflight": false,
+      "proves_all_actual_model_values_or_a_priori_peak": false
+    },
+    "actual_run_resource_acceptance": {
+      "success_status": "PASS_RSS_EXIT_EMPIRICAL",
+      "required": "all registered wall/RSS/role-chain/complete-exit/charge evidence independently reconciled within caps",
+      "RSS_monitor_single_sample_successful_boot_or_exit0_alone_sufficient": false,
+      "C_requires_own_full_RSS_exit_evidence": true
+    },
+    "removed_for_new_M2_identity_only": [
+      "proof of all pre-entry/startup/import transient user-page allocations before public preflight",
+      "complete Python/native allocator/cache/workspace static or source-to-binary lifetime upper bound",
+      "kernel/shared-cache/ELF proof or fixed allocator/workspace/backend prerequisite",
+      "recovery of old B430 detailed allocation derivation"
+    ],
+    "remaining_execution_requirements": [
+      "A6h+4h/public software grant fulfilled under separate A protocol; B/C each require new scope/budget/input/formal-role grants",
+      "actual public software, full source checks, measured recording/coverage tables and independent preflight",
+      "exact input manifest identities/bytes/schema/role views before payload read",
+      "finite call/charge tables, no source mutation after freeze, strict STOP"
+    ]
+  },
+  "future_permissions": {
+    "A_implementation_and_independent_review": "AUTHORIZED_6H_IMPLEMENTATION_4H_DISTINCT_REVIEW_PUBLIC_SOFTWARE_ONLY_THEN_STOP",
+    "B_one_public_no_old_data_preflight": "A_PUBLIC_CHECKS_AND_ACTUAL_RECORDING_SCOPE_TABLES_AND_EXACT_SCIENTIFIC_MANIFEST_METADATA_REGISTERED_PLUS_EXPLICIT_GRANT; NO_ALLOCATION_PROOF",
+    "C_one_exposed_pilot": "A_B_PASS_PLUS_SEPARATE_EXPLICIT_SCIENTIFIC_BUDGET_AND_EXACT_PAYLOAD_ROLE_VIEWS; OWN_RSS_EXIT_ACCEPTANCE_REQUIRED",
+    "resource_metadata": "OLD_RESOURCE_EXPORT_NOT_REQUIRED_NOT_REQUESTED_NO_GRANT; versioned source/report text only",
+    "pilot_metadata_and_payload": {
+      "fixed_checkpoints": 12,
+      "checkpoint_families": [
+        "C",
+        "P",
+        "W",
+        "S"
+      ],
+      "seeds": [
+        17,
+        29,
+        43
+      ],
+      "train_only_NN_labels": 528,
+      "legacy_uniform_scalar_references": 18,
+      "case_definitions": "18 versioned exposed sentinel definitions only",
+      "actual_manifests_paths_lengths_sha256_role_views_and_read_caps": null,
+      "NN_permission_unit": "528 separately prepared restricted terminal/certificate exports; not original full B3LabelRecord files",
+      "NN_export_schema": {
+        "source_fields": [
+          "case/train membership and context/solver/original-label identities",
+          "actual original f64 terminal",
+          "actual original stored f32 terminal",
+          "stored sensitivity weights",
+          "bounded original termination certificate: at most last11 density states and relevant scalars/total updates, initial-state identity where needed"
+        ],
+        "full_trajectory_or_other_cases": false,
+        "producer_view": "case and stored terminal needed by NN only",
+        "independent_view": "also f64 terminal, stored state/weights and finite termination certificate",
+        "two_terminal_states_newly_solved_or_reprojected_for_export": false,
+        "stored_design_bit_rule": "float32(original f64 design)",
+        "stored_physical_bit_rule": "float32(original filter applied to stored f32 design converted to f64)",
+        "provenance": "separately authorized owner/export provider checks originals and supplies field-selection and original-SHA -> export-SHA/bytes/source attestation; current roles never open originals to verify source",
+        "source_SHA_alone_sufficient": false,
+        "terminal_FEM_reanalyses_per_label": 2,
+        "full_old_trajectory_reaudited": false,
+        "window_checks": "bounded state/filter/finiteness/termination checks, not every-window-state FEM; extra FEM must enter unregistered call map",
+        "original_full_history_parser_reused": false,
+        "actual_schema_bytes_role_views_and_grant": null
+      },
+      "NN_numerical_identity": {
+        "encoder": "unchanged 10-channel encode_case",
+        "population": "exact original per-scale train-only sets, case_id order",
+        "distance": "unchanged float64 MSE",
+        "tie_break": "case_id",
+        "new_training_labels": 0,
+        "new_neighbor_selection_or_reencoding": false
+      },
+      "legacy_uniform_scalar_use": "18 new uniform reference compatibility checks only, rtol1e-9/atol0; not timed denominator or H terminal-selection oracle"
+    },
+    "forbidden": [
+      "original full label files and full old trajectories; only exact separately granted bounded NN certificate fields may be exported",
+      "old raw outcomes/trajectories/logs",
+      "index/pointer traversal",
+      "backup members",
+      "fit-validation/test/OOD/final payload",
+      "other models or labels",
+      "conditional48/720",
+      "unused B410 fresh48",
+      "all sealed evidence"
+    ],
+    "input_identity_unknown": "NO_FORMAL_FREEZE_OR_PAYLOAD_READ; DOES_NOT_BLOCK_SEPARATELY_GRANTED_PUBLIC_ONLY_A",
+    "implementation_entry": "SEPARATE_A_SCOPE_6PLUS4_BUDGET_AND_INDEPENDENT_ROLE_GRANT; PUBLIC_ONLY; NO_ADVANCE_ALLOCATION_PROOF",
+    "export_creation_commissioned_by_this_proposal": false,
+    "restricted_scientific_metadata_before_formal_preflight": "separate finite metadata grant and exact export paths/bytes/hashes/provenance/schema/read-domain/role paths before B; no payload or index discovery; absence need not block separately granted A public-only implementation"
+  },
+  "proposed_budgets_NOT_GRANTED": {
+    "formal_preflight_full_charged_wall_seconds": 180,
+    "pilot_producer_seconds_max": 10800,
+    "pilot_independent_audit_seconds_max": 3600,
+    "pilot_shared_full_reserve_seconds": 180,
+    "pilot_total_seconds_max": 14580,
+    "whole_new_formal_reservation_seconds": 14760,
+    "transfer_between_subcaps": false,
+    "preflight_attempts_max": 1,
+    "scientific_producer_attempts_max": 1,
+    "scientific_independent_attempts_max": 1,
+    "formal_quota_consumed_before_interpreter_start": true,
+    "retry_or_reset": false,
+    "mandatory_regression_ci_publication": "additional actual software costs and UNKNOWN_NOT_ZERO, no refunds",
+    "purchase_or_rental_grant": false,
+    "actual_monetary_cost": "UNKNOWN_NOT_ZERO; new paid expansion requires separate finite currency/rate/max/payer approval",
+    "whole_command_charge_rule": "max(all internal charged work, max(native wall, observed outer wall) + attempted reference/query rows + 10 seconds); full mandatory role start/pending through observed exit",
+    "recording_allowance_seconds_per_attempted_reference_or_query": 1,
+    "row_charge": "full inclusive row wall +1; includes failed attempt/full fallback and all load/hash/setup/inference/projection/phase/terminal/recording work",
+    "role_and_shared_accounting": "producer and independent charges inside10800/3600; preflight inside FULL180; disjoint outer preparation/control/final-exit work inside pilot shared FULL180; unused FULL reserves charged, no duplicated role work",
+    "speed_denominator": "same-case new uniform query wall+1; complete role/audit/shared/offline costs additionally reported for full cost/amortization, not arbitrarily assigned to inflate uniform",
+    "actual_monetary_reservation_currency_rate_maximum_payer": null,
+    "formal_subcaps_count": 4,
+    "export_preparation_and_original_source_verification": {
+      "commissioned": false,
+      "included_in_active10h_or_formal14760s": false,
+      "granted_seconds_or_currency": 0,
+      "actual_cost": "UNKNOWN_NOT_ZERO_ADDITIONAL_FULL_NEW_COST",
+      "required_before_new_original_processing_or_export_generation": "separate exact input scope, role and finite preparation time/fee reservation authorization",
+      "unregistered_or_ungranted": "STOP; no free prerequisite labor or assumed inclusion in current ceilings"
+    },
+    "RSS_adoption_grants_any_engineering_or_formal_seconds": false,
+    "before_B_register_full_empirical_recording_call_and_charge_tables": true,
+    "scope": "B/C formal budgets, export preparation and new paid purchases remain UNAPPROVED; A grant is separate"
+  },
+  "prospective_pilot": {
+    "case_ids": [
+      "tlcase-v1-033f380c2181d9d1f94fc7f3d4b4a6507992c5e1a5004018bff779ca92add82a",
+      "tlcase-v1-080d09f0d3f236ebe53ffe7b2065277be60e5c82f700717ff5609418b74bda40",
+      "tlcase-v1-3ed877d12beb0d1b77b6f5d94d841209d1b91e512373189993fef3477373d56b",
+      "tlcase-v1-53c7cbca434bdf62c946bb2bcfcf62728c39e1600be373afca82567d77191e7b",
+      "tlcase-v1-55c1b3e64135c23125fc286de5d780fc5d9a1e226d5e43ff0dbc8925b423936a",
+      "tlcase-v1-81172985c657df531e3d0ce68696b85acce199b394d06227dfb4ffb151055bc1",
+      "tlcase-v1-838e2ccc7891b194c1ab5d5b9854c658320e5b191a3d4ca38b78bbb4fc04d16e",
+      "tlcase-v1-999b36e8e2883275052a73da2220f11d7003c88a2984a856bedc174461012c7e",
+      "tlcase-v1-a4c6c5ac54f8dda299efb6003651da2256c7f605fba98d4e6958eca6451277b8",
+      "tlcase-v1-a7c58baceea537ea71ce5301afa9073cb8a803daaa8104e64ad575f3b5971710",
+      "tlcase-v1-aa6771f47c153c6d2942605ec8c94f229c482f5c7bdc1567989d9800c66c6866",
+      "tlcase-v1-c38b3eb15df4c6805bc187e068b1f160d1bd5af03173f2e7be29b8db5523c5c4",
+      "tlcase-v1-c84504f428f84c74e81c2093161688ef562f2b0533a54c6ed2f4a2de5da10562",
+      "tlcase-v1-d69efc62a19ab50dc014540a44e91968f638e466491b12bca42e6dd61f657ec3",
+      "tlcase-v1-d9431c1421f2408accd5db0614722f1842c3c7f7630db10b3d316dfde5148e80",
+      "tlcase-v1-d9dc312497ba5ade125c1b6d432ca029e375718fe301909a75a5db8f9c7b3e3f",
+      "tlcase-v1-f3e84b1e47f4f45c61c7b948a0535d57678a80c0bc04821c74fd7c6012983392",
+      "tlcase-v1-fae8094b1b68e2369ab61e02047e0e6799e6f45020aa5cd6f2ed92bcca8e5532"
+    ],
+    "case_definitions_sha256": "c68758e494d62515bfe189323c328209e023b3df73dd7c4ee49495857d40a388",
+    "methods": [
+      "uniform",
+      "physics_heuristic",
+      "nearest_neighbor",
+      "C/17",
+      "C/29",
+      "C/43",
+      "P-keep/17",
+      "P-keep/29",
+      "P-keep/43",
+      "W/17",
+      "W/29",
+      "W/43",
+      "plain-P/17",
+      "plain-P/29",
+      "plain-P/43",
+      "H/17",
+      "H/29",
+      "H/43",
+      "uniform-homotopy"
+    ],
+    "new_references": 18,
+    "new_queries": 342,
+    "producer_FEM_analyses_max": 254808,
+    "independent_FEM_analyses_max": 19056,
+    "independent_analysis_partition": {
+      "terminal_and_windows": 16632,
+      "homotopy_prefix_and_transitions": 1368,
+      "NN_label_input_reanalysis": 1056
+    },
+    "actual_call_order_and_extra_analyses": "UNKNOWN_UNREGISTERED_NO_FREEZE; every mandatory numerical/input/model/projection/NN/OC/error check must map within fixed counts/time/bytes; insufficiency means STOP, not cap expansion or omitted audits",
+    "future_output_root_name": "p17-m2-native-homotopy-rss-v1",
+    "output_root_created": false,
+    "fresh_or_final_opened": false,
+    "independent_analysis_partition_transferable": false,
+    "operation_caps_status": "PROPOSED_UNPROVEN_COMPLETE_CALL_MAPPING_UNKNOWN",
+    "producer_cap_derivation": "342*(364+362)+18*362=254808; H364=initial1+transitions2+updates<=360+terminal1; all other methods/helpers must be mapped, not assumed covered",
+    "independent_cap_derivation": "342*48+18*12=16632; <=72*19=1368 prefix/transitions; 528*2=1056 terminal label reanalyses; total19056",
+    "full_FEM_inference_read_charge_and_preflight_start_call_tables": null,
+    "target_speed_population": {
+      "within_registered_18": true,
+      "mesh": [
+        24,
+        12,
+        6
+      ],
+      "direction": "y",
+      "volume_strictly_below": 0.55,
+      "route": "generalist",
+      "expected_count": 13,
+      "favorable_subset_selection": false
+    },
+    "resource_metric": "new M2 RSS/complete-exit empirical metric only; same4GiB for references/all methods/auditor/controllers"
+  },
+  "acceptance": {
+    "primary_failed_attempts_and_fallbacks_max": 0,
+    "all_18_cases_required": true,
+    "historical_target_predicates": 7,
+    "already_passing_P_targets_not_claimed_newly_repaired": true,
+    "accepted_P_regressions_max": 0,
+    "negative_controls_retained": true,
+    "final_compliance_ratio_max": 1.001,
+    "volume_error_max": 0.005,
+    "independent_final_rtol": 1e-09,
+    "independent_final_atol": 0,
+    "density_change_tolerance": 0.01,
+    "p3_plateau_relative_gain_max": 0.0002,
+    "target_mean_and_sum_ratio_max": 1.0,
+    "both_scale_mean_and_sum_ratio_max": 0.9,
+    "each_direction_mean_max": 1.0,
+    "passing_H_seeds_minimum": 2,
+    "primary_overall_mean_strictly_below": [
+      "C/17",
+      "physics_heuristic",
+      "nearest_neighbor",
+      "uniform-homotopy"
+    ],
+    "same_runtime_optimized_uniform_reference": true,
+    "resource_and_preflight_and_full_checks_required": true,
+    "independent_reviewer_uses_candidate_driver_gate_or_resource_oracle": false,
+    "scientific_outcomes": "UNKNOWN_NOT_TESTED",
+    "target_predicate_source": "b4_30_z_reflection_repair_contract.json:sentinel_gate.all_known_failed_target_units_repaired; R/seed mapped prospectively to H/seed only",
+    "target_predicates": [
+      {
+        "case_id": "tlcase-v1-d9dc312497ba5ade125c1b6d432ca029e375718fe301909a75a5db8f9c7b3e3f",
+        "policy": "H/17"
+      },
+      {
+        "case_id": "tlcase-v1-033f380c2181d9d1f94fc7f3d4b4a6507992c5e1a5004018bff779ca92add82a",
+        "policy": "H/29"
+      },
+      {
+        "case_id": "tlcase-v1-033f380c2181d9d1f94fc7f3d4b4a6507992c5e1a5004018bff779ca92add82a",
+        "policy": "H/43"
+      },
+      {
+        "case_id": "tlcase-v1-838e2ccc7891b194c1ab5d5b9854c658320e5b191a3d4ca38b78bbb4fc04d16e",
+        "policy": "H/29"
+      },
+      {
+        "case_id": "tlcase-v1-55c1b3e64135c23125fc286de5d780fc5d9a1e226d5e43ff0dbc8925b423936a",
+        "policy": "H/17"
+      },
+      {
+        "case_id": "tlcase-v1-55c1b3e64135c23125fc286de5d780fc5d9a1e226d5e43ff0dbc8925b423936a",
+        "policy": "H/29"
+      },
+      {
+        "case_id": "tlcase-v1-55c1b3e64135c23125fc286de5d780fc5d9a1e226d5e43ff0dbc8925b423936a",
+        "policy": "H/43"
+      }
+    ],
+    "negative_control_case_ids": [
+      "tlcase-v1-53c7cbca434bdf62c946bb2bcfcf62728c39e1600be373afca82567d77191e7b",
+      "tlcase-v1-d9431c1421f2408accd5db0614722f1842c3c7f7630db10b3d316dfde5148e80"
+    ],
+    "negative_controls": "matched plain-P/29 and H/29 retain the two old small-z attempt failures; successful fallback does not repair attempt",
+    "no_regression_scope": "H must not fail any historically accepted P seed/case or newly accepted matched P-keep seed/case; historical failed units are retained, not reclassified",
+    "paired_ratio_definition": "arithmetic mean of same-case new method row-charge / new uniform-query row-charge; ratio of charge sums separately required, no substitution",
+    "each_direction_mean_scope": "each scale/direction",
+    "seed_gate": {
+      "seeds": [
+        17,
+        29,
+        43
+      ],
+      "each_scale_mean_max": 0.9,
+      "each_scale_direction_mean_max": 1.0,
+      "failed_attempts_max": "min(2, same-seed C failures, same-seed W failures)",
+      "non_specialist_y_failed_attempts_max": "min(same-seed C and W non-specialist-y failures)",
+      "overall_mean_strictly_below": [
+        "physics_heuristic",
+        "nearest_neighbor"
+      ],
+      "passing_seeds_min": 2,
+      "fixed_H17_must_itself_pass": true
+    },
+    "primary_better_than_W17": "overall mean strictly lower OR fewer failed attempts",
+    "fresh_specific_quality_cells_applied_to_18": false,
+    "new_uniform_references_vs_approved_old_scalar": {
+      "cases": 18,
+      "rtol": 1e-09,
+      "atol": 0,
+      "drift_recorded": true,
+      "mismatch_action": "STOP_ROUTE_NOT_ISOLATED; no tolerance/value substitution"
+    },
+    "all_legacy_control_outcomes_reverified_byte_for_byte": false,
+    "resource_acceptance": "independent actual preflight and this scientific run own <=4GiB empirical RSS/complete-exit evidence per resource section",
+    "a_priori_complete_allocation_proof_required": false
+  },
+  "stops": [
+    "NOT_AUTHORIZED_NOT_LAUNCHED",
+    "RESOURCE_UNKNOWN_STOP",
+    "FAIL_PREFLIGHT",
+    "FAIL_PROCESS_SOURCE_FREEZE",
+    "FAIL_RESOURCE_CAP",
+    "STOP_SCOPE_OR_WORK_CAP",
+    "FAIL_INPUT_IDENTITY",
+    "FAIL_SCIENCE_GATE",
+    "STOP_ROUTE_NOT_ISOLATED"
+  ],
+  "failure_handling": {
+    "ordinary_quality_failure": "retain attempt and full fallback; complete preregistered finite panel and audit within caps, then close failed",
+    "fatal_process_resource_failure": "propagate OOM/MemoryError/watchdog/process failure as fatal before ordinary fallback; stop complete role tree and numerical suffix; independent failed-prefix metadata only, preserve full charges/unknown exits",
+    "automatic_backend_vm_proof_toy_guard_platform_successor": false,
+    "runtime_footprint_cap_is_preallocation_guarantee": false
+  },
+  "historical_preservation": {
+    "full_v2": "FULL_V2_OPEN_NO_ADMITTED_ROUTE",
+    "fixed_P17": "UNREPAIRED",
+    "default": "uniform",
+    "B451": "FAIL_PROCESS_SOURCE_FREEZE; primary and independent quotas consumed1/1",
+    "D1": "STOP; closed unlaunched0/1; FULL60 retained",
+    "I1": "published software; NO_ADMISSIBLE_ROUTE; historical resource UNKNOWN",
+    "B452": "NOT_SELECTED_BY_R1",
+    "known_paid_K_seconds": "12721.16417100014444982",
+    "D1_full_seconds": "60",
+    "new_full_reservation_scenario_known_floor_seconds": "27541.16417100014444982",
+    "scenario_is_actual_new_spend": false,
+    "other_history_engineering_software_ci_costs": "UNKNOWN_NOT_ZERO_ADDITIONAL",
+    "old_all_paid_7200": "PERMANENT_FAIL_UNCHANGED",
+    "old_quotas_transferred": false,
+    "old_failures_costs_unknowns_seals": "UNCHANGED",
+    "B3_final_requirements": "Apple M2 plus independent Ubuntu24.04, two scales and replication retained"
+  },
+  "versioned_evidence_sha256": {
+    "docs/planning/b4_30_z_reflection_repair_contract.json": "ddb69d4947c01e849306b387bac5e23dbf9fd5fa42b896b29edac376b6bb63d3",
+    "docs/planning/b4_30_paid_continuation_contract.json": "ed52a1f725f0592f7f8e752ba802764e85ab987c107743379703a09ed033bb8a",
+    "docs/planning/b4_30_paid_continuation_protocol.md": "05045fd1030edf1491a1702927c819525216f8d499ebd61293ac5c389a8aa0c6",
+    "docs/planning/TopoLab_v2_P17_bounded_homotopy_proposal.md": "f18141d1f4dbd4b7ed33e1bd250d95b86fdb128d568ef90cc93ab922f758d5af",
+    "docs/planning/i1_bounded_native_software_contract.json": "c1c8def33ca34d0c5ac9632eed8cdc02917097020209d63b01b930daef679ff9",
+    "docs/validation/b4_30_paid_continuation.md": "c045c90a2c7f2ed9b7a60f1a446941f65e5ffced72f4589192788b474077e780",
+    "docs/validation/i1_independent_resource_review.md": "b56ce92d8e2f00d8becf050f4bf77fbb166554b14fcd2018293ea012d05a65c6",
+    "src/topolab/simp.py": "35e1e990b1485145a1746aa52096bab7f19070ef4870ada0336e7e6561936248",
+    "src/topolab/fem.py": "bf525efabd55091ef68893aa82ad8d10d4fa99314c3ef2cd348593abeb14cdc0",
+    "src/topolab/b3_queries.py": "648b2cd8d9cbf69d341122eaa20d066e61876e2b2781943f6329146783ff0724",
+    "src/topolab/b4_polish.py": "ee95ee91bc5cc262e9b988f715b52a6ebf57d94ae3e0d3f5439c39d6f9e0d42c",
+    "src/topolab/b4_reflection_repair.py": "1743975ee083a75882b6a48fa9e67f3c69ee15275105e6369f8801eeedac60c8",
+    "scripts/b4_30_native_execution.py": "4193f5fae64f25dd514a3c3da0a4bbe633977fcea361d1fc7e7a0c9595b2bbf9",
+    "src/topolab/baselines.py": "11892b318a90f14347bf985cc8fb54f40a1b95b8156924e5a3be794f78af4307",
+    "src/topolab/b3_dataset.py": "c921ef66c4fa17cb3e75021d1dda45a78db53c4b9f443d1eafd2860d49e3b953",
+    "src/topolab/b3_screening.py": "afbaec995e6aa4e9ec2039dd48931410cf132f8c9da65996abc1571f3e3f632d",
+    "src/topolab/b2_4_labels.py": "0b2fb9971bf5e97b83308ac0d4dd786de97c2c79c59390bd1ce3d6bbd71e92c4",
+    "scripts/b4_8_rollback_confirmation.py": "df77745fa6214d2d43309f5d107f6dd3cc97e9c32ec28d85b36c5c48dfe0dd45",
+    "scripts/b4_30_z_reflection_repair.py": "e7d62944b2370ccb100b82eff8ec57fc5aa60c42d6bf11d03b7c4eef15cca478",
+    "scripts/b4_30_independent_audit.py": "e7b5240f48e6e3f2e8de4bfbff13f126bc0fec69e1208a0d0460812fd45ea751",
+    "docs/planning/TopoLab_v2_delivery_reassessment.md": "870a4c35a24d0023aa9edbe6b8bd7dd5b933cf87b890bdc60f3b6301b551599c",
+    "uv.lock": "9c84a5ab362e8848d7ccab0142e9fe33aee5700abf5866d843a4c9cb23920292",
+    "pyproject.toml": "6b32d6c1b0f0134b17595262bc070aa9c29a49dcd5254f08bb805f0d3f86e06f",
+    "scripts/b4_31_reflection_failure_cost_review.py": "609c4674db4ca632b9378a07b9435e006213a8905408ef9ca64af67939205238",
+    "scripts/b4_31_independent_audit.py": "690cd5801af980417505b2c6fb3004fb6bf60c45d2a77121cc58623237edcbc6",
+    "docs/validation/b4_31_reflection_failure_cost_review.md": "724a91bc98d6b0cd68fbfa48dfa73b48d65a79fce99f6ef93962a23df996c874"
+  },
+  "draft_revision": 5,
+  "document_consistency": "Markdown defines scope; JSON enumerates fields; substantive disagreement stops dependent work",
+  "entry_prerequisites": {
+    "resource_metric_and_evidence_method": {
+      "status": "ADOPTED_PROSPECTIVELY",
+      "new_identity_only": true,
+      "historical_stronger_check_ref": "resource_attainability_check; original result retained under former draft assumptions",
+      "old_missing_allocation_proof_blocks_new_A_or_B": false,
+      "new_scientific_TEXT_gate": false
+    },
+    "A": {
+      "explicit_implementation_engineering_budget_and_independent_role_grant": true,
+      "scope": "only four necessary source units, public fixtures/tests and empirical RSS/exit adaptation",
+      "old_payload_or_resource_metadata_access": false,
+      "actual_scientific_input_metadata_prerequisite_for_public_only_implementation": false,
+      "advance_allocation_proof_required": false
+    },
+    "B": {
+      "explicit_preflight_grant": false,
+      "public_software_checks_source_CI_and_recording_role_tables_required": true,
+      "exact_scientific_manifest_metadata_role_paths_and_fixed_public_schema_byte_domain_required_before_B": true,
+      "actual_registration": null,
+      "actual_payload_read": false,
+      "advance_allocation_proof_required": false
+    },
+    "C": {
+      "A_B_pass_and_separate_scientific_budget_exact_payload_role_grants": false,
+      "actual_manifest_and_read_caps": null,
+      "input_domain_source_runtime_or_role_change_after_freeze": "STOP; no automatic second preflight or larger whitelist"
+    },
+    "complete_call_charge_and_preflight_start_tables": null,
+    "no_placeholder_freeze": true
+  },
+  "source_scope_notes": {
+    "restricted_manifest_loaders_required": true,
+    "legacy_discovery_loaders_reusable_as_whole": false,
+    "forbidden_legacy_loader_dependencies": [
+      "old data/training indices",
+      "B3ScreenContext discovery",
+      "upstream_fits discovery"
+    ],
+    "new_phase_aware_result_schema_required": true,
+    "old_schema_or_frozen_source_mutation": false,
+    "phase_evidence": [
+      "full scalar update trace",
+      "prefix/transition density evidence",
+      "separate p3 terminal window"
+    ],
+    "control_mapping": "W uses original W generalist/same-seed S; P-keep retains fixed20/own-certificate policy; retain actual method/weight/route identities",
+    "four_units_proven_sufficient_within_six_hours": false,
+    "candidate_free_checker": "distinct author; no candidate H driver, classifier, Gate or resource conclusion as oracle; reviewed unchanged foundational FEM may be shared",
+    "resource_control_scope": "adapt committed B430 native/time, group/controller RSS, watchdog, pending and full-exit bindings for this identity; no new allocator, fixed workspace, kernel/ELF proof or generic guard",
+    "query_orchestration_wrapper": "preserve old controls numerical policies, not blanket exception/discovery entrypoints; prevent MemoryError/resource failures being swallowed into ordinary fallback; no frozen numerical source mutation",
+    "independent_review_current_revision": "A distinct author /root/review_m2_contracts; nonblind; no formal B admission role or quota"
+  },
+  "independent_contract_review": {
+    "date": "2026-10-18 America/New_York",
+    "reviewer": "/root/review_m2_contracts",
+    "did_not_author_original_draft": true,
+    "prior_exposure": "full conversation and draft; not blinded",
+    "formal_resource_role_appointed": false,
+    "verdict": "REQUIRES_EVIDENCE_NOT_EXECUTABLE",
+    "original_draft_sha256": {
+      "md": "c3f21f4f81e06710b705b1a9d9cf6c5f27070d13c5c89af705852035b9e574df",
+      "json": "c8f62372e0d37cba8db4bb84ceead5e49b9fdbd26bd2049010a9973bf9ac2ad4"
+    },
+    "read_scope": "versioned text and these two drafts only; old external read set empty",
+    "no_numeric_preflight_or_experiment": true,
+    "revision_topics": [
+      "resource evidence attainability before implementation",
+      "historical PASS reuse boundary",
+      "input metadata before complete bound",
+      "restricted NN exports and manifest-only loaders",
+      "complete charge floors and two label terminal reanalyses",
+      "p3 window and literal reliability/quality/reference predicates"
+    ],
+    "remaining_blockers": [
+      "actual M2/runtime and complete startup/workspace evidence sources",
+      "source-attested restricted exports, sizes and role views",
+      "complete operation/charge/preflight-start tables",
+      "actual independent complete bound and finite fees/stage grants"
+    ],
+    "current_document_review_cost": "additional UNKNOWN_NOT_ZERO; no ungranted engineering/formal/scientific quota allocated or consumed",
+    "revision_rechecked": true,
+    "recheck_result": "original substantive drafting issues revised; still no implementation/resource admission; export-preparation grant/cost clarified after recheck"
+  },
+  "resource_attainability_check": {
+    "date": "2026-10-18 America/New_York",
+    "owner_authority": "one finite readonly M2-native evidence-attainability check, necessary identity queries and public primary documentation; supplement these two drafts only",
+    "review_role": "primary author inquiry; not a new independent resource admission role or blinded review",
+    "result": "RESOURCE_UNKNOWN_STOP",
+    "implementation_entry_satisfied": false,
+    "complete_bound_bytes": null,
+    "evidence_attainability": "basic identities and versioned interfaces obtainable; complete mandatory bound attainability not established",
+    "new_scientific_TEXT_gate": false,
+    "git_baseline": {
+      "worktree": "/Users/keith1117/.codex/worktrees/ec0b/TopoLab",
+      "head": "53f9ebb675ed1fd3cf039b1696a9eaf188290798",
+      "branch": "detached HEAD",
+      "uncommitted": "only these two untracked drafts",
+      "latest_main_same": true,
+      "open_PRs": [],
+      "main_CI": {
+        "run": 39117742800,
+        "conclusion": "success",
+        "url": "https://github.com/keith1117/TopoLab/actions/runs/39117742800"
+      }
+    },
+    "environment_observation": {
+      "identity_observation_anchor_utc": "2026-10-18T20:19:45Z",
+      "host_label": "current-owner-M2-logical-label; no unique device ID",
+      "public_model_class": "Mac14,2",
+      "cpu": "Apple M2",
+      "cpu_count": 8,
+      "hardware_memory_bytes": 8589934592,
+      "page_size_bytes": 16384,
+      "macOS_version": "26.5",
+      "macOS_build": "25F71",
+      "architecture": "arm64",
+      "Darwin_release": "25.5.0",
+      "kernel_reported_source_build": "xnu-12377.121.6~2/RELEASE_ARM64_T8112",
+      "CPython_version": "3.12.10",
+      "CPython_SOABI": "cpython-312-darwin",
+      "CPython_compiler_string": "Clang13.0.0 (clang-1300.0.29.30)",
+      "uv_version": "0.11.15 (3cffe97c2, 2026-05-18, aarch64-apple-darwin)",
+      "installed_metadata_versions": {
+        "numpy": "2.5.3",
+        "scipy": "1.18.1",
+        "torch": "2.14.0",
+        "safetensors": "0.8.0"
+      },
+      "installed_wheel_tags": {
+        "numpy": "cp312-cp312-macosx_14_0_arm64",
+        "scipy": "cp312-cp312-macosx_14_0_arm64",
+        "torch": "cp312-cp312-macosx_14_0_arm64",
+        "safetensors": "cp310-abi3-macosx_11_0_arm64"
+      },
+      "uv_lock_sha256": "9c84a5ab362e8848d7ccab0142e9fe33aee5700abf5866d843a4c9cb23920292",
+      "torch_platform_lock_note": "two torch lock entries exist: macOS2.14.0 wheel and other-platform2.14.0+cpu; do not collapse by name into one version",
+      "torch_mac_wheel_locked_url": "https://download-r2.pytorch.org/whl/cpu/torch-2.14.0-cp312-cp312-macosx_14_0_arm64.whl",
+      "torch_mac_wheel_locked_sha256": "ab7e226c18d3cbc134dfa952d18ab1df202055dd33446837c8fd050ad449e6f5",
+      "locked_wheel_downloaded_or_reverified": false,
+      "torch_reported_git_identity": "08187d9e0fba026dc8217405802ab5381dc88d90",
+      "selected_file_identities": [
+        {
+          "path": "/Library/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+          "bytes": 152096,
+          "sha256": "d4f152f2a753c94e0e7935c8ebbe6b2609979e1df7898422b577d0076383d08b"
+        },
+        {
+          "path": "/Library/Frameworks/Python.framework/Versions/3.12/Python",
+          "bytes": 16238256,
+          "sha256": "14e61fb22a897d238248dfd8fe3b472b4541338c293368b4747803055b8bb3aa"
+        },
+        {
+          "path": ".venv/lib/python3.12/site-packages/numpy/_core/_multiarray_umath.cpython-312-darwin.so",
+          "bytes": 3996136,
+          "sha256": "3432cd9093d7e84b4080015b6a889598fea4c305da967063cb916215193bf85d"
+        },
+        {
+          "path": ".venv/lib/python3.12/site-packages/scipy/sparse/linalg/_dsolve/_superlu.cpython-312-darwin.so",
+          "bytes": 279072,
+          "sha256": "dc5797bee155da521013ae2621cfc6537886a8be3243dd788d31dbfe271e30c6"
+        },
+        {
+          "path": ".venv/lib/python3.12/site-packages/torch/lib/libtorch_cpu.dylib",
+          "bytes": 386016976,
+          "sha256": "ca979f3619acb92240c2ef46d7581b1a388761e0fccfa7dc491a7eaa153d584a"
+        },
+        {
+          "path": ".venv/lib/python3.12/site-packages/torch/version.py",
+          "bytes": 309,
+          "sha256": "6e8ac10fb51dab764f540116b948e767b4c587fb413ea5587d92db325eda3da0"
+        },
+        {
+          "path": ".venv/pyvenv.cfg",
+          "bytes": 177,
+          "sha256": "fed86ceece0e9b9dd7e0d48fd8fb4f691bb3fa3cd8c5dc055a8eb6e268388c20"
+        }
+      ],
+      "build_metadata_BLAS_LAPACK": "NumPy and SciPy say Accelerate; component version field unknown",
+      "selected_MachO_declared_links": [
+        "Accelerate",
+        "libSystem",
+        "libc++",
+        "Foundation/CoreFoundation",
+        "libc10",
+        "libomp",
+        "weak Metal/MPS/MPSGraph/IOKit/objc"
+      ],
+      "MachO_link_interpretation": "selected file load commands only; not all live loaded libraries, actual CPU dispatch, GPU execution or full binary closure",
+      "runtime_imports_actual_threads_and_roles_not_probed": true,
+      "file_sizes_are_runtime_memory_bounds": false,
+      "hardware8GiB_implies_role4GiB_guarantee_or_exceedance": false,
+      "complete_frozen_environment_identity": false
+    },
+    "query_methods": [
+      "sw_vers product/build; uname architecture/release",
+      "whitelisted sysctl model/CPU/physical capacity/page size/core count/kernel version; no serial/UUID",
+      "uv --version and pyvenv.cfg/readlink identity",
+      ".venv Python -I -B -S using stdlib importlib.metadata/sysconfig/tomllib only; no site hooks or numerical imports",
+      "streaming SHA256 of selected installed interpreter/native code files and metadata, not model weights",
+      "otool -L selected installed binaries and text-only installed build configuration/version files",
+      "committed-source text search/read; public primary web documentation/source read; readonly GitHub state"
+    ],
+    "public_primary_sources": [
+      {
+        "id": "CPY31210",
+        "url": "https://raw.githubusercontent.com/python/cpython/v3.12.10/Doc/c-api/memory.rst",
+        "version_scope": "v3.12.10 release documentation",
+        "supported_fact": "Python raw/object allocators are separate domains; extensions can allocate outside Python manager",
+        "not_supplied": "actual complete deployed role startup/extension/fragmentation/lifetime byte bound"
+      },
+      {
+        "id": "NP253",
+        "url": "https://raw.githubusercontent.com/numpy/numpy/v2.5.3/doc/source/reference/c-api/data_memory.rst",
+        "version_scope": "v2.5.3 release documentation",
+        "supported_fact": "array data handler, object metadata and caches have separate responsibilities",
+        "not_supplied": "whole-process or all-library4GiB cap; no handler installed in this inquiry"
+      },
+      {
+        "id": "SPLU1181",
+        "url": "https://raw.githubusercontent.com/scipy/scipy/v1.18.1/scipy/sparse/linalg/_dsolve/linsolve.py",
+        "version_scope": "v1.18.1 splu source",
+        "supported_fact": "splu invokes native gstrf with its ordering/options; current TopoLab FEM uses splu",
+        "not_supplied": "complete p1/p2/p3 transient/fill/error-path byte bound"
+      },
+      {
+        "id": "SLUWRAP1181",
+        "url": "https://raw.githubusercontent.com/scipy/scipy/v1.18.1/scipy/sparse/linalg/_dsolve/_superluobject.c",
+        "version_scope": "v1.18.1 native wrapper source",
+        "supported_fact": "factorization sets lwork=0 and passes NULL workspace",
+        "not_supplied": "deployed fixed-workspace confinement or independent native-workspace bound; exact installed build closure not proved"
+      },
+      {
+        "id": "SLUGUIDE",
+        "url": "https://portal.nersc.gov/project/sparse/superlu/ug.pdf",
+        "version_scope": "general SuperLU guide sections1.4.4 and2.8; not bound to installed wheel revision",
+        "supported_fact": "describes fill and dynamic growth/copy or direct user workspace modes",
+        "not_supplied": "certificate for installed SciPy wheel; direct wrapper/backend change not commissioned"
+      },
+      {
+        "id": "TORCHCPU",
+        "url": "https://raw.githubusercontent.com/pytorch/pytorch/08187d9e0fba026dc8217405802ab5381dc88d90/c10/core/CPUAllocator.cpp",
+        "version_scope": "git identity reported by installed torch/version.py; not a verified complete binary/source build binding",
+        "supported_fact": "default CPU allocator calls alloc_cpu and has reporting/replacement interfaces",
+        "not_supplied": "CNN/kernel/workspace/threads and all-role simultaneous lifetime bound"
+      },
+      {
+        "id": "APPLEMEM",
+        "url": "https://developer.apple.com/documentation/os/os_proc_available_memory",
+        "version_scope": "public API documentation, not frozen macOS25F71 implementation evidence",
+        "supported_fact": "available memory result is advisory and changes with app activity",
+        "not_supplied": "fixed whole-role chain4GiB guarantee; API not called"
+      },
+      {
+        "id": "APPLEBLAS",
+        "url": "https://developer.apple.com/documentation/accelerate/blas",
+        "version_scope": "public BLAS interface documentation only",
+        "supported_fact": "locatable interface for the framework named by installed build/link metadata",
+        "not_supplied": "actual version-specific workspace/allocator/startup/error lifetime certificate"
+      },
+      {
+        "id": "XNU",
+        "url": "https://github.com/apple-oss-distributions/xnu/tree/xnu-12377.121.6",
+        "version_scope": "public tag matching reported kernel source version string",
+        "supported_fact": "corresponding source tag is publicly accessible",
+        "not_supplied": "complete deployed kernel/dyld/shared-cache binary binding or justified startup user-page transient bound"
+      }
+    ],
+    "evidence_matrix": [
+      {
+        "requirement": "basic selected-host/runtime identity",
+        "status": "PARTIALLY_OBTAINED_NOT_ADMISSION",
+        "evidence": "environment_observation",
+        "gap": "full deployed/loaded code, actual settings, all future roles and launch identity unregistered"
+      },
+      {
+        "requirement": "transferable B430 complete new allocation/lifetime components",
+        "status": "UNKNOWN",
+        "evidence": "versioned report and B431 field/scope; historical PASS retained",
+        "gap": "detailed component derivation existence/identities unknown; old external read set empty"
+      },
+      {
+        "requirement": "pre-entry/import/system dependency/error user-page transients",
+        "status": "UNKNOWN",
+        "evidence": "kernel version and public matching tag plus API context",
+        "gap": "actual justified all-lifetime bound not supplied; no startup run"
+      },
+      {
+        "requirement": "complete Python/native allocator/cache/workspace overlap",
+        "status": "UNKNOWN",
+        "evidence": "version-matched allocation interfaces and selected file hashes",
+        "gap": "no actual quantitative whole-role upper bound or accepted confinement; bounded-workspace wrapper not deployed"
+      },
+      {
+        "requirement": "finite actual scientific input byte/role domain",
+        "status": "UNREGISTERED_NOT_GRANTED",
+        "evidence": "proposal counts only",
+        "gap": "no source-attested restricted exports or exact manifests/byte/read/resident caps"
+      },
+      {
+        "requirement": "actual candidate/audit/controller lifetime and costs",
+        "status": "NOT_IMPLEMENTED_UNREGISTERED",
+        "evidence": "committed reusable components only",
+        "gap": "no new actual code, roles, full call/charge/start tables or independent resource acceptance"
+      }
+    ],
+    "decisive_remaining_mandatory_terms": [
+      "selected M2 startup/import/system user-page transient and actual deployment lifetime bound",
+      "Python/Torch/SciPy/SuperLU/Accelerate allocator/cache/workspace simultaneous bound including errors and copies",
+      "all producer/independent/controller/helper overlap through observed exit",
+      "source-attested restricted scientific export identity/byte/role domain"
+    ],
+    "actual_operations": {
+      "candidate_starts": 0,
+      "VM_starts": 0,
+      "formal_preflights": 0,
+      "scientific_experiments": 0,
+      "manual_workflow_dispatches": 0,
+      "installations": 0,
+      "numerical_library_or_TopoLab_imports": 0,
+      "old_external_input_read_set": [],
+      "environment_identity_standard_library_queries_only": true,
+      "resource_measurements": false
+    },
+    "cost": "readonly inquiry/documentation cost additional UNKNOWN_NOT_ZERO; no new engineering/formal/scientific allocation or quota consumed",
+    "historical_results_costs_quotas_seals_and_B_adoption": "UNCHANGED",
+    "stop_disposition": "close these two drafts only; no A/B/C implementation, old input access, preflight, experiment or automatically scheduled follow-up",
+    "interpretation": "missing mandatory evidence within this finite allowed check; not measured>4GiB, not universal infeasibility, not a new resource/scientific PASS"
+  },
+  "resource_assurance_adoption": {
+    "status": "ADOPTED_PROSPECTIVELY",
+    "date": "2026-10-18 America/New_York",
+    "owner_decision": "我接受仅对新的M2原生合同前瞻采用B4.30式RSS及完整退出实证验收，保留4GiB和独立预检，不将其等同于事前完整分配保证。",
+    "scope": "this proposal new M2-native RSS contract identity only; no automatic extension to other routes",
+    "new_contract_identity": "topolab.v2.p17-m2-native-homotopy.rss.v1",
+    "memory_ceiling_bytes": 4294967296,
+    "independent_actual_preflight_retained": true,
+    "equivalent_to_a_priori_complete_allocation_guarantee": false,
+    "implementation_budget_access_or_science_granted": false,
+    "old_contracts_results_costs_unknowns_quotas_seals": "UNCHANGED",
+    "B_guest_capacity_adoption": "RETAINED_SEPARATE_SCOPE_NOT_APPLIED_TO_NATIVE_RSS",
+    "repeat_adoption_decision_needed": false
+  },
+  "stop_conditions": {
+    "NOT_AUTHORIZED_NOT_LAUNCHED": "missing corresponding A/B/C scope/budget/role/metadata/payload grant; adoption alone grants none",
+    "RESOURCE_UNKNOWN_STOP": "missing/unverifiable required wall/RSS/units/profile/role-chain composition/cost/child or last-verifier observed-exit evidence; not triggered solely by absence of advance allocation/startup proof",
+    "FAIL_PREFLIGHT": "unexpected public launch/error-path/recording/exit failure in first formal preflight; role consumed before interpreter; no retry",
+    "FAIL_PROCESS_SOURCE_FREEZE": "source/runtime/role/input-domain identity mutation or pending/start/observed-exit-chain defect after freeze; no patch and continue",
+    "FAIL_RESOURCE_CAP": "recorded RSS acceptance value >4294967296, OOM/MemoryError, including postexit exceedance despite exit0",
+    "STOP_SCOPE_OR_WORK_CAP": "time/engineering/operation/byte/read cap, unknown extra process, offload or access boundary violation; stop entire tree",
+    "FAIL_INPUT_IDENTITY": "wrong hash/schema/shape/finite bits/train/source/view; no substituted file or wider whitelist",
+    "FAIL_SCIENCE_GATE": "ordinary quality failure retains paid fallback and finite preregistered panel; preserves failure and closes after audit",
+    "STOP_ROUTE_NOT_ISOLATED": "plain-P/runtime removes counterexample, unfair/changed uniform denominator, reference scalar mismatch or backend confounding; no homotopy credit"
+  },
+  "historical_draft_resource_requirements": {
+    "scope": "HISTORICAL_REVISION3_NOT_CURRENT_NEW_M2_REQUIREMENTS",
+    "input_revision3_sha256": {
+      "md": "1b44fe3eaf282ef30b4d34b93be214c1e270778af7ba48c9bd99264f22b1297b",
+      "json": "a4dde75bcb534ffe57f59c3f807c0f517f9662136fb64e37c686e813e1790056"
+    },
+    "resource": {
+      "whole_native_role_limit_bytes": 4294967296,
+      "status": "RESOURCE_UNKNOWN_STOP",
+      "scope": "all mandatory native role/process startup user pages, code/dependencies, eight allocation categories, errors, helpers and observed exits; not the unrelated whole Mac/kernel heap",
+      "historical_B430_limit_bytes": 2147483648,
+      "historical_published_conservative_bound_bytes": 800047104,
+      "historical_bound_reverified_this_draft": false,
+      "inherited_resource_pass": false,
+      "complete_independent_bound_required_before_formal_preflight": true,
+      "rss_monitor_or_successful_launch_alone_sufficient": false,
+      "whole_fit_memory": "PENDING/4GiB",
+      "generic_Linux_I1_proof_automatically_imposed_on_M2": false,
+      "unknown_mandatory_term": "RESOURCE_UNKNOWN_STOP",
+      "historical_component_derivation_available": null,
+      "historical_bound_reuse": "historical scoped complete B430 v2 numerical/native chain PASS retained; B431 code calls same800047104 field scoped old peak; no detailed transferable pre-entry/allocation/component derivation found in allowed versioned text; old external receipts not read",
+      "evidence_attainability_required_before_implementation": true,
+      "mandatory_dependency_workspace_and_preentry_lifetime_evidence_sources": null,
+      "actual_complete_independent_bound": null,
+      "input_domain_registered_before_complete_bound": false,
+      "required_additional_terms": [
+        "NN construction stack/copies, read-only copies, float64 conversion/differences/squares/reduction temporaries",
+        "p1/p2/p3-dependent native factorization workspace and all phase histories/copies",
+        "bounded file/parse/schema/read counts and actual maximum simultaneous input domain",
+        "all required role/helper startup, overlap, failures, kill and observed exit; aliases subtracted only with evidence"
+      ],
+      "missing_evidence_responsibility": [
+        {
+          "term": "B430 actual component and runtime/lifetime derivation if it exists",
+          "provider": "owner or separately authorized evidence custodian",
+          "status": "UNKNOWN_EXISTENCE_AND_IDENTITY"
+        },
+        {
+          "term": "complete actual M2/interpreter/native deployment and role identities",
+          "provider": "basic identity observed by this authorized readonly inquiry; future implementer/operator plus distinct independent resource reviewer must bind complete deployment",
+          "status": "BASIC_IDENTITIES_OBSERVED_FULL_CLOSURE_NOT_FROZEN"
+        },
+        {
+          "term": "version-matched dependency workspace/startup/lifetime assurance sources and method",
+          "provider": "independent resource reviewer, accepted before implementation",
+          "status": "PUBLIC_VERSIONED_INTERFACES_FOUND_COMPLETE_MANDATORY_BOUND_UNKNOWN_STOP"
+        },
+        {
+          "term": "restricted export identity/size/schema/provenance manifest",
+          "provider": "owner or separately authorized export provider",
+          "status": "NOT_GRANTED_UNREGISTERED"
+        },
+        {
+          "term": "actual new software complete bound then one public preflight",
+          "provider": "later authorized implementer and distinct independent reviewer",
+          "status": "NOT_IMPLEMENTED_NOT_ADMITTED"
+        }
+      ],
+      "preflight": {
+        "data_free_of_old_payload": true,
+        "actual_bound_covering_registered_scientific_input_domain_required_first": true,
+        "formal_outer_invocations_max": 1,
+        "public_fixture_inner_starts_order_and_cases": null,
+        "unknown_inner_start_table": "NO_FREEZE_NO_LAUNCH",
+        "controller_pending_before_role_interpreter_candidate_import_and_input_read": true,
+        "terminal_only_after_all_observed_exits": true,
+        "success_substitutes_for_missing_prior_bound": false,
+        "proves_all_actual_model_value_compatibility": false
+      },
+      "attainability_check_completed": true,
+      "attainability_check_ref": "resource_attainability_check",
+      "historical_B431_bound_field": "conservative_whole_chain_rss_upper_bound_bytes"
+    },
+    "entry_prerequisites": {
+      "resource_evidence_attainability_before_implementation": {
+        "status": "CHECKED_RESOURCE_UNKNOWN_STOP",
+        "independent_acceptance": false,
+        "source_identity_and_responsible_provider_for_each_mandatory_term": null,
+        "missing_term_action": "STOP_BEFORE_IMPLEMENTATION; close these two drafts and stop; no automatic follow-up inquiry, trial, proof or backend project",
+        "new_scientific_TEXT_gate": false,
+        "limited_check_completed": true,
+        "limited_check_ref": "resource_attainability_check"
+      },
+      "restricted_input_identity_size_role_metadata_before_complete_bound": {
+        "status": "UNREGISTERED_NO_READ",
+        "separate_owner_grant": false,
+        "actual_manifest": null,
+        "payload_access": false
+      },
+      "complete_call_charge_and_preflight_start_tables": null,
+      "no_placeholder_freeze": true
+    },
+    "original_UNKNOWN_unchanged": true,
+    "new_interpretation": "previous check did not meet stronger unadopted complete-allocation assumptions; owner now chooses empirical RSS for new M2 only; no old failure converted to PASS"
+  },
+  "historical_record_applicability": {
+    "independent_contract_review": "revision2, not resource admission or approval of revision4",
+    "resource_attainability_check": "revision3 under former stronger allocation proof assumptions; original result and observations unchanged; not current new-M2 execution requirement",
+    "historical_unknowns_closed_by_RSS_adoption": false
+  },
+  "granted_A_engineering_budget": {
+    "implementation_max": 6,
+    "independent_review_max": 4,
+    "total_max": 10,
+    "interpretation": "OWNER_GRANTED_A_ONLY; 6 implementation +4 distinct independent review hours, all directed public tests/waits/failures included; full prescribed regression/CI/publication additional; no scientific allocation or cap transfer"
+  },
+  "versioned_evidence_sha256_scope": "baseline_commit snapshot identities; frozen scientific source/contracts/reports remain byte-identical; current planning entries may be updated under A authority",
+  "current_A_software_boundary": {
+    "protocol": "p17_m2_native_homotopy_a_protocol.md",
+    "report": "../validation/p17_m2_native_homotopy_a.md",
+    "formal_preflight_run": false,
+    "scientific_panel_run": false,
+    "old_input_read_set": [],
+    "public_model_weights": "new initializations, never historical P/17 checkpoint bits",
+    "future_scientific_input_schema_and_metadata": "UNREGISTERED_NO_ACCESS",
+    "automatic_successor": false
+  }
+}

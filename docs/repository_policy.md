@@ -90,33 +90,27 @@ review, not a default sequel or experiment grant. Existing checks and
 preflight/freeze/STOP remain; scientific, resource, process and UNKNOWN outcomes
 stay distinct.
 
-I1 software/independent stop publication is complete through PR197/198/main57c73b8,
-whose four main contexts passed. Mandatory selected-host pre-entry lifetime
-UNKNOWN remains NO_ADMISSIBLE_ROUTE. The owner has decided to retain
-FULL_V2_OPEN_NO_ADMITTED_ROUTE, fixed P/17,4GiB and independent preflight.
-[Current status](project_status.md) records the owner's2026-10-18 prospective
-adoption of B's complete guest-capacity metric/trust boundary after
-PR200/main1da9740 and all four main CI contexts passed:
-ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED. This applies to new future
-compatible identities only; excluded host overhead stays additional UNKNOWN.
-Old native contracts/results retain bytes. No concrete host/resource admission
-or independent actual preflight is established. This slice authorizes adoption
-documentation, prescribed regression and normal publication only; no scientific
-threshold, budget, access, VM/proof/algorithm implementation or A2.3. The unique
-next item is a named host/provider documentary eligibility package and later
-separate explicit finite cost/scope/role authorization, not another adoption choice.
-12-hour/4-start/1800-second later implementation terms remain unapproved.
+The current owner-approved [M2 native H stage-A protocol](planning/p17_m2_native_homotopy_a_protocol.md)
+grants at most6 implementation and4 distinct independent-review hours, versioned
+source and new public fixtures only, plus mandatory regression/normal publication.
+The new native identity uses prospectively adopted B4.30-style RSS/complete-exit
+empirical evidence at4GiB with independent preflight; it is not an a-priori
+allocation/mapping guarantee and changes no old native or B guest contract.
+B guest-capacity adoption remains effective in its separate scope; excluded host
+overhead UNKNOWN and environment unadmitted. Old I1/D1 stops, fixed P/17,
+FULL_V2_OPEN_NO_ADMITTED_ROUTE, uniform default,
+known-paid`12721.16417100014444982>7200`, consumed quotas and every seal remain.
+B4.52 NOT_SELECTED_BY_R1.
 
-R1/D1, closed exact-physics rescue, rejected solver-internal candidate, I1
-resource stop and B4.52 NOT_SELECTED_BY_R1 retain historical context. All costs,
-UNKNOWN, failures, consumed/closed quotas and seals remain; no old inputs,
-scientific/pilot14580s grant, retry/reset, cap transfer or automatic backend/
-proof/toy/guard/platform chain. A plain “continue” displays the missing host
-fields and separate authorization requirements only; it starts no capability.
-All four existing CI jobs run unchanged for this publication,
-including the retained `i1-native-software` requirement on exact PR head and
-main, alongside the three protected contexts below. Existing publication controls
-remain unchanged; adoption documentation is not a new scientific Gate.
+No old input/export preparation, formal B preflight or C scientific panel, new
+provider/installation/VM, A2.3, reset or automatic successor is authorized by A.
+[Current status](project_status.md) records the missing finite input/domain/role/
+call/fee registration and separate owner decision before B. No Ubuntu/KVM package
+is a prerequisite to this native A. Proposed FULL180/14580 seconds remain
+unapproved, as do the separate guest12-hour/4-start/1800-second proposal.
+All four existing CI jobs remain applicable on latest PR head and main:
+quality, frontend, clean-linux-smoke and i1-native-software. Their software
+success cannot admit M2 resources or pass a scientific Gate.
 
 ## Slice and GitHub workflow
 

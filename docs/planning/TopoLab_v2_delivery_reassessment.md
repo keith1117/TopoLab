@@ -11,41 +11,33 @@ accepted by the owner in the reassessment conversation. It changes delivery
 governance; it is not a new numerical experiment contract, scientific Gate or
 budget authorization.
 
-Current authority (owner-approved prospective B metric adoption,2026-10-18):
-**FULL_V2_OPEN_NO_ADMITTED_ROUTE is retained by owner decision; science is stopped.**
-I1 software and independent resource-stop publication are complete through
-[PR197](https://github.com/keith1117/TopoLab/pull/197) and
-[PR198](https://github.com/keith1117/TopoLab/pull/198), main
-`57c73b8fc19930f2d7a518e2c4c0cd8d50b3f7b7`; all four contexts of its
-[main CI](https://github.com/keith1117/TopoLab/actions/runs/38891321770) passed.
-The [I1 result](../validation/i1_bounded_native_software.md) and
-[independent review](../validation/i1_independent_resource_review.md) retain
-implemented public software and mandatory selected-host pre-entry lifetime
-UNKNOWN, not measured memory>4GiB, a universal impossibility or P/17 repair.
-R1 NO_ADMISSIBLE_ROUTE, D1 STOP_UNKNOWN_PREFIT_BOUND/unlaunched0/1/FULL60,
-owner-closed exact-physics rescue and rejected solver-internal candidate remain
-historical conclusions. B4.52 remains NOT_SELECTED_BY_R1.
+Current authority (owner-approved M2 native H stage A,2026-10-18):
+**FULL_V2_OPEN_NO_ADMITTED_ROUTE; fixed P/17 unrepaired; science paused.**
+The owner separately adopted B4.30-style RSS and complete-exit empirical
+acceptance at4GiB for the NEW M2 native identity, with independent preflight;
+this is not an a-priori complete-allocation guarantee. Then the owner authorized
+[A only](p17_m2_native_homotopy_a_protocol.md): <=6 implementation hours plus
+<=4 distinct independent-review hours, versioned source/new public fixtures,
+H integration and RSS/exit recording, required regression/normal publication,
+then STOP. See [the revised drafts](p17_m2_native_homotopy_proposal.md),
+[A software report](../validation/p17_m2_native_homotopy_a.md) and
+[independent review](../validation/p17_m2_native_homotopy_a_independent_review.md).
+No old input/export preparation, B formal preflight or C scientific panel,
+installation/VM/new provider, A2.3 or automatic successor. Formal allocations0;
+FULL180/14580s remain unapproved. New actual H/17 quality/speed/resource admission
+remain UNKNOWN_NOT_TESTED/NOT_RUN; software tests do not establish repair.
 
-The Section4 methods published through [PR199](https://github.com/keith1117/TopoLab/pull/199),
-main622d546, remain effective. B's specification was published through
-[PR200](https://github.com/keith1117/TopoLab/pull/200), main1da9740, with all four
-[main CI contexts](https://github.com/keith1117/TopoLab/actions/runs/39110392591) passed.
-The owner now explicitly adopts its complete
-[guest-capacity metric/trust boundary](TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
-for new compatible future contract identities only:
-**ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED**. Host overhead remains
-additional UNKNOWN; old native contracts/results are unchanged. Adoption is
-resolved, but no concrete host, resource admission or independent preflight is
-complete. Current authority covers this adoption documentation, mandatory
-regression and normal publication only. No scientific threshold/budget/access,
-implementation, installation/probe/VM/manual workflow, experiment or successor
-is granted; A2.3 and12-hour/4-start/1800-second appliance work remain unapproved.
-No D1/I1 reopening,14580s pilot, retry/reset or proof/toy/guard/platform chain.
-The [single next item](TopoLab_v2_development_roadmap.md#unique-next-item--host-eligibility-evidence-and-separate-owner-authorization)
-is host/provider documentary eligibility, with responsibility and later finite
-cost/explicit authorization fields; do not ask for adoption again.
-Sections5–7 below retain the original reassessment/handoff history; they do not
-restart R1. All failures, costs, UNKNOWN, quotas and seals remain.
+PR199/main622d546 methods remain effective. B guest-capacity adoption through
+PR200/201 remains ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED in its own
+future-compatible scope, with host overhead additional UNKNOWN. It is not the
+native RSS metric. I1 published software/selected-host pre-entry UNKNOWN,
+D1 STOP/unlaunched0/1/FULL60, owner-closed rescue, B4.51 FAIL/consumed quotas,
+B4.52 NOT_SELECTED_BY_R1 and every cost/UNKNOWN/seal remain. Known-paid
+12721.16417100014444982>7200 still fails unchanged all-paid feasibility.
+The one next item after A is precise restricted input/domain/role/call/fee
+registration and separate owner authority before B; no Ubuntu/KVM procurement
+or further proof project is commissioned. B3 M2 plus independent Ubuntu24.04,
+two scales and independent reproduction remain final obligations.
 
 ## 1. Owner-confirmed goals
 

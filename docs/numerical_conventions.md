@@ -1012,3 +1012,24 @@ tiny nonzero intended residual never certifies unmodified U. This is public
 diagnostic software ONLY, no original loss/gradient/normalizer/real FEM change.
 Clean locked merged all-CI-passed source precedes first-only formal roles. See
 the [B4.49 protocol](planning/b4_49_public_combined_diagnostic_certificate_protocol.md).
+
+## New M2 native H/17 stage-A conventions (2026-10-18)
+
+The [A protocol](planning/p17_m2_native_homotopy_a_protocol.md) is software-only.
+For the new opt-in identity, H uses unreflected P prediction/legacy projection,
+eight OC updates at p=1, eight at p=2, then p=3; both penalty transitions require
+a current-state re-solve. Activation is exactly (24,12,6)/y/volume<0.55/generalist.
+Outside it H is plain P/S. Prefix16 counts within360; no prefix early termination,
+reflection, polish or own-witness rescue. Only p=3 updates certify stopping:
+design change<=0.01 or eleven post-update p3 states with ten physical changes
+<=0.01 and relative compliance gain in [0,0.0002]. Transition/entry analyses
+are not updates/window states. Terminal quality uses a fresh p=3 re-solve.
+Foundation FEM/filter/OC/A3 ordering and all historical contracts stay unchanged.
+New phase witnesses preserve all scalar points, prefix/transition densities and
+last eleven p3 density states. Public small-mesh driver fixtures are software
+checks; the dispatch activation is never relaxed for scientific runs.
+
+The owner adopted B4.30-style native RSS/complete-exit empirical evidence only
+for the prospective M2 identity at4294967296 bytes, with independent preflight.
+It is not an a-priori complete allocation/mapping guarantee. A grants no B/C
+execution/input/formal quotas and supplies no actual P/17 repair/resource pass.

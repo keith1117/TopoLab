@@ -9,30 +9,22 @@
 本文记录所有者在本对话中认可的复盘、新期望和后续工作规则，属于交付治理调整，
 不是新的数值实验合同、科研 Gate 或预算授权。
 
-当前授权（所有者批准B资源口径前瞻采用，2026-10-18）：**所有者已决定保留
-FULL_V2_OPEN_NO_ADMITTED_ROUTE，科研执行暂停。** I1的软件与独立资源停止结论已通过
-[PR197](https://github.com/keith1117/TopoLab/pull/197)及
-[PR198](https://github.com/keith1117/TopoLab/pull/198)完成发布，main为
-`57c73b8fc19930f2d7a518e2c4c0cd8d50b3f7b7`，其
-[主线CI](https://github.com/keith1117/TopoLab/actions/runs/38891321770)四项全部通过。
-[I1结果](../validation/i1_bounded_native_software.md)及
-[独立审查](../validation/i1_independent_resource_review.md)保留已实现的公开软件及所选宿主入口前
-生命周期必需UNKNOWN；不是实测超过4GiB、普遍不可能性或P/17修复。
-R1 NO_ADMISSIBLE_ROUTE、D1 STOP_UNKNOWN_PREFIT_BOUND/未启动0/1/FULL60、
-所有者关闭精确物理救援及求解器内学习候选淘汰均为保留的历史结论；B4.52仍为NOT_SELECTED_BY_R1。
+当前授权（所有者批准M2原生H的A阶段，2026-10-18）：
+**FULL_V2_OPEN_NO_ADMITTED_ROUTE、固定P/17未修复、uniform默认、科研暂停。**
+所有者另已为新M2原生身份采用B4.30式RSS及完整退出实证验收，保留4GiB和独立预检，
+不等同于事前完整分配保证。随后明确授权[仅A阶段](p17_m2_native_homotopy_a_protocol.md)：
+实现最多6小时、不同作者独立审查最多4小时，只用版本化源码及新公开fixtures，完成H接入和
+RSS/退出记录适配、规定回归及正常发布后停止。见[两份修订草案](p17_m2_native_homotopy_proposal.md)、
+[A软件报告](../validation/p17_m2_native_homotopy_a.md)和[独立审查](../validation/p17_m2_native_homotopy_a_independent_review.md)。
+不访问旧输入、不准备导出、不运行B正式预检或C科学面板，不安装/启动VM/另选提供方、A2.3或自动后继。
+正式额度仍0，FULL180/14580秒未批准；真实H/17质量、速度及资源准入仍UNKNOWN/NOT_RUN，软件检查不等于修复。
 
-[PR199](https://github.com/keith1117/TopoLab/pull/199)/main622d546发布的第4节开发方法继续生效。
-B规格已通过[PR200](https://github.com/keith1117/TopoLab/pull/200)/main1da9740发布，
-[主线CI](https://github.com/keith1117/TopoLab/actions/runs/39110392591)四项全部通过。
-所有者现明确采用[完整客户机容量指标/信任边界](TopoLab_v2_开发路线图.md#b-前瞻资源保证规格)，
-仅用于新的未来兼容合同身份：**ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED**。
-宿主额外开销仍为额外UNKNOWN，旧native合同/结果不变。采用已经解决，但具体宿主资格、资源准入及
-独立预检尚未完成。当前仅授权采用决定文档、规定回归及正常发布，不改变科学阈值/预算/访问，
-不实现/安装/探测/启动VM/手动派发环境工作流，不实验或启动后继；A2.3及12小时/4次启动/1800秒仍未批准。
-不重开D1/I1、不含14580秒试点、正式重试/reset或证明/玩具/守卫/平台链。
-[唯一下一项](TopoLab_v2_开发路线图.md#唯一下一项宿主资格证据及另行所有者授权)为具体宿主/提供方文档资格，
-含责任方、后续有限费用及明确授权字段，不再询问是否采用。
-下方第5–7节保留首次复盘及R1交接历史，不重新启动R1。所有失败、成本、UNKNOWN、配额和封存保留。
+PR199/main622d546开发方法继续生效；PR200/201的B客户机容量口径前瞻采用仍有效、环境未准入，
+宿主开销额外UNKNOWN，不与新原生RSS口径混用。I1软件及入口前UNKNOWN、D1 STOP/未启动0/1/FULL60、
+所有者关闭救援、B4.51 FAIL/已消耗配额、B4.52 NOT_SELECTED_BY_R1及所有成本/UNKNOWN/封存保留。
+已知付费12721.16417100014444982>7200仍不能通过旧全计费条件。A后唯一下一项是具体受限输入/字节域/
+角色/调用/费用登记及B前另行所有者授权，不是采购Ubuntu/KVM或新增证明工程。
+B3的M2加独立Ubuntu24.04、两尺度及独立复现最终要求不变。
 
 ## 1. 所有者确认的目标
 
