@@ -9,9 +9,10 @@ and [Chinese companion](TopoLab_v2_交付复盘与后续开发约束.md) are req
 The2026-10-16 documentation consolidation makes development methods effective:
 acceptance/resource specification before algorithms, public debug before freeze,
 blocker-based progress and bounded hypothesis/confirmation stages. Scientific
-threshold/resource-assurance questions remain pending advice in
-[roadmap Section6](TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment),
-not changed standards or authority. See [validation](../validation/v2_development_methods_closeout.md).
+quality/reliability/speed questions remain pending advice in
+[roadmap Section6](TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment).
+Its resource row records the later prospective B adoption only, without host
+admission. See [validation](../validation/v2_development_methods_closeout.md).
 
 The owner retains **FULL_V2_OPEN_NO_ADMITTED_ROUTE**, fixed P/17/unrepaired,
 4GiB and independent preflight. I1 public software/independent stop are published
@@ -22,18 +23,25 @@ owner-closed exact-physics rescue, solver-internal rejection, B4.51 FAIL/consume
 quotas and all old costs/UNKNOWN/seals remain; B4.52 NOT_SELECTED_BY_R1.
 Historical protocols below retain bytes and old successor context.
 
-The owner commissioned **B** after methods consolidation PR199/main622d546.
-The [resource-assurance specification](TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
-and [Chinese companion](TopoLab_v2_开发路线图.md#b-前瞻资源保证规格) are one
-**PROPOSED_NOT_ADOPTED** decision object in existing plans. Guest-visible capacity
-and current native assurance differ; excluded host overhead remains additional
-UNKNOWN. See [B validation](../validation/b_resource_assurance_specification.md).
-The unique next item is explicit owner adoption/rejection of that metric/trust
-boundary, not commissioning B again or executing a capability. The proposed
-12-hour/4-start/1800-second later public-appliance terms, host privileges/cost
-reservation and all science/access remain unapproved. No changed current
-standard, VM/proof/algorithm implementation, experiment, successor or A2.3.
-“Continue” after B displays the adoption decision only.
+B's original specification is published through
+[PR200](https://github.com/keith1117/TopoLab/pull/200)/main1da9740, all four main CI
+contexts passed. The owner explicitly adopts its complete
+[resource metric/trust boundary](TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
+and [Chinese definition](TopoLab_v2_开发路线图.md#b-前瞻资源保证规格):
+**ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED**. New compatible identities
+only; host overhead additional UNKNOWN, old native proof/contracts unchanged.
+The [original B validation](../validation/b_resource_assurance_specification.md)
+retains proposal-only history; [adoption validation](../validation/b_resource_assurance_adoption.md)
+records the current finite documentation/regression/publication slice.
+
+The [unique handoff](TopoLab_v2_development_roadmap.md#unique-next-item--host-eligibility-evidence-and-separate-owner-authorization)
+lists host/provider, permission, fixed identities, capacity/control, independent
+admission and finite fees/authority fields with responsible parties. No concrete
+host is qualified, and no resource preflight is complete. Existing hosted CI
+is unqualified on present evidence, not proved impossible.12-hour/4-start/
+1800-second later public-appliance work remains unapproved. No installation,
+probe/VM/manual workflow, resource-proof/algorithm implementation, old access,
+science, A2.3 or successor. “Continue” displays missing evidence/decisions only.
 
 ## Overall project plans
 
@@ -43,7 +51,7 @@ standard, VM/proof/algorithm implementation, experiment, successor or A2.3.
 | Numerical implementation | [Reimplementation strategy](TopoLab_reimplementation_strategy.md) | [数值核心重写策略](TopoLab_数值核心重写策略.md) |
 | Timeline and resources | [Timeline](TopoLab_development_timeline_and_resources.md) | [开发周期与资源评估](TopoLab_开发周期与资源评估.md) |
 | Active v2 delivery | [Development roadmap](TopoLab_v2_development_roadmap.md) | [开发路线图](TopoLab_v2_开发路线图.md) |
-| B prospective resource assurance | [Single conditional specification, not adopted](TopoLab_v2_development_roadmap.md#b-resource-assurance-specification) | [前瞻规格及采用决定](TopoLab_v2_开发路线图.md#b-前瞻资源保证规格) |
+| B prospective resource assurance | [Complete metric adopted prospectively; environment unadmitted](TopoLab_v2_development_roadmap.md#b-resource-assurance-specification) | [前瞻采用规格及宿主证据交接](TopoLab_v2_开发路线图.md#b-前瞻资源保证规格) |
 | Mandatory delivery reassessment | [Retained retrospective and effective development methods](TopoLab_v2_delivery_reassessment.md) | [交付复盘与后续开发约束](TopoLab_v2_交付复盘与后续开发约束.md) |
 | R1 delivery decision and execution plan | [Acceptance, three routes and historical D1 proposal](TopoLab_v2_delivery_execution_plan.md) | [当前中文结论与唯一下一步](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 | Rescue-program closure history | [Owner decision and full-v2 handoff](TopoLab_v2_rescue_program_closure_handoff.md) | [当前中文排期](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |

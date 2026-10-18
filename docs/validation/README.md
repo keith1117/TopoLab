@@ -11,11 +11,14 @@ checks are post-stop TEXT only, not protocol acceptance; both quotas remain1/1
 consumed with no retry/reset. See the [failed report](b4_51_real_certification_executable_full_resource_preregistration.md).
 Scientific FAIL/fixed P17/uniform, all historical costs/UNKNOWN and seals remain.
 
-Latest documentation proposal: [B resource-assurance specification](b_resource_assurance_specification.md),
-**PROPOSED_NOT_ADOPTED**, not a scientific/resource Gate. The preceding
-[method consolidation](v2_development_methods_closeout.md), PR199/main622d546,
-remains effective. Resource metric/trust-boundary adoption is pending; current
-thresholds, budgets, access and admission standards are unchanged.
+Latest documentation slice: [B prospective resource metric adoption](b_resource_assurance_adoption.md),
+**ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED**, not a scientific/resource
+Gate. The [original specification report](b_resource_assurance_specification.md)
+retains PR200/main1da9740's PROPOSED_NOT_ADOPTED history and all four main CI
+passes. The [method consolidation](v2_development_methods_closeout.md),
+PR199/main622d546, remains effective. Only the complete resource metric/trust
+boundary is adopted for new compatible future identities; old native contracts,
+scientific thresholds/budgets/access and concrete admission remain unchanged.
 
 The owner retains **FULL_V2_OPEN_NO_ADMITTED_ROUTE**, P/17/unrepaired,4GiB and
 independent preflight. [I1 software validation](i1_bounded_native_software.md) and
@@ -29,12 +32,14 @@ Historical [R1](r1_v2_delivery_execution_plan.md), [D1](d1_physics_resource_feas
 [P/17 proposal](p17_bounded_homotopy_proposal.md) retain their original scope.
 B4.52 NOT_SELECTED_BY_R1; all costs/UNKNOWN/failures/quotas/seals remain.
 
-The owner commissioned B only. Its [single next decision](../project_status.md#unique-next-item-concrete-owner-scope-decision)
-is prospective adoption/rejection of the guest-capacity claim and explicit
-host-overhead exclusion. Host overhead/selected environment remain UNKNOWN;
-no selected-host bound or independent preflight is claimed. No executable
-successor, public-appliance investment, A2.3, old-input/scientific/pilot grant
-or automatic proof/backend/toy/guard/platform chain. Software CI cannot pass science.
+The adoption question is resolved. The
+[single next item](../project_status.md#unique-next-item-host-evidence-and-separate-owner-authorization)
+is a named host/provider eligibility package and later separate finite cost/scope/
+role authorization. Host overhead, concrete configuration/capacity guarantee and
+resource admission remain UNKNOWN/unestablished; no independent preflight claimed.
+No12-hour/4-start/1800-second implementation, install/probe/VM/manual workflow,
+A2.3, old-input/scientific/pilot grant or automatic successor. No I1/D1 reopening
+or quota reset. Software CI cannot pass science or qualify the host.
 
 Frozen commitments are in the [planning index](../planning/README.md) and versioned
 contracts. Generated evidence remains external under the

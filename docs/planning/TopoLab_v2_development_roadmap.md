@@ -1,6 +1,6 @@
 # TopoLab v2 Development Roadmap
 
-Current authority (owner-approved B specification proposal,2026-10-18):
+Current authority (owner-approved prospective B metric adoption,2026-10-18):
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE is retained by owner decision; science is stopped.**
 I1 software and independent resource-stop publication are complete through
 [PR197](https://github.com/keith1117/TopoLab/pull/197) and
@@ -16,15 +16,22 @@ owner-closed exact-physics rescue and rejected solver-internal candidate remain
 historical conclusions. B4.52 remains NOT_SELECTED_BY_R1.
 
 The methods published in [PR199](https://github.com/keith1117/TopoLab/pull/199),
-main622d546, remain effective. The owner now commissions **B: one prospective
-resource-assurance specification proposal only**. Section6 contains one
-[reviewable specification](#b-resource-assurance-specification),
-**PROPOSED_NOT_ADOPTED**, and its finite adoption decision. No scientific
-threshold, budget, access or resource-admission standard changes. No algorithm,
-resource proof, appliance or A2.3 is implemented. No old inputs, pilot14580s,
-formal retry/reset, D1/I1 reopening or proof/toy/guard/platform chain is granted.
-Publication closes this document slice; the next item is an owner decision,
-not an executable capability.
+main622d546, remain effective. B's specification was published through
+[PR200](https://github.com/keith1117/TopoLab/pull/200), main
+`1da9740bb5c420577dfe9ff028e477942e4a1f1b`, with all four
+[main CI contexts](https://github.com/keith1117/TopoLab/actions/runs/39110392591) passed.
+The owner has now explicitly adopted the complete
+[guest-capacity metric/trust boundary](#b-resource-assurance-specification):
+**ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED**. Only new compatible future
+contract identities may use it; no such executable contract or host is admitted.
+Host overhead remains additional UNKNOWN. Old native obligations/results remain.
+This slice authorizes adoption documentation, required regression and normal
+publication only. No scientific threshold, budget, access or concrete admission
+changes; no installation, probe, VM/manual workflow, appliance/algorithm/proof
+implementation, A2.3, experiment, formal retry/reset or successor. The
+[unique handoff](#unique-next-item--host-eligibility-evidence-and-separate-owner-authorization)
+is concrete host eligibility evidence and a later separate owner authorization,
+not a repeat adoption choice or executable capability.
 Historical stage bodies below retain their original contracts and successors;
 they do not restart a closed program. All failures, costs, UNKNOWN, quotas and seals remain.
 
@@ -185,7 +192,7 @@ UNKNOWN stop; it establishes no composed capability or scientific pass. R1 and
 all old failures/seals stay. See [D1 report](../validation/d1_physics_resource_feasibility.md).
 
 Prepared: 2026-09-24
-Revised: 2026-10-18 (B specification proposed, not adopted; science stopped)
+Revised: 2026-10-18 (B metric adopted prospectively; environment unadmitted; science stopped)
 
 Related documents:
 
@@ -2376,9 +2383,12 @@ complete at main57c73b8/PR198 with all four main CI contexts passed. Its
 [resource UNKNOWN stop](../validation/i1_independent_resource_review.md),
 D1 STOP/unlaunched0/1/FULL60, owner-closed exact-physics rescue, solver-internal
 candidate rejection and R1/B4.52 dispositions remain. P/17 is unrepaired.
-The present B slice only proposes a resource-assurance specification and completes
-required software/GitHub checks; it implements no appliance, A2.3, algorithm or
-resource proof. PR199/main622d546 completed the preceding methods consolidation.
+PR200/main1da9740 published B's specification with all four main CI contexts
+passed. The owner now adopts its complete metric/trust boundary for new future
+compatible identities only: ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED.
+The present slice records that decision and completes required software/GitHub
+checks; it implements no appliance, A2.3, algorithm or resource proof.
+PR199/main622d546 methods remain effective; old native contracts remain unchanged.
 The unapproved
 14580s pilot/old views remain unallocated/denied. No executable successor exists.
 
@@ -2431,17 +2441,19 @@ new scientific spending ceiling is supplied by this maintenance.
 
 ### Prospective acceptance questions — no change authorized
 
-This table records **pending advice**, not active alternatives. Any change must
-be a separately reviewed finite proposal, justified before new results, with
-compatible new identity and explicit adoption. Observed P/17 margins cannot be
-used to choose a just-passing standard. Historical contracts/FAIL/costs stay.
+Quality, reliability and speed rows record **pending advice**, not active
+alternatives. Any such change needs a separately reviewed finite proposal,
+justification before results, a compatible new identity and explicit adoption.
+The resource row records the now-resolved B metric adoption for future identities,
+not environment admission. Observed P/17 margins cannot choose a just-passing
+standard. Historical contracts/FAIL/costs stay.
 
 | Requirement and current basis | Evidence and unanswered question for a future proposal |
 |---|---|
 | Quality:C<=1.001*C_uniform, matched physical-volume error<=0.005, convergence and independent re-solve rtol1e-9. [B3](../b3_experiment_contract.md) protects same-quality comparison;1.001 permits0.1% compliance degradation, not solver roundoff | B4.8's near miss and B4.30's larger gap remain failures. A future use-case/conditioning/error-budget rationale must justify any prospective allowance independently of those observed outcomes; no new limit is chosen here |
 | Zero selected-primary candidate failures/fallbacks on ID, beyond zero accepted quality violations; OOD safe rejection remains charged under [B3](../b3_experiment_contract.md) | Distinguish operational safety from attempt reliability. Whether a new limited-fallback/hybrid service is a useful separate claim needs a finite deployable trigger, fixed failure budget and all attempt/fallback costs; no reference oracle, old failure conversion or current allowance |
 | B3 ID both scales:point mean and sum<=0.90, upper95% mean ratio<1, every direction<=1; non-ML paired difference upper<0; OOD upper<=1.05; both environments | The10% point effect is a prospectively selected meaningful-effect policy, not a mathematical constant. Any revision needs workload/query-volume value, measurement uncertainty and full amortization; it must not select a favorable subgroup/repeat after results |
-| Retained4GiB/4294967296 bytes and independent preflight; current applicable contracts require complete native/startup/simultaneous-lifetime assurance before admission | I1's partial image/stack facts do not close selected-host pre-entry user-page UNKNOWN. First specify the protected resource metric/scope, evidence obtainable on a selected environment and failure behavior. An alternative assurance method needs separate review/adoption; monitors/RSS/RLIMIT are not substitutes under current contracts. UNKNOWN is not universal impossibility |
+| Retained4GiB/4294967296 bytes and independent preflight; old applicable native/startup/lifetime contracts remain immutable | Owner adopted the complete B guest-capacity metric/trust boundary prospectively for new compatible identities only; host overhead additional UNKNOWN. Concrete host assurance/admission and independent preflight remain incomplete. I1 pre-entry UNKNOWN is unchanged; monitors/RSS/RLIMIT or successful boot do not replace the adopted complete capacity guarantee. No whole-host guarantee or equivalence to old native proof |
 
 ### Separately acceptable platform candidate — not commissioned
 
@@ -2460,39 +2472,48 @@ or scientific Gate credit. A2.4 follows its recovery dependency; A4 follows limi
 
 ### B resource assurance specification
 
-Date:2026-10-18 (America/New_York); baseline main
-`622d5465e2962702642f7da8d6cc25221f9d623d`, PR199 and successful
-[main CI](https://github.com/keith1117/TopoLab/actions/runs/38932467504).
-The owner explicitly commissioned option B after that closeout. Assessment
-identity: `topolab.v2.guest-capacity-assurance.proposal.v1`.
-**Result: one conditional reviewable specification, PROPOSED_NOT_ADOPTED.**
-This is neither an executable contract nor current resource admission. No
-independent resource reviewer/preflight is registered or run for B.
+Specification prepared2026-10-18 (America/New_York), from main
+`622d5465e2962702642f7da8d6cc25221f9d623d`/PR199. Historical proposal identity:
+`topolab.v2.guest-capacity-assurance.proposal.v1`. Its original
+[validation report](../validation/b_resource_assurance_specification.md) retains
+PROPOSED_NOT_ADOPTED as the PR200 outcome, without retroactive edits.
+PR200 merged as `1da9740bb5c420577dfe9ff028e477942e4a1f1b`; all four
+[main CI contexts](https://github.com/keith1117/TopoLab/actions/runs/39110392591) passed.
+
+**Owner adoption,2026-10-18: ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED.**
+The owner explicitly accepts the entire definition below, including host-overhead
+exclusion, for new prospective compatible contract identities only. The adoption
+question is resolved; no executable future contract identity is commissioned or
+assigned here. Concrete host qualification, resource admission and independent
+actual preflight remain incomplete. No B resource role or preflight is registered
+or run. This is a governance decision, not a new TEXT/scientific Gate. See the
+[adoption validation](../validation/b_resource_assurance_adoption.md).
 
 **Purpose and tradeoff.** Protect a reproducible, bounded execution environment
 for future same-quality learned acceleration, including startup and all required
-application helpers, using a selected platform's fixed capacity as the proposed
-assurance for role/workspace/startup user pages. Propose
-one fixed-capacity virtual appliance, not another algorithm/backend. Its resource
-claim would be **guest-visible memory capacity**, rather than the current
-complete native-role simultaneous-memory proof. The scope change is material:
-host hypervisor/kernel overhead is outside the proposed4GiB metric. It remains
-additional UNKNOWN, never free or zero. If4GiB must cover that host overhead or
-retain the current native metric, **this proposal is unsuitable; retain the
-pause**. Under unchanged contracts there is still NO_ADMISSIBLE_ROUTE.
+application helpers, using a selected platform's fixed capacity as the adopted prospective
+assurance for role/workspace/startup user pages. The specification concerns
+one fixed-capacity virtual appliance; it selects no new algorithm/backend.
+Its resource claim is **guest-visible memory capacity**, a material change from
+complete native-role simultaneous-memory proof. The owner accepts the exclusion
+of host hypervisor/kernel and related host overhead from this4GiB metric.
+That overhead remains additional UNKNOWN, never free or zero. This provides no
+whole-host<=4GiB guarantee and is not equivalent to old native proof. Under old
+unchanged contracts there is still NO_ADMISSIBLE_ROUTE; adopting a metric does
+not qualify an environment or demonstrate a runnable route.
 Current I1 asks for exec-time transient user-page assurance, **not the whole
 kernel heap or GitHub host**. The new hypervisor is a required platform component
-proposed outside the4GiB metric; that explicit trust/scope change cannot be
+outside the adopted prospective4GiB metric; that explicit trust/scope change cannot be
 presented as satisfying the current role-chain proof or as zero-cost overhead.
 
-**Proposed metric and confinement.** For a closed list of guest-visible memory
+**Adopted prospective metric and confinement.** For a closed list of guest-visible memory
 backing objects, let `C_guest = sum(B_j) <= 4294967296 bytes` at every point from
 before the first guest instruction through verified teardown. Each `B_j` is the
 allocation capacity rounded to its actual registered backing granularity; count
 each backing allocation once, including ROM/firmware/device/auxiliary memory.
 Do not deduct shared pages or aliases without an identity. This is a capacity
 bound, not sampled RSS, a sum of process RSS or a whole-host physical-memory claim.
-Proposed partition: main RAM<=3840MiB/4026531840 bytes; all other guest-visible
+Adopted partition: main RAM<=3840MiB/4026531840 bytes; all other guest-visible
 backings together<=256MiB/268435456 bytes. These are ceilings, not observed sizes
 or guessed headroom: every actual object/size/growth path must be enumerated;
 an UNKNOWN cannot be filled with the unused256MiB.
@@ -2556,7 +2577,7 @@ assurance or cross-environment result; those remain UNKNOWN/unadmitted. Adopting
 the metric does not change final environments, minimum two-scale evidence or
 replication, and does not commission a second appliance/backend to fill that gap.
 
-**Proposed independent preflight and failure semantics.** Before any later
+**Required independent preflight and failure semantics for future admission.** Before any later
 research input, an independent reviewer who did not implement the appliance
 must accept the exact capacity/trust/inventory evidence. A separate actual
 data-free launch preflight then checks frozen identities, source/lock/CI,
@@ -2576,15 +2597,15 @@ admission is UNKNOWN/STOP; if a registered capacity is exceeded, it is a resourc
 FAIL. A bounded OOM proves neither a successful workload nor general algorithmic
 impossibility. Existing stricter failure/STOP rules still bind old identities.
 
-| Current obligation | Proposed prospective difference — requires adoption |
+| Retained old obligation | Adopted prospective difference — new compatible identities only |
 |---|---|
 |4GiB complete simultaneous native/startup/lifetime assurance before input | Same numerical ceiling, **different metric/trust boundary**: closed guest-visible capacity includes guest OS; native source/binary/startup/lifetime upper-bound proof replaced by trusted fixed virtual hardware confinement. New host hypervisor overhead excluded explicitly. No claim of equivalence or current compliance |
 | Independent complete review and actual launch preflight | Independence and preflight retained; evidence object changes to selected appliance capacity/configuration/role containment. Merely monitoring a run remains insufficient |
 | Full-fit memory PENDING4GiB; I1 pre-entry UNKNOWN; old B4.24/28 gaps | All stay unchanged. A new identity could use the adopted metric only after a separate compatible contract; no retrofit, reopen or inherited admission |
 | Same-quality/fixed primary/fair speed and full accounting | No change:1.001/volume/convergence/re-solve/zero required failures/fallbacks, fixed17, speed/replication and all paid history stay; VM overhead is charged and performance remains UNKNOWN |
 
-**Finite later investment/access request — NOT GRANTED.** Only if the owner
-first adopts this resource claim, a separate instruction could commission one
+**Finite later investment/access request — NOT GRANTED.** Metric adoption is
+complete. A separate explicit owner instruction is still required to commission one
 actual appliance integration and resource-admission capability, with a new
 contract and independent role. Proposed ceiling: **12 active engineering/review
 hours,8 implementation+4 independent**, including at most4 public guest starts
@@ -2613,29 +2634,46 @@ FULL60, giving known floor12781.16417100014444982 plus all additional history,
 B/other software/CI/publication costs UNKNOWN_NOT_ZERO. Proposed work ceilings
 are not spend. No guest metric or new identity repairs old all-paid7200.
 Current metrics/P/17 failures/quality/speed/resource UNKNOWN/full-fit/seals have
-no measured delta from B. B delivers a decision object only. Adoption refused,
-unobtainable host evidence, incomplete inventory, absent independence, cap/STOP
+no measured delta from B or its adoption. Adoption resolves the metric decision
+only. Unobtainable host evidence, incomplete inventory, absent independence, cap/STOP
 or failed confinement ends the applicable proposal/capability with the pause
 retained, without algorithm selection or experiment. P/17 has no repair date;
 resource adoption alone supplies no repair evidence.
 
-### Unique next item — owner scope decision, not an executable capability
+### Unique next item — host eligibility evidence and separate owner authorization
 
-The original option B commissioning decision is **resolved by the owner's
-2026-10-18 instruction**. B now closes with the specification above, not adoption.
-The single remaining decision is whether **this guest-capacity claim and its
-explicit host-overhead exclusion are acceptable for a new prospective identity**.
+The owner has resolved both commissioning B and prospectively adopting its complete
+metric/trust boundary. Do not request adoption again. **No concrete host/provider
+has been qualified or resource-admitted.** The one next item is a documentary
+host-eligibility package for the retained Ubuntu24.04 x86-64 target, supplied by
+the owner and the named provider/host operator; if unavailable, retain the pause.
+This handoff does not authorize gathering it by installation, probes, trial boots,
+manual environment workflows or automatic selection of another provider.
 
-| Finite choice | Consequence — no work starts automatically |
-|---|---|
-| Adopt the proposed metric/trust boundary for future contracts (conditional recommendation only if this is the intended4GiB deliverable) | Explicitly accepts the metric/scope change prospectively; old standards/results remain. Then separately decide the concrete12-hour/4-start/1800-second public appliance capability, provider permission and finite cost reservation above. Adoption alone commissions none of it and no science |
-| Reject and retain current complete native-role assurance | This proposal supplies no suitable route under that requirement; a whole-host guarantee is also outside its scope, but is not a current I1 requirement. Retain FULL_V2_OPEN_NO_ADMITTED_ROUTE and scientific pause. No automatic replacement proposal, I1/D1 reopening, B4.52 or A2.3 |
+| Missing field / present status | Evidence or decision still needed | Responsible party |
+|---|---|---|
+| Exact Ubuntu24.04 x86-64 host and provider: UNKNOWN_UNREGISTERED | Name one concrete host/provider and its fixed OS/architecture identity with a non-secret export or attestation. The existing GitHub CI label is insufficient and remains unqualified on available evidence, not proved to lack KVM | Owner names the host/provider; provider or host operator supplies the documentary identity |
+| Permission and configuration control: UNKNOWN | Explicit provider permission/support for the required QEMU/KVM use, KVM access and the control privileges needed to freeze configuration and prevent prohibited changes | Provider grants/documents permission; host operator documents actual control; owner accepts the named trust boundary |
+| Reproducible identities: UNKNOWN_UNREGISTERED | Establish that fixed host, kernel, KVM, QEMU, machine/device, firmware and guest image/boot-chain identities and matching version evidence can be obtained. Actual hashes/configuration must be frozen before future admission | Provider/operator supplies host/kernel/KVM evidence and export/control capability; a separately authorized implementer binds actual appliance identities; independent reviewer verifies them |
+| Complete capacity and denied growth: UNKNOWN | Ability to enumerate every guest-visible backing object, actual capacity/granularity/aliases, total<=4294967296, main<=3840MiB and other<=256MiB, with all ROM/firmware/device/auxiliary objects and enforced no-add/hotplug/balloon/migration/management-growth paths. No unverified slack or -m-only claim | Operator supplies documentary configuration/control evidence; later authorized implementer completes the actual inventory; independent reviewer must accept it before any guest starts |
+| Swap, placement and disk controls: UNKNOWN | Verifiable disabled guest swap/zram/zswap and host swapping of the appliance backings; one appliance, all required OS/application/timer/recorder/auditor work inside, no offload/host workspace/device passthrough; separately bounded disk/I/O, no RAM-substituting spill | Provider/operator supplies enforceable control evidence; later implementer registers actual role/phase/I/O placement; independent reviewer checks complete lifetime containment |
+| Independent admission and actual preflight: NOT_REGISTERED / NOT_RUN | New reviewer distinct from implementer; documentary eligibility accepted before implementation, complete actual capacity/configuration accepted before any boot, then separately authorized data-free launch preflight with frozen clean merged all-CI-passed source and pending/start/observed-exit/teardown records | Owner separately commissions roles; independent reviewer accepts resource evidence and actual preflight. I1 roles/quotas do not transfer |
+| Fees and implementation authority: UNAPPROVED; monetary/CI terms UNKNOWN_NOT_ZERO | After documentary prerequisites, a compatible finite public-only contract and explicit owner grant for any later capability. Set an accepted finite provider/CI fee reservation: currency, rates or bounded billing basis, maximum amount/payer and stop on exhaustion, including failed starts/review/closure. No purchase is authorized. Mandatory regression/CI/publication costs are additionally recorded | Provider/operator supplies price and billing limits; owner decides finite reservation, named environment, scope and roles before any implementation or launch |
 
-No choice is presumed; the current standard remains effective until explicit
-adoption. Quality/reliability/speed advice stays separately pending. A plain
-“continue” displays this decision only. Finish B's documentation/regression/
-protected publication, retain the assigned worktree and **STOP**. See the
-[B validation record](../validation/b_resource_assurance_specification.md).
+The proposed **12 active hours (8 implementation+4 independent review), at most4
+public guest starts and1800 cumulative guest-wall seconds** remain **unapproved**.
+A missing mandatory provider/control premise permits zero starts. Eligibility
+evidence precedes that investment; actual configuration/capacity acceptance and
+independent launch preflight still cannot be presumed from a paper package.
+No science, old input/model/label/index/backup/seal access,14580s pilot, I1/D1
+reopening, quota transfer/reset, A2.3 or backend/proof/toy/guard/platform chain.
+B3's Apple M2 plus independent Ubuntu24.04, two scales and replication remain;
+this one Ubuntu capacity definition covers none of the missing Apple evidence.
+
+A plain “continue” displays these missing fields and the need for a separate
+bounded owner authorization only; it starts no successor. Finish this adoption
+slice's documentation/regression/protected publication, retain the assigned
+worktree and **STOP**. [Validation and publication record](../validation/b_resource_assurance_adoption.md).
 
 ## 7. Stage completion evidence
 

@@ -1920,3 +1920,38 @@ trust boundary, including host-overhead exclusion. Even adoption commissions
 no capability; proposed12-hour/4-start/1800-second public-appliance terms,
 provider privileges/cost reservation and all scientific budget/access stay
 unapproved. Retain this worktree and stop after publication, with no successor.
+
+
+## 2026-10-18 B resource metric adopted prospectively; environment unadmitted
+
+From clean assigned ec0b detached main1da9740/PR200, actual GitHub recovery found
+all four main CI contexts passed, no open PR or duplicate adoption, and no dirty
+or untracked files. The owner explicitly adopts the complete B guest-visible
+backing-capacity<=4294967296-byte definition, before first instruction through
+verified teardown, including OS/application/helpers/device/firmware, for new
+future compatible identities only. Host virtualization and related extra overhead
+remain additional UNKNOWN. The [bilingual specification](planning/TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
+now records ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED, a material metric/
+trust-boundary change, neither old native-proof equivalence nor a whole-host bound.
+
+No concrete host, resource admission or independent preflight is established.
+The [handoff](planning/TopoLab_v2_development_roadmap.md#unique-next-item--host-eligibility-evidence-and-separate-owner-authorization)
+assigns owner/provider/operator/later implementer/independent reviewer responsibility
+for exact Ubuntu host/provider, QEMU/KVM permission/control, frozen identities,
+complete capacity/no-growth/swap/offload evidence and finite fees/authorization.
+12 active hours (8+4),4 public starts and1800 guest seconds remain unapproved;
+no installation/probe/VM/manual workflow, proof/algorithm, old evidence access,
+experiment, formal retry/reset, purchase or successor. One Ubuntu definition
+supplies no Apple M2 evidence or waiver of B3 two-scale/independent reproduction.
+
+FULL_V2_OPEN_NO_ADMITTED_ROUTE, fixed unrepaired P/17/uniform/science pause,
+full-fit PENDING4GiB, I1/D1 stops, owner-closed rescue, B4.51 failure/consumed quotas,
+B4.52 NOT_SELECTED_BY_R1, K=12721.16417100014444982>7200/D1 FULL60, every old
+cost/UNKNOWN/seal and original frozen/report/history bytes remain. No measured
+scientific/resource blocker delta. [Adoption validation](validation/b_resource_assurance_adoption.md)
+records full regression and publication; new raw logs/review/CI/release/verified
+backup bindings remain external in
+`TopoLab-data/v2-resource-assurance-adoption-2026-10-18-ec0b`.
+Adoption needs no repeat approval. Next is documentary host evidence and later
+separate bounded authorization, or retained pause. Retain this worktree and stop
+at this slice's publication; “continue” commissions no capability.

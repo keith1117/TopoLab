@@ -31,29 +31,33 @@ Read the [R1 plan](docs/planning/TopoLab_v2_delivery_execution_plan.md) after th
 Reassessment Section4 methods are effective; the [roadmap Section6](docs/planning/TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment)
 separates current rules, historical observations and pending acceptance advice.
 The English roadmap controls scientific Gate order; README is the public entry.
-No threshold, budget, access or resource-admission change is authorized.
+No scientific threshold, budget, access or concrete environment admission changes.
 B4.51 FAIL_PROCESS_SOURCE_FREEZE/consumed1/1 quotas, D1 STOP/unlaunched0/1/FULL60,
 owner-closed rescue and solver-internal rejection remain; B4.52 NOT_SELECTED_BY_R1.
 Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility;
 full fit PENDING4GiB and every old UNKNOWN/seal remain. Read applicable frozen
 contracts before dependent work; unresolved substantive conflicts stop that work.
 
-Current authority is B: one finite prospective resource-assurance specification
-proposal in [roadmap Section6](docs/planning/TopoLab_v2_development_roadmap.md#b-resource-assurance-specification),
-plus required regression and normal publication. The proposal is
-PROPOSED_NOT_ADOPTED: fixed guest-visible capacity differs from current native
-assurance; excluded host overhead stays additional UNKNOWN. No standard, budget,
-access or resource admission changes; no appliance/algorithm/proof implementation,
-A2.3, old input/model/label/backup/seal access, experiment or formal retry/reset.
-Use versioned documents, necessary committed-source text and public primary
-assurance-interface documentation; do not follow old evidence pointers.
-PR199/main622d546 completed methods consolidation with all four main CI contexts
-passed. After B closeout the unique next item is its concrete owner adoption
-choice: accept the proposed metric/trust boundary for a new future identity, or
-retain current requirements/pause. Adoption alone commissions no capability;
-12-hour/4-start/1800-second later public-appliance terms remain unapproved.
-“Continue” displays that decision only. No D1/I1 reopening, cap transfer or
-backend/proof/toy/guard/platform chain. Retain this worktree and stop after B.
+B specification PR200/main1da9740 and all four main CI contexts passed. The owner
+has explicitly adopted its complete metric/trust boundary prospectively:
+**ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED**. For new compatible contract
+identities only, all guest-visible backing capacities sum to<=4294967296 bytes,
+before the first guest instruction through verified teardown, including guest OS,
+devices/firmware and required helpers. Excluded host overhead stays additional
+UNKNOWN; this is neither native-proof equivalence nor a whole-host4GiB guarantee.
+Old contracts/results remain unchanged. Do not ask for adoption again.
+Current authority is this finite adoption documentation, mandatory regression and
+normal publication only. The [host-evidence handoff](docs/planning/TopoLab_v2_development_roadmap.md#unique-next-item--host-eligibility-evidence-and-separate-owner-authorization)
+lists missing host/provider, permission, identities, capacity/control, independent
+review and finite cost/authority fields with responsible parties. No host is
+admitted; existing CI is unqualified on available evidence, not proved impossible.
+12-hour (8+4)/4-start/1800-second implementation terms remain unapproved. No install,
+probe, VM/manual workflow, appliance/algorithm/proof implementation, A2.3, old input/
+model/label/index/backup/seal access, experiment, formal retry/reset or successor.
+Use versioned documents and necessary committed-source text; follow no old evidence
+pointers. No D1/I1 reopening, cap transfer or backend/proof/toy/guard/platform chain.
+“Continue” displays the missing evidence/decision only. Retain this worktree and
+stop after this adoption slice; do not start the next capability.
 
 ## Provenance boundary
 
