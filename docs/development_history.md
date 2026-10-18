@@ -1890,3 +1890,33 @@ owner scope decision: current specification/pause or one separately commissioned
 finite prospective resource-assurance specification proposal. Neither it nor
 A2.3 is authorized here; no default I1/D1/B4.52 reopening or pilot14580s. Retain
 the assigned worktree and stop after this documentation publishes.
+
+
+## 2026-10-18 B prospective resource-assurance specification proposal
+
+From clean assigned main622d546/PR199 with all four main CI contexts passed,
+the owner explicitly commissioned one finite B proposal, retaining full v2,
+fixed P/17,4GiB/independent preflight and every old boundary. Existing bilingual
+[roadmaps](planning/TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
+now contain one guest-capacity specification, **PROPOSED_NOT_ADOPTED**. It defines
+a closed4GiB guest-visible backing inventory, one conditional Ubuntu24.04
+QEMU/KVM environment, independent review/actual preflight, fail-closed lifetime
+semantics, differences from native assurance and finite later investment/access
+requests. Host overhead is explicitly excluded from the proposed metric and
+remains additional UNKNOWN; current requirements still admit no route.
+
+No resource/algorithm/appliance implementation, VM probe/boot, experiment,
+old evidence/model/label/index/backup/seal access, scientific allocation or
+formal retry/reset occurred. All current standards, failures/costs/UNKNOWN,
+quotas/seals, I1/D1 closure and B4.52 NOT_SELECTED_BY_R1 remain. B produces no
+measured P/17/quality/speed/resource delta. Primary interface citations are
+recorded in provenance, not treated as selected-host proof.
+
+[B validation](validation/b_resource_assurance_specification.md) binds mandatory
+software and publication checks. New raw records and verified backup bindings
+stay in `TopoLab-data/v2-resource-assurance-specification-2026-10-18`.
+Unique next item is explicit owner adoption/rejection of the proposed metric/
+trust boundary, including host-overhead exclusion. Even adoption commissions
+no capability; proposed12-hour/4-start/1800-second public-appliance terms,
+provider privileges/cost reservation and all scientific budget/access stay
+unapproved. Retain this worktree and stop after publication, with no successor.

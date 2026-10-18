@@ -94,23 +94,25 @@ I1 software/independent stop publication is complete through PR197/198/main57c73
 whose four main contexts passed. Mandatory selected-host pre-entry lifetime
 UNKNOWN remains NO_ADMISSIBLE_ROUTE. The owner has decided to retain
 FULL_V2_OPEN_NO_ADMITTED_ROUTE, fixed P/17,4GiB and independent preflight.
-[Current status](project_status.md) gives the single pending owner scope decision;
-retention itself is no longer pending. Only this documentation maintenance,
-required software regression and ordinary publication are commissioned.
-A prospective resource-assurance specification proposal and A2.3 platform
-capability are not commissioned. No scientific threshold, budget, access or
-resource-admission standard changes through these method updates or advice.
-Any such change needs a separately reviewed finite proposal and explicit
-prospective adoption; no old FAIL/contract/ledger changes.
+[Current status](project_status.md) records B, explicitly commissioned by the
+owner on2026-10-18 after PR199/main622d546 completed methods consolidation.
+Only one finite prospective resource-assurance specification, required regression
+and ordinary publication are authorized. Its guest-capacity metric/trust boundary
+is PROPOSED_NOT_ADOPTED; host overhead remains additional UNKNOWN. No current
+standard, budget, access or resource admission changes. No appliance/algorithm/
+resource-proof implementation, experiment or A2.3 is commissioned. The one next
+item is an explicit owner adoption choice; adoption alone grants no later
+capability, provider privilege, scientific budget or input access.
 
 R1/D1, closed exact-physics rescue, rejected solver-internal candidate, I1
 resource stop and B4.52 NOT_SELECTED_BY_R1 retain historical context. All costs,
 UNKNOWN, failures, consumed/closed quotas and seals remain; no old inputs,
 scientific/pilot14580s grant, retry/reset, cap transfer or automatic backend/
-proof/toy/guard/platform chain. A plain “continue” after closure displays the
-concrete decision only. I1 additionally requires its `i1-native-software` context
-on exact PR head and main; all four existing CI jobs run unchanged for this
-publication, alongside the three protected contexts below.
+proof/toy/guard/platform chain. A plain “continue” after B displays the adoption
+decision only. All four existing CI jobs run unchanged for this publication,
+including the retained `i1-native-software` requirement on exact PR head and
+main, alongside the three protected contexts below. Existing publication controls
+remain unchanged; a documentation proposal is not a new scientific Gate.
 
 ## Slice and GitHub workflow
 

@@ -11,7 +11,7 @@ accepted by the owner in the reassessment conversation. It changes delivery
 governance; it is not a new numerical experiment contract, scientific Gate or
 budget authorization.
 
-Current authority (owner-approved documentation consolidation,2026-10-16):
+Current authority (owner-approved B specification proposal,2026-10-18):
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE is retained by owner decision; science is stopped.**
 I1 software and independent resource-stop publication are complete through
 [PR197](https://github.com/keith1117/TopoLab/pull/197) and
@@ -26,14 +26,15 @@ R1 NO_ADMISSIBLE_ROUTE, D1 STOP_UNKNOWN_PREFIT_BOUND/unlaunched0/1/FULL60,
 owner-closed exact-physics rescue and rejected solver-internal candidate remain
 historical conclusions. B4.52 remains NOT_SELECTED_BY_R1.
 
-Only the development methods in Section4 and the roadmap's current Section6
-are newly effective. Scientific thresholds, budgets, access and resource admission
-are unchanged. The threshold/assurance questions there are **pending advice**,
-not accepted changes. The unique next item after this documentation closes is
-[one concrete owner scope decision](TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment),
-not an executable capability. A2.3 is a separately acceptable platform candidate,
-not an automatic successor. No old inputs, pilot14580s, new scientific budget,
-formal retry/reset, D1/I1 reopening or proof/toy/guard/platform chain is granted.
+The Section4 methods published through [PR199](https://github.com/keith1117/TopoLab/pull/199),
+main622d546, remain effective. The owner now commissions B only: one finite
+[resource-assurance specification](TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
+in the existing roadmap, **PROPOSED_NOT_ADOPTED**. It explicitly distinguishes
+fixed guest-visible capacity from current native-role assurance and leaves host
+overhead additional UNKNOWN. Adoption is the next owner decision; no changed
+standard, capability, budget, access or experiment is authorized. A2.3 remains
+uncommissioned. No D1/I1 reopening, pilot14580s, formal retry/reset or proof/toy/
+guard/platform chain follows. Required software regression/publication closes B.
 Sections5–7 below retain the original reassessment/handoff history; they do not
 restart R1. All failures, costs, UNKNOWN, quotas and seals remain.
 
@@ -353,3 +354,16 @@ updates existing current entries and bilingual plans; no new research route,
 resource proof, capability or scientific Gate is started. See the
 [documentation validation](../validation/v2_development_methods_closeout.md).
 Unchanged historical sections and frozen records keep their original meaning.
+
+## 9. B prospective resource-assurance specification (2026-10-18)
+
+The owner commissioned one finite specification proposal after the methods
+consolidation. The [roadmap specification](TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
+is the single reviewable proposal, not an adopted standard or executable route.
+It specifies metric/scope, one conditional environment, obtainable versus UNKNOWN
+evidence, independent preflight, failure semantics, current-obligation differences
+and finite later investment/access decisions. See the
+[B validation](../validation/b_resource_assurance_specification.md).
+Full v2/fixed P/17/4GiB/independence and all historical boundaries stay; no
+algorithm or resource proof is implemented. Close publication and stop for the
+explicit metric/trust-boundary adoption decision, without commissioning a successor.
