@@ -1508,3 +1508,19 @@ is implemented or evaluated, and no VM is executed. No reference code, figure
 or implementation is copied, translated or vendored.
 No Hack3D content/comparison or old external research/backup/sealed payload is
 read. Required ordinary regression remains separate software verification.
+
+## M2 native fixed H stage A (2026-10-18)
+
+The [A protocol](docs/planning/p17_m2_native_homotopy_a_protocol.md) implements
+only the owner-fixed8×p1/8×p2/p3 schedule using TopoLab's independently authored
+FEM/filter/OC/legacy projection and CPU ContextCNN/encoding. No upstream source,
+new algorithm/kernel/backend, training or old model/label/index/evidence was used.
+The new3×2×1 point-node19/y/-1 software fixture and reinitialized public weights
+are original tests, never historical P/17 bits or scientific samples.
+The independent author wrote its numerical checker/original two-element fixtures
+before reading the new driver, then cross-reviewed software; exposure is
+nonblind and shared unchanged foundational FEM is explicit. RSS/exit adaptation
+uses existing B4.30 recording semantics and Python's existing os.wait4/native
+statistics; no new allocation/kernel proof or external scientific source.
+Old native and guest contracts/results retain scope. See [software report](docs/validation/p17_m2_native_homotopy_a.md)
+and [independent review](docs/validation/p17_m2_native_homotopy_a_independent_review.md).

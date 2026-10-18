@@ -1955,3 +1955,35 @@ backup bindings remain external in
 Adoption needs no repeat approval. Next is documentary host evidence and later
 separate bounded authorization, or retained pause. Retain this worktree and stop
 at this slice's publication; “continue” commissions no capability.
+
+
+## 2026-10-18 M2 native H stage A — public software only
+
+From assigned ec0b detached main53f9ebb/PR201, only the two existing untracked
+MD/JSON drafts were present. Actual main/CI/open-PR recovery confirmed that
+revision, successful CI39117742800 and no duplicate work. The owner prospectively
+adopted native B4.30-style RSS/full-exit empirical acceptance at4GiB with
+independent preflight, then explicitly granted A<=6h implementation +<=4h
+separately authored review, new public fixtures only, regression/publication and
+STOP. The [revised drafts](planning/p17_m2_native_homotopy_proposal.md),
+[A protocol](planning/p17_m2_native_homotopy_a_protocol.md), [software report](validation/p17_m2_native_homotopy_a.md)
+and [independent review](validation/p17_m2_native_homotopy_a_independent_review.md)
+record fixed H dispatch/8+8+p3, phase witnesses, original controls/backend, bounded
+public model/NN inputs and RSS/watchdog/immutable pending/exit bindings.
+The independent checker predates candidate-driver exposure; review is not blind.
+
+Only NEW initialized weights and public tiny fixtures ran. An actual public
+command/25-member record was independently checked, including timer wait4
+statistics,552992768-byte empirical envelope and last-verifier native exit.
+Prefreeze code/style/fixture/sandbox-measurement failures remain charged and
+external; no B formal attempt, C panel, old input/export or formal reset.
+Actual P/17 repair/quality/speed/resource admission remain UNKNOWN/NOT_RUN.
+A native RSS method is not an a-priori allocation theorem or old I1/D1 waiver.
+Every old cost/UNKNOWN/failure/quota/seal and B3 final M2+Ubuntu/two-scale
+requirements remain. B guest metric adoption stays separate/unadmitted.
+
+Mandatory regression and protected publication evidence is in the A report and
+new external stage-A namespace. After publication stop, retaining this worktree.
+The only next item is finite exact input/export-domain/role/call/fee registration
+and separate owner authority before the proposed one FULL180 B preflight; export
+preparation, B/C budgets/access and automatic successor remain unapproved.
