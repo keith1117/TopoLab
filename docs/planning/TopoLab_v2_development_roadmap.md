@@ -1,6 +1,6 @@
 # TopoLab v2 Development Roadmap
 
-Current authority (owner-approved documentation consolidation,2026-10-16):
+Current authority (owner-approved B specification proposal,2026-10-18):
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE is retained by owner decision; science is stopped.**
 I1 software and independent resource-stop publication are complete through
 [PR197](https://github.com/keith1117/TopoLab/pull/197) and
@@ -15,14 +15,16 @@ R1 NO_ADMISSIBLE_ROUTE, D1 STOP_UNKNOWN_PREFIT_BOUND/unlaunched0/1/FULL60,
 owner-closed exact-physics rescue and rejected solver-internal candidate remain
 historical conclusions. B4.52 remains NOT_SELECTED_BY_R1.
 
-Only the reassessment's development methods and this roadmap's current Section6
-are newly effective. Scientific thresholds, budgets, access and resource admission
-are unchanged. The threshold/assurance questions there are **pending advice**,
-not accepted changes. The unique next item after this documentation closes is
-[one concrete owner scope decision](TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment),
-not an executable capability. A2.3 is a separately acceptable platform candidate,
-not an automatic successor. No old inputs, pilot14580s, new scientific budget,
+The methods published in [PR199](https://github.com/keith1117/TopoLab/pull/199),
+main622d546, remain effective. The owner now commissions **B: one prospective
+resource-assurance specification proposal only**. Section6 contains one
+[reviewable specification](#b-resource-assurance-specification),
+**PROPOSED_NOT_ADOPTED**, and its finite adoption decision. No scientific
+threshold, budget, access or resource-admission standard changes. No algorithm,
+resource proof, appliance or A2.3 is implemented. No old inputs, pilot14580s,
 formal retry/reset, D1/I1 reopening or proof/toy/guard/platform chain is granted.
+Publication closes this document slice; the next item is an owner decision,
+not an executable capability.
 Historical stage bodies below retain their original contracts and successors;
 they do not restart a closed program. All failures, costs, UNKNOWN, quotas and seals remain.
 
@@ -183,7 +185,7 @@ UNKNOWN stop; it establishes no composed capability or scientific pass. R1 and
 all old failures/seals stay. See [D1 report](../validation/d1_physics_resource_feasibility.md).
 
 Prepared: 2026-09-24
-Revised: 2026-10-16 (effective development methods; pending acceptance advice; science stopped)
+Revised: 2026-10-18 (B specification proposed, not adopted; science stopped)
 
 Related documents:
 
@@ -2374,8 +2376,10 @@ complete at main57c73b8/PR198 with all four main CI contexts passed. Its
 [resource UNKNOWN stop](../validation/i1_independent_resource_review.md),
 D1 STOP/unlaunched0/1/FULL60, owner-closed exact-physics rescue, solver-internal
 candidate rejection and R1/B4.52 dispositions remain. P/17 is unrepaired.
-The present slice only consolidates documentation and required software/GitHub
-checks; it implements no A2.3, algorithm or resource proof. The unapproved
+The present B slice only proposes a resource-assurance specification and completes
+required software/GitHub checks; it implements no appliance, A2.3, algorithm or
+resource proof. PR199/main622d546 completed the preceding methods consolidation.
+The unapproved
 14580s pilot/old views remain unallocated/denied. No executable successor exists.
 
 The following order applies **only after separate authority and admission**;
@@ -2454,26 +2458,184 @@ scope/resource violation, retaining failures. Separate owner instruction is
 required. No automatic scientific retry/resume, changed denominator, P/17 repair
 or scientific Gate credit. A2.4 follows its recovery dependency; A4 follows limits.
 
+### B resource assurance specification
+
+Date:2026-10-18 (America/New_York); baseline main
+`622d5465e2962702642f7da8d6cc25221f9d623d`, PR199 and successful
+[main CI](https://github.com/keith1117/TopoLab/actions/runs/38932467504).
+The owner explicitly commissioned option B after that closeout. Assessment
+identity: `topolab.v2.guest-capacity-assurance.proposal.v1`.
+**Result: one conditional reviewable specification, PROPOSED_NOT_ADOPTED.**
+This is neither an executable contract nor current resource admission. No
+independent resource reviewer/preflight is registered or run for B.
+
+**Purpose and tradeoff.** Protect a reproducible, bounded execution environment
+for future same-quality learned acceleration, including startup and all required
+application helpers, using a selected platform's fixed capacity as the proposed
+assurance for role/workspace/startup user pages. Propose
+one fixed-capacity virtual appliance, not another algorithm/backend. Its resource
+claim would be **guest-visible memory capacity**, rather than the current
+complete native-role simultaneous-memory proof. The scope change is material:
+host hypervisor/kernel overhead is outside the proposed4GiB metric. It remains
+additional UNKNOWN, never free or zero. If4GiB must cover that host overhead or
+retain the current native metric, **this proposal is unsuitable; retain the
+pause**. Under unchanged contracts there is still NO_ADMISSIBLE_ROUTE.
+Current I1 asks for exec-time transient user-page assurance, **not the whole
+kernel heap or GitHub host**. The new hypervisor is a required platform component
+proposed outside the4GiB metric; that explicit trust/scope change cannot be
+presented as satisfying the current role-chain proof or as zero-cost overhead.
+
+**Proposed metric and confinement.** For a closed list of guest-visible memory
+backing objects, let `C_guest = sum(B_j) <= 4294967296 bytes` at every point from
+before the first guest instruction through verified teardown. Each `B_j` is the
+allocation capacity rounded to its actual registered backing granularity; count
+each backing allocation once, including ROM/firmware/device/auxiliary memory.
+Do not deduct shared pages or aliases without an identity. This is a capacity
+bound, not sampled RSS, a sum of process RSS or a whole-host physical-memory claim.
+Proposed partition: main RAM<=3840MiB/4026531840 bytes; all other guest-visible
+backings together<=256MiB/268435456 bytes. These are ceilings, not observed sizes
+or guessed headroom: every actual object/size/growth path must be enumerated;
+an UNKNOWN cannot be filled with the unused256MiB.
+
+All eight existing categories stay inside one appliance: controllers/children,
+inputs/I/O, physics setup, model/optimizer, activations/saved state, filter/
+projection, object/parser/journal storage and assembly/factorization/transients.
+Guest OS, initial stacks, exec old/new-image overlap, page cache and required
+application timers/recorders/auditors also consume that same capacity. No required
+computation/helper may move to the host. One live appliance only; a later role
+starts only after the predecessor's observed exit and teardown. No offload,
+remote compute, host shared-memory workspace, GPU/device passthrough, additional
+memory device, hotplug, ballooning, migration or automatic accelerator fallback.
+Guest swap/zram/zswap and host swapping of appliance backings must be disabled
+and verifiable. Disk/input/output bounds must be separately frozen; no spill
+workspace may substitute for RAM. Ordinary bounded input/output files remain
+allowed only by a later access contract and are fully charged.
+
+**One target environment, not a provisioned host.** Target Ubuntu24.04 x86-64
+host and guest, one pinned QEMU/KVM appliance on the existing Ubuntu24.04 CI
+surface **only if** it provides the required KVM/control privileges and evidence.
+Do not assume the I1 host choice grants these new privileges. Actual host/kernel,
+QEMU/machine/device configuration, guest image/boot chain, backing granularity,
+KVM availability and provider permission are **UNKNOWN_UNREGISTERED**. No install,
+VM boot, workflow dispatch or availability probe occurs in B. No TCG, alternate
+provider or larger host is automatically selected if this environment fails.
+
+The [GitHub-hosted runner documentation](https://docs.github.com/en/actions/concepts/runners/github-hosted-runners)
+explicitly does not support nested virtualization or guarantee its stability,
+performance or compatibility. Thus the existing CI is **not a qualified assurance
+environment on the evidence available here**; this is not a claim that KVM is
+absent or virtualization impossible. Required provider/control evidence must be
+supplied and accepted before any later capability launch, not discovered through
+trial boots. Without it, zero of the proposed starts may be used. B does not
+recommend directly implementing on the currently unqualified CI surface.
+
+The [QEMU invocation manual](https://www.qemu.org/docs/master/system/invocation.html)
+describes fixed startup RAM when hotplug is omitted, and separately documents
+auxiliary device RAM; `-m` alone is therefore insufficient for this specification.
+The [KVM memory-region API](https://docs.kernel.org/virt/kvm/api.html#kvm-set-user-memory-region)
+allows guest slots to be changed: selected configuration and management access
+must prevent later additions. These are interface facts, **not a certificate of
+a selected binary or host**. Exact deployed versions and their matching evidence
+are required later; current/master documentation supplies no such identity.
+The [cgroup v2 manual](https://docs.kernel.org/admin-guide/cgroup-v2.html)
+allows temporary `memory.max` overshoot. Consequently a container limit, RSS
+monitor or RLIMIT alone is not proposed as a strict4GiB capacity guarantee.
+
+| Requirement / delivery protected | Evidence required before later admission | Obtainability and present status |
+|---|---|---|
+| Closed capacity from first instruction, including startup | Exact hypervisor/machine/device/firmware identities; complete backing inventory and sum; version-matched explanation of fixed capacity and denied management/growth paths | Public interface mechanism exists; actual inventory, selected implementation closure and independent acceptance UNKNOWN. No generic command line or successful boot substitutes |
+| Trust and reproducible environment | Immutable host/provider identity, selected kernel/KVM/QEMU binaries/configuration and guest/source/lock hashes; explicit trust in virtualization isolation and host operator | Owner-controlled provider/export must supply evidence without secrets; CI label alone insufficient. Hosted nested virtualization lacks provider support/guarantees; actual permission/identity UNKNOWN. No trial to obtain a missing mandatory premise; unavailable means reject, not another host search |
+| All required work inside the limit | Role/process/phase inventory covering all eight categories, guest OS and helpers; no escaped child, host workspace or overlapping appliance | Obtainable from future public integration and selected configuration, not historical raw evidence. Presently UNKNOWN; no claim that a workload completes within the capacity |
+| Independent actual preflight and complete exit | Separate reviewer identity and configuration review; data-free actual launch records, frozen identities, guest settings and observed process/VM exits | A newly registered independent role is required; I1 role/quotas do not transfer. B performs none |
+| Honest resource and scientific conclusions | Capacity-confinement result separate from completion, OOM, quality, speed, full-fit and historical gaps | Enforced capacity may bound a failed run; it does not prove fit feasibility, repair P/17 or clear a scientific Gate |
+| Fair end-to-end comparison | Same new appliance/source/limits for all methods and optimized reference; startup/virtualization/I/O/audit/failure and offline costs charged | Performance and usable baseline UNKNOWN_NOT_TESTED. A slow virtualized uniform cannot manufacture an acceleration claim; applicable fair-reference obligations remain |
+
+This one Ubuntu target is not a replacement for B3's **Apple M2 plus independent
+Ubuntu24.04** final evidence. The proposed appliance supplies no Apple resource
+assurance or cross-environment result; those remain UNKNOWN/unadmitted. Adopting
+the metric does not change final environments, minimum two-scale evidence or
+replication, and does not commission a second appliance/backend to fill that gap.
+
+**Proposed independent preflight and failure semantics.** Before any later
+research input, an independent reviewer who did not implement the appliance
+must accept the exact capacity/trust/inventory evidence. A separate actual
+data-free launch preflight then checks frozen identities, source/lock/CI,
+argv/cwd/origins/permissions, complete role placement, no swap/offload/growth,
+bounded public input identity and immutable pending/start/exit/teardown receipts.
+Pending precedes VM/role start; terminal success follows observed exits only.
+The capacity boundary must already hold before guest boot, not begin at the
+first `/proc` snapshot. A missing mandatory premise refuses launch; a test boot
+does not establish the missing guarantee. No old payload is mounted for preflight.
+
+OOM/ENOMEM, timeout, escape, unexpected mapping/device, lost identity or frozen
+mutation invalidates dependent work and stops the whole role tree. Preserve
+prefixes, attempted/completed counts, full costs and unexecuted suffixes; no
+automatic restart/fallback, hot-add or retry. Missing exit/teardown is a process
+failure/UNKNOWN, never success. If confinement cannot be established, resource
+admission is UNKNOWN/STOP; if a registered capacity is exceeded, it is a resource
+FAIL. A bounded OOM proves neither a successful workload nor general algorithmic
+impossibility. Existing stricter failure/STOP rules still bind old identities.
+
+| Current obligation | Proposed prospective difference — requires adoption |
+|---|---|
+|4GiB complete simultaneous native/startup/lifetime assurance before input | Same numerical ceiling, **different metric/trust boundary**: closed guest-visible capacity includes guest OS; native source/binary/startup/lifetime upper-bound proof replaced by trusted fixed virtual hardware confinement. New host hypervisor overhead excluded explicitly. No claim of equivalence or current compliance |
+| Independent complete review and actual launch preflight | Independence and preflight retained; evidence object changes to selected appliance capacity/configuration/role containment. Merely monitoring a run remains insufficient |
+| Full-fit memory PENDING4GiB; I1 pre-entry UNKNOWN; old B4.24/28 gaps | All stay unchanged. A new identity could use the adopted metric only after a separate compatible contract; no retrofit, reopen or inherited admission |
+| Same-quality/fixed primary/fair speed and full accounting | No change:1.001/volume/convergence/re-solve/zero required failures/fallbacks, fixed17, speed/replication and all paid history stay; VM overhead is charged and performance remains UNKNOWN |
+
+**Finite later investment/access request — NOT GRANTED.** Only if the owner
+first adopts this resource claim, a separate instruction could commission one
+actual appliance integration and resource-admission capability, with a new
+contract and independent role. Proposed ceiling: **12 active engineering/review
+hours,8 implementation+4 independent**, including at most4 public guest starts
+and1800 aggregate guest-wall seconds including failures and final data-free
+preflight. The starts/time are ceilings within that capability, not a prediction,
+new scientific quota or transferable I1 allowance. Required full regression/CI/
+publication remains additional recorded software cost, UNKNOWN_NOT_ZERO. This
+smaller scope omits I1's numerical port;12 hours is an owner investment limit,
+not a completion guarantee. No second appliance/backend/proof/guard slice follows
+a failed/UNKNOWN result; close and make a route decision.
+
+That later request would permit only committed public software fixtures, new
+appliance build/configuration/launch metadata and provider evidence. It requires
+explicit provider/KVM/control permission on the one target above, no cloud
+purchase, and no historical index/model/label/raw/backup/sealed access. Proposed
+scientific budget: **none**. Provider monetary/CI cost and whole-project forecast
+are UNKNOWN, not zero; absent an accepted finite cost reservation, do not launch.
+The host documentary prerequisites precede this investment; it is not a request
+to spend12 hours or four boots investigating an unsupported environment.
+If actual resources cannot be obtained within those terms, stop without a
+substitute provider or a second proposal. No pilot14580s or research attempt is
+included, even if the appliance later passes.
+
+**Accounting and finite exit.** Preserve K=12721.16417100014444982>7200 and D1
+FULL60, giving known floor12781.16417100014444982 plus all additional history,
+B/other software/CI/publication costs UNKNOWN_NOT_ZERO. Proposed work ceilings
+are not spend. No guest metric or new identity repairs old all-paid7200.
+Current metrics/P/17 failures/quality/speed/resource UNKNOWN/full-fit/seals have
+no measured delta from B. B delivers a decision object only. Adoption refused,
+unobtainable host evidence, incomplete inventory, absent independence, cap/STOP
+or failed confinement ends the applicable proposal/capability with the pause
+retained, without algorithm selection or experiment. P/17 has no repair date;
+resource adoption alone supplies no repair evidence.
+
 ### Unique next item — owner scope decision, not an executable capability
 
-Retaining FULL_V2_OPEN_NO_ADMITTED_ROUTE is already decided. The unresolved
-question is: **keep the current admission specification and pause, or commission
-one finite prospective resource-assurance specification proposal before any
-further scientific implementation?**
+The original option B commissioning decision is **resolved by the owner's
+2026-10-18 instruction**. B now closes with the specification above, not adoption.
+The single remaining decision is whether **this guest-capacity claim and its
+explicit host-overhead exclusion are acceptable for a new prospective identity**.
 
-| Finite option | Consequence after explicit choice |
+| Finite choice | Consequence — no work starts automatically |
 |---|---|
-| A — retain current specification and scientific pause (current effective default) | No new capability/proposal/experiment; all current resource obligations remain. Platform A2.3 stays a candidate requiring a separate instruction |
-| B — commission one prospective resource-assurance specification proposal only (recommended if seeking critical-path resumption) | One document slice in existing plans: define4GiB metric/scope, selected environment/evidence obtainable, independent roles/preflight, hard-limit/failure semantics, differences from current proof obligations, and finite adoption/budget/access decisions; deliver one reviewable specification or explicit no adequate proposal, then stop. No algorithm research, proof implementation, checker/toy chain, real input, trial, new scientific budget or standard change follows |
+| Adopt the proposed metric/trust boundary for future contracts (conditional recommendation only if this is the intended4GiB deliverable) | Explicitly accepts the metric/scope change prospectively; old standards/results remain. Then separately decide the concrete12-hour/4-start/1800-second public appliance capability, provider permission and finite cost reservation above. Adoption alone commissions none of it and no science |
+| Reject and retain current complete native-role assurance | This proposal supplies no suitable route under that requirement; a whole-host guarantee is also outside its scope, but is not a current I1 requirement. Retain FULL_V2_OPEN_NO_ADMITTED_ROUTE and scientific pause. No automatic replacement proposal, I1/D1 reopening, B4.52 or A2.3 |
 
-Option B is **NOT AUTHORIZED** by this maintenance. Even a useful proposal needs
-separate adoption of any changed requirement and a later bounded capability
-contract; it does not reopen I1/D1, auto-restore B4.52 or approve the14580s pilot.
-Quality/reliability/speed questions remain separately pending, not bundled
-relaxations. No acceptable proposal means retain the pause, without a default
-second proposal. A plain “continue” after closure displays this concrete decision
-only; it grants neither option B nor A2.3. Close this maintenance, retain the
-assigned worktree and stop without executing its recommendation.
+No choice is presumed; the current standard remains effective until explicit
+adoption. Quality/reliability/speed advice stays separately pending. A plain
+“continue” displays this decision only. Finish B's documentation/regression/
+protected publication, retain the assigned worktree and **STOP**. See the
+[B validation record](../validation/b_resource_assurance_specification.md).
 
 ## 7. Stage completion evidence
 

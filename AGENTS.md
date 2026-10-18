@@ -38,17 +38,22 @@ Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibilit
 full fit PENDING4GiB and every old UNKNOWN/seal remain. Read applicable frozen
 contracts before dependent work; unresolved substantive conflicts stop that work.
 
-Current authority is one documentation consolidation, required software regression
-and normal publication only. No algorithm/resource-proof implementation, A2.3,
-old input/model/label/backup/seal access, experiment, new scientific budget or
-formal retry/reset. Use versioned documents and necessary committed-source text;
-do not follow old evidence pointers. After closeout the unique next item is the
-roadmap's concrete owner scope decision: retain current specification/pause, or
-separately commission one finite prospective resource-assurance specification
-proposal. Neither that proposal nor a platform capability is automatically
-commissioned. “Continue” finishes this slice or, once closed, displays the decision
-only. No D1/I1 reopening, cap transfer or backend/proof/toy/guard/platform chain.
-Retain the assigned worktree; close one authorized slice and stop.
+Current authority is B: one finite prospective resource-assurance specification
+proposal in [roadmap Section6](docs/planning/TopoLab_v2_development_roadmap.md#b-resource-assurance-specification),
+plus required regression and normal publication. The proposal is
+PROPOSED_NOT_ADOPTED: fixed guest-visible capacity differs from current native
+assurance; excluded host overhead stays additional UNKNOWN. No standard, budget,
+access or resource admission changes; no appliance/algorithm/proof implementation,
+A2.3, old input/model/label/backup/seal access, experiment or formal retry/reset.
+Use versioned documents, necessary committed-source text and public primary
+assurance-interface documentation; do not follow old evidence pointers.
+PR199/main622d546 completed methods consolidation with all four main CI contexts
+passed. After B closeout the unique next item is its concrete owner adoption
+choice: accept the proposed metric/trust boundary for a new future identity, or
+retain current requirements/pause. Adoption alone commissions no capability;
+12-hour/4-start/1800-second later public-appliance terms remain unapproved.
+“Continue” displays that decision only. No D1/I1 reopening, cap transfer or
+backend/proof/toy/guard/platform chain. Retain this worktree and stop after B.
 
 ## Provenance boundary
 

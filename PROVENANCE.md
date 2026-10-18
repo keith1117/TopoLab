@@ -1489,3 +1489,22 @@ blobs without importing the primary inspector or executing target binaries.
 The primary reviewed their read/execute/output boundary and actual source;
 their facts remain UNKNOWN for complete admission. No external implementation
 or old research payload was imported.
+
+## B prospective resource-assurance specification (2026-10-18)
+
+The owner commissions one document proposal in the existing
+[roadmap](docs/planning/TopoLab_v2_development_roadmap.md#b-resource-assurance-specification),
+not an implementation, resource proof or adopted standard. The
+[QEMU invocation manual](https://www.qemu.org/docs/master/system/invocation.html),
+[Linux KVM memory-region API](https://docs.kernel.org/virt/kvm/api.html#kvm-set-user-memory-region)
+the [cgroup v2 manual](https://docs.kernel.org/admin-guide/cgroup-v2.html)
+and [GitHub-hosted runner documentation](https://docs.github.com/en/actions/concepts/runners/github-hosted-runners)
+were read on2026-10-18 for public capacity/configuration/limit interface context
+only, including the provider's unsupported nested-virtualization limitation.
+Current/master documents bind no deployed version, selected host or
+complete resource certificate. The normative guest-capacity/trust-boundary
+specification is original planning; no new kernel/hypervisor proof or algorithm
+is implemented or evaluated, and no VM is executed. No reference code, figure
+or implementation is copied, translated or vendored.
+No Hack3D content/comparison or old external research/backup/sealed payload is
+read. Required ordinary regression remains separate software verification.
