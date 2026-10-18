@@ -11,7 +11,7 @@ accepted by the owner in the reassessment conversation. It changes delivery
 governance; it is not a new numerical experiment contract, scientific Gate or
 budget authorization.
 
-Current authority (owner-approved B specification proposal,2026-10-18):
+Current authority (owner-approved prospective B metric adoption,2026-10-18):
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE is retained by owner decision; science is stopped.**
 I1 software and independent resource-stop publication are complete through
 [PR197](https://github.com/keith1117/TopoLab/pull/197) and
@@ -27,14 +27,23 @@ owner-closed exact-physics rescue and rejected solver-internal candidate remain
 historical conclusions. B4.52 remains NOT_SELECTED_BY_R1.
 
 The Section4 methods published through [PR199](https://github.com/keith1117/TopoLab/pull/199),
-main622d546, remain effective. The owner now commissions B only: one finite
-[resource-assurance specification](TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
-in the existing roadmap, **PROPOSED_NOT_ADOPTED**. It explicitly distinguishes
-fixed guest-visible capacity from current native-role assurance and leaves host
-overhead additional UNKNOWN. Adoption is the next owner decision; no changed
-standard, capability, budget, access or experiment is authorized. A2.3 remains
-uncommissioned. No D1/I1 reopening, pilot14580s, formal retry/reset or proof/toy/
-guard/platform chain follows. Required software regression/publication closes B.
+main622d546, remain effective. B's specification was published through
+[PR200](https://github.com/keith1117/TopoLab/pull/200), main1da9740, with all four
+[main CI contexts](https://github.com/keith1117/TopoLab/actions/runs/39110392591) passed.
+The owner now explicitly adopts its complete
+[guest-capacity metric/trust boundary](TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
+for new compatible future contract identities only:
+**ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED**. Host overhead remains
+additional UNKNOWN; old native contracts/results are unchanged. Adoption is
+resolved, but no concrete host, resource admission or independent preflight is
+complete. Current authority covers this adoption documentation, mandatory
+regression and normal publication only. No scientific threshold/budget/access,
+implementation, installation/probe/VM/manual workflow, experiment or successor
+is granted; A2.3 and12-hour/4-start/1800-second appliance work remain unapproved.
+No D1/I1 reopening,14580s pilot, retry/reset or proof/toy/guard/platform chain.
+The [single next item](TopoLab_v2_development_roadmap.md#unique-next-item--host-eligibility-evidence-and-separate-owner-authorization)
+is host/provider documentary eligibility, with responsibility and later finite
+cost/explicit authorization fields; do not ask for adoption again.
 Sections5–7 below retain the original reassessment/handoff history; they do not
 restart R1. All failures, costs, UNKNOWN, quotas and seals remain.
 
@@ -229,9 +238,11 @@ speed effect thresholds and resource assurance method, their evidence basis and
 unanswered questions. Any change needs a separately reviewed finite proposal,
 prospective compatible identity and explicit adoption before results. Do not pick
 standards just sufficient for observed P/17, relabel old FAIL, amend historical
-contracts or reset costs. Retaining4GiB/independent preflight is effective;
-changing how it is assured is not approved. No resource UNKNOWN becomes proved
-impossible or an execution grant through wording.
+contracts or reset costs. Retaining4GiB/independent preflight is effective.
+The later B adoption in Section10 resolves only the complete prospective
+resource metric/trust boundary for new compatible identities; concrete assurance
+and admission remain incomplete. Quality/reliability/speed advice remains pending.
+No resource UNKNOWN becomes proved impossible or an execution grant through wording.
 
 ## 5. Historical R1 scheduling (2026-10-15)
 
@@ -367,3 +378,20 @@ and finite later investment/access decisions. See the
 Full v2/fixed P/17/4GiB/independence and all historical boundaries stay; no
 algorithm or resource proof is implemented. Close publication and stop for the
 explicit metric/trust-boundary adoption decision, without commissioning a successor.
+
+
+## 10. B resource metric adopted prospectively (2026-10-18)
+
+Section9 records the historical proposal-only commission. After PR200/main1da9740,
+the owner explicitly adopts its complete guest-visible backing-capacity definition
+and host-overhead exclusion for new future compatible identities only. The
+[roadmap](TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
+retains every capacity/lifetime/control/independence condition; no new executable
+contract or environment is admitted. This is ADOPTED_PROSPECTIVELY;
+ENVIRONMENT_NOT_ADMITTED, not equivalent old native proof, a whole-host4GiB
+guarantee or a scientific Gate. I1/D1/old failures/costs/UNKNOWN/quotas/seals stay.
+See [adoption validation](../validation/b_resource_assurance_adoption.md) and the
+[host-evidence handoff](TopoLab_v2_development_roadmap.md#unique-next-item--host-eligibility-evidence-and-separate-owner-authorization).
+Only adoption documentation/regression/publication is authorized. No later
+12-hour capability, install/probe/VM/manual workflow, old access or experiment.
+Finish this slice, retain the worktree and stop without a successor.
