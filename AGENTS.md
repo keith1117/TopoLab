@@ -44,19 +44,29 @@ The owner separately adopted B4.30-style RSS/full-exit empirical acceptance for
 NEW M2 native identity only, retaining4GiB and independent preflight. This is
 not a-priori allocation assurance or a change to old I1/D1/B contracts.
 
-M2 H stage A is closed through PR202/203/main65bbbd3, four CI contexts passed.
-[R preparation](docs/planning/p17_m2_input_export_preparation_protocol.md) closed
-STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING. Tools merged through PR204/
-main43ffed0, all four main CI passed before the first independent public IO role.
-Its fixture fields passed, but actual whole wall109.224s+10 exceeded the immutable
-20s receipt charge; final serializer exit1. Full-role RSS remains UNKNOWN, not
-measured>4GiB. Old source stat/reads0; R0/R1 unlaunched and closed, no12/528/18
-exports. Failed role conservatively FULL120 plus shared FULL60=180/1860s; the
-one new-output backup/exit closeout passed. Publish the failed prefix and STOP.
-No B/C, old/backup access, expanded input, implementation fix, retry/reset,
-unused-cap transfer or automatic successor. A new finite identity/call-cost
-proposal and explicit owner decision are needed before any further R work;
-B FULL180/C14580s remain unapproved. Read current status/results; retain worktree.
+M2 H stage A is closed through PR202/203/main65bbbd3. Old
+[R/v1](docs/planning/p17_m2_input_export_preparation_protocol.md) remains
+STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING:109.224s+10>immutable20s,
+final serializer exit1, full RSS UNKNOWN, old reads0, R0/R1 closed unlaunched.
+Failed FULL120+shared FULL60=180/1860s; closed1680s never transfers. Source PR204/
+main43ffed0 preceded entry; result PR205/main3459dd5 and all four main CI passed.
+
+The owner expressly authorized NEW R/v2 under the
+[protocol](docs/planning/p17_m2_input_export_billing_revision_protocol.md):
+`/root`3h and new different-author `/root/review_r_v2`2h; six once-only FULL
+charges120/120/120/780/660/60=1860s and exact40-metadata/12-checkpoint/528-train/
+18-uniform original-byte/temporary-parse scope. Preserve v1 frozen bytes/STOP/costs.
+First publish reviewed tools under all five checks and four PR/main CI contexts;
+then freeze literal new plan and pass independent public IO before R0/R1 source
+entry. Source review/local public tests passed; named roles/old reads0.
+Approval service recovered; main protection was checked. The five mandatory
+normal-permission source checks passed (2203 tests passed/1 platform skip).
+The earlier default-sandbox7 native permission failures remain recorded.
+Source PR/latest-head and merged-main CI plus literal freeze remain pending;
+do not start formal entry before all gates pass. No approval bypass.
+First named failure STOP/no retry; only one reserved NEW-only shared backup.
+No B/C, old backup/seal, expansion, cap transfer, new proof or successor. Complete
+finite preparation, regression and protected publication; retain worktree and STOP.
 
 ## Provenance boundary
 

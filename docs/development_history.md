@@ -2042,3 +2042,81 @@ RSS remains UNKNOWN. Retain earlier corrected review misreading and every cost.
 Required result regression/normal publication then STOP; no frozen fix/retry,
 old input, B/C or successor. New finite R identity/call-cost work needs a separate
 owner decision; no additional allocation/kernel proof is required.
+
+
+## 2026-10-18 — New R/v2 finite billing revision proposal, documents only
+
+Owner authorized only a [new identity billing contract/budget proposal](planning/p17_m2_input_export_billing_revision_proposal.md)
+and [JSON](planning/p17_m2_input_export_billing_revision_proposal.json), no implementation,
+old input, precheck, B/C or successor. Assigned ec0b recovered clean detached
+3459dd5, no untracked files; read-only GitHub checks confirmed same latest main,
+no open PR and PR205/main CI39191422887 all-four success. Work stays in ec0b on
+`docs/m2-r-billing-revision-contract`; main checkout and other worktrees untouched.
+
+New `topolab.v2.p17-m2-input-export-preparation.v2` is PROPOSED_NOT_AUTHORIZED:
+3h exporter+2h newly delegated different author, same six caps/1860s IO, now
+immutable FULL charges before dispatch and independent complete outer-wall/RSS/
+actual-final-exit binding. Failure records retain available serializer peaks
+before acceptance assertions; missing evidence remains UNKNOWN/STOP. Same frozen
+40-metadata/12-checkpoint/528-train/18-uniform content/byte/read bounds, with a
+fresh explicit full-byte/temporary-parse exception required; public-only approval
+would not authorize R0/R1. No new allocation/kernel or recursive observer proof.
+
+Old R/v1 STOP/20s failed receipt/109.224s whole wall/final exit1, complete RSS
+UNKNOWN, old reads0 and closed source roles remain. Failed FULL120+shared FULL60
+paid180/1860 and unused1680 closed; no retry/reset/transfer. Old R contracts,
+protocol/reports, parent drafts and source remain byte-identical. EN/ZH current
+plans, AGENTS/status/policy and indices now distinguish this proposal from old
+publication and execution authority. All historical Gates/costs/quotas/seals,
+fixed P/17/uniform/full-fit PENDING4GiB and independent preflight remain.
+
+JSON/MD identity/scope/count/budget/link/preserved-byte/diff checks only;
+no code change, installation, old external stat/read, delegated agent, R entry,
+B/C or experiment. Uncommitted review drafts, no regression/CI/publication for
+this document slice; future commits retain all five required checks and normal
+publication guards. Documentation costs UNKNOWN_NOT_ZERO, separate from ungranted
+new caps. Sole next item is owner decision on the finite new grant. STOP.
+
+
+## 2026-10-19 — Authorized finite NEW R/v2 FULL billing and preparation
+
+The owner expressly authorized both new drafts: `/root`3h from04:33:59 UTC and
+new different-author `/root/review_r_v2`2h from04:34:17 UTC, six FULL charges
+120/120/120/780/660/60=1860s and exact40 metadata/12 checkpoint/528 train/18
+uniform original-byte/temporary-parse exception. Recovered assigned ec0b3459dd5
+with ten tracked/two untracked draft documents, all preserved; main same/openPR0/
+all-four main CI39191422887 confirmed. Current branch fix/m2-input-export-billing.
+
+[Protocol](planning/p17_m2_input_export_billing_revision_protocol.md),
+[software report](validation/p17_m2_input_export_billing_revision.md) and
+[independent review](validation/p17_m2_input_export_billing_revision_independent_review.md)
+record minimal v2 bindings, complete consecutive external events/FULL/RSS/actual
+exit and one NEW-only independently compared backup. Original field/numerical
+semantics and old frozen R/v1 documents remain. Prefreeze software stage has
+formal roles/old reads0; clean merged all-CI source precedes freeze/public entry,
+independent R0 before R1. First named failure closes source suffix/no retry.
+Old R paid180/closed1680 and every historical failure/cost/quota/UNKNOWN/seal,
+4GiB/independent preflight/P17/uniform/B3 remain. No B/C, expanded input, new
+allocation proof, cap transfer or successor. Complete finite outcome/publication
+then STOP; later actual results append here without rewriting older entries.
+
+Prefreeze checkpoint: public integration107 passed; full default-sandbox2204
+ended7 failed/2196 passed/1 Linux-only skip in789.00s. Both authors confirmed
+NEW fixture kern.clockrate permission denial and incomplete native RSS. Proper-
+permission checks/protection queries were NOT executed because automatic review
+repeatedly returned model-capacity errors. Owner requested recovery; current
+interfaces expose no reviewer restart and prohibit Codex self-UI automation.
+Keep all modifications uncommitted, no PR/publication claim, formal roles/old
+TopoLab source reads/new restricted IO paid0. Restore service within original
+budgets; no permission weakening, database change, frozen retry or successor.
+
+The owner then switched the chat model; the read-only main protection query
+worked at05:34 UTC without changing sandbox/approval rules. The different-author
+reviewer found and checked a new freeze-negative-test ordering error; the root
+fixed it before release. Final normal-permission mandatory five checks all
+passed: complete2203 tests passed/1 selected Linux-only skip, with13 targeted
+native fixtures also passing. The default-sandbox failed attempt remains in
+the [R/v2 software report](validation/p17_m2_input_export_billing_revision.md).
+This is a pre-entry software result only; source PR/main CI/freeze remain,
+formal roles/old reads/new IO paid0 at this checkpoint, original actor
+deadlines unchanged.

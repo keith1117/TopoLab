@@ -2,18 +2,30 @@
 
 英文工作版：[v2 Development Roadmap](./TopoLab_v2_development_roadmap.md)
 
-当前收尾（R在旧输入前停止，2026-10-18）：
+当前执行（新R/v2，2026-10-19）：
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE、固定P/17未修复、uniform默认、科研暂停。**
-A经PR202/203关闭。所有者授权的[R准备](p17_m2_input_export_preparation_protocol.md)
-保留执行3小时/不同作者审查2小时、内部I/O1860秒范围。工具经
-[PR204](https://github.com/keith1117/TopoLab/pull/204)/main43ffed0合并，四项main CI通过后冻结启动首次独立公开I/O。
-公开fixtures字段检查通过，但完整角色109.224秒＋10超过不可变收据的20秒，最终序列化器退出1。
-**STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING**；完整角色RSS仍UNKNOWN，不是已测>4GiB。
-旧源stat/读取0；R0/R1未启动且关闭，没有12/528/18来源导出。失败角色保守FULL120＋共享FULL60＝180/1860秒；
-一次仅新前缀备份/完整退出收尾通过。见[实际补充](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access)。
-规定回归、正常发布后停止；不修复冻结实现、不访问旧输入、不重试/reset、转移余量或自动B/C。
-任何新R身份/调用计费工作须有限提案和明确所有者决定；B FULL180/C14580秒仍未批准。
-[原范围](p17_m2_input_export_preparation_proposal.md)及[JSON](p17_m2_input_export_preparation_proposal.json)保留原字节。
+所有者已明确授权[新R/v2合同](p17_m2_input_export_billing_revision_proposal.md)及
+[JSON](p17_m2_input_export_billing_revision_proposal.json)：`/root`最多3小时，
+新不同作者`/root/review_r_v2`最多2小时，六角色FULL120/120/120/780/660/60＝1860秒；
+精确40元数据/12 checkpoint/528训练/18 uniform原packet的完整字节核验及临时解析例外。
+按[新协议](p17_m2_input_export_billing_revision_protocol.md)执行；五项本机回归通过（2203通过/1平台跳过），
+正式角色与旧源读取仍0，须先干净合并且main四项CI通过，再冻结并通过独立公开入口。
+首次命名失败即关闭来源后缀、不重试；不B/C、扩大输入、读旧备份、转移余量或自动后继。
+4GiB和独立预检保持。
+自动审批已恢复并核对main保护规则；此前默认沙盒2196通过/7原生权限失败/1跳过仍独立保留。
+见[当前状态](../project_status.md)；源码PR及合并后main四项CI待完成，正式角色/旧读/新I/O已付均0，
+原工时上限不重置或转移，不自动后继。
+
+A经PR202/203关闭。旧[R/v1](p17_m2_input_export_preparation_protocol.md)保留
+STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING：完整109.224秒＋10超过不可变20秒收费，
+最终序列化器退出1、完整RSS UNKNOWN、旧读取0、R0/R1未启动且关闭、无12/528/18导出。
+失败FULL120＋共享FULL60＝180秒及关闭的1680秒保持，不转移或重试。工具PR204/main43ffed0/四项CI
+先于该失败入口；结果[PR205](https://github.com/keith1117/TopoLab/pull/205)已合并为3459dd5。
+本片只读核对main未变、无开放PR，四项[main CI39191422887](https://github.com/keith1117/TopoLab/actions/runs/39191422887)均成功。
+[实际补充](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access)、
+[原范围](p17_m2_input_export_preparation_proposal.md)/[JSON](p17_m2_input_export_preparation_proposal.json)、协议及报告保留原字节。
+后来的明确新R/v2授权独立于关闭的v1；只完成上述有限准备、规定回归及正常发布后停止。
+B FULL180/C14580秒未批准，不自动开启后继。
 
 新M2原生4GiB RSS/完整退出实证采用及独立预检保持，不增事前分配证明。
 B客户机容量采用独立、环境未准入、宿主开销UNKNOWN。真实P/17质量/速度/资源仍UNKNOWN/NOT_RUN，
@@ -48,7 +60,7 @@ D1 已按 UNKNOWN 停止，当前救援程序已由所有者关闭；第6节记�
 [验证报告](../validation/README.md)为准。`v1.0.0` 与 M1/M2 的负面结论继续保留。
 
 制定日期：2026-09-24
-修订日期：2026-10-18（A已发布；R在旧读取前停止，B/C未授权）
+修订日期：2026-10-19（旧R保持关闭；新R/v2有限准备获准，B/C未授权）
 
 相关文档：
 
@@ -503,8 +515,11 @@ final 证据。不得对 B5 结果展开未预注册搜索。
 所有者保留 **FULL_V2_OPEN_NO_ADMITTED_ROUTE**、固定P/17未修复、uniform默认、4GiB及独立预检。
 A已关闭；获准的[R准备](p17_m2_input_export_preparation_protocol.md)在首次公开I/O因完整用时/计费绑定
 失败、最终序列化器退出1而停止。旧stat/读取0，R0/R1未启动且关闭。失败FULL120＋共享FULL60＝180秒，
-保留不可变失败前缀及已核验的新产物备份；规定回归、正常发布后停止。不扩大、修复冻结实现、重试/reset、
-转移余量或自动B/C。新M2 RSS采用、B客户机独立边界及旧失败/成本/UNKNOWN/配额/封存保持；P/17未修复。
+保留不可变失败前缀及已核验的新产物备份；结果PR205/main3459dd5/四项CI已完成。
+后来明确授权新R/v2的3h+2h/1860秒及精确来源例外；按
+[新协议](p17_m2_input_export_billing_revision_protocol.md)先发布源码/四项main CI，再冻结、一次公开入口、R0后R1。
+不扩大、重试/reset、转移余量或自动B/C。
+新M2 RSS采用、B客户机独立边界及旧失败/成本/UNKNOWN/配额/封存保持；P/17未修复。
 
 以下顺序**仅在另行授权和满足准入后适用**，是目的/验收/退出说明，不是新立项或新Gate。
 所有后续片适用[交付复盘方法](TopoLab_v2_交付复盘与后续开发约束.md#4-已生效的开发方法)。
@@ -569,9 +584,11 @@ A2.4依赖恢复能力，A4依赖资源限制。
 A由PR202/203关闭，R工具经PR204/main43ffed0合并且四项main CI通过后，首次冻结公开I/O因完整
 用时/计费差异停止。获准的12权重、528训练原件及18标量原packet均未打开，来源/字段仍UNKNOWN_NOT_RUN。
 见[实际R补充](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access)。
-R0/R1未启动且关闭，不重试或转移余量。规定回归/结果发布后停止。唯一下一项是所有者决定是否另以新身份
-有限修正实际调用/计费缺陷，并单独授权旧读取前的公开I/O入口；本片不执行。无需新增分配器/内核证明。
-B FULL180/C14580秒和科学角色/调用/费用准入仍独立、未批准；B3最终义务不变。
+R0/R1未启动且关闭，不重试或转移余量；结果PR205/main3459dd5/四项CI已完成。
+后来明确授权新R/v2的有限3h+2h/1860秒及精确来源例外。不同作者已任命，
+当前软件实现/公开fixture审查进行中，正式角色/旧源读取仍0。按新协议先通过合并/CI再冻结一次入口，
+独立R0验收在R1之前。完整外层/RSS/退出与4GiB保持；首次命名失败STOP不重试。
+不增分配器/内核证明，B FULL180/C14580秒、科学准入及B3义务不变。完成有限准备及发布后停止。
 
 ### B 前瞻资源保证规格
 

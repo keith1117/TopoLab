@@ -9,18 +9,30 @@
 本文记录所有者在本对话中认可的复盘、新期望和后续工作规则，属于交付治理调整，
 不是新的数值实验合同、科研 Gate 或预算授权。
 
-当前收尾（R在旧输入前停止，2026-10-18）：
+当前执行（新R/v2，2026-10-19）：
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE、固定P/17未修复、uniform默认、科研暂停。**
-A经PR202/203关闭。所有者授权的[R准备](p17_m2_input_export_preparation_protocol.md)
-保留执行3小时/不同作者审查2小时、内部I/O1860秒范围。工具经
-[PR204](https://github.com/keith1117/TopoLab/pull/204)/main43ffed0合并，四项main CI通过后冻结启动首次独立公开I/O。
-公开fixtures字段检查通过，但完整角色109.224秒＋10超过不可变收据的20秒，最终序列化器退出1。
-**STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING**；完整角色RSS仍UNKNOWN，不是已测>4GiB。
-旧源stat/读取0；R0/R1未启动且关闭，没有12/528/18来源导出。失败角色保守FULL120＋共享FULL60＝180/1860秒；
-一次仅新前缀备份/完整退出收尾通过。见[实际补充](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access)。
-规定回归、正常发布后停止；不修复冻结实现、不访问旧输入、不重试/reset、转移余量或自动B/C。
-任何新R身份/调用计费工作须有限提案和明确所有者决定；B FULL180/C14580秒仍未批准。
-[原范围](p17_m2_input_export_preparation_proposal.md)及[JSON](p17_m2_input_export_preparation_proposal.json)保留原字节。
+所有者已明确授权[新R/v2合同](p17_m2_input_export_billing_revision_proposal.md)及
+[JSON](p17_m2_input_export_billing_revision_proposal.json)：`/root`最多3小时，
+新不同作者`/root/review_r_v2`最多2小时，六角色FULL120/120/120/780/660/60＝1860秒；
+精确40元数据/12 checkpoint/528训练/18 uniform原packet的完整字节核验及临时解析例外。
+按[新协议](p17_m2_input_export_billing_revision_protocol.md)执行；五项本机回归通过（2203通过/1平台跳过），
+正式角色与旧源读取仍0，须先干净合并且main四项CI通过，再冻结并通过独立公开入口。
+首次命名失败即关闭来源后缀、不重试；不B/C、扩大输入、读旧备份、转移余量或自动后继。
+4GiB和独立预检保持。
+自动审批已恢复并核对main保护规则；此前默认沙盒2196通过/7原生权限失败/1跳过仍独立保留。
+见[当前状态](../project_status.md)；源码PR及合并后main四项CI待完成，正式角色/旧读/新I/O已付均0，
+原工时上限不重置或转移，不自动后继。
+
+A经PR202/203关闭。旧[R/v1](p17_m2_input_export_preparation_protocol.md)保留
+STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING：完整109.224秒＋10超过不可变20秒收费，
+最终序列化器退出1、完整RSS UNKNOWN、旧读取0、R0/R1未启动且关闭、无12/528/18导出。
+失败FULL120＋共享FULL60＝180秒及关闭的1680秒保持，不转移或重试。工具PR204/main43ffed0/四项CI
+先于该失败入口；结果[PR205](https://github.com/keith1117/TopoLab/pull/205)已合并为3459dd5。
+本片只读核对main未变、无开放PR，四项[main CI39191422887](https://github.com/keith1117/TopoLab/actions/runs/39191422887)均成功。
+[实际补充](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access)、
+[原范围](p17_m2_input_export_preparation_proposal.md)/[JSON](p17_m2_input_export_preparation_proposal.json)、协议及报告保留原字节。
+后来的明确新R/v2授权独立于关闭的v1；只完成上述有限准备、规定回归及正常发布后停止。
+B FULL180/C14580秒未批准，不自动开启后继。
 
 新M2原生4GiB RSS/完整退出实证采用及独立预检保持，不增事前分配证明。
 B客户机容量采用独立、环境未准入、宿主开销UNKNOWN。真实P/17质量/速度/资源仍UNKNOWN/NOT_RUN，

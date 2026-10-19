@@ -1,22 +1,36 @@
 # TopoLab v2 Development Roadmap
 
-Current closeout (R stopped before source access,2026-10-18):
+Current execution (NEW R/v2,2026-10-19):
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE; fixed P/17 unrepaired; science paused.**
-A is closed through PR202/203. Owner-authorized [R preparation](p17_m2_input_export_preparation_protocol.md)
-operated under caps3h exporter/2h distinct review and1860s IO. Tools merged through
-[PR204](https://github.com/keith1117/TopoLab/pull/204)/main43ffed0 and all four main
-CI jobs passed before the frozen first independent public IO role. Synthetic
-field checks passed, but actual complete wall109.224s+10 exceeded the immutable
-20s charge; final serializer exited1. **STOP_NO_RETRY /
-FAIL_FULL_NAMED_WALL_CHARGE_BINDING**; full-role RSS remains UNKNOWN, not >4GiB.
-Old source stat/reads0; R0/R1 closed unlaunched, no12/528/18 source exports.
-Conservatively FULL120 failed role + shared FULL60=180/1860s; one NEW-prefix
-backup/complete-exit closeout passed. See [execution supplement](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access).
-Required regression/normal publication closes R, then STOP. No fix, old input,
-retry/reset, cap transfer or automatic B/C. Any new R identity/call-cost work
-needs a finite proposal and explicit owner decision; B FULL180/C14580s remain
-unapproved. The [frozen scope](p17_m2_input_export_preparation_proposal.md) and
-[JSON](p17_m2_input_export_preparation_proposal.json) retain original bytes.
+The owner explicitly authorized the [new R/v2 proposal](p17_m2_input_export_billing_revision_proposal.md)
+and [JSON](p17_m2_input_export_billing_revision_proposal.json): exporter `/root`3h,
+new different-author `/root/review_r_v2`2h, six immutable FULL charges
+120/120/120/780/660/60=1860s and the exact40-metadata/12-checkpoint/528-train/
+18-uniform full-byte/temporary-parse exception. Follow the
+[new protocol](p17_m2_input_export_billing_revision_protocol.md). Source/public
+software passed all five local checks (2203 tests passed/1 platform skip);
+formal named roles and old source reads remain0
+before clean merged all-four-main-CI source and the independent frozen public
+entry. First named failure closes source suffix/no retry. No B/C, expanded input,
+old backup, cap transfer or automatic successor.4GiB/independent preflight remain.
+Approval recovered and main protection was checked. The earlier default-sandbox
+7 native-permission failures/2196 passed/1 skip remain recorded separately.
+See [current status](../project_status.md); source PR and merged main CI are
+pending, named roles/old reads/new IO paid0, original budgets unchanged.
+
+A is closed through PR202/203. Old [R/v1](p17_m2_input_export_preparation_protocol.md)
+remains STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING: whole109.224s+10
+exceeded immutable20s, final serializer exit1, full-role RSS UNKNOWN, old reads0,
+R0/R1 closed unlaunched, no12/528/18 exports. Failed FULL120+shared FULL60=180s
+and closed1680s remain; no transfer or retry. Source PR204/main43ffed0/all-four-CI
+preceded that failed entry. Result [PR205](https://github.com/keith1117/TopoLab/pull/205)
+merged as3459dd5; read-only recovery confirmed unchanged main, no open PR and all
+four [main CI39191422887 jobs](https://github.com/keith1117/TopoLab/actions/runs/39191422887)
+successful. See the [unaltered execution supplement](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access).
+Original [scope](p17_m2_input_export_preparation_proposal.md)/[JSON](p17_m2_input_export_preparation_proposal.json),
+protocol and reports retain bytes. The later explicit new R/v2 authority above
+is separate from closed v1; complete only its finite preparation and normal
+publication, then STOP. B FULL180/C14580s remain unapproved.
 
 New M2 native4GiB RSS/full-exit empirical adoption and independent preflight
 remain, without an a-priori allocation theorem. B guest-capacity adoption stays
@@ -2374,10 +2388,12 @@ uniform default,4GiB and independent preflight. A is closed. Authorized
 [R preparation](p17_m2_input_export_preparation_protocol.md) has stopped at its
 first public IO role: full-wall/charge binding failed, final serializer exit1.
 No old stat/read or R0/R1 occurred. Retain failed FULL120 + shared FULL60=180s,
-the immutable prefix and verified new-output backup; required regression and
-normal publication then STOP. No B/C, source expansion, retry/reset, frozen fix
-or cap transfer. New M2 RSS empirical adoption, separate B guest boundary and
-every historical failure/cost/UNKNOWN/quota/seal remain; no P/17 repair claim.
+the immutable prefix and verified new-output backup. Result publication closed
+through PR205/main3459dd5/all-four-CI. The later new R/v2 grant authorizes only
+its finite3h+2h/1860s/source exception under the
+[new protocol](p17_m2_input_export_billing_revision_protocol.md), independently
+of the closed v1 grant. No B/C, source expansion, retry/reset or cap transfer. Native RSS adoption, separate B guest
+boundary and all historical failures/costs/UNKNOWN/quotas/seals remain.
 
 The following order applies **only after separate authority and admission**;
 these are purposes/acceptance/exits, not newly commissioned slices or new Gates.
@@ -2432,8 +2448,8 @@ Quality, reliability and speed rows record **pending advice**, not active
 alternatives. Any such change needs a separately reviewed finite proposal,
 justification before results, a compatible new identity and explicit adoption.
 The resource row retains B guest adoption in its own scope. The later M2 native
-RSS adoption and R preparation authority above are effective; B/C environments
-remain unadmitted. Observed P/17 margins cannot choose a just-passing standard.
+RSS adoption is effective; old R authority is closed and new R/v2 has only
+the separate finite preparation authority above. B/C environments remain unadmitted. Observed P/17 margins cannot choose a just-passing standard.
 Historical contracts/FAIL/costs stay.
 
 | Requirement and current basis | Evidence and unanswered question for a future proposal |
@@ -2465,12 +2481,15 @@ main CI jobs passed before its first frozen public IO. That entry stopped on the
 actual full-wall/charge discrepancy. The authorized12 C/P/W/S weights,528 train
 cases432/96 and18 B4.30 scalars were never opened; all source/field acceptance
 remains UNKNOWN_NOT_RUN. See [actual R supplement](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access).
-R0/R1 are closed unlaunched, no retry or remaining-cap transfer. After required
-regression/result publication STOP. The sole next item is an owner decision on
-a new finite software/call-cost identity closing that demonstrated defect, with
-a separately authorized public IO entry before any old read. No new allocation/
-kernel proof is required or commissioned. B FULL180/C14580s and scientific
-role/call/fee admission remain separate/unapproved; B3 final obligations remain.
+R0/R1 are closed unlaunched, no retry or remaining-cap transfer. Result publication
+is complete through PR205/main3459dd5/all-four-CI. The owner subsequently authorized
+NEW R/v2 under its [protocol](p17_m2_input_export_billing_revision_protocol.md):
+3h exporter+2h new different author/1860s, six frozen FULL charges and the exact
+unchanged source exception. Complete software release before the once-only public
+entry; independently accepted R0 precedes R1. Actual source acceptance remains
+UNKNOWN_NOT_RUN at this prefreeze checkpoint. No allocation/kernel proof is added.
+B FULL180/C14580s/scientific admission stay unapproved and B3 unchanged. Publish
+this finite preparation outcome and STOP without a successor.
 
 ### B resource assurance specification
 

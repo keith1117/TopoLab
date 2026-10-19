@@ -17,6 +17,8 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 DATA = Path("/Users/keith1117/Documents/TopoLab-data")
 CONTRACT = REPO / "docs/planning/p17_m2_input_export_preparation_proposal.json"
+CONTENT_SHA256 = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
+OUTPUT_ROOT_NAME = "p17-m2-input-export-preparation-v2"
 MIB = 1024 * 1024
 
 
@@ -642,7 +644,7 @@ def main(argv=None):
         "literal authorized R source root only",
     )
     need(
-        args.output.absolute().is_relative_to(DATA / "p17-m2-input-export-preparation-v1")
+        args.output.absolute().is_relative_to(DATA / OUTPUT_ROOT_NAME)
         and args.output.resolve() == args.output.absolute(),
         "new R output only",
     )
@@ -650,7 +652,7 @@ def main(argv=None):
     for named in (args.registry, args.independent_r0):
         if named is not None:
             need(
-                named.absolute().is_relative_to(DATA / "p17-m2-input-export-preparation-v1")
+                named.absolute().is_relative_to(DATA / OUTPUT_ROOT_NAME)
                 and named.resolve() == named.absolute(),
                 "new registry/review paths only",
             )
@@ -661,7 +663,9 @@ def main(argv=None):
     )
     reader = Reader(args.data_root, args.output / "source-read.jsonl")
     try:
-        contract = parse(args.contract.read_bytes())
+        contract_raw = args.contract.read_bytes()
+        need(sha(contract_raw) == CONTENT_SHA256, "frozen content scope hash")
+        contract = parse(contract_raw)
         if args.stage == "r0":
             result = register(reader, contract)
             new_file(args.output / "source_registry.json", canonical(result))

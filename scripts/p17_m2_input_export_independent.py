@@ -23,7 +23,18 @@ from typing import Any
 
 MIB = 1024 * 1024
 AUTHORIZED_DATA_ROOT = Path("/Users/keith1117/Documents/TopoLab-data")
-AUTHORIZED_R_ROOT = AUTHORIZED_DATA_ROOT / "p17-m2-input-export-preparation-v1"
+AUTHORIZED_R_ROOT = AUTHORIZED_DATA_ROOT / "p17-m2-input-export-preparation-v2"
+EXECUTION_V2 = "topolab.v2.p17-m2-input-export-preparation.v2"
+CONTENT_CONTRACT_SHA256 = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
+CLOCK_V2 = "functions.exec.Date.now.UTC-seconds"
+FULL_V2 = {
+    "independent-public-check": 120,
+    "exporter-r0": 120,
+    "independent-r0": 120,
+    "exporter-r1": 780,
+    "independent-r1": 660,
+    "shared-closeout": 60,
+}
 REGISTRY_SCHEMA = "topolab.v2.m2-input-source-registry.v1"
 CASE = re.compile(r"tlcase-v1-[0-9a-f]{64}\Z")
 SHA = re.compile(r"[0-9a-f]{64}\Z")
@@ -860,6 +871,356 @@ def audit_native_record(
     }
 
 
+def audit_v2_resource_components(
+    completion: dict[str, Any],
+    *,
+    inner_evidence: dict[str, Any] | None = None,
+    native_profiles: dict[str, bytes] | None = None,
+) -> dict[str, Any]:
+    """Reconcile raw native evidence; future external exit remains PENDING.
+
+    Preserve available failed-process peaks before rejecting incomplete evidence.
+    Callers must never use this resource-only return as successor admission.
+    """
+    result: dict[str, Any] = {
+        "status": "PENDING_EXTERNAL_EXIT",
+        "execution_identity": completion.get("execution_identity"),
+        "role": completion.get("role"),
+        "plan_sha256": completion.get("plan_sha256"),
+        "pending_sha256": completion.get("pending_sha256"),
+        "frozen_FULL_seconds": completion.get("frozen_FULL_seconds"),
+        "reason": None,
+        "RSS_envelope_bytes": None,
+        "RSS_components_bytes": {},
+        "inner_minimum_charge_seconds": None,
+        "actual_component_exit_codes": [],
+        "full_role_evidence_accepted": False,
+    }
+    try:
+        require(completion["execution_identity"] == EXECUTION_V2,
+                "resource completion v2 identity differs")
+        peaks: dict[int, int] = {}
+        components = completion["resource_components"]
+        require(isinstance(components, list) and components, "UNKNOWN_MISSING_OUTER_RSS")
+        serializer_seen = False
+        profile_names: set[str] = set()
+        for item in components:
+            pid = item["pid"]
+            _nonnegative(pid, integer=True, positive=True)
+            kind = item["kind"]
+            if kind == "native_profile":
+                name = item["profile"]
+                require(native_profiles is not None and name in native_profiles,
+                        "UNKNOWN_MISSING_NATIVE_PROFILE")
+                require(name not in profile_names, "duplicate outer native profile")
+                profile_names.add(name)
+                raw = native_profiles[name]
+                require(item["profile_sha256"] == digest(raw), "outer native profile hash")
+                peak = native_profile(raw, item["platform"])["rss_bytes"]
+                code = item["actual_exit_code"]
+            elif kind == "wait4":
+                record = item["record"]
+                require(record["statistics_source"] == "os.wait4"
+                        and record["wall_source"] == "controller_monotonic_observed"
+                        and record["pid"] == pid
+                        and record["rss_unit"] == (
+                            "bytes" if item["platform"] == "darwin" else "KiB*1024"
+                        ), "outer wait4 identity/units differ")
+                for name in ("wall_seconds", "user_seconds", "system_seconds"):
+                    _nonnegative(record["native"][name])
+                peak = _nonnegative(record["native"]["rss_bytes"], integer=True, positive=True)
+                code = record["exit_code"]
+            else:
+                require(kind == "self_high_water", "unregistered outer RSS component")
+                require(item["statistics_source"] == "resource.getrusage"
+                        and item["rss_unit"] == "bytes"
+                        and item["phases"] == ["preflush", "postflush"],
+                        "final serializer sample source/units/phases differ")
+                samples = item["samples_bytes"]
+                require(isinstance(samples, list) and len(samples) == 2,
+                        "UNKNOWN_MISSING_SERIALIZER_RSS")
+                peak = max(_nonnegative(v, integer=True, positive=True) for v in samples)
+                serializer_seen |= pid == completion["final_serializer_pid"]
+                code = None  # This process's actual exit belongs to the external event.
+            peaks[pid] = max(peaks.get(pid, 0), peak)
+            result["RSS_components_bytes"] = {str(k): v for k, v in sorted(peaks.items())}
+            if kind != "self_high_water":
+                result["actual_component_exit_codes"].append(code)
+        require(set(native_profiles or {}) == profile_names, "unregistered outer native profile")
+        require(serializer_seen, "UNKNOWN_MISSING_SERIALIZER_RSS")
+        inner_peak, minimum = 0, 0.0
+        if inner_evidence is not None:
+            inner = audit_native_record(**inner_evidence)
+            inner_peak = inner["inner_empirical_RSS_bytes"]
+            minimum = inner["inner_minimum_charge_seconds"]
+            result["inner_record_sha256"] = inner["record_canonical_sha256"]
+        else:
+            require(completion["role"] == "shared-closeout", "UNKNOWN_MISSING_INNER_EVIDENCE")
+        result["RSS_components_bytes"]["independently_reconciled_inner"] = inner_peak
+        result["RSS_envelope_bytes"] = sum(peaks.values()) + inner_peak
+        result["inner_minimum_charge_seconds"] = minimum
+        require(all(type(code) is int and code == 0
+                    for code in result["actual_component_exit_codes"]),
+                "native/helper actual exit nonzero or missing")
+        require(completion["cleanup"]["group_gone"] is True,
+                "UNKNOWN_INCOMPLETE_GROUP_CLEANUP")
+        require(result["RSS_envelope_bytes"] <= 4294967296, "retained 4GiB RSS cap exceeded")
+    except (KeyError, TypeError, ValueError, OverflowError) as error:
+        result.update(status="STOP_NO_RETRY", reason=f"{type(error).__name__}: {error}")
+    return result
+
+
+def audit_full_role_v2(
+    pending: dict[str, Any],
+    completion: dict[str, Any],
+    *,
+    raw_tool_events: list[dict[str, Any]],
+    expected_role: str,
+    expected_plan_sha256: str,
+    inner_evidence: dict[str, Any] | None = None,
+    native_profiles: dict[str, bytes] | None = None,
+) -> dict[str, Any]:
+    """Independently bind supplied *actual* external events, never a PASS oracle.
+
+    This pure auditor opens no path. The caller supplies the execution tool's raw
+    observed start/end/exit events at the finite, adopted observation boundary.
+    The last event must follow final serialization; an internal PENDING record
+    cannot certify that future exit. Failure preserves available measurements and
+    never opens the source-role suffix. Inner evidence is reconciled afresh.
+    """
+    def evidence_digest(value: Any) -> str | None:
+        try:
+            return digest(canonical(value))
+        except (ValueError, TypeError, OverflowError):
+            return None  # Malformed numeric evidence still receives a STOP record.
+
+    result: dict[str, Any] = {
+        "schema": "topolab.v2.m2-input-export-exit.v2",
+        "execution_identity": EXECUTION_V2,
+        "role": expected_role,
+        "plan_sha256": expected_plan_sha256,
+        "pending_sha256": evidence_digest(pending),
+        "completion_sha256": evidence_digest(completion),
+        "frozen_FULL_seconds": FULL_V2.get(expected_role),
+        "status": "STOP_NO_RETRY",
+        "reason": "UNKNOWN_INCOMPLETE_OUTER_EVIDENCE",
+        "clock_domain": None,
+        "T0": None,
+        "T1": None,
+        "whole_wall_seconds": None,
+        "inner_minimum_charge_seconds": None,
+        "RSS_envelope_bytes": None,
+        "RSS_components_bytes": {},
+        "actual_exit_codes": [event.get("exit_code") for event in raw_tool_events],
+        "raw_tool_event_ids_and_hashes": [
+            {"event_id": event.get("event_id"), "sha256": evidence_digest(event)}
+            for event in raw_tool_events
+        ],
+        "cleanup": completion.get("cleanup"),
+        "known_cost_lower_bound_seconds": FULL_V2.get(expected_role),
+        "missing_evidence_cost": "UNKNOWN_NOT_ZERO",
+        "source_successor_admitted": False,
+        "full_role_evidence_accepted": False,
+        "charge_record_sha256": evidence_digest(pending),
+        "B_C_admission": False,
+        "a_priori_allocation_guarantee": False,
+    }
+    resources = audit_v2_resource_components(
+        completion, inner_evidence=inner_evidence, native_profiles=native_profiles
+    )
+    for key in ("RSS_envelope_bytes", "RSS_components_bytes", "inner_minimum_charge_seconds"):
+        result[key] = resources[key]
+    result["resource_evidence"] = resources
+    try:
+        require(expected_role in FULL_V2 and bool(SHA.fullmatch(expected_plan_sha256)),
+                "unregistered v2 role/plan")
+        cap = FULL_V2[expected_role]
+        for record in (pending, completion):
+            require(
+                record["execution_identity"] == EXECUTION_V2
+                and record["role"] == expected_role
+                and record["plan_sha256"] == expected_plan_sha256
+                and type(record["frozen_FULL_seconds"]) is int
+                and record["frozen_FULL_seconds"] == cap,
+                "v2 identity/plan/immutable FULL differs",
+            )
+            require(record["clock_domain"] == CLOCK_V2
+                    and record["clock_resolution_seconds"] == 0.001,
+                    "unfrozen external clock identity/resolution")
+        require(
+            completion["status"] == "PENDING_EXTERNAL_EXIT"
+            and completion["pending_sha256"] == result["pending_sha256"],
+            "internal completion/pending binding differs",
+        )
+        require(raw_tool_events, "UNKNOWN_MISSING_ACTUAL_OUTER_EVENT")
+        first = raw_tool_events[0]
+        result["clock_domain"] = first["clock_domain"]
+        result["T0"] = _nonnegative(first["start_seconds"])
+        result["T1"] = _nonnegative(raw_tool_events[-1]["end_seconds"])
+        whole = result["T1"] - result["T0"]
+        require(whole >= 0, "outer clock regression")
+        result["whole_wall_seconds"] = whole
+        result["known_cost_lower_bound_seconds"] = max(cap, math.ceil(whole + 10))
+        previous_end = result["T0"]
+        ids: set[str] = set()
+        for event in raw_tool_events:
+            start = _nonnegative(event["start_seconds"])
+            end = _nonnegative(event["end_seconds"])
+            native_wall = _nonnegative(event["wall_seconds"])
+            require(
+                isinstance(event["event_id"], str) and event["event_id"]
+                and event["event_id"] not in ids,
+                "duplicate/missing raw event identity",
+            )
+            ids.add(event["event_id"])
+            require(
+                isinstance(event["argv"], list) and event["argv"]
+                and all(isinstance(word, str) for word in event["argv"])
+                and event["clock_domain"] == result["clock_domain"]
+                and isinstance(event["clock_domain"], str) and event["clock_domain"]
+                and previous_end <= start <= end <= result["T1"]
+                and event["clock_domain"] == CLOCK_V2
+                and native_wall <= end - start + 0.001,
+                "raw event clock/order/argv/native-wall differs",
+            )
+            require(event["complete"] is True and type(event["exit_code"]) is int,
+                    "UNKNOWN_MISSING_ACTUAL_FINAL_EXIT")
+            previous_end = end
+        if "external_argv" in pending:
+            require(pending["external_argv"] == [event["argv"] for event in raw_tool_events],
+                    "external literal argv differs")
+
+        require(resources["status"] == "PENDING_EXTERNAL_EXIT", resources["reason"])
+        minimum = resources["inner_minimum_charge_seconds"]
+        result["known_cost_lower_bound_seconds"] = max(cap, math.ceil(whole + 10),
+                                                        math.ceil(minimum))
+        require(all(code == 0 for code in result["actual_exit_codes"]),
+                "actual outer/final serializer exit nonzero")
+        require(max(whole + 10, minimum) <= cap, "FAIL_FULL_NAMED_WALL_CHARGE_BINDING")
+        result.update(status="PASS_R_V2_FULL_ROLE", reason=None,
+                      missing_evidence_cost=None, full_role_evidence_accepted=True)
+    except (KeyError, TypeError, ValueError, OverflowError) as error:
+        result["reason"] = f"{type(error).__name__}: {error}"
+    return result
+
+
+def audit_new_backup(
+    root: Path,
+    backup: Path,
+    *,
+    excluded_prefixes: tuple[str, ...] = (),
+    public_fixture: bool = False,
+) -> dict[str, Any]:
+    """Compare only NEW artifacts, including empty logs, by exact bytes and SHA.
+
+    Production roots are literal v2 roots. The explicit public-fixture switch
+    cannot open anything below DATA; it exists only for newly created test files.
+    Prefix exclusions are literal frozen names, not a glob or alternate source.
+    """
+    root, backup = Path(os.path.abspath(root)), Path(os.path.abspath(backup))
+    result: dict[str, Any] = {
+        "status": "STOP_NO_RETRY", "reason": "UNKNOWN_INCOMPLETE_NEW_BACKUP",
+        "member_count": 0, "total_bytes": 0, "members": [],
+        "old_input_reads": 0, "B_C_admission": False,
+        "excluded_prefixes": list(excluded_prefixes),
+    }
+    try:
+        if public_fixture:
+            require(not root.is_relative_to(AUTHORIZED_DATA_ROOT)
+                    and not backup.is_relative_to(AUTHORIZED_DATA_ROOT),
+                    "public fixture cannot open DATA")
+        else:
+            require(root == AUTHORIZED_R_ROOT
+                    and backup == root.with_name(root.name + "-independent-backup"),
+                    "backup requires literal NEW v2 roots")
+        require(root != backup and not root.is_relative_to(backup)
+                and not backup.is_relative_to(root), "backup roots overlap")
+        for prefix in excluded_prefixes:
+            require(isinstance(prefix, str) and prefix
+                    and not PurePosixPath(prefix).is_absolute()
+                    and ".." not in PurePosixPath(prefix).parts,
+                    "unsafe backup exclusion")
+
+        def inventory(base: Path) -> set[str]:
+            for ancestor in reversed((base, *base.parents)):
+                info = ancestor.lstat()
+                require(stat.S_ISDIR(info.st_mode), "NEW backup root ancestor/symlink")
+            found: set[str] = set()
+            total_bytes = 0
+            for folder, directories, filenames in os.walk(base, followlinks=False):
+                for name in list(directories):
+                    path = Path(folder) / name
+                    relative = path.relative_to(base).as_posix()
+                    if any(relative.startswith(prefix) for prefix in excluded_prefixes):
+                        directories.remove(name)
+                    else:
+                        require(stat.S_ISDIR(path.lstat().st_mode), "NEW backup directory symlink")
+                for name in filenames:
+                    path = Path(folder) / name
+                    relative = path.relative_to(base).as_posix()
+                    if any(relative.startswith(prefix) for prefix in excluded_prefixes):
+                        continue
+                    info = path.lstat()
+                    require(stat.S_ISREG(info.st_mode), "NEW backup nonregular/symlink member")
+                    require(info.st_size <= 64 * MIB, "NEW backup single-file cap")
+                    total_bytes += info.st_size
+                    require(total_bytes <= 512 * MIB, "NEW backup inventory byte cap")
+                    found.add(relative)
+                    require(len(found) <= 20000, "NEW backup member cap")
+            return found
+
+        def member(base: Path, relative: str) -> bytes:
+            path = base / relative
+            before = path.lstat()
+            directory = os.open(path.anchor, os.O_RDONLY | os.O_DIRECTORY)
+            try:
+                for piece in path.parts[1:-1]:
+                    next_fd = os.open(piece, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW,
+                                      dir_fd=directory)
+                    os.close(directory)
+                    directory = next_fd
+                fd = os.open(path.name, os.O_RDONLY | os.O_NOFOLLOW, dir_fd=directory)
+            finally:
+                os.close(directory)
+            try:
+                opened = os.fstat(fd)
+                require(stat.S_ISREG(opened.st_mode) and opened.st_size <= 64 * MIB,
+                        "NEW backup changed/large/nonregular descriptor")
+                raw = bytearray()
+                while True:
+                    chunk = os.read(fd, min(MIB, 64 * MIB + 1 - len(raw)))
+                    if not chunk:
+                        break
+                    raw.extend(chunk)
+                    require(len(raw) <= 64 * MIB, "NEW backup grew past file cap")
+                after = os.fstat(fd)
+            finally:
+                os.close(fd)
+            def identity(info: os.stat_result) -> tuple[int, int, int, int]:
+                return info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns
+            require(identity(before) == identity(opened) == identity(after)
+                    == identity(path.lstat()) and len(raw) == before.st_size,
+                    "NEW backup member changed during read")
+            return bytes(raw)
+
+        source_members, copied_members = inventory(root), inventory(backup)
+        require(source_members == copied_members, "NEW backup exact member set differs")
+        for relative in sorted(source_members):
+            source, copied = member(root, relative), member(backup, relative)
+            result["total_bytes"] += len(source)
+            require(result["total_bytes"] <= 512 * MIB, "NEW backup total byte cap")
+            require(source == copied and digest(source) == digest(copied),
+                    "NEW backup member bytes/hash differ")
+            result["members"].append(reference(relative, source))
+            result["member_count"] += 1
+        require(source_members == inventory(root) == inventory(backup),
+                "NEW backup inventory changed during comparison")
+        result.update(status="PASS_INDEPENDENT_NEW_BACKUP", reason=None)
+    except (KeyError, TypeError, ValueError, OSError, OverflowError) as error:
+        result["reason"] = f"{type(error).__name__}: {error}"
+    return result
+
+
 def check_registry_shape(registry: dict[str, Any], contract: dict[str, Any]) -> None:
     require(
         set(registry) == {"schema", "metadata", "models", "labels", "scalars"}
@@ -1224,7 +1585,10 @@ def main() -> int:
                 Path(os.path.abspath(new_path)).is_relative_to(AUTHORIZED_R_ROOT),
                 "source role new path outside R root",
             )
-    contract = parse(args.contract.read_bytes())
+    contract_raw = args.contract.read_bytes()
+    require(digest(contract_raw) == CONTENT_CONTRACT_SHA256,
+            "frozen content-only contract hash differs")
+    contract = parse(contract_raw)
     registry_raw = args.registry.read_bytes()
     registry = parse(registry_raw, canonical_required=True)
     check_registry_shape(registry, contract)
