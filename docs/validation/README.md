@@ -205,3 +205,13 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 ## B4.51 real executable and full-resource preregistration
 
 - [Source-freeze process FAIL;217/404 post-stop TEXT checks retained](b4_51_real_certification_executable_full_resource_preregistration.md)
+
+
+## M2 restricted input/export preparation R
+
+- [Authorized protocol](../planning/p17_m2_input_export_preparation_protocol.md)
+- [Software source snapshot](p17_m2_input_export_preparation.md)
+- [Independent source/software review](p17_m2_input_export_preparation_independent_review.md)
+
+Only source-bound preparation is authorized; actual IO/results are recorded
+separately after admitted source entry. No B/C or P/17 repair claim.

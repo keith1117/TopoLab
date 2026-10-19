@@ -44,19 +44,20 @@ The owner separately adopted B4.30-style RSS/full-exit empirical acceptance for
 NEW M2 native identity only, retaining4GiB and independent preflight. This is
 not a-priori allocation assurance or a change to old I1/D1/B contracts.
 
-Current slice is [M2 H stage A](docs/planning/p17_m2_native_homotopy_a_protocol.md):
-owner grants <=6h implementation plus <=4h distinct independent review, versioned
-source/new public fixtures only, then all prescribed regression/normal protected
-publication and STOP. [Drafts](docs/planning/p17_m2_native_homotopy_proposal.md)
-and [A result](docs/validation/p17_m2_native_homotopy_a.md) control this boundary.
-Public H/17 dispatch, original backend and RSS/exit adaptation grant no historical
-P/17 repair, B resource acceptance or C science. No old model/label/index/backup/
-seal access, export preparation, formal preflight/panel, VM/install, new provider,
-A2.3, D1/I1 reopening, quota transfer/reset or automatic successor.
-The one next item is exact restricted input/domain/role/call/fee registration and
-separate owner authorization before B, not Ubuntu/KVM procurement. B/C formal
-allocations remain0; proposed FULL180/14580s stay unapproved. Preserve old costs,
-UNKNOWN and seals, retain this worktree and stop after A publication.
+M2 H stage A is closed through PR202/203/main65bbbd3, four CI contexts passed.
+Current owner grant is [R preparation](docs/planning/p17_m2_input_export_preparation_protocol.md):
+exporter `/root` <=3h and independent author `/root/review_r_exports` <=2h;
+IO900+900+FULL60=1860s. Exact proposal metadata/12 checkpoints/528 train labels/
+18 uniform packets permit full-byte hash/temporary parse, named fields only.
+Publish/check clean locked merged tools and all four CI, then one independent
+public IO check, bounded R0 registry, R1 and full source/field/bit review.
+No old source access before those entry conditions; no directory expansion,
+backup read, FEM/filter/inference/new labels, installation/provider, B/C,
+quota transfer/reset/retry or successor. Record actual RSS/full exits/costs;
+missing mandatory evidence or first failure STOPs subsequent reads. Required
+regression/normal publication then STOP; retain worktree and all history.
+B FULL180/C14580s remain unapproved. Read the protocol and current status before
+any role; no A remainder reuse or automatic continuation after R.
 
 ## Provenance boundary
 

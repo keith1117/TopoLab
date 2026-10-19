@@ -5,48 +5,68 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current slice: M2 native H stage A, software only
+## Current slice: authorized R input/export preparation
 
-The owner authorized [A](planning/p17_m2_native_homotopy_a_protocol.md), at most
-6 implementation hours plus4 distinct independent-review hours, versioned source
-and new public fixtures/weights only, required regression/normal GitHub publication,
-then STOP. The [revised drafts](planning/p17_m2_native_homotopy_proposal.md) record
-this later grant; they allocate no B/C formal quota, scientific seconds or old access.
-The owner separately adopted B4.30-style RSS/full-exit empirical acceptance for
-this NEW M2 native identity at4294967296 bytes with independent preflight. It is
-not an a-priori complete-allocation/instantaneous-mapping guarantee. No such proof
-is a prerequisite to new A/B. Old I1/D1 obligations and UNKNOWN remain unchanged.
+Owner authorizes [R protocol](planning/p17_m2_input_export_preparation_protocol.md)
+and [exact scope](planning/p17_m2_input_export_preparation_proposal.md)/
+[JSON](planning/p17_m2_input_export_preparation_proposal.json): `/root` exporter
+<=10800 active seconds; distinct `/root/review_r_exports` <=7200 seconds, internal
+IO900+900+FULL60=1860s. Exact bounded metadata and12 checkpoints/528 train labels/
+18 uniform original packets allow full-byte hashing/temporary parsing, semantic
+use limited to named fields. No other old input or backup read, algorithm,
+FEM/filter/projection/inference, B/C, installation, reset/retry or successor.
 
+Tools/public fixtures and independent source comparison are being prepared.
+No old source access before clean locked merged all-four-main-CI tools, frozen
+roles and one independent public IO check. R0 registers exact metadata-declared
+source refs before R1; independently accepted source registry is required before
+any payload. R0 actual payload fields are NOT yet checked. Missing mandatory
+provenance/identity or first failed/UNKNOWN/overcap role stops the suffix with
+immutable prefix/cost. No source selection/replacement or cap expansion.
+
+Required regression and normal protected publication remain additional software
+costs, UNKNOWN_NOT_ZERO where unmeasured. No new purchase/paid expansion.
+Current public software checks and actual future R source results must stay
+separate. `PREPARATION_COMPLETE_SOURCE_BOUND` would be input preparation only,
+not scientific acceptance, P/17 repair or B/C admission; B FULL180/C14580s remain
+unapproved. Native4GiB RSS/full-exit empirical evidence and independent preflight
+remain; no new allocation proof. All historical limits below remain unchanged.
+
+## Completed M2 native H stage A and verified publication
+
+[A protocol](planning/p17_m2_native_homotopy_a_protocol.md),
 [A software validation](validation/p17_m2_native_homotopy_a.md) and
 [independent review](validation/p17_m2_native_homotopy_a_independent_review.md)
-record fixed H dispatch/8+8+p3 driver, original backend/controls, phase witnesses,
-new public-only inputs and RSS/watchdog/pending/complete-exit adaptation. All
-historical numerical source, contracts and reports retain bytes. NEW initialized
-weights exercise software; historical fixed P/17 has not been read or repaired.
-The independently checked public command has16 prefix updates,18 total,22
-independent FEM analyses and a552992768-byte recorded RSS envelope; final verifier
-native0.03s/20709376bytes and observed exit0. This is software evidence only,
-not PASS_PREFLIGHT_RSS_EXIT_EMPIRICAL, actual H/17 quality/speed or B/C admission.
-Formal B/C NOT_RUN; old input read set empty. Full-fit PENDING4GiB remains.
+retain their original snapshots. Publication has since completed:
+[PR202](https://github.com/keith1117/TopoLab/pull/202) merged as
+`c9359c76014063056dcf78fbecbdc8126f58da99`; permission-row documentation erratum
+[PR203](https://github.com/keith1117/TopoLab/pull/203) merged as
+`65bbbd3da9440250243886a8aaf142968bbca674`. This slice's read-only GitHub recovery
+confirmed main at65bbbd3, no open PR and successful
+[main CI39172866765](https://github.com/keith1117/TopoLab/actions/runs/39172866765):
+quality, frontend, clean-linux-smoke and i1-native-software all passed.
+No pending-at-authoring statement in a historical report is rewritten.
 
-Current technical publication is the PR containing this snapshot; required
-regression and actual publication/CI outcomes are bound in the A report and its
-new external closure record. No merge/main result is presumed at authoring.
-A's6/4-hour role costs and separate regression/CI/publication costs are recorded;
-unknown totals remain UNKNOWN_NOT_ZERO. No purchase/rental/new environment.
+A implemented fixed H dispatch/8+8+p3, original backend/controls, phase witnesses,
+new public-only inputs and RSS/watchdog/pending/complete-exit adaptation. The
+public command recorded16 prefix/18 total updates,22 independent FEM analyses
+and552992768-byte RSS envelope; final verifier native0.03s/20709376bytes,
+observed exit0. Mandatory local regression2095 passed/1 Linux-only skip;
+Linux2096 passed. These are software results only, not historical H/17 repair,
+PASS_PREFLIGHT_RSS_EXIT_EMPIRICAL or B/C admission. No old input/export or formal
+B/C was run. Full-fit remains PENDING4GiB. A's implementation1133.157247s/21600
+and independent1023s/14400 are closed; unused caps cannot transfer. Separate
+regression/CI/publication costs remain separately recorded/UNKNOWN_NOT_ZERO.
 
-The distinct B guest-capacity adoption (PR200/201) remains
-ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED for future compatible guest
-contracts only, with excluded host overhead additional UNKNOWN. Its complete
-[definition](planning/TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
-is retained. It is not applied to this native chain; no Ubuntu/KVM procurement,
-VM, install or guest preflight occurs. B's12-hour/4-start/1800-second proposal
-remains unapproved. B3's M2 plus independent Ubuntu24.04, both scales and final
-independent reproduction remain eventual obligations.
-
-PR199 methods remain effective: debug public software before freeze; separate
-science/resource/process/UNKNOWN; at most two ineffective capabilities require
-an explicit route decision. The next item below commissions no further work.
+The NEW M2 native identity retains owner-adopted B4.30-style RSS/full-exit empirical
+acceptance at4294967296 bytes and independent preflight, not a-priori allocation
+assurance. No new allocation/kernel/old-component proof is a prerequisite.
+B guest-capacity adoption (PR200/201) remains separately
+ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED, host overhead additional UNKNOWN.
+Its [definition](planning/TopoLab_v2_development_roadmap.md#b-resource-assurance-specification)
+and unapproved12-hour/4-start/1800-second proposal remain. B3's M2 plus independent
+Ubuntu24.04, both scales and final independent reproduction remain obligations.
+PR199 methods and all historical gates/costs/UNKNOWN/quotas/seals below stay.
 
 ## Historical I1 capability and publication
 
@@ -132,25 +152,11 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 ## Unique next item: bounded registration and separate B authority
 
-**A publication closes this instruction; STOP.** Before considering B, owner and
-a separately authorized export custodian must register the exact12 fixed
-checkpoints,528 restricted train-only NN exports and18 uniform scalar references:
-source provenance/attestation, bytes/SHA/schema/shape, role views/paths and bounded
-reads. Preparing exports or checking originals needs its own finite input/time/
-fee grant, currently absent. No full old label/history/index discovery is granted.
-The public fixture/model/NN schema exercised in A is not the real scientific
-export schema or a substitute for those identities and two-scale memberships.
-
-Implementer and independent reviewer must then close actual role/command/runtime/
-thread identities, units/native/profile/overlap/exit evidence tables and complete
-call/charge/public-start order within the proposed caps. Clean locked merged
-source and all four applicable CI contexts are required. All missing fields stay
-UNKNOWN_UNREGISTERED. The owner must explicitly authorize the finite registration/
-export work and subsequently B's one FULL180 preflight; neither is granted by A.
-Do not consume B before the actual scientific input domain metadata is known,
-or add another preflight after changing it. No C14580s/payload grant exists.
-
-No further computer, provider, installation, VM, allocation/kernel proof project,
-scientific experiment, D1/I1 reopening, A2.3, quota transfer/reset or automatic
-successor. Preserve the assigned worktree. A plain “continue” displays the missing
-registration/authority only; it does not start B, C or export preparation.
+Execute only the authorized [R protocol](planning/p17_m2_input_export_preparation_protocol.md)
+in its fixed order, caps and source boundary, then publish result and STOP.
+Before old source access: clean locked merged/all-CI tools and one independent
+public IO check. Before payload: complete independently accepted R0 registry.
+Any failure/mandatory UNKNOWN closes the remaining source roles without retry.
+R preparation does not authorize B/C. After R, the sole next item will be its
+concrete remaining-field/owner decision, not an automatic successor. Preserve
+worktree, historical failures/costs/UNKNOWN/quotas/seals and every old STOP.

@@ -1,12 +1,12 @@
 {
   "schema": "topolab.v2.p17-m2-native-homotopy.proposal.v1",
-  "status": "A_SOFTWARE_AUTHORIZED_ENVIRONMENT_NOT_ADMITTED_B_C_NOT_AUTHORIZED",
+  "status": "A_COMPLETE_R_PREPARATION_AUTHORIZED_B_C_NOT_AUTHORIZED",
   "date": "2026-10-18 America/New_York",
-  "baseline_commit": "53f9ebb675ed1fd3cf039b1696a9eaf188290798",
+  "baseline_commit": "65bbbd3da9440250243886a8aaf142968bbca674",
   "normative_draft": "p17_m2_native_homotopy_proposal.md",
   "current_authority": {
     "documentation_revision_only": false,
-    "scope": "A only: <=6h implementation + <=4h distinct independent review; versioned source/new public fixtures, H integration and RSS/exit adaptation; required regression/normal publication then STOP",
+    "scope": "R exporter3h independent2h IO1860; exact source exception and tools/regression/publication; clean merged allCI and independent IO beforeoldread; noB/C orretry/successor",
     "prospective_resource_assurance_adoption": true,
     "implementation": true,
     "installation": false,
@@ -14,7 +14,7 @@
     "trial_or_VM_start": false,
     "resource_preflight": false,
     "old_resource_metadata": false,
-    "old_model_label_reference_payload": false,
+    "old_model_label_reference_payload": "R exact source-byte/temporary-parse exception under protocol entry only; no scientific B/C consumer access",
     "science": false,
     "old_external_read_set": [],
     "allocated_formal_quotas": 0,
@@ -22,7 +22,13 @@
     "formal_resource_reviewer_appointed": false,
     "automatic_successor": false,
     "independent_A_reviewer": "/root/review_m2_contracts; distinct author, full conversation exposure, not blind or formal B resource role",
-    "stage_A_protocol": "p17_m2_native_homotopy_a_protocol.md"
+    "stage_A_protocol": "p17_m2_native_homotopy_a_protocol.md",
+    "exporter_appointed": true,
+    "exporter": "/root",
+    "preparation_execution": true,
+    "independent_preparation_reviewer_appointed": true,
+    "historical_A_authorization_closed": true,
+    "independent_preparation_reviewer": "/root/review_r_exports"
   },
   "prospective_identity": {
     "proposed_new_executable_contract_identity": "topolab.v2.p17-m2-native-homotopy.rss.v1",
@@ -224,7 +230,7 @@
     ]
   },
   "future_permissions": {
-    "A_implementation_and_independent_review": "AUTHORIZED_6H_IMPLEMENTATION_4H_DISTINCT_REVIEW_PUBLIC_SOFTWARE_ONLY_THEN_STOP",
+    "A_implementation_and_independent_review": "COMPLETE_PUBLISHED_PR202_PR203_CLOSED_NO_REPEAT_OR_TRANSFER",
     "B_one_public_no_old_data_preflight": "A_PUBLIC_CHECKS_AND_ACTUAL_RECORDING_SCOPE_TABLES_AND_EXACT_SCIENTIFIC_MANIFEST_METADATA_REGISTERED_PLUS_EXPLICIT_GRANT; NO_ALLOCATION_PROOF",
     "C_one_exposed_pilot": "A_B_PASS_PLUS_SEPARATE_EXPLICIT_SCIENTIFIC_BUDGET_AND_EXACT_PAYLOAD_ROLE_VIEWS; OWN_RSS_EXIT_ACCEPTANCE_REQUIRED",
     "resource_metadata": "OLD_RESOURCE_EXPORT_NOT_REQUIRED_NOT_REQUESTED_NO_GRANT; versioned source/report text only",
@@ -260,7 +266,7 @@
         "two_terminal_states_newly_solved_or_reprojected_for_export": false,
         "stored_design_bit_rule": "float32(original f64 design)",
         "stored_physical_bit_rule": "float32(original filter applied to stored f32 design converted to f64)",
-        "provenance": "separately authorized owner/export provider checks originals and supplies field-selection and original-SHA -> export-SHA/bytes/source attestation; current roles never open originals to verify source",
+        "provenance": "appointed /root only after separate R execution grant and exact registry; distinct preparation reviewer compares original fields/bits; scientific consumers cannot open originals; SHA alone insufficient",
         "source_SHA_alone_sufficient": false,
         "terminal_FEM_reanalyses_per_label": 2,
         "full_old_trajectory_reaudited": false,
@@ -279,9 +285,9 @@
       "legacy_uniform_scalar_use": "18 new uniform reference compatibility checks only, rtol1e-9/atol0; not timed denominator or H terminal-selection oracle"
     },
     "forbidden": [
-      "original full label files and full old trajectories; only exact separately granted bounded NN certificate fields may be exported",
-      "old raw outcomes/trajectories/logs",
-      "index/pointer traversal",
+      "original full labels/history denied to scientific consumers; only separately approved R source-bound full-byte/temporary-parse exception proposed, not granted",
+      "old raw outcomes/logs denied; only separately approved R exact18 successful uniform-source packets proposed; no other candidate/raw log access",
+      "recursive index/pointer traversal denied; only separately approved bounded R0 literal7+unit21+selection12 metadata scope proposed",
       "backup members",
       "fit-validation/test/OOD/final payload",
       "other models or labels",
@@ -289,10 +295,11 @@
       "unused B410 fresh48",
       "all sealed evidence"
     ],
-    "input_identity_unknown": "NO_FORMAL_FREEZE_OR_PAYLOAD_READ; DOES_NOT_BLOCK_SEPARATELY_GRANTED_PUBLIC_ONLY_A",
-    "implementation_entry": "SEPARATE_A_SCOPE_6PLUS4_BUDGET_AND_INDEPENDENT_ROLE_GRANT; PUBLIC_ONLY; NO_ADVANCE_ALLOCATION_PROOF",
+    "input_identity_unknown": "NO_B_C_FORMAL_FREEZE_OR_PAYLOAD_READ; A_PUBLIC_SOFTWARE_COMPLETE_CLOSED; bounded separately granted R0 may register only specified metadata",
+    "implementation_entry": "R_ONLY; Aclosed; noB/C",
     "export_creation_commissioned_by_this_proposal": false,
-    "restricted_scientific_metadata_before_formal_preflight": "separate finite metadata grant and exact export paths/bytes/hashes/provenance/schema/read-domain/role paths before B; no payload or index discovery; absence need not block separately granted A public-only implementation"
+    "restricted_scientific_metadata_before_formal_preflight": "separate finite metadata grant and exact export paths/bytes/hashes/provenance/schema/read-domain/role paths before B; no scientific payload or recursive index discovery; A public-only software complete closed",
+    "R_preparation": "AUTHORIZED_EXACT_SOURCE_SCOPE_3H_2H_IO1860; protocol entry and STOP; noB/C"
   },
   "proposed_budgets_NOT_GRANTED": {
     "formal_preflight_full_charged_wall_seconds": 180,
@@ -318,16 +325,29 @@
     "actual_monetary_reservation_currency_rate_maximum_payer": null,
     "formal_subcaps_count": 4,
     "export_preparation_and_original_source_verification": {
-      "commissioned": false,
+      "commissioned": true,
       "included_in_active10h_or_formal14760s": false,
-      "granted_seconds_or_currency": 0,
+      "granted_seconds_or_currency": {
+        "active_seconds": 18000,
+        "internal_IO_seconds": 1860,
+        "new_purchase_USD": 0
+      },
       "actual_cost": "UNKNOWN_NOT_ZERO_ADDITIONAL_FULL_NEW_COST",
       "required_before_new_original_processing_or_export_generation": "separate exact input scope, role and finite preparation time/fee reservation authorization",
-      "unregistered_or_ungranted": "STOP; no free prerequisite labor or assumed inclusion in current ceilings"
+      "unregistered_or_ungranted": "STOP; no free prerequisite labor or assumed inclusion in current ceilings",
+      "exporter_appointed": true,
+      "exporter": "/root",
+      "execution_commissioned": true,
+      "preparation_proposal": "p17_m2_input_export_preparation_proposal.json",
+      "proposed_active_hours": {
+        "exporter": 3,
+        "independent": 2
+      },
+      "proposed_restricted_IO_total_seconds": 1860
     },
     "RSS_adoption_grants_any_engineering_or_formal_seconds": false,
     "before_B_register_full_empirical_recording_call_and_charge_tables": true,
-    "scope": "B/C formal budgets, export preparation and new paid purchases remain UNAPPROVED; A grant is separate"
+    "scope": "B/C and paid expansion UNAPPROVED; R separately owner-granted3h+2h/1860s under R protocol, A closed"
   },
   "prospective_pilot": {
     "case_ids": [
@@ -564,7 +584,7 @@
     "scripts/b4_31_independent_audit.py": "690cd5801af980417505b2c6fb3004fb6bf60c45d2a77121cc58623237edcbc6",
     "docs/validation/b4_31_reflection_failure_cost_review.md": "724a91bc98d6b0cd68fbfa48dfa73b48d65a79fce99f6ef93962a23df996c874"
   },
-  "draft_revision": 5,
+  "draft_revision": 7,
   "document_consistency": "Markdown defines scope; JSON enumerates fields; substantive disagreement stops dependent work",
   "entry_prerequisites": {
     "resource_metric_and_evidence_method": {
@@ -579,7 +599,8 @@
       "scope": "only four necessary source units, public fixtures/tests and empirical RSS/exit adaptation",
       "old_payload_or_resource_metadata_access": false,
       "actual_scientific_input_metadata_prerequisite_for_public_only_implementation": false,
-      "advance_allocation_proof_required": false
+      "advance_allocation_proof_required": false,
+      "state": "HISTORICAL_GRANT_COMPLETE_PUBLISHED_CLOSED"
     },
     "B": {
       "explicit_preflight_grant": false,
@@ -1024,9 +1045,11 @@
     "implementation_max": 6,
     "independent_review_max": 4,
     "total_max": 10,
-    "interpretation": "OWNER_GRANTED_A_ONLY; 6 implementation +4 distinct independent review hours, all directed public tests/waits/failures included; full prescribed regression/CI/publication additional; no scientific allocation or cap transfer"
+    "interpretation": "OWNER_GRANTED_A_ONLY; 6 implementation +4 distinct independent review hours, all directed public tests/waits/failures included; full prescribed regression/CI/publication additional; no scientific allocation or cap transfer",
+    "closed_after_publication": true,
+    "unused_transfer_or_repeat": false
   },
-  "versioned_evidence_sha256_scope": "baseline_commit snapshot identities; frozen scientific source/contracts/reports remain byte-identical; current planning entries may be updated under A authority",
+  "versioned_evidence_sha256_scope": "retained revision5 snapshot at53f9ebb675ed1fd3cf039b1696a9eaf188290798; frozen source/contracts/reports unchanged; mutable planning-header hashes are not current identities",
   "current_A_software_boundary": {
     "protocol": "p17_m2_native_homotopy_a_protocol.md",
     "report": "../validation/p17_m2_native_homotopy_a.md",
@@ -1035,6 +1058,38 @@
     "old_input_read_set": [],
     "public_model_weights": "new initializations, never historical P/17 checkpoint bits",
     "future_scientific_input_schema_and_metadata": "UNREGISTERED_NO_ACCESS",
-    "automatic_successor": false
+    "automatic_successor": false,
+    "phase_state": "COMPLETE_PUBLISHED_CLOSED",
+    "published_PRs": [
+      202,
+      203
+    ],
+    "verified_main": "65bbbd3da9440250243886a8aaf142968bbca674",
+    "main_CI_all_four_success": 39172866765
+  },
+  "previous_proposal_revision5_baseline_commit": "53f9ebb675ed1fd3cf039b1696a9eaf188290798",
+  "input_export_preparation_proposal": {
+    "markdown": "p17_m2_input_export_preparation_proposal.md",
+    "json": "p17_m2_input_export_preparation_proposal.json",
+    "exporter_appointed": true,
+    "exporter": "/root",
+    "current_authority": "R_AUTHORIZED",
+    "execution_authorized": true,
+    "independent_role_appointed": true,
+    "active_hours_proposed": {
+      "exporter": 3,
+      "independent": 2
+    },
+    "IO_seconds_proposed": {
+      "exporter": 900,
+      "independent": 900,
+      "shared_FULL": 60,
+      "total": 1860
+    },
+    "old_source_read_granted": true,
+    "future_R_exception": "exact source-bound full bytes/temporary JSON parsing for528 train labels+18 uniform packets and bounded R0 metadata; explicit separate grant required",
+    "B_C_authorized": false,
+    "automatic_successor": false,
+    "entry": "protocol preconditions before anyoldsource"
   }
 }

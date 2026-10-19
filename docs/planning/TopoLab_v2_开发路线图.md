@@ -2,22 +2,23 @@
 
 英文工作版：[v2 Development Roadmap](./TopoLab_v2_development_roadmap.md)
 
-当前授权（所有者批准M2原生H的A阶段，2026-10-18）：
+当前授权（所有者授权R准备，2026-10-18）：
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE、固定P/17未修复、uniform默认、科研暂停。**
-所有者另已为新M2原生身份采用B4.30式RSS及完整退出实证验收，保留4GiB和独立预检，
-不等同于事前完整分配保证。随后明确授权[仅A阶段](p17_m2_native_homotopy_a_protocol.md)：
-实现最多6小时、不同作者独立审查最多4小时，只用版本化源码及新公开fixtures，完成H接入和
-RSS/退出记录适配、规定回归及正常发布后停止。见[两份修订草案](p17_m2_native_homotopy_proposal.md)、
-[A软件报告](../validation/p17_m2_native_homotopy_a.md)和[独立审查](../validation/p17_m2_native_homotopy_a_independent_review.md)。
-不访问旧输入、不准备导出、不运行B正式预检或C科学面板，不安装/启动VM/另选提供方、A2.3或自动后继。
-正式额度仍0，FULL180/14580秒未批准；真实H/17质量、速度及资源准入仍UNKNOWN/NOT_RUN，软件检查不等于修复。
+A已由PR202/203/main65bbbd3发布，四项main CI成功。所有者现授权
+[R准备协议](p17_m2_input_export_preparation_protocol.md)：执行者`/root`最多3主动小时，
+不同作者`/root/review_r_exports`独立审查最多2小时，内部I/O1860秒（900＋900＋FULL60）；
+批准白名单元数据及12/528/18原件完整字节核验、临时解析，语义使用仅限规定字段。
+仅当前M2/已有软件CI，不采购、不做算法/FEM/推理、不扩大输入、不运行B/C、重试/reset或自动后继。
+规定回归及正常发布保留。旧源访问前须先有干净锁定已合并全四项CI工具及一次独立公开I/O检查；
+R0冻结元数据引用后才可R1转录与全量独立来源/字段/位值比较。见
+[范围/预算](p17_m2_input_export_preparation_proposal.md)及[JSON](p17_m2_input_export_preparation_proposal.json)。
+R收尾后停止，失败亦保留不可变前缀；B FULL180及C14580秒仍未批准。
 
-PR199/main622d546开发方法继续生效；PR200/201的B客户机容量口径前瞻采用仍有效、环境未准入，
-宿主开销额外UNKNOWN，不与新原生RSS口径混用。I1软件及入口前UNKNOWN、D1 STOP/未启动0/1/FULL60、
-所有者关闭救援、B4.51 FAIL/已消耗配额、B4.52 NOT_SELECTED_BY_R1及所有成本/UNKNOWN/封存保留。
-已知付费12721.16417100014444982>7200仍不能通过旧全计费条件。A后唯一下一项是具体受限输入/字节域/
-角色/调用/费用登记及B前另行所有者授权，不是采购Ubuntu/KVM或新增证明工程。
-B3的M2加独立Ubuntu24.04、两尺度及独立复现最终要求不变。
+新M2原生4GiB RSS/完整退出实证采用及独立预检保持，不增事前分配证明。
+B客户机容量采用独立、环境未准入、宿主开销UNKNOWN。真实P/17质量/速度/资源仍UNKNOWN/NOT_RUN，
+完整训练PENDING4GiB，输入准备不等于修复或科研Gate。PR199方法、I1/D1停止、B4.51失败/已消耗配额、
+B4.52 NOT_SELECTED_BY_R1、K12721.16417100014444982>7200/D1 FULL60及旧成本/UNKNOWN/封存不变。
+B3的M2＋独立Ubuntu24.04、两尺度及最终独立复现义务不变。
 
 状态：**v2仍在开发，科研Gate FAIL；uniform默认、P17未修复。** 最新B4.51文本
 Gate FAIL_PROCESS_SOURCE_FREEZE。主217/独立404虽首次一次通过，属于停止后的文本结果，
@@ -38,7 +39,7 @@ R1 比较了查询侧修复、精确 FEM 训练目标、固定锚点倒数能量
 超过4294967296字节；这淘汰该直接稠密构造，不代表所有真实证书均不可能。
 精确训练的同时内存与新成本上界仍 UNKNOWN/PENDING。没有科研 Gate 通过。
 B4.52 为 NOT_SELECTED_BY_R1，不自动恢复；不建立 R2/R3 或文本/玩具/守卫链。
-D1 已按 UNKNOWN 停止，当前救援程序已由所有者关闭；第6节记录已生效方法、M2原生A及尚未授权的B/C。
+D1 已按 UNKNOWN 停止，当前救援程序已由所有者关闭；第6节记录已生效方法、已完成A及仅文档的R提案；R/B/C均未获执行授权。
 
 本文件是中文阅读伴随版。早期阶段描述保留其历史语境；当前停止条件以
 [项目状态](../project_status.md)为入口，完整切片进度与执行顺序以
@@ -46,7 +47,7 @@ D1 已按 UNKNOWN 停止，当前救援程序已由所有者关闭；第6节记�
 [验证报告](../validation/README.md)为准。`v1.0.0` 与 M1/M2 的负面结论继续保留。
 
 制定日期：2026-09-24
-修订日期：2026-10-18（M2原生A软件；B/C未授权，科研暂停）
+修订日期：2026-10-18（A已发布；R准备获准，B/C未授权）
 
 相关文档：
 
@@ -499,11 +500,11 @@ final 证据。不得对 B5 结果展开未预注册搜索。
 ### 已生效授权及开发顺序
 
 所有者保留 **FULL_V2_OPEN_NO_ADMITTED_ROUTE**、固定P/17未修复、uniform默认、4GiB及独立预检。
-新M2原生身份前瞻采用RSS/完整退出实证，与旧native证明及B客户机容量口径分开。
-仅[A阶段](p17_m2_native_homotopy_a_protocol.md)已获6小时实现＋4小时不同作者审查授权，
-限新公开输入、规定回归/正常发布后停止；B/C正式输入及预算未批准。
-[A软件报告](../validation/p17_m2_native_homotopy_a.md)不证明真实H/17修复、科学速度或资源准入。
-PR199方法、I1/D1/R1/B4.52历史结论和所有成本/UNKNOWN/配额/封存保持。
+A已关闭，现授权[R准备](p17_m2_input_export_preparation_protocol.md)：`/root`执行3小时＋
+不同作者`/root/review_r_exports`审查2小时，内部I/O1860秒及精确原件字节/临时解析例外。
+干净锁定合并全CI工具与独立公开I/O先于旧读取；完整独立R0登记先于R1。规定回归、正常发布后停止，
+失败也关闭后缀，不扩大/重试/reset或自动B/C。新M2 RSS采用、B客户机独立边界及旧失败/成本/UNKNOWN/
+配额/封存保持；输入准备不等于P/17修复。
 
 以下顺序**仅在另行授权和满足准入后适用**，是目的/验收/退出说明，不是新立项或新Gate。
 所有后续片适用[交付复盘方法](TopoLab_v2_交付复盘与后续开发约束.md#4-已生效的开发方法)。
@@ -565,19 +566,14 @@ A2.4依赖恢复能力，A4依赖资源限制。
 
 ### M2原生H的A阶段及唯一下一项
 
-[修订5草案](p17_m2_native_homotopy_proposal.md)及[JSON](p17_m2_native_homotopy_proposal.json)
-记录新原生RSS采用及随后A授权：固定H派发、8/8前缀/阶段证据、原控制、受限公开输入、
-独立数值/记录审查及RSS/完整退出适配。新初始化公开权重不冒充历史P/17。
-见[A软件报告](../validation/p17_m2_native_homotopy_a.md)及[独立审查](../validation/p17_m2_native_homotopy_a_independent_review.md)。
-
-**A发布后停止。** 唯一下一项是B前有限登记/授权决定：所有者及另获授权的导出提供者须提供
-12个固定checkpoint、528个train-only NN受限导出和18个uniform标量的精确身份/出处证明、
-角色视图、实际schema/shape/字节/读取上限及路径；不发现旧index或读取完整label/history。
-导出准备/原件核源另需精确访问及有限工时/费用授权，当前未批准。实施者及独立者还须登记完整
-调用/收费/启动、角色/native单位/重叠/完整退出表及干净锁定已合并全CI源码。
-缺项保留UNKNOWN；未齐备并另获B明确授权前，不消耗拟议的一次FULL180预检。
-C的14580秒及payload访问仍未批准，不转移配额/不reset。
-当前仅M2加已有软件CI；这些原生前提不要求采购Ubuntu/KVM。B3最终独立Ubuntu、两尺度及复现要求仍保留。
+A已由PR202/203/main65bbbd3发布、全四项CI成功。所有者现按
+[R准备协议](p17_m2_input_export_preparation_protocol.md)、[范围](p17_m2_input_export_preparation_proposal.md)/
+[JSON](p17_m2_input_export_preparation_proposal.json)授权12个C/P/W/S权重（W来自B4.5，其余B4.1）、
+528训练例432/96的受限生产/独立视图及18个B4.30 uniform标量。仅R角色获精确原件字节/临时解析例外，
+3小时执行者＋2小时不同作者审查，内部I/O1860秒。工具/公开测试/源码审查及正常受保护发布先于独立公开I/O、
+有限R0和来源绑定R1；冻结入口条件前不读取旧源。首次失败、必需UNKNOWN或超限即关闭旧读取后缀，不重试。
+R结果发布后停止。B单次FULL180和C14580秒仍未批准；输入准备不自动闭合全部科学角色/调用/费用字段或准入B/C。
+B3最终义务不变。
 
 ### B 前瞻资源保证规格
 

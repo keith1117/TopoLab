@@ -1,0 +1,1273 @@
+"""Separately authored, stdlib-only R source/field comparator; never runs science.
+
+The launcher must bind owner authority, clean merged source, precheck, role caps
+and observed exits. The explicit CLI acknowledgement is not that admission.
+This module imports no exporter, TopoLab loader, numerical code or shared oracle.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import math
+import os
+import re
+import stat
+import struct
+import sys
+from collections import Counter
+from copy import deepcopy
+from pathlib import Path, PurePosixPath
+from typing import Any
+
+MIB = 1024 * 1024
+AUTHORIZED_DATA_ROOT = Path("/Users/keith1117/Documents/TopoLab-data")
+AUTHORIZED_R_ROOT = AUTHORIZED_DATA_ROOT / "p17-m2-input-export-preparation-v1"
+REGISTRY_SCHEMA = "topolab.v2.m2-input-source-registry.v1"
+CASE = re.compile(r"tlcase-v1-[0-9a-f]{64}\Z")
+SHA = re.compile(r"[0-9a-f]{64}\Z")
+B3_DATA_HASH = "b78e85f5bab56f2b05e06b43b8fd77f2bfd556150b95643e443a566165d8fc26"
+CATALOG_HASH = "441b7f74e41489e0ea29cf3ac8ee1da86da499370b504eac2067ee787480bd5c"
+STORED_FIELDS = (
+    "volume",
+    "tensor_dtype",
+    "tensor_axis_order",
+    "tensor_shape",
+    "design_density",
+    "physical_density",
+    "sensitivity_weight",
+    "compliance",
+    "physical_volume_fraction",
+    "iterations",
+    "terminal_density_change",
+    "stop_reason",
+)
+RECENT_FIELDS = (
+    "iteration",
+    "compliance",
+    "volume_fraction",
+    "density_change",
+    "design_density",
+    "physical_density",
+)
+TENSOR_SHAPES = {
+    "network.0.weight": [16, 13, 3, 3, 3],
+    "network.0.bias": [16],
+    "network.2.weight": [16, 16, 3, 3, 3],
+    "network.2.bias": [16],
+    "network.4.weight": [16, 16, 3, 3, 3],
+    "network.4.bias": [16],
+    "network.6.weight": [16, 16, 3, 3, 3],
+    "network.6.bias": [16],
+    "network.8.weight": [1, 16, 1, 1, 1],
+    "network.8.bias": [1],
+}
+
+
+def require(condition: bool, reason: str) -> None:
+    if not condition:
+        raise ValueError(reason)
+
+
+def digest(raw: bytes) -> str:
+    return hashlib.sha256(raw).hexdigest()
+
+
+def canonical(obj: Any) -> bytes:
+    return (
+        json.dumps(obj, ensure_ascii=True, sort_keys=True, separators=(",", ":"), allow_nan=False)
+        + "\n"
+    ).encode("ascii")
+
+
+def _pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        require(key not in result, "duplicate JSON key")
+        result[key] = value
+    return result
+
+
+def parse(raw: bytes, *, canonical_required: bool = False) -> Any:
+    def bad_constant(_: str) -> None:
+        raise ValueError("nonfinite JSON constant")
+
+    obj = json.loads(raw, object_pairs_hook=_pairs, parse_constant=bad_constant)
+    stack = [(obj, 0)]
+    while stack:
+        value, depth = stack.pop()
+        require(depth <= 64, "JSON depth exceeds 64")
+        if isinstance(value, dict):
+            stack.extend((v, depth + 1) for v in value.values())
+        elif isinstance(value, list):
+            stack.extend((v, depth + 1) for v in value)
+        elif type(value) is float:
+            require(math.isfinite(value), "nonfinite JSON number")
+    if canonical_required:
+        require(canonical(obj) == raw, "source metadata is not canonical JSON")
+    return obj
+
+
+def compare_words(expected: Any, actual: Any, pointer: str = "") -> int:
+    """Compare all fields, including signed zero; return compared scalar count."""
+    require(type(expected) is type(actual), f"field type differs at {pointer}")
+    if type(expected) is float:
+        require(
+            struct.pack("<d", expected) == struct.pack("<d", actual),
+            f"IEEE binary64 field differs at {pointer}",
+        )
+        return 1
+    if isinstance(expected, dict):
+        require(expected.keys() == actual.keys(), f"field set differs at {pointer}")
+        return sum(
+            compare_words(value, actual[key], pointer + "/" + key)
+            for key, value in expected.items()
+        )
+    if isinstance(expected, list):
+        require(len(expected) == len(actual), f"array length differs at {pointer}")
+        return sum(
+            compare_words(left, right, pointer + "/" + str(i))
+            for i, (left, right) in enumerate(zip(expected, actual, strict=True))
+        )
+    require(expected == actual, f"field differs at {pointer}")
+    return 1
+
+
+class OnceReader:
+    """Bounded descriptor reads; each literal source is opened at most once."""
+
+    def __init__(self, root: Path, max_files: int, total_bytes: int):
+        self.root = Path(os.path.abspath(root))
+        self.max_files = max_files
+        self.total_bytes = total_bytes
+        self.table: list[dict[str, Any]] = []
+        self.seen: set[str] = set()
+        self.used = 0
+
+    def read(
+        self,
+        relative: str,
+        maximum: int,
+        *,
+        sha256: str | None = None,
+        byte_size: int | None = None,
+    ) -> bytes:
+        pieces = PurePosixPath(relative)
+        require(
+            isinstance(relative, str)
+            and relative == pieces.as_posix()
+            and not pieces.is_absolute()
+            and ".." not in pieces.parts
+            and relative not in ("", "."),
+            "unsafe literal path",
+        )
+        require(relative not in self.seen, "repeat source read refused")
+        require(len(self.seen) < self.max_files, "source file count cap")
+        self.seen.add(relative)
+        target = self.root / relative
+        current = Path(target.anchor)
+        for component in target.parts[1:]:
+            current /= component
+            info = current.lstat()
+            require(not stat.S_ISLNK(info.st_mode), "source symlink refused")
+        require(stat.S_ISREG(info.st_mode), "source is not regular")
+        require(
+            0 < info.st_size <= maximum and self.used + info.st_size <= self.total_bytes,
+            "source byte cap",
+        )
+        if byte_size is not None:
+            require(type(byte_size) is int and info.st_size == byte_size, "declared bytes differ")
+        # Resolve every ancestor through a no-follow descriptor, so a parent
+        # replaced after lstat cannot redirect the actual file open.
+        directory = os.open(target.anchor, os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            for component in target.parts[1:-1]:
+                next_directory = os.open(
+                    component, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory
+                )
+                os.close(directory)
+                directory = next_directory
+            fd = os.open(target.name, os.O_RDONLY | os.O_NOFOLLOW, dir_fd=directory)
+        finally:
+            os.close(directory)
+        try:
+            opened = os.fstat(fd)
+            require(
+                (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns)
+                == (opened.st_dev, opened.st_ino, opened.st_size, opened.st_mtime_ns),
+                "source changed before descriptor read",
+            )
+            chunks = []
+            remaining = maximum + 1
+            while remaining:
+                chunk = os.read(fd, min(1024 * 1024, remaining))
+                if not chunk:
+                    break
+                chunks.append(chunk)
+                remaining -= len(chunk)
+            raw = b"".join(chunks)
+            after = os.fstat(fd)
+            require(
+                (opened.st_dev, opened.st_ino, opened.st_size, opened.st_mtime_ns)
+                == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns)
+                and len(raw) == opened.st_size,
+                "source changed during descriptor read",
+            )
+        finally:
+            os.close(fd)
+        actual_sha = digest(raw)
+        self.used += len(raw)
+        self.table.append({"path": relative, "byte_size": len(raw), "sha256": actual_sha})
+        require(sha256 is None or actual_sha == sha256, "source SHA differs")
+        return raw
+
+
+def reference(path: str, raw: bytes) -> dict[str, Any]:
+    return {"path": path, "byte_size": len(raw), "sha256": digest(raw)}
+
+
+def fit_reference(root: str, ref: dict[str, Any], kind: str) -> dict[str, Any]:
+    require(
+        SHA.fullmatch(ref["sha256"]) is not None
+        and type(ref["byte_size"]) is int
+        and ref["byte_size"] > 0,
+        "invalid artifact reference",
+    )
+    suffix = "safetensors" if kind == "checkpoint" else "json"
+    expected = f"artifacts/{kind}/{ref['sha256']}.{suffix}"
+    require(
+        ref.get("kind", kind) == kind and ref.get("path", expected) == expected,
+        "content-addressed reference path differs",
+    )
+    return {"path": root + "/" + expected, "byte_size": ref["byte_size"], "sha256": ref["sha256"]}
+
+
+def closed_units(
+    reader: OnceReader,
+    folder: str,
+    context_sha: str,
+    units: list[str],
+    progress: dict[str, Any],
+    summary: dict[str, Any],
+) -> list[dict[str, Any]]:
+    require(
+        progress["version"] == "topolab.b4.progress.v1"
+        and progress["context_sha256"] == context_sha
+        and progress["units_sha256"] == digest(canonical(units))
+        and progress["completed"] == len(units)
+        and progress["attempted"] == len(units)
+        and progress["pending"] is None
+        and progress["active_at"] is None
+        and progress["resource_failed"] is False
+        and progress["integrity_failed"] is False,
+        "source journal is not complete and closed",
+    )
+    for key in ("context_sha256", "completed", "attempted", "head_sha256"):
+        require(summary[key] == progress[key], "source summary/journal binding differs")
+    head = "0" * 64
+    payloads = []
+    for ordinal, unit in enumerate(units):
+        raw = reader.read(f"{folder}/units/{ordinal:04d}.json", 32768)
+        record = parse(raw, canonical_required=True)
+        require(
+            record["version"] == "topolab.b4.unit.v1"
+            and record["context_sha256"] == context_sha
+            and record["unit"] == unit
+            and record["previous_sha256"] == head,
+            "source unit chain differs",
+        )
+        head = digest(raw)
+        payloads.append(record["payload"])
+    require(head == progress["head_sha256"], "source unit head differs")
+    return payloads
+
+
+def build_registry(reader: OnceReader, contract: dict[str, Any]) -> dict[str, Any]:
+    """Derive the finite registry independently; no payload stat or open here."""
+    old = {}
+    for spec in contract["R0"]["literal_bootstrap_files"]:
+        raw = reader.read(spec["relative_path"], spec["max_bytes"], sha256=spec["expected_sha256"])
+        old[spec["relative_path"]] = parse(raw, canonical_required=True)
+    fits = old["b3-v1-fits/b3_training.json"]
+    context = fits["context"]
+    require(
+        fits["index_version"] == "topolab.b3.training-index.v1"
+        and fits["context_sha256"] == digest(canonical(context)),
+        "B3 fitting context differs",
+    )
+    data = context["data_index"]
+    require(
+        context["data_index_sha256"] == B3_DATA_HASH and digest(canonical(data)) == B3_DATA_HASH,
+        "embedded B3 index binding differs",
+    )
+    manifest = data["manifest"]
+    manifest_sha = digest(canonical(manifest))
+    require(
+        manifest_sha == data["manifest_sha256"]
+        and digest(canonical(manifest["catalog"])) == CATALOG_HASH,
+        "embedded manifest/catalog differs",
+    )
+    train = [entry for entry in manifest["catalog"]["entries"] if entry["role"] == "train"]
+    require(len(train) == 528, "train set is not complete528")
+    outcomes = {outcome["entry"]["case"]["case_id"]: outcome for outcome in data["entries"]}
+    labels = []
+    for entry in sorted(train, key=lambda e: e["case"]["case_id"]):
+        case_id = entry["case"]["case_id"]
+        require(CASE.fullmatch(case_id) is not None, "invalid train case identity")
+        outcome = outcomes[case_id]
+        compare_words(entry, outcome["entry"])
+        require(outcome["status"] == "succeeded", "original train outcome is not successful")
+        artifact = outcome["artifact"]
+        access = artifact["access"]
+        compare_words(entry, access["entry"])
+        require(
+            access["kind"] == "label"
+            and artifact["manifest_sha256"] == manifest_sha
+            and artifact["source_revision"] == manifest["context"]["source_revision"],
+            "label source identity differs",
+        )
+        relative = f"artifacts/label/{case_id}/{access['artifact_sha256']}.json"
+        require(
+            artifact["relative_path"] == relative
+            and SHA.fullmatch(access["artifact_sha256"]) is not None,
+            "label artifact path differs",
+        )
+        labels.append(
+            {
+                "case_id": case_id,
+                "entry": entry,
+                "manifest_sha256": manifest_sha,
+                "context_sha256": digest(canonical(manifest["context"])),
+                "source_revision": artifact["source_revision"],
+                "artifact": {
+                    "path": "b3-v1-data/" + relative,
+                    "byte_size": artifact["byte_size"],
+                    "sha256": access["artifact_sha256"],
+                },
+            }
+        )
+    require(
+        len({row["case_id"] for row in labels}) == 528
+        and Counter(
+            tuple(row["entry"]["case"]["problem"]["mesh"]["element_counts"]) for row in labels
+        )
+        == {(12, 6, 3): 432, (24, 12, 6): 96},
+        "train uniqueness/scale membership differs",
+    )
+    wroot = "b4-5-weighted-terminal/fit"
+    weighted = closed_units(
+        reader,
+        wroot,
+        contract["R0"]["W_context_sha256"],
+        ["W/17", "W/29", "W/43"],
+        old[wroot + "/progress.json"],
+        old[wroot + "/summary.json"],
+    )
+    refroot = "b4-30-z-reflection-repair-v2/sentinel/reference"
+    context_path = "b4-30-z-reflection-repair-v2/context.json"
+    context_sha = next(
+        spec["expected_sha256"]
+        for spec in contract["R0"]["literal_bootstrap_files"]
+        if spec["relative_path"] == context_path
+    )
+    units = contract["scalars"]["case_ids"]
+    uniform_refs = closed_units(
+        reader,
+        refroot,
+        context_sha,
+        units,
+        old[refroot + "/progress.json"],
+        old[refroot + "/summary.json"],
+    )
+    scalars = [
+        {
+            "case_id": case_id,
+            "context_sha256": context_sha,
+            "unit": next(
+                row for row in reader.table if row["path"] == f"{refroot}/units/{ordinal:04d}.json"
+            ),
+            "packet": fit_reference(refroot, ref, "outcome"),
+        }
+        for ordinal, (case_id, ref) in enumerate(zip(units, uniform_refs, strict=True))
+    ]
+    models = []
+    for spec in contract["checkpoints"]["fixed_rows"]:
+        family, seed = spec["family"], spec["seed"]
+        if family == "W":
+            selection_ref = fit_reference(wroot, weighted[[17, 29, 43].index(seed)], "selection")
+            source_context = contract["R0"]["W_context_sha256"]
+        else:
+            matched = [o for o in fits["outcomes"] if (o["recipe"], o["seed"]) == (family, seed)]
+            require(len(matched) == 1, "selected model outcome is missing/duplicated")
+            selection_ref = fit_reference("b3-v1-fits", matched[0]["selection"], "selection")
+            source_context = fits["context_sha256"]
+        selection = parse(
+            reader.read(
+                selection_ref["path"],
+                262144,
+                sha256=selection_ref["sha256"],
+                byte_size=selection_ref["byte_size"],
+            ),
+            canonical_required=True,
+        )
+        if family == "W":
+            require(
+                selection["version"] == "topolab.b4_5.selection.v1"
+                and selection["objective"] == "topolab.b4_5.weighted-terminal.v1",
+                "W wrapper/objective differs",
+            )
+            history = selection["history_schema"]
+            checkpoint = fit_reference(wroot, selection["checkpoint"], "checkpoint")
+            require(
+                history["checkpoint"]["sha256"] == checkpoint["sha256"]
+                and history["checkpoint"]["byte_size"] == checkpoint["byte_size"],
+                "W inner/outer checkpoint differs",
+            )
+        else:
+            history = selection
+            checkpoint = fit_reference("b3-v1-fits", selection["checkpoint"], "checkpoint")
+        require(
+            history["selection_version"] == "topolab.b3.selection.v1"
+            and history["context_sha256"] == source_context
+            and history["recipe"] == spec["selection_wrapper_recipe"]
+            and history["seed"] == seed
+            and history["selected_epoch"] == spec["selected_epoch"]
+            and 0 < len(history["history"]) <= 200,
+            "fixed model selection differs",
+        )
+        require(0 < checkpoint["byte_size"] <= MIB, "checkpoint declared bytes exceed cap")
+        models.append(
+            {
+                "family": family,
+                "seed": seed,
+                "epoch": spec["selected_epoch"],
+                "context_sha256": source_context,
+                "selection": selection_ref,
+                "checkpoint": checkpoint,
+            }
+        )
+    require(len(reader.table) == 40, "R0 metadata count differs")
+    require(
+        sum(row["artifact"]["byte_size"] for row in labels) <= 768 * MIB
+        and all(0 < row["artifact"]["byte_size"] <= 64 * MIB for row in labels),
+        "declared label byte cap",
+    )
+    require(
+        sum(row["packet"]["byte_size"] for row in scalars) <= 72 * MIB
+        and all(0 < row["packet"]["byte_size"] <= 4 * MIB for row in scalars),
+        "declared uniform packet byte cap",
+    )
+    return {
+        "schema": REGISTRY_SCHEMA,
+        "metadata": sorted(reader.table, key=lambda row: row["path"]),
+        "models": models,
+        "labels": labels,
+        "scalars": scalars,
+    }
+
+
+def vector_sha(vector: Any, width: int, count: int, *, exact_f32: bool = False) -> str:
+    require(isinstance(vector, list) and len(vector) == count, "source vector dimension differs")
+    result = hashlib.sha256()
+    for value in vector:
+        require(type(value) in (int, float) and math.isfinite(value), "invalid vector number")
+        word = struct.pack("<f" if width == 32 else "<d", value)
+        if exact_f32:
+            require(
+                struct.pack("<d", struct.unpack("<f", word)[0]) == struct.pack("<d", value),
+                "stored vector is not actual exact float32",
+            )
+        result.update(word)
+    return result.hexdigest()
+
+
+def label_views(
+    source: dict[str, Any], row: dict[str, Any]
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Select only contract fields; no filter, solve or complete-history analysis."""
+    require(
+        source["kind"] == "label" and source["label_version"] == "topolab.b3.label.v1",
+        "original label version differs",
+    )
+    compare_words(row["entry"], source["entry"])
+    require(
+        source["entry"]["role"] == "train"
+        and source["initialization"] == "projected_float32_uniform"
+        and source["manifest_sha256"] == row["manifest_sha256"]
+        and digest(canonical(source["context"])) == row["context_sha256"]
+        and source["context"]["source_revision"] == row["source_revision"],
+        "original label source binding differs",
+    )
+    stored, result = source["stored"], source["result"]
+    compare_words(source["entry"]["case"], stored["case"])
+    nx, ny, nz = source["entry"]["case"]["problem"]["mesh"]["element_counts"]
+    require((nx, ny, nz) in ((12, 6, 3), (24, 12, 6)), "label scale differs")
+    count = nx * ny * nz
+    require(
+        stored["tensor_dtype"] == "float32"
+        and stored["tensor_axis_order"] == "channel,z,y,x"
+        and stored["tensor_shape"] == [1, nz, ny, nx],
+        "stored tensor identity differs",
+    )
+    history = result["history"]
+    require(
+        isinstance(history, list)
+        and 0 < len(history) <= 360
+        and stored["iterations"] == len(history)
+        and stored["stop_reason"] in ("design_max", "physical_plateau")
+        and (stored["stop_reason"] != "physical_plateau" or len(history) >= 11),
+        "stored termination/window fields differ",
+    )
+    membership = {key: value for key, value in source["entry"].items() if key != "case"}
+    binding = dict(
+        row["artifact"],
+        context_sha256=row["context_sha256"],
+        manifest_sha256=row["manifest_sha256"],
+    )
+    common = {
+        "case": source["entry"]["case"],
+        "membership": membership,
+        "initialization": source["initialization"],
+        "source": binding,
+    }
+    production_stored = {
+        key: stored[key]
+        for key in ("tensor_dtype", "tensor_axis_order", "tensor_shape", "design_density")
+    }
+    bits = {
+        "/stored/design_density": vector_sha(stored["design_density"], 32, count, exact_f32=True)
+    }
+    producer = dict(
+        common,
+        schema="topolab.v2.m2-nn-producer-view.v1",
+        stored=production_stored,
+        bit_digests=bits.copy(),
+    )
+    for name in ("physical_density", "sensitivity_weight"):
+        bits["/stored/" + name] = vector_sha(stored[name], 32, count, exact_f32=True)
+    for name in ("design_density", "physical_density"):
+        bits["/result/" + name] = vector_sha(result[name], 64, count)
+    recent = []
+    for index in range(max(0, len(history) - 11), len(history)):
+        state = history[index]
+        require(state["iteration"] == index + 1, "recent state ordinal differs")
+        recent.append({key: state[key] for key in RECENT_FIELDS})
+        for name in ("design_density", "physical_density"):
+            bits[f"/result/history/{index}/{name}"] = vector_sha(state[name], 64, count)
+    terminal = {
+        key: result[key]
+        for key in ("design_density", "physical_density", "compliance", "converged")
+    }
+    require(type(terminal["converged"]) is bool, "terminal convergence type differs")
+    return producer, dict(
+        common,
+        schema="topolab.v2.m2-nn-audit-view.v1",
+        stored={key: stored[key] for key in STORED_FIELDS},
+        terminal=terminal,
+        total_updates=len(history),
+        recent=recent,
+        bit_digests=bits,
+    )
+
+
+def scalar_view(packet: dict[str, Any], row: dict[str, Any]) -> dict[str, Any]:
+    outcome = packet["outcome"]
+    attempt = outcome["attempt"]
+    require(
+        packet["version"] == "topolab.b4_30.z-reflection-repair.v2"
+        and packet["case_id"] == row["case_id"]
+        and packet["policy"] == "uniform"
+        and packet["context_sha256"] == row["context_sha256"]
+        and outcome["method"] == "uniform"
+        and outcome["seed"] is None
+        and outcome["route"] == "baseline"
+        and outcome["fallback"] is None
+        and attempt["succeeded"] is True
+        and attempt["failure_code"] is None
+        and attempt["failure_type"] is None,
+        "uniform source attempt differs",
+    )
+    value = attempt["metrics"]["final_compliance"]
+    require(
+        type(value) in (float, int) and math.isfinite(value) and value > 0,
+        "uniform compliance is invalid",
+    )
+    compare_words(value, attempt["state"]["result"]["compliance"])
+    return {
+        "case_id": row["case_id"],
+        "compliance": value,
+        "compliance_bits_sha256": digest(struct.pack("<d", value)),
+        "initialization": {"method": "uniform", "seed": None, "route": "baseline"},
+        "solver_identity": {
+            "context_sha256": row["context_sha256"],
+            "packet_version": packet["version"],
+        },
+        "source": dict(
+            row["packet"],
+            json_pointer="/outcome/attempt/metrics/final_compliance",
+            unit=row["unit"],
+        ),
+    }
+
+
+def check_safetensors(raw: bytes, model: dict[str, Any]) -> None:
+    require(8 < len(raw) <= MIB, "Safetensors file byte cap")
+    header_size = int.from_bytes(raw[:8], "little")
+    require(2 < header_size <= 65536 and 8 + header_size < len(raw), "Safetensors header length")
+    header = parse(raw[8 : 8 + header_size])
+    require(set(header) == {"__metadata__", *TENSOR_SHAPES}, "Safetensors tensor keys differ")
+    if model["family"] == "W":
+        metadata = {
+            "version": "topolab.b4_5.checkpoint.v1",
+            "context_sha256": model["context_sha256"],
+            "seed": model["seed"],
+            "epoch": model["epoch"],
+            "objective": "topolab.b4_5.weighted-terminal.v1",
+        }
+    else:
+        metadata = {
+            "checkpoint_version": "topolab.b3.checkpoint.v1",
+            "context_sha256": model["context_sha256"],
+            "recipe": model["family"],
+            "seed": model["seed"],
+            "selected_epoch": model["epoch"],
+        }
+    require(
+        header["__metadata__"] == {"topolab": canonical(metadata).decode("ascii")},
+        "Safetensors original provenance metadata differs",
+    )
+    ranges = []
+    for name, shape in TENSOR_SHAPES.items():
+        tensor = header[name]
+        require(
+            set(tensor) == {"dtype", "shape", "data_offsets"}
+            and tensor["dtype"] == "F32"
+            and tensor["shape"] == shape,
+            "Safetensors dtype/shape differs",
+        )
+        start, end = tensor["data_offsets"]
+        require(
+            type(start) is int
+            and type(end) is int
+            and 0 <= start < end
+            and end - start == 4 * math.prod(shape),
+            "Safetensors data range differs",
+        )
+        ranges.append((start, end))
+    expected_start = 0
+    for start, end in sorted(ranges):
+        require(start == expected_start, "Safetensors gap/overlap")
+        expected_start = end
+    require(expected_start == 105732 == len(raw) - 8 - header_size, "Safetensors body size differs")
+    require(
+        all(math.isfinite(v) for (v,) in struct.iter_unpack("<f", raw[8 + header_size :])),
+        "Safetensors nonfinite float32",
+    )
+
+
+def native_profile(raw: bytes, platform: str) -> dict[str, Any]:
+    """Independently parse supplied new profile bytes with explicit native units."""
+    lines = [line.split() for line in raw.decode("ascii").splitlines()]
+    if platform == "darwin":
+        clocks = [p for p in lines if len(p) == 6 and p[1::2] == ["real", "user", "sys"]]
+        peaks = [p for p in lines if p[1:] == ["maximum", "resident", "set", "size"]]
+        require(len(clocks) == len(peaks) == 1, "Darwin native profile incomplete")
+        wall, user, system = (float(clocks[0][i]) for i in (0, 2, 4))
+        rss = int(peaks[0][0])
+    elif platform == "linux":
+        clocks = [p for p in lines if len(p) == 5 and p[0] == "TOPOLAB_NATIVE"]
+        require(len(clocks) == 1, "GNU native profile incomplete")
+        wall, user, system = (float(clocks[0][i]) for i in (1, 2, 3))
+        rss = int(clocks[0][4]) * 1024
+    else:
+        raise ValueError("native profile platform unregistered")
+    require(
+        all(math.isfinite(v) and v >= 0 for v in (wall, user, system)) and rss > 0,
+        "native profile values invalid",
+    )
+    return {"wall_seconds": wall, "user_seconds": user, "system_seconds": system, "rss_bytes": rss}
+
+
+def _nonnegative(value: Any, *, integer: bool = False, positive: bool = False) -> float:
+    require(
+        type(value) is int if integer else type(value) in (int, float),
+        "resource numeric type differs",
+    )
+    require(
+        math.isfinite(value) and (value > 0 if positive else value >= 0),
+        "resource numeric domain differs",
+    )
+    return value
+
+
+def _timer_peak(value: dict[str, Any], expected_pid: int, platform: str) -> int:
+    _nonnegative(expected_pid, integer=True, positive=True)
+    require(
+        value["statistics_source"] == "os.wait4"
+        and value["wall_source"] == "controller_monotonic_observed"
+        and value["exit_code"] == 0
+        and value["pid"] == expected_pid
+        and value["rss_unit"] == ("bytes" if platform == "darwin" else "KiB*1024"),
+        "timer native exit binding differs",
+    )
+    for key in ("wall_seconds", "user_seconds", "system_seconds"):
+        _nonnegative(value["native"][key])
+    rss = value["native"]["rss_bytes"]
+    _nonnegative(rss, integer=True, positive=True)
+    return rss
+
+
+def audit_native_record(
+    record: dict[str, Any],
+    *,
+    profile: bytes,
+    log: bytes,
+    helper_profiles: dict[str, bytes],
+    expected_role: str,
+    expected_argv: list[str],
+    platform: str,
+) -> dict[str, Any]:
+    """Reconcile only explicit NEW receipts; read no path and trust no PASS.
+
+    The outer timer/supervisor peaks and their observed exits remain caller work.
+    This is native RSS/exit empirical bookkeeping, never B or a lifetime theorem.
+    """
+    require(
+        record["schema"] == "topolab.v2.m2-native-rss-exit-assurance.v1"
+        and record["status"] == "PENDING_POSTEXIT"
+        and record["role"] == expected_role
+        and record["argv"] == expected_argv
+        and record["platform"] == platform
+        and record["software_only"] is True
+        and record["scientific_resource_admission"] == "NOT_RUN"
+        and record["controller_complete_exit"] == "UNKNOWN_PENDING_OUTER_PROFILE",
+        "resource identity/status differs",
+    )
+    require(
+        record["exit_code"] == 0
+        and record["software_result"] == "PUBLIC_COMMAND_EXIT_OBSERVED"
+        and record["cleanup"]["group_gone"] is True
+        and record["cleanup"]["leader_exit"] == 0,
+        "role child exit incomplete",
+    )
+    require(
+        record["ps_rss_unit"] == "KiB*1024"
+        and record["native_rss_unit"] == ("bytes" if platform == "darwin" else "KiB*1024")
+        and record["profile_sha256"] == digest(profile)
+        and record["log_sha256"] == digest(log),
+        "native units/profile/log binding differs",
+    )
+    measured = native_profile(profile, platform)
+    compare_words(measured, record["native"])
+    limit = _nonnegative(record["limit_bytes"], integer=True, positive=True)
+    require(limit <= 4294967296, "RSS ceiling exceeds retained 4GiB")
+    elapsed = _nonnegative(record["observed_outer_wall_seconds"])
+    timeout = _nonnegative(record["timeout_seconds"], positive=True)
+    interval = _nonnegative(record["target_sample_interval_seconds"], positive=True)
+    require(elapsed <= timeout and interval <= 0.5, "role timeout/sample interval cap")
+    controller = _nonnegative(record["controller_rss_peak_bytes"], integer=True, positive=True)
+    launch_pid = record["pid"]
+    _nonnegative(launch_pid, integer=True, positive=True)
+    timer_peak = _timer_peak(record["timer_native_exit"], launch_pid, platform)
+    helpers, samples = record["helpers"], record["samples"]
+    require(
+        isinstance(helpers, list)
+        and isinstance(samples, list)
+        and 0 < len(helpers) == len(samples),
+        "resource sample/helper coverage differs",
+    )
+    require(
+        set(helper_profiles) == {f"sampler-{i}.time" for i in range(len(helpers))},
+        "literal helper profile set differs",
+    )
+    helper_peak = 0
+    empirical_peak = measured["rss_bytes"]
+    previous = None
+    for index, (helper, sample) in enumerate(zip(helpers, samples, strict=True)):
+        name = f"sampler-{index}.time"
+        require(
+            helper["profile"] == name
+            and helper["role"] == f"rss-sampler-{index}"
+            and helper["profile_sha256"] == digest(helper_profiles[name])
+            and helper["exit_code"] == 0
+            and helper["problem"] is None
+            and helper["cleanup"]["group_gone"] is True
+            and helper["cleanup"]["leader_exit"] == 0,
+            "helper profile/exit differs",
+        )
+        helper_native = native_profile(helper_profiles[name], platform)
+        compare_words(helper_native, helper["native"])
+        helper_timer = _timer_peak(helper["timer_native_exit"], helper["pid"], platform)
+        chain_peak = helper_native["rss_bytes"] + helper_timer
+        helper_peak = max(helper_peak, chain_peak)
+        offset = _nonnegative(sample["offset_seconds"])
+        require(offset <= elapsed, "resource sample after command exit")
+        if previous is None:
+            require(sample["actual_interval_seconds"] is None, "initial interval fabricated")
+        else:
+            actual_interval = _nonnegative(sample["actual_interval_seconds"])
+            require(
+                offset >= previous and abs(actual_interval - (offset - previous)) <= 1e-12,
+                "actual sample interval arithmetic differs",
+            )
+        previous = offset
+        sample_controller = _nonnegative(
+            sample["controller_rss_bytes"], integer=True, positive=True
+        )
+        require(sample_controller <= controller, "controller sample exceeds high-water")
+        process_rows = sample["roles"]
+        require(
+            len(process_rows) <= 2
+            and len({row["pid"] for row in process_rows}) == len(process_rows),
+            "unregistered/duplicate process in role",
+        )
+        group = 0
+        for row in process_rows:
+            _nonnegative(row["pid"], integer=True, positive=True)
+            _nonnegative(row["parent"], integer=True)
+            require(
+                row["pgid"] == launch_pid
+                and (row["pid"] == launch_pid or row["parent"] == launch_pid),
+                "observed process escaped role tree",
+            )
+            group += _nonnegative(row["rss_bytes"], integer=True)
+        require(
+            sample["group_plus_controller_rss_bytes"] == group + sample_controller,
+            "sample RSS addition differs",
+        )
+        empirical_peak = max(empirical_peak, group + sample_controller + chain_peak)
+    overlap = measured["rss_bytes"] + timer_peak + controller + helper_peak
+    require(
+        record["native_plus_controller_and_sampler_rss_bytes"] == overlap,
+        "native overlap addition differs",
+    )
+    empirical_peak = max(empirical_peak, overlap)
+    require(
+        empirical_peak <= limit
+        and all(item["group_gone"] is True for item in record["escaped_group_cleanup"]),
+        "role RSS cap/escaped cleanup incomplete",
+    )
+    return {
+        "record_canonical_sha256": digest(canonical(record)),
+        "inner_empirical_RSS_bytes": empirical_peak,
+        "inner_observed_wall_seconds": elapsed,
+        "native_profile_wall_seconds": measured["wall_seconds"],
+        "inner_minimum_charge_seconds": max(elapsed, measured["wall_seconds"]) + 10,
+        "outer_timer_supervisor_exits_and_full_role_cost": "CALLER_MUST_CLOSE",
+        "B_C_admission": False,
+        "a_priori_allocation_guarantee": False,
+    }
+
+
+def check_registry_shape(registry: dict[str, Any], contract: dict[str, Any]) -> None:
+    require(
+        set(registry) == {"schema", "metadata", "models", "labels", "scalars"}
+        and registry["schema"] == REGISTRY_SCHEMA,
+        "source registry schema differs",
+    )
+    require(
+        len(registry["metadata"]) == 40
+        and len(registry["models"]) == 12
+        and len(registry["labels"]) == 528
+        and len(registry["scalars"]) == 18,
+        "source registry exact counts differ",
+    )
+    require(
+        [(r["family"], r["seed"], r["epoch"]) for r in registry["models"]]
+        == [
+            (r["family"], r["seed"], r["selected_epoch"])
+            for r in contract["checkpoints"]["fixed_rows"]
+        ],
+        "registry fixed models differ",
+    )
+    require(
+        [r["case_id"] for r in registry["scalars"]] == contract["scalars"]["case_ids"],
+        "registry fixed sentinel differs",
+    )
+    ids = [r["case_id"] for r in registry["labels"]]
+    require(ids == sorted(set(ids)), "registry train identifiers duplicated/unordered")
+    require(
+        all(r["entry"]["role"] == "train" for r in registry["labels"])
+        and Counter(
+            tuple(r["entry"]["case"]["problem"]["mesh"]["element_counts"])
+            for r in registry["labels"]
+        )
+        == {(12, 6, 3): 432, (24, 12, 6): 96},
+        "registry train population differs",
+    )
+
+
+def audit_exports(
+    reader: OnceReader, exports: OnceReader, registry: dict[str, Any]
+) -> dict[str, Any]:
+    words = 0
+    model_bindings = []
+    for model in registry["models"]:
+        source = model["checkpoint"]
+        raw = reader.read(
+            source["path"], MIB, sha256=source["sha256"], byte_size=source["byte_size"]
+        )
+        check_safetensors(raw, model)
+        actual = exports.read(f"checkpoints/{model['family']}-{model['seed']}.safetensors", MIB)
+        require(actual == raw, "checkpoint copy bytes differ")
+        model_bindings.append(
+            {key: model[key] for key in ("family", "seed", "epoch", "context_sha256")}
+        )
+        model_bindings[-1].update(
+            source=source,
+            selection=model["selection"],
+            output={
+                "path": f"checkpoints/{model['family']}-{model['seed']}.safetensors",
+                "byte_size": len(actual),
+                "sha256": digest(actual),
+            },
+        )
+    models_raw = exports.read("models.json", 65536)
+    words += compare_words(
+        {"schema": "topolab.v2.m2-checkpoint-view.v1", "models": model_bindings},
+        parse(models_raw, canonical_required=True),
+    )
+    labels_bytes = producer_bytes = audit_bytes = 0
+    for row in registry["labels"]:
+        source = row["artifact"]
+        raw = reader.read(
+            source["path"], 64 * MIB, sha256=source["sha256"], byte_size=source["byte_size"]
+        )
+        labels_bytes += len(raw)
+        require(labels_bytes <= 768 * MIB, "total label bytes exceed cap")
+        producer, audit = label_views(parse(raw), row)
+        case_id = row["case_id"]
+        production_raw = exports.read(f"nn/producer/{case_id}.json", 128 * 1024)
+        audit_raw = exports.read(f"nn/audit/{case_id}.json", 2 * MIB)
+        producer_bytes += len(production_raw)
+        audit_bytes += len(audit_raw)
+        require(producer_bytes <= 32 * MIB and audit_bytes <= 256 * MIB, "NN output total cap")
+        words += compare_words(producer, parse(production_raw, canonical_required=True))
+        words += compare_words(audit, parse(audit_raw, canonical_required=True))
+    values = []
+    for row in registry["scalars"]:
+        source = row["packet"]
+        raw = reader.read(
+            source["path"], 4 * MIB, sha256=source["sha256"], byte_size=source["byte_size"]
+        )
+        values.append(scalar_view(parse(raw), row))
+    scalar_raw = exports.read("uniform-scalars.json", 65536)
+    words += compare_words(
+        {"schema": "topolab.v2.m2-uniform-scalar-view.v1", "values": values},
+        parse(scalar_raw, canonical_required=True),
+    )
+    return {
+        "status": "PASS_R1_ALL_SOURCE_FIELDS",
+        "checkpoint_count": len(registry["models"]),
+        "NN_cases": len(registry["labels"]),
+        "NN_view_files": 2 * len(registry["labels"]),
+        "scalar_count": len(values),
+        "compared_scalar_fields": words,
+        "old_read_table": reader.table,
+        "new_read_table": exports.table,
+        "FEM_inference_or_complete_history_analysis": False,
+        "B_C_authorized_or_run": False,
+        "resource_acceptance": "EXTERNAL_EXIT_RECORD_REQUIRED",
+    }
+
+
+def public_label(mesh: tuple[int, int, int], ordinal: int = 1) -> dict[str, Any]:
+    """New synthetic serialization fixture, with no solver or historical source."""
+    nx, ny, nz = mesh
+    count = nx * ny * nz
+    x = [0.5] * count
+    rho = [0.625] * count  # Deliberately distinct: a transcript is no filter audit.
+    case = {
+        "case_id": "tlcase-v1-" + f"{ordinal:064x}",
+        "problem": {
+            "mesh": {"element_counts": list(mesh)},
+            "optimization": {"volume_fraction": 0.5, "max_iterations": 360},
+        },
+    }
+    recent = [
+        {
+            "iteration": i,
+            "compliance": float(20 - i),
+            "volume_fraction": 0.625,
+            "density_change": 0.005,
+            "design_density": x,
+            "physical_density": rho,
+        }
+        for i in range(1, 12)
+    ]
+    context = {"source_revision": "a" * 40, "fixture": "new R public IO only"}
+    return {
+        "kind": "label",
+        "label_version": "topolab.b3.label.v1",
+        "context": context,
+        "manifest_sha256": "b" * 64,
+        "initialization": "projected_float32_uniform",
+        "entry": {
+            "case": case,
+            "role": "train",
+            "training_sets": ["expanded"],
+            "source_case_id": None,
+            "physical_fingerprint": "c" * 64,
+        },
+        "stored": {
+            "case": case,
+            "volume": 0.5,
+            "tensor_dtype": "float32",
+            "tensor_axis_order": "channel,z,y,x",
+            "tensor_shape": [1, nz, ny, nx],
+            "design_density": x,
+            "physical_density": rho,
+            "sensitivity_weight": [1.0] * count,
+            "compliance": 9.0,
+            "physical_volume_fraction": 0.625,
+            "iterations": 11,
+            "terminal_density_change": 0.005,
+            "stop_reason": "design_max",
+        },
+        "result": {
+            "design_density": x,
+            "physical_density": rho,
+            "compliance": 9.0,
+            "converged": True,
+            "history": recent,
+            "displacements": [0.0],
+            "reactions": [0.0],
+        },
+    }
+
+
+def public_model(model: dict[str, Any]) -> bytes:
+    if model["family"] == "W":
+        metadata = {
+            "version": "topolab.b4_5.checkpoint.v1",
+            "context_sha256": model["context_sha256"],
+            "seed": model["seed"],
+            "epoch": model["epoch"],
+            "objective": "topolab.b4_5.weighted-terminal.v1",
+        }
+    else:
+        metadata = {
+            "checkpoint_version": "topolab.b3.checkpoint.v1",
+            "context_sha256": model["context_sha256"],
+            "recipe": model["family"],
+            "seed": model["seed"],
+            "selected_epoch": model["epoch"],
+        }
+    header: dict[str, Any] = {"__metadata__": {"topolab": canonical(metadata).decode("ascii")}}
+    offset = 0
+    for key, shape in TENSOR_SHAPES.items():
+        end = offset + 4 * math.prod(shape)
+        header[key] = {"dtype": "F32", "shape": shape, "data_offsets": [offset, end]}
+        offset = end
+    raw_header = canonical(header).rstrip(b"\n")
+    raw_header += b" " * (-len(raw_header) % 8)
+    return struct.pack("<Q", len(raw_header)) + raw_header + struct.pack("<f", 0.25) * 26433
+
+
+def public_check(root: Path) -> dict[str, Any]:
+    """ONE post-freeze IO check; caller supplies an exclusive NEW fixture root."""
+    root.mkdir(parents=True, exist_ok=False)
+    originals, outputs = root / "new-public-sources", root / "new-public-exports"
+    originals.mkdir()
+    outputs.mkdir()
+    registry: dict[str, Any] = {"models": [], "labels": [], "scalars": []}
+
+    def write(base: Path, path: str, raw: bytes) -> None:
+        target = base / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with target.open("xb") as stream:
+            stream.write(raw)
+            stream.flush()
+            os.fsync(stream.fileno())
+
+    bindings = []
+    for family in ("C", "W"):
+        model = {
+            "family": family,
+            "seed": 17,
+            "epoch": 1,
+            "context_sha256": "d" * 64,
+            "selection": {"path": "new-public-selection.json", "byte_size": 1, "sha256": "e" * 64},
+        }
+        raw = public_model(model)
+        model["checkpoint"] = reference(f"{family}.safetensors", raw)
+        registry["models"].append(model)
+        write(originals, f"{family}.safetensors", raw)
+        output = f"checkpoints/{family}-17.safetensors"
+        write(outputs, output, raw)
+        bindings.append({key: model[key] for key in ("family", "seed", "epoch", "context_sha256")})
+        bindings[-1].update(
+            source=model["checkpoint"], selection=model["selection"], output=reference(output, raw)
+        )
+    write(
+        outputs,
+        "models.json",
+        canonical({"schema": "topolab.v2.m2-checkpoint-view.v1", "models": bindings}),
+    )
+    for i, mesh in enumerate(((12, 6, 3), (24, 12, 6)), 1):
+        source = public_label(mesh, i)
+        raw = canonical(source)
+        row = {
+            "case_id": source["entry"]["case"]["case_id"],
+            "entry": source["entry"],
+            "manifest_sha256": source["manifest_sha256"],
+            "context_sha256": digest(canonical(source["context"])),
+            "source_revision": source["context"]["source_revision"],
+            "artifact": reference(f"label-{i}.json", raw),
+        }
+        registry["labels"].append(row)
+        write(originals, f"label-{i}.json", raw)
+        production, audit = label_views(source, row)
+        write(outputs, f"nn/producer/{row['case_id']}.json", canonical(production))
+        write(outputs, f"nn/audit/{row['case_id']}.json", canonical(audit))
+    packet = {
+        "version": "topolab.b4_30.z-reflection-repair.v2",
+        "case_id": "public-uniform",
+        "context_sha256": "f" * 64,
+        "policy": "uniform",
+        "outcome": {
+            "method": "uniform",
+            "seed": None,
+            "route": "baseline",
+            "fallback": None,
+            "attempt": {
+                "succeeded": True,
+                "failure_code": None,
+                "failure_type": None,
+                "metrics": {"final_compliance": 7.25},
+                "state": {"result": {"compliance": 7.25}},
+            },
+        },
+    }
+    raw = canonical(packet)
+    row = {
+        "case_id": "public-uniform",
+        "context_sha256": "f" * 64,
+        "unit": {"path": "new-public-unit.json", "byte_size": 1, "sha256": "0" * 64},
+        "packet": reference("uniform.json", raw),
+    }
+    registry["scalars"].append(row)
+    write(originals, "uniform.json", raw)
+    write(
+        outputs,
+        "uniform-scalars.json",
+        canonical(
+            {"schema": "topolab.v2.m2-uniform-scalar-view.v1", "values": [scalar_view(packet, row)]}
+        ),
+    )
+    result = audit_exports(
+        OnceReader(originals, 5, 16 * MIB), OnceReader(outputs, 8, 8 * MIB), registry
+    )
+    rejected = 0
+    for mutate in (
+        lambda p: p["outcome"].update(fallback={}),
+        lambda p: p.update(policy="candidate"),
+    ):
+        malformed = deepcopy(packet)
+        mutate(malformed)
+        try:
+            scalar_view(malformed, row)
+        except ValueError:
+            rejected += 1
+    require(rejected == 2, "public damaged controls did not stop")
+    result.update(
+        status="PASS_PUBLIC_IO_ONLY",
+        damaged_controls_rejected=rejected,
+        old_source_read_set=[],
+        B_quota_consumed=0,
+        fixture_root=str(root),
+        historical_source_or_scientific_acceptance=False,
+    )
+    return result
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("mode", choices=("public-check", "r0", "r1"))
+    parser.add_argument("--data-root", type=Path)
+    parser.add_argument("--contract", type=Path)
+    parser.add_argument("--registry", type=Path)
+    parser.add_argument("--fixture-root", type=Path)
+    parser.add_argument("--exports-root", type=Path)
+    parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--authorize-old-read", action="store_true")
+    args = parser.parse_args()
+    require(not args.output.exists(), "independent output exists; no retry")
+    if args.mode == "public-check":
+        require(args.fixture_root is not None, "public check needs an exclusive NEW root")
+        result = public_check(args.fixture_root)
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        with args.output.open("xb") as stream:
+            stream.write(canonical(result))
+            stream.flush()
+            os.fsync(stream.fileno())
+        return 0
+    require(args.authorize_old_read, "explicit frozen role launch acknowledgement required")
+    require(
+        args.contract is not None and args.registry is not None and args.data_root is not None,
+        "source role requires literal contract/registry/root",
+    )
+    require(
+        Path(os.path.abspath(args.data_root)) == AUTHORIZED_DATA_ROOT,
+        "source role requires the authorized literal data root",
+    )
+    require(
+        Path(os.path.abspath(args.contract))
+        == Path(__file__).resolve().parents[1]
+        / "docs/planning/p17_m2_input_export_preparation_proposal.json",
+        "source role requires the frozen versioned contract",
+    )
+    for new_path in (args.registry, args.output, args.exports_root):
+        if new_path is not None:
+            require(
+                Path(os.path.abspath(new_path)).is_relative_to(AUTHORIZED_R_ROOT),
+                "source role new path outside R root",
+            )
+    contract = parse(args.contract.read_bytes())
+    registry_raw = args.registry.read_bytes()
+    registry = parse(registry_raw, canonical_required=True)
+    check_registry_shape(registry, contract)
+    old_reader = OnceReader(
+        args.data_root,
+        40 if args.mode == "r0" else 558,
+        32 * MIB if args.mode == "r0" else (12 + 768 + 72) * MIB,
+    )
+    try:
+        if args.mode == "r0":
+            own = build_registry(old_reader, contract)
+            count = compare_words(own, registry)
+            result = {
+                "status": "PASS_R0_SOURCE_REGISTRY",
+                "registry_sha256": digest(registry_raw),
+                "own_registry": own,
+                "compared_scalar_fields": count,
+                "old_read_table": old_reader.table,
+                "payload_open_or_stat": False,
+                "B_C_authorized_or_run": False,
+            }
+        else:
+            require(args.exports_root is not None, "R1 needs literal new exports root")
+            new_reader = OnceReader(args.exports_root, 1070, (12 + 32 + 256 + 1) * MIB)
+            result = audit_exports(old_reader, new_reader, registry)
+            result["registry_sha256"] = digest(registry_raw)
+    except (ValueError, KeyError, TypeError, OSError, OverflowError, struct.error) as error:
+        result = {
+            "status": "STOP",
+            "reason_type": type(error).__name__,
+            "reason": str(error),
+            "old_read_table": old_reader.table,
+            "attempted_paths": sorted(old_reader.seen),
+            "retry": False,
+            "B_C_authorized_or_run": False,
+        }
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    with args.output.open("xb") as stream:
+        stream.write(canonical(result))
+        stream.flush()
+        os.fsync(stream.fileno())
+    return 0 if result["status"].startswith("PASS_") else 2
+
+
+if __name__ == "__main__":
+    sys.exit(main())

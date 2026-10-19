@@ -1524,3 +1524,17 @@ uses existing B4.30 recording semantics and Python's existing os.wait4/native
 statistics; no new allocation/kernel proof or external scientific source.
 Old native and guest contracts/results retain scope. See [software report](docs/validation/p17_m2_native_homotopy_a.md)
 and [independent review](docs/validation/p17_m2_native_homotopy_a_independent_review.md).
+
+
+## M2 bounded input/export preparation R (2026-10-18)
+
+Owner-authorized [R protocol](docs/planning/p17_m2_input_export_preparation_protocol.md)
+adds original stdlib-only bounded metadata registration and literal field/IEEE
+transcription for12 checkpoint copies,528 train-only two-view cases and18 uniform
+scalars. The independent author writes its own source registry/field/word/tensor
+comparisons before primary source exposure, then cross-reviews; review is not blind.
+No external implementation or Hack3D source is used. Existing native RSS/exit
+recording is reused for non-scientific IO only. No model execution, numerical
+revalidation, new algorithm, label generation, B/C or old proof reconstruction.
+Actual source access/results are reported separately; raw originals remain read-only
+and only the explicitly granted R roles may parse them under the frozen whitelist.

@@ -23,19 +23,19 @@ owner-closed exact-physics rescue, solver-internal rejection, B4.51 FAIL/consume
 quotas and all old costs/UNKNOWN/seals remain; B4.52 NOT_SELECTED_BY_R1.
 Historical protocols below retain bytes and old successor context.
 
-The latest commissioned software is [M2 native H stage A](p17_m2_native_homotopy_a_protocol.md),
-with [revised MD/JSON drafts](p17_m2_native_homotopy_proposal.md),
+[M2 native H stage A](p17_m2_native_homotopy_a_protocol.md) is complete through
+PR202/203/main65bbbd3, all four main CI contexts passed; see its
 [software report](../validation/p17_m2_native_homotopy_a.md) and
 [independent review](../validation/p17_m2_native_homotopy_a_independent_review.md).
-The owner prospectively adopted B4.30-style RSS/full-exit empirical evidence for
-this new native identity at4GiB with independent preflight, then granted A6h+4h,
-new public inputs only, regression/normal publication and STOP. No old access,
-formal B preflight/C panel or automatic successor. Actual P/17 remains unrepaired.
-B guest-capacity adoption PR200/201 remains effective in its separate scope,
-host overhead UNKNOWN/environment unadmitted;12-hour/4-start/1800s unapproved.
-The [one next item](../project_status.md#unique-next-item-bounded-registration-and-separate-b-authority)
-is exact restricted input/domain/role/call/fee registration and separate owner
-permission before B; no Ubuntu/KVM procurement is required for native A.
+A caps are closed. New M2 RSS/full-exit empirical acceptance at4GiB and independent
+preflight stay distinct from B guest capacity; actual P/17 remains unrepaired.
+
+The owner now authorizes [R input/export preparation](p17_m2_input_export_preparation_protocol.md):
+`/root`3h exporter + distinct `/root/review_r_exports`2h, internal IO1860s,
+exact metadata/12/528/18 source-byte/temporary-parse exception. Required checks/
+normal publication; clean merged all-CI tools + independent public IO before old
+source, R0 registry before R1. No B/C, expanded input, retry or successor; STOP
+after R closeout. [Scope](p17_m2_input_export_preparation_proposal.md)/[JSON](p17_m2_input_export_preparation_proposal.json).
 
 ## Overall project plans
 
@@ -52,6 +52,14 @@ permission before B; no Ubuntu/KVM procurement is required for native A.
 | Solver-internal learning inception | [Single-candidate resource-admission rejection](TopoLab_v2_solver_internal_learning_route_decision.md) | [淘汰结论与所有者决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 | I1 bounded native software | [Approved software/resource protocol](i1_bounded_native_software_protocol.md), [contract](i1_bounded_native_software_contract.json), [native source guide](../../native/i1/README.md) | [当前停止与所有者决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 | P/17 bounded-runtime penalty homotopy | [Finite implementation, resource admission and later pilot proposal](TopoLab_v2_P17_bounded_homotopy_proposal.md) | [提案历史与当前决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
+
+## Current finite proposals and R execution authority
+
+| Proposal | Documents | Current boundary |
+|---|---|---|
+| M2 native H/17 parent | [Revision6](p17_m2_native_homotopy_proposal.md), [JSON](p17_m2_native_homotopy_proposal.json) | A closed; R authorized under separate protocol; B/C unapproved |
+| M2 input registration and restricted export preparation | [Contract and budget](p17_m2_input_export_preparation_proposal.md), [JSON](p17_m2_input_export_preparation_proposal.json) | R authorized3h+2h/1860s with exact exception; entry/STOP enforced |
+| Authorized R execution | [Protocol](p17_m2_input_export_preparation_protocol.md) | Exact input exception,3h+2h/1860s, no B/C/retry/successor |
 
 The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.

@@ -1,32 +1,29 @@
 # TopoLab v2 Development Roadmap
 
-Current authority (owner-approved M2 native H stage A,2026-10-18):
+Current authority (owner-authorized R preparation,2026-10-18):
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE; fixed P/17 unrepaired; science paused.**
-The owner separately adopted B4.30-style RSS and complete-exit empirical
-acceptance at4GiB for the NEW M2 native identity, with independent preflight;
-this is not an a-priori complete-allocation guarantee. Then the owner authorized
-[A only](p17_m2_native_homotopy_a_protocol.md): <=6 implementation hours plus
-<=4 distinct independent-review hours, versioned source/new public fixtures,
-H integration and RSS/exit recording, required regression/normal publication,
-then STOP. See [the revised drafts](p17_m2_native_homotopy_proposal.md),
-[A software report](../validation/p17_m2_native_homotopy_a.md) and
-[independent review](../validation/p17_m2_native_homotopy_a_independent_review.md).
-No old input/export preparation, B formal preflight or C scientific panel,
-installation/VM/new provider, A2.3 or automatic successor. Formal allocations0;
-FULL180/14580s remain unapproved. New actual H/17 quality/speed/resource admission
-remain UNKNOWN_NOT_TESTED/NOT_RUN; software tests do not establish repair.
+A is closed through PR202/203/main65bbbd3, all four main CI contexts passed.
+The owner now authorizes [R preparation](p17_m2_input_export_preparation_protocol.md):
+exporter `/root` <=3 active hours, distinct author `/root/review_r_exports` <=2h,
+internal IO1860s (900+900+FULL60), proposal-white-listed metadata and12/528/18
+full-byte/temporary-parse exception with semantic field limits. Only M2/existing
+software CI; no new purchases, algorithm, FEM/inference, expanded input, B/C,
+retry/reset or automatic successor. Required regression/normal publication remains.
+Tools must be clean locked merged all-four-CI source and pass one independent
+public IO check before any old source access; R0 freezes metadata references
+before R1 source-bound copying and complete independent field/bit comparisons.
+See [scope/budget](p17_m2_input_export_preparation_proposal.md) and
+[JSON](p17_m2_input_export_preparation_proposal.json). After R closeout STOP,
+including failure with immutable prefix; no automatic B FULL180 or C14580s.
 
-PR199/main622d546 methods remain effective. B guest-capacity adoption through
-PR200/201 remains ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED in its own
-future-compatible scope, with host overhead additional UNKNOWN. It is not the
-native RSS metric. I1 published software/selected-host pre-entry UNKNOWN,
-D1 STOP/unlaunched0/1/FULL60, owner-closed rescue, B4.51 FAIL/consumed quotas,
-B4.52 NOT_SELECTED_BY_R1 and every cost/UNKNOWN/seal remain. Known-paid
-12721.16417100014444982>7200 still fails unchanged all-paid feasibility.
-The one next item after A is precise restricted input/domain/role/call/fee
-registration and separate owner authority before B; no Ubuntu/KVM procurement
-or further proof project is commissioned. B3 M2 plus independent Ubuntu24.04,
-two scales and independent reproduction remain final obligations.
+New M2 native4GiB RSS/full-exit empirical adoption and independent preflight
+remain, without an a-priori allocation theorem. B guest-capacity adoption stays
+separate/environment unadmitted/host overhead UNKNOWN. P/17 quality/speed/resource
+admission remain UNKNOWN_NOT_TESTED/NOT_RUN, full-fit PENDING4GiB; preparing inputs
+is not repair or a scientific Gate. PR199 methods, I1/D1 stops, B4.51 failure and
+consumed quotas, B4.52 NOT_SELECTED_BY_R1, K12721.16417100014444982>7200/D1 FULL60
+and all old costs/UNKNOWN/seals remain. B3 M2+independent Ubuntu24.04, both scales
+and final independent reproduction remain obligations.
 
 Status: **active v2 flagship delivery plan; the ML delivery Gate remains open.**
 Gates A1/A3 and B3's data Gate passed; A2.1–A2.2 are complete. The original
@@ -2371,14 +2368,14 @@ search on B5 outcomes.
 ### Effective authority and development order
 
 The owner retains **FULL_V2_OPEN_NO_ADMITTED_ROUTE**, fixed unrepaired P/17,
-uniform default,4GiB and independent preflight. The new M2 native identity has
-prospectively adopted B4.30-style RSS/full-exit empirical evidence, distinct from
-old native proof and the adopted B guest-capacity boundary. Only [stage A](p17_m2_native_homotopy_a_protocol.md)
-is commissioned: <=6h implementation + <=4h separate review, new public inputs,
-required regression/normal publication, then STOP. No B/C formal access or budget.
-The [A software result](../validation/p17_m2_native_homotopy_a.md) and independent
-review supply no actual H/17 repair, scientific speed or resource admission.
-PR199 methods, old I1/D1/R1/B4.52 dispositions, all costs/UNKNOWN/quotas/seals stay.
+uniform default,4GiB and independent preflight. A is closed. The owner now grants
+[R preparation](p17_m2_input_export_preparation_protocol.md):3h exporter `/root`+
+2h distinct `/root/review_r_exports`, IO1860s and exact proposal source-byte/parse
+exception. Clean locked merged all-CI tools and independent public IO precede old
+reads; R0 independently accepted registry precedes R1. Complete required regression/
+normal publication then STOP, including any failed prefix. No B/C, source expansion,
+retry/reset or successor. New M2 RSS empirical adoption, separate B guest boundary
+and every historical failure/cost/UNKNOWN/quota/seal remain; no P/17 repair claim.
 
 The following order applies **only after separate authority and admission**;
 these are purposes/acceptance/exits, not newly commissioned slices or new Gates.
@@ -2433,8 +2430,8 @@ Quality, reliability and speed rows record **pending advice**, not active
 alternatives. Any such change needs a separately reviewed finite proposal,
 justification before results, a compatible new identity and explicit adoption.
 The resource row retains B guest adoption in its own scope. The later M2 native
-RSS adoption and A-only authority above are effective; neither admits an
-environment. Observed P/17 margins cannot choose a just-passing standard.
+RSS adoption and R preparation authority above are effective; B/C environments
+remain unadmitted. Observed P/17 margins cannot choose a just-passing standard.
 Historical contracts/FAIL/costs stay.
 
 | Requirement and current basis | Evidence and unanswered question for a future proposal |
@@ -2461,29 +2458,18 @@ or scientific Gate credit. A2.4 follows its recovery dependency; A4 follows limi
 
 ### M2 native H stage A and sole next item
 
-The [revised proposal](p17_m2_native_homotopy_proposal.md) and
-[structured draft](p17_m2_native_homotopy_proposal.json), revision5, record the
-owner's native RSS adoption and later A-only authorization. A implements fixed
-H dispatch, eight/eight penalty prefixes, phase witnesses, original controls,
-strict public-only inputs, independently authored numerical/record checks and
-RSS/complete-exit adaptation. New initialized public weights never substitute
-for the historical P/17 checkpoint. No old input read or B/C launch occurs.
-See [software validation](../validation/p17_m2_native_homotopy_a.md) and
-[independent review](../validation/p17_m2_native_homotopy_a_independent_review.md).
-
-**After A, STOP.** The single next item is a bounded registration/authority
-decision before B. Owner and separately authorized export custodian must supply
-exact12 checkpoint and528 restricted train-only NN/18 uniform-scalar identities,
-source-attested views, actual schema/shapes/bytes/read caps and role paths;
-no full original label/history/index discovery. Export preparation and source
-verification need their own finite access/time/fee grant, currently unapproved.
-Implementer and independent reviewer must register complete call/charge/start,
-role/native-unit/overlap/exit tables and the locked clean merged all-CI source.
-Unknown terms remain UNKNOWN; do not consume the proposed single FULL180
-preflight before these fields and its separate explicit grant are complete.
-C14580s and payload authority remain unapproved, no quota transfer/reset.
-This uses M2 and existing software CI; no Ubuntu/KVM procurement is a prerequisite
-to this native route. B3's final independent Ubuntu/two-scale obligations remain.
+A is closed through PR202/203/main65bbbd3/all-four-CI. Owner authorizes
+[R input/export preparation](p17_m2_input_export_preparation_protocol.md) under
+[scope](p17_m2_input_export_preparation_proposal.md)/[JSON](p17_m2_input_export_preparation_proposal.json):
+12 C/P/W/S fixed weights (W B4.5, others B4.1),528 train cases432/96 with restricted
+producer/audit views and18 B4.30 uniform scalars. Exact source-byte/temporary parse
+exception and3h exporter+2h distinct review, IO1860s are granted only to R.
+Tools/public tests/source review and normal protected publication come before
+independent public IO, bounded R0 and full source-bound R1 comparison. No old read
+before the frozen entry conditions. Any first failure, mandatory UNKNOWN or cap
+closes remaining source roles without retry. After R result publication STOP.
+B's one FULL180 and C14580s remain unapproved; input preparation does not close
+all scientific role/call/fee fields or admit B/C. B3 final obligations remain.
 
 ### B resource assurance specification
 
