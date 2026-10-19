@@ -5,7 +5,7 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current slice: authorized NEW R/v2 source preparation, before freeze
+## NEW R/v2 source merged; formal preparation closed unlaunched
 
 The owner explicitly authorized the [new proposal](planning/p17_m2_input_export_billing_revision_proposal.md)
 and [JSON](planning/p17_m2_input_export_billing_revision_proposal.json) for
@@ -17,28 +17,39 @@ charges120/120/120/780/660/60=1860s. Follow the
 and temporary parsing only for prescribed fields,4GiB and independent public IO.
 No B/C, extra source, old backup/seal, retry/reset or automatic successor.
 
-Assigned ec0b recovered3459dd5 on `docs/m2-r-billing-revision-contract` with ten
-tracked draft modifications and two untracked proposal documents, all preserved.
-Read-only GitHub connector confirmed main unchanged, open PRs0 and all four
-[main CI39191422887 jobs](https://github.com/keith1117/TopoLab/actions/runs/39191422887)
-successful. Current branch `fix/m2-input-export-billing`; no second worktree or
-main-checkout edit. Source implementation/public-fixture review passed locally;
+Assigned ec0b recovered3459dd5 and preserved ten tracked draft modifications
+and two untracked proposal documents. Read-only GitHub recovery confirmed then-
+main CI39191422887's four jobs successful and no open PR. Reviewed source passed
+all four exact-head [PR206 CI jobs](https://github.com/keith1117/TopoLab/actions/runs/39206836164)
+and merged as `04d14c9afde929d76e262821f4f87e180c89d4dc` through
+[PR206](https://github.com/keith1117/TopoLab/pull/206). The assigned worktree
+was safely detached onto merged main, then this result branch was created;
+no second worktree or main-checkout edit. Source/public-fixture review passed;
 [software report](validation/p17_m2_input_export_billing_revision.md) and
 [independent review](validation/p17_m2_input_export_billing_revision_independent_review.md)
 distinguish public checks from actual resource/source acceptance. Named roles,
-old source stat/read and new R root creation remain0 before clean merged locked
-source/all-four main CI/frozen plan. No preparation-complete or P/17 repair claim.
-Original v1 contracts/protocol/reports retain bytes; no new allocation proof.
+old source stat/read and new R root creation remain0. No preparation-complete or
+P/17 repair claim. Original v1 contracts/protocol/reports retain bytes; no new
+allocation proof.
 
 Approval service recovered for the read-only main protection query at05:34 UTC.
 The final normal-permission five precommit checks all passed; complete pytest
 2203 passed/1 selected Linux-only skip in746.07s. The earlier default-sandbox
 2204 run remains7 native permission failures/2196 passed/1 skip, with literal
 NEW fixture `kern.clockrate` denial; it was not a full PASS. Branch protection
-requires current PR checks and disallows direct bypass. Source PR and exact merged
-main four-job CI remain pending, followed by literal freeze and independent public
-IO. Named roles/old source reads/new IO paid remain0; neither original actor
-window resets. See the [software report](validation/p17_m2_input_export_billing_revision.md).
+requires current PR checks and disallows direct bypass. Exact
+[merged-main CI39208671873](https://github.com/keith1117/TopoLab/actions/runs/39208671873)
+was still `quality` IN_PROGRESS at06:22:14 UTC, though its other three jobs passed.
+That same exact merged-SHA run later completed with all four jobs successful.
+The independent deadline is06:34:17 UTC; mandatory exporter-r1 FULL780 could
+start no later than06:21:17 UTC. That latest start passed before the required
+main-CI/freeze gate, so the complete six-role sequence could not be admitted
+under the original window. **No R/v2 formal role was attempted; no launch plan,
+NEW execution/backup root, restricted input stat/read or formal RSS/exit event
+exists. New restricted I/O charge is0/1860s, including untriggered shared60.**
+This is `UNKNOWN_NOT_RUN`, not R/v2 FAIL, measured>4GiB or source preparation
+success. No clock reset, partial prefix or automatic successor. Publish the
+zero-launch result under normal protection, then stop. See the [software report](validation/p17_m2_input_export_billing_revision.md).
 
 ## Closed R/v1 before old input access
 
@@ -205,14 +216,15 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-owner-decision-on-the-stopped-r-identity"></a>
 
-<a id="unique-next-item-owner-decision-on-the-new-rv2-proposal"></a>
+<a id="unique-next-item-owner-decision-after-rv2-zero-launch"></a>
 
-## Unique next item: complete only the authorized finite R/v2
+## Unique next item: an explicit owner decision after zero launch
 
-Complete its clean reviewed source publication/all-four main CI, freeze actual
-literal plan and perform the six once-only roles under the
-[new protocol](planning/p17_m2_input_export_billing_revision_protocol.md), stopping
-on the first failure and closing all source suffix roles. Accepted independent
-R0 must precede R1. Publish the actual finite result and STOP. No B/C or successor
-is authorized; future B FULL180/C14580s remain separate. Retain worktree and all
-historical gates/costs/UNKNOWN/quotas/seals.
+After normal result publication, the only prospective decision is whether to
+commission a **new** finite preparation identity and original-window budget
+for this already published source, with exact scope, two authors, FULL/RSS/exit
+evidence and independent public preflight fixed before any old-input access.
+The R/v2 clock and0/1860s unlaunched allowance do not transfer or constitute
+permission to start later. The owner may instead retain the current pause.
+No B/C or scientific successor is authorized; future B FULL180/C14580s remain
+separate. Retain worktree and all historical gates/costs/UNKNOWN/quotas/seals.

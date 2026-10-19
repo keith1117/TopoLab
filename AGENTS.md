@@ -56,17 +56,18 @@ The owner expressly authorized NEW R/v2 under the
 `/root`3h and new different-author `/root/review_r_v2`2h; six once-only FULL
 charges120/120/120/780/660/60=1860s and exact40-metadata/12-checkpoint/528-train/
 18-uniform original-byte/temporary-parse scope. Preserve v1 frozen bytes/STOP/costs.
-First publish reviewed tools under all five checks and four PR/main CI contexts;
-then freeze literal new plan and pass independent public IO before R0/R1 source
-entry. Source review/local public tests passed; named roles/old reads0.
-Approval service recovered; main protection was checked. The five mandatory
-normal-permission source checks passed (2203 tests passed/1 platform skip).
-The earlier default-sandbox7 native permission failures remain recorded.
-Source PR/latest-head and merged-main CI plus literal freeze remain pending;
-do not start formal entry before all gates pass. No approval bypass.
-First named failure STOP/no retry; only one reserved NEW-only shared backup.
-No B/C, old backup/seal, expansion, cap transfer, new proof or successor. Complete
-finite preparation, regression and protected publication; retain worktree and STOP.
+Reviewed source passed the five mandatory normal-permission checks (2203 passed/1
+platform skip) and PR206/latest-head four CI jobs, then merged as main04d14c9.
+The earlier default-sandbox7 native permission failures remain recorded. Exact
+main CI39208671873 quality was still running at06:22:14 UTC. The independent
+window ends06:34:17 UTC, so later exporter-r1 FULL780 latest start06:21:17
+had passed before source admission could be frozen. Close this finite execution
+**unlaunched**: no R/v2 plan/root, named role, old source stat/read or restricted
+I/O charge; source/resource acceptance remains UNKNOWN_NOT_RUN, not formal FAIL.
+That exact main CI later finished with all four jobs successful; it does not
+reopen the elapsed window. Publish the zero-launch result normally. Do not use the old grant again,
+start a partial prefix, B/C, old backup/seal, expanded input, retry/reset or an
+automatic successor. Retain4GiB, independent preflight, all old costs and gates.
 
 ## Provenance boundary
 

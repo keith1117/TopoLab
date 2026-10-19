@@ -42,11 +42,15 @@ owner grant authorizes NEW R/v2 under its
 [protocol](../planning/p17_m2_input_export_billing_revision_protocol.md),3h+2h/1860s
 and exact source exception. [New software report](p17_m2_input_export_billing_revision.md)
 and [different-author review](p17_m2_input_export_billing_revision_independent_review.md)
-retain authorship, public checks and pending actual entry distinctly. Formal
-roles/old source reads0 at this prefreeze checkpoint.4GiB and independent public
-preflight remain; no allocation proof. First named failure STOP/no retry; no B/C,
-expanded input, old backup/seal, transfer or automatic successor. All historical
-contracts/reports remain. New raw artifacts/logs stay external under the
+retain authorship, public checks and actual zero-launch closeout distinctly.
+Source PR206/main04d14c9 merged after exact-head four-job CI; its exact-main
+run later passed all four jobs. Original
+independent window could no longer fit exporter-r1 FULL780 after exact-main CI
+remained unfinished past its06:21:17 UTC latest start. Formal roles/old source
+reads0, NEW restricted I/O paid0/1860; resource/source acceptance UNKNOWN_NOT_RUN,
+not R/v2 FAIL.4GiB and independent public preflight remain; no allocation proof.
+No B/C, partial prefix, expanded input, old backup/seal, transfer or automatic
+successor. All historical contracts/reports remain. New raw artifacts/logs stay external under the
 [repository policy](../repository_policy.md).
 
 ## Numerical and historical release evidence
