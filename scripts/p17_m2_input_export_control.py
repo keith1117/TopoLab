@@ -1,10 +1,11 @@
-"""Frozen R launch plan and post-exit binding; no historical payload reads."""
+"""NEW R/v2 FULL billing and finite external-exit binding; no old payload reads."""
 
 import argparse
 import hashlib
 import importlib.util
 import json
 import os
+import platform
 import resource
 import signal
 import subprocess
@@ -13,7 +14,10 @@ import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-ROOT = Path("/Users/keith1117/Documents/TopoLab-data/p17-m2-input-export-preparation-v1")
+ROOT = Path("/Users/keith1117/Documents/TopoLab-data/p17-m2-input-export-preparation-v2")
+IDENTITY = "topolab.v2.p17-m2-input-export-preparation.v2"
+CONTENT_SHA = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
+CLOCK = "functions.exec.Date.now.UTC-seconds"
 # -I excludes script-directory imports. Bind this stdlib-only helper explicitly.
 HELPER_SPEC = importlib.util.spec_from_file_location(
     "p17_m2_homotopy", REPO / "scripts/p17_m2_homotopy.py"
@@ -40,6 +44,7 @@ CAPS = {
     "independent-r0": 120,
     "exporter-r1": 780,
     "independent-r1": 660,
+    "shared-closeout": 60,
 }
 
 
@@ -78,6 +83,20 @@ def write(path, value):
         os.fsync(stream.fileno())
 
 
+def external_templates(python):
+    return {
+        role: [
+            [python, "-I", str(Path(__file__).resolve()), mode, "--plan",
+             str(ROOT / "launch_plan.json"), "--plan-sha", "<PLAN_SHA256>", "--role", role]
+            for mode in ("supervise", "finalize")
+        ] for role in CAPS
+    }
+
+
+def resolved(argv, plan_sha):
+    return [word.replace("<PLAN_SHA256>", plan_sha) for word in argv]
+
+
 def plan_checked(path, expected):
     require(path.absolute() == ROOT / "launch_plan.json", "literal new plan")
     raw = read(path)
@@ -97,15 +116,49 @@ def plan_checked(path, expected):
         "scripts/p17_m2_homotopy.py",
         "uv.lock",
         "docs/planning/p17_m2_input_export_preparation_proposal.json",
+        "docs/planning/p17_m2_input_export_billing_revision_proposal.json",
+        "docs/planning/p17_m2_input_export_billing_revision_protocol.md",
+        "scripts/p17_m2_input_export_dispatch.js",
     }
     require(set(plan["source_files"]) == expected_files, "complete source freeze")
+    tree = subprocess.check_output(["git", "rev-parse", "HEAD^{tree}"], cwd=REPO).decode().strip()
+    require(tree == plan["merged_tree"], "merged source tree changed")
     for name, h in plan["source_files"].items():
         require(digest((REPO / name).read_bytes()) == h, "frozen source bytes changed")
     require(
         plan["all_four_main_CI_success"] is True
-        and plan["owner_R_authorized"] is True
+        and plan["owner_R_v2_authorized"] is True
         and plan["B_C_authorized"] is False,
         "admission record",
+    )
+    require(
+        plan["execution_identity"] == IDENTITY
+        and plan["content_sha256"] == CONTENT_SHA
+        and plan["FULL_caps_seconds"] == CAPS
+        and plan["clock_domain"] == CLOCK
+        and plan["clock_resolution_seconds"] == 0.001,
+        "new identity/FULL/content/clock binding",
+    )
+    require(
+        plan["actor_deadlines_UTC"] == {
+            "exporter": "2026-10-19T07:33:59Z",
+            "independent": "2026-10-19T06:34:17Z",
+        },
+        "original continuous actor windows changed",
+    )
+    require(sys.platform == "darwin", "M2 native Darwin execution only")
+    require(plan["external_argv"] == external_templates(sys.executable),
+            "complete literal supervisor/finalizer call table")
+    require(
+        platform.machine() == "arm64"
+        and plan["host_machine"] == platform.machine()
+        and plan["host_platform"] == sys.platform
+        and plan["python_executable"] == sys.executable
+        and plan["python_version"] == platform.python_version()
+        and plan["host_os_release"] == platform.release()
+        and plan["thread_environment"] == native_recording.ENVIRONMENT
+        and all(os.environ.get(k) == v for k, v in native_recording.ENVIRONMENT.items()),
+        "actual frozen interpreter/M2/thread identity",
     )
     return plan
 
@@ -123,7 +176,7 @@ def bind(plan, role, controller_exit, plan_sha):
         and record["cleanup"]["group_gone"] is True,
         "observed role success and full exit",
     )
-    require(record["argv"] == plan["roles"][role]["argv"], "actual argv")
+    require(record["argv"] == resolved(plan["roles"][role]["argv"], plan_sha), "actual argv")
     require(
         record["native"]
         and record["timer_native_exit"]
@@ -146,7 +199,7 @@ def bind(plan, role, controller_exit, plan_sha):
         log=read(inner_root / "command.log", 16 * 1024 * 1024, allow_empty=True),
         helper_profiles=helpers,
         expected_role=role,
-        expected_argv=plan["roles"][role]["argv"],
+        expected_argv=resolved(plan["roles"][role]["argv"], plan_sha),
         platform=sys.platform,
     )
     rss = reconciled["inner_empirical_RSS_bytes"] + measured["rss_bytes"]
@@ -161,7 +214,7 @@ def bind(plan, role, controller_exit, plan_sha):
     )
     require(charge <= CAPS[role], "role charge cap")
     result = {
-        "schema": "topolab.v2.m2-input-export-exit.v1",
+        "schema": "topolab.v2.m2-input-export-inner-exit-diagnostic.v2",
         "role": role,
         "plan_sha256": plan_sha,
         "status": "PENDING_BINDER_NATIVE_EXIT",
@@ -231,6 +284,18 @@ def supervise(plan, role, plan_sha):
     started = time.monotonic()
     base = ROOT / "receipts"
     base.mkdir(parents=True, exist_ok=True)
+    pending = {
+        "execution_identity": IDENTITY,
+        "role": role,
+        "plan_sha256": plan_sha,
+        "frozen_FULL_seconds": CAPS[role],
+        "clock_domain": CLOCK,
+        "clock_resolution_seconds": 0.001,
+        "external_argv": [resolved(argv, plan_sha) for argv in plan["external_argv"][role]],
+        "status": "PENDING_BEFORE_DISPATCH",
+    }
+    write(base / (role + "-pending.json"), pending)
+    ingest_external(plan, plan_sha, closing=role == "shared-closeout")
     profile = base / (role + "-controller.time")
     log = base / (role + "-controller.log")
     write(
@@ -273,6 +338,19 @@ def supervise(plan, role, plan_sha):
                 break
             time.sleep(0.01)
     timer_peak = int(rusage.ru_maxrss) * (1 if sys.platform == "darwin" else 1024)
+    wait4 = {
+        "statistics_source": "os.wait4",
+        "wall_source": "controller_monotonic_observed",
+        "pid": child.pid,
+        "exit_code": child.returncode,
+        "rss_unit": "bytes" if sys.platform == "darwin" else "KiB*1024",
+        "native": {
+            "wall_seconds": time.monotonic() - started,
+            "user_seconds": rusage.ru_utime,
+            "system_seconds": rusage.ru_stime,
+            "rss_bytes": timer_peak,
+        },
+    }
     write(
         base / (role + "-outer-timer-exit.json"),
         {
@@ -282,6 +360,7 @@ def supervise(plan, role, plan_sha):
             "wall_seconds": time.monotonic() - started,
             "role": role,
             "plan_sha256": plan_sha,
+            "wait4": wait4,
         },
     )
     require(child.returncode == 0 and timer_peak > 0, "outer timer/controller exit")
@@ -296,6 +375,7 @@ def supervise(plan, role, plan_sha):
         supervisor_observed_wall_seconds=time.monotonic() - started,
         supervisor_complete_exit="PENDING_EXTERNAL_CALLER_OBSERVATION",
         full_role_charge="EXTERNAL_FULL_WALL_PLUS10_REQUIRED",
+        supervisor_pid=os.getpid(),
     )
     result["conservative_RSS_bytes"] += timer_peak + self_peak
     require(result["conservative_RSS_bytes"] <= 4294967296, "whole registered RSS envelope")
@@ -310,15 +390,224 @@ def supervise(plan, role, plan_sha):
             "unit": "bytes",
             "status": "PENDING_EXTERNAL_EXIT",
             "role": role,
+            "pid": os.getpid(),
             "plan_sha256": plan_sha,
         },
     )
     return result
 
 
+
+def resource_inputs(plan, role, plan_sha):
+    """Read only this NEW role's literal recording outputs, never old payloads."""
+    folder = ROOT / "receipts" / role / role
+    record = json.loads(read(folder / "command.json", 4 * 1024 * 1024))
+    helpers = {}
+    require(len(record["helpers"]) <= 4096, "bounded helper inventory")
+    for index, item in enumerate(record["helpers"]):
+        name = f"sampler-{index}.time"
+        require(item["profile"] == name, "literal registered helper")
+        helpers[name] = read(folder / name, 1024 * 1024)
+    return {
+        "inner_evidence": {
+            "record": record,
+            "profile": read(folder / "command.time", 1024 * 1024),
+            "log": read(folder / "command.log", allow_empty=True),
+            "helper_profiles": helpers,
+            "expected_role": role,
+            "expected_argv": resolved(plan["roles"][role]["argv"], plan_sha),
+            "platform": sys.platform,
+        },
+        "native_profiles": {
+            "outer-controller": read(ROOT / "receipts" / (role + "-controller.time"), 1048576)
+        },
+    }
+
+
+def ingest_external(plan, plan_sha, *, closing=False):
+    """Copy actual trusted-tool events at the next role's measured prelude."""
+    raw = os.environ.get("TOPOLAB_R2_PREVIOUS_TOOL_RECORDS", "[]")
+    require(len(raw.encode()) <= 4 * 1024 * 1024, "bounded external telemetry")
+    records = json.loads(raw)
+    require(isinstance(records, list) and len(records) <= 1, "one actual prior tool packet")
+    (ROOT / "tool-events").mkdir(exist_ok=True)
+    for packet in records:
+        role = packet["pending"]["role"]
+        require(role in CAPS, "registered previous role")
+        write(ROOT / "tool-events" / (role + ".json"), packet)
+        try:
+            pending = json.loads(read(ROOT / "receipts" / (role + "-pending.json")))
+            require(pending == packet["pending"], "literal pending identity")
+            try:
+                evidence = resource_inputs(plan, role, plan_sha)
+            except (OSError, KeyError, ValueError):
+                evidence = {}
+            verified = independent.audit_full_role_v2(
+                pending, packet["completion"], raw_tool_events=packet["events"],
+                expected_role=role, expected_plan_sha256=plan_sha, **evidence,
+            )
+            for key in ("status", "whole_wall_seconds", "RSS_envelope_bytes",
+                        "execution_identity", "role", "plan_sha256", "pending_sha256",
+                        "frozen_FULL_seconds", "actual_exit_codes", "full_role_evidence_accepted"):
+                require(verified[key] == packet["terminal"][key],
+                        "independent actual external-event replay differs: " + key)
+        except (OSError, KeyError, TypeError, ValueError) as error:
+            if not closing:
+                raise
+            verified = {"status": "STOP_NO_RETRY", "role": role,
+                        "reason": str(error), "missing_evidence": "UNKNOWN_NOT_ZERO"}
+        write(ROOT / "receipts" / (role + "-observed.json"), verified)
+        if verified["status"] != "PASS_R_V2_FULL_ROLE":
+            write(ROOT / "STOP.json", {"role": role, "outcome": verified, "retry": False})
+
+
+def archive_new():
+    """One NEW-prefix backup; never follows original input or backup pointers."""
+    backup = ROOT.with_name(ROOT.name + "-independent-backup")
+    backup.mkdir(exist_ok=False)
+    return backup_late(backup, exclude_active=True)
+
+
+def backup_late(backup, *, exclude_active=False):
+    rows = []
+    total = 0
+    for path in sorted(ROOT.rglob("*")):
+        relative = path.relative_to(ROOT)
+        if exclude_active and str(relative).startswith("receipts/shared-closeout"):
+            continue
+        require(not path.is_symlink(), "NEW backup symlink")
+        if path.is_dir():
+            continue
+        require(path.is_file(), "NEW backup regular file")
+        data = read(path, 64 * 1024 * 1024, allow_empty=True)
+        total += len(data)
+        require(total <= 512 * 1024 * 1024 and len(rows) < 20000, "NEW backup finite cap")
+        target = backup / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if target.exists():
+            require(read(target, 64 * 1024 * 1024, allow_empty=True) == data,
+                    "immutable NEW snapshot changed")
+        else:
+            with target.open("xb") as stream:
+                stream.write(data)
+                stream.flush()
+                os.fsync(stream.fileno())
+        require(read(target, 64 * 1024 * 1024, allow_empty=True) == data,
+                "NEW backup actual byte comparison")
+        rows.append({"path": str(relative), "bytes": len(data), "sha256": digest(data)})
+    actual = {str(p.relative_to(backup)) for p in backup.rglob("*") if p.is_file()}
+    require(actual == {row["path"] for row in rows}, "NEW backup exact member inventory")
+    return {"status": "PASS_NEW_PREFIX_BACKUP_ONLY", "members": rows,
+            "total_bytes": total, "old_input_reads": 0}
+
+
+def backup_evidence(*, public_fixture=False):
+    backup = ROOT.with_name(ROOT.name + "-independent-backup")
+    first = independent.audit_new_backup(ROOT, backup, public_fixture=public_fixture)
+    require(first["status"] == "PASS_INDEPENDENT_NEW_BACKUP", "independent NEW backup")
+    # The inventory excludes its own not-yet-created manifest. Both manifest
+    # copies are then included in the final independent byte comparison.
+    write(ROOT / "backup_manifest.json", first)
+    write(backup / "backup_manifest.json", first)
+    checked = independent.audit_new_backup(ROOT, backup, public_fixture=public_fixture)
+    require(checked["status"] == "PASS_INDEPENDENT_NEW_BACKUP", "NEW manifest copies")
+    return {"status": checked["status"], "member_count": checked["member_count"],
+            "total_bytes": checked["total_bytes"], "manifest": "backup_manifest.json",
+            "manifest_sha256": digest(canonical(first))}
+
+
+def finish_record(plan, role, plan_sha):
+    """Retain available serializer RSS BEFORE acceptance; actual exit is external."""
+    base = ROOT / "receipts"
+    own = {
+        "pid": os.getpid(), "kind": "self_high_water",
+        "statistics_source": "resource.getrusage", "rss_unit": "bytes",
+        "phases": ["preflush", "postflush"],
+        "samples_bytes": [native_recording._rss_self(), native_recording._rss_self()],
+    }
+    completion = {
+        "schema": "topolab.v2.m2-input-export-exit.v2",
+        "execution_identity": IDENTITY, "role": role, "plan_sha256": plan_sha,
+        "frozen_FULL_seconds": CAPS[role], "clock_domain": CLOCK,
+        "clock_resolution_seconds": 0.001, "status": "PENDING_EXTERNAL_EXIT",
+        "pending_sha256": None, "resource_components": [own],
+        "final_serializer_pid": os.getpid(), "cleanup": {"group_gone": None},
+    }
+    packet = {"pending": {}, "completion": completion, "resourceEvidence": {
+        "status": "STOP_NO_RETRY", "reason": "UNKNOWN_INCOMPLETE_ROLE_EVIDENCE"}}
+    success = False
+    try:
+        raw = read(base / (role + "-pending.json"))
+        packet["pending"] = json.loads(raw)
+        completion["pending_sha256"] = digest(raw)
+        sup = json.loads(read(base / (role + "-supervisor.json")))
+        last = json.loads(read(base / (role + "-last-rss.json")))
+        timer = json.loads(read(base / (role + "-outer-timer-exit.json")))["wait4"]
+        evidence = resource_inputs(plan, role, plan_sha)
+        controller_pid = evidence["inner_evidence"]["record"]["controller_pid"]
+        outer_raw = evidence["native_profiles"]["outer-controller"]
+        completion["resource_components"] = [
+            {"pid": controller_pid, "kind": "native_profile", "profile": "outer-controller",
+             "profile_sha256": digest(outer_raw), "platform": sys.platform,
+             "actual_exit_code": sup["controller_exit"]},
+            {"pid": timer["pid"], "kind": "wait4", "platform": sys.platform, "record": timer},
+            {"pid": sup["supervisor_pid"], "kind": "self_high_water",
+             "statistics_source": "resource.getrusage", "rss_unit": "bytes",
+             "phases": ["preflush", "postflush"],
+             "samples_bytes": [sup["supervisor_rss_after_verification_bytes"], last["rss_bytes"]]},
+            own,
+        ]
+        completion["cleanup"] = evidence["inner_evidence"]["record"]["cleanup"]
+        write(base / (role + "-finalizer-preflush.json"), completion)
+        own["samples_bytes"][1] = native_recording._rss_self()
+        packet["resourceEvidence"] = independent.audit_v2_resource_components(
+            completion, **evidence
+        )
+        write(base / (role + "-completion.json"), packet)
+        if role == "shared-closeout":
+            # Include all late native/serializer disk records in the one backup.
+            backup_late(ROOT.with_name(ROOT.name + "-independent-backup"))
+            packet["independent_backup"] = backup_evidence()
+        # Exercise bounded stdout serialization before retaining this process's
+        # last high-water sample. Actual exit is still the external tool event.
+        canonical(packet)
+        own["samples_bytes"][1] = native_recording._rss_self()
+        packet["resourceEvidence"] = independent.audit_v2_resource_components(
+            completion, **evidence
+        )
+        success = packet["resourceEvidence"]["status"] == "PENDING_EXTERNAL_EXIT"
+    except (ValueError, KeyError, TypeError, OSError, OverflowError) as error:
+        own["samples_bytes"][1] = native_recording._rss_self()
+        packet["failure"] = {"type": type(error).__name__, "reason": str(error),
+                             "status": "STOP_NO_RETRY", "missing": "UNKNOWN_NOT_ZERO"}
+    # Serialization and stdout occur inside the measured final external call.
+    print(canonical(packet).decode(), end="", flush=True)
+    return 0 if success else 1
+
+
+def source_gate(plan, role, plan_sha):
+    require(role == "shared-closeout" or not (ROOT / "STOP.json").exists(),
+            "STOP closes all source suffix roles")
+    if role == "shared-closeout":
+        return
+    order = list(CAPS)
+    for previous in order[:order.index(role)]:
+        observed = json.loads(read(ROOT / "receipts" / (previous + "-observed.json")))
+        require(observed["status"] == "PASS_R_V2_FULL_ROLE"
+                and observed["execution_identity"] == IDENTITY
+                and observed["plan_sha256"] == plan_sha
+                and observed["frozen_FULL_seconds"] == CAPS[previous]
+                and observed["full_role_evidence_accepted"] is True,
+                "complete new predecessor exit/FULL/plan binding")
+    if role != "independent-public-check":
+        public = json.loads(read(ROOT / "independent-public-check.json"))
+        require(public["status"] == "PASS_PUBLIC_IO_ONLY" and public["old_source_read_set"] == [],
+                "independent NEW public IO prerequisite")
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("mode", choices=("run", "bind", "supervise"))
+    p.add_argument("mode", choices=("run", "bind", "supervise", "finalize", "archive"))
     p.add_argument("--plan", type=Path, required=True)
     p.add_argument("--plan-sha", required=True)
     p.add_argument("--role", choices=tuple(CAPS), required=True)
@@ -326,30 +615,27 @@ def main():
     args = p.parse_args()
     plan = plan_checked(args.plan, args.plan_sha)
     if args.mode == "supervise":
-        supervise(plan, args.role, args.plan_sha)
+        result = supervise(plan, args.role, args.plan_sha)
+        pending_raw = read(ROOT / "receipts" / (args.role + "-pending.json"))
+        print(canonical({"pending": json.loads(pending_raw),
+                         "pending_sha256": digest(pending_raw), "diagnostic": result}).decode(),
+              end="", flush=True)
+        return 0
+    if args.mode == "finalize":
+        return finish_record(plan, args.role, args.plan_sha)
+    if args.mode == "archive":
+        require(args.role == "shared-closeout", "one NEW-only closeout")
+        print(canonical(archive_new()).decode(), end="", flush=True)
         return 0
     if args.mode == "bind":
         bind(plan, args.role, args.controller_exit, args.plan_sha)
         return 0
-    require(not (ROOT / "STOP.json").exists(), "prior R STOP closes remaining roles")
-    order = list(CAPS)
-    for previous in order[: order.index(args.role)]:
-        observed = json.loads(read(ROOT / "receipts" / (previous + "-observed.json")))
-        require(
-            observed["status"] == "PASS_R_NATIVE_EXIT" and observed["plan_sha256"] == args.plan_sha,
-            "complete predecessor exit/plan binding",
-        )
-    if args.role != "independent-public-check":
-        public = json.loads(read(ROOT / "independent-public-check.json"))
-        require(public["status"] == "PASS_PUBLIC_IO_ONLY", "independent public IO prerequisite")
+    source_gate(plan, args.role, args.plan_sha)
     value = plan["roles"][args.role]
     require(value["cap_seconds"] == CAPS[args.role], "unchanged cap")
     result = native_recording.invoke(
-        ROOT / "receipts" / args.role,
-        args.role,
-        value["argv"],
-        timeout=CAPS[args.role] - 20,
-        limit_bytes=4294967296,
+        ROOT / "receipts" / args.role, args.role, resolved(value["argv"], args.plan_sha),
+        timeout=CAPS[args.role] - 20, limit_bytes=4294967296,
     )
     return 0 if result["software_result"] == "PUBLIC_COMMAND_EXIT_OBSERVED" else 1
 

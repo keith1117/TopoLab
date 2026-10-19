@@ -2,7 +2,9 @@
 
 import importlib.util
 import json
+import shutil
 import struct
+import subprocess
 from copy import deepcopy
 from pathlib import Path
 
@@ -466,3 +468,328 @@ def test_native_profile_GNU_units_and_missing_identity() -> None:
     assert parsed["rss_bytes"] == 20480
     with pytest.raises(ValueError):
         checker.native_profile(b"no native profile", "darwin")
+
+
+def full_v2_subject():  # type: ignore[no-untyped-def]
+    pending = {
+        "execution_identity": checker.EXECUTION_V2,
+        "role": "independent-public-check",
+        "plan_sha256": "a" * 64,
+        "frozen_FULL_seconds": 120,
+        "clock_domain": checker.CLOCK_V2,
+        "clock_resolution_seconds": 0.001,
+        "external_argv": [["new-supervisor"], ["new-finalizer"]],
+    }
+    completion = dict(
+        pending,
+        status="PENDING_EXTERNAL_EXIT",
+        pending_sha256=checker.digest(checker.canonical(pending)),
+        cleanup={"group_gone": True},
+        final_serializer_pid=102,
+        resource_components=[
+            {
+                "pid": 101,
+                "kind": "self_high_water",
+                "statistics_source": "resource.getrusage",
+                "rss_unit": "bytes",
+                "phases": ["preflush", "postflush"],
+                "samples_bytes": [200, 210],
+            },
+            {
+                "pid": 102,
+                "kind": "self_high_water",
+                "statistics_source": "resource.getrusage",
+                "rss_unit": "bytes",
+                "phases": ["preflush", "postflush"],
+                "samples_bytes": [100, 150],
+            },
+        ],
+    )
+    events = [
+        {
+            "event_id": "raw-observed-1",
+            "clock_domain": checker.CLOCK_V2,
+            "start_seconds": 1000.0,
+            "end_seconds": 1007.015,
+            "wall_seconds": 7.014,
+            "argv": ["new-supervisor"],
+            "exit_code": 0,
+            "complete": True,
+        },
+        {
+            "event_id": "raw-observed-2",
+            "clock_domain": checker.CLOCK_V2,
+            "start_seconds": 1109.118,
+            "end_seconds": 1109.224,
+            "wall_seconds": 0.106,
+            "argv": ["new-finalizer"],
+            "exit_code": 0,
+            "complete": True,
+        },
+    ]
+    record, profile, helpers = resource_subject()
+    inner = {
+        "record": record,
+        "profile": profile,
+        "log": b"",
+        "helper_profiles": helpers,
+        "expected_role": "synthetic-r-io",
+        "expected_argv": ["new-public-tool"],
+        "platform": "darwin",
+    }
+    return pending, completion, events, inner
+
+
+def full_v2_audit(pending, completion, events, inner):  # type: ignore[no-untyped-def]
+    return checker.audit_full_role_v2(
+        pending, completion, raw_tool_events=events,
+        expected_role="independent-public-check", expected_plan_sha256="a" * 64,
+        inner_evidence=inner,
+    )
+
+
+def test_new_FULL_retains_complete_disjoint_wall_and_same_process_peak() -> None:
+    pending, completion, events, inner = full_v2_subject()
+    result = full_v2_audit(pending, completion, events, inner)
+    assert result["status"] == "PASS_R_V2_FULL_ROLE"
+    assert result["whole_wall_seconds"] == pytest.approx(109.224)
+    assert result["frozen_FULL_seconds"] == 120
+    assert result["known_cost_lower_bound_seconds"] == 120
+    assert result["RSS_envelope_bytes"] == 210 + 150 + 190
+    assert result["source_successor_admitted"] is False
+    assert result["B_C_admission"] is False
+
+
+@pytest.mark.parametrize("last_end,accepted", [(1110.0, True), (1110.0001, False)])
+def test_complete_outer_plus_ten_exact_and_just_over_cap(last_end: float, accepted: bool) -> None:
+    pending, completion, events, inner = full_v2_subject()
+    events[-1]["end_seconds"] = last_end
+    result = full_v2_audit(pending, completion, events, inner)
+    assert result["full_role_evidence_accepted"] is accepted
+    if not accepted:
+        assert result["known_cost_lower_bound_seconds"] == 121
+
+
+@pytest.mark.parametrize("damage", [
+    "old20", "old_identity", "final_exit", "missing_exit", "clock", "missing_RSS",
+    "inner_only", "changed_plan", "changed_pending", "wrong_argv", "cleanup",
+])
+def test_full_role_faults_close_suffix_and_preserve_available_peaks(damage: str) -> None:
+    pending, completion, events, inner = full_v2_subject()
+    if damage == "old20":
+        pending["frozen_FULL_seconds"] = completion["frozen_FULL_seconds"] = 20
+    elif damage == "old_identity":
+        pending["execution_identity"] = completion["execution_identity"] = "v1"
+    elif damage == "final_exit":
+        events[-1]["exit_code"] = 1
+    elif damage == "missing_exit":
+        events[-1]["exit_code"] = None
+    elif damage == "clock":
+        events[-1]["end_seconds"] = 999
+    elif damage == "missing_RSS":
+        completion["resource_components"].pop()
+    elif damage == "inner_only":
+        events.clear()
+    elif damage == "changed_plan":
+        completion["plan_sha256"] = "b" * 64
+    elif damage == "changed_pending":
+        completion["pending_sha256"] = "b" * 64
+    elif damage == "wrong_argv":
+        events[-1]["argv"] = ["unregistered-glue"]
+    else:
+        completion["cleanup"]["group_gone"] = None
+    result = full_v2_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["source_successor_admitted"] is False
+    if damage == "final_exit":
+        assert result["RSS_envelope_bytes"] == 550
+        assert result["actual_exit_codes"][-1] == 1
+
+
+def test_failed_native_exit_keeps_own_available_peak_before_rejection() -> None:
+    _, completion, _, inner = full_v2_subject()
+    record = {
+        "statistics_source": "os.wait4", "wall_source": "controller_monotonic_observed",
+        "pid": 103, "rss_unit": "bytes", "exit_code": 1,
+        "native": {"wall_seconds": 0.1, "user_seconds": 0.0, "system_seconds": 0.0,
+                   "rss_bytes": 250},
+    }
+    completion["resource_components"].append(
+        {"pid": 103, "kind": "wait4", "platform": "darwin", "record": record}
+    )
+    result = checker.audit_v2_resource_components(completion, inner_evidence=inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["RSS_components_bytes"]["103"] == 250
+    assert result["RSS_envelope_bytes"] == 800
+
+
+def test_outer_native_profile_and_wait4_are_independently_parsed_and_added() -> None:
+    _, completion, _, inner = full_v2_subject()
+    profile = b"0.1 real 0.0 user 0.0 sys\n180 maximum resident set size\n"
+    completion["resource_components"].extend([
+        {
+            "pid": 101, "kind": "native_profile", "profile": "outer.time",
+            "profile_sha256": checker.digest(profile), "platform": "darwin",
+            "actual_exit_code": 0,
+        },
+        {
+            "pid": 103, "kind": "wait4", "platform": "darwin",
+            "record": {
+                "statistics_source": "os.wait4",
+                "wall_source": "controller_monotonic_observed", "pid": 103,
+                "rss_unit": "bytes", "exit_code": 0,
+                "native": {"wall_seconds": 0.1, "user_seconds": 0.0,
+                           "system_seconds": 0.0, "rss_bytes": 250},
+            },
+        },
+    ])
+    result = checker.audit_v2_resource_components(
+        completion, inner_evidence=inner, native_profiles={"outer.time": profile},
+    )
+    assert result["status"] == "PENDING_EXTERNAL_EXIT"
+    assert result["RSS_envelope_bytes"] == 210 + 150 + 250 + 190
+    assert result["RSS_components_bytes"]["101"] == 210  # Same supervisor, not double counted.
+    completion["resource_components"][-2]["profile_sha256"] = "b" * 64
+    rejected = checker.audit_v2_resource_components(
+        completion, inner_evidence=inner, native_profiles={"outer.time": profile},
+    )
+    assert rejected["status"] == "STOP_NO_RETRY"
+    assert "profile hash" in rejected["reason"]
+
+
+@pytest.mark.parametrize("excess,accepted", [(0.001, True), (0.001001, False)])
+def test_tool_wall_display_resolution_is_frozen_not_a_cap_slack(
+    excess: float, accepted: bool,
+) -> None:
+    pending, completion, events, inner = full_v2_subject()
+    events[0]["wall_seconds"] = events[0]["end_seconds"] - events[0]["start_seconds"] + excess
+    result = full_v2_audit(pending, completion, events, inner)
+    assert result["full_role_evidence_accepted"] is accepted
+
+
+def test_arbitrary_larger_clock_resolution_cannot_loosen_outer_checks() -> None:
+    pending, completion, events, inner = full_v2_subject()
+    pending["clock_resolution_seconds"] = completion["clock_resolution_seconds"] = 1.0
+    result = full_v2_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert "resolution" in result["reason"]
+
+
+def test_nonfinite_raw_clock_still_retains_failure_and_RSS_evidence() -> None:
+    pending, completion, events, inner = full_v2_subject()
+    events[-1]["end_seconds"] = float("nan")
+    result = full_v2_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["RSS_envelope_bytes"] == 550
+    assert result["raw_tool_event_ids_and_hashes"][-1]["sha256"] is None
+
+
+def test_content_snapshot_guard_retains_literal_frozen_scope() -> None:
+    contract = (
+        Path(__file__).parents[1]
+        / "docs/planning/p17_m2_input_export_preparation_proposal.json"
+    )
+    assert checker.digest(contract.read_bytes()) == checker.CONTENT_CONTRACT_SHA256
+
+
+def test_independent_new_backup_compares_complete_bytes_including_empty_log(tmp_path: Path) -> None:
+    root, backup = tmp_path / "new-prefix", tmp_path / "new-backup"
+    for folder in (root, backup):
+        folder.mkdir()
+        (folder / "new-view.json").write_bytes(b'{"new":true}\n')
+        (folder / "empty-native.log").write_bytes(b"")
+    result = checker.audit_new_backup(root, backup, public_fixture=True)
+    assert result["status"] == "PASS_INDEPENDENT_NEW_BACKUP"
+    assert result["member_count"] == 2
+    assert result["total_bytes"] == len(b'{"new":true}\n')
+    assert result["old_input_reads"] == 0
+    (backup / "new-view.json").write_bytes(b'{"new":false}')
+    rejected = checker.audit_new_backup(root, backup, public_fixture=True)
+    assert rejected["status"] == "STOP_NO_RETRY"
+    assert "bytes/hash" in rejected["reason"]
+
+
+@pytest.mark.parametrize("damage", ["extra", "symlink", "ancestor_symlink"])
+def test_new_backup_rejects_extra_or_symlink_member(tmp_path: Path, damage: str) -> None:
+    root, backup = tmp_path / "new-prefix", tmp_path / "new-backup"
+    for folder in (root, backup):
+        folder.mkdir()
+        (folder / "data.json").write_bytes(b"{}\n")
+    if damage == "extra":
+        (backup / "extra.json").write_bytes(b"{}\n")
+    elif damage == "symlink":
+        (backup / "data.json").unlink()
+        (backup / "data.json").symlink_to(root / "data.json")
+    else:
+        alias = tmp_path / "alias"
+        alias.symlink_to(root, target_is_directory=True)
+        root = alias
+    result = checker.audit_new_backup(root, backup, public_fixture=True)
+    assert result["status"] == "STOP_NO_RETRY"
+
+
+def test_new_backup_exclusion_is_literal_and_preserves_stable_prefix(tmp_path: Path) -> None:
+    root, backup = tmp_path / "new-prefix", tmp_path / "new-backup"
+    for folder in (root, backup):
+        (folder / "receipts").mkdir(parents=True)
+        (folder / "stable.json").write_bytes(b"{}\n")
+    (root / "receipts/shared-closeout-controller.log").write_bytes(b"active-new-log")
+    result = checker.audit_new_backup(
+        root, backup, public_fixture=True, excluded_prefixes=("receipts/shared-closeout",),
+    )
+    assert result["status"] == "PASS_INDEPENDENT_NEW_BACKUP"
+    assert result["member_count"] == 1
+
+
+def test_backup_refuses_v1_or_old_DATA_before_stat(monkeypatch: pytest.MonkeyPatch) -> None:
+    def forbidden_stat(*args, **kwargs):  # type: ignore[no-untyped-def]
+        raise AssertionError("no old path may be stat'ed")
+
+    monkeypatch.setattr(Path, "lstat", forbidden_stat)
+    old = checker.AUTHORIZED_DATA_ROOT / "p17-m2-input-export-preparation-v1"
+    result = checker.audit_new_backup(old, old.with_name(old.name + "-independent-backup"))
+    assert result["status"] == "STOP_NO_RETRY"
+    assert "literal NEW v2" in result["reason"]
+    result = checker.audit_new_backup(old, old.with_name(old.name + "-copy"), public_fixture=True)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert "public fixture cannot open DATA" in result["reason"]
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="existing Node runtime unavailable")
+def test_trusted_JS_boundary_matches_raw_gap_cap_and_actual_exit() -> None:
+    pending, completion, events, inner = full_v2_subject()
+    resources = checker.audit_v2_resource_components(completion, inner_evidence=inner)
+    cases = []
+    for damage in (
+        "none", "cap", "exit", "pending", "resource_identity", "missing_exit", "wrong_clock",
+    ):
+        row = deepcopy([pending, completion, events, resources, completion["pending_sha256"]])
+        if damage == "cap":
+            row[2][-1]["end_seconds"] = 1110.001
+        elif damage == "exit":
+            row[2][-1]["exit_code"] = 1
+        elif damage == "pending":
+            row[4] = "b" * 64
+        elif damage == "resource_identity":
+            row[3]["role"] = "exporter-r1"
+        elif damage == "missing_exit":
+            row[2][-1]["exit_code"] = None
+        elif damage == "wrong_clock":
+            for event in row[2]:
+                event["clock_domain"] = "unregistered-derived-clock"
+        cases.append(row)
+    script = Path(__file__).parents[1] / "scripts/p17_m2_input_export_dispatch.js"
+    command = (
+        "const fs=require('fs');const {finishExternal}=require(process.argv[1]);"
+        "console.log(JSON.stringify(JSON.parse(fs.readFileSync(0,'utf8'))"
+        ".map(args=>finishExternal(...args))))"
+    )
+    observed = subprocess.run(
+        ["node", "-e", command, str(script)], input=json.dumps(cases),
+        text=True, capture_output=True, check=True,
+    )
+    results = json.loads(observed.stdout)
+    assert results[0]["whole_wall_seconds"] == pytest.approx(109.224)
+    assert results[0]["status"] == "PASS_R_V2_FULL_ROLE"
+    assert all(result["status"] == "STOP_NO_RETRY" for result in results[1:])
+    assert results[2]["RSS_envelope_bytes"] == 550

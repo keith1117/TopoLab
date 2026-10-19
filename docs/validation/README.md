@@ -37,13 +37,17 @@ scope, distinct from native RSS. PR199 methods, I1 published software and
 NOT_SELECTED_BY_R1 remain. FULL_V2_OPEN_NO_ADMITTED_ROUTE/P17/uniform, all
 costs/UNKNOWN/quotas/seals and B3 two-scale/M2+Ubuntu obligations stay.
 
-After R result publication, STOP. The [sole next item](../project_status.md#unique-next-item-owner-decision-on-the-stopped-r-identity)
-is the owner decision on a new finite R software/call-cost identity and separately
-authorized public IO entry before any old read. No new allocation proof is needed.
-Proposed B FULL180/C14580s remain unapproved. No old source access, install/VM/
-provider change, formal retry/reset or automatic successor.
-Source contracts remain in the [planning index](../planning/README.md); all new
-raw software outputs remain external under the [repository policy](../repository_policy.md).
+R/v1 result publication closed through PR205/main3459dd5/all-four-CI. The later
+owner grant authorizes NEW R/v2 under its
+[protocol](../planning/p17_m2_input_export_billing_revision_protocol.md),3h+2h/1860s
+and exact source exception. [New software report](p17_m2_input_export_billing_revision.md)
+and [different-author review](p17_m2_input_export_billing_revision_independent_review.md)
+retain authorship, public checks and pending actual entry distinctly. Formal
+roles/old source reads0 at this prefreeze checkpoint.4GiB and independent public
+preflight remain; no allocation proof. First named failure STOP/no retry; no B/C,
+expanded input, old backup/seal, transfer or automatic successor. All historical
+contracts/reports remain. New raw artifacts/logs stay external under the
+[repository policy](../repository_policy.md).
 
 ## Numerical and historical release evidence
 

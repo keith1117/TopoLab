@@ -122,7 +122,18 @@ new-prefix backup. Source tools/contracts stay frozen; append actual execution
 supplements to the original reports and publish the failure under normal rules.
 No unused grant permits a fix or repeated entry. Further R work needs a new
 finite identity/call-cost proposal and explicit owner decision; B/C remain
-unapproved. This creates no additional allocation/kernel proof requirement.
+unapproved. Result publication has since closed through PR205/main3459dd5 and
+all four main CI jobs. This creates no additional allocation/kernel proof requirement.
+
+The later owner grant expressly authorizes NEW R/v2 under its
+[protocol](planning/p17_m2_input_export_billing_revision_protocol.md):3h exporter,
+2h newly delegated different author,1860s six-role FULL and unchanged exact
+source-byte/temporary-parse exception. Closed v1 budgets/roles/receipts do not
+transfer. Clean merged locked source/all-four-main-CI and frozen call/identity
+plan precede the once-only independent public IO; accepted R0 before R1. First
+named failure STOP/no retry, only one reserved NEW-only shared backup. No B/C,
+extra source, old backup/seal, new proof or automatic successor. All five checks,
+reviewed staging/all-upload guards/protected PR and main CI remain required.
 
 All four existing CI jobs remain applicable on latest PR head and main:
 quality, frontend, clean-linux-smoke and i1-native-software. Their software

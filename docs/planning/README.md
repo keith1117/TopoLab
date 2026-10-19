@@ -36,10 +36,16 @@ its first public IO role: actual complete wall109.224s+10 exceeded its immutable
 that launch. Old stat/reads0; R0/R1 closed unlaunched and12/528/18 not exported.
 Failed FULL120 + shared FULL60=180/1860s; one NEW-prefix backup/exit close passed.
 See [result](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access).
-After required regression/publication STOP; a new finite identity/call-cost
-proposal and explicit owner decision precede any further R work. No fix/retry/
-cap transfer, old input or automatic B/C. [Frozen scope](p17_m2_input_export_preparation_proposal.md)/
-[JSON](p17_m2_input_export_preparation_proposal.json) retain their bytes.
+Result publication is complete through PR205/main3459dd5/all-four-CI. The owner
+subsequently authorized NEW R/v2:3h exporter+2h new different author/1860s,
+exact40/12/528/18 original-byte/temporary-parse exception and six immutable FULL
+charges. See the [new protocol](p17_m2_input_export_billing_revision_protocol.md),
+[software report](../validation/p17_m2_input_export_billing_revision.md) and
+[independent review](../validation/p17_m2_input_export_billing_revision_independent_review.md).
+Current prefreeze source work/public fixtures supply no actual source or resource
+admission. Publish source before once-only entry, independent R0 before R1,
+first named failure STOP/no retry. No B/C, expansion, old backup, cap transfer or
+successor. Frozen v1 contracts/reports retain bytes.
 
 ## Overall project plans
 
@@ -63,7 +69,8 @@ cap transfer, old input or automatic B/C. [Frozen scope](p17_m2_input_export_pre
 |---|---|---|
 | M2 native H/17 parent | [Revision7](p17_m2_native_homotopy_proposal.md), [JSON](p17_m2_native_homotopy_proposal.json) | A closed; later R stopped before source access; B/C unapproved |
 | M2 input registration and restricted export preparation | [Contract and budget](p17_m2_input_export_preparation_proposal.md), [JSON](p17_m2_input_export_preparation_proposal.json) | Original scope retained; no12/528/18 exports or accepted source registry |
-| Stopped R execution | [Protocol](p17_m2_input_export_preparation_protocol.md) | STOP_NO_RETRY; failed FULL120 + shared FULL60; old reads0; normal result publication only |
+| Stopped R execution | [Protocol](p17_m2_input_export_preparation_protocol.md) | STOP_NO_RETRY; failed FULL120 + shared FULL60; old reads0; result PR205 published |
+| New R/v2 billing revision | [Finite proposal](p17_m2_input_export_billing_revision_proposal.md), [JSON](p17_m2_input_export_billing_revision_proposal.json) | Authorized3h+2h/1860s; [protocol](p17_m2_input_export_billing_revision_protocol.md); finite once-only preparation then STOP |
 
 The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.

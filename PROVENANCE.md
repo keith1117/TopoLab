@@ -1538,3 +1538,11 @@ recording is reused for non-scientific IO only. No model execution, numerical
 revalidation, new algorithm, label generation, B/C or old proof reconstruction.
 Actual source access/results are reported separately; raw originals remain read-only
 and only the explicitly granted R roles may parse them under the frozen whitelist.
+
+## 2026-10-19 — NEW R/v2 billing and source preparation
+
+Original standard-library v2 identity/FULL/external-exit orchestration and a
+separately authored raw event/RSS/exit/new-only-backup comparator extend the
+existing R field tools. No upstream implementation, scientific algorithm or
+external data was imported. Original R/v1 source remains at its frozen commit;
+actual restricted source acceptance is separately recorded in the new report.

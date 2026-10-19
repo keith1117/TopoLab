@@ -1,0 +1,518 @@
+{
+  "schema": "topolab.v2.p17-m2-input-export-billing-revision.proposal.v1",
+  "draft_revision": 1,
+  "date": "2026-10-18 America/New_York",
+  "baseline_commit": "3459dd523d1fcf8b278b3a056f167095042e2077",
+  "normative_document": "p17_m2_input_export_billing_revision_proposal.md",
+  "status": "AUTHORIZED_FINITE_R_V2_B_C_NOT_AUTHORIZED",
+  "prospective_execution_identity": "topolab.v2.p17-m2-input-export-preparation.v2",
+  "current_authority": {
+    "implementation": true,
+    "independent_agent_delegated": true,
+    "exporter": "/root",
+    "different_author": "/root/review_r_v2",
+    "exporter_active_seconds": 10800,
+    "independent_active_seconds": 7200,
+    "internal_IO_FULL_seconds": 1860,
+    "named_role_launches_max": 6,
+    "old_source_read_exception_granted": true,
+    "exact_scope": "40 bounded metadata,12 checkpoints,528 train labels,18 original uniform packets; complete bytes/temporary parsing, prescribed fields only",
+    "formal_roles_launched_at_source_authoring": 0,
+    "old_source_stat_or_read_set_at_source_authoring": [],
+    "B_C": false,
+    "retry_or_automatic_successor": false,
+    "protocol": "p17_m2_input_export_billing_revision_protocol.md"
+  },
+  "recovered_publication": {
+    "worktree": "/Users/keith1117/.codex/worktrees/ec0b/TopoLab",
+    "initial_state": "clean detached HEAD; no preexisting changes or untracked files",
+    "document_branch": "docs/m2-r-billing-revision-contract",
+    "main_commit": "3459dd523d1fcf8b278b3a056f167095042e2077",
+    "open_PRs": [],
+    "PR205_merged": true,
+    "main_CI_run": 39191422887,
+    "all_applicable_CI_success": [
+      "quality",
+      "frontend",
+      "clean-linux-smoke",
+      "i1-native-software"
+    ],
+    "environment_workflow_manually_dispatched": false
+  },
+  "retained_failed_identity": {
+    "identity": "topolab.v2.p17-m2-input-export-preparation.v1",
+    "outcome": [
+      "STOP_NO_RETRY",
+      "FAIL_FULL_NAMED_WALL_CHARGE_BINDING"
+    ],
+    "whole_wall_seconds": 109.224,
+    "required_whole_plus10_seconds": 119.224,
+    "stale_local_wall_seconds": 7.01521454192698,
+    "immutable_receipt_charge_seconds": 20,
+    "actual_final_serializer_exit": 1,
+    "full_role_RSS": "UNKNOWN_INCOMPLETE_FAILED_SERIALIZER",
+    "partial_RSS_bytes_not_a_complete_bound": 188301312,
+    "conservative_paid_IO_seconds": 180,
+    "failed_role_FULL_seconds": 120,
+    "shared_FULL_seconds": 60,
+    "unused_closed_IO_seconds": 1680,
+    "old_source_stat_reads": 0,
+    "R0_R1": "UNLAUNCHED_CLOSED",
+    "checkpoint_train_uniform_exports": [
+      0,
+      0,
+      0
+    ],
+    "rewrite_receipt_or_frozen_plan_retry_reset_or_transfer": false
+  },
+  "deliverable": "same source-bound restricted R preparation, repairing complete outer charge binding and failure evidence only; no P17 repair/scientific Gate",
+  "proposed_minimum_source_edits": [
+    {
+      "path": "scripts/p17_m2_input_export_control.py",
+      "change": "v2 literal root/contract/new grant and six FULL caps; version receipt/completion glue and one NEW-only backup closeout; reconcile full external events; retain available RSS/exits before failure assertions; deny v1 roots/receipts"
+    },
+    {
+      "path": "scripts/p17_m2_input_export.py",
+      "change": "v2 CLI/root/frozen content-contract hash binding only; preserve register/extraction/IEEE/schema/byte/read guard semantics"
+    },
+    {
+      "path": "scripts/p17_m2_input_export_independent.py",
+      "change": "v2 CLI/root binding and different-author full outer charge/final-serializer/RSS/exit audit; reuse independent R0/R1 field semantics"
+    },
+    {
+      "path": "corresponding public tests",
+      "change": "synthetic cost/exit/failure/clock/identity controls only; preserve all source-field tests and numerical tolerances"
+    }
+  ],
+  "reuse": {
+    "unchanged_native_recorder": "scripts/p17_m2_resource_control.py",
+    "unchanged_stdlib_atomic_helper": "scripts/p17_m2_homotopy.py; no numerical function invoked",
+    "independent_inner_audit": "audit_native_record returns CALLER_MUST_CLOSE; cannot stand in for whole role",
+    "old_controller_and_source_CLIs": "literal v1 roots make path-only reuse invalid; new version bindings required",
+    "historical_software_B430_A_and_R": "method/tool/field evidence only, no role RSS PASS or scientific quota transfer",
+    "new_proof_backend_kernel_allocation_or_observer_chain": false,
+    "old_uncommitted_glue": "behavior available from versioned reports only; future bounded binding/NEW-only backup authored from these records, no old R roots/backups/tmp script access or claim of a reviewed unseen patch"
+  },
+  "full_outer_billing": {
+    "frozen_charge": "FULL(role_cap), frozen before first dispatch; measured raw wall stored separately",
+    "charge_is_query_speed_measurement": false,
+    "whole_wall": "T1-T0 in one registered trusted outer clock domain; T0 before role dispatch, T1 after last registered actual exit/tool return",
+    "included": [
+      "startup/import",
+      "queue/tool round trips",
+      "polls/directed waits/gaps",
+      "hash/parse/IO",
+      "all timers/controllers/samplers",
+      "independent reconciliation",
+      "all binders/receipt writers/final serializers/flush",
+      "failure cleanup and actual final observation"
+    ],
+    "events_required": [
+      "ordered raw tool events and IDs",
+      "clock source/unit/resolution/domain",
+      "T0/T1 and UTC cross anchors",
+      "each actual argv/cwd/start/end/exit",
+      "frozen FULL identity",
+      "all registered source or literal glue hashes"
+    ],
+    "no_cross_clock_subtraction_or_max_of_disjoint_intervals": true,
+    "acceptance": "max(whole_wall+10, independently_reconciled_minimum_charge) <= frozen_FULL",
+    "time_margin_seconds": 10,
+    "pending_before_dispatch": true,
+    "internal_terminal_status": "PENDING_EXTERNAL_EXIT",
+    "terminal_authority": "internal evidence plus actual final external tool event; no self-certification of future exit",
+    "finite_trust_boundary": "same external execution-tool boundary as adopted R; no recursive proof of observer",
+    "capture_available_RSS_and_failure_evidence_before_assertion": true,
+    "charged_on_role_start": "FULL; never refund failed launched role",
+    "known_overrun_cost_lower_bound": "max(FULL, ceil(whole_wall+10), ceil(inner_minimum)); append overrun without editing frozen charge; STOP, never retroactive PASS",
+    "unmeasured_failure_cost": "FULL plus UNKNOWN_NOT_ZERO; no truncation or zero substitution",
+    "unlaunched_source_roles": "0 paid, unused reserve CLOSED, no transfer",
+    "shared_FULL60": "charged once new execution begins, even unused; no paid spend before execution starts",
+    "published_fault_example": "119.224 <= FULL120 leaves only 0.776s; arithmetic only, not future runtime assurance or cap increase",
+    "successor_admission": "new identity/plan/FULL with complete whole-wall/RSS/actual-exit acceptance required; inner PASS or PENDING alone cannot open next role",
+    "terminal_schema": "topolab.v2.m2-input-export-exit.v2",
+    "accepted_status": "PASS_R_V2_FULL_ROLE",
+    "terminal_fields_required": [
+      "execution_identity",
+      "role",
+      "plan_sha256",
+      "pending_sha256",
+      "frozen_FULL_seconds",
+      "clock_domain",
+      "T0",
+      "T1",
+      "whole_wall_seconds",
+      "raw_tool_event_ids_and_hashes",
+      "inner_minimum_charge_seconds",
+      "native_and_helper_profiles",
+      "RSS_envelope_bytes_and_components_units",
+      "actual_exit_codes",
+      "cleanup",
+      "charge_record_sha256",
+      "status",
+      "reason"
+    ],
+    "legacy_charge_before_binder": "inner diagnostic only; never a final accepted charge",
+    "missing_failure_field": "null plus specific UNKNOWN reason, never numeric zero"
+  },
+  "resource": {
+    "method": "owner-adopted B4.30-style RSS/full-exit empirical for NEW M2 native identity",
+    "limit_bytes": 4294967296,
+    "independent_public_IO_precheck_required": true,
+    "roles_covered": [
+      "payload",
+      "controller",
+      "timers",
+      "samplers",
+      "source/completion audits",
+      "binders",
+      "final serializer",
+      "registered observer processes"
+    ],
+    "evidence": [
+      "Darwin time -l high water in bytes",
+      "actual wait4 native peak/exit",
+      "group/controller ps KiB*1024",
+      "target sample interval <=0.5s; retain actual interval arithmetic",
+      "max same-supervisor pre/postflush peak",
+      "conservative overlap additions, no shared-page subtraction",
+      "actual final external tool exit"
+    ],
+    "target_sample_interval_seconds": 0.5,
+    "inner_watchdog": "role cap - 20 seconds",
+    "outer_supervisor_watchdog": "role cap - 10 seconds",
+    "failure_serializer": "capture available own/native peak and failure evidence before rejection; exception/OOM/storage failure may still leave UNKNOWN/STOP",
+    "actual_source_roles_need_own_new_RSS_exit_evidence": true,
+    "whole_host_or_a_priori_allocation_guarantee": false,
+    "old_I1_D1_B_contract_equivalence": false,
+    "B_FORMAL_preflight_or_quota": false
+  },
+  "public_software_regression_required_before_freeze": [
+    "old 7.015/20 versus complete 109.224 omission rejected",
+    "FULL120 with 119.224 accepted arithmetically; exact and just-over-cap boundaries",
+    "disjoint helper intervals cannot be replaced by max",
+    "final serializer nonzero exit/missing RSS/missing exit reject",
+    "available measurements/failure records precede acceptance assertion",
+    "storage failure and clock regression STOP",
+    "v1 identity/root/receipt, changed FULL or unregistered glue reject",
+    "use synthetic events, no 109s wait/repeated frozen entry for debugging",
+    "inner PASS with missing complete outer terminal cannot admit R0/R1"
+  ],
+  "input_scope": {
+    "currently_granted": true,
+    "future_grant_must_explicitly_include": "new v2, 10800+7200 author seconds, 1860 IO, different author, all R0/R1 roles, exact bounded metadata plus complete original bytes/temporary parsing exception",
+    "software_or_public_only_grant_opens_R0_R1": false,
+    "content_snapshot_path": "p17_m2_input_export_preparation_proposal.json",
+    "content_snapshot_sha256": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "inherit_only_JSON_pointers": [
+      "/checkpoints",
+      "/NN",
+      "/scalars",
+      "/byte_caps_proposed",
+      "/R0/metadata_root",
+      "/R0/literal_bootstrap_files",
+      "/R0/embedded_B3_data_index_sha256",
+      "/R0/non_target_embedded_metadata",
+      "/R0/bounded_additional_metadata",
+      "/R0/W_context_sha256",
+      "/R0/maximum_metadata_files_per_role",
+      "/R0/metadata_read_passes_per_role",
+      "/R0/source_registry_fields",
+      "/R0/unknown_reference_history_anchor",
+      "/R0/independent_source_acceptance_required_before_R1",
+      "/R0/unknown_or_inconsistent_lineage",
+      "/R0/UNKNOWN_interpretation",
+      "/R0/payload_open_or_stat",
+      "/R0/registry_NOT_actual_payload_acceptance",
+      "/R1/new_preparation_role_exception",
+      "/R1/old_source_full_read_passes_per_file_max",
+      "/R1/passes",
+      "/R1/science_A_B_C_permissions_expanded",
+      "/R1/denied",
+      "/R1/full_history_analysis_FEM_filter_projection_sensitivity_inference_refit",
+      "/R1/selection_metadata",
+      "/R1/strict_JSON",
+      "/R1/outputs",
+      "/R1/file_guard",
+      "/R1/source_immutability",
+      "/R1/new_backup_scope",
+      "/R1/actual_payload_check"
+    ],
+    "never_inherit": [
+      "old status/current_authority/owner_execution_authorization",
+      "old execution identity/root/freeze",
+      "old budget/calls/resource admission/results/STOP",
+      "old agent appointment/hours/unused quota"
+    ],
+    "interpretation": "inherit content, fields, scope, deny sets and byte/read ceilings only; their historical future/permitted language is not new authorization",
+    "R0_metadata_files_per_role": 40,
+    "R0_metadata_bytes_per_role": 33554432,
+    "R0_metadata_structure": {
+      "literal_bootstrap": 7,
+      "fixed_units": 21,
+      "selected_metadata": 12
+    },
+    "R0_payload_stat_or_open": false,
+    "R0_before_R1": "independently reconstruct/compare/accept entire source registry and hash",
+    "original_payload_counts": {
+      "checkpoints": 12,
+      "train_labels": 528,
+      "uniform_packets": 18
+    },
+    "fixed_checkpoint_rows": [
+      {
+        "logical_id": "C/17",
+        "selected_epoch": 168,
+        "source_stage": "B4.1",
+        "source_root_name": "b3-v1-fits"
+      },
+      {
+        "logical_id": "C/29",
+        "selected_epoch": 137,
+        "source_stage": "B4.1",
+        "source_root_name": "b3-v1-fits"
+      },
+      {
+        "logical_id": "C/43",
+        "selected_epoch": 92,
+        "source_stage": "B4.1",
+        "source_root_name": "b3-v1-fits"
+      },
+      {
+        "logical_id": "P/17",
+        "selected_epoch": 123,
+        "source_stage": "B4.1",
+        "source_root_name": "b3-v1-fits"
+      },
+      {
+        "logical_id": "P/29",
+        "selected_epoch": 134,
+        "source_stage": "B4.1",
+        "source_root_name": "b3-v1-fits"
+      },
+      {
+        "logical_id": "P/43",
+        "selected_epoch": 169,
+        "source_stage": "B4.1",
+        "source_root_name": "b3-v1-fits"
+      },
+      {
+        "logical_id": "W/17",
+        "selected_epoch": 93,
+        "source_stage": "B4.5 weighted-terminal",
+        "source_root_name": "b4-5-weighted-terminal/fit"
+      },
+      {
+        "logical_id": "W/29",
+        "selected_epoch": 156,
+        "source_stage": "B4.5 weighted-terminal",
+        "source_root_name": "b4-5-weighted-terminal/fit"
+      },
+      {
+        "logical_id": "W/43",
+        "selected_epoch": 142,
+        "source_stage": "B4.5 weighted-terminal",
+        "source_root_name": "b4-5-weighted-terminal/fit"
+      },
+      {
+        "logical_id": "S/17",
+        "selected_epoch": 65,
+        "source_stage": "B4.1",
+        "source_root_name": "b3-v1-fits"
+      },
+      {
+        "logical_id": "S/29",
+        "selected_epoch": 115,
+        "source_stage": "B4.1",
+        "source_root_name": "b3-v1-fits"
+      },
+      {
+        "logical_id": "S/43",
+        "selected_epoch": 127,
+        "source_stage": "B4.1",
+        "source_root_name": "b3-v1-fits"
+      }
+    ],
+    "NN_scales": {
+      "12x6x3": 432,
+      "24x12x6": 96
+    },
+    "NN_views": {
+      "producer": 528,
+      "independent_audit": 528
+    },
+    "reads_per_original_per_role": 1,
+    "original_scope_only": "source fields/IEEE values/actual stored F32 and original F64/last at most11 updates; no new field or population",
+    "original_full_bytes_temporary_JSON_parse": "explicit new owner source-role exception; transient full history not analyzed/exported",
+    "new_source_registry_and_actual_payload_acceptance": "UNKNOWN_NOT_RUN",
+    "first_observed_reference_hashes": "current R0 observation only, not reconstructed historical tamper-proof anchors",
+    "science_permissions_expanded": false,
+    "old_backups_or_seals_opened": false,
+    "future_C_checks_retained": "two terminal FEMs per NN label and18 NEW paired uniform denominators with rtol1e-9/atol0; none run by R"
+  },
+  "new_execution_freeze": {
+    "output_root_proposed_not_created": "/Users/keith1117/Documents/TopoLab-data/p17-m2-input-export-preparation-v2",
+    "backup_root_proposed_not_created": "/Users/keith1117/Documents/TopoLab-data/p17-m2-input-export-preparation-v2-independent-backup",
+    "existing_new_root": "STOP; no overwrite/clear/name-shopping retry",
+    "actual_merged_commit_tree_lock_interpreter_host_module_hashes": "UNKNOWN_UNFROZEN",
+    "actual_argv_cwd_helpers_glue_clock_tool_sequence_and_plan_hash": "UNKNOWN_UNFROZEN",
+    "different_author_call_fee_permissions_and_source_registry": "UNKNOWN_UNFROZEN",
+    "thread_variables_value": 1,
+    "clean_locked_merged_all_four_main_CI_before_first_launch": true,
+    "versioned_glue_required_no_unregistered_tmp_scripts": true,
+    "only_predeclared_after_freeze_increment": "bounded R0 source registry; no scope/path/cap expansion",
+    "thread_variables": [
+      "OMP_NUM_THREADS",
+      "OPENBLAS_NUM_THREADS",
+      "MKL_NUM_THREADS",
+      "VECLIB_MAXIMUM_THREADS",
+      "NUMEXPR_NUM_THREADS"
+    ]
+  },
+  "acceptance": {
+    "software_only": "focused failure/boundary regression, mandatory full checks, independent source review and exact-head/main protected publication",
+    "public_entry_only": "one frozen actual public IO with complete fields/FULL120 cost/<=4GiB RSS/actual final exits; no B quota or source acceptance",
+    "source_preparation": "PREPARATION_COMPLETE_SOURCE_BOUND only after new R0/R1 all source/field/byte/read/RSS/exit/charge checks and NEW independent byte/hash backup",
+    "partial_public_acceptance_is_preparation_complete": false,
+    "P17_repair_or_scientific_Gate_or_B_C_admission": false
+  },
+  "STOP": [
+    "no explicit new authority or different author or clean locked all-CI frozen release",
+    "v1 identity/root/receipt or old grant mixed into v2",
+    "postfreeze source/argv/FULL/scope mutation or unregistered glue",
+    "incomplete whole wall/clock/last serializer/helper RSS/actual exit",
+    "cap/time/RSS/byte/read/author-hours violation, OOM, escape or incomplete cleanup",
+    "source/count/hash/field mismatch, mandatory UNKNOWN or prohibited access",
+    "first public or source role failure closes all remaining source roles",
+    "retain immutable pending/failure/actual costs+UNKNOWN, no automatic patch/retry/reset/substitution/transfer",
+    "at most one pre-reserved NEW-only closeout after STOP; no seventh named role or successor"
+  ],
+  "historical_preservation": {
+    "full_v2": "FULL_V2_OPEN_NO_ADMITTED_ROUTE",
+    "P17": "fixed/unrepaired",
+    "default": "uniform",
+    "science": "paused",
+    "full_fit_memory": "PENDING/4GiB",
+    "B451": "FAIL_PROCESS_SOURCE_FREEZE; both1/1 consumed",
+    "D1": "STOP;0/1 unlaunched closed;FULL60 paid; owner-closed rescue",
+    "I1": "published software/resource UNKNOWN unchanged",
+    "B452": "NOT_SELECTED_BY_R1",
+    "known_paid_K_seconds": "12721.16417100014444982 > 7200",
+    "old_R_paid_IO_seconds": 180,
+    "old_R_unused_IO_closed_seconds": 1680,
+    "all_other_paid_costs_UNKNOWN_quotas_and_seals": "unchanged, not reset or transferred",
+    "B430": "two administrative calls/one campaign/no third/reflection STOP; all original failure/cost ledgers",
+    "B_guest": "separate ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED; extra host overhead UNKNOWN",
+    "B3": "M2+independent Ubuntu24.04; both scales and final independent reproduction",
+    "B_FULL180_C14580": "UNAPPROVED; no automatic admission or successor"
+  },
+  "document_checks": "Original documentation-only snapshot above retained; later authorized implementation requires mandatory regression and protected publication before formal entry.",
+  "unique_next_item": "Complete only authorized finite R/v2 with first-failure STOP, normal publication, no B/C or automatic successor.",
+  "historical_versioned_snapshot_sha256": {
+    "docs/planning/p17_m2_input_export_preparation_proposal.md": "58360808706c20acaa937eb73bc7203b948cf5d13a91f05721df19bd4a9220bf",
+    "docs/planning/p17_m2_input_export_preparation_proposal.json": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "docs/planning/p17_m2_input_export_preparation_protocol.md": "b96d6475396a0ffa58842d0aa768d39ff42d0f5c39985a7093ec8d41dea285dc",
+    "docs/validation/p17_m2_input_export_preparation.md": "1943fc8efa49c196a0f6cc68e743fb51f456bb5bac8e9fe4b2db7c1844131f73",
+    "docs/validation/p17_m2_input_export_preparation_independent_review.md": "608b6313c29e88518e324cd159747e47c90778e7a40b39ac6ef1de8cc6075db4",
+    "docs/planning/p17_m2_native_homotopy_proposal.md": "c070787fcbbf3bbcc33ede53ea13b81e5cdf1eeb0ff2eb10a145594e6fc170d2",
+    "docs/planning/p17_m2_native_homotopy_proposal.json": "966b47825dafde6653e0943bc7674082336f629e5e99a4ab4e8a6ada4b7c1434",
+    "scripts/p17_m2_input_export_control.py": "281e47cf86f8ec5475fd962716cfc2c2c21b8454429d7b59612f4e0cf300a362",
+    "scripts/p17_m2_input_export.py": "3eed97842b815ae96d8244432205e21406b36016ae4d2053efb646fd51443be6",
+    "scripts/p17_m2_input_export_independent.py": "20c19ad76cca3de4d24420a9ed0dbafef0764a9b6622a0cbdb78041eab4c7115",
+    "scripts/p17_m2_resource_control.py": "99beefa728614257efc4310deddbb6ca85786239d0d89d4720c572a809cd57d5",
+    "scripts/p17_m2_homotopy.py": "3d7723e0f62f93036027fea25a1386079482bdc09a4818c518bdc5999cb5e7d9",
+    "uv.lock": "9c84a5ab362e8848d7ccab0142e9fe33aee5700abf5866d843a4c9cb23920292"
+  },
+  "historical_snapshot_semantics": "identifies the old version read now; old contract/report bytes retained; proposed new-version source edits need new actual hashes at future v2 freeze, never pretend v1 hashes match v2",
+  "previous_documentation_only_authority": {
+    "documents_and_readonly_GitHub_metadata_only": true,
+    "implementation": false,
+    "independent_agent_delegated": false,
+    "new_execution_active_seconds_granted": 0,
+    "internal_IO_seconds_granted": 0,
+    "named_role_launches_granted": 0,
+    "old_source_read_exception_granted": false,
+    "old_source_stat_or_read_set": [],
+    "R_public_IO_B_preflight_or_C_science": false,
+    "automatic_successor": false,
+    "regression_commit_or_publication_in_this_document_slice": false,
+    "new_data_root_stat_or_create": false
+  },
+  "budget_authorized": {
+    "exporter": "/root",
+    "exporter_active_seconds": 10800,
+    "different_author": "/root/review_r_v2",
+    "independent_active_seconds": 7200,
+    "author_scope": "minimal implementation/public debugging, source/independent review, IO, directed waits, failures, closeout; no old/A balance transfer",
+    "strict_serial_roles": [
+      {
+        "order": 1,
+        "role": "independent-public-check",
+        "author": "independent",
+        "FULL_seconds": 120,
+        "max_launches": 1,
+        "predecessor": "new owner grant; clean locked merged all-four-main-CI source and frozen new plan; NEW public fixtures only"
+      },
+      {
+        "order": 2,
+        "role": "exporter-r0",
+        "author": "exporter",
+        "FULL_seconds": 120,
+        "max_launches": 1,
+        "predecessor": "accepted new public IO fields/full-wall/RSS/actual exits AND explicit new source-read exception"
+      },
+      {
+        "order": 3,
+        "role": "independent-r0",
+        "author": "independent",
+        "FULL_seconds": 120,
+        "max_launches": 1,
+        "predecessor": "exporter R0 complete, no STOP; reconstruct and compare whole registry"
+      },
+      {
+        "order": 4,
+        "role": "exporter-r1",
+        "author": "exporter",
+        "FULL_seconds": 780,
+        "max_launches": 1,
+        "predecessor": "independent R0 whole registry acceptance/hash"
+      },
+      {
+        "order": 5,
+        "role": "independent-r1",
+        "author": "independent",
+        "FULL_seconds": 660,
+        "max_launches": 1,
+        "predecessor": "exporter R1 all restricted outputs complete"
+      },
+      {
+        "order": 6,
+        "role": "shared-closeout",
+        "author": "shared",
+        "FULL_seconds": 60,
+        "max_launches": 1,
+        "predecessor": "one success closeout or one STOP-prefix closeout; NEW outputs only"
+      }
+    ],
+    "exporter_IO_FULL_seconds": 900,
+    "independent_IO_FULL_seconds": 900,
+    "shared_IO_FULL_seconds": 60,
+    "total_restricted_IO_FULL_seconds": 1860,
+    "max_named_launches": 6,
+    "ordinary_regression_CI_publication": "required before every commit and normal protected publication; separately record actual costs; not zero or deducted from1860; author effort/directed wait still uses own cap; do not sum overlapping views as disjoint wall",
+    "new_purchase_or_paid_expansion_USD": 0,
+    "existing_energy_subscription_CI_fees": "UNKNOWN_NOT_ZERO",
+    "new_paid_action_requires": "owner currency/rate/amount/payer authorization before action",
+    "already_paid_by_this_proposal": false
+  },
+  "independent_review_authorized": {
+    "currently_delegated": true,
+    "different_author_required": true,
+    "before_primary_new_logic_exposure": "independently author outer billing/exit reconciliation from contract and synthetic fault events; retain own hash/time",
+    "afterwards": "nonblind source cross-review, explicitly disclosed",
+    "oracle": "raw actual outer tool events, frozen FULL, native profiles/helper/exits and source originals under new exception; never producer PASS/derived elapsed/manifest",
+    "reuse": "existing independently authored source-field/IEEE comparator and registered recorder; no numerical oracle",
+    "independent_actual_public_IO_before_any_old_read": true,
+    "whole_R0_registry_and_all12_528_18_field_comparisons_and_NEW_backup": true
+  }
+}

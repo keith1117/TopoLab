@@ -1,13 +1,48 @@
 # Current project status
 
-Updated:2026-10-18. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-10-19. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current slice: R stopped before old input access
+## Current slice: authorized NEW R/v2 source preparation, before freeze
 
-Owner authorized [R protocol](planning/p17_m2_input_export_preparation_protocol.md)
+The owner explicitly authorized the [new proposal](planning/p17_m2_input_export_billing_revision_proposal.md)
+and [JSON](planning/p17_m2_input_export_billing_revision_proposal.json) for
+`topolab.v2.p17-m2-input-export-preparation.v2`. `/root` <=10800s from04:33:59 UTC,
+new distinct `/root/review_r_v2` <=7200s from04:34:17 UTC on2026-10-19. Six FULL
+charges120/120/120/780/660/60=1860s. Follow the
+[new protocol](planning/p17_m2_input_export_billing_revision_protocol.md): exact
+40 metadata/12 checkpoints/528 train/18 original uniform packets, original bytes
+and temporary parsing only for prescribed fields,4GiB and independent public IO.
+No B/C, extra source, old backup/seal, retry/reset or automatic successor.
+
+Assigned ec0b recovered3459dd5 on `docs/m2-r-billing-revision-contract` with ten
+tracked draft modifications and two untracked proposal documents, all preserved.
+Read-only GitHub connector confirmed main unchanged, open PRs0 and all four
+[main CI39191422887 jobs](https://github.com/keith1117/TopoLab/actions/runs/39191422887)
+successful. Current branch `fix/m2-input-export-billing`; no second worktree or
+main-checkout edit. Source implementation/public-fixture review passed locally;
+[software report](validation/p17_m2_input_export_billing_revision.md) and
+[independent review](validation/p17_m2_input_export_billing_revision_independent_review.md)
+distinguish public checks from actual resource/source acceptance. Named roles,
+old source stat/read and new R root creation remain0 before clean merged locked
+source/all-four main CI/frozen plan. No preparation-complete or P/17 repair claim.
+Original v1 contracts/protocol/reports retain bytes; no new allocation proof.
+
+Approval service recovered for the read-only main protection query at05:34 UTC.
+The final normal-permission five precommit checks all passed; complete pytest
+2203 passed/1 selected Linux-only skip in746.07s. The earlier default-sandbox
+2204 run remains7 native permission failures/2196 passed/1 skip, with literal
+NEW fixture `kern.clockrate` denial; it was not a full PASS. Branch protection
+requires current PR checks and disallows direct bypass. Source PR and exact merged
+main four-job CI remain pending, followed by literal freeze and independent public
+IO. Named roles/old source reads/new IO paid remain0; neither original actor
+window resets. See the [software report](validation/p17_m2_input_export_billing_revision.md).
+
+## Closed R/v1 before old input access
+
+Historical owner authority covered [R protocol](planning/p17_m2_input_export_preparation_protocol.md)
 and [exact scope](planning/p17_m2_input_export_preparation_proposal.md)/
 [JSON](planning/p17_m2_input_export_preparation_proposal.json): `/root` exporter
 <=10800 active seconds; distinct `/root/review_r_exports` <=7200 seconds, internal
@@ -44,7 +79,9 @@ Public software checks and this failed formal entry remain distinct from source
 acceptance. `PREPARATION_COMPLETE_SOURCE_BOUND` was **not achieved**. B FULL180/
 C14580s remain unapproved. Native4GiB RSS/full-exit empirical evidence and
 independent preflight remain; no new allocation proof. Required regression and
-normal publication close this R slice; all historical limits below remain unchanged.
+normal publication have since closed R through PR205/main3459dd5/all-four-CI
+above; original pending-at-authoring report statements retain bytes. All historical
+limits below remain unchanged.
 
 ## Completed M2 native H stage A and verified publication
 
@@ -166,13 +203,16 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-bounded-registration-and-separate-b-authority"></a>
 
-## Unique next item: owner decision on the stopped R identity
+<a id="unique-next-item-owner-decision-on-the-stopped-r-identity"></a>
 
-Retain this failed identity and STOP. Further R work needs an explicit owner
-decision on a new finite software/call-cost identity that closes the demonstrated
-outer-wall charging defect, with a separately authorized public IO entry before
-any old read. This slice neither implements that fix nor retries the stopped
-role. It requires no new allocation/kernel proof. The12/528/18 provenance/field
-checks remain UNKNOWN_NOT_RUN; a future accepted R0 must still precede R1.
-B/C remain separately unapproved. Preserve the worktree, all failed prefixes,
-historical costs/UNKNOWN/quotas/seals and every old STOP; no automatic successor.
+<a id="unique-next-item-owner-decision-on-the-new-rv2-proposal"></a>
+
+## Unique next item: complete only the authorized finite R/v2
+
+Complete its clean reviewed source publication/all-four main CI, freeze actual
+literal plan and perform the six once-only roles under the
+[new protocol](planning/p17_m2_input_export_billing_revision_protocol.md), stopping
+on the first failure and closing all source suffix roles. Accepted independent
+R0 must precede R1. Publish the actual finite result and STOP. No B/C or successor
+is authorized; future B FULL180/C14580s remain separate. Retain worktree and all
+historical gates/costs/UNKNOWN/quotas/seals.
