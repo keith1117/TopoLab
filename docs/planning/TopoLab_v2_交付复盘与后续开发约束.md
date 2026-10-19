@@ -9,22 +9,23 @@
 本文记录所有者在本对话中认可的复盘、新期望和后续工作规则，属于交付治理调整，
 不是新的数值实验合同、科研 Gate 或预算授权。
 
-当前授权（所有者批准M2原生H的A阶段，2026-10-18）：
+当前授权（所有者授权R准备，2026-10-18）：
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE、固定P/17未修复、uniform默认、科研暂停。**
-所有者另已为新M2原生身份采用B4.30式RSS及完整退出实证验收，保留4GiB和独立预检，
-不等同于事前完整分配保证。随后明确授权[仅A阶段](p17_m2_native_homotopy_a_protocol.md)：
-实现最多6小时、不同作者独立审查最多4小时，只用版本化源码及新公开fixtures，完成H接入和
-RSS/退出记录适配、规定回归及正常发布后停止。见[两份修订草案](p17_m2_native_homotopy_proposal.md)、
-[A软件报告](../validation/p17_m2_native_homotopy_a.md)和[独立审查](../validation/p17_m2_native_homotopy_a_independent_review.md)。
-不访问旧输入、不准备导出、不运行B正式预检或C科学面板，不安装/启动VM/另选提供方、A2.3或自动后继。
-正式额度仍0，FULL180/14580秒未批准；真实H/17质量、速度及资源准入仍UNKNOWN/NOT_RUN，软件检查不等于修复。
+A已由PR202/203/main65bbbd3发布，四项main CI成功。所有者现授权
+[R准备协议](p17_m2_input_export_preparation_protocol.md)：执行者`/root`最多3主动小时，
+不同作者`/root/review_r_exports`独立审查最多2小时，内部I/O1860秒（900＋900＋FULL60）；
+批准白名单元数据及12/528/18原件完整字节核验、临时解析，语义使用仅限规定字段。
+仅当前M2/已有软件CI，不采购、不做算法/FEM/推理、不扩大输入、不运行B/C、重试/reset或自动后继。
+规定回归及正常发布保留。旧源访问前须先有干净锁定已合并全四项CI工具及一次独立公开I/O检查；
+R0冻结元数据引用后才可R1转录与全量独立来源/字段/位值比较。见
+[范围/预算](p17_m2_input_export_preparation_proposal.md)及[JSON](p17_m2_input_export_preparation_proposal.json)。
+R收尾后停止，失败亦保留不可变前缀；B FULL180及C14580秒仍未批准。
 
-PR199/main622d546开发方法继续生效；PR200/201的B客户机容量口径前瞻采用仍有效、环境未准入，
-宿主开销额外UNKNOWN，不与新原生RSS口径混用。I1软件及入口前UNKNOWN、D1 STOP/未启动0/1/FULL60、
-所有者关闭救援、B4.51 FAIL/已消耗配额、B4.52 NOT_SELECTED_BY_R1及所有成本/UNKNOWN/封存保留。
-已知付费12721.16417100014444982>7200仍不能通过旧全计费条件。A后唯一下一项是具体受限输入/字节域/
-角色/调用/费用登记及B前另行所有者授权，不是采购Ubuntu/KVM或新增证明工程。
-B3的M2加独立Ubuntu24.04、两尺度及独立复现最终要求不变。
+新M2原生4GiB RSS/完整退出实证采用及独立预检保持，不增事前分配证明。
+B客户机容量采用独立、环境未准入、宿主开销UNKNOWN。真实P/17质量/速度/资源仍UNKNOWN/NOT_RUN，
+完整训练PENDING4GiB，输入准备不等于修复或科研Gate。PR199方法、I1/D1停止、B4.51失败/已消耗配额、
+B4.52 NOT_SELECTED_BY_R1、K12721.16417100014444982>7200/D1 FULL60及旧成本/UNKNOWN/封存不变。
+B3的M2＋独立Ubuntu24.04、两尺度及最终独立复现义务不变。
 
 ## 1. 所有者确认的目标
 

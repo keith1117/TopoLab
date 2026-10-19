@@ -90,8 +90,8 @@ review, not a default sequel or experiment grant. Existing checks and
 preflight/freeze/STOP remain; scientific, resource, process and UNKNOWN outcomes
 stay distinct.
 
-The current owner-approved [M2 native H stage-A protocol](planning/p17_m2_native_homotopy_a_protocol.md)
-grants at most6 implementation and4 distinct independent-review hours, versioned
+The completed owner-approved [M2 native H stage-A protocol](planning/p17_m2_native_homotopy_a_protocol.md)
+granted at most6 implementation and4 distinct independent-review hours, versioned
 source and new public fixtures only, plus mandatory regression/normal publication.
 The new native identity uses prospectively adopted B4.30-style RSS/complete-exit
 empirical evidence at4GiB with independent preflight; it is not an a-priori
@@ -108,6 +108,13 @@ provider/installation/VM, A2.3, reset or automatic successor is authorized by A.
 call/fee registration and separate owner decision before B. No Ubuntu/KVM package
 is a prerequisite to this native A. Proposed FULL180/14580 seconds remain
 unapproved, as do the separate guest12-hour/4-start/1800-second proposal.
+A is published through PR202/203/main65bbbd3; unused caps are closed. Later owner
+authority grants [R preparation](planning/p17_m2_input_export_preparation_protocol.md):
+3h exporter +2h distinct review/1860s IO and exact source-byte/temporary-parse
+exception, after clean merged all-CI tools and independent public IO; R0 before
+R1. No B/C, input expansion, retry/reset or automatic successor. Every existing
+check and normal protected publication rule below remains required.
+
 All four existing CI jobs remain applicable on latest PR head and main:
 quality, frontend, clean-linux-smoke and i1-native-software. Their software
 success cannot admit M2 resources or pass a scientific Gate.

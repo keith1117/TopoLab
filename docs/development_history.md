@@ -1987,3 +1987,46 @@ new external stage-A namespace. After publication stop, retaining this worktree.
 The only next item is finite exact input/export-domain/role/call/fee registration
 and separate owner authority before the proposed one FULL180 B preflight; export
 preparation, B/C budgets/access and automatic successor remain unapproved.
+
+
+## 2026-10-18 — M2 finite input/export preparation proposal, documents only
+
+Recovered assigned ec0b clean detached main65bbbd3, no open PR; read-only GitHub
+checks confirmed PR202/203 merged and main CI39172866765's four jobs successful.
+Retained the worktree and created `docs/m2-input-export-contract`, with no old
+external path stat/read. A software/publication is closed; frozen reports and all
+old failures/costs/UNKNOWN/quotas/seals retain original bytes.
+
+Owner appointed this conversation's primary `/root` future exporter, requesting
+ONLY the [R contract/budget proposal](planning/p17_m2_input_export_preparation_proposal.md)
+and [JSON](planning/p17_m2_input_export_preparation_proposal.json). The proposal
+lists12 fixed C/P/W/S checkpoints (W from B4.5),528 train cases432/96 with two
+restricted views, and18 fixed B4.30 uniform compliance scalars. It explicitly
+requests a future bounded metadata and complete specified original-byte/temporary
+JSON-parse exception for separately authorized exporter/source-review roles;
+scientific consumers retain restricted views. Suggested3h exporter+2h independent
+review includes900+900+FULL60=1860s IO, no A remainder or B/C quota reuse.
+None of these execution/access caps is granted; independent role unappointed.
+
+Parent drafts revision6 and EN/ZH planning/status/entry records are synchronized.
+Current work uses versioned documents/necessary committed-source text only, plus
+read-only GitHub publication metadata. No implementation, old input, export,
+IO precheck, B/C, installation or experiment; no successor. JSON/link/permission/
+count/budget/diff checks only; documents remain uncommitted for owner review.
+Future commits still require every mandatory regression and normal protected
+publication. P/17 stays unrepaired,4GiB/independent preflight retained, old
+all-paid12721.16417100014444982>7200/D1 FULL60 unchanged. STOP after documents.
+
+
+## 2026-10-18 — Authorized R input registration/restricted export preparation
+
+Owner granted the [R protocol](planning/p17_m2_input_export_preparation_protocol.md):
+`/root` exporter3h, distinct `/root/review_r_exports`2h, IO900+900+FULL60=1860s,
+exact bounded metadata/12checkpoint/528train/18uniform full-byte/temporary-parse
+exception, limited fields,4GiB and independent public IO, required regression/
+normal publication then STOP. Source tools/public fixtures are prepared before
+any old access; clean merged all-CI source and independently accepted R0 registry
+precede R1. No B/C, expanded input, numerical computation, retry or successor.
+See [software/result record](validation/p17_m2_input_export_preparation.md) and
+[independent review](validation/p17_m2_input_export_preparation_independent_review.md).
+Earlier docs-only proposal remains historical; this later grant supplies authority.
