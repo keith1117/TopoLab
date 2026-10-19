@@ -135,6 +135,16 @@ named failure STOP/no retry, only one reserved NEW-only shared backup. No B/C,
 extra source, old backup/seal, new proof or automatic successor. All five checks,
 reviewed staging/all-upload guards/protected PR and main CI remain required.
 
+R/v2 source tools were protected-merged through PR206/main04d14c9 after four
+exact-head CI jobs passed. Exact merged-main CI quality remained in progress
+past06:21:17 UTC, the latest original independent-window start for the later
+exporter-r1 FULL780. The finite formal R/v2 sequence was therefore closed
+**unlaunched**, without a frozen plan, NEW root, old source access or role charge;
+restricted I/O paid0/1860s and actual source/RSS/exit acceptance UNKNOWN_NOT_RUN.
+The same merged-SHA main run later passed all four jobs; this is not a named-role
+FAIL or a reusable grant. Publish the zero-launch report under these same rules. Any later preparation
+requires a new explicit finite owner decision, not an automatic restart.
+
 All four existing CI jobs remain applicable on latest PR head and main:
 quality, frontend, clean-linux-smoke and i1-native-software. Their software
 success cannot admit M2 resources or pass a scientific Gate.

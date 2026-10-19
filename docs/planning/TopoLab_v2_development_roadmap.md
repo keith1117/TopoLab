@@ -1,6 +1,6 @@
 # TopoLab v2 Development Roadmap
 
-Current execution (NEW R/v2,2026-10-19):
+Current closeout (NEW R/v2,2026-10-19):
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE; fixed P/17 unrepaired; science paused.**
 The owner explicitly authorized the [new R/v2 proposal](p17_m2_input_export_billing_revision_proposal.md)
 and [JSON](p17_m2_input_export_billing_revision_proposal.json): exporter `/root`3h,
@@ -8,15 +8,22 @@ new different-author `/root/review_r_v2`2h, six immutable FULL charges
 120/120/120/780/660/60=1860s and the exact40-metadata/12-checkpoint/528-train/
 18-uniform full-byte/temporary-parse exception. Follow the
 [new protocol](p17_m2_input_export_billing_revision_protocol.md). Source/public
-software passed all five local checks (2203 tests passed/1 platform skip);
-formal named roles and old source reads remain0
-before clean merged all-four-main-CI source and the independent frozen public
-entry. First named failure closes source suffix/no retry. No B/C, expanded input,
-old backup, cap transfer or automatic successor.4GiB/independent preflight remain.
-Approval recovered and main protection was checked. The earlier default-sandbox
-7 native-permission failures/2196 passed/1 skip remain recorded separately.
-See [current status](../project_status.md); source PR and merged main CI are
-pending, named roles/old reads/new IO paid0, original budgets unchanged.
+software passed all five local checks (2203 tests passed/1 platform skip), all
+four latest-head [PR206 CI jobs](https://github.com/keith1117/TopoLab/actions/runs/39206836164)
+and protected merge as main04d14c9. At06:22:14 UTC the exact merged-main
+[CI39208671873](https://github.com/keith1117/TopoLab/actions/runs/39208671873)
+still had quality IN_PROGRESS. The original independent deadline06:34:17 makes
+exporter-r1 FULL780's latest start06:21:17; this passed before source admission.
+That exact merged-SHA main run later completed all four jobs successfully,
+without reopening the elapsed formal window.
+Close this finite preparation **unlaunched**: no plan/root/formal role/old input
+read, restricted I/O paid0/1860 and source/resource acceptance UNKNOWN_NOT_RUN.
+This is not a formal R/v2 FAIL. No partial prefix, B/C, expanded input, old backup,
+cap transfer or automatic successor.4GiB/independent preflight remain. Approval
+recovered and main protection was checked; earlier default-sandbox7 native
+permission failures/2196 passed/1 skip remain separately recorded. See
+[current status](../project_status.md); publish the zero-launch result normally,
+without resetting original windows.
 
 A is closed through PR202/203. Old [R/v1](p17_m2_input_export_preparation_protocol.md)
 remains STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING: whole109.224s+10
@@ -2389,10 +2396,14 @@ uniform default,4GiB and independent preflight. A is closed. Authorized
 first public IO role: full-wall/charge binding failed, final serializer exit1.
 No old stat/read or R0/R1 occurred. Retain failed FULL120 + shared FULL60=180s,
 the immutable prefix and verified new-output backup. Result publication closed
-through PR205/main3459dd5/all-four-CI. The later new R/v2 grant authorizes only
+through PR205/main3459dd5/all-four-CI. The later new R/v2 grant authorized only
 its finite3h+2h/1860s/source exception under the
 [new protocol](p17_m2_input_export_billing_revision_protocol.md), independently
-of the closed v1 grant. No B/C, source expansion, retry/reset or cap transfer. Native RSS adoption, separate B guest
+of the closed v1 grant. Source PR206/main04d14c9 merged, but exact main CI had
+not completed before exporter-r1's latest original FULL780 start; it later
+passed all four jobs. Formal R/v2
+preparation is closed unlaunched, with no plan, old read or restricted I/O charge.
+No B/C, source expansion, retry/reset or cap transfer. Native RSS adoption, separate B guest
 boundary and all historical failures/costs/UNKNOWN/quotas/seals remain.
 
 The following order applies **only after separate authority and admission**;
@@ -2474,7 +2485,7 @@ scope/resource violation, retaining failures. Separate owner instruction is
 required. No automatic scientific retry/resume, changed denominator, P/17 repair
 or scientific Gate credit. A2.4 follows its recovery dependency; A4 follows limits.
 
-### M2 native H stage A, stopped R and sole next item
+### M2 native H stage A and R zero-launch closeout
 
 A is closed through PR202/203; R tools merged through PR204/main43ffed0, all four
 main CI jobs passed before its first frozen public IO. That entry stopped on the
@@ -2485,11 +2496,15 @@ R0/R1 are closed unlaunched, no retry or remaining-cap transfer. Result publicat
 is complete through PR205/main3459dd5/all-four-CI. The owner subsequently authorized
 NEW R/v2 under its [protocol](p17_m2_input_export_billing_revision_protocol.md):
 3h exporter+2h new different author/1860s, six frozen FULL charges and the exact
-unchanged source exception. Complete software release before the once-only public
-entry; independently accepted R0 precedes R1. Actual source acceptance remains
-UNKNOWN_NOT_RUN at this prefreeze checkpoint. No allocation/kernel proof is added.
-B FULL180/C14580s/scientific admission stay unapproved and B3 unchanged. Publish
-this finite preparation outcome and STOP without a successor.
+unchanged source exception. Source software merged through PR206/main04d14c9,
+but main CI quality remained in progress after exporter-r1's latest original
+FULL780 start06:21:17 UTC, then later passed. No six-role completion route
+remains in this window.
+The formal plan/independent public entry/R0/R1 never launched; actual source
+acceptance stays UNKNOWN_NOT_RUN and new restricted I/O charge0/1860. This is
+not an R/v2 role failure or an allocation/kernel proof. B FULL180/C14580s/
+scientific admission stay unapproved and B3 unchanged. Publish the finite
+zero-launch outcome and STOP without a successor.
 
 ### B resource assurance specification
 

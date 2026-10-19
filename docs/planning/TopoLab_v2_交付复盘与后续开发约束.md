@@ -9,19 +9,22 @@
 本文记录所有者在本对话中认可的复盘、新期望和后续工作规则，属于交付治理调整，
 不是新的数值实验合同、科研 Gate 或预算授权。
 
-当前执行（新R/v2，2026-10-19）：
+当前收尾（新R/v2，2026-10-19）：
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE、固定P/17未修复、uniform默认、科研暂停。**
 所有者已明确授权[新R/v2合同](p17_m2_input_export_billing_revision_proposal.md)及
 [JSON](p17_m2_input_export_billing_revision_proposal.json)：`/root`最多3小时，
 新不同作者`/root/review_r_v2`最多2小时，六角色FULL120/120/120/780/660/60＝1860秒；
 精确40元数据/12 checkpoint/528训练/18 uniform原packet的完整字节核验及临时解析例外。
-按[新协议](p17_m2_input_export_billing_revision_protocol.md)执行；五项本机回归通过（2203通过/1平台跳过），
-正式角色与旧源读取仍0，须先干净合并且main四项CI通过，再冻结并通过独立公开入口。
-首次命名失败即关闭来源后缀、不重试；不B/C、扩大输入、读旧备份、转移余量或自动后继。
-4GiB和独立预检保持。
-自动审批已恢复并核对main保护规则；此前默认沙盒2196通过/7原生权限失败/1跳过仍独立保留。
-见[当前状态](../project_status.md)；源码PR及合并后main四项CI待完成，正式角色/旧读/新I/O已付均0，
-原工时上限不重置或转移，不自动后继。
+按[新协议](p17_m2_input_export_billing_revision_protocol.md)核对；五项本机回归通过（2203通过/1平台跳过），
+[PR206最新提交四项CI](https://github.com/keith1117/TopoLab/actions/runs/39206836164)通过，保护合并为main04d14c9。
+在06:22:14 UTC，精确合并后[main CI39208671873](https://github.com/keith1117/TopoLab/actions/runs/39208671873)
+的quality仍运行。独立者原截止06:34:17，exporter-r1 FULL780最晚启动06:21:17已过；
+同一合并提交的main运行后来四项均成功，但不能重开已过的正式窗口。
+本次完整六角色流程无法在原窗口准入，决定正式零启动：无计划/新根/旧源读取，受限I/O已付0/1860秒，
+来源与资源验收仍UNKNOWN_NOT_RUN，而非正式R/v2 FAIL。不启动部分前缀，不B/C、扩大输入、读旧备份、
+转移余量或自动后继。4GiB和独立预检保持。自动审批已恢复且核对main保护规则；此前默认沙盒
+2196通过/7原生权限失败/1跳过另行保留。见[当前状态](../project_status.md)；完成零启动结果发布后停止，
+原工时上限不重置或转移。
 
 A经PR202/203关闭。旧[R/v1](p17_m2_input_export_preparation_protocol.md)保留
 STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING：完整109.224秒＋10超过不可变20秒收费，

@@ -2120,3 +2120,31 @@ the [R/v2 software report](validation/p17_m2_input_export_billing_revision.md).
 This is a pre-entry software result only; source PR/main CI/freeze remain,
 formal roles/old reads/new IO paid0 at this checkpoint, original actor
 deadlines unchanged.
+
+## 2026-10-19 — R/v2 source merged; original formal window closes unlaunched
+
+The reviewed source commit968907caf3faf6f61f7a121291eb5cee4007fe34
+passed the four exact-head [PR206 CI jobs](https://github.com/keith1117/TopoLab/actions/runs/39206836164),
+then [PR206](https://github.com/keith1117/TopoLab/pull/206) squash-merged as
+main04d14c9afde929d76e262821f4f87e180c89d4dc at06:13:24 UTC. The
+assigned worktree was clean and switched onto merged main; no primary checkout
+edit or second worktree. The matching [main CI39208671873](https://github.com/keith1117/TopoLab/actions/runs/39208671873)
+quality job remained in progress at06:22:14 UTC while its other three jobs
+passed; that same exact merged-SHA main run later completed all four jobs
+successfully. The later success does not reopen the elapsed formal window.
+
+The independent author's original deadline06:34:17 UTC made strict-order
+exporter-r1 FULL780 latest start06:21:17 UTC. Since exact main CI had not
+cleared before then, the complete R/v2 six-role sequence could not fit the
+original window. No partial prefix, frozen launch plan, NEW R root/backup,
+formal role, old TopoLab input stat/read, source export or resource preflight
+was started. Restricted I/O charged0/1860s, including untriggered shared60;
+all source/resource results remain UNKNOWN_NOT_RUN, not formal FAIL or measured
+memory>4GiB. Distinct software/regression/CI/review/publication costs remain
+real and separately accounted, not zero. Original exporter07:33:59 and
+independent06:34:17 UTC deadlines were not reset. The different-author
+[review](validation/p17_m2_input_export_billing_revision_independent_review.md)
+and [execution report](validation/p17_m2_input_export_billing_revision.md#source-publication-and-formal-zero-launch-closeout)
+record the boundary. Old R/v1 paid180/closed1680, all historical gates/costs/
+UNKNOWN/quotas/seals,4GiB and independent preflight remain. B/C and automatic
+successor remain unauthorized; publish this finite zero-launch result and STOP.

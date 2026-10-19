@@ -401,3 +401,90 @@ fields/RSS/exits remain UNKNOWN_NOT_RUN. The reviewer will keep repository
 files read-only during frozen execution and add actual results only after its
 shared closeout, within the original06:34:17 UTC window. At this checkpoint
 elapsed4657/7200s, remaining2543s; no closure/reset/transfer or automatic successor.
+
+
+## Actual independent closeout: no formal R/v2 launch
+
+This is the actual zero-launch conclusion, added at **2026-10-19T06:24:08.483217+00:00**
+within the original independent window; it supersedes use of the separate
+private/tmp conditional draft, while preserving every earlier review above.
+The primary decided at approximately06:22 UTC to close this preparation with
+no formal launch, no plan/context freeze and no old-input access.
+
+The reviewer directly checked GitHub's official read-only responses: [PR206](https://github.com/keith1117/TopoLab/pull/206)
+was MERGED at2026-10-19T06:13:24Z as
+`04d14c9afde929d76e262821f4f87e180c89d4dc`; the actual clean checkout on
+`docs/m2-r-v2-zero-launch-closeout` had that HEAD. At the independent06:22 UTC
+observation, [main CI39208671873](https://github.com/keith1117/TopoLab/actions/runs/39208671873)
+matched that exact SHA and `head_branch=main`, but remained `in_progress` with
+`conclusion=null`. All four jobs had the same run/head identities:
+
+| Job | Actual job ID | Observed status / conclusion |
+|---|---:|---|
+| i1-native-software | 117916977592 | completed / success |
+| clean-linux-smoke | 117916977684 | completed / success |
+| quality | 117916977685 | in_progress / null |
+| frontend | 117916977763 | completed / success |
+
+This snapshot is not four-job main success. A later successful CI outcome may
+complete software publication, but does not reopen this closed zero-launch
+execution or change the earlier observation.
+
+The original starts/deadlines remain exporter04:33:59—07:33:59 UTC and
+independent04:34:17—06:34:17 UTC. Under the already committed dispatcher, the
+complete FULL780 of exporter-r1 required dispatch no later than **06:21:17 UTC**.
+That boundary had passed while exact-main CI was incomplete, so the complete
+six-role sequence could no longer satisfy the original windows. There was no
+reason to consume a partial prefix. The later public-only FULL120 boundary
+06:32:17 cannot restore the unavailable full sequence. This is existing budget
+arithmetic and admission order, not a new scientific Gate or a finding that
+M2,4GiB or the software mechanism is infeasible.
+
+The executor `/root` supplied a read-only trusted-tool-store snapshot: both
+`r2-last-packet` and `r2-active-role` absent, all six `r2-attempted-*` and all six
+`r2-packet-*` keys absent. The executor also reported only the two literal NEW
+output/backup paths checked with `os.path.lexists`, both absent; no generator
+`main`, plan/context creation or named dispatch occurred. The generator had
+only been read/compiled as software. **These store/new-path observations are
+explicitly attributed to `/root`; the independent reviewer does not claim
+direct visibility into that tool store or inspection of any DATA path.**
+The reviewer directly verified GitHub/Git/source and performed no DATA access
+or role execution. The executor confirmed old-input stat/reads0.
+
+| Actual named role | Launches | Restricted FULL paid seconds |
+|---|---:|---:|
+| independent-public-check | 0 | 0 |
+| exporter-r0 | 0 | 0 |
+| independent-r0 | 0 | 0 |
+| exporter-r1 | 0 | 0 |
+| independent-r1 | 0 | 0 |
+| shared-closeout | 0 | 0 |
+
+New restricted IO is **0/1860s**, including shared0. SharedFULL60 was reserved,
+but its charge-on-new-execution-start condition never occurred. The unstarted
+allowance is closed, not transferable or a future retry grant. Metadata0/40,
+checkpoints0/12, training labels0/528 and original uniform packets0/18 were
+actually verified/exported; no new source registry or accepted export exists.
+Actual source fields, FULL-role wall/RSS/native-helper/final-exit acceptance and
+independent resource entry remain **UNKNOWN_NOT_RUN**. This is **no formal
+launch**, not an R/v2 named FAIL, a measured4GiB overrun or
+`PREPARATION_COMPLETE_SOURCE_BOUND`.
+
+The successful source regression above, failed/interrupted software attempts,
+CI, publication, direct API verification, review and directed waits remain
+software/author costs; they are not zero, refunded or deducted from restricted
+IO. Unmeasured existing fees remain UNKNOWN_NOT_ZERO. Old R/v1 retains
+STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING, its original invalid20s
+receipt, failedFULL120+sharedFULL60=paid180s and closed1680s. Historical
+K12721.16417100014444982>7200, D1FULL60 and all other failures/costs/UNKNOWN,
+quotas/seals remain. FixedP/17 is unrepaired, uniform/default and science pause,
+4GiB/independent preflight, full-fit PENDING and B3's final M2+Ubuntu/two-scale
+obligations remain; no B/C, source expansion or successor is authorized.
+
+At this appendix checkpoint, continuous independent elapsed is
+**6591.483217/7200s**, remaining **608.516783s**, with the same
+06:34:17 UTC hard deadline. No pause, fresh appointment, extension, reset or
+balance transfer is claimed. The primary must finish the normal closeout
+regression/protected publication under its original remaining authority.
+Any future preparation execution requires a new explicit owner decision on
+identity, author/IO budget and exact input exception; no automatic continuation.

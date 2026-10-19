@@ -2,19 +2,22 @@
 
 英文工作版：[v2 Development Roadmap](./TopoLab_v2_development_roadmap.md)
 
-当前执行（新R/v2，2026-10-19）：
+当前收尾（新R/v2，2026-10-19）：
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE、固定P/17未修复、uniform默认、科研暂停。**
 所有者已明确授权[新R/v2合同](p17_m2_input_export_billing_revision_proposal.md)及
 [JSON](p17_m2_input_export_billing_revision_proposal.json)：`/root`最多3小时，
 新不同作者`/root/review_r_v2`最多2小时，六角色FULL120/120/120/780/660/60＝1860秒；
 精确40元数据/12 checkpoint/528训练/18 uniform原packet的完整字节核验及临时解析例外。
-按[新协议](p17_m2_input_export_billing_revision_protocol.md)执行；五项本机回归通过（2203通过/1平台跳过），
-正式角色与旧源读取仍0，须先干净合并且main四项CI通过，再冻结并通过独立公开入口。
-首次命名失败即关闭来源后缀、不重试；不B/C、扩大输入、读旧备份、转移余量或自动后继。
-4GiB和独立预检保持。
-自动审批已恢复并核对main保护规则；此前默认沙盒2196通过/7原生权限失败/1跳过仍独立保留。
-见[当前状态](../project_status.md)；源码PR及合并后main四项CI待完成，正式角色/旧读/新I/O已付均0，
-原工时上限不重置或转移，不自动后继。
+按[新协议](p17_m2_input_export_billing_revision_protocol.md)核对；五项本机回归通过（2203通过/1平台跳过），
+[PR206最新提交四项CI](https://github.com/keith1117/TopoLab/actions/runs/39206836164)通过，保护合并为main04d14c9。
+在06:22:14 UTC，精确合并后[main CI39208671873](https://github.com/keith1117/TopoLab/actions/runs/39208671873)
+的quality仍运行。独立者原截止06:34:17，exporter-r1 FULL780最晚启动06:21:17已过；
+同一合并提交的main运行后来四项均成功，但不能重开已过的正式窗口。
+本次完整六角色流程无法在原窗口准入，决定正式零启动：无计划/新根/旧源读取，受限I/O已付0/1860秒，
+来源与资源验收仍UNKNOWN_NOT_RUN，而非正式R/v2 FAIL。不启动部分前缀，不B/C、扩大输入、读旧备份、
+转移余量或自动后继。4GiB和独立预检保持。自动审批已恢复且核对main保护规则；此前默认沙盒
+2196通过/7原生权限失败/1跳过另行保留。见[当前状态](../project_status.md)；完成零启动结果发布后停止，
+原工时上限不重置或转移。
 
 A经PR202/203关闭。旧[R/v1](p17_m2_input_export_preparation_protocol.md)保留
 STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING：完整109.224秒＋10超过不可变20秒收费，
@@ -579,16 +582,18 @@ A已关闭；获准的[R准备](p17_m2_input_export_preparation_protocol.md)在�
 须另行所有者指令，不自动恢复科研作业、不改比较分母、不算P/17修复或科研Gate通过。
 A2.4依赖恢复能力，A4依赖资源限制。
 
-### M2原生H的A阶段、停止的R及唯一下一项
+### M2原生H的A阶段及R零启动收尾
 
 A由PR202/203关闭，R工具经PR204/main43ffed0合并且四项main CI通过后，首次冻结公开I/O因完整
 用时/计费差异停止。获准的12权重、528训练原件及18标量原packet均未打开，来源/字段仍UNKNOWN_NOT_RUN。
 见[实际R补充](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access)。
 R0/R1未启动且关闭，不重试或转移余量；结果PR205/main3459dd5/四项CI已完成。
-后来明确授权新R/v2的有限3h+2h/1860秒及精确来源例外。不同作者已任命，
-当前软件实现/公开fixture审查进行中，正式角色/旧源读取仍0。按新协议先通过合并/CI再冻结一次入口，
-独立R0验收在R1之前。完整外层/RSS/退出与4GiB保持；首次命名失败STOP不重试。
-不增分配器/内核证明，B FULL180/C14580秒、科学准入及B3义务不变。完成有限准备及发布后停止。
+后来明确授权新R/v2的有限3h+2h/1860秒及精确来源例外，不同作者已任命。
+源码经PR206/main04d14c9合并；main CI quality在独立截止倒推的exporter-r1 FULL780最晚
+启动06:21:17 UTC后仍未完成，虽后来四项通过，该原窗口仍无法完成六角色顺序。正式计划、独立公开入口和R0/R1
+均未启动，旧源读取0、受限I/O已付0/1860秒，验收UNKNOWN_NOT_RUN；不把这写成角色FAIL。
+完整外层/RSS/退出与4GiB要求保持；不增分配器/内核证明，B FULL180/C14580秒、
+科学准入及B3义务不变。完成有限零启动结果发布后停止，不自动后继。
 
 ### B 前瞻资源保证规格
 

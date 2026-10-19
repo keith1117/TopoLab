@@ -172,3 +172,45 @@ old source stat/reads0, new restricted IO paid0, no NEW R root/freeze.**
 Exporter checkpoint05:52:06 UTC:4687/10800s, independent4669/7200s; respective
 deadlines remain07:33:59 and06:34:17 UTC. Actual source publication and any
 future role must fit those same original windows; no reset or automatic next slice.
+
+### Source publication and formal zero-launch closeout
+
+The reviewed source commit `968907caf3faf6f61f7a121291eb5cee4007fe34`
+passed all four latest-head [PR206 CI jobs](https://github.com/keith1117/TopoLab/actions/runs/39206836164):
+quality, frontend, clean-linux-smoke and i1-native-software. Protected squash
+[PR206](https://github.com/keith1117/TopoLab/pull/206) merged at06:13:24 UTC
+as main `04d14c9afde929d76e262821f4f87e180c89d4dc`. The assigned ec0b
+worktree was clean and safely switched onto that commit; the primary checkout
+was not edited. Exact [main CI39208671873](https://github.com/keith1117/TopoLab/actions/runs/39208671873)
+has the merged SHA. At06:22:14 UTC its quality job remained IN_PROGRESS while
+frontend, clean-linux-smoke and i1-native-software had succeeded. Its final
+conclusion later became SUCCESS with all four jobs successful on that exact
+merged SHA. This completes source publication verification, not formal entry.
+
+The independent author's original continuous7200s window ends06:34:17 UTC.
+The strict six-role order requires exporter-r1 to have a complete FULL780s
+available before dispatch, so its latest start was06:21:17 UTC. The required
+exact-main CI was still incomplete after that point; no clean locked plan and
+accepted independent public entry could precede exporter-r1. The complete
+authorized formal sequence therefore cannot run within this window. No partial
+prefix was launched merely to spend quota. The original exporter deadline
+07:33:59 UTC and independent deadline06:34:17 UTC are not extended or reset.
+
+Actual formal dispatch count is **0/6**. No `launch_plan.json` or dispatch
+context was generated and neither literal NEW execution root nor NEW independent
+backup root was created. The trusted tool store held no R/v2 attempted/packet/
+last/active role keys; both literal NEW paths were absent on a NEW-path-only
+existence check. Old TopoLab input stat/read is0; metadata0/40, checkpoints0/12,
+training labels0/528 and original uniform packets0/18. No formal RSS, full-exit,
+resource preflight or source acceptance is available: `UNKNOWN_NOT_RUN`, not
+`FAIL`, `>4GiB`, infeasibility or `PREPARATION_COMPLETE_SOURCE_BOUND`. Every
+R/v2 named FULL charge is0, including untriggered shared60; new restricted
+I/O paid **0/1860s**. Mandatory software work, directed waits, review, CI and
+publication are separate real costs, not zero and not debited from restricted
+I/O. Historical R/v1 paid180/closed1680 and all old records remain unchanged.
+
+No B/C, old backup/seal, extra source, reset/retry, formal scientific test or
+automatic successor was run. This closeout cannot admit the same R/v2 grant
+later: any new preparation attempt needs a fresh explicit finite owner decision,
+new deadlines and budget, while preserving this zero-launch result and every
+historical failure/cost/quota. Complete normal result publication and stop.
