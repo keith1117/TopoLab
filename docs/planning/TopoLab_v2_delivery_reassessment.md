@@ -11,21 +11,23 @@ accepted by the owner in the reassessment conversation. It changes delivery
 governance; it is not a new numerical experiment contract, scientific Gate or
 budget authorization.
 
-Current authority (owner-authorized R preparation,2026-10-18):
+Current closeout (R stopped before source access,2026-10-18):
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE; fixed P/17 unrepaired; science paused.**
-A is closed through PR202/203/main65bbbd3, all four main CI contexts passed.
-The owner now authorizes [R preparation](p17_m2_input_export_preparation_protocol.md):
-exporter `/root` <=3 active hours, distinct author `/root/review_r_exports` <=2h,
-internal IO1860s (900+900+FULL60), proposal-white-listed metadata and12/528/18
-full-byte/temporary-parse exception with semantic field limits. Only M2/existing
-software CI; no new purchases, algorithm, FEM/inference, expanded input, B/C,
-retry/reset or automatic successor. Required regression/normal publication remains.
-Tools must be clean locked merged all-four-CI source and pass one independent
-public IO check before any old source access; R0 freezes metadata references
-before R1 source-bound copying and complete independent field/bit comparisons.
-See [scope/budget](p17_m2_input_export_preparation_proposal.md) and
-[JSON](p17_m2_input_export_preparation_proposal.json). After R closeout STOP,
-including failure with immutable prefix; no automatic B FULL180 or C14580s.
+A is closed through PR202/203. Owner-authorized [R preparation](p17_m2_input_export_preparation_protocol.md)
+operated under caps3h exporter/2h distinct review and1860s IO. Tools merged through
+[PR204](https://github.com/keith1117/TopoLab/pull/204)/main43ffed0 and all four main
+CI jobs passed before the frozen first independent public IO role. Synthetic
+field checks passed, but actual complete wall109.224s+10 exceeded the immutable
+20s charge; final serializer exited1. **STOP_NO_RETRY /
+FAIL_FULL_NAMED_WALL_CHARGE_BINDING**; full-role RSS remains UNKNOWN, not >4GiB.
+Old source stat/reads0; R0/R1 closed unlaunched, no12/528/18 source exports.
+Conservatively FULL120 failed role + shared FULL60=180/1860s; one NEW-prefix
+backup/complete-exit closeout passed. See [execution supplement](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access).
+Required regression/normal publication closes R, then STOP. No fix, old input,
+retry/reset, cap transfer or automatic B/C. Any new R identity/call-cost work
+needs a finite proposal and explicit owner decision; B FULL180/C14580s remain
+unapproved. The [frozen scope](p17_m2_input_export_preparation_proposal.md) and
+[JSON](p17_m2_input_export_preparation_proposal.json) retain original bytes.
 
 New M2 native4GiB RSS/full-exit empirical adoption and independent preflight
 remain, without an a-priori allocation theorem. B guest-capacity adoption stays

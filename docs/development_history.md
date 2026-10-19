@@ -2030,3 +2030,15 @@ precede R1. No B/C, expanded input, numerical computation, retry or successor.
 See [software/result record](validation/p17_m2_input_export_preparation.md) and
 [independent review](validation/p17_m2_input_export_preparation_independent_review.md).
 Earlier docs-only proposal remains historical; this later grant supplies authority.
+
+Actual closeout: tools/protocol merged through PR204/main43ffed0, all four main
+CI39186191753 jobs passed before plan freeze/first public IO. Synthetic fields
+passed, but actual complete109.224s+10 exceeded the immutable20s receipt charge;
+final serializer exit1 closes STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING.
+Old source stat/reads0; R0/R1 closed unlaunched,12/528/18 not exported. Failed
+role FULL120 + one shared FULL60=180/1860s, unused allowance closed. Shared
+new-prefix backup/exit verification passed4.100s/81166336bytes; failed full-role
+RSS remains UNKNOWN. Retain earlier corrected review misreading and every cost.
+Required result regression/normal publication then STOP; no frozen fix/retry,
+old input, B/C or successor. New finite R identity/call-cost work needs a separate
+owner decision; no additional allocation/kernel proof is required.

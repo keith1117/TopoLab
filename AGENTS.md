@@ -45,19 +45,18 @@ NEW M2 native identity only, retaining4GiB and independent preflight. This is
 not a-priori allocation assurance or a change to old I1/D1/B contracts.
 
 M2 H stage A is closed through PR202/203/main65bbbd3, four CI contexts passed.
-Current owner grant is [R preparation](docs/planning/p17_m2_input_export_preparation_protocol.md):
-exporter `/root` <=3h and independent author `/root/review_r_exports` <=2h;
-IO900+900+FULL60=1860s. Exact proposal metadata/12 checkpoints/528 train labels/
-18 uniform packets permit full-byte hash/temporary parse, named fields only.
-Publish/check clean locked merged tools and all four CI, then one independent
-public IO check, bounded R0 registry, R1 and full source/field/bit review.
-No old source access before those entry conditions; no directory expansion,
-backup read, FEM/filter/inference/new labels, installation/provider, B/C,
-quota transfer/reset/retry or successor. Record actual RSS/full exits/costs;
-missing mandatory evidence or first failure STOPs subsequent reads. Required
-regression/normal publication then STOP; retain worktree and all history.
-B FULL180/C14580s remain unapproved. Read the protocol and current status before
-any role; no A remainder reuse or automatic continuation after R.
+[R preparation](docs/planning/p17_m2_input_export_preparation_protocol.md) closed
+STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING. Tools merged through PR204/
+main43ffed0, all four main CI passed before the first independent public IO role.
+Its fixture fields passed, but actual whole wall109.224s+10 exceeded the immutable
+20s receipt charge; final serializer exit1. Full-role RSS remains UNKNOWN, not
+measured>4GiB. Old source stat/reads0; R0/R1 unlaunched and closed, no12/528/18
+exports. Failed role conservatively FULL120 plus shared FULL60=180/1860s; the
+one new-output backup/exit closeout passed. Publish the failed prefix and STOP.
+No B/C, old/backup access, expanded input, implementation fix, retry/reset,
+unused-cap transfer or automatic successor. A new finite identity/call-cost
+proposal and explicit owner decision are needed before any further R work;
+B FULL180/C14580s remain unapproved. Read current status/results; retain worktree.
 
 ## Provenance boundary
 

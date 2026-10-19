@@ -9,17 +9,18 @@
 本文记录所有者在本对话中认可的复盘、新期望和后续工作规则，属于交付治理调整，
 不是新的数值实验合同、科研 Gate 或预算授权。
 
-当前授权（所有者授权R准备，2026-10-18）：
+当前收尾（R在旧输入前停止，2026-10-18）：
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE、固定P/17未修复、uniform默认、科研暂停。**
-A已由PR202/203/main65bbbd3发布，四项main CI成功。所有者现授权
-[R准备协议](p17_m2_input_export_preparation_protocol.md)：执行者`/root`最多3主动小时，
-不同作者`/root/review_r_exports`独立审查最多2小时，内部I/O1860秒（900＋900＋FULL60）；
-批准白名单元数据及12/528/18原件完整字节核验、临时解析，语义使用仅限规定字段。
-仅当前M2/已有软件CI，不采购、不做算法/FEM/推理、不扩大输入、不运行B/C、重试/reset或自动后继。
-规定回归及正常发布保留。旧源访问前须先有干净锁定已合并全四项CI工具及一次独立公开I/O检查；
-R0冻结元数据引用后才可R1转录与全量独立来源/字段/位值比较。见
-[范围/预算](p17_m2_input_export_preparation_proposal.md)及[JSON](p17_m2_input_export_preparation_proposal.json)。
-R收尾后停止，失败亦保留不可变前缀；B FULL180及C14580秒仍未批准。
+A经PR202/203关闭。所有者授权的[R准备](p17_m2_input_export_preparation_protocol.md)
+保留执行3小时/不同作者审查2小时、内部I/O1860秒范围。工具经
+[PR204](https://github.com/keith1117/TopoLab/pull/204)/main43ffed0合并，四项main CI通过后冻结启动首次独立公开I/O。
+公开fixtures字段检查通过，但完整角色109.224秒＋10超过不可变收据的20秒，最终序列化器退出1。
+**STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING**；完整角色RSS仍UNKNOWN，不是已测>4GiB。
+旧源stat/读取0；R0/R1未启动且关闭，没有12/528/18来源导出。失败角色保守FULL120＋共享FULL60＝180/1860秒；
+一次仅新前缀备份/完整退出收尾通过。见[实际补充](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access)。
+规定回归、正常发布后停止；不修复冻结实现、不访问旧输入、不重试/reset、转移余量或自动B/C。
+任何新R身份/调用计费工作须有限提案和明确所有者决定；B FULL180/C14580秒仍未批准。
+[原范围](p17_m2_input_export_preparation_proposal.md)及[JSON](p17_m2_input_export_preparation_proposal.json)保留原字节。
 
 新M2原生4GiB RSS/完整退出实证采用及独立预检保持，不增事前分配证明。
 B客户机容量采用独立、环境未准入、宿主开销UNKNOWN。真实P/17质量/速度/资源仍UNKNOWN/NOT_RUN，
