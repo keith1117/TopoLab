@@ -115,6 +115,15 @@ exception, after clean merged all-CI tools and independent public IO; R0 before
 R1. No B/C, input expansion, retry/reset or automatic successor. Every existing
 check and normal protected publication rule below remains required.
 
+That R identity now closed STOP_NO_RETRY at its first public IO role: actual
+whole-wall charging failed; R0/R1 unlaunched and old source stat/reads0. Preserve
+the original20s receipt and failed FULL120/shared FULL60 costs, source PR204 and
+new-prefix backup. Source tools/contracts stay frozen; append actual execution
+supplements to the original reports and publish the failure under normal rules.
+No unused grant permits a fix or repeated entry. Further R work needs a new
+finite identity/call-cost proposal and explicit owner decision; B/C remain
+unapproved. This creates no additional allocation/kernel proof requirement.
+
 All four existing CI jobs remain applicable on latest PR head and main:
 quality, frontend, clean-linux-smoke and i1-native-software. Their software
 success cannot admit M2 resources or pass a scientific Gate.

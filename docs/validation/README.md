@@ -11,7 +11,17 @@ checks are post-stop TEXT only, not protocol acceptance; both quotas remain1/1
 consumed with no retry/reset. See the [failed report](b4_51_real_certification_executable_full_resource_preregistration.md).
 Scientific FAIL/fixed P17/uniform, all historical costs/UNKNOWN and seals remain.
 
-Latest software slice: [M2 native H stage A](p17_m2_native_homotopy_a.md) and
+Latest software/source preparation slice: [R](p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access)
+and [independent review](p17_m2_input_export_preparation_independent_review.md).
+Source PR204/main43ffed0/all-four-CI preceded its first public IO. Fixture fields
+passed; actual109.224s+10 exceeded the immutable20s charge, final serializer exit1:
+STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING. Partial RSS is not complete
+role admission. Old source reads0; R0/R1 closed unlaunched;12/528/18 not exported.
+Failed FULL120 + shared FULL60=180/1860s; one NEW-prefix backup/exit close passed.
+No retry, frozen fix, cap transfer, B/C or successor. Frozen source snapshots are
+retained, with actual results appended rather than rewritten.
+
+Prior software slice: [M2 native H stage A](p17_m2_native_homotopy_a.md) and
 [separately authored review](p17_m2_native_homotopy_a_independent_review.md),
 limited to original new public fixtures/weights, fixed H integration and native
 RSS/complete-exit recording. The owner adopted empirical RSS at4GiB for this
@@ -27,10 +37,11 @@ scope, distinct from native RSS. PR199 methods, I1 published software and
 NOT_SELECTED_BY_R1 remain. FULL_V2_OPEN_NO_ADMITTED_ROUTE/P17/uniform, all
 costs/UNKNOWN/quotas/seals and B3 two-scale/M2+Ubuntu obligations stay.
 
-After A publication, STOP. The [sole next item](../project_status.md#unique-next-item-bounded-registration-and-separate-b-authority)
-is a finite input/export-domain/role/call/fee registration and separate owner
-authority before B. Proposed FULL180/14580s remain unapproved. No old input/export
-preparation, install/VM/provider change, formal retry/reset or automatic successor.
+After R result publication, STOP. The [sole next item](../project_status.md#unique-next-item-owner-decision-on-the-stopped-r-identity)
+is the owner decision on a new finite R software/call-cost identity and separately
+authorized public IO entry before any old read. No new allocation proof is needed.
+Proposed B FULL180/C14580s remain unapproved. No old source access, install/VM/
+provider change, formal retry/reset or automatic successor.
 Source contracts remain in the [planning index](../planning/README.md); all new
 raw software outputs remain external under the [repository policy](../repository_policy.md).
 
@@ -210,8 +221,9 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 ## M2 restricted input/export preparation R
 
 - [Authorized protocol](../planning/p17_m2_input_export_preparation_protocol.md)
-- [Software source snapshot](p17_m2_input_export_preparation.md)
-- [Independent source/software review](p17_m2_input_export_preparation_independent_review.md)
+- [Software snapshot and actual R STOP supplement](p17_m2_input_export_preparation.md)
+- [Independent source/software and actual failed-entry review](p17_m2_input_export_preparation_independent_review.md)
 
-Only source-bound preparation is authorized; actual IO/results are recorded
-separately after admitted source entry. No B/C or P/17 repair claim.
+The frozen protocol retains the source-bound preparation scope. Actual entry
+stopped before old reads; supplements retain that failure and closed roles.
+No B/C or P/17 repair claim and no continuing R authority.

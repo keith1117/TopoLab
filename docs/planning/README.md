@@ -30,12 +30,16 @@ PR202/203/main65bbbd3, all four main CI contexts passed; see its
 A caps are closed. New M2 RSS/full-exit empirical acceptance at4GiB and independent
 preflight stay distinct from B guest capacity; actual P/17 remains unrepaired.
 
-The owner now authorizes [R input/export preparation](p17_m2_input_export_preparation_protocol.md):
-`/root`3h exporter + distinct `/root/review_r_exports`2h, internal IO1860s,
-exact metadata/12/528/18 source-byte/temporary-parse exception. Required checks/
-normal publication; clean merged all-CI tools + independent public IO before old
-source, R0 registry before R1. No B/C, expanded input, retry or successor; STOP
-after R closeout. [Scope](p17_m2_input_export_preparation_proposal.md)/[JSON](p17_m2_input_export_preparation_proposal.json).
+Authorized [R preparation](p17_m2_input_export_preparation_protocol.md) stopped at
+its first public IO role: actual complete wall109.224s+10 exceeded its immutable
+20s charge, final serializer exit1. Source PR204/main43ffed0/all-four-CI preceded
+that launch. Old stat/reads0; R0/R1 closed unlaunched and12/528/18 not exported.
+Failed FULL120 + shared FULL60=180/1860s; one NEW-prefix backup/exit close passed.
+See [result](../validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access).
+After required regression/publication STOP; a new finite identity/call-cost
+proposal and explicit owner decision precede any further R work. No fix/retry/
+cap transfer, old input or automatic B/C. [Frozen scope](p17_m2_input_export_preparation_proposal.md)/
+[JSON](p17_m2_input_export_preparation_proposal.json) retain their bytes.
 
 ## Overall project plans
 
@@ -53,13 +57,13 @@ after R closeout. [Scope](p17_m2_input_export_preparation_proposal.md)/[JSON](p1
 | I1 bounded native software | [Approved software/resource protocol](i1_bounded_native_software_protocol.md), [contract](i1_bounded_native_software_contract.json), [native source guide](../../native/i1/README.md) | [当前停止与所有者决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 | P/17 bounded-runtime penalty homotopy | [Finite implementation, resource admission and later pilot proposal](TopoLab_v2_P17_bounded_homotopy_proposal.md) | [提案历史与当前决定](TopoLab_v2_开发路线图.md#6-推荐执行顺序) |
 
-## Current finite proposals and R execution authority
+## Current finite proposals and stopped R identity
 
 | Proposal | Documents | Current boundary |
 |---|---|---|
-| M2 native H/17 parent | [Revision6](p17_m2_native_homotopy_proposal.md), [JSON](p17_m2_native_homotopy_proposal.json) | A closed; R authorized under separate protocol; B/C unapproved |
-| M2 input registration and restricted export preparation | [Contract and budget](p17_m2_input_export_preparation_proposal.md), [JSON](p17_m2_input_export_preparation_proposal.json) | R authorized3h+2h/1860s with exact exception; entry/STOP enforced |
-| Authorized R execution | [Protocol](p17_m2_input_export_preparation_protocol.md) | Exact input exception,3h+2h/1860s, no B/C/retry/successor |
+| M2 native H/17 parent | [Revision7](p17_m2_native_homotopy_proposal.md), [JSON](p17_m2_native_homotopy_proposal.json) | A closed; later R stopped before source access; B/C unapproved |
+| M2 input registration and restricted export preparation | [Contract and budget](p17_m2_input_export_preparation_proposal.md), [JSON](p17_m2_input_export_preparation_proposal.json) | Original scope retained; no12/528/18 exports or accepted source registry |
+| Stopped R execution | [Protocol](p17_m2_input_export_preparation_protocol.md) | STOP_NO_RETRY; failed FULL120 + shared FULL60; old reads0; normal result publication only |
 
 The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.

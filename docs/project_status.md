@@ -5,9 +5,9 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current slice: authorized R input/export preparation
+## Current slice: R stopped before old input access
 
-Owner authorizes [R protocol](planning/p17_m2_input_export_preparation_protocol.md)
+Owner authorized [R protocol](planning/p17_m2_input_export_preparation_protocol.md)
 and [exact scope](planning/p17_m2_input_export_preparation_proposal.md)/
 [JSON](planning/p17_m2_input_export_preparation_proposal.json): `/root` exporter
 <=10800 active seconds; distinct `/root/review_r_exports` <=7200 seconds, internal
@@ -16,21 +16,35 @@ IO900+900+FULL60=1860s. Exact bounded metadata and12 checkpoints/528 train label
 use limited to named fields. No other old input or backup read, algorithm,
 FEM/filter/projection/inference, B/C, installation, reset/retry or successor.
 
-Tools/public fixtures and independent source comparison are being prepared.
-No old source access before clean locked merged all-four-main-CI tools, frozen
-roles and one independent public IO check. R0 registers exact metadata-declared
-source refs before R1; independently accepted source registry is required before
-any payload. R0 actual payload fields are NOT yet checked. Missing mandatory
-provenance/identity or first failed/UNKNOWN/overcap role stops the suffix with
-immutable prefix/cost. No source selection/replacement or cap expansion.
+**STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING.** Source tools/protocol
+merged through [PR204](https://github.com/keith1117/TopoLab/pull/204) as
+`43ffed0477f42f1fd70c0a30cf15e4de953d7ab0`; all four
+[main CI39186191753 jobs](https://github.com/keith1117/TopoLab/actions/runs/39186191753)
+passed before the frozen first public IO launch. Its synthetic field check
+passed (54729 scalar comparisons, two damaged controls rejected). The actual
+complete named role took109.224s; wall+10=119.224 exceeded its immutable20s
+charge. The final completion serializer exited1, so this is not an accepted
+independent IO entry. Partial RSS188301312 bytes excludes the failed final
+serializer; full-role RSS remains UNKNOWN, not measured>4GiB or infeasibility.
+
+Historical source stat/reads **0**; actual checkpoints0/12, train labels0/528,
+uniform packets0/18. R0/R1 remain unlaunched and closed; there is no source
+registry or accepted restricted export. No source replacement, repeated role,
+frozen-code fix or B/C occurred. The one shared new-output backup/exit closeout
+passed:4.100s whole wall,81166336-byte empirical envelope and actual exits0.
+Conservatively book the failed role FULL120 plus shared FULL60=**180/1860s**;
+the original invalid20s receipt is retained, not overwritten to PASS. Remaining
+1680s is unused closed allowance, not reusable authority. See the
+[actual execution supplement](validation/p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access)
+and [independent review](validation/p17_m2_input_export_preparation_independent_review.md).
 
 Required regression and normal protected publication remain additional software
 costs, UNKNOWN_NOT_ZERO where unmeasured. No new purchase/paid expansion.
-Current public software checks and actual future R source results must stay
-separate. `PREPARATION_COMPLETE_SOURCE_BOUND` would be input preparation only,
-not scientific acceptance, P/17 repair or B/C admission; B FULL180/C14580s remain
-unapproved. Native4GiB RSS/full-exit empirical evidence and independent preflight
-remain; no new allocation proof. All historical limits below remain unchanged.
+Public software checks and this failed formal entry remain distinct from source
+acceptance. `PREPARATION_COMPLETE_SOURCE_BOUND` was **not achieved**. B FULL180/
+C14580s remain unapproved. Native4GiB RSS/full-exit empirical evidence and
+independent preflight remain; no new allocation proof. Required regression and
+normal publication close this R slice; all historical limits below remain unchanged.
 
 ## Completed M2 native H stage A and verified publication
 
@@ -150,13 +164,15 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-concrete-owner-scope-decision"></a>
 
-## Unique next item: bounded registration and separate B authority
+<a id="unique-next-item-bounded-registration-and-separate-b-authority"></a>
 
-Execute only the authorized [R protocol](planning/p17_m2_input_export_preparation_protocol.md)
-in its fixed order, caps and source boundary, then publish result and STOP.
-Before old source access: clean locked merged/all-CI tools and one independent
-public IO check. Before payload: complete independently accepted R0 registry.
-Any failure/mandatory UNKNOWN closes the remaining source roles without retry.
-R preparation does not authorize B/C. After R, the sole next item will be its
-concrete remaining-field/owner decision, not an automatic successor. Preserve
-worktree, historical failures/costs/UNKNOWN/quotas/seals and every old STOP.
+## Unique next item: owner decision on the stopped R identity
+
+Retain this failed identity and STOP. Further R work needs an explicit owner
+decision on a new finite software/call-cost identity that closes the demonstrated
+outer-wall charging defect, with a separately authorized public IO entry before
+any old read. This slice neither implements that fix nor retries the stopped
+role. It requires no new allocation/kernel proof. The12/528/18 provenance/field
+checks remain UNKNOWN_NOT_RUN; a future accepted R0 must still precede R1.
+B/C remain separately unapproved. Preserve the worktree, all failed prefixes,
+historical costs/UNKNOWN/quotas/seals and every old STOP; no automatic successor.
