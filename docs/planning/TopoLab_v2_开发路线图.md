@@ -2,15 +2,19 @@
 
 英文工作版：[v2 Development Roadmap](./TopoLab_v2_development_roadmap.md)
 
-当前授权（新R/v3，2026-10-20）：所有者接受按[就绪协议](p17_m2_input_export_readiness_protocol.md)
-及[JSON](p17_m2_input_export_readiness_protocol.json)再进行**一次**有限输入准备。
-仍为执行者总3小时/新不同作者总2小时，六个正式角色FULL合计1860秒，精确40元数据/12 checkpoint/
-528训练/18 uniform原件完整字节核验及临时解析例外，4GiB和独立预检。预先封顶的软件准备、正式、
-结果阶段分别连续计时，软件发布及等待实记费用；不暂停/重置旧时钟或转移余量。发布就绪后才一次
-开启双方2700秒正式窗口。真实来源/字段/资源仍UNKNOWN_NOT_RUN，只有实际角色全部通过才验收。
-不B/C、扩大输入、旧备份/封存、新证明工程、重试或自动后继。旧R/v1停止/已付180/关闭1680，
-R/v2零启动/已付0/关闭1860及原文件保持。这是明确的一次路线决定，不重开旧授权。
-见[当前状态](../project_status.md)、[报告](../validation/p17_m2_input_export_readiness.md)及
+新R/v3实际收尾（2026-10-20）：**STOP_NO_RETRY**，未完成受限输入准备。
+源码[PR208](https://github.com/keith1117/TopoLab/pull/208)/main5b01c13的四项CI通过后，
+双方正式窗口于08:33:55.857 UTC一次开启。合同仍规定六角色，实际启动3个：独立公开核对PASS、
+exporter-r0 STOP、预留收尾PASS。R0尝试12个白名单元数据，完成11个字节/哈希记录（2619248字节），
+读取第12个时检测到前后fstat身份元组变化。具体变化字段和原因UNKNOWN，不能据此宣称内容损坏；未补读。
+独立R0和双方R1均未启动：checkpoint0/12、训练标签0/528、uniform原packet0/18。
+失败角色完整RSS仍UNKNOWN，实际外层退出1/1，不能验收；不是已测超4GiB。FULL已付300/1860秒，未用1560关闭不转移。
+一次仅NEW输出的独立备份PASS；最终外层工具包在发布期另存，明确不属于已测备份快照。
+正式阶段08:38:17.388 UTC关闭；仅按既定预算完成结果审查、规定回归及正常受保护发布。
+固定P/17未修复、4GiB及独立预检、uniform默认/科研暂停、FULL_V2_OPEN_NO_ADMITTED_ROUTE和
+全部旧合同/失败/成本/UNKNOWN/配额/封存保持。无B/C、追加旧读取、边修边续、重试/reset或自动后继。
+唯一下步是所有者对失败后的路线决定；没有默认R/v4。后续来源稳定性调查/访问须另有明确有限授权。
+见[当前状态](../project_status.md)、[报告](../validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration)及
 [独立报告](../validation/p17_m2_input_export_readiness_independent_review.md)。
 
 历史收尾（新R/v2，2026-10-19）：
@@ -74,7 +78,7 @@ D1 已按 UNKNOWN 停止，当前救援程序已由所有者关闭；第6节记�
 [验证报告](../validation/README.md)为准。`v1.0.0` 与 M1/M2 的负面结论继续保留。
 
 制定日期：2026-09-24
-修订日期：2026-10-20（旧R/v1/v2关闭；新R/v3一次有限准备获准，B/C未授权）
+修订日期：2026-10-20（R/v3在R0停止，已付300/关闭1560；B/C未授权）
 
 相关文档：
 

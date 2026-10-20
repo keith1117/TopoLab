@@ -51,19 +51,29 @@ source/resource admission UNKNOWN_NOT_RUN. See the [actual zero-launch report](.
 No partial prefix, B/C, expansion, old backup, cap transfer or successor;
 frozen v1 contracts/reports retain bytes.
 
-Current authority (NEW R/v3,2026-10-20): the owner accepted **one** fresh
-restricted preparation attempt under the [readiness protocol](p17_m2_input_export_readiness_protocol.md)
-and [JSON](p17_m2_input_export_readiness_protocol.json). Same total3h exporter/2h
-new different author, six once-only FULL roles1860s, exact40/12/528/18 original-byte/
-temporary-parse scope,4GiB and independent preflight. Prospective bounded software,
-formal and result phases prevent release waiting from expiring an unopened formal
-window; no clock pause/reset, budget transfer or free software cost. Complete
-software release readiness before one immutable2700s formal window for both
-actors. Source/field/resource acceptance remains UNKNOWN_NOT_RUN until actual
-roles pass. No B/C, extra source, old backup/seal, new proof, retry or successor.
-R/v1 STOP/paid180/closed1680 and R/v2 zero-launch/paid0/closed1860 retain bytes.
-This is the explicit finite route decision, not reopening either old grant.
-See [current status](../project_status.md), [report](../validation/p17_m2_input_export_readiness.md)
+R/v3 actual closeout (2026-10-20): **STOP_NO_RETRY**, not preparation-complete.
+Source [PR208](https://github.com/keith1117/TopoLab/pull/208) merged as5b01c13;
+all four exact-main CI jobs passed before once-only activation08:33:55.857 UTC.
+The contract still defines six roles; three launched: independent public PASS,
+exporter-r0 STOP, reserved shared closeout PASS. R0 attempted12 whitelisted
+metadata files, completed11 byte/hash rows (2619248 bytes), then detected a
+before/after fstat identity mismatch while reading the12th. The changed field
+and cause are UNKNOWN; this is not proof of corrupted contents. No reread.
+Independent R0 and both R1 source roles never launched: checkpoints0/12,
+train0/528, original uniform packets0/18. Failed-role full RSS remains UNKNOWN;
+actual outer exits1/1 preclude success. No measured>4GiB result. Booked FULL300/1860s; unused1560 is closed,
+not transferable. One NEW-only independent backup passed; final trusted-tool
+packet is separately filed at publication, outside its measured snapshot.
+
+The finite formal phase closed08:38:17.388 UTC. Only result review, mandatory
+regression and protected publication follow under the predeclared result caps.
+Fixed P/17 remains unrepaired;4GiB, independent preflight, uniform/science pause,
+FULL_V2_OPEN_NO_ADMITTED_ROUTE and all old gates/costs/quotas/UNKNOWN/seals stay.
+B/C, further old reads, patch-and-continue, retry/reset or successor are not
+admitted. The one next item is an owner route decision after this failure;
+no default R/v4. Any later source-stability investigation/access would require
+new explicit finite authority. See [current status](../project_status.md),
+[actual report](../validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration)
 and [independent review](../validation/p17_m2_input_export_readiness_independent_review.md).
 
 ## Overall project plans
@@ -86,10 +96,10 @@ and [independent review](../validation/p17_m2_input_export_readiness_independent
 
 | Proposal | Documents | Current boundary |
 |---|---|---|
-| M2 native H/17 parent | [Revision7](p17_m2_native_homotopy_proposal.md), [JSON](p17_m2_native_homotopy_proposal.json) | A closed; later R stopped before source access; B/C unapproved |
+| M2 native H/17 parent | [Revision7](p17_m2_native_homotopy_proposal.md), [JSON](p17_m2_native_homotopy_proposal.json) | A closed; R/v1 stopped before source access; R/v3 R0 STOP; B/C unapproved |
 | M2 input registration and restricted export preparation | [Contract and budget](p17_m2_input_export_preparation_proposal.md), [JSON](p17_m2_input_export_preparation_proposal.json) | Original scope retained; no12/528/18 exports or accepted source registry |
 | Stopped R execution | [Protocol](p17_m2_input_export_preparation_protocol.md) | STOP_NO_RETRY; failed FULL120 + shared FULL60; old reads0; result PR205 published |
-| New R/v3 readiness preparation | [Protocol](p17_m2_input_export_readiness_protocol.md), [JSON](p17_m2_input_export_readiness_protocol.json) | One newly authorized attempt; phased3h/2h, six FULL1860, no B/C or successor |
+| New R/v3 readiness preparation | [Protocol](p17_m2_input_export_readiness_protocol.md), [JSON](p17_m2_input_export_readiness_protocol.json) | STOP during R0;3/6 launched, paid300/closed1560; no R1 or B/C |
 | Historical R/v2 billing revision | [Finite proposal](p17_m2_input_export_billing_revision_proposal.md), [JSON](p17_m2_input_export_billing_revision_proposal.json) | Source PR206 merged; formal zero launch due original window; [protocol](p17_m2_input_export_billing_revision_protocol.md), new I/O paid0/1860, no automatic successor |
 
 The original schedule and admissions estimates are planning assumptions, not

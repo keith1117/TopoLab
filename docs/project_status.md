@@ -5,30 +5,50 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## NEW R/v3: one readiness-bound preparation authorized
+## NEW R/v3 closed STOP during metadata registration
 
-The owner accepted the recommended one fresh attempt under the
-[protocol](planning/p17_m2_input_export_readiness_protocol.md) and
-[JSON](planning/p17_m2_input_export_readiness_protocol.json), preserving3h exporter/
-2h new different-author review, six once-only FULL roles1860s and the same exact
-40 metadata/12 checkpoints/528 train/18 original uniform packets byte/temporary
-parse exception. Predeclared software/formal/result phase caps sum10800/7200;
-waits/debugging count within each continuous phase, no transfers or cost erasure.
-Formal2700s for both actors starts once only after software review, required
-regression, protected merge and all four exact-main CI successes. Source/field/
-resource results currently UNKNOWN_NOT_RUN; no R/v3 root, role or old input read
-at source authoring. See [report](validation/p17_m2_input_export_readiness.md) and
-[independent review](validation/p17_m2_input_export_readiness_independent_review.md).
+[Source PR208](https://github.com/keith1117/TopoLab/pull/208) merged as
+`5b01c13a387d2085f9b08bbdb4e5c054ebc9b4a3`; all four
+[exact-main CI39392280673](https://github.com/keith1117/TopoLab/actions/runs/39392280673)
+jobs passed before once-only activation2026-10-20T08:33:55.857Z. Both formal
+windows were2700s, exact deadline09:18:55.857Z; plan SHA
+`7252429be4107800f4f7dc889c0a9432ab059eb1953198e2f8ca12850492d0fe`.
+The owner-authorized [protocol](planning/p17_m2_input_export_readiness_protocol.md)
+and [JSON](planning/p17_m2_input_export_readiness_protocol.json) retain bytes.
 
-The complete precommit software checks passed:2218 tests passed/1 Linux-only
-skip; source PR/main CI and actual formal source/resource acceptance remain pending.
+**STOP_NO_RETRY**, not PREPARATION_COMPLETE_SOURCE_BOUND. Six formal roles remain
+defined; three launched: independent public PASS (FULL120), exporter-r0 STOP
+(FULL120), shared closeout PASS (FULL60). R0 attempted12 whitelisted metadata;
+11 completed byte/hash rows total2619248 bytes. The12th read reached its
+before/after fstat check and detected a changed(dev,inode,size,mtime_ns) tuple.
+The exact changed member/cause and failed-read byte count were not retained,
+so remain UNKNOWN; no source corruption diagnosis or additional read. Independent
+R0 and both R1 roles never launched, checkpoint0/12/train0/528/uniform packet0/18.
+No accepted complete source registry or restricted export exists. Full failed-role
+RSS remains UNKNOWN; actual outer exits1/1 preclude success, without proving
+measured>4GiB or universal infeasibility.
 
-This is an explicit one-attempt route decision following the closed v1/v2,
-not their restart. V2 source/result PR206/207 merged through main e1e52f3; four
-main CI jobs39213240822 passed. Old contracts/reports/paid and closed caps retain
-bytes. No B/C, extra source, old backup/seal, proof engineering or automatic
-successor.4GiB/independent preflight, all historical gates/costs/quotas/UNKNOWN
-and B3 final M2+Ubuntu/two-scale requirements remain.
+Public actual whole6.671000004s/RSS199262208 bytes/exits0/0; shared
+whole4.950999975s/RSS188203008/exits0/0. Failed R0 raw outer endpoints span
+37.579999924s, actual exits1/1; its terminal leaves whole-wall/RSS null, not0.
+The failed source check preceded missing supervisor/full evidence; shared replay
+also preserves the null-vs-derived-wall discrepancy rather than repairing PASS.
+Booked300/1860s; unused1560 closes without transfer. One independent NEW-only
+backup passed187 members/1323178 bytes excluding its manifest; each finalized
+snapshot including the manifest has188 members/1352153 bytes. Its old_input_reads0 describes backup
+work only, not R0. The final trusted-tool packet is separately filed after formal
+close, outside the measured backup snapshot. [Actual report](validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration)
+and [different-author audit](validation/p17_m2_input_export_readiness_independent_review.md).
+
+Formal closed08:38:17.388Z after261.530999899/2700s. Result/publication caps start
+there: exporter3600s deadline09:38:17.388Z; independent900s deadline08:53:17.388Z.
+Only required result review, regression and protected publication follow. No
+new purchase; software/CI/publication are real costs, fees UNKNOWN_NOT_ZERO.
+Result precommit five-check regression passed:2218 tests/1 platform skip, no
+relaxed guard or tolerance. Result PR/main CI remain pending at this snapshot.
+Old v1 paid180/closed1680 and v2 paid0/closed1860 retain bytes. All historical
+limits below remain; B/C, further old reads, frozen patch/retry/reset or an
+automatic successor are not authorized. No default R/v4.
 
 ## Historical R/v2 source merged; formal preparation closed unlaunched
 
@@ -243,11 +263,12 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-owner-decision-after-rv2-zero-launch"></a>
 
-## Unique next item: complete only the one authorized R/v3 attempt
+## Unique next item: owner route decision after the stopped R/v3
 
-Complete bounded software readiness and the once-only formal preparation under
-the new protocol, then normal result publication and STOP. First named failure
-or mandatory UNKNOWN closes source suffix; no patch-and-continue. Successful
-preparation is not P/17 repair or B/C authority. If it does not pass, publish the
-specific result and stop for an explicit owner route decision; no default v4.
-All old grants and unused balances remain closed. Retain assigned worktree.
+Finish this result's required normal protected publication, then stop. The next
+owner decision is whether to end this route or authorize a separately scoped
+source-stability clarification/investigation; its concrete evidence would need
+to explain the12th metadata identity transition without rewriting the failed
+receipt. Current authority permits no reread, repair, R/v4, B or C. A later
+proposal/grant must state exact input access, finite cost, independent role and
+STOP terms before any such access; none is automatic. Keep assigned worktree.

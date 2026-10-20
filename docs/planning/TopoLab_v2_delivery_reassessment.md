@@ -11,19 +11,29 @@ accepted by the owner in the reassessment conversation. It changes delivery
 governance; it is not a new numerical experiment contract, scientific Gate or
 budget authorization.
 
-Current authority (NEW R/v3,2026-10-20): the owner accepted **one** fresh
-restricted preparation attempt under the [readiness protocol](p17_m2_input_export_readiness_protocol.md)
-and [JSON](p17_m2_input_export_readiness_protocol.json). Same total3h exporter/2h
-new different author, six once-only FULL roles1860s, exact40/12/528/18 original-byte/
-temporary-parse scope,4GiB and independent preflight. Prospective bounded software,
-formal and result phases prevent release waiting from expiring an unopened formal
-window; no clock pause/reset, budget transfer or free software cost. Complete
-software release readiness before one immutable2700s formal window for both
-actors. Source/field/resource acceptance remains UNKNOWN_NOT_RUN until actual
-roles pass. No B/C, extra source, old backup/seal, new proof, retry or successor.
-R/v1 STOP/paid180/closed1680 and R/v2 zero-launch/paid0/closed1860 retain bytes.
-This is the explicit finite route decision, not reopening either old grant.
-See [current status](../project_status.md), [report](../validation/p17_m2_input_export_readiness.md)
+R/v3 actual closeout (2026-10-20): **STOP_NO_RETRY**, not preparation-complete.
+Source [PR208](https://github.com/keith1117/TopoLab/pull/208) merged as5b01c13;
+all four exact-main CI jobs passed before once-only activation08:33:55.857 UTC.
+The contract still defines six roles; three launched: independent public PASS,
+exporter-r0 STOP, reserved shared closeout PASS. R0 attempted12 whitelisted
+metadata files, completed11 byte/hash rows (2619248 bytes), then detected a
+before/after fstat identity mismatch while reading the12th. The changed field
+and cause are UNKNOWN; this is not proof of corrupted contents. No reread.
+Independent R0 and both R1 source roles never launched: checkpoints0/12,
+train0/528, original uniform packets0/18. Failed-role full RSS remains UNKNOWN;
+actual outer exits1/1 preclude success. No measured>4GiB result. Booked FULL300/1860s; unused1560 is closed,
+not transferable. One NEW-only independent backup passed; final trusted-tool
+packet is separately filed at publication, outside its measured snapshot.
+
+The finite formal phase closed08:38:17.388 UTC. Only result review, mandatory
+regression and protected publication follow under the predeclared result caps.
+Fixed P/17 remains unrepaired;4GiB, independent preflight, uniform/science pause,
+FULL_V2_OPEN_NO_ADMITTED_ROUTE and all old gates/costs/quotas/UNKNOWN/seals stay.
+B/C, further old reads, patch-and-continue, retry/reset or successor are not
+admitted. The one next item is an owner route decision after this failure;
+no default R/v4. Any later source-stability investigation/access would require
+new explicit finite authority. See [current status](../project_status.md),
+[actual report](../validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration)
 and [independent review](../validation/p17_m2_input_export_readiness_independent_review.md).
 
 Historical closeout (NEW R/v2,2026-10-19):

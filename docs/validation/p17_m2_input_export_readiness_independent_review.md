@@ -176,3 +176,165 @@ activated only by an explicit readiness message with the same frozen activation
 and both deadlines. Result review has its separate900s ceiling after formal
 close. Neither phase has started at this software closure, and no old clock,
 unused prep cap or role is reactivated. No automatic B/C or successor follows.
+
+## Actual once-only formal preparation: STOP at exporter R0
+
+The primary explicitly activated the predeclared formal phase ONCE at
+**2026-10-20T08:33:55.857Z**, both immutable deadlines09:18:55.857Z. Independent
+software preparation had closed at the primary's conservative07:37:46 boundary,
+684/3600s with2916s closed, without a directed CI wait or cap transfer. Exporter
+prep closed4106.857/4500s. This is new phase authority, not a paused v1/v2 window.
+
+Independent read-only recovery confirmed clean detached source
+`5b01c13a387d2085f9b08bbdb4e5c054ebc9b4a3`, protected
+[PR208](https://github.com/keith1117/TopoLab/pull/208). The independent reviewer
+directly queried official [main CI39392280673](https://github.com/keith1117/TopoLab/actions/runs/39392280673):
+exact head above, `headBranch=main`, `event=push`, completed/success, and all four
+jobs completed/success: frontend118526425393, clean-linux-smoke118526425607,
+quality118526425631 and i1-native-software118526425710. This completes the
+source-CI observation prerequisite; it is separate from actual source/resource
+acceptance. The committed precommit report records2218 tests passed/1 platform
+skip and all five required checks, not the earlier restricted diagnostics.
+
+The NEW plan SHA is
+`7252429be4107800f4f7dc889c0a9432ab059eb1953198e2f8ca12850492d0fe`.
+The reviewer read and directly verified this NEW plan against that SHA, merged
+source, authors `/root` and `/root/review_r_v3`, actual activation1792485235.857,
+both deadlines and fixed six FULL roles. No frozen source/protocol was changed
+during formal execution. No old source was reread by this reviewer.
+
+### Direct raw-event and resource replay
+
+After explicit permission, the reviewer read only NEW v3 receipts, role outputs
+and NEW backup, never their old evidence pointers. The committed independent
+pure auditor was replayed with the actual raw external events, the NEW native
+profile bytes/helper records and frozen payload argv. This is result review of
+already observed events, with no extra formal role, resource observer or old
+input access. Actual raw-frontier packet filing occurred during ordinary result
+publication after formal closure, at
+`result-publication/trusted-frontier-packets.json`, SHA256
+`7840e4446adf47056e7144e1fa43f6cfc586a6dde1739523ae97ae8aad0c5dcb`.
+It explicitly does not claim retrospective native measurement or inclusion in
+the earlier measured backup.
+
+| Actual role | Full outer observed seconds | FULL paid seconds | Actual outer exits | Independently replayed RSS bytes / outcome |
+|---|---:|---:|---|---|
+| independent-public-check |6.671000003814697|120|0,0|199262208; PASS_R_V3_FULL_ROLE |
+| exporter-r0 |37.579999923706055|120|1,1|full envelope UNKNOWN; STOP_NO_RETRY |
+| independent-r0 |unlaunched|0|not run|UNKNOWN_NOT_RUN |
+| exporter-r1 |unlaunched|0|not run|UNKNOWN_NOT_RUN |
+| independent-r1 |unlaunched|0|not run|UNKNOWN_NOT_RUN |
+| shared-closeout |4.950999975204468|60|0,0|188203008; PASS_R_V3_FULL_ROLE |
+
+Public and shared exact FULL/RSS/exit results agree with the trusted dispatcher.
+Public T0/T1 were08:34:28.857—08:34:35.528 UTC; failed R0
+08:37:08.341—08:37:45.921; shared08:38:03.944—08:38:08.895. All lie inside the
+same actor window. Between-role waits count in formal author time. Started
+roles are3/6; new restricted FULL paid is**300/1860s**, including shared60;
+closed1560s never transfers. Actual failed-role cost evidence is retained rather
+than clipped to a fabricated PASS or inferred memory overrun.
+
+### Specific inner cause and actual metadata access
+
+NEW `exporter-r0/failure.json` reports `ValueError`, **`STOP: source changed`**,
+old_files_read11. Its SHA256 is
+`54563ec4b3cd71c74a1282a933cfbc906550d13d2a59c3b84b05b9c720c1f518`.
+The NEW `source-read.jsonl`, SHA256
+`4f82b6e2c2faac2686ec99d41e37479397c89a9687ec192139246ac11d4a34f3`,
+contains12 unique attempt records and11 complete byte/hash rows totaling
+**2619248 bytes**. The final attempted metadata file was
+`b3-v1-fits/artifacts/selection/62245b313b64d17fdd5d5ee2e77dcf28158dd4aea098810e11a910a1ba4ffb09.json`.
+No source_registry.json was emitted or independently accepted.
+
+Committed `Reader.read` gives this exact failure reason only when its
+post-`stream.read` fstat tuple `(device,inode,size,mtime_ns)` differs from the
+pre-read tuple. This is distinct from its declared-size, before-open replacement
+and expected-SHA checks, which have other reasons. The failed twelfth file
+therefore reached the stat/open/read path but did not reach a complete hash/byte
+journal row. **Its actual returned byte count and the differing tuple component
+are UNKNOWN**, since those values were not retained. No old path was reopened
+to diagnose them. The evidence does not establish content corruption, a specific
+filesystem mechanism or zero metadata access.
+
+The source CLI uses read-only old descriptors and writes its journal/failure
+only under the NEW root. No old-source write by this exporter is present in the
+reviewed code/argv. Nevertheless, unchanged old-byte identity cannot be asserted
+from this failed guard. R0 alone accessed the above metadata prefix; all R1
+checkpoint/label/uniform payload roles stayed closed and unlaunched, so actual
+payload verification/export is0/12,0/528,0/18. Independent old source reads are0.
+No original payload or full trajectory was copied into the NEW failed prefix.
+
+### Failed outer evidence and successful preservation
+
+R0's NEW native payload profile records31.13s and52592640-byte RSS, with child
+and timer exits1. The final serializer retained an available own peak24182784
+bytes. Its required successful supervisor receipt is absent, so these partial
+values do not certify the full role envelope. The independent full-role replay
+retains actual whole37.58s but refuses incomplete outer resource coverage with
+`unregistered outer native profile`. Full RSS remains UNKNOWN, not proved>4GiB.
+
+The dispatcher's earlier fallback terminal had already stopped with
+`internal terminal cannot certify future exit`, leaving whole_wall null. During
+shared closeout the independent replay derived the actual37.58s from retained
+events; the decisive-field mismatch was also preserved as
+`independent actual external-event replay differs: whole_wall_seconds`. This is
+a secondary failed-evidence preservation defect, not the inner source cause,
+a new source launch, a changed old receipt or authority to patch and continue.
+
+The once-reserved shared role preserved the failed prefix. Direct independent
+byte/hash/member comparison verified the NEW backup snapshot:187 members and
+1323178 bytes before its self-excluded manifest; including the manifest in each
+snapshot, the exact copy is**188 members/1352153 bytes**. Manifest SHA256
+`18e4c69be2a8d3f246205ebb9eb9f10e9adcc8fa091255a2b930786dccdc9b1f`
+agrees with the actual shared finalizer stdout and both NEW copies. Every listed
+member matches the current NEW original by bytes/SHA, the backup has no extra
+member or symlink, and the sole later `result-publication` raw-packet filing is
+explicitly outside that measured snapshot. The manifest's old_input_reads0
+describes backup work only, not the earlier R0 metadata reads. Successful backup
+does not restore the failed role or source suffix.
+
+### Closure and remaining boundary
+
+The primary declared **FORMAL_CLOSED2026-10-20T08:38:17.388Z**,
+261.530999899/2700s for each formal author phase; unused2438.469000101s closes.
+Independent result review900s begins at that same boundary and ends no later
+than08:53:17.388Z; exporter result3600s ends09:38:17.388Z. This appendix is result
+review after closure, not mutation of the frozen formal program. No retry,
+alternate source, old backup, seventh role or B/C occurred.
+
+**PREPARATION_COMPLETE_SOURCE_BOUND was not achieved.** Exact registry/payload
+source acceptance remains incomplete/UNKNOWN_NOT_RUN; fixed P/17 is unrepaired.
+Report this finite source-identity/evidence STOP and stop for an explicit owner
+route decision, without automatic v4. All v1/v2 records, old failures/costs,
+4GiB/independent preflight, science pause, quotas/seals and final B3 independent
+Ubuntu/two-scale/reproduction obligations remain. Normal result regression,
+protected publication and main-CI verification are still required separately.
+
+### Independent result-review closure
+
+At **2026-10-20 08:45:17 UTC**, substantive independent result review is complete,
+419.612/900s after the original08:38:17.388 activation of this result phase.
+Final filing/message time still counts; the primary records its conservative
+actual receipt boundary and closes the resulting unused cap without transfer.
+There is no further independent CI-wait or review duty after this closure.
+
+The independent reviewer checked the current AGENTS/status, EN/ZH roadmap and
+reassessment, history/index/policy and primary actual-report diffs. Review
+corrections now distinguish completed11 from attempted12 metadata and unknown
+failed-read bytes; known actual exits1/1 from UNKNOWN full RSS; manifest-excluded
+187/1323178 from finalized188/1352153 per snapshot; and actual pending publication
+from a future success. Current entries consistently retain both primary source
+failure and secondary raw-wall discrepancy,4GiB/independent preflight, no B/C,
+no further old read and no automatic v4. No substantive factual conflict remains.
+Direct Git diff verification found scripts/tests/src/native/lock and all new
+frozen plan-source contracts unchanged from the merged source; diff check passed.
+Only this owned independent report was appended by the reviewer after formal
+closure. Its original source-authoring prefix remains historical.
+
+Result five-check regression is still running under the primary's ordinary
+normal-permission runner at this checkpoint; latest result PR/merged-main CI
+publication has not yet completed. This review accepts the documented STOP and
+evidence boundary for normal publication, conditional on those existing required
+checks and protection rules. It does not turn incomplete preparation into PASS,
+authorize diagnostics on the old source, extend either result deadline or
+commission a successor. No additional formal role or old source read occurred.
