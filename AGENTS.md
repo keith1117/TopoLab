@@ -62,17 +62,18 @@ Payload0/12/528/18; failed full RSS UNKNOWN/exits1/1. Paid300/closed1560 remains
 PR209/main85644c4/all-four CI and merged-branch cleanup completed, worktree retained.
 Original result overrun18.633086s and separate followup335.755696s remain costs.
 
-F public software implementation/review is complete; local2290 passed/1 platform skip.
-The **F-only** grant under the unchanged
-[proposal](docs/planning/p17_m2_input_failure_diagnostic_repair_proposal.md)/[JSON](docs/planning/p17_m2_input_failure_diagnostic_repair_proposal.json):
-executor2h preparation, fresh different author1h, one90min regression/protected
-publication. [F report](docs/validation/p17_m2_input_failure_recording_repair.md)
-records public-fixture-only failure tuples, whole-wall/cost and RSS/exit repair;
-measurement completeness never turns payload failure into PASS. D remains
-UNRUN_NOT_AUTHORIZED, old cause/full RSS UNKNOWN. No old stat/read, D/environment-identity/power query,
-R retry, B/C, reset or successor. Retain4GiB/independent preflight and all old
-contracts/costs/quotas/seals. Only normal publication remains; afterward STOP and do not restart F.
-Verify the associated PR/main CI rather than repeating completed implementation.
+F is published/closed through PR211/mainb0fe235/all-four exact-main CI39473450571;
+local2290 passed/1 skip. Its first unchanged cleanup assertion failure/cost/cause
+UNKNOWN remains, not fixed by passing repeats. Frozen reports retain bytes.
+Current owner grant is [R-STABLE contract documents](docs/planning/p17_m2_source_stability_export_proposal.md)/
+[JSON](docs/planning/p17_m2_source_stability_export_proposal.json), required software
+regression and normal GitHub publication ONLY. Future in-place writer quiescence,
+new source exception/identity, fresh different author, F production/cleanup binding
+and new phased budgets are PROPOSED_NOT_AUTHORIZED. D is not a prerequisite;
+old cause/full RSS UNKNOWN. No implementation, old stat/read, formal R/B/C,
+D/environment/power query, retry/reset or automatic successor. Retain4GiB and
+independent preflight/all old contracts/costs/quotas/seals. After document publication
+STOP for the one scoped owner decision; no closed allowance transfers.
 
 ## Provenance boundary
 

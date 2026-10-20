@@ -51,22 +51,25 @@ source/resource admission UNKNOWN_NOT_RUN. See the [actual zero-launch report](.
 No partial prefix, B/C, expansion, old backup, cap transfer or successor;
 frozen v1 contracts/reports retain bytes.
 
-F public implementation/review and local five checks complete:2290 passed/1 platform skip.
-Normal exact-head PR/main all-four CI publication remains at report authoring;
-finish that one phase and STOP, without restarting F.
-Current owner scope (2026-10-20): **F only** is expressly authorized under the
-[bounded proposal](p17_m2_input_failure_diagnostic_repair_proposal.md) and
-[JSON](p17_m2_input_failure_diagnostic_repair_proposal.json); their original
-PROPOSED snapshot retains bytes. F repairs failure recording with versioned
-source/new public fixtures on M2 and existing CI, with a fresh different author.
-Executor preparation2h, independent1h, then one90min regression/protected
-publication; no D window or second publication. See the [F execution report](../validation/p17_m2_input_failure_recording_repair.md)
-and [independent review](../validation/p17_m2_input_failure_recording_repair_independent_review.md).
-D stays UNRUN_NOT_AUTHORIZED; old metadata cause/RSS remain UNKNOWN.
-Source guards,4GiB/independent preflight and all historical contracts/costs/
-quotas/seals remain. No old source/stat/read, D/environment-identity/power query, R retry, B/C or automatic
-successor. Complete F-only software publication and STOP; any later source
-preparation needs a separate source-stability/input/cost contract and owner grant.
+F is published and closed: [PR211](https://github.com/keith1117/TopoLab/pull/211),
+main `b0fe2350ac68a88a05e974926a2b0fe6a1302bf7`, all four exact-main
+[CI39473450571 jobs](https://github.com/keith1117/TopoLab/actions/runs/39473450571) successful.
+Final local2290 passed/1 platform skip; the first unchanged cleanup assertion
+failure/cost and its UNKNOWN cause remain, without a fix claim. Frozen F reports
+retain their precommit publication wording; do not repeat F.
+
+Current owner scope (2026-10-20): **new source-stability/export contract documents,
+required software regression and normal publication only**. See the
+[new R-STABLE proposal](p17_m2_source_stability_export_proposal.md) and
+[JSON](p17_m2_source_stability_export_proposal.json): in-place custodian writer
+quiescence, strict source checks, independent R0 before R1, explicit F production
+binding/cleanup acceptance and newly proposed budgets. New execution/old-source
+permissions and fresh independent appointment are NOT_GRANTED. D is not a
+prerequisite; historical cause/full RSS remain UNKNOWN. No implementation, old
+stat/read, formal R, B/C, environment/power query or automatic successor.
+After this document publication STOP for the single scoped owner decision in
+that proposal; do not treat the old grants or closed balances as current authority.
+4GiB/independent preflight, fixed P/17/uniform/science pause and all old evidence stay.
 
 Historical R/v3 remains **STOP_NO_RETRY**: source PR208/main5b01c13/all-four CI
 preceded activation. Six roles defined,3 launched (public PASS/R0 STOP/shared PASS);
@@ -105,6 +108,7 @@ retain their historical bytes. No default R/v4; no diagnostic execution now.
 
 | Proposal | Documents | Current boundary |
 |---|---|---|
+| New R-STABLE source control and restricted export | [Finite proposal](p17_m2_source_stability_export_proposal.md), [JSON](p17_m2_source_stability_export_proposal.json) | Documents/regression/publication only; future roles, source exception and budgets ungranted; D not prerequisite; [validation](../validation/p17_m2_source_stability_export_proposal.md) |
 | M2 native H/17 parent | [Revision7](p17_m2_native_homotopy_proposal.md), [JSON](p17_m2_native_homotopy_proposal.json) | A closed; R/v1 stopped before source access; R/v3 R0 STOP; B/C unapproved |
 | M2 input registration and restricted export preparation | [Contract and budget](p17_m2_input_export_preparation_proposal.md), [JSON](p17_m2_input_export_preparation_proposal.json) | Original scope retained; no12/528/18 exports or accepted source registry |
 | Stopped R execution | [Protocol](p17_m2_input_export_preparation_protocol.md) | STOP_NO_RETRY; failed FULL120 + shared FULL60; old reads0; result PR205 published |
