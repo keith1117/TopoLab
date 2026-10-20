@@ -1,29 +1,33 @@
 # TopoLab v2 Development Roadmap
 
-R/v3 actual closeout (2026-10-20): **STOP_NO_RETRY**, not preparation-complete.
-Source [PR208](https://github.com/keith1117/TopoLab/pull/208) merged as5b01c13;
-all four exact-main CI jobs passed before once-only activation08:33:55.857 UTC.
-The contract still defines six roles; three launched: independent public PASS,
-exporter-r0 STOP, reserved shared closeout PASS. R0 attempted12 whitelisted
-metadata files, completed11 byte/hash rows (2619248 bytes), then detected a
-before/after fstat identity mismatch while reading the12th. The changed field
-and cause are UNKNOWN; this is not proof of corrupted contents. No reread.
-Independent R0 and both R1 source roles never launched: checkpoints0/12,
-train0/528, original uniform packets0/18. Failed-role full RSS remains UNKNOWN;
-actual outer exits1/1 preclude success. No measured>4GiB result. Booked FULL300/1860s; unused1560 is closed,
-not transferable. One NEW-only independent backup passed; final trusted-tool
-packet is separately filed at publication, outside its measured snapshot.
+Current owner scope (2026-10-20): **documentation only** for the
+[bounded failure diagnosis/recording-repair proposal](p17_m2_input_failure_diagnostic_repair_proposal.md)
+and [JSON](p17_m2_input_failure_diagnostic_repair_proposal.json),
+PROPOSED_NOT_AUTHORIZED. Separate D's historical metadata-identity question from
+F's fixture-only failure recording repair. Missing historical tuples/cause may
+remain UNKNOWN without blocking public F; strict source guards are unchanged.
+Proposed new caps: F2h executor/1h fresh different author; D common10min;
+F-only one90min publication; full F/D adds one90min result publication.
+None grants execution, old access,
+R retry, formal B/C or a successor. The only next item is the owner's decision
+on F only or F plus the exact five-receipt/optional bounded-log D exception.
 
-The finite formal phase closed08:38:17.388 UTC. Only result review, mandatory
-regression and protected publication follow under the predeclared result caps.
-Fixed P/17 remains unrepaired;4GiB, independent preflight, uniform/science pause,
-FULL_V2_OPEN_NO_ADMITTED_ROUTE and all old gates/costs/quotas/UNKNOWN/seals stay.
-B/C, further old reads, patch-and-continue, retry/reset or successor are not
-admitted. The one next item is an owner route decision after this failure;
-no default R/v4. Any later source-stability investigation/access would require
-new explicit finite authority. See [current status](../project_status.md),
-[actual report](../validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration)
-and [independent review](../validation/p17_m2_input_export_readiness_independent_review.md).
+Historical R/v3 remains **STOP_NO_RETRY**: source PR208/main5b01c13/all-four CI
+preceded activation. Six roles defined,3 launched (public PASS/R0 STOP/shared PASS);
+12 metadata attempts/11 completed hashes/2619248 bytes,12th fstat identity changed,
+member/cause/failed-read bytes UNKNOWN. Later R0/R1 unlaunched; payload0/12/528/18.
+Full failed-role RSS UNKNOWN, actual outer exits1/1; no measured>4GiB result.
+FULL300 paid/1560 unused closed, NEW-only backup PASS. No reread or repaired PASS.
+Result [PR209](https://github.com/keith1117/TopoLab/pull/209)/main85644c4 and all four
+[exact-main CI39399796173 jobs](https://github.com/keith1117/TopoLab/actions/runs/39399796173)
+are complete; merged branches cleaned, worktree retained. Original result-phase
+18.633086s overrun remains; separately granted publication followup335.755696s
+closes without transferring unused264.244304s or retroactively covering overrun.
+Fixed P/17/uniform/science pause,4GiB/independent preflight,
+FULL_V2_OPEN_NO_ADMITTED_ROUTE and all old failures/costs/quotas/UNKNOWN/seals stay.
+The [original report](../validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration)
+and [independent review](../validation/p17_m2_input_export_readiness_independent_review.md)
+retain their historical bytes. No default R/v4; no diagnostic execution now.
 
 Historical closeout (NEW R/v2,2026-10-19):
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE; fixed P/17 unrepaired; science paused.**
@@ -2415,30 +2419,34 @@ search on B5 outcomes.
 
 ### Effective authority and development order
 
-R/v3 actual closeout (2026-10-20): **STOP_NO_RETRY**, not preparation-complete.
-Source [PR208](https://github.com/keith1117/TopoLab/pull/208) merged as5b01c13;
-all four exact-main CI jobs passed before once-only activation08:33:55.857 UTC.
-The contract still defines six roles; three launched: independent public PASS,
-exporter-r0 STOP, reserved shared closeout PASS. R0 attempted12 whitelisted
-metadata files, completed11 byte/hash rows (2619248 bytes), then detected a
-before/after fstat identity mismatch while reading the12th. The changed field
-and cause are UNKNOWN; this is not proof of corrupted contents. No reread.
-Independent R0 and both R1 source roles never launched: checkpoints0/12,
-train0/528, original uniform packets0/18. Failed-role full RSS remains UNKNOWN;
-actual outer exits1/1 preclude success. No measured>4GiB result. Booked FULL300/1860s; unused1560 is closed,
-not transferable. One NEW-only independent backup passed; final trusted-tool
-packet is separately filed at publication, outside its measured snapshot.
+Current owner scope (2026-10-20): **documentation only** for the
+[bounded failure diagnosis/recording-repair proposal](p17_m2_input_failure_diagnostic_repair_proposal.md)
+and [JSON](p17_m2_input_failure_diagnostic_repair_proposal.json),
+PROPOSED_NOT_AUTHORIZED. Separate D's historical metadata-identity question from
+F's fixture-only failure recording repair. Missing historical tuples/cause may
+remain UNKNOWN without blocking public F; strict source guards are unchanged.
+Proposed new caps: F2h executor/1h fresh different author; D common10min;
+F-only one90min publication; full F/D adds one90min result publication.
+None grants execution, old access,
+R retry, formal B/C or a successor. The only next item is the owner's decision
+on F only or F plus the exact five-receipt/optional bounded-log D exception.
 
-The finite formal phase closed08:38:17.388 UTC. Only result review, mandatory
-regression and protected publication follow under the predeclared result caps.
-Fixed P/17 remains unrepaired;4GiB, independent preflight, uniform/science pause,
-FULL_V2_OPEN_NO_ADMITTED_ROUTE and all old gates/costs/quotas/UNKNOWN/seals stay.
-B/C, further old reads, patch-and-continue, retry/reset or successor are not
-admitted. The one next item is an owner route decision after this failure;
-no default R/v4. Any later source-stability investigation/access would require
-new explicit finite authority. See [current status](../project_status.md),
-[actual report](../validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration)
-and [independent review](../validation/p17_m2_input_export_readiness_independent_review.md).
+Historical R/v3 remains **STOP_NO_RETRY**: source PR208/main5b01c13/all-four CI
+preceded activation. Six roles defined,3 launched (public PASS/R0 STOP/shared PASS);
+12 metadata attempts/11 completed hashes/2619248 bytes,12th fstat identity changed,
+member/cause/failed-read bytes UNKNOWN. Later R0/R1 unlaunched; payload0/12/528/18.
+Full failed-role RSS UNKNOWN, actual outer exits1/1; no measured>4GiB result.
+FULL300 paid/1560 unused closed, NEW-only backup PASS. No reread or repaired PASS.
+Result [PR209](https://github.com/keith1117/TopoLab/pull/209)/main85644c4 and all four
+[exact-main CI39399796173 jobs](https://github.com/keith1117/TopoLab/actions/runs/39399796173)
+are complete; merged branches cleaned, worktree retained. Original result-phase
+18.633086s overrun remains; separately granted publication followup335.755696s
+closes without transferring unused264.244304s or retroactively covering overrun.
+Fixed P/17/uniform/science pause,4GiB/independent preflight,
+FULL_V2_OPEN_NO_ADMITTED_ROUTE and all old failures/costs/quotas/UNKNOWN/seals stay.
+The [original report](../validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration)
+and [independent review](../validation/p17_m2_input_export_readiness_independent_review.md)
+retain their historical bytes. No default R/v4; no diagnostic execution now.
 
 The following closed executions are historical; R/v3 has also closed STOP above.
 

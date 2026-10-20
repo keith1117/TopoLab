@@ -61,6 +61,15 @@ Six roles defined,3 launched;12 metadata attempted/11 complete hashes;12th
 fstat identity changed/causeUNKNOWN. Payload0/12/528/18, full failed-role RSSUNKNOWN.
 FULL300 paid/1560 closed; NEW backupPASS. No reread, R/v4 or B/C authority.
 
+R/v3 result publication subsequently completed through PR209/main85644c4 and
+all four exact-main CI39399796173 jobs. Frozen reports keep their earlier
+pending-at-authoring wording; [current status](../project_status.md) and the
+[new diagnosis/recording-repair proposal](../planning/p17_m2_input_failure_diagnostic_repair_proposal.md)/
+[JSON](../planning/p17_m2_input_failure_diagnostic_repair_proposal.json) carry the
+later publication/cost supplement. This is a documents-only, unapproved future
+contract; no new diagnostic, independent review, resource or source acceptance
+is claimed. All earlier failures/closed quotas/seals remain; no R retry or B/C.
+
 ## Numerical and historical release evidence
 
 - [Gate N1 finite-element validation](n1_fem_validation.md)

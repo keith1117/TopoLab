@@ -163,6 +163,16 @@ actual failed result under the predeclared result caps and STOP; no defaultv4,
 further old access or source/protocol mutation. Read the
 [actual supplement](validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration).
 
+Subsequent R/v3 result publication completed through PR209/main85644c4 and
+all-four exact-main CI; original reports stay frozen. Original result-phase
+18.633086s overrun and later separately granted335.755696s verification/cleanup
+remain cost history, with no retroactive permission or remaining transfer.
+The current [failure diagnosis/recording-repair proposal](planning/p17_m2_input_failure_diagnostic_repair_proposal.md)
+and [JSON](planning/p17_m2_input_failure_diagnostic_repair_proposal.json) are a
+**documents-only** commission. Their F/D read/implementation/review/publication
+ceilings and optional log exception are unapproved; no old access, diagnostics,
+R retry or B/C follows. Mandatory document regression/publication below applies.
+
 All four existing CI jobs remain applicable on latest PR head and main:
 quality, frontend, clean-linux-smoke and i1-native-software. Their software
 success cannot admit M2 resources or pass a scientific Gate.

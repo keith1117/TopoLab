@@ -8,6 +8,34 @@ next slice or a development primary describe their historical context.
 Read [project status](project_status.md) for the current boundary and
 [validation reports](validation/README.md) for the authoritative evidence.
 
+## 2026-10-20 — Bounded failure diagnosis / recording repair proposal
+
+Owner commissions documentation only. [Proposal](planning/p17_m2_input_failure_diagnostic_repair_proposal.md)/
+[JSON](planning/p17_m2_input_failure_diagnostic_repair_proposal.json) separate
+historical metadata identity cause D from prospective public recording repair F.
+D may remain UNKNOWN; no lost tuple recovery or new resource theorem is required.
+Strict identity checks stay. Proposed F2h executor/1h new different author,
+D common10min and two90min publication phases are all unapproved. D would read
+only five literal SHA-bound failed receipts and optionally bounded sleep/wake
+records, never the target original. Current old external stat/reads0, code0,
+diagnostic/preflight/R retry/B/C0; no independent execution commissioned here.
+
+Recovery verified clean assigned ec0b at85644c4, same remote main, no open PR,
+PR209 merged and exact-main CI39399796173 four jobs successful. The original
+result overrun18.633086s and separately granted publication followup335.755696s
+are now explicit current-entry supplements; unused264.244304s closed. Frozen
+R/v1/v2/v3 reports/contracts/source and prior history remain unchanged. Keep
+fixed P/17/uniform/science pause,4GiB/independent preflight, all failures/costs/
+quotas/UNKNOWN/seals. No scientific blocker is measured or declared repaired.
+Current document precommit five checks passed:2218 tests/1 selected Linux-only
+skip in661.52s; command wall sum665.510743541s, no relaxed guard/tolerance.
+Existing all-upload guard checks12 reviewed document paths and730 unchanged
+tracked source/contract/report identities. Raw checks/logs stay in external
+software namespace `topolab-m2-failure-contract-20261020T095105Z`; checks.json SHA256
+`c3055ce671f43dd537101a55762da42deb02bb827cd9d337f58503e3d512a711`.
+Publication outcomes are filed in the PR and external software release record;
+next is owner decision, no automatic successor.
+
 ## 2026-10-20 — NEW R/v3 readiness-bound restricted preparation
 
 The owner accepted one new finite attempt after R/v2 zero launch. The
