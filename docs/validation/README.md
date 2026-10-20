@@ -6,12 +6,18 @@ resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
 
+Latest software maintenance: F-only owner grant2026-10-20: [public failure recording repair](p17_m2_input_failure_recording_repair.md)
+and [fresh different-author review](p17_m2_input_failure_recording_repair_independent_review.md).
+Versioned source/new fixtures only, executor2h/reviewer1h plus one90min publication;
+D UNRUN_NOT_AUTHORIZED, no old reads/R retry/B/C. Historical cause/full RSS and
+all costs/quotas/seals remain; complete F software publication and STOP.
+
 Latest completed B4 slice: **B4.51 FAIL_PROCESS_SOURCE_FREEZE**. Its217/404
 checks are post-stop TEXT only, not protocol acceptance; both quotas remain1/1
 consumed with no retry/reset. See the [failed report](b4_51_real_certification_executable_full_resource_preregistration.md).
 Scientific FAIL/fixed P17/uniform, all historical costs/UNKNOWN and seals remain.
 
-Latest software/source preparation slice: [R](p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access)
+Historical R/v1 source preparation: [R](p17_m2_input_export_preparation.md#actual-r-execution-supplement--stopped-before-source-access)
 and [independent review](p17_m2_input_export_preparation_independent_review.md).
 Source PR204/main43ffed0/all-four-CI preceded its first public IO. Fixture fields
 passed; actual109.224s+10 exceeded the immutable20s charge, final serializer exit1:
@@ -66,9 +72,9 @@ all four exact-main CI39399796173 jobs. Frozen reports keep their earlier
 pending-at-authoring wording; [current status](../project_status.md) and the
 [new diagnosis/recording-repair proposal](../planning/p17_m2_input_failure_diagnostic_repair_proposal.md)/
 [JSON](../planning/p17_m2_input_failure_diagnostic_repair_proposal.json) carry the
-later publication/cost supplement. This is a documents-only, unapproved future
-contract; no new diagnostic, independent review, resource or source acceptance
-is claimed. All earlier failures/closed quotas/seals remain; no R retry or B/C.
+later publication/cost supplement. The proposal retains its original documents-only/unapproved snapshot;
+the subsequent F-only owner grant and software report above do not grant D
+or retrospective resource/source acceptance. All earlier failures/closed quotas/seals remain; no R retry or B/C.
 
 ## Numerical and historical release evidence
 

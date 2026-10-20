@@ -2201,3 +2201,21 @@ and [execution report](validation/p17_m2_input_export_billing_revision.md#source
 record the boundary. Old R/v1 paid180/closed1680, all historical gates/costs/
 UNKNOWN/quotas/seals,4GiB and independent preflight remain. B/C and automatic
 successor remain unauthorized; publish this finite zero-launch result and STOP.
+
+## 2026-10-20 — F-only public failure recording repair
+
+The owner separately authorizes only F under the published diagnosis/repair
+proposal, executor2h/fresh different author1h and one90min protected publication.
+Original new fixtures cover failure-stage identities/bytes, retained raw span/
+exits/costs, partial-vs-complete native RSS and source-vs-recorder failures.
+No old input/stat, D/host query, R retry or B/C; historical12th cause/full failed
+RSS stay UNKNOWN. Four existing tools evolve without changing frozen old source
+revisions/contracts/results/costs/quotas/seals. See [F result](validation/p17_m2_input_failure_recording_repair.md)
+and [independent review](validation/p17_m2_input_failure_recording_repair_independent_review.md).
+This one F software publication closes without an automatic successor.
+
+F closeout local checks:2290 passed/1 platform skip after one unchanged-source
+repeat; the first2289 passed/1 failed native cleanup assertion and its662.227495s
+command cost remain. The later own-group disappearance and fresh bounded
+verification do not rewrite that failure. F source/foundation/guards stay frozen;
+normal exact-head PR/main publication is recorded separately, then STOP.

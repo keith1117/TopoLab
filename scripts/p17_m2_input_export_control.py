@@ -18,6 +18,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 ROOT = Path("/Users/keith1117/Documents/TopoLab-data/p17-m2-input-export-preparation-v3")
 IDENTITY = "topolab.v2.p17-m2-input-export-preparation.v3"
+F_IDENTITY = "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1"
 CONTENT_SHA = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
 CLOCK = "functions.exec.Date.now.UTC-seconds"
 # -I excludes script-directory imports. Bind this stdlib-only helper explicitly.
@@ -266,15 +267,19 @@ def plan_checked(path, expected):
 
 
 def bind(plan, role, controller_exit, plan_sha):
+    failure_recording = plan.get("execution_identity") == F_IDENTITY
     base = ROOT / "receipts"
     record_path = base / role / role / "command.json"
     record = json.loads(read(record_path, 4 * 1024 * 1024))
     profile = base / (role + "-controller.time")
     measured = native_recording.native(read(profile, 1024 * 1024).decode(), sys.platform)
     require(
-        controller_exit == 0
-        and record["exit_code"] == 0
-        and record["software_result"] == "PUBLIC_COMMAND_EXIT_OBSERVED"
+        type(controller_exit) is int
+        and (controller_exit == 0 or failure_recording)
+        and (record["exit_code"] == 0 or failure_recording)
+        and record["software_result"] in (
+            ("PUBLIC_COMMAND_EXIT_OBSERVED", "FAIL_PUBLIC_COMMAND") if failure_recording
+            else ("PUBLIC_COMMAND_EXIT_OBSERVED",))
         and record["cleanup"]["group_gone"] is True,
         "observed role success and full exit",
     )
@@ -303,6 +308,7 @@ def bind(plan, role, controller_exit, plan_sha):
         expected_role=role,
         expected_argv=resolved(plan["roles"][role]["argv"], plan_sha),
         platform=sys.platform,
+        **({"failure_recording": True} if failure_recording else {}),
     )
     rss = reconciled["inner_empirical_RSS_bytes"] + measured["rss_bytes"]
     require(0 < rss <= 4294967296, "recorded role RSS envelope")
@@ -384,10 +390,11 @@ def supervise(plan, role, plan_sha):
     This receipt deliberately never certifies its own future exit.
     """
     started = time.monotonic()
+    failure_recording = plan.get("execution_identity") == F_IDENTITY
     base = ROOT / "receipts"
     base.mkdir(parents=True, exist_ok=True)
     pending = {
-        "execution_identity": IDENTITY,
+        "execution_identity": F_IDENTITY if failure_recording else IDENTITY,
         "role": role,
         "plan_sha256": plan_sha,
         "frozen_FULL_seconds": CAPS[role],
@@ -399,7 +406,8 @@ def supervise(plan, role, plan_sha):
         "status": "PENDING_BEFORE_DISPATCH",
     }
     write(base / (role + "-pending.json"), pending)
-    ingest_external(plan, plan_sha, closing=role == "shared-closeout")
+    if not failure_recording:
+        ingest_external(plan, plan_sha, closing=role == "shared-closeout")
     profile = base / (role + "-controller.time")
     log = base / (role + "-controller.log")
     write(
@@ -418,6 +426,9 @@ def supervise(plan, role, plan_sha):
         "--role",
         role,
     ]
+    if failure_recording:
+        argv = [sys.executable, "-I", str(Path(__file__).resolve()), "public-payload",
+                "--public-root", str(ROOT), "--fixture-exit", str(plan["fixture_exit"])]
     with log.open("xb") as stream:
         child = subprocess.Popen(
             ["/usr/bin/time", "-l", "-o", str(profile), *argv],
@@ -467,12 +478,29 @@ def supervise(plan, role, plan_sha):
             "wait4": wait4,
         },
     )
-    require(child.returncode == 0 and timer_peak > 0, "outer timer/controller exit")
-    result = bind(plan, role, child.returncode, plan_sha)
+    try:
+        require(timer_peak > 0 and (child.returncode == 0 or failure_recording),
+                "outer timer/controller exit")
+        result = bind(plan, role, child.returncode, plan_sha)
+    except (ValueError, KeyError, TypeError, OSError, OverflowError) as error:
+        # A failed controller still has an actual exit, native timer and supervisor.
+        # Persist these before the caller observes STOP; do not demand success first.
+        result = {"status": "STOP_NO_RETRY", "controller_exit": child.returncode,
+                  "conservative_RSS_bytes": None, "domain_status": "STOP",
+                  "secondary_failures": [
+                      {"stage": "binding", "type": type(error).__name__, "reason": str(error)}
+                  ], "missing": "UNKNOWN_NOT_ZERO"}
+    if child.returncode != 0:
+        result.setdefault("primary_failure", {"stage": "payload/controller", "type": "ExitCode",
+                                               "reason": str(child.returncode)})
+        result["domain_status"] = "STOP"
     self_peak = int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
     if sys.platform != "darwin":
         self_peak *= 1024
     result.update(
+        execution_identity=F_IDENTITY if failure_recording else IDENTITY,
+        schema="topolab.v2.m2-input-failure-supervisor.v1" if failure_recording
+               else "topolab.v2.m2-input-export-supervisor.v2",
         outer_timer_exit=child.returncode,
         outer_timer_native_rss_bytes=timer_peak,
         supervisor_rss_after_verification_bytes=self_peak,
@@ -481,9 +509,13 @@ def supervise(plan, role, plan_sha):
         full_role_charge="EXTERNAL_FULL_WALL_PLUS10_REQUIRED",
         supervisor_pid=os.getpid(),
     )
-    result["conservative_RSS_bytes"] += timer_peak + self_peak
-    require(result["conservative_RSS_bytes"] <= 4294967296, "whole registered RSS envelope")
-    require(result["supervisor_observed_wall_seconds"] + 10 <= CAPS[role], "complete role time")
+    if result["conservative_RSS_bytes"] is not None:
+        result["conservative_RSS_bytes"] += timer_peak + self_peak
+    if (result["conservative_RSS_bytes"] is not None
+            and result["conservative_RSS_bytes"] > 4294967296
+            or result["supervisor_observed_wall_seconds"] + 10 > CAPS[role]):
+        result.setdefault("secondary_failures", []).append("whole RSS/time cap exceeded")
+        result["status"] = "STOP_NO_RETRY"
     write(base / (role + "-supervisor.json"), result)
     # Retain final sample after actual serialization/flush; caller still observes exit.
     write(
@@ -502,28 +534,48 @@ def supervise(plan, role, plan_sha):
 
 
 
-def resource_inputs(plan, role, plan_sha):
+def resource_inputs(plan, role, plan_sha, *, available=None):
     """Read only this NEW role's literal recording outputs, never old payloads."""
     folder = ROOT / "receipts" / role / role
-    record = json.loads(read(folder / "command.json", 4 * 1024 * 1024))
+    failures = []
+
+    def collect(path, cap=1048576, *, allow_empty=False):
+        try:
+            raw = read(path, cap, allow_empty=allow_empty)
+            if available is not None:
+                available[str(path.relative_to(ROOT))] = {
+                    "byte_size": len(raw), "sha256": digest(raw)}
+            return raw
+        except (ValueError, OSError) as error:
+            failures.append(f"{path.name}: {type(error).__name__}: {error}")
+            return None
+
+    # Keep the independent outer profile even if an inner/helper record is absent.
+    outer = collect(ROOT / "receipts" / (role + "-controller.time"))
+    command = collect(folder / "command.json", 4 * 1024 * 1024)
+    profile = collect(folder / "command.time")
+    log = collect(folder / "command.log", 16 * 1024 * 1024, allow_empty=True)
+    require(command is not None, "UNKNOWN_MISSING_INNER_RECORD " + "; ".join(failures))
+    record = json.loads(command)
     helpers = {}
     require(len(record["helpers"]) <= 4096, "bounded helper inventory")
     for index, item in enumerate(record["helpers"]):
         name = f"sampler-{index}.time"
         require(item["profile"] == name, "literal registered helper")
-        helpers[name] = read(folder / name, 1024 * 1024)
+        helpers[name] = collect(folder / name)
+    require(not failures, "UNKNOWN_MISSING_NATIVE_COMPONENT " + "; ".join(failures))
     return {
         "inner_evidence": {
             "record": record,
-            "profile": read(folder / "command.time", 1024 * 1024),
-            "log": read(folder / "command.log", allow_empty=True),
+            "profile": profile,
+            "log": log,
             "helper_profiles": helpers,
             "expected_role": role,
             "expected_argv": resolved(plan["roles"][role]["argv"], plan_sha),
             "platform": sys.platform,
         },
         "native_profiles": {
-            "outer-controller": read(ROOT / "receipts" / (role + "-controller.time"), 1048576)
+            "outer-controller": outer,
         },
     }
 
@@ -623,6 +675,7 @@ def backup_evidence(*, public_fixture=False):
 def finish_record(plan, role, plan_sha):
     """Retain available serializer RSS BEFORE acceptance; actual exit is external."""
     base = ROOT / "receipts"
+    failure_recording = plan.get("execution_identity") == F_IDENTITY
     own = {
         "pid": os.getpid(), "kind": "self_high_water",
         "statistics_source": "resource.getrusage", "rss_unit": "bytes",
@@ -630,8 +683,10 @@ def finish_record(plan, role, plan_sha):
         "samples_bytes": [native_recording._rss_self(), native_recording._rss_self()],
     }
     completion = {
-        "schema": "topolab.v2.m2-input-export-exit.v2",
-        "execution_identity": IDENTITY, "role": role, "plan_sha256": plan_sha,
+        "schema": "topolab.v2.m2-input-failure-completion.v1" if failure_recording
+                  else "topolab.v2.m2-input-export-exit.v2",
+        "execution_identity": F_IDENTITY if failure_recording else IDENTITY,
+        "role": role, "plan_sha256": plan_sha,
         "frozen_FULL_seconds": CAPS[role], "clock_domain": CLOCK,
         "clock_resolution_seconds": 0.001, "status": "PENDING_EXTERNAL_EXIT",
         **{key: plan[key] for key in (
@@ -642,14 +697,55 @@ def finish_record(plan, role, plan_sha):
     packet = {"pending": {}, "completion": completion, "resourceEvidence": {
         "status": "STOP_NO_RETRY", "reason": "UNKNOWN_INCOMPLETE_ROLE_EVIDENCE"}}
     success = False
+    secondary = []
+    available = {}
+    # Collect independent components even if the successful supervisor receipt
+    # or another component is absent. No reread, retry or old source access.
+    for name in ("pending", "supervisor", "last-rss", "outer-timer-exit"):
+        try:
+            raw = read(base / (role + "-" + name + ".json"))
+            value = json.loads(raw)
+            require(isinstance(value, dict), "outer record must be an object")
+            if name == "outer-timer-exit":
+                require(isinstance(value.get("wait4"), dict), "wait4 record must be an object")
+            if name == "supervisor":
+                require(isinstance(value.get("secondary_failures", []), list),
+                        "secondary failures must be a list")
+            available[name] = value
+            if name == "pending":
+                packet["pending"] = available[name]
+                completion["pending_sha256"] = digest(raw)
+        except (ValueError, KeyError, TypeError, OSError, OverflowError) as error:
+            secondary.append({"stage": name, "type": type(error).__name__, "reason": str(error)})
+    sup = available.get("supervisor", {})
+    completion["primary_failure"] = sup.get("primary_failure")
+    completion["domain_status"] = sup.get("domain_status", "UNKNOWN")
+    completion["available_outer_records"] = available
+    completion["available_native_evidence"] = {}
+    evidence = None
     try:
-        raw = read(base / (role + "-pending.json"))
-        packet["pending"] = json.loads(raw)
-        completion["pending_sha256"] = digest(raw)
-        sup = json.loads(read(base / (role + "-supervisor.json")))
-        last = json.loads(read(base / (role + "-last-rss.json")))
-        timer = json.loads(read(base / (role + "-outer-timer-exit.json")))["wait4"]
-        evidence = resource_inputs(plan, role, plan_sha)
+        evidence = resource_inputs(plan, role, plan_sha,
+                                   available=completion["available_native_evidence"])
+    except (ValueError, KeyError, TypeError, OSError, OverflowError) as error:
+        secondary.append({"stage": "inner/native", "type": type(error).__name__,
+                          "reason": str(error)})
+    # Preserve wait4 and supervisor peaks independently of the inner receipt.
+    if "outer-timer-exit" in available and "wait4" in available["outer-timer-exit"]:
+        timer = available["outer-timer-exit"]["wait4"]
+        completion["resource_components"].append(
+            {"pid": timer.get("pid"), "kind": "wait4", "platform": sys.platform,
+             "record": timer})
+    if "supervisor_pid" in sup and "last-rss" in available:
+        completion["resource_components"].append(
+            {"pid": sup["supervisor_pid"], "kind": "self_high_water",
+             "statistics_source": "resource.getrusage", "rss_unit": "bytes",
+             "phases": ["preflush", "postflush"],
+             "samples_bytes": [sup.get("supervisor_rss_after_verification_bytes"),
+                               available["last-rss"].get("rss_bytes")]})
+    try:
+        require(not secondary and evidence is not None, "UNKNOWN_INCOMPLETE_ROLE_EVIDENCE")
+        timer = available["outer-timer-exit"]["wait4"]
+        last = available["last-rss"]
         controller_pid = evidence["inner_evidence"]["record"]["controller_pid"]
         outer_raw = evidence["native_profiles"]["outer-controller"]
         completion["resource_components"] = [
@@ -667,7 +763,7 @@ def finish_record(plan, role, plan_sha):
         write(base / (role + "-finalizer-preflush.json"), completion)
         own["samples_bytes"][1] = native_recording._rss_self()
         packet["resourceEvidence"] = independent.audit_v2_resource_components(
-            completion, **evidence
+            completion, **evidence, failure_recording=failure_recording,
         )
         write(base / (role + "-completion.json"), packet)
         if role == "shared-closeout":
@@ -679,13 +775,24 @@ def finish_record(plan, role, plan_sha):
         canonical(packet)
         own["samples_bytes"][1] = native_recording._rss_self()
         packet["resourceEvidence"] = independent.audit_v2_resource_components(
-            completion, **evidence
+            completion, **evidence, failure_recording=failure_recording,
         )
         success = packet["resourceEvidence"]["status"] == "PENDING_EXTERNAL_EXIT"
     except (ValueError, KeyError, TypeError, OSError, OverflowError) as error:
         own["samples_bytes"][1] = native_recording._rss_self()
+        completion["status"] = "FAILED_INTERNAL_COMPLETION"
         packet["failure"] = {"type": type(error).__name__, "reason": str(error),
                              "status": "STOP_NO_RETRY", "missing": "UNKNOWN_NOT_ZERO"}
+        secondary.append({"stage": "completion", "type": type(error).__name__,
+                          "reason": str(error)})
+        packet["resourceEvidence"] = independent.audit_v2_resource_components(
+            completion, **(evidence or {}), failure_recording=failure_recording,
+        )
+        # Preserve the independent resource result verbatim. The failed terminal
+        # binding closes role acceptance without inventing missing RSS facts.
+    packet["primary_failure"] = completion["primary_failure"]
+    completion["secondary_failures"] = [*sup.get("secondary_failures", []), *secondary]
+    packet["secondary_failures"] = completion["secondary_failures"]
     # Serialization and stdout occur inside the measured final external call.
     print(canonical(packet).decode(), end="", flush=True)
     return 0 if success else 1
@@ -711,16 +818,81 @@ def source_gate(plan, role, plan_sha):
                 "independent NEW public IO prerequisite")
 
 
+def public_entry(mode, root, code):
+    """Only fixed new public exit fixtures; no R plan/role/input can be supplied."""
+    global ROOT, CAPS
+    require(root is not None and root.is_absolute()
+            and root.parts[:3] == ("/", "private", "tmp") and len(root.parts) > 3
+            and all(part not in (".", "..") for part in root.parts),
+            "F output must be a literal NEW /private/tmp directory")
+    # Reject symlink ancestors before accessing even a plan. Historical DATA
+    # roots are rejected lexically above, without stat, resolve or read.
+    parent = os.open("/", os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        for part in root.parts[1:-1]:
+            child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
+            os.close(parent)
+            parent = child
+    finally:
+        os.close(parent)
+    ROOT, CAPS = root, {"public-fixture": 120}
+    role = "public-fixture"
+    argv = [sys.executable, "-I", "-c", f"raise SystemExit({code})"]
+    entry = [sys.executable, "-I", str(Path(__file__).resolve())]
+    if mode == "public-plan":
+        ROOT.mkdir(exist_ok=False)
+        activation = round(time.time() * 1000) / 1000
+        deadline = datetime.fromtimestamp(activation + 2700, UTC).isoformat(
+            timespec="milliseconds").replace("+00:00", "Z")
+        plan = {"execution_identity": F_IDENTITY, "fixture_exit": code,
+                "roles": {role: {"argv": argv}},
+                "actor_activation_UTC_seconds": activation, "actor_window_seconds": 2700,
+                "actor_deadlines_UTC": {"exporter": deadline, "independent": deadline},
+                "external_argv": {role: [
+                    [*entry, command, "--public-root", str(ROOT), "--fixture-exit", str(code)]
+                    for command in ("public-supervise", "public-finalize")]}}
+        write(ROOT / "public-plan.json", plan)
+        print(canonical({"execution_identity": F_IDENTITY, "status": "PUBLIC_FIXTURE_PLAN_ONLY",
+                         "plan_sha256": digest(canonical(plan))}).decode(), end="", flush=True)
+        return 0
+    else:
+        fd = os.open(ROOT, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        os.close(fd)
+        plan = json.loads(read(ROOT / "public-plan.json"))
+    require(plan["execution_identity"] == F_IDENTITY and plan["fixture_exit"] == code
+            and plan["roles"] == {role: {"argv": argv}}, "F fixed public plan differs")
+    plan_sha = digest(canonical(plan))
+    if mode == "public-payload":
+        record = native_recording.invoke(ROOT / "receipts" / role, role, argv,
+                                         timeout=100, limit_bytes=4294967296)
+        return 0 if record["software_result"] == "PUBLIC_COMMAND_EXIT_OBSERVED" else 1
+    if mode == "public-finalize":
+        return finish_record(plan, role, plan_sha)
+    result = supervise(plan, role, plan_sha)
+    pending = json.loads(read(ROOT / "receipts" / (role + "-pending.json")))
+    print(canonical({"pending": pending, "diagnostic": result}).decode(), end="", flush=True)
+    return 1 if result.get("primary_failure") or result["status"] == "STOP_NO_RETRY" else 0
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("mode", choices=("plan", "run", "bind", "supervise", "finalize", "archive"))
+    p.add_argument("mode", choices=("plan", "run", "bind", "supervise", "finalize", "archive",
+                                    "public-plan", "public-supervise", "public-finalize",
+                                    "public-payload"))
     p.add_argument("--plan", type=Path)
     p.add_argument("--plan-sha")
     p.add_argument("--role", choices=tuple(CAPS))
     p.add_argument("--activation-utc-seconds", type=float)
     p.add_argument("--ci-evidence", type=Path)
     p.add_argument("--controller-exit", type=int)
+    p.add_argument("--public-root", type=Path)
+    p.add_argument("--fixture-exit", type=int, choices=(0, 1), default=1)
     args = p.parse_args()
+    if args.mode.startswith("public-"):
+        require(args.plan is None and args.plan_sha is None and args.role is None,
+                "F public entry cannot accept an R plan or role")
+        return public_entry(args.mode, args.public_root, args.fixture_exit)
+    require(False, "historical R execution is closed; F public fixtures only")
     if args.mode == "plan":
         require(args.activation_utc_seconds is not None and args.ci_evidence is not None,
                 "readiness activation and actual CI evidence required")

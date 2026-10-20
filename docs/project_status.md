@@ -5,25 +5,27 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current slice: failure diagnosis / minimal recording repair proposal only
+## Current slice: F-only public software complete; no automatic successor
 
-The owner commissions only the [finite proposal](planning/p17_m2_input_failure_diagnostic_repair_proposal.md)
-and [JSON](planning/p17_m2_input_failure_diagnostic_repair_proposal.json):
-**PROPOSED_NOT_AUTHORIZED**. Current old external stat/read set is empty; no code,
-OS query, diagnostic preflight, R retry or B/C. D may leave the12th identity
-change's member/cause UNKNOWN. F would preserve failure-stage tuples/byte counts,
-known wall/exits/partial RSS and original/secondary errors using new fixtures,
-without weakening source guards or converting a failed payload to PASS.
+Implementation/different-author review and local five checks are complete:
+2290 passed/1 platform skip on unchanged reviewed source. The first native
+cleanup assertion failure remains recorded, not repaired by the successful repeat.
+Normal exact-head PR/main all-four CI publication is the sole remaining phase;
+its final observation is filed in the associated PR/release record.
 
-Future proposed ceilings: F executor2h/new different author1h; D common10min;
-source and result regression/protected publication90min each. Executor maximum
-5h10m, independent1h10m; diagnostic FULL600 overlaps the author view, no double
-count. All unapproved. Proposed D would permit five exact hash-bound failed receipts
-and one optional105s-window sleep/wake query, never the target original file,
-other source, profiles, old backup or seals. Missing historical evidence may
-remain UNKNOWN; no new kernel/allocation proof is requested. F-only closes in one PR at executor3h30m/independent1h, with D and second
-publication omitted. Any later grant must choose F only or F plus that exact
-bounded D scope with a fresh reviewer.
+Owner expressly selects F only from the [published proposal](planning/p17_m2_input_failure_diagnostic_repair_proposal.md)
+and [JSON](planning/p17_m2_input_failure_diagnostic_repair_proposal.json).
+Executor2h preparation/new different author1h, then one90min regression/protected
+publication. F records failing-read tuples/bytes, available native RSS/exits,
+validated whole-wall/cost lower bounds and separate primary/secondary errors.
+Evidence completeness cannot convert a failed payload to PASS. Strict source
+predicates and4GiB/independent preflight remain. See the [execution report](validation/p17_m2_input_failure_recording_repair.md)
+and [independent review](validation/p17_m2_input_failure_recording_repair_independent_review.md).
+No old external stat/read, D, D/environment-identity/power query, R retry or B/C. D stays
+UNRUN_NOT_AUTHORIZED; historical12th identity cause and failed complete RSS stay
+UNKNOWN. One F software PR/publication then STOP; no automatic successor.
+Later source preparation would need a separate source-stability/input/cost
+contract and explicit owner decision; no expired grant/closed balance transfers.
 
 ## NEW R/v3 closed STOP during metadata registration
 

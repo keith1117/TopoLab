@@ -11,17 +11,22 @@ accepted by the owner in the reassessment conversation. It changes delivery
 governance; it is not a new numerical experiment contract, scientific Gate or
 budget authorization.
 
-Current owner scope (2026-10-20): **documentation only** for the
-[bounded failure diagnosis/recording-repair proposal](p17_m2_input_failure_diagnostic_repair_proposal.md)
-and [JSON](p17_m2_input_failure_diagnostic_repair_proposal.json),
-PROPOSED_NOT_AUTHORIZED. Separate D's historical metadata-identity question from
-F's fixture-only failure recording repair. Missing historical tuples/cause may
-remain UNKNOWN without blocking public F; strict source guards are unchanged.
-Proposed new caps: F2h executor/1h fresh different author; D common10min;
-F-only one90min publication; full F/D adds one90min result publication.
-None grants execution, old access,
-R retry, formal B/C or a successor. The only next item is the owner's decision
-on F only or F plus the exact five-receipt/optional bounded-log D exception.
+F public implementation/review and local five checks complete:2290 passed/1 platform skip.
+Normal exact-head PR/main all-four CI publication remains at report authoring;
+finish that one phase and STOP, without restarting F.
+Current owner scope (2026-10-20): **F only** is expressly authorized under the
+[bounded proposal](p17_m2_input_failure_diagnostic_repair_proposal.md) and
+[JSON](p17_m2_input_failure_diagnostic_repair_proposal.json); their original
+PROPOSED snapshot retains bytes. F repairs failure recording with versioned
+source/new public fixtures on M2 and existing CI, with a fresh different author.
+Executor preparation2h, independent1h, then one90min regression/protected
+publication; no D window or second publication. See the [F execution report](../validation/p17_m2_input_failure_recording_repair.md)
+and [independent review](../validation/p17_m2_input_failure_recording_repair_independent_review.md).
+D stays UNRUN_NOT_AUTHORIZED; old metadata cause/RSS remain UNKNOWN.
+Source guards,4GiB/independent preflight and all historical contracts/costs/
+quotas/seals remain. No old source/stat/read, D/environment-identity/power query, R retry, B/C or automatic
+successor. Complete F-only software publication and STOP; any later source
+preparation needs a separate source-stability/input/cost contract and owner grant.
 
 Historical R/v3 remains **STOP_NO_RETRY**: source PR208/main5b01c13/all-four CI
 preceded activation. Six roles defined,3 launched (public PASS/R0 STOP/shared PASS);

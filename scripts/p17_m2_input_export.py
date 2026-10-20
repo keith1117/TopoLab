@@ -87,8 +87,47 @@ class Reader:
     def __init__(self, root, journal=None):
         self.root, self.journal = Path(root).absolute(), journal
         self.rows, self.total, self.seen, self.attempts = [], {}, set(), []
+        self.failures = []
 
     def read(self, relative, limit, *, expected=None, size=None, group="metadata", total=None):
+        facts = {
+            "schema": "topolab.v2.m2-input-read-failure.v1",
+            "execution_identity": "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1",
+            "attempt_ordinal": len(self.attempts) + 1,
+            "path": relative, "stage": "path_validation",
+            "declared": None, "before": None, "after": None,
+            "returned_bytes": None, "changed_fields": [],
+        }
+        self._read_facts = facts
+        try:
+            return self._read(relative, limit, expected=expected, size=size,
+                              group=group, total=total)
+        except (ValueError, OSError) as error:
+            facts.update(status="STOP_NO_RETRY", exception_type=type(error).__name__,
+                         primary_reason=str(error), unavailable="UNKNOWN_NOT_ZERO")
+            for left, right in (("declared", "before"), ("before", "after")):
+                if facts[left] is not None and facts[right] is not None:
+                    facts["changed_fields"] = [key for key in facts[left]
+                                               if facts[left][key] != facts[right][key]]
+                    if facts["changed_fields"]:
+                        break
+            self.failures.append(facts)
+            if self.journal:
+                try:
+                    with self.journal.open("ab") as stream:
+                        stream.write(canonical(facts))
+                        stream.flush()
+                        os.fsync(stream.fileno())
+                except OSError as secondary:
+                    facts["recording_error"] = f"{type(secondary).__name__}: {secondary}"
+                    error.add_note(facts["recording_error"])
+            raise
+
+    def _identity(self, stage, value):
+        self._read_facts[stage] = {key: getattr(value, key) for key in
+                                  ("st_dev", "st_ino", "st_size", "st_mtime_ns")}
+
+    def _read(self, relative, limit, *, expected=None, size=None, group="metadata", total=None):
         need(isinstance(relative, str) and relative not in self.seen, "unregistered reread")
         self.seen.add(relative)
         parts = Path(relative).parts
@@ -103,6 +142,7 @@ class Reader:
                 stream.write(canonical({"attempt": relative}))
                 stream.flush()
                 os.fsync(stream.fileno())
+        self._read_facts["stage"] = "declared_stat"
         parent = os.open("/", os.O_RDONLY | os.O_DIRECTORY)
         try:
             for part in (*self.root.parts[1:], *parts[:-1]):
@@ -110,6 +150,7 @@ class Reader:
                 os.close(parent)
                 parent = child
             declared = os.stat(parts[-1], dir_fd=parent, follow_symlinks=False)
+            self._identity("declared", declared)
             need(
                 stat.S_ISREG(declared.st_mode) and 0 < declared.st_size <= limit,
                 "file byte cap/type",
@@ -119,19 +160,26 @@ class Reader:
                 total is None or self.total.get(group, 0) + declared.st_size <= total,
                 "aggregate byte cap before open",
             )
+            self._read_facts["stage"] = "open_nofollow"
             fd = os.open(parts[-1], os.O_RDONLY | os.O_NOFOLLOW, dir_fd=parent)
         finally:
             os.close(parent)
         try:
+            self._read_facts["stage"] = "before_read_identity"
             before = os.fstat(fd)
+            self._identity("before", before)
             need(
                 (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns)
                 == (declared.st_dev, declared.st_ino, declared.st_size, declared.st_mtime_ns),
                 "source replaced before read",
             )
+            self._read_facts["stage"] = "bounded_read"
             with os.fdopen(fd, "rb", closefd=False) as stream:
                 raw = stream.read(limit + 1)
+            self._read_facts["returned_bytes"] = len(raw)
+            self._read_facts["stage"] = "after_read_identity"
             after = os.fstat(fd)
+            self._identity("after", after)
             need(
                 (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns)
                 == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns),
@@ -139,6 +187,7 @@ class Reader:
             )
         finally:
             os.close(fd)
+        self._read_facts["stage"] = "read_size_hash_caps"
         row = ref(relative, raw)
         self.rows.append(row)
         if self.journal:

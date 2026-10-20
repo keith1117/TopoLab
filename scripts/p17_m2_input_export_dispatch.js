@@ -3,9 +3,18 @@
  * Root may append orchestration after the independent initial-source snapshot.
  */
 
-function finishExternal(pending, completion, events, resourceEvidence, expectedPendingSha256) {
-  const identity = "topolab.v2.p17-m2-input-export-preparation.v3";
-  const caps = {
+function finishExternal(pending, completion, events, resourceEvidence, expectedPendingSha256,
+  failureRecording = false) {
+  const object = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+  const pendingIsObject = object(pending), completionIsObject = object(completion);
+  pending = pendingIsObject ? pending : {};
+  completion = completionIsObject ? completion : {};
+  const eventsAreList = Array.isArray(events);
+  events = eventsAreList ? events : [];
+  const identity = failureRecording
+    ? "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1"
+    : "topolab.v2.p17-m2-input-export-preparation.v3";
+  const caps = failureRecording ? { "public-fixture": 120 } : {
     "independent-public-check": 120,
     "exporter-r0": 120,
     "independent-r0": 120,
@@ -15,7 +24,8 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
   };
   const cap = caps[pending.role];
   const result = {
-    schema: "topolab.v2.m2-input-export-exit.v2",
+    schema: failureRecording ? "topolab.v2.m2-input-failure-exit.v1"
+      : "topolab.v2.m2-input-export-exit.v2",
     execution_identity: identity,
     role: pending.role,
     plan_sha256: pending.plan_sha256,
@@ -28,7 +38,7 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
     T1: null,
     whole_wall_seconds: null,
     raw_tool_events: events,
-    actual_exit_codes: events.map((event) => event.exit_code ?? null),
+    actual_exit_codes: events.map((event) => object(event) ? event.exit_code ?? null : null),
     RSS_envelope_bytes: resourceEvidence?.RSS_envelope_bytes ?? null,
     RSS_components_bytes: resourceEvidence?.RSS_components_bytes ?? null,
     inner_minimum_charge_seconds: resourceEvidence?.inner_minimum_charge_seconds ?? null,
@@ -39,6 +49,10 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
     source_successor_admitted: false,
     B_C_admission: false,
     a_priori_allocation_guarantee: false,
+    evidence_complete: false,
+    domain_status: "STOP",
+    primary_failure: completion.primary_failure ?? null,
+    secondary_failures: completion.secondary_failures ?? [],
   };
   function require(condition, message) {
     if (!condition) throw new Error(message);
@@ -49,9 +63,10 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
     return value;
   }
   try {
+    require(pendingIsObject, "pending must be an object");
     require(Number.isInteger(cap) && /^[0-9a-f]{64}$/.test(pending.plan_sha256),
       "unregistered role/plan");
-    for (const record of [pending, completion]) {
+    for (const record of [pending]) {
       require(record.execution_identity === identity && record.role === pending.role
         && record.plan_sha256 === pending.plan_sha256 && record.frozen_FULL_seconds === cap,
       "v3 identity/plan/immutable FULL differs");
@@ -59,15 +74,9 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
         && record.clock_resolution_seconds === 0.001,
       "unfrozen external clock identity/resolution");
     }
-    require(completion.status === "PENDING_EXTERNAL_EXIT"
-      && /^[0-9a-f]{64}$/.test(expectedPendingSha256)
-      && completion.pending_sha256 === expectedPendingSha256,
-    "internal terminal cannot certify future exit");
-    require(events.length > 0, "UNKNOWN_MISSING_ACTUAL_OUTER_EVENT");
+    require(eventsAreList && events.length > 0 && events.every(object),
+      "UNKNOWN_MISSING_OR_MALFORMED_ACTUAL_OUTER_EVENT");
     const actor = validateActorWindow(pending);
-    const completedActor = validateActorWindow(completion);
-    require(JSON.stringify(completedActor) === JSON.stringify(actor),
-      "completion actor window differs");
     result.actor_activation_UTC_seconds = actor.activation;
     result.actor_window_seconds = 2700;
     result.actor_deadlines_UTC = pending.actor_deadlines_UTC;
@@ -79,8 +88,6 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
     "actual full role lies outside immutable actor window");
     const whole = result.T1 - result.T0;
     require(whole >= 0, "outer clock regression");
-    result.whole_wall_seconds = whole;
-    result.known_cost_lower_bound_seconds = Math.max(cap, Math.ceil(whole + 10));
     let previousEnd = result.T0;
     const ids = new Set();
     for (const event of events) {
@@ -98,19 +105,45 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
       require(Array.isArray(event.argv) && event.argv.length > 0
         && event.argv.every((word) => typeof word === "string"),
       "external argv missing");
-      require(event.complete === true && Number.isInteger(event.exit_code),
-        "UNKNOWN_MISSING_ACTUAL_FINAL_EXIT");
       previousEnd = end;
     }
     if (pending.external_argv !== undefined) {
       require(JSON.stringify(pending.external_argv) === JSON.stringify(events.map((e) => e.argv)),
         "external literal argv differs");
     }
+    result.whole_wall_seconds = whole;
+    result.known_cost_lower_bound_seconds = Math.max(cap, Math.ceil(whole + 10));
+    if (typeof result.inner_minimum_charge_seconds === "number"
+        && Number.isFinite(result.inner_minimum_charge_seconds)
+        && result.inner_minimum_charge_seconds >= 0) {
+      result.known_cost_lower_bound_seconds = Math.max(result.known_cost_lower_bound_seconds,
+        Math.ceil(result.inner_minimum_charge_seconds));
+    }
+    require(events.every((event) => event.complete === true && Number.isInteger(event.exit_code)),
+      "UNKNOWN_MISSING_ACTUAL_FINAL_EXIT");
+    require(completionIsObject, "completion must be an object");
+    const completedActor = validateActorWindow(completion);
+    require(JSON.stringify(completedActor) === JSON.stringify(actor),
+      "completion actor window differs");
+    for (const key of ["execution_identity", "role", "plan_sha256", "frozen_FULL_seconds",
+      "clock_domain", "clock_resolution_seconds"]) {
+      require(completion[key] === pending[key], "completion identity differs");
+    }
+    require(completion.status === "PENDING_EXTERNAL_EXIT"
+      && /^[0-9a-f]{64}$/.test(expectedPendingSha256)
+      && completion.pending_sha256 === expectedPendingSha256,
+    "internal terminal cannot certify future exit");
     // The Python independent checker runs INSIDE the measured finalizer. It
     // reconciles raw profile bytes and inner receipt details, never producer PASS.
     require(resourceEvidence?.status === "PENDING_EXTERNAL_EXIT"
       && resourceEvidence.full_role_evidence_accepted === false,
     resourceEvidence?.reason ?? "UNKNOWN_MISSING_INDEPENDENT_RESOURCE_EVIDENCE");
+    if (failureRecording) {
+      require(resourceEvidence.evidence_complete === true
+        && Number.isInteger(resourceEvidence.inner_actual_exit_code)
+        && Array.isArray(resourceEvidence.actual_component_exit_codes),
+      "UNKNOWN_INCOMPLETE_INDEPENDENT_RESOURCE_EVIDENCE");
+    }
     for (const key of ["execution_identity", "role", "plan_sha256", "pending_sha256",
       "frozen_FULL_seconds"]) {
       require(resourceEvidence[key] === completion[key], "independent resource identity differs");
@@ -121,13 +154,22 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
     const minimum = number(resourceEvidence.inner_minimum_charge_seconds);
     result.known_cost_lower_bound_seconds = Math.max(cap, Math.ceil(whole + 10),
       Math.ceil(minimum));
-    require(result.actual_exit_codes.every((exit) => exit === 0),
-      "actual final serializer/outer exit nonzero");
     require(completion.cleanup?.group_gone === true,
       "UNKNOWN_INCOMPLETE_GROUP_CLEANUP");
     require(Math.max(whole + 10, minimum) <= cap,
       "FAIL_FULL_NAMED_WALL_CHARGE_BINDING");
-    result.status = "PASS_R_V3_FULL_ROLE";
+    result.evidence_complete = true;
+    result.missing_evidence_cost = null;
+    require(result.actual_exit_codes.every((exit) => exit === 0),
+      "actual final serializer/outer exit nonzero");
+    if (failureRecording) {
+      require(resourceEvidence.evidence_complete === true
+        && resourceEvidence.inner_actual_exit_code === 0
+        && (resourceEvidence.actual_component_exit_codes ?? []).every((code) => code === 0)
+        && completion.domain_status !== "STOP", "payload/domain failure");
+    }
+    result.status = failureRecording ? "PASS_PUBLIC_SOFTWARE" : "PASS_R_V3_FULL_ROLE";
+    result.domain_status = "PASS_PUBLIC_SOFTWARE";
     result.reason = null;
     result.missing_evidence_cost = null;
     result.full_role_evidence_accepted = true;
@@ -137,7 +179,11 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
   return result;
 }
 
-if (typeof module !== "undefined") module.exports = { finishExternal };
+function finishExternalF(pending, completion, events, resourceEvidence, expectedPendingSha256) {
+  return finishExternal(pending, completion, events, resourceEvidence, expectedPendingSha256, true);
+}
+
+if (typeof module !== "undefined") module.exports = { finishExternal, finishExternalF };
 
 function validateActorWindow(context) {
   const activation = context.actor_activation_UTC_seconds;

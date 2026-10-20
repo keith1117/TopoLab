@@ -828,3 +828,441 @@ def test_trusted_JS_boundary_matches_raw_gap_cap_and_actual_exit() -> None:
     assert results[0]["status"] == "PASS_R_V3_FULL_ROLE"
     assert all(result["status"] == "STOP_NO_RETRY" for result in results[1:])
     assert results[2]["RSS_envelope_bytes"] == 550
+
+
+@pytest.mark.parametrize("damage", ["failed_completion", "missing_status", "missing_completion"])
+def test_failure_recording_valid_raw_span_survives_internal_failure(damage: str) -> None:
+    """Raw endpoints are the oracle, not an internal completion's PASS flag."""
+    pending, completion, events, inner = full_v2_subject()
+    events[-1].update(start_seconds=1017.0, end_seconds=1017.25, wall_seconds=0.25,
+                      exit_code=1)
+    if damage == "failed_completion":
+        completion["status"] = "FAILED_INTERNAL_COMPLETION"
+    elif damage == "missing_status":
+        completion.pop("status")
+    else:
+        completion = {}
+    result = full_v2_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["T0"] == 1000.0 and result["T1"] == 1017.25
+    assert result["whole_wall_seconds"] == 17.25
+    assert result["actual_exit_codes"] == [0, 1]
+    assert result["known_cost_lower_bound_seconds"] == 120
+    assert result["full_role_evidence_accepted"] is False
+    assert result["source_successor_admitted"] is False
+    assert result["B_C_admission"] is False
+    if damage == "missing_completion":
+        assert result["RSS_envelope_bytes"] is None
+
+
+def test_failure_recording_overrun_is_not_lost_when_internal_completion_failed() -> None:
+    pending, completion, events, inner = full_v2_subject()
+    completion["status"] = "FAILED_INTERNAL_COMPLETION"
+    events[-1].update(end_seconds=1110.001, exit_code=1)
+    result = full_v2_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["whole_wall_seconds"] == pytest.approx(110.001)
+    assert result["known_cost_lower_bound_seconds"] == 121
+    assert result["actual_exit_codes"] == [0, 1]
+
+
+@pytest.mark.parametrize("damage", ["clock", "order", "duplicate", "missing_event"])
+def test_failure_recording_invalid_stream_has_no_certified_whole_span(damage: str) -> None:
+    pending, completion, events, inner = full_v2_subject()
+    if damage == "clock":
+        events[-1]["clock_domain"] = "untrusted-other-clock"
+    elif damage == "order":
+        events[-1]["start_seconds"] = 1001.0
+    elif damage == "duplicate":
+        events[-1]["event_id"] = events[0]["event_id"]
+    else:
+        events.pop()
+    result = full_v2_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["whole_wall_seconds"] is None
+    assert result["full_role_evidence_accepted"] is False
+
+
+def test_failure_recording_missing_final_exit_preserves_separate_clock_fact() -> None:
+    pending, completion, events, inner = full_v2_subject()
+    events[-1].update(start_seconds=1017.0, end_seconds=1017.25, wall_seconds=0.25,
+                      exit_code=None)
+    result = full_v2_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["whole_wall_seconds"] == 17.25
+    assert result["actual_exit_codes"] == [0, None]
+    assert result["full_role_evidence_accepted"] is False
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="existing Node runtime unavailable")
+@pytest.mark.parametrize("damage", [
+    "failed_completion", "missing_status", "missing_completion", "payload_exit",
+    "missing_exit", "overrun", "bad_clock",
+])
+def test_failure_recording_JS_Python_retains_same_independent_facts(damage: str) -> None:
+    pending, completion, events, inner = full_v2_subject()
+    events[-1].update(start_seconds=1017.0, end_seconds=1017.25, wall_seconds=0.25)
+    if damage == "failed_completion":
+        completion["status"] = "FAILED_INTERNAL_COMPLETION"
+    elif damage == "missing_status":
+        completion.pop("status")
+    elif damage == "missing_completion":
+        completion = {}
+    elif damage == "payload_exit":
+        events[0]["exit_code"] = 1
+    elif damage == "missing_exit":
+        events[-1]["exit_code"] = None
+    elif damage == "overrun":
+        completion["status"] = "FAILED_INTERNAL_COMPLETION"
+        events[-1]["end_seconds"] = 1110.001
+    else:
+        events[-1]["clock_domain"] = "not-the-frozen-external-clock"
+    resources = checker.audit_v2_resource_components(completion, inner_evidence=inner)
+    script = Path(__file__).parents[1] / "scripts/p17_m2_input_export_dispatch.js"
+    command = (
+        "const fs=require('fs');const {finishExternal}=require(process.argv[1]);"
+        "console.log(JSON.stringify(finishExternal(...JSON.parse(fs.readFileSync(0,'utf8')))))"
+    )
+    observed = subprocess.run(
+        ["node", "-e", command, str(script)],
+        input=json.dumps([pending, completion, events, resources,
+                          checker.digest(checker.canonical(pending))]),
+        text=True, capture_output=True, check=True,
+    )
+    js = json.loads(observed.stdout)
+    py = full_v2_audit(pending, completion, events, inner)
+    expected_whole = (None if damage == "bad_clock" else
+                      pytest.approx(110.001) if damage == "overrun" else 17.25)
+    expected_charge = 121 if damage == "overrun" else 120
+    for result in (js, py):
+        assert result["status"] == "STOP_NO_RETRY"
+        assert result["whole_wall_seconds"] == expected_whole
+        assert result["known_cost_lower_bound_seconds"] == expected_charge
+        assert result["actual_exit_codes"] == [
+            1 if damage == "payload_exit" else 0,
+            None if damage == "missing_exit" else 0,
+        ]
+        assert result["full_role_evidence_accepted"] is False
+        assert result["source_successor_admitted"] is False
+    for key in ("status", "whole_wall_seconds", "known_cost_lower_bound_seconds",
+                "actual_exit_codes", "RSS_envelope_bytes", "full_role_evidence_accepted"):
+        assert js[key] == py[key], key
+
+
+def failure_recording_subject(*, failed: bool = False):  # type: ignore[no-untyped-def]
+    """Original tiny F-only values; no historical execution receipt is replayed."""
+    pending, completion, events, inner = full_v2_subject()
+    identity = "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1"
+    for item in (pending, completion):
+        item.update(execution_identity=identity, role="public-fixture")
+    completion["pending_sha256"] = checker.digest(checker.canonical(pending))
+    completion["domain_status"] = "STOP" if failed else "PASS_PUBLIC_SOFTWARE"
+    events[-1].update(start_seconds=1017.0, end_seconds=1017.25, wall_seconds=0.25)
+    inner["record"]["role"] = inner["expected_role"] = "new-public-payload"
+    inner["record"]["controller_pid"] = 103
+    profile = failure_recording_profiles()["F-outer-native"]
+    completion["supervisor_pid"] = 101
+    completion["resource_components"][:0] = [
+        {"pid": 103, "kind": "native_profile", "profile": "F-outer-native",
+         "profile_sha256": checker.digest(profile), "platform": "darwin",
+         "actual_exit_code": 1 if failed else 0},
+        {"pid": 104, "kind": "wait4", "platform": "darwin", "record": {
+            "statistics_source": "os.wait4", "wall_source": "controller_monotonic_observed",
+            "pid": 104, "rss_unit": "bytes", "exit_code": 1 if failed else 0,
+            "native": {"wall_seconds": 1.2, "user_seconds": 0.1,
+                       "system_seconds": 0.0, "rss_bytes": 250},
+        }},
+    ]
+    if failed:
+        inner["record"]["exit_code"] = 1
+        inner["record"]["software_result"] = "FAIL_PUBLIC_COMMAND"
+        inner["record"]["cleanup"]["leader_exit"] = 1
+        inner["record"]["timer_native_exit"]["exit_code"] = 1
+        events[0]["exit_code"] = 1
+        completion["primary_failure"] = {
+            "stage": "payload", "type": "ValueError", "reason": "new public expected failure",
+        }
+    return pending, completion, events, inner
+
+
+def failure_recording_profiles() -> dict[str, bytes]:
+    return {"F-outer-native": b"0.1 real 0.0 user 0.0 sys\n180 maximum resident set size\n"}
+
+
+def failure_recording_audit(pending, completion, events, inner):  # type: ignore[no-untyped-def]
+    return checker.audit_full_role_f(
+        pending, completion=completion, raw_tool_events=events,
+        expected_role="public-fixture", expected_plan_sha256="a" * 64,
+        expected_pending_sha256=checker.digest(checker.canonical(pending)),
+        inner_evidence=inner, native_profiles=failure_recording_profiles(),
+    )
+
+
+@pytest.mark.parametrize("failed", [False, True])
+def test_F_separates_complete_measurement_from_payload_outcome(failed: bool) -> None:
+    pending, completion, events, inner = failure_recording_subject(failed=failed)
+    result = failure_recording_audit(pending, completion, events, inner)
+    assert result["whole_wall_seconds"] == 17.25
+    assert result["known_cost_lower_bound_seconds"] == 120
+    assert result["RSS_envelope_bytes"] == 180 + 250 + 210 + 150 + 190
+    assert result["evidence_complete"] is True
+    assert result["missing_evidence_cost"] is None
+    assert result["domain_status"] == ("STOP" if failed else "PASS_PUBLIC_SOFTWARE")
+    assert result["actual_exit_codes"] == [1 if failed else 0, 0]
+    assert result["source_successor_admitted"] is False
+    assert result["B_C_admission"] is False
+    if failed:
+        assert result["status"] == "STOP_NO_RETRY"
+        assert result["full_role_evidence_accepted"] is False
+        assert result["primary_failure"] == completion["primary_failure"]
+
+
+def test_F_independent_inner_charge_is_retained_even_when_completion_failed() -> None:
+    pending, completion, events, inner = failure_recording_subject(failed=True)
+    inner["record"]["observed_outer_wall_seconds"] = 130.0
+    inner["record"]["timeout_seconds"] = 200.0
+    completion["status"] = "FAILED_INTERNAL_COMPLETION"
+    result = failure_recording_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["whole_wall_seconds"] == 17.25
+    assert result["inner_minimum_charge_seconds"] == 140.0
+    assert result["known_cost_lower_bound_seconds"] == 140
+    assert result["evidence_complete"] is False
+    assert result["primary_failure"] == completion["primary_failure"]
+
+
+def test_F_primary_success_flag_cannot_hide_observed_failed_payload() -> None:
+    pending, completion, events, inner = failure_recording_subject(failed=True)
+    completion["domain_status"] = "PASS_PUBLIC_SOFTWARE"
+    events[0]["exit_code"] = 0
+    completion["resource_components"][0]["actual_exit_code"] = 0
+    completion["resource_components"][1]["record"]["exit_code"] = 0
+    result = failure_recording_audit(pending, completion, events, inner)
+    assert result["domain_status"] == "STOP"
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["full_role_evidence_accepted"] is False
+    assert result["source_successor_admitted"] is False
+
+
+def test_F_resource_failure_mode_cannot_upgrade_old_R_measurement() -> None:
+    _, completion, _, inner = full_v2_subject()
+    inner["record"]["exit_code"] = 1
+    inner["record"]["software_result"] = "FAIL_PUBLIC_COMMAND"
+    inner["record"]["cleanup"]["leader_exit"] = 1
+    inner["record"]["timer_native_exit"]["exit_code"] = 1
+    result = checker.audit_v2_resource_components(
+        completion, inner_evidence=inner, failure_recording=True,
+    )
+    assert result["status"] == "STOP_NO_RETRY"
+
+
+def test_F_secondary_recording_failure_does_not_replace_payload_cause() -> None:
+    pending, completion, events, inner = failure_recording_subject(failed=True)
+    completion["status"] = "FAILED_INTERNAL_COMPLETION"
+    defect = {"stage": "public-serializer", "type": "OSError",
+              "reason": "new fixture recording defect"}
+    completion["secondary_failures"] = [defect]
+    result = failure_recording_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["primary_failure"] == completion["primary_failure"]
+    assert defect in result["secondary_failures"]
+    assert result["whole_wall_seconds"] == 17.25
+
+
+@pytest.mark.parametrize("damage", ["old_identity", "R_role", "increased_FULL", "pending_hash"])
+def test_F_is_exact_public_identity_and_cannot_admit_R(damage: str) -> None:
+    pending, completion, events, inner = failure_recording_subject()
+    pending_sha = checker.digest(checker.canonical(pending))
+    if damage == "old_identity":
+        pending["execution_identity"] = completion["execution_identity"] = checker.EXECUTION_V2
+    elif damage == "R_role":
+        pending["role"] = completion["role"] = "exporter-r0"
+    elif damage == "increased_FULL":
+        pending["frozen_FULL_seconds"] = completion["frozen_FULL_seconds"] = 121
+    else:
+        pending_sha = "b" * 64
+    completion["pending_sha256"] = checker.digest(checker.canonical(pending))
+    result = checker.audit_full_role_f(
+        pending, completion=completion, raw_tool_events=events,
+        expected_role="public-fixture", expected_plan_sha256="a" * 64,
+        expected_pending_sha256=pending_sha, inner_evidence=inner,
+        native_profiles=failure_recording_profiles(),
+    )
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["evidence_complete"] is False
+    assert result["source_successor_admitted"] is False
+
+
+@pytest.mark.parametrize("damage", [
+    "helper_missing", "helper_exit", "serializer_RSS", "actual_exit", "cleanup",
+    "inner_cleanup", "inner_RSS", "overrun", "completion", "event_order",
+    "outer_native", "outer_timer", "supervisor_RSS",
+])
+def test_F_missing_mandatory_recording_component_cannot_become_complete(damage: str) -> None:
+    pending, completion, events, inner = failure_recording_subject(failed=True)
+    if damage == "helper_missing":
+        inner["helper_profiles"] = {}
+    elif damage == "helper_exit":
+        inner["record"]["helpers"][0]["exit_code"] = 1
+    elif damage == "serializer_RSS":
+        completion["resource_components"].pop()
+    elif damage == "actual_exit":
+        events[-1]["exit_code"] = None
+    elif damage == "cleanup":
+        completion["cleanup"]["group_gone"] = None
+    elif damage == "inner_cleanup":
+        inner["record"]["cleanup"]["group_gone"] = None
+    elif damage == "inner_RSS":
+        inner["record"]["native"]["rss_bytes"] = 0
+    elif damage == "overrun":
+        events[-1]["end_seconds"] = 1110.001
+    elif damage == "completion":
+        completion["status"] = "FAILED_INTERNAL_COMPLETION"
+        completion["secondary_failures"] = [{"stage": "new-public-finalizer", "reason": "fixture"}]
+    elif damage == "outer_native":
+        completion["resource_components"].pop(0)
+    elif damage == "outer_timer":
+        completion["resource_components"].pop(1)
+    elif damage == "supervisor_RSS":
+        completion["resource_components"].pop(2)
+    else:
+        events[-1]["start_seconds"] = 1001.0
+    result = failure_recording_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["evidence_complete"] is False
+    assert result["domain_status"] == "STOP"
+    assert result["missing_evidence_cost"] == "UNKNOWN_NOT_ZERO"
+    assert result["source_successor_admitted"] is False
+    if damage != "event_order":
+        assert result["whole_wall_seconds"] == pytest.approx(
+            110.001 if damage == "overrun" else 17.25
+        )
+    assert result["known_cost_lower_bound_seconds"] == (121 if damage == "overrun" else 120)
+    assert result["primary_failure"] == completion["primary_failure"]
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="existing Node runtime unavailable")
+@pytest.mark.parametrize("damage", [
+    "none", "helper", "completion", "exit", "cleanup", "cap", "hidden_payload",
+])
+def test_F_JS_Python_agree_without_a_primary_PASS_oracle(damage: str) -> None:
+    pending, completion, events, inner = failure_recording_subject(failed=True)
+    if damage == "helper":
+        inner["helper_profiles"] = {}
+    elif damage == "completion":
+        completion["status"] = "FAILED_INTERNAL_COMPLETION"
+        completion["secondary_failures"] = [{"stage": "new-public-finalizer", "reason": "fixture"}]
+    elif damage == "exit":
+        events[-1]["exit_code"] = None
+    elif damage == "cleanup":
+        completion["cleanup"]["group_gone"] = None
+    elif damage == "cap":
+        events[-1]["end_seconds"] = 1110.001
+    elif damage == "hidden_payload":
+        events[0]["exit_code"] = 0
+        completion["domain_status"] = "PASS_PUBLIC_SOFTWARE"
+        completion["resource_components"][0]["actual_exit_code"] = 0
+        completion["resource_components"][1]["record"]["exit_code"] = 0
+    resources = checker.audit_v2_resource_components(
+        completion, inner_evidence=inner, native_profiles=failure_recording_profiles(),
+        failure_recording=True,
+    )
+    script = Path(__file__).parents[1] / "scripts/p17_m2_input_export_dispatch.js"
+    command = (
+        "const fs=require('fs');const {finishExternalF}=require(process.argv[1]);"
+        "console.log(JSON.stringify(finishExternalF(...JSON.parse(fs.readFileSync(0,'utf8')))))"
+    )
+    observed = subprocess.run(
+        ["node", "-e", command, str(script)],
+        input=json.dumps([pending, completion, events, resources,
+                          checker.digest(checker.canonical(pending))]),
+        text=True, capture_output=True, check=True,
+    )
+    js = json.loads(observed.stdout)
+    py = failure_recording_audit(pending, completion, events, inner)
+    for result in (js, py):
+        assert result["status"] == "STOP_NO_RETRY"
+        assert result["domain_status"] == "STOP"
+        assert result["evidence_complete"] is (damage in ("none", "hidden_payload"))
+        assert result["whole_wall_seconds"] == pytest.approx(110.001 if damage == "cap" else 17.25)
+        assert result["known_cost_lower_bound_seconds"] == (121 if damage == "cap" else 120)
+        assert result["primary_failure"] == completion["primary_failure"]
+        assert result["source_successor_admitted"] is False
+        if damage == "completion":
+            assert completion["secondary_failures"][0] in result["secondary_failures"]
+    for key in ("status", "domain_status", "evidence_complete", "whole_wall_seconds",
+                "known_cost_lower_bound_seconds", "actual_exit_codes", "RSS_envelope_bytes",
+                "full_role_evidence_accepted", "primary_failure"):
+        assert js[key] == py[key], key
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="existing Node runtime unavailable")
+def test_F_serializer_failure_keeps_component_truth_and_closes_full_packet() -> None:
+    pending, completion, events, inner = failure_recording_subject(failed=True)
+    completion["status"] = "FAILED_INTERNAL_COMPLETION"
+    completion["secondary_failures"] = [
+        {"stage": "completion", "type": "OSError", "reason": "new public serializer write"}
+    ]
+    events[-1]["exit_code"] = 1
+    resources = checker.audit_v2_resource_components(
+        completion, inner_evidence=inner, native_profiles=failure_recording_profiles(),
+        failure_recording=True,
+    )
+    assert resources["status"] == "PENDING_EXTERNAL_EXIT"
+    assert resources["evidence_complete"] is True
+    assert resources["RSS_envelope_bytes"] == 980
+    script = Path(__file__).parents[1] / "scripts/p17_m2_input_export_dispatch.js"
+    command = (
+        "const fs=require('fs');const {finishExternalF}=require(process.argv[1]);"
+        "console.log(JSON.stringify(finishExternalF(...JSON.parse(fs.readFileSync(0,'utf8')))))"
+    )
+    observed = subprocess.run(
+        ["node", "-e", command, str(script)],
+        input=json.dumps([pending, completion, events, resources,
+                          checker.digest(checker.canonical(pending))]),
+        text=True, capture_output=True, check=True,
+    )
+    js = json.loads(observed.stdout)
+    py = failure_recording_audit(pending, completion, events, inner)
+    for result in (js, py):
+        assert result["status"] == "STOP_NO_RETRY"
+        assert result["evidence_complete"] is False
+        assert result["domain_status"] == "STOP"
+        assert result["RSS_envelope_bytes"] == 980
+        assert result["whole_wall_seconds"] == 17.25
+        assert result["known_cost_lower_bound_seconds"] == 120
+        assert result["actual_exit_codes"] == [1, 1]
+        assert result["primary_failure"] == completion["primary_failure"]
+        assert result["secondary_failures"] == completion["secondary_failures"]
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="existing Node runtime unavailable")
+@pytest.mark.parametrize("bad_event", [None, 5, "new malformed public event", {}])
+def test_F_malformed_event_entry_emits_bounded_STOP(bad_event: object) -> None:
+    pending, completion, _, inner = failure_recording_subject(failed=True)
+    events = [bad_event]
+    resources = checker.audit_v2_resource_components(
+        completion, inner_evidence=inner, native_profiles=failure_recording_profiles(),
+        failure_recording=True,
+    )
+    script = Path(__file__).parents[1] / "scripts/p17_m2_input_export_dispatch.js"
+    command = (
+        "const fs=require('fs');const {finishExternalF}=require(process.argv[1]);"
+        "console.log(JSON.stringify(finishExternalF(...JSON.parse(fs.readFileSync(0,'utf8')))))"
+    )
+    observed = subprocess.run(
+        ["node", "-e", command, str(script)],
+        input=json.dumps([pending, completion, events, resources,
+                          checker.digest(checker.canonical(pending))]),
+        text=True, capture_output=True, check=True,
+    )
+    js = json.loads(observed.stdout)
+    py = failure_recording_audit(pending, completion, events, inner)
+    for result in (js, py):
+        assert result["status"] == "STOP_NO_RETRY"
+        assert result["domain_status"] == "STOP"
+        assert result["evidence_complete"] is False
+        assert result["whole_wall_seconds"] is None
+        assert result["actual_exit_codes"] == [None]
+        assert result["known_cost_lower_bound_seconds"] == 120
+        assert result["primary_failure"] == completion["primary_failure"]

@@ -62,14 +62,17 @@ Payload0/12/528/18; failed full RSS UNKNOWN/exits1/1. Paid300/closed1560 remains
 PR209/main85644c4/all-four CI and merged-branch cleanup completed, worktree retained.
 Original result overrun18.633086s and separate followup335.755696s remain costs.
 
-Current owner scope is **documents only**: [diagnosis/minimal recording-repair
-proposal](docs/planning/p17_m2_input_failure_diagnostic_repair_proposal.md)/[JSON](docs/planning/p17_m2_input_failure_diagnostic_repair_proposal.json)
-PROPOSED_NOT_AUTHORIZED. Historical cause may remain UNKNOWN; public fixture
-recording repair need not resolve it or weaken source guards. Proposed F2h/1h,
-D10min/common window and up to two90min publication phases need explicit authority
-and a fresh different author. No old stat/read, implementation/diagnostic query,
-R retry, B/C, old backup/seal, reset or automatic successor. Finish this document
-slice's required regression/protected publication, then STOP for owner decision.
+F public software implementation/review is complete; local2290 passed/1 platform skip.
+The **F-only** grant under the unchanged
+[proposal](docs/planning/p17_m2_input_failure_diagnostic_repair_proposal.md)/[JSON](docs/planning/p17_m2_input_failure_diagnostic_repair_proposal.json):
+executor2h preparation, fresh different author1h, one90min regression/protected
+publication. [F report](docs/validation/p17_m2_input_failure_recording_repair.md)
+records public-fixture-only failure tuples, whole-wall/cost and RSS/exit repair;
+measurement completeness never turns payload failure into PASS. D remains
+UNRUN_NOT_AUTHORIZED, old cause/full RSS UNKNOWN. No old stat/read, D/environment-identity/power query,
+R retry, B/C, reset or successor. Retain4GiB/independent preflight and all old
+contracts/costs/quotas/seals. Only normal publication remains; afterward STOP and do not restart F.
+Verify the associated PR/main CI rather than repeating completed implementation.
 
 ## Provenance boundary
 
