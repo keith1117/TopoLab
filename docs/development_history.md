@@ -22,6 +22,17 @@ are recorded in the [report](validation/p17_m2_input_export_readiness.md) and
 Old R/v1 STOP/paid180/closed1680 and v2 zero-launch/paid0/closed1860 retain bytes;
 no B/C, numerical work, expanded input or automatic successor.
 
+Actual closeout: source PR208/main5b01c13/exact-main four-CI PASS preceded
+activation08:33:55.857Z. Public PASS, exporter-r0 STOP, sharedPASS;3/6 launched.
+R0 metadata12 attempted/11 complete hashes/2619248 bytes;12th before/after
+fstat identity mismatch, component/causeUNKNOWN, no reread. Independent R0/R1
+unlaunched;12/528/18 payload reads0. Failed-role full RSSUNKNOWN, actual outer
+exits1/1; no measured4GiB exceedance. FULL300 paid/1560 closed. NEW-only independent
+backup187 members/1323178 bytes excluding manifestPASS; finalized including
+manifest188/1352153 per copy. Final frontier separately filed. Formal
+closed08:38:17.388Z; only prescribed result regression/publication follows,
+then owner route decision, no defaultv4. Frozen v1/v2/v3 contracts/source remain.
+
 ## Historical baseline and early development
 
 The historical `v1.0.0` release and Gates N1, N2, P1, M0, and A1 are complete. M1 did

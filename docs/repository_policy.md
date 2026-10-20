@@ -154,6 +154,15 @@ No old clock or unused allowance reopens, no directed wait/cost is erased. First
 failure STOP, no B/C, proof work, expanded source, old backup/seal or successor.
 Publish the actual source-bound result or concrete STOP/UNKNOWN and stop.
 
+R/v3 has now closed STOP_NO_RETRY at exporter-r0 after source PR208/main5b01c13
+and all-four-main-CI readiness.3/6 roles launched;12 metadata attempted/11
+complete hashes;12th before/after fstat identity changed, exact cause UNKNOWN.
+No independent R0/R1 or12/528/18 payload reads. Failed-role full RSSUNKNOWN;
+FULL300 paid,1560 unused closed. The reserved NEW-only shared closeout passed. Publish the
+actual failed result under the predeclared result caps and STOP; no defaultv4,
+further old access or source/protocol mutation. Read the
+[actual supplement](validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration).
+
 All four existing CI jobs remain applicable on latest PR head and main:
 quality, frontend, clean-linux-smoke and i1-native-software. Their software
 success cannot admit M2 resources or pass a scientific Gate.

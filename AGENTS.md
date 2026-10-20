@@ -56,18 +56,18 @@ unlaunched when its original independent window expired: roles/old reads/IO0,
 UNKNOWN_NOT_RUN. Result PR207/main e1e52f3/all-four CI completed. Old v1/v2
 frozen files, STOP/costs and closed allowances retain bytes and never transfer.
 
-Current owner authority is ONE fresh R/v3 preparation under the
-[readiness protocol](docs/planning/p17_m2_input_export_readiness_protocol.md) and
-[JSON](docs/planning/p17_m2_input_export_readiness_protocol.json): same3h/2h total,
-new /root/review_r_v3, six FULL120/120/120/780/660/60=1860s and exact40/12/528/18
-source-byte/temporary-parse exception. Predeclared continuous software/formal/
-result phase caps; formal2700s each begins once only AFTER clean locked protected
-merged source/all-four-main-CI readiness. No old grant reset or free waits.
-Independent public IO and complete independent R0 before source R1,4GiB and
-full actual RSS/helper/exits/FULL binding. First failure STOP/no retry; only
-reserved NEW-only shared closeout. No B/C, expanded input, old backup/seal,
-algorithm/proof/installation or automatic successor. Publish actual result and
-STOP; unsuccessful preparation requires an owner route decision, no default v4.
+The ONE fresh [R/v3 preparation](docs/planning/p17_m2_input_export_readiness_protocol.md)
+closed **STOP_NO_RETRY**: source PR208/main5b01c13/all-four-CI preceded activation.
+Six roles remain defined;3 launched(public PASS/exporter-r0 STOP/shared PASS).
+R0 attempted12 metadata,11 completed byte/hash rows;12th before/after fstat
+identity changed, exact field/cause UNKNOWN. No reread; independent R0/R1 and
+all12/528/18 payload reads unlaunched. Failed-role full RSS UNKNOWN, actual
+outer exits1/1; no measured>4GiB result. Booked300/1860; unused1560 closed. NEW-only backup passed;
+final raw outer packet separately filed in result publication. Formal closed
+2026-10-20T08:38:17.388Z. Complete only bounded result review/required regression/
+normal protected publication, then STOP for owner route decision. No defaultv4,
+B/C, further old input, frozen patch/retry/reset or automatic successor. Old
+v1/v2 bytes/STOP/costs/closed caps and every historical gate/UNKNOWN/seal stay.
 
 ## Provenance boundary
 
