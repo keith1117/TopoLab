@@ -65,15 +65,18 @@ Original result overrun18.633086s and separate followup335.755696s remain costs.
 F is published/closed through PR211/mainb0fe235/all-four exact-main CI39473450571;
 local2290 passed/1 skip. Its first unchanged cleanup assertion failure/cost/cause
 UNKNOWN remains, not fixed by passing repeats. Frozen reports retain bytes.
-Current owner grant is [R-STABLE contract documents](docs/planning/p17_m2_source_stability_export_proposal.md)/
-[JSON](docs/planning/p17_m2_source_stability_export_proposal.json), required software
-regression and normal GitHub publication ONLY. Future in-place writer quiescence,
-new source exception/identity, fresh different author, F production/cleanup binding
-and new phased budgets are PROPOSED_NOT_AUTHORIZED. D is not a prerequisite;
-old cause/full RSS UNKNOWN. No implementation, old stat/read, formal R/B/C,
-D/environment/power query, retry/reset or automatic successor. Retain4GiB and
-independent preflight/all old contracts/costs/quotas/seals. After document publication
-STOP for the one scoped owner decision; no closed allowance transfers.
+Current owner approved PR212 R-STABLE's finite budgets, exact source exception and
+fresh different author. Read the [new approved protocol](docs/planning/p17_m2_source_stability_export_protocol.md)/
+[JSON](docs/planning/p17_m2_source_stability_export_protocol.json) and
+[software/zero-launch report](docs/validation/p17_m2_source_stability_export.md).
+Minimal software/public fixtures are reviewed; local2417 passed/1 skip/all five
+checks passed. Verify normal PR/main publication rather than repeating software.
+Delegated custodian and independent review cannot close writer coverage. Formal entry is
+NO_SOURCE_ADMISSION_KEEP_STOP, unlaunched0/6, old stat/read0, no DATA root/plan/lease.
+Finish protected publication then STOP; no old R, D/environment/power query, B/C,
+snapshot/permission change or automatic successor. Later source entry needs a
+fresh finite owner decision with concrete writer controls; no balance transfers.
+Keep4GiB/independent preflight and every old failure/cost/UNKNOWN/quota/seal.
 
 ## Provenance boundary
 

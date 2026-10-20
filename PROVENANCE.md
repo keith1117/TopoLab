@@ -1565,3 +1565,16 @@ first writes its own failure matrix/arithmetic, then performs nonblind review
 and fresh public native fixture checks. No upstream implementation, historical
 raw input/receipt/profile, Hack3D material, numerical method or scientific data
 is read, copied or imported; old source revisions remain reproducible.
+
+## 2026-10-20 — R-STABLE software and zero source admission
+
+Original stdlib-only new identity/actual-argv/lease/role bindings, same-read
+closing identity sidecars and bounded cleanup observations reuse TopoLab's H,
+field transcription, independently authored IEEE/source comparison and F
+recording algorithms. A fresh different author freezes expectations before
+producer-patch exposure, then cross-reviews NONBLIND and tests NEW public/native
+fixtures. No external implementation, numerical method, Hack3D material or old
+source/evidence is imported. Unknown operational writer coverage closes formal
+entry unlaunched0/6/old stat-read0. See the
+[software/zero-launch report](docs/validation/p17_m2_source_stability_export.md)
+and [independent review](docs/validation/p17_m2_source_stability_export_independent_review.md).

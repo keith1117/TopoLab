@@ -15,12 +15,16 @@ main `b0fe2350ac68a88a05e974926a2b0fe6a1302bf7`，
 最终本地2290通过/1平台跳过；首轮unchanged清理断言失败/费用及原因UNKNOWN仍保留，不能称已修复。
 冻结F报告保留提交前“发布待完成”语境，不重做F。
 
-当前仅授权新的[来源稳定性/受限导出合同文档](p17_m2_source_stability_export_proposal.md)、
-[JSON](p17_m2_source_stability_export_proposal.json)、规定软件回归及正常发布。
-拟议原路径写者静止、严格核源、独立R0先于R1、F生产绑定/清理验收及新预算均待另行批准；
-新执行/旧原件权限为0，新的不同作者未任命。D不是前置条件，历史原因/失败完整RSS仍UNKNOWN。
-不实现、不旧stat/read、不正式R/B/C、不查询环境/电源、不自动后继；发布后只等提案中的一次有限所有者决定。
-保留4GiB/独立预检、固定P/17未修复、uniform/科研暂停及旧合同、成本、配额、UNKNOWN和封存。
+所有者已批准PR212的有限R-STABLE预算、精确输入例外及新的不同作者独立审查。
+[已批准协议](p17_m2_source_stability_export_protocol.md)/[JSON](p17_m2_source_stability_export_protocol.json)
+补充原样保留的提案快照。最小软件/公开fixtures及正常源码发布继续完成；实际写者控制覆盖仍UNKNOWN。
+受委托维护者与独立审查一致决定正式入口NO_SOURCE_ADMISSION_KEEP_STOP：0/6启动、旧stat/read0，
+无新DATA根、租约或计划，不用先跑公开I/O来补偿控制缺口。
+见[软件及零启动报告](../validation/p17_m2_source_stability_export.md)和
+[独立审查](../validation/p17_m2_source_stability_export_independent_review.md)。正常保护发布后停止。
+以后若再申请来源读取，需要具体可归属的写者控制和新的有限所有者决定；额度不转移。
+D/历史原因恢复、环境探测、快照/权限调整、B/C及自动后继仍不在本片内。
+保留4GiB/独立预检、固定P/17未修复、uniform/科研暂停及全部旧证据、成本和封存。
 
 历史R/v3保持STOP_NO_RETRY：源码PR208/main5b01c13/四项CI先于正式开启；六角色规定不变，
 实际启动3个（公开PASS/R0 STOP/共享PASS）。尝试12元数据、完成11哈希/2619248字节；第12份fstat

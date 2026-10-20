@@ -6,12 +6,14 @@ Actual source access requires the owner grant and the externally frozen role pla
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import math
 import os
 import re
 import stat
 import struct
+import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -19,6 +21,8 @@ DATA = Path("/Users/keith1117/Documents/TopoLab-data")
 CONTRACT = REPO / "docs/planning/p17_m2_input_export_preparation_proposal.json"
 CONTENT_SHA256 = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
 OUTPUT_ROOT_NAME = "p17-m2-input-export-preparation-v3"
+STABLE_IDENTITY = "topolab.v2.p17-m2-source-stable-export.v1"
+STABLE_ROOT_NAME = "p17-m2-source-stable-export-v1"
 MIB = 1024 * 1024
 
 
@@ -84,20 +88,29 @@ def ref(path, raw):
 class Reader:
     """One bounded read per literal file; identities journaled even on failure."""
 
-    def __init__(self, root, journal=None):
+    def __init__(self, root, journal=None, *, execution_identity=None,
+                 source_identity_checks=False):
         self.root, self.journal = Path(root).absolute(), journal
         self.rows, self.total, self.seen, self.attempts = [], {}, set(), []
         self.failures = []
+        self.execution_identity = execution_identity or (
+            "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1")
+        self.source_identity_checks = source_identity_checks
+        self.source_observations = []
+        need(not source_identity_checks or self.execution_identity == STABLE_IDENTITY,
+             "new source identity checks require R-STABLE")
 
     def read(self, relative, limit, *, expected=None, size=None, group="metadata", total=None):
         facts = {
             "schema": "topolab.v2.m2-input-read-failure.v1",
-            "execution_identity": "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1",
+            "execution_identity": self.execution_identity,
             "attempt_ordinal": len(self.attempts) + 1,
             "path": relative, "stage": "path_validation",
             "declared": None, "before": None, "after": None,
             "returned_bytes": None, "changed_fields": [],
         }
+        if self.source_identity_checks:
+            facts["closing"] = None
         self._read_facts = facts
         try:
             return self._read(relative, limit, expected=expected, size=size,
@@ -105,7 +118,10 @@ class Reader:
         except (ValueError, OSError) as error:
             facts.update(status="STOP_NO_RETRY", exception_type=type(error).__name__,
                          primary_reason=str(error), unavailable="UNKNOWN_NOT_ZERO")
-            for left, right in (("declared", "before"), ("before", "after")):
+            comparisons = [("declared", "before"), ("before", "after")]
+            if self.source_identity_checks:
+                comparisons.append(("after", "closing"))
+            for left, right in comparisons:
                 if facts[left] is not None and facts[right] is not None:
                     facts["changed_fields"] = [key for key in facts[left]
                                                if facts[left][key] != facts[right][key]]
@@ -126,6 +142,20 @@ class Reader:
     def _identity(self, stage, value):
         self._read_facts[stage] = {key: getattr(value, key) for key in
                                   ("st_dev", "st_ino", "st_size", "st_mtime_ns")}
+
+    def _closing_stat(self, relative):
+        # Rewalk the literal path from / so an ancestor replacement is checked
+        # as well as replacement of the opened leaf; no second content read.
+        parts = Path(relative).parts
+        parent = os.open("/", os.O_RDONLY | os.O_DIRECTORY)
+        try:
+            for part in (*self.root.parts[1:], *parts[:-1]):
+                child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
+                os.close(parent)
+                parent = child
+            return os.stat(parts[-1], dir_fd=parent, follow_symlinks=False)
+        finally:
+            os.close(parent)
 
     def _read(self, relative, limit, *, expected=None, size=None, group="metadata", total=None):
         need(isinstance(relative, str) and relative not in self.seen, "unregistered reread")
@@ -185,6 +215,13 @@ class Reader:
                 == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns),
                 "source changed",
             )
+            if self.source_identity_checks:
+                self._read_facts["stage"] = "closing_path_identity"
+                closing = self._closing_stat(relative)
+                self._identity("closing", closing)
+                need(stat.S_ISREG(closing.st_mode)
+                     and self._read_facts["after"] == self._read_facts["closing"],
+                     "source path replaced during read")
         finally:
             os.close(fd)
         self._read_facts["stage"] = "read_size_hash_caps"
@@ -199,6 +236,9 @@ class Reader:
         need(len(raw) <= limit and (size is None or len(raw) == size), "read size")
         need(total is None or self.total[group] <= total, "aggregate byte cap")
         need(expected is None or row["sha256"] == expected, "source SHA " + relative)
+        if self.source_identity_checks:
+            self.source_observations.append(row | {
+                key: self._read_facts[key] for key in ("declared", "before", "after", "closing")})
         return raw
 
     def packet(self, relative, limit, **kwargs):
@@ -687,30 +727,45 @@ def main(argv=None):
     parser.add_argument("--registry", type=Path)
     parser.add_argument("--independent-r0", type=Path)
     parser.add_argument("--authorize-old-read", action="store_true")
+    parser.add_argument("--execution-identity")
+    parser.add_argument("--plan", type=Path)
+    parser.add_argument("--plan-sha")
     args = parser.parse_args(argv)
+    need(args.execution_identity == STABLE_IDENTITY and args.plan is not None
+         and args.plan_sha is not None, "closed historical R; explicit frozen R-STABLE required")
     need(
         args.authorize_old_read and args.data_root.absolute() == DATA,
         "literal authorized R source root only",
     )
     need(
-        args.output.absolute().is_relative_to(DATA / OUTPUT_ROOT_NAME)
-        and args.output.resolve() == args.output.absolute(),
+        args.output.absolute() == DATA / STABLE_ROOT_NAME / ("exporter-" + args.stage),
         "new R output only",
     )
     need(args.contract.absolute() == CONTRACT, "literal frozen R contract")
     for named in (args.registry, args.independent_r0):
         if named is not None:
             need(
-                named.absolute().is_relative_to(DATA / OUTPUT_ROOT_NAME)
-                and named.resolve() == named.absolute(),
+                named.absolute().is_relative_to(DATA / STABLE_ROOT_NAME),
                 "new registry/review paths only",
             )
+    spec = importlib.util.spec_from_file_location(
+        "stable_source_control", REPO / "scripts/p17_m2_input_export_control.py")
+    need(spec is not None and spec.loader is not None, "source controller")
+    controller = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(controller)
+    role = "exporter-" + args.stage
+    plan = controller.validate_stable_source_entry(args.plan, args.plan_sha, role)
+    need(getattr(sys, "orig_argv", None)
+         == controller.resolved(plan["roles"][role]["argv"], args.plan_sha),
+         "actual source argv differs from frozen role")
+    need(args.output.resolve() == args.output.absolute(), "nofollow new output ancestors")
     args.output.mkdir(parents=True, exist_ok=False)
     new_file(
         args.output / "pending.json",
         canonical({"stage": args.stage, "status": "PENDING_BEFORE_OLD_READ"}),
     )
-    reader = Reader(args.data_root, args.output / "source-read.jsonl")
+    reader = Reader(args.data_root, args.output / "source-read.jsonl",
+                    execution_identity=STABLE_IDENTITY, source_identity_checks=True)
     try:
         contract_raw = args.contract.read_bytes()
         need(sha(contract_raw) == CONTENT_SHA256, "frozen content scope hash")
@@ -732,6 +787,11 @@ def main(argv=None):
                 "independent registered-source acceptance",
             )
             result = export(reader, registry, contract, args.output / "exports")
+        need(len(reader.source_observations) == (40 if args.stage == "r0" else 558),
+             "complete new source tuple sidecar")
+        new_file(args.output / "source-identities.json", canonical({
+            "schema": "topolab.v2.m2-source-identity-sidecar.v1",
+            "execution_identity": STABLE_IDENTITY, "rows": reader.source_observations}))
         new_file(
             args.output / "terminal.json",
             canonical(

@@ -1,4 +1,4 @@
-"""NEW R/v3 readiness-bound FULL billing; no old payload reads during planning."""
+"""Explicit R-STABLE production binding; F remains public-fixture only."""
 
 import argparse
 import hashlib
@@ -19,6 +19,15 @@ REPO = Path(__file__).resolve().parents[1]
 ROOT = Path("/Users/keith1117/Documents/TopoLab-data/p17-m2-input-export-preparation-v3")
 IDENTITY = "topolab.v2.p17-m2-input-export-preparation.v3"
 F_IDENTITY = "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1"
+STABLE_IDENTITY = "topolab.v2.p17-m2-source-stable-export.v1"
+STABLE_ROOT = ROOT.parent / "p17-m2-source-stable-export-v1"
+STABLE_CAPS = {"independent-public-check": 300, "exporter-r0": 300,
+               "independent-r0": 300, "exporter-r1": 1200,
+               "independent-r1": 1200, "shared-closeout": 300}
+STABLE_PROTOCOL = "docs/planning/p17_m2_source_stability_export_protocol.json"
+FINAL_HELPER_ROOT = Path("/private/tmp/topolab-r-stable-software-20261020/final-helper")
+SOURCE_NAMESPACES = {"b3-v1-fits", "b4-5-weighted-terminal/fit", "b3-v1-data",
+                     "b4-30-z-reflection-repair-v2"}
 CONTENT_SHA = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
 CLOCK = "functions.exec.Date.now.UTC-seconds"
 # -I excludes script-directory imports. Bind this stdlib-only helper explicitly.
@@ -66,6 +75,82 @@ SOURCE_FILES = {
 }
 
 
+def configure_stable():
+    """Explicit NEW production binding; no old identity or F mode grants R."""
+    global ROOT, IDENTITY, CAPS, ACTOR_WINDOW, SOURCE_FILES
+    ROOT, IDENTITY, CAPS, ACTOR_WINDOW = STABLE_ROOT, STABLE_IDENTITY, STABLE_CAPS.copy(), 4500
+    SOURCE_FILES = SOURCE_FILES | {
+        "docs/planning/p17_m2_source_stability_export_proposal.md",
+        "docs/planning/p17_m2_source_stability_export_proposal.json",
+        "docs/planning/p17_m2_source_stability_export_protocol.md", STABLE_PROTOCOL}
+
+
+def stable_controls_checked(controls, activation):
+    require(controls["schema"] == "topolab.v2.m2-writer-quiescence.v1"
+            and controls["execution_identity"] == STABLE_IDENTITY
+            and controls["custodian"] == "/root"
+            and controls["no_write_until_release"] is True,
+            "new attributed in-place custodian controls")
+    require(set(controls["namespaces"]) == SOURCE_NAMESPACES, "exact source namespaces")
+    names = set()
+    for writer in controls["writers"]:
+        require(isinstance(writer["name"], str) and writer["name"]
+                and writer["name"] not in names and writer["namespace"] in SOURCE_NAMESPACES
+                and (writer["action"], writer["status"]) in {
+                    ("pause", "PAUSED_ACKNOWLEDGED"), ("exclude", "EXCLUDED_CUSTODIAN_CONTROL")}
+                and isinstance(writer["evidence"], str) and writer["evidence"],
+                "every named writer actually controlled with evidence")
+        names.add(writer["name"])
+    for namespace, coverage in controls["namespaces"].items():
+        require(coverage["accepted"] is True and isinstance(coverage["basis"], str)
+                and bool(coverage["basis"].strip()), "UNKNOWN writer coverage refuses activation")
+        if not any(w["namespace"] == namespace for w in controls["writers"]):
+            require(isinstance(coverage.get("no_writer_explanation"), str)
+                    and bool(coverage["no_writer_explanation"].strip()),
+                    "affirmative no-writer explanation required")
+    ack = controls["acquisition_ack"]
+    require(ack["by"] == controls["custodian"] and isinstance(ack["basis"], str)
+            and bool(ack["basis"].strip())
+            and type(ack["UTC_seconds"]) in (int, float)
+            and math.isfinite(ack["UTC_seconds"])
+            and activation <= ack["UTC_seconds"] <= activation + 300,
+            "actual custodian acquisition acknowledgement inside setup300")
+
+
+def stable_authority_checked(protocol):
+    require(protocol["execution_identity"] == STABLE_IDENTITY
+            and protocol["owner_grant"]["approved"] is True
+            and protocol.get("actual_admission", {}).get("status")
+                != "NO_SOURCE_ADMISSION_KEEP_STOP", "closed unlaunched R-STABLE authority")
+
+
+def stable_lease_checked(plan, plan_sha):
+    controls = plan["source_controls"]
+    stable_controls_checked(controls, plan["actor_activation_UTC_seconds"])
+    raw = read(ROOT / "writer_quiescence.json")
+    require(raw == canonical(controls) and digest(raw) == plan["source_controls_sha256"],
+            "immutable source control bytes")
+    expected = {"execution_identity": STABLE_IDENTITY, "plan_sha256": plan_sha,
+                "control_sha256": plan["source_controls_sha256"],
+                "custodian": controls["custodian"],
+                "acquired_UTC_seconds": controls["acquisition_ack"]["UTC_seconds"], "active": True}
+    require(json.loads(read(ROOT / "source-lease.json")) == expected,
+            "exclusive new lease and plan binding")
+    require(not os.path.lexists(ROOT / "source-release.json"), "source interval already released")
+
+
+def validate_stable_source_entry(path, expected, role):
+    configure_stable()
+    require(role in CAPS, "registered new source role")
+    plan = plan_checked(path, expected)
+    stable_lease_checked(plan, expected)
+    source_gate(plan, role, expected)
+    write(ROOT / ("source-access-" + role + ".json"), {
+        "execution_identity": STABLE_IDENTITY, "plan_sha256": expected,
+        "role": role, "first_entry_UTC_seconds": time.time(), "retry": False})
+    return plan
+
+
 def require(ok, reason):
     if not ok:
         raise ValueError("R_STOP: " + reason)
@@ -104,7 +189,8 @@ def write(path, value):
 def external_templates(python):
     return {
         role: [
-            [python, "-I", str(Path(__file__).resolve()), mode, "--plan",
+            [python, "-I", str(Path(__file__).resolve()), mode,
+             *(["--r-stable"] if IDENTITY == STABLE_IDENTITY else []), "--plan",
              str(ROOT / "launch_plan.json"), "--plan-sha", "<PLAN_SHA256>", "--role", role]
             for mode in ("supervise", "finalize")
         ] for role in CAPS
@@ -130,7 +216,7 @@ def actor_window_checked(plan, now):
             "immutable readiness-activated actor window")
 
 
-def create_plan(activation, ci_path):
+def create_plan(activation, ci_path, controls_path=None):
     """One NEW plan after release readiness; never opens historical DATA files."""
     require(subprocess.check_output(["git", "status", "--porcelain"], cwd=REPO) == b"",
             "clean merged source before activation")
@@ -162,6 +248,21 @@ def create_plan(activation, ci_path):
     content = str(REPO / "docs/planning/p17_m2_input_export_preparation_proposal.json")
     registry = str(ROOT / "exporter-r0/source_registry.json")
     source = ["--data-root", str(ROOT.parent), "--contract", content, "--authorize-old-read"]
+    stable = IDENTITY == STABLE_IDENTITY
+    if stable:
+        require(controls_path is not None
+                and not controls_path.absolute().is_relative_to(ROOT.parent),
+                "new custodian package outside DATA required")
+        controls = json.loads(read(controls_path))
+        stable_controls_checked(controls, activation)
+        protocol = json.loads((REPO / STABLE_PROTOCOL).read_bytes())
+        stable_authority_checked(protocol)
+        require(protocol["execution_identity"] == STABLE_IDENTITY
+                and protocol["owner_grant"]["approved"] is True
+                and protocol["formal_roles_FULL_seconds"] == CAPS,
+                "new owner-approved protocol, not old grant")
+        source += ["--execution-identity", STABLE_IDENTITY, "--plan",
+                   str(ROOT / "launch_plan.json"), "--plan-sha", "<PLAN_SHA256>"]
     payloads = {
         "independent-public-check": [python, "-I", audit, "public-check", "--fixture-root",
             str(ROOT / "public-fixtures"), "--output", str(ROOT / "independent-public-check.json")],
@@ -179,10 +280,15 @@ def create_plan(activation, ci_path):
             str(ROOT / "launch_plan.json"), "--plan-sha", "<PLAN_SHA256>", "--role",
             "shared-closeout"],
     }
+    if stable:
+        payloads["independent-public-check"] += ["--execution-identity", STABLE_IDENTITY,
+            "--plan", str(ROOT / "launch_plan.json"), "--plan-sha", "<PLAN_SHA256>"]
+        payloads["shared-closeout"].append("--r-stable")
     deadline = datetime.fromtimestamp(activation + ACTOR_WINDOW, UTC).isoformat(
         timespec="milliseconds").replace("+00:00", "Z")
     plan = {
-        "execution_identity": IDENTITY, "owner_R_v3_authorized": True,
+        "execution_identity": IDENTITY,
+        ("owner_R_STABLE_authorized" if stable else "owner_R_v3_authorized"): True,
         "B_C_authorized": False, "repository": str(REPO),
         "merged_source": head,
         "merged_tree": subprocess.check_output(
@@ -194,7 +300,8 @@ def create_plan(activation, ci_path):
         "host_os_release": platform.release(), "python_executable": python,
         "python_version": platform.python_version(),
         "thread_environment": native_recording.ENVIRONMENT,
-        "authors": {"exporter": "/root", "independent": "/root/review_r_v3"},
+        "authors": {"exporter": "/root", "independent": (
+            "/root/review_r_stable_export_v1" if stable else "/root/review_r_v3")},
         "actor_activation_UTC_seconds": activation, "actor_window_seconds": ACTOR_WINDOW,
         "actor_deadlines_UTC": {"exporter": deadline, "independent": deadline},
         "FULL_caps_seconds": CAPS, "clock_domain": CLOCK, "clock_resolution_seconds": 0.001,
@@ -202,23 +309,44 @@ def create_plan(activation, ci_path):
         "roles": {role: {"cap_seconds": CAPS[role], "argv": argv}
                   for role, argv in payloads.items()},
     }
+    if stable:
+        plan["output_root"] = str(ROOT)
+        plan.update(source_controls=controls, source_controls_sha256=digest(canonical(controls)),
+                    helper_inventory=protocol["helper_inventory"],
+                    public_fixture_table=protocol["public_fixture_table"],
+                    runtime_binaries={p: digest(Path(p).read_bytes())
+                                      for p in (sys.executable, "/usr/bin/time", "/bin/ps")},
+                    formal_overhead_caps={"plan_lease": 300, "between_roles_total": 240,
+                                          "final_frontier_retention_and_release": 360})
+        plan["final_helper_external_argv"] = [python, "-I", control, "final-helper", "--r-stable",
+            "--plan", str(ROOT / "launch_plan.json"), "--plan-sha", "<PLAN_SHA256>"]
+        plan["final_filing_child_argv"] = [python, "-I", control, "final-file", "--r-stable",
+            "--plan", str(ROOT / "launch_plan.json"), "--plan-sha", "<PLAN_SHA256>"]
+        plan["final_helper_root"] = str(FINAL_HELPER_ROOT)
     actor_window_checked(plan, time.time())
-    require(time.time() + sum(CAPS.values()) <= activation + ACTOR_WINDOW,
+    require(time.time() + sum(CAPS.values()) + (600 if stable else 0) <= activation + ACTOR_WINDOW,
             "complete six-role reserve before plan creation")
     require(not os.path.lexists(ROOT)
             and not os.path.lexists(ROOT.with_name(ROOT.name + "-independent-backup")),
             "exclusive NEW roots; no overwrite or retry")
     ROOT.mkdir(exist_ok=False)
+    if stable:
+        write(ROOT / "writer_quiescence.json", controls)
     raw = canonical(plan)
     write(ROOT / "launch_plan.json", plan)
     plan_sha = digest(raw)
+    if stable:
+        write(ROOT / "source-lease.json", {
+            "execution_identity": STABLE_IDENTITY, "plan_sha256": plan_sha,
+            "control_sha256": plan["source_controls_sha256"], "custodian": controls["custodian"],
+            "acquired_UTC_seconds": controls["acquisition_ack"]["UTC_seconds"], "active": True})
     context = dict(plan, plan_sha256=plan_sha)
     context["external_argv"] = {role: [resolved(argv, plan_sha) for argv in calls]
                                 for role, calls in plan["external_argv"].items()}
     return context
 
 
-def plan_checked(path, expected):
+def plan_checked(path, expected, *, result_filing=False):
     require(path.absolute() == ROOT / "launch_plan.json", "literal new plan")
     raw = read(path)
     require(digest(raw) == expected, "plan freeze changed")
@@ -236,7 +364,8 @@ def plan_checked(path, expected):
         require(digest((REPO / name).read_bytes()) == h, "frozen source bytes changed")
     require(
         plan["all_four_main_CI_success"] is True
-        and plan["owner_R_v3_authorized"] is True
+        and plan["owner_R_STABLE_authorized" if IDENTITY == STABLE_IDENTITY
+                 else "owner_R_v3_authorized"] is True
         and plan["B_C_authorized"] is False,
         "admission record",
     )
@@ -248,7 +377,19 @@ def plan_checked(path, expected):
         and plan["clock_resolution_seconds"] == 0.001,
         "new identity/FULL/content/clock binding",
     )
-    actor_window_checked(plan, time.time())
+    actor_window_checked(plan, min(time.time(), plan["actor_activation_UTC_seconds"] + ACTOR_WINDOW)
+                         if result_filing else time.time())
+    require(not result_filing or (IDENTITY == STABLE_IDENTITY
+            and time.time() >= plan["actor_activation_UTC_seconds"]), "new result filing only")
+    if IDENTITY == STABLE_IDENTITY:
+        stable_authority_checked(json.loads((REPO / STABLE_PROTOCOL).read_bytes()))
+        require(Path.cwd() == REPO == Path(plan["repository"]), "actual frozen repository cwd")
+        require(plan["authors"] == {"exporter": "/root", "independent":
+                                   "/root/review_r_stable_export_v1"}, "fresh different author")
+        require(set(plan["runtime_binaries"]) == {sys.executable, "/usr/bin/time", "/bin/ps"},
+                "literal registered runtime helpers")
+        for binary, h in plan["runtime_binaries"].items():
+            require(digest(Path(binary).read_bytes()) == h, "frozen runtime helper changed")
     require(sys.platform == "darwin", "M2 native Darwin execution only")
     require(plan["external_argv"] == external_templates(sys.executable),
             "complete literal supervisor/finalizer call table")
@@ -266,8 +407,105 @@ def plan_checked(path, expected):
     return plan
 
 
+def final_packet_checked(plan, plan_sha):
+    raw = os.environ.get("TOPOLAB_RSTABLE_PREVIOUS_TOOL_RECORDS", "[]")
+    require(len(raw.encode()) <= 4 * 1024 * 1024, "finite final trusted packet")
+    packets = json.loads(raw)
+    require(isinstance(packets, list) and len(packets) == 1, "one final shared-return packet")
+    packet = packets[0]
+    require(packet["pending"]["execution_identity"] == STABLE_IDENTITY
+            and packet["pending"]["role"] == "shared-closeout"
+            and packet["pending"]["plan_sha256"] == plan_sha
+            and packet["terminal"]["status"] == "PASS_R_STABLE_FULL_ROLE"
+            and packet["terminal"]["cleanup"]["group_gone"] is True,
+            "actual complete shared return and cleanup before final helper")
+    t1 = packet["events"][-1]["end_seconds"]
+    closed = packet["formal_close_UTC_seconds"]
+    ack = packet["custodian_release"]
+    require(t1 <= closed <= t1 + 360
+            and closed <= plan["actor_activation_UTC_seconds"] + 4500
+            and ack == {"by": plan["source_controls"]["custodian"], "UTC_seconds": closed,
+                        "plan_sha256": plan_sha, "source_roles_closed": True}
+            and closed <= time.time() <= closed + 7200,
+            "actual custodian release/formal close and bounded result phase")
+    return packet
+
+
+def final_file(plan, plan_sha):
+    """NEW-only last packet filing; independent exact backup, no source read."""
+    packet = final_packet_checked(plan, plan_sha)
+    ingest_external(plan, plan_sha, closing=True)
+    observed = json.loads(read(ROOT / "receipts/shared-closeout-observed.json"))
+    require(observed["status"] == "PASS_R_STABLE_FULL_ROLE", "independent shared replay")
+    write(ROOT / "source-release.json", packet["custodian_release"])
+    write(ROOT / "formal-close.json", {"UTC_seconds": packet["formal_close_UTC_seconds"],
+                                      "plan_sha256": plan_sha, "no_successor": True})
+    backup = ROOT.with_name(ROOT.name + "-independent-backup")
+    backup_late(backup)
+    first = independent.audit_new_backup(ROOT, backup, execution_identity=STABLE_IDENTITY)
+    write(ROOT / "final-backup-manifest.json", first)
+    write(backup / "final-backup-manifest.json", first)
+    result = independent.audit_new_backup(ROOT, backup, execution_identity=STABLE_IDENTITY)
+    return {key: result[key] for key in ("status", "member_count", "total_bytes")} | {
+                     "shared_packet_sha256": digest(canonical(packet)),
+                     "shared_role_status": observed["status"], "plan_sha256": plan_sha,
+                     "formal_close_UTC_seconds": packet["formal_close_UTC_seconds"]}
+
+
+def final_helper(plan, plan_sha):
+    """One <=180s result helper; native child plus parent pre/post RSS and actual outer exit."""
+    final_packet_checked(plan, plan_sha)
+    require(plan["final_helper_root"] == str(FINAL_HELPER_ROOT), "literal new filing recorder")
+    argv = resolved(plan["final_filing_child_argv"], plan_sha)
+    expected = [sys.executable, "-I", str(Path(__file__).resolve()), "final-file", "--r-stable",
+                "--plan", str(ROOT / "launch_plan.json"), "--plan-sha", plan_sha]
+    require(argv == expected, "frozen final filing command")
+    before_rss = native_recording._rss_self()
+    record, raw_result, primary, secondary = None, None, None, []
+    inner = FINAL_HELPER_ROOT / "final-filing"
+    try:
+        record = native_recording.invoke(FINAL_HELPER_ROOT, "final-filing", argv,
+                                         timeout=160, limit_bytes=4294967296)
+        if record["exit_code"] != 0 or record["software_result"] != "PUBLIC_COMMAND_EXIT_OBSERVED":
+            primary = {"stage": "final-filing-child", "exit_code": record["exit_code"],
+                       "reason": record["software_result"]}
+        helpers = {h["profile"]: read(inner / h["profile"], 1048576) for h in record["helpers"]}
+        independent.audit_native_record(record, profile=read(inner / "command.time", 1048576),
+            log=read(inner / "command.log", allow_empty=True), helper_profiles=helpers,
+            expected_role="final-filing", expected_argv=expected, platform=sys.platform,
+            failure_recording=True)
+        raw_result = json.loads(read(inner / "command.log"))
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        failure = {"stage": "final-filing-recording", "type": type(exc).__name__,
+                   "reason": str(exc)[:512]}
+        if primary is None:
+            primary = failure
+        else:
+            secondary.append(failure)
+    packet = {"schema": "topolab.v2.m2-source-stable-final-filing.v1",
+              "execution_identity": STABLE_IDENTITY,
+              "status": ("PENDING_EXTERNAL_EXIT" if primary is None
+                         else "FAILED_INTERNAL_COMPLETION"),
+              "plan_sha256": plan_sha, "inner_argv_sha256": digest(canonical(expected)),
+              "controller_RSS_samples_bytes": [before_rss, 0],
+              "controller_RSS_unit": "bytes", "filing_result": raw_result,
+              "native_record_root": str(inner), "primary_failure": primary,
+              "secondary_failures": secondary,
+              "available_child_exit": None if record is None else record.get("exit_code")}
+    canonical(packet)
+    packet["controller_RSS_samples_bytes"][1] = native_recording._rss_self()
+    print(canonical(packet).decode(), end="", flush=True)
+    return 0 if primary is None else 1
+
+
+def recording_options(plan):
+    if plan.get("execution_identity") == STABLE_IDENTITY:
+        return {"failure_recording": True, "execution_identity": STABLE_IDENTITY}
+    return {"failure_recording": plan.get("execution_identity") == F_IDENTITY}
+
+
 def bind(plan, role, controller_exit, plan_sha):
-    failure_recording = plan.get("execution_identity") == F_IDENTITY
+    failure_recording = plan.get("execution_identity") in (F_IDENTITY, STABLE_IDENTITY)
     base = ROOT / "receipts"
     record_path = base / role / role / "command.json"
     record = json.loads(read(record_path, 4 * 1024 * 1024))
@@ -337,6 +575,8 @@ def bind(plan, role, controller_exit, plan_sha):
         "independent_inner_receipt_reconciliation": reconciled,
         "B_C_run": False,
     }
+    if plan.get("execution_identity") == STABLE_IDENTITY:
+        result["domain_status"] = "PASS" if record["exit_code"] == 0 else "STOP"
     write(base / (role + "-exit.json"), result)
     return result
 
@@ -390,11 +630,12 @@ def supervise(plan, role, plan_sha):
     This receipt deliberately never certifies its own future exit.
     """
     started = time.monotonic()
-    failure_recording = plan.get("execution_identity") == F_IDENTITY
+    failure_recording = plan.get("execution_identity") in (F_IDENTITY, STABLE_IDENTITY)
+    public_fixture = plan.get("execution_identity") == F_IDENTITY
     base = ROOT / "receipts"
     base.mkdir(parents=True, exist_ok=True)
     pending = {
-        "execution_identity": F_IDENTITY if failure_recording else IDENTITY,
+        "execution_identity": plan.get("execution_identity", IDENTITY),
         "role": role,
         "plan_sha256": plan_sha,
         "frozen_FULL_seconds": CAPS[role],
@@ -406,8 +647,10 @@ def supervise(plan, role, plan_sha):
         "status": "PENDING_BEFORE_DISPATCH",
     }
     write(base / (role + "-pending.json"), pending)
-    if not failure_recording:
+    if not public_fixture:
         ingest_external(plan, plan_sha, closing=role == "shared-closeout")
+        if plan.get("execution_identity") == STABLE_IDENTITY:
+            source_gate(plan, role, plan_sha)
     profile = base / (role + "-controller.time")
     log = base / (role + "-controller.log")
     write(
@@ -426,7 +669,9 @@ def supervise(plan, role, plan_sha):
         "--role",
         role,
     ]
-    if failure_recording:
+    if plan.get("execution_identity") == STABLE_IDENTITY:
+        argv.append("--r-stable")
+    if public_fixture:
         argv = [sys.executable, "-I", str(Path(__file__).resolve()), "public-payload",
                 "--public-root", str(ROOT), "--fixture-exit", str(plan["fixture_exit"])]
     with log.open("xb") as stream:
@@ -498,7 +743,7 @@ def supervise(plan, role, plan_sha):
     if sys.platform != "darwin":
         self_peak *= 1024
     result.update(
-        execution_identity=F_IDENTITY if failure_recording else IDENTITY,
+        execution_identity=plan.get("execution_identity", IDENTITY),
         schema="topolab.v2.m2-input-failure-supervisor.v1" if failure_recording
                else "topolab.v2.m2-input-export-supervisor.v2",
         outer_timer_exit=child.returncode,
@@ -582,7 +827,8 @@ def resource_inputs(plan, role, plan_sha, *, available=None):
 
 def ingest_external(plan, plan_sha, *, closing=False):
     """Copy actual trusted-tool events at the next role's measured prelude."""
-    raw = os.environ.get("TOPOLAB_R3_PREVIOUS_TOOL_RECORDS", "[]")
+    raw = os.environ.get("TOPOLAB_RSTABLE_PREVIOUS_TOOL_RECORDS" if IDENTITY == STABLE_IDENTITY
+                         else "TOPOLAB_R3_PREVIOUS_TOOL_RECORDS", "[]")
     require(len(raw.encode()) <= 4 * 1024 * 1024, "bounded external telemetry")
     records = json.loads(raw)
     require(isinstance(records, list) and len(records) <= 1, "one actual prior tool packet")
@@ -590,9 +836,17 @@ def ingest_external(plan, plan_sha, *, closing=False):
     for packet in records:
         role = packet["pending"]["role"]
         require(role in CAPS, "registered previous role")
+        if IDENTITY == STABLE_IDENTITY and "full_collector_record" in packet:
+            pointer = packet["full_collector_record"]
+            literal = "receipts/" + role + "-final-wire-source.json"
+            require(pointer["path"] == literal, "literal NEW collector record")
+            collector_raw = read(ROOT / literal)
+            require(len(collector_raw) == pointer["byte_size"]
+                    and digest(collector_raw) == pointer["sha256"], "collector bytes/hash differ")
         write(ROOT / "tool-events" / (role + ".json"), packet)
         try:
-            pending = json.loads(read(ROOT / "receipts" / (role + "-pending.json")))
+            pending_raw = read(ROOT / "receipts" / (role + "-pending.json"))
+            pending = json.loads(pending_raw)
             require(pending == packet["pending"], "literal pending identity")
             try:
                 evidence = resource_inputs(plan, role, plan_sha)
@@ -601,6 +855,8 @@ def ingest_external(plan, plan_sha, *, closing=False):
             verified = independent.audit_full_role_v2(
                 pending, packet["completion"], raw_tool_events=packet["events"],
                 expected_role=role, expected_plan_sha256=plan_sha, **evidence,
+                **(dict(recording_options(plan), expected_pending_sha256=digest(pending_raw))
+                   if IDENTITY == STABLE_IDENTITY else {}),
             )
             for key in ("status", "whole_wall_seconds", "RSS_envelope_bytes",
                         "execution_identity", "role", "plan_sha256", "pending_sha256",
@@ -613,7 +869,9 @@ def ingest_external(plan, plan_sha, *, closing=False):
             verified = {"status": "STOP_NO_RETRY", "role": role,
                         "reason": str(error), "missing_evidence": "UNKNOWN_NOT_ZERO"}
         write(ROOT / "receipts" / (role + "-observed.json"), verified)
-        if verified["status"] != "PASS_R_V3_FULL_ROLE":
+        accepted = ("PASS_R_STABLE_FULL_ROLE" if IDENTITY == STABLE_IDENTITY
+                    else "PASS_R_V3_FULL_ROLE")
+        if verified["status"] != accepted and not os.path.lexists(ROOT / "STOP.json"):
             write(ROOT / "STOP.json", {"role": role, "outcome": verified, "retry": False})
 
 
@@ -659,23 +917,57 @@ def backup_late(backup, *, exclude_active=False):
 
 def backup_evidence(*, public_fixture=False):
     backup = ROOT.with_name(ROOT.name + "-independent-backup")
-    first = independent.audit_new_backup(ROOT, backup, public_fixture=public_fixture)
+    options = {"execution_identity": STABLE_IDENTITY} if IDENTITY == STABLE_IDENTITY else {}
+    first = independent.audit_new_backup(ROOT, backup, public_fixture=public_fixture, **options)
     require(first["status"] == "PASS_INDEPENDENT_NEW_BACKUP", "independent NEW backup")
     # The inventory excludes its own not-yet-created manifest. Both manifest
     # copies are then included in the final independent byte comparison.
     write(ROOT / "backup_manifest.json", first)
     write(backup / "backup_manifest.json", first)
-    checked = independent.audit_new_backup(ROOT, backup, public_fixture=public_fixture)
+    checked = independent.audit_new_backup(ROOT, backup, public_fixture=public_fixture, **options)
     require(checked["status"] == "PASS_INDEPENDENT_NEW_BACKUP", "NEW manifest copies")
     return {"status": checked["status"], "member_count": checked["member_count"],
             "total_bytes": checked["total_bytes"], "manifest": "backup_manifest.json",
             "manifest_sha256": digest(canonical(first))}
 
 
+def stable_wire_packet(packet, role):
+    """Keep full collectors on NEW disk; bounded wire preserves acceptance facts."""
+    full = canonical(packet)
+    path = ROOT / "receipts" / (role + "-final-wire-source.json")
+    write(path, packet)
+    return bounded_stable_wire(packet, {"path": str(path.relative_to(ROOT)),
+                                       "byte_size": len(full), "sha256": digest(full)})
+
+
+def bounded_stable_wire(packet, collector):
+    completion = {key: value for key, value in packet["completion"].items()
+                  if key not in ("available_outer_records", "available_native_evidence")}
+    wire = dict(packet, completion=completion)
+    wire["full_collector_record"] = collector
+    if len(canonical(wire)) > 32768:
+        # Never trim required observations to manufacture a passing receipt.
+        completion = {key: completion[key] for key in (
+            "execution_identity", "role", "plan_sha256", "frozen_FULL_seconds",
+            "clock_domain", "clock_resolution_seconds", "actor_activation_UTC_seconds",
+            "actor_window_seconds", "actor_deadlines_UTC", "pending_sha256")}
+        completion.update(status="FAILED_INTERNAL_COMPLETION", domain_status="STOP",
+                          cleanup={"group_gone": None},
+                          resource_components=[packet["completion"]["resource_components"][-1]],
+                          final_serializer_pid=packet["completion"]["final_serializer_pid"],
+                          primary_failure=packet["completion"].get("primary_failure"),
+                          secondary_failures=[{"stage": "wire", "reason": "finite32768 byte cap"}])
+        wire = {"pending": packet["pending"], "completion": completion,
+                "full_collector_record": wire["full_collector_record"],
+                "resourceEvidence": {"status": "STOP_NO_RETRY", "reason": "WIRE_SIZE_STOP"}}
+    require(len(canonical(wire)) <= 32768, "finite stable actual stdout")
+    return wire
+
+
 def finish_record(plan, role, plan_sha):
     """Retain available serializer RSS BEFORE acceptance; actual exit is external."""
     base = ROOT / "receipts"
-    failure_recording = plan.get("execution_identity") == F_IDENTITY
+    failure_recording = plan.get("execution_identity") in (F_IDENTITY, STABLE_IDENTITY)
     own = {
         "pid": os.getpid(), "kind": "self_high_water",
         "statistics_source": "resource.getrusage", "rss_unit": "bytes",
@@ -685,7 +977,7 @@ def finish_record(plan, role, plan_sha):
     completion = {
         "schema": "topolab.v2.m2-input-failure-completion.v1" if failure_recording
                   else "topolab.v2.m2-input-export-exit.v2",
-        "execution_identity": F_IDENTITY if failure_recording else IDENTITY,
+        "execution_identity": plan.get("execution_identity", IDENTITY),
         "role": role, "plan_sha256": plan_sha,
         "frozen_FULL_seconds": CAPS[role], "clock_domain": CLOCK,
         "clock_resolution_seconds": 0.001, "status": "PENDING_EXTERNAL_EXIT",
@@ -763,7 +1055,7 @@ def finish_record(plan, role, plan_sha):
         write(base / (role + "-finalizer-preflush.json"), completion)
         own["samples_bytes"][1] = native_recording._rss_self()
         packet["resourceEvidence"] = independent.audit_v2_resource_components(
-            completion, **evidence, failure_recording=failure_recording,
+            completion, **evidence, **recording_options(plan),
         )
         write(base / (role + "-completion.json"), packet)
         if role == "shared-closeout":
@@ -775,7 +1067,7 @@ def finish_record(plan, role, plan_sha):
         canonical(packet)
         own["samples_bytes"][1] = native_recording._rss_self()
         packet["resourceEvidence"] = independent.audit_v2_resource_components(
-            completion, **evidence, failure_recording=failure_recording,
+            completion, **evidence, **recording_options(plan),
         )
         success = packet["resourceEvidence"]["status"] == "PENDING_EXTERNAL_EXIT"
     except (ValueError, KeyError, TypeError, OSError, OverflowError) as error:
@@ -786,7 +1078,7 @@ def finish_record(plan, role, plan_sha):
         secondary.append({"stage": "completion", "type": type(error).__name__,
                           "reason": str(error)})
         packet["resourceEvidence"] = independent.audit_v2_resource_components(
-            completion, **(evidence or {}), failure_recording=failure_recording,
+            completion, **(evidence or {}), **recording_options(plan),
         )
         # Preserve the independent resource result verbatim. The failed terminal
         # binding closes role acceptance without inventing missing RSS facts.
@@ -794,7 +1086,17 @@ def finish_record(plan, role, plan_sha):
     completion["secondary_failures"] = [*sup.get("secondary_failures", []), *secondary]
     packet["secondary_failures"] = completion["secondary_failures"]
     # Serialization and stdout occur inside the measured final external call.
-    print(canonical(packet).decode(), end="", flush=True)
+    if plan.get("execution_identity") == STABLE_IDENTITY:
+        packet = stable_wire_packet(packet, role)
+        own["samples_bytes"][1] = native_recording._rss_self()
+        packet["resourceEvidence"] = independent.audit_v2_resource_components(
+            packet["completion"], **(evidence or {}), **recording_options(plan))
+        packet = bounded_stable_wire(packet, packet["full_collector_record"])
+        success = success and packet["completion"]["status"] == "PENDING_EXTERNAL_EXIT"
+    raw = canonical(packet)
+    require(plan.get("execution_identity") != STABLE_IDENTITY or len(raw) <= 32768,
+            "final actual stable stdout cap")
+    print(raw.decode(), end="", flush=True)
     return 0 if success else 1
 
 
@@ -802,11 +1104,20 @@ def source_gate(plan, role, plan_sha):
     require(role == "shared-closeout" or not (ROOT / "STOP.json").exists(),
             "STOP closes all source suffix roles")
     if role == "shared-closeout":
+        if plan.get("execution_identity") == STABLE_IDENTITY:
+            observed = [json.loads(read(p))
+                        for p in sorted((ROOT / "receipts").glob("*-observed.json"))]
+            require(observed and all(p.get("cleanup", {}).get("group_gone") is True
+                                     for p in observed),
+                    "uncertain cleanup refuses closeout process")
         return
+    if plan.get("execution_identity") == STABLE_IDENTITY:
+        stable_lease_checked(plan, plan_sha)
     order = list(CAPS)
     for previous in order[:order.index(role)]:
         observed = json.loads(read(ROOT / "receipts" / (previous + "-observed.json")))
-        require(observed["status"] == "PASS_R_V3_FULL_ROLE"
+        require(observed["status"] == ("PASS_R_STABLE_FULL_ROLE" if IDENTITY == STABLE_IDENTITY
+                                       else "PASS_R_V3_FULL_ROLE")
                 and observed["execution_identity"] == IDENTITY
                 and observed["plan_sha256"] == plan_sha
                 and observed["frozen_FULL_seconds"] == CAPS[previous]
@@ -877,6 +1188,7 @@ def public_entry(mode, root, code):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("mode", choices=("plan", "run", "bind", "supervise", "finalize", "archive",
+                                    "final-helper", "final-file",
                                     "public-plan", "public-supervise", "public-finalize",
                                     "public-payload"))
     p.add_argument("--plan", type=Path)
@@ -884,31 +1196,43 @@ def main():
     p.add_argument("--role", choices=tuple(CAPS))
     p.add_argument("--activation-utc-seconds", type=float)
     p.add_argument("--ci-evidence", type=Path)
+    p.add_argument("--writer-control", type=Path)
+    p.add_argument("--r-stable", action="store_true")
     p.add_argument("--controller-exit", type=int)
     p.add_argument("--public-root", type=Path)
     p.add_argument("--fixture-exit", type=int, choices=(0, 1), default=1)
     args = p.parse_args()
     if args.mode.startswith("public-"):
-        require(args.plan is None and args.plan_sha is None and args.role is None,
+        require(args.plan is None and args.plan_sha is None and args.role is None
+                and not args.r_stable and args.writer_control is None,
                 "F public entry cannot accept an R plan or role")
         return public_entry(args.mode, args.public_root, args.fixture_exit)
-    require(False, "historical R execution is closed; F public fixtures only")
+    require(args.r_stable, "historical R execution is closed; explicit NEW R-STABLE required")
+    configure_stable()
     if args.mode == "plan":
         require(args.activation_utc_seconds is not None and args.ci_evidence is not None,
                 "readiness activation and actual CI evidence required")
-        print(canonical(create_plan(args.activation_utc_seconds, args.ci_evidence)).decode(),
+        print(canonical(create_plan(args.activation_utc_seconds, args.ci_evidence,
+                                    args.writer_control)).decode(),
               end="", flush=True)
         return 0
-    require(args.plan is not None and args.plan_sha is not None and args.role is not None,
+    filing = args.mode in ("final-helper", "final-file")
+    require(args.plan is not None and args.plan_sha is not None
+            and (filing or args.role is not None),
             "frozen plan/hash/role required")
-    plan = plan_checked(args.plan, args.plan_sha)
+    plan = plan_checked(args.plan, args.plan_sha, result_filing=filing)
+    if filing:
+        if args.mode == "final-helper":
+            return final_helper(plan, args.plan_sha)
+        print(canonical(final_file(plan, args.plan_sha)).decode(), end="", flush=True)
+        return 0
     if args.mode == "supervise":
         result = supervise(plan, args.role, args.plan_sha)
         pending_raw = read(ROOT / "receipts" / (args.role + "-pending.json"))
         print(canonical({"pending": json.loads(pending_raw),
                          "pending_sha256": digest(pending_raw), "diagnostic": result}).decode(),
               end="", flush=True)
-        return 0
+        return int(result.get("domain_status") == "STOP" or result["status"] == "STOP_NO_RETRY")
     if args.mode == "finalize":
         return finish_record(plan, args.role, args.plan_sha)
     if args.mode == "archive":

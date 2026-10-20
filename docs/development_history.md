@@ -2254,3 +2254,29 @@ Linux-only platform skip,697.54s test time/716.507428s whole pytest invocation.
 Final working/staged/all-upload guards cover13 documents and876 local links/
 anchors; numerical source/tests/locks/workflows/frozen reports/history prefix
 remain. PR/main observations are filed only after actual completion, not presumed.
+
+
+## 2026-10-20 — R-STABLE minimal software and zero formal launch
+
+The owner approves PR212's exact scope/budgets and new different-author review,
+then delegates source-custodian assessment to `/root`. The
+[new approved protocol](planning/p17_m2_source_stability_export_protocol.md)/
+[JSON](planning/p17_m2_source_stability_export_protocol.json) preserve the original
+proposal snapshot. Minimal adaptation reuses H/field/independent/F algorithms,
+binds actual isolated argv/new identity/lease/role sequence, records same-read
+closing path tuples and cross-author sidecars, and retains bounded cleanup facts.
+[Software/zero-launch report](validation/p17_m2_source_stability_export.md) and
+[independent review](validation/p17_m2_source_stability_export_independent_review.md)
+retain all public-fixture failures/costs and actual regression/publication evidence.
+Final required checks passed2417/1 unchanged platform skip; fresh independent
+integration332 passed. The earlier2416/1 complete-check attempt predating the
+last wire correction and every focused failure/cost remain in the report.
+Writer coverage remains UNKNOWN: manual CLI records and idle chats cannot supply
+actual writer/sync/restore exclusion. Custodian and reviewer close formal entry
+NO_SOURCE_ADMISSION_KEEP_STOP,0/6, old stat/read0, no new DATA roots/plan/lease,
+formal paid0/3600s; unused allowances closed. No registry/export/input PASS,
+D/cause recovery, B/C or automatic sequel. Fixed P17/uniform/science pause,
+FULL_V2_OPEN_NO_ADMITTED_ROUTE,4GiB/independent preflight/full-fit PENDING, B3 M2+
+independent Ubuntu24.04/two scales/final reproduction and every old failure/cost/
+quota/UNKNOWN/seal stay. Only a fresh finite owner decision with concrete writer
+controls could allow a later source attempt; this publication does not start it.
