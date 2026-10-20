@@ -6,11 +6,19 @@ resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
 
-Latest software maintenance: F-only owner grant2026-10-20: [public failure recording repair](p17_m2_input_failure_recording_repair.md)
-and [fresh different-author review](p17_m2_input_failure_recording_repair_independent_review.md).
-Versioned source/new fixtures only, executor2h/reviewer1h plus one90min publication;
-D UNRUN_NOT_AUTHORIZED, no old reads/R retry/B/C. Historical cause/full RSS and
-all costs/quotas/seals remain; complete F software publication and STOP.
+Latest documentation slice: [new R-STABLE source stability/export proposal](p17_m2_source_stability_export_proposal.md),
+with [contract](../planning/p17_m2_source_stability_export_proposal.md) and
+[JSON](../planning/p17_m2_source_stability_export_proposal.json). Documents, required
+regression and normal publication only; no implementation/old stat-read/formal R/B/C.
+Future source control/roles/budgets are ungranted; D is not a prerequisite.
+
+Prior software maintenance F is published/closed through PR211/mainb0fe235 and
+all four exact-main CI39473450571 jobs. [F report](p17_m2_input_failure_recording_repair.md)
+and [different-author review](p17_m2_input_failure_recording_repair_independent_review.md)
+retain their precommit wording. Final local2290 passed/1 platform skip, while
+the original unchanged cleanup assertion failure/cost and UNKNOWN cause remain;
+passing repeats establish no cleanup fix. D stays UNRUN_NOT_AUTHORIZED; no R retry
+or B/C is granted. All old costs/UNKNOWN/quotas/seals remain.
 
 Latest completed B4 slice: **B4.51 FAIL_PROCESS_SOURCE_FREEZE**. Its217/404
 checks are post-stop TEXT only, not protocol acceptance; both quotas remain1/1

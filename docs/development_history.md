@@ -2219,3 +2219,38 @@ repeat; the first2289 passed/1 failed native cleanup assertion and its662.227495
 command cost remain. The later own-group disappearance and fresh bounded
 verification do not rewrite that failure. F source/foundation/guards stay frozen;
 normal exact-head PR/main publication is recorded separately, then STOP.
+
+
+## 2026-10-20 — New R source stability and restricted export contract proposal
+
+Assigned57b5 recovered clean detachedb0fe235, verified current main/openPR0,
+merged PR211 and exact-main CI39473450571 all-four success. F is published and
+closed; first unchanged cleanup assertion failure/cost/cause UNKNOWN remains,
+with frozen F/R reports retained. Contract evidence uses versioned docs/necessary
+source text; the supplied-chat context read is disclosed in validation. No old
+external stat/read or evidence pointer followed.
+
+[New R-STABLE proposal](planning/p17_m2_source_stability_export_proposal.md)/
+[JSON](planning/p17_m2_source_stability_export_proposal.json) specify in-place
+custodian writer quiescence, strict same-read identities/byte/SHA guards,
+independent R0 before R1, exact40/12/528(432/96)/18 scope, F-aware production
+binding and bounded cleanup acceptance. Six newly proposed FULL caps total3600s,
+common formal4500s; preparation7200/3600, source publication7200 and result
+publication7200/review1800 are ungranted, no old balance transfer. Historical D
+cause may stay UNKNOWN; no snapshot/permission change, proof/guard chain or B/C.
+
+Only documents, mandatory software regression and normal protected publication
+are authorized. [Validation](validation/p17_m2_source_stability_export_proposal.md)
+records actual checks; exact PR/main CI and final merged-only cleanup are later
+publication observations in the associated PR/new release record. Current EN/ZH
+entries, status, AGENTS, policy and indices agree. Fixed P/17/uniform/science pause,
+FULL_V2_OPEN_NO_ADMITTED_ROUTE,4GiB/independent preflight/full-fit PENDING and all
+old failures/costs/UNKNOWN/quotas/seals/B3 obligations stay. Unique next item is
+the scoped new owner grant and custodian control package; unavailable means keep
+STOP. No implementation, old stat/read, formal R/B/C or automatic successor.
+
+Document precommit regression passed all five checks:2290 passed/1 unchanged
+Linux-only platform skip,697.54s test time/716.507428s whole pytest invocation.
+Final working/staged/all-upload guards cover13 documents and876 local links/
+anchors; numerical source/tests/locks/workflows/frozen reports/history prefix
+remain. PR/main observations are filed only after actual completion, not presumed.

@@ -176,6 +176,16 @@ See the [F report](validation/p17_m2_input_failure_recording_repair.md). D and i
 optional log/read exception remain unapproved; no old stat/read, D/environment-identity/power query,
 R retry, B/C or successor follows. The workflow/protection rules below are unchanged.
 
+F subsequently completed through PR211/mainb0fe235 and all four exact-main
+CI39473450571 jobs. Its frozen reports keep their earlier publication wording;
+first unchanged cleanup failure/cost/cause UNKNOWN remains. The current owner
+instruction authorizes only [new R-STABLE contract documents](planning/p17_m2_source_stability_export_proposal.md),
+[JSON](planning/p17_m2_source_stability_export_proposal.json), required software
+regression and normal publication. Proposed source control, new phased budgets,
+old-byte/temporary-parse/closing-stat exception and fresh role remain ungranted.
+No implementation/old stat-read/formal R/B/C/D or successor. D is not a prerequisite.
+No old root/role/balance reopens. This supplement changes no publication protection.
+
 All four existing CI jobs remain applicable on latest PR head and main:
 quality, frontend, clean-linux-smoke and i1-native-software. Their software
 success cannot admit M2 resources or pass a scientific Gate.

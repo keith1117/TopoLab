@@ -1,0 +1,603 @@
+{
+  "schema": "topolab.v2.p17-m2-source-stable-export.proposal.v1",
+  "execution_identity_proposed": "topolab.v2.p17-m2-source-stable-export.v1",
+  "status": "PROPOSED_NOT_AUTHORIZED_DOCUMENTS_ONLY",
+  "date": "2026-10-20",
+  "timezone": "America/New_York",
+  "normative_document": "p17_m2_source_stability_export_proposal.md",
+  "executable": false,
+  "current_authority": {
+    "documents_required_software_regression_normal_GitHub_publication": true,
+    "implementation": false,
+    "old_external_stat_read_allowlist": [],
+    "formal_R": false,
+    "B": false,
+    "C": false,
+    "D": false,
+    "new_independent_agent_commissioned": false,
+    "automatic_successor": false
+  },
+  "recovered_state": {
+    "assigned_worktree": "/Users/keith1117/.codex/worktrees/57b5/TopoLab",
+    "initial_HEAD": "b0fe2350ac68a88a05e974926a2b0fe6a1302bf7",
+    "initial_branch": "DETACHED",
+    "uncommitted": [],
+    "untracked": [],
+    "main_same": true,
+    "open_PRs": [],
+    "F_PR": 211,
+    "F_PR_status": "MERGED",
+    "F_main_CI": 39473450571,
+    "all_four_exact_main_jobs": "SUCCESS",
+    "F": "PUBLISHED_CLOSED_NO_REPEAT"
+  },
+  "scope_reference": {
+    "path": "docs/planning/p17_m2_input_export_preparation_proposal.json",
+    "sha256": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "inherit_only_JSON_pointers": [
+      "/checkpoints",
+      "/NN",
+      "/scalars",
+      "/byte_caps_proposed",
+      "/R0/metadata_root",
+      "/R0/literal_bootstrap_files",
+      "/R0/embedded_B3_data_index_sha256",
+      "/R0/non_target_embedded_metadata",
+      "/R0/bounded_additional_metadata",
+      "/R0/W_context_sha256",
+      "/R0/maximum_metadata_files_per_role",
+      "/R0/metadata_read_passes_per_role",
+      "/R0/source_registry_fields",
+      "/R0/unknown_reference_history_anchor",
+      "/R0/independent_source_acceptance_required_before_R1",
+      "/R0/unknown_or_inconsistent_lineage",
+      "/R0/UNKNOWN_interpretation",
+      "/R0/payload_open_or_stat",
+      "/R0/registry_NOT_actual_payload_acceptance",
+      "/R1/new_preparation_role_exception",
+      "/R1/old_source_full_read_passes_per_file_max",
+      "/R1/passes",
+      "/R1/science_A_B_C_permissions_expanded",
+      "/R1/denied",
+      "/R1/full_history_analysis_FEM_filter_projection_sensitivity_inference_refit",
+      "/R1/selection_metadata",
+      "/R1/strict_JSON",
+      "/R1/outputs",
+      "/R1/file_guard",
+      "/R1/source_immutability",
+      "/R1/new_backup_scope",
+      "/R1/actual_payload_check"
+    ],
+    "never_inherit": [
+      "status",
+      "current_authority",
+      "owner_execution_authorization",
+      "old identity/root/freeze/roles/budgets/quotas/PASS/results",
+      "old unused balances or retry permission"
+    ],
+    "meaning": "content identities/fields/derivations/denials/byte/read limits only; original future/permitted wording never grants new access"
+  },
+  "exact_inputs": {
+    "R0": {
+      "files_per_author": 40,
+      "structure": {
+        "literal_bootstrap": 7,
+        "W_units": 3,
+        "reference_units": 18,
+        "selected_selection_metadata": 12
+      },
+      "identity_sources": [
+        "/R0/literal_bootstrap_files",
+        "/R0/bounded_additional_metadata",
+        "/R0/embedded_B3_data_index_sha256",
+        "/R0/W_context_sha256"
+      ],
+      "original_reads_per_file_per_author": 1,
+      "payload_stat_or_open": false,
+      "independent_full_registry_and_hash_acceptance_before_R1": true,
+      "first_observed_reference_progress_summary": "current R0 identities with known context, exact18 closed chain, published audit and custodian declaration; not historical tamper-free anchors"
+    },
+    "checkpoints": [
+      {
+        "family": "C",
+        "seed": 17,
+        "epoch": 168,
+        "source": "B4.1"
+      },
+      {
+        "family": "C",
+        "seed": 29,
+        "epoch": 137,
+        "source": "B4.1"
+      },
+      {
+        "family": "C",
+        "seed": 43,
+        "epoch": 92,
+        "source": "B4.1"
+      },
+      {
+        "family": "P",
+        "seed": 17,
+        "epoch": 123,
+        "source": "B4.1"
+      },
+      {
+        "family": "P",
+        "seed": 29,
+        "epoch": 134,
+        "source": "B4.1"
+      },
+      {
+        "family": "P",
+        "seed": 43,
+        "epoch": 169,
+        "source": "B4.1"
+      },
+      {
+        "family": "W",
+        "seed": 17,
+        "epoch": 93,
+        "source": "B4.5 weighted-terminal"
+      },
+      {
+        "family": "W",
+        "seed": 29,
+        "epoch": 156,
+        "source": "B4.5 weighted-terminal"
+      },
+      {
+        "family": "W",
+        "seed": 43,
+        "epoch": 142,
+        "source": "B4.5 weighted-terminal"
+      },
+      {
+        "family": "S",
+        "seed": 17,
+        "epoch": 65,
+        "source": "B4.1"
+      },
+      {
+        "family": "S",
+        "seed": 29,
+        "epoch": 115,
+        "source": "B4.1"
+      },
+      {
+        "family": "S",
+        "seed": 43,
+        "epoch": 127,
+        "source": "B4.1"
+      }
+    ],
+    "checkpoint_schema": {
+      "tensors": 10,
+      "dtype": "F32",
+      "parameters": 26433,
+      "body_bytes": 105732,
+      "keys_shapes_offsets": "exact /checkpoints/tensor_header_schema in content reference",
+      "resave_reselect_model_execution": false
+    },
+    "NN": {
+      "logical_cases": 528,
+      "small_12x6x3": 432,
+      "large_24x12x6": 96,
+      "source": "exact B3.4 role=train union; canonical case_id order; overlapping468/508/488 add no labels",
+      "actual_case_ids_paths_bytes_hashes": "UNKNOWN_R0_ONLY_AFTER_NEW_GRANT",
+      "producer_files": 528,
+      "audit_files": 528,
+      "producer_fields_ref": "/NN/producer_fields and /NN/source_field_pointers",
+      "audit_fields_ref": "/NN/audit_additional_fields and /NN/source_field_pointers",
+      "common_fields_ref": "/NN/identity_metadata_in_both_views",
+      "actual_F64_and_stored_F32_separate": true,
+      "last_original_updates_max": 11,
+      "physical_plateau_original_updates_required": 11,
+      "bit_digest": "little-endian IEEE F32/F64 with exact flat order/dtype/shape/length/signed zero",
+      "new_filter_projection_FEM_sensitivity_inference_training": false,
+      "NN_algorithm": "unchanged10-channel encode_case/per-scale population/float64 MSE/case_id tie break"
+    },
+    "uniform": {
+      "count": 18,
+      "case_ids_ref": "/scalars/case_ids",
+      "origin": "original B4.30 v2 sentinel/reference successful uniform packets, no failure/fallback",
+      "fields_ref": "/scalars/output_fields and /scalars/status_source_fields",
+      "original_binary64_bits": true,
+      "time_density_candidate_history_export": false,
+      "future_use": "compatibility only;18 new uniform timing denominators and rtol1e-9/atol0 remain future C"
+    },
+    "R1_originals_per_author": 558,
+    "R1_original_byte_passes_per_file_per_author": 1,
+    "R1_new_source_exception": "full original bytes for SHA and bounded temporary ordinary JSON parse; full history can transiently materialize; semantics only named fields/count/last<=11; never persist/print/analyze full originals/history",
+    "old_byte_cap_per_author": 926941184,
+    "old_byte_cap_two_authors": 1853882368,
+    "byte_caps": {
+      "R0_total_per_role": 33554432,
+      "R0_first_index": 16777216,
+      "R0_other_literal_each": 1048576,
+      "unit_metadata_each": 32768,
+      "selection_metadata_each": 262144,
+      "checkpoint_each": 1048576,
+      "all_checkpoints_per_role": 12582912,
+      "NN_source_each": 67108864,
+      "NN_source_total_per_role": 805306368,
+      "uniform_packet_each": 4194304,
+      "all_uniform_packets_per_role": 75497472,
+      "NN_producer_each": 131072,
+      "NN_producer_total": 33554432,
+      "NN_audit_each": 2097152,
+      "NN_audit_total": 268435456,
+      "scalar_output_total": 65536,
+      "interpretation": "rejection/investment caps; actual sizes unobserved; not a memory theorem; no truncation/replacement/limit growth"
+    },
+    "new_closing_stat_permission": "one nofollow leaf-path stat in same granted source read transaction, exact tuple versus descriptor; no extra content pass; R0 never payload stat",
+    "source_guards": "nofollow directory traversal from /, regular file, exact path, preopen aggregate cap, exact size/SHA and declared/before/after tuple checks unchanged; strict duplicate-free finite JSON depth<=64 and exact dimensions",
+    "denied": [
+      "directory/glob/index-tree discovery beyond explicit R0 list",
+      "backup members",
+      "old raw logs or non-uniform candidate outcomes",
+      "fit-validation/test/OOD/final payload",
+      "other models/labels",
+      "conditional48/720 and unused48/seals",
+      "old B3 full-history validators/campaign/upstream_fits execution"
+    ],
+    "future_C_two_terminal_FEMs_per_label": "RETAINED_NOT_RUN"
+  },
+  "source_stability": {
+    "selected_approach": "IN_PLACE_CUSTODIAN_QUIESCENCE_NO_SNAPSHOT_OR_PERMISSION_CHANGE",
+    "custodian": "OWNER_OR_NAMED_DATA_CUSTODIAN_NOT_YET_BOUND",
+    "source_namespaces": [
+      "b3-v1-fits",
+      "b4-5-weighted-terminal/fit",
+      "b3-v1-data",
+      "b4-30-z-reflection-repair-v2"
+    ],
+    "before_activation": [
+      "attributed proposed writer_quiescence.json with named potential writers, intended stopped/excluded actions and control coverage from custodian knowledge; no old stat or discovery probe",
+      "explicit future owner permission for only specifically named pause actions; no generic service shutdown",
+      "affirmative no-writer explanation if list empty; uncontrolled or unknown writer coverage refuses activation"
+    ],
+    "through_source_exits": [
+      "no writes/rename/replace/sync restore/generation/training/editor updates by named controlled writers",
+      "exclusive NEW cooperative lease bound to new identity/plan/custodian; other writers must actually honor interval",
+      "strict serial source roles; output only NEW root; one-read transaction with before/after tuple and closing nofollow leaf stat",
+      "independent same original tuple/bytes/SHA versus exporter for all40 metadata and558 payload originals; separate new sidecars preserve existing field schemas",
+      "acquisition/release acknowledgments, actual UTC interval and events bound; interruption losing required evidence STOP"
+    ],
+    "identity_tuple": [
+      "st_dev",
+      "st_ino",
+      "st_size",
+      "st_mtime_ns"
+    ],
+    "independent_control_acceptance_before_any_old_stat": true,
+    "lock_alone_proves_outside_writers_stopped": false,
+    "guarantee": "cooperative operational control plus exact fail-closed reads, not hostile-writer exclusion theorem",
+    "filesystem_atime": "may update; no absolute zero metadata-write claim",
+    "snapshot_chmod_chflags_ACL_xattr_hardlink_rename_old_copy_restore": false,
+    "sleep_power_query_or_no_sleep_proof": false,
+    "unavailable": "NO_SOURCE_ADMISSION_KEEP_STOP; no automatic snapshot/permission/provider/guard successor",
+    "historical_attempt12_cause_required": false,
+    "formal_setup_within_300_seconds": "after one readiness activation, all specifically authorized named writer pauses, actual acknowledgments/coordination/waits, NEW lease and final plan freeze fit plan/lease300 before first dispatch; failure refuses old access; no hidden preactivation labor"
+  },
+  "minimum_future_software": [
+    {
+      "component": "existing exporter and independent reader",
+      "change": "explicit new identity/root/content-only hash, quiescence/lease binding, same-transaction closing leaf stat, cross-role tuple sidecar; replace hardcoded F failure identity only for explicit new-R binding",
+      "preserve": "field/IEEE/register algorithms, source guards, F public-only and old R closures"
+    },
+    {
+      "component": "existing controller and JS dispatcher",
+      "change": "explicit new-R production plan/entry and FULL/readiness/source/role/control/CI/STOP binding; cannot reuse F public entry or old boolean grant"
+    },
+    {
+      "component": "existing independent replay",
+      "change": "new production identity with F raw known facts, cost/RSS/exits and primary/secondary failures; require domain and evidence success; producer PASS is not oracle"
+    },
+    {
+      "component": "scripts/p17_m2_resource_control.py only concrete cleanup boundary as needed",
+      "change": "bounded same-launch group disappearance/reap observation after signals, <=5 seconds inside reserve; initial/final facts retained; persistent false/unknown STOP",
+      "historical_cause_claim": false
+    },
+    {
+      "component": "existing related public tests",
+      "change": "actual entry/new source/cleanup failure fixtures; no algorithm/FEM/training/dependency/CI/provider/proof work"
+    }
+  ],
+  "cleanup": {
+    "existing_hard_requirement": "every registered required group_gone is True and actual exits observed; leader exit insufficient",
+    "known_F_first_regression": "unchanged sampler-failure test returned group_gone=false, later disappearance; cause UNKNOWN; first failure and cost retained",
+    "later_passing_checks_prove_fixed": false,
+    "proposed_observation_seconds_max": 5,
+    "relaunch_or_retry_payload": false,
+    "signals_scope": "same launch registered groups only; no broad process kill",
+    "unconfirmed": "STOP, no source successor or shared closeout process; preserve available trusted frontier and UNKNOWN backup"
+  },
+  "future_public_acceptance": [
+    "deterministic delayed disappearance, leader-gone descendant-alive, ESRCH/permission/unknown, persistent-false cleanup, timeout/sampler failure and actual last exits",
+    "new native sampler-failure fixture and unchanged source success; mtime/size change, replacement before/after open, returned-byte/read exception",
+    "missing supervisor/serializer/helper/RSS, malformed raw events, missing last return, overcap, wrong or frozen identity",
+    "F tuples/bytes/primary-secondary causes and Python/JS raw fact/UNKNOWN agreement; fully measured negative stays STOP",
+    "strict complete source/field/IEEE/full-registry tests and all five existing mandatory commands before freeze; every failed public attempt/cost retained"
+  ],
+  "future_roles": {
+    "executor": "/root_PROPOSED_NOT_NEWLY_GRANTED",
+    "independent": "NOT_YET_APPOINTED",
+    "proposed_fresh_role_label": "review_r_stable_export_v1",
+    "new_different_author_required": true,
+    "before_patch_exposure": "write own source-control/cleanup/failure/clock/budget expectations; preserve authorship snapshot",
+    "after": "nonblind disclosed cross-review; reuse original independent field algorithms, never producer PASS oracle",
+    "old_A_R_F_role_time_reactivated": false
+  },
+  "future_budgets_NOT_GRANTED": {
+    "phases": [
+      {
+        "name": "software_preparation",
+        "executor_seconds": 7200,
+        "independent_seconds": 3600,
+        "start": "each actual first preparation tool, continuous; includes reads/minimal changes/fixtures/review/failures/directed waits/report"
+      },
+      {
+        "name": "source_regression_publication",
+        "executor_seconds": 7200,
+        "independent_seconds": 0,
+        "start": "first mandatory source check; all regression/upload/PR/push/main-CI waits/safe source switch/readiness filing"
+      },
+      {
+        "name": "formal_preparation",
+        "executor_seconds": 4500,
+        "independent_seconds": 4500,
+        "start": "one common readiness activation after published source/all4 exact-main CI/review/five checks/clean locked state and both authors ready"
+      },
+      {
+        "name": "result_review_publication",
+        "executor_seconds": 7200,
+        "independent_seconds": 1800,
+        "start": "executor at actual formal close or preformal STOP; reviewer at actual first result-review tool within executor phase; includes all checks/CI/final filing/cleanup/last return"
+      }
+    ],
+    "executor_total_seconds": 26100,
+    "independent_total_seconds": 9900,
+    "prep_and_publication_closure_reserve_seconds": 120,
+    "formal_FULL_roles": [
+      {
+        "order": 1,
+        "role": "independent-public-check",
+        "FULL_seconds": 300,
+        "allowance_components_seconds": [
+          120,
+          60,
+          60,
+          50,
+          10
+        ],
+        "predecessor": "new public fixtures; completed independent review, merged all-four-main-CI and frozen control plan",
+        "max_launches": 1
+      },
+      {
+        "order": 2,
+        "role": "exporter-r0",
+        "FULL_seconds": 300,
+        "allowance_components_seconds": [
+          180,
+          60,
+          30,
+          20,
+          10
+        ],
+        "predecessor": "independent public full-role PASS; new old-source exception and live writer quiescence/lease",
+        "max_launches": 1
+      },
+      {
+        "order": 3,
+        "role": "independent-r0",
+        "FULL_seconds": 300,
+        "allowance_components_seconds": [
+          180,
+          60,
+          30,
+          20,
+          10
+        ],
+        "predecessor": "complete exporter R0; independently reconstruct all40 metadata, tuples and declared payload caps",
+        "max_launches": 1
+      },
+      {
+        "order": 4,
+        "role": "exporter-r1",
+        "FULL_seconds": 1200,
+        "allowance_components_seconds": [
+          900,
+          150,
+          60,
+          80,
+          10
+        ],
+        "predecessor": "independent entire R0 registry/hash, domain and full-role PASS",
+        "max_launches": 1
+      },
+      {
+        "order": 5,
+        "role": "independent-r1",
+        "FULL_seconds": 1200,
+        "allowance_components_seconds": [
+          900,
+          150,
+          60,
+          80,
+          10
+        ],
+        "predecessor": "complete exporter restricted outputs; compare own558 originals and all fields/IEEE/tuples",
+        "max_launches": 1
+      },
+      {
+        "order": 6,
+        "role": "shared-closeout",
+        "FULL_seconds": 300,
+        "allowance_components_seconds": [
+          180,
+          60,
+          30,
+          20,
+          10
+        ],
+        "predecessor": "one successful or STOP-prefix NEW-only closeout, only after required groups confirmed gone",
+        "max_launches": 1
+      }
+    ],
+    "formal_FULL_total_seconds": 3600,
+    "formal_disjoint_overhead_caps_seconds": {
+      "plan_lease": 300,
+      "between_roles_total": 240,
+      "final_frontier_retention_and_release": 360
+    },
+    "formal_window_seconds": 4500,
+    "first_dispatch_minimum_remaining_seconds": 4200,
+    "later_dispatch": "entire remaining FULL sequence + remaining coordination + final360 must fit immutable common deadline",
+    "formal_accounted_cap": "sum(started immutable FULLs) + disjoint actual outside-role overhead <=4500; whole formal observed wall <=4500 too",
+    "formal_price_is_prediction": false,
+    "role_charge": "FULL on start, no refund; shared300 charged once on first dispatch even unused; unstarted source roles0/closed; no transfer",
+    "minimum_acceptance": "max(whole_wall+10, independently_reconciled_minimum)<=FULL exactly; all helpers/flush/failure cleanup and final tool return included",
+    "known_overrun_lower_bound": "max(FULL,ceil(whole_wall+10),ceil(independent_minimum)); additionally retain UNKNOWN_NOT_ZERO; original cap violation STOP never repaired",
+    "FULL_allowance_rationale": "fixed original byte workload plus explicit F/error/RSS/replay/cleanup/dispatch/flush margins; unmeasured subphase maxima and full R1 runtime remain UNKNOWN, not guaranteed completion",
+    "publication_cap_rationale": "each120min covers complete existing regression and sequential exact-head/main CI plus filing; F ~662s suite observation and Rv3 result3600s overrun are context, not new throughput/CI guarantees",
+    "all_debug_failure_wait_CI_and_actual_last_return_count": true,
+    "phase_author_transfer_pause_reset_or_hidden_directed_wait": false,
+    "cost_views": "author/command/FULL/CI job views overlap; do not double-add; outside-role overhead and custodian effort explicitly recorded",
+    "existing_fees": "UNKNOWN_NOT_ZERO",
+    "new_purchase_paid_expansion_USD": 0,
+    "new_paid_action": "owner currency/rate/maximum/payer approval first; otherwise STOP",
+    "CI_pending_at_cap": "retain pending/failed and STOP; no automatic rerun/extension/bypass",
+    "unentered_phases": "cost0 and unused allowance closed/nontransferable; failed preparation costs retained"
+  },
+  "future_freeze": {
+    "unknown_actual_fields": "UNKNOWN_UNFROZEN_NO_LAUNCH",
+    "before_activation": [
+      "actual protected-merged commit/tree/uv.lock/interpreter/module hashes",
+      "actual official main push run with exact merged SHA and quality/frontend/clean-linux-smoke/i1-native-software all completed/success",
+      "completed public independent source/cleanup review and all five checks; clean locked worktree",
+      "new grant/fresh independent author/custodian/quiescence control package",
+      "literal argv/cwd/helpers/role/clock/RSS-unit-overlap/source permission/cost tables and new plan binding; five thread variables1",
+      "both authors ready; whole formal pipeline plus closure fits",
+      "finite public fixture/inner-start/count/order table, all source and final-filing helper coverage before dispatch; missing mandatory actual table NO_LAUNCH"
+    ],
+    "only_source_additions_after_freeze": "predeclared R0 registry/sidecars and R1 measured facts, never scope/authority/cap changes",
+    "formal_deadlines": "same once-only actual activation+4500s for both authors",
+    "new_output_root": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-stable-export-v1",
+    "new_backup_root": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-stable-export-v1-independent-backup",
+    "current_new_root_stat_or_create": false,
+    "existing_root": "STOP_NO_OVERWRITE_CLEAR_OR_NAME_SEARCH",
+    "raw_event_frontier": "finite trusted external-tool actual return; internal PENDING_EXTERNAL_EXIT never certifies future exit; no recursive observer proof"
+  },
+  "resource": {
+    "environment": "CURRENT_M2_NATIVE_CPU_EXISTING_GITHUB_SOFTWARE_CI_ONLY",
+    "RSS_limit_bytes": 4294967296,
+    "metric": "ADOPTED_B430_STYLE_NATIVE_RSS_COMPLETE_EXIT_EMPIRICAL_NEW_M2_ONLY",
+    "independent_public_IO_before_old_stat": true,
+    "B_FORMAL_preflight": false,
+    "all_source_roles_own_RSS_exit_required": true,
+    "coverage": "native high-water and wait4/exits; group/controller samples target0.5s and actual intervals; all helpers and conservative overlaps, no shared deduction; maximum native/sample/independent envelope",
+    "Darwin_native_RSS_unit": "bytes",
+    "ps_RSS_unit": "KiB*1024",
+    "OOM_online_or_postexit_overcap": "FAIL_STOP_EVEN_EXIT0",
+    "missing_RSS_unit_helper_exit_cleanup": "UNKNOWN_STOP",
+    "advance_allocation_kernel_or_whole_host_guarantee": false,
+    "host_non_RSS_terms": "UNKNOWN"
+  },
+  "new_backup": {
+    "new_outputs_only": true,
+    "old_backup_or_original_copy_except12_checkpoint_exports": false,
+    "files_max": 20000,
+    "file_bytes_max": 67108864,
+    "inventory_bytes_max": 536870912,
+    "independent_exact_members_bytes_SHA_no_links_or_extra": true,
+    "late_stable_records_included": true,
+    "last_trusted_return_packet": "filed and independently compared into NEW backup during result publication; outside earlier measured snapshot, no retrospective measurement or seventh source role",
+    "acceptance_waits_for_last_packet_filing_backup": true,
+    "last_required_filing_helper": {
+      "seconds_max": 180,
+      "inside_result_publication_and_independent_review": true,
+      "own_RSS_actual_exit_cleanup_cost_evidence_required": true,
+      "same_RSS_limit_bytes": 4294967296,
+      "finite_frontier": "actual final tool acknowledgment; frozen backup set covers exports/six roles including shared-return packet, not recursive self-inventory of final verifier acknowledgment",
+      "failure": "NO_ACCEPTANCE_STOP_NO_RETRY"
+    }
+  },
+  "acceptance": {
+    "status": "PREPARATION_COMPLETE_SOURCE_BOUND",
+    "all40_independent_R0_and_exact12_528_18_required": true,
+    "all_source_field_IEEE_tuple_byte_read_role_checks": true,
+    "all_new_required_FULL_wall_RSS_actual_exit_cleanup_cost_records_complete": true,
+    "quiescence_interval_covers_every_source_event": true,
+    "all_new_artifacts_including_final_packet_backup_complete": true,
+    "mandatory_new_role_evidence_UNKNOWN": "NO_ACCEPTANCE_STOP",
+    "historical_or_existing_fee_UNKNOWN": "qualified and retained, not new mandatory evidence silently dropped",
+    "P17_repair_scientific_PASS_B_C_authority": false
+  },
+  "STOP": [
+    "missing new grant/fresh author/quiescence/clean locked merged all-CI source",
+    "first source identity/field/count/hash mismatch or prohibited access",
+    "required new evidence UNKNOWN including RSS/helper/exit/cleanup/cost",
+    "read/byte/time/RSS/fee/scope limit or OOM",
+    "postfreeze source/plan/role/input-domain/cap mutation",
+    "no entire remaining formal pipeline and closure reserve",
+    "preserve immutable prefix/returned bytes/primary-secondary failures/full cost and overrun, close suffix without retry/substitution/regeneration/cap transfer",
+    "only one pre-reserved NEW-only closeout if required groups gone; otherwise frontier filing and UNKNOWN backup; no automatic successor"
+  ],
+  "unknowns_and_responsibilities": [
+    {
+      "field": "writer/control/quiescence interval",
+      "status": "UNKNOWN_NOT_SUPPLIED",
+      "responsible": "owner/data custodian; attributed specific pause package, no probing; unavailable NO_SOURCE_ADMISSION_KEEP_STOP"
+    },
+    {
+      "field": "fresh author and actual production/source/CI/runtime/lease",
+      "status": "UNKNOWN_UNFROZEN",
+      "responsible": "owner appoints under new grant; implementer and independent reviewer bind future actual released source"
+    },
+    {
+      "field": "exact metadata bytes/selection refs/528 IDs/payload paths and two reference current hashes",
+      "status": "UNKNOWN_R0_ONLY",
+      "responsible": "future explicitly granted source authors; independent complete registry before R1"
+    },
+    {
+      "field": "actual payload fields/tuples/exports/full RSS/exits/cost and backup",
+      "status": "UNKNOWN_NOT_RUN",
+      "responsible": "future R1 and new-only closure under new grant"
+    },
+    {
+      "field": "historical attempt12 tuple member/cause/bytes/full RSS and F cleanup transient cause",
+      "status": "UNKNOWN_RETAINED",
+      "responsible": "no recovery required or authorized; not a D prerequisite"
+    },
+    {
+      "field": "existing fees/whole-project cost and B/C admission tables",
+      "status": "UNKNOWN_NOT_ZERO_OR_UNGRANTED",
+      "responsible": "owner for any new paid action and later separate B/C decision"
+    }
+  ],
+  "preserved": {
+    "FULL_V2_OPEN_NO_ADMITTED_ROUTE": true,
+    "fixed_P17": "UNREPAIRED",
+    "default": "uniform",
+    "science": "PAUSED",
+    "full_fit": "PENDING_4GiB",
+    "independent_preflight": true,
+    "B451": "FAIL_PROCESS_SOURCE_FREEZE_BOTH_QUOTAS_CONSUMED1/1",
+    "D1": "STOP_UNLAUNCHED0/1_FULL60_OWNER_CLOSED_RESCUE",
+    "I1": "RESOURCE_UNKNOWN",
+    "B452": "NOT_SELECTED_BY_R1",
+    "known_paid_K_seconds": "12721.16417100014444982>7200",
+    "R_v1": "STOP_PAID180_CLOSED1680",
+    "R_v2": "UNLAUNCHED_PAID0_CLOSED1860",
+    "R_v3": "STOP_NO_RETRY_3/6_LAUNCHED_METADATA12_ATTEMPTED11_HASHES_PAYLOAD0/12/528/18_PAID300_CLOSED1560",
+    "Rv3_result_overrun_seconds": "18.633086",
+    "Rv3_separate_followup_seconds": "335.755696",
+    "F_first_unchanged_cleanup_failure_and_cost": "RETAINED_CAUSE_UNKNOWN_NOT_FIXED_BY_LATER_PASS",
+    "all_old_costs_UNKNOWN_quotas_seals_and_frozen_bytes": "UNCHANGED",
+    "B_guest": "ADOPTED_PROSPECTIVELY_ENVIRONMENT_NOT_ADMITTED_HOST_OVERHEAD_UNKNOWN",
+    "B3": "M2_PLUS_INDEPENDENT_UBUNTU24_04_BOTH_SCALES_FINAL_INDEPENDENT_REPRODUCTION"
+  },
+  "only_next_owner_decision": "Grant or decline this new phased finite capability, exact original full-byte/temporary-parse plus same-read closing-stat exception, fresh different author, and custodian specific writer pauses/current-observation provenance boundary; no D/B/C. If control package cannot close, keep STOP without generic proof/guard successor.",
+  "current_slice_stop": "After required documentation regression/normal protected PR and exact-main CI/merged-only cleanup, retain assigned worktree and STOP; no implementation/old stat-read/formal R/B/C/successor."
+}

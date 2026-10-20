@@ -9,16 +9,18 @@
 本文记录所有者在本对话中认可的复盘、新期望和后续工作规则，属于交付治理调整，
 不是新的数值实验合同、科研 Gate 或预算授权。
 
-F公开软件实现/独立审查及本地五项检查已完成：2290通过、1平台跳过；首轮清理断言失败仍照记。
-报告撰写时仅剩正常PR/main各四项CI保护发布；完成这一阶段即STOP，不重开F。
-当前所有者范围（2026-10-20）：明确授权仅执行F，依据已发布的
-[有限提案](p17_m2_input_failure_diagnostic_repair_proposal.md)及[JSON](p17_m2_input_failure_diagnostic_repair_proposal.json)；
-原PROPOSED快照保留字节。F仅用M2、现有CI、版本化源码和新公开fixtures修复失败记录，
-委派新不同作者；执行准备2小时、独立审查1小时、随后一轮90分钟回归/保护发布。
-见[F执行报告](../validation/p17_m2_input_failure_recording_repair.md)及[独立审查](../validation/p17_m2_input_failure_recording_repair_independent_review.md)。
-D保持UNRUN_NOT_AUTHORIZED，不开启D窗口或第二轮发布；历史原因及失败完整RSS仍UNKNOWN。
-输入身份保护、4GiB/独立预检及旧合同、成本、配额、封存不变；无旧源stat/read、D/环境身份/电源查询、
-R重试、B/C或自动后继。本片完成F软件发布即停止；后续准备须另订来源稳定性/输入/计费合同并获所有者授权。
+F已完成发布并关闭：[PR211](https://github.com/keith1117/TopoLab/pull/211)、
+main `b0fe2350ac68a88a05e974926a2b0fe6a1302bf7`，
+[精确main CI39473450571](https://github.com/keith1117/TopoLab/actions/runs/39473450571)四项成功。
+最终本地2290通过/1平台跳过；首轮unchanged清理断言失败/费用及原因UNKNOWN仍保留，不能称已修复。
+冻结F报告保留提交前“发布待完成”语境，不重做F。
+
+当前仅授权新的[来源稳定性/受限导出合同文档](p17_m2_source_stability_export_proposal.md)、
+[JSON](p17_m2_source_stability_export_proposal.json)、规定软件回归及正常发布。
+拟议原路径写者静止、严格核源、独立R0先于R1、F生产绑定/清理验收及新预算均待另行批准；
+新执行/旧原件权限为0，新的不同作者未任命。D不是前置条件，历史原因/失败完整RSS仍UNKNOWN。
+不实现、不旧stat/read、不正式R/B/C、不查询环境/电源、不自动后继；发布后只等提案中的一次有限所有者决定。
+保留4GiB/独立预检、固定P/17未修复、uniform/科研暂停及旧合同、成本、配额、UNKNOWN和封存。
 
 历史R/v3保持STOP_NO_RETRY：源码PR208/main5b01c13/四项CI先于正式开启；六角色规定不变，
 实际启动3个（公开PASS/R0 STOP/共享PASS）。尝试12元数据、完成11哈希/2619248字节；第12份fstat
