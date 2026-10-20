@@ -2,12 +2,16 @@
 
 英文工作版：[v2 Development Roadmap](./TopoLab_v2_development_roadmap.md)
 
-当前所有者范围（2026-10-20）：仅编写[有限故障诊断与记录最小修复提案](p17_m2_input_failure_diagnostic_repair_proposal.md)
-及[JSON](p17_m2_input_failure_diagnostic_repair_proposal.json)，状态PROPOSED_NOT_AUTHORIZED。
-D核对历史元数据身份变化，F仅用新公开fixtures修复失败记录；历史元组/原因仍UNKNOWN不阻止公开F验收，
-输入身份检查不放宽。拟议新预算：F执行者2小时/新不同作者1小时；D双方同一10分钟窗口；
-仅F一轮90分钟发布；F加D再增一轮90分钟结果发布。均未授权执行、旧访问、R重试、正式B/C或后继。
-唯一下步为所有者决定F单独或F加精确五份收据/可选限时日志D范围；本片发布后停止。
+F公开软件实现/独立审查及本地五项检查已完成：2290通过、1平台跳过；首轮清理断言失败仍照记。
+报告撰写时仅剩正常PR/main各四项CI保护发布；完成这一阶段即STOP，不重开F。
+当前所有者范围（2026-10-20）：明确授权仅执行F，依据已发布的
+[有限提案](p17_m2_input_failure_diagnostic_repair_proposal.md)及[JSON](p17_m2_input_failure_diagnostic_repair_proposal.json)；
+原PROPOSED快照保留字节。F仅用M2、现有CI、版本化源码和新公开fixtures修复失败记录，
+委派新不同作者；执行准备2小时、独立审查1小时、随后一轮90分钟回归/保护发布。
+见[F执行报告](../validation/p17_m2_input_failure_recording_repair.md)及[独立审查](../validation/p17_m2_input_failure_recording_repair_independent_review.md)。
+D保持UNRUN_NOT_AUTHORIZED，不开启D窗口或第二轮发布；历史原因及失败完整RSS仍UNKNOWN。
+输入身份保护、4GiB/独立预检及旧合同、成本、配额、封存不变；无旧源stat/read、D/环境身份/电源查询、
+R重试、B/C或自动后继。本片完成F软件发布即停止；后续准备须另订来源稳定性/输入/计费合同并获所有者授权。
 
 历史R/v3保持STOP_NO_RETRY：源码PR208/main5b01c13/四项CI先于正式开启；六角色规定不变，
 实际启动3个（公开PASS/R0 STOP/共享PASS）。尝试12元数据、完成11哈希/2619248字节；第12份fstat

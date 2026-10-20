@@ -27,6 +27,7 @@ AUTHORIZED_DATA_ROOT = Path("/Users/keith1117/Documents/TopoLab-data")
 AUTHORIZED_R_ROOT = AUTHORIZED_DATA_ROOT / "p17-m2-input-export-preparation-v3"
 # v2 names below identify the reused wire/evidence algorithm, not old authority.
 EXECUTION_V2 = "topolab.v2.p17-m2-input-export-preparation.v3"
+EXECUTION_F = "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1"
 CONTENT_CONTRACT_SHA256 = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
 CLOCK_V2 = "functions.exec.Date.now.UTC-seconds"
 FULL_V2 = {
@@ -714,12 +715,13 @@ def _nonnegative(value: Any, *, integer: bool = False, positive: bool = False) -
     return value
 
 
-def _timer_peak(value: dict[str, Any], expected_pid: int, platform: str) -> int:
+def _timer_peak(value: dict[str, Any], expected_pid: int, platform: str,
+                *, expected_exit: int = 0) -> int:
     _nonnegative(expected_pid, integer=True, positive=True)
     require(
         value["statistics_source"] == "os.wait4"
         and value["wall_source"] == "controller_monotonic_observed"
-        and value["exit_code"] == 0
+        and type(value["exit_code"]) is int and value["exit_code"] == expected_exit
         and value["pid"] == expected_pid
         and value["rss_unit"] == ("bytes" if platform == "darwin" else "KiB*1024"),
         "timer native exit binding differs",
@@ -740,6 +742,7 @@ def audit_native_record(
     expected_role: str,
     expected_argv: list[str],
     platform: str,
+    failure_recording: bool = False,
 ) -> dict[str, Any]:
     """Reconcile only explicit NEW receipts; read no path and trust no PASS.
 
@@ -758,10 +761,13 @@ def audit_native_record(
         "resource identity/status differs",
     )
     require(
-        record["exit_code"] == 0
-        and record["software_result"] == "PUBLIC_COMMAND_EXIT_OBSERVED"
+        type(record["exit_code"]) is int
+        and (record["exit_code"] == 0 or failure_recording)
+        and record["software_result"] == (
+            "PUBLIC_COMMAND_EXIT_OBSERVED" if record["exit_code"] == 0 else "FAIL_PUBLIC_COMMAND"
+        )
         and record["cleanup"]["group_gone"] is True
-        and record["cleanup"]["leader_exit"] == 0,
+        and record["cleanup"]["leader_exit"] == record["exit_code"],
         "role child exit incomplete",
     )
     require(
@@ -782,7 +788,10 @@ def audit_native_record(
     controller = _nonnegative(record["controller_rss_peak_bytes"], integer=True, positive=True)
     launch_pid = record["pid"]
     _nonnegative(launch_pid, integer=True, positive=True)
-    timer_peak = _timer_peak(record["timer_native_exit"], launch_pid, platform)
+    timer_peak = _timer_peak(
+        record["timer_native_exit"], launch_pid, platform,
+        expected_exit=record["exit_code"] if failure_recording else 0,
+    )
     helpers, samples = record["helpers"], record["samples"]
     require(
         isinstance(helpers, list)
@@ -878,12 +887,16 @@ def audit_v2_resource_components(
     *,
     inner_evidence: dict[str, Any] | None = None,
     native_profiles: dict[str, bytes] | None = None,
+    failure_recording: bool = False,
 ) -> dict[str, Any]:
     """Reconcile raw native evidence; future external exit remains PENDING.
 
     Preserve available failed-process peaks before rejecting incomplete evidence.
     Callers must never use this resource-only return as successor admission.
     """
+    completion_is_object = isinstance(completion, dict)
+    if not completion_is_object:
+        completion = {}
     result: dict[str, Any] = {
         "status": "PENDING_EXTERNAL_EXIT",
         "execution_identity": completion.get("execution_identity"),
@@ -897,9 +910,12 @@ def audit_v2_resource_components(
         "inner_minimum_charge_seconds": None,
         "actual_component_exit_codes": [],
         "full_role_evidence_accepted": False,
+        "evidence_complete": False,
     }
     try:
-        require(completion["execution_identity"] == EXECUTION_V2,
+        require(completion_is_object, "completion must be an object")
+        require(completion["execution_identity"] == (
+            EXECUTION_F if failure_recording else EXECUTION_V2),
                 "resource completion v2 identity differs")
         peaks: dict[int, int] = {}
         components = completion["resource_components"]
@@ -952,21 +968,36 @@ def audit_v2_resource_components(
         require(serializer_seen, "UNKNOWN_MISSING_SERIALIZER_RSS")
         inner_peak, minimum = 0, 0.0
         if inner_evidence is not None:
-            inner = audit_native_record(**inner_evidence)
+            inner = audit_native_record(**inner_evidence, failure_recording=failure_recording)
             inner_peak = inner["inner_empirical_RSS_bytes"]
             minimum = inner["inner_minimum_charge_seconds"]
             result["inner_record_sha256"] = inner["record_canonical_sha256"]
+            result["inner_actual_exit_code"] = inner_evidence["record"]["exit_code"]
         else:
             require(completion["role"] == "shared-closeout", "UNKNOWN_MISSING_INNER_EVIDENCE")
         result["RSS_components_bytes"]["independently_reconciled_inner"] = inner_peak
-        result["RSS_envelope_bytes"] = sum(peaks.values()) + inner_peak
         result["inner_minimum_charge_seconds"] = minimum
-        require(all(type(code) is int and code == 0
+        if failure_recording:
+            require(completion["role"] == "public-fixture"
+                    and type(completion["frozen_FULL_seconds"]) is int
+                    and completion["frozen_FULL_seconds"] == 120,
+                    "F immutable public role/FULL differs")
+            kinds = [item["kind"] for item in components]
+            require(sorted(kinds) == ["native_profile", "self_high_water", "self_high_water",
+                                      "wait4"]
+                    and len(peaks) == 4, "UNKNOWN_INCOMPLETE_F_OUTER_INVENTORY")
+            require(inner_evidence is not None and next(
+                item["pid"] for item in components if item["kind"] == "native_profile"
+            ) == inner_evidence["record"]["controller_pid"],
+                    "F outer profile/controller identity differs")
+        result["RSS_envelope_bytes"] = sum(peaks.values()) + inner_peak
+        require(all(type(code) is int and (code == 0 or failure_recording)
                     for code in result["actual_component_exit_codes"]),
                 "native/helper actual exit nonzero or missing")
         require(completion["cleanup"]["group_gone"] is True,
                 "UNKNOWN_INCOMPLETE_GROUP_CLEANUP")
         require(result["RSS_envelope_bytes"] <= 4294967296, "retained 4GiB RSS cap exceeded")
+        result["evidence_complete"] = True
     except (KeyError, TypeError, ValueError, OverflowError) as error:
         result.update(status="STOP_NO_RETRY", reason=f"{type(error).__name__}: {error}")
     return result
@@ -999,6 +1030,8 @@ def audit_full_role_v2(
     expected_plan_sha256: str,
     inner_evidence: dict[str, Any] | None = None,
     native_profiles: dict[str, bytes] | None = None,
+    failure_recording: bool = False,
+    expected_pending_sha256: str | None = None,
 ) -> dict[str, Any]:
     """Independently bind supplied *actual* external events, never a PASS oracle.
 
@@ -1014,14 +1047,24 @@ def audit_full_role_v2(
         except (ValueError, TypeError, OverflowError):
             return None  # Malformed numeric evidence still receives a STOP record.
 
+    original_pending, original_completion = pending, completion
+    pending_is_object = isinstance(pending, dict)
+    completion_is_object = isinstance(completion, dict)
+    pending = pending if pending_is_object else {}
+    completion = completion if completion_is_object else {}
+    events_are_list = isinstance(raw_tool_events, list)
+    raw_tool_events = raw_tool_events if events_are_list else []
+    identity = EXECUTION_F if failure_recording else EXECUTION_V2
+    caps = {"public-fixture": 120} if failure_recording else FULL_V2
     result: dict[str, Any] = {
-        "schema": "topolab.v2.m2-input-export-exit.v2",
-        "execution_identity": EXECUTION_V2,
+        "schema": "topolab.v2.m2-input-failure-exit.v1" if failure_recording
+                  else "topolab.v2.m2-input-export-exit.v2",
+        "execution_identity": identity,
         "role": expected_role,
         "plan_sha256": expected_plan_sha256,
-        "pending_sha256": evidence_digest(pending),
-        "completion_sha256": evidence_digest(completion),
-        "frozen_FULL_seconds": FULL_V2.get(expected_role),
+        "pending_sha256": evidence_digest(original_pending),
+        "completion_sha256": evidence_digest(original_completion),
+        "frozen_FULL_seconds": caps.get(expected_role),
         "status": "STOP_NO_RETRY",
         "reason": "UNKNOWN_INCOMPLETE_OUTER_EVIDENCE",
         "clock_domain": None,
@@ -1031,39 +1074,45 @@ def audit_full_role_v2(
         "inner_minimum_charge_seconds": None,
         "RSS_envelope_bytes": None,
         "RSS_components_bytes": {},
-        "actual_exit_codes": [event.get("exit_code") for event in raw_tool_events],
+        "actual_exit_codes": [event.get("exit_code") if isinstance(event, dict) else None
+                              for event in raw_tool_events],
         "raw_tool_event_ids_and_hashes": [
-            {"event_id": event.get("event_id"), "sha256": evidence_digest(event)}
+            {"event_id": event.get("event_id") if isinstance(event, dict) else None,
+             "sha256": evidence_digest(event)}
             for event in raw_tool_events
         ],
         "cleanup": completion.get("cleanup"),
-        "known_cost_lower_bound_seconds": FULL_V2.get(expected_role),
+        "known_cost_lower_bound_seconds": caps.get(expected_role),
         "missing_evidence_cost": "UNKNOWN_NOT_ZERO",
         "source_successor_admitted": False,
         "full_role_evidence_accepted": False,
         "charge_record_sha256": evidence_digest(pending),
         "B_C_admission": False,
         "a_priori_allocation_guarantee": False,
+        "evidence_complete": False,
+        "domain_status": "STOP",
+        "primary_failure": completion.get("primary_failure"),
+        "secondary_failures": completion.get("secondary_failures", []),
     }
     resources = audit_v2_resource_components(
-        completion, inner_evidence=inner_evidence, native_profiles=native_profiles
+        completion, inner_evidence=inner_evidence, native_profiles=native_profiles,
+        failure_recording=failure_recording,
     )
     for key in ("RSS_envelope_bytes", "RSS_components_bytes", "inner_minimum_charge_seconds"):
         result[key] = resources[key]
     result["resource_evidence"] = resources
     try:
-        require(expected_role in FULL_V2 and bool(SHA.fullmatch(expected_plan_sha256)),
+        require(pending_is_object, "pending must be an object")
+        require(expected_role in caps and bool(SHA.fullmatch(expected_plan_sha256)),
                 "unregistered v3 role/plan")
-        cap = FULL_V2[expected_role]
+        cap = caps[expected_role]
         activation, deadline = actor_window(pending)
-        require(actor_window(completion) == (activation, deadline),
-                "completion actor window differs")
         result["actor_activation_UTC_seconds"] = activation
         result["actor_window_seconds"] = 2700
         result["actor_deadlines_UTC"] = pending["actor_deadlines_UTC"]
-        for record in (pending, completion):
+        for record in (pending,):
             require(
-                record["execution_identity"] == EXECUTION_V2
+                record["execution_identity"] == identity
                 and record["role"] == expected_role
                 and record["plan_sha256"] == expected_plan_sha256
                 and type(record["frozen_FULL_seconds"]) is int
@@ -1073,12 +1122,9 @@ def audit_full_role_v2(
             require(record["clock_domain"] == CLOCK_V2
                     and record["clock_resolution_seconds"] == 0.001,
                     "unfrozen external clock identity/resolution")
-        require(
-            completion["status"] == "PENDING_EXTERNAL_EXIT"
-            and completion["pending_sha256"] == result["pending_sha256"],
-            "internal completion/pending binding differs",
-        )
-        require(raw_tool_events, "UNKNOWN_MISSING_ACTUAL_OUTER_EVENT")
+        require(events_are_list and raw_tool_events
+                and all(isinstance(event, dict) for event in raw_tool_events),
+                "UNKNOWN_MISSING_OR_MALFORMED_ACTUAL_OUTER_EVENT")
         first = raw_tool_events[0]
         result["clock_domain"] = first["clock_domain"]
         result["T0"] = _nonnegative(first["start_seconds"])
@@ -1087,8 +1133,6 @@ def audit_full_role_v2(
                 "actual full role lies outside immutable actor window")
         whole = result["T1"] - result["T0"]
         require(whole >= 0, "outer clock regression")
-        result["whole_wall_seconds"] = whole
-        result["known_cost_lower_bound_seconds"] = max(cap, math.ceil(whole + 10))
         previous_end = result["T0"]
         ids: set[str] = set()
         for event in raw_tool_events:
@@ -1111,25 +1155,61 @@ def audit_full_role_v2(
                 and native_wall <= end - start + 0.001,
                 "raw event clock/order/argv/native-wall differs",
             )
-            require(event["complete"] is True and type(event["exit_code"]) is int,
-                    "UNKNOWN_MISSING_ACTUAL_FINAL_EXIT")
             previous_end = end
         if "external_argv" in pending:
             require(pending["external_argv"] == [event["argv"] for event in raw_tool_events],
                     "external literal argv differs")
-
-        require(resources["status"] == "PENDING_EXTERNAL_EXIT", resources["reason"])
+        # Certify the clock interval only after validating the entire raw stream.
+        # Missing exits/completion cannot erase a separately valid interval.
+        result["whole_wall_seconds"] = whole
         minimum = resources["inner_minimum_charge_seconds"]
-        result["known_cost_lower_bound_seconds"] = max(cap, math.ceil(whole + 10),
-                                                        math.ceil(minimum))
+        result["known_cost_lower_bound_seconds"] = max(
+            cap, math.ceil(whole + 10), math.ceil(minimum) if minimum is not None else 0
+        )
+        require(all(event.get("complete") is True and type(event.get("exit_code")) is int
+                    for event in raw_tool_events), "UNKNOWN_MISSING_ACTUAL_FINAL_EXIT")
+        require(completion_is_object, "completion must be an object")
+        require(actor_window(completion) == (activation, deadline),
+                "completion actor window differs")
+        require(all(completion.get(key) == pending[key] for key in (
+            "execution_identity", "role", "plan_sha256", "frozen_FULL_seconds",
+            "clock_domain", "clock_resolution_seconds")), "completion identity differs")
+        require(completion["status"] == "PENDING_EXTERNAL_EXIT"
+                and completion["pending_sha256"] == result["pending_sha256"]
+                and (not failure_recording or expected_pending_sha256 == result["pending_sha256"]),
+                "internal completion/pending binding differs")
+        require(resources["status"] == "PENDING_EXTERNAL_EXIT", resources["reason"])
+        require(max(whole + 10, minimum) <= cap, "FAIL_FULL_NAMED_WALL_CHARGE_BINDING")
+        result["evidence_complete"] = True
+        result["missing_evidence_cost"] = None
         require(all(code == 0 for code in result["actual_exit_codes"]),
                 "actual outer/final serializer exit nonzero")
-        require(max(whole + 10, minimum) <= cap, "FAIL_FULL_NAMED_WALL_CHARGE_BINDING")
-        result.update(status="PASS_R_V3_FULL_ROLE", reason=None,
+        if failure_recording:
+            require(inner_evidence is not None and inner_evidence["record"]["exit_code"] == 0
+                    and all(code == 0 for code in resources["actual_component_exit_codes"])
+                    and completion.get("domain_status") != "STOP", "payload/domain failure")
+        result.update(status="PASS_PUBLIC_SOFTWARE" if failure_recording else "PASS_R_V3_FULL_ROLE",
+                      reason=None, domain_status="PASS_PUBLIC_SOFTWARE",
                       missing_evidence_cost=None, full_role_evidence_accepted=True)
     except (KeyError, TypeError, ValueError, OverflowError) as error:
         result["reason"] = f"{type(error).__name__}: {error}"
     return result
+
+
+def audit_full_role_f(
+    pending: dict[str, Any], *, completion: dict[str, Any],
+    raw_tool_events: list[dict[str, Any]], expected_plan_sha256: str,
+    expected_pending_sha256: str, expected_role: str = "public-fixture",
+    inner_evidence: dict[str, Any] | None = None,
+    native_profiles: dict[str, bytes] | None = None,
+) -> dict[str, Any]:
+    """Pure F-only public fixture audit: no path access and no R dispatch."""
+    return audit_full_role_v2(
+        pending, completion, raw_tool_events=raw_tool_events, expected_role=expected_role,
+        expected_plan_sha256=expected_plan_sha256, inner_evidence=inner_evidence,
+        native_profiles=native_profiles, failure_recording=True,
+        expected_pending_sha256=expected_pending_sha256,
+    )
 
 
 def audit_new_backup(

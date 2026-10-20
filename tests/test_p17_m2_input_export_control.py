@@ -187,6 +187,36 @@ def test_timeout_closes_registered_sessions(tmp_path, monkeypatch):
     assert result["complete_exit"] is False  # requires actual parent reap/observer
 
 
+@pytest.mark.skipif(c.sys.platform != 'darwin', reason='selected M2 native fixture only')
+@pytest.mark.parametrize('code', [0, 1])
+def test_supervisor_binding_error_never_replaces_observed_payload_exit(
+    tmp_path, monkeypatch, code
+):
+    monkeypatch.setattr(c, 'ROOT', tmp_path)
+    monkeypatch.setattr(c, 'CAPS', {'public-fixture': 120})
+    original = c.subprocess.Popen
+
+    def fixture(argv, **kwargs):
+        return original(argv[:5] + ['-I', '-c', f'raise SystemExit({code})'], **kwargs)
+
+    def bad_bind(*args, **kwargs):
+        raise OSError('new public missing helper binding')
+
+    monkeypatch.setattr(c.subprocess, 'Popen', fixture)
+    monkeypatch.setattr(c, 'bind', bad_bind)
+    result = c.supervise({
+        'execution_identity': c.F_IDENTITY, 'fixture_exit': code,
+        'external_argv': {'public-fixture': [['new-public-supervise'], ['new-public-finalize']]},
+        **actor_fields(),
+    }, 'public-fixture', 'a' * 64)
+    assert result['outer_timer_exit'] == code
+    assert result['outer_timer_native_rss_bytes'] > 0
+    assert result['status'] == 'STOP_NO_RETRY'
+    assert result['secondary_failures'][0]['reason'] == 'new public missing helper binding'
+    assert result.get('primary_failure') == (
+        {'stage': 'payload/controller', 'type': 'ExitCode', 'reason': '1'} if code else None)
+
+
 def test_v2_full_caps_and_exact_outer_call_table():
     assert list(c.CAPS.values()) == [120, 120, 120, 780, 660, 60]
     assert sum(c.CAPS.values()) == 1860
@@ -257,6 +287,154 @@ def test_failed_finalizer_retains_own_peak_and_nonzero_exit(tmp_path, monkeypatc
     assert packet['failure']['status'] == 'STOP_NO_RETRY'
     assert packet['completion']['resource_components'][0]['samples_bytes'] == [4096, 4096]
     assert packet['resourceEvidence']['status'] == 'STOP_NO_RETRY'
+
+
+def test_missing_supervisor_keeps_wait4_and_native_facts(tmp_path, monkeypatch, capsys):
+    plan, role = v2_finalizer_files(tmp_path, monkeypatch)
+    (tmp_path / 'receipts' / (role + '-supervisor.json')).unlink()
+    assert c.finish_record(plan, role, 'a' * 64) == 1
+    packet = json.loads(capsys.readouterr().out)
+    assert packet['completion']['available_outer_records']['outer-timer-exit']['wait4']
+    assert packet['resourceEvidence']['RSS_components_bytes']
+    assert packet['resourceEvidence']['evidence_complete'] is False
+    assert packet['secondary_failures'][0]['stage'] == 'supervisor'
+
+
+@pytest.mark.parametrize('value', [[], None, 1, {'secondary_failures': None}])
+def test_malformed_supervisor_still_emits_bounded_failure_packet(
+    tmp_path, monkeypatch, capsys, value
+):
+    plan, role = v2_finalizer_files(tmp_path, monkeypatch)
+    (tmp_path / 'receipts' / (role + '-supervisor.json')).write_bytes(c.canonical(value))
+    assert c.finish_record(plan, role, 'a' * 64) == 1
+    packet = json.loads(capsys.readouterr().out)
+    assert packet['completion']['available_outer_records']['outer-timer-exit']['wait4']
+    assert packet['completion']['resource_components'][0]['samples_bytes'] == [4096, 4096]
+    assert packet['resourceEvidence']['evidence_complete'] is False
+    assert packet['secondary_failures'][0]['stage'] == 'supervisor'
+
+
+@pytest.mark.parametrize('value', [[], None, 1])
+def test_malformed_wait4_keeps_other_components(tmp_path, monkeypatch, capsys, value):
+    plan, role = v2_finalizer_files(tmp_path, monkeypatch)
+    (tmp_path / 'receipts' / (role + '-outer-timer-exit.json')).write_bytes(
+        c.canonical({'wait4': value}))
+    assert c.finish_record(plan, role, 'a' * 64) == 1
+    packet = json.loads(capsys.readouterr().out)
+    assert packet['completion']['available_outer_records']['supervisor']
+    assert packet['resourceEvidence']['evidence_complete'] is False
+    assert packet['secondary_failures'][0]['stage'] == 'outer-timer-exit'
+
+
+def test_serializer_write_failure_preserves_original_and_secondary(tmp_path, monkeypatch, capsys):
+    plan, role = v2_finalizer_files(tmp_path, monkeypatch)
+    path = tmp_path / 'receipts' / (role + '-supervisor.json')
+    supervisor = json.loads(path.read_bytes())
+    primary = {'stage': 'new-public-source', 'type': 'ValueError', 'reason': 'identity changed'}
+    supervisor['primary_failure'] = primary
+    path.write_bytes(c.canonical(supervisor))
+    original = c.write
+
+    def fail_completion(path, value):
+        if path.name.endswith('-completion.json'):
+            raise OSError('new public serializer write failure')
+        return original(path, value)
+
+    monkeypatch.setattr(c, 'write', fail_completion)
+    assert c.finish_record(plan, role, 'a' * 64) == 1
+    packet = json.loads(capsys.readouterr().out)
+    assert packet['primary_failure'] == primary
+    assert packet['completion']['primary_failure'] == primary
+    assert packet['secondary_failures'][-1]['stage'] == 'completion'
+    assert 'serializer write failure' in packet['secondary_failures'][-1]['reason']
+    assert packet['resourceEvidence']['RSS_envelope_bytes'] > 0
+    assert packet['resourceEvidence']['evidence_complete'] is True
+    assert packet['completion']['status'] == 'FAILED_INTERNAL_COMPLETION'
+    events = [{
+        'event_id': f'new-public-event-{i}', 'clock_domain': c.CLOCK,
+        'start_seconds': 1000.0 + i * 2, 'end_seconds': 1001.0 + i * 2,
+        'wall_seconds': 1.0, 'argv': [f'new-public-command-{i}'],
+        'complete': True, 'exit_code': i,
+    } for i in range(2)]
+    py = c.independent.audit_full_role_v2(
+        packet['pending'], packet['completion'], raw_tool_events=events,
+        expected_role=role, expected_plan_sha256='a' * 64,
+        **c.resource_inputs(plan, role, 'a' * 64),
+    )
+    assert py['status'] == 'STOP_NO_RETRY' and py['evidence_complete'] is False
+    assert py['whole_wall_seconds'] == 3.0
+    if shutil.which('node'):
+        script = Path(c.__file__).with_name('p17_m2_input_export_dispatch.js')
+        command = (
+            "const fs=require('fs');const {finishExternal}=require(process.argv[1]);"
+            "console.log(JSON.stringify(finishExternal(...JSON.parse(fs.readFileSync(0,'utf8')))))"
+        )
+        observed = subprocess.run(
+            ['node', '-e', command, str(script)], input=json.dumps([
+                packet['pending'], packet['completion'], events, packet['resourceEvidence'],
+                packet['completion']['pending_sha256'],
+            ]), text=True, capture_output=True, check=True,
+        )
+        js = json.loads(observed.stdout)
+        for key in ('status', 'evidence_complete', 'whole_wall_seconds', 'RSS_envelope_bytes',
+                    'actual_exit_codes', 'primary_failure', 'secondary_failures'):
+            assert js[key] == py[key], key
+
+
+def test_missing_helper_preserves_other_new_native_inventory(tmp_path, monkeypatch, capsys):
+    plan, role = v2_finalizer_files(tmp_path, monkeypatch)
+    (tmp_path / 'receipts' / role / role / 'sampler-0.time').unlink()
+    assert c.finish_record(plan, role, 'a' * 64) == 1
+    packet = json.loads(capsys.readouterr().out)
+    inventory = packet['completion']['available_native_evidence']
+    assert f'receipts/{role}-controller.time' in inventory
+    assert f'receipts/{role}/{role}/command.time' in inventory
+    assert f'receipts/{role}/{role}/command.log' in inventory
+    assert packet['resourceEvidence']['evidence_complete'] is False
+
+
+@pytest.mark.parametrize('path', [
+    '/Users/keith1117/Documents/TopoLab-data/p17-m2-input-export-preparation-v3',
+    '/private/tmp/../outside', '/tmp/public-fixture',
+])
+def test_F_entry_rejects_old_or_nonliteral_root_before_any_query(path, monkeypatch):
+    monkeypatch.setattr(c.os, 'open', lambda *a, **k: pytest.fail('must reject before open'))
+    with pytest.raises(ValueError, match='literal NEW'):
+        c.public_entry('public-finalize', Path(path), 1)
+
+
+@pytest.mark.skipif(c.sys.platform != 'darwin', reason='selected M2 native fixture only')
+@pytest.mark.parametrize('code', [0, 1])
+def test_F_real_native_failure_exit_is_measured_without_domain_upgrade(code):
+    import tempfile
+
+    with tempfile.TemporaryDirectory(prefix='topolab-new-F-', dir='/private/tmp') as parent:
+        root = Path(parent) / 'new-public-output'
+        outputs = []
+        setup = subprocess.run(
+            [c.sys.executable, '-I', c.__file__, 'public-plan', '--public-root', str(root),
+             '--fixture-exit', str(code)], capture_output=True, text=True, check=False,
+            timeout=120,
+        )
+        assert setup.returncode == 0, setup.stderr
+        for mode in ('public-supervise', 'public-finalize'):
+            process = subprocess.run(
+                [c.sys.executable, '-I', c.__file__, mode, '--public-root', str(root),
+                 '--fixture-exit', str(code)], capture_output=True, text=True, check=False,
+                timeout=120,
+            )
+            assert process.returncode == (code if mode == 'public-supervise' else 0), (
+                process.stdout, process.stderr)
+            outputs.append(json.loads(process.stdout))
+        packet = outputs[-1]
+        assert packet['resourceEvidence']['status'] == 'PENDING_EXTERNAL_EXIT'
+        assert packet['resourceEvidence']['evidence_complete'] is True
+        assert 0 < packet['resourceEvidence']['RSS_envelope_bytes'] <= 4294967296
+        assert packet['resourceEvidence']['inner_actual_exit_code'] == code
+        assert packet['completion']['cleanup']['group_gone'] is True
+        assert packet['completion']['domain_status'] == ('STOP' if code else 'UNKNOWN')
+        assert packet['completion']['primary_failure'] is not None if code else (
+            packet['completion']['primary_failure'] is None)
 
 
 def test_inner_or_legacy_PASS_cannot_open_source_suffix(tmp_path, monkeypatch):

@@ -168,10 +168,13 @@ all-four exact-main CI; original reports stay frozen. Original result-phase
 18.633086s overrun and later separately granted335.755696s verification/cleanup
 remain cost history, with no retroactive permission or remaining transfer.
 The current [failure diagnosis/recording-repair proposal](planning/p17_m2_input_failure_diagnostic_repair_proposal.md)
-and [JSON](planning/p17_m2_input_failure_diagnostic_repair_proposal.json) are a
-**documents-only** commission. Their F/D read/implementation/review/publication
-ceilings and optional log exception are unapproved; no old access, diagnostics,
-R retry or B/C follows. Mandatory document regression/publication below applies.
+and [JSON](planning/p17_m2_input_failure_diagnostic_repair_proposal.json) retain
+their original **documents-only** proposal snapshot. The owner subsequently
+authorizes **F only**: versioned source/new public fixtures, executor2h preparation,
+fresh different author1h, then one90min normal regression/protected publication.
+See the [F report](validation/p17_m2_input_failure_recording_repair.md). D and its
+optional log/read exception remain unapproved; no old stat/read, D/environment-identity/power query,
+R retry, B/C or successor follows. The workflow/protection rules below are unchanged.
 
 All four existing CI jobs remain applicable on latest PR head and main:
 quality, frontend, clean-linux-smoke and i1-native-software. Their software

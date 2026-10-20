@@ -1556,3 +1556,12 @@ before nonblind cross-review. No external implementation, new numerical method,
 Hack3D content or old research payload is imported during software preparation.
 Actual explicitly granted source access is recorded only in the new validation
 report; preparation cannot establish scientific repair or reopen historical grants.
+
+## 2026-10-20 — F-only public failure recording repair
+
+Original standard-library failure-stage bookkeeping, finite raw-event binding
+and public-only F entry evolve four existing TopoLab tools. The different author
+first writes its own failure matrix/arithmetic, then performs nonblind review
+and fresh public native fixture checks. No upstream implementation, historical
+raw input/receipt/profile, Hack3D material, numerical method or scientific data
+is read, copied or imported; old source revisions remain reproducible.

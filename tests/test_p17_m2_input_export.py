@@ -111,6 +111,63 @@ def test_path_escape_and_symlink(tmp_path):
             r.Reader(tmp_path).read(name, 10)
 
 
+@pytest.mark.parametrize("mutation", ["mtime", "size", "before_open", "read_error"])
+def test_failed_reader_persists_exact_available_identity_without_reread(
+    tmp_path, monkeypatch, mutation
+):
+    import os
+
+    source = tmp_path / "new-public-source"
+    source.write_bytes(b"abc")
+    journal = tmp_path / "new-journal.jsonl"
+    reader = r.Reader(tmp_path, journal)
+    real_fstat, real_open, real_fdopen = os.fstat, os.open, os.fdopen
+    calls = []
+
+    def fstat(fd):
+        calls.append(fd)
+        if len(calls) == 2:
+            if mutation == "mtime":
+                old = source.stat()
+                os.utime(source, ns=(old.st_atime_ns, old.st_mtime_ns + 1000000))
+            elif mutation == "size":
+                source.write_bytes(b"abcdef")
+        return real_fstat(fd)
+
+    def open_file(path, flags, *args, **kwargs):
+        if mutation == "before_open" and path == source.name:
+            replacement = tmp_path / "new-replacement"
+            replacement.write_bytes(b"abc")
+            replacement.replace(source)
+        return real_open(path, flags, *args, **kwargs)
+
+    def fdopen(fd, *args, **kwargs):
+        if mutation == "read_error":
+            raise OSError("new public injected read failure")
+        return real_fdopen(fd, *args, **kwargs)
+
+    monkeypatch.setattr(r.os, "fstat", fstat)
+    monkeypatch.setattr(r.os, "open", open_file)
+    monkeypatch.setattr(r.os, "fdopen", fdopen)
+    with pytest.raises((ValueError, OSError)):
+        reader.read(source.name, 16)
+    failure = reader.failures[0]
+    assert failure["attempt_ordinal"] == 1 and failure["path"] == source.name
+    assert failure["declared"] is not None and failure["before"] is not None
+    assert failure["returned_bytes"] == (3 if mutation in ("mtime", "size") else None)
+    assert failure["changed_fields"] == {
+        "mtime": ["st_mtime_ns"], "size": ["st_size", "st_mtime_ns"],
+        "before_open": ["st_ino", "st_mtime_ns"], "read_error": [],
+    }[mutation] or (mutation in ("size", "before_open") and
+                   {"size": "st_size", "before_open": "st_ino"}[mutation]
+                   in failure["changed_fields"])
+    assert json.loads(journal.read_bytes().splitlines()[-1]) == failure
+    assert reader.rows == [] and reader.attempts == [source.name]
+    assert len(calls) == (2 if mutation in ("mtime", "size") else 1)
+    with pytest.raises(ValueError, match="reread"):
+        reader.read(source.name, 16)
+
+
 @pytest.mark.parametrize("n", [216, 1728])
 def test_restricted_projection_and_actual_float32_state(n):
     raw, item = label(n)
