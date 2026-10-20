@@ -53,6 +53,13 @@ No B/C, partial prefix, expanded input, old backup/seal, transfer or automatic
 successor. All historical contracts/reports remain. New raw artifacts/logs stay external under the
 [repository policy](../repository_policy.md).
 
+Current NEW R/v3 has one fresh finite owner grant, not continuing v1/v2 authority:
+[readiness protocol](../planning/p17_m2_input_export_readiness_protocol.md),
+[software/actual report](p17_m2_input_export_readiness.md) and
+[independent review](p17_m2_input_export_readiness_independent_review.md).
+Same3h/2h, six FULL1860, exact40/12/528/18,4GiB/independent preflight; source
+acceptance remains UNKNOWN_NOT_RUN until actual once-only roles complete.
+
 ## Numerical and historical release evidence
 
 - [Gate N1 finite-element validation](n1_fem_validation.md)

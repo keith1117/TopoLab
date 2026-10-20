@@ -478,6 +478,12 @@ def full_v2_subject():  # type: ignore[no-untyped-def]
         "frozen_FULL_seconds": 120,
         "clock_domain": checker.CLOCK_V2,
         "clock_resolution_seconds": 0.001,
+        "actor_activation_UTC_seconds": 1000.0,
+        "actor_window_seconds": 2700,
+        "actor_deadlines_UTC": {
+            "exporter": "1970-01-01T01:01:40.000Z",
+            "independent": "1970-01-01T01:01:40.000Z",
+        },
         "external_argv": [["new-supervisor"], ["new-finalizer"]],
     }
     completion = dict(
@@ -551,13 +557,39 @@ def full_v2_audit(pending, completion, events, inner):  # type: ignore[no-untype
 def test_new_FULL_retains_complete_disjoint_wall_and_same_process_peak() -> None:
     pending, completion, events, inner = full_v2_subject()
     result = full_v2_audit(pending, completion, events, inner)
-    assert result["status"] == "PASS_R_V2_FULL_ROLE"
+    assert result["status"] == "PASS_R_V3_FULL_ROLE"
     assert result["whole_wall_seconds"] == pytest.approx(109.224)
     assert result["frozen_FULL_seconds"] == 120
     assert result["known_cost_lower_bound_seconds"] == 120
     assert result["RSS_envelope_bytes"] == 210 + 150 + 190
     assert result["source_successor_admitted"] is False
     assert result["B_C_admission"] is False
+
+
+@pytest.mark.parametrize("damage", [
+    "missing_activation", "submillisecond", "window", "deadline", "completion", "late_event",
+])
+def test_new_readiness_window_is_bound_to_complete_actual_role(damage: str) -> None:
+    pending, completion, events, inner = full_v2_subject()
+    if damage == "missing_activation":
+        pending.pop("actor_activation_UTC_seconds")
+    elif damage == "submillisecond":
+        pending["actor_activation_UTC_seconds"] = 1000.0001
+    elif damage == "window":
+        pending["actor_window_seconds"] = 2701
+    elif damage == "deadline":
+        pending["actor_deadlines_UTC"]["independent"] = "1970-01-01T01:01:41.000Z"
+    elif damage == "completion":
+        completion["actor_activation_UTC_seconds"] = 1001.0
+    else:
+        for event in events:
+            event["start_seconds"] += 3000
+            event["end_seconds"] += 3000
+    completion["pending_sha256"] = checker.digest(checker.canonical(pending))
+    result = full_v2_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["RSS_envelope_bytes"] == 550
+    assert result["source_successor_admitted"] is False
 
 
 @pytest.mark.parametrize("last_end,accepted", [(1110.0, True), (1110.0001, False)])
@@ -741,15 +773,18 @@ def test_new_backup_exclusion_is_literal_and_preserves_stable_prefix(tmp_path: P
     assert result["member_count"] == 1
 
 
-def test_backup_refuses_v1_or_old_DATA_before_stat(monkeypatch: pytest.MonkeyPatch) -> None:
+@pytest.mark.parametrize("version", (1, 2))
+def test_backup_refuses_closed_identity_before_stat(
+    monkeypatch: pytest.MonkeyPatch, version: int,
+) -> None:
     def forbidden_stat(*args, **kwargs):  # type: ignore[no-untyped-def]
         raise AssertionError("no old path may be stat'ed")
 
     monkeypatch.setattr(Path, "lstat", forbidden_stat)
-    old = checker.AUTHORIZED_DATA_ROOT / "p17-m2-input-export-preparation-v1"
+    old = checker.AUTHORIZED_DATA_ROOT / f"p17-m2-input-export-preparation-v{version}"
     result = checker.audit_new_backup(old, old.with_name(old.name + "-independent-backup"))
     assert result["status"] == "STOP_NO_RETRY"
-    assert "literal NEW v2" in result["reason"]
+    assert "literal NEW v3" in result["reason"]
     result = checker.audit_new_backup(old, old.with_name(old.name + "-copy"), public_fixture=True)
     assert result["status"] == "STOP_NO_RETRY"
     assert "public fixture cannot open DATA" in result["reason"]
@@ -790,6 +825,6 @@ def test_trusted_JS_boundary_matches_raw_gap_cap_and_actual_exit() -> None:
     )
     results = json.loads(observed.stdout)
     assert results[0]["whole_wall_seconds"] == pytest.approx(109.224)
-    assert results[0]["status"] == "PASS_R_V2_FULL_ROLE"
+    assert results[0]["status"] == "PASS_R_V3_FULL_ROLE"
     assert all(result["status"] == "STOP_NO_RETRY" for result in results[1:])
     assert results[2]["RSS_envelope_bytes"] == 550

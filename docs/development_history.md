@@ -8,6 +8,20 @@ next slice or a development primary describe their historical context.
 Read [project status](project_status.md) for the current boundary and
 [validation reports](validation/README.md) for the authoritative evidence.
 
+## 2026-10-20 — NEW R/v3 readiness-bound restricted preparation
+
+The owner accepted one new finite attempt after R/v2 zero launch. The
+[protocol](planning/p17_m2_input_export_readiness_protocol.md)/[JSON](planning/p17_m2_input_export_readiness_protocol.json)
+retain total3h/2h, six FULL roles1860 and exact40/12/528/18 input scope. Prospective
+continuous prep/formal/result phases prevent CI readiness from consuming an
+unopened formal window; all waits/costs recorded, no old cap transfer. Minimal
+identity/root/window binding and versioned plan builder reuse field/RSS/exit
+algorithms, with new different-author review. Actual software and role results
+are recorded in the [report](validation/p17_m2_input_export_readiness.md) and
+[independent report](validation/p17_m2_input_export_readiness_independent_review.md).
+Old R/v1 STOP/paid180/closed1680 and v2 zero-launch/paid0/closed1860 retain bytes;
+no B/C, numerical work, expanded input or automatic successor.
+
 ## Historical baseline and early development
 
 The historical `v1.0.0` release and Gates N1, N2, P1, M0, and A1 are complete. M1 did

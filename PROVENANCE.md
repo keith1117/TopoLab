@@ -1546,3 +1546,13 @@ separately authored raw event/RSS/exit/new-only-backup comparator extend the
 existing R field tools. No upstream implementation, scientific algorithm or
 external data was imported. Original R/v1 source remains at its frozen commit;
 actual restricted source acceptance is separately recorded in the new report.
+
+## 2026-10-20 — NEW R/v3 readiness binding
+
+Original finite identity/root/readiness-window binding and versioned plan builder
+reuse TopoLab's published field/IEEE/FULL/native RSS/observed-exit algorithms. The
+new different author independently specifies/checks window and raw-event coverage
+before nonblind cross-review. No external implementation, new numerical method,
+Hack3D content or old research payload is imported during software preparation.
+Actual explicitly granted source access is recorded only in the new validation
+report; preparation cannot establish scientific repair or reopen historical grants.

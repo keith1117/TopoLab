@@ -18,7 +18,7 @@ REPO = Path(__file__).resolve().parents[1]
 DATA = Path("/Users/keith1117/Documents/TopoLab-data")
 CONTRACT = REPO / "docs/planning/p17_m2_input_export_preparation_proposal.json"
 CONTENT_SHA256 = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
-OUTPUT_ROOT_NAME = "p17-m2-input-export-preparation-v2"
+OUTPUT_ROOT_NAME = "p17-m2-input-export-preparation-v3"
 MIB = 1024 * 1024
 
 

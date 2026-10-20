@@ -1,9 +1,10 @@
-"""NEW R/v2 FULL billing and finite external-exit binding; no old payload reads."""
+"""NEW R/v3 readiness-bound FULL billing; no old payload reads during planning."""
 
 import argparse
 import hashlib
 import importlib.util
 import json
+import math
 import os
 import platform
 import resource
@@ -11,11 +12,12 @@ import signal
 import subprocess
 import sys
 import time
+from datetime import UTC, datetime
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-ROOT = Path("/Users/keith1117/Documents/TopoLab-data/p17-m2-input-export-preparation-v2")
-IDENTITY = "topolab.v2.p17-m2-input-export-preparation.v2"
+ROOT = Path("/Users/keith1117/Documents/TopoLab-data/p17-m2-input-export-preparation-v3")
+IDENTITY = "topolab.v2.p17-m2-input-export-preparation.v3"
 CONTENT_SHA = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
 CLOCK = "functions.exec.Date.now.UTC-seconds"
 # -I excludes script-directory imports. Bind this stdlib-only helper explicitly.
@@ -45,6 +47,21 @@ CAPS = {
     "exporter-r1": 780,
     "independent-r1": 660,
     "shared-closeout": 60,
+}
+ACTOR_WINDOW = 2700
+SOURCE_FILES = {
+    "scripts/p17_m2_input_export.py",
+    "scripts/p17_m2_input_export_independent.py",
+    "scripts/p17_m2_input_export_control.py",
+    "scripts/p17_m2_resource_control.py",
+    "scripts/p17_m2_homotopy.py",
+    "scripts/p17_m2_input_export_dispatch.js",
+    "uv.lock",
+    "docs/planning/p17_m2_input_export_preparation_proposal.json",
+    "docs/planning/p17_m2_input_export_billing_revision_proposal.json",
+    "docs/planning/p17_m2_input_export_billing_revision_protocol.md",
+    "docs/planning/p17_m2_input_export_readiness_protocol.md",
+    "docs/planning/p17_m2_input_export_readiness_protocol.json",
 }
 
 
@@ -97,6 +114,109 @@ def resolved(argv, plan_sha):
     return [word.replace("<PLAN_SHA256>", plan_sha) for word in argv]
 
 
+def actor_window_checked(plan, now):
+    activation = plan["actor_activation_UTC_seconds"]
+    require(type(activation) in (int, float) and math.isfinite(activation)
+            and activation > 0 and round(activation, 3) == activation,
+            "actual millisecond activation required")
+    deadline = activation + ACTOR_WINDOW
+    iso = datetime.fromtimestamp(deadline, UTC).isoformat(
+        timespec="milliseconds").replace("+00:00", "Z")
+    require(type(plan["actor_window_seconds"]) is int
+            and plan["actor_window_seconds"] == ACTOR_WINDOW
+            and plan["actor_deadlines_UTC"] == {"exporter": iso, "independent": iso}
+            and activation <= now <= deadline,
+            "immutable readiness-activated actor window")
+
+
+def create_plan(activation, ci_path):
+    """One NEW plan after release readiness; never opens historical DATA files."""
+    require(subprocess.check_output(["git", "status", "--porcelain"], cwd=REPO) == b"",
+            "clean merged source before activation")
+    head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO).decode().strip()
+    require(head == subprocess.check_output(
+        ["git", "rev-parse", "origin/main"], cwd=REPO).decode().strip(), "merged main only")
+    require(not ci_path.absolute().is_relative_to(ROOT.parent), "CI evidence outside DATA")
+    ci_raw = read(ci_path, 4 * 1024 * 1024)
+    ci = json.loads(ci_raw)
+    jobs = ci["jobs"]
+    require(ci["headSha"] == head and ci["headBranch"] == "main" and ci["event"] == "push"
+            and type(ci["databaseId"]) is int and ci["databaseId"] > 0
+            and ci["url"] == f"https://github.com/keith1117/TopoLab/actions/runs/{ci['databaseId']}"
+            and ci["status"] == "completed"
+            and ci["conclusion"] == "success"
+            and len(jobs) == 4
+            and {job["name"] for job in jobs} == {
+                "quality", "frontend", "clean-linux-smoke", "i1-native-software"}
+            and all(job["status"] == "completed" and job["conclusion"] == "success"
+                    for job in jobs), "all four exact-main CI jobs required")
+    require(sys.platform == "darwin" and platform.machine() == "arm64",
+            "M2 native Darwin only")
+    require(all(os.environ.get(k) == v for k, v in native_recording.ENVIRONMENT.items()),
+            "locked five-thread environment")
+    python = sys.executable
+    control = str(Path(__file__).resolve())
+    export = str(REPO / "scripts/p17_m2_input_export.py")
+    audit = str(REPO / "scripts/p17_m2_input_export_independent.py")
+    content = str(REPO / "docs/planning/p17_m2_input_export_preparation_proposal.json")
+    registry = str(ROOT / "exporter-r0/source_registry.json")
+    source = ["--data-root", str(ROOT.parent), "--contract", content, "--authorize-old-read"]
+    payloads = {
+        "independent-public-check": [python, "-I", audit, "public-check", "--fixture-root",
+            str(ROOT / "public-fixtures"), "--output", str(ROOT / "independent-public-check.json")],
+        "exporter-r0": [python, "-I", export, "r0", *source, "--output",
+            str(ROOT / "exporter-r0")],
+        "independent-r0": [python, "-I", audit, "r0", *source, "--registry", registry,
+            "--output", str(ROOT / "independent-r0.json")],
+        "exporter-r1": [python, "-I", export, "r1", *source, "--registry", registry,
+            "--independent-r0", str(ROOT / "independent-r0.json"), "--output",
+            str(ROOT / "exporter-r1")],
+        "independent-r1": [python, "-I", audit, "r1", *source, "--registry", registry,
+            "--exports-root", str(ROOT / "exporter-r1/exports"), "--output",
+            str(ROOT / "independent-r1.json")],
+        "shared-closeout": [python, "-I", control, "archive", "--plan",
+            str(ROOT / "launch_plan.json"), "--plan-sha", "<PLAN_SHA256>", "--role",
+            "shared-closeout"],
+    }
+    deadline = datetime.fromtimestamp(activation + ACTOR_WINDOW, UTC).isoformat(
+        timespec="milliseconds").replace("+00:00", "Z")
+    plan = {
+        "execution_identity": IDENTITY, "owner_R_v3_authorized": True,
+        "B_C_authorized": False, "repository": str(REPO),
+        "merged_source": head,
+        "merged_tree": subprocess.check_output(
+            ["git", "rev-parse", "HEAD^{tree}"], cwd=REPO).decode().strip(),
+        "source_files": {name: digest((REPO / name).read_bytes()) for name in sorted(SOURCE_FILES)},
+        "content_sha256": CONTENT_SHA, "all_four_main_CI_success": True,
+        "main_CI": ci, "main_CI_raw_sha256": digest(ci_raw),
+        "host_machine": platform.machine(), "host_platform": sys.platform,
+        "host_os_release": platform.release(), "python_executable": python,
+        "python_version": platform.python_version(),
+        "thread_environment": native_recording.ENVIRONMENT,
+        "authors": {"exporter": "/root", "independent": "/root/review_r_v3"},
+        "actor_activation_UTC_seconds": activation, "actor_window_seconds": ACTOR_WINDOW,
+        "actor_deadlines_UTC": {"exporter": deadline, "independent": deadline},
+        "FULL_caps_seconds": CAPS, "clock_domain": CLOCK, "clock_resolution_seconds": 0.001,
+        "external_argv": external_templates(python),
+        "roles": {role: {"cap_seconds": CAPS[role], "argv": argv}
+                  for role, argv in payloads.items()},
+    }
+    actor_window_checked(plan, time.time())
+    require(time.time() + sum(CAPS.values()) <= activation + ACTOR_WINDOW,
+            "complete six-role reserve before plan creation")
+    require(not os.path.lexists(ROOT)
+            and not os.path.lexists(ROOT.with_name(ROOT.name + "-independent-backup")),
+            "exclusive NEW roots; no overwrite or retry")
+    ROOT.mkdir(exist_ok=False)
+    raw = canonical(plan)
+    write(ROOT / "launch_plan.json", plan)
+    plan_sha = digest(raw)
+    context = dict(plan, plan_sha256=plan_sha)
+    context["external_argv"] = {role: [resolved(argv, plan_sha) for argv in calls]
+                                for role, calls in plan["external_argv"].items()}
+    return context
+
+
 def plan_checked(path, expected):
     require(path.absolute() == ROOT / "launch_plan.json", "literal new plan")
     raw = read(path)
@@ -108,26 +228,14 @@ def plan_checked(path, expected):
     )
     head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO).decode().strip()
     require(head == plan["merged_source"], "source commit changed")
-    expected_files = {
-        "scripts/p17_m2_input_export.py",
-        "scripts/p17_m2_input_export_independent.py",
-        "scripts/p17_m2_input_export_control.py",
-        "scripts/p17_m2_resource_control.py",
-        "scripts/p17_m2_homotopy.py",
-        "uv.lock",
-        "docs/planning/p17_m2_input_export_preparation_proposal.json",
-        "docs/planning/p17_m2_input_export_billing_revision_proposal.json",
-        "docs/planning/p17_m2_input_export_billing_revision_protocol.md",
-        "scripts/p17_m2_input_export_dispatch.js",
-    }
-    require(set(plan["source_files"]) == expected_files, "complete source freeze")
+    require(set(plan["source_files"]) == SOURCE_FILES, "complete source freeze")
     tree = subprocess.check_output(["git", "rev-parse", "HEAD^{tree}"], cwd=REPO).decode().strip()
     require(tree == plan["merged_tree"], "merged source tree changed")
     for name, h in plan["source_files"].items():
         require(digest((REPO / name).read_bytes()) == h, "frozen source bytes changed")
     require(
         plan["all_four_main_CI_success"] is True
-        and plan["owner_R_v2_authorized"] is True
+        and plan["owner_R_v3_authorized"] is True
         and plan["B_C_authorized"] is False,
         "admission record",
     )
@@ -139,13 +247,7 @@ def plan_checked(path, expected):
         and plan["clock_resolution_seconds"] == 0.001,
         "new identity/FULL/content/clock binding",
     )
-    require(
-        plan["actor_deadlines_UTC"] == {
-            "exporter": "2026-10-19T07:33:59Z",
-            "independent": "2026-10-19T06:34:17Z",
-        },
-        "original continuous actor windows changed",
-    )
+    actor_window_checked(plan, time.time())
     require(sys.platform == "darwin", "M2 native Darwin execution only")
     require(plan["external_argv"] == external_templates(sys.executable),
             "complete literal supervisor/finalizer call table")
@@ -291,6 +393,8 @@ def supervise(plan, role, plan_sha):
         "frozen_FULL_seconds": CAPS[role],
         "clock_domain": CLOCK,
         "clock_resolution_seconds": 0.001,
+        **{key: plan[key] for key in (
+            "actor_activation_UTC_seconds", "actor_window_seconds", "actor_deadlines_UTC")},
         "external_argv": [resolved(argv, plan_sha) for argv in plan["external_argv"][role]],
         "status": "PENDING_BEFORE_DISPATCH",
     }
@@ -426,7 +530,7 @@ def resource_inputs(plan, role, plan_sha):
 
 def ingest_external(plan, plan_sha, *, closing=False):
     """Copy actual trusted-tool events at the next role's measured prelude."""
-    raw = os.environ.get("TOPOLAB_R2_PREVIOUS_TOOL_RECORDS", "[]")
+    raw = os.environ.get("TOPOLAB_R3_PREVIOUS_TOOL_RECORDS", "[]")
     require(len(raw.encode()) <= 4 * 1024 * 1024, "bounded external telemetry")
     records = json.loads(raw)
     require(isinstance(records, list) and len(records) <= 1, "one actual prior tool packet")
@@ -457,7 +561,7 @@ def ingest_external(plan, plan_sha, *, closing=False):
             verified = {"status": "STOP_NO_RETRY", "role": role,
                         "reason": str(error), "missing_evidence": "UNKNOWN_NOT_ZERO"}
         write(ROOT / "receipts" / (role + "-observed.json"), verified)
-        if verified["status"] != "PASS_R_V2_FULL_ROLE":
+        if verified["status"] != "PASS_R_V3_FULL_ROLE":
             write(ROOT / "STOP.json", {"role": role, "outcome": verified, "retry": False})
 
 
@@ -530,6 +634,8 @@ def finish_record(plan, role, plan_sha):
         "execution_identity": IDENTITY, "role": role, "plan_sha256": plan_sha,
         "frozen_FULL_seconds": CAPS[role], "clock_domain": CLOCK,
         "clock_resolution_seconds": 0.001, "status": "PENDING_EXTERNAL_EXIT",
+        **{key: plan[key] for key in (
+            "actor_activation_UTC_seconds", "actor_window_seconds", "actor_deadlines_UTC")},
         "pending_sha256": None, "resource_components": [own],
         "final_serializer_pid": os.getpid(), "cleanup": {"group_gone": None},
     }
@@ -593,7 +699,7 @@ def source_gate(plan, role, plan_sha):
     order = list(CAPS)
     for previous in order[:order.index(role)]:
         observed = json.loads(read(ROOT / "receipts" / (previous + "-observed.json")))
-        require(observed["status"] == "PASS_R_V2_FULL_ROLE"
+        require(observed["status"] == "PASS_R_V3_FULL_ROLE"
                 and observed["execution_identity"] == IDENTITY
                 and observed["plan_sha256"] == plan_sha
                 and observed["frozen_FULL_seconds"] == CAPS[previous]
@@ -607,12 +713,22 @@ def source_gate(plan, role, plan_sha):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("mode", choices=("run", "bind", "supervise", "finalize", "archive"))
-    p.add_argument("--plan", type=Path, required=True)
-    p.add_argument("--plan-sha", required=True)
-    p.add_argument("--role", choices=tuple(CAPS), required=True)
+    p.add_argument("mode", choices=("plan", "run", "bind", "supervise", "finalize", "archive"))
+    p.add_argument("--plan", type=Path)
+    p.add_argument("--plan-sha")
+    p.add_argument("--role", choices=tuple(CAPS))
+    p.add_argument("--activation-utc-seconds", type=float)
+    p.add_argument("--ci-evidence", type=Path)
     p.add_argument("--controller-exit", type=int)
     args = p.parse_args()
+    if args.mode == "plan":
+        require(args.activation_utc_seconds is not None and args.ci_evidence is not None,
+                "readiness activation and actual CI evidence required")
+        print(canonical(create_plan(args.activation_utc_seconds, args.ci_evidence)).decode(),
+              end="", flush=True)
+        return 0
+    require(args.plan is not None and args.plan_sha is not None and args.role is not None,
+            "frozen plan/hash/role required")
     plan = plan_checked(args.plan, args.plan_sha)
     if args.mode == "supervise":
         result = supervise(plan, args.role, args.plan_sha)

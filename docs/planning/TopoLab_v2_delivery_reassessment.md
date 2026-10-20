@@ -11,7 +11,22 @@ accepted by the owner in the reassessment conversation. It changes delivery
 governance; it is not a new numerical experiment contract, scientific Gate or
 budget authorization.
 
-Current closeout (NEW R/v2,2026-10-19):
+Current authority (NEW R/v3,2026-10-20): the owner accepted **one** fresh
+restricted preparation attempt under the [readiness protocol](p17_m2_input_export_readiness_protocol.md)
+and [JSON](p17_m2_input_export_readiness_protocol.json). Same total3h exporter/2h
+new different author, six once-only FULL roles1860s, exact40/12/528/18 original-byte/
+temporary-parse scope,4GiB and independent preflight. Prospective bounded software,
+formal and result phases prevent release waiting from expiring an unopened formal
+window; no clock pause/reset, budget transfer or free software cost. Complete
+software release readiness before one immutable2700s formal window for both
+actors. Source/field/resource acceptance remains UNKNOWN_NOT_RUN until actual
+roles pass. No B/C, extra source, old backup/seal, new proof, retry or successor.
+R/v1 STOP/paid180/closed1680 and R/v2 zero-launch/paid0/closed1860 retain bytes.
+This is the explicit finite route decision, not reopening either old grant.
+See [current status](../project_status.md), [report](../validation/p17_m2_input_export_readiness.md)
+and [independent review](../validation/p17_m2_input_export_readiness_independent_review.md).
+
+Historical closeout (NEW R/v2,2026-10-19):
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE; fixed P/17 unrepaired; science paused.**
 The owner explicitly authorized the [new R/v2 proposal](p17_m2_input_export_billing_revision_proposal.md)
 and [JSON](p17_m2_input_export_billing_revision_proposal.json): exporter `/root`3h,
