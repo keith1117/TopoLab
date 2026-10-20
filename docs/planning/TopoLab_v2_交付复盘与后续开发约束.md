@@ -9,20 +9,24 @@
 本文记录所有者在本对话中认可的复盘、新期望和后续工作规则，属于交付治理调整，
 不是新的数值实验合同、科研 Gate 或预算授权。
 
-新R/v3实际收尾（2026-10-20）：**STOP_NO_RETRY**，未完成受限输入准备。
-源码[PR208](https://github.com/keith1117/TopoLab/pull/208)/main5b01c13的四项CI通过后，
-双方正式窗口于08:33:55.857 UTC一次开启。合同仍规定六角色，实际启动3个：独立公开核对PASS、
-exporter-r0 STOP、预留收尾PASS。R0尝试12个白名单元数据，完成11个字节/哈希记录（2619248字节），
-读取第12个时检测到前后fstat身份元组变化。具体变化字段和原因UNKNOWN，不能据此宣称内容损坏；未补读。
-独立R0和双方R1均未启动：checkpoint0/12、训练标签0/528、uniform原packet0/18。
-失败角色完整RSS仍UNKNOWN，实际外层退出1/1，不能验收；不是已测超4GiB。FULL已付300/1860秒，未用1560关闭不转移。
-一次仅NEW输出的独立备份PASS；最终外层工具包在发布期另存，明确不属于已测备份快照。
-正式阶段08:38:17.388 UTC关闭；仅按既定预算完成结果审查、规定回归及正常受保护发布。
-固定P/17未修复、4GiB及独立预检、uniform默认/科研暂停、FULL_V2_OPEN_NO_ADMITTED_ROUTE和
-全部旧合同/失败/成本/UNKNOWN/配额/封存保持。无B/C、追加旧读取、边修边续、重试/reset或自动后继。
-唯一下步是所有者对失败后的路线决定；没有默认R/v4。后续来源稳定性调查/访问须另有明确有限授权。
-见[当前状态](../project_status.md)、[报告](../validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration)及
-[独立报告](../validation/p17_m2_input_export_readiness_independent_review.md)。
+当前所有者范围（2026-10-20）：仅编写[有限故障诊断与记录最小修复提案](p17_m2_input_failure_diagnostic_repair_proposal.md)
+及[JSON](p17_m2_input_failure_diagnostic_repair_proposal.json)，状态PROPOSED_NOT_AUTHORIZED。
+D核对历史元数据身份变化，F仅用新公开fixtures修复失败记录；历史元组/原因仍UNKNOWN不阻止公开F验收，
+输入身份检查不放宽。拟议新预算：F执行者2小时/新不同作者1小时；D双方同一10分钟窗口；
+仅F一轮90分钟发布；F加D再增一轮90分钟结果发布。均未授权执行、旧访问、R重试、正式B/C或后继。
+唯一下步为所有者决定F单独或F加精确五份收据/可选限时日志D范围；本片发布后停止。
+
+历史R/v3保持STOP_NO_RETRY：源码PR208/main5b01c13/四项CI先于正式开启；六角色规定不变，
+实际启动3个（公开PASS/R0 STOP/共享PASS）。尝试12元数据、完成11哈希/2619248字节；第12份fstat
+身份变化，字段/原因/失败读取字节数UNKNOWN。后续独立R0和双方R1未启动，payload0/12/528/18。
+失败完整RSS UNKNOWN、实际外层退出1/1；不是已测超4GiB。FULL已付300、未用1560关闭，NEW备份PASS；
+未补读或修复为PASS。结果[PR209](https://github.com/keith1117/TopoLab/pull/209)/main85644c4及
+[精确main CI39399796173](https://github.com/keith1117/TopoLab/actions/runs/39399796173)四项完成，
+本片已合并分支清理、工作树保留。原结果阶段超时18.633086秒照记；另行授权的发布核对使用335.755696秒，
+未用264.244304秒关闭，不能追溯覆盖超时。固定P/17、uniform/科研暂停、4GiB及独立预检、
+FULL_V2_OPEN_NO_ADMITTED_ROUTE和全部旧失败/成本/配额/UNKNOWN/封存不变。
+[原报告](../validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration)及
+[独立报告](../validation/p17_m2_input_export_readiness_independent_review.md)保留历史字节；没有默认R/v4，本片不执行诊断。
 
 历史收尾（新R/v2，2026-10-19）：
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE、固定P/17未修复、uniform默认、科研暂停。**

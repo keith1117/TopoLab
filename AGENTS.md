@@ -56,18 +56,20 @@ unlaunched when its original independent window expired: roles/old reads/IO0,
 UNKNOWN_NOT_RUN. Result PR207/main e1e52f3/all-four CI completed. Old v1/v2
 frozen files, STOP/costs and closed allowances retain bytes and never transfer.
 
-The ONE fresh [R/v3 preparation](docs/planning/p17_m2_input_export_readiness_protocol.md)
-closed **STOP_NO_RETRY**: source PR208/main5b01c13/all-four-CI preceded activation.
-Six roles remain defined;3 launched(public PASS/exporter-r0 STOP/shared PASS).
-R0 attempted12 metadata,11 completed byte/hash rows;12th before/after fstat
-identity changed, exact field/cause UNKNOWN. No reread; independent R0/R1 and
-all12/528/18 payload reads unlaunched. Failed-role full RSS UNKNOWN, actual
-outer exits1/1; no measured>4GiB result. Booked300/1860; unused1560 closed. NEW-only backup passed;
-final raw outer packet separately filed in result publication. Formal closed
-2026-10-20T08:38:17.388Z. Complete only bounded result review/required regression/
-normal protected publication, then STOP for owner route decision. No defaultv4,
-B/C, further old input, frozen patch/retry/reset or automatic successor. Old
-v1/v2 bytes/STOP/costs/closed caps and every historical gate/UNKNOWN/seal stay.
+[R/v3](docs/planning/p17_m2_input_export_readiness_protocol.md) stays STOP_NO_RETRY:
+3/6 launched, metadata12 attempted/11 hash rows;12th identity field/cause UNKNOWN.
+Payload0/12/528/18; failed full RSS UNKNOWN/exits1/1. Paid300/closed1560 remains.
+PR209/main85644c4/all-four CI and merged-branch cleanup completed, worktree retained.
+Original result overrun18.633086s and separate followup335.755696s remain costs.
+
+Current owner scope is **documents only**: [diagnosis/minimal recording-repair
+proposal](docs/planning/p17_m2_input_failure_diagnostic_repair_proposal.md)/[JSON](docs/planning/p17_m2_input_failure_diagnostic_repair_proposal.json)
+PROPOSED_NOT_AUTHORIZED. Historical cause may remain UNKNOWN; public fixture
+recording repair need not resolve it or weaken source guards. Proposed F2h/1h,
+D10min/common window and up to two90min publication phases need explicit authority
+and a fresh different author. No old stat/read, implementation/diagnostic query,
+R retry, B/C, old backup/seal, reset or automatic successor. Finish this document
+slice's required regression/protected publication, then STOP for owner decision.
 
 ## Provenance boundary
 

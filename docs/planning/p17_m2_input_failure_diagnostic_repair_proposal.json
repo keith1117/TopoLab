@@ -1,0 +1,410 @@
+{
+  "schema": "topolab.v2.p17-m2-input-failure-diagnostic-repair.proposal.v1",
+  "date": "2026-10-20",
+  "timezone": "America/New_York",
+  "status": "PROPOSED_NOT_AUTHORIZED",
+  "executable": false,
+  "current_authority": "DOCUMENTS_ONLY_AND_REQUIRED_NORMAL_SOFTWARE_VALIDATION_PUBLICATION",
+  "current_old_external_read_stat_allowlist": [],
+  "current_forbidden": [
+    "implementation",
+    "installation",
+    "OS_or_host_diagnostic_query",
+    "old_input_stat_read_hash_parse",
+    "public_diagnostic_preflight",
+    "R_retry",
+    "B",
+    "C",
+    "automatic_successor"
+  ],
+  "markdown": "p17_m2_input_failure_diagnostic_repair_proposal.md",
+  "baseline": {
+    "main": "85644c423ab7151c22dd861639369642ed630f1a",
+    "worktree": "/Users/keith1117/.codex/worktrees/ec0b/TopoLab",
+    "clean_detached": true,
+    "open_PRs": 0,
+    "result_PR": 209,
+    "main_CI": 39399796173,
+    "all_four_main_jobs": "SUCCESS",
+    "R_v3_outcome": "STOP_NO_RETRY",
+    "roles_defined": 6,
+    "roles_launched": 3,
+    "paid_FULL_seconds": 300,
+    "unused_closed_seconds": 1560,
+    "metadata_attempts": 12,
+    "completed_hash_rows": 11,
+    "completed_bytes": 2619248,
+    "failed_role_outer_seconds": 37.579999923706055,
+    "actual_outer_exits": [
+      1,
+      1
+    ],
+    "full_failed_role_RSS": "UNKNOWN",
+    "differing_identity_member": "UNKNOWN",
+    "failed_read_bytes": "UNKNOWN",
+    "historical_cause": "UNKNOWN",
+    "sleep_causation": "UNKNOWN",
+    "scientific_H17": "NOT_RUN"
+  },
+  "future_execution_identity": "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1",
+  "future_authority": "UNAPPROVED_REQUIRES_NEW_EXPLICIT_OWNER_GRANT",
+  "future_options": [
+    "DECLINE",
+    "F_ONLY_D_UNRUN",
+    "F_AND_EXACT_BOUNDED_D"
+  ],
+  "future_reviewer": {
+    "identity": "NOT_YET_APPOINTED",
+    "different_from_executor": true,
+    "fresh_grant_required": true,
+    "no_old_role_or_cap_reactivation": true,
+    "expected_matrix_before_patch_exposure": true,
+    "cross_review": "NONBLIND_DISCLOSED",
+    "reuse_of_independent_algorithms": "DISCLOSE_NOT_PRIMARY_PASS_ORACLE",
+    "independent_historical_original_reread": false
+  },
+  "D": {
+    "purpose": "Bound historical metadata identity evidence and optional sleep/wake association; retain UNKNOWN if cause unavailable",
+    "source_target_locator_only": "b3-v1-fits/artifacts/selection/62245b313b64d17fdd5d5ee2e77dcf28158dd4aea098810e11a910a1ba4ffb09.json",
+    "source_target_stat_open_read_allowed": false,
+    "receipt_root": "/Users/keith1117/Documents/TopoLab-data/p17-m2-input-export-preparation-v3",
+    "receipts": [
+      {
+        "path": "launch_plan.json",
+        "sha256": "7252429be4107800f4f7dc889c0a9432ab059eb1953198e2f8ca12850492d0fe"
+      },
+      {
+        "path": "exporter-r0/failure.json",
+        "sha256": "54563ec4b3cd71c74a1282a933cfbc906550d13d2a59c3b84b05b9c720c1f518"
+      },
+      {
+        "path": "exporter-r0/source-read.jsonl",
+        "sha256": "4f82b6e2c2faac2686ec99d41e37479397c89a9687ec192139246ac11d4a34f3"
+      },
+      {
+        "path": "STOP.json",
+        "sha256": "2279221e6fbf99ee2320eee73487cebb7aab47c4508582f546a62b1711a0a7b6"
+      },
+      {
+        "path": "result-publication/trusted-frontier-packets.json",
+        "sha256": "7840e4446adf47056e7144e1fa43f6cfc586a6dde1739523ae97ae8aad0c5dcb"
+      }
+    ],
+    "capture": {
+      "reader": "executor_once_per_literal_file",
+      "files_max": 5,
+      "file_bytes_max": 4194304,
+      "aggregate_bytes_max": 16777216,
+      "complete_byte_hash": true,
+      "parse_fields": [
+        "identity",
+        "attempt_count_and_byte_summaries",
+        "failure_stage_and_reason",
+        "event_clocks_argv_exits",
+        "available_RSS_cleanup_cost"
+      ],
+      "nofollow_regular_files": true,
+      "before_after_identity_check": true,
+      "reread": false,
+      "pointer_following": false,
+      "recursive_enumeration": false,
+      "incidental_embedded_source_payload_semantic_access": false,
+      "recorded_argv_executable": false
+    },
+    "independent_review": {
+      "source": "NEW_HASH_BOUND_COPIES_ONLY",
+      "passes": 1,
+      "files_max": 5,
+      "file_bytes_max": 4194304,
+      "aggregate_bytes_max": 16777216,
+      "hash_check_against_published_report_and_manifest": true,
+      "originals_not_reread": true
+    },
+    "optional_OS_query": {
+      "reader": "executor_once",
+      "start_UTC": "2026-10-20T08:36:30Z",
+      "end_UTC": "2026-10-20T08:38:15Z",
+      "EDT_window": "2026-10-20 04:36:30-04:38:15",
+      "fields": [
+        "event_timestamp",
+        "sleep_wake_type",
+        "nonidentifying_reason_classification"
+      ],
+      "queries_max": 1,
+      "seconds_max": 30,
+      "output_bytes_max": 1048576,
+      "server_side_time_and_event_selection_required": true,
+      "freeze_command_against_public_documentation_first": true,
+      "sudo_install_retry_full_history_export": false,
+      "reviewer_reads_same_new_export_only": true,
+      "unavailable": "UNKNOWN_LOG_UNAVAILABLE_CLOSE_D",
+      "temporal_overlap_proves_causation": false,
+      "absence_proves_no_sleep": false
+    },
+    "excluded": [
+      "target_source_even_stat",
+      "other_receipts",
+      "old_native_profiles",
+      "backup_members",
+      "old_checkpoint_label_packet_payloads",
+      "model_or_trajectory_parse",
+      "xattrs",
+      "cloud_account_configuration",
+      "sealed_evidence"
+    ],
+    "cause_acceptance": [
+      "BOUNDED_EVIDENCE_FINDING",
+      "EXPLICIT_UNRESOLVED_UNKNOWN"
+    ],
+    "UNKNOWN_does_not_block_F": true,
+    "admit_R_or_source_successor": false,
+    "historical_failed_role_RSS_reconstruction_required": false,
+    "historical_failed_role_RSS_remains": "UNKNOWN"
+  },
+  "F": {
+    "sources": [
+      "scripts/p17_m2_input_export.py",
+      "scripts/p17_m2_input_export_control.py",
+      "scripts/p17_m2_input_export_dispatch.js",
+      "scripts/p17_m2_input_export_independent.py"
+    ],
+    "existing_test_scope": "tests/test_p17_m2_input_export*.py",
+    "input_scope": "VERSIONED_SOURCE_AND_ORIGINAL_NEW_PUBLIC_FIXTURES_ONLY",
+    "changes": [
+      {
+        "component": "Reader",
+        "retain": [
+          "attempt_ordinal_relative_path",
+          "declared_before_after_identity_when_available",
+          "check_stage",
+          "changed_field_names",
+          "returned_byte_count_or_UNKNOWN",
+          "exception"
+        ],
+        "existing_source_identity_and_nofollow_byte_SHA_predicates": "UNCHANGED",
+        "failed_read_reread": false
+      },
+      {
+        "component": "supervisor_finalizer",
+        "retain": "Available actual wait4/nonzero exits/native profiles/own high_water/flush/cleanup even without successful supervisor receipt",
+        "missing_components": "UNKNOWN_NOT_ZERO",
+        "complete_RSS_from_partial_peaks": false
+      },
+      {
+        "component": "JS_and_independent_Python",
+        "retain": "Independently validated raw event span/actual exits/cost lower bound despite incomplete internal completion; reconcile failed decisive fields",
+        "partial_or_malformed_events": "PARTIAL_OR_UNKNOWN_NOT_CERTIFIED",
+        "original_and_secondary_causes": "SEPARATE_RETAINED"
+      },
+      {
+        "component": "outcome_and_evidence",
+        "failed_payload_outcome": "STOP_EVEN_WITH_COMPLETE_MEASUREMENT",
+        "actual_final_exit": "SAME_FINITE_EXTERNAL_TOOL_FRONTIER",
+        "internal_future_exit_certification": false
+      }
+    ],
+    "failure_record_schema": "EXPLICIT_NEW_VERSION_BIND_NEW_DIAGNOSTIC_IDENTITY",
+    "historical_R_execution_output_roots": "REJECTED_AS_EXECUTION_OR_OUTPUT; ONLY_D_FIVE_RECEIPT_READ_ONLY_INPUT_EXCEPTION",
+    "R_role_dispatch": false,
+    "fixture_matrix": [
+      "unchanged_success",
+      "mtime_only_change",
+      "size_change",
+      "replacement_before_open",
+      "read_exception",
+      "payload_exit_1",
+      "absent_supervisor_receipt",
+      "serializer_failure",
+      "missing_helper_RSS",
+      "malformed_missing_out_of_order_events",
+      "missing_actual_exit",
+      "FULL_overrun",
+      "uncertain_cleanup"
+    ],
+    "acceptance": [
+      "independently_checked_span_exit_counters_strict_rejection",
+      "primary_and_secondary_failure_retained",
+      "JS_Python_decisive_fact_and_UNKNOWN_agreement",
+      "fully_recorded_negative_payload_remains_STOP",
+      "removed_component_closes_resource_acceptance",
+      "unchanged_FULL_plus10_and_independent_minimum_rules",
+      "mandatory_full_regression_and_protected_publication"
+    ],
+    "mandatory_F_evidence_UNKNOWN": "NO_F_ACCEPTANCE",
+    "D_cause_UNKNOWN": "NOT_A_BLOCKER_TO_PUBLIC_F",
+    "new_algorithm_dependency_backend_provider_workflow_or_resource_proof": false
+  },
+  "future_budget": {
+    "approved": false,
+    "old_caps_transfer": false,
+    "phases": [
+      {
+        "name": "F_public_preparation",
+        "executor_seconds": 7200,
+        "independent_seconds": 3600,
+        "start": "EACH_ACTUAL_FIRST_PREPARATION_TOOL",
+        "includes": "implementation_fixtures_substantive_review_source_report_debug_and_directed_waits"
+      },
+      {
+        "name": "source_regression_and_publication",
+        "executor_seconds": 5400,
+        "independent_seconds": 0,
+        "start": "FIRST_MANDATORY_SOURCE_CHECK",
+        "includes": "five_checks_push_PR_main_CI_all_waits_and_freeze_filing"
+      },
+      {
+        "name": "D_once_common_window",
+        "executor_seconds": 600,
+        "independent_seconds": 600,
+        "start": "ONE_READINESS_ACTIVATION_AFTER_SOURCE_MAIN_ALL_FOUR_CI_AND_BOTH_AUTHORS_READY",
+        "includes": "independent_public_preflight_capture_optional_OS_query_new_copy_review_shutdown"
+      },
+      {
+        "name": "result_regression_and_publication",
+        "executor_seconds": 5400,
+        "independent_seconds": 0,
+        "start": "D_CLOSE_OR_POST_SOURCE_PRE_D_STOP_OMISSION_IF_BOTH_F_D_GRANTED",
+        "includes": "result_drafting_five_checks_all_PR_main_CI_waits_and_final_return"
+      }
+    ],
+    "executor_total_seconds": 18600,
+    "independent_total_seconds": 4200,
+    "D_FULL_charge_seconds_if_entered": 600,
+    "D_FULL_charge_seconds_if_unlaunched": 0,
+    "D_public_independent_IO_preflight_max_seconds_within_600": 120,
+    "D_preflight_before_any_historical_receipt_or_OS_read": true,
+    "D_preflight_attempts_max": 1,
+    "D_complete_outer_wall_plus10_max_seconds": 600,
+    "author_publication_closure_reserve_seconds": 120,
+    "D_closure_reserve_seconds": 60,
+    "continuous_each_phase_all_directed_waits_count": true,
+    "reset_pause_transfer": false,
+    "CI_pending_at_cap": "STOP_RETAIN_PENDING_NO_BYPASS_AUTOMATIC_EXTENSION_OR_RERUN",
+    "cost_views": "AUTHOR_DIAGNOSTIC_FULL_COMMAND_CI_OVERLAP_NOT_DOUBLE_COUNTED",
+    "new_purchases_USD": 0,
+    "existing_electricity_subscription_CI_fees": "UNKNOWN_NOT_ZERO",
+    "current_documentation_cost": "SEPARATE_NOT_RETROACTIVELY_GOVERNED_BY_PROPOSED_CAPS",
+    "F_only": {
+      "executor_seconds": 12600,
+      "independent_seconds": 3600,
+      "D_seconds": 0,
+      "result_publication_seconds": 0,
+      "source_PR_contains_final_fixture_review_report_and_D_UNRUN": true,
+      "second_result_PR": false,
+      "unused_phases": "CLOSED_NONTRANSFERABLE"
+    },
+    "full_table_requires": "BOTH_F_AND_D_GRANTED"
+  },
+  "future_resource": {
+    "environment": "CURRENT_M2_AND_EXISTING_GITHUB_CI_ONLY",
+    "RSS_limit_bytes": 4294967296,
+    "acceptance": "PROSPECTIVELY_ADOPTED_NATIVE_RSS_FULL_EXIT_EMPIRICAL",
+    "independent_preflight": true,
+    "a_priori_allocation_or_kernel_proof": false,
+    "same_complete_native_coverage_actual_exits_cleanup_required": true,
+    "immutable_FULL_test": "max(whole_wall+10, independently_reconciled_minimum)<=FULL",
+    "overrun": "RETAIN_ADDITIONALLY_NEVER_CLIP_REFUND",
+    "scientific_B_preflight": false
+  },
+  "future_freeze": {
+    "before_D": [
+      "explicit_grant",
+      "fresh_reviewer",
+      "literal_commands_roots_five_hashes_actor_clock_charge_plan",
+      "clean_locked_merged_source",
+      "all_four_exact_main_CI",
+      "both_authors_ready"
+    ],
+    "new_root": "/Users/keith1117/Documents/TopoLab-data/p17-m2-input-failure-diagnostic-v1",
+    "root_must_be_absent": true,
+    "existing_root": "STOP_NO_DELETION_OR_NAME_SEARCH",
+    "old_R_roots_or_plan_reused": false,
+    "raw_records": "EXTERNAL_NO_DEVICE_IDS_OR_SECRETS_IN_GIT"
+  },
+  "STOP": [
+    "missing_grant_or_reviewer",
+    "scope_hash_identity_schema_mismatch",
+    "symlink_path_escape",
+    "prohibited_access_or_extra_file",
+    "mandatory_evidence_UNKNOWN",
+    "resource_or_cap_breach",
+    "cleanup_uncertainty",
+    "frozen_mutation"
+  ],
+  "STOP_scope": "DEPENDENT_TRACK; D_unknown_historical_cause_does_not_block_fixture_only_F",
+  "unfrozen_public_software_debug": "WITHIN_NEW_PREPARATION_CAP_ONLY",
+  "frozen_D_first_failure": "NO_RETRY_NO_PATCH_CONTINUE",
+  "never_authorized": [
+    "change_old_source_metadata_or_disable_guard",
+    "old_target_stat_or_reread",
+    "widen_OS_log_window",
+    "sleep_or_sync_setting_change",
+    "replacement_input_or_provider",
+    "R_v4_or_R_retry",
+    "B",
+    "C",
+    "automatic_successor"
+  ],
+  "publication": {
+    "five_checks_before_each_commit": [
+      "uv sync --dev --locked",
+      "uv run ruff check .",
+      "uv run mypy src",
+      "uv run pytest",
+      "git diff --check"
+    ],
+    "reviewed_staging_and_all_upload_guard": true,
+    "all_four_exact_PR_and_main_CI": true,
+    "protected_merge_only": true,
+    "source_publication_precedes_D": true,
+    "no_environment_workflow_dispatch": true
+  },
+  "preserved": {
+    "full_v2": "FULL_V2_OPEN_NO_ADMITTED_ROUTE",
+    "fixed_primary": "P/17_UNREPAIRED",
+    "uniform_default": true,
+    "science": "PAUSED",
+    "full_fit_memory": "PENDING_4GiB",
+    "B_guest": "ADOPTED_PROSPECTIVELY_ENVIRONMENT_NOT_ADMITTED_HOST_OVERHEAD_UNKNOWN",
+    "B4_51": "FAIL_PROCESS_SOURCE_FREEZE_CONSUMED_QUOTAS",
+    "D1": "STOP_FULL60_OWNER_CLOSED_RESCUE",
+    "I1": "UNKNOWN",
+    "B4_52": "NOT_SELECTED_BY_R1",
+    "known_paid_floor_seconds": "12721.16417100014444982>7200",
+    "R_v1": {
+      "paid": 180,
+      "unused_closed": 1680
+    },
+    "R_v2": {
+      "paid": 0,
+      "unused_closed": 1860,
+      "formal": "UNLAUNCHED_UNKNOWN_NOT_RUN"
+    },
+    "R_v3": {
+      "paid": 300,
+      "unused_closed": 1560,
+      "outcome": "STOP_NO_RETRY"
+    },
+    "other_costs_quotas_UNKNOWN_and_seals": "UNCHANGED",
+    "B3": "M2_PLUS_INDEPENDENT_UBUNTU24_04_BOTH_SCALES_FINAL_REPRODUCTION",
+    "historical_contract_report_receipt_and_source_revisions": "UNCHANGED"
+  },
+  "R_v3_later_publication_supplement": {
+    "original_executor_result_seconds": 3618.633086,
+    "original_cap_seconds": 3600,
+    "overrun_seconds": 18.633086,
+    "overrun_retained_not_retroactively_authorized": true,
+    "separate_owner_publication_followup_cap_seconds": 600,
+    "followup_actual_seconds": 335.755696,
+    "followup_unused_closed_seconds": 264.244304,
+    "followup_scope": "EXISTING_MAIN_CI_VERIFICATION_AND_MERGED_BRANCH_CLEANUP_ONLY",
+    "followup_old_reads_roles_CI_reruns": 0,
+    "PR209_and_all_four_main_CI": "COMPLETE",
+    "worktree_retained": true,
+    "historical_reports_not_rewritten": true
+  },
+  "only_next_decision": "OWNER_DECLINES_OR_EXPLICITLY_GRANTS_F_ONLY_OR_F_AND_EXACT_D_WITH_FRESH_REVIEWER; NOTHING_AUTOMATIC",
+  "success_also_stops": true,
+  "later_R_requires_separate_contract_and_grant": true,
+  "recommended_smallest_option": "F_ONLY_D_UNRUN; MISSING_HISTORICAL_TUPLES_ALREADY_DOCUMENTED_D_CANNOT_PROMISE_CAUSE"
+}

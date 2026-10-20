@@ -5,6 +5,26 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
+## Current slice: failure diagnosis / minimal recording repair proposal only
+
+The owner commissions only the [finite proposal](planning/p17_m2_input_failure_diagnostic_repair_proposal.md)
+and [JSON](planning/p17_m2_input_failure_diagnostic_repair_proposal.json):
+**PROPOSED_NOT_AUTHORIZED**. Current old external stat/read set is empty; no code,
+OS query, diagnostic preflight, R retry or B/C. D may leave the12th identity
+change's member/cause UNKNOWN. F would preserve failure-stage tuples/byte counts,
+known wall/exits/partial RSS and original/secondary errors using new fixtures,
+without weakening source guards or converting a failed payload to PASS.
+
+Future proposed ceilings: F executor2h/new different author1h; D common10min;
+source and result regression/protected publication90min each. Executor maximum
+5h10m, independent1h10m; diagnostic FULL600 overlaps the author view, no double
+count. All unapproved. Proposed D would permit five exact hash-bound failed receipts
+and one optional105s-window sleep/wake query, never the target original file,
+other source, profiles, old backup or seals. Missing historical evidence may
+remain UNKNOWN; no new kernel/allocation proof is requested. F-only closes in one PR at executor3h30m/independent1h, with D and second
+publication omitted. Any later grant must choose F only or F plus that exact
+bounded D scope with a fresh reviewer.
+
 ## NEW R/v3 closed STOP during metadata registration
 
 [Source PR208](https://github.com/keith1117/TopoLab/pull/208) merged as
@@ -40,15 +60,24 @@ work only, not R0. The final trusted-tool packet is separately filed after forma
 close, outside the measured backup snapshot. [Actual report](validation/p17_m2_input_export_readiness.md#actual-rv3-execution--stopped-during-metadata-registration)
 and [different-author audit](validation/p17_m2_input_export_readiness_independent_review.md).
 
-Formal closed08:38:17.388Z after261.530999899/2700s. Result/publication caps start
-there: exporter3600s deadline09:38:17.388Z; independent900s deadline08:53:17.388Z.
-Only required result review, regression and protected publication follow. No
-new purchase; software/CI/publication are real costs, fees UNKNOWN_NOT_ZERO.
-Result precommit five-check regression passed:2218 tests/1 platform skip, no
-relaxed guard or tolerance. Result PR/main CI remain pending at this snapshot.
-Old v1 paid180/closed1680 and v2 paid0/closed1860 retain bytes. All historical
-limits below remain; B/C, further old reads, frozen patch/retry/reset or an
-automatic successor are not authorized. No default R/v4.
+Formal closed08:38:17.388Z after261.530999899/2700s. Result precommit five checks
+passed:2218 tests/1 platform skip, unchanged tolerance/guard/protection. Result
+[PR209](https://github.com/keith1117/TopoLab/pull/209) protected-merged as
+`85644c423ab7151c22dd861639369642ed630f1a`; all four exact-head PR jobs and
+[exact-main CI39399796173](https://github.com/keith1117/TopoLab/actions/runs/39399796173)
+jobs passed. This subsequent publication supplement resolves pending-at-authoring
+entry wording; frozen reports retain their original bytes. Assigned ec0b worktree
+was safely detached at merged main, both this slice's merged/no-new-work branches
+removed locally/remotely; no worktree archived or main checkout edited.
+
+Original exporter result cap3600s ended at09:38:36.021086Z, actual3618.633086s:
+**18.633086s overrun retained**. Main CI completed09:40:15Z. The owner separately
+granted <=600s only for existing-main-CI verification and merged-branch cleanup;
+09:42:08.149–09:47:43.904696Z used335.755696s, unused264.244304s closed. This does
+not retroactively authorize the original overrun, reset a cap or reopen a role.
+No CI rerun/old read/B/C. Software/CI/publication costs remain additional and
+UNKNOWN_NOT_ZERO where unmeasured; no new purchase. Old v1 paid180/closed1680,
+v2 paid0/closed1860 and v3 paid300/closed1560 stay. No default R/v4.
 
 ## Historical R/v2 source merged; formal preparation closed unlaunched
 
@@ -263,12 +292,17 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-owner-decision-after-rv2-zero-launch"></a>
 
-## Unique next item: owner route decision after the stopped R/v3
+<a id="unique-next-item-owner-route-decision-after-the-stopped-rv3"></a>
 
-Finish this result's required normal protected publication, then stop. The next
-owner decision is whether to end this route or authorize a separately scoped
-source-stability clarification/investigation; its concrete evidence would need
-to explain the12th metadata identity transition without rewriting the failed
-receipt. Current authority permits no reread, repair, R/v4, B or C. A later
-proposal/grant must state exact input access, finite cost, independent role and
-STOP terms before any such access; none is automatic. Keep assigned worktree.
+## Unique next item: owner decision on the finite diagnosis/repair proposal
+
+Review the [proposal](planning/p17_m2_input_failure_diagnostic_repair_proposal.md)
+and [JSON](planning/p17_m2_input_failure_diagnostic_repair_proposal.json). The owner
+may decline, approve fixture-only F with D UNRUN, or explicitly grant F plus the
+five-receipt/optional bounded sleep-wake D scope and new finite budgets/fresh
+different author. Publication itself grants none of these. No target-file
+stat/reread or automatic R/v4; unresolved D cause can remain UNKNOWN without
+blocking public F. Any later R identity/input preparation needs a separate
+contract/owner decision after this work, never a continuation of old quota.
+Finish the current documentation slice's mandatory checks/protected publication
+and STOP. Retain assigned worktree, every failed receipt/cost/closed cap/seal.
