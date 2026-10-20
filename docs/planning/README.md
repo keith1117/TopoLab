@@ -58,18 +58,22 @@ Final local2290 passed/1 platform skip; the first unchanged cleanup assertion
 failure/cost and its UNKNOWN cause remain, without a fix claim. Frozen F reports
 retain their precommit publication wording; do not repeat F.
 
-Current owner scope (2026-10-20): **new source-stability/export contract documents,
-required software regression and normal publication only**. See the
-[new R-STABLE proposal](p17_m2_source_stability_export_proposal.md) and
-[JSON](p17_m2_source_stability_export_proposal.json): in-place custodian writer
-quiescence, strict source checks, independent R0 before R1, explicit F production
-binding/cleanup acceptance and newly proposed budgets. New execution/old-source
-permissions and fresh independent appointment are NOT_GRANTED. D is not a
-prerequisite; historical cause/full RSS remain UNKNOWN. No implementation, old
-stat/read, formal R, B/C, environment/power query or automatic successor.
-After this document publication STOP for the single scoped owner decision in
-that proposal; do not treat the old grants or closed balances as current authority.
-4GiB/independent preflight, fixed P/17/uniform/science pause and all old evidence stay.
+Current owner grant (2026-10-20) approves PR212's finite R-STABLE budget,
+exact source exception and fresh different-author review. The
+[approved protocol](p17_m2_source_stability_export_protocol.md)/
+[JSON](p17_m2_source_stability_export_protocol.json) supplement the unchanged
+proposal snapshot. Minimal software/public-fixture preparation and normal source
+publication proceed; actual writer-control coverage remains UNKNOWN.
+The delegated custodian and independent reviewer therefore close formal entry
+**NO_SOURCE_ADMISSION_KEEP_STOP**, unlaunched0/6, old stat/read0, no new DATA root,
+lease or plan. No I/O role is run to compensate for missing operational control.
+See [software/zero-launch report](../validation/p17_m2_source_stability_export.md)
+and [independent review](../validation/p17_m2_source_stability_export_independent_review.md).
+After normal protected publication STOP. Any later source attempt needs a fresh
+finite owner decision with concrete attributed writer controls; no allowance
+transfers. D/cause recovery, environment discovery, snapshots/permission changes,
+B/C and automatic successors remain outside this slice. Retain4GiB/independent
+preflight, fixed P/17/uniform/science pause and all old evidence/costs/seals.
 
 Historical R/v3 remains **STOP_NO_RETRY**: source PR208/main5b01c13/all-four CI
 preceded activation. Six roles defined,3 launched (public PASS/R0 STOP/shared PASS);
@@ -108,7 +112,7 @@ retain their historical bytes. No default R/v4; no diagnostic execution now.
 
 | Proposal | Documents | Current boundary |
 |---|---|---|
-| New R-STABLE source control and restricted export | [Finite proposal](p17_m2_source_stability_export_proposal.md), [JSON](p17_m2_source_stability_export_proposal.json) | Documents/regression/publication only; future roles, source exception and budgets ungranted; D not prerequisite; [validation](../validation/p17_m2_source_stability_export_proposal.md) |
+| New R-STABLE source control and restricted export | [Finite proposal](p17_m2_source_stability_export_proposal.md), [JSON](p17_m2_source_stability_export_proposal.json) | Original proposal snapshot preserved; subsequent approved [protocol](p17_m2_source_stability_export_protocol.md)/[JSON](p17_m2_source_stability_export_protocol.json); [software/zero-launch outcome](../validation/p17_m2_source_stability_export.md) NO_SOURCE_ADMISSION_KEEP_STOP |
 | M2 native H/17 parent | [Revision7](p17_m2_native_homotopy_proposal.md), [JSON](p17_m2_native_homotopy_proposal.json) | A closed; R/v1 stopped before source access; R/v3 R0 STOP; B/C unapproved |
 | M2 input registration and restricted export preparation | [Contract and budget](p17_m2_input_export_preparation_proposal.md), [JSON](p17_m2_input_export_preparation_proposal.json) | Original scope retained; no12/528/18 exports or accepted source registry |
 | Stopped R execution | [Protocol](p17_m2_input_export_preparation_protocol.md) | STOP_NO_RETRY; failed FULL120 + shared FULL60; old reads0; result PR205 published |

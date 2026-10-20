@@ -1,5 +1,14 @@
 # TopoLab v2 delivery execution plan — R1
 
+Current2026-10-20 supplement: the later PR212 R-STABLE grant is governed by
+[its new approved protocol](p17_m2_source_stability_export_protocol.md)/
+[JSON](p17_m2_source_stability_export_protocol.json), not the historical R1 next
+step below. Minimal software/normal publication is authorized, but writer
+coverage UNKNOWN closes formal entry NO_SOURCE_ADMISSION_KEEP_STOP,0/6/old reads0.
+See [current status](../project_status.md) and
+[software/zero-launch report](../validation/p17_m2_source_stability_export.md).
+No B/C or automatic successor; old R1 scientific/cost conclusions retain bytes.
+
 Date: 2026-10-15 (America/New_York). Baseline: merged main
 `502e45caa0f81569a515adf2b78448e1be7bbd00` (PR #191), with successful
 [main CI](https://github.com/keith1117/TopoLab/actions/runs/38706518569).

@@ -2,6 +2,7 @@
 
 import importlib.util
 import json
+import os
 import shutil
 import struct
 import subprocess
@@ -1266,3 +1267,727 @@ def test_F_malformed_event_entry_emits_bounded_STOP(bad_event: object) -> None:
         assert result["actual_exit_codes"] == [None]
         assert result["known_cost_lower_bound_seconds"] == 120
         assert result["primary_failure"] == completion["primary_failure"]
+
+
+def test_stable_reader_records_same_transaction_source_identity(tmp_path: Path) -> None:
+    original = tmp_path / "new-public.json"
+    original.write_bytes(b"{}\n")
+    reader = checker.OnceReader(tmp_path, 1, 100, source_identity_checks=True)
+    assert reader.read(original.name, 100) == b"{}\n"
+    row = reader.observations[0]
+    assert row["path"] == original.name
+    assert row["byte_size"] == 3
+    assert row["sha256"] == checker.digest(b"{}\n")
+    assert row["declared"] == row["before"] == row["after"] == row["closing"]
+    assert row["closing"] == checker.source_identity(original.stat())
+    assert checker.compare_source_identities(
+        reader.observations, checker.identity_sidecar(reader.observations), 1,
+    ) > 10
+
+
+@pytest.mark.parametrize("replacement", ["leaf", "ancestor"])
+def test_stable_reader_closing_path_detects_same_byte_replacement(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, replacement: str,
+) -> None:
+    parent = tmp_path / "source"
+    parent.mkdir()
+    original = parent / "original.json"
+    original.write_bytes(b"{}\n")
+    real_read = os.read
+    changed = False
+
+    def read_and_replace(fd: int, maximum: int) -> bytes:
+        nonlocal changed
+        raw = real_read(fd, maximum)
+        if raw and not changed:
+            changed = True
+            if replacement == "leaf":
+                original.rename(parent / "retained-original.json")
+            else:
+                parent.rename(tmp_path / "retained-original-directory")
+                parent.mkdir()
+            original.write_bytes(raw)
+        return raw
+
+    monkeypatch.setattr(os, "read", read_and_replace)
+    reader = checker.OnceReader(tmp_path, 1, 100, source_identity_checks=True)
+    with pytest.raises(ValueError, match="closing literal path"):
+        reader.read("source/original.json", 100)
+    facts = reader.failures[0]
+    assert facts["execution_identity"] == checker.EXECUTION_STABLE
+    assert facts["stage"] == "closing_path_identity"
+    assert facts["returned_bytes"] == 3
+    assert facts["before"] == facts["after"]
+    assert facts["before"]["st_ino"] != facts["closing"]["st_ino"]
+    assert "st_ino" in facts["changed_fields"]
+    assert reader.observations == []
+    assert reader.seen == {"source/original.json"}
+
+
+@pytest.mark.parametrize("mutation", ["mtime", "size"])
+def test_stable_reader_preserves_change_failure_and_read_bytes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, mutation: str,
+) -> None:
+    original = tmp_path / "original.json"
+    original.write_bytes(b"{}\n")
+    before = original.stat()
+    real_read = os.read
+    changed = False
+
+    def change_during_read(fd: int, maximum: int) -> bytes:
+        nonlocal changed
+        raw = real_read(fd, maximum)
+        if raw and not changed:
+            changed = True
+            if mutation == "mtime":
+                os.utime(original, ns=(before.st_atime_ns, before.st_mtime_ns + 1_000_000))
+            else:
+                original.write_bytes(b"{\"new\":true}\n")
+        return raw
+
+    monkeypatch.setattr(os, "read", change_during_read)
+    journal = tmp_path / "new-failure.jsonl"
+    reader = checker.OnceReader(tmp_path, 1, 100, source_identity_checks=True, journal=journal)
+    with pytest.raises(ValueError, match="changed during"):
+        reader.read(original.name, 100)
+    failure = reader.failures[0]
+    assert failure["returned_bytes"] >= 3
+    assert failure["stage"] == "after_read_identity"
+    assert "st_mtime_ns" in failure["changed_fields"]
+    if mutation == "size":
+        assert "st_size" in failure["changed_fields"]
+    assert checker.parse(journal.read_bytes()) == failure
+
+
+def test_stable_reader_partial_read_failure_retains_actual_prefix_bytes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    (tmp_path / "original.json").write_bytes(b"{}\n")
+    real_read = os.read
+    calls = 0
+
+    def partial_then_failure(fd: int, maximum: int) -> bytes:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            return real_read(fd, 1)
+        raise OSError("new public read failure")
+
+    monkeypatch.setattr(os, "read", partial_then_failure)
+    reader = checker.OnceReader(tmp_path, 1, 100, source_identity_checks=True)
+    with pytest.raises(OSError, match="new public"):
+        reader.read("original.json", 100)
+    failure = reader.failures[0]
+    assert failure["returned_bytes"] == 1
+    assert failure["after"] is None and failure["closing"] is None
+    assert failure["stage"] == "bounded_read"
+    assert reader.table == []
+
+
+@pytest.mark.parametrize("damage", ["missing", "extra", "inode", "closing", "duplicate"])
+def test_cross_author_source_identity_sidecar_cannot_accept_changed_original(
+    tmp_path: Path, damage: str,
+) -> None:
+    (tmp_path / "original.json").write_bytes(b"{}\n")
+    reader = checker.OnceReader(tmp_path, 1, 100, source_identity_checks=True)
+    reader.read("original.json", 100)
+    producer = deepcopy(checker.identity_sidecar(reader.observations))
+    if damage == "missing":
+        producer["rows"] = []
+    elif damage == "extra":
+        producer["rows"][0]["extra"] = True
+    elif damage == "inode":
+        # Equal bytes and SHA cannot hide cross-author replacement.
+        for stage in ("declared", "before", "after", "closing"):
+            producer["rows"][0][stage]["st_ino"] += 1
+    elif damage == "closing":
+        producer["rows"][0]["closing"] = None
+    else:
+        producer["rows"].append(deepcopy(producer["rows"][0]))
+    with pytest.raises(ValueError):
+        checker.compare_source_identities(reader.observations, producer, 1)
+
+
+def stable_recording_subject(*, role="independent-public-check", failed=False):  # type: ignore[no-untyped-def]
+    pending, completion, events, inner = failure_recording_subject(failed=failed)
+    for record in (pending, completion):
+        record.update(
+            execution_identity=checker.EXECUTION_STABLE,
+            role=role, frozen_FULL_seconds=checker.FULL_STABLE[role],
+            actor_window_seconds=4500,
+            actor_deadlines_UTC={
+                "exporter": "1970-01-01T01:31:40.000Z",
+                "independent": "1970-01-01T01:31:40.000Z",
+            },
+        )
+    completion["pending_sha256"] = checker.digest(checker.canonical(pending))
+    completion["domain_status"] = "STOP" if failed else "PASS"
+    cleanup = {"group_gone": True, "leader_exit": 1 if failed else 0,
+               "initial_group_gone": False, "final_group_gone": True,
+               "signals": ["SIGTERM"], "observation_limit_seconds": 5,
+               "post_signal_observation_seconds": 0.02, "observation_limit_exceeded": False,
+               "observations": [{"elapsed_seconds": 0.0, "group_gone": False,
+                                 "leader_exit": None},
+                                {"elapsed_seconds": 0.02, "group_gone": True,
+                                 "leader_exit": 1 if failed else 0}]}
+    completion["cleanup"] = deepcopy(cleanup)
+    inner["record"]["cleanup"] = deepcopy(cleanup)
+    helper_cleanup = deepcopy(cleanup)
+    helper_cleanup["leader_exit"] = helper_cleanup["observations"][-1]["leader_exit"] = 0
+    inner["record"]["helpers"][0]["cleanup"] = helper_cleanup
+    return pending, completion, events, inner
+
+
+def stable_recording_audit(pending, completion, events, inner):  # type: ignore[no-untyped-def]
+    return checker.audit_full_role_stable(
+        pending, completion=completion, raw_tool_events=events,
+        expected_role=pending["role"], expected_plan_sha256="a" * 64,
+        expected_pending_sha256=checker.digest(checker.canonical(pending)),
+        inner_evidence=inner, native_profiles=failure_recording_profiles(),
+    )
+
+
+@pytest.mark.parametrize("role", checker.FULL_STABLE)
+def test_stable_full_role_uses_only_new_role_cap_and_4500_window(role: str) -> None:
+    pending, completion, events, inner = stable_recording_subject(role=role)
+    result = stable_recording_audit(pending, completion, events, inner)
+    assert result["status"] == "PASS_R_STABLE_FULL_ROLE"
+    assert result["frozen_FULL_seconds"] == checker.FULL_STABLE[role]
+    assert result["actor_window_seconds"] == 4500
+    assert result["whole_wall_seconds"] == 17.25
+    assert result["RSS_envelope_bytes"] == 980
+    assert result["source_successor_admitted"] is False
+    assert result["B_C_admission"] is False
+
+
+@pytest.mark.parametrize("damage", ["old_identity", "old_FULL", "old_window", "missing_outer",
+                                   "missing_inner", "cleanup", "missing_exit", "pending"])
+def test_stable_replay_missing_or_closed_evidence_fails_first(damage: str) -> None:
+    pending, completion, events, inner = stable_recording_subject()
+    pending_sha = checker.digest(checker.canonical(pending))
+    if damage == "old_identity":
+        pending["execution_identity"] = completion["execution_identity"] = checker.EXECUTION_V2
+    elif damage == "old_FULL":
+        pending["frozen_FULL_seconds"] = completion["frozen_FULL_seconds"] = 120
+    elif damage == "old_window":
+        pending["actor_window_seconds"] = completion["actor_window_seconds"] = 2700
+    elif damage == "missing_outer":
+        completion["resource_components"].pop()
+    elif damage == "missing_inner":
+        inner = None
+    elif damage == "cleanup":
+        completion["cleanup"]["group_gone"] = None
+    elif damage == "missing_exit":
+        events[-1]["exit_code"] = None
+    else:
+        pending_sha = "f" * 64
+    result = checker.audit_full_role_stable(
+        pending, completion=completion, raw_tool_events=events,
+        expected_role="independent-public-check", expected_plan_sha256="a" * 64,
+        expected_pending_sha256=pending_sha, inner_evidence=inner,
+        native_profiles=failure_recording_profiles(),
+    )
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["full_role_evidence_accepted"] is False
+    assert result["B_C_admission"] is False
+    if damage == "missing_exit":
+        assert result["whole_wall_seconds"] == 17.25
+
+
+def test_stable_measured_payload_failure_and_overrun_are_never_PASS() -> None:
+    pending, completion, events, inner = stable_recording_subject(failed=True)
+    measured_failure = stable_recording_audit(pending, completion, events, inner)
+    assert measured_failure["evidence_complete"] is True
+    assert measured_failure["domain_status"] == "STOP"
+    assert measured_failure["status"] == "STOP_NO_RETRY"
+    completion["status"] = "FAILED_INTERNAL_COMPLETION"
+    events[-1]["end_seconds"] = 1290.001
+    overrun = stable_recording_audit(pending, completion, events, inner)
+    assert overrun["whole_wall_seconds"] == pytest.approx(290.001)
+    assert overrun["known_cost_lower_bound_seconds"] == 301
+    assert overrun["status"] == "STOP_NO_RETRY"
+    assert overrun["actual_exit_codes"] == [1, 0]
+
+
+def test_stable_resource_api_explicit_F_recording_preserves_new_binding() -> None:
+    _, completion, _, inner = stable_recording_subject(failed=True)
+    result = checker.audit_v2_resource_components(
+        completion, inner_evidence=inner, native_profiles=failure_recording_profiles(),
+        execution_identity=checker.EXECUTION_STABLE, failure_recording=True,
+    )
+    assert result["evidence_complete"] is True
+    assert result["actual_component_exit_codes"] == [1, 1]
+    assert result["RSS_envelope_bytes"] == 980
+
+
+@pytest.mark.parametrize("mode", ["r0", "r1", "public-check"])
+def test_independent_CLI_refuses_unauthorized_DATA_before_any_stat(
+    monkeypatch: pytest.MonkeyPatch, mode: str,
+) -> None:
+    argv = ["independent", mode, "--output", str(checker.AUTHORIZED_DATA_ROOT / "denied.json")]
+    if mode == "public-check":
+        argv += ["--fixture-root", str(checker.AUTHORIZED_DATA_ROOT / "denied-fixture")]
+    else:
+        argv += ["--authorize-old-read"]
+    monkeypatch.setattr("sys.argv", argv)
+
+    def forbidden(*args, **kwargs):  # type: ignore[no-untyped-def]
+        raise AssertionError("denied entry must not stat DATA")
+
+    monkeypatch.setattr(Path, "exists", forbidden)
+    with pytest.raises(ValueError, match="historical R CLI closed|public fixture cannot open DATA"):
+        checker.main()
+
+
+def stable_control_subject():  # type: ignore[no-untyped-def]
+    return {
+        "schema": "topolab.v2.m2-writer-quiescence.v1",
+        "execution_identity": checker.EXECUTION_STABLE,
+        "custodian": "/root",
+        "namespaces": {
+            namespace: {"accepted": True,
+                        "basis": "new public custodian fixture; no original queried",
+                        "no_writer_explanation": "fixture has no original writer"}
+            for namespace in checker.SOURCE_NAMESPACES
+        },
+        "writers": [], "no_write_until_release": True,
+        "acquisition_ack": {"by": "/root", "UTC_seconds": 1001.0,
+                            "basis": "new public acknowledgment only"},
+    }
+
+
+def test_source_controls_empty_writers_need_explicit_attributed_coverage() -> None:
+    controls = stable_control_subject()
+    result = checker.accept_source_controls(controls, 1000.0,
+                                           checker.digest(checker.canonical(controls)))
+    assert result["status"] == "PASS_ATTRIBUTED_SOURCE_CONTROL_CONTENT"
+    assert result["coverage_basis_requires_independent_judgment"] is True
+    assert result["outside_writers_discovered_or_excluded_by_software"] is False
+
+
+@pytest.mark.parametrize("damage", ["identity", "namespace", "unknown_coverage", "empty_basis",
+                                   "no_explanation", "interval", "custodian", "early", "late",
+                                   "hash", "unpaused_writer", "writer_unknown_namespace"])
+def test_source_controls_unknown_or_unattributed_coverage_cannot_admit(
+    damage: str,
+) -> None:
+    controls = stable_control_subject()
+    expected_sha = None
+    namespace = "b3-v1-fits"
+    if damage == "identity":
+        controls["execution_identity"] = checker.EXECUTION_V2
+    elif damage == "namespace":
+        controls["namespaces"].pop(namespace)
+    elif damage == "unknown_coverage":
+        controls["namespaces"][namespace]["accepted"] = None
+    elif damage == "empty_basis":
+        controls["namespaces"][namespace]["basis"] = ""
+    elif damage == "no_explanation":
+        controls["namespaces"][namespace].pop("no_writer_explanation")
+    elif damage == "interval":
+        controls["no_write_until_release"] = False
+    elif damage == "custodian":
+        controls["acquisition_ack"]["by"] = "other"
+    elif damage == "early":
+        controls["acquisition_ack"]["UTC_seconds"] = 999.0
+    elif damage == "late":
+        controls["acquisition_ack"]["UTC_seconds"] = 1300.001
+    elif damage == "hash":
+        expected_sha = "f" * 64
+    else:
+        controls["writers"] = [{
+            "name": "fixture-writer", "namespace": namespace if damage == "unpaused_writer"
+            else "undeclared", "action": "pause", "status": "UNKNOWN",
+            "evidence": "fixture cannot acknowledge pause",
+        }]
+    with pytest.raises(ValueError):
+        checker.accept_source_controls(controls, 1000.0, expected_sha)
+
+
+@pytest.mark.parametrize("action,status", [("pause", "PAUSED_ACKNOWLEDGED"),
+                                          ("exclude", "EXCLUDED_CUSTODIAN_CONTROL")])
+def test_source_controls_accept_only_acknowledged_named_writer_action(
+    action: str, status: str,
+) -> None:
+    controls = stable_control_subject()
+    namespace = "b3-v1-fits"
+    controls["namespaces"][namespace].pop("no_writer_explanation")
+    controls["writers"] = [{"name": "fixture-writer", "namespace": namespace,
+                            "action": action, "status": status,
+                            "evidence": "new public fixture attributed action acknowledgment"}]
+    assert checker.accept_source_controls(controls, 1000.0)["status"].startswith("PASS_")
+    controls["writers"].append(deepcopy(controls["writers"][0]))
+    with pytest.raises(ValueError, match="unconfirmed"):
+        checker.accept_source_controls(controls, 1000.0)
+
+
+def test_stable_public_entry_requires_plan_before_stat(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr("sys.argv", [
+        "independent", "public-check", "--execution-identity", checker.EXECUTION_STABLE,
+        "--fixture-root", str(checker.AUTHORIZED_STABLE_ROOT / "public-fixtures"),
+        "--output", str(checker.AUTHORIZED_STABLE_ROOT / "independent-public-check.json"),
+    ])
+
+    def forbidden(*args, **kwargs):  # type: ignore[no-untyped-def]
+        raise AssertionError("unbound stable entry must not stat DATA")
+
+    monkeypatch.setattr(Path, "exists", forbidden)
+    with pytest.raises(ValueError, match="literal frozen plan/hash"):
+        checker.main()
+
+
+def test_stable_reader_before_open_replacement_has_no_fabricated_bytes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    original = tmp_path / "original.json"
+    original.write_bytes(b"{}\n")
+    real_open = os.open
+    replaced = False
+
+    def replaced_open(name, flags, *args, **kwargs):  # type: ignore[no-untyped-def]
+        nonlocal replaced
+        if name == original.name and not replaced:
+            replaced = True
+            original.rename(tmp_path / "retained-original.json")
+            original.write_bytes(b"{}\n")
+        return real_open(name, flags, *args, **kwargs)
+
+    monkeypatch.setattr(os, "open", replaced_open)
+    reader = checker.OnceReader(tmp_path, 1, 100, source_identity_checks=True)
+    with pytest.raises(ValueError, match="changed before"):
+        reader.read(original.name, 100)
+    failure = reader.failures[0]
+    assert failure["stage"] == "before_read_identity"
+    assert failure["returned_bytes"] is None
+    assert failure["declared"]["st_ino"] != failure["before"]["st_ino"]
+    assert failure["after"] is None and failure["closing"] is None
+
+
+def test_stable_failure_journal_error_is_secondary_to_source_hash(
+    tmp_path: Path,
+) -> None:
+    (tmp_path / "original.json").write_bytes(b"{}\n")
+    reader = checker.OnceReader(tmp_path, 1, 100, source_identity_checks=True,
+                                journal=tmp_path / "absent" / "new-journal.jsonl")
+    with pytest.raises(ValueError, match="source SHA differs"):
+        reader.read("original.json", 100, sha256="f" * 64)
+    failure = reader.failures[0]
+    assert failure["primary_reason"] == "source SHA differs"
+    assert "FileNotFoundError" in failure["recording_error"]
+    assert failure["returned_bytes"] == 3
+    assert failure["before"] == failure["after"] == failure["closing"]
+    assert reader.observations[0]["sha256"] == checker.digest(b"{}\n")
+
+
+@pytest.mark.parametrize("damage", ["missing", "initial", "final", "unknown", "order", "late",
+                                   "overrun_flag", "exit", "helper_missing", "inner_missing"])
+def test_stable_cleanup_raw_facts_are_required_not_only_final_true(damage: str) -> None:
+    pending, completion, events, inner = stable_recording_subject()
+    cleanup = completion["cleanup"]
+    if damage == "missing":
+        cleanup.pop("observations")
+    elif damage == "initial":
+        cleanup["initial_group_gone"] = True
+    elif damage == "final":
+        cleanup["final_group_gone"] = False
+    elif damage == "unknown":
+        cleanup["observations"][0]["group_gone"] = None
+        cleanup["initial_group_gone"] = None
+    elif damage == "order":
+        cleanup["observations"][0]["elapsed_seconds"] = 1.0
+    elif damage == "late":
+        cleanup["post_signal_observation_seconds"] = 5.001
+    elif damage == "overrun_flag":
+        cleanup["observation_limit_exceeded"] = True
+    elif damage == "exit":
+        cleanup["observations"][-1]["leader_exit"] = 1
+    elif damage == "helper_missing":
+        inner["record"]["helpers"][0]["cleanup"].pop("observations")
+    else:
+        inner["record"]["cleanup"].pop("observations")
+    result = stable_recording_audit(pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["evidence_complete"] is False
+    assert result["domain_status"] == "STOP"
+    assert result["actual_exit_codes"] == [0, 0]
+    assert result["whole_wall_seconds"] == 17.25
+
+
+@pytest.mark.parametrize("domain_status", [None, "UNKNOWN", "PASS_PUBLIC_SOFTWARE", True])
+def test_stable_domain_requires_exact_PASS_after_complete_evidence(domain_status) -> None:  # type: ignore[no-untyped-def]
+    pending, completion, events, inner = stable_recording_subject()
+    completion["domain_status"] = domain_status
+    result = stable_recording_audit(pending, completion, events, inner)
+    assert result["evidence_complete"] is True
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["domain_status"] == "STOP"
+
+
+def test_actual_isolated_public_CLI_uses_only_new_fixture_paths(tmp_path: Path) -> None:
+    import sys
+
+    output = tmp_path / "new-independent-public-result.json"
+    completed = subprocess.run([
+        sys.executable, "-I", str(Path(__file__).parents[1]
+                                 / "scripts/p17_m2_input_export_independent.py"),
+        "public-check", "--fixture-root", str(tmp_path / "new-public-CLI-fixtures"),
+        "--output", str(output),
+    ], text=True, capture_output=True, check=False, timeout=30)
+    assert completed.returncode == 0, completed.stderr
+    result = checker.parse(output.read_bytes())
+    assert result["status"] == "PASS_PUBLIC_IO_ONLY"
+    assert result["old_source_read_set"] == []
+    assert result["compared_scalar_fields"] > 50000
+
+
+def test_actual_isolated_stable_CLI_refuses_nonliteral_plan_before_DATA(tmp_path: Path) -> None:
+    import sys
+
+    completed = subprocess.run([
+        sys.executable, "-I", str(Path(__file__).parents[1]
+                                 / "scripts/p17_m2_input_export_independent.py"),
+        "public-check", "--execution-identity", checker.EXECUTION_STABLE,
+        "--plan", str(tmp_path / "nonliteral-plan.json"), "--plan-sha", "a" * 64,
+        "--fixture-root", str(checker.AUTHORIZED_STABLE_ROOT / "public-fixtures"),
+        "--output", str(checker.AUTHORIZED_STABLE_ROOT / "independent-public-check.json"),
+    ], text=True, capture_output=True, check=False, timeout=30)
+    assert completed.returncode != 0
+    assert "literal frozen plan/hash" in completed.stderr
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="existing Node runtime unavailable")
+@pytest.mark.parametrize("damage", ["none", "payload", "missing_exit", "cleanup", "outer",
+                                   "malformed_clock", "overrun", "pending", "domain"])
+def test_stable_JS_and_independent_replay_agree_on_raw_facts(damage: str) -> None:
+    pending, completion, events, inner = stable_recording_subject(failed=damage == "payload")
+    pending_sha = checker.digest(checker.canonical(pending))
+    if damage == "missing_exit":
+        events[-1]["exit_code"] = None
+    elif damage == "cleanup":
+        completion["cleanup"]["observations"][0]["group_gone"] = None
+    elif damage == "outer":
+        completion["resource_components"].pop()
+    elif damage == "malformed_clock":
+        events[-1]["clock_domain"] = "unregistered-clock"
+    elif damage == "overrun":
+        events[-1]["end_seconds"] = 1290.001
+    elif damage == "pending":
+        pending_sha = "f" * 64
+    elif damage == "domain":
+        completion["domain_status"] = "UNKNOWN"
+    resources = checker.audit_v2_resource_components(
+        completion, inner_evidence=inner, native_profiles=failure_recording_profiles(),
+        execution_identity=checker.EXECUTION_STABLE, failure_recording=True,
+    )
+    script = Path(__file__).parents[1] / "scripts/p17_m2_input_export_dispatch.js"
+    command = (
+        "const fs=require('fs');const {finishExternalStable}=require(process.argv[1]);"
+        "console.log(JSON.stringify(finishExternalStable(...JSON.parse(fs.readFileSync(0,'utf8')))))"
+    )
+    observed = subprocess.run(
+        ["node", "-e", command, str(script)],
+        input=json.dumps([pending, completion, events, resources, pending_sha]),
+        text=True, capture_output=True, check=True,
+    )
+    js = json.loads(observed.stdout)
+    py = checker.audit_full_role_stable(
+        pending, completion=completion, raw_tool_events=events,
+        expected_role="independent-public-check", expected_plan_sha256="a" * 64,
+        expected_pending_sha256=pending_sha, inner_evidence=inner,
+        native_profiles=failure_recording_profiles(),
+    )
+    for key in ("status", "domain_status", "evidence_complete", "whole_wall_seconds",
+                "known_cost_lower_bound_seconds", "actual_exit_codes", "RSS_envelope_bytes",
+                "full_role_evidence_accepted", "primary_failure"):
+        assert js[key] == py[key], key
+    assert js["status"] == ("PASS_R_STABLE_FULL_ROLE" if damage == "none" else "STOP_NO_RETRY")
+    assert js["B_C_admission"] is False
+    if damage == "malformed_clock":
+        assert py["whole_wall_seconds"] is None
+    elif damage == "overrun":
+        assert py["known_cost_lower_bound_seconds"] == 301
+    else:
+        assert py["whole_wall_seconds"] == 17.25
+
+
+def test_stable_predecessor_replay_binds_actual_pending_bytes_before_source(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    spec = importlib.util.spec_from_file_location(
+        "new_public_stable_controller_subject",
+        Path(__file__).parents[1] / "scripts/p17_m2_input_export_control.py",
+    )
+    assert spec and spec.loader
+    control = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(control)
+    control.configure_stable()
+    monkeypatch.setattr(control, "ROOT", tmp_path / "new-controller-root")
+    (control.ROOT / "receipts").mkdir(parents=True)
+    pending, completion, events, inner = stable_recording_subject()
+    role = pending["role"]
+    pending_raw = checker.canonical(pending)
+    (control.ROOT / "receipts" / f"{role}-pending.json").write_bytes(pending_raw)
+    terminal = stable_recording_audit(pending, completion, events, inner)
+    assert terminal["status"] == "PASS_R_STABLE_FULL_ROLE"
+    packet = {"pending": pending, "completion": completion, "events": events,
+              "terminal": terminal}
+    monkeypatch.setenv("TOPOLAB_RSTABLE_PREVIOUS_TOOL_RECORDS", json.dumps([packet]))
+    monkeypatch.setattr(control, "resource_inputs", lambda *args, **kwargs: {
+        "inner_evidence": inner, "native_profiles": failure_recording_profiles(),
+    })
+    control.ingest_external({"execution_identity": checker.EXECUTION_STABLE}, "a" * 64)
+    observed = checker.parse((control.ROOT / "receipts" / f"{role}-observed.json").read_bytes())
+    assert observed["status"] == "PASS_R_STABLE_FULL_ROLE"
+    assert observed["pending_sha256"] == checker.digest(pending_raw)
+    assert not (control.ROOT / "STOP.json").exists()
+
+
+def final_filing_subject():  # type: ignore[no-untyped-def]
+    _, completion, _, native = stable_recording_subject()
+    child_argv = ["new-python", "-I", "new-control", "final-file", "--r-stable"]
+    native["expected_role"] = native["record"]["role"] = "final-filing"
+    native["expected_argv"] = native["record"]["argv"] = child_argv
+    filing = {"status": "PASS_INDEPENDENT_NEW_BACKUP", "member_count": 100,
+              "total_bytes": 1000, "shared_packet_sha256": "b" * 64,
+              "shared_role_status": "PASS_R_STABLE_FULL_ROLE", "plan_sha256": "a" * 64,
+              "formal_close_UTC_seconds": 1017.25}
+    native["log"] = checker.canonical(filing)
+    native["record"]["log_sha256"] = checker.digest(native["log"])
+    record = {"schema": "topolab.v2.m2-source-stable-final-filing.v1",
+              "execution_identity": checker.EXECUTION_STABLE,
+              "status": "PENDING_EXTERNAL_EXIT", "plan_sha256": "a" * 64,
+              "inner_argv_sha256": checker.digest(checker.canonical(child_argv)),
+              "controller_RSS_samples_bytes": [200, 210], "controller_RSS_unit": "bytes",
+              "filing_result": filing}
+    return record, native, child_argv
+
+
+def final_filing_audit(record, native, argv, **kwargs):  # type: ignore[no-untyped-def]
+    options = {"actual_exit": 0, "whole_wall_seconds": 17.25,
+               "expected_argv": argv, "native_evidence": native,
+               "expected_plan_sha256": "a" * 64, "expected_shared_packet_sha256": "b" * 64}
+    options.update(kwargs)
+    return checker.audit_final_filing(record, **options)
+
+
+def test_final_filing_after_return_is_new_only_not_seventh_source_role() -> None:
+    record, native, argv = final_filing_subject()
+    result = final_filing_audit(record, native, argv)
+    assert result["status"] == "PASS_FINAL_NEW_FILING"
+    assert result["RSS_envelope_bytes"] == 210 + 190
+    assert result["whole_wall_seconds"] == 17.25
+    assert result["known_cost_lower_bound_seconds"] == 28
+    assert result["actual_exit_code"] == result["actual_child_exit_code"] == 0
+    assert result["evidence_complete"] is True
+    assert result["preparation_complete"] is False
+    assert result["formal_source_role_or_window"] is False
+    assert result["B_C_admission"] is False
+    assert "final-filing" not in checker.FULL_STABLE
+
+
+@pytest.mark.parametrize("damage", ["identity", "plan", "argv", "parent_RSS", "parent_units",
+                                   "helper", "cleanup", "missing_exit", "parent_exit",
+                                   "backup_status", "backup_extra", "packet", "shared_STOP",
+                                   "missing_packet", "overrun", "RSS_cap"])
+def test_final_filing_missing_required_or_failed_evidence_stays_STOP(damage: str) -> None:
+    record, native, argv = final_filing_subject()
+    options = {}
+    if damage == "identity":
+        record["execution_identity"] = checker.EXECUTION_F
+    elif damage == "plan":
+        record["plan_sha256"] = "f" * 64
+    elif damage == "argv":
+        record["inner_argv_sha256"] = "f" * 64
+    elif damage == "parent_RSS":
+        record["controller_RSS_samples_bytes"].pop()
+    elif damage == "parent_units":
+        record["controller_RSS_unit"] = "UNKNOWN"
+    elif damage == "helper":
+        native["helper_profiles"] = {}
+    elif damage == "cleanup":
+        native["record"]["cleanup"]["group_gone"] = None
+    elif damage == "missing_exit":
+        options["actual_exit"] = None
+    elif damage == "parent_exit":
+        options["actual_exit"] = 1
+    elif damage == "backup_status":
+        record["filing_result"]["status"] = "STOP_NO_RETRY"
+        native["log"] = checker.canonical(record["filing_result"])
+        native["record"]["log_sha256"] = checker.digest(native["log"])
+    elif damage == "backup_extra":
+        record["filing_result"]["extra_claim"] = "not in raw child log"
+    elif damage == "packet":
+        options["expected_shared_packet_sha256"] = "f" * 64
+    elif damage == "shared_STOP":
+        record["filing_result"]["shared_role_status"] = "STOP_NO_RETRY"
+        native["log"] = checker.canonical(record["filing_result"])
+        native["record"]["log_sha256"] = checker.digest(native["log"])
+    elif damage == "missing_packet":
+        options["expected_shared_packet_sha256"] = None
+    elif damage == "overrun":
+        options["whole_wall_seconds"] = 170.001
+    else:
+        record["controller_RSS_samples_bytes"][-1] = 4294967296
+    result = final_filing_audit(record, native, argv, **options)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["whole_wall_seconds"] == (170.001 if damage == "overrun" else 17.25)
+    assert result["actual_exit_code"] == options.get("actual_exit", 0)
+    assert result["preparation_complete"] is False
+    assert result["B_C_admission"] is False
+    if damage == "overrun":
+        assert result["known_cost_lower_bound_seconds"] == 181
+    if damage == "parent_exit":
+        assert result["evidence_complete"] is True
+        assert result["actual_child_exit_code"] == 0
+
+
+def test_final_filing_exact_time_boundary_does_not_use_tolerance() -> None:
+    record, native, argv = final_filing_subject()
+    assert final_filing_audit(record, native, argv, whole_wall_seconds=170.0)["status"] == (
+        "PASS_FINAL_NEW_FILING"
+    )
+    rejected = final_filing_audit(record, native, argv, whole_wall_seconds=170.000001)
+    assert rejected["status"] == "STOP_NO_RETRY"
+    assert rejected["known_cost_lower_bound_seconds"] == 181
+
+
+def test_final_filing_bad_completion_preserves_obtainable_RSS_wall_and_actual_exit() -> None:
+    record, native, argv = final_filing_subject()
+    record["status"] = "FAILED_INTERNAL_COMPLETION"
+    result = final_filing_audit(record, native, argv, actual_exit=1)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["whole_wall_seconds"] == 17.25
+    assert result["actual_exit_code"] == 1
+    assert result["actual_child_exit_code"] == 0
+    assert result["RSS_envelope_bytes"] == 400
+    assert result["known_cost_lower_bound_seconds"] == 28
+    assert result["evidence_complete"] is False
+
+
+@pytest.mark.parametrize("damage", [None, "isolated", "registry", "output", "extra", "missing"])
+def test_stable_complete_actual_argv_binds_all_source_role_arguments(
+    monkeypatch: pytest.MonkeyPatch, damage: str | None,
+) -> None:
+    frozen = ["new-python", "-I", "new-independent.py", "r0", "--registry",
+              "new-root/registry.json", "--output", "new-root/result.json", "--plan-sha",
+              "<PLAN_SHA256>"]
+    plan = {"roles": {"independent-r0": {"argv": frozen}}}
+    actual = [word.replace("<PLAN_SHA256>", "a" * 64) for word in frozen]
+    if damage == "isolated":
+        actual.remove("-I")
+    elif damage == "registry":
+        actual[5] = "another-allowlisted-file.json"
+    elif damage == "output":
+        actual[7] = "new-root/another-result.json"
+    elif damage == "extra":
+        actual.append("--unfrozen-extra")
+    elif damage == "missing":
+        actual = None
+    monkeypatch.setattr("sys.orig_argv", actual)
+    if damage is None:
+        checker.stable_argv_checked(plan, "a" * 64, "independent-r0")
+    else:
+        with pytest.raises(ValueError, match="complete argv"):
+            checker.stable_argv_checked(plan, "a" * 64, "independent-r0")

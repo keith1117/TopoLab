@@ -136,7 +136,8 @@ def _snapshot(root, index, pgid, known_pids=()):
             cleanup = _terminate(sample.pid, sample)
         stream.seek(0)
         stdout = stream.read()
-    if sample.returncode != 0 or not cleanup["group_gone"]:
+    if (sample.returncode != 0 or not cleanup["group_gone"]
+            or cleanup.get("observation_limit_exceeded")):
         problem = problem or "RESOURCE_UNKNOWN_STOP_SAMPLER_EXIT"
     timer_exit = getattr(sample, "timer_native_exit", None)
     if timer_exit is None or timer_exit["native"]["rss_bytes"] <= 0:
@@ -180,6 +181,34 @@ def _snapshot(root, index, pgid, known_pids=()):
 def _terminate(pgid, child):
     """Kill the session's registered process group even if its leader exited."""
     signals = []
+    observations = []
+    cleanup_start = monotonic()
+
+    def observe():
+        _native_poll(child)  # Reap only this registered leader if it has exited.
+        try:
+            os.killpg(pgid, 0)
+            gone = False
+        except ProcessLookupError:
+            gone = True
+        except PermissionError:
+            gone = None
+        observations.append({"elapsed_seconds": monotonic() - cleanup_start,
+                             "group_gone": gone, "leader_exit": child.returncode})
+        return gone
+
+    def result(gone, observation_started=None):
+        elapsed = 0 if observation_started is None else monotonic() - observation_started
+        return {"signals": signals, "group_gone": gone, "leader_exit": child.returncode,
+                "initial_group_gone": observations[0]["group_gone"],
+                "final_group_gone": observations[-1]["group_gone"],
+                "observations": observations, "observation_limit_seconds": 5,
+                "post_signal_observation_seconds": elapsed,
+                "observation_limit_exceeded": elapsed > 5}
+
+    initial = observe()
+    if initial is True:
+        return result(True)
     # Let the timing parent reap its ONE registered command first. Killing both
     # simultaneously can orphan a zombie under a non-reaping container PID1.
     # Extra/unobserved descendants still take the group cleanup path below.
@@ -213,20 +242,18 @@ def _terminate(pgid, child):
         except subprocess.TimeoutExpired:
             continue
         # A leader exiting does not prove its descendants have exited.
-        try:
-            os.killpg(pgid, 0)
-        except ProcessLookupError:
-            return {"signals": signals, "group_gone": True, "leader_exit": child.returncode}
-        except PermissionError:
-            return {"signals": signals, "group_gone": False, "leader_exit": child.returncode}
-    try:
-        os.killpg(pgid, 0)
-        gone = False
-    except ProcessLookupError:
-        gone = True
-    except PermissionError:
-        gone = False
-    return {"signals": signals, "group_gone": gone, "leader_exit": child.returncode}
+        gone = observe()
+        if gone is not False:
+            return result(gone)
+    # Bounded observation of the SAME launch, without payload relaunch or more
+    # signals. Retain the initial false and actual final observations verbatim.
+    observation_started = monotonic()
+    deadline = observation_started + 5
+    gone = False
+    while gone is False and monotonic() < deadline:
+        sleep(min(0.02, max(0, deadline - monotonic())))
+        gone = observe()
+    return result(gone, observation_started)
 
 
 def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5):
@@ -376,6 +403,8 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5):
             cleanup = _terminate(child.pid, child)
         if not cleanup["group_gone"]:
             reason = reason or "RESOURCE_UNKNOWN_STOP_EXIT"
+        if cleanup.get("observation_limit_exceeded"):
+            reason = reason or "RESOURCE_UNKNOWN_STOP_CLEANUP_WAIT_CAP"
     measured = None
     try:
         measured = native(profile.read_text(), sys.platform)

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import math
 import os
@@ -25,9 +26,11 @@ from typing import Any
 MIB = 1024 * 1024
 AUTHORIZED_DATA_ROOT = Path("/Users/keith1117/Documents/TopoLab-data")
 AUTHORIZED_R_ROOT = AUTHORIZED_DATA_ROOT / "p17-m2-input-export-preparation-v3"
+AUTHORIZED_STABLE_ROOT = AUTHORIZED_DATA_ROOT / "p17-m2-source-stable-export-v1"
 # v2 names below identify the reused wire/evidence algorithm, not old authority.
 EXECUTION_V2 = "topolab.v2.p17-m2-input-export-preparation.v3"
 EXECUTION_F = "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1"
+EXECUTION_STABLE = "topolab.v2.p17-m2-source-stable-export.v1"
 CONTENT_CONTRACT_SHA256 = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
 CLOCK_V2 = "functions.exec.Date.now.UTC-seconds"
 FULL_V2 = {
@@ -37,6 +40,18 @@ FULL_V2 = {
     "exporter-r1": 780,
     "independent-r1": 660,
     "shared-closeout": 60,
+}
+FULL_STABLE = {
+    "independent-public-check": 300,
+    "exporter-r0": 300,
+    "independent-r0": 300,
+    "exporter-r1": 1200,
+    "independent-r1": 1200,
+    "shared-closeout": 300,
+}
+SOURCE_NAMESPACES = {
+    "b3-v1-fits", "b4-5-weighted-terminal/fit", "b3-v1-data",
+    "b4-30-z-reflection-repair-v2",
 }
 REGISTRY_SCHEMA = "topolab.v2.m2-input-source-registry.v1"
 CASE = re.compile(r"tlcase-v1-[0-9a-f]{64}\Z")
@@ -148,16 +163,44 @@ def compare_words(expected: Any, actual: Any, pointer: str = "") -> int:
     return 1
 
 
+def source_identity(info: os.stat_result) -> dict[str, int]:
+    return {key: getattr(info, key) for key in
+            ("st_dev", "st_ino", "st_size", "st_mtime_ns")}
+
+
+def nofollow_parent(target: Path) -> int:
+    """Resolve a literal absolute parent afresh from /, without symlinks."""
+    directory = os.open(target.anchor, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        for component in target.parts[1:-1]:
+            next_directory = os.open(
+                component, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory
+            )
+            os.close(directory)
+            directory = next_directory
+        return directory
+    except BaseException:
+        os.close(directory)
+        raise
+
+
 class OnceReader:
     """Bounded descriptor reads; each literal source is opened at most once."""
 
-    def __init__(self, root: Path, max_files: int, total_bytes: int):
+    def __init__(
+        self, root: Path, max_files: int, total_bytes: int, *,
+        source_identity_checks: bool = False, journal: Path | None = None,
+    ):
         self.root = Path(os.path.abspath(root))
         self.max_files = max_files
         self.total_bytes = total_bytes
         self.table: list[dict[str, Any]] = []
         self.seen: set[str] = set()
         self.used = 0
+        self.source_identity_checks = source_identity_checks
+        self.journal = journal
+        self.observations: list[dict[str, Any]] = []
+        self.failures: list[dict[str, Any]] = []
 
     def read(
         self,
@@ -167,6 +210,42 @@ class OnceReader:
         sha256: str | None = None,
         byte_size: int | None = None,
     ) -> bytes:
+        facts: dict[str, Any] = {
+            "schema": "topolab.v2.m2-input-read-failure.v1",
+            "execution_identity": EXECUTION_STABLE if self.source_identity_checks else EXECUTION_F,
+            "attempt_ordinal": len(self.seen) + 1, "path": relative,
+            "stage": "path_validation", "declared": None, "before": None,
+            "after": None, "closing": None, "returned_bytes": None, "changed_fields": [],
+        }
+        try:
+            return self._read(relative, maximum, sha256=sha256, byte_size=byte_size, facts=facts)
+        except (ValueError, OSError, TypeError) as error:
+            facts.update(status="STOP_NO_RETRY", exception_type=type(error).__name__,
+                         primary_reason=str(error), unavailable="UNKNOWN_NOT_ZERO")
+            identities = [facts[key] for key in ("declared", "before", "after", "closing")]
+            for left, right in zip(identities, identities[1:], strict=False):
+                if left is not None and right is not None:
+                    changed = [key for key in left if left[key] != right[key]]
+                    if changed:
+                        facts["changed_fields"] = changed
+                        break
+            self.failures.append(facts)
+            if self.journal is not None:
+                try:
+                    with self.journal.open("ab") as stream:
+                        stream.write(canonical(facts))
+                        stream.flush()
+                        os.fsync(stream.fileno())
+                except OSError as secondary:
+                    facts["recording_error"] = f"{type(secondary).__name__}: {secondary}"
+                    error.add_note(facts["recording_error"])
+            raise
+
+    def _read(
+        self, relative: str, maximum: int, *, sha256: str | None,
+        byte_size: int | None, facts: dict[str, Any],
+    ) -> bytes:
+        require(isinstance(relative, str), "unsafe literal path")
         pieces = PurePosixPath(relative)
         require(
             isinstance(relative, str)
@@ -180,12 +259,14 @@ class OnceReader:
         require(len(self.seen) < self.max_files, "source file count cap")
         self.seen.add(relative)
         target = self.root / relative
+        facts["stage"] = "declared_stat"
         current = Path(target.anchor)
         for component in target.parts[1:]:
             current /= component
             info = current.lstat()
             require(not stat.S_ISLNK(info.st_mode), "source symlink refused")
         require(stat.S_ISREG(info.st_mode), "source is not regular")
+        facts["declared"] = source_identity(info)
         require(
             0 < info.st_size <= maximum and self.used + info.st_size <= self.total_bytes,
             "source byte cap",
@@ -194,19 +275,14 @@ class OnceReader:
             require(type(byte_size) is int and info.st_size == byte_size, "declared bytes differ")
         # Resolve every ancestor through a no-follow descriptor, so a parent
         # replaced after lstat cannot redirect the actual file open.
-        directory = os.open(target.anchor, os.O_RDONLY | os.O_DIRECTORY)
+        facts["stage"] = "open_nofollow"
+        directory = nofollow_parent(target)
+        fd = None
         try:
-            for component in target.parts[1:-1]:
-                next_directory = os.open(
-                    component, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory
-                )
-                os.close(directory)
-                directory = next_directory
             fd = os.open(target.name, os.O_RDONLY | os.O_NOFOLLOW, dir_fd=directory)
-        finally:
-            os.close(directory)
-        try:
+            facts["stage"] = "before_read_identity"
             opened = os.fstat(fd)
+            facts["before"] = source_identity(opened)
             require(
                 (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns)
                 == (opened.st_dev, opened.st_ino, opened.st_size, opened.st_mtime_ns),
@@ -214,25 +290,48 @@ class OnceReader:
             )
             chunks = []
             remaining = maximum + 1
+            facts["stage"] = "bounded_read"
+            facts["returned_bytes"] = 0
             while remaining:
                 chunk = os.read(fd, min(1024 * 1024, remaining))
                 if not chunk:
                     break
                 chunks.append(chunk)
+                facts["returned_bytes"] += len(chunk)
                 remaining -= len(chunk)
             raw = b"".join(chunks)
+            facts["stage"] = "after_read_identity"
             after = os.fstat(fd)
+            facts["after"] = source_identity(after)
             require(
                 (opened.st_dev, opened.st_ino, opened.st_size, opened.st_mtime_ns)
                 == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns)
                 and len(raw) == opened.st_size,
                 "source changed during descriptor read",
             )
+            if self.source_identity_checks:
+                facts["stage"] = "closing_path_identity"
+                closing_parent = nofollow_parent(target)
+                try:
+                    closing = os.stat(target.name, dir_fd=closing_parent, follow_symlinks=False)
+                finally:
+                    os.close(closing_parent)
+                facts["closing"] = source_identity(closing)
+                require(stat.S_ISREG(closing.st_mode)
+                        and source_identity(after) == source_identity(closing),
+                        "source changed at closing literal path")
         finally:
-            os.close(fd)
+            if fd is not None:
+                os.close(fd)
+            os.close(directory)
+        facts["stage"] = "read_size_hash_caps"
         actual_sha = digest(raw)
         self.used += len(raw)
         self.table.append({"path": relative, "byte_size": len(raw), "sha256": actual_sha})
+        if self.source_identity_checks:
+            self.observations.append(dict(self.table[-1], **{
+                key: facts[key] for key in ("declared", "before", "after", "closing")
+            }))
         require(sha256 is None or actual_sha == sha256, "source SHA differs")
         return raw
 
@@ -733,6 +832,34 @@ def _timer_peak(value: dict[str, Any], expected_pid: int, platform: str,
     return rss
 
 
+def stable_cleanup_checked(cleanup: dict[str, Any], expected_exit: int) -> None:
+    """Require complete new cleanup facts, preserving initial false observations."""
+    require(isinstance(cleanup, dict) and cleanup.get("group_gone") is True
+            and cleanup.get("final_group_gone") is True
+            and type(expected_exit) is int and cleanup.get("leader_exit") == expected_exit
+            and cleanup.get("observation_limit_seconds") == 5
+            and cleanup.get("observation_limit_exceeded") is False,
+            "new cleanup final exit/group/observation incomplete")
+    elapsed = _nonnegative(cleanup["post_signal_observation_seconds"])
+    require(elapsed <= 5, "new cleanup observation exceeds5s")
+    rows = cleanup["observations"]
+    require(isinstance(rows, list) and rows and isinstance(cleanup.get("signals"), list)
+            and all(isinstance(sig, str) for sig in cleanup["signals"]),
+            "new cleanup observations/signals missing")
+    previous = 0.0
+    for row in rows:
+        require(isinstance(row, dict) and type(row.get("group_gone")) is bool
+                and (row.get("leader_exit") is None or type(row["leader_exit"]) is int),
+                "new cleanup observation UNKNOWN")
+        offset = _nonnegative(row["elapsed_seconds"])
+        require(offset >= previous, "new cleanup observation order differs")
+        previous = offset
+    require(cleanup.get("initial_group_gone") == rows[0]["group_gone"]
+            and cleanup["final_group_gone"] == rows[-1]["group_gone"]
+            and rows[-1]["leader_exit"] == expected_exit,
+            "new cleanup initial/final facts differ")
+
+
 def audit_native_record(
     record: dict[str, Any],
     *,
@@ -888,6 +1015,7 @@ def audit_v2_resource_components(
     inner_evidence: dict[str, Any] | None = None,
     native_profiles: dict[str, bytes] | None = None,
     failure_recording: bool = False,
+    execution_identity: str | None = None,
 ) -> dict[str, Any]:
     """Reconcile raw native evidence; future external exit remains PENDING.
 
@@ -895,6 +1023,8 @@ def audit_v2_resource_components(
     Callers must never use this resource-only return as successor admission.
     """
     completion_is_object = isinstance(completion, dict)
+    stable = execution_identity == EXECUTION_STABLE
+    recording = failure_recording or stable
     if not completion_is_object:
         completion = {}
     result: dict[str, Any] = {
@@ -914,8 +1044,9 @@ def audit_v2_resource_components(
     }
     try:
         require(completion_is_object, "completion must be an object")
+        require(execution_identity is None or stable, "unregistered explicit replay identity")
         require(completion["execution_identity"] == (
-            EXECUTION_F if failure_recording else EXECUTION_V2),
+            EXECUTION_STABLE if stable else EXECUTION_F if failure_recording else EXECUTION_V2),
                 "resource completion v2 identity differs")
         peaks: dict[int, int] = {}
         components = completion["resource_components"]
@@ -968,20 +1099,27 @@ def audit_v2_resource_components(
         require(serializer_seen, "UNKNOWN_MISSING_SERIALIZER_RSS")
         inner_peak, minimum = 0, 0.0
         if inner_evidence is not None:
-            inner = audit_native_record(**inner_evidence, failure_recording=failure_recording)
+            inner = audit_native_record(**inner_evidence, failure_recording=recording)
             inner_peak = inner["inner_empirical_RSS_bytes"]
             minimum = inner["inner_minimum_charge_seconds"]
             result["inner_record_sha256"] = inner["record_canonical_sha256"]
             result["inner_actual_exit_code"] = inner_evidence["record"]["exit_code"]
+            if stable:
+                record = inner_evidence["record"]
+                stable_cleanup_checked(record["cleanup"], record["exit_code"])
+                for sampler in record["helpers"]:
+                    stable_cleanup_checked(sampler["cleanup"], sampler["exit_code"])
+                stable_cleanup_checked(completion["cleanup"], record["exit_code"])
         else:
             require(completion["role"] == "shared-closeout", "UNKNOWN_MISSING_INNER_EVIDENCE")
         result["RSS_components_bytes"]["independently_reconciled_inner"] = inner_peak
         result["inner_minimum_charge_seconds"] = minimum
-        if failure_recording:
-            require(completion["role"] == "public-fixture"
+        if recording:
+            require(completion["role"] in (FULL_STABLE if stable else {"public-fixture": 120})
                     and type(completion["frozen_FULL_seconds"]) is int
-                    and completion["frozen_FULL_seconds"] == 120,
-                    "F immutable public role/FULL differs")
+                    and completion["frozen_FULL_seconds"] == (
+                        FULL_STABLE[completion["role"]] if stable else 120),
+                    "immutable recording role/FULL differs")
             kinds = [item["kind"] for item in components]
             require(sorted(kinds) == ["native_profile", "self_high_water", "self_high_water",
                                       "wait4"]
@@ -991,7 +1129,7 @@ def audit_v2_resource_components(
             ) == inner_evidence["record"]["controller_pid"],
                     "F outer profile/controller identity differs")
         result["RSS_envelope_bytes"] = sum(peaks.values()) + inner_peak
-        require(all(type(code) is int and (code == 0 or failure_recording)
+        require(all(type(code) is int and (code == 0 or recording)
                     for code in result["actual_component_exit_codes"]),
                 "native/helper actual exit nonzero or missing")
         require(completion["cleanup"]["group_gone"] is True,
@@ -1003,21 +1141,22 @@ def audit_v2_resource_components(
     return result
 
 
-def actor_window(record: dict[str, Any]) -> tuple[float, float]:
+def actor_window(record: dict[str, Any], *, stable: bool = False) -> tuple[float, float]:
     """Validate the NEW readiness-triggered window, without opening any path."""
     activation = _nonnegative(record["actor_activation_UTC_seconds"], positive=True)
     require(round(activation * 1000) / 1000 == activation,
             "actor activation must have millisecond resolution")
+    window = 4500 if stable else 2700
     require(type(record["actor_window_seconds"]) is int
-            and record["actor_window_seconds"] == 2700,
+            and record["actor_window_seconds"] == window,
             "prospective actor window differs")
-    deadline = activation + 2700
+    deadline = activation + window
     expected = datetime.fromtimestamp(deadline, UTC).isoformat(
         timespec="milliseconds"
     ).replace("+00:00", "Z")
     require(record["actor_deadlines_UTC"] == {
         "exporter": expected, "independent": expected,
-    }, "actor deadlines must equal the immutable activation plus2700")
+    }, "actor deadlines must equal the immutable activation plus registered window")
     return activation, deadline
 
 
@@ -1032,6 +1171,7 @@ def audit_full_role_v2(
     native_profiles: dict[str, bytes] | None = None,
     failure_recording: bool = False,
     expected_pending_sha256: str | None = None,
+    execution_identity: str | None = None,
 ) -> dict[str, Any]:
     """Independently bind supplied *actual* external events, never a PASS oracle.
 
@@ -1054,10 +1194,13 @@ def audit_full_role_v2(
     completion = completion if completion_is_object else {}
     events_are_list = isinstance(raw_tool_events, list)
     raw_tool_events = raw_tool_events if events_are_list else []
-    identity = EXECUTION_F if failure_recording else EXECUTION_V2
-    caps = {"public-fixture": 120} if failure_recording else FULL_V2
+    stable = execution_identity == EXECUTION_STABLE
+    recording = failure_recording or stable
+    identity = EXECUTION_STABLE if stable else EXECUTION_F if failure_recording else EXECUTION_V2
+    caps = FULL_STABLE if stable else {"public-fixture": 120} if failure_recording else FULL_V2
     result: dict[str, Any] = {
-        "schema": "topolab.v2.m2-input-failure-exit.v1" if failure_recording
+        "schema": "topolab.v2.m2-source-stable-export-exit.v1" if stable else
+                  "topolab.v2.m2-input-failure-exit.v1" if failure_recording
                   else "topolab.v2.m2-input-export-exit.v2",
         "execution_identity": identity,
         "role": expected_role,
@@ -1097,18 +1240,20 @@ def audit_full_role_v2(
     resources = audit_v2_resource_components(
         completion, inner_evidence=inner_evidence, native_profiles=native_profiles,
         failure_recording=failure_recording,
+        execution_identity=execution_identity,
     )
     for key in ("RSS_envelope_bytes", "RSS_components_bytes", "inner_minimum_charge_seconds"):
         result[key] = resources[key]
     result["resource_evidence"] = resources
     try:
         require(pending_is_object, "pending must be an object")
+        require(execution_identity is None or stable, "unregistered explicit replay identity")
         require(expected_role in caps and bool(SHA.fullmatch(expected_plan_sha256)),
                 "unregistered v3 role/plan")
         cap = caps[expected_role]
-        activation, deadline = actor_window(pending)
+        activation, deadline = actor_window(pending, stable=stable)
         result["actor_activation_UTC_seconds"] = activation
-        result["actor_window_seconds"] = 2700
+        result["actor_window_seconds"] = 4500 if stable else 2700
         result["actor_deadlines_UTC"] = pending["actor_deadlines_UTC"]
         for record in (pending,):
             require(
@@ -1169,14 +1314,14 @@ def audit_full_role_v2(
         require(all(event.get("complete") is True and type(event.get("exit_code")) is int
                     for event in raw_tool_events), "UNKNOWN_MISSING_ACTUAL_FINAL_EXIT")
         require(completion_is_object, "completion must be an object")
-        require(actor_window(completion) == (activation, deadline),
+        require(actor_window(completion, stable=stable) == (activation, deadline),
                 "completion actor window differs")
         require(all(completion.get(key) == pending[key] for key in (
             "execution_identity", "role", "plan_sha256", "frozen_FULL_seconds",
             "clock_domain", "clock_resolution_seconds")), "completion identity differs")
         require(completion["status"] == "PENDING_EXTERNAL_EXIT"
                 and completion["pending_sha256"] == result["pending_sha256"]
-                and (not failure_recording or expected_pending_sha256 == result["pending_sha256"]),
+                and (not recording or expected_pending_sha256 == result["pending_sha256"]),
                 "internal completion/pending binding differs")
         require(resources["status"] == "PENDING_EXTERNAL_EXIT", resources["reason"])
         require(max(whole + 10, minimum) <= cap, "FAIL_FULL_NAMED_WALL_CHARGE_BINDING")
@@ -1184,12 +1329,15 @@ def audit_full_role_v2(
         result["missing_evidence_cost"] = None
         require(all(code == 0 for code in result["actual_exit_codes"]),
                 "actual outer/final serializer exit nonzero")
-        if failure_recording:
+        if recording:
             require(inner_evidence is not None and inner_evidence["record"]["exit_code"] == 0
                     and all(code == 0 for code in resources["actual_component_exit_codes"])
-                    and completion.get("domain_status") != "STOP", "payload/domain failure")
-        result.update(status="PASS_PUBLIC_SOFTWARE" if failure_recording else "PASS_R_V3_FULL_ROLE",
-                      reason=None, domain_status="PASS_PUBLIC_SOFTWARE",
+                    and (completion.get("domain_status") == "PASS" if stable else
+                         completion.get("domain_status") != "STOP"),
+                    "payload/domain failure")
+        result.update(status="PASS_R_STABLE_FULL_ROLE" if stable else
+                      "PASS_PUBLIC_SOFTWARE" if failure_recording else "PASS_R_V3_FULL_ROLE",
+                      reason=None, domain_status="PASS" if stable else "PASS_PUBLIC_SOFTWARE",
                       missing_evidence_cost=None, full_role_evidence_accepted=True)
     except (KeyError, TypeError, ValueError, OverflowError) as error:
         result["reason"] = f"{type(error).__name__}: {error}"
@@ -1212,16 +1360,257 @@ def audit_full_role_f(
     )
 
 
+def audit_full_role_stable(
+    pending: dict[str, Any], *, completion: dict[str, Any],
+    raw_tool_events: list[dict[str, Any]], expected_role: str,
+    expected_plan_sha256: str, expected_pending_sha256: str,
+    inner_evidence: dict[str, Any] | None = None,
+    native_profiles: dict[str, bytes] | None = None,
+) -> dict[str, Any]:
+    """Explicit new identity only; reconcile raw facts, never a producer PASS."""
+    return audit_full_role_v2(
+        pending, completion, raw_tool_events=raw_tool_events, expected_role=expected_role,
+        expected_plan_sha256=expected_plan_sha256,
+        expected_pending_sha256=expected_pending_sha256, inner_evidence=inner_evidence,
+        native_profiles=native_profiles, execution_identity=EXECUTION_STABLE,
+    )
+
+
+def identity_sidecar(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    return {"schema": "topolab.v2.m2-source-identity-sidecar.v1",
+            "execution_identity": EXECUTION_STABLE, "rows": rows}
+
+
+def compare_source_identities(
+    own: list[dict[str, Any]], producer: dict[str, Any], count: int,
+) -> int:
+    """Compare actual per-path observations, including equal-SHA replacement."""
+    require(set(producer) == {"schema", "execution_identity", "rows"}
+            and producer["schema"] == "topolab.v2.m2-source-identity-sidecar.v1"
+            and producer["execution_identity"] == EXECUTION_STABLE,
+            "source identity sidecar binding differs")
+    tables = []
+    for rows in (own, producer["rows"]):
+        require(isinstance(rows, list) and len(rows) == count, "source identity exact count")
+        table = {}
+        for row in rows:
+            require(set(row) == {"path", "byte_size", "sha256", "declared", "before",
+                                 "after", "closing"}, "source identity field set")
+            name = row["path"]
+            require(isinstance(name, str) and name not in table, "source identity duplicate path")
+            pieces = PurePosixPath(name)
+            require(not pieces.is_absolute() and ".." not in pieces.parts
+                    and name == pieces.as_posix() and name not in ("", "."),
+                    "source identity unsafe path")
+            require(type(row["byte_size"]) is int and row["byte_size"] > 0
+                    and isinstance(row["sha256"], str) and SHA.fullmatch(row["sha256"]) is not None,
+                    "source identity bytes/hash")
+            for stage in ("declared", "before", "after", "closing"):
+                value = row[stage]
+                require(isinstance(value, dict) and set(value) == {
+                    "st_dev", "st_ino", "st_size", "st_mtime_ns"}
+                    and all(type(v) is int and v >= 0 for v in value.values()),
+                    "source identity tuple missing")
+                require(value == row["before"] and value["st_size"] == row["byte_size"],
+                        "source identity changed within read")
+            table[name] = row
+        tables.append(table)
+    return compare_words(tables[0], tables[1])
+
+
+def accept_source_controls(
+    controls: dict[str, Any], activation: float, controlsha: str | None = None,
+) -> dict[str, Any]:
+    """Independently check attributed control content, never infer actual custody.
+
+    The reviewer still assesses each basis before activation. Passing this
+    structural check cannot discover writers or turn unknown coverage into true.
+    The controller separately binds the actual frozen lease and absence of release.
+    """
+    require(isinstance(controls, dict)
+            and controls["schema"] == "topolab.v2.m2-writer-quiescence.v1"
+            and controls["execution_identity"] == EXECUTION_STABLE,
+            "source control identity differs")
+    custodian = controls["custodian"]
+    require(isinstance(custodian, str) and bool(custodian.strip())
+            and controls["no_write_until_release"] is True,
+            "source custodian/no-write interval missing")
+    namespaces, writers = controls["namespaces"], controls["writers"]
+    require(isinstance(namespaces, dict) and set(namespaces) == SOURCE_NAMESPACES
+            and isinstance(writers, list), "source control namespace coverage differs")
+    registered: set[tuple[str, str]] = set()
+    populated: set[str] = set()
+    states = {"pause": "PAUSED_ACKNOWLEDGED", "exclude": "EXCLUDED_CUSTODIAN_CONTROL"}
+    for writer in writers:
+        require(isinstance(writer, dict) and all(isinstance(writer.get(key), str)
+                and writer[key].strip() for key in ("name", "namespace", "action", "status",
+                                                    "evidence")),
+                "source writer attribution incomplete")
+        namespace, name = writer["namespace"], writer["name"]
+        require(namespace in SOURCE_NAMESPACES and (namespace, name) not in registered
+                and writer["action"] in states
+                and writer["status"] == states[writer["action"]],
+                "source writer pause/exclusion unconfirmed")
+        registered.add((namespace, name))
+        populated.add(namespace)
+    for namespace, coverage in namespaces.items():
+        require(isinstance(coverage, dict) and coverage.get("accepted") is True
+                and isinstance(coverage.get("basis"), str) and coverage["basis"].strip(),
+                "source control coverage UNKNOWN or unattributed")
+        if namespace not in populated:
+            require(isinstance(coverage.get("no_writer_explanation"), str)
+                    and coverage["no_writer_explanation"].strip(),
+                    "empty writer scope requires affirmative explanation")
+    acknowledgment = controls["acquisition_ack"]
+    acquired = _nonnegative(acknowledgment["UTC_seconds"], positive=True)
+    require(acknowledgment["by"] == custodian
+            and isinstance(acknowledgment.get("basis"), str) and acknowledgment["basis"].strip()
+            and _nonnegative(activation, positive=True) <= acquired <= activation + 300,
+            "source acquisition acknowledgment outside formal setup")
+    actual_sha = digest(canonical(controls))
+    require(controlsha is None or controlsha == actual_sha, "source control hash differs")
+    return {"status": "PASS_ATTRIBUTED_SOURCE_CONTROL_CONTENT",
+            "source_controls_sha256": actual_sha, "custodian": custodian,
+            "coverage_basis_requires_independent_judgment": True,
+            "outside_writers_discovered_or_excluded_by_software": False}
+
+
+def stable_source_entry(plan_path: Path | None, plan_sha: str | None, role: str) -> dict[str, Any]:
+    require(plan_path is not None
+            and Path(os.path.abspath(plan_path)) == AUTHORIZED_STABLE_ROOT / "launch_plan.json"
+            and isinstance(plan_sha, str) and SHA.fullmatch(plan_sha) is not None,
+            "R-STABLE requires literal frozen plan/hash")
+    # -I omits script-directory imports: bind only this committed source path.
+    spec = importlib.util.spec_from_file_location(
+        "independent_stable_control_gate",
+        Path(__file__).resolve().with_name("p17_m2_input_export_control.py"),
+    )
+    require(spec is not None and spec.loader is not None, "source controller unavailable")
+    control = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(control)
+    plan = control.validate_stable_source_entry(plan_path, plan_sha, role)
+    stable_argv_checked(plan, plan_sha, role)
+    accept_source_controls(plan["source_controls"], plan["actor_activation_UTC_seconds"],
+                           plan["source_controls_sha256"])
+    return plan
+
+
+def stable_argv_checked(plan: dict[str, Any], plan_sha: str, role: str) -> None:
+    """Bind the complete isolated Python invocation, including -I and all paths."""
+    expected = [word.replace("<PLAN_SHA256>", plan_sha) for word in plan["roles"][role]["argv"]]
+    actual = getattr(sys, "orig_argv", None)
+    require(isinstance(actual, list) and actual == expected,
+            "actual complete argv differs from frozen source role")
+
+
+def audit_final_filing(
+    record: dict[str, Any], *, actual_exit: int | None, whole_wall_seconds: float,
+    expected_argv: list[str], native_evidence: dict[str, Any],
+    expected_plan_sha256: str, expected_shared_packet_sha256: str | None = None,
+) -> dict[str, Any]:
+    """After-return NEW-only helper audit; never a seventh source-role admission.
+
+    expected_argv is the literal child command from the frozen helper table.
+    The caller supplies the actual outer tool return and trusted packet hash.
+    This pure function opens no path and retains a measured failure's facts.
+    """
+    result: dict[str, Any] = {
+        "schema": "topolab.v2.m2-source-stable-final-filing-exit.v1",
+        "execution_identity": EXECUTION_STABLE, "status": "STOP_NO_RETRY",
+        "reason": "UNKNOWN_INCOMPLETE_FINAL_FILING", "helper_cap_seconds": 180,
+        "actual_exit_code": actual_exit if type(actual_exit) is int else None,
+        "whole_wall_seconds": None, "known_cost_lower_bound_seconds": None,
+        "RSS_envelope_bytes": None, "RSS_components_bytes": {}, "evidence_complete": False,
+        "domain_status": "STOP", "preparation_complete": False, "B_C_admission": False,
+        "source_successor_admitted": False,
+        "formal_source_role_or_window": False, "missing_evidence_cost": "UNKNOWN_NOT_ZERO",
+        "primary_failure": record.get("primary_failure") if isinstance(record, dict) else None,
+        "secondary_failures": record.get("secondary_failures", [])
+        if isinstance(record, dict) else [],
+    }
+    try:
+        whole = _nonnegative(whole_wall_seconds)
+        result["whole_wall_seconds"] = whole
+        result["known_cost_lower_bound_seconds"] = math.ceil(whole + 10)
+        require(isinstance(record, dict)
+                and record["schema"] == "topolab.v2.m2-source-stable-final-filing.v1"
+                and record["execution_identity"] == EXECUTION_STABLE,
+                "final filing identity/status differs")
+        require(isinstance(expected_plan_sha256, str)
+                and SHA.fullmatch(expected_plan_sha256) is not None
+                and record["plan_sha256"] == expected_plan_sha256,
+                "final filing frozen plan differs")
+        require(isinstance(expected_argv, list) and expected_argv
+                and all(isinstance(word, str) and word for word in expected_argv)
+                and record["inner_argv_sha256"] == digest(canonical(expected_argv))
+                and native_evidence["expected_role"] == "final-filing"
+                and native_evidence["expected_argv"] == expected_argv,
+                "final filing literal child argv differs")
+        parent_samples = record["controller_RSS_samples_bytes"]
+        require(record["controller_RSS_unit"] == "bytes"
+                and isinstance(parent_samples, list) and len(parent_samples) == 2,
+                "final filing parent RSS samples/units missing")
+        parent = max(_nonnegative(value, integer=True, positive=True) for value in parent_samples)
+        result["RSS_components_bytes"]["parent_high_water_bytes"] = parent
+        inner = audit_native_record(**native_evidence, failure_recording=True)
+        native_record = native_evidence["record"]
+        result["actual_child_exit_code"] = native_record["exit_code"]
+        stable_cleanup_checked(native_record["cleanup"], native_record["exit_code"])
+        for sampler in native_record["helpers"]:
+            stable_cleanup_checked(sampler["cleanup"], sampler["exit_code"])
+        minimum = inner["inner_minimum_charge_seconds"]
+        result["inner_minimum_charge_seconds"] = minimum
+        result["known_cost_lower_bound_seconds"] = math.ceil(max(whole + 10, minimum))
+        result["RSS_components_bytes"]["independent_inner_envelope_bytes"] = (
+            inner["inner_empirical_RSS_bytes"]
+        )
+        # Intentional conservative overlap: the recorded inner controller may
+        # be this parent. No shared-page or duplicate-process credit is taken.
+        result["RSS_envelope_bytes"] = parent + inner["inner_empirical_RSS_bytes"]
+        require(result["RSS_envelope_bytes"] <= 4294967296, "final filing retained4GiB exceeded")
+        require(type(actual_exit) is int, "UNKNOWN_ACTUAL_FINAL_HELPER_EXIT")
+        require(max(whole + 10, minimum) <= 180, "final filing whole-wall+10 exceeds180")
+        require(record["status"] == "PENDING_EXTERNAL_EXIT",
+                "final filing internal completion failed")
+        result["evidence_complete"] = True
+        result["missing_evidence_cost"] = None
+        require(actual_exit == 0 and native_record["exit_code"] == 0,
+                "final filing actual parent/child exit nonzero")
+        filing = parse(native_evidence["log"], canonical_required=True)
+        result["filing_result"] = filing
+        compare_words(filing, record["filing_result"])
+        require(filing["status"] == "PASS_INDEPENDENT_NEW_BACKUP"
+                and filing["plan_sha256"] == expected_plan_sha256
+                and filing["shared_role_status"] == "PASS_R_STABLE_FULL_ROLE"
+                and isinstance(expected_shared_packet_sha256, str)
+                and SHA.fullmatch(expected_shared_packet_sha256) is not None
+                and filing["shared_packet_sha256"] == expected_shared_packet_sha256,
+                "final filing independent backup/trusted shared packet binding differs")
+        require(type(filing["member_count"]) is int and 0 < filing["member_count"] <= 20000
+                and type(filing["total_bytes"]) is int
+                and 0 < filing["total_bytes"] <= 512 * MIB,
+                "final filing complete backup counts/bytes differ")
+        result["formal_close_UTC_seconds"] = _nonnegative(
+            filing["formal_close_UTC_seconds"], positive=True,
+        )
+        result.update(status="PASS_FINAL_NEW_FILING", domain_status="PASS", reason=None,
+                      filing_result=filing, source_successor_admitted=False)
+    except (KeyError, TypeError, ValueError, OSError, OverflowError) as error:
+        result["reason"] = f"{type(error).__name__}: {error}"
+    return result
+
+
 def audit_new_backup(
     root: Path,
     backup: Path,
     *,
     excluded_prefixes: tuple[str, ...] = (),
     public_fixture: bool = False,
+    execution_identity: str | None = None,
 ) -> dict[str, Any]:
     """Compare only NEW artifacts, including empty logs, by exact bytes and SHA.
 
-    Production roots are literal NEW v3 roots. The explicit public-fixture switch
+    Production roots are literal NEW R-STABLE roots. The explicit public-fixture switch
     cannot open anything below DATA; it exists only for newly created test files.
     Prefix exclusions are literal frozen names, not a glob or alternate source.
     """
@@ -1238,9 +1627,10 @@ def audit_new_backup(
                     and not backup.is_relative_to(AUTHORIZED_DATA_ROOT),
                     "public fixture cannot open DATA")
         else:
-            require(root == AUTHORIZED_R_ROOT
+            require(execution_identity == EXECUTION_STABLE
+                    and root == AUTHORIZED_STABLE_ROOT
                     and backup == root.with_name(root.name + "-independent-backup"),
-                    "backup requires literal NEW v3 roots")
+                    "backup requires literal NEW v3 closed; explicit R-STABLE roots only")
         require(root != backup and not root.is_relative_to(backup)
                 and not backup.is_relative_to(root), "backup roots overlap")
         for prefix in excluded_prefixes:
@@ -1661,10 +2051,26 @@ def main() -> int:
     parser.add_argument("--exports-root", type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--authorize-old-read", action="store_true")
+    parser.add_argument("--execution-identity")
+    parser.add_argument("--plan", type=Path)
+    parser.add_argument("--plan-sha")
     args = parser.parse_args()
-    require(not args.output.exists(), "independent output exists; no retry")
     if args.mode == "public-check":
         require(args.fixture_root is not None, "public check needs an exclusive NEW root")
+        if args.execution_identity == EXECUTION_STABLE:
+            require(Path(os.path.abspath(args.fixture_root))
+                    == AUTHORIZED_STABLE_ROOT / "public-fixtures"
+                    and Path(os.path.abspath(args.output))
+                    == AUTHORIZED_STABLE_ROOT / "independent-public-check.json",
+                    "R-STABLE public role requires literal new paths")
+            stable_source_entry(args.plan, args.plan_sha, "independent-public-check")
+        else:
+            for new_path in (args.fixture_root, args.output):
+                require(not Path(os.path.abspath(new_path)).is_relative_to(AUTHORIZED_DATA_ROOT),
+                        "public fixture cannot open DATA")
+            require(args.execution_identity is None,
+                    "public fixture cannot select another production identity")
+        require(not args.output.exists(), "independent output exists; no retry")
         result = public_check(args.fixture_root)
         args.output.parent.mkdir(parents=True, exist_ok=True)
         with args.output.open("xb") as stream:
@@ -1672,6 +2078,8 @@ def main() -> int:
             stream.flush()
             os.fsync(stream.fileno())
         return 0
+    require(args.execution_identity == EXECUTION_STABLE,
+            "historical R CLI closed; explicit R-STABLE identity required")
     require(args.authorize_old_read, "explicit frozen role launch acknowledgement required")
     require(
         args.contract is not None and args.registry is not None and args.data_root is not None,
@@ -1690,20 +2098,32 @@ def main() -> int:
     for new_path in (args.registry, args.output, args.exports_root):
         if new_path is not None:
             require(
-                Path(os.path.abspath(new_path)).is_relative_to(AUTHORIZED_R_ROOT),
+                Path(os.path.abspath(new_path)).is_relative_to(AUTHORIZED_STABLE_ROOT),
                 "source role new path outside R root",
             )
+    # Deliberately lazy: closed identities and lexical root failures cannot
+    # import a controller or stat DATA. The gate binds actual readiness/lease.
+    stable_source_entry(args.plan, args.plan_sha, f"independent-{args.mode}")
+    require(not args.output.exists(), "independent output exists; no retry")
     contract_raw = args.contract.read_bytes()
     require(digest(contract_raw) == CONTENT_CONTRACT_SHA256,
             "frozen content-only contract hash differs")
     contract = parse(contract_raw)
-    registry_raw = args.registry.read_bytes()
+    registry_raw = OnceReader(AUTHORIZED_STABLE_ROOT, 1, 32 * MIB).read(
+        Path(os.path.abspath(args.registry)).relative_to(AUTHORIZED_STABLE_ROOT).as_posix(),
+        32 * MIB,
+    )
     registry = parse(registry_raw, canonical_required=True)
     check_registry_shape(registry, contract)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    sidecar_path = args.output.with_name(args.output.stem + "-source-identities.json")
+    require(not sidecar_path.exists(), "independent source sidecar exists; no retry")
     old_reader = OnceReader(
         args.data_root,
         40 if args.mode == "r0" else 558,
         32 * MIB if args.mode == "r0" else (12 + 768 + 72) * MIB,
+        source_identity_checks=True,
+        journal=args.output.with_name(args.output.stem + "-source-failures.jsonl"),
     )
     try:
         if args.mode == "r0":
@@ -1723,6 +2143,22 @@ def main() -> int:
             new_reader = OnceReader(args.exports_root, 1070, (12 + 32 + 256 + 1) * MIB)
             result = audit_exports(old_reader, new_reader, registry)
             result["registry_sha256"] = digest(registry_raw)
+        producer_sidecar_reader = OnceReader(AUTHORIZED_STABLE_ROOT, 1, 4 * MIB)
+        producer_sidecar_raw = producer_sidecar_reader.read(
+            f"exporter-{args.mode}/source-identities.json", 4 * MIB,
+        )
+        result["compared_source_identity_fields"] = compare_source_identities(
+            old_reader.observations, parse(producer_sidecar_raw, canonical_required=True),
+            40 if args.mode == "r0" else 558,
+        )
+        own_sidecar_raw = canonical(identity_sidecar(old_reader.observations))
+        with sidecar_path.open("xb") as stream:
+            stream.write(own_sidecar_raw)
+            stream.flush()
+            os.fsync(stream.fileno())
+        result["producer_source_identities_sha256"] = digest(producer_sidecar_raw)
+        result["independent_source_identities_sha256"] = digest(own_sidecar_raw)
+        result["execution_identity"] = EXECUTION_STABLE
     except (ValueError, KeyError, TypeError, OSError, OverflowError, struct.error) as error:
         result = {
             "status": "STOP",
@@ -1730,10 +2166,11 @@ def main() -> int:
             "reason": str(error),
             "old_read_table": old_reader.table,
             "attempted_paths": sorted(old_reader.seen),
+            "source_failures": old_reader.failures,
+            "source_identities": old_reader.observations,
             "retry": False,
             "B_C_authorized_or_run": False,
         }
-    args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("xb") as stream:
         stream.write(canonical(result))
         stream.flush()

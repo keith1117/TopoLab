@@ -5,37 +5,44 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current slice: new source-stability/export contract documents only
+## Current slice: R-STABLE software; formal entry closed unlaunched
 
-F publication is complete: [PR211](https://github.com/keith1117/TopoLab/pull/211)
-merged as `b0fe2350ac68a88a05e974926a2b0fe6a1302bf7`; all four exact-main
-[CI39473450571 jobs](https://github.com/keith1117/TopoLab/actions/runs/39473450571)
-passed. Final local2290 passed/1 platform skip. The first unchanged
-`test_sampler_failure_preserves_stop_and_exit` failure/cost remains: group_gone
-was false at return, later gone; cause UNKNOWN, no fix claim. The
-[F report](validation/p17_m2_input_failure_recording_repair.md) and
-[independent review](validation/p17_m2_input_failure_recording_repair_independent_review.md)
-retain original precommit publication wording. Do not repeat F implementation or publication.
+PR212's contract documents merged as main `9f40c2690edc7ef440c87319b60dab72799a1c5c`;
+[exact-main CI39493861377](https://github.com/keith1117/TopoLab/actions/runs/39493861377)
+passed all four contexts. The owner subsequently approved its new finite budget,
+exact input exception and fresh different author, delegating writer-control
+assessment to `/root`. The [approved protocol](planning/p17_m2_source_stability_export_protocol.md)/
+[JSON](planning/p17_m2_source_stability_export_protocol.json) bind that grant;
+the proposal pair remains an unchanged historical snapshot.
 
-Owner now authorizes one limited documentation/regression/normal-publication slice.
-The [new R-STABLE proposal](planning/p17_m2_source_stability_export_proposal.md)
-and [JSON](planning/p17_m2_source_stability_export_proposal.json) specify in-place
-custodian writer quiescence, exact40 metadata/12 checkpoint/528 train432/96/
-18 original uniform source boundaries, independent R0 before R1, F-aware production
-identity/cleanup recording, fresh independent author and newly proposed budgets.
-Future software7200/3600s, source publication7200s, common formal4500s (six FULL
-3600s plus900s disjoint overhead), result publication7200s/review1800s are
-requests, not grants or old balance transfers. See [document validation](validation/p17_m2_source_stability_export_proposal.md).
+**NO_SOURCE_ADMISSION_KEEP_STOP**: possible background/sync/restore writer
+coverage is UNKNOWN; manual versioned CLI entrypoints and idle task states do
+not establish actual exclusion. The delegated custodian and new independent
+reviewer agree not to activate. Formal0/6, old source stat/read0, new DATA
+roots/plan/lease0; formal FULL paid0/3600s, all unused formal allowances closed.
+No accepted40-source registry,12/528/18 restricted export or input-preparation
+PASS. Source tuples/actual bytes/lineage/resource evidence remain UNKNOWN_NOT_RUN.
+This does not diagnose the old12th tuple change or prove sources corrupt.
 
-No new implementation, source stat/read, formal R/B/C, D/environment/power query,
-snapshot/permission change or automatic successor. D is not a prerequisite;
-historical attempt12 member/cause/bytes and failed full RSS stay UNKNOWN.
-Actual writer-control package, fresh role, future frozen production source and
-source identities are UNKNOWN/ungranted, with responsible parties in the proposal.
-This document capability makes no measured P/17 quality/speed/resource delta.
-Its five mandatory precommit checks passed:2290 tests passed/1 unchanged platform
-skip, with source/tests/locks/workflows and old frozen reports preserved. Actual
-new PR/main publication observations are filed in the associated PR/release record.
+Minimal software binds new identity/frozen actual argv, cooperative lease and
+independent predecessor gates, same-read closing path identity and cross-author
+sidecars, F complete failure recording and bounded cleanup observations. Field
+and independent comparison algorithms are reused; historical F cause remains
+UNKNOWN. [Software and zero-launch report](validation/p17_m2_source_stability_export.md)
+and [fresh independent review](validation/p17_m2_source_stability_export_independent_review.md)
+record tests, failed attempts, budgets and publication observations. Final local
+2417 passed/1 unchanged platform skip and all five mandatory checks passed;
+fresh independent integration332 passed, without input/resource admission.
+Software preparation7200/3600s, source publication7200s, unentered formal4500s,
+and result publication7200s/review1800s retain the approved caps; no clock reset,
+old allowance transfer or hidden CI wait. Actual publication fees UNKNOWN_NOT_ZERO.
+
+F remains published through PR211/mainb0fe235/all-four CI39473450571; its frozen
+reports and original unchanged cleanup failure/cost/cause UNKNOWN remain.
+After this protected software/zero-launch publication STOP. The only later
+owner decision would be a fresh finite source attempt with concrete attributed
+writer controls; no generic diagnostic/proof/guard sequel, original access,
+B/C or successor is authorized now. Keep all historical boundaries below.
 
 ## NEW R/v3 closed STOP during metadata registration
 
@@ -306,16 +313,18 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-owner-route-decision-after-the-stopped-rv3"></a>
 
-## Unique next item: owner decision on new R-STABLE scope and source control
+<a id="unique-next-item-owner-decision-on-new-r-stable-scope-and-source-control"></a>
 
-Review the [new proposal](planning/p17_m2_source_stability_export_proposal.md#7-acceptance-stop-and-all-remaining-owner-decisions)
-and [JSON](planning/p17_m2_source_stability_export_proposal.json). Decide whether
-to grant its finite phased software/source-publication/formal/result budgets,
-exact40/12/528/18 complete-byte/temporary-parse exception plus same-transaction
-closing stat, fresh different author, and custodian's specifically named writer
-pauses/current-observation provenance boundary. The writer/control/no-write package
-must be supplied before activation; unavailable means NO_SOURCE_ADMISSION_KEEP_STOP.
-Historical D cause may stay UNKNOWN. No general proof/guard followup, B or C is
-commissioned. No execution permission is inferred from publishing these documents.
-Complete this slice's required checks/protected publication, retain the assigned
-worktree and STOP; no implementation/old stat-read/formal R/B/C/automatic successor.
+## Unique next item: STOP after publication; any later source grant needs concrete controls
+
+The owner already approved PR212's budgets, exact input exception and fresh
+different author; do not ask to approve them again. The
+[approved protocol](planning/p17_m2_source_stability_export_protocol.md)/
+[JSON](planning/p17_m2_source_stability_export_protocol.json) and
+[zero-launch report](validation/p17_m2_source_stability_export.md) close this
+identity NO_SOURCE_ADMISSION_KEEP_STOP because operational writer coverage is
+UNKNOWN. Complete authorized software/normal protected publication, retain this
+worktree and STOP. Any later attempt requires a fresh finite owner decision with
+concrete attributed writer controls; no unused allowance reopens. Historical D
+cause may stay UNKNOWN. No old stat/read, formal R/B/C, generic proof/guard sequel,
+discovery probe or automatic successor is commissioned by this closure.
