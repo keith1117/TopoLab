@@ -18,13 +18,15 @@ import struct
 import sys
 from collections import Counter
 from copy import deepcopy
+from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
 from typing import Any
 
 MIB = 1024 * 1024
 AUTHORIZED_DATA_ROOT = Path("/Users/keith1117/Documents/TopoLab-data")
-AUTHORIZED_R_ROOT = AUTHORIZED_DATA_ROOT / "p17-m2-input-export-preparation-v2"
-EXECUTION_V2 = "topolab.v2.p17-m2-input-export-preparation.v2"
+AUTHORIZED_R_ROOT = AUTHORIZED_DATA_ROOT / "p17-m2-input-export-preparation-v3"
+# v2 names below identify the reused wire/evidence algorithm, not old authority.
+EXECUTION_V2 = "topolab.v2.p17-m2-input-export-preparation.v3"
 CONTENT_CONTRACT_SHA256 = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
 CLOCK_V2 = "functions.exec.Date.now.UTC-seconds"
 FULL_V2 = {
@@ -970,6 +972,24 @@ def audit_v2_resource_components(
     return result
 
 
+def actor_window(record: dict[str, Any]) -> tuple[float, float]:
+    """Validate the NEW readiness-triggered window, without opening any path."""
+    activation = _nonnegative(record["actor_activation_UTC_seconds"], positive=True)
+    require(round(activation * 1000) / 1000 == activation,
+            "actor activation must have millisecond resolution")
+    require(type(record["actor_window_seconds"]) is int
+            and record["actor_window_seconds"] == 2700,
+            "prospective actor window differs")
+    deadline = activation + 2700
+    expected = datetime.fromtimestamp(deadline, UTC).isoformat(
+        timespec="milliseconds"
+    ).replace("+00:00", "Z")
+    require(record["actor_deadlines_UTC"] == {
+        "exporter": expected, "independent": expected,
+    }, "actor deadlines must equal the immutable activation plus2700")
+    return activation, deadline
+
+
 def audit_full_role_v2(
     pending: dict[str, Any],
     completion: dict[str, Any],
@@ -1033,8 +1053,14 @@ def audit_full_role_v2(
     result["resource_evidence"] = resources
     try:
         require(expected_role in FULL_V2 and bool(SHA.fullmatch(expected_plan_sha256)),
-                "unregistered v2 role/plan")
+                "unregistered v3 role/plan")
         cap = FULL_V2[expected_role]
+        activation, deadline = actor_window(pending)
+        require(actor_window(completion) == (activation, deadline),
+                "completion actor window differs")
+        result["actor_activation_UTC_seconds"] = activation
+        result["actor_window_seconds"] = 2700
+        result["actor_deadlines_UTC"] = pending["actor_deadlines_UTC"]
         for record in (pending, completion):
             require(
                 record["execution_identity"] == EXECUTION_V2
@@ -1042,7 +1068,7 @@ def audit_full_role_v2(
                 and record["plan_sha256"] == expected_plan_sha256
                 and type(record["frozen_FULL_seconds"]) is int
                 and record["frozen_FULL_seconds"] == cap,
-                "v2 identity/plan/immutable FULL differs",
+                "v3 identity/plan/immutable FULL differs",
             )
             require(record["clock_domain"] == CLOCK_V2
                     and record["clock_resolution_seconds"] == 0.001,
@@ -1057,6 +1083,8 @@ def audit_full_role_v2(
         result["clock_domain"] = first["clock_domain"]
         result["T0"] = _nonnegative(first["start_seconds"])
         result["T1"] = _nonnegative(raw_tool_events[-1]["end_seconds"])
+        require(activation <= result["T0"] <= result["T1"] <= deadline,
+                "actual full role lies outside immutable actor window")
         whole = result["T1"] - result["T0"]
         require(whole >= 0, "outer clock regression")
         result["whole_wall_seconds"] = whole
@@ -1097,7 +1125,7 @@ def audit_full_role_v2(
         require(all(code == 0 for code in result["actual_exit_codes"]),
                 "actual outer/final serializer exit nonzero")
         require(max(whole + 10, minimum) <= cap, "FAIL_FULL_NAMED_WALL_CHARGE_BINDING")
-        result.update(status="PASS_R_V2_FULL_ROLE", reason=None,
+        result.update(status="PASS_R_V3_FULL_ROLE", reason=None,
                       missing_evidence_cost=None, full_role_evidence_accepted=True)
     except (KeyError, TypeError, ValueError, OverflowError) as error:
         result["reason"] = f"{type(error).__name__}: {error}"
@@ -1113,7 +1141,7 @@ def audit_new_backup(
 ) -> dict[str, Any]:
     """Compare only NEW artifacts, including empty logs, by exact bytes and SHA.
 
-    Production roots are literal v2 roots. The explicit public-fixture switch
+    Production roots are literal NEW v3 roots. The explicit public-fixture switch
     cannot open anything below DATA; it exists only for newly created test files.
     Prefix exclusions are literal frozen names, not a glob or alternate source.
     """
@@ -1132,7 +1160,7 @@ def audit_new_backup(
         else:
             require(root == AUTHORIZED_R_ROOT
                     and backup == root.with_name(root.name + "-independent-backup"),
-                    "backup requires literal NEW v2 roots")
+                    "backup requires literal NEW v3 roots")
         require(root != backup and not root.is_relative_to(backup)
                 and not backup.is_relative_to(root), "backup roots overlap")
         for prefix in excluded_prefixes:

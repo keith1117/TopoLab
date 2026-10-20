@@ -145,6 +145,15 @@ The same merged-SHA main run later passed all four jobs; this is not a named-rol
 FAIL or a reusable grant. Publish the zero-launch report under these same rules. Any later preparation
 requires a new explicit finite owner decision, not an automatic restart.
 
+The subsequent owner decision authorizes ONE new R/v3 preparation under the
+[readiness protocol](planning/p17_m2_input_export_readiness_protocol.md), with
+same total3h/2h and six FULL roles1860s/same exact input exception. Its prospective
+continuous preparation/formal/result phase maxima sum10800/7200; formal2700s each
+starts once after clean locked protected-merged all-four-main-CI readiness.
+No old clock or unused allowance reopens, no directed wait/cost is erased. First
+failure STOP, no B/C, proof work, expanded source, old backup/seal or successor.
+Publish the actual source-bound result or concrete STOP/UNKNOWN and stop.
+
 All four existing CI jobs remain applicable on latest PR head and main:
 quality, frontend, clean-linux-smoke and i1-native-software. Their software
 success cannot admit M2 resources or pass a scientific Gate.

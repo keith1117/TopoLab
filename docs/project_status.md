@@ -1,11 +1,36 @@
 # Current project status
 
-Updated:2026-10-19. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-10-20. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## NEW R/v2 source merged; formal preparation closed unlaunched
+## NEW R/v3: one readiness-bound preparation authorized
+
+The owner accepted the recommended one fresh attempt under the
+[protocol](planning/p17_m2_input_export_readiness_protocol.md) and
+[JSON](planning/p17_m2_input_export_readiness_protocol.json), preserving3h exporter/
+2h new different-author review, six once-only FULL roles1860s and the same exact
+40 metadata/12 checkpoints/528 train/18 original uniform packets byte/temporary
+parse exception. Predeclared software/formal/result phase caps sum10800/7200;
+waits/debugging count within each continuous phase, no transfers or cost erasure.
+Formal2700s for both actors starts once only after software review, required
+regression, protected merge and all four exact-main CI successes. Source/field/
+resource results currently UNKNOWN_NOT_RUN; no R/v3 root, role or old input read
+at source authoring. See [report](validation/p17_m2_input_export_readiness.md) and
+[independent review](validation/p17_m2_input_export_readiness_independent_review.md).
+
+The complete precommit software checks passed:2218 tests passed/1 Linux-only
+skip; source PR/main CI and actual formal source/resource acceptance remain pending.
+
+This is an explicit one-attempt route decision following the closed v1/v2,
+not their restart. V2 source/result PR206/207 merged through main e1e52f3; four
+main CI jobs39213240822 passed. Old contracts/reports/paid and closed caps retain
+bytes. No B/C, extra source, old backup/seal, proof engineering or automatic
+successor.4GiB/independent preflight, all historical gates/costs/quotas/UNKNOWN
+and B3 final M2+Ubuntu/two-scale requirements remain.
+
+## Historical R/v2 source merged; formal preparation closed unlaunched
 
 The owner explicitly authorized the [new proposal](planning/p17_m2_input_export_billing_revision_proposal.md)
 and [JSON](planning/p17_m2_input_export_billing_revision_proposal.json) for
@@ -218,13 +243,11 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-owner-decision-after-rv2-zero-launch"></a>
 
-## Unique next item: an explicit owner decision after zero launch
+## Unique next item: complete only the one authorized R/v3 attempt
 
-After normal result publication, the only prospective decision is whether to
-commission a **new** finite preparation identity and original-window budget
-for this already published source, with exact scope, two authors, FULL/RSS/exit
-evidence and independent public preflight fixed before any old-input access.
-The R/v2 clock and0/1860s unlaunched allowance do not transfer or constitute
-permission to start later. The owner may instead retain the current pause.
-No B/C or scientific successor is authorized; future B FULL180/C14580s remain
-separate. Retain worktree and all historical gates/costs/UNKNOWN/quotas/seals.
+Complete bounded software readiness and the once-only formal preparation under
+the new protocol, then normal result publication and STOP. First named failure
+or mandatory UNKNOWN closes source suffix; no patch-and-continue. Successful
+preparation is not P/17 repair or B/C authority. If it does not pass, publish the
+specific result and stop for an explicit owner route decision; no default v4.
+All old grants and unused balances remain closed. Retain assigned worktree.

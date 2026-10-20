@@ -16,6 +16,12 @@ c = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(c)
 
 
+def actor_fields():
+    return {"actor_activation_UTC_seconds": 1000.0, "actor_window_seconds": 2700,
+            "actor_deadlines_UTC": {"exporter": "1970-01-01T01:01:40.000Z",
+                                    "independent": "1970-01-01T01:01:40.000Z"}}
+
+
 def test_isolated_entry_imports_only_stdlib():
     import subprocess
     import sys
@@ -78,6 +84,60 @@ def test_missing_source_freeze_refuses(tmp_path, monkeypatch):
         c.plan_checked(p, c.digest(raw))
 
 
+@pytest.mark.parametrize("fault", [None, "head", "branch", "event", "job", "future"])
+def test_readiness_plan_requires_exact_main_ci_and_one_fresh_window(tmp_path, monkeypatch, fault):
+    # Entirely NEW public files. Damaged readiness cannot create a plan/root.
+    repo = tmp_path / "public-repo"
+    repo.mkdir()
+    (repo / "source.txt").write_bytes(b"original public source\n")
+    root = tmp_path / "outputs" / "new-preparation"
+    root.parent.mkdir()
+    monkeypatch.setattr(c, "REPO", repo)
+    monkeypatch.setattr(c, "ROOT", root)
+    monkeypatch.setattr(c, "SOURCE_FILES", {"source.txt"})
+    monkeypatch.setattr(c.sys, "platform", "darwin")
+    monkeypatch.setattr(c.platform, "machine", lambda: "arm64")
+    monkeypatch.setattr(c.time, "time", lambda: 1001.0)
+    for name, value in c.native_recording.ENVIRONMENT.items():
+        monkeypatch.setenv(name, value)
+    head = "a" * 40
+
+    def git(argv, **_):
+        return b"" if "status" in argv else (head + "\n").encode()
+
+    monkeypatch.setattr(c.subprocess, "check_output", git)
+    ci = {"headSha": head, "headBranch": "main", "event": "push", "databaseId": 1,
+          "url": "https://github.com/keith1117/TopoLab/actions/runs/1",
+          "status": "completed", "conclusion": "success", "jobs": [
+              {"name": name, "status": "completed", "conclusion": "success"}
+              for name in ("quality", "frontend", "clean-linux-smoke", "i1-native-software")]}
+    if fault == "head":
+        ci["headSha"] = "b" * 40
+    if fault == "branch":
+        ci["headBranch"] = "feature"
+    if fault == "event":
+        ci["event"] = "pull_request"
+    if fault == "job":
+        ci["jobs"][0]["conclusion"] = "skipped"
+    evidence = tmp_path / "actual-ci.json"
+    evidence.write_bytes(c.canonical(ci))
+    if fault:
+        with pytest.raises(ValueError, match="CI|window"):
+            c.create_plan(1002.0 if fault == "future" else 1000.0, evidence)
+        assert not root.exists()
+        return
+    context = c.create_plan(1000.0, evidence)
+    assert context["actor_deadlines_UTC"] == actor_fields()["actor_deadlines_UTC"]
+    assert set(context["roles"]) == set(c.CAPS) and len(context["roles"]) == 6
+    plan_raw = (root / "launch_plan.json").read_bytes()
+    assert context["plan_sha256"] == c.digest(plan_raw)
+    assert all("<PLAN_SHA256>" not in word for calls in context["external_argv"].values()
+               for argv in calls for word in argv)
+    assert json.loads(plan_raw)["main_CI_raw_sha256"] == c.digest(evidence.read_bytes())
+    with pytest.raises(ValueError, match="exclusive NEW"):
+        c.create_plan(1000.0, evidence)
+
+
 @pytest.mark.skipif(c.sys.platform != "darwin", reason="Darwin native-time public adapter")
 def test_supervisor_real_timer_wait4_new_fixture(tmp_path, monkeypatch):
     monkeypatch.setattr(c, "ROOT", tmp_path)
@@ -91,7 +151,8 @@ def test_supervisor_real_timer_wait4_new_fixture(tmp_path, monkeypatch):
     monkeypatch.setattr(c.subprocess, "Popen", public_child)
     monkeypatch.setattr(c, "bind", lambda *a, **k: {"conservative_RSS_bytes": 1024})
     result = c.supervise(
-        {"external_argv": c.external_templates(c.sys.executable)}, "exporter-r0", "a" * 64
+        {"external_argv": c.external_templates(c.sys.executable), **actor_fields()},
+        "exporter-r0", "a" * 64
     )
     assert result["outer_timer_exit"] == 0 and result["outer_timer_native_rss_bytes"] > 0
     assert result["supervisor_rss_after_verification_bytes"] > 0
@@ -158,6 +219,7 @@ def v2_finalizer_files(tmp_path, monkeypatch):
     pending = {
         'execution_identity': c.IDENTITY, 'role': role, 'plan_sha256': 'a' * 64,
         'frozen_FULL_seconds': 120, 'clock_domain': c.CLOCK, 'clock_resolution_seconds': 0.001,
+        **actor_fields(),
     }
     (base / (role + '-pending.json')).write_bytes(c.canonical(pending))
     (base / (role + '-supervisor.json')).write_bytes(c.canonical({
@@ -168,7 +230,7 @@ def v2_finalizer_files(tmp_path, monkeypatch):
     timer = record['timer_native_exit'].copy()
     timer.update(pid=103)
     (base / (role + '-outer-timer-exit.json')).write_bytes(c.canonical({'wait4': timer}))
-    return {'roles': {role: {'argv': ['new-public-tool']}}}, role
+    return {'roles': {role: {'argv': ['new-public-tool']}}, **actor_fields()}, role
 
 
 def test_real_finalizer_wire_remains_pending_until_actual_external_exit(
@@ -254,27 +316,31 @@ def test_frozen_dispatcher_serial_once_stop_and_partial_tool_output(fault):
 const fs = require('fs'), vm = require('vm');
 const state = new Map(), emitted = [], calls = [];
 let milliseconds = 1000000;
-const identity = 'topolab.v2.p17-m2-input-export-preparation.v2';
+const identity = 'topolab.v2.p17-m2-input-export-preparation.v3';
 const roles = ['independent-public-check', 'exporter-r0', 'independent-r0',
   'exporter-r1', 'independent-r1', 'shared-closeout'];
 const caps = [120,120,120,780,660,60];
 const context = {execution_identity:identity, plan_sha256:'a'.repeat(64),
   repository:'/new/public/repo', thread_environment:{OMP_NUM_THREADS:'1'},
-  actor_deadlines_UTC:{exporter:'2026-10-19T07:33:59Z',
-    independent:'2026-10-19T06:34:17Z'},
+  actor_activation_UTC_seconds:1000,actor_window_seconds:2700,
+  actor_deadlines_UTC:{exporter:'1970-01-01T01:01:40.000Z',
+    independent:'1970-01-01T01:01:40.000Z'},
   FULL_caps_seconds:Object.fromEntries(roles.map((r,i)=>[r,caps[i]])),
   external_argv:Object.fromEntries(roles.map(r=>[r,[[r,'supervise'],[r,'finalize']]]))};
 const fault = process.argv[2];
 const sandbox = {module:{exports:{}},
   load:k=>state.get(k), store:(k,v)=>state.set(k,v), text:v=>emitted.push(v),
-  Date:{now:()=>milliseconds+=100,parse:Date.parse},
+  Date:class extends Date {static now(){return milliseconds+=100;}},
   tools:{exec_command:async args=>{
     calls.push(args);
-    const role = state.get('r2-active-role');
+    const role = state.get('r3-active-role');
     const p = {execution_identity:identity, role, plan_sha256:context.plan_sha256,
       frozen_FULL_seconds:context.FULL_caps_seconds[role],
       clock_domain:'functions.exec.Date.now.UTC-seconds', clock_resolution_seconds:0.001,
-      external_argv:context.external_argv[role]};
+      external_argv:context.external_argv[role],
+      actor_activation_UTC_seconds:context.actor_activation_UTC_seconds,
+      actor_window_seconds:context.actor_window_seconds,
+      actor_deadlines_UTC:context.actor_deadlines_UTC};
     const done = args.cmd.includes("'finalize'");
     const completion = {...p,status:'PENDING_EXTERNAL_EXIT',pending_sha256:'b'.repeat(64),
       cleanup:{group_gone:true}};
@@ -287,7 +353,7 @@ const sandbox = {module:{exports:{}},
     return {output,exit_code:done && fault==='exit'?1:0,wall_time_seconds:0.01};
   }}};
 vm.runInNewContext(fs.readFileSync(process.argv[1],'utf8'),sandbox);
-const dispatch = sandbox.module.exports.dispatchRoleV2;
+const dispatch = sandbox.module.exports.dispatchRoleV3;
 async function rejected(role,ctx=context) {
   const before=calls.length;
   try { await dispatch(ctx,role); throw new Error('guard allowed role'); }
@@ -296,16 +362,16 @@ async function rejected(role,ctx=context) {
 }
 (async()=>{
   await rejected('extra',{...context,external_argv:{...context.external_argv,extra:[]}});
-  milliseconds=Date.parse('2026-10-19T06:34:17Z')-caps[0]*1000+1;
+  milliseconds=Date.parse(context.actor_deadlines_UTC.independent)-1860*1000+1;
   await rejected(roles[0]);
   milliseconds=1000000;
   const first = await dispatch(context,roles[0]);
   await rejected(roles[0]);
   await rejected(roles[2]);
   if(fault==='none') {
-    if(first.terminal.status!=='PASS_R_V2_FULL_ROLE') throw new Error('valid role refused');
+    if(first.terminal.status!=='PASS_R_V3_FULL_ROLE') throw new Error('valid role refused');
     await dispatch(context,roles[1]);
-    if(!calls[2].cmd.includes('TOPOLAB_R2_PREVIOUS_TOOL_RECORDS=')) throw new Error('no replay');
+    if(!calls[2].cmd.includes('TOPOLAB_R3_PREVIOUS_TOOL_RECORDS=')) throw new Error('no replay');
     await rejected(roles[1]);
   } else {
     if(first.terminal.status!=='STOP_NO_RETRY') throw new Error('bad role passed');

@@ -51,23 +51,23 @@ final serializer exit1, full RSS UNKNOWN, old reads0, R0/R1 closed unlaunched.
 Failed FULL120+shared FULL60=180/1860s; closed1680s never transfers. Source PR204/
 main43ffed0 preceded entry; result PR205/main3459dd5 and all four main CI passed.
 
-The owner expressly authorized NEW R/v2 under the
-[protocol](docs/planning/p17_m2_input_export_billing_revision_protocol.md):
-`/root`3h and new different-author `/root/review_r_v2`2h; six once-only FULL
-charges120/120/120/780/660/60=1860s and exact40-metadata/12-checkpoint/528-train/
-18-uniform original-byte/temporary-parse scope. Preserve v1 frozen bytes/STOP/costs.
-Reviewed source passed the five mandatory normal-permission checks (2203 passed/1
-platform skip) and PR206/latest-head four CI jobs, then merged as main04d14c9.
-The earlier default-sandbox7 native permission failures remain recorded. Exact
-main CI39208671873 quality was still running at06:22:14 UTC. The independent
-window ends06:34:17 UTC, so later exporter-r1 FULL780 latest start06:21:17
-had passed before source admission could be frozen. Close this finite execution
-**unlaunched**: no R/v2 plan/root, named role, old source stat/read or restricted
-I/O charge; source/resource acceptance remains UNKNOWN_NOT_RUN, not formal FAIL.
-That exact main CI later finished with all four jobs successful; it does not
-reopen the elapsed window. Publish the zero-launch result normally. Do not use the old grant again,
-start a partial prefix, B/C, old backup/seal, expanded input, retry/reset or an
-automatic successor. Retain4GiB, independent preflight, all old costs and gates.
+R/v2 source PR206/main04d14c9 passed all-four CI, but formal preparation closed
+unlaunched when its original independent window expired: roles/old reads/IO0,
+UNKNOWN_NOT_RUN. Result PR207/main e1e52f3/all-four CI completed. Old v1/v2
+frozen files, STOP/costs and closed allowances retain bytes and never transfer.
+
+Current owner authority is ONE fresh R/v3 preparation under the
+[readiness protocol](docs/planning/p17_m2_input_export_readiness_protocol.md) and
+[JSON](docs/planning/p17_m2_input_export_readiness_protocol.json): same3h/2h total,
+new /root/review_r_v3, six FULL120/120/120/780/660/60=1860s and exact40/12/528/18
+source-byte/temporary-parse exception. Predeclared continuous software/formal/
+result phase caps; formal2700s each begins once only AFTER clean locked protected
+merged source/all-four-main-CI readiness. No old grant reset or free waits.
+Independent public IO and complete independent R0 before source R1,4GiB and
+full actual RSS/helper/exits/FULL binding. First failure STOP/no retry; only
+reserved NEW-only shared closeout. No B/C, expanded input, old backup/seal,
+algorithm/proof/installation or automatic successor. Publish actual result and
+STOP; unsuccessful preparation requires an owner route decision, no default v4.
 
 ## Provenance boundary
 

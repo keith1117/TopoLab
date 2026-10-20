@@ -9,7 +9,18 @@
 本文记录所有者在本对话中认可的复盘、新期望和后续工作规则，属于交付治理调整，
 不是新的数值实验合同、科研 Gate 或预算授权。
 
-当前收尾（新R/v2，2026-10-19）：
+当前授权（新R/v3，2026-10-20）：所有者接受按[就绪协议](p17_m2_input_export_readiness_protocol.md)
+及[JSON](p17_m2_input_export_readiness_protocol.json)再进行**一次**有限输入准备。
+仍为执行者总3小时/新不同作者总2小时，六个正式角色FULL合计1860秒，精确40元数据/12 checkpoint/
+528训练/18 uniform原件完整字节核验及临时解析例外，4GiB和独立预检。预先封顶的软件准备、正式、
+结果阶段分别连续计时，软件发布及等待实记费用；不暂停/重置旧时钟或转移余量。发布就绪后才一次
+开启双方2700秒正式窗口。真实来源/字段/资源仍UNKNOWN_NOT_RUN，只有实际角色全部通过才验收。
+不B/C、扩大输入、旧备份/封存、新证明工程、重试或自动后继。旧R/v1停止/已付180/关闭1680，
+R/v2零启动/已付0/关闭1860及原文件保持。这是明确的一次路线决定，不重开旧授权。
+见[当前状态](../project_status.md)、[报告](../validation/p17_m2_input_export_readiness.md)及
+[独立报告](../validation/p17_m2_input_export_readiness_independent_review.md)。
+
+历史收尾（新R/v2，2026-10-19）：
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE、固定P/17未修复、uniform默认、科研暂停。**
 所有者已明确授权[新R/v2合同](p17_m2_input_export_billing_revision_proposal.md)及
 [JSON](p17_m2_input_export_billing_revision_proposal.json)：`/root`最多3小时，

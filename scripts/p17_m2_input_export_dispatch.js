@@ -1,10 +1,10 @@
-/* Independently authored finite external-tool boundary for NEW R/v2.
+/* Independently authored finite external-tool boundary for NEW R/v3.
  * No filesystem, native helper, numerical oracle or producer PASS is used here.
  * Root may append orchestration after the independent initial-source snapshot.
  */
 
 function finishExternal(pending, completion, events, resourceEvidence, expectedPendingSha256) {
-  const identity = "topolab.v2.p17-m2-input-export-preparation.v2";
+  const identity = "topolab.v2.p17-m2-input-export-preparation.v3";
   const caps = {
     "independent-public-check": 120,
     "exporter-r0": 120,
@@ -54,7 +54,7 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
     for (const record of [pending, completion]) {
       require(record.execution_identity === identity && record.role === pending.role
         && record.plan_sha256 === pending.plan_sha256 && record.frozen_FULL_seconds === cap,
-      "v2 identity/plan/immutable FULL differs");
+      "v3 identity/plan/immutable FULL differs");
       require(record.clock_domain === "functions.exec.Date.now.UTC-seconds"
         && record.clock_resolution_seconds === 0.001,
       "unfrozen external clock identity/resolution");
@@ -64,9 +64,19 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
       && completion.pending_sha256 === expectedPendingSha256,
     "internal terminal cannot certify future exit");
     require(events.length > 0, "UNKNOWN_MISSING_ACTUAL_OUTER_EVENT");
+    const actor = validateActorWindow(pending);
+    const completedActor = validateActorWindow(completion);
+    require(JSON.stringify(completedActor) === JSON.stringify(actor),
+      "completion actor window differs");
+    result.actor_activation_UTC_seconds = actor.activation;
+    result.actor_window_seconds = 2700;
+    result.actor_deadlines_UTC = pending.actor_deadlines_UTC;
     result.clock_domain = events[0].clock_domain;
     result.T0 = number(events[0].start_seconds);
     result.T1 = number(events.at(-1).end_seconds);
+    require(actor.activation <= result.T0 && result.T0 <= result.T1
+      && result.T1 <= actor.deadline,
+    "actual full role lies outside immutable actor window");
     const whole = result.T1 - result.T0;
     require(whole >= 0, "outer clock regression");
     result.whole_wall_seconds = whole;
@@ -117,7 +127,7 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
       "UNKNOWN_INCOMPLETE_GROUP_CLEANUP");
     require(Math.max(whole + 10, minimum) <= cap,
       "FAIL_FULL_NAMED_WALL_CHARGE_BINDING");
-    result.status = "PASS_R_V2_FULL_ROLE";
+    result.status = "PASS_R_V3_FULL_ROLE";
     result.reason = null;
     result.missing_evidence_cost = null;
     result.full_role_evidence_accepted = true;
@@ -129,19 +139,49 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
 
 if (typeof module !== "undefined") module.exports = { finishExternal };
 
+function validateActorWindow(context) {
+  const activation = context.actor_activation_UTC_seconds;
+  const activationMillis = Math.round(activation * 1000);
+  if (typeof activation !== "number" || !Number.isFinite(activation) || activation <= 0
+      || !Number.isSafeInteger(activationMillis) || activationMillis / 1000 !== activation
+      || context.actor_window_seconds !== 2700) {
+    throw new Error("prospective actor activation/window differs");
+  }
+  const deadline = activation + 2700;
+  const expected = new Date(activationMillis + 2700 * 1000).toISOString();
+  const deadlines = context.actor_deadlines_UTC;
+  if (!deadlines || Object.keys(deadlines).sort().join(",") !== "exporter,independent"
+      || deadlines.exporter !== expected || deadlines.independent !== expected) {
+    throw new Error("actor deadlines must equal immutable activation plus2700");
+  }
+  return { activation, deadline };
+}
+
 /* Versioned orchestration in the SAME trusted external-tool invocation.
  * Context is the frozen launch plan; dynamic telemetry is previous actual tool
  * OUTPUT, not a new source identity. No native process runs after final event.
  */
-async function dispatchRoleV2(context, role) {
-  if (context.execution_identity !== "topolab.v2.p17-m2-input-export-preparation.v2"
-      || !Object.hasOwn(context.external_argv, role)) throw new Error("unregistered R/v2");
-  const previous = load("r2-last-packet") ?? null;
+async function dispatchRoleV3(context, role) {
+  if (context.execution_identity !== "topolab.v2.p17-m2-input-export-preparation.v3"
+      || !Object.hasOwn(context.external_argv, role)) throw new Error("unregistered R/v3");
+  const binding = JSON.stringify({
+    plan_sha256: context.plan_sha256,
+    actor_activation_UTC_seconds: context.actor_activation_UTC_seconds,
+    actor_window_seconds: context.actor_window_seconds,
+    actor_deadlines_UTC: context.actor_deadlines_UTC,
+  });
+  const frozen = load("r3-activation");
+  if (frozen !== undefined && frozen !== binding) {
+    throw new Error("one immutable activation/plan only; no reactivation");
+  }
+  if (frozen === undefined) store("r3-activation", binding);
+  const actor = validateActorWindow(context);
+  const previous = load("r3-last-packet") ?? null;
   const order = ["independent-public-check", "exporter-r0", "independent-r0",
     "exporter-r1", "independent-r1", "shared-closeout"];
   const index = order.indexOf(role);
-  if (index < 0) throw new Error("unregistered R/v2 role");
-  if (load("r2-active-role") || load("r2-attempted-" + role)) {
+  if (index < 0) throw new Error("unregistered R/v3 role");
+  if (load("r3-active-role") || load("r3-attempted-" + role)) {
     throw new Error("one named launch only; active or consumed role");
   }
   if (index === 0 && previous !== null) throw new Error("prior prefix closes fresh entry");
@@ -152,28 +192,27 @@ async function dispatchRoleV2(context, role) {
     throw new Error("one real prefix required for closeout");
   }
   if (role !== "independent-public-check" && role !== "shared-closeout"
-      && previous?.terminal?.status !== "PASS_R_V2_FULL_ROLE") {
+      && previous?.terminal?.status !== "PASS_R_V3_FULL_ROLE") {
     throw new Error("STOP refuses source suffix before dispatch");
   }
-  const deadlines = { exporter: "2026-10-19T07:33:59Z",
-    independent: "2026-10-19T06:34:17Z" };
   const caps = { "independent-public-check": 120, "exporter-r0": 120,
     "independent-r0": 120, "exporter-r1": 780,
     "independent-r1": 660, "shared-closeout": 60 };
-  if (JSON.stringify(context.actor_deadlines_UTC) !== JSON.stringify(deadlines)
+  const now = Date.now() / 1000;
+  const remainingFull = index === 0 ? 1860 : caps[role];
+  if (!/^[0-9a-f]{64}$/.test(context.plan_sha256)
       || context.FULL_caps_seconds[role] !== caps[role]
-      || Date.now() + caps[role] * 1000 > Math.min(
-        Date.parse(deadlines.exporter), Date.parse(deadlines.independent))) {
-    throw new Error("original actor window cannot cover complete named role");
+      || now < actor.activation || now + remainingFull > actor.deadline) {
+    throw new Error("immutable actor window cannot cover complete registered work");
   }
-  store("r2-attempted-" + role, true);
-  store("r2-active-role", role);
+  store("r3-attempted-" + role, true);
+  store("r3-active-role", role);
   const events = [];
   const packets = [];
   function quote(word) { return "'" + word.replaceAll("'", "'\\''") + "'"; }
   for (const [index, argv] of context.external_argv[role].entries()) {
     const env = { ...context.thread_environment,
-      TOPOLAB_R2_PREVIOUS_TOOL_RECORDS: JSON.stringify(index === 0 && previous ? [previous] : []) };
+      TOPOLAB_R3_PREVIOUS_TOOL_RECORDS: JSON.stringify(index === 0 && previous ? [previous] : []) };
     const cmd = Object.entries(env).map(([k, v]) => k + "=" + quote(v)).join(" ")
       + " " + argv.map(quote).join(" ");
     const event = {
@@ -187,7 +226,7 @@ async function dispatchRoleV2(context, role) {
       let reply = await tools.exec_command({
         cmd, workdir: context.repository,
         sandbox_permissions: "require_escalated",
-        justification: "按所有者已授权的新R/v2冻结计划执行一次" + role
+        justification: "按所有者已授权的新R/v3冻结计划执行一次" + role
           + "，含已登记计时/RSS/退出；不运行B/C、不重试或扩大输入。",
         yield_time_ms: 1000, max_output_tokens: 12000,
       });
@@ -214,6 +253,9 @@ async function dispatchRoleV2(context, role) {
     execution_identity: context.execution_identity, role, plan_sha256: context.plan_sha256,
     frozen_FULL_seconds: context.FULL_caps_seconds[role],
     clock_domain: "functions.exec.Date.now.UTC-seconds", clock_resolution_seconds: 0.001,
+    actor_activation_UTC_seconds: context.actor_activation_UTC_seconds,
+    actor_window_seconds: context.actor_window_seconds,
+    actor_deadlines_UTC: context.actor_deadlines_UTC,
   };
   const completion = last.completion ?? {
     ...pending, status: "PENDING_EXTERNAL_EXIT", cleanup: { group_gone: null },
@@ -226,9 +268,9 @@ async function dispatchRoleV2(context, role) {
     packets[0]?.pending_sha256);
   terminal.charge_record_sha256 = packets[0]?.pending_sha256 ?? null;
   const packet = { pending, completion, events, terminal };
-  store("r2-last-packet", packet);
-  store("r2-packet-" + role, packet);
-  store("r2-active-role", null);
+  store("r3-last-packet", packet);
+  store("r3-packet-" + role, packet);
+  store("r3-active-role", null);
   text({ role, status: terminal.status, reason: terminal.reason,
     charged_seconds: terminal.frozen_FULL_seconds,
     whole_wall_seconds: terminal.whole_wall_seconds,
@@ -237,4 +279,7 @@ async function dispatchRoleV2(context, role) {
   return packet;
 }
 
-if (typeof module !== "undefined") module.exports.dispatchRoleV2 = dispatchRoleV2;
+if (typeof module !== "undefined") {
+  module.exports.dispatchRoleV3 = dispatchRoleV3;
+  module.exports.validateActorWindow = validateActorWindow;
+}

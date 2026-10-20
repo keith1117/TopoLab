@@ -51,6 +51,21 @@ source/resource admission UNKNOWN_NOT_RUN. See the [actual zero-launch report](.
 No partial prefix, B/C, expansion, old backup, cap transfer or successor;
 frozen v1 contracts/reports retain bytes.
 
+Current authority (NEW R/v3,2026-10-20): the owner accepted **one** fresh
+restricted preparation attempt under the [readiness protocol](p17_m2_input_export_readiness_protocol.md)
+and [JSON](p17_m2_input_export_readiness_protocol.json). Same total3h exporter/2h
+new different author, six once-only FULL roles1860s, exact40/12/528/18 original-byte/
+temporary-parse scope,4GiB and independent preflight. Prospective bounded software,
+formal and result phases prevent release waiting from expiring an unopened formal
+window; no clock pause/reset, budget transfer or free software cost. Complete
+software release readiness before one immutable2700s formal window for both
+actors. Source/field/resource acceptance remains UNKNOWN_NOT_RUN until actual
+roles pass. No B/C, extra source, old backup/seal, new proof, retry or successor.
+R/v1 STOP/paid180/closed1680 and R/v2 zero-launch/paid0/closed1860 retain bytes.
+This is the explicit finite route decision, not reopening either old grant.
+See [current status](../project_status.md), [report](../validation/p17_m2_input_export_readiness.md)
+and [independent review](../validation/p17_m2_input_export_readiness_independent_review.md).
+
 ## Overall project plans
 
 | Plan | English working document | Chinese reading companion |
@@ -74,7 +89,8 @@ frozen v1 contracts/reports retain bytes.
 | M2 native H/17 parent | [Revision7](p17_m2_native_homotopy_proposal.md), [JSON](p17_m2_native_homotopy_proposal.json) | A closed; later R stopped before source access; B/C unapproved |
 | M2 input registration and restricted export preparation | [Contract and budget](p17_m2_input_export_preparation_proposal.md), [JSON](p17_m2_input_export_preparation_proposal.json) | Original scope retained; no12/528/18 exports or accepted source registry |
 | Stopped R execution | [Protocol](p17_m2_input_export_preparation_protocol.md) | STOP_NO_RETRY; failed FULL120 + shared FULL60; old reads0; result PR205 published |
-| New R/v2 billing revision | [Finite proposal](p17_m2_input_export_billing_revision_proposal.md), [JSON](p17_m2_input_export_billing_revision_proposal.json) | Source PR206 merged; formal zero launch due original window; [protocol](p17_m2_input_export_billing_revision_protocol.md), new I/O paid0/1860, no automatic successor |
+| New R/v3 readiness preparation | [Protocol](p17_m2_input_export_readiness_protocol.md), [JSON](p17_m2_input_export_readiness_protocol.json) | One newly authorized attempt; phased3h/2h, six FULL1860, no B/C or successor |
+| Historical R/v2 billing revision | [Finite proposal](p17_m2_input_export_billing_revision_proposal.md), [JSON](p17_m2_input_export_billing_revision_proposal.json) | Source PR206 merged; formal zero launch due original window; [protocol](p17_m2_input_export_billing_revision_protocol.md), new I/O paid0/1860, no automatic successor |
 
 The original schedule and admissions estimates are planning assumptions, not
 promises of a completion date or empirical acceleration.
