@@ -46,11 +46,17 @@ UserFolder field was null. Configuration and the missing UI surface do not estab
 an exclusion. No OneDrive or shared iCloud service was paused. Empty source-matching
 open-path observations cannot establish a maintained no-write interval.
 
-Remaining concrete prerequisites are an attributable project-scoped iCloud control
-and actual acknowledgment through the last source reader, plus current OneDrive
-Documents/account mapping or a scoped exclusion acknowledgment. The independent
-author must accept actual complete coverage and acquisition/release facts before
-activation. There is no new kernel, hostile-writer, no-sleep or allocation theorem.
+Before common activation the independent author must accept a credible, complete
+proposed control plan: a feasible project-scoped iCloud procedure and current
+OneDrive Documents/account mapping or scoped exclusion. Actual authorized pauses,
+acquisition acknowledgment, lease and final freeze then belong inside setup300,
+before first dispatch; maintain control through the last source reader. Release
+is recorded after that exit and audited before final preparation acceptance.
+The earlier publication wording incorrectly put future acquisition/release facts
+before activation; the [publication review](../validation/p17_m2_source_custody_export_publication_review.md)
+corrects that temporal error without reopening this stopped identity. The actual
+STOP rests on the unavailable feasible scoped procedure/mapping, not the absence
+of a future release event. There is no new kernel, hostile-writer, no-sleep or allocation theorem.
 This check does not prove that no practical control exists outside the checked
 interfaces and permission scope.
 

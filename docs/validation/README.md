@@ -13,6 +13,9 @@ under [new authority](../planning/p17_m2_source_custody_export_protocol.md)/
 no reset. Live iCloud Documents coverage has no project-scoped control; current
 OneDrive Documents mapping unavailable. Formal0/6/old stat-read0/NO_SOURCE_ADMISSION_KEEP_STOP.
 No unused source implementation or automatic successor.
+The [publication review](p17_m2_source_custody_export_publication_review.md)
+corrects temporal wording: plan before activation, acquisition in setup300,
+release after final reader; the specific operational STOP remains.
 R-STABLE [software/zero-launch](p17_m2_source_stability_export.md)/
 [independent review](p17_m2_source_stability_export_independent_review.md) is already
 published through PR213/main6654ca2/all-four CI; frozen files retain bytes.

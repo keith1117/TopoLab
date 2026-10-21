@@ -52,10 +52,12 @@ fields. No sync database, log, cache payload or source folder was scanned. Accou
 identifiers, unrelated preferences, UI names and device details are excluded from
 publication; generated current records stay external.
 
-Concrete missing prerequisites: an attributable project-scoped iCloud pause or
-exclusion and maintained no-write acknowledgment through the last source reader;
-current OneDrive Documents/account mapping or a scoped exclusion acknowledgment;
-independent acceptance of that actual complete control package. The empty open-file
+The concrete preactivation gap is a feasible, attributable project-scoped iCloud
+control procedure and current OneDrive Documents/account mapping or scoped
+exclusion in an independently acceptable proposed plan. Actual pauses/acquisition
+acknowledgment/lease/freeze belong inside setup300 before first dispatch; release
+is recorded after the last reader, then audited before final acceptance. Future
+release facts are not required before activation. The empty open-file
 snapshot, manual CLI history and a cooperative new lease cannot substitute for them.
 No new allocation/kernel/no-sleep theorem or historical D diagnosis is required.
 
@@ -72,8 +74,8 @@ remain a comparison baseline, not source admission.
 Writer metadata actually begins00:18:46.436207Z and ends with preformal STOP
 00:31:13.579911Z: **747.144801625/1200s**, including interruption and waits.
 Unused452.855198375s closes without transfer. Result-publication7200s begins at
-that STOP, deadline02:31:13.579911Z. No formal4500s or independent result1800s
-window was activated. Six roles0/6, FULL paid0/3600s, all unentered formal
+that STOP, deadline02:31:13.579911Z. At that STOP, no formal4500s or independent
+result1800s window had been activated. Six roles0/6, FULL paid0/3600s, all unentered formal
 allowances close; no NEW DATA root/plan/lease or source adaptation implementation.
 
 Failed attempts remain: default-sandbox File Provider help refused; authorized
@@ -94,8 +96,8 @@ Overlapping author/command/CI views are not summed as disjoint spend. No purchas
 Independent preparation has been released: close marker00:37:44.372858Z,
 actual1189.141007167s through that marker, conservatively charged1260/3600s
 through00:38:55.231697Z; unused2340s closed. Parent observed the delivered final
-return by00:38:07Z, within that charging bound. No CI-wait duty or separate
-result-review activation. Final report SHA256
+return by00:38:07Z, within that charging bound. That preparation phase had no
+CI-wait duty or separate result-review activation. Final report SHA256
 `659b42d54d7b22eaa692e6e038c5dafddc693fdc0ceb395d2d05030277da5da5`; its9-member
 NEW software backup totals34999bytes excluding manifest, exact bytes/SHA verified;
 manifest SHA256 `4569e58f9875ca6846624d0361a76617064ac4549cb4b8feb577a82522829eb1`.
@@ -116,7 +118,7 @@ closed. The existing field/IEEE, strict identity, F failure/cleanup/native and
 independent comparison software retain their previous2417-pass/1-skip scope;
 that software result grants no input or resource acceptance.
 
-Final mandatory precommit checks all passed: **2417 passed/1 unchanged selected
+First complete precommit checks on59ff2ab all passed: **2417 passed/1 unchanged selected
 Linux-only platform skip**,858.22s pytest test time/862.057701875s whole command.
 All source/test/lock/workflow bytes remain unchanged; no tolerance/assertion/guard
 relaxation. Existing publication-rule checks cover16 reviewed paths,740 unchanged
@@ -135,6 +137,61 @@ and are not double-added. Required-check record SHA256
 `6754103fce126a146f66f86840f01888b96b822d91077f55734d326eb8477934`; pytest log SHA256
 `014a7e245553a974250650c31f7e3fd5ed099b11713b8ad6aab9e7e0e6da0882`. Complete runner exit0 was actually returned; later PR/CI/cleanup
 waits and final returns continue inside the original publication clocks.
+
+Publication review found one temporal wording error in the new protocol: its
+sentence put acquisition/release facts before activation. The correct original
+sequence is proposed plan before activation, actual controls/acquisition in
+setup300 and release after last reader. The specific missing feasible iCloud
+procedure/OneDrive mapping still independently prevents admission. Correct only
+this documentary sequence, retain the first commit/checks/CI costs, and repeat
+all five mandatory commands before the correction commit. No clock or writer
+check restarts, original review/PREPATCH bytes remain frozen, no source changes.
+The already granted independent result-review1800s starts at actual first tool
+2026-10-21T01:08:02.849434Z, deadline01:38:02.849434Z; closed preparation time
+does not reopen and no CI-wait duty follows. See the separate
+[publication review](p17_m2_source_custody_export_publication_review.md).
+It closed at01:10:57.019128Z after174.168838083s through that marker;
+conservative240/1800s includes the last return, unused1560s closed. The parent
+observed final delivery by01:11:55Z within the01:12:02.849434Z charging bound.
+Report SHA256 `feb3c316566af36d35544ce98d658e279784e473b49753ebd64c67be1a764128`;
+NEW five-member/9392-byte frontier (excluding manifest) was exact-byte/SHA/fsync
+backed up separately, manifest SHA256
+`6164529fc86225aa4fed27cc2dd92605899f321d47b0743ad993fa0054f2d1fa`.
+This result phase does not reopen its earlier preparation or cover CI waiting.
+A NEW external timing erratum preserves the initial decision bytes while
+qualifying its missing-item list: later acquisition/release acceptance is not
+a demand for those future facts before activation.
+
+The initial59ff2ab PR214 [CI39524007864](https://github.com/keith1117/TopoLab/actions/runs/39524007864)
+passed all four jobs; its feature-push [CI39524004924](https://github.com/keith1117/TopoLab/actions/runs/39524004924)
+passed applicable jobs with intentionally skipped push smoke. Watcher wall views
+988.982641791s/780.413883709s remain within the original publication clocks and
+overlap. These checks predate the correction and do not validate its later head.
+A second-check launcher first exited127 because the unqualified python command
+was unavailable; existing python3 then launched all five checks at01:10:53.216475Z.
+The failed invocation and all recovery/serialization time remain charged;
+individual unmeasured call cost stays UNKNOWN_NOT_ZERO.
+
+
+Second correction-precommit checks all passed: **2417 passed/1 unchanged platform
+skip**,684.18s pytest time/686.886227250s whole command. Actual runner exit0
+was returned by01:23:07Z; all waiting remains inside the original publication clocks.
+
+| Second mandatory command | Result | Whole command seconds |
+|---|---|---:|
+| `uv sync --dev --locked` | PASS | 0.136258000 |
+| `uv run ruff check .` | PASS | 0.073028000 |
+| `uv run mypy src` | PASS | 0.774468375 |
+| `uv run pytest` | PASS | 686.886227250 |
+| `git diff --check` | PASS | 0.027906750 |
+
+Second command-wall views sum687.897888375s; they overlap author
+phase views and are not extra allowance. Check-record SHA256
+`60b5742a37ae11f2eb52d8e1cd3055ed32663726222256067240eb07787c9426`; pytest-log SHA256
+`7d78480df36658df7888e514d1a8b6702bf84f7abb387cd8379f4f763deeb5b3`. The final scope has17 reviewed
+document paths,740 unchanged tracked files and1014 local links/anchors. Old
+preparation report/PREPATCH bytes remain unchanged; source/tests/lock/workflow
+and all prior frozen evidence retain their original identities.
 
 This documentation result follows all five existing precommit commands,
 individually reviewed staging, unchanged frozen bytes, local links/secrets/ignore

@@ -25,15 +25,21 @@ current Documents/known-folder mapping and a null Business1 folder remain
 unresolved. Empty source-open-path observations are not future writer control.
 No global sync/service/source setting was changed and no old input was probed.
 
-Concrete missing items are actual attributed project-scoped iCloud control
-through the final reader and current OneDrive mapping/scoped exclusion, followed
-by independent complete coverage/acquisition/release acceptance. This is not a
+Concrete preactivation missing items are a feasible attributed project-scoped
+iCloud control procedure and current OneDrive mapping/scoped exclusion in an
+independently acceptable complete proposed plan. This is not a
 claim that iCloud caused the historical12th identity change or all controls are
 impossible. No source adaptation or formal public I/O compensates for missing
 control. Complete only normal result publication, retain57b5, then STOP; no
 source replacement, generic proof/guard slice, B/C or automatic successor.
 Original prep7200/3600, publication7200, result7200/1800 and unentered formal4500
 clocks keep the new grant's caps, no old balances transfer. Fees UNKNOWN_NOT_ZERO.
+
+The [publication review](validation/p17_m2_source_custody_export_publication_review.md)
+corrects one new protocol sentence: a credible proposed plan precedes activation;
+actual acquisition is in setup300 and release follows the last reader. Future
+release is not a launch prerequisite. The concrete missing feasible control
+procedure/mapping still supports STOP; both regression/CI attempts remain charged.
 
 R-STABLE software/zero-launch is already published through
 [PR213](https://github.com/keith1117/TopoLab/pull/213), main

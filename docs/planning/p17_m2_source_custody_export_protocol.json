@@ -125,14 +125,14 @@
     "formal_FULL_paid_seconds": 0,
     "formal_FULL_unused_closed_seconds": 3600,
     "common_formal4500s_unstarted_closed": true,
-    "result_review1800s_unstarted": true,
     "concrete_missing": [
-      "actual attributable project-scoped iCloud pause/exclusion maintained through last source reader",
-      "current OneDrive Documents/known-folder/account mapping or scoped exclusion acknowledgment",
-      "independent complete actual coverage and acquisition/release acceptance"
+      "credible attributable feasible project-scoped iCloud pause/exclusion procedure",
+      "current OneDrive Documents/known-folder/account mapping or a scoped exclusion procedure",
+      "independent acceptance of complete proposed writer-control coverage and obtainable setup evidence"
     ],
     "no_accepted_input_registry_export_or_resource_PASS": true,
-    "no_automatic_reactivation_or_successor": true
+    "no_automatic_reactivation_or_successor": true,
+    "result_review1800s_unstarted_at_preformal_STOP": true
   },
   "preserved": "FULL_V2_OPEN_NO_ADMITTED_ROUTE; P17 unrepaired/uniform/science pause/full fit PENDING4GiB/independent preflight; all old R/F/H/B451/D1/I1/B452 failures,costs,closed quotas,UNKNOWN,seals; K12721.16417100014444982>7200; B3 M2+independentUbuntu24.04/bothscales/finalreproduction",
   "actual_preparation_closures": {
@@ -143,5 +143,28 @@
     "source_publication_actual_start_UTC": "2026-10-21T00:35:52.333287+00:00",
     "earlier_result_deadline_UTC": "2026-10-21T02:31:13.579911Z",
     "remaining_final_returns_inside_original_publication_clocks": true
+  },
+  "control_timing": {
+    "before_common_activation": "independent acceptance of credible complete proposed feasible writer-control plan",
+    "setup300_before_first_dispatch": "actual authorized pauses/acquisition acknowledgment/lease/final freeze",
+    "through_last_source_reader": "maintain accepted control interval",
+    "after_last_reader": "record release; independent audit before final preparation acceptance",
+    "future_release_before_activation_required": false,
+    "first_commit_temporal_wording_error": "retained in59ff2ab; corrected during normal publication, no new discovery/formal activation or clock reset"
+  },
+  "independent_result_review": {
+    "actual_start_UTC": "2026-10-21T01:08:02.849434Z",
+    "cap_seconds": 1800,
+    "deadline_UTC": "2026-10-21T01:38:02.849434Z",
+    "old_preparation_unused_stays_closed": true,
+    "report": "docs/validation/p17_m2_source_custody_export_publication_review.md",
+    "purpose": "narrow temporal publication correction, no source implementation/control probe/CI wait",
+    "outcome": "PASS_DOCUMENTARY_TIMING_CORRECTION_ONLY",
+    "closed_marker_UTC": "2026-10-21T01:10:57.019128Z",
+    "actual_seconds_through_marker": 174.168838083,
+    "conservative_charged_seconds_including_last_return": 240,
+    "unused_closed_seconds": 1560,
+    "report_sha256": "feb3c316566af36d35544ce98d658e279784e473b49753ebd64c67be1a764128",
+    "manifest_sha256": "6164529fc86225aa4fed27cc2dd92605899f321d47b0743ad993fa0054f2d1fa"
   }
 }
