@@ -65,17 +65,20 @@ Original result overrun18.633086s and separate followup335.755696s remain costs.
 F is published/closed through PR211/mainb0fe235/all-four exact-main CI39473450571;
 local2290 passed/1 skip. Its first unchanged cleanup assertion failure/cost/cause
 UNKNOWN remains, not fixed by passing repeats. Frozen reports retain bytes.
-Current owner approved PR212 R-STABLE's finite budgets, exact source exception and
-fresh different author. Read the [new approved protocol](docs/planning/p17_m2_source_stability_export_protocol.md)/
-[JSON](docs/planning/p17_m2_source_stability_export_protocol.json) and
-[software/zero-launch report](docs/validation/p17_m2_source_stability_export.md).
-Minimal software/public fixtures are reviewed; local2417 passed/1 skip/all five
-checks passed. Verify normal PR/main publication rather than repeating software.
-Delegated custodian and independent review cannot close writer coverage. Formal entry is
-NO_SOURCE_ADMISSION_KEEP_STOP, unlaunched0/6, old stat/read0, no DATA root/plan/lease.
-Finish protected publication then STOP; no old R, D/environment/power query, B/C,
-snapshot/permission change or automatic successor. Later source entry needs a
-fresh finite owner decision with concrete writer controls; no balance transfers.
+R-STABLE software/zero-launch is published through PR213/main6654ca2 and all-four
+exact-main CI39510351493; local2417/1 skip and independent332 retain software scope.
+Its original protocol/reports/budgets remain frozen and closed.
+The owner next granted20min related writer runtime metadata and conditional new
+six roles. Read the [new authority](docs/planning/p17_m2_source_custody_export_protocol.md)/
+[JSON](docs/planning/p17_m2_source_custody_export_protocol.json) and
+[actual report](docs/validation/p17_m2_source_custody_export.md). Original clock
+used747.144801625/1200s, no interruption reset. Live iCloud Documents sync covers
+four declared paths without project-scoped control; OneDrive current Documents
+mapping remains unavailable. NO_SOURCE_ADMISSION_KEEP_STOP, formal0/6/old stat-read0/
+no DATA root, plan or lease. No source adaptation or shared/global sync change.
+Finish normal result publication, retain worktree and STOP; report concrete
+iCloud control/OneDrive mapping gaps. No retry, source change, generic proof/guard
+sequel, B/C/D or automatic successor; all unused budgets close without transfer.
 Keep4GiB/independent preflight and every old failure/cost/UNKNOWN/quota/seal.
 
 ## Provenance boundary

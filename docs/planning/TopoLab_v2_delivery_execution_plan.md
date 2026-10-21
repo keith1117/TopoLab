@@ -1,13 +1,15 @@
 # TopoLab v2 delivery execution plan — R1
 
-Current2026-10-20 supplement: the later PR212 R-STABLE grant is governed by
-[its new approved protocol](p17_m2_source_stability_export_protocol.md)/
-[JSON](p17_m2_source_stability_export_protocol.json), not the historical R1 next
-step below. Minimal software/normal publication is authorized, but writer
-coverage UNKNOWN closes formal entry NO_SOURCE_ADMISSION_KEEP_STOP,0/6/old reads0.
-See [current status](../project_status.md) and
-[software/zero-launch report](../validation/p17_m2_source_stability_export.md).
-No B/C or automatic successor; old R1 scientific/cost conclusions retain bytes.
+Current2026-10-20 supplement: the owner approved the bounded
+[R-CUSTODY authority](p17_m2_source_custody_export_protocol.md)/
+[JSON](p17_m2_source_custody_export_protocol.json), including20min related runtime
+metadata discovery. Actual747.144801625/1200s/no reset found live iCloud
+Documents coverage without scoped control and unresolved OneDrive Documents
+mapping. [Current report](../validation/p17_m2_source_custody_export.md):
+NO_SOURCE_ADMISSION_KEEP_STOP, formal0/6, old stat/read0/no DATA root/plan/lease.
+Publish the concrete gaps then STOP. R-STABLE PR213/main6654ca2/all-four CI
+is complete; its frozen records and all prior R1 decisions/costs retain bytes.
+No B/C or automatic successor.
 
 Date: 2026-10-15 (America/New_York). Baseline: merged main
 `502e45caa0f81569a515adf2b78448e1be7bbd00` (PR #191), with successful

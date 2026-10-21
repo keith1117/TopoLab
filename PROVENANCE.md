@@ -1578,3 +1578,15 @@ source/evidence is imported. Unknown operational writer coverage closes formal
 entry unlaunched0/6/old stat-read0. See the
 [software/zero-launch report](docs/validation/p17_m2_source_stability_export.md)
 and [independent review](docs/validation/p17_m2_source_stability_export_independent_review.md).
+
+## 2026-10-20 — R-CUSTODY finite local writer metadata
+
+The owner-authorized local runtime/configuration check uses native process/open-
+path metadata, related synchronization preferences and read-only settings UI.
+No source-original stat/read, sync database/log, upstream reference, new external
+implementation or scientific method is imported. Actual iCloud declared-path
+coverage lacks project-scoped control and OneDrive Documents mapping remains
+unavailable, closing formal entry0/6. Existing TopoLab source/field/IEEE/native
+algorithms remain byte-identical. See the
+[bounded result](docs/validation/p17_m2_source_custody_export.md) and
+[fresh independent review](docs/validation/p17_m2_source_custody_export_independent_review.md).

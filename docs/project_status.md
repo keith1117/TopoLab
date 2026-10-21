@@ -5,44 +5,52 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current slice: R-STABLE software; formal entry closed unlaunched
+## Current slice: R-CUSTODY runtime check; specific controls missing
 
-PR212's contract documents merged as main `9f40c2690edc7ef440c87319b60dab72799a1c5c`;
-[exact-main CI39493861377](https://github.com/keith1117/TopoLab/actions/runs/39493861377)
-passed all four contexts. The owner subsequently approved its new finite budget,
-exact input exception and fresh different author, delegating writer-control
-assessment to `/root`. The [approved protocol](planning/p17_m2_source_stability_export_protocol.md)/
-[JSON](planning/p17_m2_source_stability_export_protocol.json) bind that grant;
-the proposal pair remains an unchanged historical snapshot.
+The owner newly approved20min of related local process/open-path/sync/restore
+configuration metadata, new preparation/publication budgets and conditional six
+roles. [New authority](planning/p17_m2_source_custody_export_protocol.md)/
+[JSON](planning/p17_m2_source_custody_export_protocol.json) records that exception;
+[actual findings](validation/p17_m2_source_custody_export.md) and
+[new independent review](validation/p17_m2_source_custody_export_independent_review.md)
+retain its finite evidence. Root and reviewer are newly appointed for this grant.
 
-**NO_SOURCE_ADMISSION_KEEP_STOP**: possible background/sync/restore writer
-coverage is UNKNOWN; manual versioned CLI entrypoints and idle task states do
-not establish actual exclusion. The delegated custodian and new independent
-reviewer agree not to activate. Formal0/6, old source stat/read0, new DATA
-roots/plan/lease0; formal FULL paid0/3600s, all unused formal allowances closed.
-No accepted40-source registry,12/528/18 restricted export or input-preparation
-PASS. Source tuples/actual bytes/lineage/resource evidence remain UNKNOWN_NOT_RUN.
-This does not diagnose the old12th tuple change or prove sources corrupt.
+**NO_SOURCE_ADMISSION_KEEP_STOP**, formal0/6, old stat/read0, new DATA root/plan/
+lease0, FULL paid0/3600s and unused formal allowances closed. Writer check used
+747.144801625/1200s without resetting during interruption. System Settings
+confirmed iCloud Sync this Mac/Desktop & Documents/Optimize on. Four declared
+source paths are inside Documents; no project-only pause/exclusion acknowledgment
+was obtained. OneDrive personal configured root is outside those paths, but
+current Documents/known-folder mapping and a null Business1 folder remain
+unresolved. Empty source-open-path observations are not future writer control.
+No global sync/service/source setting was changed and no old input was probed.
 
-Minimal software binds new identity/frozen actual argv, cooperative lease and
-independent predecessor gates, same-read closing path identity and cross-author
-sidecars, F complete failure recording and bounded cleanup observations. Field
-and independent comparison algorithms are reused; historical F cause remains
-UNKNOWN. [Software and zero-launch report](validation/p17_m2_source_stability_export.md)
-and [fresh independent review](validation/p17_m2_source_stability_export_independent_review.md)
-record tests, failed attempts, budgets and publication observations. Final local
-2417 passed/1 unchanged platform skip and all five mandatory checks passed;
-fresh independent integration332 passed, without input/resource admission.
-Software preparation7200/3600s, source publication7200s, unentered formal4500s,
-and result publication7200s/review1800s retain the approved caps; no clock reset,
-old allowance transfer or hidden CI wait. Actual publication fees UNKNOWN_NOT_ZERO.
+Concrete preactivation missing items are a feasible attributed project-scoped
+iCloud control procedure and current OneDrive mapping/scoped exclusion in an
+independently acceptable complete proposed plan. This is not a
+claim that iCloud caused the historical12th identity change or all controls are
+impossible. No source adaptation or formal public I/O compensates for missing
+control. Complete only normal result publication, retain57b5, then STOP; no
+source replacement, generic proof/guard slice, B/C or automatic successor.
+Original prep7200/3600, publication7200, result7200/1800 and unentered formal4500
+clocks keep the new grant's caps, no old balances transfer. Fees UNKNOWN_NOT_ZERO.
 
-F remains published through PR211/mainb0fe235/all-four CI39473450571; its frozen
-reports and original unchanged cleanup failure/cost/cause UNKNOWN remain.
-After this protected software/zero-launch publication STOP. The only later
-owner decision would be a fresh finite source attempt with concrete attributed
-writer controls; no generic diagnostic/proof/guard sequel, original access,
-B/C or successor is authorized now. Keep all historical boundaries below.
+The [publication review](validation/p17_m2_source_custody_export_publication_review.md)
+corrects one new protocol sentence: a credible proposed plan precedes activation;
+actual acquisition is in setup300 and release follows the last reader. Future
+release is not a launch prerequisite. The concrete missing feasible control
+procedure/mapping still supports STOP; both regression/CI attempts remain charged.
+
+R-STABLE software/zero-launch is already published through
+[PR213](https://github.com/keith1117/TopoLab/pull/213), main
+`6654ca228fe9d34174de1684facd138b10377f3b`; all four exact-main
+[CI39510351493 jobs](https://github.com/keith1117/TopoLab/actions/runs/39510351493)
+passed. Its final local2417/1 skip and independent332 public checks retain scope;
+old protocols/proposals/reports and all closed allowances retain bytes. Current
+publication observations resolve pending-at-authoring wording without repeating
+software. F PR211/mainb0fe235/all-four CI39473450571/local2290/1 remains closed;
+its first unchanged cleanup assertion failure/cost/cause UNKNOWN is not fixed.
+All retained historical boundaries below remain unchanged.
 
 ## NEW R/v3 closed STOP during metadata registration
 
@@ -315,16 +323,14 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-owner-decision-on-new-r-stable-scope-and-source-control"></a>
 
-## Unique next item: STOP after publication; any later source grant needs concrete controls
+## Unique next item: report specific sync-control gaps and STOP
 
-The owner already approved PR212's budgets, exact input exception and fresh
-different author; do not ask to approve them again. The
-[approved protocol](planning/p17_m2_source_stability_export_protocol.md)/
-[JSON](planning/p17_m2_source_stability_export_protocol.json) and
-[zero-launch report](validation/p17_m2_source_stability_export.md) close this
-identity NO_SOURCE_ADMISSION_KEEP_STOP because operational writer coverage is
-UNKNOWN. Complete authorized software/normal protected publication, retain this
-worktree and STOP. Any later attempt requires a fresh finite owner decision with
-concrete attributed writer controls; no unused allowance reopens. Historical D
-cause may stay UNKNOWN. No old stat/read, formal R/B/C, generic proof/guard sequel,
-discovery probe or automatic successor is commissioned by this closure.
+The approved finite writer check is complete; do not reset or repeat its20min
+window. iCloud Documents coverage is confirmed, but an actual project-scoped
+pause/exclusion acknowledgment is missing; OneDrive current Documents/account
+mapping or exclusion remains unavailable. The
+[new report](validation/p17_m2_source_custody_export.md) records formal0/6 and
+source stat/read0. Complete only protected result publication/merged-only branch
+cleanup, keep the worktree and STOP. Broader shared-sync changes or source
+relocation/snapshots are outside this grant; no such action, new generic proof/
+guard slice, R/B/C/D or automatic successor is started. All unused allowances close.
