@@ -1,0 +1,147 @@
+{
+  "schema": "topolab.v2.p17-m2-source-custody-export.protocol.v1",
+  "execution_identity": "topolab.v2.p17-m2-source-custody-export.v1",
+  "owner_grant": {
+    "approved": true,
+    "reply": "批准上述有限核查、适配发布及条件启动",
+    "continuation": "继续刚才已批准的有限核查，不重置计时。先查清 iCloud、OneDrive 是否覆盖四个来源目录，并落实授权内可行的暂停或排除；控制闭合、独审和 main CI 全通过后启动六角色。保留4GiB、独立预检和首次失败STOP，无法闭合就报告具体缺项。",
+    "new_metadata_exception_seconds_max": 1200,
+    "permitted": [
+      "local related process and open-path runtime metadata",
+      "related sync/restore configuration and read-only settings UI",
+      "only specifically identified related project-writer pause/exclusion",
+      "minimal necessary new identity/control adaptation and normal protected publication",
+      "conditional six roles only after complete actual controls and all readiness gates"
+    ],
+    "denied": [
+      "old input stat/read before formal activation",
+      "recursive source scan or sync database/log content discovery",
+      "generic shared-service shutdown or global sync reconfiguration",
+      "source permission/snapshot/rename/replacement or alternate input",
+      "purchase, provider/VM/dependency/workflow probe",
+      "old identity or balance reuse, B/C/D, automatic successor"
+    ]
+  },
+  "authors": {
+    "executor_custodian": "/root",
+    "fresh_independent": "/root/review_r_stable_custody_v2",
+    "PREPATCH_sha256": "2006e2e6603a47a0bf09136152ff21a8c0bdf5b7334a93dcce094142192d166f",
+    "producer_patch_exposure_before_PREPATCH": false,
+    "producer_source_changes": 0
+  },
+  "budgets": {
+    "software_preparation_executor_seconds": 7200,
+    "software_preparation_independent_seconds": 3600,
+    "writer_metadata_within_software_preparation_seconds": 1200,
+    "source_publication_executor_seconds": 7200,
+    "source_publication_independent_extra_directed_wait_seconds": 0,
+    "formal_common_seconds_each": 4500,
+    "formal_roles_FULL_seconds": {
+      "independent-public-check": 300,
+      "exporter-r0": 300,
+      "independent-r0": 300,
+      "exporter-r1": 1200,
+      "independent-r1": 1200,
+      "shared-closeout": 300
+    },
+    "formal_FULL_total_seconds": 3600,
+    "formal_setup_coordination_frontier_seconds": [
+      300,
+      240,
+      360
+    ],
+    "first_dispatch_remaining_seconds_min": 4200,
+    "result_publication_executor_seconds": 7200,
+    "result_review_independent_seconds": 1800,
+    "prep_publication_closure_reserve_seconds": 120,
+    "all_failure_wait_interruption_CI_actual_last_returns_count": true,
+    "clock_reset_or_balance_transfer": false,
+    "overlapping_cost_views_not_disjoint_addends": true,
+    "new_purchase_or_paid_expansion": 0,
+    "existing_fees": "UNKNOWN_NOT_ZERO"
+  },
+  "scope": {
+    "source_namespaces": [
+      "b3-v1-fits",
+      "b4-5-weighted-terminal/fit",
+      "b3-v1-data",
+      "b4-30-z-reflection-repair-v2"
+    ],
+    "declared_parent": "Documents/TopoLab-data",
+    "content_reference": "docs/planning/p17_m2_input_export_preparation_proposal.json",
+    "content_sha256": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "inherit_content_only_via_original_R_STABLE_pointer_list": "docs/planning/p17_m2_source_stability_export_protocol.json#/scope_reference/inherit_only_JSON_pointers",
+    "R0_metadata_count": 40,
+    "independent_entire_R0_before_either_R1": true,
+    "R1_checkpoint_train_uniform_counts": [
+      12,
+      528,
+      18
+    ],
+    "train_small_large": [
+      432,
+      96
+    ],
+    "all_original_field_IEEE_path_nofollow_size_aggregate_SHA_identity_closing_tuple_predicates": "UNCHANGED",
+    "source_permission_activated": false
+  },
+  "resource": {
+    "RSS_limit_bytes": 4294967296,
+    "metric": "B430_STYLE_NATIVE_RSS_COMPLETE_EXIT_EMPIRICAL_NEW_M2",
+    "independent_preflight": true,
+    "advance_allocation_assurance": false,
+    "formal_resource_acceptance": "UNKNOWN_NOT_RUN"
+  },
+  "actual_writer_check": {
+    "first_probe_UTC": "2026-10-21T00:18:46.436207Z",
+    "closed_UTC": "2026-10-21T00:31:13.579911Z",
+    "elapsed_seconds": 747.144801625,
+    "unused_seconds_closed": 452.855198375,
+    "old_source_stat_read": 0,
+    "source_matching_open_paths_observed": 0,
+    "empty_snapshot_is_control": false,
+    "iCloud_live_Sync_this_Mac_Desktop_Documents_Optimize": [
+      true,
+      true,
+      true
+    ],
+    "iCloud_covers_declared_Documents_paths": true,
+    "source_alias_or_path_stat_observation": "NOT_PERFORMED",
+    "iCloud_project_scoped_pause_exclusion_ack": "NOT_OBTAINED",
+    "OneDrive_configured_personal_root": "Library/Group Containers/OneDrive suite/OneDrive.noindex/OneDrive",
+    "OneDrive_personal_root_literally_disjoint_from_declared_sources": true,
+    "OneDrive_Business1_UserFolder": null,
+    "OneDrive_current_Documents_known_folder_mapping": "UNKNOWN_NOT_OBTAINED",
+    "OneDrive_project_scoped_control_ack": "NOT_OBTAINED",
+    "actual_pause_exclusion_actions": [],
+    "global_sync_service_or_source_changes": 0,
+    "historical_12th_file_cause_diagnosed": false
+  },
+  "actual_admission": {
+    "status": "NO_SOURCE_ADMISSION_KEEP_STOP",
+    "formal_activated": false,
+    "roles_launched": 0,
+    "new_DATA_root_plan_lease_created": 0,
+    "formal_FULL_paid_seconds": 0,
+    "formal_FULL_unused_closed_seconds": 3600,
+    "common_formal4500s_unstarted_closed": true,
+    "result_review1800s_unstarted": true,
+    "concrete_missing": [
+      "actual attributable project-scoped iCloud pause/exclusion maintained through last source reader",
+      "current OneDrive Documents/known-folder/account mapping or scoped exclusion acknowledgment",
+      "independent complete actual coverage and acquisition/release acceptance"
+    ],
+    "no_accepted_input_registry_export_or_resource_PASS": true,
+    "no_automatic_reactivation_or_successor": true
+  },
+  "preserved": "FULL_V2_OPEN_NO_ADMITTED_ROUTE; P17 unrepaired/uniform/science pause/full fit PENDING4GiB/independent preflight; all old R/F/H/B451/D1/I1/B452 failures,costs,closed quotas,UNKNOWN,seals; K12721.16417100014444982>7200; B3 M2+independentUbuntu24.04/bothscales/finalreproduction",
+  "actual_preparation_closures": {
+    "executor_charged_seconds_through_marker": 1275.120093,
+    "executor_unused_closed_seconds": 5924.879907,
+    "independent_charged_seconds": 1260,
+    "independent_unused_closed_seconds": 2340,
+    "source_publication_actual_start_UTC": "2026-10-21T00:35:52.333287+00:00",
+    "earlier_result_deadline_UTC": "2026-10-21T02:31:13.579911Z",
+    "remaining_final_returns_inside_original_publication_clocks": true
+  }
+}

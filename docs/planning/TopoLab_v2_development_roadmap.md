@@ -7,22 +7,26 @@ Final local2290 passed/1 platform skip; the first unchanged cleanup assertion
 failure/cost and its UNKNOWN cause remain, without a fix claim. Frozen F reports
 retain their precommit publication wording; do not repeat F.
 
-Current owner grant (2026-10-20) approves PR212's finite R-STABLE budget,
-exact source exception and fresh different-author review. The
-[approved protocol](p17_m2_source_stability_export_protocol.md)/
-[JSON](p17_m2_source_stability_export_protocol.json) supplement the unchanged
-proposal snapshot. Minimal software/public-fixture preparation and normal source
-publication proceed; actual writer-control coverage remains UNKNOWN.
-The delegated custodian and independent reviewer therefore close formal entry
-**NO_SOURCE_ADMISSION_KEEP_STOP**, unlaunched0/6, old stat/read0, no new DATA root,
-lease or plan. No I/O role is run to compensate for missing operational control.
-See [software/zero-launch report](../validation/p17_m2_source_stability_export.md)
-and [independent review](../validation/p17_m2_source_stability_export_independent_review.md).
-After normal protected publication STOP. Any later source attempt needs a fresh
-finite owner decision with concrete attributed writer controls; no allowance
-transfers. D/cause recovery, environment discovery, snapshots/permission changes,
-B/C and automatic successors remain outside this slice. Retain4GiB/independent
-preflight, fixed P/17/uniform/science pause and all old evidence/costs/seals.
+Current owner grant (2026-10-20) authorizes one new finite R-CUSTODY runtime
+writer check and conditional six-role attempt under the
+[new authority record](p17_m2_source_custody_export_protocol.md)/
+[JSON](p17_m2_source_custody_export_protocol.json). The original20min clock was
+not reset: actual747.144801625/1200s, interruption included. Live iCloud
+Desktop/Documents sync is on for the four declared Documents paths, without an
+acknowledged project-scoped control. OneDrive's personal root is elsewhere, but
+current Documents/known-folder mapping and a null account-root field remain
+unresolved. No shared/global sync setting was changed. See the
+[concrete findings](../validation/p17_m2_source_custody_export.md) and
+[fresh independent review](../validation/p17_m2_source_custody_export_independent_review.md).
+**NO_SOURCE_ADMISSION_KEEP_STOP**, formal0/6/old stat-read0/no DATA root, plan or
+lease; unused formal allowances close. No unnecessary source adaptation or R
+public I/O runs after failed custody admission. Normal result publication then
+STOP; the concrete missing items are actual iCloud scoped control and current
+OneDrive mapping/exclusion, not a generic proof or guard sequel.
+R-STABLE is already published through PR213/main6654ca2/all-four CI39510351493;
+its frozen protocol/reports and all costs/closed allowances retain bytes.
+Keep4GiB/independent preflight, fixed P17/uniform/science pause and all old
+failures/costs/UNKNOWN/quotas/seals; no B/C or automatic successor.
 
 Historical R/v3 remains **STOP_NO_RETRY**: source PR208/main5b01c13/all-four CI
 preceded activation. Six roles defined,3 launched (public PASS/R0 STOP/shared PASS);
@@ -2438,22 +2442,26 @@ Final local2290 passed/1 platform skip; the first unchanged cleanup assertion
 failure/cost and its UNKNOWN cause remain, without a fix claim. Frozen F reports
 retain their precommit publication wording; do not repeat F.
 
-Current owner grant (2026-10-20) approves PR212's finite R-STABLE budget,
-exact source exception and fresh different-author review. The
-[approved protocol](p17_m2_source_stability_export_protocol.md)/
-[JSON](p17_m2_source_stability_export_protocol.json) supplement the unchanged
-proposal snapshot. Minimal software/public-fixture preparation and normal source
-publication proceed; actual writer-control coverage remains UNKNOWN.
-The delegated custodian and independent reviewer therefore close formal entry
-**NO_SOURCE_ADMISSION_KEEP_STOP**, unlaunched0/6, old stat/read0, no new DATA root,
-lease or plan. No I/O role is run to compensate for missing operational control.
-See [software/zero-launch report](../validation/p17_m2_source_stability_export.md)
-and [independent review](../validation/p17_m2_source_stability_export_independent_review.md).
-After normal protected publication STOP. Any later source attempt needs a fresh
-finite owner decision with concrete attributed writer controls; no allowance
-transfers. D/cause recovery, environment discovery, snapshots/permission changes,
-B/C and automatic successors remain outside this slice. Retain4GiB/independent
-preflight, fixed P/17/uniform/science pause and all old evidence/costs/seals.
+Current owner grant (2026-10-20) authorizes one new finite R-CUSTODY runtime
+writer check and conditional six-role attempt under the
+[new authority record](p17_m2_source_custody_export_protocol.md)/
+[JSON](p17_m2_source_custody_export_protocol.json). The original20min clock was
+not reset: actual747.144801625/1200s, interruption included. Live iCloud
+Desktop/Documents sync is on for the four declared Documents paths, without an
+acknowledged project-scoped control. OneDrive's personal root is elsewhere, but
+current Documents/known-folder mapping and a null account-root field remain
+unresolved. No shared/global sync setting was changed. See the
+[concrete findings](../validation/p17_m2_source_custody_export.md) and
+[fresh independent review](../validation/p17_m2_source_custody_export_independent_review.md).
+**NO_SOURCE_ADMISSION_KEEP_STOP**, formal0/6/old stat-read0/no DATA root, plan or
+lease; unused formal allowances close. No unnecessary source adaptation or R
+public I/O runs after failed custody admission. Normal result publication then
+STOP; the concrete missing items are actual iCloud scoped control and current
+OneDrive mapping/exclusion, not a generic proof or guard sequel.
+R-STABLE is already published through PR213/main6654ca2/all-four CI39510351493;
+its frozen protocol/reports and all costs/closed allowances retain bytes.
+Keep4GiB/independent preflight, fixed P17/uniform/science pause and all old
+failures/costs/UNKNOWN/quotas/seals; no B/C or automatic successor.
 
 Historical R/v3 remains **STOP_NO_RETRY**: source PR208/main5b01c13/all-four CI
 preceded activation. Six roles defined,3 launched (public PASS/R0 STOP/shared PASS);

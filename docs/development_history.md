@@ -2280,3 +2280,21 @@ FULL_V2_OPEN_NO_ADMITTED_ROUTE,4GiB/independent preflight/full-fit PENDING, B3 M
 independent Ubuntu24.04/two scales/final reproduction and every old failure/cost/
 quota/UNKNOWN/seal stay. Only a fresh finite owner decision with concrete writer
 controls could allow a later source attempt; this publication does not start it.
+
+
+## 2026-10-20 — R-CUSTODY writer-runtime check; formal unlaunched
+
+After R-STABLE PR213/main6654ca2/all-four CI, the owner grants20min related local
+writer metadata, new finite review/publication and conditional six roles under
+[new authority](planning/p17_m2_source_custody_export_protocol.md)/
+[JSON](planning/p17_m2_source_custody_export_protocol.json). Actual747.144801625/1200s
+includes interruption without reset. Live iCloud Desktop/Documents sync covers
+four declared source paths, without project-scoped pause/exclusion acknowledgment;
+OneDrive's personal root is elsewhere, but current Documents/account mapping
+remains unavailable. No source stat/read, pause/global sync change, DATA root/
+plan/lease or source-code adaptation. [Result](validation/p17_m2_source_custody_export.md)
+and [fresh independent review](validation/p17_m2_source_custody_export_independent_review.md)
+close NO_SOURCE_ADMISSION_KEEP_STOP, formal0/6/FULL0/3600 and unused allowances.
+Normal result publication then STOP, no broad shutdown/source replacement/guard
+sequel/B/C or automatic successor.4GiB/independent preflight/P17/uniform/science
+pause and all old costs/failures/UNKNOWN/quotas/seals/B3 obligations retain scope.

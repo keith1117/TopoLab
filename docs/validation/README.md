@@ -6,13 +6,16 @@ resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
 
-Latest software/zero-launch slice: [R-STABLE adaptation](p17_m2_source_stability_export.md)
-and [fresh independent review](p17_m2_source_stability_export_independent_review.md),
-under the new [approved protocol](../planning/p17_m2_source_stability_export_protocol.md)/
-[JSON](../planning/p17_m2_source_stability_export_protocol.json).
-Unknown writer coverage closes NO_SOURCE_ADMISSION_KEEP_STOP, formal0/6, old
-stat/read0. Software fixtures do not admit inputs/resources. Original
-[proposal validation](p17_m2_source_stability_export_proposal.md) retains bytes.
+Latest finite writer-runtime check: [R-CUSTODY findings](p17_m2_source_custody_export.md)
+and [fresh independent review](p17_m2_source_custody_export_independent_review.md),
+under [new authority](../planning/p17_m2_source_custody_export_protocol.md)/
+[JSON](../planning/p17_m2_source_custody_export_protocol.json).747.144801625/1200s,
+no reset. Live iCloud Documents coverage has no project-scoped control; current
+OneDrive Documents mapping unavailable. Formal0/6/old stat-read0/NO_SOURCE_ADMISSION_KEEP_STOP.
+No unused source implementation or automatic successor.
+R-STABLE [software/zero-launch](p17_m2_source_stability_export.md)/
+[independent review](p17_m2_source_stability_export_independent_review.md) is already
+published through PR213/main6654ca2/all-four CI; frozen files retain bytes.
 
 Prior software maintenance F is published/closed through PR211/mainb0fe235 and
 all four exact-main CI39473450571 jobs. [F report](p17_m2_input_failure_recording_repair.md)

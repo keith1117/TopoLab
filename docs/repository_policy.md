@@ -190,6 +190,20 @@ retains that actual outcome and costs. After publication STOP; no old grant,
 source replacement, D/environment probe, B/C, cap transfer or automatic sequel.
 The original proposal/reports stay frozen and publication protections below stay.
 
+A later owner grant permits one20min related runtime-metadata custody check,
+new finite preparation/review/publication and conditional six roles under
+[R-CUSTODY](planning/p17_m2_source_custody_export_protocol.md)/
+[JSON](planning/p17_m2_source_custody_export_protocol.json). This narrow local
+configuration/process/open-path exception does not permit original stat/read,
+source scans/mutations, generic service shutdown, B/C/D or successors. Actual
+747.144801625/1200s without reset confirms iCloud Documents scope but no actual
+project-scoped control, and unresolved OneDrive Documents mapping.
+[Report](validation/p17_m2_source_custody_export.md): NO_SOURCE_ADMISSION_KEEP_STOP,
+formal0/6/source0/no DATA root or plan. Publish only the concrete stopped result
+under unchanged rules; do not implement an unused source binding after admission closes or reuse its
+closed allowances. R-STABLE PR213/main6654ca2/all-four CI is already complete;
+its original frozen reports retain bytes.
+
 All four existing CI jobs remain applicable on latest PR head and main:
 quality, frontend, clean-linux-smoke and i1-native-software. Their software
 success cannot admit M2 resources or pass a scientific Gate.
