@@ -118,9 +118,6 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
     result.clock_domain = events[0].clock_domain;
     result.T0 = number(events[0].start_seconds);
     result.T1 = number(events.at(-1).end_seconds);
-    require(actor.activation <= result.T0 && result.T0 <= result.T1
-      && result.T1 <= actor.deadline,
-    "actual full role lies outside immutable actor window");
     const whole = result.T1 - result.T0;
     require(whole >= 0, "outer clock regression");
     let previousEnd = result.T0;
@@ -146,6 +143,7 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
       require(JSON.stringify(pending.external_argv) === JSON.stringify(events.map((e) => e.argv)),
         "external literal argv differs");
     }
+    // A valid raw interval remains a cost fact even when the actor window rejects it.
     result.whole_wall_seconds = whole;
     result.known_cost_lower_bound_seconds = Math.max(cap, Math.ceil(whole + 10));
     if (typeof result.inner_minimum_charge_seconds === "number"
@@ -154,6 +152,9 @@ function finishExternal(pending, completion, events, resourceEvidence, expectedP
       result.known_cost_lower_bound_seconds = Math.max(result.known_cost_lower_bound_seconds,
         Math.ceil(result.inner_minimum_charge_seconds));
     }
+    require(actor.activation <= result.T0 && result.T0 <= result.T1
+      && result.T1 <= actor.deadline,
+    "actual full role lies outside immutable actor window");
     require(events.every((event) => event.complete === true && Number.isInteger(event.exit_code)),
       "UNKNOWN_MISSING_ACTUAL_FINAL_EXIT");
     require(completionIsObject, "completion must be an object");
@@ -392,21 +393,34 @@ async function dispatchRoleV3(context, role, stable = false) {
   if (stable && last.full_collector_record) packet.full_collector_record = last.full_collector_record;
   if (stable && role === "shared-closeout") {
     const closed = Date.now() / 1000;
-    if (closed > actor.deadline || closed - events.at(-1).end_seconds > 360) {
-      throw new Error("final frontier retention/release exceeds reserve");
+    try {
+      if (closed > actor.deadline || closed - events.at(-1).end_seconds > 360) {
+        throw new Error("final frontier retention/release exceeds reserve");
+      }
+      const ledger = load("rstable-ledger");
+      ledger.final_frontier_seconds = closed - events.at(-1).end_seconds;
+      if (ledger.FULL_booked_seconds + ledger.setup_seconds + ledger.between_roles_seconds
+          + ledger.final_frontier_seconds > 4500) {
+        throw new Error("actual formal close exceeds disjoint FULL ledger");
+      }
+      packet.formal_close_UTC_seconds = closed;
+      packet.custodian_release = { by: context.source_controls.custodian,
+        UTC_seconds: closed, plan_sha256: context.plan_sha256, source_roles_closed: true };
+      ledger.formal_closed_UTC_seconds = closed;
+      store("rstable-ledger", ledger);
+      store("rstable-formal-close", closed);
+    } catch (error) {
+      const reason = String(error.message ?? error);
+      terminal.status = "STOP_NO_RETRY";
+      terminal.reason ??= reason;
+      terminal.domain_status = "STOP";
+      terminal.full_role_evidence_accepted = false;
+      terminal.secondary_failures = [
+        ...(Array.isArray(terminal.secondary_failures) ? terminal.secondary_failures : []),
+        { stage: "shared-closeout-frontier", reason, observed_UTC_seconds: closed,
+          final_frontier_seconds: closed - events.at(-1).end_seconds },
+      ];
     }
-    packet.formal_close_UTC_seconds = closed;
-    packet.custodian_release = { by: context.source_controls.custodian,
-      UTC_seconds: closed, plan_sha256: context.plan_sha256, source_roles_closed: true };
-    const ledger = load("rstable-ledger");
-    ledger.final_frontier_seconds = closed - events.at(-1).end_seconds;
-    ledger.formal_closed_UTC_seconds = closed;
-    if (ledger.FULL_booked_seconds + ledger.setup_seconds + ledger.between_roles_seconds
-        + ledger.final_frontier_seconds > 4500) {
-      throw new Error("actual formal close exceeds disjoint FULL ledger");
-    }
-    store("rstable-ledger", ledger);
-    store("rstable-formal-close", closed);
   }
   store(prefix + "-last-packet", packet);
   store(prefix + "-packet-" + role, packet);

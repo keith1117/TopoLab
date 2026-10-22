@@ -1447,6 +1447,112 @@ def stable_recording_audit(pending, completion, events, inner):  # type: ignore[
     )
 
 
+@pytest.mark.skipif(shutil.which("node") is None, reason="existing Node runtime unavailable")
+@pytest.mark.parametrize("fault", ["none", "late_event", "late_close"])
+def test_stable_shared_closeout_retains_packet_after_frontier_failure(fault: str) -> None:
+    # Exercise the real six-role dispatcher; only time and external tool returns are synthetic.
+    subjects = {}
+    for role in checker.FULL_STABLE:
+        pending, completion, _, inner = stable_recording_subject(role=role)
+        pending_sha = checker.digest(checker.canonical(pending))
+        resources = checker.audit_v2_resource_components(
+            completion, inner_evidence=inner, native_profiles=failure_recording_profiles(),
+            execution_identity=checker.EXECUTION_STABLE, failure_recording=True,
+        )
+        subjects[role] = {"pending": pending, "pending_sha": pending_sha,
+                          "completion": completion, "resourceEvidence": resources,
+                          "full_collector_record": {
+                              "path": f"receipts/{role}-final-wire-source.json",
+                              "byte_size": 17, "sha256": "c" * 64}}
+    command = r'''
+const fs = require('fs'), vm = require('vm');
+const subjects = JSON.parse(fs.readFileSync(0,'utf8')), fault = process.argv[2];
+const state = new Map(), calls = [], packets = [];
+let clock = 1000000, closing = 0;
+const roles = Object.keys(subjects), first = subjects[roles[0]].pending;
+const context = {...first, repository:'/NEW_PUBLIC_FIXTURE_ONLY', thread_environment:{},
+  source_controls:{custodian:'/root'},
+  FULL_caps_seconds:Object.fromEntries(roles.map(r=>[r,subjects[r].pending.frozen_FULL_seconds])),
+  external_argv:Object.fromEntries(roles.map(r=>[r,subjects[r].pending.external_argv])),
+  python_executable:'/NEW/python', output_root:'/NEW/output',
+  final_helper_external_argv:['/NEW/python','-I',
+    '/NEW_PUBLIC_FIXTURE_ONLY/scripts/p17_m2_input_export_control.py','final-helper','--r-stable',
+    '--plan','/NEW/output/launch_plan.json','--plan-sha','<PLAN_SHA256>']};
+const sandbox = {module:{exports:{}}, load:k=>state.get(k), store:(k,v)=>state.set(k,v),
+  text:()=>{}, Date:class extends Date {static now(){
+    if (closing && --closing===0 && fault==='late_close') clock=5500000;
+    return ++clock;
+  }}, tools:{exec_command:async args=>{
+    const role=state.get('rstable-active-role'), final=calls.length%2===1;
+    calls.push(args); clock+=2000;
+    if(role==='shared-closeout' && final) {
+      closing=2;
+      if(fault==='late_event') clock=5500000;
+    }
+    return {output:JSON.stringify(final ? subjects[role] : {
+      pending:subjects[role].pending, pending_sha256:subjects[role].pending_sha}),
+      exit_code:0, wall_time_seconds:2};
+  }}};
+vm.runInNewContext(fs.readFileSync(process.argv[1],'utf8'),sandbox);
+(async()=>{
+  let error=null;
+  try {for(const role of roles) packets.push(await sandbox.module.exports.dispatchRoleStable(
+    context,role));} catch(e) {error=e.message;}
+  const packet=state.get('rstable-packet-shared-closeout')??null, before=calls.length;
+  let retryRefused=false, filingRefused=false;
+  try {await sandbox.module.exports.dispatchRoleStable(context,'shared-closeout');}
+  catch(e) {retryRefused=true;}
+  if(fault!=='none') {
+    try {await sandbox.module.exports.dispatchFinalFilingStable(context);}
+    catch(e) {filingRefused=true;}
+  }
+  process.stdout.write(JSON.stringify({packet,error,packets,calls:before,
+    active:state.get('rstable-active-role'),last:state.get('rstable-last-packet'),
+    formalClose:state.get('rstable-formal-close')??null,retryRefused,filingRefused,
+    extraCalls:calls.length-before}));
+})().catch(e=>{process.stderr.write(e.stack);process.exitCode=1;});
+'''
+    script = Path(__file__).parents[1] / "scripts/p17_m2_input_export_dispatch.js"
+    observed = subprocess.run(
+        ["node", "-e", command, str(script), fault], input=json.dumps(subjects),
+        text=True, capture_output=True, check=True,
+    )
+    result = json.loads(observed.stdout)
+    packet = result["packet"]
+    assert packet is not None, result["error"]
+    assert result["error"] is None
+    assert packet == result["last"] == result["packets"][-1]
+    assert result["active"] is None
+    assert result["calls"] == 12
+    assert result["retryRefused"] and result["extraCalls"] == 0
+    subject = subjects["shared-closeout"]
+    assert packet["pending"] == subject["pending"]
+    assert packet["completion"] == subject["completion"]
+    assert packet["full_collector_record"] == subject["full_collector_record"]
+    assert len(packet["events"]) == 2
+    assert all(event["tool_results"] for event in packet["events"])
+    assert packet["terminal"]["actual_exit_codes"] == [0, 0]
+    if fault == "none":
+        assert packet["terminal"]["status"] == "PASS_R_STABLE_FULL_ROLE"
+        assert result["formalClose"] == packet["formal_close_UTC_seconds"]
+    else:
+        assert packet["terminal"]["status"] == "STOP_NO_RETRY"
+        assert packet["terminal"]["full_role_evidence_accepted"] is False
+        assert packet["terminal"]["domain_status"] == "STOP"
+        assert result["formalClose"] is None
+        assert "formal_close_UTC_seconds" not in packet
+        assert "custodian_release" not in packet
+        assert result["filingRefused"]
+        assert any(item["reason"] == "final frontier retention/release exceeds reserve"
+                   for item in packet["terminal"]["secondary_failures"])
+        if fault == "late_event":
+            assert "outside immutable actor window" in packet["terminal"]["reason"]
+        else:
+            assert packet["events"][-1]["end_seconds"] < 5500
+            assert packet["terminal"]["reason"] == (
+                "final frontier retention/release exceeds reserve")
+
+
 @pytest.mark.parametrize("role", checker.FULL_STABLE)
 def test_stable_full_role_uses_only_new_role_cap_and_4500_window(role: str) -> None:
     pending, completion, events, inner = stable_recording_subject(role=role)
@@ -1458,6 +1564,60 @@ def test_stable_full_role_uses_only_new_role_cap_and_4500_window(role: str) -> N
     assert result["RSS_envelope_bytes"] == 980
     assert result["source_successor_admitted"] is False
     assert result["B_C_admission"] is False
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="existing Node runtime unavailable")
+@pytest.mark.parametrize("adapter", ["js", "independent"])
+@pytest.mark.parametrize("end,damage,span,charge", [
+    (5500.0, "none", 4500.0, 4510),
+    (5500.001, "none", 4500.001, 4511),
+    (5501.0, "none", 4501.0, 4511),
+    (5500.001, "missing_exit", 4500.001, 4511),
+    (5500.001, "completion", 4500.001, 4511),
+    (5500.001, "clock", None, 300),
+    (5500.001, "argv", None, 300),
+])
+def test_stable_outside_actor_window_keeps_valid_span_and_full_charge(
+    adapter: str, end: float, damage: str, span: float | None, charge: int,
+) -> None:
+    pending, completion, events, inner = stable_recording_subject()
+    events[-1]["end_seconds"] = end
+    if damage == "missing_exit":
+        events[-1]["exit_code"] = None
+    elif damage == "completion":
+        completion["pending_sha256"] = "f" * 64
+    elif damage == "clock":
+        events[-1]["clock_domain"] = "unregistered-clock"
+    elif damage == "argv":
+        events[-1]["argv"] = ["different-finalizer"]
+    resources = checker.audit_v2_resource_components(
+        completion, inner_evidence=inner, native_profiles=failure_recording_profiles(),
+        execution_identity=checker.EXECUTION_STABLE, failure_recording=True,
+    )
+    script = Path(__file__).parents[1] / "scripts/p17_m2_input_export_dispatch.js"
+    command = (
+        "const fs=require('fs');const {finishExternalStable}=require(process.argv[1]);"
+        "console.log(JSON.stringify(finishExternalStable(...JSON.parse(fs.readFileSync(0,'utf8')))))"
+    )
+    observed = subprocess.run(
+        ["node", "-e", command, str(script)],
+        input=json.dumps([pending, completion, events, resources,
+                          checker.digest(checker.canonical(pending))]),
+        text=True, capture_output=True, check=True,
+    )
+    result = json.loads(observed.stdout) if adapter == "js" else stable_recording_audit(
+        pending, completion, events, inner)
+    assert result["status"] == "STOP_NO_RETRY"
+    if span is None:
+        assert result["whole_wall_seconds"] is None
+    else:
+        assert result["whole_wall_seconds"] == pytest.approx(span, rel=0, abs=1e-9)
+    assert result["known_cost_lower_bound_seconds"] == charge
+    assert result["actual_exit_codes"] == [0, None if damage == "missing_exit" else 0]
+    assert result["full_role_evidence_accepted"] is False
+    assert result["source_successor_admitted"] is result["B_C_admission"] is False
+    if damage not in ("clock", "argv") and end > 5500:
+        assert "outside immutable actor window" in result["reason"]
 
 
 @pytest.mark.parametrize("damage", ["old_identity", "old_FULL", "old_window", "missing_outer",

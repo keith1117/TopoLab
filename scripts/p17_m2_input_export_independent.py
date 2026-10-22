@@ -1274,8 +1274,6 @@ def audit_full_role_v2(
         result["clock_domain"] = first["clock_domain"]
         result["T0"] = _nonnegative(first["start_seconds"])
         result["T1"] = _nonnegative(raw_tool_events[-1]["end_seconds"])
-        require(activation <= result["T0"] <= result["T1"] <= deadline,
-                "actual full role lies outside immutable actor window")
         whole = result["T1"] - result["T0"]
         require(whole >= 0, "outer clock regression")
         previous_end = result["T0"]
@@ -1305,12 +1303,14 @@ def audit_full_role_v2(
             require(pending["external_argv"] == [event["argv"] for event in raw_tool_events],
                     "external literal argv differs")
         # Certify the clock interval only after validating the entire raw stream.
-        # Missing exits/completion cannot erase a separately valid interval.
+        # Actor-window STOP or missing exits/completion cannot erase that cost fact.
         result["whole_wall_seconds"] = whole
         minimum = resources["inner_minimum_charge_seconds"]
         result["known_cost_lower_bound_seconds"] = max(
             cap, math.ceil(whole + 10), math.ceil(minimum) if minimum is not None else 0
         )
+        require(activation <= result["T0"] <= result["T1"] <= deadline,
+                "actual full role lies outside immutable actor window")
         require(all(event.get("complete") is True and type(event.get("exit_code")) is int
                     for event in raw_tool_events), "UNKNOWN_MISSING_ACTUAL_FINAL_EXIT")
         require(completion_is_object, "completion must be an object")

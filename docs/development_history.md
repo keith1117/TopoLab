@@ -8,6 +8,16 @@ next slice or a development primary describe their historical context.
 Read [project status](project_status.md) for the current boundary and
 [validation reports](validation/README.md) for the authoritative evidence.
 
+## 2026-10-22 — Public packet retention and out-of-window charges
+
+Owner-authorized test-first maintenance on main447592c retains complete shared
+STOP packets after frontier exceptions and valid raw time/full costs after
+actor-window rejection in JS and independent Python. See the
+[regression report](validation/p17_m2_failure_packet_retention.md). All formal
+rules/closed allowances and historical frozen files remain. No formal execution,
+old input access, source admission or scientific progress; R-CUSTODY operational
+STOP and fixed unrepaired P/17 remain. No automatic successor.
+
 ## 2026-10-20 — Bounded failure diagnosis / recording repair proposal
 
 Owner commissions documentation only. [Proposal](planning/p17_m2_input_failure_diagnostic_repair_proposal.md)/

@@ -2435,6 +2435,13 @@ search on B5 outcomes.
 
 ### Effective authority and development order
 
+Owner-authorized public software maintenance2026-10-22 repairs shared STOP
+packet retention after frontier exceptions and valid raw time/full charges
+after actor-window STOP. [Regression evidence](../validation/p17_m2_failure_packet_retention.md)
+does not change the Gate order, formal rules, closed grants or source admission.
+No formal role/old input access, P/17 repair or scientific delta is claimed;
+the operational R-CUSTODY blockers below remain and no successor is automatic.
+
 F is published and closed: [PR211](https://github.com/keith1117/TopoLab/pull/211),
 main `b0fe2350ac68a88a05e974926a2b0fe6a1302bf7`, all four exact-main
 [CI39473450571 jobs](https://github.com/keith1117/TopoLab/actions/runs/39473450571) successful.

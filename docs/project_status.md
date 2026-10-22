@@ -1,11 +1,23 @@
 # Current project status
 
-Updated:2026-10-20. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-10-22. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current slice: R-CUSTODY runtime check; specific controls missing
+## Current software maintenance: failure retention and accounting
+
+The owner authorized two confirmed software fixes, test first, on main447592c.
+Shared frontier exceptions now retain the complete STOP packet and end active
+state; valid raw spans and full charges survive actor-window STOP in both JS and
+independent Python. [Validation](validation/p17_m2_failure_packet_retention.md)
+records public regression evidence and limitations. No deadline/FULL/reserve,
+acceptance, retry or billing rule changes; no formal role or old input access.
+This maintenance does not resolve source admission or repair P/17. No automatic
+successor follows; the concrete operational blockers below still require a
+separate owner decision.
+
+## Latest formal route: R-CUSTODY runtime check; specific controls missing
 
 The owner newly approved20min of related local process/open-path/sync/restore
 configuration metadata, new preparation/publication budgets and conditional six
