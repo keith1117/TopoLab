@@ -16,15 +16,14 @@ At session start, slice start and context recovery, read these files in order:
 10. `docs/repository_policy.md` before staging or publishing changes.
 
 ## Current state and execution entry
-For the latest owner-approved local-input preparation, read the
-[new protocol](docs/planning/p17_m2_local_input_version_protocol.md) and
-[result](docs/validation/p17_m2_local_input_version_preparation.md) before dependent work.
-Custody model/preparation4h/3h only; target NO_LOCAL_ROOT_ADMISSION and formal
-launch binding INCOMPLETE. Original access/copy, six-role activation and B/C stay
-ungranted. Complete preparation publication within its actual continuous clocks,
-then stop for the target-control route decision in current status. No automatic probe.
-
-
+Read the latest [R-LOCAL/v2 authority](docs/planning/p17_m2_local_input_v2_preparation_protocol.md)
+and [target decision](docs/validation/p17_m2_local_input_v2_preparation.md) before
+dependent work. New4h/3h preparation stops BEFORE its public fixture because
+complete provider coverage is UNKNOWN. No target is created; formal binding
+remains incomplete. Finish only normal protected publication within original
+continuous clocks, then stop for the concrete route decision in current status.
+Two target slices have no admission; no automatic third directory/probe/guard.
+Old originals, six-role activation, B/C and old quotas remain closed.
 
 Historical v1 is a usable interim delivery. The owner retains
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE**, fixed P/17/unrepaired,4GiB and independent

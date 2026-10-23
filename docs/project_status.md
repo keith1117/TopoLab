@@ -5,21 +5,33 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: local input-version preparation; target not admitted (2026-10-23)
+## Current: R-LOCAL/v2 stops before target fixture (2026-10-23)
 
-Owner-adopted [new custody/preparation protocol](planning/p17_m2_local_input_version_protocol.md)
-permits only software/public regressions and one target evidence check within new
-executor4h/independent3h. [Result](validation/p17_m2_local_input_version_preparation.md):
-connected public40/558/1071 transcription and different-author comparison work;
-strict private/nofollow/member/tuple/canonical identity checks retain STOP rules.
-The target check closes149.9207718372345/600s: local/private fixture works, but
-provider coverage, backup control and complete custodian inventory are UNKNOWN.
-**NO_LOCAL_ROOT_ADMISSION / FORMAL_LAUNCH_BINDING_INCOMPLETE**. Proposed target
-and backup not created; original stat/read/copy0, formal0/6, B/C0, no quota reset.
-Pure plan/lease checks and self-written PASS cannot admit a version or consumer.
-Finish this preparation's normal protected publication within original continuous
-clocks, then stop for the concrete owner route decision below. Older entries
-retain historical scope; neither scientific progress nor old-cause attribution.
+The owner explicitly grants a NEW [metadata-first preparation](planning/p17_m2_local_input_v2_preparation_protocol.md)
+with executor4h/different-author3h and a new Application Support target.
+[Independent evidence and outcome](validation/p17_m2_local_input_v2_preparation.md):
+**NO_LOCAL_ROOT_ADMISSION_BEFORE_FIXTURE**. Effective provider/domain/root coverage
+is still UNKNOWN; current OneDrive changes prevent treating one cache/root as
+complete. This does not prove that the target is synced or explain the old failure.
+Time Machine Included alone is not a rejection. New target writer statement is
+confirmed; a later direct answer completes the finite backup inventory. Normal
+Time Machine/APFS read-only backup metadata is accepted separately; modifying
+iCloud/OneDrive effective provider coverage remains UNKNOWN, so STOP is unchanged.
+
+The public600s fixture is unstarted/closed unused; parent/generation/backup0,
+conditional implementation0, old stat/read/copy0, formal0/6, B/C0, quota reset0.
+Actual formal launch/lease/resource/outer-return/certificate binding remains
+INCOMPLETE. Fixed P/17 remains unrepaired; scientific delta is none.
+Complete only normal protected publication within continuous preparation clocks,
+then STOP for the concrete route decision below. Do not try another directory.
+
+The previous v1 preparation is published through
+[PR218](https://github.com/keith1117/TopoLab/pull/218), main
+`6ea943139e16fe22e6a45767f5f7b9779492ffb6`; all four
+[exact-main CI39927585751 jobs](https://github.com/keith1117/TopoLab/actions/runs/39927585751)
+passed. Its connected public40/558/1071 capability and149.9207718372345/600s target
+non-admission retain their original scope and closed budgets; neither is repeated.
+Frozen [v1 report](validation/p17_m2_local_input_version_preparation.md) retains bytes.
 
 ## Current software maintenance: bounded read completeness (2026-10-23)
 
@@ -383,15 +395,19 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-owner-decision-on-new-r-stable-scope-and-source-control"></a>
 
-## Unique next item: owner route decision on target control evidence
+## Unique next item: route decision after two target non-admissions
 
-After preparation publication, review the [specific target gaps](validation/p17_m2_local_input_version_preparation.md).
-Supply independently acceptable sync/backup coverage and custodian control for
-the proposed target, or select another controlled target/exit. The one check is
-closed; there is no automatic probe or guard sequel. New formal launch binding,
-resources/actual exit/last-reader release and explicit source/activation grants
-remain absent. No old read/copy, six-role or B/C follows from the model adoption.
-All earlier closed grants and scientific blockers retain their original scope.
+After R-LOCAL/v2 publication, decide whether an obtainable supported metadata
+source can supply the missing complete effective provider scope for both literal
+target and backup, or whether to
+change the custody model/exit this route. See the
+[concrete result](validation/p17_m2_local_input_v2_preparation.md).
+Two local-target capability slices have not changed target admission: no automatic
+third directory, public-file test, generic proof/guard chain or implementation.
+This is an owner route decision, not a new investigation grant. A later target
+pass still needs actual formal launch/resource/exit/last-reader binding and
+separate source/activation authority before any six roles; B/C remain unapproved.
+All old failures/costs/UNKNOWN/quotas/seals and Gate order retain their scope.
 
 ### Retained R-CUSTODY closeout boundary
 
