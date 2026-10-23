@@ -325,10 +325,11 @@ class OnceReader:
             facts["after"] = source_identity(after)
             require(
                 (opened.st_dev, opened.st_ino, opened.st_size, opened.st_mtime_ns)
-                == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns)
-                and len(raw) == opened.st_size,
+                == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns),
                 "source changed during descriptor read",
             )
+            facts["stage"] = "read_size_consistency"
+            require(len(raw) == opened.st_size, "source read length differs from descriptor size")
             if self.source_identity_checks:
                 facts["stage"] = "closing_path_identity"
                 closing_parent = nofollow_parent(target)

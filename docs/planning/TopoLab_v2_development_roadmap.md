@@ -2433,6 +2433,16 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
+Owner-selected software maintenance2026-10-23 on main `f7e7637` resolves the
+previously deferred short-read finding: both readers enforce complete returned
+length against descriptor size and distinguish length-only failure from actual
+identity change. [Validation](../validation/p17_m2_source_read_completeness.md)
+records new public fixtures and unchanged STOP/window/FULL/billing rules. The
+three selected reader findings now have software repairs. No scientific Gate,
+source admission, old-cause attribution, formal retry or quota reopening follows.
+Normal publication then STOP; source admission remains a separate unresolved
+decision, with no automatic successor. Older maintenance notes below are historical.
+
 Owner-selected software maintenance on main `deca9ab` repairs only source-failure
 context retention: same-read facts now cover JSON and source-field rejection,
 and producer terminal failure retains tuples/prefix/secondary journal errors.

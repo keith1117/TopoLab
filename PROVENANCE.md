@@ -1599,3 +1599,11 @@ producer terminal record, derived from owner-selected code-level defects and
 new local JSON/field/mtime/journal-failure fixtures. No external implementation,
 old source, dataset, weight, figure or upstream code imported. See
 [validation](docs/validation/p17_m2_source_failure_context_retention.md).
+
+
+## 2026-10-23 — Source read completeness and failure classification
+
+Original TopoLab maintenance of its two existing bounded source readers, using
+new local three-byte files and OS-boundary early-EOF/mtime fault injection.
+No external implementation, historical source or scientific data imported.
+See [software validation](docs/validation/p17_m2_source_read_completeness.md).
