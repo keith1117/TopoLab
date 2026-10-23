@@ -1,0 +1,49 @@
+{
+  "B_C_authorized": false,
+  "authority": "Direct owner reply call_c1641c8f9175480fb738e95e866fabf2/0 approves a new 4h/3h preparation slice",
+  "automatic_successor": false,
+  "baseline_main": "6ea943139e16fe22e6a45767f5f7b9779492ffb6",
+  "budget_semantics": "Continuous through actual final returns; includes failed attempts, waiting, review, all required checks, PR/main CI and publication; no extra result allocation or reset",
+  "compatibility": "Documentary new preparation identity only. Old v1 protocol, execution identities, source code, tests, failures, evidence and closed budgets retain bytes. No formal v2 entry is implemented or admitted.",
+  "conditional_implementation_entered": false,
+  "custodian_backup_inventory": {
+    "answer": "No additional read-only backup, mirror or scheduled script beyond iCloud Drive, OneDrive, macOS Time Machine and local snapshots",
+    "backup_metadata_branch": "Time Machine/local snapshots: EXCLUDED_OR_NONMUTATING_READONLY; plan metadata only, no actual lease/target acceptance",
+    "budget_permission_change": false,
+    "provider_limit": "iCloud Drive/OneDrive remain modifying sync mechanisms; complete effective domain/root coverage UNKNOWN",
+    "reopens_prior_stop_or_fixture": false,
+    "source": "Direct user reply call_04835f56c47b4e99a7cf539a27633dd9/0",
+    "status": "COMPLETE_FINITE_CUSTODIAN_INVENTORY"
+  },
+  "custodian_statement": "Direct owner reply call_d4bed15819b84d7d941911e0db7af54f/0: new target permits only registered TopoLab writers",
+  "execution_identity": "topolab.v2.p17-m2-local-input-version.v2",
+  "executor": {
+    "author": "/root",
+    "cap_seconds": 14400,
+    "deadline_UTC": "2026-10-24T00:56:18.197800Z",
+    "first_tool_UTC": "2026-10-23T20:56:18.197800Z"
+  },
+  "fixture_started": false,
+  "formal_six_roles_authorized": false,
+  "global_sync_changes_authorized": false,
+  "independent": {
+    "author": "/root/local_v2_independent",
+    "cap_seconds": 10800,
+    "deadline_UTC": "2026-10-23T23:56:45.093771Z",
+    "first_tool_UTC": "2026-10-23T20:56:45.093771Z"
+  },
+  "metadata_stop_UTC": "2026-10-23T21:04:23.547392+00:00",
+  "new_target_parent": "/Users/keith1117/Library/Application Support/TopoLab-custody",
+  "old_quota_reopening": false,
+  "old_source_stat_read_copy_authorized": false,
+  "ordered_scope": [
+    "Complete applicable sync/backup coverage metadata first",
+    "Only if complete: one public sibling target fixture at most 600 seconds inside preparation budget",
+    "Only if target accepted: regression-first minimal new actual orchestration/lease/return/resource/fee/certificate binding using new public data"
+  ],
+  "outcome": "NO_LOCAL_ROOT_ADMISSION_BEFORE_FIXTURE",
+  "proposed_backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v2-independent-backup",
+  "proposed_root": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v2",
+  "runtime_identity_registered": false,
+  "schema": "topolab.local-input-v2-preparation-authority.v1"
+}

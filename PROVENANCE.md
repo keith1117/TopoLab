@@ -1619,3 +1619,12 @@ One target-only Foundation/File Provider/Time Machine observation uses original
 helpers and native APIs; complete target coverage remains UNKNOWN/non-admitted.
 No upstream/Hack3D implementation, old original or model is imported. See
 [preparation result](docs/validation/p17_m2_local_input_version_preparation.md).
+
+## 2026-10-23 — R-LOCAL/v2 finite target metadata decision
+
+Owner-approved new preparation uses bounded synchronization-preference/root
+metadata, native provider registry/help and backup status plus current Apple/
+Microsoft primary scope documentation. No external implementation, source-input
+payload, historical model, scientific method or upstream material is imported.
+Complete provider coverage remains UNKNOWN; the public fixture and conditional
+implementation never start. See the [new result](docs/validation/p17_m2_local_input_v2_preparation.md).

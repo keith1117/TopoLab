@@ -8,6 +8,18 @@ next slice or a development primary describe their historical context.
 Read [project status](project_status.md) for the current boundary and
 [validation reports](validation/README.md) for the authoritative evidence.
 
+## 2026-10-23 — R-LOCAL/v2 target decision before public fixture
+
+The owner grants NEW4h/3h metadata-first preparation under a
+[new authority](planning/p17_m2_local_input_v2_preparation_protocol.md).
+[Different-author result](validation/p17_m2_local_input_v2_preparation.md): complete
+current provider coverage remains UNKNOWN; NO_LOCAL_ROOT_ADMISSION_BEFORE_FIXTURE.
+Public fixture unstarted/closed unused, target creation/conditional code/source/
+formal/B/C0. Included backups alone are not a rejection; historical cause stays
+UNKNOWN and P/17 unrepaired. Preserve v1/PR218/main6ea9431/all-four CI and old
+closed budgets. Normal protected publication then owner route decision after two
+target non-admissions; no automatic third target/probe or formal implementation.
+
 ## 2026-10-23 — Local input-version public capability; target not admitted
 
 Owner adopts prospective referenced-closure/local custody and grants only4h/3h

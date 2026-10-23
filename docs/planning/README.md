@@ -1,11 +1,12 @@
 # Planning index
-Latest owner-adopted [local input-version custody/preparation protocol](p17_m2_local_input_version_protocol.md)
-([JSON](p17_m2_local_input_version_protocol.json)) grants only executor4h/different-author3h
-preparation. [Result](../validation/p17_m2_local_input_version_preparation.md): public
-transcription capability, target non-admission and incomplete formal launch binding;
-no original access, formal activation, B/C or old allowance reopening.
 
-
+Latest [R-LOCAL/v2 metadata-first preparation authority](p17_m2_local_input_v2_preparation_protocol.md)
+([JSON](p17_m2_local_input_v2_preparation_protocol.json)) records NEW4h/3h;
+[decision](../validation/p17_m2_local_input_v2_preparation.md) stops before public
+fixture because complete provider scope remains UNKNOWN. No conditional source
+implementation or formal activation; route decision after two target non-admissions.
+Previous [v1 custody protocol](p17_m2_local_input_version_protocol.md) and closed
+preparation retain bytes and no allowances transfer.
 
 The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next
