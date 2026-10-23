@@ -5,6 +5,22 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
+## Current software maintenance: source failure-context retention
+
+Owner-authorized test-first repair on main `deca9ab`: both readers retain the
+original path/ordinal, available four-field tuples, bytes/hash and primary
+exception when parsing or source-field validation rejects. Producer `failure.json`
+also retains the completed read table, identity prefix, source failures and
+secondary journal errors. [Validation](validation/p17_m2_source_failure_context_retention.md)
+records scope and public regressions. This changes failure evidence only;
+canonical/field/identity/one-read/STOP/window/FULL/billing rules remain unchanged.
+The separate short-read consistency finding is deferred. Historical changed
+member/cause stays UNKNOWN. No old input, formal role, provider control or quota
+reset; P/17 remains unrepaired and source admission closed. After normal software
+publication STOP. The next technical item is the separate short-read consistency
+repair, subject to its own selected scope; no automatic six-role restart follows.
+Existing local diagnosis/control drafts are retained outside this change.
+
 ## Current software maintenance: failure retention and accounting
 
 The owner authorized two confirmed software fixes, test first, on main447592c.

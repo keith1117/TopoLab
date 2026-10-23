@@ -6,6 +6,10 @@ resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
 
+Latest source-reader maintenance: [parse/validation and terminal failure-context
+retention](p17_m2_source_failure_context_retention.md), new public regressions only;
+no source admission, historical cause reconstruction or rule relaxation.
+
 Latest public maintenance: [shared STOP packet retention and out-of-window
 accounting](p17_m2_failure_packet_retention.md), test-first two-defect repair.
 No formal rules, quotas, source admission or scientific results change.

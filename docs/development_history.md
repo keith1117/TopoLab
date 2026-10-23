@@ -2308,3 +2308,18 @@ close NO_SOURCE_ADMISSION_KEEP_STOP, formal0/6/FULL0/3600 and unused allowances.
 Normal result publication then STOP, no broad shutdown/source replacement/guard
 sequel/B/C or automatic successor.4GiB/independent preflight/P17/uniform/science
 pause and all old costs/failures/UNKNOWN/quotas/seals/B3 obligations retain scope.
+
+
+## 2026-10-22 — Source parse/validation and terminal failure-context retention
+
+Owner selects two confirmed recording defects on latest main `deca9ab`, test
+first. Both readers attach parse/canonical/source-validation exceptions to the
+original read's facts, preserving source/ordinal/tuples/bytes/hash without reread.
+Producer terminal failure includes complete known read/identity prefixes, source
+failures and secondary journal errors. [Validation](validation/p17_m2_source_failure_context_retention.md)
+records regressions and software limits. Source identity, fields, STOP, windows
+and full accounting remain; the short-read finding is deferred. Old source/formal/
+provider calls0, closed grants stay closed, existing local changes preserved.
+This improves future diagnosis only; old changed member/cause UNKNOWN and P17
+unrepaired, science pause/source admission/full-v2/seals unchanged. Publication
+then STOP; no automatic successor.

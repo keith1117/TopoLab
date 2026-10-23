@@ -18,6 +18,7 @@ import stat
 import struct
 import sys
 from collections import Counter
+from contextlib import contextmanager
 from copy import deepcopy
 from datetime import UTC, datetime
 from pathlib import Path, PurePosixPath
@@ -201,6 +202,7 @@ class OnceReader:
         self.journal = journal
         self.observations: list[dict[str, Any]] = []
         self.failures: list[dict[str, Any]] = []
+        self.source_facts: dict[str, dict[str, Any]] = {}
 
     def read(
         self,
@@ -217,29 +219,47 @@ class OnceReader:
             "stage": "path_validation", "declared": None, "before": None,
             "after": None, "closing": None, "returned_bytes": None, "changed_fields": [],
         }
+        if isinstance(relative, str):
+            self.source_facts[relative] = facts
         try:
             return self._read(relative, maximum, sha256=sha256, byte_size=byte_size, facts=facts)
         except (ValueError, OSError, TypeError) as error:
-            facts.update(status="STOP_NO_RETRY", exception_type=type(error).__name__,
-                         primary_reason=str(error), unavailable="UNKNOWN_NOT_ZERO")
-            identities = [facts[key] for key in ("declared", "before", "after", "closing")]
-            for left, right in zip(identities, identities[1:], strict=False):
-                if left is not None and right is not None:
-                    changed = [key for key in left if left[key] != right[key]]
-                    if changed:
-                        facts["changed_fields"] = changed
-                        break
-            self.failures.append(facts)
-            if self.journal is not None:
-                try:
-                    with self.journal.open("ab") as stream:
-                        stream.write(canonical(facts))
-                        stream.flush()
-                        os.fsync(stream.fileno())
-                except OSError as secondary:
-                    facts["recording_error"] = f"{type(secondary).__name__}: {secondary}"
-                    error.add_note(facts["recording_error"])
+            self.record_failure(facts, error)
             raise
+
+    @contextmanager
+    def validation(self, relative, stage="source_validation"):
+        """Attach a downstream rejection to facts from the original single read."""
+        facts = self.source_facts[relative]
+        facts["stage"] = stage
+        try:
+            yield
+        except Exception as error:
+            self.record_failure(facts, error)
+            raise
+
+    def record_failure(self, facts, error):
+        if facts.get("status") == "STOP_NO_RETRY":
+            return
+        facts.update(status="STOP_NO_RETRY", exception_type=type(error).__name__,
+                     primary_reason=str(error), unavailable="UNKNOWN_NOT_ZERO")
+        identities = [facts[key] for key in ("declared", "before", "after", "closing")]
+        for left, right in zip(identities, identities[1:], strict=False):
+            if left is not None and right is not None:
+                changed = [key for key in left if left[key] != right[key]]
+                if changed:
+                    facts["changed_fields"] = changed
+                    break
+        self.failures.append(facts)
+        if self.journal is not None:
+            try:
+                with self.journal.open("ab") as stream:
+                    stream.write(canonical(facts))
+                    stream.flush()
+                    os.fsync(stream.fileno())
+            except OSError as secondary:
+                facts["recording_error"] = f"{type(secondary).__name__}: {secondary}"
+                error.add_note(facts["recording_error"])
 
     def _read(
         self, relative: str, maximum: int, *, sha256: str | None,
@@ -327,13 +347,22 @@ class OnceReader:
         facts["stage"] = "read_size_hash_caps"
         actual_sha = digest(raw)
         self.used += len(raw)
-        self.table.append({"path": relative, "byte_size": len(raw), "sha256": actual_sha})
+        facts["source"] = {"path": relative, "byte_size": len(raw), "sha256": actual_sha}
+        self.table.append(facts["source"])
         if self.source_identity_checks:
             self.observations.append(dict(self.table[-1], **{
                 key: facts[key] for key in ("declared", "before", "after", "closing")
             }))
         require(sha256 is None or actual_sha == sha256, "source SHA differs")
         return raw
+
+    def packet(self, relative, maximum, **kwargs):
+        raw = self.read(relative, maximum, **kwargs)
+        with self.validation(relative, "json_parse"):
+            packet = parse(raw)
+        with self.validation(relative, "canonical_json"):
+            require(canonical(packet) == raw, "source metadata is not canonical JSON")
+        return packet
 
 
 def reference(path: str, raw: bytes) -> dict[str, Any]:
@@ -364,35 +393,39 @@ def closed_units(
     progress: dict[str, Any],
     summary: dict[str, Any],
 ) -> list[dict[str, Any]]:
-    require(
-        progress["version"] == "topolab.b4.progress.v1"
-        and progress["context_sha256"] == context_sha
-        and progress["units_sha256"] == digest(canonical(units))
-        and progress["completed"] == len(units)
-        and progress["attempted"] == len(units)
-        and progress["pending"] is None
-        and progress["active_at"] is None
-        and progress["resource_failed"] is False
-        and progress["integrity_failed"] is False,
-        "source journal is not complete and closed",
-    )
-    for key in ("context_sha256", "completed", "attempted", "head_sha256"):
-        require(summary[key] == progress[key], "source summary/journal binding differs")
+    with reader.validation(folder + "/progress.json"):
+        require(
+            progress["version"] == "topolab.b4.progress.v1"
+            and progress["context_sha256"] == context_sha
+            and progress["units_sha256"] == digest(canonical(units))
+            and progress["completed"] == len(units)
+            and progress["attempted"] == len(units)
+            and progress["pending"] is None
+            and progress["active_at"] is None
+            and progress["resource_failed"] is False
+            and progress["integrity_failed"] is False,
+            "source journal is not complete and closed",
+        )
+    with reader.validation(folder + "/summary.json"):
+        for key in ("context_sha256", "completed", "attempted", "head_sha256"):
+            require(summary[key] == progress[key], "source summary/journal binding differs")
     head = "0" * 64
     payloads = []
     for ordinal, unit in enumerate(units):
-        raw = reader.read(f"{folder}/units/{ordinal:04d}.json", 32768)
-        record = parse(raw, canonical_required=True)
-        require(
-            record["version"] == "topolab.b4.unit.v1"
-            and record["context_sha256"] == context_sha
-            and record["unit"] == unit
-            and record["previous_sha256"] == head,
-            "source unit chain differs",
-        )
-        head = digest(raw)
-        payloads.append(record["payload"])
-    require(head == progress["head_sha256"], "source unit head differs")
+        path = f"{folder}/units/{ordinal:04d}.json"
+        record = reader.packet(path, 32768)
+        with reader.validation(path):
+            require(
+                record["version"] == "topolab.b4.unit.v1"
+                and record["context_sha256"] == context_sha
+                and record["unit"] == unit
+                and record["previous_sha256"] == head,
+                "source unit chain differs",
+            )
+            head = reader.table[-1]["sha256"]
+            payloads.append(record["payload"])
+    with reader.validation(folder + "/progress.json"):
+        require(head == progress["head_sha256"], "source unit head differs")
     return payloads
 
 
@@ -400,74 +433,76 @@ def build_registry(reader: OnceReader, contract: dict[str, Any]) -> dict[str, An
     """Derive the finite registry independently; no payload stat or open here."""
     old = {}
     for spec in contract["R0"]["literal_bootstrap_files"]:
-        raw = reader.read(spec["relative_path"], spec["max_bytes"], sha256=spec["expected_sha256"])
-        old[spec["relative_path"]] = parse(raw, canonical_required=True)
-    fits = old["b3-v1-fits/b3_training.json"]
-    context = fits["context"]
-    require(
-        fits["index_version"] == "topolab.b3.training-index.v1"
-        and fits["context_sha256"] == digest(canonical(context)),
-        "B3 fitting context differs",
-    )
-    data = context["data_index"]
-    require(
-        context["data_index_sha256"] == B3_DATA_HASH and digest(canonical(data)) == B3_DATA_HASH,
-        "embedded B3 index binding differs",
-    )
-    manifest = data["manifest"]
-    manifest_sha = digest(canonical(manifest))
-    require(
-        manifest_sha == data["manifest_sha256"]
-        and digest(canonical(manifest["catalog"])) == CATALOG_HASH,
-        "embedded manifest/catalog differs",
-    )
-    train = [entry for entry in manifest["catalog"]["entries"] if entry["role"] == "train"]
-    require(len(train) == 528, "train set is not complete528")
-    outcomes = {outcome["entry"]["case"]["case_id"]: outcome for outcome in data["entries"]}
-    labels = []
-    for entry in sorted(train, key=lambda e: e["case"]["case_id"]):
-        case_id = entry["case"]["case_id"]
-        require(CASE.fullmatch(case_id) is not None, "invalid train case identity")
-        outcome = outcomes[case_id]
-        compare_words(entry, outcome["entry"])
-        require(outcome["status"] == "succeeded", "original train outcome is not successful")
-        artifact = outcome["artifact"]
-        access = artifact["access"]
-        compare_words(entry, access["entry"])
+        old[spec["relative_path"]] = reader.packet(
+            spec["relative_path"], spec["max_bytes"], sha256=spec["expected_sha256"])
+    with reader.validation("b3-v1-fits/b3_training.json"):
+        fits = old["b3-v1-fits/b3_training.json"]
+        context = fits["context"]
         require(
-            access["kind"] == "label"
-            and artifact["manifest_sha256"] == manifest_sha
-            and artifact["source_revision"] == manifest["context"]["source_revision"],
-            "label source identity differs",
+            fits["index_version"] == "topolab.b3.training-index.v1"
+            and fits["context_sha256"] == digest(canonical(context)),
+            "B3 fitting context differs",
         )
-        relative = f"artifacts/label/{case_id}/{access['artifact_sha256']}.json"
+        data = context["data_index"]
         require(
-            artifact["relative_path"] == relative
-            and SHA.fullmatch(access["artifact_sha256"]) is not None,
-            "label artifact path differs",
+            context["data_index_sha256"] == B3_DATA_HASH
+            and digest(canonical(data)) == B3_DATA_HASH,
+            "embedded B3 index binding differs",
         )
-        labels.append(
-            {
-                "case_id": case_id,
-                "entry": entry,
-                "manifest_sha256": manifest_sha,
-                "context_sha256": digest(canonical(manifest["context"])),
-                "source_revision": artifact["source_revision"],
-                "artifact": {
-                    "path": "b3-v1-data/" + relative,
-                    "byte_size": artifact["byte_size"],
-                    "sha256": access["artifact_sha256"],
-                },
-            }
+        manifest = data["manifest"]
+        manifest_sha = digest(canonical(manifest))
+        require(
+            manifest_sha == data["manifest_sha256"]
+            and digest(canonical(manifest["catalog"])) == CATALOG_HASH,
+            "embedded manifest/catalog differs",
         )
-    require(
-        len({row["case_id"] for row in labels}) == 528
-        and Counter(
-            tuple(row["entry"]["case"]["problem"]["mesh"]["element_counts"]) for row in labels
+        train = [entry for entry in manifest["catalog"]["entries"] if entry["role"] == "train"]
+        require(len(train) == 528, "train set is not complete528")
+        outcomes = {outcome["entry"]["case"]["case_id"]: outcome for outcome in data["entries"]}
+        labels = []
+        for entry in sorted(train, key=lambda e: e["case"]["case_id"]):
+            case_id = entry["case"]["case_id"]
+            require(CASE.fullmatch(case_id) is not None, "invalid train case identity")
+            outcome = outcomes[case_id]
+            compare_words(entry, outcome["entry"])
+            require(outcome["status"] == "succeeded", "original train outcome is not successful")
+            artifact = outcome["artifact"]
+            access = artifact["access"]
+            compare_words(entry, access["entry"])
+            require(
+                access["kind"] == "label"
+                and artifact["manifest_sha256"] == manifest_sha
+                and artifact["source_revision"] == manifest["context"]["source_revision"],
+                "label source identity differs",
+            )
+            relative = f"artifacts/label/{case_id}/{access['artifact_sha256']}.json"
+            require(
+                artifact["relative_path"] == relative
+                and SHA.fullmatch(access["artifact_sha256"]) is not None,
+                "label artifact path differs",
+            )
+            labels.append(
+                {
+                    "case_id": case_id,
+                    "entry": entry,
+                    "manifest_sha256": manifest_sha,
+                    "context_sha256": digest(canonical(manifest["context"])),
+                    "source_revision": artifact["source_revision"],
+                    "artifact": {
+                        "path": "b3-v1-data/" + relative,
+                        "byte_size": artifact["byte_size"],
+                        "sha256": access["artifact_sha256"],
+                    },
+                }
+            )
+        require(
+            len({row["case_id"] for row in labels}) == 528
+            and Counter(
+                tuple(row["entry"]["case"]["problem"]["mesh"]["element_counts"]) for row in labels
+            )
+            == {(12, 6, 3): 432, (24, 12, 6): 96},
+            "train uniqueness/scale membership differs",
         )
-        == {(12, 6, 3): 432, (24, 12, 6): 96},
-        "train uniqueness/scale membership differs",
-    )
     wroot = "b4-5-weighted-terminal/fit"
     weighted = closed_units(
         reader,
@@ -493,63 +528,63 @@ def build_registry(reader: OnceReader, contract: dict[str, Any]) -> dict[str, An
         old[refroot + "/progress.json"],
         old[refroot + "/summary.json"],
     )
-    scalars = [
-        {
-            "case_id": case_id,
-            "context_sha256": context_sha,
-            "unit": next(
-                row for row in reader.table if row["path"] == f"{refroot}/units/{ordinal:04d}.json"
-            ),
-            "packet": fit_reference(refroot, ref, "outcome"),
-        }
-        for ordinal, (case_id, ref) in enumerate(zip(units, uniform_refs, strict=True))
-    ]
+    scalars = []
+    for ordinal, (case_id, ref) in enumerate(zip(units, uniform_refs, strict=True)):
+        path = f"{refroot}/units/{ordinal:04d}.json"
+        with reader.validation(path):
+            scalars.append({
+                "case_id": case_id,
+                "context_sha256": context_sha,
+                "unit": next(row for row in reader.table if row["path"] == path),
+                "packet": fit_reference(refroot, ref, "outcome"),
+            })
     models = []
     for spec in contract["checkpoints"]["fixed_rows"]:
         family, seed = spec["family"], spec["seed"]
-        if family == "W":
-            selection_ref = fit_reference(wroot, weighted[[17, 29, 43].index(seed)], "selection")
-            source_context = contract["R0"]["W_context_sha256"]
-        else:
-            matched = [o for o in fits["outcomes"] if (o["recipe"], o["seed"]) == (family, seed)]
-            require(len(matched) == 1, "selected model outcome is missing/duplicated")
-            selection_ref = fit_reference("b3-v1-fits", matched[0]["selection"], "selection")
-            source_context = fits["context_sha256"]
-        selection = parse(
-            reader.read(
-                selection_ref["path"],
-                262144,
-                sha256=selection_ref["sha256"],
-                byte_size=selection_ref["byte_size"],
-            ),
-            canonical_required=True,
+        source_path = (f"{wroot}/units/{[17, 29, 43].index(seed):04d}.json"
+                       if family == "W" else "b3-v1-fits/b3_training.json")
+        with reader.validation(source_path):
+            if family == "W":
+                selection_ref = fit_reference(
+                    wroot, weighted[[17, 29, 43].index(seed)], "selection")
+                source_context = contract["R0"]["W_context_sha256"]
+            else:
+                matched = [o for o in fits["outcomes"]
+                           if (o["recipe"], o["seed"]) == (family, seed)]
+                require(len(matched) == 1, "selected model outcome is missing/duplicated")
+                selection_ref = fit_reference("b3-v1-fits", matched[0]["selection"], "selection")
+                source_context = fits["context_sha256"]
+        selection = reader.packet(
+            selection_ref["path"], 262144,
+            sha256=selection_ref["sha256"], byte_size=selection_ref["byte_size"],
         )
-        if family == "W":
+        with reader.validation(selection_ref["path"]):
+            if family == "W":
+                require(
+                    selection["version"] == "topolab.b4_5.selection.v1"
+                    and selection["objective"] == "topolab.b4_5.weighted-terminal.v1",
+                    "W wrapper/objective differs",
+                )
+                history = selection["history_schema"]
+                checkpoint = fit_reference(wroot, selection["checkpoint"], "checkpoint")
+                require(
+                    history["checkpoint"]["sha256"] == checkpoint["sha256"]
+                    and history["checkpoint"]["byte_size"] == checkpoint["byte_size"],
+                    "W inner/outer checkpoint differs",
+                )
+            else:
+                history = selection
+                checkpoint = fit_reference("b3-v1-fits", selection["checkpoint"], "checkpoint")
             require(
-                selection["version"] == "topolab.b4_5.selection.v1"
-                and selection["objective"] == "topolab.b4_5.weighted-terminal.v1",
-                "W wrapper/objective differs",
+                history["selection_version"] == "topolab.b3.selection.v1"
+                and history["context_sha256"] == source_context
+                and history["recipe"] == spec["selection_wrapper_recipe"]
+                and history["seed"] == seed
+                and history["selected_epoch"] == spec["selected_epoch"]
+                and 0 < len(history["history"]) <= 200,
+                "fixed model selection differs",
             )
-            history = selection["history_schema"]
-            checkpoint = fit_reference(wroot, selection["checkpoint"], "checkpoint")
-            require(
-                history["checkpoint"]["sha256"] == checkpoint["sha256"]
-                and history["checkpoint"]["byte_size"] == checkpoint["byte_size"],
-                "W inner/outer checkpoint differs",
-            )
-        else:
-            history = selection
-            checkpoint = fit_reference("b3-v1-fits", selection["checkpoint"], "checkpoint")
-        require(
-            history["selection_version"] == "topolab.b3.selection.v1"
-            and history["context_sha256"] == source_context
-            and history["recipe"] == spec["selection_wrapper_recipe"]
-            and history["seed"] == seed
-            and history["selected_epoch"] == spec["selected_epoch"]
-            and 0 < len(history["history"]) <= 200,
-            "fixed model selection differs",
-        )
-        require(0 < checkpoint["byte_size"] <= MIB, "checkpoint declared bytes exceed cap")
+            require(0 < checkpoint["byte_size"] <= MIB, "checkpoint declared bytes exceed cap")
         models.append(
             {
                 "family": family,
@@ -1767,7 +1802,8 @@ def audit_exports(
         raw = reader.read(
             source["path"], MIB, sha256=source["sha256"], byte_size=source["byte_size"]
         )
-        check_safetensors(raw, model)
+        with reader.validation(source["path"]):
+            check_safetensors(raw, model)
         actual = exports.read(f"checkpoints/{model['family']}-{model['seed']}.safetensors", MIB)
         require(actual == raw, "checkpoint copy bytes differ")
         model_bindings.append(
@@ -1793,9 +1829,12 @@ def audit_exports(
         raw = reader.read(
             source["path"], 64 * MIB, sha256=source["sha256"], byte_size=source["byte_size"]
         )
-        labels_bytes += len(raw)
-        require(labels_bytes <= 768 * MIB, "total label bytes exceed cap")
-        producer, audit = label_views(parse(raw), row)
+        with reader.validation(source["path"], "json_parse"):
+            packet = parse(raw)
+        with reader.validation(source["path"]):
+            labels_bytes += len(raw)
+            require(labels_bytes <= 768 * MIB, "total label bytes exceed cap")
+            producer, audit = label_views(packet, row)
         case_id = row["case_id"]
         production_raw = exports.read(f"nn/producer/{case_id}.json", 128 * 1024)
         audit_raw = exports.read(f"nn/audit/{case_id}.json", 2 * MIB)
@@ -1810,7 +1849,10 @@ def audit_exports(
         raw = reader.read(
             source["path"], 4 * MIB, sha256=source["sha256"], byte_size=source["byte_size"]
         )
-        values.append(scalar_view(parse(raw), row))
+        with reader.validation(source["path"], "json_parse"):
+            packet = parse(raw)
+        with reader.validation(source["path"]):
+            values.append(scalar_view(packet, row))
     scalar_raw = exports.read("uniform-scalars.json", 65536)
     words += compare_words(
         {"schema": "topolab.v2.m2-uniform-scalar-view.v1", "values": values},
