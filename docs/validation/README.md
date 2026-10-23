@@ -5,6 +5,12 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
+Latest local input-version preparation: [public40/558/1071 capability and target
+non-admission](p17_m2_local_input_version_preparation.md). Different-author software
+comparison is distinct from formal source acceptance; target controls and actual
+new formal launch/return bindings remain missing. Old inputs/formal roles/B/C0.
+
+
 
 Latest source-read consistency: [complete reads and distinct failure reasons](p17_m2_source_read_completeness.md),
 new public fixtures; both short reads and actual tuple changes remain STOP.

@@ -1,4 +1,11 @@
 # Planning index
+Latest owner-adopted [local input-version custody/preparation protocol](p17_m2_local_input_version_protocol.md)
+([JSON](p17_m2_local_input_version_protocol.json)) grants only executor4h/different-author3h
+preparation. [Result](../validation/p17_m2_local_input_version_preparation.md): public
+transcription capability, target non-admission and incomplete formal launch binding;
+no original access, formal activation, B/C or old allowance reopening.
+
+
 
 The English v2 roadmap is the working development plan. Start with
 [current status](../project_status.md) for the latest result and permitted next

@@ -1,0 +1,684 @@
+{
+  "schema": "topolab.v2.m2-local-input-contract.v1",
+  "date": "2026-10-23",
+  "status": "CUSTODY_MODEL_ADOPTED_PREPARATION_ONLY_AUTHORIZED",
+  "baseline_main": "4d1d4a07986827d4d16e50a1b3819ee2da046241",
+  "normative_document": "p17_m2_local_input_version_protocol.md",
+  "normative_document_sha256": "83a0dadf014bdabc2de7b8c0372488bdca323c8cea3ab4e97713ef2ee2c7af28",
+  "authority": {
+    "drafting_only": false,
+    "owner_adoption_record": "2026-10-23 owner message: approve new custody model and preparation executor4h/independent3h; independent authors, tests first, minimal software and target evidence only",
+    "new_custody_model_adopted": true,
+    "software_implementation_public_checks_and_target_preparation_authorized": true,
+    "old_metadata_and_payload_stat_read_temporary_parse_authorized": false,
+    "new_six_role_activation_authorized": false,
+    "scientific_B_authorized": false,
+    "scientific_C_authorized": false,
+    "old_quota_reopening_authorized": false,
+    "source_copy_now_authorized": false,
+    "proposal_is_not_an_execution_token": true
+  },
+  "review": {
+    "outcome": "PREPARATION_ONLY_NOT_FORMAL_ADMISSION",
+    "performed": "Different-author software preparation; NONBLIND cross-review after independent expectations freeze; actual verdict in preparation report",
+    "new_independent_author_appointed": true,
+    "new_formal_independent_acceptance_performed": false,
+    "critical_change_requiring_explicit_adoption": "fixed referenced content closure plus two-author full origin comparison and controlled local version, replacing global original-namespace quiescence only for this new identity",
+    "not_claimed": [
+      "atomic same-instant snapshot of all original directories",
+      "all original writers paused through the interval",
+      "tamper-free unpublished historical bytes",
+      "historical failure cause",
+      "guaranteed successful acquisition",
+      "P17 repair or scientific gate"
+    ],
+    "unchanged_rejections": [
+      "original within-read four-tuple change",
+      "original cross-author four-tuple change",
+      "short read",
+      "hash, lineage, field, IEEE, count or byte mismatch",
+      "resource, exit, cleanup, window or charge failure"
+    ]
+  },
+  "content_inheritance": {
+    "path": "docs/planning/p17_m2_input_export_preparation_proposal.json",
+    "raw_sha256": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "json_pointers": [
+      "/checkpoints",
+      "/NN",
+      "/scalars",
+      "/R0",
+      "/R1",
+      "/byte_caps_proposed"
+    ],
+    "ignored_authority_json_pointers": [
+      "/current_authority",
+      "/owner_execution_authorization",
+      "/R0/authorization_now",
+      "/R1/authorization_now",
+      "/budget_PROPOSED_NOT_GRANTED",
+      "/prospective_execution_identity"
+    ],
+    "not_inherited": [
+      "old authority and closed actor identities",
+      "old output roots",
+      "old budgets/windows/balances",
+      "original-directory interval quiescence"
+    ],
+    "substantive_conflict": "STOP before dependent work; no favorable interpretation"
+  },
+  "actors": {
+    "proposed_executor_role_id": "p17-m2-local-input-version-v1/executor",
+    "proposed_independent_role_id": "p17-m2-local-input-version-v1/independent",
+    "actual_executor": "/root; delegated producer binding author /root/local_input_binding",
+    "actual_independent": "/root/local_input_independent",
+    "different_from_producer_tool_author_and_executor": true,
+    "independent_expectations_before_producer_patch": true,
+    "cross_review": "NONBLIND",
+    "closed_old_author_time_transfers": false
+  },
+  "source_scope": {
+    "proposed_original_root_literal": "/Users/keith1117/Documents/TopoLab-data",
+    "namespaces": [
+      "b3-v1-fits",
+      "b4-5-weighted-terminal/fit",
+      "b3-v1-data",
+      "b4-30-z-reflection-repair-v2"
+    ],
+    "R0_exact_metadata_count_per_author": 40,
+    "literal_bootstrap": [
+      {
+        "relative_path": "b3-v1-fits/b3_training.json",
+        "expected_sha256": "229e1ba5a3cd4da9ebfb5e3e77a5aa97fcea37f7ff7c671bec8b70f9b5ac69e7",
+        "max_bytes": 16777216,
+        "hash_status": "PREPUBLISHED_BINDING"
+      },
+      {
+        "relative_path": "b4-5-weighted-terminal/fit/progress.json",
+        "expected_sha256": "5e54f8cede96d9e4b60acc17586d25d29903bd4927461a8d6b4b18f3b49e43ac",
+        "max_bytes": 1048576,
+        "hash_status": "PREPUBLISHED_BINDING"
+      },
+      {
+        "relative_path": "b4-5-weighted-terminal/fit/summary.json",
+        "expected_sha256": "513064fe615456fe8204b511f850a71150895038c3541ad23f5cd35642b0cc6c",
+        "max_bytes": 1048576,
+        "hash_status": "PREPUBLISHED_BINDING"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/context.json",
+        "expected_sha256": "cd0dffbb28347889726baacb8225efd9b2dadd94ea86f7485c843170b1ec2181",
+        "max_bytes": 1048576,
+        "hash_status": "PREPUBLISHED_BINDING"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/independent_audit.json",
+        "expected_sha256": "e9a8278b9a7d521992f7f5d62f3aef626e0767cd717f3ee134c2c4cc58b5ca2a",
+        "max_bytes": 1048576,
+        "hash_status": "PREPUBLISHED_BINDING"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/progress.json",
+        "expected_sha256": null,
+        "max_bytes": 1048576,
+        "hash_status": "UNKNOWN_FIRST_REGISTRATION_ONLY_AFTER_R_GRANT"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/summary.json",
+        "expected_sha256": null,
+        "max_bytes": 1048576,
+        "hash_status": "UNKNOWN_FIRST_REGISTRATION_ONLY_AFTER_R_GRANT"
+      }
+    ],
+    "embedded_B3_data_index_sha256": "b78e85f5bab56f2b05e06b43b8fd77f2bfd556150b95643e443a566165d8fc26",
+    "bounded_metadata_derivation": {
+      "W_units": [
+        "b4-5-weighted-terminal/fit/units/0000.json",
+        "b4-5-weighted-terminal/fit/units/0001.json",
+        "b4-5-weighted-terminal/fit/units/0002.json"
+      ],
+      "reference_units": [
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0000.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0001.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0002.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0003.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0004.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0005.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0006.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0007.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0008.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0009.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0010.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0011.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0012.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0013.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0014.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0015.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0016.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/units/0017.json"
+      ],
+      "selected_selection_files": 12,
+      "derivation": "only canonical content-addressed refs to exact selected C/P/S and W; verify chain/context/unit/order/head; no recursion or old loader"
+    },
+    "fixed_models": [
+      {
+        "logical_id": "C/17",
+        "family": "C",
+        "seed": 17,
+        "selected_epoch": 168
+      },
+      {
+        "logical_id": "C/29",
+        "family": "C",
+        "seed": 29,
+        "selected_epoch": 137
+      },
+      {
+        "logical_id": "C/43",
+        "family": "C",
+        "seed": 43,
+        "selected_epoch": 92
+      },
+      {
+        "logical_id": "P/17",
+        "family": "P",
+        "seed": 17,
+        "selected_epoch": 123
+      },
+      {
+        "logical_id": "P/29",
+        "family": "P",
+        "seed": 29,
+        "selected_epoch": 134
+      },
+      {
+        "logical_id": "P/43",
+        "family": "P",
+        "seed": 43,
+        "selected_epoch": 169
+      },
+      {
+        "logical_id": "W/17",
+        "family": "W",
+        "seed": 17,
+        "selected_epoch": 93
+      },
+      {
+        "logical_id": "W/29",
+        "family": "W",
+        "seed": 29,
+        "selected_epoch": 156
+      },
+      {
+        "logical_id": "W/43",
+        "family": "W",
+        "seed": 43,
+        "selected_epoch": 142
+      },
+      {
+        "logical_id": "S/17",
+        "family": "S",
+        "seed": 17,
+        "selected_epoch": 65
+      },
+      {
+        "logical_id": "S/29",
+        "family": "S",
+        "seed": 29,
+        "selected_epoch": 115
+      },
+      {
+        "logical_id": "S/43",
+        "family": "S",
+        "seed": 43,
+        "selected_epoch": 127
+      }
+    ],
+    "NN_count": 528,
+    "NN_small_large": [
+      432,
+      96
+    ],
+    "NN_case_ids_and_payload_refs": null,
+    "scalar_case_ids": [
+      "tlcase-v1-033f380c2181d9d1f94fc7f3d4b4a6507992c5e1a5004018bff779ca92add82a",
+      "tlcase-v1-080d09f0d3f236ebe53ffe7b2065277be60e5c82f700717ff5609418b74bda40",
+      "tlcase-v1-3ed877d12beb0d1b77b6f5d94d841209d1b91e512373189993fef3477373d56b",
+      "tlcase-v1-53c7cbca434bdf62c946bb2bcfcf62728c39e1600be373afca82567d77191e7b",
+      "tlcase-v1-55c1b3e64135c23125fc286de5d780fc5d9a1e226d5e43ff0dbc8925b423936a",
+      "tlcase-v1-81172985c657df531e3d0ce68696b85acce199b394d06227dfb4ffb151055bc1",
+      "tlcase-v1-838e2ccc7891b194c1ab5d5b9854c658320e5b191a3d4ca38b78bbb4fc04d16e",
+      "tlcase-v1-999b36e8e2883275052a73da2220f11d7003c88a2984a856bedc174461012c7e",
+      "tlcase-v1-a4c6c5ac54f8dda299efb6003651da2256c7f605fba98d4e6958eca6451277b8",
+      "tlcase-v1-a7c58baceea537ea71ce5301afa9073cb8a803daaa8104e64ad575f3b5971710",
+      "tlcase-v1-aa6771f47c153c6d2942605ec8c94f229c482f5c7bdc1567989d9800c66c6866",
+      "tlcase-v1-c38b3eb15df4c6805bc187e068b1f160d1bd5af03173f2e7be29b8db5523c5c4",
+      "tlcase-v1-c84504f428f84c74e81c2093161688ef562f2b0533a54c6ed2f4a2de5da10562",
+      "tlcase-v1-d69efc62a19ab50dc014540a44e91968f638e466491b12bca42e6dd61f657ec3",
+      "tlcase-v1-d9431c1421f2408accd5db0614722f1842c3c7f7630db10b3d316dfde5148e80",
+      "tlcase-v1-d9dc312497ba5ade125c1b6d432ca029e375718fe301909a75a5db8f9c7b3e3f",
+      "tlcase-v1-f3e84b1e47f4f45c61c7b948a0535d57678a80c0bc04821c74fd7c6012983392",
+      "tlcase-v1-fae8094b1b68e2369ab61e02047e0e6799e6f45020aa5cd6f2ed92bcca8e5532"
+    ],
+    "R1_exact_payload_count_per_author": 558,
+    "read_limits": {
+      "old_content_reads_per_file_per_author": 1,
+      "maximum_both_authors_total_old_content_reads": 1196,
+      "R1_reopens_R0_originals": false,
+      "public_shared_filing_or_consumers_old_stat_read": false,
+      "same_buffer_hash_parse_transcribe": true,
+      "directory_scan_or_reference_expansion": false,
+      "source_retry_or_backup_substitution": false
+    },
+    "R0_dynamic_fields": {
+      "when": "only inside newly granted R0; complete and independently accepted before R1",
+      "allowed": [
+        "two reference progress/summary first-observed hashes",
+        "all exact selection and 558 payload paths, declared bytes/SHA and domains"
+      ],
+      "origin_limit": "current progress/summary hash observed only under the future bounded R0 grant; combine known context, fixed18 closure and published audit plus exporter provenance statement; does not prove a past unpublished hash or tamper-free temporal history",
+      "unknown_after_R0_acceptance": "STOP, never fabricate history or select another panel"
+    }
+  },
+  "acquisition": {
+    "claim": "one frozen semantically closed content/reference graph",
+    "bootstrap_context_unit_head_selection_memberships_all_checked": true,
+    "independent_R0_full_original_reads_before_R1": true,
+    "R1_expected_payload_hashes_frozen_in_accepted_registry": true,
+    "no_new_discovery_after_accepted_R0": true,
+    "original_tuple_fields": [
+      "st_dev",
+      "st_ino",
+      "st_size",
+      "st_mtime_ns"
+    ],
+    "within_each_read_equalities": [
+      "declared == before",
+      "before == after",
+      "after == closing"
+    ],
+    "original_cross_author_equalities": "all available four tuples and actual bytes/SHA identical",
+    "one_bounded_nofollow_regular_file_read": true,
+    "tuple_mismatch_precedes_length_reason": true,
+    "length_rule": "returned_bytes == before.st_size",
+    "length_failure_stage": "read_size_consistency",
+    "length_failure_reason": "source read length differs from descriptor size",
+    "raw_memory_working_set": "at most one original payload raw/parsed at a time; release non-view fields",
+    "original_content_or_mtime_write": false,
+    "filesystem_atime_may_update": true,
+    "raw_history_or_original_label_packet_persistence": false,
+    "raw_original_metadata_persistence": false,
+    "checkpoint_persistence": "12 byte-identical new ordinary files written from admitted buffers",
+    "label_packet_persistence": "existing restricted schema/JSON pointers and IEEE digests only",
+    "model_instantiation_inference_fit_FEM_filter_projection": false,
+    "old_source_snapshot_hardlink_clone_recursive_copy": false,
+    "failure_records": [
+      "attempt/path",
+      "stage",
+      "expected/actual bytes/SHA",
+      "available tuples",
+      "returned_bytes",
+      "changed_fields",
+      "primary exception",
+      "secondary recording_error",
+      "full packet and completed prefix"
+    ],
+    "unavailable_observation": "UNKNOWN/null, never zero or successful persistence",
+    "raw_input_snippets_traceback_locals_dumps": false
+  },
+  "target_admission": {
+    "proposed_root_literal": "/Users/Shared/TopoLab-input-versions/p17-m2-local-input-version-v1",
+    "proposed_backup_literal": "/Users/Shared/TopoLab-input-versions/p17-m2-local-input-version-v1-independent-backup",
+    "currently_probed_or_created": false,
+    "new_path_write_permission_required": true,
+    "directory_mode_PROPOSED": "0700",
+    "file_mode_PROPOSED": "0600",
+    "one_passive_readiness_check_seconds": 600,
+    "check_is_inside_preparation_budget": true,
+    "only_target_parent_and_new_public_sibling_fixture": true,
+    "required_evidence": [
+      "physical no-symlink path and local filesystem",
+      "actual ownership/private exclusive writes",
+      "provider/backup coverage evidence for the new root and backup",
+      "responsible custodian complete target writer inventory/control",
+      "independent acceptance of obtainable evidence"
+    ],
+    "insufficient_alone": [
+      "outside Documents spelling",
+      "empty open-process observation",
+      "ordinary-directory pause mask zero",
+      "missing preference",
+      "one negative File Provider flag"
+    ],
+    "new_global_sync_or_old_Documents_probe": false,
+    "unavailable_evidence": "NO_LOCAL_ROOT_ADMISSION; zero old stat/read and formal roles; stop",
+    "before_activation": "independently accepted feasible proposed target control plan",
+    "inside_setup300": "actual exclusive local generation lease, new empty root and final plan freeze",
+    "lease_meaning": "LOCAL_GENERATION_WRITER_EXCLUSION_ONLY; not old-source cloud pause",
+    "content_writers_after_exporter_R1_exit": [],
+    "custody_through_result_filing": true,
+    "shared_close_records": "formal close and sealed handoff, not premature target release",
+    "release": "after last registered reader INCLUDING filing helper actually returns; trusted outer/custodian evidence in result stage before final acceptance",
+    "release_permits_content_mutation": false,
+    "future_consumption_requires_registered_target_custody": true
+  },
+  "local_version": {
+    "manifest_schema": "topolab.v2.m2-local-input-content.v1",
+    "content_prefix": "content/",
+    "exact_member_categories": [
+      {
+        "path": "source_registry.json",
+        "count": 1
+      },
+      {
+        "path": "checkpoints/{family}-{seed}.safetensors",
+        "count": 12
+      },
+      {
+        "path": "models.json",
+        "count": 1
+      },
+      {
+        "path": "nn/producer/{case_id}.json",
+        "count": 528
+      },
+      {
+        "path": "nn/audit/{case_id}.json",
+        "count": 528
+      },
+      {
+        "path": "uniform-scalars.json",
+        "count": 1
+      }
+    ],
+    "exact_content_files": 1071,
+    "canonical_json": {
+      "encoding": "ASCII",
+      "sort_keys": true,
+      "separators": [
+        ",",
+        ":"
+      ],
+      "ensure_ascii": true,
+      "allow_nan": false,
+      "trailing_LF": true
+    },
+    "content_manifest_fields": [
+      "schema",
+      "frozen_contract_sha256",
+      "content_scope_sha256",
+      "source_registry_sha256",
+      "sorted members path/type/bytes/SHA",
+      "proposed role views"
+    ],
+    "version_id": "SHA256(canonical(content-manifest))",
+    "manifest_contains_own_hash_or_version_id": false,
+    "observation_tuples_authors_times_and_resources": "separate immutable evidence",
+    "original_local_backup_identities": "separate physical identity records; never assert inode equality",
+    "local_read_checks": "independent bytes/hash/nofollow/before-after-closing match producer local identities",
+    "publication": "unchanged literal private generation path plus final accepted external certificate",
+    "partial_generation_consumable": false,
+    "atomic_exclusive_write_flush_fsync": true,
+    "content_mutation_after_staging": "STOP; no repair and continue",
+    "READY_file_alone_is_acceptance": false,
+    "version_id_grants_relocation_or_consumer_permission": false
+  },
+  "role_view_policy": {
+    "R_LOCAL_independent": "all newly admitted content and evidence, complete comparison only",
+    "future_scientific_producer_PROPOSED": [
+      "models.json",
+      "checkpoints/*",
+      "nn/producer/*"
+    ],
+    "future_scientific_auditor_PROPOSED": [
+      "approved producer views",
+      "nn/audit/*"
+    ],
+    "uniform_scalars_PROPOSED": "separately granted reference-compatibility role only; no H selection",
+    "future_role_grants_now": [],
+    "no_original_root_old_loader_backup_or_unaccepted_generation_fallback": true
+  },
+  "byte_caps": {
+    "inherited": {
+      "R0_total_per_role": 33554432,
+      "R0_first_index": 16777216,
+      "R0_other_literal_each": 1048576,
+      "unit_metadata_each": 32768,
+      "selection_metadata_each": 262144,
+      "checkpoint_each": 1048576,
+      "all_checkpoints_per_role": 12582912,
+      "NN_source_each": 67108864,
+      "NN_source_total_per_role": 805306368,
+      "uniform_packet_each": 4194304,
+      "all_uniform_packets_per_role": 75497472,
+      "NN_producer_each": 131072,
+      "NN_producer_total": 33554432,
+      "NN_audit_each": 2097152,
+      "NN_audit_total": 268435456,
+      "scalar_output_total": 65536,
+      "interpretation": "rejection/investment caps; actual sizes unobserved; not a memory theorem; no truncation/replacement/limit growth"
+    },
+    "source_total_per_author": 926941184,
+    "source_total_both_authors": 1853882368,
+    "models_output_each": 1048576,
+    "registry_output_each": 8388608,
+    "content_manifest_each": 2097152,
+    "evidence_record_file_each": 16777216,
+    "primary_evidence_total": 268435456,
+    "primary_evidence_files": 512,
+    "entire_new_formal_namespace_primary_backup_fixtures_helpers_temporary": 2147483648,
+    "entire_new_formal_namespace_regular_files": 4096,
+    "partial_files_included": true,
+    "software_checkout_cache_outside_formal_disk_cap": true,
+    "unknown_actual_sizes_throughput_peak": true,
+    "no_truncation_cap_growth_substitution": true
+  },
+  "resources": {
+    "environment": "new registered actual M2 native Darwin arm64 CPU with locked five-thread environment",
+    "RSS_cap_bytes": 4294967296,
+    "metric": "adopted M2 native complete named-role RSS/actual-exit empirical envelope",
+    "all_controller_sampler_supervisor_helper_overlap_units_intervals": true,
+    "independent_public_full_role_pass_before_any_old_stat_read": true,
+    "each_actual_source_role_own_full_records_required": true,
+    "allocation_or_kernel_proof_added": false,
+    "R_public_is_scientific_B_or_full_fit_proof": false,
+    "unknown_exceedance_OOM_escape_missing_exit_cleanup": "STOP_NO_RETRY",
+    "wire_bytes_cap": 32768,
+    "full_collector_on_new_disk_bound_by_hash": true
+  },
+  "budget_request_NOT_GRANTED": {
+    "preparation_including_public_checks_CI_and_target_readiness": {
+      "executor_seconds": 14400,
+      "independent_seconds": 10800,
+      "continuous_from": "each author's first tool AFTER a separate future grant for this preparation phase",
+      "continuous_until": "joint readiness or STOP and own actual last return",
+      "failed_checks_waits_interruptions_CI_included": true,
+      "both_must_be_ready_before_own_deadlines": true,
+      "target_check600_is_additional_allowance": false
+    },
+    "formal": {
+      "common_window_seconds": 4500,
+      "FULL_seconds_by_role": {
+        "independent-public-check": 300,
+        "exporter-r0": 300,
+        "independent-r0": 300,
+        "exporter-r1": 1200,
+        "independent-r1": 1200,
+        "shared-closeout": 300
+      },
+      "FULL_sum_seconds": 3600,
+      "setup_lease_seconds": 300,
+      "between_roles_total_seconds": 240,
+      "final_frontier_seal_handoff_seconds": 360,
+      "first_dispatch_remaining_minimum": 4200,
+      "activation": "one T0 only after all grants, software/CI, target plan and both authors ready",
+      "later_dispatch": "remaining registered FULL suffix plus coordination and closure must fit",
+      "shared_FULL_booked_once_on_first_actual_dispatch": true,
+      "other_FULL_booked_on_start_no_refund": true,
+      "zero_dispatch_role_FULL": 0,
+      "zero_dispatch_setup_and_preparation_costs_retained": true,
+      "partial_prefix_tryout_authorized": false
+    },
+    "result_review_publication": {
+      "executor_seconds": 7200,
+      "independent_seconds": 3600,
+      "continuous_from": "one T_result: actual preformal STOP if never activated, otherwise actual formal close/close-failure frontier no later than T0+4500",
+      "executor_deadline": "T_result+7200; not moved by delayed first result tool",
+      "independent_deadline": "T_result+3600; not moved by delayed first result tool",
+      "filing_helper_starts_max": 1,
+      "filing_FULL_seconds": 180,
+      "filing_native_timeout_seconds": 160,
+      "filing180_is_inside_result_cap": true,
+      "filing_is_seventh_formal_source_role": false,
+      "actual_final_returns_included": true,
+      "filing_start_requires": "real new prefix, all started groups confirmed gone, prior tools returned and FULL180 fits result deadline",
+      "filing_on_unknown_cleanup": false,
+      "filing_full_RSS_wall_plus_10_exit_cleanup_evidence": true
+    },
+    "charge_floor": "max(whole trusted outer wall + 10 seconds, independent internal minimum) <= role FULL",
+    "window_STOP_keeps_valid_wall_and_full_charge": true,
+    "same_event_author_command_CI_views_not_extra_allowance_or_duplicate_spend": true,
+    "old_quota_balance_or_clock_transfer": false,
+    "purchase_authorized": false,
+    "unmeasured_existing_electricity_subscription_CI_fees": "UNKNOWN_NOT_ZERO"
+  },
+  "role_order_and_gates": [
+    {
+      "role": "independent-public-check",
+      "requires": "all new admission/freeze/target prerequisites"
+    },
+    {
+      "role": "exporter-r0",
+      "requires": "independent public complete full-role PASS"
+    },
+    {
+      "role": "independent-r0",
+      "requires": "complete producer 40-metadata registry and full-role PASS"
+    },
+    {
+      "role": "exporter-r1",
+      "requires": "independent complete R0 and frozen exact registry acceptance"
+    },
+    {
+      "role": "independent-r1",
+      "requires": "complete restricted export and producer full-role PASS"
+    },
+    {
+      "role": "shared-closeout",
+      "requires": "real prefix and all required groups confirmed gone; NEW-only"
+    }
+  ],
+  "independent_acceptance": {
+    "separately_authored_origin_field_bit_resource_algorithms": true,
+    "producer_parser_registration_gate_or_PASS_as_oracle": false,
+    "metadata_originals": 40,
+    "payload_originals": 558,
+    "new_content_members": 1071,
+    "full_comparison_not_sampling": true,
+    "checkpoints": "all bytes plus fixed family/seed/epoch/header/tensors/finite F32",
+    "labels": "exact 528 and 432/96 train population, all both-view fields/pointers/dtypes/shapes/IEEE",
+    "scalars": "all 18 exact origin/status/no-fallback and binary64 values",
+    "local_backup": "finite registered NEW-only bytes and identities; no old source read; independent ordinary files, not hardlinks to primary",
+    "bounded_inventory": "NEW root and backup only, <=4096 regular files; reject extras, never auto-include; no original directory enumeration",
+    "independent_backup_meaning": "separate directory checked by different author; not separate-device/disaster-isolation proof",
+    "all_full_RSS_exit_cleanup_window_charge_and_release_records": true,
+    "finite_evidence_frontier": "all content and six-role actual returns including shared; no recursive self inventory",
+    "filing_actual_return_observed_by_trusted_outer_tool": true,
+    "filing_releases_target_before_own_actual_return": false,
+    "self_written_READY_or_pre_exit_PASS_sufficient": false,
+    "final_certificate_fields": [
+      "version_id",
+      "contract/source/tree hashes",
+      "independent content comparison",
+      "six-role actual-return/resource/charge records",
+      "shared sealed handoff",
+      "target release after last actual reader",
+      "new backup",
+      "filing actual outer return provenance and hash"
+    ],
+    "acceptance_requires_closed_actual_evidence_and_published_acceptance_record": true,
+    "accepted_status": "LOCAL_INPUT_VERSION_ACCEPTED",
+    "not_scientific_or_B_C_admission": true
+  },
+  "freeze_slots_UNREGISTERED": {
+    "owner_adoption_and_phase_grants": null,
+    "actual_actors_and_ready_times": null,
+    "implementation_merged_commit_tree_lock_and_four_CI": null,
+    "actual_runtime_orig_argv_cwd_threads_helpers_and_all_calls": null,
+    "target_actual_control_evidence_and_independent_acceptance": null,
+    "new_plan_lease_activation_root_bindings": null,
+    "unregistered_required_preconditions": "STOP; no placeholder authorizes actions"
+  },
+  "public_software_evidence_before_formal_freeze": [
+    "actual interpreter/-I/orig_argv/cwd/permissions/import origins and registered helpers",
+    "full 40/558/1071 synthetic successful capture/origin/IEEE comparison and role-view separation",
+    "malformed chain/hash/domain, duplicate/extra/missing members and same-hash path replacement",
+    "identity change and zero/partial short-read reasons, full prefixes and secondary recording failures",
+    "partial writes, shared failure, window STOP still fully charged and incomplete packet rejection",
+    "old closed identities rejected, no old-loader fallback, lease/target failure and false READY refused",
+    "admitted maximum byte/object/vector/recent-window shapes and actual RSS/exit precheck coverage",
+    "uv sync --dev --locked; uv run ruff check .; uv run mypy src; complete uv run pytest; git diff --check",
+    "production authorization/identity/orig_argv refusal through actual commands; positive matrix uses only public fixture entry or public register/export interface",
+    "public fixture identities never accepted by formal entry; no skip-guards or old bytes in public tests",
+    "all four exact PR/main CI jobs before formal activation"
+  ],
+  "implementation_scope_after_separate_grant": {
+    "reuse": "existing bounded readers, register/export semantic rules and separate independent comparator",
+    "new_binding_required": "new identity/contract/root/author/lease and local manifest/certificate; old guards remain closed",
+    "no_generic_reader_framework_new_numerical_backend_or_new_dependencies": true,
+    "current_code_already_implements_R_LOCAL": false
+  },
+  "STOP": [
+    "missing grant or mandatory precondition",
+    "target custody unavailable",
+    "origin/identity/length/hash/field/IEEE/count mismatch or required UNKNOWN",
+    "byte/disk/file/time/FULL/RSS limit, OOM, missing exit or uncertain cleanup",
+    "source/contract/input-domain mutation after freeze or prohibited old access",
+    "partial/truncated/malformed record, unaccepted backup or filing actual-return failure"
+  ],
+  "STOP_effect": "retain prefix, actual bytes/available tuples, primary and secondary errors and all costs; no retry, substitution, quota reset or automatic successor",
+  "historical_preservation": {
+    "old_protocol_report_paths_and_bytes": "unchanged",
+    "known_paid_subtotal": "12721.16417100014444982",
+    "old_all_paid_cap": "7200",
+    "D1_booked_FULL_seconds": 60,
+    "old_all_paid_condition_repaired_by_this_contract": false,
+    "fixed_P17": "UNREPAIRED",
+    "uniform_default": true,
+    "science_paused": true,
+    "full_v2": "OPEN_NO_ADMITTED_ROUTE",
+    "full_fit": "PENDING4GiB",
+    "old_unknown_failures_costs_quotas_seals_and_B3_replication": "retain"
+  },
+  "actual_this_drafting_turn": {
+    "old_source_stat_reads": 0,
+    "old_source_copies": 0,
+    "new_target_probes": 0,
+    "formal_roles_started": 0,
+    "B_C_calls": 0,
+    "old_quotas_reopened": 0,
+    "code_implemented": false,
+    "new_formal_resource_acceptance": false,
+    "draft_authoring_cost": "additional project engineering cost; unmeasured UNKNOWN_NOT_ZERO, not free or a reset of any phase",
+    "historical_draft_snapshot": true
+  },
+  "next_item": "Complete preparation report/publication within granted continuous clocks; target/source/formal/B/C remain separately unadmitted/ungranted; no automatic successor",
+  "execution_identity": "topolab.v2.p17-m2-local-input-version.v1",
+  "draft_origin": {
+    "MD_sha256": "343eaff0e8fb53223c4bf9ff8ceff12272be023b6d0460c76717a611e7f0cff1",
+    "JSON_sha256": "e3b6b3e1100175598e24ab75bb45af90f4e0c02d59efa5a0f9908e9cabdc83d7",
+    "preserved_uncommitted_originals": true
+  },
+  "preparation_grant": {
+    "executor_seconds": 14400,
+    "independent_seconds": 10800,
+    "continuous_clock": true,
+    "executor_first_tool_UTC": "2026-10-23T07:48:15Z",
+    "executor_deadline_UTC": "2026-10-23T11:48:15Z",
+    "independent_first_tool_UTC": "2026-10-23T07:49:32.069279Z",
+    "independent_deadline_UTC": "2026-10-23T10:49:32.069279Z",
+    "target_check_seconds_inside_preparation": 600,
+    "formal_and_result_budget_granted": false
+  },
+  "budget_field_note": "budget_request_NOT_GRANTED retains proposed formal/result limits; only preparation is superseded by preparation_grant; no old clock/balance transfer"
+}
