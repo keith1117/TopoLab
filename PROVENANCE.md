@@ -1607,3 +1607,15 @@ Original TopoLab maintenance of its two existing bounded source readers, using
 new local three-byte files and OS-boundary early-EOF/mtime fault injection.
 No external implementation, historical source or scientific data imported.
 See [software validation](docs/validation/p17_m2_source_read_completeness.md).
+
+
+## 2026-10-23 — Restricted local input-version software preparation
+
+Original TopoLab finite private content/manifest and separately authored
+local identity/coverage comparison, derived from the owner-adopted new custody
+model and existing independently authored field/IEEE/source/native rules. New
+connected public fixtures supply no historical input or new scientific method.
+One target-only Foundation/File Provider/Time Machine observation uses original
+helpers and native APIs; complete target coverage remains UNKNOWN/non-admitted.
+No upstream/Hack3D implementation, old original or model is imported. See
+[preparation result](docs/validation/p17_m2_local_input_version_preparation.md).

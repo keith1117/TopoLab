@@ -1819,6 +1819,7 @@ def audit_exports(
                 "sha256": digest(actual),
             },
         )
+        del raw
     models_raw = exports.read("models.json", 65536)
     words += compare_words(
         {"schema": "topolab.v2.m2-checkpoint-view.v1", "models": model_bindings},
@@ -1844,6 +1845,7 @@ def audit_exports(
         require(producer_bytes <= 32 * MIB and audit_bytes <= 256 * MIB, "NN output total cap")
         words += compare_words(producer, parse(production_raw, canonical_required=True))
         words += compare_words(audit, parse(audit_raw, canonical_required=True))
+        del raw, packet, producer, audit
     values = []
     for row in registry["scalars"]:
         source = row["packet"]
@@ -1854,6 +1856,7 @@ def audit_exports(
             packet = parse(raw)
         with reader.validation(source["path"]):
             values.append(scalar_view(packet, row))
+        del raw, packet
     scalar_raw = exports.read("uniform-scalars.json", 65536)
     words += compare_words(
         {"schema": "topolab.v2.m2-uniform-scalar-view.v1", "values": values},

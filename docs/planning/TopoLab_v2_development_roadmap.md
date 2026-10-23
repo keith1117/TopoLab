@@ -2432,6 +2432,18 @@ search on B5 outcomes.
   routine slice results belong in the linked status and evidence documents.
 
 ## 6. Current sequence after the delivery reassessment
+Owner2026-10-23 adopts the [new local-input custody model/preparation](p17_m2_local_input_version_protocol.md)
+only: executor4h/different-author3h. [Public capability/target result](../validation/p17_m2_local_input_version_preparation.md)
+records connected40/558/1071 field/identity comparisons and a149.9207718372345s
+new-target check. Local/private fixture evidence is insufficient for complete
+provider/backup/custodian controls: NO_LOCAL_ROOT_ADMISSION. Actual new formal
+orchestration/resource-return/last-reader acceptance remains unimplemented;
+FORMAL_LAUNCH_BINDING_INCOMPLETE, not SOFTWARE_READY. No source stat/read/copy,
+six roles or B/C is granted. Complete protected preparation publication within
+continuous caps, then stop for the target-control route decision in current status.
+Gate order/quality/STOP/window/FULL/accounting and all historical boundaries remain.
+
+
 
 Owner-selected software maintenance2026-10-23 on main `f7e7637` resolves the
 previously deferred short-read finding: both readers enforce complete returned

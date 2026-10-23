@@ -23,6 +23,7 @@ CONTRACT = REPO / "docs/planning/p17_m2_input_export_preparation_proposal.json"
 CONTENT_SHA256 = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
 OUTPUT_ROOT_NAME = "p17-m2-input-export-preparation-v3"
 STABLE_IDENTITY = "topolab.v2.p17-m2-source-stable-export.v1"
+LOCAL_IDENTITY = "topolab.v2.p17-m2-local-input-version.v1"
 STABLE_ROOT_NAME = "p17-m2-source-stable-export-v1"
 MIB = 1024 * 1024
 
@@ -99,8 +100,9 @@ class Reader:
             "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1")
         self.source_identity_checks = source_identity_checks
         self.source_observations = []
-        need(not source_identity_checks or self.execution_identity == STABLE_IDENTITY,
-             "new source identity checks require R-STABLE")
+        need(not source_identity_checks
+             or self.execution_identity in (STABLE_IDENTITY, LOCAL_IDENTITY),
+             "new source identity checks require R-STABLE or R-LOCAL")
 
     def read(self, relative, limit, *, expected=None, size=None, group="metadata", total=None):
         facts = {
@@ -695,7 +697,9 @@ def scalar_view(raw, item):
     }
 
 
-def export(reader, registry, contract, output):
+def export(reader, registry, contract, output, *, local_content=None):
+    need(local_content is None or output.absolute() == local_content.root,
+         "local content output binding")
     need(
         len(registry["models"]) == 12
         and len(registry["labels"]) == 528
@@ -708,7 +712,10 @@ def export(reader, registry, contract, output):
         data = value if raw else canonical(value)
         totals[group] = totals.get(group, 0) + len(data)
         need(len(data) <= each and totals[group] <= total, "view byte cap")
-        new_file(output / path, data)
+        if local_content is None:
+            new_file(output / path, data)
+        else:
+            local_content.write(path, data)
         written.append(ref(path, data))
 
     models = []
@@ -722,6 +729,7 @@ def export(reader, registry, contract, output):
             {k: item[k] for k in ("family", "seed", "epoch", "context_sha256")}
             | {"source": item["checkpoint"], "selection": item["selection"], "output": written[-1]}
         )
+        del raw
     emit(
         "models.json",
         {"schema": "topolab.v2.m2-checkpoint-view.v1", "models": models},
@@ -737,6 +745,7 @@ def export(reader, registry, contract, output):
             producer, audit = label_views(packet, item)
         emit("nn/producer/" + item["case_id"] + ".json", producer, 128 * 1024, 32 * MIB, "producer")
         emit("nn/audit/" + item["case_id"] + ".json", audit, 2 * MIB, 256 * MIB, "audit")
+        del raw, packet, producer, audit
     values = []
     for item in registry["scalars"]:
         raw = read_ref(reader, item["packet"], 4 * MIB, group="uniform", total=72 * MIB)
@@ -744,6 +753,7 @@ def export(reader, registry, contract, output):
             packet = parse(raw)
         with reader.validation(item["packet"]["path"]):
             values.append(scalar_view(packet, item))
+        del raw, packet
     emit(
         "uniform-scalars.json",
         {"schema": "topolab.v2.m2-uniform-scalar-view.v1", "values": values},
@@ -760,7 +770,8 @@ def export(reader, registry, contract, output):
         "FEM_inference_calls": 0,
         "status": "TRANSCRIPTION_PENDING_INDEPENDENT_COMPARISON",
     }
-    new_file(output / "export_manifest.json", canonical(manifest))
+    if local_content is None:
+        new_file(output / "export_manifest.json", canonical(manifest))
     return manifest
 
 

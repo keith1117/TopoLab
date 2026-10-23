@@ -1,9 +1,25 @@
 # Current project status
 
-Updated:2026-10-22. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-10-23. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
+
+## Current: local input-version preparation; target not admitted (2026-10-23)
+
+Owner-adopted [new custody/preparation protocol](planning/p17_m2_local_input_version_protocol.md)
+permits only software/public regressions and one target evidence check within new
+executor4h/independent3h. [Result](validation/p17_m2_local_input_version_preparation.md):
+connected public40/558/1071 transcription and different-author comparison work;
+strict private/nofollow/member/tuple/canonical identity checks retain STOP rules.
+The target check closes149.9207718372345/600s: local/private fixture works, but
+provider coverage, backup control and complete custodian inventory are UNKNOWN.
+**NO_LOCAL_ROOT_ADMISSION / FORMAL_LAUNCH_BINDING_INCOMPLETE**. Proposed target
+and backup not created; original stat/read/copy0, formal0/6, B/C0, no quota reset.
+Pure plan/lease checks and self-written PASS cannot admit a version or consumer.
+Finish this preparation's normal protected publication within original continuous
+clocks, then stop for the concrete owner route decision below. Older entries
+retain historical scope; neither scientific progress nor old-cause attribution.
 
 ## Current software maintenance: bounded read completeness (2026-10-23)
 
@@ -367,7 +383,18 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-owner-decision-on-new-r-stable-scope-and-source-control"></a>
 
-## Unique next item: report specific sync-control gaps and STOP
+## Unique next item: owner route decision on target control evidence
+
+After preparation publication, review the [specific target gaps](validation/p17_m2_local_input_version_preparation.md).
+Supply independently acceptable sync/backup coverage and custodian control for
+the proposed target, or select another controlled target/exit. The one check is
+closed; there is no automatic probe or guard sequel. New formal launch binding,
+resources/actual exit/last-reader release and explicit source/activation grants
+remain absent. No old read/copy, six-role or B/C follows from the model adoption.
+All earlier closed grants and scientific blockers retain their original scope.
+
+### Retained R-CUSTODY closeout boundary
+
 
 The approved finite writer check is complete; do not reset or repeat its20min
 window. iCloud Documents coverage is confirmed, but an actual project-scoped

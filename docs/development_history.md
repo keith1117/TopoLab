@@ -8,6 +8,17 @@ next slice or a development primary describe their historical context.
 Read [project status](project_status.md) for the current boundary and
 [validation reports](validation/README.md) for the authoritative evidence.
 
+## 2026-10-23 — Local input-version public capability; target not admitted
+
+Owner adopts prospective referenced-closure/local custody and grants only4h/3h
+preparation. [Protocol](planning/p17_m2_local_input_version_protocol.md) and
+[result](validation/p17_m2_local_input_version_preparation.md) retain full origin/
+tuple/STOP/window/FULL rules. Different-author public40/558/1071 comparison passes;
+one149.9207718372345/600s target check lacks complete provider/backup/custodian
+control. NO_LOCAL_ROOT_ADMISSION/FORMAL_LAUNCH_BINDING_INCOMPLETE. No old input,
+formal six roles, B/C, quota reset or scientific delta. Publish normally within
+continuous preparation clocks; stop for a concrete target-control route decision.
+
 ## 2026-10-22 — Public packet retention and out-of-window charges
 
 Owner-authorized test-first maintenance on main447592c retains complete shared
