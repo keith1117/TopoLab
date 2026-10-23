@@ -5,6 +5,22 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
+## Current software maintenance: bounded read completeness (2026-10-23)
+
+The owner selects the previously deferred third finding on main `f7e7637`.
+Both readers now require total returned bytes equal to the unchanged descriptor
+size. A length-only rejection records `read_size_consistency` and an explicit
+length reason; actual tuple changes keep their existing identity reason and
+precedence. [Validation](validation/p17_m2_source_read_completeness.md) records
+new-file test-first evidence. No extra source read or retry is added. STOP,
+windows, FULL charges and billing rules remain unchanged. All three selected
+source-reader findings now have software repairs; this does not identify the
+old12th-read cause, admit sources or repair fixed P/17. Preserve closed quotas,
+existing drafts, uniform/science pause/4GiB/independent preflight. Complete normal
+publication then STOP. Source admission remains an unresolved separate decision;
+no formal restart, cloud-control probe or automatic repair slice follows.
+The older maintenance paragraphs below retain their original chronological scope.
+
 ## Current software maintenance: source failure-context retention
 
 Owner-authorized test-first repair on main `deca9ab`: both readers retain the

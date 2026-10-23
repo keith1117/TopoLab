@@ -2323,3 +2323,17 @@ provider calls0, closed grants stay closed, existing local changes preserved.
 This improves future diagnosis only; old changed member/cause UNKNOWN and P17
 unrepaired, science pause/source admission/full-v2/seals unchanged. Publication
 then STOP; no automatic successor.
+
+
+## 2026-10-23 — Unify bounded source-read completeness and failure reasons
+
+On main `f7e7637`, owner-selected test-first repair makes both readers require
+returned length equal to the descriptor size without optional hash/size metadata.
+Length-only failure has its own stage/reason; genuine tuple change retains its
+original identity STOP and takes precedence when both occur. New-file regressions
+cover empty/partial reads, actual1ns mtime change and complete chunked reads.
+[Validation](validation/p17_m2_source_read_completeness.md) records software evidence.
+No additional content read, retry, formal role, old input or quota reuse. Existing
+local drafts and frozen evidence remain. Historical cause stays UNKNOWN; P17,
+source admission, scientific Gates and all STOP/window/billing rules retain scope.
+Close normal publication and STOP; no automatic successor.

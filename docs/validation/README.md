@@ -6,6 +6,10 @@ resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
 
+Latest source-read consistency: [complete reads and distinct failure reasons](p17_m2_source_read_completeness.md),
+new public fixtures; both short reads and actual tuple changes remain STOP.
+No old input, formal role, closed quota reuse or historical-cause attribution.
+
 Latest source-reader maintenance: [parse/validation and terminal failure-context
 retention](p17_m2_source_failure_context_retention.md), new public regressions only;
 no source admission, historical cause reconstruction or rule relaxation.

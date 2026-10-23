@@ -235,6 +235,8 @@ class Reader:
                 == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns),
                 "source changed",
             )
+            self._read_facts["stage"] = "read_size_consistency"
+            need(len(raw) == before.st_size, "source read length differs from descriptor size")
             if self.source_identity_checks:
                 self._read_facts["stage"] = "closing_path_identity"
                 closing = self._closing_stat(relative)
