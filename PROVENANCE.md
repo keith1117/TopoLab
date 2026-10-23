@@ -1590,3 +1590,12 @@ unavailable, closing formal entry0/6. Existing TopoLab source/field/IEEE/native
 algorithms remain byte-identical. See the
 [bounded result](docs/validation/p17_m2_source_custody_export.md) and
 [fresh independent review](docs/validation/p17_m2_source_custody_export_independent_review.md).
+
+
+## 2026-10-22 source failure-context retention
+
+Original TopoLab maintenance of the two existing bounded source readers and
+producer terminal record, derived from owner-selected code-level defects and
+new local JSON/field/mtime/journal-failure fixtures. No external implementation,
+old source, dataset, weight, figure or upstream code imported. See
+[validation](docs/validation/p17_m2_source_failure_context_retention.md).

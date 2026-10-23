@@ -2433,6 +2433,16 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
+Owner-selected software maintenance on main `deca9ab` repairs only source-failure
+context retention: same-read facts now cover JSON and source-field rejection,
+and producer terminal failure retains tuples/prefix/secondary journal errors.
+[Validation](../validation/p17_m2_source_failure_context_retention.md) distinguishes
+public regression from scientific/source acceptance. No STOP/window/accounting
+change is needed; short-read consistency is deferred. Old failure/cause UNKNOWN,
+P/17, source admission, formal closures, all costs/quotas/seals and Gate order
+remain. Close normal publication and stop for the next owner-selected item;
+there is no automatic formal rerun or cloud-control probe.
+
 ### Effective authority and development order
 
 Owner-authorized public software maintenance2026-10-22 repairs shared STOP
