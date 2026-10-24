@@ -111,15 +111,16 @@ def test_public_payload_reads_closed_graph_only_after_independent_r0(tmp_path):
 
     program = frozen_program(tmp_path)
     root = tmp_path / "topolab-public-content-verified"
+    image = str(Path(sys.orig_argv[0]).resolve())
     prepare = subprocess.run(
-        [sys.executable, "-I", str(program), "prepare-public", "--root", str(root)],
+        [image, "-I", str(program), "prepare-public", "--root", str(root)],
         capture_output=True,
         text=True,
         check=True,
     )
     plan_sha = json.loads(prepare.stdout)["plan_sha256"]
     prefix = [
-        sys.executable,
+        image,
         "-I",
         str(program),
         "payload",
@@ -133,7 +134,9 @@ def test_public_payload_reads_closed_graph_only_after_independent_r0(tmp_path):
     assert early.returncode != 0
     assert not (root / "content").exists()
     # New independent launch gets its own namespace; a stopped plan is never retried.
-    assert "predecessor" in early.stderr
+    assert early.stderr.splitlines()[-1] == (
+        "ValueError: predecessor actual external acceptance missing"
+    )
 
 
 def test_first_public_role_records_native_exit_but_needs_actual_external_return(tmp_path):
@@ -166,7 +169,7 @@ def test_forged_predecessor_PASS_does_not_authorize_next_public_payload(tmp_path
 
     program = frozen_program(tmp_path)
     root = tmp_path / "topolab-public-forged"
-    argv = [sys.executable, "-I", str(program)]
+    argv = [str(Path(sys.orig_argv[0]).resolve()), "-I", str(program)]
     prepared = subprocess.run(
         [*argv, "prepare-public", "--root", str(root)], capture_output=True, text=True, check=True
     )
@@ -178,7 +181,7 @@ def test_forged_predecessor_PASS_does_not_authorize_next_public_payload(tmp_path
         text=True,
     )
     assert result.returncode != 0
-    assert "predecessor" in result.stderr
+    assert result.stderr.splitlines()[-1] == "ValueError: predecessor acceptance invalid"
     assert not (root / "registry.json").exists()
 
 

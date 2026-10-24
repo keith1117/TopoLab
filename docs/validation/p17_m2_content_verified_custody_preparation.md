@@ -303,6 +303,23 @@ main发表前再核仍为c9502cbe8302ffa8e41939347081e4c96599e019，无开放PR�
 实际观察完成后，外部publication-closure.json才可闭合本切片；本报告不事先填写未来CI结果。
 旧工作树/25文件保留、代码与actual-v3冻结一致、所有实际连续成本由closure绑定。
 
+## 保留的首轮 Linux CI 失败与测试调用修正
+
+源head`8244bbed8afc6e66b6adef744b67d2f77b3bacfb`的PR220首次quality
+run40072472005在Linux实际1 failed/2696 passed/5平台skip，1479.84s；
+其他三job通过。唯一失败是S2的predecessor测试：调用方用venv的`sys.executable`
+别名，而冻结入口要求解析后的Python image，因而正确地提前STOP于
+`actual orig_argv differs from frozen entry`。新公开symlink调用在本机2.657465s
+复现同一断言失败（`CI-ALIAS-RED.log`），不同作者直接核对了调用与冻结入口。
+同一alias刺激还复现了相邻forged-predecessor测试的错误分支；当临时目录名含
+predecessor时，旧substring断言会因traceback路径误通过。新公开RED2保留实际
+末行`ValueError: actual orig_argv differs from frozen entry`。
+最小修正只让两项测试使用解析后的image，并精确断言末行predecessor原因；产品argv比较、
+STOP、窗口及计费规则全部不变。产品18项runtime与actual-v3运行证据保持原冻结字节。
+首轮CI失败、后续symlink GREEN、修正后的五项完整检查、精确新head/main CI及
+发表成本全部另记外部publication回执，并连续计入原6h/4h；不能复用旧head的成功job
+替代新head检查，也不能用后续通过抹去首轮失败。本报告上方V3本地检查保留其当时范围。
+
 ## 唯一下一步
 
 本轮在上述证据闭合后只关闭PREPARATION_COMPLETE_FORMAL_CLOSED并STOP；有必需缺口则
