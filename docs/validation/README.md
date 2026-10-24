@@ -5,6 +5,11 @@ limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.
 
 Read [current status](../project_status.md) and [history](../development_history.md).
+Latest [content-verified custody public preparation](p17_m2_content_verified_custody_preparation.md):
+new6h/4h S1/S2/S3 capability and retained failures, public-only independent content/
+resource/actual-return/lease/billing evidence. Formal0/6, old source0, target0,
+B/C0; fixed P/17 unrepaired. Final validation/publication status is explicit.
+
 Latest [R-LOCAL/v2 target evidence decision](p17_m2_local_input_v2_preparation.md):
 NO_LOCAL_ROOT_ADMISSION_BEFORE_FIXTURE, complete provider scope UNKNOWN;
 public fixture unstarted/closed unused, target/code/source/formal/B/C0. No old

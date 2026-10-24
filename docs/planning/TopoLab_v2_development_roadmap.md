@@ -2433,6 +2433,21 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
+Owner2026-10-24 adopts a NEW [content-verified custody preparation](p17_m2_content_verified_custody_protocol.md)
+under new6h/4h continuous clocks, limited to public software and independent review.
+The new acceptance object is independently source-attested fixed content plus the
+actual verified buffer consumed; it does not promise absence of sync/upload,
+unregistered external writes or continuous availability. Provider UNKNOWN is retained.
+[Capability/failure evidence](../validation/p17_m2_content_verified_custody_preparation.md)
+separates S1/S2/S3 public preparation from formal source/target admission and science.
+All old protocols, tuples, one-read/short-read/hash,4GiB/exit, STOP/windows/FULL,
+charges, failures/quotas/seals and fixed P/17 remain. Complete this slice's normal
+publication/retention inside its original clocks, then stop for separate source,
+formal4500s/result7200s/3600s/FULL180 authority. No original/target access or B/C
+is granted, no old allowance transfers and no third-directory route is attempted.
+Earlier R-LOCAL/v2/v1 entries below record their closed historical scopes.
+
+
 Owner2026-10-23 grants NEW [R-LOCAL/v2 preparation](p17_m2_local_input_v2_preparation_protocol.md)
 only: executor4h/different-author3h, complete mechanism metadata before a conditional
 single600s public fixture and regression-first implementation.

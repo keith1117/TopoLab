@@ -16,14 +16,15 @@ At session start, slice start and context recovery, read these files in order:
 10. `docs/repository_policy.md` before staging or publishing changes.
 
 ## Current state and execution entry
-Read the latest [R-LOCAL/v2 authority](docs/planning/p17_m2_local_input_v2_preparation_protocol.md)
-and [target decision](docs/validation/p17_m2_local_input_v2_preparation.md) before
-dependent work. New4h/3h preparation stops BEFORE its public fixture because
-complete provider coverage is UNKNOWN. No target is created; formal binding
-remains incomplete. Finish only normal protected publication within original
-continuous clocks, then stop for the concrete route decision in current status.
-Two target slices have no admission; no automatic third directory/probe/guard.
-Old originals, six-role activation, B/C and old quotas remain closed.
+Read the latest [content-verified preparation authority](docs/planning/p17_m2_content_verified_custody_protocol.md)
+and [actual preparation report](docs/validation/p17_m2_content_verified_custody_preparation.md)
+before dependent work. Owner adopts the new custody model and NEW6h/4h public
+preparation only; finish checks/protected publication/retention within those
+continuous clocks, then STOP for separate source/formal/result authority.
+Sync coverage stays UNKNOWN; new acceptance uses independently attested fixed
+content and same-read consumption, with all physical identities/STOP/cost rules.
+No target probe/create, old original read/copy, formal six roles, B/C or old quota
+reuse is granted. The final external closure controls preparation completion.
 
 Historical v1 is a usable interim delivery. The owner retains
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE**, fixed P/17/unrepaired,4GiB and independent
