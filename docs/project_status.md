@@ -1,11 +1,35 @@
 # Current project status
 
-Updated:2026-10-23. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-10-24. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: R-LOCAL/v2 stops before target fixture (2026-10-23)
+## Current: content-verified custody public preparation (2026-10-24)
+
+Owner adopts the [new content-verified model and preparation protocol](planning/p17_m2_content_verified_custody_protocol.md)
+([authority/continuous clocks](planning/p17_m2_content_verified_custody_protocol.json)):
+NEW executor6h/different-author4h, public software only. This replaces the prospective
+never-synced/external-writer-exclusion premise for this new identity; provider
+coverage remains UNKNOWN and no old cause/status changes. Every source/content/
+physical-identity, native4GiB, actual-return, STOP/window/FULL and billing check stays.
+
+The [preparation report](validation/p17_m2_content_verified_custody_preparation.md)
+records the actual new public40/558/1071 chain, S1 same-buffer consumer, S2 native
+orchestration/failure prefixes and S3 different-author evidence acceptance.
+It distinguishes completed observations from pending validation/publication; only
+the final external closure can close PREPARATION_COMPLETE_FORMAL_CLOSED.
+Original stat/read/copy0; proposed target stat/create/probe0; formal0/6; B/C0;
+old quota reset0. Cooperative leases coordinate registered TopoLab actors only.
+Fixed P/17 is unrepaired; scientific progress and the full-v2 estimate are unchanged.
+
+Finish this one approved preparation through full checks, protected exact-head
+PR/main four-job CI, evidence retention and actual final returns inside the
+original continuous6h/4h clocks. Then stop. The next item is a separate concrete
+source/formal/result authority decision; no automatic target, original read,
+formal activation, B/C or quota reuse. Earlier entries retain their historical scope.
+
+## Historical: R-LOCAL/v2 stopped before target fixture (2026-10-23)
 
 The owner explicitly grants a NEW [metadata-first preparation](planning/p17_m2_local_input_v2_preparation_protocol.md)
 with executor4h/different-author3h and a new Application Support target.
@@ -33,7 +57,7 @@ passed. Its connected public40/558/1071 capability and149.9207718372345/600s tar
 non-admission retain their original scope and closed budgets; neither is repeated.
 Frozen [v1 report](validation/p17_m2_local_input_version_preparation.md) retains bytes.
 
-## Current software maintenance: bounded read completeness (2026-10-23)
+## Published software maintenance: bounded read completeness (2026-10-23)
 
 The owner selects the previously deferred third finding on main `f7e7637`.
 Both readers now require total returned bytes equal to the unchanged descriptor
@@ -49,7 +73,7 @@ publication then STOP. Source admission remains an unresolved separate decision;
 no formal restart, cloud-control probe or automatic repair slice follows.
 The older maintenance paragraphs below retain their original chronological scope.
 
-## Current software maintenance: source failure-context retention
+## Published software maintenance: source failure-context retention
 
 Owner-authorized test-first repair on main `deca9ab`: both readers retain the
 original path/ordinal, available four-field tuples, bytes/hash and primary
@@ -65,7 +89,7 @@ publication STOP. The next technical item is the separate short-read consistency
 repair, subject to its own selected scope; no automatic six-role restart follows.
 Existing local diagnosis/control drafts are retained outside this change.
 
-## Current software maintenance: failure retention and accounting
+## Published software maintenance: failure retention and accounting
 
 The owner authorized two confirmed software fixes, test first, on main447592c.
 Shared frontier exceptions now retain the complete STOP packet and end active
@@ -395,7 +419,25 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-owner-decision-on-new-r-stable-scope-and-source-control"></a>
 
-## Unique next item: route decision after two target non-admissions
+## Unique next item: separate source/formal/result authority decision
+
+After this content-verified public preparation's actual protected publication and
+external closure, stop. The next decision is one concrete prospective contract
+for the exact source whitelist, real target/private-root binding, compatible
+execution identity, fresh six-role4500s window and result7200s/3600s including
+filing FULL180. Keep the already approved content/tuple/one-read/4GiB/FULL rules;
+public certificates cannot authorize original sources or scientific consumers.
+The new custody model retains provider UNKNOWN without requiring a never-sync
+promise; no third-directory search or provider guard chain is commissioned.
+
+This slice grants no such source/target access or activation. A later “continue”
+first checks the exact PR/main CI and listed external closure; if complete, it
+may prepare the concrete authority decision only, not access originals, create
+formal targets, restart old roles, reuse closed budgets or run B/C. Only actual
+independent R0 acceptance can precede a future authorized R1. Fixed P/17 remains
+unrepaired, and B resource preflight/C repair stay later separately approved Gates.
+
+### Historical route decision after two target non-admissions
 
 After R-LOCAL/v2 publication, decide whether an obtainable supported metadata
 source can supply the missing complete effective provider scope for both literal

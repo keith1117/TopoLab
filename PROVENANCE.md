@@ -1628,3 +1628,15 @@ Microsoft primary scope documentation. No external implementation, source-input
 payload, historical model, scientific method or upstream material is imported.
 Complete provider coverage remains UNKNOWN; the public fixture and conditional
 implementation never start. See the [new result](docs/validation/p17_m2_local_input_v2_preparation.md).
+
+## 2026-10-24 — Content-verified custody public preparation
+
+Original TopoLab stdlib orchestration, same-buffer public consumer and separately
+authored raw-evidence verifier implement the owner-adopted
+[preparation protocol](docs/planning/p17_m2_content_verified_custody_protocol.md).
+Reused read/transcription/native/independent comparison algorithms are TopoLab's
+own versioned helpers, with their old execution identities explicitly disclosed;
+old formal calls are never relabelled as this new actor. The connected bounded
+public graph is newly authored and contains no historical scientific input.
+No upstream/reference implementation, old original, model execution, external
+source or target probe is introduced. See [validation](docs/validation/p17_m2_content_verified_custody_preparation.md).

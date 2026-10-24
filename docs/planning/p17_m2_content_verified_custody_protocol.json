@@ -1,0 +1,68 @@
+{
+  "schema": "topolab.v2.m2-content-verified-custody-contract.v1",
+  "execution_identity": "topolab.v2.p17-m2-content-verified-input.v1",
+  "baseline_main": "c9502cbe8302ffa8e41939347081e4c96599e019",
+  "authority": {
+    "direct_owner_reply": "call_8e8daf47565a4691b1bdb20b0a407f4b/0",
+    "answer": "批准草案及新6h/4h准备预算（推荐）",
+    "new_custody_model_adopted": true,
+    "S1_S2_S3_test_seams_confirmed": true,
+    "software_public_implementation_independent_review_checks_publication_authorized": true,
+    "target_stat_create_probe_authorized": false,
+    "old_original_stat_read_copy_temporary_parse_authorized": false,
+    "formal_six_role_activation_authorized": false,
+    "scientific_B_authorized": false,
+    "scientific_C_authorized": false,
+    "global_sync_changes_authorized": false,
+    "new_installation_purchase_authorized": false,
+    "old_quota_reopening_authorized": false
+  },
+  "normative_proposal": {
+    "MD": "docs/planning/p17_m2_content_verified_custody_proposal.md",
+    "MD_sha256": "4ba70b28826dd3443e936ad8a97112575bcea4af08b9019d17397d831899abd3",
+    "JSON": "docs/planning/p17_m2_content_verified_custody_proposal.json",
+    "JSON_sha256": "8fa602f3d86be03da0c336f7569a35a68ce31052517249e0bf32b35f098aa7e0",
+    "adopt_sections": "1 through8 technical, compatibility, interface, acceptance, resource/STOP/billing and exit rules",
+    "authority_precedence": "This direct grant supersedes only proposal not-granted fields for new contract, test seams, 21600/14400 preparation and normal publication; formal/result/source/target/B/C remain ungranted",
+    "snapshot_bytes_preserved": true
+  },
+  "preparation_budget": {
+    "executor": {
+      "author": "/root",
+      "seconds": 21600,
+      "first_tool_UTC": "2026-10-24T04:50:14.699320Z",
+      "first_tool_monotonic": 2108089.633201083,
+      "deadline_UTC": "2026-10-24T10:50:14.699320Z"
+    },
+    "independent": {
+      "author": "/root/content_verified_independent",
+      "seconds": 14400,
+      "first_tool_UTC": "2026-10-24T04:50:40.401679Z",
+      "first_tool_monotonic": 2108115.335872291,
+      "deadline_UTC": "2026-10-24T08:50:40.401679Z"
+    },
+    "continuous_through_actual_final_returns": true,
+    "includes_failures_waits_full_checks_PR_main_CI_review_retention_publication": true,
+    "additional_result_or_publication_budget": false,
+    "pause_reset_transfer_old_allowance": false,
+    "pregrant_cost": "UNKNOWN_NOT_ZERO; separate, not retroactively transferred",
+    "monetary_cost": "UNKNOWN_NOT_ZERO"
+  },
+  "custody_guarantees": {
+    "consumer_same_verified_buffer": true,
+    "original_local_backup_tuple_rules_unchanged": true,
+    "same_hash_replacement_exception": false,
+    "source_provenance_and_full_independent_comparison_unchanged": true,
+    "cooperative_registered_topolab_lease_only": true,
+    "provider_EXCLUDED_prerequisite_for_this_new_model": false,
+    "provider_coverage_if_unobserved": "UNKNOWN",
+    "no_sync_upload_or_external_writes_guarantee": false,
+    "continuous_availability_guarantee": false,
+    "resource_exit_window_FULL_STOP_rules_unchanged": true
+  },
+  "preparation_scope": "New public software fixtures and versioned source only; no custody-target stat/probe/create or old scientific input",
+  "permitted_preparation_success": "PREPARATION_COMPLETE_FORMAL_CLOSED",
+  "formal_and_result_proposals": "Original4500 common window, six FULL3600 and result2h/1h including filing180 remain NOT_GRANTED",
+  "science_state": "P17 unrepaired; uniform default; science paused/fullv2open; historical costs/UNKNOWN/quotas/seals and full-fit PENDING4GiB remain",
+  "after_preparation": "Close and stop; separate source/formal/result and then B/C decisions, no automatic successor"
+}

@@ -1,5 +1,11 @@
 # Planning index
 
+Latest owner-adopted [content-verified custody public preparation](p17_m2_content_verified_custody_protocol.md)
+([JSON](p17_m2_content_verified_custody_protocol.json), [approved proposal](p17_m2_content_verified_custody_proposal.md))
+grants NEW6h/4h public preparation only. [Evidence and limitations](../validation/p17_m2_content_verified_custody_preparation.md)
+retain source/target/formal/B/C closures and exact identity/STOP/window/FULL rules.
+
+
 Latest [R-LOCAL/v2 metadata-first preparation authority](p17_m2_local_input_v2_preparation_protocol.md)
 ([JSON](p17_m2_local_input_v2_preparation_protocol.json)) records NEW4h/3h;
 [decision](../validation/p17_m2_local_input_v2_preparation.md) stops before public

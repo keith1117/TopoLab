@@ -8,6 +8,17 @@ next slice or a development primary describe their historical context.
 Read [project status](project_status.md) for the current boundary and
 [validation reports](validation/README.md) for the authoritative evidence.
 
+## 2026-10-24 — Content-verified custody public preparation
+
+Owner adopts the [new model and independent preparation](planning/p17_m2_content_verified_custody_protocol.md)
+with NEW executor6h/different-author4h continuous caps. [Public evidence](validation/p17_m2_content_verified_custody_preparation.md)
+records original S1/S2/S3 implementation, new40/558/1071 same-buffer/tuple/native/
+actual-return/lease/billing controls and failed-path regressions. Provider UNKNOWN
+stays; no never-sync/external-writer-exclusion guarantee is claimed for this new
+model. No target probe/create, original read/copy, formal role, B/C, old quota or
+scientific Gate change. Complete normal protected publication and stop for separate
+source/formal/result authority. P/17 remains unrepaired and uniform default.
+
 ## 2026-10-23 — R-LOCAL/v2 target decision before public fixture
 
 The owner grants NEW4h/3h metadata-first preparation under a
