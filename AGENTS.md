@@ -16,18 +16,21 @@ At session start, slice start and context recovery, read these files in order:
 10. `docs/repository_policy.md` before staging or publishing changes.
 
 ## Current state and execution entry
-Read the [conditional source-acquisition authority](docs/planning/p17_m2_source_acquisition_execution_protocol.md)
-and [actual validation](docs/validation/p17_m2_source_acquisition_execution.md).
-Owner grants NEW readiness2h/2h, commonformal4500/FULL3600 and result2h/2h
-includingfiling180; overall18900s each continuously. Prior4h/3h is sealed CLOSED.
-New different author; regression-first minimum test-fixture compatibility, actual
-independent metadata preflight and clean locked protected exact PR/main all4 CI
-precede unique T0. Readiness grants no old-original/target IO. Setup300 and first
-native public PASS precede source reads; independent R0 acceptance precedes R1.
-Exact frozen sources/target only; first failure STOP/no retry or fallback directory.
-Complete acquisition or concrete STOP, finite result publication/retention and
-stop. B/C/science/old quota reset stay closed; provider coverage UNKNOWN under
-the adopted content-verified model. Preserve all existing uncommitted changes.
+Read the [frozen source-acquisition authority](docs/planning/p17_m2_source_acquisition_execution_protocol.md)
+and [actual STOP result](docs/validation/p17_m2_source_acquisition_execution.md).
+Formal v1 is CLOSED_STOP_NO_RETRY: source PR222/main e890cb7/all-four CI40222089168
+preceded unique setup and3/6 actual roles. Public PASS; exporter R0 stopped on
+13th metadata fstat mtime+89ns,12 completed hashes; independent R0/R1 unlaunched,
+payload0 and input version unaccepted. Shared returned the original STOP while
+checking171 NEW failed-prefix backup members; complete packets/costs remain.
+FULL900 paid once,2700 unused closed. No retry/reset, fallback directory or filing/
+release/certificate; failed generation/HELD cooperative lease stay quarantined.
+Finish only this grant's finite result review/checks/protected PR/main CI and
+immutable NEW retention inside same result deadline21:11:53.915Z2026-10-25, then
+STOP. External actual-return closure controls publication completion. Future
+work needs a new finite owner decision; no automatic successor or B/C/science.
+Provider/writer cause UNKNOWN; preserve25 existing uncommitted files and all
+old FAIL/cost/UNKNOWN/quota/seal facts. Production/test/authority bytes stay frozen.
 
 Historical v1 is a usable interim delivery. The owner retains
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE**, fixed P/17/unrepaired,4GiB and independent

@@ -1662,3 +1662,9 @@ source/reader/native algorithms retain80f9eb8 bytes. No external implementation
 or upstream/Hack3D content is introduced. Actual later owner-granted source
 acquisition, if entered, is recorded separately in its validation report; public
 software checks do not establish input or scientific acceptance.
+
+This same owner's later gated once-only acquisition actually reads13 bounded
+metadata originals from TopoLab's own prior B3/B4 records;12 hashes complete before
+mtime identity STOP. No payload/model execution, external implementation or new
+numerical method is imported. Shared copies only171 NEW failed-prefix evidence
+members; result retention never rereads old originals. See the actual supplement.
