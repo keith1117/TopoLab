@@ -16,17 +16,18 @@ At session start, slice start and context recovery, read these files in order:
 10. `docs/repository_policy.md` before staging or publishing changes.
 
 ## Current state and execution entry
-Read the [formal-adapter preparation authority](docs/planning/p17_m2_source_acquisition_adapter_preparation_protocol.md)
-and [actual report](docs/validation/p17_m2_source_acquisition_adapter_preparation.md)
-before dependent work. Owner grants NEW4h/3h public-data preparation only;
-close checks/protected PR/main CI, independent review and retained evidence within
-those continuous caps, then STOP. External actual-return closure controls completion.
-The source-acquisition identity binds fixed source/content/backup and deferred
-setup to native/return/lease/cost checks; actual source/target admission is unobserved.
-Old originals, proposed custody target, formal six roles, B/C and old quotas stay
-closed. After closure the next item is a separate compatible execution/source/
-target/formal/result authority decision, never automatic activation.
-Provider coverage remains UNKNOWN under the adopted content-verified model.
+Read the [conditional source-acquisition authority](docs/planning/p17_m2_source_acquisition_execution_protocol.md)
+and [actual validation](docs/validation/p17_m2_source_acquisition_execution.md).
+Owner grants NEW readiness2h/2h, commonformal4500/FULL3600 and result2h/2h
+includingfiling180; overall18900s each continuously. Prior4h/3h is sealed CLOSED.
+New different author; regression-first minimum test-fixture compatibility, actual
+independent metadata preflight and clean locked protected exact PR/main all4 CI
+precede unique T0. Readiness grants no old-original/target IO. Setup300 and first
+native public PASS precede source reads; independent R0 acceptance precedes R1.
+Exact frozen sources/target only; first failure STOP/no retry or fallback directory.
+Complete acquisition or concrete STOP, finite result publication/retention and
+stop. B/C/science/old quota reset stay closed; provider coverage UNKNOWN under
+the adopted content-verified model. Preserve all existing uncommitted changes.
 
 Historical v1 is a usable interim delivery. The owner retains
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE**, fixed P/17/unrepaired,4GiB and independent

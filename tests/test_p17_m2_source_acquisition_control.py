@@ -42,6 +42,7 @@ def load():
 
 def test_formal_entry_denies_before_inspecting_any_scientific_path(monkeypatch):
     controller = load()
+    monkeypatch.setattr(controller, "EXECUTION_AUTHORITY_RAW", None)
 
     def forbidden(*args, **kwargs):
         pytest.fail("ungranted formal entry reached filesystem")
@@ -283,10 +284,49 @@ def future_authority():
     }
 
 
+@pytest.mark.parametrize("authority_present", [False, True])
+def test_preparation_checks_are_isolated_from_optional_execution_authority(
+    tmp_path, authority_present
+):
+    """The ungranted and pure-plan checks must work after authority publication too."""
+    program = frozen_program(tmp_path)
+    runtime = program.parents[1]
+    copied_test = runtime / "tests" / Path(__file__).name
+    copied_test.parent.mkdir()
+    copied_test.write_bytes(Path(__file__).read_bytes())
+    if authority_present:
+        (runtime / "docs/planning/p17_m2_source_acquisition_execution_protocol.json").write_text(
+            json.dumps(future_authority())
+        )
+    observed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-m",
+            "pytest",
+            "-q",
+            str(copied_test)
+            + "::test_formal_entry_denies_before_inspecting_any_scientific_path",
+            str(copied_test)
+            + (
+                "::test_formal_plan_metadata_uses_frozen_original_contract"
+                "_without_touching_declared_paths"
+            ),
+        ],
+        cwd=runtime,
+        capture_output=True,
+        text=True,
+        timeout=60,
+        env={**single_thread_environment(), "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"},
+    )
+    assert observed.returncode == 0, observed.stdout + observed.stderr
+
+
 def test_formal_plan_metadata_uses_frozen_original_contract_without_touching_declared_paths(
     monkeypatch,
 ):
     controller = load()
+    monkeypatch.setattr(controller, "EXECUTION_AUTHORITY_RAW", None)
     controller.base()  # Software imports only, before blocking data-directory operations.
 
     def forbidden(*args, **kwargs):

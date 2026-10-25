@@ -2433,6 +2433,21 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
+Owner2026-10-25 approves NEW [conditional formal acquisition](p17_m2_source_acquisition_execution_protocol.md)
+([JSON](p17_m2_source_acquisition_execution_protocol.json)), exact source/target
+exception and new different author; readiness7200/7200, common4500/FULL3600,
+result7200/7200 includingfiling180, overall18900 each continuously. It binds the
+sealed PR221/main80f9eb8 preparation closure62977ea6; old4h/3h closes without
+transfer. [Actual frontier](../validation/p17_m2_source_acquisition_execution.md)
+requires minimal public test-fixture isolation, independent metadata preflight,
+full checks and clean protected exact PR/main all4 CI before T0. Source/target
+facts remain deferred to unique setup300 and independent R0/R1, never presumed
+from public software. Exact40 metadata then accepted558 references only; first
+failure STOP, no retry or new directory route. Acquire input-only version or
+retain concrete STOP, publish finite result and stop. No B/C/scientific repair,
+old quota reopening or automatic successor. Earlier entries retain closed scopes.
+
+
 Owner2026-10-25 authorizes NEW [formal-adapter public preparation](p17_m2_source_acquisition_adapter_preparation_protocol.md)
 only, executor4h/different-author3h continuously through actual publication returns.
 [Capability/evidence](../validation/p17_m2_source_acquisition_adapter_preparation.md)

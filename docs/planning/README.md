@@ -1,5 +1,12 @@
 # Planning index
 
+Latest [conditional source-acquisition authority](p17_m2_source_acquisition_execution_protocol.md)
+([JSON](p17_m2_source_acquisition_execution_protocol.json), [adopted preserved draft](p17_m2_source_acquisition_execution_authorization_draft.md))
+grants NEW readiness2h/2h, commonformal4500/FULL3600 and result2h/2h including
+filing180. [Actual evidence](../validation/p17_m2_source_acquisition_execution.md)
+retains source/target gates, once-only role calls and science/B/C closure.
+
+
 Latest [source-acquisition formal-adapter preparation](p17_m2_source_acquisition_adapter_preparation_protocol.md)
 ([JSON](p17_m2_source_acquisition_adapter_preparation_protocol.json), [preserved source/target/budget proposal](p17_m2_content_verified_source_acquisition_proposal.md))
 grants NEW4h/3h public preparation only. [Actual evidence](../validation/p17_m2_source_acquisition_adapter_preparation.md)
