@@ -1,10 +1,11 @@
 # Validation evidence index
 
-Latest [source-acquisition actual evidence](p17_m2_source_acquisition_execution.md)
-separates new public fixture compatibility/readiness from conditional formal
-source/target/input acceptance. Every failure/time/FULL and pending fact is
-retained; no B/C or seed17 repair is claimed.
-
+Latest [fixed-source acquisition STOP](p17_m2_source_acquisition_execution.md)
+and [different-author result review](p17_m2_source_acquisition_execution_result_independent_review.md):
+source identity failure at13th metadata,12 hashes, full context/native/returns/
+costs and171 NEW-prefix backup. No R1/input acceptance or P17 repair; only finite
+result publication/retention remains, then STOP. Future facts stay pending until
+actual external closure; no source retry/B/C follows.
 
 Latest [source-acquisition formal-adapter preparation](p17_m2_source_acquisition_adapter_preparation.md):
 NEW4h/3h, new public40/558/1071/native/return/lease/billing bindings only.

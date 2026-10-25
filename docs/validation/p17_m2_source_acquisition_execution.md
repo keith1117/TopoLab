@@ -126,3 +126,146 @@ only supplied actual stdout, never an on-disk pending packet. Independent
 positive/negative controls and metadata clock-bracket observations are retained
 externally; these software checks are not formal/native-input acceptance.
 No target or source probe was needed for those observations.
+
+
+## Actual formal execution — source identity STOP, no retry
+
+Source [PR222](https://github.com/keith1117/TopoLab/pull/222), reviewed head8155f5b9,
+merged main `e890cb792c02cf48c5558965040c731bd0c4d001`/tree848843de and exact PR
+CI40219188995/main CI40222089168 all four jobs passed before activation. PR Linux
+2736 passed/6 platform skips in2017.46s; main2736/6 in1567.90s. Protection strict/
+admin/conversation/no-force/no-delete rules remained, unresolved threads0. Only
+this slice's merged remote branch was removed; local branch/worktree retained.
+Different-author final metadata receipt raw SHA
+03c7e072d8361dfc2d38960bc8a7393b7f8795c268607d88e9044616d4aa0304
+and root's actual final metadata/tool-return journal122bc244 confirmed actors,
+runtime, source/authority/test, prior dual closure and original continuous clocks.
+At that point target/source/native future facts remained UNKNOWN, not assumed PASS.
+
+The once-only setup succeeded: T0=1792955161.553 (19:06:01.553Z), formal deadline
+20:21:01.553Z, plan SHA
+`a9e013196803bb3c00cdf7b710a53a2f066a60fb3f8b35800f40e6d2fbc1f84b`.
+Setup0.018166065216064453s; actual private generation/lease, writable APFS
+MNT_LOCAL and14743068672 available bytes satisfy the fixed target checks.
+Backup was absent/reserved, not yet created. Source stat/read0 until independent
+public acceptance. This proves local filesystem facts, no never-upload/provider
+or external-writer exclusion guarantee. Both readiness clocks ended within7200s;
+no old preparation budget resumed or unused allowance transferred.
+
+| Actual role | Result | Complete outer wall seconds | Native RSS envelope bytes | Frozen FULL seconds |
+|---|---|---:|---:|---:|
+| independent-public-check | full evidence accepted | 9.6900000572 | 220889088 | 300 |
+| exporter-r0 | original source identity STOP, evidence complete | 47.69099998474121 | 302333952 | 300 |
+| independent-r0 | unlaunched | UNKNOWN_NOT_RUN | UNKNOWN_NOT_RUN | unspent300 closed |
+| exporter-r1 | unlaunched | UNKNOWN_NOT_RUN | UNKNOWN_NOT_RUN | unspent1200 closed |
+| independent-r1 | unlaunched | UNKNOWN_NOT_RUN | UNKNOWN_NOT_RUN | unspent1200 closed |
+| shared-closeout | original STOP propagated; failed-prefix backup checked | 8.372999906539917 | 207519744 | prepaid300, no second charge |
+
+Actual supervise/record external exits are0/0 for each launched role. R0 and
+shared inner payload exits1 are retained, not inferred successful from outer0.
+Complete native components, wait4/high-water/profile/actual-exit/group cleanup,
+original stdout chunks and actual return-derived pending/completion hashes are
+retained. All measured envelopes are below4294967296; no formal resource gap
+is filled by public software RSS or claimed as full-fit evidence. R0 inner known
+minimum44.15871824976057s/shared10.598597083706409s and valid whole spans survive
+STOP. Formal FULL900 is paid once, including first-dispatch shared prepayment;
+2700 unused closes without refund/transfer. Monetary/host/CI cost UNKNOWN_NOT_ZERO.
+
+### Confirmed source observation and remaining cause uncertainty
+
+Only exporter R0 accessed old originals:13 metadata attempts,12 completed
+hashes/2633946 bytes. Ordinal13 is
+`b3-v1-fits/artifacts/selection/d89c9338875bf544f480350619df774f8c56523880169c0863589e33474eb7d5.json`.
+It returned10668 bytes, matching unchanged size10668. Before mtime_ns
+1790843026136346728; after1790843026136346817, difference+89ns; device/inode/size
+unchanged. Stage `after_read_identity`, reason `STOP: source changed`, closing
+null, hash not completed/UNKNOWN, secondary errors empty. Known returned bytes
+including failed capture2644614; no refill, re-read or original archive read.
+
+The [frozen reader](../../scripts/p17_m2_input_export.py) takes direct integer
+st_mtime_ns values and compares before/after os.fstat on the same descriptor
+(lines164–166,220–238 at source main e890cb7). Thus this observation is not a
+short-read length rejection or a JavaScript display-rounding artifact. It proves
+the recorded identity gate failed; it does not prove content bytes changed,
+which writer/system mechanism acted, or iCloud/OneDrive causation. Those causes
+remain UNKNOWN; no diagnostic experiment or additional original access follows.
+
+Complete source facts,12-row read/identity prefix, ordinal13 failure tuple/bytes/
+primary error and secondary[] are in NEW role command.log, raw SHA
+abada753090fcf7f9eae7f8d9701ae48904a3c737df58469bfd0b1da5f3575e6.
+The root-level `failure.json` is absent; shared later materializes the same full
+packet as `exporter-r0-failure.json` plus source-failure JSONL. Do not claim a
+missing basename exists or replace full context with the small STOP summary.
+Independent old-original reads0. Payload stat/read0; independent R0 never closes
+558-reference registry, no1071-member content/version or scientific consumption.
+
+### Sole prepaid shared exception and finite STOP frontier
+
+Different author reconstructed actual2event arrays from raw chunks/stdout and
+verified both prefix closed_attempt proofs, all groups/returns, no active role,
+prepaid300 and actual remaining>=900 before sole shared dispatch. Receipt SHA
+afdf4520a3d6407185584b439d81b8daf1978a4eb2eb89d03fea3a34c2f1bc93.
+Shared command log7cceae9a records `SOURCE_ACQUISITION_FAILED_PREFIX_BACKUP_CHECKED`:
+171 NEW metadata/profile/failed-context members,484193 bytes, exact fixed backup,
+separate file inodes, old_original_reads0. This is failed-prefix evidence backup,
+not1071 accepted input backup. Shared status/inner exit retain original STOP;
+they do not establish a second backup implementation failure. Independent result
+review binds the actual snapshot verification separately.
+
+The complete shared packet raw SHA
+86a35a1563a121a727afe9f1660dbc28379e13de860ea16bd4f66e885b1b75df
+retains all3 attempted-role raw packets and3 missing-unlaunched-role secondary
+FileNotFoundErrors as UNKNOWN_NOT_ZERO; it is never trimmed into a PASS. The
+success-path backup-proof.json is absent; failed-prefix proof remains in shared
+native output. Shared actual source/helper/native/outer/failure costs are retained.
+No second shared action or formal suffix is allowed.
+
+Actual shared record final outer return T_result=1792955513.915
+(19:11:53.915Z) closes formal352.3619999885559s after T0, within4500s, and starts
+BOTH result7200s immediately: deadline21:11:53.915Z. Hash/persist/bind/independent
+review, all checks, CI, retention and final returns after that instant count here.
+Filing/release/certificate are unlaunched because all-six/closed-input prerequisites
+fail. Actual cooperative lease stays HELD and the failed generation/backup private
+and quarantined; no consumer permission or replacement target is created.
+
+[New independent result review](p17_m2_source_acquisition_execution_result_independent_review.md)
+and external final closure govern finite result publication/retention/actual-return
+completion. At this result authoring those later checks/PR/main CI and immutable
+dual retention are still PENDING, not predicted successes. Only NEW formal raw
+metadata/native/source-context/return/lease/cost, software logs/sources and actual
+publication/preservation receipts enter the two fixed result-retention directories.
+Complete pytest temporary trees/venv/cache are excluded and disclosed; no critical
+formal raw evidence may be omitted. No automatic after-CI source commit cycle.
+
+Fixed P17 remains unrepaired, uniform default, full v2 open, full-fit PENDING4GiB;
+known scientific-paid12721.16417100014444982>7200 and all old FAIL/UNKNOWN/costs/
+quotas/seals persist. After finite result closure STOP. Next possible work is a
+separate finite owner decision addressing this observed source-identity blocker;
+no old reread, attribution experiment, production fix, new directory or B/C is
+commissioned by this report.
+
+
+### Actual result-stage local checks and core retention frontier
+
+Result locked sync/Ruff/mypy pass; full local pytest2741 passed/1 Darwin platform
+skip in1471.74s (actual outer1474.904655s, exit0). Raw log SHA
+`de30d5759e4d804486118f6e574f059a3f4c9aa9bdad7001c13b6c8909397984`.
+Nine reviewed documentation paths only;22 frozen production/contract blobs,
+authority/test/first review and25 pre-existing dirty files remain unchanged.
+Both fixed result directories now contain the core archive SHA
+`5e37ea0b7929d78f2aa8346a8fa3d34e903fb72bafd6715cf157f6d01722a964`:566
+NEW evidence/software members,9214628 uncompressed bytes. Different author
+independently verifies every member and replays all three native closed-attempt
+proofs from archive bytes; private audit SHA
+`01535b0829d3baa11e43375556059cd9f4d4def5bb53efd070d59c491067ea4b`.
+These two copies are still UNSEALED. Exact result PR/main CI, publication-tail
+archive and final immutable seal/actual returns remain pending until external
+closure. Static helper review is not evidence of those future actions.
+
+An initial result publication preservation guard failed its same-descriptor
+before/after identity assertion while reading existing dirty software files;
+its old assertion retained no filename/tuple context, so that cause is UNKNOWN.
+The shell's later diff-check exit0 does not make the failed guard PASS. A fresh
+context-only guard (same strict rules, no tolerance change) actually passed all
+25 baseline byte hashes/heads/indices/status at19:43:19.825194Z, outer exit0. Both
+observations remain external; neither is a scientific-source read or formal retry.

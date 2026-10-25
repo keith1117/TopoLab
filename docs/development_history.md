@@ -2385,7 +2385,7 @@ source admission, scientific Gates and all STOP/window/billing rules retain scop
 Close normal publication and STOP; no automatic successor.
 
 
-## 2026-10-25 — Conditional fixed-source acquisition authority
+## 2026-10-25 — Fixed-source acquisition STOP with complete failure context
 
 Owner adopts exact draft401c3261 and sealed dual preparation closure62977ea6,
 with NEW readiness2h/2h, commonformal4500/FULL3600 and result2h/2h including
@@ -2397,3 +2397,10 @@ observed preparation from pending source/target/formal gates. No production
 rule/reader/native/STOP/window/billing change; no B/C, old retry/reset or science
 claim. Acquire once after full readiness or retain STOP, close finite result and
 stop; source/target must remain untouched until their exact conditional gates.
+
+Actual source PR222/main e890cb7/four main CI passed; unique safe setup/public
+PASS precede R0 STOP at13th metadata fstat mtime+89ns (12 completed hashes).
+No R1/accepted input; shared propagates original STOP and checks171 NEW-prefix
+backup members. All3 actual role/raw/resource/cost packets retained, FULL900
+paid/unused2700 closed. Complete finite result publication inside original
+same-start2h/2h then STOP; cause UNKNOWN, no automatic retry/B/C or science claim.
