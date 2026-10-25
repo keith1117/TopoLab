@@ -168,6 +168,23 @@ are recorded by the final external publication receipt after their actual return
 At this authoring those publication obligations remain pending; no pending fact
 is a preparation-complete or formal-access claim.
 
+### PR CI test-environment correction
+
+The first exact-head PR221 run40175603886 at commit
+`9f3aa873dc40ff44c5e0b6cab275376911c03a35` failed quality:2731 passed,
+3 failed and6 skipped. The three new subprocess tests omitted the five explicit
+single-thread environment values; the production runtime correctly refused with
+`ISOLATED_SINGLE_THREAD_RUNTIME_REQUIRED`. Local full-suite resource settings had
+masked this test-harness dependency. A fresh public native-precheck test with all
+five parent values absent reproduced the failure before correction. The minimal
+test-only correction supplies those values explicitly to the successful CLI
+subprocesses; production runtime/STOP/window/billing checks retain their bytes.
+The failed CI and pre-correction core archive remain their original source
+frontier. Subsequent local checks, independently reviewed test delta, exact-head
+PR/main CI and actual returns require new append-only evidence; they are pending
+until observed. The original continuous4h/3h clocks include this correction and
+all waiting, with no new allowance or preparation-complete claim.
+
 Executor clock starts06:43:00.864171Z/mono2201255.329195791, cap14400s;
 independent starts06:43:33.490189Z/mono2201287.955256416, cap10800s.
 Failures, waiting, complete tests, PR/main CI, retention/publication and actual

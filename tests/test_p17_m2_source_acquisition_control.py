@@ -15,6 +15,22 @@ REPO = Path(__file__).parents[1]
 ENTRY = REPO / "scripts/p17_m2_source_acquisition_control.py"
 
 
+def single_thread_environment():
+    return {
+        **os.environ,
+        **dict.fromkeys(
+            (
+                "OMP_NUM_THREADS",
+                "OPENBLAS_NUM_THREADS",
+                "MKL_NUM_THREADS",
+                "VECLIB_MAXIMUM_THREADS",
+                "NUMEXPR_NUM_THREADS",
+            ),
+            "1",
+        ),
+    }
+
+
 def load():
     spec = importlib.util.spec_from_file_location("source_acquisition_control_test", ENTRY)
     assert spec and spec.loader
@@ -51,6 +67,7 @@ def test_rehearsal_freezes_new_identity_and_explicit_nonformal_source_target_bin
         cwd=REPO,
         capture_output=True,
         text=True,
+        env=single_thread_environment(),
         check=False,
     )
     assert result.returncode == 0, result.stderr
@@ -77,13 +94,24 @@ def test_new_binding_native_precheck_keeps_actual_new_identity_and_full_exit_inv
         cwd=Path(argv[2]).parents[1],
         capture_output=True,
         text=True,
+        env=single_thread_environment(),
         check=True,
     )
     plan_sha = json.loads(prepared.stdout)["plan_sha256"]
     args = ["--root", str(root), "--plan-sha", plan_sha, "--role", "independent-public-check"]
-    started = subprocess.run([*argv, "supervise", *args], capture_output=True, text=True)
+    started = subprocess.run(
+        [*argv, "supervise", *args],
+        capture_output=True,
+        text=True,
+        env=single_thread_environment(),
+    )
     assert started.returncode == 0, started.stderr
-    returned = subprocess.run([*argv, "record", *args], capture_output=True, text=True)
+    returned = subprocess.run(
+        [*argv, "record", *args],
+        capture_output=True,
+        text=True,
+        env=single_thread_environment(),
+    )
     assert returned.returncode == 0, returned.stderr
     packet = json.loads(returned.stdout)
     assert packet["pending"]["execution_identity"] == (
@@ -127,7 +155,11 @@ def run_rehearsal_role(argv, root, plan_sha, role, *, accepted=True):
             command += ["--reader-role", "scientific-producer"]
         start = round(time.time(), 3)
         result = subprocess.run(
-            command, cwd=Path(argv[2]).parents[1], capture_output=True, text=True
+            command,
+            cwd=Path(argv[2]).parents[1],
+            capture_output=True,
+            text=True,
+            env=single_thread_environment(),
         )
         end = round(time.time(), 3)
         event = dict(
@@ -167,6 +199,7 @@ def run_rehearsal_role(argv, root, plan_sha, role, *, accepted=True):
         cwd=Path(argv[2]).parents[1],
         capture_output=True,
         text=True,
+        env=single_thread_environment(),
     )
     assert result.returncode == (0 if accepted else 1), result.stderr + result.stdout
     proof = json.loads(result.stdout)
@@ -186,6 +219,7 @@ def test_connected_new_binding_rehearsal_has_independent_source_and_finite_certi
         cwd=Path(argv[2]).parents[1],
         capture_output=True,
         text=True,
+        env=single_thread_environment(),
         check=True,
     )
     plan_sha = json.loads(result.stdout)["plan_sha256"]
@@ -214,6 +248,7 @@ def test_connected_new_binding_rehearsal_has_independent_source_and_finite_certi
         cwd=program.parents[1],
         capture_output=True,
         text=True,
+        env=single_thread_environment(),
     )
     assert certified.returncode == 0, certified.stderr + certified.stdout
     proof = json.loads(certified.stdout)
@@ -349,6 +384,7 @@ def test_new_source_failure_keeps_full_prefix_charge_and_permits_only_reserved_c
         cwd=program.parents[1],
         capture_output=True,
         text=True,
+        env=single_thread_environment(),
         check=True,
     )
     plan_sha = json.loads(prepared.stdout)["plan_sha256"]
@@ -384,6 +420,7 @@ def test_changed_deferred_setup_binding_blocks_first_native_dispatch(tmp_path):
         cwd=program.parents[1],
         capture_output=True,
         text=True,
+        env=single_thread_environment(),
         check=True,
     )
     plan_sha = json.loads(prepared.stdout)["plan_sha256"]
@@ -405,6 +442,7 @@ def test_changed_deferred_setup_binding_blocks_first_native_dispatch(tmp_path):
         cwd=program.parents[1],
         capture_output=True,
         text=True,
+        env=single_thread_environment(),
     )
     assert result.returncode != 0
     assert "SETUP_BINDING_CHANGED" in result.stderr
