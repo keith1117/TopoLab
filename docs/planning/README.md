@@ -1,5 +1,10 @@
 # Planning index
 
+Latest [source-acquisition formal-adapter preparation](p17_m2_source_acquisition_adapter_preparation_protocol.md)
+([JSON](p17_m2_source_acquisition_adapter_preparation_protocol.json), [preserved source/target/budget proposal](p17_m2_content_verified_source_acquisition_proposal.md))
+grants NEW4h/3h public preparation only. [Actual evidence](../validation/p17_m2_source_acquisition_adapter_preparation.md)
+keeps formal/source/target/B/C closed and stops after normal publication.
+
 Latest owner-adopted [content-verified custody public preparation](p17_m2_content_verified_custody_protocol.md)
 ([JSON](p17_m2_content_verified_custody_protocol.json), [approved proposal](p17_m2_content_verified_custody_proposal.md))
 grants NEW6h/4h public preparation only. [Evidence and limitations](../validation/p17_m2_content_verified_custody_preparation.md)

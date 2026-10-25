@@ -8,6 +8,18 @@ next slice or a development primary describe their historical context.
 Read [project status](project_status.md) for the current boundary and
 [validation reports](validation/README.md) for the authoritative evidence.
 
+## 2026-10-25 — Source-acquisition formal adapter public preparation
+
+Owner grants NEW4h/3h under the [preparation-only authority](planning/p17_m2_source_acquisition_adapter_preparation_protocol.md).
+[Regression and evidence](validation/p17_m2_source_acquisition_adapter_preparation.md)
+bind the new actor's exact source/content/backup projection, deferred setup,
+native/actual returns/lease/FULL accounting and scope-specific independent
+certificate, tested with new public data only. Full checks, protected publication,
+retention and actual final returns control closure inside those continuous caps.
+Actual old source/target/formal/B/C0, no quota reset or scientific delta; fixed
+P/17 remains unrepaired. Stop for a separately approved compatible execution
+protocol, source/target and formal/result budgets; no automatic six-role start.
+
 ## 2026-10-24 — Content-verified custody public preparation
 
 Owner adopts the [new model and independent preparation](planning/p17_m2_content_verified_custody_protocol.md)

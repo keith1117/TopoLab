@@ -2433,6 +2433,19 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
+Owner2026-10-25 authorizes NEW [formal-adapter public preparation](p17_m2_source_acquisition_adapter_preparation_protocol.md)
+only, executor4h/different-author3h continuously through actual publication returns.
+[Capability/evidence](../validation/p17_m2_source_acquisition_adapter_preparation.md)
+binds the new source-acquisition identity, exact source/content/backup projection,
+deferred setup and independent native/return/lease/cost certificate. Only NEW
+public fixtures run; actual source/target/formal/B/C0 and P/17 remains unrepaired.
+Close this preparation's full checks/protected PR+main four-CI/retention and stop.
+External closure controls completion; source/target/new formal4500/FULL3600 and
+result2h/2h/filing180 remain a separate explicit owner decision. R0 acceptance
+precedes R1; complete inputs precede separately admitted B resources and C repair.
+No old grant transfers, no target/provider investigation or automatic successor.
+Earlier entries below retain their historical authoring scope and closed clocks.
+
 Owner2026-10-24 adopts a NEW [content-verified custody preparation](p17_m2_content_verified_custody_protocol.md)
 under new6h/4h continuous clocks, limited to public software and independent review.
 The new acceptance object is independently source-attested fixed content plus the

@@ -1640,3 +1640,15 @@ old formal calls are never relabelled as this new actor. The connected bounded
 public graph is newly authored and contains no historical scientific input.
 No upstream/reference implementation, old original, model execution, external
 source or target probe is introduced. See [validation](docs/validation/p17_m2_content_verified_custody_preparation.md).
+
+## 2026-10-25 — Source-acquisition binding preparation
+
+Original TopoLab explicit orchestration adapters and separately authored source/
+raw-evidence policy extend the existing owned native/read/transcription algorithms;
+helper identities remain disclosed and old formal calls are not relabelled.
+New scope-specific capability/reader and deferred setup bindings use new public
+fixtures only. Darwin statfs64 layout and MNT_LOCAL derive from the locally
+installed Apple SDK sys/mount.h interface; only a new public temporary directory
+exercised that interface, never the proposed custody target. No Hack3D code,
+external implementation, historical source payload or model execution is imported.
+See [validation](docs/validation/p17_m2_source_acquisition_adapter_preparation.md).

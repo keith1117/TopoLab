@@ -1,11 +1,37 @@
 # Current project status
 
-Updated:2026-10-24. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-10-25. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: content-verified custody public preparation (2026-10-24)
+## Current: source-acquisition formal adapter public preparation (2026-10-25)
+
+Owner grants NEW executor4h/different-author3h preparation under the
+[effective protocol](planning/p17_m2_source_acquisition_adapter_preparation_protocol.md)
+([JSON](planning/p17_m2_source_acquisition_adapter_preparation_protocol.json)).
+[Actual report](validation/p17_m2_source_acquisition_adapter_preparation.md) records
+regression-first NEW identity/source-content-backup/runtime/native/setup/lease/
+return/cost bindings and separate scope-specific independent acceptance. This
+resolves a software binding task only. Formal0/6, old originals0, actual target0,
+B/C0 and old quota reset0; P/17 and scientific progress remain unchanged.
+
+Finish this one preparation through all five local checks, independent review,
+protected exact-head PR/main four-job CI, immutable NEW software retention and
+both actual final returns inside the original clocks. External closure controls
+FORMAL_BINDING_PREPARATION_COMPLETE_FORMAL_CLOSED. Then STOP; the only next item
+is a separate compatible exact source/target/setup/formal/result authority decision.
+Formal4500/FULL3600 and result2h/2h/filing180 are proposals, not grants. Actual
+source lineage/558 registry, target locality/capacity/lease, native resource and
+six-role acceptance remain UNKNOWN_NOT_RUN. No third directory/probe or B/C.
+
+The previous6h/4h public preparation closed through
+[PR220](https://github.com/keith1117/TopoLab/pull/220), main
+`ebf59a78c95e8279e4a9f444e856cf108b78ad0b`; its external closure and all-four
+exact-main CI40077463035 retain their scope and closed budgets. Frozen reports
+below retain their authoring frontier; no old allowance transfers.
+
+## Historical: content-verified custody public preparation (2026-10-24)
 
 Owner adopts the [new content-verified model and preparation protocol](planning/p17_m2_content_verified_custody_protocol.md)
 ([authority/continuous clocks](planning/p17_m2_content_verified_custody_protocol.json)):
@@ -421,10 +447,10 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 ## Unique next item: separate source/formal/result authority decision
 
-After this content-verified public preparation's actual protected publication and
+After this formal-adapter public preparation's actual protected publication and
 external closure, stop. The next decision is one concrete prospective contract
 for the exact source whitelist, real target/private-root binding, compatible
-execution identity, fresh six-role4500s window and result7200s/3600s including
+execution identity, fresh six-role4500s window and result7200s/7200s including
 filing FULL180. Keep the already approved content/tuple/one-read/4GiB/FULL rules;
 public certificates cannot authorize original sources or scientific consumers.
 The new custody model retains provider UNKNOWN without requiring a never-sync

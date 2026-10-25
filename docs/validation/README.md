@@ -1,5 +1,11 @@
 # Validation evidence index
 
+Latest [source-acquisition formal-adapter preparation](p17_m2_source_acquisition_adapter_preparation.md):
+NEW4h/3h, new public40/558/1071/native/return/lease/billing bindings only.
+Actual old source/target/formal/B/C0; P/17 unchanged. External closure records
+full checks, protected PR/main CI, retention and actual final-return frontier.
+See the [different-author review](p17_m2_source_acquisition_adapter_independent_review.md).
+
 Reports retain completed checks, failed Gates, source revisions, complete charges,
 limitations and external artifact identities. A report's existence or successful
 resource audit does not imply that its scientific Gate passed.

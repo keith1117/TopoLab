@@ -16,15 +16,17 @@ At session start, slice start and context recovery, read these files in order:
 10. `docs/repository_policy.md` before staging or publishing changes.
 
 ## Current state and execution entry
-Read the latest [content-verified preparation authority](docs/planning/p17_m2_content_verified_custody_protocol.md)
-and [actual preparation report](docs/validation/p17_m2_content_verified_custody_preparation.md)
-before dependent work. Owner adopts the new custody model and NEW6h/4h public
-preparation only; finish checks/protected publication/retention within those
-continuous clocks, then STOP for separate source/formal/result authority.
-Sync coverage stays UNKNOWN; new acceptance uses independently attested fixed
-content and same-read consumption, with all physical identities/STOP/cost rules.
-No target probe/create, old original read/copy, formal six roles, B/C or old quota
-reuse is granted. The final external closure controls preparation completion.
+Read the [formal-adapter preparation authority](docs/planning/p17_m2_source_acquisition_adapter_preparation_protocol.md)
+and [actual report](docs/validation/p17_m2_source_acquisition_adapter_preparation.md)
+before dependent work. Owner grants NEW4h/3h public-data preparation only;
+close checks/protected PR/main CI, independent review and retained evidence within
+those continuous caps, then STOP. External actual-return closure controls completion.
+The source-acquisition identity binds fixed source/content/backup and deferred
+setup to native/return/lease/cost checks; actual source/target admission is unobserved.
+Old originals, proposed custody target, formal six roles, B/C and old quotas stay
+closed. After closure the next item is a separate compatible execution/source/
+target/formal/result authority decision, never automatic activation.
+Provider coverage remains UNKNOWN under the adopted content-verified model.
 
 Historical v1 is a usable interim delivery. The owner retains
 **FULL_V2_OPEN_NO_ADMITTED_ROUTE**, fixed P/17/unrepaired,4GiB and independent

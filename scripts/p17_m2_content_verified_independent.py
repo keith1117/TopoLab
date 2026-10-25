@@ -101,6 +101,7 @@ def audit_resources(
     *,
     inner_evidence: dict[str, Any] | None,
     native_profiles: dict[str, bytes] | None,
+    expected_identity: str = EXECUTION_IDENTITY,
 ) -> dict[str, Any]:
     """Reconcile each actual PID once; inherited native parsing is independent code."""
     result: dict[str, Any] = {
@@ -125,7 +126,7 @@ def audit_resources(
         inner_problem = f"{type(error).__name__}: {error}"
     try:
         require(
-            completion["execution_identity"] == EXECUTION_IDENTITY,
+            completion["execution_identity"] == expected_identity,
             "resource execution identity differs",
         )
         components = completion["resource_components"]
@@ -243,17 +244,23 @@ def audit_resources(
     return result
 
 
-def _result_window(record: dict[str, Any]) -> tuple[float, float]:
+def _result_window(
+    record: dict[str, Any], *, result_seconds: tuple[int, int] = (7200, 3600)
+) -> tuple[float, float]:
+    require(
+        len(result_seconds) == 2 and all(type(v) is int and v > 0 for v in result_seconds),
+        "invalid result window profile",
+    )
     start = number(record["result_start_UTC_seconds"], positive=True)
     require(round(start * 1000) / 1000 == start, "result start clock resolution differs")
     expected = {
         actor: datetime.fromtimestamp(start + seconds, UTC)
         .isoformat(timespec="milliseconds")
         .replace("+00:00", "Z")
-        for actor, seconds in (("exporter", 7200), ("independent", 3600))
+        for actor, seconds in zip(("exporter", "independent"), result_seconds, strict=True)
     }
     require(record["result_deadlines_UTC"] == expected, "immutable result deadlines differ")
-    return start, start + 3600
+    return start, start + min(result_seconds)
 
 
 def evidence_digest(value: Any) -> str | None:
@@ -282,13 +289,15 @@ def audit_role(
     expected_plan_sha256: str,
     inner_evidence: dict[str, Any] | None = None,
     native_profiles: dict[str, bytes] | None = None,
+    expected_identity: str = EXECUTION_IDENTITY,
+    result_seconds: tuple[int, int] = (7200, 3600),
 ) -> dict[str, Any]:
     """Reconcile actual outer intervals independently and preserve failed cost facts."""
     cap = FULL_SECONDS.get(expected_role)
     result: dict[str, Any] = {
         "status": "STOP_NO_RETRY",
         "reason": "OUTER_RETURN_MISSING",
-        "execution_identity": EXECUTION_IDENTITY,
+        "execution_identity": expected_identity,
         "role": expected_role,
         "plan_sha256": expected_plan_sha256,
         "pending_sha256": evidence_digest(pending),
@@ -314,7 +323,10 @@ def audit_role(
         else [],
     }
     resources = audit_resources(
-        completion, inner_evidence=inner_evidence, native_profiles=native_profiles
+        completion,
+        inner_evidence=inner_evidence,
+        native_profiles=native_profiles,
+        expected_identity=expected_identity,
     )
     result["resource_evidence"] = resources
     for key in ("RSS_envelope_bytes", "RSS_components_bytes", "inner_minimum_charge_seconds"):
@@ -368,7 +380,11 @@ def audit_role(
             result["known_cost_lower_bound_seconds"] = max(
                 result["known_cost_lower_bound_seconds"], math.ceil(minimum)
             )
-        window = _result_window if expected_role == "final-filing" else _window
+        window = (
+            (lambda record: _result_window(record, result_seconds=result_seconds))
+            if expected_role == "final-filing"
+            else _window
+        )
         activation, deadline = window(pending)
         if expected_role == "independent-public-check":
             require(
@@ -382,7 +398,7 @@ def audit_role(
             else "actual role outside immutable actor window",
         )
         require(
-            pending["execution_identity"] == EXECUTION_IDENTITY
+            pending["execution_identity"] == expected_identity
             and pending["role"] == expected_role
             and pending["plan_sha256"] == expected_plan_sha256
             and isinstance(expected_plan_sha256, str)
@@ -519,8 +535,8 @@ def _capture_read_failure(
         error.add_note("independent context attachment failed: " + type(secondary).__name__)
 
 
-def _checked_root(root: Path) -> dict[str, int]:
-    root = public_root(root)
+def _checked_root(root: Path, *, root_guard: Any = None) -> dict[str, int]:
+    root = public_root(root) if root_guard is None else root_guard(root)
     descriptor = base.nofollow_parent(root / ".root-identity")
     try:
         first = os.fstat(descriptor)
@@ -870,6 +886,30 @@ class CheckedPublicInput:
             "checked certificate cannot be serialized; replay the actual evidence bundle"
         )
 
+    def _reader_identity(self) -> str:
+        return EXECUTION_IDENTITY
+
+    def _reader_scope(self) -> str:
+        return PUBLIC_SCOPE
+
+    def _reader_result_seconds(self) -> tuple[int, int]:
+        return (7200, 3600)
+
+    def _reader_schema(self) -> str:
+        return "topolab.v2.m2-content-verified-public-reader-lease.v1"
+
+    def _reader_ack_status(self) -> str:
+        return "PUBLIC_READER_RETURN_ACKNOWLEDGED"
+
+    def _reader_source_digest(self) -> str:
+        return digest(Path(__file__).read_bytes())
+
+    def _reader_root(self, root: Path) -> Path:
+        return public_root(root)
+
+    def _reader_root_identity(self, root: Path) -> dict[str, int]:
+        return _checked_root(root)
+
     def _reader_argv(self, action: str, role: str) -> list[str]:
         require(not self._reader_failed, "STOP_NO_RETRY: public reader already failed")
         require(
@@ -888,12 +928,12 @@ class CheckedPublicInput:
         argv = self._reader_argv("public-consumer", role)
         require(getattr(sys, "orig_argv", None) == argv, "actual public reader orig_argv differs")
         require(
-            digest(Path(__file__).read_bytes()) == self._binding["independent_source_sha256"],
+            self._reader_source_digest() == self._binding["independent_source_sha256"],
             "reader verifier source freeze changed",
         )
-        root = public_root(Path(self._binding["root"]))
+        root = self._reader_root(Path(self._binding["root"]))
         require(
-            _checked_root(root) == self._binding["root_identity"],
+            self._reader_root_identity(root) == self._binding["root_identity"],
             "reader local root identity changed",
         )
         path = root.with_name(root.name + ".cooperative-reader.lease")
@@ -912,9 +952,9 @@ class CheckedPublicInput:
                 dir_fd=directory,
             )
             record = {
-                "schema": "topolab.v2.m2-content-verified-public-reader-lease.v1",
-                "scope": PUBLIC_SCOPE,
-                "execution_identity": EXECUTION_IDENTITY,
+                "schema": self._reader_schema(),
+                "scope": self._reader_scope(),
+                "execution_identity": self._reader_identity(),
                 "root": str(root),
                 "version_id": self._binding["version_id"],
                 "root_identity": self._binding["root_identity"],
@@ -948,7 +988,8 @@ class CheckedPublicInput:
         require(isinstance(reader_lease, CheckedReaderLease), "actual opaque reader lease required")
         reader_lease._assert_held(self, role)
         require(
-            _checked_root(Path(self._binding["root"])) == self._binding["root_identity"],
+            self._reader_root_identity(Path(self._binding["root"]))
+            == self._binding["root_identity"],
             "reader local root identity changed",
         )
         return self._readonly_binding
@@ -980,8 +1021,8 @@ class CheckedPublicInput:
         )
         require(
             receipt["status"] == "PENDING_ACTUAL_OUTER_RETURN"
-            and receipt["scope"] == PUBLIC_SCOPE
-            and receipt["execution_identity"] == EXECUTION_IDENTITY
+            and receipt["scope"] == self._reader_scope()
+            and receipt["execution_identity"] == self._reader_identity()
             and receipt["certificate_binding_sha256"] == self._certificate_id
             and receipt["root"] == self._binding["root"]
             and receipt["version_id"] == self._binding["version_id"]
@@ -1003,6 +1044,8 @@ class CheckedPublicInput:
             plan_sha256=self._binding["plan_sha256"],
             expected_argv=self._reader_argv("public-consumer", role),
             expected_role="public-consumer",
+            expected_identity=self._reader_identity(),
+            result_seconds=self._reader_result_seconds(),
         )
         require(observed["metadata_evidence_accepted"] is True, str(observed.get("reason")))
         require(
@@ -1046,8 +1089,8 @@ class CheckedPublicInput:
                 os.close(fd)
             os.close(directory)
         return {
-            "status": "PUBLIC_READER_RETURN_ACKNOWLEDGED",
-            "scope": PUBLIC_SCOPE,
+            "status": self._reader_ack_status(),
+            "scope": self._reader_scope(),
             "consumer_actual_exit_observed": True,
             "token": receipt["token"],
             "lease_state": "RELEASED",
@@ -1070,15 +1113,21 @@ def resolved_argv(plan: dict[str, Any], role: str, plan_sha: str) -> list[str]:
     return [word.replace("@PLAN_SHA256@", plan_sha) for word in words]
 
 
-def _proof(wire: dict[str, Any], expected_status: str) -> dict[str, Any]:
+def _proof(
+    wire: dict[str, Any],
+    expected_status: str,
+    *,
+    expected_identity: str = EXECUTION_IDENTITY,
+    expected_scope: str = PUBLIC_SCOPE,
+) -> dict[str, Any]:
     raw = wire["inner_evidence"]["log"]
     require(isinstance(raw, bytes) and 0 < len(raw) <= 16 * base.MIB, "actual proof log missing")
     proof = base.parse(raw, canonical_required=True)
     require(
         isinstance(proof, dict)
         and proof.get("status") == expected_status
-        and proof.get("execution_identity") == EXECUTION_IDENTITY
-        and proof.get("scope") == PUBLIC_SCOPE
+        and proof.get("execution_identity") == expected_identity
+        and proof.get("scope") == expected_scope
         and proof.get("B_C_admission") is False,
         "actual independent proof scope/status differs",
     )
@@ -1119,6 +1168,8 @@ def audit_metadata(
     plan_sha256: str,
     expected_argv: list[str],
     expected_role: str,
+    expected_identity: str = EXECUTION_IDENTITY,
+    result_seconds: tuple[int, int] = (7200, 3600),
 ) -> dict[str, Any]:
     """Audit actual metadata lifetime with no formal FULL or new allowance."""
     result: dict[str, Any] = {
@@ -1155,6 +1206,7 @@ def audit_metadata(
             completion,
             inner_evidence=wire["inner_evidence"],
             native_profiles=wire["native_profiles"],
+            expected_identity=expected_identity,
         )
         result["resource_evidence"] = resources
         result.update(
@@ -1174,7 +1226,7 @@ def audit_metadata(
         )
         for item in (pending, completion):
             require(
-                item["execution_identity"] == EXECUTION_IDENTITY
+                item["execution_identity"] == expected_identity
                 and item["role"] == expected_role
                 and item["plan_sha256"] == plan_sha256
                 and item["frozen_FULL_seconds"] is None
@@ -1219,6 +1271,8 @@ def audit_release(
     raw_tool_events: list[dict[str, Any]],
     plan_sha256: str,
     expected_argv: list[str],
+    expected_identity: str = EXECUTION_IDENTITY,
+    result_seconds: tuple[int, int] = (7200, 3600),
 ) -> dict[str, Any]:
     return audit_metadata(
         wire,
@@ -1226,6 +1280,8 @@ def audit_release(
         plan_sha256=plan_sha256,
         expected_argv=expected_argv,
         expected_role="lease-release",
+        expected_identity=expected_identity,
+        result_seconds=result_seconds,
     )
 
 
@@ -1322,6 +1378,8 @@ def check_closed_attempt(
     expected_role: str,
     expected_plan_sha256: str,
     expected_argv: list[str],
+    expected_identity: str = EXECUTION_IDENTITY,
+    result_seconds: tuple[int, int] = (7200, 3600),
 ) -> dict[str, Any]:
     """Prove returned registered groups for the one STOP archive, never role PASS.
 
@@ -1361,6 +1419,7 @@ def check_closed_attempt(
             completion,
             inner_evidence=wire["inner_evidence"],
             native_profiles=wire["native_profiles"],
+            expected_identity=expected_identity,
         )
         result["resource_evidence"] = resources
         minimum = resources["inner_minimum_charge_seconds"]
@@ -1376,11 +1435,15 @@ def check_closed_attempt(
             ),
             "actual outer native exit UNKNOWN",
         )
-        window = _result_window if expected_role == "final-filing" else _window
+        window = (
+            (lambda record: _result_window(record, result_seconds=result_seconds))
+            if expected_role == "final-filing"
+            else _window
+        )
         require(window(pending) == window(completion), "closed attempt immutable window differs")
         for item in (pending, completion):
             require(
-                item["execution_identity"] == EXECUTION_IDENTITY
+                item["execution_identity"] == expected_identity
                 and item["role"] == expected_role
                 and item["plan_sha256"] == expected_plan_sha256
                 and (
@@ -1533,7 +1596,7 @@ def _software_bytes(path: Path) -> bytes:
     directory = base.nofollow_parent(path)
     fd = -1
     try:
-        fd = os.open(path.name, os.O_RDONLY | os.O_NOFOLLOW, dir_fd=directory)
+        fd = os.open(path.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory)
         before = os.fstat(fd)
         require(
             stat.S_ISREG(before.st_mode)
@@ -1561,7 +1624,9 @@ def _software_bytes(path: Path) -> bytes:
         os.close(directory)
 
 
-def _software_closure(repo: Path) -> dict[str, str]:
+def _software_closure(
+    repo: Path, *, contracts: tuple[str, ...] = SOFTWARE_CONTRACTS
+) -> dict[str, str]:
     directory = base.nofollow_parent(repo / "scripts" / ".software-closure")
     try:
         with os.scandir(directory) as entries:
@@ -1573,13 +1638,19 @@ def _software_closure(repo: Path) -> dict[str, str]:
     finally:
         os.close(directory)
     require(REQUIRED_HELPERS <= names, "software closure required helper missing")
-    return {
-        name: digest(_software_bytes(repo / name))
-        for name in sorted(names | set(SOFTWARE_CONTRACTS))
-    }
+    return {name: digest(_software_bytes(repo / name)) for name in sorted(names | set(contracts))}
 
 
-def _check_software(plan: dict[str, Any]) -> None:
+def _check_software(
+    plan: dict[str, Any],
+    *,
+    contracts: tuple[str, ...] = SOFTWARE_CONTRACTS,
+    verifier_path: str = "scripts/p17_m2_content_verified_independent.py",
+    verifier_sha256: str = MODULE_SOURCE_SHA256,
+    controller: str = "p17_m2_content_verified_control.py",
+    prepare_mode: str = "prepare-public",
+    repo_guard: Any = None,
+) -> None:
     require(
         isinstance(plan.get("source_tree"), dict) and REQUIRED_HELPERS <= set(plan["source_tree"]),
         "software closure is incomplete",
@@ -1589,11 +1660,11 @@ def _check_software(plan: dict[str, Any]) -> None:
     own_repo = Path(__file__).resolve().parents[1]
     repo = Path(base.os.path.abspath(runtime["cwd"]))
     if repo != own_repo:
-        public_root(repo)
-    frozen = _software_closure(repo)
+        (public_root if repo_guard is None else repo_guard)(repo)
+    frozen = _software_closure(repo, contracts=contracts)
     require(
-        frozen == plan["source_tree"] == _software_closure(own_repo)
-        and frozen["scripts/p17_m2_content_verified_independent.py"] == MODULE_SOURCE_SHA256,
+        frozen == plan["source_tree"] == _software_closure(own_repo, contracts=contracts)
+        and frozen[verifier_path] == verifier_sha256,
         "software closure/source freeze differs",
     )
     python = Path(sys.orig_argv[0]).resolve()
@@ -1623,10 +1694,9 @@ def _check_software(plan: dict[str, Any]) -> None:
         },
         "actual isolated platform/lock/thread binding differs",
     )
-    script = str(repo / "scripts" / "p17_m2_content_verified_control.py")
+    script = str(repo / "scripts" / controller)
     require(
-        runtime["orig_argv"]
-        == [str(python), "-I", script, "prepare-public", "--root", plan["root"]],
+        runtime["orig_argv"] == [str(python), "-I", script, prepare_mode, "--root", plan["root"]],
         "actual prepare orig_argv differs",
     )
     for role in [*ROLE_ORDER, "final-filing", "lease-release"]:
@@ -1649,9 +1719,66 @@ def _check_software(plan: dict[str, Any]) -> None:
         )
 
 
+class _PublicCertificatePolicy:
+    """Fixed public context; other independently validated contexts are explicit adapters."""
+
+    identity = EXECUTION_IDENTITY
+    scope = PUBLIC_SCOPE
+    schema = "topolab.v2.m2-content-verified-public-bundle.v1"
+    formal_authority = False
+    contract_path = "docs/planning/p17_m2_content_verified_custody_protocol.json"
+    source_identity_key = "public_source_identity"
+    r0_status = "PUBLIC_INDEPENDENT_R0_CHECKED"
+    r1_status = "PUBLIC_INDEPENDENT_R1_CHECKED"
+    backup_status = "PUBLIC_INDEPENDENT_BACKUP_CHECKED"
+    filing_status = "PUBLIC_FILING_SNAPSHOT_WRITTEN"
+    verifier_path = "scripts/p17_m2_content_verified_independent.py"
+    result_seconds = (7200, 3600)
+    precheck_status = None
+
+    def check_precheck(self, proof: Any, bundle: dict[str, Any], actual: dict[str, Any]) -> None:
+        pass
+
+    def guard(self, root: Path) -> Path:
+        return public_root(root)
+
+    def check_software(self, plan: dict[str, Any]) -> None:
+        _check_software(plan)
+
+    def content_root(self, plan: dict[str, Any]) -> Path:
+        return self.guard(Path(plan["root"])) / "content"
+
+    def source_root(self, plan: dict[str, Any]) -> Path:
+        return self.guard(Path(plan["root"])) / "public-source"
+
+    def backup_root(self, plan: dict[str, Any]) -> Path:
+        return self.guard(Path(plan["root"])) / "backup-content"
+
+    def source_identity(self, plan: dict[str, Any]) -> dict[str, Any]:
+        return plan["public_source_identity"]
+
+    def check_filing(self, result: dict[str, Any], wire: dict[str, Any]) -> None:
+        pass
+
+    def check_release(self, result: dict[str, Any], filing: dict[str, Any]) -> None:
+        pass
+
+    def certificate(self, binding: dict[str, Any]) -> Any:
+        return CheckedPublicInput(binding, _authority=_CHECKED_AUTHORITY)
+
+
 def audit_public_certificate(
     bundle: dict[str, Any], *, trusted_tool_events: dict[str, list[dict[str, Any]]]
 ) -> CheckedPublicInput:
+    """Issue only the historical fixed public scope through the shared independent engine."""
+    return _audit_certificate(
+        bundle, trusted_tool_events=trusted_tool_events, policy=_PublicCertificatePolicy()
+    )
+
+
+def _audit_certificate(
+    bundle: dict[str, Any], *, trusted_tool_events: dict[str, list[dict[str, Any]]], policy: Any
+) -> Any:
     """Replay independent content/native/raw-return facts before issuing public-only capability."""
     require(
         isinstance(trusted_tool_events, dict) and trusted_tool_events,
@@ -1659,19 +1786,19 @@ def audit_public_certificate(
     )
     require(
         isinstance(bundle, dict)
-        and bundle.get("schema") == "topolab.v2.m2-content-verified-public-bundle.v1"
-        and bundle.get("execution_identity") == EXECUTION_IDENTITY
-        and bundle.get("scope") == PUBLIC_SCOPE,
+        and bundle.get("schema") == policy.schema
+        and bundle.get("execution_identity") == policy.identity
+        and bundle.get("scope") == policy.scope,
         "public bundle identity/scope differs",
     )
-    root = public_root(Path(bundle["root"]))
+    root = policy.guard(Path(bundle["root"]))
     plan, plan_sha = bundle["plan"], bundle["plan_sha256"]
-    parent = public_root(Path(plan["root"]))
+    policy.guard(Path(plan["root"]))
     require(
-        root == parent / "content"
-        and plan.get("scope") == PUBLIC_SCOPE
-        and plan.get("execution_identity") == EXECUTION_IDENTITY
-        and plan.get("formal_authority") is False
+        root == policy.content_root(plan)
+        and plan.get("scope") == policy.scope
+        and plan.get("execution_identity") == policy.identity
+        and plan.get("formal_authority") is policy.formal_authority
         and plan_sha == digest(canonical(plan))
         and plan["role_order"] == ROLE_ORDER
         and set(plan["roles"]) == set(ROLE_ORDER)
@@ -1679,12 +1806,11 @@ def audit_public_certificate(
         == {"final-filing", "lease-release", "public-consumer", "reader-ack"},
         "frozen public plan/scope/order/root differs",
     )
-    _check_software(plan)
+    policy.check_software(plan)
     contract = bundle["contract_sha256"]
     require(
         plan["contract_sha256"] == contract
-        and contract
-        == plan["source_tree"]["docs/planning/p17_m2_content_verified_custody_protocol.json"]
+        and contract == plan["source_tree"][policy.contract_path]
         and isinstance(contract, str)
         and base.SHA.fullmatch(contract),
         "contract identity differs from actual frozen protocol",
@@ -1713,6 +1839,8 @@ def audit_public_certificate(
             expected_plan_sha256=plan_sha,
             inner_evidence=wire["inner_evidence"],
             native_profiles=wire["native_profiles"],
+            expected_identity=policy.identity,
+            result_seconds=policy.result_seconds,
         )
         require(checked["full_role_evidence_accepted"] is True, str(checked["reason"]))
         require(
@@ -1728,6 +1856,14 @@ def audit_public_certificate(
             event_ids.add(event["event_id"])
         previous = checked["T1"]
         results[role] = checked
+    if policy.precheck_status is not None:
+        precheck = _proof(
+            bundle["roles"][ROLE_ORDER[0]],
+            policy.precheck_status,
+            expected_identity=policy.identity,
+            expected_scope=policy.scope,
+        )
+        policy.check_precheck(precheck, bundle, results[ROLE_ORDER[0]])
     require(previous + 360 <= plan_window[1], "common actor window final seal360s unavailable")
     shared_sha = digest(canonical(results))
     require(bundle["shared_packet_sha256"] == shared_sha, "shared actual-return packet differs")
@@ -1750,14 +1886,24 @@ def audit_public_certificate(
             "local physical bytes/hash differs",
         )
     root_identity = _root_tuple(bundle["root_identity"])
-    r0 = _proof(bundle["roles"]["independent-r0"], "PUBLIC_INDEPENDENT_R0_CHECKED")
-    r1 = _proof(bundle["roles"]["independent-r1"], "PUBLIC_INDEPENDENT_R1_CHECKED")
+    r0 = _proof(
+        bundle["roles"]["independent-r0"],
+        policy.r0_status,
+        expected_identity=policy.identity,
+        expected_scope=policy.scope,
+    )
+    r1 = _proof(
+        bundle["roles"]["independent-r1"],
+        policy.r1_status,
+        expected_identity=policy.identity,
+        expected_scope=policy.scope,
+    )
     registry_sha = digest(canonical(registry))
     for proof, count in ((r0, 40), (r1, 558)):
         require(
             proof["source_count"] == count
             and proof["source_registry_sha256"] == registry_sha
-            and proof["public_source_identity"] == plan["public_source_identity"]
+            and proof[policy.source_identity_key] == policy.source_identity(plan)
             and proof["source_comparison"] == "ALL_FIELDS_AND_PHYSICAL_TUPLES_MATCHED"
             and type(proof["compared_fields"]) is int
             and proof["compared_fields"] > 0
@@ -1766,7 +1912,7 @@ def audit_public_certificate(
         )
         local.identity_table(proof["source_rows"], count)
     require(
-        r0["root"] == str(parent / "public-source")
+        r0["root"] == str(policy.source_root(plan))
         and r0["source_contract_sha256"] == digest(canonical(plan["content_contract"]))
         and r1["source_root"] == r0["root"]
         and r1["root"] == str(root)
@@ -1776,13 +1922,25 @@ def audit_public_certificate(
         "source/content proof version/root differs",
     )
     base.compare_words(r1["local_identity_rows"], bundle["local_identity_rows"])
-    backup = _proof(bundle["roles"]["shared-closeout"], "PUBLIC_INDEPENDENT_BACKUP_CHECKED")
+    backup = _proof(
+        bundle["roles"]["shared-closeout"],
+        policy.backup_status,
+        expected_identity=policy.identity,
+        expected_scope=policy.scope,
+    )
     base.compare_words(backup, bundle["backup"])
-    billing = _audit_billing_ledger(backup, bundle["roles"], trusted_tool_events, plan_sha)
+    billing = _audit_billing_ledger(
+        backup,
+        bundle["roles"],
+        trusted_tool_events,
+        plan_sha,
+        expected_identity=policy.identity,
+        expected_scope=policy.scope,
+    )
     require(
         backup["own_root"] == str(root)
         and backup["root"] != str(root)
-        and public_root(Path(backup["root"])) == parent / "backup-content"
+        and policy.guard(Path(backup["root"])) == policy.backup_root(plan)
         and backup["version_id"] == bundle["version_id"]
         and backup["contract_sha256"] == contract
         and backup["member_count"] == 1071
@@ -1831,15 +1989,18 @@ def audit_public_certificate(
         expected_plan_sha256=plan_sha,
         inner_evidence=filing["inner_evidence"],
         native_profiles=filing["native_profiles"],
+        expected_identity=policy.identity,
+        result_seconds=policy.result_seconds,
     )
     require(filed["full_role_evidence_accepted"] is True, str(filed["reason"]))
+    policy.check_filing(filed, filing)
     filing_proof = base.parse(filing["inner_evidence"]["log"], canonical_required=True)
     require(
         filing_proof
         == {
-            "status": "PUBLIC_FILING_SNAPSHOT_WRITTEN",
-            "scope": PUBLIC_SCOPE,
-            "execution_identity": EXECUTION_IDENTITY,
+            "status": policy.filing_status,
+            "scope": policy.scope,
+            "execution_identity": policy.identity,
             "plan_sha256": plan_sha,
             "version_id": bundle["version_id"],
             "manifest_sha256": bundle["version_id"],
@@ -1860,8 +2021,8 @@ def audit_public_certificate(
         charge["role"] == "final-filing"
         and type(charge["frozen_FULL_seconds"]) is int
         and charge["frozen_FULL_seconds"] == charge["charged_FULL_seconds"] == 180
-        and charge["scope"] == PUBLIC_SCOPE
-        and charge["execution_identity"] == EXECUTION_IDENTITY
+        and charge["scope"] == policy.scope
+        and charge["execution_identity"] == policy.identity
         and charge["plan_sha256"] == plan_sha
         and charge["shared_reservation_sha256"]
         == digest(canonical(backup["billing_ledger"]["reservation"]))
@@ -1877,8 +2038,11 @@ def audit_public_certificate(
         raw_tool_events=trusted_tool_events["lease-release"],
         plan_sha256=plan_sha,
         expected_argv=resolved_argv(plan, "lease-release", plan_sha),
+        expected_identity=policy.identity,
+        result_seconds=policy.result_seconds,
     )
     require(released["metadata_evidence_accepted"] is True, str(released["reason"]))
+    policy.check_release(released, filed)
     require(filed["T1"] <= released["T0"], "lease released before actual last reader return")
     lease, held = bundle["lease"], backup["custody_lease"]
     release_log = bundle["lease_release_evidence"]["inner_evidence"]["log"]
@@ -1898,7 +2062,7 @@ def audit_public_certificate(
     require(
         all(lease[k] == held[k] for k in immutable)
         and lease["scope"] == "COOPERATIVE_REGISTERED_TOPOLAB_ONLY"
-        and lease["execution_identity"] == EXECUTION_IDENTITY
+        and lease["execution_identity"] == policy.identity
         and lease["root"] == str(root)
         and lease["version_id"] == bundle["version_id"]
         and lease["registered_readers"] == [*ROLE_ORDER, "final-filing"]
@@ -1962,14 +2126,18 @@ def audit_public_certificate(
     binding["shared_packet_sha256"] = shared_sha
     binding["formal_or_scientific_admission"] = False
     binding["metadata_actions"] = plan["metadata_actions"]
-    binding["independent_source_sha256"] = plan["source_tree"][
-        "scripts/p17_m2_content_verified_independent.py"
-    ]
-    return CheckedPublicInput(binding, _authority=_CHECKED_AUTHORITY)
+    binding["independent_source_sha256"] = plan["source_tree"][policy.verifier_path]
+    return policy.certificate(binding)
 
 
 def _audit_billing_ledger(
-    backup: dict[str, Any], wires: dict[str, Any], events: dict[str, Any], plan_sha: str
+    backup: dict[str, Any],
+    wires: dict[str, Any],
+    events: dict[str, Any],
+    plan_sha: str,
+    *,
+    expected_identity: str = EXECUTION_IDENTITY,
+    expected_scope: str = PUBLIC_SCOPE,
 ) -> dict[str, Any]:
     ledger = backup["billing_ledger"]
     reservation = ledger["reservation"]
@@ -1980,8 +2148,8 @@ def _audit_billing_ledger(
         and reservation["role_FULL_seconds"] == caps
         and all(type(v) is int for v in reservation["role_FULL_seconds"].values())
         and reservation["refunds_allowed"] is False
-        and reservation["scope"] == PUBLIC_SCOPE
-        and reservation["execution_identity"] == EXECUTION_IDENTITY
+        and reservation["scope"] == expected_scope
+        and reservation["execution_identity"] == expected_identity
         and reservation["plan_sha256"] == plan_sha,
         "billing shared reservation/FULL/no-refund differs",
     )
@@ -2003,8 +2171,8 @@ def _audit_billing_ledger(
         charged = number(charge["charged_UTC_seconds"], positive=True)
         require(
             charge["role"] == role
-            and charge["scope"] == PUBLIC_SCOPE
-            and charge["execution_identity"] == EXECUTION_IDENTITY
+            and charge["scope"] == expected_scope
+            and charge["execution_identity"] == expected_identity
             and charge["plan_sha256"] == plan_sha
             and type(charge["frozen_FULL_seconds"]) is int
             and type(charge["charged_FULL_seconds"]) is int
@@ -2029,17 +2197,27 @@ def _audit_billing_ledger(
 
 
 def independent_backup(
-    content: Path, backup: Path, closed: dict[str, Any], registry: dict[str, Any], contract_sha: str
+    content: Path,
+    backup: Path,
+    closed: dict[str, Any],
+    registry: dict[str, Any],
+    contract_sha: str,
+    *,
+    expected_identity: str = EXECUTION_IDENTITY,
+    expected_scope: str = PUBLIC_SCOPE,
+    checked_status: str = "PUBLIC_INDEPENDENT_BACKUP_CHECKED",
+    root_guard: Any = None,
 ) -> dict[str, Any]:
-    content, backup = public_root(content), public_root(backup)
+    guard = public_root if root_guard is None else root_guard
+    content, backup = guard(content), guard(backup)
     require(
         content != backup
         and not backup.is_relative_to(content)
         and not content.is_relative_to(backup),
         "backup must be a distinct sibling namespace",
     )
-    own_root = _checked_root(content)
-    backup_root = _checked_root(backup)
+    own_root = _checked_root(content, root_guard=guard)
+    backup_root = _checked_root(backup, root_guard=guard)
     require(
         own_root == _root_tuple(closed.get("root_identity")), "backup source root identity changed"
     )
@@ -2060,7 +2238,8 @@ def independent_backup(
         backup, closed["manifest"], registry, reader.observations, contract_sha
     )
     require(
-        _checked_root(content) == own_root and _checked_root(backup) == backup_root,
+        _checked_root(content, root_guard=guard) == own_root
+        and _checked_root(backup, root_guard=guard) == backup_root,
         "backup root identity changed during comparison",
     )
     require(
@@ -2068,9 +2247,9 @@ def independent_backup(
         "backup content version differs",
     )
     return {
-        "status": "PUBLIC_INDEPENDENT_BACKUP_CHECKED",
-        "execution_identity": EXECUTION_IDENTITY,
-        "scope": PUBLIC_SCOPE,
+        "status": checked_status,
+        "execution_identity": expected_identity,
+        "scope": expected_scope,
         "own_root": str(content),
         "root": str(backup),
         "root_identity": backup_root,
@@ -2137,13 +2316,26 @@ def _prefix_inventory(root: Path) -> set[str]:
 
 
 def independent_prefix_backup(
-    source_root: Path, backup_root: Path, rows: list[dict[str, Any]]
+    source_root: Path,
+    backup_root: Path,
+    rows: list[dict[str, Any]],
+    *,
+    expected_identity: str = EXECUTION_IDENTITY,
+    expected_scope: str = PUBLIC_SCOPE,
+    checked_status: str = "PUBLIC_FAILED_PREFIX_BACKUP_CHECKED",
+    root_guard: Any = None,
+    expected_backup: Path | None = None,
 ) -> dict[str, Any]:
     """Check only a finite failed public prefix; never issue an input certificate."""
     readers: dict[str, Any] = {}
     try:
-        source_root, backup_root = public_root(source_root), public_root(backup_root)
-        require(backup_root == source_root / "backup-prefix", "failed prefix backup root differs")
+        guard = public_root if root_guard is None else root_guard
+        source_root, backup_root = guard(source_root), guard(backup_root)
+        require(
+            backup_root
+            == (source_root / "backup-prefix" if expected_backup is None else expected_backup),
+            "failed prefix backup root differs",
+        )
         require(
             isinstance(rows, list) and 0 < len(rows) <= 4096,
             "failed prefix explicit nonempty inventory missing",
@@ -2172,7 +2364,10 @@ def independent_prefix_backup(
                 and all(row[k] == identities[name][k] for k in ("path", "byte_size", "sha256")),
                 "failed prefix inventory includes unclosed/excluded files",
             )
-        original_root, copied_root = _checked_root(source_root), _checked_root(backup_root)
+        original_root, copied_root = (
+            _checked_root(source_root, root_guard=guard),
+            _checked_root(backup_root, root_guard=guard),
+        )
         require(
             _prefix_inventory(backup_root) == set(paths), "failed prefix backup inventory differs"
         )
@@ -2217,15 +2412,15 @@ def independent_prefix_backup(
                 "failed prefix backup shares source physical file",
             )
         require(
-            _checked_root(source_root) == original_root
-            and _checked_root(backup_root) == copied_root
+            _checked_root(source_root, root_guard=guard) == original_root
+            and _checked_root(backup_root, root_guard=guard) == copied_root
             and _prefix_inventory(backup_root) == set(paths),
             "failed prefix root/inventory changed during comparison",
         )
         return {
-            "status": "PUBLIC_FAILED_PREFIX_BACKUP_CHECKED",
-            "scope": PUBLIC_SCOPE,
-            "execution_identity": EXECUTION_IDENTITY,
+            "status": checked_status,
+            "scope": expected_scope,
+            "execution_identity": expected_identity,
             "root": str(source_root),
             "backup_root": str(backup_root),
             "source_root_identity": original_root,

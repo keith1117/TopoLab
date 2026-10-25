@@ -28,10 +28,19 @@ class VerifiedInput:
         checker = sys.modules.get("p17_m2_content_verified_independent")
         if checker is None or not isinstance(certificate, checker.CheckedPublicInput):
             raise ValueError("UNVERIFIED_CERTIFICATE")
-        self.certificate, self.role, self.lease = certificate, role, reader_lease
-        self.binding = certificate.binding_for(role, reader_lease=reader_lease)
-        if self.binding["scope"] != "PUBLIC_SOFTWARE_FIXTURE_ONLY":
+        binding = certificate.binding_for(role, reader_lease=reader_lease)
+        if binding["scope"] != "PUBLIC_SOFTWARE_FIXTURE_ONLY":
             raise ValueError("PUBLIC_SCOPE_REQUIRED")
+        self._initialize(certificate, role, reader_lease, binding)
+
+    def _initialize(self, certificate, role, reader_lease, binding):
+        """Share the exact checked-buffer reader after scope-specific authority gates."""
+        self.certificate, self.role, self.lease, self.binding = (
+            certificate,
+            role,
+            reader_lease,
+            binding,
+        )
         spec = importlib.util.spec_from_file_location(
             "verified_buffer_source_helper", Path(__file__).with_name("p17_m2_input_export.py")
         )
