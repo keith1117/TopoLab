@@ -2383,3 +2383,17 @@ No additional content read, retry, formal role, old input or quota reuse. Existi
 local drafts and frozen evidence remain. Historical cause stays UNKNOWN; P17,
 source admission, scientific Gates and all STOP/window/billing rules retain scope.
 Close normal publication and STOP; no automatic successor.
+
+
+## 2026-10-25 — Conditional fixed-source acquisition authority
+
+Owner adopts exact draft401c3261 and sealed dual preparation closure62977ea6,
+with NEW readiness2h/2h, commonformal4500/FULL3600 and result2h/2h including
+filing180; prior4h/3h stays closed. New different author and regression-first
+two-test fixture isolation precede source authority publication.
+[Effective protocol](planning/p17_m2_source_acquisition_execution_protocol.md) and
+[actual evidence](validation/p17_m2_source_acquisition_execution.md) distinguish
+observed preparation from pending source/target/formal gates. No production
+rule/reader/native/STOP/window/billing change; no B/C, old retry/reset or science
+claim. Acquire once after full readiness or retain STOP, close finite result and
+stop; source/target must remain untouched until their exact conditional gates.

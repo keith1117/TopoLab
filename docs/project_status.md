@@ -5,7 +5,34 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: source-acquisition formal adapter public preparation (2026-10-25)
+## Current: conditional source-acquisition authority (2026-10-25)
+
+Owner approves [formal acquisition v1](planning/p17_m2_source_acquisition_execution_protocol.md)
+([JSON](planning/p17_m2_source_acquisition_execution_protocol.json)), adopting the
+preserved exact draft401c3261 and dual preparation closure62977ea6. Previous
+4h/3h is sealed CLOSED via PR221/main80f9eb8/all-four CI40181787855.
+NEW executor/root and different-author/formal_acquisition_independent_v1 receive
+readiness7200s each, common formal4500s/FULL3600 and result7200s each including
+filing180; overall18900s each, continuous failures/waits/CI/returns included.
+No old budget or quota transfers. [Actual evidence/frontier](validation/p17_m2_source_acquisition_execution.md)
+keeps preparation and later formal/result observations separate.
+
+Before any T0, finish NEW public regression-first minimum test-fixture isolation,
+independent metadata preflight and clean locked protected exact-head PR/main all4
+CI. Actual source/target/role admission remains UNKNOWN_NOT_RUN at this source
+publication frontier; no old-original or target IO is authorized during readiness.
+Only after all gates, once-only setup300 may create/check the exact fixed target;
+independent native public-check PASS precedes old source stat/read, independent
+R0 acceptance precedes any R1 payload stat/open. No trial prefix, fallback directory
+or post-freeze repair. First failure STOP; only frozen prepaid NEW-prefix shared
+exception if actual cleanup/returns and remaining suffix conditions hold.
+Complete the exact acquisition or concrete STOP and finite result publication/
+retention, then stop. FixedP17/uniform/full-v2-open/full-fit/old FAIL/UNKNOWN/costs/
+quotas/seals remain; B/C and science are closed. No automatic successor.
+
+The following preparation and older entries retain their historical frontiers.
+
+## Historical: source-acquisition formal adapter public preparation (2026-10-25)
 
 Owner grants NEW executor4h/different-author3h preparation under the
 [effective protocol](planning/p17_m2_source_acquisition_adapter_preparation_protocol.md)

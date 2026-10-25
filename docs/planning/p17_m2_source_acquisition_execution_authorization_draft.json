@@ -1,0 +1,1140 @@
+{
+  "schema": "topolab.v2.m2-source-acquisition-execution-authorization-DRAFT.v1",
+  "draft_revision": 1,
+  "status": "DRAFT_ONLY_NOT_AUTHORITY_NOT_BUDGET_NOT_ACTIVATION",
+  "draft_UTC": "2026-10-25T11:13:35.348456+00:00",
+  "baseline_main": "80f9eb8b44f8efb3ffbe158b33a48fe34ba94b64",
+  "baseline_tree": "f75963f322a5242fdc2b565c5f91e15c20cc81f4",
+  "normative_document": "p17_m2_source_acquisition_execution_authorization_draft.md",
+  "authority_now": {
+    "read_committed_software_and_explicit_new_preparation_closure": true,
+    "draft_local_files": true,
+    "new_preflight_or_implementation": false,
+    "new_independent_delegation": false,
+    "old_original_stat_read_copy_parse": false,
+    "target_stat_probe_create": false,
+    "formal_activation": false,
+    "B_C": false,
+    "old_quota_reset": false,
+    "commit_push_merge": false
+  },
+  "goal": "One independently source-attested restricted input version; seed17 unrepaired, B/C and science remain closed",
+  "preparation_closure_binding": {
+    "paths": [
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-formal-adapter-preparation-20261025-0806-a4fc2e7f/publication-closure.json",
+      "/private/tmp/topolab-formal-binding-preparation-retention-0806-a4fc2e7f/publication-closure.json"
+    ],
+    "raw_sha256": "62977ea64ae3241eac514304d3b06e3ba3ce40272ae47b01ddae18dee7b3ff3b",
+    "schema": "topolab.v2.m2-source-acquisition-adapter-preparation-closure.v1",
+    "status_required": "FORMAL_BINDING_PREPARATION_COMPLETE_FORMAL_CLOSED",
+    "source_main": "80f9eb8b44f8efb3ffbe158b33a48fe34ba94b64",
+    "reviewed_head": "7ab3963329f31d046487371678eb77e01d8e4ca3",
+    "reviewed_tree": "f75963f322a5242fdc2b565c5f91e15c20cc81f4",
+    "PR": 221,
+    "PR_CI": 40179485353,
+    "main_CI": 40181787855,
+    "all_four_jobs": "PASS",
+    "local_tests": {
+      "passed": 2739,
+      "skipped": 1
+    },
+    "executor": {
+      "cap_seconds": 14400,
+      "sealed_conservative_charge_seconds": 12946.710839250125,
+      "closed": true
+    },
+    "independent": {
+      "cap_seconds": 10800,
+      "actual_final_conservative_charge_seconds": 9316.316365042236,
+      "closed": true
+    },
+    "zero_actual_original_target_formal_B_C": true,
+    "input_version_accepted": false,
+    "limitations": "Earlier ephemeral unit trees including pytest745 missing; logs/source/receipts retained, no reconstruction. Failed partial archive retained but never accepted. Independent finalized fixed source before future mainCI; root observed later CI inside its original4h.",
+    "no_resume_rewrite_or_unused_transfer": true
+  },
+  "reference_file_raw_sha256": {
+    "docs/planning/TopoLab_v2_development_roadmap.md": "722ad498397e73fd26e4edd453cfce5deb515cc1260b23d8f26cdb2d083b626f",
+    "docs/planning/TopoLab_v2_delivery_reassessment.md": "465c16182195b2431ec63c436e38ae8ee2c5cd4829a8606a82a68fcbc3a9e58c",
+    "docs/project_status.md": "357d3ce67f1dc47b83f528d2c3eee5fce3cf5e2aeb6eee4537f1e8c3570296d5",
+    "docs/planning/p17_m2_content_verified_source_acquisition_proposal.json": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+    "docs/planning/p17_m2_content_verified_source_acquisition_proposal.md": "07a8cff95ac9d2d971c7ae7e4831fda8b60aab40474c079fdd5538c585215f78",
+    "docs/planning/p17_m2_input_export_preparation_proposal.json": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "docs/planning/p17_m2_source_acquisition_adapter_preparation_protocol.json": "ad3745d028931d5469e3be76467da391ef0289addbf46fbe909a808497c285f0",
+    "docs/validation/p17_m2_source_acquisition_adapter_preparation.md": "63057c1f4d1f94ac725938191ccfdade77fb7929825565991a97ff00d92ce797",
+    "docs/validation/p17_m2_source_acquisition_adapter_independent_review.md": "4adb7df157bfde8df9c5ab6bd6135b718a506543fbf3d9a6610dab2f3e249cd7",
+    "scripts/p17_m2_source_acquisition_control.py": "5460e93dffae5e55267bc1f80e85ca62a0f6cf7505a9815956830ddd39cb6dcc",
+    "scripts/p17_m2_source_acquisition_independent.py": "c06bbe152baa5961206922c90c06347c765a60948721393834abd0478903680f",
+    "scripts/p17_m2_source_verified_input.py": "a53090b1f8d5a22c634ff6a60f66aaf1d17e4f36e1c4fa34ad3d97cbb2291669",
+    "tests/test_p17_m2_source_acquisition_control.py": "3faa1b43b4fc40b90188794de7c856acd4e867d375300bde6c9eefc1f76425f5",
+    "uv.lock": "9c84a5ab362e8848d7ccab0142e9fe33aee5700abf5866d843a4c9cb23920292"
+  },
+  "inheritance": {
+    "content_reference": "docs/planning/p17_m2_input_export_preparation_proposal.json",
+    "content_reference_raw_sha256": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "content_only_selectors": [
+      "/checkpoints",
+      "/NN",
+      "/scalars",
+      "/R0/literal_bootstrap_files",
+      "/R0/embedded_B3_data_index_sha256",
+      "/R0/bounded_additional_metadata",
+      "/R0/W_context_sha256",
+      "/R0/source_registry_fields",
+      "/R0/unknown_reference_history_anchor",
+      "/R1/strict_JSON",
+      "/byte_caps_proposed"
+    ],
+    "old_authority_identity_output_paths_budgets_and_roles_inherited": false,
+    "mask_all_old_authorization_and_current_authority_fields": true,
+    "adopted_new_custody_guarantee": "independently source-attested fixed content and the exact verified buffer consumed",
+    "provider_coverage": "UNKNOWN",
+    "never_sync_upload_external_write_exclusion_or_continuous_availability_guarantee": false,
+    "cooperative_lease_only_registered_topolab_actors": true,
+    "same_hash_physical_replacement_exception": false,
+    "all_historical_frozen_bytes_stops_costs_quotas_seals_preserved": true,
+    "historical_reference_file_sha256_from_frozen_proposal": {
+      "docs/planning/p17_m2_content_verified_custody_protocol.md": "c35b2d3c2022224b850268e22af9061c9e76d25d8937c8974a7658adf3af933d",
+      "docs/planning/p17_m2_content_verified_custody_protocol.json": "8ecc3716306cd2e49d7d5fd46f61eb43b4d2740861a702e5bc8745b9500e3381",
+      "docs/planning/p17_m2_content_verified_custody_proposal.md": "4ba70b28826dd3443e936ad8a97112575bcea4af08b9019d17397d831899abd3",
+      "docs/planning/p17_m2_content_verified_custody_proposal.json": "8fa602f3d86be03da0c336f7569a35a68ce31052517249e0bf32b35f098aa7e0",
+      "docs/planning/p17_m2_local_input_version_protocol.md": "83a0dadf014bdabc2de7b8c0372488bdca323c8cea3ab4e97713ef2ee2c7af28",
+      "docs/planning/TopoLab_v2_development_roadmap.md": "f7c1f7821a03feef92f24edcab1792347336919e4ca7aaa07d9977ef9a1c03f3",
+      "docs/planning/TopoLab_v2_delivery_reassessment.md": "465c16182195b2431ec63c436e38ae8ee2c5cd4829a8606a82a68fcbc3a9e58c"
+    },
+    "current_reference_file_sha256": {
+      "docs/planning/TopoLab_v2_development_roadmap.md": "722ad498397e73fd26e4edd453cfce5deb515cc1260b23d8f26cdb2d083b626f",
+      "docs/planning/TopoLab_v2_delivery_reassessment.md": "465c16182195b2431ec63c436e38ae8ee2c5cd4829a8606a82a68fcbc3a9e58c",
+      "docs/project_status.md": "357d3ce67f1dc47b83f528d2c3eee5fce3cf5e2aeb6eee4537f1e8c3570296d5",
+      "docs/planning/p17_m2_content_verified_source_acquisition_proposal.json": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+      "docs/planning/p17_m2_content_verified_source_acquisition_proposal.md": "07a8cff95ac9d2d971c7ae7e4831fda8b60aab40474c079fdd5538c585215f78",
+      "docs/planning/p17_m2_input_export_preparation_proposal.json": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+      "docs/planning/p17_m2_source_acquisition_adapter_preparation_protocol.json": "ad3745d028931d5469e3be76467da391ef0289addbf46fbe909a808497c285f0",
+      "docs/validation/p17_m2_source_acquisition_adapter_preparation.md": "63057c1f4d1f94ac725938191ccfdade77fb7929825565991a97ff00d92ce797",
+      "docs/validation/p17_m2_source_acquisition_adapter_independent_review.md": "4adb7df157bfde8df9c5ab6bd6135b718a506543fbf3d9a6610dab2f3e249cd7",
+      "scripts/p17_m2_source_acquisition_control.py": "5460e93dffae5e55267bc1f80e85ca62a0f6cf7505a9815956830ddd39cb6dcc",
+      "scripts/p17_m2_source_acquisition_independent.py": "c06bbe152baa5961206922c90c06347c765a60948721393834abd0478903680f",
+      "scripts/p17_m2_source_verified_input.py": "a53090b1f8d5a22c634ff6a60f66aaf1d17e4f36e1c4fa34ad3d97cbb2291669",
+      "tests/test_p17_m2_source_acquisition_control.py": "3faa1b43b4fc40b90188794de7c856acd4e867d375300bde6c9eefc1f76425f5",
+      "uv.lock": "9c84a5ab362e8848d7ccab0142e9fe33aee5700abf5866d843a4c9cb23920292"
+    },
+    "reference_precedence": "Historical proposal file hashes identify its authoring baseline only; latest80f9eb8 roadmap/status and this new draft control prospective scheduling and proposed budgets. Frozen content/proposal/protocol bytes remain unchanged."
+  },
+  "execution": {
+    "identity": "topolab.v2.p17-m2-content-verified-source-acquisition.v1",
+    "formal_scope": "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY",
+    "grant_instance_id": "p17-m2-source-acquisition-owner-grant-v1",
+    "actors_proposed_for_new_appointment": {
+      "executor": "/root",
+      "independent": "/root/formal_acquisition_independent_v1"
+    },
+    "actors_actual_now": null,
+    "new_independent_must_be_distinct_from_executor_and_not_resume_closed_review": true,
+    "run_id_plan_sha_runtime_preflight_actual_now": null,
+    "native_code_identity_reused_without_old_execution_quota": true,
+    "calls_maximum": {
+      "independent-public-check": 1,
+      "exporter-r0": 1,
+      "independent-r0": 1,
+      "exporter-r1": 1,
+      "independent-r1": 1,
+      "shared-closeout": 1
+    },
+    "formal_source_implementation_commit": "80f9eb8b44f8efb3ffbe158b33a48fe34ba94b64",
+    "future_authority_file_RESERVED_DO_NOT_CREATE_NOW": "docs/planning/p17_m2_source_acquisition_execution_protocol.json",
+    "future_authority_template_NOT_EFFECTIVE": {
+      "schema": "topolab.v2.m2-source-acquisition-execution-authority.v1",
+      "execution_identity": "topolab.v2.p17-m2-content-verified-source-acquisition.v1",
+      "proposal_sha256": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+      "owner_approval_reference": null,
+      "permissions": {
+        "formal_activation": true,
+        "old_original_access": true,
+        "target_access": true,
+        "B_C": false
+      },
+      "formal_seconds": 4500,
+      "result_seconds": {
+        "exporter": 7200,
+        "independent": 7200
+      },
+      "actors": {
+        "executor": "/root",
+        "independent": "/root/formal_acquisition_independent_v1"
+      },
+      "preparation_closure_sha256": "62977ea64ae3241eac514304d3b06e3ba3ce40272ae47b01ddae18dee7b3ff3b",
+      "independent_preflight_sha256": null,
+      "implementation_commit": "80f9eb8b44f8efb3ffbe158b33a48fe34ba94b64",
+      "approved_authorization_draft_sha256": null,
+      "grant_instance_id": "p17-m2-source-acquisition-owner-grant-v1",
+      "budget_contract_reference": "p17_m2_source_acquisition_execution_authorization_draft.json#/budgets_PROPOSED_NOT_GRANTED",
+      "initial_state": "FROZEN_NOT_ACTIVATED_NO_TARGET_OR_SOURCE_ACCESS_UNTIL_UNIQUE_T0_AND_ROLE_GATES"
+    },
+    "unknown_template_fields": "Only recorded actual owner message reference, actual fresh immutable public-only preflight hash and approved draft raw hash may fill nulls before publication; never fabricate placeholders. Changes to scope/content/rules/budget need new owner decision.",
+    "actual_implementation_commit_condition": "All source_freeze paths except later execution authority must match80f9eb8 raw bytes. Tests may receive only approved fixture-isolation correction, separately reviewed and included in final clean published tree. Any production/source-contract change STOP, do not silently update implementation_commit.",
+    "current_formal_entry": "No grant file in actual repository; current modules refuse formal before target/source IO"
+  },
+  "source_whitelist": {
+    "original_root_literal": "/Users/keith1117/Documents/TopoLab-data",
+    "allowed_subroots": [
+      "b3-v1-fits",
+      "b4-5-weighted-terminal/fit",
+      "b3-v1-data",
+      "b4-30-z-reflection-repair-v2"
+    ],
+    "static_metadata_files": [
+      {
+        "relative_path": "b3-v1-fits/b3_training.json",
+        "expected_sha256": "229e1ba5a3cd4da9ebfb5e3e77a5aa97fcea37f7ff7c671bec8b70f9b5ac69e7",
+        "max_bytes": 16777216,
+        "hash_status": "PREPUBLISHED_BINDING",
+        "phase": "R0",
+        "identity_basis": "PREPUBLISHED_BINDING"
+      },
+      {
+        "relative_path": "b4-5-weighted-terminal/fit/progress.json",
+        "expected_sha256": "5e54f8cede96d9e4b60acc17586d25d29903bd4927461a8d6b4b18f3b49e43ac",
+        "max_bytes": 1048576,
+        "hash_status": "PREPUBLISHED_BINDING",
+        "phase": "R0",
+        "identity_basis": "PREPUBLISHED_BINDING"
+      },
+      {
+        "relative_path": "b4-5-weighted-terminal/fit/summary.json",
+        "expected_sha256": "513064fe615456fe8204b511f850a71150895038c3541ad23f5cd35642b0cc6c",
+        "max_bytes": 1048576,
+        "hash_status": "PREPUBLISHED_BINDING",
+        "phase": "R0",
+        "identity_basis": "PREPUBLISHED_BINDING"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/context.json",
+        "expected_sha256": "cd0dffbb28347889726baacb8225efd9b2dadd94ea86f7485c843170b1ec2181",
+        "max_bytes": 1048576,
+        "hash_status": "PREPUBLISHED_BINDING",
+        "phase": "R0",
+        "identity_basis": "PREPUBLISHED_BINDING"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/independent_audit.json",
+        "expected_sha256": "e9a8278b9a7d521992f7f5d62f3aef626e0767cd717f3ee134c2c4cc58b5ca2a",
+        "max_bytes": 1048576,
+        "hash_status": "PREPUBLISHED_BINDING",
+        "phase": "R0",
+        "identity_basis": "PREPUBLISHED_BINDING"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/progress.json",
+        "expected_sha256": null,
+        "max_bytes": 1048576,
+        "hash_status": "UNKNOWN_FIRST_REGISTRATION_ONLY_AFTER_R_GRANT",
+        "phase": "R0",
+        "identity_basis": "UNKNOWN_FIRST_REGISTRATION_ONLY_AFTER_R_GRANT"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/summary.json",
+        "expected_sha256": null,
+        "max_bytes": 1048576,
+        "hash_status": "UNKNOWN_FIRST_REGISTRATION_ONLY_AFTER_R_GRANT",
+        "phase": "R0",
+        "identity_basis": "UNKNOWN_FIRST_REGISTRATION_ONLY_AFTER_R_GRANT"
+      },
+      {
+        "relative_path": "b4-5-weighted-terminal/fit/units/0000.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-5-weighted-terminal/fit/units/0001.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-5-weighted-terminal/fit/units/0002.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0000.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0001.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0002.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0003.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0004.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0005.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0006.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0007.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0008.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0009.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0010.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0011.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0012.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0013.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0014.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0015.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0016.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      },
+      {
+        "relative_path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0017.json",
+        "max_bytes": 32768,
+        "phase": "R0",
+        "expected_sha256": null,
+        "identity_basis": "REQUIRED_CONTEXT_ORDER_PREVIOUS_HEAD_CHAIN_NOT_FREE_FIRST_OBSERVATION"
+      }
+    ],
+    "derived_selection_files_exactly": [
+      {
+        "logical_id": "C/17",
+        "family": "C",
+        "seed": 17,
+        "selected_epoch": 168,
+        "source_root_name": "b3-v1-fits",
+        "selection_wrapper_recipe": "C",
+        "weighted_objective_required": false,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b3-v1-fits/b3_training.json#/outcomes/[recipe=C,seed=17]/selection",
+        "selection_path_rule": "b3-v1-fits/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b3-v1-fits/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      },
+      {
+        "logical_id": "C/29",
+        "family": "C",
+        "seed": 29,
+        "selected_epoch": 137,
+        "source_root_name": "b3-v1-fits",
+        "selection_wrapper_recipe": "C",
+        "weighted_objective_required": false,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b3-v1-fits/b3_training.json#/outcomes/[recipe=C,seed=29]/selection",
+        "selection_path_rule": "b3-v1-fits/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b3-v1-fits/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      },
+      {
+        "logical_id": "C/43",
+        "family": "C",
+        "seed": 43,
+        "selected_epoch": 92,
+        "source_root_name": "b3-v1-fits",
+        "selection_wrapper_recipe": "C",
+        "weighted_objective_required": false,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b3-v1-fits/b3_training.json#/outcomes/[recipe=C,seed=43]/selection",
+        "selection_path_rule": "b3-v1-fits/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b3-v1-fits/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      },
+      {
+        "logical_id": "P/17",
+        "family": "P",
+        "seed": 17,
+        "selected_epoch": 123,
+        "source_root_name": "b3-v1-fits",
+        "selection_wrapper_recipe": "P",
+        "weighted_objective_required": false,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b3-v1-fits/b3_training.json#/outcomes/[recipe=P,seed=17]/selection",
+        "selection_path_rule": "b3-v1-fits/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b3-v1-fits/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      },
+      {
+        "logical_id": "P/29",
+        "family": "P",
+        "seed": 29,
+        "selected_epoch": 134,
+        "source_root_name": "b3-v1-fits",
+        "selection_wrapper_recipe": "P",
+        "weighted_objective_required": false,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b3-v1-fits/b3_training.json#/outcomes/[recipe=P,seed=29]/selection",
+        "selection_path_rule": "b3-v1-fits/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b3-v1-fits/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      },
+      {
+        "logical_id": "P/43",
+        "family": "P",
+        "seed": 43,
+        "selected_epoch": 169,
+        "source_root_name": "b3-v1-fits",
+        "selection_wrapper_recipe": "P",
+        "weighted_objective_required": false,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b3-v1-fits/b3_training.json#/outcomes/[recipe=P,seed=43]/selection",
+        "selection_path_rule": "b3-v1-fits/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b3-v1-fits/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      },
+      {
+        "logical_id": "W/17",
+        "family": "W",
+        "seed": 17,
+        "selected_epoch": 93,
+        "source_root_name": "b4-5-weighted-terminal/fit",
+        "selection_wrapper_recipe": "P",
+        "weighted_objective_required": true,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b4-5-weighted-terminal/fit/units/0000.json#/payload",
+        "selection_path_rule": "b4-5-weighted-terminal/fit/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b4-5-weighted-terminal/fit/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      },
+      {
+        "logical_id": "W/29",
+        "family": "W",
+        "seed": 29,
+        "selected_epoch": 156,
+        "source_root_name": "b4-5-weighted-terminal/fit",
+        "selection_wrapper_recipe": "P",
+        "weighted_objective_required": true,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b4-5-weighted-terminal/fit/units/0001.json#/payload",
+        "selection_path_rule": "b4-5-weighted-terminal/fit/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b4-5-weighted-terminal/fit/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      },
+      {
+        "logical_id": "W/43",
+        "family": "W",
+        "seed": 43,
+        "selected_epoch": 142,
+        "source_root_name": "b4-5-weighted-terminal/fit",
+        "selection_wrapper_recipe": "P",
+        "weighted_objective_required": true,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b4-5-weighted-terminal/fit/units/0002.json#/payload",
+        "selection_path_rule": "b4-5-weighted-terminal/fit/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b4-5-weighted-terminal/fit/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      },
+      {
+        "logical_id": "S/17",
+        "family": "S",
+        "seed": 17,
+        "selected_epoch": 65,
+        "source_root_name": "b3-v1-fits",
+        "selection_wrapper_recipe": "S",
+        "weighted_objective_required": false,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b3-v1-fits/b3_training.json#/outcomes/[recipe=S,seed=17]/selection",
+        "selection_path_rule": "b3-v1-fits/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b3-v1-fits/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      },
+      {
+        "logical_id": "S/29",
+        "family": "S",
+        "seed": 29,
+        "selected_epoch": 115,
+        "source_root_name": "b3-v1-fits",
+        "selection_wrapper_recipe": "S",
+        "weighted_objective_required": false,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b3-v1-fits/b3_training.json#/outcomes/[recipe=S,seed=29]/selection",
+        "selection_path_rule": "b3-v1-fits/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b3-v1-fits/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      },
+      {
+        "logical_id": "S/43",
+        "family": "S",
+        "seed": 43,
+        "selected_epoch": 127,
+        "source_root_name": "b3-v1-fits",
+        "selection_wrapper_recipe": "S",
+        "weighted_objective_required": false,
+        "selection_relative_path": null,
+        "selection_bytes": null,
+        "selection_sha256": null,
+        "reference_origin": "b3-v1-fits/b3_training.json#/outcomes/[recipe=S,seed=43]/selection",
+        "selection_path_rule": "b3-v1-fits/artifacts/selection/{referenced_sha256}.json",
+        "checkpoint_path_rule": "b3-v1-fits/artifacts/checkpoint/{referenced_sha256}.safetensors",
+        "checkpoint_relative_path": null,
+        "checkpoint_bytes": null,
+        "checkpoint_sha256": null
+      }
+    ],
+    "R0_expected_per_author": 40,
+    "R0_order": "7 literal bootstrap,3 W units,12 fixed selection references,18 reference units; not directory discovery",
+    "R0_source_binding": {
+      "embedded_B3_data_index_sha256": "b78e85f5bab56f2b05e06b43b8fd77f2bfd556150b95643e443a566165d8fc26",
+      "W_context_sha256": "0454eee24c1c72c051f10dce0162f0f41d5a5ade1fb3a4e5b42c9c82c9d11071",
+      "reference_context_sha256": "cd0dffbb28347889726baacb8225efd9b2dadd94ea86f7485c843170b1ec2181",
+      "only_first_observed_metadata": [
+        "b4-30-z-reflection-repair-v2/sentinel/reference/progress.json",
+        "b4-30-z-reflection-repair-v2/sentinel/reference/summary.json"
+      ],
+      "first_observation_is_not_proof_of_unpublished_past_history": true,
+      "unresolved_mandatory_lineage_means_STOP": true
+    },
+    "R1_payloads": {
+      "count_per_author": 558,
+      "checkpoint_rows": [
+        {
+          "logical_id": "C/17",
+          "family": "C",
+          "seed": 17,
+          "selected_epoch": 168,
+          "source_root_name": "b3-v1-fits",
+          "selection_wrapper_recipe": "C",
+          "weighted_objective_required": false
+        },
+        {
+          "logical_id": "C/29",
+          "family": "C",
+          "seed": 29,
+          "selected_epoch": 137,
+          "source_root_name": "b3-v1-fits",
+          "selection_wrapper_recipe": "C",
+          "weighted_objective_required": false
+        },
+        {
+          "logical_id": "C/43",
+          "family": "C",
+          "seed": 43,
+          "selected_epoch": 92,
+          "source_root_name": "b3-v1-fits",
+          "selection_wrapper_recipe": "C",
+          "weighted_objective_required": false
+        },
+        {
+          "logical_id": "P/17",
+          "family": "P",
+          "seed": 17,
+          "selected_epoch": 123,
+          "source_root_name": "b3-v1-fits",
+          "selection_wrapper_recipe": "P",
+          "weighted_objective_required": false
+        },
+        {
+          "logical_id": "P/29",
+          "family": "P",
+          "seed": 29,
+          "selected_epoch": 134,
+          "source_root_name": "b3-v1-fits",
+          "selection_wrapper_recipe": "P",
+          "weighted_objective_required": false
+        },
+        {
+          "logical_id": "P/43",
+          "family": "P",
+          "seed": 43,
+          "selected_epoch": 169,
+          "source_root_name": "b3-v1-fits",
+          "selection_wrapper_recipe": "P",
+          "weighted_objective_required": false
+        },
+        {
+          "logical_id": "W/17",
+          "family": "W",
+          "seed": 17,
+          "selected_epoch": 93,
+          "source_root_name": "b4-5-weighted-terminal/fit",
+          "selection_wrapper_recipe": "P",
+          "weighted_objective_required": true
+        },
+        {
+          "logical_id": "W/29",
+          "family": "W",
+          "seed": 29,
+          "selected_epoch": 156,
+          "source_root_name": "b4-5-weighted-terminal/fit",
+          "selection_wrapper_recipe": "P",
+          "weighted_objective_required": true
+        },
+        {
+          "logical_id": "W/43",
+          "family": "W",
+          "seed": 43,
+          "selected_epoch": 142,
+          "source_root_name": "b4-5-weighted-terminal/fit",
+          "selection_wrapper_recipe": "P",
+          "weighted_objective_required": true
+        },
+        {
+          "logical_id": "S/17",
+          "family": "S",
+          "seed": 17,
+          "selected_epoch": 65,
+          "source_root_name": "b3-v1-fits",
+          "selection_wrapper_recipe": "S",
+          "weighted_objective_required": false
+        },
+        {
+          "logical_id": "S/29",
+          "family": "S",
+          "seed": 29,
+          "selected_epoch": 115,
+          "source_root_name": "b3-v1-fits",
+          "selection_wrapper_recipe": "S",
+          "weighted_objective_required": false
+        },
+        {
+          "logical_id": "S/43",
+          "family": "S",
+          "seed": 43,
+          "selected_epoch": 127,
+          "source_root_name": "b3-v1-fits",
+          "selection_wrapper_recipe": "S",
+          "weighted_objective_required": false
+        }
+      ],
+      "checkpoint_count": 12,
+      "train_labels": {
+        "count": 528,
+        "scale_counts": [
+          {
+            "mesh": [
+              12,
+              6,
+              3
+            ],
+            "count": 432
+          },
+          {
+            "mesh": [
+              24,
+              12,
+              6
+            ],
+            "count": 96
+          }
+        ],
+        "unique_population": "exact role=train set of frozen embedded B3.4 union; overlapping468/508/488 memberships add no originals",
+        "path_rule": "b3-v1-data/artifacts/label/{exact_case_id}/{referenced_artifact_sha256}.json",
+        "actual_case_ids_paths_sizes_hashes": null
+      },
+      "uniform_packets": {
+        "count": 18,
+        "case_ids": [
+          "tlcase-v1-033f380c2181d9d1f94fc7f3d4b4a6507992c5e1a5004018bff779ca92add82a",
+          "tlcase-v1-080d09f0d3f236ebe53ffe7b2065277be60e5c82f700717ff5609418b74bda40",
+          "tlcase-v1-3ed877d12beb0d1b77b6f5d94d841209d1b91e512373189993fef3477373d56b",
+          "tlcase-v1-53c7cbca434bdf62c946bb2bcfcf62728c39e1600be373afca82567d77191e7b",
+          "tlcase-v1-55c1b3e64135c23125fc286de5d780fc5d9a1e226d5e43ff0dbc8925b423936a",
+          "tlcase-v1-81172985c657df531e3d0ce68696b85acce199b394d06227dfb4ffb151055bc1",
+          "tlcase-v1-838e2ccc7891b194c1ab5d5b9854c658320e5b191a3d4ca38b78bbb4fc04d16e",
+          "tlcase-v1-999b36e8e2883275052a73da2220f11d7003c88a2984a856bedc174461012c7e",
+          "tlcase-v1-a4c6c5ac54f8dda299efb6003651da2256c7f605fba98d4e6958eca6451277b8",
+          "tlcase-v1-a7c58baceea537ea71ce5301afa9073cb8a803daaa8104e64ad575f3b5971710",
+          "tlcase-v1-aa6771f47c153c6d2942605ec8c94f229c482f5c7bdc1567989d9800c66c6866",
+          "tlcase-v1-c38b3eb15df4c6805bc187e068b1f160d1bd5af03173f2e7be29b8db5523c5c4",
+          "tlcase-v1-c84504f428f84c74e81c2093161688ef562f2b0533a54c6ed2f4a2de5da10562",
+          "tlcase-v1-d69efc62a19ab50dc014540a44e91968f638e466491b12bca42e6dd61f657ec3",
+          "tlcase-v1-d9431c1421f2408accd5db0614722f1842c3c7f7630db10b3d316dfde5148e80",
+          "tlcase-v1-d9dc312497ba5ade125c1b6d432ca029e375718fe301909a75a5db8f9c7b3e3f",
+          "tlcase-v1-f3e84b1e47f4f45c61c7b948a0535d57678a80c0bc04821c74fd7c6012983392",
+          "tlcase-v1-fae8094b1b68e2369ab61e02047e0e6799e6f45020aa5cd6f2ed92bcca8e5532"
+        ],
+        "path_rule": "b4-30-z-reflection-repair-v2/sentinel/reference/artifacts/outcome/{referenced_sha256}.json",
+        "source_pointer": "/outcome/attempt/metrics/final_compliance",
+        "actual_paths_sizes_hashes": null,
+        "require_original_uniform_success_no_failure_no_fallback_and_terminal_equality": true
+      },
+      "full_558_literal_registry": null,
+      "deferred_fields_first_registration": "Only within separately granted R0: both independent R0 readers accept/freeze exact558 literal paths, declared bytes/SHA/context/role and actual R0 METADATA tuple rows before any R1 payload stat/open. Payload actual tuples are first observed only in respective R1 reads and then cross-compared; R0 must not stat payload to prefill them.",
+      "metadata_payload_stat_open_before_R0_acceptance": false,
+      "payload_actual_four_tuples_first_observed": "R1 only, under source exception; never a pre-R1 fact"
+    },
+    "source_read_caps": {
+      "per_author_per_original_full_read_passes": 1,
+      "R0_per_author": 40,
+      "R1_per_author": 558,
+      "two_authors_total_content_reads": 1196,
+      "shared_filing_or_future_consumer_old_reads": 0,
+      "reread_after_short_read_failure_or_STOP": false,
+      "original_raw_metadata_label_packet_history_persistence": false,
+      "checkpoint_copy": "12 byte-identical Safetensors only; no resave",
+      "hash_and_parse_same_captured_buffer": true
+    },
+    "denied": [
+      "old directory/list/glob/recursive/index-tree search",
+      "standalone old data index or alternate panel/backup",
+      "A substituted for W or different seed/epoch/selection",
+      "validation/test/OOD/final/candidate payload",
+      "old raw logs/backup members/sealed48/720/unused48",
+      "old loader/full history validation/model instantiation/inference/FEM/filter/projection/refit",
+      "raw original metadata/label/packet/history dumps or exception locals"
+    ]
+  },
+  "content_output": {
+    "member_count": 1071,
+    "members": {
+      "source_registry.json": 1,
+      "checkpoint": 12,
+      "models.json": 1,
+      "NN_producer": 528,
+      "NN_audit": 528,
+      "uniform-scalars.json": 1
+    },
+    "version_id": "SHA256(canonical(content-manifest)); manifest excludes own version/hash; ASCII sort_keys compact ensure_ascii allow_nanFalse oneLF",
+    "source_local_backup_identity": "Keep declared/before/after/closing dev/ino/size/mtime_ns separately; independently compare full required bytes/IEEE/pointers; no same-hash inode replacement",
+    "consumption": "No formal/scientific consumer granted now; any later separately admitted reader needs formal-scope certificate, role allowlist and opaque held lease, verified same-read buffer only; no source/backup fallback",
+    "role_views": "Future producer weights/models/NN-producer only; NN-audit/recent states for separately admitted independent scientist; uniform scalars compatibility only, no old timing denominator or H selection"
+  },
+  "rejection_caps": {
+    "R0_total_per_role": 33554432,
+    "R0_first_index": 16777216,
+    "R0_other_literal_each": 1048576,
+    "unit_metadata_each": 32768,
+    "selection_metadata_each": 262144,
+    "checkpoint_each": 1048576,
+    "all_checkpoints_per_role": 12582912,
+    "NN_source_each": 67108864,
+    "NN_source_total_per_role": 805306368,
+    "uniform_packet_each": 4194304,
+    "all_uniform_packets_per_role": 75497472,
+    "NN_producer_each": 131072,
+    "NN_producer_total": 33554432,
+    "NN_audit_each": 2097152,
+    "NN_audit_total": 268435456,
+    "scalar_output_total": 65536,
+    "interpretation": "rejection/investment caps; actual sizes unobserved; not a memory theorem; no truncation/replacement/limit growth",
+    "models_output": 1048576,
+    "registry_output": 8388608,
+    "content_manifest": 2097152,
+    "evidence_record_each": 16777216,
+    "evidence_per_primary_root": 268435456,
+    "evidence_files_per_primary_root": 512,
+    "source_total_per_author": 926941184,
+    "source_total_two_authors": 1853882368,
+    "new_formal_namespace_total_bytes": 2147483648,
+    "new_formal_namespace_regular_files": 4096,
+    "partial_files_included": true,
+    "native_RSS_bytes": 4294967296,
+    "native_metric": "Previously adopted M2 empirical complete native chain RSS/actual exits; independent preflight; not a-priori allocation assurance or historical full-fit proof",
+    "caps_are_rejection_bounds_not_measured_source_sizes_or_completion_assurance": true
+  },
+  "fixed_target": {
+    "parent": "/Users/keith1117/Library/Application Support/TopoLab-custody",
+    "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v2",
+    "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v2-independent-backup",
+    "same_previously_proposed_literals_no_new_directory_route": true,
+    "actual_existence_filesystem_identity_and_free_space": "UNKNOWN_UNPROBED",
+    "earliest_target_probe_or_creation": "After new explicit target/activation grant, at unique T0 inside setup300, before first dispatch",
+    "ancestor_traversal": "dirfd/nofollow fixed path, no symlink/escape and local filesystem. Normal trusted root-owned system ancestors such as /Users are permitted; only fixed TopoLab custody parent/generation/backup require euid ownership and0700/private control, not every system ancestor.",
+    "parent_if_absent": "Only fixed parent may be created0700 under explicit grant; reject existing unsafe owner/mode/filesystem, do not repair global settings",
+    "generation_backup_existing": "STOP; no overwrite/reuse/rename/fallback target",
+    "directory_mode": "0700",
+    "new_regular_file_mode": "0600 singlelink exclusive create/fsync",
+    "backup_distinct_file_inodes": true,
+    "backup_different_device_or_disaster_isolation_claim": false,
+    "registered_lease": "Actual O_EXCL/nofollow cooperative lock and inode/content receipt; HELD through actual final filing reader return, release separately witnessed; STOP retains quarantine if cleanup/release unknown",
+    "source_cloud_control_probe_or_global_sync_change": false,
+    "setup_actual_sequence": "At uniqueT0<=300s check/create only fixed private parent and fresh generation; require sibling backup absent and reserve it, actual backup created only in shared-closeout. Source stat/read0 until independent-public-check PASS.",
+    "provider_coverage": "UNKNOWN",
+    "never_sync_or_upload_or_external_writer_exclusion_guarantee": false
+  },
+  "new_result_retention_proposal": {
+    "primary": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-acquisition-v1-results",
+    "mirror": "/private/tmp/topolab-source-acquisition-v1-results-backup",
+    "actual_now": "UNKNOWN_UNPROBED_NOT_CREATED",
+    "earliest_creation": "After explicit new grant in result stage; only NEW allowlisted evidence, never original source or historical archive members",
+    "role": "Metadata/logs/finite archives only, cannot be substitute input generation or fallback custody target",
+    "caps_per_copy": {
+      "bytes": 2147483648,
+      "regular_files": 4096,
+      "single_file_bytes": 1073741824
+    },
+    "no_overwrite_reuse_or_extra_directory_search": true,
+    "independent_file_inodes": true,
+    "directories": "0700 while authoring; sealed0555",
+    "files": "0600 while authoring; sealed0444",
+    "archive_scope": "Exact new formal evidence and new readiness/result check logs, source/test hashes and actual CI/return/preservation receipts; no old originals, historical archives, full checkout/venv/cache or raw scientific label/history persistence",
+    "critical_raw_loss": "Required formal source/native/return/lease/cost evidence missing => no accepted version; ephemeral unit directories if absent disclosed separately, no reconstructed raw-evidence claim"
+  },
+  "budgets_PROPOSED_NOT_GRANTED": {
+    "formal": {
+      "common_window_seconds": 4500,
+      "T0": "Once, after actual metadata readiness; plan actor_activation_UTC_seconds immediately before unique target setup. No CI/git/gh in formal payload; actual setup/dispatch/returns all inside4500s.",
+      "setup_and_lease_seconds": 300,
+      "coordination_total_seconds": 240,
+      "seal_handoff_seconds": 360,
+      "FULL_by_role": {
+        "independent-public-check": 300,
+        "exporter-r0": 300,
+        "independent-r0": 300,
+        "exporter-r1": 1200,
+        "independent-r1": 1200,
+        "shared-closeout": 300
+      },
+      "FULL_sum_seconds": 3600,
+      "first_dispatch_remaining_minimum_seconds": 4200,
+      "successful_role_acceptance": "max(actual complete outer whole_wall+10, independently established inner_minimum_charge)<=immutable FULL; all required actual exits0/cleanup and complete<=4GiB",
+      "failed_role_known_charge": "max(immutable FULL,ceil(valid complete whole_wall+10),ceil(known inner minimum)); missing data UNKNOWN_NOT_ZERO",
+      "shared_FULL300_prebooked_once_before_first_dispatch": true,
+      "shared_dispatch_additional_FULL_charge": 0,
+      "refund_on_failure_or_short_run": false,
+      "all_six_roles_ready_before_any_dispatch": true,
+      "partial_prefix_trial_authorized": false
+    },
+    "result": {
+      "executor_seconds": 7200,
+      "independent_seconds": 7200,
+      "earlier_ungranted_proposal_executor_seconds": 7200,
+      "earlier_ungranted_proposal_independent_seconds": 3600,
+      "change_requires_explicit_new_adoption": true,
+      "reason": "Explicitly adopt7200s per actor for this new formal identity; last final local+PR+main test times4727.79s already exceed earlier3600s before other publication work.",
+      "T_result": "Actual preformal STOP if unactivated; otherwise actual formal closure/closure-failure STOP frontier, no later than T0+4500; same start for both authors",
+      "wait_first_tool_later_or_interruption_may_shift_deadline": false,
+      "includes": [
+        "one result report and cross-review",
+        "all mandatory local5 checks for each commit",
+        "exact PR and merged-main4CI",
+        "finite NEW-only filing and lease release evidence",
+        "immutable NEW evidence retention",
+        "actual last tool/message returns"
+      ],
+      "final_filing_once": {
+        "FULL_seconds": 180,
+        "native_timeout_seconds": 160,
+        "included_in_result_not_extra": true,
+        "old_original_reads": 0,
+        "content_mutation": false,
+        "requires": "Real new prefix, all relevant groups gone and actual prior returns witnessed; native4GiB/complete exit/billing, shared packet and backup binding; both result windows remaining>=4860=filing180+lease-release180+finite publication reserve4500",
+        "missing_or_unknown_cleanup_may_launch_helper": false,
+        "remaining_both_result_windows_minimum_seconds": 4860
+      },
+      "publication_strategy": "One scoped result commit after required checks; final external finite closure binds later exact main CI and actual returns, never another automatic after-CI commit cycle",
+      "finite_publication_and_final_returns_reserve_seconds": 4500,
+      "lease_release_metadata_action": {
+        "maximum_calls": 1,
+        "whole_wall_plus10_cap_seconds": 180,
+        "native_timeout_seconds": 160,
+        "minimum_both_result_windows_remaining_at_dispatch_seconds": 4680,
+        "formal_seventh_role": false,
+        "additional_frozen_FULL": null,
+        "charge": "ceil(actual complete outer wall+10) and independently established internal minimum; UNKNOWN_NOT_ZERO if incomplete, included in result and not waived",
+        "old_original_content_reads": 0,
+        "scientific_content_consumption": false,
+        "requires": "Only after actual filing last return/exits/cleanup; read only new lease/plan/return metadata; full native4GiB/exits/cleanup verified by outer observer; no future self-exit claim"
+      },
+      "finite_reserve_basis": "Keep frozen4500s operational reserve/4860s filing and4680s release gates unchanged. Latest4727.79s tests-only exceeds4500s; start filing/release immediately after closure and require a conservative complete-publication plan within actual remaining7200s. Queues/failures do not extend deadlines."
+    },
+    "all_old_budgets_closed_no_pause_reset_transfer": true,
+    "monetary_host_subscription_CI_cost": "UNKNOWN_NOT_ZERO; no new purchase/installation/provider spend; stop for separate authority if new monetary commitment needed",
+    "drafting_before_new_grant_cost": "UNKNOWN_NOT_ZERO, separate from all closed/new proposed budgets",
+    "completion_guaranteed": false,
+    "authorization_freeze_and_launch_readiness": {
+      "executor_seconds": 7200,
+      "independent_seconds": 7200,
+      "new_not_extension_of_closed_4h_3h": true,
+      "start": "Each newly appointed actor first authorized preparation tool after explicit approval; continuous to common T0 or preformal STOP",
+      "allowed": [
+        "Write and independently review exact new execution authority and metadata-only launch preflight",
+        "First regress authority-present and absent test isolation with NEW public software copies; minimum test-only fixture correction for the two documented absence assumptions",
+        "Normal five local checks, protected exact-head PR and merged-main four-job CI, actual runtime/command/actors and clean checkout freeze",
+        "Retain NEW software failures/logs/receipts and actual returns"
+      ],
+      "denied": [
+        "Old-original stat/read/copy/parse",
+        "Custody target stat/probe/create",
+        "Formal six roles",
+        "B/C",
+        "Production rule/threshold/charge/reader changes",
+        "Repeat completed formal-adapter capability preparation"
+      ],
+      "if_more_production_changes_needed": "STOP and report concrete new blocker; no automatic scope growth",
+      "completion": "Both actors actual readiness, new protected publication and frozen main/plan/authority/runtime, with common T0 no later than both7200s deadlines; otherwise preformal STOP",
+      "basis_seconds": {
+        "last_final_local_pytest": 1188.96,
+        "last_PR_quality_test_time": 1898.91,
+        "last_main_quality_test_time": 1639.92,
+        "sum_tests_only": 4727.79,
+        "remaining_for_other_checks_review_queues_retention_and_handoff": 2472.21
+      },
+      "basis_limitation": "Observed test durations are lower bounds on complete job latency;7200 is a proposed hard cap, not a feasibility guarantee or an actual runtime measurement"
+    },
+    "overall_continuous_from_each_new_authorization_preflight_first_tool": {
+      "executor_seconds": 18900,
+      "independent_seconds": 18900,
+      "arithmetic": "7200+4500+7200=18900=5h15m per actor maximum",
+      "handoff_gaps_count": true,
+      "phases_do_not_add_unbooked_time": true,
+      "FULL3600_and_filing180_already_inside_phases": true,
+      "preformal_STOP": "Formal charge0; both result clocks begin at actual preformal STOP. Actual preparation cost retained; no full cap refund or future transfer."
+    }
+  },
+  "six_role_start_conditions": [
+    {
+      "role": "independent-public-check",
+      "FULL_seconds": 300,
+      "old_content_reads_maximum": 0,
+      "remaining_common_window_minimum_seconds": 4200
+    },
+    {
+      "role": "exporter-r0",
+      "FULL_seconds": 300,
+      "old_content_reads_maximum": 40,
+      "remaining_common_window_minimum_seconds": 3900
+    },
+    {
+      "role": "independent-r0",
+      "FULL_seconds": 300,
+      "old_content_reads_maximum": 40,
+      "remaining_common_window_minimum_seconds": 3600
+    },
+    {
+      "role": "exporter-r1",
+      "FULL_seconds": 1200,
+      "old_content_reads_maximum": 558,
+      "remaining_common_window_minimum_seconds": 3300
+    },
+    {
+      "role": "independent-r1",
+      "FULL_seconds": 1200,
+      "old_content_reads_maximum": 558,
+      "remaining_common_window_minimum_seconds": 2100
+    },
+    {
+      "role": "shared-closeout",
+      "FULL_seconds": 300,
+      "old_content_reads_maximum": 0,
+      "remaining_common_window_minimum_seconds": 900
+    }
+  ],
+  "preactivation_required": [
+    "Actual explicit approval of this exact revised draft incl new7200/7200 freeze/readiness,4500 formal,7200/7200 results and exact source/target exception; old4h/3h closed",
+    "Fresh distinct independent appointed under exact actor IDs and actual command/tool-caller table; no old author resumed",
+    "Both preparation closure copies raw-hash checked62977... status and limitations accepted; required source/proposal/content hashes unchanged",
+    "Authority-file presence/absence test isolation regression green with NEW public software only; full required checks and current protected exact-head PR and merged-main all4 CI passed",
+    "Actual fresh metadata-only independent launch preflight evidence, owner message and draft hash frozen before authority publication; no source/target facts invented",
+    "Clean actual latest main; runtime executable/image SHA,orig_argv/-I,cwd,OS,uv.lock/import origins and all5 thread=1 settings fixed; outer actual-tool event recorder ready",
+    "Frozen role commands/native RSS4GiB/complete exit and actual-return observer, setup300, full six-role suffix and both result funding feasible before any dispatch",
+    "Plan may defer only target physical facts to unique setup and source558 declaration facts to independently accepted R0; all other mandatory unknowns stop preformal entry",
+    "Formal preflight uses80f9eb8 implementation source blobs plus separately frozen later authority/clean publication tree; no source mutation after freeze"
+  ],
+  "preflight_receipt_nonrecursive_binding": {
+    "preflight_scope": "NEW software metadata/public fixtures only; exact actors,80f9eb8 source/runtime/proposal/content and intended authorization payload, no actual target/source tests",
+    "bind": "Immutable independently authored receipt excluding its own future hash and future CI/return; its raw hash goes into authority. Final independent/publication observations bind exact later authority SHA/mainCI before T0.",
+    "no_future_claim": "Receipt cannot claim future mainCI/target/source/resource PASS; launch readiness separately observes actual exact-mainCI before T0. Authority strings alone are not independent evidence verification."
+  },
+  "formal_steps": {
+    "setup": "Inside300s check/create fixed parent+generation only, verify backup absence/reserve capacity, acquire exclusive cooperative lease, bind physical facts and first native precheck; backup creation waits for shared-closeout; first dispatch remaining>=4200s",
+    "independent-public-check": "Only new public data; actual frozen formal adapter startup and native full4GiB/exits/tool return PASS before any old-original stat/read",
+    "exporter-r0": "Predecessor complete PASS, lease valid; bounded40 source metadata reads only; save complete context and derived558 declarations, no payload stat/open",
+    "independent-r0": "Own independently authored complete40 reads, own chain/origin/member verification; byte/SHA/fulltuple registry equality; freeze accepted exact558 literals before R1",
+    "exporter-r1": "Accepted R0 source registry and all declared identities/caps; own once-only558 reads and restricted1071-member write, no scientific operations",
+    "independent-r1": "Own once-only558 original reads plus all new content, complete independent byte/schema/IEEE/source/tuple/member comparisons; all native/resource/cost/exit facts complete",
+    "shared-closeout": "NEW-only explicit allowlisted outputs to independent-inode backup, frozen shared prepayment once, actual last return observed externally; failure-prefix exception only after real prefix and every started group/return verified, no source-role suffix",
+    "result": "At common T_result start both clocks immediately; at most one filing180, then separately observed final return/release and finite manifest/certificate/result publication; UNKNOWN is not acceptance"
+  },
+  "STOP_and_acceptance": {
+    "first_failure_or_missing_mandatory_fact": "STOP_NO_RETRY, preserve primary source context/all existing tuples/whole packet/secondary errors/valid wall/complete charges; unlaunched suffix UNKNOWN_NOT_RUN",
+    "same_hash_replacement_or_short_read": "STOP; identity changes retain precedence, length-only read_size_consistency; no refill reread",
+    "lease_or_resource_or_return_unknown": "No input acceptance; do not launch helper for backup if relevant process cleanup unknown",
+    "failure_shared_exception": "Only already-prepaid NEW-only finite backup when frozen prerequisites and common-window remaining are satisfied; cannot revive source suffix or issue certificate",
+    "accepted_only_if": "Independent complete actual source/content/backup comparison plus all6 required successful exits/RSS/wall/FULL/windows/actual returns, formal closed, real filing return/lease release and immutable published finite closure jointly verified",
+    "success_status": "SOURCE_ATTESTED_LOCAL_INPUT_VERSION_ACCEPTED_SCIENCE_CLOSED",
+    "max_cap_or_STOP": "Close unused allowance without transfer; retain failed/partial generation quarantined, no target fallback/retry",
+    "after": "Stop; B native preflight and C P17 repair require separate compatible authority and budgets; accepted inputs do not repair P17 or pass a scientific Gate"
+  },
+  "remaining_blockers": [
+    {
+      "class": "CONFIRMED_AUTHORITY_GAP",
+      "id": "A1",
+      "fact": "Public preparation is sealed complete but no source/target/formal/result grant; reserved actual protocol absent, actual fresh formal actors and launch preflight unappointed/unfrozen"
+    },
+    {
+      "class": "CONFIRMED_STATIC_TEST_ASSUMPTION_NOT_REPRODUCED_CI",
+      "id": "A2",
+      "fact": "Two tests rely on global actual execution authority absence; publishing the future file contradicts those premises. No current mainCI failure claimed, no formal role/test rerun in this draft.",
+      "evidence": [
+        "tests/test_p17_m2_source_acquisition_control.py:42-53",
+        "tests/test_p17_m2_source_acquisition_control.py:284-309",
+        "scripts/p17_m2_source_acquisition_control.py:50-55"
+      ],
+      "next": "Only under new explicit readiness grant, public-copy presence/absence regression then minimal test fixture isolation; production rules unchanged. Other defects stop for owner decision."
+    },
+    {
+      "class": "UNKNOWN_DEFERRED_SETUP",
+      "id": "A3",
+      "fact": "Target existence/private ownership/locality/space/real lease not observed; only new unique T0 setup300 may obtain, failure STOP no alternate target"
+    },
+    {
+      "class": "UNKNOWN_DEFERRED_R0",
+      "id": "A4",
+      "fact": "12 actual selection names/hashes and558 payload literal declarations/current lineage unknown. Both R0 must independently accept exact frozen-origin closure before any payload stat/open."
+    },
+    {
+      "class": "UNKNOWN_ACTUAL_FORMAL",
+      "id": "A5",
+      "fact": "Actual input read completeness/identities/native RSS/exit/wall/full costs and1071 backup/filing/release acceptance unobserved; public evidence supplies no formal pass"
+    },
+    {
+      "class": "CONFIRMED_DOWNSTREAM_CLOSED",
+      "id": "A6",
+      "fact": "FixedP17 remains unrepaired, B/C unapproved, all-paid12721.16417100014444982>7200 and full-fitPENDING4GiB remain; input acceptance grants no science"
+    }
+  ],
+  "hypotheses_not_confirmed": [
+    "iCloud or OneDrive caused historical identity fault",
+    "The target is never synced/uploaded or protected from all external writers",
+    "Current originals satisfy full lineage or all future work fits proposed clocks",
+    "Two static test premises are the only remaining grant-present integration defect; actual compatibility must pass before T0"
+  ],
+  "current_draft_observed_actions": {
+    "old_original_stat_read_copy_parse": 0,
+    "target_stat_probe_create": 0,
+    "formal_roles": 0,
+    "B_C": 0,
+    "old_quota_reset": 0,
+    "new_agent": 0,
+    "commit_push_merge": 0,
+    "source_or_test_edits": 0,
+    "existing_dirty_files_preserved": 25,
+    "closed_proposals_preserved": true
+  },
+  "approval_boundary": "Owner may approve this exact draft once; approval conditions only the staged scope herein. If only75min/result budgets are approved without new authority-freeze/readiness budget, remain preformal STOP. No action is authorized by this DRAFT itself."
+}

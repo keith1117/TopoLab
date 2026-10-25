@@ -1,0 +1,337 @@
+{
+  "schema": "topolab.v2.m2-source-acquisition-execution-authority.v1",
+  "execution_identity": "topolab.v2.p17-m2-content-verified-source-acquisition.v1",
+  "proposal_sha256": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+  "owner_approval_reference": "codex-thread:01a15c40-ca75-72c2-841b-1e7c852287c2; direct human message quoted in owner_direct_message; observed immediately before root first tool2026-10-25T17:29:22.373325Z",
+  "permissions": {
+    "formal_activation": true,
+    "old_original_access": true,
+    "target_access": true,
+    "B_C": false
+  },
+  "formal_seconds": 4500,
+  "result_seconds": {
+    "exporter": 7200,
+    "independent": 7200
+  },
+  "actors": {
+    "executor": "/root",
+    "independent": "/root/formal_acquisition_independent_v1"
+  },
+  "preparation_closure_sha256": "62977ea64ae3241eac514304d3b06e3ba3ce40272ae47b01ddae18dee7b3ff3b",
+  "independent_preflight_sha256": "4a437504d8170b60d45d797ec216901b8ad7c271592fdcc7185cc2386814acaf",
+  "implementation_commit": "80f9eb8b44f8efb3ffbe158b33a48fe34ba94b64",
+  "approved_authorization_draft_sha256": "401c32618ef6fb964d0efc425dc2f792ce92baf7a7e483d8bdbafa1c08906786",
+  "grant_instance_id": "p17-m2-source-acquisition-owner-grant-v1",
+  "budget_contract_reference": "p17_m2_source_acquisition_execution_authorization_draft.json#/budgets_PROPOSED_NOT_GRANTED",
+  "initial_state": "FROZEN_NOT_ACTIVATED_NO_TARGET_OR_SOURCE_ACCESS_UNTIL_UNIQUE_T0_AND_ROLE_GATES",
+  "owner_direct_message": "批准正式采集授权草案v1及绑定的双份收尾记录：授权冻结与独立预检各2小时、共同正式窗口4500秒（FULL合计3600秒）、结果阶段各2小时（含filing180秒）。按草案新委派不同作者，先补回归再做最小测试兼容；全部门槛满足后，授权精确白名单旧原件的一次有界读取、临时解析及固定目标创建、写入和备份。不运行B/C、不重开旧额度，保留现有未提交改动，完成或STOP后按草案收尾并停止。",
+  "independent_preflight_reference": {
+    "path": "/private/tmp/topolab-formal-acquisition-independent-v1-rukazk3q/independent-metadata-preflight-v2.json",
+    "raw_sha256": "4a437504d8170b60d45d797ec216901b8ad7c271592fdcc7185cc2386814acaf",
+    "scope": "METADATA_ONLY_NEW_PUBLIC_SOFTWARE_NO_SOURCE_OR_TARGET_IO",
+    "verdict": "METADATA_PREFLIGHT_ACCEPTED_FORMAL_ENTRY_STILL_CONDITIONAL",
+    "expectations_sha256": "999d7957ac55c09dfcbce0a3b2b72671a0a311552af9ab70fb40c5eaa5a9812a",
+    "missing_future_facts_remain_unknown": true
+  },
+  "preparation_closure_binding": {
+    "paths": [
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-formal-adapter-preparation-20261025-0806-a4fc2e7f/publication-closure.json",
+      "/private/tmp/topolab-formal-binding-preparation-retention-0806-a4fc2e7f/publication-closure.json"
+    ],
+    "raw_sha256": "62977ea64ae3241eac514304d3b06e3ba3ce40272ae47b01ddae18dee7b3ff3b",
+    "schema": "topolab.v2.m2-source-acquisition-adapter-preparation-closure.v1",
+    "status_required": "FORMAL_BINDING_PREPARATION_COMPLETE_FORMAL_CLOSED",
+    "source_main": "80f9eb8b44f8efb3ffbe158b33a48fe34ba94b64",
+    "reviewed_head": "7ab3963329f31d046487371678eb77e01d8e4ca3",
+    "reviewed_tree": "f75963f322a5242fdc2b565c5f91e15c20cc81f4",
+    "PR": 221,
+    "PR_CI": 40179485353,
+    "main_CI": 40181787855,
+    "all_four_jobs": "PASS",
+    "local_tests": {
+      "passed": 2739,
+      "skipped": 1
+    },
+    "executor": {
+      "cap_seconds": 14400,
+      "sealed_conservative_charge_seconds": 12946.710839250125,
+      "closed": true
+    },
+    "independent": {
+      "cap_seconds": 10800,
+      "actual_final_conservative_charge_seconds": 9316.316365042236,
+      "closed": true
+    },
+    "zero_actual_original_target_formal_B_C": true,
+    "input_version_accepted": false,
+    "limitations": "Earlier ephemeral unit trees including pytest745 missing; logs/source/receipts retained, no reconstruction. Failed partial archive retained but never accepted. Independent finalized fixed source before future mainCI; root observed later CI inside its original4h.",
+    "no_resume_rewrite_or_unused_transfer": true
+  },
+  "approved_draft_reference": {
+    "path": "docs/planning/p17_m2_source_acquisition_execution_authorization_draft.json",
+    "raw_sha256": "401c32618ef6fb964d0efc425dc2f792ce92baf7a7e483d8bdbafa1c08906786"
+  },
+  "budget_contract": {
+    "formal": {
+      "common_window_seconds": 4500,
+      "T0": "Once, after actual metadata readiness; plan actor_activation_UTC_seconds immediately before unique target setup. No CI/git/gh in formal payload; actual setup/dispatch/returns all inside4500s.",
+      "setup_and_lease_seconds": 300,
+      "coordination_total_seconds": 240,
+      "seal_handoff_seconds": 360,
+      "FULL_by_role": {
+        "independent-public-check": 300,
+        "exporter-r0": 300,
+        "independent-r0": 300,
+        "exporter-r1": 1200,
+        "independent-r1": 1200,
+        "shared-closeout": 300
+      },
+      "FULL_sum_seconds": 3600,
+      "first_dispatch_remaining_minimum_seconds": 4200,
+      "successful_role_acceptance": "max(actual complete outer whole_wall+10, independently established inner_minimum_charge)<=immutable FULL; all required actual exits0/cleanup and complete<=4GiB",
+      "failed_role_known_charge": "max(immutable FULL,ceil(valid complete whole_wall+10),ceil(known inner minimum)); missing data UNKNOWN_NOT_ZERO",
+      "shared_FULL300_prebooked_once_before_first_dispatch": true,
+      "shared_dispatch_additional_FULL_charge": 0,
+      "refund_on_failure_or_short_run": false,
+      "all_six_roles_ready_before_any_dispatch": true,
+      "partial_prefix_trial_authorized": false
+    },
+    "result": {
+      "executor_seconds": 7200,
+      "independent_seconds": 7200,
+      "earlier_ungranted_proposal_executor_seconds": 7200,
+      "earlier_ungranted_proposal_independent_seconds": 3600,
+      "change_requires_explicit_new_adoption": true,
+      "reason": "Explicitly adopt7200s per actor for this new formal identity; last final local+PR+main test times4727.79s already exceed earlier3600s before other publication work.",
+      "T_result": "Actual preformal STOP if unactivated; otherwise actual formal closure/closure-failure STOP frontier, no later than T0+4500; same start for both authors",
+      "wait_first_tool_later_or_interruption_may_shift_deadline": false,
+      "includes": [
+        "one result report and cross-review",
+        "all mandatory local5 checks for each commit",
+        "exact PR and merged-main4CI",
+        "finite NEW-only filing and lease release evidence",
+        "immutable NEW evidence retention",
+        "actual last tool/message returns"
+      ],
+      "final_filing_once": {
+        "FULL_seconds": 180,
+        "native_timeout_seconds": 160,
+        "included_in_result_not_extra": true,
+        "old_original_reads": 0,
+        "content_mutation": false,
+        "requires": "Real new prefix, all relevant groups gone and actual prior returns witnessed; native4GiB/complete exit/billing, shared packet and backup binding; both result windows remaining>=4860=filing180+lease-release180+finite publication reserve4500",
+        "missing_or_unknown_cleanup_may_launch_helper": false,
+        "remaining_both_result_windows_minimum_seconds": 4860
+      },
+      "publication_strategy": "One scoped result commit after required checks; final external finite closure binds later exact main CI and actual returns, never another automatic after-CI commit cycle",
+      "finite_publication_and_final_returns_reserve_seconds": 4500,
+      "lease_release_metadata_action": {
+        "maximum_calls": 1,
+        "whole_wall_plus10_cap_seconds": 180,
+        "native_timeout_seconds": 160,
+        "minimum_both_result_windows_remaining_at_dispatch_seconds": 4680,
+        "formal_seventh_role": false,
+        "additional_frozen_FULL": null,
+        "charge": "ceil(actual complete outer wall+10) and independently established internal minimum; UNKNOWN_NOT_ZERO if incomplete, included in result and not waived",
+        "old_original_content_reads": 0,
+        "scientific_content_consumption": false,
+        "requires": "Only after actual filing last return/exits/cleanup; read only new lease/plan/return metadata; full native4GiB/exits/cleanup verified by outer observer; no future self-exit claim"
+      },
+      "finite_reserve_basis": "Keep frozen4500s operational reserve/4860s filing and4680s release gates unchanged. Latest4727.79s tests-only exceeds4500s; start filing/release immediately after closure and require a conservative complete-publication plan within actual remaining7200s. Queues/failures do not extend deadlines."
+    },
+    "all_old_budgets_closed_no_pause_reset_transfer": true,
+    "monetary_host_subscription_CI_cost": "UNKNOWN_NOT_ZERO; no new purchase/installation/provider spend; stop for separate authority if new monetary commitment needed",
+    "drafting_before_new_grant_cost": "UNKNOWN_NOT_ZERO, separate from all closed/new proposed budgets",
+    "completion_guaranteed": false,
+    "authorization_freeze_and_launch_readiness": {
+      "executor_seconds": 7200,
+      "independent_seconds": 7200,
+      "new_not_extension_of_closed_4h_3h": true,
+      "start": "Each newly appointed actor first authorized preparation tool after explicit approval; continuous to common T0 or preformal STOP",
+      "allowed": [
+        "Write and independently review exact new execution authority and metadata-only launch preflight",
+        "First regress authority-present and absent test isolation with NEW public software copies; minimum test-only fixture correction for the two documented absence assumptions",
+        "Normal five local checks, protected exact-head PR and merged-main four-job CI, actual runtime/command/actors and clean checkout freeze",
+        "Retain NEW software failures/logs/receipts and actual returns"
+      ],
+      "denied": [
+        "Old-original stat/read/copy/parse",
+        "Custody target stat/probe/create",
+        "Formal six roles",
+        "B/C",
+        "Production rule/threshold/charge/reader changes",
+        "Repeat completed formal-adapter capability preparation"
+      ],
+      "if_more_production_changes_needed": "STOP and report concrete new blocker; no automatic scope growth",
+      "completion": "Both actors actual readiness, new protected publication and frozen main/plan/authority/runtime, with common T0 no later than both7200s deadlines; otherwise preformal STOP",
+      "basis_seconds": {
+        "last_final_local_pytest": 1188.96,
+        "last_PR_quality_test_time": 1898.91,
+        "last_main_quality_test_time": 1639.92,
+        "sum_tests_only": 4727.79,
+        "remaining_for_other_checks_review_queues_retention_and_handoff": 2472.21
+      },
+      "basis_limitation": "Observed test durations are lower bounds on complete job latency;7200 is a proposed hard cap, not a feasibility guarantee or an actual runtime measurement"
+    },
+    "overall_continuous_from_each_new_authorization_preflight_first_tool": {
+      "executor_seconds": 18900,
+      "independent_seconds": 18900,
+      "arithmetic": "7200+4500+7200=18900=5h15m per actor maximum",
+      "handoff_gaps_count": true,
+      "phases_do_not_add_unbooked_time": true,
+      "FULL3600_and_filing180_already_inside_phases": true,
+      "preformal_STOP": "Formal charge0; both result clocks begin at actual preformal STOP. Actual preparation cost retained; no full cap refund or future transfer."
+    }
+  },
+  "budget_contract_status": "ADOPTED_BY_CURRENT_DIRECT_OWNER_APPROVAL_ONLY; OLD_GRANTS_CLOSED",
+  "first_tools": {
+    "executor": {
+      "actor": "/root",
+      "first_tool_UTC": "2026-10-25T17:29:22.373325+00:00",
+      "first_tool_monotonic": 2240036.58996825,
+      "readiness_cap_seconds": 7200,
+      "overall_cap_seconds": 18900,
+      "readiness_deadline_UTC": "2026-10-25T19:29:22.373325+00:00",
+      "overall_deadline_UTC": "2026-10-25T22:44:22.373325+00:00"
+    },
+    "independent": {
+      "actor": "/root/formal_acquisition_independent_v1",
+      "first_tool_UTC": "2026-10-25T17:29:42.979231+00:00",
+      "first_tool_monotonic": 2240057.193459041,
+      "readiness_cap_seconds": 7200,
+      "overall_cap_seconds": 18900,
+      "readiness_deadline_UTC": "2026-10-25T19:29:42.979231+00:00",
+      "overall_deadline_UTC": "2026-10-25T22:44:42.979231+00:00"
+    }
+  },
+  "source_whitelist_reference": {
+    "path": "docs/planning/p17_m2_source_acquisition_execution_authorization_draft.json",
+    "pointer": "/source_whitelist",
+    "raw_file_sha256": "401c32618ef6fb964d0efc425dc2f792ce92baf7a7e483d8bdbafa1c08906786",
+    "full_558_actual_registry_now": null,
+    "R0_acceptance_before_R1_stat_open": true
+  },
+  "fixed_target": {
+    "parent": "/Users/keith1117/Library/Application Support/TopoLab-custody",
+    "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v2",
+    "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v2-independent-backup",
+    "same_previously_proposed_literals_no_new_directory_route": true,
+    "actual_existence_filesystem_identity_and_free_space": "UNKNOWN_UNPROBED",
+    "earliest_target_probe_or_creation": "After new explicit target/activation grant, at unique T0 inside setup300, before first dispatch",
+    "ancestor_traversal": "dirfd/nofollow fixed path, no symlink/escape and local filesystem. Normal trusted root-owned system ancestors such as /Users are permitted; only fixed TopoLab custody parent/generation/backup require euid ownership and0700/private control, not every system ancestor.",
+    "parent_if_absent": "Only fixed parent may be created0700 under explicit grant; reject existing unsafe owner/mode/filesystem, do not repair global settings",
+    "generation_backup_existing": "STOP; no overwrite/reuse/rename/fallback target",
+    "directory_mode": "0700",
+    "new_regular_file_mode": "0600 singlelink exclusive create/fsync",
+    "backup_distinct_file_inodes": true,
+    "backup_different_device_or_disaster_isolation_claim": false,
+    "registered_lease": "Actual O_EXCL/nofollow cooperative lock and inode/content receipt; HELD through actual final filing reader return, release separately witnessed; STOP retains quarantine if cleanup/release unknown",
+    "source_cloud_control_probe_or_global_sync_change": false,
+    "setup_actual_sequence": "At uniqueT0<=300s check/create only fixed private parent and fresh generation; require sibling backup absent and reserve it, actual backup created only in shared-closeout. Source stat/read0 until independent-public-check PASS.",
+    "provider_coverage": "UNKNOWN",
+    "never_sync_or_upload_or_external_writer_exclusion_guarantee": false
+  },
+  "new_result_retention": {
+    "primary": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-acquisition-v1-results",
+    "mirror": "/private/tmp/topolab-source-acquisition-v1-results-backup",
+    "actual_now": "UNKNOWN_UNPROBED_NOT_CREATED",
+    "earliest_creation": "After explicit new grant in result stage; only NEW allowlisted evidence, never original source or historical archive members",
+    "role": "Metadata/logs/finite archives only, cannot be substitute input generation or fallback custody target",
+    "caps_per_copy": {
+      "bytes": 2147483648,
+      "regular_files": 4096,
+      "single_file_bytes": 1073741824
+    },
+    "no_overwrite_reuse_or_extra_directory_search": true,
+    "independent_file_inodes": true,
+    "directories": "0700 while authoring; sealed0555",
+    "files": "0600 while authoring; sealed0444",
+    "archive_scope": "Exact new formal evidence and new readiness/result check logs, source/test hashes and actual CI/return/preservation receipts; no old originals, historical archives, full checkout/venv/cache or raw scientific label/history persistence",
+    "critical_raw_loss": "Required formal source/native/return/lease/cost evidence missing => no accepted version; ephemeral unit directories if absent disclosed separately, no reconstructed raw-evidence claim"
+  },
+  "actual_caller_table": {
+    "setup": "/root",
+    "independent-public-check": "/root/formal_acquisition_independent_v1",
+    "exporter-r0": "/root",
+    "independent-r0": "/root/formal_acquisition_independent_v1",
+    "exporter-r1": "/root",
+    "independent-r1": "/root/formal_acquisition_independent_v1",
+    "shared-closeout": "/root",
+    "final-filing": "/root",
+    "lease-release": "/root",
+    "final_independent_acceptance": "/root/formal_acquisition_independent_v1"
+  },
+  "native_runtime": {
+    "python": "/Library/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python",
+    "python_sha256": "93d04da16de15e537a76fa1278accf982dd35ff1107e06460433315512eb381f",
+    "isolated": 1,
+    "platform": "darwin",
+    "os_release": "25.5.0",
+    "version": "3.12.10 (v3.12.10:0cc81280367, Apr  8 2025, 08:46:59) [Clang 13.0.0 (clang-1300.0.29.30)]",
+    "threads": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    }
+  },
+  "prospective_setup_argv": [
+    "/Library/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python",
+    "-I",
+    "/private/tmp/topolab-failure-evidence-tgcbfpst/scripts/p17_m2_source_acquisition_control.py",
+    "activate-formal",
+    "--root",
+    "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v2"
+  ],
+  "prospective_role_argv_template": [
+    "/Library/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python",
+    "-I",
+    "/private/tmp/topolab-failure-evidence-tgcbfpst/scripts/p17_m2_source_acquisition_control.py",
+    "@MODE@",
+    "--root",
+    "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v2",
+    "--plan-sha",
+    "@ACTUAL_FROZEN_PLAN_SHA256@",
+    "--role",
+    "@REGISTERED_ROLE@"
+  ],
+  "lock_sha256": "9c84a5ab362e8848d7ccab0142e9fe33aee5700abf5866d843a4c9cb23920292",
+  "fixed_test_sha256": "114048d7fbace09da3e5ac298be7b1a28d8183d521db94d99db23b28831ff992",
+  "source_contract_blobs_implementation": {
+    "docs/planning/p17_m2_content_verified_custody_proposal.json": "8fa602f3d86be03da0c336f7569a35a68ce31052517249e0bf32b35f098aa7e0",
+    "docs/planning/p17_m2_content_verified_custody_protocol.json": "8ecc3716306cd2e49d7d5fd46f61eb43b4d2740861a702e5bc8745b9500e3381",
+    "docs/planning/p17_m2_content_verified_source_acquisition_proposal.json": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+    "docs/planning/p17_m2_input_export_preparation_proposal.json": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "docs/planning/p17_m2_source_acquisition_adapter_preparation_protocol.json": "ad3745d028931d5469e3be76467da391ef0289addbf46fbe909a808497c285f0",
+    "scripts/p17_m2_content_verified_control.py": "cd9af3c1c5d8c48c15c9c474375363b9c9ba36e8abbec8d4c995978cb6a34d11",
+    "scripts/p17_m2_content_verified_independent.py": "5599e59739be22557cb3f515d13f445b94818686457a1ccc382c4f49c7d00f9d",
+    "scripts/p17_m2_content_verified_public_fixture.py": "1de1827427b3f28536dcc2004d26b1c8e69deba7ac95007f5cfe9d7757cecf08",
+    "scripts/p17_m2_homotopy.py": "3d7723e0f62f93036027fea25a1386079482bdc09a4818c518bdc5999cb5e7d9",
+    "scripts/p17_m2_independent_audit.py": "300a330bc5681728930c95be4fdd67c66b10ea5abb0aab7cc15b382ca7e7153d",
+    "scripts/p17_m2_input_export.py": "03ae9ac02ec319421c55f5d7247396bdb5ad4862733ca55568e0520196f38708",
+    "scripts/p17_m2_input_export_control.py": "94ac117823d9c9ddba92cccf7632608ad6d19423d2d59e5a0a7f691c50a66681",
+    "scripts/p17_m2_input_export_dispatch.js": "a712d5b038c335752c14080cecc06f056e15cd8e2f811049c5ad2435153545dd",
+    "scripts/p17_m2_input_export_independent.py": "a89a4dc4475c4dacc39b00f0370180d8801b73a988279fcd7d00e788d9aa0fb4",
+    "scripts/p17_m2_local_input_control.py": "6cfdbfd15e5a6b083975d9c20107aa7107232072755a66a13fcf86a3f0eb0bfb",
+    "scripts/p17_m2_local_input_independent.py": "8b23786a14da85bc69c785e0d38a23022b7139c934cc90ece6804b4ae69e3cd1",
+    "scripts/p17_m2_local_input_version.py": "e43f56ddd90fc5b19e53caeae2d2ef1462cedf5e49f9d79f9604b5052b8e1184",
+    "scripts/p17_m2_resource_control.py": "ac8467b55f5ed459710eeeca23c7327fca0a68dc16866049e35cbdb1b8a56fbd",
+    "scripts/p17_m2_source_acquisition_control.py": "5460e93dffae5e55267bc1f80e85ca62a0f6cf7505a9815956830ddd39cb6dcc",
+    "scripts/p17_m2_source_acquisition_independent.py": "c06bbe152baa5961206922c90c06347c765a60948721393834abd0478903680f",
+    "scripts/p17_m2_source_verified_input.py": "a53090b1f8d5a22c634ff6a60f66aaf1d17e4f36e1c4fa34ad3d97cbb2291669",
+    "scripts/p17_m2_verified_input.py": "db4d4e6e286c4652694209e6c29360e98c9423afc09f3c16d8cbce3791d7614b"
+  },
+  "publication_frontier_at_authoring": {
+    "formal_activated": false,
+    "old_original_stat_read_copy": 0,
+    "target_stat_probe_create": 0,
+    "source_target_resource_admission": "UNKNOWN_NOT_RUN",
+    "B_C": 0,
+    "old_quota_reset": 0,
+    "all_four_new_PR_main_CI": "PENDING_ACTUAL_PUBLICATION"
+  },
+  "STOP_no_retry_or_production_patch_after_freeze": true,
+  "after": "Complete one acquisition or concrete STOP; finite result review/publication/retention then stop. No B/C/science or automatic successor."
+}

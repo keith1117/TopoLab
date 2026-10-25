@@ -1,5 +1,11 @@
 # Validation evidence index
 
+Latest [source-acquisition actual evidence](p17_m2_source_acquisition_execution.md)
+separates new public fixture compatibility/readiness from conditional formal
+source/target/input acceptance. Every failure/time/FULL and pending fact is
+retained; no B/C or seed17 repair is claimed.
+
+
 Latest [source-acquisition formal-adapter preparation](p17_m2_source_acquisition_adapter_preparation.md):
 NEW4h/3h, new public40/558/1071/native/return/lease/billing bindings only.
 Actual old source/target/formal/B/C0; P/17 unchanged. External closure records

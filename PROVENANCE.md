@@ -1652,3 +1652,13 @@ installed Apple SDK sys/mount.h interface; only a new public temporary directory
 exercised that interface, never the proposed custody target. No Hack3D code,
 external implementation, historical source payload or model execution is imported.
 See [validation](docs/validation/p17_m2_source_acquisition_adapter_preparation.md).
+
+
+## 2026-10-25 — Source authority publication and test-fixture compatibility
+
+Original TopoLab NEW public-copy presence/absence regression and two explicit
+ungranted test fixtures isolate authorization-file publication state. Production
+source/reader/native algorithms retain80f9eb8 bytes. No external implementation
+or upstream/Hack3D content is introduced. Actual later owner-granted source
+acquisition, if entered, is recorded separately in its validation report; public
+software checks do not establish input or scientific acceptance.
