@@ -1,0 +1,65 @@
+{
+  "schema": "topolab.v2.m2-source-acquisition-adapter-preparation-protocol.v1",
+  "date_America_New_York": "2026-10-25",
+  "baseline_main": "ebf59a78c95e8279e4a9f444e856cf108b78ad0b",
+  "execution_identity": "topolab.v2.p17-m2-content-verified-source-acquisition.v1",
+  "preparation_scope": "FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY",
+  "owner_direct_message": "批准正式适配准备阶段的新4小时／不同作者独立者3小时预算。先补回归测试再做最小实现，仅用新公开数据完成正式绑定、独立审查和正常发布。暂不授权旧原件读取或复制、目标探测或创建、六角色激活或B/C，不重开旧额度，保留现有未提交改动。",
+  "proposal": {
+    "path": "docs/planning/p17_m2_content_verified_source_acquisition_proposal.json",
+    "sha256": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+    "snapshot_bytes_preserved": true,
+    "adopted_now": "Only public-data formal adapter/binding preparation4h/3h, regression-first independent review and normal protected publication",
+    "superseded_for_this_preparation": [
+      "Draft requirement to enter formalT0 before preparation cap; success MUST stop FORMAL_CLOSED and cannot activateT0",
+      "Draft combined-stage26100/22500 clocks; not granted"
+    ],
+    "ungranted": [
+      "Old-original stat/read/copy/temporary parse",
+      "Proposed custody target stat/probe/create",
+      "Formal4500 and sixFULL3600 activation",
+      "Result phase2h/2h and filing180 real scope",
+      "B/C",
+      "Old quota/budget reopening"
+    ]
+  },
+  "authority": {
+    "public_implementation_tests_independent_review_publication": true,
+    "new_public_fixtures": true,
+    "formal_activation": false,
+    "old_original_access": false,
+    "target_access": false,
+    "B_C": false,
+    "global_sync_change": false,
+    "new_installation_purchase": false,
+    "old_quota_reset": false
+  },
+  "budgets": {
+    "executor": {
+      "author": "/root",
+      "first_tool_UTC": "2026-10-25T06:43:00.864171Z",
+      "first_tool_monotonic": 2201255.329195791,
+      "cap_seconds": 14400,
+      "deadline_UTC": "2026-10-25T10:43:00.864171Z"
+    },
+    "independent": {
+      "author": "/root/formal_binding_independent",
+      "first_tool_UTC": "2026-10-25T06:43:33.490189Z",
+      "first_tool_monotonic": 2201287.955256416,
+      "cap_seconds": 10800,
+      "deadline_UTC": "2026-10-25T09:43:33.490189Z",
+      "evidence": "/private/tmp/topolab-formal-binding-independent-33df7dji",
+      "expectations_sha256": "76ceaecb8a89953a17fa3298c423b3ef7746c901120f9c7f89f031cf76b12212"
+    },
+    "continuous_failures_waits_full_checks_PR_main_CI_retention_publication_actual_returns": true,
+    "pause_reset_transfer": false,
+    "additional_result_publication_budget": false,
+    "monetary_cost": "UNKNOWN_NOT_ZERO"
+  },
+  "seams": "Existing owner-approvedS1/S2/S3 applied to new formal binding, actual new public native transport, independent scope-specific certificate and same-buffer consumption; no new scientific interface",
+  "public_namespace": "Only new topolab-public-formal-binding-* roots under platform temporary /private/tmp, /tmp, or /private/var/folders and their explicitly bounded descendants; rehearsal-only source/target projection, no scientific literal source or proposed custody target",
+  "future_formal_entry": "Requires separately owner-authorized, frozen Git-local docs/planning/p17_m2_source_acquisition_execution_protocol.json; current authority false/absent denies before scientific-path IO",
+  "success_status": "FORMAL_BINDING_PREPARATION_COMPLETE_FORMAL_CLOSED",
+  "after": "Close one preparation and STOP; source/target/formal/result/B/C all separate and ungranted",
+  "science": "P17 unrepaired/uniform default/FULL_V2_OPEN_NO_ADMITTED_ROUTE; old costs/FAIL/UNKNOWN/quotas/seals/full-fitPENDING4GiB unchanged"
+}

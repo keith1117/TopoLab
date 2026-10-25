@@ -71,10 +71,10 @@ def physical(info):
     return {key: getattr(info, key) for key in ("st_dev", "st_ino", "st_size", "st_mtime_ns")}
 
 
-def namespace_check(root, *, additional_bytes=0, additional_files=0):
+def namespace_check(root, *, additional_bytes=0, additional_files=0, evidence=True):
     """Stat only this new public tree, including partial writes; never follow links."""
     count = size = evidence_count = evidence_size = 0
-    stack = [(nofollow_directory(root), True)]
+    stack = [(nofollow_directory(root), evidence)]
     try:
         while stack:
             descriptor, evidence = stack.pop()
@@ -114,6 +114,9 @@ def namespace_check(root, *, additional_bytes=0, additional_files=0):
         need(size + additional_bytes <= 2 * 1024**3, "NAMESPACE_BYTE_CAP")
         need(evidence_count + additional_files <= 512, "EVIDENCE_FILE_CAP")
         need(evidence_size + additional_bytes <= 256 * 1024**2, "EVIDENCE_BYTE_CAP")
+        return dict(
+            count=count, size=size, evidence_count=evidence_count, evidence_size=evidence_size
+        )
     finally:
         for descriptor, _ in stack:
             os.close(descriptor)
@@ -194,6 +197,36 @@ def nofollow_directory(path):
     except OSError as error:
         os.close(fd)
         raise ValueError("nofollow public directory") from error
+
+
+def private_backup_parent(root, relative):
+    """Create descendants only through held no-follow private directory descriptors."""
+    parts = Path(relative).parts
+    need(
+        parts
+        and not Path(relative).is_absolute()
+        and all(part not in (".", "..") for part in parts),
+        "BACKUP_RELATIVE_PATH_REQUIRED",
+    )
+    descriptor = nofollow_directory(root)
+    try:
+        for part in parts[:-1]:
+            try:
+                os.mkdir(part, mode=0o700, dir_fd=descriptor)
+                os.fsync(descriptor)
+            except FileExistsError:
+                pass
+            child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=descriptor)
+            info = os.fstat(child)
+            if info.st_uid != os.geteuid() or stat.S_IMODE(info.st_mode) != 0o700:
+                os.close(child)
+                raise ValueError("PRIVATE_BACKUP_PARENT_REQUIRED")
+            os.close(descriptor)
+            descriptor = child
+        return descriptor
+    except BaseException:
+        os.close(descriptor)
+        raise
 
 
 def prepare(root, public_fault=None):
@@ -334,36 +367,37 @@ def predecessor(root, plan, role):
             raise ValueError("predecessor acceptance invalid") from error
 
 
-def payload(root, plan, role):
-    predecessor(root, plan, role)
+def payload(root, plan, role, *, adapter=None):
+    transport = adapter or _PublicTransport()
+    transport.predecessor(root, plan, role)
     active = read_json(root / "active.json")
     started = read_json(root / "receipts" / role / role / "started.json")
     need(
         active == {"role": role, "plan_sha256": sha(canonical(plan)), "status": "ACTIVE"}
         and started["role"] == role
         and started["software_only"] is True
-        and started["argv"] == argv_for(root, "payload", sha(canonical(plan)), role)
+        and started["argv"] == transport.argv_for(root, "payload", sha(canonical(plan)), role)
         and started["pid"] == os.getppid() == os.getpgrp(),
         "registered native launch/actual parent/group required",
     )
     if role == "shared-closeout" or (role not in CAPS and role != "final-filing"):
-        return payload_body(root, plan, role)
+        return transport.payload_body(root, plan, role)
     try:
-        custody_hold(root)
+        transport.custody_hold(root)
     except Exception as error:
         return dict(
             status="STOP_NO_RETRY",
-            scope=SCOPE,
-            execution_identity=IDENTITY,
+            scope=transport.scope,
+            execution_identity=transport.identity,
             primary_failure=dict(
                 stage="custody hold", type=type(error).__name__, reason=str(error)
             ),
             secondary_failures=[],
             formal_authority=False,
         )
-    result = payload_body(root, plan, role)
+    result = transport.payload_body(root, plan, role)
     try:
-        custody_hold(root)
+        transport.custody_hold(root)
     except Exception as error:
         detail = dict(stage="custody hold", type=type(error).__name__, reason=str(error))
         if result.get("status") == "STOP_NO_RETRY":
@@ -371,8 +405,8 @@ def payload(root, plan, role):
             return result
         return dict(
             status="STOP_NO_RETRY",
-            scope=SCOPE,
-            execution_identity=IDENTITY,
+            scope=transport.scope,
+            execution_identity=transport.identity,
             primary_failure=detail,
             completed_payload=result,
             secondary_failures=[],
@@ -534,16 +568,17 @@ class FailureJournal:
             os.close(parent)
 
 
-def content_step(root, plan, role):
+def content_step(root, plan, role, *, adapter=None):
+    transport = adapter or _PublicTransport()
     readers = []
     try:
-        return _content_step(root, plan, role, readers)
+        return _content_step(root, plan, role, readers, adapter=adapter)
     except Exception as error:
         context = getattr(error, "independent_read_failure", {})
         failure = dict(
             status="STOP_NO_RETRY",
-            scope=SCOPE,
-            execution_identity=IDENTITY,
+            scope=transport.scope,
+            execution_identity=transport.identity,
             role=role,
             error_type=type(error).__name__,
             reason=str(error),
@@ -569,7 +604,7 @@ def content_step(root, plan, role):
                     dict(stage="source journal", reason=fact["recording_error"])
                 )
         try:
-            put(root / (role + "-failure.json"), failure)
+            transport.put(root / (role + "-failure.json"), failure)
         except Exception as secondary:
             failure["secondary_failures"].append(
                 dict(stage="failure record", type=type(secondary).__name__, reason=str(secondary))
@@ -577,11 +612,12 @@ def content_step(root, plan, role):
         return failure
 
 
-def _content_step(root, plan, role, readers):
+def _content_step(root, plan, role, readers, *, adapter=None):
+    transport = adapter or _PublicTransport()
     producer = load("p17_m2_input_export")
     local = load("p17_m2_local_input_version")
-    independent = load("p17_m2_content_verified_independent")
-    source = root / "public-source"
+    independent = transport.independent()
+    source = Path(plan["source_root"]) if adapter is not None else root / "public-source"
     contract = plan["content_contract"]
     if role == "exporter-r0":
         reader = producer.Reader(
@@ -592,11 +628,11 @@ def _content_step(root, plan, role, readers):
         )
         readers.append(reader)
         registry = producer.register(reader, contract)
-        put(root / "registry.json", registry)
-        put(root / "r0-source-rows.json", reader.source_observations)
+        transport.put(root / "registry.json", registry)
+        transport.put(root / "r0-source-rows.json", reader.source_observations)
         return {
-            "scope": SCOPE,
-            "execution_identity": IDENTITY,
+            "scope": transport.scope,
+            "execution_identity": transport.identity,
             "source_count": len(reader.rows),
             "helper_execution_identity": local.IDENTITY,
             "helper_identity_relabelled": False,
@@ -608,12 +644,19 @@ def _content_step(root, plan, role, readers):
             contract,
             registry,
             read_json(root / "r0-source-rows.json"),
-            plan["public_source_identity"],
+            plan["source_identity"]
+            if adapter is not None and transport.scope != SCOPE and "source_identity" in plan
+            else plan["public_source_identity"],
+            **({"plan": plan} if adapter is not None else {}),
         )
-        put(root / "r0-proof.json", proof)
+        transport.put(root / "r0-proof.json", proof)
         return proof
     if role == "exporter-r1":
-        content = local.LocalContent(root / "content", registry, plan["contract_sha256"])
+        content = (
+            transport.new_content(root / "content", registry, plan["contract_sha256"])
+            if adapter is not None
+            else local.LocalContent(root / "content", registry, plan["contract_sha256"])
+        )
         content.write("source_registry.json", producer.canonical(registry))
         reader = producer.Reader(
             source,
@@ -629,9 +672,9 @@ def _content_step(root, plan, role, readers):
             closed["root_identity"] = physical(os.fstat(descriptor))
         finally:
             os.close(descriptor)
-        put(root / "closed.json", closed)
-        put(root / "r1-source-rows.json", reader.source_observations)
-        put(
+        transport.put(root / "closed.json", closed)
+        transport.put(root / "r1-source-rows.json", reader.source_observations)
+        transport.put(
             root / "custody-version-bound.json",
             {
                 "event": "VERSION_BOUND",
@@ -642,8 +685,8 @@ def _content_step(root, plan, role, readers):
             },
         )
         return {
-            "scope": SCOPE,
-            "execution_identity": IDENTITY,
+            "scope": transport.scope,
+            "execution_identity": transport.identity,
             "source_count": len(reader.rows),
             "member_count": len(closed["manifest"]["members"]),
             "version_id": closed["version_id"],
@@ -659,13 +702,17 @@ def _content_step(root, plan, role, readers):
         read_json(root / "r1-source-rows.json"),
         closed,
         plan["contract_sha256"],
-        plan["public_source_identity"],
+        plan["source_identity"]
+        if adapter is not None and "source_identity" in plan
+        else plan["public_source_identity"],
+        **({"plan": plan} if adapter is not None else {}),
     )
-    put(root / "r1-proof.json", proof)
+    transport.put(root / "r1-proof.json", proof)
     return proof
 
 
-def shared_payload(root, plan):
+def shared_payload(root, plan, *, adapter=None):
+    transport = adapter or _PublicTransport()
     context = {
         "copied_members": [],
         "source_read_table": [],
@@ -687,17 +734,17 @@ def shared_payload(root, plan):
         )
         custody_hold(root)
         result = (
-            backup_failed_prefix(root, plan, context)
+            transport.backup_failed_prefix(root, plan, context)
             if context["primary_stop"]
-            else backup_content(root, plan, context)
+            else transport.backup_content(root, plan, context)
         )
         custody_hold(root)
         return result
     except Exception as error:
         failure = {
             "status": "STOP_NO_RETRY",
-            "scope": SCOPE,
-            "execution_identity": IDENTITY,
+            "scope": transport.scope,
+            "execution_identity": transport.identity,
             "formal_authority": False,
             "input_version_accepted": False,
             "primary_failure": {"type": type(error).__name__, "reason": str(error)},
@@ -706,7 +753,7 @@ def shared_payload(root, plan):
             "secondary_failures": [],
         }
         try:
-            put(root / "shared-payload-failure.json", failure)
+            transport.put(root / "shared-payload-failure.json", failure)
         except Exception as secondary:
             failure["secondary_failures"].append(
                 dict(
@@ -718,9 +765,10 @@ def shared_payload(root, plan):
         return failure
 
 
-def backup_failed_prefix(root, plan, context):
+def backup_failed_prefix(root, plan, context, *, adapter=None):
+    transport = adapter or _PublicTransport()
     """One reserved closeout, only explicitly inventoried NEW closed-prefix files."""
-    backup = root / "backup-prefix"
+    backup = transport.backup_prefix_root(plan) if adapter is not None else root / "backup-prefix"
     backup.mkdir(mode=0o700)
     excluded = {"public-source", "independent-public-fixture", "backup-prefix"}
     members = []
@@ -739,11 +787,11 @@ def backup_failed_prefix(root, plan, context):
             members.append(path)
     members.append("failed-prefix-inventory.json")
     members.sort()
-    put(
+    transport.put(
         root / "failed-prefix-inventory.json",
         {
             "paths": members,
-            "scope": SCOPE,
+            "scope": transport.scope,
             "frozen_UTC_seconds": time.time(),
             "future_mutable_shared_files_excluded": True,
         },
@@ -762,9 +810,12 @@ def backup_failed_prefix(root, plan, context):
     )
     for name in members:
         raw = reader.read(name, 64 * 1024**2, group="new-prefix", total=512 * 1024**2)
+        if adapter is not None:
+            transport.namespace_check(
+                root, additional_bytes=len(raw), additional_files=1, additional_evidence=False
+            )
         destination = backup / name
-        destination.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
-        descriptor = nofollow_directory(destination.parent)
+        descriptor = private_backup_parent(backup, name)
         try:
             fd = os.open(
                 destination.name,
@@ -787,14 +838,14 @@ def backup_failed_prefix(root, plan, context):
                 identity=reader.source_observations[-1],
             )
         )
-    proof = load("p17_m2_content_verified_independent").independent_prefix_backup(
-        root, backup, rows
+    proof = transport.independent().independent_prefix_backup(
+        root, backup, rows, **({"plan": plan} if adapter is not None else {})
     )
-    put(root / "failed-prefix-backup-proof.json", proof)
+    transport.put(root / "failed-prefix-backup-proof.json", proof)
     return dict(
         status="STOP_NO_RETRY",
-        scope=SCOPE,
-        execution_identity=IDENTITY,
+        scope=transport.scope,
+        execution_identity=transport.identity,
         primary_stop=read_json(root / "STOP.json"),
         failed_prefix_backup=proof,
         input_version_accepted=False,
@@ -802,11 +853,17 @@ def backup_failed_prefix(root, plan, context):
     )
 
 
-def backup_content(root, plan, context):
+def backup_content(root, plan, context, *, adapter=None):
+    transport = adapter or _PublicTransport()
     local = load("p17_m2_local_input_version")
     producer = load("p17_m2_input_export")
     registry, closed = read_json(root / "registry.json"), read_json(root / "closed.json")
-    backup = local.LocalContent(root / "backup-content", registry, plan["contract_sha256"])
+    backup_root = Path(plan["backup_root"]) if adapter is not None else root / "backup-content"
+    backup = (
+        transport.new_content(backup_root, registry, plan["contract_sha256"])
+        if adapter is not None
+        else local.LocalContent(backup_root, registry, plan["contract_sha256"])
+    )
     reader = producer.Reader(
         root / "content", execution_identity=local.IDENTITY, source_identity_checks=True
     )
@@ -832,8 +889,13 @@ def backup_content(root, plan, context):
         context["copied_members"].append(member)
     copied = backup.finish()
     need(copied["version_id"] == closed["version_id"], "backup version differs")
-    proof = load("p17_m2_content_verified_independent").independent_backup(
-        root / "content", backup.root, closed, registry, plan["contract_sha256"]
+    proof = transport.independent().independent_backup(
+        root / "content",
+        backup.root,
+        closed,
+        registry,
+        plan["contract_sha256"],
+        **({"plan": plan} if adapter is not None else {}),
     )
     acquired = read_json(root / "custody-acquired.json")
     bound = read_json(root / "custody-version-bound.json")
@@ -853,7 +915,7 @@ def backup_content(root, plan, context):
             root / "receipts" / (plan["role_order"][0] + "-supervisor.json")
         )["launched_UTC_seconds"],
     }
-    put(root / "backup-proof.json", proof)
+    transport.put(root / "backup-proof.json", proof)
     return proof
 
 
@@ -864,16 +926,17 @@ def role_results(root, plan):
     }
 
 
-def bind(root, plan, plan_sha, role):
+def bind(root, plan, plan_sha, role, *, adapter=None):
+    transport = adapter or _PublicTransport()
     result = None
     packet = None
     try:
         events = read_json(root / (role + "-events.json"))
-        result = audit_saved(root, role, events)
+        result = transport.audit_saved(root, role, events)
         if role == "shared-closeout":
             packet = {
-                "scope": SCOPE,
-                "execution_identity": IDENTITY,
+                "scope": transport.scope,
+                "execution_identity": transport.identity,
                 "plan_sha256": plan_sha,
                 "status": "SEALED_HANDOFF_PENDING_INDEPENDENT_FILING",
                 "role_results": {},
@@ -885,7 +948,7 @@ def bind(root, plan, plan_sha, role):
                     raw = read_json(root / "receipts" / (prior + "-wire.json"))
                     raw_events = read_json(root / (prior + "-events.json"))
                     packet["raw_packets"][prior] = dict(wire=raw, raw_tool_events=raw_events)
-                    packet["role_results"][prior] = audit_saved(root, prior, raw_events)
+                    packet["role_results"][prior] = transport.audit_saved(root, prior, raw_events)
                 except Exception as error:
                     packet["status"] = "STOP_NO_RETRY"
                     packet["secondary_failures"].append(
@@ -896,14 +959,16 @@ def bind(root, plan, plan_sha, role):
                             unavailable="UNKNOWN_NOT_ZERO",
                         )
                     )
-            put(root / "shared-packet.json", packet)
-        put(root / (role + "-accepted.json"), {"raw_tool_events": events, "result": result})
+            transport.put(root / "shared-packet.json", packet)
+        transport.put(
+            root / (role + "-accepted.json"), {"raw_tool_events": events, "result": result}
+        )
     except Exception as error:
         # Filing failure cannot erase an already independently measured result.
         if result is None:
             result = dict(
                 role=role,
-                execution_identity=IDENTITY,
+                execution_identity=transport.identity,
                 frozen_FULL_seconds=CAPS.get(role, 180 if role == "final-filing" else None),
                 known_cost_lower_bound_seconds=CAPS.get(
                     role, 180 if role == "final-filing" else None
@@ -936,7 +1001,7 @@ def bind(root, plan, plan_sha, role):
             )
             if not clearable:
                 events = read_json(root / (role + "-events.json"))
-                closed = closed_saved(root, plan_sha, role, events)
+                closed = transport.closed_saved(root, plan_sha, role, events)
                 clearable = closed.get("closed_attempt_verified") is True
                 if not clearable and result is not None:
                     result["cleanup_acceptance"] = closed
@@ -950,7 +1015,7 @@ def bind(root, plan, plan_sha, role):
     if not (result.get("full_role_evidence_accepted") or result.get("metadata_evidence_accepted")):
         if not (root / "STOP.json").exists():
             try:
-                put(root / "STOP.json", result)
+                transport.put(root / "STOP.json", result)
             except Exception as error:
                 result.setdefault("secondary_failures", []).append(
                     dict(stage="STOP record", type=type(error).__name__, reason=str(error))
@@ -969,7 +1034,37 @@ def closed_saved(root, plan_sha, role, events):
     )
 
 
-def resource_evidence(root, plan_sha, role, *, tolerate_missing=False):
+class _PublicTransport:
+    """Fixed public defaults; explicit adapters reuse native transport only."""
+
+    identity = IDENTITY
+    scope = SCOPE
+    result_windows = (("exporter", 7200), ("independent", 3600))
+
+    def independent(self):
+        return load("p17_m2_content_verified_independent")
+
+    def __getattr__(self, name):
+        if name in {
+            "argv_for",
+            "put",
+            "native_module",
+            "namespace_check",
+            "predecessor",
+            "audit_saved",
+            "closed_saved",
+            "resource_evidence",
+            "backup_content",
+            "backup_failed_prefix",
+            "payload_body",
+            "custody_hold",
+        }:
+            return globals()[name]
+        raise AttributeError(name)
+
+
+def resource_evidence(root, plan_sha, role, *, tolerate_missing=False, adapter=None):
+    transport = adapter or _PublicTransport()
     folder = root / "receipts" / role / role
     failures = []
 
@@ -993,7 +1088,7 @@ def resource_evidence(root, plan_sha, role, *, tolerate_missing=False):
             "log": take("inner resource evidence", lambda: (folder / "command.log").read_bytes()),
             "helper_profiles": {},
             "expected_role": role,
-            "expected_argv": argv_for(root, "payload", plan_sha, role),
+            "expected_argv": transport.argv_for(root, "payload", plan_sha, role),
             "platform": sys.platform,
         }
 
@@ -1087,11 +1182,12 @@ def native_module(root=None):
     return native
 
 
-def supervise(root, plan, plan_sha, role):
+def supervise(root, plan, plan_sha, role, *, adapter=None):
+    transport = adapter or _PublicTransport()
     import resource
     import subprocess
 
-    predecessor(root, plan, role)
+    transport.predecessor(root, plan, role)
     need(not (root / "STOP.json").exists() or role == "shared-closeout", "STOP_NO_RETRY")
     folder = root / "receipts"
     folder.mkdir(mode=0o700, exist_ok=True)
@@ -1100,17 +1196,19 @@ def supervise(root, plan, plan_sha, role):
         for k in ("actor_activation_UTC_seconds", "actor_window_seconds", "actor_deadlines_UTC")
     }
     pending.update(
-        execution_identity=IDENTITY,
+        execution_identity=transport.identity,
         role=role,
         plan_sha256=plan_sha,
         frozen_FULL_seconds=role_cap(role) if role in CAPS or role == "final-filing" else None,
         clock_domain="functions.exec.Date.now.UTC-seconds",
         clock_resolution_seconds=0.001,
         status="PENDING_BEFORE_DISPATCH",
-        external_argv=[argv_for(root, m, plan_sha, role) for m in ("supervise", "record")],
+        external_argv=[
+            transport.argv_for(root, m, plan_sha, role) for m in ("supervise", "record")
+        ],
     )
     if role == "final-filing":
-        frontier = audit_saved(
+        frontier = transport.audit_saved(
             root, "shared-closeout", read_json(root / "shared-closeout-events.json")
         )["T1"]
         pending["result_start_UTC_seconds"] = frontier
@@ -1118,9 +1216,9 @@ def supervise(root, plan, plan_sha, role):
             k: datetime.fromtimestamp(frontier + seconds, UTC)
             .isoformat(timespec="milliseconds")
             .replace("+00:00", "Z")
-            for k, seconds in [("exporter", 7200), ("independent", 3600)]
+            for k, seconds in transport.result_windows
         }
-    put(folder / (role + "-pending.json"), pending)
+    transport.put(folder / (role + "-pending.json"), pending)
     if role in CAPS:
         now = time.time()
         remaining = sum(CAPS[r] for r in plan["role_order"][plan["role_order"].index(role) :])
@@ -1131,20 +1229,20 @@ def supervise(root, plan, plan_sha, role):
         )
     # Native timer's actual exit is observed by wait4; supervisor exit is external.
     if not (root / "ledger-reservation.json").exists():
-        put(
+        transport.put(
             root / "ledger-reservation.json",
             {
                 "shared_reserved_FULL_seconds": 300,
                 "role_FULL_seconds": CAPS,
                 "refunds_allowed": False,
-                "scope": SCOPE,
+                "scope": transport.scope,
                 "reserved_UTC_seconds": time.time(),
-                "execution_identity": IDENTITY,
+                "execution_identity": transport.identity,
                 "plan_sha256": plan_sha,
             },
         )
-    put(root / "active.json", {"role": role, "plan_sha256": plan_sha, "status": "ACTIVE"})
-    put(
+    transport.put(root / "active.json", {"role": role, "plan_sha256": plan_sha, "status": "ACTIVE"})
+    transport.put(
         root / (role + "-dispatch-charge.json"),
         {
             "role": role,
@@ -1155,14 +1253,14 @@ def supervise(root, plan, plan_sha, role):
             if role == "shared-closeout"
             else (role_cap(role) if role in CAPS or role == "final-filing" else None),
             "charged_UTC_seconds": time.time(),
-            "execution_identity": IDENTITY,
+            "execution_identity": transport.identity,
             "plan_sha256": plan_sha,
-            "scope": SCOPE,
+            "scope": transport.scope,
             "shared_reservation_sha256": sha((root / "ledger-reservation.json").read_bytes()),
         },
     )
-    native = native_module()
-    command = argv_for(root, "run", plan_sha, role)
+    native = transport.native_module()
+    command = transport.argv_for(root, "run", plan_sha, role)
     profile = folder / (role + "-controller.time")
     started = time.monotonic()
     launched_UTC_seconds = time.time()
@@ -1185,7 +1283,9 @@ def supervise(root, plan, plan_sha, role):
                     if str(plan.get("public_fault", "")).startswith("outer-watchdog")
                     else role_cap(role) - 5
                 ):
-                    namespace_check(root, additional_files=16, additional_bytes=4 * 1024**2)
+                    transport.namespace_check(
+                        root, additional_files=16, additional_bytes=4 * 1024**2
+                    )
                     observed, watchdog_helper = native._snapshot(
                         folder, "watchdog-" + role, child.pid
                     )
@@ -1199,7 +1299,8 @@ def supervise(root, plan, plan_sha, role):
                     try:
                         inner_started = read_json(folder / role / role / "started.json")
                         need(
-                            inner_started["argv"] == argv_for(root, "payload", plan_sha, role)
+                            inner_started["argv"]
+                            == transport.argv_for(root, "payload", plan_sha, role)
                             and inner_started["pgid"] == inner_started["pid"],
                             "watchdog registered inner identity unknown",
                         )
@@ -1315,18 +1416,19 @@ def supervise(root, plan, plan_sha, role):
         "supervisor_pid": os.getpid(),
         "supervisor_rss": native._rss_self(),
     }
-    put(folder / (role + "-supervisor.json"), result)
+    transport.put(folder / (role + "-supervisor.json"), result)
     result["supervisor_rss_final"] = int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss) * (
         1 if sys.platform == "darwin" else 1024
     )
-    put(folder / (role + "-last-rss.json"), result)
+    transport.put(folder / (role + "-last-rss.json"), result)
     return {"status": "PENDING_EXTERNAL_EXIT", "controller_exit": child.returncode}
 
 
-def collect(root, plan_sha, role):
+def collect(root, plan_sha, role, *, adapter=None):
+    transport = adapter or _PublicTransport()
     folder = root / "receipts"
     folder.mkdir(mode=0o700, exist_ok=True)
-    native = native_module()
+    native = transport.native_module()
     own = {
         "pid": os.getpid(),
         "kind": "self_high_water",
@@ -1371,7 +1473,7 @@ def collect(root, plan_sha, role):
                 "type": "ExitCode",
                 "reason": str(inner["exit_code"]),
             }
-        raw_evidence = resource_evidence(root, pending["plan_sha256"], role)
+        raw_evidence = transport.resource_evidence(root, pending["plan_sha256"], role)
         inner_evidence = raw_evidence["inner_evidence"]
         completion["native_evidence_hashes"] = {
             "inner_record_canonical_sha256": sha(canonical(inner_evidence["record"])),
@@ -1412,7 +1514,7 @@ def collect(root, plan_sha, role):
     # Full failure packet retained first; bounded stdout is never evidence trimming for PASS.
     collector = folder / (role + "-collector.json")
     try:
-        identity = put(collector, packet)
+        identity = transport.put(collector, packet)
         packet["full_collector_record"] = {
             "path": str(collector.relative_to(root)),
             "byte_size": identity["st_size"],
@@ -1447,7 +1549,7 @@ def collect(root, plan_sha, role):
         }
     need(len(canonical(packet)) <= 32768, "WIRE_SIZE_STOP")
     try:
-        put(folder / (role + "-wire.json"), packet)
+        transport.put(folder / (role + "-wire.json"), packet)
     except Exception as error:
         packet["completion"]["status"] = "FAILED_INTERNAL_COMPLETION"
         packet["completion"]["domain_status"] = "STOP"
