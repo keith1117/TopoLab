@@ -16,6 +16,9 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 IDENTITY = "topolab.v2.p17-m2-content-verified-source-acquisition.v1"
+COMPAT_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v1"
+COMPAT_PROTOCOL = "docs/planning/p17_m2_hash_bound_acquisition_protocol.json"
+SOURCE_IDENTITY_POLICY = "topolab.source-identity.prebound-sha256.v1"
 REHEARSAL_SCOPE = "FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY"
 FORMAL_SCOPE = "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY"
 PROTOCOL = "docs/planning/p17_m2_source_acquisition_adapter_preparation_protocol.json"
@@ -67,12 +70,15 @@ def source_freeze():
     }
     if EXECUTION_AUTHORITY_RAW is not None:
         paths.add(REPO / EXECUTION_PROTOCOL)
+    if (REPO / COMPAT_PROTOCOL).is_file():
+        paths.add(REPO / COMPAT_PROTOCOL)
     return {str(p.relative_to(REPO)): base().sha(p.read_bytes()) for p in sorted(paths)}
 
 
 def rehearsal_root(root):
     root = Path(os.path.abspath(root))
-    need(root.name.startswith("topolab-public-formal-binding-"), "REHEARSAL_ROOT_REQUIRED")
+    need(root.name.startswith(("topolab-public-formal-binding-", "topolab-public-hash-bound-")),
+         "REHEARSAL_ROOT_REQUIRED")
     return base().public_root(root)
 
 
@@ -99,11 +105,13 @@ def make_plan(root, contract, source_identity):
     helper = base()
     now = round(time.time(), 3)
     end = datetime.fromtimestamp(now + 4500, UTC).isoformat(timespec="milliseconds")
-    protocol_sha = helper.sha((REPO / PROTOCOL).read_bytes())
+    compat = root.name.startswith("topolab-public-hash-bound-")
+    protocol_sha = helper.sha((REPO / (COMPAT_PROTOCOL if compat else PROTOCOL)).read_bytes())
     proposal_sha = helper.sha((REPO / PROPOSAL).read_bytes())
     return {
         "schema": "topolab.v2.m2-source-acquisition-plan.v1",
-        "execution_identity": IDENTITY,
+        "execution_identity": COMPAT_IDENTITY if compat else IDENTITY,
+        **({"source_identity_policy": SOURCE_IDENTITY_POLICY} if compat else {}),
         "scope": REHEARSAL_SCOPE,
         "formal_authority": False,
         "root": str(root),
@@ -124,6 +132,7 @@ def make_plan(root, contract, source_identity):
             "old_original_access": False,
             "target_access": False,
             "B_C": False,
+            **({"source_identity_policy": SOURCE_IDENTITY_POLICY} if compat else {}),
         },
         "source_tree": source_freeze(),
         "runtime": helper.runtime(),
@@ -169,7 +178,7 @@ def initial_lease(root, plan):
     helper = base()
     acquired = {
         "scope": "COOPERATIVE_REGISTERED_TOPOLAB_ONLY",
-        "execution_identity": IDENTITY,
+        "execution_identity": plan["execution_identity"],
         "plan_sha256": helper.sha(helper.canonical(plan)),
         "source_tree_sha256": helper.sha(helper.canonical(plan["source_tree"])),
         "root": plan["content_root"],
@@ -280,7 +289,7 @@ def finish_setup(root, plan, *, began, readiness=None, locality=None):
     helper = base()
     proof = dict(
         status="TARGET_AND_INITIAL_COOPERATIVE_LEASE_ACQUIRED",
-        execution_identity=IDENTITY,
+        execution_identity=plan["execution_identity"],
         scope=plan["scope"],
         plan_sha256=helper.sha(helper.canonical(plan)),
         contract_sha256=plan["contract_sha256"],
@@ -321,7 +330,7 @@ def checked_setup(root, plan):
         and proof["lease_record_sha256"] == helper.sha(helper.canonical(acquired))
         and proof["lease_identity"] == helper.read_json(root / "custody-lock-identity.json")
         and proof["scope"] == plan["scope"]
-        and proof["execution_identity"] == IDENTITY
+        and proof["execution_identity"] == plan["execution_identity"]
         and proof["setup_start_UTC_seconds"] == plan["actor_activation_UTC_seconds"]
         and 0 <= proof["setup_seconds"] <= 300
         and proof["setup_start_UTC_seconds"] <= proof["setup_end_UTC_seconds"] <= time.time()
@@ -474,6 +483,10 @@ def activation_readiness(authority):
 
 
 def activate_formal(root):
+    # The finite new grant has no funded complete result suffix. Do not try a prefix.
+    if Path(root).name in ("p17-m2-local-input-version-v3-hash-bound-20261026",
+                           "p17-m2-local-input-version-v4-hash-bound-20261026"):
+        raise ValueError("FORMAL_CLOSED_RESULT_RESERVE_UNFUNDED")
     # An approved preparation/public PASS is never a scientific access grant.
     need(EXECUTION_AUTHORITY_RAW is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
     authority = load("p17_m2_input_export").parse(EXECUTION_AUTHORITY_RAW)
@@ -487,7 +500,7 @@ def activate_formal(root):
 def checked(root, expected):
     helper = base()
     literal = Path(os.path.abspath(root))
-    if literal.name.startswith("topolab-public-formal-binding-"):
+    if literal.name.startswith(("topolab-public-formal-binding-", "topolab-public-hash-bound-")):
         root = rehearsal_root(literal)
         scope = REHEARSAL_SCOPE
     else:
@@ -501,7 +514,8 @@ def checked(root, expected):
     need(
         plan["root"] == str(root)
         and plan["scope"] == scope
-        and plan["execution_identity"] == IDENTITY
+        and plan["execution_identity"] == (COMPAT_IDENTITY
+             if literal.name.startswith("topolab-public-hash-bound-") else IDENTITY)
         and plan["formal_authority"] is (scope == FORMAL_SCOPE),
         "ACQUISITION_BINDING_CHANGED",
     )
@@ -524,8 +538,18 @@ class AcquisitionTransport:
     reader_role: str = "scientific-producer"
     scope: str = REHEARSAL_SCOPE
 
-    identity = IDENTITY
-    result_windows = (("exporter", 7200), ("independent", 7200))
+    @property
+    def identity(self):
+        return (COMPAT_IDENTITY if self.root.name.startswith("topolab-public-hash-bound-")
+                else IDENTITY)
+
+    @property
+    def result_windows(self):
+        return (("exporter", 7200), ("independent", 7200))
+
+    @property
+    def source_identity_policy(self):
+        return SOURCE_IDENTITY_POLICY if self.identity == COMPAT_IDENTITY else None
 
     def argv_for(self, root, mode, plan_sha, role):
         return argv_for(root, mode, plan_sha, role, reader_role=self.reader_role)
@@ -684,8 +708,8 @@ class AcquisitionTransport:
                 plan_sha256=self.plan_sha,
                 expected_argv=self.argv_for(root, "payload", self.plan_sha, role),
                 expected_role=role,
-                expected_identity=IDENTITY,
-                result_seconds=(7200, 7200),
+                expected_identity=self.identity,
+                result_seconds=tuple(value for _, value in self.result_windows),
             )
         else:
             result = checker.audit_role(
@@ -694,8 +718,8 @@ class AcquisitionTransport:
                 raw_tool_events=events,
                 expected_role=role,
                 expected_plan_sha256=self.plan_sha,
-                expected_identity=IDENTITY,
-                result_seconds=(7200, 7200),
+                expected_identity=self.identity,
+                result_seconds=tuple(value for _, value in self.result_windows),
                 **resources,
             )
         result.setdefault("secondary_failures", []).extend(failures)
@@ -708,8 +732,8 @@ class AcquisitionTransport:
             expected_role=role,
             expected_plan_sha256=plan_sha,
             expected_argv=self.argv_for(root, "payload", plan_sha, role),
-            expected_identity=IDENTITY,
-            result_seconds=(7200, 7200),
+            expected_identity=self.identity,
+            result_seconds=tuple(value for _, value in self.result_windows),
         )
 
 
@@ -732,7 +756,7 @@ def payload_body(root, plan, role, transport):
         )
         return dict(
             result,
-            execution_identity=IDENTITY,
+            execution_identity=plan["execution_identity"],
             scope=transport.scope,
             formal_authority=False,
             B_C_admission=False,
@@ -770,7 +794,7 @@ def payload_body(root, plan, role, transport):
             root / "public-consumption.json",
             dict(
                 scope=transport.scope,
-                execution_identity=IDENTITY,
+                execution_identity=plan["execution_identity"],
                 role=transport.reader_role,
                 member_count=count,
                 total_bytes=total,
@@ -786,7 +810,7 @@ def payload_body(root, plan, role, transport):
         proof = {
             "status": "SOURCE_ACQUISITION_FILING_SNAPSHOT_WRITTEN",
             "scope": transport.scope,
-            "execution_identity": IDENTITY,
+            "execution_identity": plan["execution_identity"],
             "plan_sha256": transport.plan_sha,
             "version_id": closed["version_id"],
             "manifest_sha256": helper.sha(helper.canonical(closed["manifest"])),
@@ -807,7 +831,7 @@ def bundle(root, plan, transport):
     closed = helper.read_json(root / "closed.json")
     return {
         "schema": "topolab.v2.m2-source-acquisition-bundle.v1",
-        "execution_identity": IDENTITY,
+        "execution_identity": plan["execution_identity"],
         "scope": transport.scope,
         "plan": plan,
         "plan_sha256": transport.plan_sha,
@@ -829,6 +853,87 @@ def bundle(root, plan, transport):
         "initial_lease_identity": helper.read_json(root / "custody-lock-identity.json"),
         "lease": helper.read_json(root / "lease-release.json"),
     }
+
+
+def verify_retained_evidence(root, manifest_raw, expected_manifest_sha256):
+    """Verify this finite evidence set against an anchor held outside its custody directory.
+
+    Directory modes are observations, never a promise of permanent immutability.
+    This does not acquire a lease or authorize any old-original access.
+    """
+    helper = base()
+    need(len(manifest_raw) <= 2 * 1024**2
+         and re.fullmatch(r"[0-9a-f]{64}", expected_manifest_sha256) is not None
+         and helper.sha(manifest_raw) == expected_manifest_sha256, "CUSTODY_MANIFEST_SHA")
+    manifest = load("p17_m2_input_export").parse(manifest_raw)
+    need(set(manifest) == {"members"} and isinstance(manifest["members"], list)
+         and 0 < len(manifest["members"]) <= 4096, "CUSTODY_MANIFEST_MEMBERS")
+    rows = manifest["members"]
+    need(all(set(row) == {"path", "byte_size", "sha256"} for row in rows),
+         "CUSTODY_MANIFEST_FIELDS")
+    expected, directories = set(), set()
+    for row in rows:
+        name = row["path"]
+        need(isinstance(name, str) and len(name) <= 1024, "CUSTODY_LITERAL_PATH")
+        parts = Path(name)
+        need(not parts.is_absolute() and name == parts.as_posix()
+             and name not in ("", ".") and ".." not in parts.parts, "CUSTODY_LITERAL_PATH")
+        expected.add(name)
+        directories.update(str(parent) for parent in parts.parents if str(parent) != ".")
+    need(len(expected) == len(rows), "CUSTODY_DUPLICATE_MEMBER")
+    root = Path(os.path.abspath(root))
+    modes = {}
+
+    def inventory():
+        names = set()
+        directory = helper.nofollow_directory(root)
+
+        def visit(fd, prefix):
+            info = os.fstat(fd)
+            need(info.st_uid == os.geteuid() and not info.st_mode & 0o022,
+                 "CUSTODY_UNTRUSTED_DIRECTORY")
+            modes[prefix or "."] = stat.S_IMODE(info.st_mode)
+            with os.scandir(fd) as entries:
+                for entry_name in entries:
+                    name = entry_name.name
+                    relative = prefix + name
+                    entry = os.stat(name, dir_fd=fd, follow_symlinks=False)
+                    if stat.S_ISDIR(entry.st_mode):
+                        need(relative in directories, "CUSTODY_EXACT_WHITELIST_DIRECTORY")
+                        child = os.open(
+                            name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+                        try:
+                            visit(child, relative + "/")
+                        finally:
+                            os.close(child)
+                    else:
+                        need(relative in expected and len(names) < len(rows),
+                             "CUSTODY_EXACT_WHITELIST")
+                        need(stat.S_ISREG(entry.st_mode) and entry.st_nlink == 1
+                             and entry.st_uid == os.geteuid() and not entry.st_mode & 0o022,
+                             "CUSTODY_UNTRUSTED_MEMBER")
+                        names.add(relative)
+        try:
+            before = os.fstat(directory)
+            visit(directory, "")
+            return names, (before.st_dev, before.st_ino)
+        finally:
+            os.close(directory)
+
+    names, identity = inventory()
+    need(names == expected, "CUSTODY_EXACT_WHITELIST")
+    reader = load("p17_m2_input_export_independent").OnceReader(
+        root, len(rows), 2 * 1024**3, source_identity_checks=True,
+        source_identity_policy=SOURCE_IDENTITY_POLICY)
+    for row in rows:
+        need(type(row["byte_size"]) is int and 0 < row["byte_size"] <= 1024**3,
+             "CUSTODY_MEMBER_BYTE_CAP")
+        reader.read(row["path"], row["byte_size"], sha256=row["sha256"],
+                    byte_size=row["byte_size"])
+    need(inventory() == (expected, identity), "CUSTODY_INVENTORY_CHANGED")
+    return {"manifest_sha256": expected_manifest_sha256, "members": reader.table,
+            "observations": reader.observations, "directory_modes": modes,
+            "continuous_immutability_claim": False}
 
 
 def main():

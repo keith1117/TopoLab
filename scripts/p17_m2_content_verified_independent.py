@@ -1735,6 +1735,7 @@ class _PublicCertificatePolicy:
     verifier_path = "scripts/p17_m2_content_verified_independent.py"
     result_seconds = (7200, 3600)
     precheck_status = None
+    source_identity_policy = None
 
     def check_precheck(self, proof: Any, bundle: dict[str, Any], actual: dict[str, Any]) -> None:
         pass
@@ -1904,13 +1905,17 @@ def _audit_certificate(
             proof["source_count"] == count
             and proof["source_registry_sha256"] == registry_sha
             and proof[policy.source_identity_key] == policy.source_identity(plan)
-            and proof["source_comparison"] == "ALL_FIELDS_AND_PHYSICAL_TUPLES_MATCHED"
+            and proof["source_comparison"] == getattr(
+                policy, "source_comparison", "ALL_FIELDS_AND_PHYSICAL_TUPLES_MATCHED")
             and type(proof["compared_fields"]) is int
             and proof["compared_fields"] > 0
             and proof["helper_identity_relabelled"] is False,
             "independent original-source content comparison missing/different",
         )
-        local.identity_table(proof["source_rows"], count)
+        local.identity_table(proof["source_rows"], count,
+                             source_identity_policy=getattr(policy, "source_identity_policy", None))
+        if hasattr(policy, "check_source_rows"):
+            policy.check_source_rows(proof, count, registry)
     require(
         r0["root"] == str(policy.source_root(plan))
         and r0["source_contract_sha256"] == digest(canonical(plan["content_contract"]))

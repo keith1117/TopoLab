@@ -2404,3 +2404,16 @@ No R1/accepted input; shared propagates original STOP and checks171 NEW-prefix
 backup members. All3 actual role/raw/resource/cost packets retained, FULL900
 paid/unused2700 closed. Complete finite result publication inside original
 same-start2h/2h then STOP; cause UNKNOWN, no automatic retry/B/C or science claim.
+
+
+## 2026-10-26 — Prebound source identity and anchored custody software
+
+[New protocol](planning/p17_m2_hash_bound_acquisition_protocol.md) and
+[actual frontier](validation/p17_m2_hash_bound_acquisition.md) record regression-first
+explicit hash-bound mtime handling across independently authored readers and
+certificate audit, plus finite custody integrity without permanent0555.
+Old strict behavior and every historical stop/charge/seal remain. Initial result
+funding1200 cannot meet existing4860 reserve; formal/remedy unlaunched, no source
+or target IO, input unaccepted. Conditional C funding is below full14580 proposal;
+no B/C or P17 repair. Finish checks/review/protected publication and actual
+retention within the original hard caps; no automatic budget extension.

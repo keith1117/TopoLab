@@ -16,6 +16,17 @@ At session start, slice start and context recovery, read these files in order:
 10. `docs/repository_policy.md` before staging or publishing changes.
 
 ## Current state and execution entry
+
+Current owner-authorized action: [hash-bound source/custody software](docs/planning/p17_m2_hash_bound_acquisition_protocol.md)
+and [actual frontier](docs/validation/p17_m2_hash_bound_acquisition.md). Continuous
+four-task scheduling is authorized, but the executor's initial result1200 cannot
+meet unchanged4860 filing reserve, so new formal/remedy stay unlaunched and no
+old source/target IO occurs. C FULL14580 proposal also exceeds conditional1200;
+B/C remain unadmitted. Complete funded public software/review/checks/protected
+PR/main CI/retention within original caps. Do not extend caps or transfer closed
+balances. FixedP17 remains unrepaired; old strict identity and all historical
+failures/costs/quotas/seals remain. Earlier paragraphs retain historical scope.
+
 Read the [frozen source-acquisition authority](docs/planning/p17_m2_source_acquisition_execution_protocol.md)
 and [actual STOP result](docs/validation/p17_m2_source_acquisition_execution.md).
 Formal v1 is CLOSED_STOP_NO_RETRY: source PR222/main e890cb7/all-four CI40222089168

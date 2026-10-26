@@ -32,6 +32,7 @@ AUTHORIZED_STABLE_ROOT = AUTHORIZED_DATA_ROOT / "p17-m2-source-stable-export-v1"
 EXECUTION_V2 = "topolab.v2.p17-m2-input-export-preparation.v3"
 EXECUTION_F = "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1"
 EXECUTION_STABLE = "topolab.v2.p17-m2-source-stable-export.v1"
+PREBOUND_SHA256_POLICY = "topolab.source-identity.prebound-sha256.v1"
 CONTENT_CONTRACT_SHA256 = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
 CLOCK_V2 = "functions.exec.Date.now.UTC-seconds"
 FULL_V2 = {
@@ -191,7 +192,11 @@ class OnceReader:
     def __init__(
         self, root: Path, max_files: int, total_bytes: int, *,
         source_identity_checks: bool = False, journal: Path | None = None,
+        source_identity_policy: str | None = None,
     ):
+        require(source_identity_policy is None or (
+            source_identity_checks and source_identity_policy == PREBOUND_SHA256_POLICY
+        ), "source identity policy requires closing observations")
         self.root = Path(os.path.abspath(root))
         self.max_files = max_files
         self.total_bytes = total_bytes
@@ -199,6 +204,7 @@ class OnceReader:
         self.seen: set[str] = set()
         self.used = 0
         self.source_identity_checks = source_identity_checks
+        self.source_identity_policy = source_identity_policy
         self.journal = journal
         self.observations: list[dict[str, Any]] = []
         self.failures: list[dict[str, Any]] = []
@@ -222,6 +228,11 @@ class OnceReader:
         if isinstance(relative, str):
             self.source_facts[relative] = facts
         try:
+            if self.source_identity_policy is not None:
+                facts.update(identity_policy=self.source_identity_policy, expected_sha256=sha256)
+                require(sha256 is None or (
+                    isinstance(sha256, str) and SHA.fullmatch(sha256) is not None
+                ), "prebound SHA256 is invalid")
             return self._read(relative, maximum, sha256=sha256, byte_size=byte_size, facts=facts)
         except (ValueError, OSError, TypeError) as error:
             self.record_failure(facts, error)
@@ -243,6 +254,8 @@ class OnceReader:
             return
         facts.update(status="STOP_NO_RETRY", exception_type=type(error).__name__,
                      primary_reason=str(error), unavailable="UNKNOWN_NOT_ZERO")
+        if self.source_identity_policy is not None:
+            facts["mtime_changes"] = self._mtime_changes(facts)
         identities = [facts[key] for key in ("declared", "before", "after", "closing")]
         for left, right in zip(identities, identities[1:], strict=False):
             if left is not None and right is not None:
@@ -260,6 +273,22 @@ class OnceReader:
             except OSError as secondary:
                 facts["recording_error"] = f"{type(secondary).__name__}: {secondary}"
                 error.add_note(facts["recording_error"])
+
+    def _same_identity(self, left, right, facts):
+        keys = ("st_dev", "st_ino", "st_size") if (
+            self.source_identity_policy == PREBOUND_SHA256_POLICY
+            and facts.get("expected_sha256") is not None
+        ) else ("st_dev", "st_ino", "st_size", "st_mtime_ns")
+        return all(left[key] == right[key] for key in keys)
+
+    @staticmethod
+    def _mtime_changes(facts):
+        declared = facts.get("declared")
+        return {
+            stage: facts[stage]["st_mtime_ns"] - declared["st_mtime_ns"]
+            for stage in ("before", "after", "closing")
+            if declared is not None and facts.get(stage) is not None
+        }
 
     def _read(
         self, relative: str, maximum: int, *, sha256: str | None,
@@ -304,8 +333,7 @@ class OnceReader:
             opened = os.fstat(fd)
             facts["before"] = source_identity(opened)
             require(
-                (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns)
-                == (opened.st_dev, opened.st_ino, opened.st_size, opened.st_mtime_ns),
+                self._same_identity(facts["declared"], facts["before"], facts),
                 "source changed before descriptor read",
             )
             chunks = []
@@ -324,8 +352,7 @@ class OnceReader:
             after = os.fstat(fd)
             facts["after"] = source_identity(after)
             require(
-                (opened.st_dev, opened.st_ino, opened.st_size, opened.st_mtime_ns)
-                == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns),
+                self._same_identity(facts["before"], facts["after"], facts),
                 "source changed during descriptor read",
             )
             facts["stage"] = "read_size_consistency"
@@ -339,7 +366,7 @@ class OnceReader:
                     os.close(closing_parent)
                 facts["closing"] = source_identity(closing)
                 require(stat.S_ISREG(closing.st_mode)
-                        and source_identity(after) == source_identity(closing),
+                        and self._same_identity(facts["after"], facts["closing"], facts),
                         "source changed at closing literal path")
         finally:
             if fd is not None:
@@ -350,10 +377,18 @@ class OnceReader:
         self.used += len(raw)
         facts["source"] = {"path": relative, "byte_size": len(raw), "sha256": actual_sha}
         self.table.append(facts["source"])
+        if self.source_identity_policy is not None:
+            require(sha256 is None or actual_sha == sha256, "source SHA differs")
         if self.source_identity_checks:
-            self.observations.append(dict(self.table[-1], **{
+            observation = dict(self.table[-1], **{
                 key: facts[key] for key in ("declared", "before", "after", "closing")
-            }))
+            })
+            if self.source_identity_policy is not None:
+                observation.update(
+                    identity_policy=self.source_identity_policy, expected_sha256=sha256,
+                    mtime_changes=self._mtime_changes(facts),
+                )
+            self.observations.append(observation)
         require(sha256 is None or actual_sha == sha256, "source SHA differs")
         return raw
 

@@ -625,6 +625,7 @@ def _content_step(root, plan, role, readers, *, adapter=None):
             FailureJournal(root / (role + "-source-failure-rows.jsonl")),
             execution_identity=local.IDENTITY,
             source_identity_checks=True,
+            source_identity_policy=getattr(transport, "source_identity_policy", None),
         )
         readers.append(reader)
         registry = producer.register(reader, contract)
@@ -663,6 +664,7 @@ def _content_step(root, plan, role, readers, *, adapter=None):
             FailureJournal(root / (role + "-source-failure-rows.jsonl")),
             execution_identity=local.IDENTITY,
             source_identity_checks=True,
+            source_identity_policy=getattr(transport, "source_identity_policy", None),
         )
         readers.append(reader)
         producer.export(reader, registry, contract, content.root, local_content=content)

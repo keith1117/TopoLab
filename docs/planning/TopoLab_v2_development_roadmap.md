@@ -2433,6 +2433,29 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
+## Current: hash-bound identity software; formal entry unfunded (2026-10-26)
+
+The owner's continuous four-task instruction supersedes the one-slice scheduling
+stop for this action. [New policy and finite funding](p17_m2_hash_bound_acquisition_protocol.md)
+([JSON](p17_m2_hash_bound_acquisition_protocol.json)) preserve all old
+failures/costs/quotas/seals. [Actual software frontier](../validation/p17_m2_hash_bound_acquisition.md):
+explicit prebound-hash mtime policy across producer/independent/certificate,
+anchored finite custody verification without permanent0555, old strict default.
+Full local checks2773/1 skip and new Standards/Spec reviews passed for the
+software scope; exact PR/main four-CI publication and final retention remain
+pending until external closure. Public evidence is not input acceptance or seed17 repair.
+
+The executor's initial1200s result cap cannot fund unchanged4860s filing reserve;
+new formal/remedy attempts close unlaunched, no old source or target observation.
+Conditional B/C1200 also cannot fund the unchanged C FULL14580 proposal; input,
+executable contract/call tables and B resource admission remain missing. These
+are this action's funding/planning limits, not proof that a separate M2 route is
+scientifically impossible. No automatic cap increase or old balance transfer.
+Next requires a correctly funded complete acquisition/result suffix and complete
+new B/C contract/resource plan, preserving fixed P17 and original scientific
+standards. Finish this funded software/publication first; no unfunded prefix.
+
+
 Owner2026-10-25's [fixed-source acquisition authority](p17_m2_source_acquisition_execution_protocol.md)
 now closes **STOP_NO_RETRY**, after source PR222/main e890cb7/all-four main CI
 40222089168. [Actual evidence](../validation/p17_m2_source_acquisition_execution.md):

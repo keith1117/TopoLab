@@ -1,5 +1,8 @@
 # Validation evidence index
 
+Latest [hash-bound identity and custody software frontier](p17_m2_hash_bound_acquisition.md): regression evidence and explicit formal/B/C funding blockers; fixed P17 remains unrepaired.
+
+
 Latest [fixed-source acquisition STOP](p17_m2_source_acquisition_execution.md)
 and [different-author result review](p17_m2_source_acquisition_execution_result_independent_review.md):
 source identity failure at13th metadata,12 hashes, full context/native/returns/
