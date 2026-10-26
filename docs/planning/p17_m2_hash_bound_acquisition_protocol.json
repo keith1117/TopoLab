@@ -1,0 +1,152 @@
+{
+  "schema": "topolab.v2.m2-hash-bound-acquisition-authority.v1",
+  "execution_identity": "topolab.v2.p17-m2-hash-bound-source-acquisition.v1",
+  "source_identity_policy": "topolab.source-identity.prebound-sha256.v1",
+  "owner_approval_reference": "Direct human instruction in this chat, 2026-10-26; continuous four-task authorization including prospective prebound-hash mtime policy; no old grant reset",
+  "permissions": {
+    "formal_activation": true,
+    "old_original_access": true,
+    "target_access": true,
+    "B_C": false
+  },
+  "outer_wall_seconds": 14400,
+  "total_new_author_charged_seconds_cap": 18000,
+  "formal_seconds": 4500,
+  "result_seconds": {
+    "exporter": 1200,
+    "independent": 1200
+  },
+  "actors": {
+    "executor": "/root",
+    "independent": "/root/compat_independent"
+  },
+  "budget_initial_raw_sha256": "44a73975bc3e1602ef291a13a11cb32f876aa3f96cafeb15bde90d76d9cb21d8",
+  "budget": {
+    "identity": "p17-custody-compat-v2-20261026",
+    "started_unix_ns": 1792996878756901000,
+    "started_utc": "2026-10-26T06:40:00Z",
+    "outer_wall_seconds": 14400,
+    "total_new_author_charged_seconds_cap": 18000,
+    "no_auto_extension": true,
+    "old_budgets": "CLOSED unchanged",
+    "authors": {
+      "executor": "root-compat-v2",
+      "independent": "new independent subagent, to be bound before review"
+    },
+    "stage_author_caps_seconds": {
+      "context_tests_implementation_publication": 6000,
+      "independent_review_and_recheck": 2400,
+      "formal_primary_six_roles_FULL": 3600,
+      "formal_remedy_six_roles_FULL": 3600,
+      "conditional_B_C": 1200,
+      "closing_filing_final_return": 1200
+    },
+    "calls": {
+      "formal_attempts": 2,
+      "formal_attempt_1_role_calls": {
+        "R0": 1,
+        "R1": 1,
+        "R2": 1,
+        "R3": 1,
+        "R4": 1,
+        "R5": 1
+      },
+      "formal_remedy_role_calls": {
+        "R0": 1,
+        "R1": 1,
+        "R2": 1,
+        "R3": 1,
+        "R4": 1,
+        "R5": 1
+      },
+      "software_fix_rounds_per_root_cause": 2,
+      "independent_review_calls": 2,
+      "B_formal": 0,
+      "C_formal": 0
+    },
+    "resource_limits": {
+      "process_peak_rss_bytes": 4294967296,
+      "formal_source_read_allowlist": "derive from latest contract before any original access; currently empty",
+      "original_read_calls": 0,
+      "external_paid_commitments": 0
+    },
+    "remedy_conditions": "new separately frozen attempt only after failed attempt closure, public regression, independent review and release; no old balance reuse",
+    "formal_conditions": "all latest contract gates; role names and exact per-author per-file read quotas must be bound before activation within this ceiling",
+    "B_C_conditions": "do not activate if original all-paid gate or any scientific gate cannot pass; current authorization does not amend scientific gates",
+    "charges": "all executor and agent elapsed wall time, failures, waits, tests, CI, archiving and actual final return count; formal FULL reservations charged when first role starts; no refund",
+    "targets": "selected Application Support parent only; generation names to freeze after latest contract inspection; no formal target probing yet"
+  },
+  "formal_admission": "CLOSED_UNFUNDED_COMPLETE_RESULT_SUFFIX",
+  "formal_actual_calls": 0,
+  "reason": "Initial result cap1200 is below unchanged4860 filing reserve gate; observed tests-only result publication4727.79s already exceeds1200. No trial prefix, automatic reallocation, cap increase or old balance transfer. Preserve this planning defect and finish funded public engineering/publication.",
+  "fixed_target": {
+    "parent": "/Users/keith1117/Library/Application Support/TopoLab-custody",
+    "attempts": {
+      "1": {
+        "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v3-hash-bound-20261026",
+        "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v3-hash-bound-20261026-independent-backup"
+      },
+      "2": {
+        "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v4-hash-bound-20261026",
+        "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v4-hash-bound-20261026-independent-backup"
+      }
+    }
+  },
+  "custody_integrity": {
+    "directory_create_mode": "0700",
+    "file_create_mode": "0600",
+    "exact_manifest": true,
+    "independent_inodes": true,
+    "independent_anchor_outside_custody": true,
+    "reverify_each_read": true,
+    "permanent_0555_required": false,
+    "lease": "real cooperative leases bind registered TopoLab tools only; no FileProvider exclusion",
+    "no_never_sync_or_upload_or_continuous_availability_claim": true
+  },
+  "source_whitelist": {
+    "original_contract": "docs/planning/p17_m2_input_export_preparation_proposal.json",
+    "raw_sha256": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "exact_derivation": "docs/planning/p17_m2_source_acquisition_execution_authorization_draft.json#/source_whitelist",
+    "draft_raw_sha256": "401c32618ef6fb964d0efc425dc2f792ce92baf7a7e483d8bdbafa1c08906786",
+    "per_author_per_file_reads": 1,
+    "r0_metadata": 40,
+    "r1_payload": 558,
+    "version_members": 1071,
+    "total_old_source_reads_per_attempt_max": 1196,
+    "metadata_acceptance_before_payload_stat_open": true,
+    "current_source_whitelist_active": false
+  },
+  "role_order": [
+    "independent-public-check",
+    "exporter-r0",
+    "independent-r0",
+    "exporter-r1",
+    "independent-r1",
+    "shared-closeout"
+  ],
+  "FULL_by_role": {
+    "independent-public-check": 300,
+    "exporter-r0": 300,
+    "independent-r0": 300,
+    "exporter-r1": 1200,
+    "independent-r1": 1200,
+    "shared-closeout": 300
+  },
+  "scientific_admission": {
+    "B_C_calls": 0,
+    "new_M2_not_old_rescue_relabel": true,
+    "B_proposal_FULL": 180,
+    "C_proposal_FULL": 14580,
+    "source": "docs/planning/p17_m2_native_homotopy_proposal.json#/proposed_budgets_NOT_GRANTED",
+    "reason": "Initial conditional budget1200 cannot fund unchanged complete C proposal; actual executable contract/call tables still unregistered. Fixed18 cases x19 methods cannot be reduced to fit. Original all-paid failure remains separately failed."
+  },
+  "stop_and_remedy": {
+    "freeze_failed_attempt": true,
+    "public_software_rounds_per_cause": 2,
+    "formal_attempts_max": 2,
+    "old_grants_closed": true,
+    "remedy_requires_all_dependency_gates": true
+  },
+  "publication": "five mandatory checks, new distinct-author review, protected exact PR-head four CI and merged-main four CI; no force push or bypass",
+  "source_and_target_observations": "NONE; deferred until every gate including funded complete result suffix"
+}

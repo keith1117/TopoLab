@@ -160,15 +160,22 @@ def validate_manifest(
     }
 
 
-def identity_table(rows: list[dict[str, Any]], count: int) -> dict[str, dict[str, Any]]:
+def identity_table(
+    rows: list[dict[str, Any]], count: int, *, source_identity_policy: str | None = None,
+) -> dict[str, dict[str, Any]]:
     """Check separately observed original OR local tuples, without mixing roots."""
     base.require(isinstance(rows, list) and len(rows) == count, "identity exact count differs")
+    base.require(source_identity_policy in (None, base.PREBOUND_SHA256_POLICY),
+                 "identity policy is unsupported")
     table = {}
     for row in rows:
         base.require(
             isinstance(row, dict)
-            and set(row)
-            == {"path", "byte_size", "sha256", "declared", "before", "after", "closing"},
+            and set(row) == (
+                {"path", "byte_size", "sha256", "declared", "before", "after", "closing"}
+                | ({"identity_policy", "expected_sha256", "mtime_changes"}
+                   if source_identity_policy is not None else set())
+            ),
             "identity row field set differs",
         )
         name = row["path"]
@@ -189,6 +196,16 @@ def identity_table(rows: list[dict[str, Any]], count: int) -> dict[str, dict[str
             and base.SHA.fullmatch(row["sha256"]),
             "identity row bytes/hash invalid",
         )
+        prebound = False
+        if source_identity_policy is not None:
+            expected = row["expected_sha256"]
+            base.require(row["identity_policy"] == source_identity_policy and (
+                expected is None or (
+                    isinstance(expected, str) and base.SHA.fullmatch(expected) is not None
+                    and expected == row["sha256"]
+                )
+            ), "identity prebound hash/policy differs")
+            prebound = expected is not None
         for stage in ("declared", "before", "after", "closing"):
             value = row[stage]
             base.require(
@@ -197,12 +214,49 @@ def identity_table(rows: list[dict[str, Any]], count: int) -> dict[str, dict[str
                 and all(type(v) is int and v >= 0 for v in value.values()),
                 "identity row observation missing",
             )
+        for stage in ("declared", "before", "after", "closing"):
+            value = row[stage]
             base.require(
-                value == row["before"] and value["st_size"] == row["byte_size"],
+                all(value[key] == row["before"][key] for key in (
+                    ("st_dev", "st_ino", "st_size") if prebound
+                    else ("st_dev", "st_ino", "st_size", "st_mtime_ns")
+                )) and value["st_size"] == row["byte_size"],
                 "identity changed within read",
+            )
+        if source_identity_policy is not None:
+            expected_changes = {
+                stage: row[stage]["st_mtime_ns"] - row["declared"]["st_mtime_ns"]
+                for stage in ("before", "after", "closing")
+            }
+            base.require(
+                isinstance(row["mtime_changes"], dict)
+                and set(row["mtime_changes"]) == set(expected_changes)
+                and all(type(v) is int for v in row["mtime_changes"].values())
+                and row["mtime_changes"] == expected_changes,
+                "identity mtime changes differ",
             )
         table[name] = row
     return table
+
+
+def compare_identity_tables(
+    left_rows: list[dict[str, Any]], right_rows: list[dict[str, Any]], count: int, *,
+    source_identity_policy: str | None = None,
+) -> None:
+    """Keep each author's raw timestamps while checking one physical source set."""
+    left = identity_table(left_rows, count, source_identity_policy=source_identity_policy)
+    right = identity_table(right_rows, count, source_identity_policy=source_identity_policy)
+    base.require(left.keys() == right.keys(), "source identity member set differs")
+    for name, observed in left.items():
+        other = right[name]
+        if source_identity_policy is None or observed["expected_sha256"] is None:
+            base.compare_words(observed, other)
+            continue
+        for field in ("path", "byte_size", "sha256", "identity_policy", "expected_sha256"):
+            base.compare_words(observed[field], other[field])
+        for stage in ("declared", "before", "after", "closing"):
+            for field in ("st_dev", "st_ino", "st_size"):
+                base.compare_words(observed[stage][field], other[stage][field])
 
 
 def audit_local_content(

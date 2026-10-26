@@ -1668,3 +1668,15 @@ metadata originals from TopoLab's own prior B3/B4 records;12 hashes complete bef
 mtime identity STOP. No payload/model execution, external implementation or new
 numerical method is imported. Shared copies only171 NEW failed-prefix evidence
 members; result retention never rereads old originals. See the actual supplement.
+
+
+## 2026-10-26 — Prebound-hash source identity and custody verification
+
+Original TopoLab public software and independently authored source-reader audit.
+The owner prospectively adopts a versioned mtime metadata policy only when the
+same complete buffer matches a trustworthy pre-read SHA256; old strict identities
+remain. Finite evidence manifests are checked against an outside anchor without
+assuming permanent directory0555. No new external implementation or upstream
+Hack3D material is used. Public diagnostic receipts are hash-checked read only;
+no old scientific original or custody generation is accessed. See the
+[validation report](docs/validation/p17_m2_hash_bound_acquisition.md).

@@ -25,6 +25,7 @@ OUTPUT_ROOT_NAME = "p17-m2-input-export-preparation-v3"
 STABLE_IDENTITY = "topolab.v2.p17-m2-source-stable-export.v1"
 LOCAL_IDENTITY = "topolab.v2.p17-m2-local-input-version.v1"
 STABLE_ROOT_NAME = "p17-m2-source-stable-export-v1"
+PREBOUND_SHA256_POLICY = "topolab.source-identity.prebound-sha256.v1"
 MIB = 1024 * 1024
 
 
@@ -91,7 +92,7 @@ class Reader:
     """One bounded read per literal file; identities journaled even on failure."""
 
     def __init__(self, root, journal=None, *, execution_identity=None,
-                 source_identity_checks=False):
+                 source_identity_checks=False, source_identity_policy=None):
         self.root, self.journal = Path(root).absolute(), journal
         self.rows, self.total, self.seen, self.attempts = [], {}, set(), []
         self.failures = []
@@ -99,6 +100,11 @@ class Reader:
         self.execution_identity = execution_identity or (
             "topolab.v2.p17-m2-input-failure-diagnostic-repair.v1")
         self.source_identity_checks = source_identity_checks
+        need(source_identity_policy in (None, PREBOUND_SHA256_POLICY),
+             "unknown source identity policy")
+        need(source_identity_policy is None or source_identity_checks,
+             "policy requires closing observations")
+        self.source_identity_policy = source_identity_policy
         self.source_observations = []
         need(not source_identity_checks
              or self.execution_identity in (STABLE_IDENTITY, LOCAL_IDENTITY),
@@ -113,6 +119,9 @@ class Reader:
             "declared": None, "before": None, "after": None,
             "returned_bytes": None, "changed_fields": [],
         }
+        if self.source_identity_policy is not None:
+            facts.update(identity_policy=self.source_identity_policy, expected_sha256=expected,
+                         mtime_changes={})
         if self.source_identity_checks:
             facts["closing"] = None
         self._read_facts = facts
@@ -164,6 +173,17 @@ class Reader:
     def _identity(self, stage, value):
         self._read_facts[stage] = {key: getattr(value, key) for key in
                                   ("st_dev", "st_ino", "st_size", "st_mtime_ns")}
+        if self.source_identity_policy is not None and self._read_facts.get("declared"):
+            self._read_facts["mtime_changes"] = {
+                point: self._read_facts[point]["st_mtime_ns"]
+                - self._read_facts["declared"]["st_mtime_ns"]
+                for point in ("before", "after", "closing") if self._read_facts.get(point)}
+
+    def _same_identity(self, left, right, expected):
+        keys = ("st_dev", "st_ino", "st_size", "st_mtime_ns")
+        if self.source_identity_policy == PREBOUND_SHA256_POLICY and expected is not None:
+            keys = keys[:-1]
+        return all(getattr(left, key) == getattr(right, key) for key in keys)
 
     def _closing_stat(self, relative):
         # Rewalk the literal path from / so an ancestor replacement is checked
@@ -180,6 +200,9 @@ class Reader:
             os.close(parent)
 
     def _read(self, relative, limit, *, expected=None, size=None, group="metadata", total=None):
+        if self.source_identity_policy is not None:
+            need(expected is None or (isinstance(expected, str)
+                 and re.fullmatch(r"[0-9a-f]{64}", expected)), "invalid prebound SHA256")
         need(isinstance(relative, str) and relative not in self.seen, "unregistered reread")
         self.seen.add(relative)
         parts = Path(relative).parts
@@ -221,8 +244,7 @@ class Reader:
             before = os.fstat(fd)
             self._identity("before", before)
             need(
-                (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns)
-                == (declared.st_dev, declared.st_ino, declared.st_size, declared.st_mtime_ns),
+                self._same_identity(declared, before, expected),
                 "source replaced before read",
             )
             self._read_facts["stage"] = "bounded_read"
@@ -233,8 +255,7 @@ class Reader:
             after = os.fstat(fd)
             self._identity("after", after)
             need(
-                (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns)
-                == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns),
+                self._same_identity(before, after, expected),
                 "source changed",
             )
             self._read_facts["stage"] = "read_size_consistency"
@@ -244,10 +265,15 @@ class Reader:
                 closing = self._closing_stat(relative)
                 self._identity("closing", closing)
                 need(stat.S_ISREG(closing.st_mode)
-                     and self._read_facts["after"] == self._read_facts["closing"],
+                     and self._same_identity(after, closing, expected),
                      "source path replaced during read")
         finally:
             os.close(fd)
+        if self.source_identity_policy is not None:
+            self._read_facts["mtime_changes"] = {
+                key: self._read_facts[key]["st_mtime_ns"]
+                - self._read_facts["declared"]["st_mtime_ns"]
+                for key in ("before", "after", "closing")}
         self._read_facts["stage"] = "read_size_hash_caps"
         row = ref(relative, raw)
         self._read_facts["source"] = row
@@ -263,7 +289,10 @@ class Reader:
         need(expected is None or row["sha256"] == expected, "source SHA " + relative)
         if self.source_identity_checks:
             self.source_observations.append(row | {
-                key: self._read_facts[key] for key in ("declared", "before", "after", "closing")})
+                key: self._read_facts[key] for key in ("declared", "before", "after", "closing")
+            } | ({key: self._read_facts[key] for key in
+                  ("identity_policy", "expected_sha256", "mtime_changes")}
+                 if self.source_identity_policy is not None else {}))
         return raw
 
     def packet(self, relative, limit, **kwargs):

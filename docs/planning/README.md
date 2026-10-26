@@ -1,5 +1,8 @@
 # Planning index
 
+Latest [hash-bound identity/custody policy](p17_m2_hash_bound_acquisition_protocol.md) ([JSON](p17_m2_hash_bound_acquisition_protocol.json)): public software with unchanged strict defaults; this action closes formal entry unfunded.
+
+
 Closed [source-acquisition authority](p17_m2_source_acquisition_execution_protocol.md)
 ([JSON](p17_m2_source_acquisition_execution_protocol.json), [preserved adopted draft](p17_m2_source_acquisition_execution_authorization_draft.md)):
 [actual STOP result](../validation/p17_m2_source_acquisition_execution.md) retains
