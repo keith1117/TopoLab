@@ -2433,7 +2433,22 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-## Current: hash-bound identity software; formal entry unfunded (2026-10-26)
+## Current: funded continuous acquisition and conditional M2 execution (2026-10-26)
+
+The owner's later explicit retry/automatic-expansion instruction adopts the
+[finite new authority](p17_m2_funded_acquisition_protocol.md)
+([JSON](p17_m2_funded_acquisition_protocol.json)), with unchanged first clock,
+closed historical balances and scientific Gates. [Actual frontier](../validation/p17_m2_funded_acquisition.md)
+separates public executable capability from input, B and fixed-P17 acceptance.
+Complete software/publication gates; execute fresh fixed-parent40/558/1071
+acquisition and its complete result suffix; only accepted input enables the
+separately published native scientific contract. B FULL180 precedes the complete
+C10800/3600/shared180 panel. Continue between those authorized stages directly.
+Engineering failures retain full evidence and bounded public repair/remedy;
+scientific FAIL, missing evidence, real resources and finite caps cannot be
+bypassed by new identity or accounting. No seed17/v2 success is established here.
+
+## Historical: hash-bound identity software; formal entry unfunded (2026-10-26)
 
 The owner's continuous four-task instruction supersedes the one-slice scheduling
 stop for this action. [New policy and finite funding](p17_m2_hash_bound_acquisition_protocol.md)

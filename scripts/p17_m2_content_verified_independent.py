@@ -1650,6 +1650,7 @@ def _check_software(
     controller: str = "p17_m2_content_verified_control.py",
     prepare_mode: str = "prepare-public",
     repo_guard: Any = None,
+    prepare_suffix: tuple[str, ...] = (),
 ) -> None:
     require(
         isinstance(plan.get("source_tree"), dict) and REQUIRED_HELPERS <= set(plan["source_tree"]),
@@ -1696,7 +1697,8 @@ def _check_software(
     )
     script = str(repo / "scripts" / controller)
     require(
-        runtime["orig_argv"] == [str(python), "-I", script, prepare_mode, "--root", plan["root"]],
+        runtime["orig_argv"] == [str(python), "-I", script, prepare_mode, "--root", plan["root"],
+                                 *prepare_suffix],
         "actual prepare orig_argv differs",
     )
     for role in [*ROLE_ORDER, "final-filing", "lease-release"]:

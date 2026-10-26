@@ -5,7 +5,33 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: hash-bound identity software; formal entry unfunded (2026-10-26)
+## Current: funded continuous acquisition and conditional M2 execution (2026-10-26)
+
+The owner's subsequent “retry unstarted work, automatically expand” instruction
+prospectively funds the [new finite authority](planning/p17_m2_funded_acquisition_protocol.md)
+([JSON](planning/p17_m2_funded_acquisition_protocol.json)). Same-start36h wall /
+54 author-hour ceiling, complete4500/FULL3600 source and7200/7200 result suffixes,
+and bounded engineering remedies preserve all old closed grants and charges.
+[Actual software frontier](validation/p17_m2_funded_acquisition.md) includes the
+fixed18-reference/342-query producer, distinct numerical auditor, actual native
+exit/reader controls and new public source/decoder integration. Public tests and
+software publication do not establish input acceptance, B admission or P17 repair.
+
+Complete new distinct review/full checks/protected exact-head and main4CI before
+any old original or formal target IO. Then execute the exact40/558/1071 source
+chain once within its registered allowance; after actual input acceptance and
+source result closure, publish the exact input-bound scientific contract and
+perform B before C. The continuous owner action overrides one-slice-stop, so no
+new preference/approval handoff follows a completed preparation. Scientific FAIL,
+4GiB/complete-exit requirements, fixed models/P17, old all-paid FAIL and all
+history remain binding. Engineering STOP freezes that attempt, then bounded
+public repair/review and a separately frozen prebooked remedy if legal.
+
+PR224 main2f67feee/all-four CI40290231283 actually passed after its earlier
+closure's pending-CI frontier; the immutable earlier closure remains unchanged.
+The following software and acquisition records retain their historical scopes.
+
+## Historical: hash-bound identity software; formal entry unfunded (2026-10-26)
 
 The owner's continuous four-task instruction supersedes the one-slice scheduling
 stop for this action. [New policy and finite funding](planning/p17_m2_hash_bound_acquisition_protocol.md)

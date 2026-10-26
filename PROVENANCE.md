@@ -1680,3 +1680,15 @@ assuming permanent directory0555. No new external implementation or upstream
 Hack3D material is used. Public diagnostic receipts are hash-checked read only;
 no old scientific original or custody generation is accessed. See the
 [validation report](docs/validation/p17_m2_hash_bound_acquisition.md).
+
+## 2026-10-26 funded M2 execution tooling
+
+The new fixed-panel producer, separately authored initialization/FEM/window/Gate
+checker and native exit/reader orchestration are original TopoLab work over the
+existing independently implemented FEM/filter/OC and published TopoLab protocols.
+No Hack3D source, comments, figures or file layout was consulted or introduced.
+New external public physical fixtures use two fresh uniform solutions and fresh
+per-case FEM checks of linear load scaling, preserving true terminal/windows.
+They are software integration data, not historical scientific results or fixed
+P17 repair evidence. Generated data and raw runtime evidence stay outside Git;
+see the [funded frontier](docs/validation/p17_m2_funded_acquisition.md).

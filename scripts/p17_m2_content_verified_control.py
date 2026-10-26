@@ -1095,6 +1095,10 @@ def resource_evidence(root, plan_sha, role, *, tolerate_missing=False, adapter=N
         }
 
         def read_helpers():
+            reader = getattr(transport, "helper_profiles_reader", None)
+            if reader is not None:
+                inner["helper_profiles"] = reader(folder, record)
+                return
             for helper in record["helpers"]:
                 name = helper["profile"]
                 raw = take(

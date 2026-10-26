@@ -1,5 +1,7 @@
 # Validation evidence index
 
+Latest [funded executable/public integration frontier](p17_m2_funded_acquisition.md): actual tests, retained public STOPs and conditional publication/input/B/C gates; fixed P17 remains unrepaired.
+
 Latest [hash-bound identity and custody software frontier](p17_m2_hash_bound_acquisition.md): regression evidence and explicit formal/B/C funding blockers; fixed P17 remains unrepaired.
 
 
