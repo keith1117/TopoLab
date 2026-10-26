@@ -40,19 +40,20 @@ all-paid criterion. Full fit PENDING4GiB and all old failures/UNKNOWN/seals rema
 The original start is2026-10-26T16:28:00Z. Initial registration was86400 wall /
 129600 aggregate author seconds. Prospective expansion v2 increased the active
 ceiling to129600 wall /194400 aggregate author seconds, preserving that start
-and every spent second. Later allocations v3–v9 move still-unallocated reserves;
-they do not reset clocks. The frozen JSON contains the active allocation and
-raw registration hashes. No external paid service or purchase is authorized;
+and every spent second. Later allocations v3–v10 move still-unallocated reserves;
+they do not reset clocks. The frozen JSON retains its v9 allocation snapshot;
+the v10 supplement below binds the prospective software allocation and raw hash.
+No external paid service or purchase is authorized;
 actual existing CI/monetary costs are UNKNOWN_NOT_ZERO.
 
 | Pool/stage | Seconds ceiling |
 |---|---:|
-| Pooled software preparation, implementation, public scientific audit, checks/CI |50400|
+| Pooled software preparation, implementation, public scientific audit, checks/CI |58680|
 | Acquisition common, two bounded attempts |9000|
 | Acquisition result suffix, two attempts |14400|
 | B/C two engineering-only attempts |29520|
 | Scientific contract/result publication, retention, final returns |18000|
-| Remaining finite executor contingency |8280|
+| Remaining finite executor contingency |0|
 | Distinct source software audit |14400|
 | Initial Spec feasibility |1800|
 | Standards review |9000|
@@ -97,6 +98,20 @@ their behavior. Public software evidence does not establish resource admission
 or seed17 repair.
 
 ## Formal source entry
+
+Before any formal call, Linux PR225 CI exposed a test-only Darwin temporary-root
+assumption. Allocation v10 prospectively assigns the remaining8280 executor
+contingency to software repair/review/checks/publication. Raw allocation SHA
+bd31a166780a93b167e8f106cc5264d845d17f34ae5e9a318389cd6e97f4e72c.
+The JSON's v9 allocation remains an immutable historical snapshot; this v10
+software-only supplement changes no source formal/result allowance, actor,
+call count, target, FULL, resource or scientific condition. Its unchanged
+27-member executable freeze and independently returned PUBLIC9 receipt remain
+the source entry references. All prior actual costs and closed balances remain.
+The new Standards600 and Spec900 phases are charged to the software pool;
+the reserved separate engineering900 phase is unstarted, since the executor
+performs the minimal fixture repair. No unstarted reservation creates a charge
+or transfers an already closed balance. All global clocks retain16:28Z.
 
 Use only the fixed Application Support parent and fresh v5/v6 generations in
 the JSON, with their separately named backups. No third custody parent or

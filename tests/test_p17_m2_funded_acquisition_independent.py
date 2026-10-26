@@ -25,7 +25,8 @@ FULL = {
 def copied_public_source_plan(checker, plan):
     """Only NEW public metadata is created; no original or custody target IO."""
     with tempfile.TemporaryDirectory(
-        prefix="topolab-public-funded-acquisition-independent-origin-", dir="/private/tmp"
+        prefix="topolab-public-funded-acquisition-independent-origin-",
+        dir=Path(tempfile.gettempdir()).resolve(),
     ) as directory:
         root = Path(directory)
         origin = deepcopy(plan)
@@ -47,6 +48,14 @@ def test_funded_public_copy_plan_has_exact_real_prepare_CLI_suffix(tmp_path, mon
             "--public-source-plan", str(path), "--public-source-plan-sha",
             binding["public_source_plan_sha256"],
         )
+
+
+def test_public_copy_plan_uses_platform_temporary_directory(tmp_path, monkeypatch):
+    checker, plan, _ = fixture(tmp_path, monkeypatch)
+    monkeypatch.setattr(tempfile, "tempdir", "/tmp")
+    with copied_public_source_plan(checker, plan) as (path, _):
+        assert path.parent.parent == Path("/tmp").resolve()
+        assert checker.validate_binding(plan)["public_source_plan"] == str(path)
 
 
 def test_prebound_public_graph_keeps_its_historical_authority_freeze(tmp_path, monkeypatch):

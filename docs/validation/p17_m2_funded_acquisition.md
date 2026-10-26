@@ -478,3 +478,42 @@ e567687f63bcca56c3805a923ee604a4367517e0b5c06104a825610f8baae2fb.
 The original workspaces were never written. Raw current Git indices are copied
 privately as additional recovery evidence, without claiming their raw byte hash
 was part of the older semantic-index baseline. No raw user-change backup enters Git.
+
+## Linux publication CI fixture STOP and bounded remedy
+
+PR225 exact head8366b260650cdb67ea9d299813d78526d5da0572, run40404197040,
+returned quality FAIL:2923 passed/6 skipped/8 failed in2168.29s. The other
+three jobs passed. All eight failures originate in the new independent-test
+fixture's literal `/private/tmp`, absent on Ubuntu, before actual source-policy
+behavior. Full raw quality log SHA
+bbf76a500174e57bdeb1c0ac909fcbb9f22daa3379e5a8feeba27ca8562c4e5a
+is retained externally. No formal original/target IO or B/C call occurred.
+
+A regression first required the real public-copy fixture to honor a selected
+platform temporary root, and failed on the hard-coded Darwin parent. First
+minimal removal of the explicit directory exposed macOS temporary-root alias
+and no-follow constraints:55 passed/3 failed; that failed verification remains.
+The second bounded verification uses the resolved platform temporary parent
+only in this test fixture;58 passed in0.33s. Production path whitelists,
+no-follow behavior, all27 executable/source hashes and authority9cde92ae remain
+unchanged. Both verification rounds for this cause are now consumed. No
+scientific rule, tolerance or actual-data resource cap changes. Full mandatory
+checks, different-author Standards/Spec and new exact-head/main CI remain due.
+Software allocation v10 uses only the still-unallocated8280 contingency;
+global clocks and formal caps are unchanged, with the raw binding in the
+protocol's prospective supplement. Existing CI monetary charges remain UNKNOWN.
+
+Separately, the completed passing v9 pytest tree was fully retained in two
+independent-inode compressed archives before its deliberate cleanup to recover
+disk. Both complete archive hashes are
+ce8c932adf6357c6a405eedf00bb7ae3165ac1fc3a502f2436aa4e201846bc3e;
+the original153278-member manifest SHA is
+0b9d512f33ece73956538675d44a8ea3b7c45ac7c98af25101b5bbf0a7b31079.
+Every regular-file byte/hash, symlink target and FIFO metadata was independently
+verified; FIFOs were never opened. The two earlier archive attempts stopped on
+unsupported FIFO and a conservative entry bound, retaining their error records;
+the final bound follows the exact new-test inventory, not a formal data-cap change.
+Cleanup-after SHA3796f118066964ddb5f68a181077a765da9678fe814d0239f5cc1ba7d0277e8b
+records exact pre-cleanup verification and removal of only that new completed
+passing regression tree. Original temporary inodes are no longer in place.
+This does not repair the separately disclosed older failed-tree retention gap.
