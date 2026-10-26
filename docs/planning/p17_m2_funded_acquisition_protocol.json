@@ -1,0 +1,291 @@
+{
+  "schema": "topolab.v2.m2-funded-acquisition-authority.v1",
+  "execution_identity": "topolab.v2.p17-m2-hash-bound-source-acquisition.v2",
+  "source_identity_policy": "topolab.source-identity.prebound-sha256.v1",
+  "owner_approval_reference": "Direct human 2026-10-26: retry unstarted items and automatically expand; inherits continuous four-task scope and unchanged science/data/old seals",
+  "permissions": {
+    "formal_activation": true,
+    "old_original_access": true,
+    "target_access": true,
+    "B_C": false
+  },
+  "outer_wall_seconds": 129600,
+  "total_new_author_charged_seconds_cap": 194400,
+  "formal_seconds": 4500,
+  "result_seconds": {
+    "exporter": 7200,
+    "independent": 7200
+  },
+  "actors": {
+    "executor": "/root",
+    "independent": "/root/acquisition_funded_audit"
+  },
+  "budget_initial_raw_sha256": "d29f5c55ba090f5ea1768e7665348edcd553098672dccfbff9d2422ba86914de",
+  "budget": {
+    "schema": "topolab.p17-funded-continuation.budget.v9",
+    "owner_authority": "2026-10-26 direct instruction: retry unstarted work and automatically expand; earlier four-task scope retained",
+    "clock_start_utc": "2026-10-26T16:28:00Z",
+    "outer_wall_seconds": 129600,
+    "executor_author_seconds_cap": 129600,
+    "independent_author_seconds_cap": 64800,
+    "total_author_seconds_cap": 194400,
+    "budget_expansion": "This v2 active finite ceiling is129600 wall/194400 aggregate author seconds from unchanged16:28 start; old initial registration remains immutable. No erased/shifted elapsed or old unused quota transfer. All phase/call bounds below unchanged unless explicitly increased in this record; maximum formal source2/science2 onlyengineering remedies remains.",
+    "executor_stage_caps": {
+      "software_preparation_checks_reviews_CI": 50400,
+      "acquisition_common_two_attempts": 9000,
+      "acquisition_result_two_attempts": 14400,
+      "B_C_FULL_two_attempts": 29520,
+      "scientific_contract_result_publication_retention_final_returns": 18000,
+      "unallocated_finite_contingency": 8280
+    },
+    "independent_stage_caps": {
+      "software_audit": 14400,
+      "spec_review": 1800,
+      "standards_review": 9000,
+      "acquisition_formal_and_result_two_attempts": 23400,
+      "C_independent_two_attempts": 7200,
+      "scientific_filing_and_final_returns": 7200,
+      "unallocated_finite_contingency": 0,
+      "final_spec_review": 1800
+    },
+    "authors": {
+      "executor": "/root",
+      "source_independent": "/root/acquisition_funded_audit",
+      "spec": "/root/acquisition_funded_spec",
+      "standards": "/root/acquisition_funded_standards"
+    },
+    "source_attempts": 2,
+    "source_FULL_each": 3600,
+    "source_common_each": 4500,
+    "source_result_each_author_each_attempt": 7200,
+    "source_role_order": [
+      "independent-public-check",
+      "exporter-r0",
+      "independent-r0",
+      "exporter-r1",
+      "independent-r1",
+      "shared-closeout"
+    ],
+    "source_FULL_by_role": [
+      300,
+      300,
+      300,
+      1200,
+      1200,
+      300
+    ],
+    "source_each_author_once_per_original_per_attempt": 1,
+    "source_max_reads_each_attempt": 1196,
+    "source_metadata_payload_output_members": [
+      40,
+      558,
+      1071
+    ],
+    "B_C_attempts_max": 2,
+    "B_FULL_each": 180,
+    "C_producer_FULL_each": 10800,
+    "C_independent_FULL_each": 3600,
+    "C_shared_FULL_each": 180,
+    "scientific_rules": "Full fixed panel and current proposal unchanged; B after accepted inputs, C after B/all dependencies; remedy only for engineering failure, never retry scientific FAIL or expand model/search/population",
+    "software_fix_rounds_per_root_cause": 2,
+    "formal_launch_state": "NOT_ADMITTED_PENDING_NEW_AUTHORITY_SOFTWARE_REVIEW_CI",
+    "resource_RSS_bytes": 4294967296,
+    "external_paid_commitments": 0,
+    "old_paid_ledger": "12721.16417100014444982 > 7200 unchanged FAIL",
+    "prior_action_author_charge_sealed_seconds": 9058,
+    "prior_action_unused_closed_seconds": 8942,
+    "targets_parent": "/Users/keith1117/Library/Application Support/TopoLab-custody",
+    "new_target_generation_names": [
+      "p17-m2-local-input-version-v5-hash-bound-20261026",
+      "p17-m2-local-input-version-v6-hash-bound-20261026"
+    ],
+    "source_target_probe_count": 0,
+    "accounting": "Actual full author wall incl waiting/tests/CI/failure/final return, plus separate immutable FULL ledger without doublecounting same wall; monetary fees UNKNOWN_NOT_ZERO; no refund/reset/transfer. Per-stage continuous clocks bind before activation.",
+    "historical_software_closure_sha256": "0636d0713cfa15840516b8aff20d904ec09be7577cfdfdafcb416c375a97e314",
+    "expanded_unix_ns": 1793034387462245000,
+    "previous_budget_sha256": "f24b5091f339502406f7a191b8fb2f42a32fc1f5e3c9e600111bdde02f66f897",
+    "expansion_reason": "Latest direct user authorization explicitly requests automatic expansion; complete cost review includes two scientific protected publications, source suffix/final returns and bounded remedies. Prospectively expand active envelope before any formal call. Preserve original start and every spent second; never revive closed prior grants.",
+    "allocation_updated_unix_ns": 1793046713596666000,
+    "allocation_reason": "Prospectively move10800 from still-unallocated executor contingency to software before new evidence-storage remedy; fixed512 evidence-file cap correctly rejected full-suite public pipeline. Preserve all original budgets/starts/closed balances, all formal source/science call limits and resource thresholds. No cap enlargement for actual data or science.",
+    "active_additional_software_author": {
+      "author": "/root/m2_scientific_audit",
+      "start_utc": "2026-10-26T16:41:31Z",
+      "phase_seconds_cap": 10800,
+      "deadline_utc": "2026-10-26T19:41:31Z",
+      "charged_from": "executor_stage_caps.software_preparation_checks_reviews_CI"
+    },
+    "active_review_phase_deadlines": {
+      "/root/acquisition_funded_audit": {
+        "unchanged_start_utc": "2026-10-26T16:31:42Z",
+        "cap_seconds": 14400,
+        "deadline_utc": "2026-10-26T20:31:42Z"
+      },
+      "/root/acquisition_funded_standards": {
+        "unchanged_start_utc": "2026-10-26T17:03:00Z",
+        "cap_seconds": 9000,
+        "deadline_utc": "2026-10-26T19:33:00Z"
+      }
+    },
+    "new_software_remedy_phases": {
+      "root_cause": "Unknown-root authority selection loads a software parser before denying absence of matching authority",
+      "max_repair_verification_rounds": 2,
+      "current_round": 1,
+      "distinct_review": {
+        "author": "/root/authority_remedy_review",
+        "registered_start_utc": "2026-10-26T19:36:45.173092+00:00",
+        "cap_seconds": 900,
+        "charged_from": "executor.software_preparation_checks_reviews_CI"
+      },
+      "fresh_public_preflight": {
+        "author": "/root/acquisition_funded_audit",
+        "activation": "unique parent-dispatch timestamp after reviewed fix; no prior clock reset",
+        "cap_seconds": 1800,
+        "charged_from": "executor.software_preparation_checks_reviews_CI",
+        "public_source_generation": "/private/tmp/topolab-public-funded-acquisition-preflight7",
+        "public_science_generation": "/private/tmp/topolab-funded-continuation-20261026/public-science-integration4",
+        "formal_source_B_C_calls": 0
+      }
+    },
+    "new_evidence_storage_remedy": {
+      "cause": "Redundant per-sample physical files exhaust512 metadata file cap during valid full public source chain",
+      "max_fix_verification_rounds": 2,
+      "current_round": 1,
+      "engineer_review_author": {
+        "author": "/root/sampler_evidence_audit",
+        "start_utc": "2026-10-26T20:31:53.596379+00:00",
+        "cap_seconds": 1800,
+        "charged_from": "executor.software_preparation_checks_reviews_CI"
+      },
+      "fresh_final_spec": {
+        "author": "/root/sampler_final_review",
+        "activation": "unique actual dispatch after source is frozen",
+        "cap_seconds": 600,
+        "charged_from": "executor.software_preparation_checks_reviews_CI"
+      },
+      "fresh_source_preflight": {
+        "author": "/root/acquisition_funded_audit",
+        "activation": "unique actual dispatch after reviewed freeze and Ruff",
+        "cap_seconds": 1800,
+        "generation": "/private/tmp/topolab-public-funded-acquisition-preflight9",
+        "new_preflight_file": "/private/tmp/topolab-funded-continuation-20261026/independent/preflight-remedy2.json",
+        "charged_from": "executor.software_preparation_checks_reviews_CI"
+      },
+      "full_fixed_resource_limits_unchanged": true,
+      "formal_source_B_C_calls": 0
+    }
+  },
+  "formal_admission": "CONDITIONAL_ON_FROZEN_READINESS",
+  "formal_actual_calls": 0,
+  "reason": "Prospective new grant fixes previously unstarted inadequate funding. No closed allowance is resumed. Complete software/review/CI/finite source authority/native preflight required before setup.",
+  "fixed_target": {
+    "parent": "/Users/keith1117/Library/Application Support/TopoLab-custody",
+    "attempts": {
+      "1": {
+        "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v5-hash-bound-20261026",
+        "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v5-hash-bound-20261026-independent-backup"
+      },
+      "2": {
+        "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v6-hash-bound-20261026",
+        "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v6-hash-bound-20261026-independent-backup"
+      }
+    }
+  },
+  "custody_integrity": {
+    "directory_create_mode": "0700",
+    "file_create_mode": "0600",
+    "exact_manifest": true,
+    "independent_inodes": true,
+    "independent_anchor_outside_custody": true,
+    "reverify_each_read": true,
+    "permanent_0555_required": false,
+    "lease": "real cooperative leases bind registered TopoLab tools only; no FileProvider exclusion",
+    "no_never_sync_or_upload_or_continuous_availability_claim": true
+  },
+  "source_whitelist": {
+    "original_contract": "docs/planning/p17_m2_input_export_preparation_proposal.json",
+    "raw_sha256": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "exact_derivation": "docs/planning/p17_m2_source_acquisition_execution_authorization_draft.json#/source_whitelist",
+    "draft_raw_sha256": "401c32618ef6fb964d0efc425dc2f792ce92baf7a7e483d8bdbafa1c08906786",
+    "per_author_per_file_reads": 1,
+    "r0_metadata": 40,
+    "r1_payload": 558,
+    "version_members": 1071,
+    "total_old_source_reads_per_attempt_max": 1196,
+    "metadata_acceptance_before_payload_stat_open": true,
+    "current_source_whitelist_active": false
+  },
+  "role_order": [
+    "independent-public-check",
+    "exporter-r0",
+    "independent-r0",
+    "exporter-r1",
+    "independent-r1",
+    "shared-closeout"
+  ],
+  "FULL_by_role": {
+    "independent-public-check": 300,
+    "exporter-r0": 300,
+    "independent-r0": 300,
+    "exporter-r1": 1200,
+    "independent-r1": 1200,
+    "shared-closeout": 300
+  },
+  "scientific_admission": {
+    "B_C_calls": 0,
+    "new_M2_not_old_rescue_relabel": true,
+    "B_proposal_FULL": 180,
+    "C_proposal_FULL": 14580,
+    "source": "docs/planning/p17_m2_native_homotopy_proposal.json#/proposed_budgets_NOT_GRANTED",
+    "reason": "Separately funded globally; separate executable scientific contract/fullcalltables and acceptedinput/resource admission required. Acquisition identity has no scientific permission."
+  },
+  "stop_and_remedy": {
+    "freeze_failed_attempt": true,
+    "public_software_rounds_per_cause": 2,
+    "formal_attempts_max": 2,
+    "old_grants_closed": true,
+    "remedy_requires_all_dependency_gates": true
+  },
+  "publication": "five mandatory checks, new distinct-author review, protected exact PR-head four CI and merged-main four CI; no force push or bypass",
+  "source_and_target_observations": "NONE before gated actual setup and public preflight",
+  "proposal_sha256": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+  "implementation_base_commit": "2f67feee4d89c94b36196122a5930a56d5b8433f",
+  "preparation_closure_sha256": "0636d0713cfa15840516b8aff20d904ec09be7577cfdfdafcb416c375a97e314",
+  "preparation_closure_paths": [
+    "/Users/keith1117/Documents/TopoLab-data/p17-m2-hash-bound-custody-20261026-results/publication-closure.json",
+    "/private/tmp/topolab-hash-bound-custody-20261026-results-backup/publication-closure.json"
+  ],
+  "independent_preflight_path": "/private/tmp/topolab-funded-continuation-20261026/independent/preflight-remedy2.json",
+  "independent_preflight_sha256": "a037ca934ec60d935eb87b3d88d475eff5726b341272c86700f1ae547dbf4f70",
+  "published_source_sha256": {
+    "docs/planning/p17_m2_content_verified_custody_proposal.json": "8fa602f3d86be03da0c336f7569a35a68ce31052517249e0bf32b35f098aa7e0",
+    "docs/planning/p17_m2_content_verified_custody_protocol.json": "8ecc3716306cd2e49d7d5fd46f61eb43b4d2740861a702e5bc8745b9500e3381",
+    "docs/planning/p17_m2_content_verified_source_acquisition_proposal.json": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+    "docs/planning/p17_m2_hash_bound_acquisition_protocol.json": "47b5fc562d82c61b713598c9ee34f062decce217fc275acad7b2afef881159c0",
+    "docs/planning/p17_m2_input_export_preparation_proposal.json": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "docs/planning/p17_m2_source_acquisition_adapter_preparation_protocol.json": "ad3745d028931d5469e3be76467da391ef0289addbf46fbe909a808497c285f0",
+    "docs/planning/p17_m2_source_acquisition_execution_protocol.json": "a741defb22c33f39f571a1585a55e813132a2a3593648e00230b0093d2642763",
+    "scripts/p17_m2_content_verified_control.py": "9466e248f39a3a862d3c8fc2cd53679fdb66f73bf1ba959dfdda59e14d9d56dd",
+    "scripts/p17_m2_content_verified_independent.py": "5eacd8ec95e4137ccdb3eecb997092ac43d1a61d8fb11c6a9bef55708706c3e6",
+    "scripts/p17_m2_content_verified_public_fixture.py": "1de1827427b3f28536dcc2004d26b1c8e69deba7ac95007f5cfe9d7757cecf08",
+    "scripts/p17_m2_homotopy.py": "3d7723e0f62f93036027fea25a1386079482bdc09a4818c518bdc5999cb5e7d9",
+    "scripts/p17_m2_independent_audit.py": "300a330bc5681728930c95be4fdd67c66b10ea5abb0aab7cc15b382ca7e7153d",
+    "scripts/p17_m2_input_export.py": "cbf3caa19f30d162d8b748577ad4340b46e719e7c3407d77f6c591154f3a50ac",
+    "scripts/p17_m2_input_export_control.py": "94ac117823d9c9ddba92cccf7632608ad6d19423d2d59e5a0a7f691c50a66681",
+    "scripts/p17_m2_input_export_dispatch.js": "a712d5b038c335752c14080cecc06f056e15cd8e2f811049c5ad2435153545dd",
+    "scripts/p17_m2_input_export_independent.py": "a1e41ea08decf37910d2f56a2f7b4c990c9a3201533517ee22144deb47bd39e0",
+    "scripts/p17_m2_local_input_control.py": "6cfdbfd15e5a6b083975d9c20107aa7107232072755a66a13fcf86a3f0eb0bfb",
+    "scripts/p17_m2_local_input_independent.py": "72cfbc964065fbf93078282c6f16e12753e1cc4534d1cb482a353cb06d692a74",
+    "scripts/p17_m2_local_input_version.py": "e43f56ddd90fc5b19e53caeae2d2ef1462cedf5e49f9d79f9604b5052b8e1184",
+    "scripts/p17_m2_resource_control.py": "ac8467b55f5ed459710eeeca23c7327fca0a68dc16866049e35cbdb1b8a56fbd",
+    "scripts/p17_m2_scientific_control.py": "79365900fd48de58825f2b42194f8cf5093ffac98f820e518bc04b90b467084c",
+    "scripts/p17_m2_scientific_independent.py": "9adad447ef45380b56707cc511e62e9fc3d761aa4ccfb1b7b760a10217309f51",
+    "scripts/p17_m2_scientific_orchestration.py": "2f58bb0b2bef37995622ea1642c984521318220db2fbd4dc347c69d3a3a7d965",
+    "scripts/p17_m2_source_acquisition_control.py": "007819fe03db01bbb1a8ec2a92e647fdb4377a161cd2a3d4696f6d9b88d24328",
+    "scripts/p17_m2_source_acquisition_independent.py": "f0eadf5a948d495ef6eb9c6d502ddd27f830f251d8eab5102ee38948d752244e",
+    "scripts/p17_m2_source_verified_input.py": "a53090b1f8d5a22c634ff6a60f66aaf1d17e4f36e1c4fa34ad3d97cbb2291669",
+    "scripts/p17_m2_verified_input.py": "db4d4e6e286c4652694209e6c29360e98c9423afc09f3c16d8cbce3791d7614b"
+  },
+  "readiness_freeze_state": "REVIEWED_FROZEN",
+  "budget_expansion_raw_sha256": "a6facc948443f8cf3924a98f9fca08417c062873d7841d8769ab1ec9ced08772",
+  "budget_allocation_raw_sha256": "6a322a5716161f4a42075db5f2a86b3957272d1fe2d99f879e5ed9451ea48af0"
+}

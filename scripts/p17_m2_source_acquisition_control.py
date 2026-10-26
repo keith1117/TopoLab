@@ -1,6 +1,7 @@
 """Source-acquisition binding; actual formal authority remains separately closed."""
 
 import argparse
+import base64
 import ctypes
 import importlib.util
 import json
@@ -18,6 +19,8 @@ REPO = Path(__file__).resolve().parents[1]
 IDENTITY = "topolab.v2.p17-m2-content-verified-source-acquisition.v1"
 COMPAT_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v1"
 COMPAT_PROTOCOL = "docs/planning/p17_m2_hash_bound_acquisition_protocol.json"
+FUNDED_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v2"
+FUNDED_PROTOCOL = "docs/planning/p17_m2_funded_acquisition_protocol.json"
 SOURCE_IDENTITY_POLICY = "topolab.source-identity.prebound-sha256.v1"
 REHEARSAL_SCOPE = "FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY"
 FORMAL_SCOPE = "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY"
@@ -58,6 +61,33 @@ except FileNotFoundError:
     EXECUTION_AUTHORITY_RAW = None
 
 
+try:
+    FUNDED_AUTHORITY_RAW = load("p17_m2_source_acquisition_independent").native._software_bytes(
+        REPO / FUNDED_PROTOCOL
+    )
+except FileNotFoundError:
+    FUNDED_AUTHORITY_RAW = None
+
+
+def authority_for_root(root):
+    """Select only registered literals before any source or custody traversal."""
+    literal = str(Path(os.path.abspath(root)))
+    if FUNDED_AUTHORITY_RAW is not None:
+        # Literal routing is memory-only; full strict parsing precedes any setup.
+        authority = json.loads(FUNDED_AUTHORITY_RAW)
+        for attempt, target in authority["fixed_target"]["attempts"].items():
+            if literal == target["generation"]:
+                return FUNDED_AUTHORITY_RAW, int(attempt)
+        need(
+            Path(literal).name
+            not in {
+                Path(t["generation"]).name for t in authority["fixed_target"]["attempts"].values()
+            },
+            "FORMAL_LITERAL_ROOT_REQUIRED",
+        )
+    return EXECUTION_AUTHORITY_RAW, 1
+
+
 def source_freeze():
     paths = {
         *REPO.joinpath("scripts").glob("p17_m2_*.py"),
@@ -72,13 +102,23 @@ def source_freeze():
         paths.add(REPO / EXECUTION_PROTOCOL)
     if (REPO / COMPAT_PROTOCOL).is_file():
         paths.add(REPO / COMPAT_PROTOCOL)
+    if (REPO / FUNDED_PROTOCOL).is_file():
+        paths.add(REPO / FUNDED_PROTOCOL)
     return {str(p.relative_to(REPO)): base().sha(p.read_bytes()) for p in sorted(paths)}
 
 
 def rehearsal_root(root):
     root = Path(os.path.abspath(root))
-    need(root.name.startswith(("topolab-public-formal-binding-", "topolab-public-hash-bound-")),
-         "REHEARSAL_ROOT_REQUIRED")
+    need(
+        root.name.startswith(
+            (
+                "topolab-public-formal-binding-",
+                "topolab-public-hash-bound-",
+                "topolab-public-funded-acquisition-",
+            )
+        ),
+        "REHEARSAL_ROOT_REQUIRED",
+    )
     return base().public_root(root)
 
 
@@ -105,12 +145,16 @@ def make_plan(root, contract, source_identity):
     helper = base()
     now = round(time.time(), 3)
     end = datetime.fromtimestamp(now + 4500, UTC).isoformat(timespec="milliseconds")
-    compat = root.name.startswith("topolab-public-hash-bound-")
-    protocol_sha = helper.sha((REPO / (COMPAT_PROTOCOL if compat else PROTOCOL)).read_bytes())
+    funded = root.name.startswith("topolab-public-funded-acquisition-")
+    compat = funded or root.name.startswith("topolab-public-hash-bound-")
+    protocol_path = FUNDED_PROTOCOL if funded else COMPAT_PROTOCOL if compat else PROTOCOL
+    protocol_sha = helper.sha((REPO / protocol_path).read_bytes())
     proposal_sha = helper.sha((REPO / PROPOSAL).read_bytes())
     return {
         "schema": "topolab.v2.m2-source-acquisition-plan.v1",
-        "execution_identity": COMPAT_IDENTITY if compat else IDENTITY,
+        "execution_identity": (
+            FUNDED_IDENTITY if funded else COMPAT_IDENTITY if compat else IDENTITY
+        ),
         **({"source_identity_policy": SOURCE_IDENTITY_POLICY} if compat else {}),
         "scope": REHEARSAL_SCOPE,
         "formal_authority": False,
@@ -133,6 +177,7 @@ def make_plan(root, contract, source_identity):
             "target_access": False,
             "B_C": False,
             **({"source_identity_policy": SOURCE_IDENTITY_POLICY} if compat else {}),
+            **({"authority_protocol_path": FUNDED_PROTOCOL} if funded else {}),
         },
         "source_tree": source_freeze(),
         "runtime": helper.runtime(),
@@ -150,8 +195,196 @@ def make_plan(root, contract, source_identity):
     }
 
 
-def prepare_rehearsal(root):
+def public_source_plan_context(path, expected):
+    """Only an explicitly named NEW funded public graph can feed this fixture."""
+    path = Path(os.path.abspath(path))
+    need(
+        path.name == "plan.json"
+        and path.parent.name.startswith("topolab-public-funded-acquisition-"),
+        "PUBLIC_FUNDED_SOURCE_PLAN_REQUIRED",
+    )
+    rehearsal_root(path.parent)
+    checker = load("p17_m2_source_acquisition_independent")
+    raw = checker.native._software_bytes(path)
+    need(base().sha(raw) == expected, "PUBLIC_SOURCE_PLAN_HASH_CHANGED")
+    old = checker.native.base.parse(raw)
+    need(
+        old.get("schema") == "topolab.v2.m2-source-acquisition-plan.v1"
+        and old.get("execution_identity") == FUNDED_IDENTITY
+        and old.get("source_identity_policy") == SOURCE_IDENTITY_POLICY
+        and old.get("scope") == REHEARSAL_SCOPE
+        and old.get("formal_authority") is False
+        and old.get("root") == str(path.parent)
+        and old.get("source_root") == str(path.parent / "public-source"),
+        "PUBLIC_FUNDED_SOURCE_GRAPH_REQUIRED",
+    )
+    permissions = old.get("binding", {})
+    need(
+        isinstance(permissions, dict)
+        and all(
+            permissions.get(key) is False
+            for key in ("formal_authority", "old_original_access", "target_access", "B_C")
+        ),
+        "PUBLIC_SOURCE_PLAN_PERMISSIONS_REFUSED",
+    )
+    need(
+        not {"public_source_plan", "public_source_plan_sha256"} & set(permissions),
+        "PUBLIC_SOURCE_COPY_CHAIN_REFUSED",
+    )
+    # This prebound historical plan supplies NEW public data provenance only.
+    # The newly prepared plan separately validates the current full authority.
+    checker._content_projection(old)
+    return path, old
+
+
+def copy_public_source(root, source, *, began):
+    helper = base()
+    checker = load("p17_m2_input_export_independent")
+    reader = checker.OnceReader(source, 598, 1024**3, source_identity_checks=True)
+    proof = []
+    relative = None
+    inventory_cursor = None
+    try:
+        paths = []
+        entries_seen = 0
+
+        def inventory(directory, prefix=""):
+            nonlocal entries_seen, inventory_cursor
+            with os.scandir(directory) as entries:
+                for entry in entries:
+                    entries_seen += 1
+                    relative = prefix + entry.name
+                    inventory_cursor = {"path": relative, "raw_stat": None}
+                    need(entries_seen <= 4096, "PUBLIC_SOURCE_NAMESPACE_CAP")
+                    info = entry.stat(follow_symlinks=False)
+                    inventory_cursor["raw_stat"] = {
+                        key: getattr(info, key)
+                        for key in (
+                            "st_dev",
+                            "st_ino",
+                            "st_size",
+                            "st_mtime_ns",
+                            "st_mode",
+                            "st_nlink",
+                        )
+                    }
+                    if stat.S_ISDIR(info.st_mode):
+                        child = os.open(
+                            entry.name,
+                            os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW,
+                            dir_fd=directory,
+                        )
+                        try:
+                            inventory(child, relative + "/")
+                        finally:
+                            os.close(child)
+                    else:
+                        need(
+                            stat.S_ISREG(info.st_mode) and info.st_nlink == 1,
+                            "PUBLIC_SOURCE_FILE_KIND_REFUSED",
+                        )
+                        paths.append(relative)
+                        need(len(paths) <= 598, "EXACT_PUBLIC598_SOURCE_GRAPH_REQUIRED")
+
+        directory = helper.nofollow_directory(source)
+        try:
+            inventory(directory)
+        finally:
+            os.close(directory)
+        need(len(paths) == 598, "EXACT_PUBLIC598_SOURCE_GRAPH_REQUIRED")
+        destination = root / "public-source"
+        destination.mkdir(mode=0o700)
+        for relative in sorted(paths):
+            need(time.monotonic() - began <= 300, "PUBLIC_SOURCE_COPY300_EXHAUSTED")
+            raw = reader.read(relative, 128 * 1024**2)
+            target = destination / relative
+            target.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+            fd = os.open(target, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+            try:
+                view = memoryview(raw)
+                while view:
+                    wrote = os.write(fd, view)
+                    need(wrote > 0, "PUBLIC_SOURCE_COPY_SHORT_WRITE")
+                    view = view[wrote:]
+                os.fsync(fd)
+            finally:
+                os.close(fd)
+            physical = target.stat()
+            original = reader.source_facts[relative]["before"]
+            need(
+                (physical.st_dev, physical.st_ino) != (original["st_dev"], original["st_ino"]),
+                "PUBLIC_SOURCE_COPY_INODE_NOT_INDEPENDENT",
+            )
+            need(
+                helper.sha(target.read_bytes()) == helper.sha(raw),
+                "PUBLIC_SOURCE_COPY_HASH_CHANGED",
+            )
+            proof.append(
+                {
+                    "path": relative,
+                    "sha256": helper.sha(raw),
+                    "byte_size": len(raw),
+                    "destination_identity": checker.source_identity(physical),
+                }
+            )
+        helper.put(
+            root / "public-source-copy.json",
+            {
+                "source_root": str(source),
+                "destination_root": str(destination),
+                "source_observations": reader.observations,
+                "source_facts": reader.source_facts,
+                "copies": proof,
+                "old_original_reads": 0,
+                "formal_authority": False,
+                "wall_seconds": time.monotonic() - began,
+            },
+        )
+    except BaseException as error:
+        failure = {
+            "status": "STOP_PUBLIC_COPY",
+            "error_type": type(error).__name__,
+            "reason": str(error),
+            "source_root": str(source),
+            "current": relative,
+            "inventory_cursor": inventory_cursor,
+            "source_facts": reader.source_facts,
+            "source_observations": reader.observations,
+            "copies": proof,
+            "wall_seconds": time.monotonic() - began,
+            "byte_cap": 1024**3,
+            "file_cap": 598,
+            "old_original_reads": 0,
+            "own_future_exit": "UNKNOWN_PENDING_ACTUAL_OUTER_RETURN",
+            "secondary_errors": [],
+        }
+        try:
+            helper.put(root / "public-source-copy-failure.json", failure)
+        except BaseException as secondary:
+            failure["secondary_errors"].append(
+                {
+                    "stage": "copy failure filing",
+                    "type": type(secondary).__name__,
+                    "reason": str(secondary),
+                }
+            )
+        error.public_copy_failure = failure
+        sys.stderr.buffer.write(helper.canonical(failure))
+        sys.stderr.buffer.flush()
+        raise
+
+
+def prepare_rehearsal(root, *, public_source_plan=None, public_source_plan_sha=None):
     root = rehearsal_root(root)
+    context = None
+    if public_source_plan is not None or public_source_plan_sha is not None:
+        need(
+            root.name.startswith("topolab-public-funded-acquisition-")
+            and public_source_plan is not None
+            and public_source_plan_sha is not None,
+            "PUBLIC_FUNDED_FIXTURE_REUSE_ONLY",
+        )
+        path, context = public_source_plan_context(public_source_plan, public_source_plan_sha)
     helper = base()
     parent = helper.nofollow_directory(root.parent)
     try:
@@ -159,10 +392,18 @@ def prepare_rehearsal(root):
         os.fsync(parent)
     finally:
         os.close(parent)
-    contract, source_identity = load("p17_m2_content_verified_public_fixture").create_sources(
-        root / "public-source", load("p17_m2_input_export_independent")
-    )
+    if context is None:
+        contract, source_identity = load("p17_m2_content_verified_public_fixture").create_sources(
+            root / "public-source", load("p17_m2_input_export_independent")
+        )
+    else:
+        copy_public_source(root, Path(context["source_root"]), began=time.monotonic())
+        contract, source_identity = context["content_contract"], context["public_source_identity"]
     plan = make_plan(root, contract, source_identity)
+    if context is not None:
+        plan["binding"].update(
+            public_source_plan=str(path), public_source_plan_sha256=public_source_plan_sha
+        )
     helper.put(root / "plan.json", plan)
     began = time.monotonic()
     initial_lease(root, plan)
@@ -234,7 +475,7 @@ def local_filesystem(descriptor):
 
 def setup_formal(plan, readiness):
     """Future-only unique setup; authority has already passed before target traversal."""
-    need(EXECUTION_AUTHORITY_RAW is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
+    need(authority_for_root(plan["root"])[0] is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
     helper = base()
     root, backup = Path(plan["root"]), Path(plan["backup_root"])
     parent = root.parent
@@ -338,8 +579,9 @@ def checked_setup(root, plan):
         "SETUP_BINDING_CHANGED",
     )
     if plan["formal_authority"]:
-        need(EXECUTION_AUTHORITY_RAW is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
-        authority = load("p17_m2_input_export").parse(EXECUTION_AUTHORITY_RAW)
+        authority_raw, _ = authority_for_root(root)
+        need(authority_raw is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
+        authority = load("p17_m2_input_export").parse(authority_raw)
         readiness = proof["readiness"]
         need(
             readiness["actors"] == authority["actors"]
@@ -357,15 +599,16 @@ def checked_setup(root, plan):
     return proof
 
 
-def formal_plan(authority_raw):
+def formal_plan(authority_raw, *, attempt=1):
     """Pure, software-only formal metadata. Constructing it grants no target access."""
     helper = base()
     authority = load("p17_m2_input_export").parse(authority_raw)
     proposal_raw = (REPO / PROPOSAL).read_bytes()
     proposal = json.loads(proposal_raw)
+    funded = authority.get("schema") == "topolab.v2.m2-funded-acquisition-authority.v1"
     need(
-        authority["schema"] == "topolab.v2.m2-source-acquisition-execution-authority.v1"
-        and authority["execution_identity"] == IDENTITY
+        (funded or authority["schema"] == "topolab.v2.m2-source-acquisition-execution-authority.v1")
+        and authority["execution_identity"] == (FUNDED_IDENTITY if funded else IDENTITY)
         and authority["proposal_sha256"] == helper.sha(proposal_raw)
         and isinstance(authority["owner_approval_reference"], str)
         and bool(authority["owner_approval_reference"].strip())
@@ -382,7 +625,16 @@ def formal_plan(authority_raw):
         and authority["result_seconds"] == {"exporter": 7200, "independent": 7200},
         "FORMAL_EXECUTION_AUTHORITY_INVALID",
     )
-    root = Path(proposal["target_proposal_only"]["generation"])
+    need(
+        type(attempt) is int and attempt in ((1, 2) if funded else (1,)),
+        "UNREGISTERED_FORMAL_ATTEMPT",
+    )
+    target = (
+        authority["fixed_target"]["attempts"][str(attempt)]
+        if funded
+        else proposal["target_proposal_only"]
+    )
+    root = Path(target["generation"])
     contract = json.loads(
         (REPO / "docs/planning/p17_m2_input_export_preparation_proposal.json").read_bytes()
     )
@@ -395,7 +647,7 @@ def formal_plan(authority_raw):
         scope=FORMAL_SCOPE,
         formal_authority=True,
         source_root=proposal["source_whitelist"]["original_root_literal"],
-        backup_root=proposal["target_proposal_only"]["backup"],
+        backup_root=target["backup"],
         source_identity=identity,
         contract_sha256=execution_sha,
     )
@@ -405,13 +657,93 @@ def formal_plan(authority_raw):
         target_access=True,
         execution_protocol_sha256=execution_sha,
     )
-    plan["source_tree"][EXECUTION_PROTOCOL] = execution_sha
+    protocol_path = FUNDED_PROTOCOL if funded else EXECUTION_PROTOCOL
+    plan["source_tree"][protocol_path] = execution_sha
+    if funded:
+        plan.update(
+            execution_identity=FUNDED_IDENTITY,
+            source_identity_policy=SOURCE_IDENTITY_POLICY,
+            preparation_contract_sha256=execution_sha,
+        )
+        plan["binding"].update(
+            authority_protocol_path=FUNDED_PROTOCOL,
+            formal_attempt=attempt,
+            source_identity_policy=SOURCE_IDENTITY_POLICY,
+            preparation_protocol_sha256=execution_sha,
+        )
     return plan
 
 
 def activation_readiness(authority):
     """Before target IO: distinct appointments, immutable evidence refs and actual clean-main CI."""
+    funded = authority.get("execution_identity") == FUNDED_IDENTITY
+    if funded:
+        need(
+            authority.get("readiness_freeze_state") == "REVIEWED_FROZEN",
+            "FUNDED_READINESS_NOT_FROZEN",
+        )
+        need(
+            authority.get("preparation_closure_paths")
+            == [
+                "/Users/keith1117/Documents/TopoLab-data/"
+                "p17-m2-hash-bound-custody-20261026-results/publication-closure.json",
+                "/private/tmp/topolab-hash-bound-custody-20261026-results-backup/"
+                "publication-closure.json",
+            ]
+            and authority.get("preparation_closure_sha256")
+            == "0636d0713cfa15840516b8aff20d904ec09be7577cfdfdafcb416c375a97e314",
+            "EXACT_PREPARATION_CLOSURES_REQUIRED",
+        )
+        need(
+            authority.get("independent_preflight_path")
+            == "/private/tmp/topolab-funded-continuation-20261026/independent/"
+            "preflight-remedy2.json",
+            "EXACT_INDEPENDENT_PREFLIGHT_PATH_REQUIRED",
+        )
+        began = datetime.fromisoformat(
+            authority["budget"]["clock_start_utc"].replace("Z", "+00:00")
+        )
+        need(
+            0 <= time.time() - began.timestamp() <= authority["outer_wall_seconds"] - 4500 - 7200,
+            "FUNDED_COMPLETE_SOURCE_AND_RESULT_SUFFIX_UNAVAILABLE",
+        )
+        frozen = {k: v for k, v in source_freeze().items() if k != FUNDED_PROTOCOL}
+        need(
+            authority.get("published_source_sha256") == frozen,
+            "PUBLISHED_IMPLEMENTATION_SOURCE_CHANGED",
+        )
+        checker = load("p17_m2_source_acquisition_independent")
+        preflight_raw = checker.native._software_bytes(
+            Path(authority["independent_preflight_path"])
+        )
+        need(
+            base().sha(preflight_raw) == authority["independent_preflight_sha256"],
+            "INDEPENDENT_PREFLIGHT_HASH_CHANGED",
+        )
+        preflight = checker.native.base.parse(preflight_raw)
+        actual_runtime = base().runtime()
+        need(
+            preflight.get("status") == "PASS_PUBLIC_METADATA_LAUNCH_PREFLIGHT"
+            and preflight.get("execution_identity") == FUNDED_IDENTITY
+            and preflight.get("actors") == authority["actors"]
+            and preflight.get("published_source_sha256") == frozen
+            and all(
+                preflight.get("runtime", {}).get(k) == v
+                for k, v in actual_runtime.items()
+                if k != "orig_argv"
+            ),
+            "INDEPENDENT_ACTUAL_PREFLIGHT_REQUIRED",
+        )
+        paths = authority.get("preparation_closure_paths", [])
+        need(len(paths) == 2 and len(set(paths)) == 2, "INDEPENDENT_PREPARATION_CLOSURES_REQUIRED")
+        for path in paths:
+            need(
+                base().sha(checker.native._software_bytes(Path(path)))
+                == authority["preparation_closure_sha256"],
+                "PREPARATION_CLOSURE_CHANGED",
+            )
     actors = authority.get("actors", {})
+    implementation_key = "implementation_base_commit" if funded else "implementation_commit"
     need(
         set(actors) == {"executor", "independent"}
         and all(isinstance(v, str) and v.strip() for v in actors.values())
@@ -420,8 +752,8 @@ def activation_readiness(authority):
             isinstance(authority.get(k), str) and re.fullmatch(r"[0-9a-f]{64}", authority[k])
             for k in ("preparation_closure_sha256", "independent_preflight_sha256")
         )
-        and isinstance(authority.get("implementation_commit"), str)
-        and re.fullmatch(r"[0-9a-f]{40}", authority["implementation_commit"]),
+        and isinstance(authority.get(implementation_key), str)
+        and re.fullmatch(r"[0-9a-f]{40}", authority[implementation_key]),
         "FROZEN_ACTIVATION_READINESS_REQUIRED",
     )
 
@@ -436,7 +768,7 @@ def activation_readiness(authority):
 
     need(github("commits/main")["sha"] == head, "EXACT_MERGED_MAIN_REQUIRED")
     for name, expected in source_freeze().items():
-        if name != EXECUTION_PROTOCOL:
+        if not funded and name != EXECUTION_PROTOCOL:
             need(
                 base().sha(
                     command(["git", "show", authority["implementation_commit"] + ":" + name])
@@ -483,16 +815,31 @@ def activation_readiness(authority):
 
 
 def activate_formal(root):
-    # The finite new grant has no funded complete result suffix. Do not try a prefix.
-    if Path(root).name in ("p17-m2-local-input-version-v3-hash-bound-20261026",
-                           "p17-m2-local-input-version-v4-hash-bound-20261026"):
+    # Earlier preparation-only grants closed without a funded complete suffix.
+    if Path(root).name in (
+        "p17-m2-local-input-version-v3-hash-bound-20261026",
+        "p17-m2-local-input-version-v4-hash-bound-20261026",
+    ):
         raise ValueError("FORMAL_CLOSED_RESULT_RESERVE_UNFUNDED")
     # An approved preparation/public PASS is never a scientific access grant.
-    need(EXECUTION_AUTHORITY_RAW is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
-    authority = load("p17_m2_input_export").parse(EXECUTION_AUTHORITY_RAW)
-    readiness = activation_readiness(authority)
-    plan = formal_plan(EXECUTION_AUTHORITY_RAW)
+    authority_raw, attempt = authority_for_root(root)
+    need(authority_raw is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
+    authority = load("p17_m2_input_export").parse(authority_raw)
+    need(
+        not (authority.get("execution_identity") == FUNDED_IDENTITY and attempt == 2),
+        "NEW_FROZEN_REMEDY_REQUIRED",
+    )
+    readiness = None
+    if authority.get("execution_identity") != FUNDED_IDENTITY:
+        # Preserve the legacy readiness refusal before constructing a plan.
+        readiness = activation_readiness(authority)
+    plan = formal_plan(authority_raw, attempt=attempt)
     need(str(root) == plan["root"], "FORMAL_LITERAL_ROOT_REQUIRED")
+    load("p17_m2_source_acquisition_independent").validate_binding(plan)
+    if readiness is None:
+        readiness = activation_readiness(authority)
+    # The metadata draft has performed no formal IO. T0 follows completed gates.
+    plan = formal_plan(authority_raw, attempt=attempt)
     load("p17_m2_source_acquisition_independent").validate_binding(plan)
     return setup_formal(plan, readiness)
 
@@ -500,12 +847,19 @@ def activate_formal(root):
 def checked(root, expected):
     helper = base()
     literal = Path(os.path.abspath(root))
-    if literal.name.startswith(("topolab-public-formal-binding-", "topolab-public-hash-bound-")):
+    if literal.name.startswith(
+        (
+            "topolab-public-formal-binding-",
+            "topolab-public-hash-bound-",
+            "topolab-public-funded-acquisition-",
+        )
+    ):
         root = rehearsal_root(literal)
         scope = REHEARSAL_SCOPE
     else:
-        need(EXECUTION_AUTHORITY_RAW is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
-        declared = formal_plan(EXECUTION_AUTHORITY_RAW)
+        authority_raw, attempt = authority_for_root(literal)
+        need(authority_raw is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
+        declared = formal_plan(authority_raw, attempt=attempt)
         load("p17_m2_source_acquisition_independent").validate_binding(declared)
         need(str(literal) == declared["root"], "FORMAL_LITERAL_ROOT_REQUIRED")
         root, scope = literal, FORMAL_SCOPE
@@ -514,8 +868,16 @@ def checked(root, expected):
     need(
         plan["root"] == str(root)
         and plan["scope"] == scope
-        and plan["execution_identity"] == (COMPAT_IDENTITY
-             if literal.name.startswith("topolab-public-hash-bound-") else IDENTITY)
+        and plan["execution_identity"]
+        == (
+            declared["execution_identity"]
+            if scope == FORMAL_SCOPE
+            else FUNDED_IDENTITY
+            if literal.name.startswith("topolab-public-funded-acquisition-")
+            else COMPAT_IDENTITY
+            if literal.name.startswith("topolab-public-hash-bound-")
+            else IDENTITY
+        )
         and plan["formal_authority"] is (scope == FORMAL_SCOPE),
         "ACQUISITION_BINDING_CHANGED",
     )
@@ -540,8 +902,17 @@ class AcquisitionTransport:
 
     @property
     def identity(self):
-        return (COMPAT_IDENTITY if self.root.name.startswith("topolab-public-hash-bound-")
-                else IDENTITY)
+        if self.root.name.startswith("topolab-public-funded-acquisition-"):
+            return FUNDED_IDENTITY
+        if (
+            self.scope == FORMAL_SCOPE
+            and authority_for_root(self.root)[0] is FUNDED_AUTHORITY_RAW
+            and FUNDED_AUTHORITY_RAW is not None
+        ):
+            return FUNDED_IDENTITY
+        return (
+            COMPAT_IDENTITY if self.root.name.startswith("topolab-public-hash-bound-") else IDENTITY
+        )
 
     @property
     def result_windows(self):
@@ -549,7 +920,9 @@ class AcquisitionTransport:
 
     @property
     def source_identity_policy(self):
-        return SOURCE_IDENTITY_POLICY if self.identity == COMPAT_IDENTITY else None
+        return (
+            SOURCE_IDENTITY_POLICY if self.identity in (COMPAT_IDENTITY, FUNDED_IDENTITY) else None
+        )
 
     def argv_for(self, root, mode, plan_sha, role):
         return argv_for(root, mode, plan_sha, role, reader_role=self.reader_role)
@@ -559,6 +932,118 @@ class AcquisitionTransport:
             self.root, additional_bytes=len(base().canonical(value)), additional_files=1
         )
         return base().put(path, value)
+
+    def sampler_put(self, path, helper):
+        """Compact only completed NEW native sampler outputs, retaining every byte."""
+        match = re.fullmatch(r"sampler-(\d+)\.json", path.name)
+        if match is None:
+            if path.name == "command.json":
+                helper["sampler_evidence_storage"] = "topolab.source-sampler-evidence.v1"
+                try:
+                    raw = self.independent().native._software_bytes(
+                        path.parent / "sampler-evidence.jsonl"
+                    )
+                    helper["sampler_journal_sha256"] = base().sha(raw)
+                except Exception as error:
+                    # A missing or unsafe journal cannot admit resources. Keep
+                    # the actual primary command result and every failure field.
+                    helper["sampler_journal_sha256"] = None
+                    helper["sampler_journal_binding_failure"] = {
+                        "type": type(error).__name__, "reason": str(error),
+                    }
+                    if helper.get("software_result") == "PUBLIC_COMMAND_EXIT_OBSERVED":
+                        helper["software_result"] = "RESOURCE_UNKNOWN_STOP"
+            return self.put(path, helper)
+        index = int(match[1])
+        profile = path.parent / f"sampler-{index}.time"
+        parent = base().nofollow_directory(path.parent)
+        descriptor = journal_fd = -1
+        try:
+            descriptor = os.open(
+                profile.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=parent
+            )
+            before = os.fstat(descriptor)
+            need(
+                stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+                and 0 < before.st_size <= 4 * 1024**2,
+                "SAMPLER_PROFILE_REGULAR_BOUNDED_REQUIRED",
+            )
+            chunks = bytearray()
+            while len(chunks) <= before.st_size:
+                chunk = os.read(descriptor, min(65536, before.st_size + 1 - len(chunks)))
+                if not chunk:
+                    break
+                chunks.extend(chunk)
+            raw = bytes(chunks)
+            need(
+                len(raw) == before.st_size
+                and base().physical(before) == base().physical(os.fstat(descriptor))
+                == base().physical(os.stat(profile.name, dir_fd=parent, follow_symlinks=False)),
+                "SAMPLER_PROFILE_IDENTITY_OR_LENGTH_CHANGED",
+            )
+            need(
+                helper.get("profile") == profile.name
+                and helper.get("role") == f"rss-sampler-{index}"
+                and helper.get("profile_sha256") == base().sha(raw),
+                "SAMPLER_PROFILE_HASH_OR_IDENTITY_CHANGED",
+            )
+            row = {
+                "schema": "topolab.source-sampler-evidence.v1", "index": index,
+                "helper": helper, "profile_base64": base64.b64encode(raw).decode("ascii"),
+                "profile_identity": base().physical(before),
+            }
+            encoded = base().canonical(row)
+            self.namespace_check(self.root, additional_bytes=len(encoded), additional_files=1)
+            journal_fd = os.open(
+                "sampler-evidence.jsonl", os.O_WRONLY | os.O_APPEND | os.O_CREAT
+                | os.O_NOFOLLOW | os.O_NONBLOCK, 0o600, dir_fd=parent,
+            )
+            journal_before = os.fstat(journal_fd)
+            need(
+                stat.S_ISREG(journal_before.st_mode) and journal_before.st_nlink == 1
+                and stat.S_IMODE(journal_before.st_mode) == 0o600,
+                "SAMPLER_JOURNAL_PRIVATE_REGULAR_REQUIRED",
+            )
+            need(os.write(journal_fd, encoded) == len(encoded), "SAMPLER_JOURNAL_SHORT_APPEND")
+            os.fsync(journal_fd)
+            journal_after = os.fstat(journal_fd)
+            need(
+                journal_after.st_size == journal_before.st_size + len(encoded)
+                and (journal_after.st_dev, journal_after.st_ino)
+                == (journal_before.st_dev, journal_before.st_ino)
+                and base().physical(journal_after)
+                == base().physical(os.stat(
+                    "sampler-evidence.jsonl", dir_fd=parent, follow_symlinks=False)),
+                "SAMPLER_JOURNAL_CLOSING_OBSERVATION_CHANGED",
+            )
+            os.fsync(parent)
+            need(
+                base().physical(before)
+                == base().physical(os.stat(profile.name, dir_fd=parent, follow_symlinks=False)),
+                "SAMPLER_PROFILE_CLOSING_OBSERVATION_CHANGED",
+            )
+            # The exact native profile is durably retained above before this owned
+            # transient is removed. A failure leaves it and the completed prefix.
+            os.unlink(profile.name, dir_fd=parent)
+            os.fsync(parent)
+            return base().physical(journal_after)
+        except BaseException as error:
+            try:
+                self.put(path, dict(helper, sampler_journal_failure={
+                    "type": type(error).__name__, "reason": str(error),
+                }))
+            except BaseException as secondary:
+                error.add_note("sampler fallback retention failed: " + repr(secondary))
+            raise
+        finally:
+            if descriptor >= 0:
+                os.close(descriptor)
+            if journal_fd >= 0:
+                os.close(journal_fd)
+            os.close(parent)
+
+    def helper_profiles_reader(self, folder, record):
+        return self.independent().sampler_profiles(folder, record)
 
     def native_module(self, root=None):
         native = base().native_module()
@@ -570,7 +1055,7 @@ class AcquisitionTransport:
                 return snapshot(*args, **kwargs)
 
             native._snapshot = bounded
-            native.atomic_new = self.put
+            native.atomic_new = self.sampler_put
         return native
 
     def namespace_check(
@@ -580,13 +1065,16 @@ class AcquisitionTransport:
             return base().namespace_check(
                 root, additional_bytes=additional_bytes, additional_files=additional_files
             )
-        need(EXECUTION_AUTHORITY_RAW is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
-        proposal = json.loads((REPO / PROPOSAL).read_bytes())
-        need(
-            str(root) == proposal["target_proposal_only"]["generation"],
-            "FORMAL_LITERAL_ROOT_REQUIRED",
-        )
-        backup = Path(proposal["target_proposal_only"]["backup"])
+        authority_raw, attempt = authority_for_root(root)
+        need(authority_raw is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
+        if FUNDED_AUTHORITY_RAW is not None and authority_raw is FUNDED_AUTHORITY_RAW:
+            declared = formal_plan(authority_raw, attempt=attempt)
+            generation, backup_name = declared["root"], declared["backup_root"]
+        else:
+            proposal = json.loads((REPO / PROPOSAL).read_bytes())["target_proposal_only"]
+            generation, backup_name = proposal["generation"], proposal["backup"]
+        need(str(root) == generation, "FORMAL_LITERAL_ROOT_REQUIRED")
+        backup = Path(backup_name)
         main = base().namespace_check(root)
         directory = base().nofollow_directory(backup.parent)
         try:
@@ -862,22 +1350,35 @@ def verify_retained_evidence(root, manifest_raw, expected_manifest_sha256):
     This does not acquire a lease or authorize any old-original access.
     """
     helper = base()
-    need(len(manifest_raw) <= 2 * 1024**2
-         and re.fullmatch(r"[0-9a-f]{64}", expected_manifest_sha256) is not None
-         and helper.sha(manifest_raw) == expected_manifest_sha256, "CUSTODY_MANIFEST_SHA")
+    need(
+        len(manifest_raw) <= 2 * 1024**2
+        and re.fullmatch(r"[0-9a-f]{64}", expected_manifest_sha256) is not None
+        and helper.sha(manifest_raw) == expected_manifest_sha256,
+        "CUSTODY_MANIFEST_SHA",
+    )
     manifest = load("p17_m2_input_export").parse(manifest_raw)
-    need(set(manifest) == {"members"} and isinstance(manifest["members"], list)
-         and 0 < len(manifest["members"]) <= 4096, "CUSTODY_MANIFEST_MEMBERS")
+    need(
+        set(manifest) == {"members"}
+        and isinstance(manifest["members"], list)
+        and 0 < len(manifest["members"]) <= 4096,
+        "CUSTODY_MANIFEST_MEMBERS",
+    )
     rows = manifest["members"]
-    need(all(set(row) == {"path", "byte_size", "sha256"} for row in rows),
-         "CUSTODY_MANIFEST_FIELDS")
+    need(
+        all(set(row) == {"path", "byte_size", "sha256"} for row in rows), "CUSTODY_MANIFEST_FIELDS"
+    )
     expected, directories = set(), set()
     for row in rows:
         name = row["path"]
         need(isinstance(name, str) and len(name) <= 1024, "CUSTODY_LITERAL_PATH")
         parts = Path(name)
-        need(not parts.is_absolute() and name == parts.as_posix()
-             and name not in ("", ".") and ".." not in parts.parts, "CUSTODY_LITERAL_PATH")
+        need(
+            not parts.is_absolute()
+            and name == parts.as_posix()
+            and name not in ("", ".")
+            and ".." not in parts.parts,
+            "CUSTODY_LITERAL_PATH",
+        )
         expected.add(name)
         directories.update(str(parent) for parent in parts.parents if str(parent) != ".")
     need(len(expected) == len(rows), "CUSTODY_DUPLICATE_MEMBER")
@@ -890,8 +1391,10 @@ def verify_retained_evidence(root, manifest_raw, expected_manifest_sha256):
 
         def visit(fd, prefix):
             info = os.fstat(fd)
-            need(info.st_uid == os.geteuid() and not info.st_mode & 0o022,
-                 "CUSTODY_UNTRUSTED_DIRECTORY")
+            need(
+                info.st_uid == os.geteuid() and not info.st_mode & 0o022,
+                "CUSTODY_UNTRUSTED_DIRECTORY",
+            )
             modes[prefix or "."] = stat.S_IMODE(info.st_mode)
             with os.scandir(fd) as entries:
                 for entry_name in entries:
@@ -901,18 +1404,26 @@ def verify_retained_evidence(root, manifest_raw, expected_manifest_sha256):
                     if stat.S_ISDIR(entry.st_mode):
                         need(relative in directories, "CUSTODY_EXACT_WHITELIST_DIRECTORY")
                         child = os.open(
-                            name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+                            name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd
+                        )
                         try:
                             visit(child, relative + "/")
                         finally:
                             os.close(child)
                     else:
-                        need(relative in expected and len(names) < len(rows),
-                             "CUSTODY_EXACT_WHITELIST")
-                        need(stat.S_ISREG(entry.st_mode) and entry.st_nlink == 1
-                             and entry.st_uid == os.geteuid() and not entry.st_mode & 0o022,
-                             "CUSTODY_UNTRUSTED_MEMBER")
+                        need(
+                            relative in expected and len(names) < len(rows),
+                            "CUSTODY_EXACT_WHITELIST",
+                        )
+                        need(
+                            stat.S_ISREG(entry.st_mode)
+                            and entry.st_nlink == 1
+                            and entry.st_uid == os.geteuid()
+                            and not entry.st_mode & 0o022,
+                            "CUSTODY_UNTRUSTED_MEMBER",
+                        )
                         names.add(relative)
+
         try:
             before = os.fstat(directory)
             visit(directory, "")
@@ -923,17 +1434,26 @@ def verify_retained_evidence(root, manifest_raw, expected_manifest_sha256):
     names, identity = inventory()
     need(names == expected, "CUSTODY_EXACT_WHITELIST")
     reader = load("p17_m2_input_export_independent").OnceReader(
-        root, len(rows), 2 * 1024**3, source_identity_checks=True,
-        source_identity_policy=SOURCE_IDENTITY_POLICY)
+        root,
+        len(rows),
+        2 * 1024**3,
+        source_identity_checks=True,
+        source_identity_policy=SOURCE_IDENTITY_POLICY,
+    )
     for row in rows:
-        need(type(row["byte_size"]) is int and 0 < row["byte_size"] <= 1024**3,
-             "CUSTODY_MEMBER_BYTE_CAP")
-        reader.read(row["path"], row["byte_size"], sha256=row["sha256"],
-                    byte_size=row["byte_size"])
+        need(
+            type(row["byte_size"]) is int and 0 < row["byte_size"] <= 1024**3,
+            "CUSTODY_MEMBER_BYTE_CAP",
+        )
+        reader.read(row["path"], row["byte_size"], sha256=row["sha256"], byte_size=row["byte_size"])
     need(inventory() == (expected, identity), "CUSTODY_INVENTORY_CHANGED")
-    return {"manifest_sha256": expected_manifest_sha256, "members": reader.table,
-            "observations": reader.observations, "directory_modes": modes,
-            "continuous_immutability_claim": False}
+    return {
+        "manifest_sha256": expected_manifest_sha256,
+        "members": reader.table,
+        "observations": reader.observations,
+        "directory_modes": modes,
+        "continuous_immutability_claim": False,
+    }
 
 
 def main():
@@ -957,7 +1477,14 @@ def main():
     parser.add_argument("--plan-sha")
     parser.add_argument("--role")
     parser.add_argument("--reader-role", default="scientific-producer")
+    parser.add_argument("--public-source-plan", type=Path)
+    parser.add_argument("--public-source-plan-sha")
     args = parser.parse_args()
+    need(
+        args.mode == "prepare-rehearsal"
+        or (args.public_source_plan is None and args.public_source_plan_sha is None),
+        "PUBLIC_PREPARE_ARGUMENTS_ONLY",
+    )
     need(Path.cwd() == REPO, "ACTUAL_WORKING_DIRECTORY_CHANGED")
     os.umask(0o077)
     if args.mode == "activate-formal":
@@ -980,7 +1507,11 @@ def main():
         result = activate_formal(args.root)
     elif args.mode == "prepare-rehearsal":
         need(args.plan_sha is None and args.role is None, "SETUP_ROLE_FORBIDDEN")
-        result = prepare_rehearsal(args.root)
+        result = prepare_rehearsal(
+            args.root,
+            public_source_plan=args.public_source_plan,
+            public_source_plan_sha=args.public_source_plan_sha,
+        )
     else:
         root, plan = checked(args.root, args.plan_sha)
         transport = AcquisitionTransport(root, args.plan_sha, args.reader_role, plan["scope"])

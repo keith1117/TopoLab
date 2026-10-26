@@ -17,15 +17,17 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Current owner-authorized action: [hash-bound source/custody software](docs/planning/p17_m2_hash_bound_acquisition_protocol.md)
-and [actual frontier](docs/validation/p17_m2_hash_bound_acquisition.md). Continuous
-four-task scheduling is authorized, but the executor's initial result1200 cannot
-meet unchanged4860 filing reserve, so new formal/remedy stay unlaunched and no
-old source/target IO occurs. C FULL14580 proposal also exceeds conditional1200;
-B/C remain unadmitted. Complete funded public software/review/checks/protected
-PR/main CI/retention within original caps. Do not extend caps or transfer closed
-balances. FixedP17 remains unrepaired; old strict identity and all historical
-failures/costs/quotas/seals remain. Earlier paragraphs retain historical scope.
+Current owner-authorized action: [funded continuous acquisition and conditional M2](docs/planning/p17_m2_funded_acquisition_protocol.md)
+and [actual frontier](docs/validation/p17_m2_funded_acquisition.md). The owner's
+later explicit automatic-expansion instruction prospectively registers a finite
+36h wall /54 author-hour envelope from the unchanged start. This action overrides
+one-slice scheduling stops; continue through source acceptance, B and fixed C
+when every dependency passes. New formal/remedy calls require the published
+freeze, different-author review, all checks and exact-head/main CI, real resource
+and lease/return evidence. No old original/target IO before those gates. Old
+closed allowances never transfer; old strict defaults and scientific gates stay.
+Fixed P/17 remains unrepaired until actual independent numerical acceptance.
+All following dated closures retain their historical authority and deadlines.
 
 Read the [frozen source-acquisition authority](docs/planning/p17_m2_source_acquisition_execution_protocol.md)
 and [actual STOP result](docs/validation/p17_m2_source_acquisition_execution.md).

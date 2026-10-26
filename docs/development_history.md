@@ -2417,3 +2417,18 @@ funding1200 cannot meet existing4860 reserve; formal/remedy unlaunched, no sourc
 or target IO, input unaccepted. Conditional C funding is below full14580 proposal;
 no B/C or P17 repair. Finish checks/review/protected publication and actual
 retention within the original hard caps; no automatic budget extension.
+
+
+## 2026-10-26 — Fund complete acquisition and the conditional fixed M2 executable
+
+The owner prospectively expands the unstarted continuation, preserving its first
+clock and all closed historical costs/quotas. [New protocol](planning/p17_m2_funded_acquisition_protocol.md)
+registers complete source/result suffixes, exact old-source reads and finite
+engineering remedies. [Executable/public frontier](validation/p17_m2_funded_acquisition.md)
+adds the actual fixed18-reference/342-query producer, distinct numerical/resource
+checker and real reader/native-return controls. New public physics and strict
+caller/startup regressions retain every failed attempt; no rule loosening or
+old-file reread. Finish publication and actual acquisition, then input-bound B/C
+when dependencies pass, under the continuous owner instruction. Input/B/C/P17
+acceptance remain separate measured outcomes; uniform/default, historical
+all-paid FAIL and every old seal retain scope.
