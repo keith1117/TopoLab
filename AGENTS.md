@@ -17,31 +17,22 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Current owner-authorized action: [funded continuous acquisition and conditional M2](docs/planning/p17_m2_funded_acquisition_protocol.md)
-and [actual frontier](docs/validation/p17_m2_funded_acquisition.md). The owner's
-later explicit automatic-expansion instruction prospectively registers a finite
-36h wall envelope from the unchanged start. The finite v11 software-only
-supplement raises aggregate author funding to61h before the main-CI remedy;
-all original spent seconds, closed balances and formal/scientific caps remain.
-Main4f6c04b8 CI40419356298 failed a NEW-public shared payload; formal entry stays
-closed pending the completed bounded repair, fresh independent public acceptance
-and normal complete publication. PUBLIC10 stopped on caller producer541/auditor1069
-mismatch; PUBLIC11 prepare then correctly refused a chained public origin. Both
-failures/costs remain. The final caller remedy PUBLIC12 passed32 actual commands, the full auditor
-view and ACK/lease release. Its418.126s/900 phase is closed; global61h and the
-consumed namespace fix rounds stay fixed. Final readiness is frozen atdf3de651;
-all five checks passed2949/1. Protected exact-head/main publication and NEW
-retention still precede any formal source/target IO. Prospective unspent reallocation v11c leaves root
-software cap41280 (03:56Z deadline) and reserves7560s for each scientific result
-suffix, within the same61h total; no closed balance transfers.
-This action overrides
-one-slice scheduling stops; continue through source acceptance, B and fixed C
-when every dependency passes. New formal/remedy calls require the published
-freeze, different-author review, all checks and exact-head/main CI, real resource
-and lease/return evidence. No old original/target IO before those gates. Old
-closed allowances never transfer; old strict defaults and scientific gates stay.
-Fixed P/17 remains unrepaired until actual independent numerical acceptance.
-All following dated closures retain their historical authority and deadlines.
+Current continuous action: [actual source1 zero-role STOP and reserved source2 remedy](docs/validation/p17_m2_source2_orchestration_remedy.md)
+and [separate prospective authority](docs/planning/p17_m2_funded_acquisition_remedy2_protocol.md).
+PR226/mainf36b74b4 and all-four exact-main CI40435596767 passed. Attempt1
+setup returned0 but its caller300s prelude expired before first-role dispatch;
+formal roles/original stat-reads0, no accepted input/native shared T_result.
+V5/HELD stays isolated. Complete the registered external failure-result closeout,
+paired minimal public-only remedy, different-author review, all checks and normal
+protected exact-head/main publication before reserved literal v6. Source2 uses
+new prospective caller5400/each-author12600; native4500/FULL3600/result7200,
+40/558/1071 and once-per-file quotas remain. One finite v12 ceiling235800 author
+seconds keeps the original36h start and every closed balance/cost. Original df3
+protocol bytes stay frozen. Continue after actual source acceptance and result
+closure to input-bound scientific contract, B then fixed C when all Gates pass.
+P/17 remains unrepaired; uniform/default, historical all-paid FAIL,4GiB,
+scientific thresholds, old UNKNOWN/seals and fixed models remain. The owner
+expressly overrides one-slice scheduling stops for this continuous action.
 
 Read the [frozen source-acquisition authority](docs/planning/p17_m2_source_acquisition_execution_protocol.md)
 and [actual STOP result](docs/validation/p17_m2_source_acquisition_execution.md).

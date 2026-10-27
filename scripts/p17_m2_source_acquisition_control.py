@@ -5,6 +5,7 @@ import base64
 import ctypes
 import importlib.util
 import json
+import math
 import os
 import re
 import stat
@@ -21,6 +22,8 @@ COMPAT_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v1"
 COMPAT_PROTOCOL = "docs/planning/p17_m2_hash_bound_acquisition_protocol.json"
 FUNDED_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v2"
 FUNDED_PROTOCOL = "docs/planning/p17_m2_funded_acquisition_protocol.json"
+REMEDY_PROTOCOL = "docs/planning/p17_m2_funded_acquisition_remedy2_protocol.json"
+REMEDY_SCHEMA = "topolab.v2.m2-funded-acquisition-remedy-authority.v1"
 SOURCE_IDENTITY_POLICY = "topolab.source-identity.prebound-sha256.v1"
 REHEARSAL_SCOPE = "FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY"
 FORMAL_SCOPE = "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY"
@@ -69,9 +72,25 @@ except FileNotFoundError:
     FUNDED_AUTHORITY_RAW = None
 
 
+try:
+    REMEDY_AUTHORITY_RAW = load("p17_m2_source_acquisition_independent").native._software_bytes(
+        REPO / REMEDY_PROTOCOL
+    )
+except FileNotFoundError:
+    REMEDY_AUTHORITY_RAW = None
+
+
+def is_funded_authority(raw):
+    return raw is not None and (raw is FUNDED_AUTHORITY_RAW or raw is REMEDY_AUTHORITY_RAW)
+
+
 def authority_for_root(root):
     """Select only registered literals before any source or custody traversal."""
     literal = str(Path(os.path.abspath(root)))
+    if (REMEDY_AUTHORITY_RAW is not None and literal ==
+            "/Users/keith1117/Library/Application Support/TopoLab-custody/"
+            "p17-m2-local-input-version-v6-hash-bound-20261026"):
+        return REMEDY_AUTHORITY_RAW, 2
     if FUNDED_AUTHORITY_RAW is not None:
         # Literal routing is memory-only; full strict parsing precedes any setup.
         authority = json.loads(FUNDED_AUTHORITY_RAW)
@@ -104,6 +123,8 @@ def source_freeze():
         paths.add(REPO / COMPAT_PROTOCOL)
     if (REPO / FUNDED_PROTOCOL).is_file():
         paths.add(REPO / FUNDED_PROTOCOL)
+    if (REPO / REMEDY_PROTOCOL).is_file():
+        paths.add(REPO / REMEDY_PROTOCOL)
     return {str(p.relative_to(REPO)): base().sha(p.read_bytes()) for p in sorted(paths)}
 
 
@@ -147,7 +168,9 @@ def make_plan(root, contract, source_identity):
     end = datetime.fromtimestamp(now + 4500, UTC).isoformat(timespec="milliseconds")
     funded = root.name.startswith("topolab-public-funded-acquisition-")
     compat = funded or root.name.startswith("topolab-public-hash-bound-")
-    protocol_path = FUNDED_PROTOCOL if funded else COMPAT_PROTOCOL if compat else PROTOCOL
+    remedy = root.name.startswith("topolab-public-funded-acquisition-remedy2-")
+    protocol_path = (REMEDY_PROTOCOL if remedy else FUNDED_PROTOCOL if funded
+                     else COMPAT_PROTOCOL if compat else PROTOCOL)
     protocol_sha = helper.sha((REPO / protocol_path).read_bytes())
     proposal_sha = helper.sha((REPO / PROPOSAL).read_bytes())
     return {
@@ -177,7 +200,7 @@ def make_plan(root, contract, source_identity):
             "target_access": False,
             "B_C": False,
             **({"source_identity_policy": SOURCE_IDENTITY_POLICY} if compat else {}),
-            **({"authority_protocol_path": FUNDED_PROTOCOL} if funded else {}),
+            **({"authority_protocol_path": protocol_path} if funded else {}),
         },
         "source_tree": source_freeze(),
         "runtime": helper.runtime(),
@@ -605,7 +628,8 @@ def formal_plan(authority_raw, *, attempt=1):
     authority = load("p17_m2_input_export").parse(authority_raw)
     proposal_raw = (REPO / PROPOSAL).read_bytes()
     proposal = json.loads(proposal_raw)
-    funded = authority.get("schema") == "topolab.v2.m2-funded-acquisition-authority.v1"
+    remedy = authority.get("schema") == REMEDY_SCHEMA
+    funded = remedy or authority.get("schema") == "topolab.v2.m2-funded-acquisition-authority.v1"
     need(
         (funded or authority["schema"] == "topolab.v2.m2-source-acquisition-execution-authority.v1")
         and authority["execution_identity"] == (FUNDED_IDENTITY if funded else IDENTITY)
@@ -626,7 +650,7 @@ def formal_plan(authority_raw, *, attempt=1):
         "FORMAL_EXECUTION_AUTHORITY_INVALID",
     )
     need(
-        type(attempt) is int and attempt in ((1, 2) if funded else (1,)),
+        type(attempt) is int and attempt in ((2,) if remedy else (1, 2) if funded else (1,)),
         "UNREGISTERED_FORMAL_ATTEMPT",
     )
     target = (
@@ -657,7 +681,7 @@ def formal_plan(authority_raw, *, attempt=1):
         target_access=True,
         execution_protocol_sha256=execution_sha,
     )
-    protocol_path = FUNDED_PROTOCOL if funded else EXECUTION_PROTOCOL
+    protocol_path = REMEDY_PROTOCOL if remedy else FUNDED_PROTOCOL if funded else EXECUTION_PROTOCOL
     plan["source_tree"][protocol_path] = execution_sha
     if funded:
         plan.update(
@@ -666,7 +690,7 @@ def formal_plan(authority_raw, *, attempt=1):
             preparation_contract_sha256=execution_sha,
         )
         plan["binding"].update(
-            authority_protocol_path=FUNDED_PROTOCOL,
+            authority_protocol_path=protocol_path,
             formal_attempt=attempt,
             source_identity_policy=SOURCE_IDENTITY_POLICY,
             preparation_protocol_sha256=execution_sha,
@@ -674,9 +698,37 @@ def formal_plan(authority_raw, *, attempt=1):
     return plan
 
 
+def source_role_windows(authority, caller_start, native_start, observed, minimum_remaining=4200):
+    """Check supplied actual clocks; this arithmetic grants no execution admission."""
+    need(authority.get("execution_identity") == FUNDED_IDENTITY,
+         "SOURCE_FUNDED_CLOCK_IDENTITY_REQUIRED")
+    remedy = authority.get("schema") == REMEDY_SCHEMA
+    if remedy:
+        load("p17_m2_source_acquisition_independent").validate_remedy_authority(
+            authority, formal=False
+        )
+    else:
+        need(authority.get("schema") == "topolab.v2.m2-funded-acquisition-authority.v1",
+             "SOURCE_FUNDED_CLOCK_AUTHORITY_REQUIRED")
+    need(all(type(v) in (int, float) and math.isfinite(v)
+             for v in (caller_start, native_start, observed, minimum_remaining))
+         and 0 <= caller_start <= native_start <= observed and minimum_remaining > 0,
+         "SOURCE_ACTUAL_CLOCKS_REQUIRED")
+    caller_deadline = caller_start + (5400 if remedy else 4500)
+    native_deadline = native_start + 4500
+    need(caller_deadline - observed >= minimum_remaining, "SOURCE_CALLER_SUFFIX_UNAVAILABLE")
+    need(native_deadline - observed >= minimum_remaining, "SOURCE_NATIVE_SUFFIX_UNAVAILABLE")
+    return dict(caller_start=caller_start, native_start=native_start, observed=observed,
+                caller_deadline=caller_deadline, native_deadline=native_deadline,
+                caller_remaining=caller_deadline-observed,
+                native_remaining=native_deadline-observed,
+                minimum_remaining=minimum_remaining)
+
+
 def activation_readiness(authority):
     """Before target IO: distinct appointments, immutable evidence refs and actual clean-main CI."""
     funded = authority.get("execution_identity") == FUNDED_IDENTITY
+    remedy = authority.get("schema") == REMEDY_SCHEMA
     if funded:
         need(
             authority.get("readiness_freeze_state") == "REVIEWED_FROZEN",
@@ -697,22 +749,26 @@ def activation_readiness(authority):
         need(
             authority.get("independent_preflight_path")
             == "/private/tmp/topolab-funded-continuation-20261026/independent/"
-            "preflight-remedy3.json",
+            + ("preflight-source2-remedy.json" if remedy else "preflight-remedy3.json"),
             "EXACT_INDEPENDENT_PREFLIGHT_PATH_REQUIRED",
         )
         began = datetime.fromisoformat(
             authority["budget"]["clock_start_utc"].replace("Z", "+00:00")
         )
         need(
-            0 <= time.time() - began.timestamp() <= authority["outer_wall_seconds"] - 4500 - 7200,
+            0 <= time.time() - began.timestamp()
+            <= authority["outer_wall_seconds"] - (5400 if remedy else 4500) - 7200,
             "FUNDED_COMPLETE_SOURCE_AND_RESULT_SUFFIX_UNAVAILABLE",
         )
-        frozen = {k: v for k, v in source_freeze().items() if k != FUNDED_PROTOCOL}
+        checker = load("p17_m2_source_acquisition_independent")
+        if remedy:
+            checker.validate_remedy_authority(authority, formal=True)
+        protocol = REMEDY_PROTOCOL if remedy else FUNDED_PROTOCOL
+        frozen = {k: v for k, v in source_freeze().items() if k != protocol}
         need(
             authority.get("published_source_sha256") == frozen,
             "PUBLISHED_IMPLEMENTATION_SOURCE_CHANGED",
         )
-        checker = load("p17_m2_source_acquisition_independent")
         preflight_raw = checker.native._software_bytes(
             Path(authority["independent_preflight_path"])
         )
@@ -734,6 +790,13 @@ def activation_readiness(authority):
             ),
             "INDEPENDENT_ACTUAL_PREFLIGHT_REQUIRED",
         )
+        if remedy:
+            need(preflight.get("authority_protocol_path") == REMEDY_PROTOCOL
+                 and type(preflight.get("remedy_formal_attempt")) is int
+                 and preflight["remedy_formal_attempt"] == 2
+                 and preflight.get("remedy_projection_sha256")
+                 == checker.remedy_projection_sha256(authority),
+                 "SOURCE2_REMEDY_PREFLIGHT_PROTOCOL_REQUIRED")
         paths = authority.get("preparation_closure_paths", [])
         need(len(paths) == 2 and len(set(paths)) == 2, "INDEPENDENT_PREPARATION_CLOSURES_REQUIRED")
         for path in paths:
@@ -826,10 +889,14 @@ def activate_formal(root):
     need(authority_raw is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
     authority = load("p17_m2_input_export").parse(authority_raw)
     need(
-        not (authority.get("execution_identity") == FUNDED_IDENTITY and attempt == 2),
+        not (authority.get("execution_identity") == FUNDED_IDENTITY and attempt == 2)
+        or authority.get("schema") == REMEDY_SCHEMA,
         "NEW_FROZEN_REMEDY_REQUIRED",
     )
     readiness = None
+    if authority.get("schema") == REMEDY_SCHEMA:
+        need(authority.get("readiness_freeze_state") == "REVIEWED_FROZEN",
+             "FUNDED_READINESS_NOT_FROZEN")
     if authority.get("execution_identity") != FUNDED_IDENTITY:
         # Preserve the legacy readiness refusal before constructing a plan.
         readiness = activation_readiness(authority)
@@ -906,8 +973,7 @@ class AcquisitionTransport:
             return FUNDED_IDENTITY
         if (
             self.scope == FORMAL_SCOPE
-            and authority_for_root(self.root)[0] is FUNDED_AUTHORITY_RAW
-            and FUNDED_AUTHORITY_RAW is not None
+            and is_funded_authority(authority_for_root(self.root)[0])
         ):
             return FUNDED_IDENTITY
         return (
@@ -1067,7 +1133,7 @@ class AcquisitionTransport:
             )
         authority_raw, attempt = authority_for_root(root)
         need(authority_raw is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
-        if FUNDED_AUTHORITY_RAW is not None and authority_raw is FUNDED_AUTHORITY_RAW:
+        if is_funded_authority(authority_raw):
             declared = formal_plan(authority_raw, attempt=attempt)
             generation, backup_name = declared["root"], declared["backup_root"]
         else:

@@ -2452,3 +2452,18 @@ publication remain required before any formal source IO or scientific admission.
 
 All-five v11 checks actually passed2949/1 in1421.96s after final freeze;
 protected exact-head/main CI and NEW retention remain pending before formal IO.
+
+## 2026-10-27 — Source1 zero-role deadline STOP; reserved source2 remedy
+
+[Actual record](validation/p17_m2_source2_orchestration_remedy.md) retains
+PR226/mainf36b74b4/all-four CI40435596767, complete dual software evidence and
+source setup0. Caller prelude349.972>300s withheld all six roles; original
+stat-reads/FULL0, no accepted input/native sharedT_result, v5 HELD isolated.
+Conservative external metadata failure closeout stays inside original11700s
+phases. A [separate prospective authority](planning/p17_m2_funded_acquisition_remedy2_protocol.md)
+for reserved v6 preserves old protocol bytes, native4500/FULL3600/result7200 and
+all scientific/read/resource limits. Finite same-start v12 funding235800 author
+seconds covers minimal paired regression-first remedy/new review/preflight and
+normal publication; its actual results control later admission. FixedP17,
+uniform/default, historical FAIL/UNKNOWN/costs/seals remain. Continuous action
+proceeds to input-bound contract/B/C only after their real dependency Gates.
