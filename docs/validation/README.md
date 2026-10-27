@@ -1,5 +1,8 @@
 # Validation evidence index
 
+Latest [source1 zero-role STOP and source2 remedy](p17_m2_source2_orchestration_remedy.md): PR226/main CI passed; setup0 but first-role caller deadline expired, source reads/native roles/FULL0, v5 HELD isolated; paired remedy and fresh acceptance remain conditional.
+
+
 Latest [funded executable/public integration frontier](p17_m2_funded_acquisition.md): retained main-CI failure, regression-first namespace remedy, retained PUBLIC10/11 failures, PUBLIC12 public PASS and reviewed metadata APIs; publication/input/B/C remain conditional and fixed P17 unrepaired.
 
 Latest [hash-bound identity and custody software frontier](p17_m2_hash_bound_acquisition.md): regression evidence and explicit formal/B/C funding blockers; fixed P17 remains unrepaired.

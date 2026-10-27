@@ -1699,3 +1699,10 @@ from its own frozen interfaces and NEW public failure regressions. No upstream
 implementation, scientific input or numerical threshold was introduced by those
 software fixes. The unconfirmed historical main-CI cause remains separate from
 the deterministic capacity-inventory race regression.
+
+The2026-10-27 reserved second source-attempt orchestration remedy derives its
+elapsed-window accounting and paired producer/independent metadata validation
+from TopoLab's own actual zero-role STOP. It uses new public regression data;
+original numerical readers, models and historical authorities remain. No
+upstream source or scientific result was imported. See the
+[remedy report](docs/validation/p17_m2_source2_orchestration_remedy.md).

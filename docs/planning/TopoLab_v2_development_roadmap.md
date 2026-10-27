@@ -2433,32 +2433,30 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-## Current: funded continuous acquisition and conditional M2 execution (2026-10-26)
+## Current: source1 zero-role STOP and reserved source2 remedy (2026-10-27)
 
-The owner's later explicit retry/automatic-expansion instruction adopts the
-[finite new authority](p17_m2_funded_acquisition_protocol.md)
-([JSON](p17_m2_funded_acquisition_protocol.json)), with unchanged first clock,
-closed historical balances and scientific Gates. [Actual frontier](../validation/p17_m2_funded_acquisition.md)
-separates public executable capability from input, B and fixed-P17 acceptance.
-Complete software/publication gates; execute fresh fixed-parent40/558/1071
-acquisition and its complete result suffix; only accepted input enables the
-separately published native scientific contract. B FULL180 precedes the complete
-C10800/3600/shared180 panel. Continue between those authorized stages directly.
-Engineering failures retain full evidence and bounded public repair/remedy;
-scientific FAIL, missing evidence, real resources and finite caps cannot be
-bypassed by new identity or accounting. No seed17/v2 success is established here.
+[Actual failure/publication evidence](../validation/p17_m2_source2_orchestration_remedy.md)
+records PR226/mainf36b74b4 and all-four exact-main CI40435596767 PASS. New v5 setup
+actually returned0, but caller prelude349.972s exceeded300s: first-role remaining
+4150.028<4200. Roles/original stat-reads/FULL0; no input acceptance or native
+shared T_result. V5/HELD remains isolated. Complete conservative external failure
+phase closure by04:36:55.323Z within original11700 author phases. If normal
+publication is unfinished, the preregistered transition closes them PENDING
+publication before reserved new executor software10800 completes it. Later
+publication resets no old clock or balance and cannot pass the old deadline;
+source2 remains closed until actual complete publication/retention/returns.
 
-The protected PR225 main CI40419356298 subsequently failed a NEW-public shared
-payload; formal calls remain0. Original inner cause stays UNKNOWN without its
-missing runner context. A deterministic sampler-unlink/inventory race receives
-one bounded public software remedy, distinct review and fresh PUBLIC10 before
-new publication. Finite same-start v11 software funding is61 author hours/36h
-wall; all source/FULL/resource/scientific caps and old closed balances remain.
-
-PUBLIC10's final caller-view mismatch is retained despite ten accepted roles:
-producer541 is not the required auditor1069. Correct explicit caller selection
-receives distinct review and a fresh bounded PUBLIC11, with no formal access,
-failed-generation reuse, source-code change or extra namespace repair round.
+The [separate prospective remedy](p17_m2_funded_acquisition_remedy2_protocol.md)
+([JSON](p17_m2_funded_acquisition_remedy2_protocol.json)) preserves the original
+authority bytes and funds only reserved v6 attempt2 after meaningful public
+regression, paired implementation, different-author review/preflight and protected
+exact PR/main all-four CI. One finite v12 supplement sets235800 author seconds
+inside unchanged36h/start, without closed-balance transfers. Source2caller5400/
+each12600 includes BOOT/setup/actual returns; native4500/FULL3600/result7200,
+read quotas/scientific tolerances/resources remain. Actual accepted v6 bundle
+and complete source result closure precede its input-bound scientific contract,
+B then fixed C. The owner continuous instruction overrides one-slice stops;
+actual failures/evidence/resource/budget limits remain. P/17 is unrepaired.
 
 ## Historical: hash-bound identity software; formal entry unfunded (2026-10-26)
 

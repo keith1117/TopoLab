@@ -22,6 +22,11 @@ HASH_BOUND_POLICY = "topolab.source-identity.prebound-sha256.v1"
 HASH_BOUND_PROTOCOL = "docs/planning/p17_m2_hash_bound_acquisition_protocol.json"
 FUNDED_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v2"
 FUNDED_PROTOCOL = "docs/planning/p17_m2_funded_acquisition_protocol.json"
+REMEDY_PROTOCOL = "docs/planning/p17_m2_funded_acquisition_remedy2_protocol.json"
+REMEDY_SCHEMA = "topolab.v2.m2-funded-acquisition-remedy-authority.v1"
+FUNDED_FROZEN_SHA256 = "df3de651f7a2bf3f553e181b184d6804d798cd2cfeb5deea088a611aa8745aac"
+REMEDY_EVIDENCE = "/private/tmp/topolab-funded-continuation-20261026/"
+REMEDY_PUBLIC_PREFIX = "topolab-public-funded-acquisition-remedy2-"
 REHEARSAL_SCOPE = "FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY"
 FORMAL_SCOPE = "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY"
 REPO = Path(__file__).resolve().parents[1]
@@ -124,6 +129,18 @@ def _source_policy(plan: dict[str, Any]) -> str | None:
 def _protocol_path(plan: dict[str, Any]) -> str:
     if plan.get("execution_identity") == FUNDED_IDENTITY:
         _source_policy(plan)
+        if plan.get("binding", {}).get("authority_protocol_path") == REMEDY_PROTOCOL:
+            require(
+                (plan.get("scope") == FORMAL_SCOPE
+                 and type(plan.get("binding", {}).get("formal_attempt")) is int
+                 and plan["binding"]["formal_attempt"] == 2)
+                or (plan.get("scope") == REHEARSAL_SCOPE
+                    and Path(plan.get("root", "")).name.startswith(REMEDY_PUBLIC_PREFIX)),
+                "source2 remedy protocol/root/attempt differs",
+            )
+            return REMEDY_PROTOCOL
+        require(not Path(plan.get("root", "")).name.startswith(REMEDY_PUBLIC_PREFIX),
+                "source2 remedy public prefix requires its separate protocol")
         return FUNDED_PROTOCOL
     return HASH_BOUND_PROTOCOL if _source_policy(plan) else EXECUTION_PROTOCOL
 
@@ -131,13 +148,15 @@ def _protocol_path(plan: dict[str, Any]) -> str:
 def _hash_bound_authority(plan: dict[str, Any]) -> dict[str, Any]:
     protocol = _protocol_path(plan)
     funded = plan.get("execution_identity") == FUNDED_IDENTITY
+    remedy = protocol == REMEDY_PROTOCOL
     raw = native._software_bytes(REPO / protocol)
     require(digest(raw) == plan["source_tree"][protocol]
             == plan["binding"]["preparation_protocol_sha256"]
             == plan["preparation_contract_sha256"], "hash-bound authority freeze differs")
     authority = native.base.parse(raw)
     require(
-        authority.get("schema") == ("topolab.v2.m2-funded-acquisition-authority.v1" if funded
+        authority.get("schema") == (REMEDY_SCHEMA if remedy else
+                                   "topolab.v2.m2-funded-acquisition-authority.v1" if funded
                                    else "topolab.v2.m2-hash-bound-acquisition-authority.v1")
         and authority.get("execution_identity") == plan["execution_identity"]
         and authority.get("source_identity_policy") == HASH_BOUND_POLICY
@@ -155,7 +174,8 @@ def _hash_bound_authority(plan: dict[str, Any]) -> dict[str, Any]:
         and type(authority.get("outer_wall_seconds")) is int
         and authority["outer_wall_seconds"] == (129600 if funded else 14400)
         and type(authority.get("total_new_author_charged_seconds_cap")) is int
-        and authority["total_new_author_charged_seconds_cap"] == (194400 if funded else 18000),
+        and authority["total_new_author_charged_seconds_cap"]
+        == (235800 if remedy else 194400 if funded else 18000),
         "hash-bound authority identity/permissions/budget differs",
     )
     actors = authority.get("actors", {})
@@ -167,6 +187,126 @@ def _hash_bound_authority(plan: dict[str, Any]) -> dict[str, Any]:
     if funded:
         _validate_funded_authority(authority, plan)
     return authority
+
+
+def remedy_projection_sha256(authority: dict[str, Any]) -> str:
+    """Bind reviewed draft semantics while closing explicit final anchors separately."""
+    projection = deepcopy(authority)
+    for key in ("readiness_freeze_state", "published_source_sha256",
+                "independent_preflight_sha256"):
+        projection.pop(key, None)
+    projection["remedy"]["review"].pop("sha256", None)
+    return digest(canonical(projection))
+
+
+def _remedy_record(reference: Any, expected_path: str) -> dict[str, Any]:
+    require(isinstance(reference, dict) and set(reference) == {"path", "sha256"}
+            and reference["path"] == expected_path
+            and isinstance(reference["sha256"], str)
+            and native.base.SHA.fullmatch(reference["sha256"])
+            and reference["sha256"] != "0" * 64, "source2 remedy metadata reference differs")
+    raw = native._software_bytes(Path(expected_path))
+    require(digest(raw) == reference["sha256"], "source2 remedy metadata SHA256 differs")
+    value = native.base.parse(raw)
+    require(isinstance(value, dict), "source2 remedy metadata object missing")
+    return value
+
+
+def validate_remedy_authority(authority: dict[str, Any], *, formal: bool) -> None:
+    """Only the reserved second attempt can consume this separately bound remedy."""
+    remedy = authority.get("remedy", {})
+    require(authority.get("schema") == REMEDY_SCHEMA and isinstance(remedy, dict)
+            and canonical({k: remedy.get(k) for k in (
+                "formal_attempt", "formal_attempts_total_max", "caller_common_seconds",
+                "each_author_cap_seconds", "native_first_role_remaining_seconds",
+                "software_rounds_per_cause_max")}) == canonical({
+                    "formal_attempt": 2, "formal_attempts_total_max": 2,
+                    "caller_common_seconds": 5400, "each_author_cap_seconds": 12600,
+                    "native_first_role_remaining_seconds": 4200,
+                    "software_rounds_per_cause_max": 2})
+            and type(remedy.get("software_round")) is int
+            and 1 <= remedy["software_round"] <= 2
+            and remedy.get("base_authority_path") == FUNDED_PROTOCOL
+            and remedy.get("base_authority_sha256") == FUNDED_FROZEN_SHA256
+            and digest(native._software_bytes(REPO / FUNDED_PROTOCOL)) == FUNDED_FROZEN_SHA256,
+            "source2 remedy immutable authority/finite windows differ")
+    stop = _remedy_record(remedy.get("prior_zero_role_stop"),
+                          REMEDY_EVIDENCE + "source-attempt1-zero-role-STOP.json")
+    expected_stop = {
+        "schema": "topolab.source-attempt1-zero-role-stop.v1",
+        "status": "FROZEN_ZERO_ROLE_CALLER_FIRST_SUFFIX_UNAVAILABLE",
+        "classification": "ENGINEERING_ORCHESTRATION_WINDOW_ACCOUNTING", "attempt": 1,
+        "authority_sha256": FUNDED_FROZEN_SHA256,
+        "plan_sha256": "39f4bbd750345e95cbdeaae3c53448efb6c2ac9ba2ae1412b48adf3166d517f3",
+        "activation_actual_exit_code": 0, "activation_final_observed_unix_ms": 1793068615323,
+        "activation_actual_return_sha256":
+            "3a27f5491dc3637c07bc8927772a154512045844b3a08cebd19028899f820452",
+        "primary_error": "CALLER_FIRST_ROLE_FULL_SUFFIX_UNAVAILABLE",
+        "formal_native_roles_launched": 0, "old_original_stat_reads": 0,
+        "metadata_completed": 0, "payload_completed": 0, "source_input_accepted": False,
+        "source_FULL_paid_seconds": 0, "source_FULL_unused_closed_seconds": 3600,
+        "version_members_accepted": 0, "formal_control_CLI_calls": 1,
+        "backup_created": False, "old_generations_backups_leases_modified": False,
+        "lease_state": "HELD_NO_MANUAL_RELEASE",
+        "native_shared_T_result": "NOT_ESTABLISHED_NO_NATIVE_SHARED_ROLE",
+        "B_admitted": False, "C_admitted": False, "seed17_repaired": False,
+    }
+    require(canonical({k: stop.get(k) for k in expected_stop}) == canonical(expected_stop),
+            "source2 remedy requires the exact engineering zero-role STOP")
+    budget = _remedy_record(remedy.get("budget"),
+                            REMEDY_EVIDENCE + "budget-allocation-v12-source2-remedy.json")
+    expected_budget = {
+        "schema": "topolab.finite-source-orchestration-remedy-budget.v12",
+        "new_total_author_cap_seconds": 235800, "executor_cap_seconds": 162900,
+        "independent_cap_seconds": 72900, "unchanged_action_start_utc": "2026-10-26T16:28:00Z",
+        "unchanged_outer_wall_seconds": 129600, "native_formal_seconds_unchanged": 4500,
+        "native_result_seconds_each_unchanged": 7200,
+        "source_attempt2_proposed_caller_common_seconds": 5400,
+        "source_attempt2_proposed_each_author_cap_seconds": 12600,
+        "minimum_native_first_role_suffix_seconds_unchanged": 4200,
+        "source_formal_attempts_total_max_unchanged": 2,
+        "old_original_reads_each_attempt_max_unchanged": 1196,
+        "per_author_per_original_unchanged": 1,
+        "scientific_FULL_unchanged": [180, 10800, 3600, 180], "external_paid_commitments": 0,
+    }
+    require(canonical({k: budget.get(k) for k in expected_budget}) == canonical(expected_budget),
+            "source2 remedy finite budget differs")
+    active = authority.get("budget", {})
+    expected_active = {
+        "clock_start_utc": "2026-10-26T16:28:00Z", "outer_wall_seconds": 129600,
+        "total_author_seconds_cap": 235800, "executor_author_seconds_cap": 162900,
+        "independent_author_seconds_cap": 72900, "source_attempts": 2,
+        "source_common_each": 4500, "source_FULL_each": 3600,
+        "source_result_each_author_each_attempt": 7200,
+        "source_caller_common_by_attempt": {"1": 4500, "2": 5400},
+        "source_each_author_total_by_attempt": {"1": 11700, "2": 12600},
+        "source_max_reads_each_attempt": 1196, "resource_RSS_bytes": 4294967296,
+    }
+    require(isinstance(active, dict)
+            and canonical({k: active.get(k) for k in expected_active})
+            == canonical(expected_active),
+            "source2 remedy active budget/native clocks differ")
+    for key, total in (("executor_stage_caps", 162900), ("independent_stage_caps", 72900)):
+        caps = active.get(key)
+        require(isinstance(caps, dict) and bool(caps)
+                and all(type(v) is int and v >= 0 for v in caps.values())
+                and sum(caps.values()) == total, "source2 remedy stage funding differs")
+    if formal:
+        review = _remedy_record(remedy.get("review"),
+                                REMEDY_EVIDENCE + "independent/source2-remedy-spec-review.json")
+        expected_review = {
+            "status": "PASS_SOURCE2_REMEDY_REVIEW", "execution_identity": FUNDED_IDENTITY,
+            "formal_attempt": 2, "base_authority_sha256": FUNDED_FROZEN_SHA256,
+            "prior_zero_role_stop_sha256": remedy["prior_zero_role_stop"]["sha256"],
+            "budget_sha256": remedy["budget"]["sha256"],
+            "published_source_sha256": authority.get("published_source_sha256"),
+            "reviewed_remedy_projection_sha256": remedy_projection_sha256(authority),
+        }
+        require(review.get("status") == "PASS_SOURCE2_REMEDY_REVIEW"
+                and review.get("author") == authority["actors"]["independent"]
+                and review["author"] != authority["actors"]["executor"]
+                and canonical(review.get("admission")) == canonical(expected_review),
+                "source2 remedy distinct review/source projection differs")
 
 
 def _validate_funded_authority(authority: dict[str, Any], plan: dict[str, Any]) -> None:
@@ -196,8 +336,13 @@ def _validate_funded_authority(authority: dict[str, Any], plan: dict[str, Any]) 
             "generation": generation, "backup": generation + "-independent-backup"}
     require(authority.get("fixed_target") == targets,
             "funded authority fresh target inventory differs")
+    remedy = authority.get("schema") == REMEDY_SCHEMA
+    if remedy:
+        require(plan["source_tree"].get(FUNDED_PROTOCOL) == FUNDED_FROZEN_SHA256,
+                "source2 remedy original authority freeze differs")
+        validate_remedy_authority(authority, formal=plan.get("scope") == FORMAL_SCOPE)
     if plan.get("scope") == FORMAL_SCOPE:
-        require(plan.get("binding", {}).get("formal_attempt") != 2,
+        require(remedy or plan.get("binding", {}).get("formal_attempt") != 2,
                 "NEW_FROZEN_REMEDY_REQUIRED")
         require(authority.get("preparation_closure_paths") == [
                     "/Users/keith1117/Documents/TopoLab-data/"
@@ -212,11 +357,11 @@ def _validate_funded_authority(authority: dict[str, Any], plan: dict[str, Any]) 
                 == "2f67feee4d89c94b36196122a5930a56d5b8433f"
                 and authority.get("published_source_sha256")
                 == {key: value for key, value in plan["source_tree"].items()
-                    if key != FUNDED_PROTOCOL}
+                    if key != (REMEDY_PROTOCOL if remedy else FUNDED_PROTOCOL)}
                 and isinstance(authority.get("independent_preflight_path"), str)
                 and authority["independent_preflight_path"]
                 == "/private/tmp/topolab-funded-continuation-20261026/independent/"
-                "preflight-remedy3.json",
+                + ("preflight-source2-remedy.json" if remedy else "preflight-remedy3.json"),
                 "funded authority actual source freeze/preflight binding differs")
 
 
@@ -240,7 +385,7 @@ def _validate_hash_bound_binding(plan: dict[str, Any]) -> dict[str, Any]:
             fields.add("formal_attempt")
         elif "public_source_plan" in binding:
             fields.update(("public_source_plan", "public_source_plan_sha256"))
-        require(binding.get("authority_protocol_path") == FUNDED_PROTOCOL,
+        require(binding.get("authority_protocol_path") == _protocol_path(plan),
                 "funded authority protocol path differs")
     if formal:
         fields.add("execution_protocol_sha256")
@@ -540,6 +685,13 @@ def check_funded_preflight(plan: dict[str, Any], raw: bytes) -> dict[str, Any]:
             and canonical({key: supplied.get(key) for key in runtime}) == canonical(runtime)
             and canonical(preflight.get("expected_white_list_contract")) == canonical(whitelist),
             "funded independent preflight source/runtime/whitelist differs")
+    if _protocol_path(plan) == REMEDY_PROTOCOL:
+        require(preflight.get("authority_protocol_path") == REMEDY_PROTOCOL
+                and type(preflight.get("remedy_formal_attempt")) is int
+                and preflight["remedy_formal_attempt"] == 2
+                and preflight.get("remedy_projection_sha256")
+                == remedy_projection_sha256(authority),
+                "source2 remedy preflight protocol/projection differs")
     return preflight
 
 
@@ -954,7 +1106,7 @@ def _check_software(plan: dict[str, Any]) -> None:
     execution = _protocol_path(plan)
     contracts = (*native.SOFTWARE_CONTRACTS, PROPOSAL, PREPARATION_PROTOCOL)
     formal = plan["scope"] == FORMAL_SCOPE
-    for path in (EXECUTION_PROTOCOL, HASH_BOUND_PROTOCOL, FUNDED_PROTOCOL):
+    for path in (EXECUTION_PROTOCOL, HASH_BOUND_PROTOCOL, FUNDED_PROTOCOL, REMEDY_PROTOCOL):
         try:
             native._software_bytes(REPO / path)
         except FileNotFoundError:

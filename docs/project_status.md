@@ -1,58 +1,62 @@
 # Current project status
 
-Updated:2026-10-26. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-10-27. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: funded continuous acquisition and conditional M2 execution (2026-10-26)
+## Current: zero-role source STOP; reserved second-attempt orchestration remedy
 
-The owner's subsequent “retry unstarted work, automatically expand” instruction
-prospectively funds the [new finite authority](planning/p17_m2_funded_acquisition_protocol.md)
-([JSON](planning/p17_m2_funded_acquisition_protocol.json)). Same-start36h wall /
-61 author-hour v11 ceiling (retained earlier54h registration), complete4500/FULL3600 source and7200/7200 result suffixes,
-and bounded engineering remedies preserve all old closed grants and charges.
-[Actual software frontier](validation/p17_m2_funded_acquisition.md) includes the
-fixed18-reference/342-query producer, distinct numerical auditor, actual native
-exit/reader controls and new public source/decoder integration. Public tests and
-software publication do not establish input acceptance, B admission or P17 repair.
+[Actual evidence](validation/p17_m2_source2_orchestration_remedy.md) records
+protected PR226/mainf36b74b4, exact-head all-four CI40431803835 and exact-main
+all-four CI40435596767 PASS. Local mandatory v11 passed2949/1; Linux main2944/6.
+Complete software dual archives, late supplement, parent returns and distinct
+BOOT were verified before new formal setup. Previous CI/PUBLIC failures and
+retention gaps remain; none is rewritten by the passing software.
 
-PR225 merged normally as4f6c04b8 after exact-head all-four CI40414490478 passed.
-Its main run40419356298 failed one legacy NEW-public shared payload,2931 passed/
-6 skipped/1 failed in2181.03s; no formal source/target IO occurred. Missing CI
-inner context leaves that original cause UNKNOWN. A deterministic regression
-exposes a real sampler-unlink/capacity-enumeration race; the bounded complete
-inventory remedy passes its final93-case verification and distinct two-axis
-review after two rounds. Fresh public acceptance and protected exact-head/main
-CI remain prerequisites, never a reason
-to bypass source or scientific gates. The new software-only finite expansion
-preserves the original16:28 start and all closed balances.
+Source attempt1 setup actually returned0 with plan39f4bbd7 and original stat/read0.
+Both caller clocks began02:31:05.351Z2026-10-27. Actual setup final return at
+02:36:55.323Z left4150.028s, below the first-role4200 minimum. No native role
+launched, no source input was accepted, formal FULL0. V5 and its real HELD lease
+remain frozen; no native shared T_result or admissible fake cleanup exists.
+Conservative external failure-result closeout ends04:36:55.323Z inside original
+11700-second phases. All diagnosis/wait/checks/CI/retention/last returns count.
+If publication cannot finish there, the preregistered transition first closes
+both original phases with publication PENDING, then uses only reserved new
+executor software10800 for completion. No old deadline or balance resets; late
+publication is not an original-deadline PASS and source2 still needs full closure.
+Both original phases actually closed03:48:28.033Z at4642.682s each; unused
+7057.318 each closed. Reserved root software10800 is active until06:48:28.033Z.
+Full v12 check failed11/2975 passed/1 skipped after private venv configuration
+and package metadata disappeared; writer UNKNOWN. The damaged environment and
+failed tree are retained. Locked reconstruction and exact eleven-case replay
+passed; fresh full v13 checks/protected publication remain pending. Source2
+formal calls and old-original/Library reads remain0.
+Fresh full v13 all-five checks subsequently passed2986/1 skip; original v12
+failure and original publication-window MISS remain. Exact protected PR/main
+four-CI publication and final retention/actual returns still precede source2.
 
-PUBLIC10's32 actual exits/ten acceptances/certificate1071 still ended in required
-consumer-view STOP: the external caller selected producer541 instead of auditor
-1069. ACK actually released; no formal input was consumed. Full failure and
-costs remain frozen. PUBLIC11 prepare then correctly refused a chained public
-origin before any role. Its reviewed caller and costs are retained. The final
-PUBLIC12 caller remedy then passed32 actual commands, ten role acceptances,
-40/558/1071 closure, required auditor1069/90256736B and actual ACK/released leases.
-Its418.126/900s phase is closed. New preflight30d3b86c and final authority
-df3de651 freeze the27-source map. All five v11 checks actually returned0:
-2949 tests passed/1 existing platform skip in1421.96s. Exact-head/main CI and
-complete NEW retention remain prerequisites to formal entry.
+The owner's existing retry/automatic-expansion instruction funds a
+[separate prospective source2 remedy](planning/p17_m2_funded_acquisition_remedy2_protocol.md)
+([JSON](planning/p17_m2_funded_acquisition_remedy2_protocol.json)). One fixed v12
+supplement makes235800 aggregate author seconds, unchanged36h/16:28Z start;
+all closed amounts stay closed. It reserves new public engineering2700/Standards900,
+future executor software10800 and extra900 caller prelude for each unstarted
+source2 author. Source2caller5400/12600 total retains native4500/FULL3600 and
+result7200, exact40/558/1071, once per file and1196-read ceiling. Only already
+reserved literal v6 attempt2 may be admitted after meaningful RED/GREEN, fresh
+independent public preflight, distinct review, all five checks, exact PR/main
+four CI and complete failure-result closure. Original authority df3de651 retains
+bytes and refusal; v5/HELD/closed allowances are never reused.
 
-Complete new distinct review/full checks/protected exact-head and main4CI before
-any old original or formal target IO. Then execute the exact40/558/1071 source
-chain once within its registered allowance; after actual input acceptance and
-source result closure, publish the exact input-bound scientific contract and
-perform B before C. The continuous owner action overrides one-slice-stop, so no
-new preference/approval handoff follows a completed preparation. Scientific FAIL,
-4GiB/complete-exit requirements, fixed models/P17, old all-paid FAIL and all
-history remain binding. Engineering STOP freezes that attempt, then bounded
-public repair/review and a separately frozen prebooked remedy if legal.
-
-PR224 main2f67feee/all-four CI40290231283 actually passed after its earlier
-closure's pending-CI frontier; the immutable earlier closure remains unchanged.
-The following software and acquisition records retain their historical scopes.
+After actual source2 input acceptance and complete result closure, publish the
+scientific contract bound to its v6 bundle/closure; B precedes fixed C. The
+unexecuted v5 builder and zero-role failure closure cannot satisfy this Gate.
+Continue directly when all dependencies pass. Scientific FAIL, actual resources,
+missing evidence and finite budgets remain stopping conditions. Historical
+all-paid12721.16417100014444982>7200 is permanently FAIL; full fitPENDING4GiB,
+uniform default and fixed P/17 unrepaired remain. No software/test/input result
+is a seed17 repair claim. Prior records below retain historical authority.
 
 ## Historical: hash-bound identity software; formal entry unfunded (2026-10-26)
 
