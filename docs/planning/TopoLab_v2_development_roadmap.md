@@ -2433,30 +2433,26 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-## Current: source1 zero-role STOP and reserved source2 remedy (2026-10-27)
+## Current: source2 unbound metadata STOP (2026-10-27)
 
-[Actual failure/publication evidence](../validation/p17_m2_source2_orchestration_remedy.md)
-records PR226/mainf36b74b4 and all-four exact-main CI40435596767 PASS. New v5 setup
-actually returned0, but caller prelude349.972s exceeded300s: first-role remaining
-4150.028<4200. Roles/original stat-reads/FULL0; no input acceptance or native
-shared T_result. V5/HELD remains isolated. Complete conservative external failure
-phase closure by04:36:55.323Z within original11700 author phases. If normal
-publication is unfinished, the preregistered transition closes them PENDING
-publication before reserved new executor software10800 completes it. Later
-publication resets no old clock or balance and cannot pass the old deadline;
-source2 remains closed until actual complete publication/retention/returns.
+[Actual source2 result](../validation/p17_m2_source2_unbound_metadata_stop.md)
+retains protected PR227/main1f41011 and exact-main all-four CI40455188819 PASS,
+then three formal core roles and the correct exporter R0 strict-unbound STOP:
+ordinal6/459B/mtime+109ns, no trusted expected SHA or closing hash. Five completed
+hashes, independent originals0 and payload0; input/B/C not admitted. Earlier
+prebound45ns/93ns changes passed, without a time tolerance. Content equality and
+writer remain UNKNOWN. Shared NEW backup independently checked43members/521343B
+and preserved the original STOP/HELD; formal CLI10, FULL900 paid,2700 and filing180
+closed. Both registered attempts are consumed, with no third attempt or reread.
 
-The [separate prospective remedy](p17_m2_funded_acquisition_remedy2_protocol.md)
-([JSON](p17_m2_funded_acquisition_remedy2_protocol.json)) preserves the original
-authority bytes and funds only reserved v6 attempt2 after meaningful public
-regression, paired implementation, different-author review/preflight and protected
-exact PR/main all-four CI. One finite v12 supplement sets235800 author seconds
-inside unchanged36h/start, without closed-balance transfers. Source2caller5400/
-each12600 includes BOOT/setup/actual returns; native4500/FULL3600/result7200,
-read quotas/scientific tolerances/resources remain. Actual accepted v6 bundle
-and complete source result closure precede its input-bound scientific contract,
-B then fixed C. The owner continuous instruction overrides one-slice stops;
-actual failures/evidence/resource/budget limits remain. P/17 is unrepaired.
+Complete result review/checks/protected publication/paired retention and actual
+returns before conservative shared RECORD T1+7200=08:22:07.998Z2026-10-27,
+subject to both original12600 author caps. Aggregate235800/original36h stays.
+Two unstarted review phases reassigned to Standards600/Spec900 add0 aggregate
+seconds and do not extend running phases. Input binding/stability is an actual
+blocker; only accepted input and complete result closure could precede B then
+fixed C. P17 remains unrepaired, historical all-paid FAIL and full fitPENDING4GiB
+remain. The continuous instruction removes scheduling stops, not these Gates.
 
 ## Historical: hash-bound identity software; formal entry unfunded (2026-10-26)
 

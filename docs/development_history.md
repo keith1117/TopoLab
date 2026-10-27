@@ -8,6 +8,19 @@ next slice or a development primary describe their historical context.
 Read [project status](project_status.md) for the current boundary and
 [validation reports](validation/README.md) for the authoritative evidence.
 
+## 2026-10-27 — Source2 strict-unbound metadata STOP
+
+[Actual report](validation/p17_m2_source2_unbound_metadata_stop.md) records PR227,
+main1f41011/all-four CI40455188819 and local2986/1 skip before unique v6 entry.
+Public role passed; exporter R0 ordinal6 stopped on unbound459B/mtime+109ns,
+five hashes complete and content/writer UNKNOWN. Earlier prebound45/93ns changes
+passed exact hashes/closing. Independent originals/payload0; source input/B/C
+unaccepted and P17 unrepaired. One shared NEW-only backup verified43members/
+521343B, preserved originalSTOP/HELD and actual0/0/1. Three roles/10 formalCLI,
+FULL900 paid,2700 plus filing180 closed. Both reserved attempts consumed.
+Complete independent failure-result review, checks, protected publication and
+paired retention/actual returns under unchanged clocks; no third retry follows.
+
 ## 2026-10-25 — Source-acquisition formal adapter public preparation
 
 Owner grants NEW4h/3h under the [preparation-only authority](planning/p17_m2_source_acquisition_adapter_preparation_protocol.md).

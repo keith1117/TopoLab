@@ -17,22 +17,21 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Current continuous action: [actual source1 zero-role STOP and reserved source2 remedy](docs/validation/p17_m2_source2_orchestration_remedy.md)
-and [separate prospective authority](docs/planning/p17_m2_funded_acquisition_remedy2_protocol.md).
-PR226/mainf36b74b4 and all-four exact-main CI40435596767 passed. Attempt1
-setup returned0 but its caller300s prelude expired before first-role dispatch;
-formal roles/original stat-reads0, no accepted input/native shared T_result.
-V5/HELD stays isolated. Complete the registered external failure-result closeout,
-paired minimal public-only remedy, different-author review, all checks and normal
-protected exact-head/main publication before reserved literal v6. Source2 uses
-new prospective caller5400/each-author12600; native4500/FULL3600/result7200,
-40/558/1071 and once-per-file quotas remain. One finite v12 ceiling235800 author
-seconds keeps the original36h start and every closed balance/cost. Original df3
-protocol bytes stay frozen. Continue after actual source acceptance and result
-closure to input-bound scientific contract, B then fixed C when all Gates pass.
-P/17 remains unrepaired; uniform/default, historical all-paid FAIL,4GiB,
-scientific thresholds, old UNKNOWN/seals and fixed models remain. The owner
-expressly overrides one-slice scheduling stops for this continuous action.
+Current continuous action: [source2 strict-unbound STOP](docs/validation/p17_m2_source2_unbound_metadata_stop.md).
+PR227/main1f41011 and all-four exact-main CI40455188819 passed before new v6.
+Three of six roles launched; exporter R0 correctly rejected ordinal6, unbound
+mtime+109ns before hash/closing. Original reads6, completed hashes5, payload0,
+independent original reads0; no input/B/C acceptance or P17 repair. The reserved
+NEW-only shared closeout verified43 failed-prefix members/521343B, returning
+original STOP. FULL900 paid,2700 and filing180 closed;10 formal CLI calls.
+Both registered attempts are consumed. No third attempt, old reread, post-failure
+hash bootstrap or manual HELD release. Complete failure result review/checks,
+protected publication and paired metadata retention/actual final returns by
+conservative shared T1+7200=08:22:07.998Z2026-10-27 and each earlier applicable cap.
+Source2 author phases12600 and aggregate235800/original36h remain unchanged.
+The owner's continuous instruction overrides one-slice scheduling stops; actual
+input, scientific, resource and finite-call blockers remain. Uniform/default,
+historical all-paid FAIL, full fitPENDING4GiB and fixed P17/unrepaired remain.
 
 Read the [frozen source-acquisition authority](docs/planning/p17_m2_source_acquisition_execution_protocol.md)
 and [actual STOP result](docs/validation/p17_m2_source_acquisition_execution.md).

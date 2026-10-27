@@ -5,58 +5,43 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: zero-role source STOP; reserved second-attempt orchestration remedy
+## Current: source2 stopped on unbound metadata; result closure
 
-[Actual evidence](validation/p17_m2_source2_orchestration_remedy.md) records
-protected PR226/mainf36b74b4, exact-head all-four CI40431803835 and exact-main
-all-four CI40435596767 PASS. Local mandatory v11 passed2949/1; Linux main2944/6.
-Complete software dual archives, late supplement, parent returns and distinct
-BOOT were verified before new formal setup. Previous CI/PUBLIC failures and
-retention gaps remain; none is rewritten by the passing software.
+[Actual source2 evidence](validation/p17_m2_source2_unbound_metadata_stop.md)
+records protected PR227/main1f41011cbb17a3fee18ab0815ad414a5ddc754b5 and
+all four exact-main CI40455188819 PASS. Source1 late publication, complete paired
+archives/actual returns and new independent BOOT preceded unique v6 setup.
+Source1's original result-window MISS and v12 environment failure remain.
 
-Source attempt1 setup actually returned0 with plan39f4bbd7 and original stat/read0.
-Both caller clocks began02:31:05.351Z2026-10-27. Actual setup final return at
-02:36:55.323Z left4150.028s, below the first-role4200 minimum. No native role
-launched, no source input was accepted, formal FULL0. V5 and its real HELD lease
-remain frozen; no native shared T_result or admissible fake cleanup exists.
-Conservative external failure-result closeout ends04:36:55.323Z inside original
-11700-second phases. All diagnosis/wait/checks/CI/retention/last returns count.
-If publication cannot finish there, the preregistered transition first closes
-both original phases with publication PENDING, then uses only reserved new
-executor software10800 for completion. No old deadline or balance resets; late
-publication is not an original-deadline PASS and source2 still needs full closure.
-Both original phases actually closed03:48:28.033Z at4642.682s each; unused
-7057.318 each closed. Reserved root software10800 is active until06:48:28.033Z.
-Full v12 check failed11/2975 passed/1 skipped after private venv configuration
-and package metadata disappeared; writer UNKNOWN. The damaged environment and
-failed tree are retained. Locked reconstruction and exact eleven-case replay
-passed; fresh full v13 checks/protected publication remain pending. Source2
-formal calls and old-original/Library reads remain0.
-Fresh full v13 all-five checks subsequently passed2986/1 skip; original v12
-failure and original publication-window MISS remain. Exact protected PR/main
-four-CI publication and final retention/actual returns still precede source2.
+Source2's public role passed. Exporter R0 then correctly rejected ordinal6:
+459-byte unbound metadata mtime increased109ns with dev/inode/size unchanged.
+Five hashes completed; earlier prebound45ns/93ns changes passed exact hash and
+closing checks. The sixth file's content equality and writer are UNKNOWN;
+no hash/closing was completed and no reread is allowed. No independent R0/R1
+or payload reading occurred. Outer0/0 did not override actual inner1/bind1 STOP.
 
-The owner's existing retry/automatic-expansion instruction funds a
-[separate prospective source2 remedy](planning/p17_m2_funded_acquisition_remedy2_protocol.md)
-([JSON](planning/p17_m2_funded_acquisition_remedy2_protocol.json)). One fixed v12
-supplement makes235800 aggregate author seconds, unchanged36h/16:28Z start;
-all closed amounts stay closed. It reserves new public engineering2700/Standards900,
-future executor software10800 and extra900 caller prelude for each unstarted
-source2 author. Source2caller5400/12600 total retains native4500/FULL3600 and
-result7200, exact40/558/1071, once per file and1196-read ceiling. Only already
-reserved literal v6 attempt2 may be admitted after meaningful RED/GREEN, fresh
-independent public preflight, distinct review, all five checks, exact PR/main
-four CI and complete failure-result closure. Original authority df3de651 retains
-bytes and refusal; v5/HELD/closed allowances are never reused.
+The single reserved shared closeout independently checked43 NEW failed-prefix
+members/521343B and returned the original STOP. Real HELD lease remains frozen.
+Three of six core roles/10 formal CLI calls; FULL900 paid,2700 and filing180
+closed without transfer. Filing/release/certificate and B/C were not launched.
+Both registered source attempts are used; no third formal source-attempt branch exists.
+Automatic funding cannot convert this failed input Gate into acceptance.
 
-After actual source2 input acceptance and complete result closure, publish the
-scientific contract bound to its v6 bundle/closure; B precedes fixed C. The
-unexecuted v5 builder and zero-role failure closure cannot satisfy this Gate.
-Continue directly when all dependencies pass. Scientific FAIL, actual resources,
-missing evidence and finite budgets remain stopping conditions. Historical
-all-paid12721.16417100014444982>7200 is permanently FAIL; full fitPENDING4GiB,
-uniform default and fixed P/17 unrepaired remain. No software/test/input result
-is a seed17 repair claim. Prior records below retain historical authority.
+Both source2 author clocks began05:59:07.911Z, each12600 seconds; native setup
+T0=06:08:09.814Z. Conservative result start is the actual shared RECORD
+T1=06:22:07.998Z, deadline08:22:07.998Z, subject also to each earlier applicable
+cap. Complete independent report review, all five checks, protected PR/main
+four-CI publication, dual metadata archives/outside anchors and actual final
+returns inside those clocks. Two still-unstarted review phases were prospectively
+reassigned to Standards600/Spec900, aggregate increase0 and no running-cap change.
+
+Input acceptance and its1071-member version remain absent. B and fixed C/P17
+cannot legally begin. The minimal missing input condition is trustworthy
+pre-read content binding or a stable strict read for every unbound member under
+a separately permitted prospective attempt; no post-failure hashing, time
+rounding, new identity or relabelled budget supplies it. Historical all-paid
+12721.16417100014444982>7200 permanently FAIL; full fitPENDING4GiB, full v2 open,
+uniform default and fixed P17 unrepaired remain. No new scientific metrics exist.
 
 ## Historical: hash-bound identity software; formal entry unfunded (2026-10-26)
 
