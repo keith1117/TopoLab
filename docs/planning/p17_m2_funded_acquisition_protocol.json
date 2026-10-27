@@ -254,8 +254,8 @@
     "/Users/keith1117/Documents/TopoLab-data/p17-m2-hash-bound-custody-20261026-results/publication-closure.json",
     "/private/tmp/topolab-hash-bound-custody-20261026-results-backup/publication-closure.json"
   ],
-  "independent_preflight_path": "/private/tmp/topolab-funded-continuation-20261026/independent/preflight-remedy2.json",
-  "independent_preflight_sha256": "a037ca934ec60d935eb87b3d88d475eff5726b341272c86700f1ae547dbf4f70",
+  "independent_preflight_path": "/private/tmp/topolab-funded-continuation-20261026/independent/preflight-remedy3.json",
+  "independent_preflight_sha256": "30d3b86cff575c39e1ec541303c3648515dbf3998ea8f0382ef951ae5cde9405",
   "published_source_sha256": {
     "docs/planning/p17_m2_content_verified_custody_proposal.json": "8fa602f3d86be03da0c336f7569a35a68ce31052517249e0bf32b35f098aa7e0",
     "docs/planning/p17_m2_content_verified_custody_protocol.json": "8ecc3716306cd2e49d7d5fd46f61eb43b4d2740861a702e5bc8745b9500e3381",
@@ -264,7 +264,7 @@
     "docs/planning/p17_m2_input_export_preparation_proposal.json": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
     "docs/planning/p17_m2_source_acquisition_adapter_preparation_protocol.json": "ad3745d028931d5469e3be76467da391ef0289addbf46fbe909a808497c285f0",
     "docs/planning/p17_m2_source_acquisition_execution_protocol.json": "a741defb22c33f39f571a1585a55e813132a2a3593648e00230b0093d2642763",
-    "scripts/p17_m2_content_verified_control.py": "9466e248f39a3a862d3c8fc2cd53679fdb66f73bf1ba959dfdda59e14d9d56dd",
+    "scripts/p17_m2_content_verified_control.py": "6dcbae9f80d9ab1d2cbd573c5a61482ccf8d990e3a8cdf727e0c039a4bf5939a",
     "scripts/p17_m2_content_verified_independent.py": "5eacd8ec95e4137ccdb3eecb997092ac43d1a61d8fb11c6a9bef55708706c3e6",
     "scripts/p17_m2_content_verified_public_fixture.py": "1de1827427b3f28536dcc2004d26b1c8e69deba7ac95007f5cfe9d7757cecf08",
     "scripts/p17_m2_homotopy.py": "3d7723e0f62f93036027fea25a1386079482bdc09a4818c518bdc5999cb5e7d9",
@@ -280,8 +280,8 @@
     "scripts/p17_m2_scientific_control.py": "79365900fd48de58825f2b42194f8cf5093ffac98f820e518bc04b90b467084c",
     "scripts/p17_m2_scientific_independent.py": "9adad447ef45380b56707cc511e62e9fc3d761aa4ccfb1b7b760a10217309f51",
     "scripts/p17_m2_scientific_orchestration.py": "2f58bb0b2bef37995622ea1642c984521318220db2fbd4dc347c69d3a3a7d965",
-    "scripts/p17_m2_source_acquisition_control.py": "007819fe03db01bbb1a8ec2a92e647fdb4377a161cd2a3d4696f6d9b88d24328",
-    "scripts/p17_m2_source_acquisition_independent.py": "f0eadf5a948d495ef6eb9c6d502ddd27f830f251d8eab5102ee38948d752244e",
+    "scripts/p17_m2_source_acquisition_control.py": "51a6060b5ec41aa22ddabb5c259700145e53a12eee286af363e952364ef05fd4",
+    "scripts/p17_m2_source_acquisition_independent.py": "57c17d587347cecf4513d540f049981fe2204e862d9b481949bf795013fa0b0e",
     "scripts/p17_m2_source_verified_input.py": "a53090b1f8d5a22c634ff6a60f66aaf1d17e4f36e1c4fa34ad3d97cbb2291669",
     "scripts/p17_m2_verified_input.py": "db4d4e6e286c4652694209e6c29360e98c9423afc09f3c16d8cbce3791d7614b"
   },
