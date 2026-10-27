@@ -697,7 +697,7 @@ def activation_readiness(authority):
         need(
             authority.get("independent_preflight_path")
             == "/private/tmp/topolab-funded-continuation-20261026/independent/"
-            "preflight-remedy2.json",
+            "preflight-remedy3.json",
             "EXACT_INDEPENDENT_PREFLIGHT_PATH_REQUIRED",
         )
         began = datetime.fromisoformat(

@@ -1692,3 +1692,10 @@ per-case FEM checks of linear load scaling, preserving true terminal/windows.
 They are software integration data, not historical scientific results or fixed
 P17 repair evidence. Generated data and raw runtime evidence stay outside Git;
 see the [funded frontier](docs/validation/p17_m2_funded_acquisition.md).
+
+The subsequent generated-namespace capacity rescan and API-only scientific
+metadata transport/manifest/arithmetic are original TopoLab software, derived
+from its own frozen interfaces and NEW public failure regressions. No upstream
+implementation, scientific input or numerical threshold was introduced by those
+software fixes. The unconfirmed historical main-CI cause remains separate from
+the deterministic capacity-inventory race regression.

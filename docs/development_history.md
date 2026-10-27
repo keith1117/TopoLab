@@ -2432,3 +2432,23 @@ old-file reread. Finish publication and actual acquisition, then input-bound B/C
 when dependencies pass, under the continuous owner instruction. Input/B/C/P17
 acceptance remain separate measured outcomes; uniform/default, historical
 all-paid FAIL and every old seal retain scope.
+
+PR225 merged after exact-head CI, but merged-main40419356298 failed one legacy
+NEW-public shared payload. Original cause stays UNKNOWN without runner inner
+context. A deterministic sampler-unlink/namespace-inventory race receives a
+two-round bounded complete-inventory remedy and different-author PASS reviews.
+PUBLIC10 then stopped on a producer/auditor caller mismatch; PUBLIC11 correctly
+refused a chained public plan at prepare. Both failed attempts/costs remain.
+The final caller remedy PUBLIC12 uses the original public plan and explicit
+auditor argv under same-start finite v11 software funding, before normal
+publication. Formal/source/B/C0;
+P17 remains unrepaired. Seven reviewed API-only scientific metadata files are
+published as software capability, without numerical/resource acceptance.
+
+PUBLIC12 then passed the exact32-call public chain, required auditor1069-member
+view and actual ACK/released leases. Final readinessdf3de651 binds distinct
+preflight30d3b86c;418.126/900s closes without transfer. Full checks/protected
+publication remain required before any formal source IO or scientific admission.
+
+All-five v11 checks actually passed2949/1 in1421.96s after final freeze;
+protected exact-head/main CI and NEW retention remain pending before formal IO.

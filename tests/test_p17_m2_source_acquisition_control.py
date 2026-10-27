@@ -202,7 +202,17 @@ def run_rehearsal_role(argv, root, plan_sha, role, *, accepted=True):
         text=True,
         env=single_thread_environment(),
     )
-    assert result.returncode == (0 if accepted else 1), result.stderr + result.stdout
+    failure_context = ""
+    if result.returncode != (0 if accepted else 1) and role == "shared-closeout":
+        failure = root / "shared-payload-failure.json"
+        failure_context = (
+            "\nRaw NEW-public shared failure context:\n" + failure.read_text()
+            if failure.is_file()
+            else "\nNEW-public shared failure context file unavailable"
+        )
+    assert result.returncode == (0 if accepted else 1), (
+        result.stderr + result.stdout + failure_context
+    )
     proof = json.loads(result.stdout)
     assert (
         bool(proof.get("full_role_evidence_accepted") or proof.get("metadata_evidence_accepted"))

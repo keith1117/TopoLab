@@ -216,7 +216,7 @@ def _validate_funded_authority(authority: dict[str, Any], plan: dict[str, Any]) 
                 and isinstance(authority.get("independent_preflight_path"), str)
                 and authority["independent_preflight_path"]
                 == "/private/tmp/topolab-funded-continuation-20261026/independent/"
-                "preflight-remedy2.json",
+                "preflight-remedy3.json",
                 "funded authority actual source freeze/preflight binding differs")
 
 

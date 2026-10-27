@@ -2448,6 +2448,18 @@ Engineering failures retain full evidence and bounded public repair/remedy;
 scientific FAIL, missing evidence, real resources and finite caps cannot be
 bypassed by new identity or accounting. No seed17/v2 success is established here.
 
+The protected PR225 main CI40419356298 subsequently failed a NEW-public shared
+payload; formal calls remain0. Original inner cause stays UNKNOWN without its
+missing runner context. A deterministic sampler-unlink/inventory race receives
+one bounded public software remedy, distinct review and fresh PUBLIC10 before
+new publication. Finite same-start v11 software funding is61 author hours/36h
+wall; all source/FULL/resource/scientific caps and old closed balances remain.
+
+PUBLIC10's final caller-view mismatch is retained despite ten accepted roles:
+producer541 is not the required auditor1069. Correct explicit caller selection
+receives distinct review and a fresh bounded PUBLIC11, with no formal access,
+failed-generation reuse, source-code change or extra namespace repair round.
+
 ## Historical: hash-bound identity software; formal entry unfunded (2026-10-26)
 
 The owner's continuous four-task instruction supersedes the one-slice scheduling
@@ -2957,3 +2969,16 @@ reportable. They do not substitute for the required positive ML result in the
 full v2 flagship delivery decision. A failed ML experiment is retained as
 evidence and informs the next explicitly bounded intervention; no final project
 completion claim follows from a failed ML gate.
+
+PUBLIC11 prepare then correctly refused a chained public source plan before any
+role. Both caller failures and costs remain. Last caller remedy PUBLIC12 uses
+the original first-generation public plan and explicit auditor flags, without
+changing the source guard, formal calls or global61h ceiling. Actual acceptance
+and complete protected publication still precede any formal input or B/C.
+
+PUBLIC12 subsequently passed32 actual commands, auditor1069-member consumption
+and actual ACK/released leases. Final readinessdf3de651 and distinct public
+preflight30d3b86c precede all-five local checks2949 passed/1 platform skip.
+Exact-head/main CI and complete NEW retention still gate formal entry. The
+finite v11c reallocation preserves61h while reserving each scientific result
+suffix7560s, with no closed-balance transfer or scientific relaxation.

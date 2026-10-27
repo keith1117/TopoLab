@@ -221,7 +221,7 @@ def fixture(tmp_path, monkeypatch, *, formal=False, attempt=1):
             "publication-closure.json",
         ],
         "independent_preflight_path":
-            "/private/tmp/topolab-funded-continuation-20261026/independent/preflight-remedy2.json",
+            "/private/tmp/topolab-funded-continuation-20261026/independent/preflight-remedy3.json",
         "independent_preflight_sha256": "a" * 64,
     }
     root = str(tmp_path.resolve() / "topolab-public-funded-acquisition-independent")
@@ -417,10 +417,10 @@ def test_independent_preflight_replay_checks_bound_actual_source_and_runtime(tmp
 def test_remedy_preflight_binds_new_file_and_preserves_historical_receipt(tmp_path, monkeypatch):
     checker, plan, authority = fixture(tmp_path, monkeypatch, formal=True)
     authority["independent_preflight_path"] = (
-        "/private/tmp/topolab-funded-continuation-20261026/independent/preflight-remedy2.json")
+        "/private/tmp/topolab-funded-continuation-20261026/independent/preflight-remedy3.json")
     reseal(checker, plan, authority)
     checker.validate_binding(plan)
-    for old_name in ("preflight.json", "preflight-remedy1.json"):
+    for old_name in ("preflight.json", "preflight-remedy1.json", "preflight-remedy2.json"):
         authority["independent_preflight_path"] = (
             "/private/tmp/topolab-funded-continuation-20261026/independent/" + old_name)
         reseal(checker, plan, authority)

@@ -517,3 +517,226 @@ Cleanup-after SHA3796f118066964ddb5f68a181077a765da9678fe814d0239f5cc1ba7d0277e8
 records exact pre-cleanup verification and removal of only that new completed
 passing regression tree. Original temporary inodes are no longer in place.
 This does not repair the separately disclosed older failed-tree retention gap.
+
+## PR225 publication, main-CI failure and generated-namespace remedy
+
+Final PR225 headf33cffd0df109ad73dce6b06768b8ace03ebff70 passed all four
+exact-head jobs, run40414490478, before normal protected squash merge to
+main4f6c04b8b2f973af2ce3e8cb3bbb6759d9ee9f03. Its tested tree is
+923dc4e2ca88214186fe2f666c354fad22bc9965. Local v10 checks actually passed:
+2937 tests/1 selected-platform skip in1767.83s, log SHA
+6290691ea2c236ee0a20e2223991d3ded018b2b2ecf4cae696c9412be71fefd4.
+PR Linux quality2932 passed/6 skipped in2310.86s, raw log SHA
+62e9955e583ff5f5398dabc3a5d2e7b21a944250d3e6b429dcaec1327d25ca7f.
+
+Merged-main CI40419356298 then failed the legacy NEW-public connected chain at
+shared-closeout:2931 passed/6 skipped/1 failed in2181.03s. Its inner payload
+exit1, outer exits0/0, complete evidence and2018484224-byte envelope distinguish
+the domain failure from an outer-exit or4GiB failure. The runner did not retain
+the raw inner log/shared failure file; historical root cause remains UNKNOWN.
+Complete available CI log SHA
+973789b8e2d70a57a0b4ac2b3ff7b495be50bfa90191bfbe85ea941a4eb9d1c9;
+different-author diagnosis SHA
+cc42cf31c0f9c13b8db8da15126dc962dacc676964d89ec83190f0e14b9f3e4c.
+No formal source role, old original, formal target or B/C operation occurred.
+Passing PR CI never substitutes for passing merged-main CI.
+
+A deterministic real-filesystem regression removes a completed sampler profile
+after enumeration and before stat. It produced3 failures/4 passes before the
+fix, including bounded-exhaustion and replaced-root cases. The first minimal
+repair performs at most three complete no-follow capacity inventories, discards
+partial counts and retains vanished-entry observations; it never omits an
+entry from a successful scan. Root dev/inode must stay fixed. Continuous churn,
+permission/type/link/cap errors still reject, and source-reader strict/hash/
+closing policies are unchanged. First verification7 passed in0.04s; combined
+targeted population90 passed in3.03s. Raw red/green roots remain external;
+receipt SHA618d20f1d475bdc8202720de98bad8f26b38e3d5bfa2561a647ae36ec0f225f5.
+This proves and repairs that code race, not the missing historical CI cause.
+
+New independent review found two initial-remedy gaps: an A-to-B-to-A root path
+could scan B while the before/closing observations saw A, and exception-only
+rescan attributes were lost by existing type/str failure serialization. Both
+findings and initial source bytes remain external. Three new red checks failed
+with six passes before the second and final repair-verification round. Each
+snapshot now scans a duplicate of the held original root FD; a closing path
+replacement still rejects. Any subsequent failure retains all prior rescan
+observations and raw root before/closing tuples in the serialized reason,
+preserving the actual exception class and errno. Deterministic ABA, exhaustion,
+late EACCES/filename, permissions/link/cap controls and all related metadata
+tests pass93 cases. Both rounds for this root cause are consumed; final
+different-author review and full public/repository validation are still required.
+The separate successful legacy-chain check on initial-remedy bytes is explicitly
+retained at that earlier frontier and does not certify the later source.
+The legacy shared assertion now includes its complete available NEW-public
+failure context in future failed output instead of only the generic exit packet.
+
+The first attempted red-test launcher failed before running tests because an
+editable rebuild needed uncached hatchling under offline mode. Direct locked
+venv tests produced the actual red result; normal `uv sync --dev --locked`
+then rebuilt only the local project successfully without changing the lock.
+The import-sort check failure was corrected before source freeze.
+Same-start finite v11 adds7 author hours prospectively (61h total/36h wall),
+with unchanged formal counts/FULL/reads/resources/science and closed balances.
+Fresh distinct review, PUBLIC10/remedy3, all five checks, exact-head/main all-four
+CI and complete software retention remain formal-entry prerequisites.
+
+The seven independently reviewed API-only metadata source/test files are also
+included unchanged. Exact predicates/metrics/seed arithmetic, Git main identity,
+parent-before-create/failure-prefix and active metadata cap regressions pass39
+Node cases and2 Python entry points. Standards SHA
+b7a43816fcf50ea6c801a7a6bd39e855c212bf89fe5edce9839a106d25a0c608;
+Spec SHA78903e3433f505b0cc3b4595825c9e8a0736e07a90aebdbedf11cb457d298867.
+These APIs launch no native/model/FEM operation and do not claim a whole-host
+4GiB bound or an accepted formal scientific contract.
+
+The preceding closed software snapshot51356 members/6398923675 logical bytes
+has two fully decompressed, independently verified archives, SHA
+7de8a3b053213402945dea9a5125fe0d7d81e3a3acacebb03be8755b7649b26c;
+raw manifest0f23993a23ab79f09c3654e6f19d3c8ccefe063c5f7e4ed5efe9859b75be3a89.
+Different-author retention review SHA
+a06b9b3de5e38ed09c82b95a33ef55ec421a43ed5832f71fcf7ab55b8e5467e0.
+The newly failed main CI and v11 registration are additional matching copies;
+this archive is a closed software-prefix snapshot, not final preparation closure.
+No old failed custody generation, lease or publication scene was modified.
+
+## PUBLIC10 required consumer-view STOP and separately registered caller remedy
+
+PUBLIC10 executed all32 top CLI calls with actual exit0, ten accepted native/
+metadata roles, certificate1071 and actual reader ACK/released lease. Its source
+population closed40 metadata/558 payload (12 models/528 labels/18 scalars).
+The final required consumer-view assertion nevertheless failed: external caller
+defaulted to scientific-producer541 members/5470975 bytes instead of the
+registered scientific-auditor1069/90256736. PUBLIC9's actual consumer/ACK argv
+and its retained role views independently identify the missing explicit reader
+argument; this is a confirmed caller error, separate from the historical CI
+UNKNOWN or the two-round namespace remedy. No preflight PASS was filed.
+
+STOP receipt SHA7e77a86484b4de48a65a8c1a0d3d7c4950665474cad9be4c23bfa2a9ac7ca150.
+Its raw334-file/17856581-byte source/evidence snapshot has independent inodes,
+manifest SHAf5d1d5a1faabe94d6637875d4fe99b1cb25ef7fcdf11902a7f5ca9d6fbfe868d;
+28/28 hashes include the unchanged67d78e65 DRAFT and27 executable members.
+All116 original sampler profiles/75748 bytes and complete helper observations
+remain bound in ten journals. The32-call actual wall subset totals185.296s;
+whole author phase707.360s includes waiting/archive/last return, with1092.640s
+unused closed from1800 and no transfer. Public FULL projection3780 is separate
+from actual author wall; formal source/B/C calls and FULL remain0.
+
+The NEW PUBLIC11 caller intent fixes all six consumer/ACK argv explicitly to
+scientific-auditor, with the same32-call bound and expected1069/90256736.
+Different-author review SHA
+47331450ab4cd021cdd812f42b8eaafb3efc7316cead717fb5f887a5f2ad41d1.
+Intent SHAfae842142aa66ceb17fd06f8afc0b13713b456983d7d658e7bcacca0c1791f7d.
+It uses a fresh physical copy of accepted NEW-public PUBLIC9 data; PUBLIC10 stays
+frozen. New900s funding comes from prospective unspent root software capacity,
+reducing that cap50280 to49380 without changing pool80280/global61h. This opens
+no old phase balance, formal attempt or namespace repair round. Actual PUBLIC11
+acceptance, final readiness, full checks and normal publication remain pending.
+
+## PUBLIC11 prepare refusal and last public caller remedy
+
+PUBLIC11's reviewed intent selected a chained PUBLIC9 plan. The existing
+PUBLIC_SOURCE_COPY_CHAIN_REFUSED guard rejected the first prepare command with
+actual exit1; no generation, role, payload consumer, certificate or ACK started.
+The caller review missed this existing origin restriction. The empty-stdout
+display error is retained separately and did not create another native call.
+STOP SHA df052880feac5b939310914493f1bc570555720109813b1976c6efa4b759b89a;
+37-file/1129121-byte independently backed-up raw snapshot manifest
+14ef58321fb304c1eccc154bdd042d069cffd2f0c06fce8545a85b5670bfbe99.
+All28 source/DRAFT hashes matched, and preflight-remedy3 remains absent.
+Parent-observed final-return charge255.674s conservatively includes the
+post-filing return interval;644.326s unused closes from900 without transfer.
+Formal/source/scientific FULL remains0; the sole CLI is1/32 consumed.
+
+The original first-generation public plan used by actual successful PUBLIC10
+prepare is independently rehashed at c07903c0a7f5484a7d5a46dfe622dfbab8799bf8734f79bd036e88b6c700f819.
+Neither copy-chain field exists in its binding; formal/old/target/B_C remain
+false. Metadata supplement SHA
+44e251fd3e53de085c2c8a6351ce53023cdeb591e17fe336a38d220fd9f91bcb.
+The new PUBLIC12 intent binds this direct origin and six explicit auditor
+flags; SHA a810c2959638b7e8e76a2f65a02109d798e7411c29da451172040426ce1a3df4.
+Its last caller remedy round2/2 receives fresh different-author review300
+and prospective unspent-root reassignment900, root49380 to48480, with the
+80280 software pool and219600 action ceiling unchanged. No closed unused
+balance transfers, no source guard is relaxed and no formal call is added.
+Actual PUBLIC12 acceptance and complete normal publication remain pending.
+
+## PUBLIC12 actual independent public preflight and final readiness
+
+PUBLIC12 passed all32 reviewed commands with actual exit0 and all ten native
+acceptance flags. Its plan SHA
+d0ff483645c1e350a71947743f2d77813b0c3ccfdeb40b2d1150d60ee2abbf1d
+closes40 metadata/558 payload (12 model/528 label/18 scalar) and1071 version
+and certificate members. The explicitly selected scientific-auditor consumed
+1069 members/90256736 bytes before actual ACK0; active and reader leases were
+absent afterward. Its first-generation public origin satisfied the unchanged
+copy-chain restriction. Different-author caller review SHA
+5419139e0e4ade1aced9e6b65ff5aa678566dd1f7e63b3d5600177a4341e0277.
+
+Independent replay of ten journals verifies122 raw native profiles/79666 bytes,
+exact canonical ordering, original helper bytes and unsafe-integer tuples.
+The338-file/17983821-byte raw source/evidence snapshot has independent backup
+inodes and manifest SHA
+5723e7ded42ccf04e4ca0264e44738cb668137d57aa4f15086c381ad8abb10fb.
+All28 plan-bound source members, including DRAFT67d, matched. An actual same-
+runtime metadata observer returned0 and verified all27 published hashes.
+Preflight-remedy3 SHA
+30d3b86cff575c39e1ec541303c3648515dbf3998ea8f0382ef951ae5cde9405
+grants no formal or scientific admission itself. Source CLI wall158.276s and
+runtime observation3.830s are subsets of the whole phase; final parent charge
+418.126/900s includes archive, filing and actual last return, with481.874 closed
+unused. Public FULL projection3780 remains separate from formal FULL0.
+
+Only two of the three allowed readiness fields changed after the actual final
+return: state and preflight SHA; the27-source map already matched. Final JSON
+SHA df3de651f7a2bf3f553e181b184d6804d798cd2cfeb5deea088a611aa8745aac;
+freeze receipt1ba42d550cc2b7d8e372e47fc2ce408d6692366f353a4329821195c4a4dc13f7.
+Historical public certificate replay remains bound to archived DRAFT67d, while
+future formal execution binds the separately published final authority. The
+old preflight0/1/2 and all failed attempts remain unchanged.
+
+Final namespace Standards review6591a58fcc88996fd6b2e7aa4e510ba756e4a2f0ca67afb3c0908d7c876c0ac8
+and Spec reviewf6fe2e579d0b6843fc03e36f6c928e913c7135b36ba63d5dcf683a963a5c2af2
+passed without remaining findings; scope supplement
+3914d2d7024cde5cd69848fbef664a4ccbd6d5bca156b6cc117c95659530773b
+retains the stricter194400 source sub-ceiling. Full repository checks and normal
+protected publication still precede formal/original/target IO; input/B/C0, P17
+unrepaired. All prior engineering and scientific failures retain scope.
+
+The fresh final-authority whitelist derivation is external at
+`/private/tmp/topolab-funded-continuation-20261026/source-contract-derived-read-quotas-v11.json`,
+SHA5d10cab00d5c5962f3dcdbf42801420f05539c4bdca876ccaddbe55c30f1219d.
+It independently rechecks both frozen contract hashes and all40/558/1071/1196
+counts, exact author roles and once-per-file limits. Original reads/target IO0.
+The later original-workspace isolated check SHA
+c575b85baba1999a2e9f5e3497b732404c1b9b87ba0e4fdd9cb2d213d20e98c2
+again matches HEAD, index semantics, status and all25 original file bytes. No
+original index/workspace write occurred; original Git pack mmap was avoided.
+
+Cost indexv2 SHA9d682da56fd9afdf5032d9aff8435f1e23f32249fcf821ecd39c1d5300514fe3
+binds33 closed author phases,39766.49457103103603s parent-observed upper charges
+and23833.50542896896397s closed unused, separate from root's open clock. The
+earlier driver/Spec final endpoints remain UNKNOWN, with their9000s caps fully
+encumbered for admission; no invented exact final cost or unused transfer.
+After this historical snapshot, v11c prospectively reassigns7200 unspent root
+software seconds to complete both scientific result suffixes. Root cap41280/
+software pool73080 and scientific pool25200 still sum within original151200
+executor/219600 total. Two root result phases7560 each, distinct remedy review
+900 and second-result review900/retention480 fit the new17400 future reserve.
+Additional B author time180 per attempt is separately reserved in the unchanged
+independent7200 filing pool. No formal/FULL/read/quality/resource limit changes,
+no scientific retry on FAIL and no closed balance transfer follow these
+prospective allocations. Raw allocation hashes are in the linked protocol.
+
+## Final v11 mandatory check return
+
+All five required commands actually returned0 after the final readiness freeze:
+locked uv sync, Ruff, mypy, the complete pytest population and diff whitespace.
+Pytest2949 passed/1 selected-Linux-surface skip in1421.96s; complete outer test
+command1425.365560s. Raw log SHA
+739e4cac30b01a056be67225cd031e2d4f9ac46411bf52cb9d0a562cee97aed9.
+The skip is the existing freestanding Linux x86-64 case, not a new exclusion.
+All10 namespace regressions and both scientific metadata Node entry points
+are in this complete population; no tolerance or population was reduced.
+Actual tool final return0 and every step's raw log/hash/times are external.
+Final different-author review, protected PR exact-head CI, merged-main all-four
+CI and final NEW retention still precede formal input/target operations.

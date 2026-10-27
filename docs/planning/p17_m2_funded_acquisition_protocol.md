@@ -46,6 +46,32 @@ the v10 supplement below binds the prospective software allocation and raw hash.
 No external paid service or purchase is authorized;
 actual existing CI/monetary costs are UNKNOWN_NOT_ZERO.
 
+The later main-CI failure invokes the same owner's explicit automatic-expansion
+authority prospectively once more, with a finite v11 ceiling: unchanged129600
+wall seconds,151200 executor-pool plus68400 independent-pool seconds,219600
+aggregate author seconds (61 hours). New software funding adds21600 executor
+and3600 independent seconds before new work; no spent second, closed balance,
+formal call/FULL/read count, resource or scientific standard changes. Raw budget
+SHA9ccd738586328beec6f28c9c317f74d517a6135ca6b4426e124a1ad2780b3c8d.
+The table below is the retained v10 allocation; v11 raises its software pool to
+80280 and adds a separate3600 independent-remedy-review pool. Root's same-start
+software cap is50280, including every wait and actual final return. Separately
+encumbered prior software authors26400, closed-unlaunched engineering900,
+fresh public preflight1800 and fresh engineering audit900 exhaust that pool.
+The new3600s review pool initially reserved four900s slots. Subsequent
+prospective registrations refine unassigned review capacity into900,900,600,300
+and a final900s phase, still3600 total. Each closed phase unused balance closes
+without transfer; refinement uses only never-assigned capacity. No further
+automatic total increase follows this registration.
+
+The source-only JSON retains its stricter194400 aggregate author-second ceiling
+and immutable v9 allocation snapshot. The trusted caller must conservatively
+keep all new costs through source-result closure, including the full two-author
+remaining suffix reserve, inside that sub-ceiling as well as the v11 action
+ceiling. Its B/C permission remains false. The separate later scientific
+contract binds v11; the larger action envelope never overrides the source
+sub-ceiling, any old scientific all-paid limit or a closed allowance.
+
 | Pool/stage | Seconds ceiling |
 |---|---:|
 | Pooled software preparation, implementation, public scientific audit, checks/CI |58680|
@@ -98,6 +124,43 @@ their behavior. Public software evidence does not establish resource admission
 or seed17 repair.
 
 ## Formal source entry
+
+Main4f6c04b8/CI40419356298 returned a NEW-public shared payload failure after
+protected PR225 and passing exact-head CI. Formal entry therefore remains closed.
+The underlying CI inner log was not retained by that runner; its original cause
+is UNKNOWN. A deterministic NEW-tree regression independently exposes an
+enumeration-versus-sampler-unlink race. Capacity inventory may now discard an
+incomplete scan and restart a complete no-follow scan at most three times, only
+for an enumerated child disappearing before stat. It never skips an entry or
+carries partial counts. Root dev/inode must match before and after; all original
+file/byte/type caps and strict source-reader observations remain binding.
+Continuous churn, replacement, permissions, symlinks, hardlinks and cap failures
+still reject. Retain all unsuccessful inventory observations on exhaustion.
+This software correction is not proof of that historical CI root cause.
+
+After different-author review, the fresh PUBLIC12 chain must return at the NEW
+literal `independent/preflight-remedy3.json`; PUBLIC9 and all prior receipts stay
+unchanged. The JSON then binds the new27 executable hashes and actual receipt.
+Only clean protected merged source, all four exact-head/main CI jobs and complete
+NEW software retention admit the unchanged v5 attempt1. No formal attempt has
+started merely because this software remedy is under way.
+
+PUBLIC10 completed32 actual CLI calls, ten role acceptances and certificate1071,
+but stopped at the final required-view check: the external caller selected
+producer541 members/5470975 bytes instead of auditor1069/90256736. Its actual
+ACK returned and released the lease; those facts do not satisfy the missing
+view requirement. Freeze its entire generation/evidence and close its1800s
+phase at actual return, without transfer. Source27 and DRAFT bytes stay fixed.
+The reviewed PUBLIC11 caller intent has32 exact commands, with explicit auditor
+selection in all six consumer/ACK calls, and uses an independent fresh copy of
+accepted PUBLIC9 public data. No failed PUBLIC10 reuse or extra formal source
+read occurs. Prospective v11a moves900 unspent root software seconds into a new
+900s PUBLIC11 phase, reducing the same-start root cap50280 to49380; pool80280
+and global61h remain fixed. Raw allocation SHA
+e1e6408af90348dddb634b2f4147328a25cdca38e20c2bc05cb47cdb91d6adcf.
+Fresh caller review600 uses the already registered3600 independent-review pool.
+This is the first bounded verification for a separate caller-selection cause;
+the namespace cause's two software repair rounds remain consumed.
 
 Before any formal call, Linux PR225 CI exposed a test-only Darwin temporary-root
 assumption. Allocation v10 prospectively assigns the remaining8280 executor
@@ -229,3 +292,55 @@ After acquisition acceptance continue to B and then C when every dependency
 passes; this owner action explicitly overrides the old one-slice scheduling
 stop. If a real boundary blocks continuation, finish remaining independent
 authorized work, publish the actual frontier and close unused allowances.
+
+PUBLIC11 actually stopped at its first prepare command: the reviewed caller
+selected a PUBLIC9 plan whose binding already recorded a copy origin. The
+existing PUBLIC_SOURCE_COPY_CHAIN_REFUSED guard correctly refused it. No role,
+generation or formal call started. This caller-review gap remains a failure,
+with its unused900s balance closed at actual return and no transfer.
+The final caller remedy PUBLIC12 uses the original first-generation public plan
+used by successful PUBLIC10 preparation, SHA
+c07903c0a7f5484a7d5a46dfe622dfbab8799bf8734f79bd036e88b6c700f819,
+whose two copy-chain fields are absent. The guard is unchanged. Its exact32
+commands retain all six explicit auditor flags. Prospective v11b moves another
+900 unspent root software seconds into this new900s phase, lowering root49380
+to48480 while pool80280/global219600 stay fixed. Allocation SHA
+532726ab6e30dd642684d5f24fa44cf735d2be93ffb370120ee51498f64bbdd2.
+Different-author caller review300 uses the existing3600 pool, leaving900 for
+final precommit review. This is caller verification round2/2; no further default
+caller or namespace repair round follows failure. Formal quotas remain unchanged.
+
+PUBLIC12 subsequently returned actual PASS within its900s phase:32/32 commands
+exit0, ten role acceptances,40/558/1071 closure, required auditor1069 members/
+90256736 bytes, actual ACK and absent active/reader leases. Final parent charge
+418.126s closes481.874s without transfer. Preflight-remedy3 SHA
+30d3b86cff575c39e1ec541303c3648515dbf3998ea8f0382ef951ae5cde9405.
+Only readiness state and actual preflight hash changed from the archived DRAFT;
+the27 published source hashes already matched. Final acquisition authority SHA
+df3de651f7a2bf3f553e181b184d6804d798cd2cfeb5deea088a611aa8745aac.
+The historical public certificate binds archived DRAFT67d; no replay under the
+changed authority is asserted. The future formal plan separately freezes the
+protected published authority. Full checks and exact-head/main CI remain pending.
+
+Before any formal call, the known full-check/PR/main-CI costs also require a
+complete result suffix for each prebooked scientific attempt. Prospective v11c
+reassigns7200 never-spent root software seconds, root48480 to41280 and software
+pool80280 to73080, into the scientific contract/result pool18000 to25200. The
+original same-start root software deadline is consequently03:56Z2026-10-27.
+Total executor151200/independent68400/action219600/wall129600 are unchanged.
+Allocation SHA d8dd0a0b0477a95d39e3a02f8dd87c12ec9690e9c77331283cb07a3c9cddbe89.
+After the earlier7800 closed phase caps, the new17400 reserve is root result
+7560 per attempt, distinct engineering review900, second-result review900 and
+second-result retention480. Each new phase is registered before activation;
+unused closes, never transfers. A scientific FAIL still forbids attempt2.
+
+The independent scientific filing pool retains its7200 ceiling:4200 prior
+closed phase caps, then unstarted software retention600, B's additional author
+180 per attempt, source-bound contract Standards600, scientific-result review900
+and retention480, leaving60 unassigned. Allocation SHA
+200fca4649c7841b52fa6a66b502118d85eb7ee0617b08c9f8945ed838cdfe5b.
+B's actual different-author time is additional to root waiting in its whole
+14760 B/C clock; protocol FULL and actual author wall remain separate views.
+Both allocations preserve every native FULL/call/read/resource/scientific limit.
+The conservative complete pre-source-result cap sum remains182880<194400 after
+software decreases and future result reserve increases by the same7200.

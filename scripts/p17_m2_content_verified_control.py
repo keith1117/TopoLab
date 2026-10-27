@@ -71,16 +71,75 @@ def physical(info):
     return {key: getattr(info, key) for key in ("st_dev", "st_ino", "st_size", "st_mtime_ns")}
 
 
+class _NamespaceEntryDisappeared(FileNotFoundError):
+    """An enumerated NEW entry vanished before its no-follow observation."""
+
+
 def namespace_check(root, *, additional_bytes=0, additional_files=0, evidence=True):
+    """Take at most three complete inventories, without dropping vanished entries."""
+    anchor = nofollow_directory(root)
+    failures = []
+    before = after = None
+    try:
+        before = os.fstat(anchor)
+        for attempt in range(3):
+            try:
+                result = _namespace_snapshot(
+                    anchor, additional_bytes=additional_bytes,
+                    additional_files=additional_files, evidence=evidence,
+                )
+            except _NamespaceEntryDisappeared as error:
+                failures.append(error.observation)
+                if attempt == 2:
+                    raise
+                continue
+            closing = nofollow_directory(root)
+            try:
+                after = os.fstat(closing)
+                need((before.st_dev, before.st_ino) == (after.st_dev, after.st_ino),
+                     "NAMESPACE_ROOT_IDENTITY_CHANGED")
+            finally:
+                os.close(closing)
+            if failures:
+                result['enumeration_rescans'] = failures
+            return result
+    except Exception as error:
+        error.namespace_inventory_failures = failures
+        context = canonical({
+            'namespace_inventory_failures': failures,
+            'root_before': physical(before) if before is not None else None,
+            'root_closing': physical(after) if after is not None else None,
+            'primary_type': type(error).__name__, 'primary_reason': str(error),
+        }).decode().strip()
+        # Existing payload recorders retain type/str; keep the context there too.
+        # Preserve the actual error class, errno and chained child observation.
+        error.args = (*error.args, context)
+        if isinstance(error, OSError):
+            error.strerror = (error.strerror or str(error)) + '; ' + context
+        raise
+    finally:
+        os.close(anchor)
+
+
+def _namespace_snapshot(anchor, *, additional_bytes, additional_files, evidence):
     """Stat only this new public tree, including partial writes; never follow links."""
     count = size = evidence_count = evidence_size = 0
-    stack = [(nofollow_directory(root), evidence)]
+    stack = [(os.dup(anchor), evidence)]
     try:
         while stack:
             descriptor, evidence = stack.pop()
             try:
                 for name in os.listdir(descriptor):
-                    info = os.stat(name, dir_fd=descriptor, follow_symlinks=False)
+                    try:
+                        info = os.stat(name, dir_fd=descriptor, follow_symlinks=False)
+                    except FileNotFoundError as error:
+                        changed = _NamespaceEntryDisappeared(*error.args)
+                        directory = os.fstat(descriptor)
+                        changed.observation = dict(
+                            entry=name, directory_dev=directory.st_dev,
+                            directory_inode=directory.st_ino, reason=str(error),
+                        )
+                        raise changed from error
                     child_evidence = evidence and name not in (
                         "public-source",
                         "content",

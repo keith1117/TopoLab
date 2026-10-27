@@ -10,12 +10,35 @@ executable scientific successor is admitted and no repair date is established.
 The owner's subsequent “retry unstarted work, automatically expand” instruction
 prospectively funds the [new finite authority](planning/p17_m2_funded_acquisition_protocol.md)
 ([JSON](planning/p17_m2_funded_acquisition_protocol.json)). Same-start36h wall /
-54 author-hour ceiling, complete4500/FULL3600 source and7200/7200 result suffixes,
+61 author-hour v11 ceiling (retained earlier54h registration), complete4500/FULL3600 source and7200/7200 result suffixes,
 and bounded engineering remedies preserve all old closed grants and charges.
 [Actual software frontier](validation/p17_m2_funded_acquisition.md) includes the
 fixed18-reference/342-query producer, distinct numerical auditor, actual native
 exit/reader controls and new public source/decoder integration. Public tests and
 software publication do not establish input acceptance, B admission or P17 repair.
+
+PR225 merged normally as4f6c04b8 after exact-head all-four CI40414490478 passed.
+Its main run40419356298 failed one legacy NEW-public shared payload,2931 passed/
+6 skipped/1 failed in2181.03s; no formal source/target IO occurred. Missing CI
+inner context leaves that original cause UNKNOWN. A deterministic regression
+exposes a real sampler-unlink/capacity-enumeration race; the bounded complete
+inventory remedy passes its final93-case verification and distinct two-axis
+review after two rounds. Fresh public acceptance and protected exact-head/main
+CI remain prerequisites, never a reason
+to bypass source or scientific gates. The new software-only finite expansion
+preserves the original16:28 start and all closed balances.
+
+PUBLIC10's32 actual exits/ten acceptances/certificate1071 still ended in required
+consumer-view STOP: the external caller selected producer541 instead of auditor
+1069. ACK actually released; no formal input was consumed. Full failure and
+costs remain frozen. PUBLIC11 prepare then correctly refused a chained public
+origin before any role. Its reviewed caller and costs are retained. The final
+PUBLIC12 caller remedy then passed32 actual commands, ten role acceptances,
+40/558/1071 closure, required auditor1069/90256736B and actual ACK/released leases.
+Its418.126/900s phase is closed. New preflight30d3b86c and final authority
+df3de651 freeze the27-source map. All five v11 checks actually returned0:
+2949 tests passed/1 existing platform skip in1421.96s. Exact-head/main CI and
+complete NEW retention remain prerequisites to formal entry.
 
 Complete new distinct review/full checks/protected exact-head and main4CI before
 any old original or formal target IO. Then execute the exact40/558/1071 source

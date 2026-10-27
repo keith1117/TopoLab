@@ -1,6 +1,6 @@
 # Planning index
 
-Latest [funded continuous acquisition/M2 continuation](p17_m2_funded_acquisition_protocol.md) ([finite JSON](p17_m2_funded_acquisition_protocol.json)): fresh complete funding, exact source/input/native Gates and bounded engineering remedies; historical grants stay closed.
+Latest [funded continuous acquisition/M2 continuation](p17_m2_funded_acquisition_protocol.md) ([finite JSON](p17_m2_funded_acquisition_protocol.json)): same-start v11 software remedy, retained PUBLIC10/PUBLIC11 caller STOPs and completed bounded PUBLIC12 and frozen readiness before exact source/input/native Gates; historical grants stay closed.
 
 Latest [hash-bound identity/custody policy](p17_m2_hash_bound_acquisition_protocol.md) ([JSON](p17_m2_hash_bound_acquisition_protocol.json)): public software with unchanged strict defaults; this action closes formal entry unfunded.
 

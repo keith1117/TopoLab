@@ -20,7 +20,21 @@ At session start, slice start and context recovery, read these files in order:
 Current owner-authorized action: [funded continuous acquisition and conditional M2](docs/planning/p17_m2_funded_acquisition_protocol.md)
 and [actual frontier](docs/validation/p17_m2_funded_acquisition.md). The owner's
 later explicit automatic-expansion instruction prospectively registers a finite
-36h wall /54 author-hour envelope from the unchanged start. This action overrides
+36h wall envelope from the unchanged start. The finite v11 software-only
+supplement raises aggregate author funding to61h before the main-CI remedy;
+all original spent seconds, closed balances and formal/scientific caps remain.
+Main4f6c04b8 CI40419356298 failed a NEW-public shared payload; formal entry stays
+closed pending the completed bounded repair, fresh independent public acceptance
+and normal complete publication. PUBLIC10 stopped on caller producer541/auditor1069
+mismatch; PUBLIC11 prepare then correctly refused a chained public origin. Both
+failures/costs remain. The final caller remedy PUBLIC12 passed32 actual commands, the full auditor
+view and ACK/lease release. Its418.126s/900 phase is closed; global61h and the
+consumed namespace fix rounds stay fixed. Final readiness is frozen atdf3de651;
+all five checks passed2949/1. Protected exact-head/main publication and NEW
+retention still precede any formal source/target IO. Prospective unspent reallocation v11c leaves root
+software cap41280 (03:56Z deadline) and reserves7560s for each scientific result
+suffix, within the same61h total; no closed balance transfers.
+This action overrides
 one-slice scheduling stops; continue through source acceptance, B and fixed C
 when every dependency passes. New formal/remedy calls require the published
 freeze, different-author review, all checks and exact-head/main CI, real resource
