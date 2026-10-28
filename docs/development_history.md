@@ -1,5 +1,31 @@
 # Development history
 
+## 2026-10-28 — New source v3 executable compatibility
+
+[New capability](validation/p17_m2_new_source_acquisition.md) binds the once-only
+v7 route on both ends and adds enforcement of public raw-tool/snapshot/runtime
+prerequisites. The first fresh public graph completed32 native calls but
+stopped acceptance on old90256736 versus actual40590471 bytes; independent
+manifest diagnosis, failing regression and a bounded new review/fresh-graph
+remedy preserve that failure and FULL3780 charge. The NEW R1 adapter now binds
+its same registry buffer to independently re-audited R0 evidence before payload
+access. A separately reproduced R0-order mismatch is corrected on both readers,
+R1 ingress and certificate audit while legacy default order stays compatible.
+The shared namespace rejection now retains its original rejected tuple without
+relaxation; its earlier missing tuple/cause and NEW temporary-tree retention gap
+remain UNKNOWN. Scientific publication selects the accepted input authority
+instead of the closed old route, before any original or scientific access.
+Legacy strict behavior and closed attempts remain. Final DRAFT full3129/1 skip
+and distinct review precede the actual second public graph:32 returned0,
+1071 members,1069 consumed/40590471 bytes and ACK. Different-author native audit
+returned0 with8 independently reconciled event pairs and post-ACK absence;
+root verified the complete report/actual return before signed preflight and
+three late READY anchors. The caller's missing-canonical-LF guard STOP is retained;
+the existing projection function resolves it before any formal access. Final
+READY checks/protected publication still control entry; no accepted original
+input or P17 repair is claimed by public software evidence.
+
+
 Retained project-state summaries through B4.27 active-set evidence implementation.
 This history was moved from
 `AGENTS.md` during the 2026-10-06 documentation cleanup; all recorded results,

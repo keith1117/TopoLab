@@ -1,5 +1,7 @@
 # Planning index
 
+Latest [new source v3 compatibility](p17_m2_new_source_acquisition_protocol.md) ([finite JSON](p17_m2_new_source_acquisition_protocol.json)): actual public32/native independent preflight complete; final READY checks/protected publication precede the once-only v7 attempt. Old quotas/strict unbound rules/scientific Gates retained.
+
 Latest [new CI recovery/closeout finite protocol](p17_m2_ci_recovery_closeout_protocol.json): current recovery and separately registered still-unstarted publication families; old quotas closed, input/B/C Gates unchanged.
 
 

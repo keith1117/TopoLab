@@ -1,0 +1,183 @@
+{
+  "FULL_by_role": {
+    "exporter-r0": 300,
+    "exporter-r1": 1200,
+    "independent-public-check": 300,
+    "independent-r0": 300,
+    "independent-r1": 1200,
+    "shared-closeout": 300
+  },
+  "accepted_R0_to_R1_registry": "Before either R1 original payload stat/open: independently re-audit accepted R0 native wire and raw events, check the exact registry buffer hash against its actual proof, parse that same buffer and pass it directly to existing export/audit. No r0-proof.json-only acceptance or second registry read. Old routes unchanged.",
+  "actors": {
+    "executor": "/root",
+    "independent": "/root/ci_recovery_independent"
+  },
+  "budget": {
+    "all_review_and_new_adapter_author_seconds_cap": 36000,
+    "clock_start_unix_ms": 1793169554000,
+    "clock_start_utc": "2026-10-28T06:39:14Z",
+    "conditional_executor_seconds_cap": 39600,
+    "conditional_independent_seconds_cap": 39600,
+    "executor_author_seconds_cap": 82800,
+    "external_paid_commitments": 0,
+    "fees": "UNKNOWN_NOT_ZERO",
+    "independent_author_seconds_cap": 82800,
+    "old_allocations": "CLOSED_NO_TRANSFER",
+    "old_paid_ledger": "12721.16417100014444982 >7200 retained FAIL",
+    "outer_wall_seconds": 129600,
+    "phase_rule": "Current root/ind43200 unchanged. Each unstarted conditional suffix39600 begins only after published readiness; core source4500+source-result9000+B/C14760+scientific-result9000=37260, margin2340. Every wait/test/CI/archive/filing/final return charged; no reset or old window extension.",
+    "public_native_accounting": "Prior recovery128/30240 wholecomplianceUNKNOWN remains. New prospective publicrole reservation64externalCLI/FULL7560 for atmost2newpublicfixturegenerations; ordinary regression/CI tracked by campaigns/continuouswall, total OS process censusUNKNOWN. No retroactive relabeling.",
+    "resource_RSS_bytes": 4294967296,
+    "schema": "topolab.new-source-v3.finite-authority-budget.v1",
+    "source_CLI_max": 26,
+    "source_FULL_max": 3780,
+    "source_attempts": 1,
+    "source_common_each": 4500,
+    "source_each_author_once_per_original_per_attempt": 1,
+    "source_max_reads_each_attempt": 1196,
+    "source_metadata_payload_output_members": [
+      40,
+      558,
+      1071
+    ],
+    "source_result_each_author_each_attempt": 9000,
+    "total_author_seconds_cap": 201600
+  },
+  "budget_allocation_raw_sha256": "02d3e2853a6d9e474b2eaa201d7a1cc88675dd9c58f64e61b9ae93beec4022b3",
+  "budget_initial_raw_sha256": "ca0338f0c3c4b7c31c83233d0c0f083efadf3f0b3435e07590af6739c7fa17b0",
+  "custody_integrity": {
+    "directory_create_mode": "0700",
+    "exact_manifest": true,
+    "file_create_mode": "0600",
+    "independent_anchor_outside_custody": true,
+    "independent_inodes": true,
+    "lease": "real cooperative leases bind registered TopoLab tools only; no FileProvider exclusion",
+    "no_never_sync_or_upload_or_continuous_availability_claim": true,
+    "permanent_0555_required": false,
+    "reverify_each_read": true
+  },
+  "execution_identity": "topolab.v2.p17-m2-hash-bound-source-acquisition.v3",
+  "fixed_target": {
+    "attempts": {
+      "1": {
+        "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v7-hash-bound-20261028-independent-backup",
+        "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v7-hash-bound-20261028"
+      }
+    },
+    "parent": "/Users/keith1117/Library/Application Support/TopoLab-custody"
+  },
+  "formal_actual_calls": 0,
+  "formal_admission": "CONDITIONAL_ON_FROZEN_READINESS",
+  "formal_seconds": 4500,
+  "implementation_base_commit": "5c6078b8ec27980d6f1f425e862ba02b9b4dd66a",
+  "independent_preflight_path": "/private/tmp/topolab-new-source-science-20261028/independent/preflight-source-v3.json",
+  "independent_preflight_sha256": "1eded8ed3b164ab27422019b342ab3e6727c7aaff14388907c71120e91bbe3d0",
+  "outer_wall_seconds": 129600,
+  "owner_approval_reference": "2026-10-28 direct continuous instruction, new finite unstarted funding and once-only conditional exact-whitelist source authority; no old grant reopening",
+  "permissions": {
+    "B_C": false,
+    "formal_activation": true,
+    "old_original_access": true,
+    "target_access": true
+  },
+  "preparation_closure_paths": [
+    "/private/tmp/topolab-ci-recovery-result-primary-v1-20261028/publication-closure-v1.json",
+    "/private/tmp/topolab-ci-recovery-result-backup-v1-20261028/publication-closure-v1.json"
+  ],
+  "preparation_closure_sha256": "4d5ac90f102d717aef8776ea896b0d392a0a60f02fa120d584d39989d9844818",
+  "proposal_sha256": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+  "prospective_publication_API_metadata_allowance": {
+    "path": "/private/tmp/topolab-ci-recovery-20261028/future-publication-api-metadata-allowance-v1.json",
+    "scope": "future800GET/current192unchanged; currentrootextraUNKNOWNnotzero; noCI/FULL/authorclockincrease",
+    "sha256": "38e13bcdd698ed677c8cda1d54b24c53db84ce5fbecfb461b125a93d1501369b"
+  },
+  "public_fixture_remedy": {
+    "diagnosis_sha256": "ff5980da230d62a440afa7d87f53e555ff3306df38447ee46a79beae5792fe1d",
+    "failed_public_v1_STOP_sha256": "26f19bcf7b5acb62d0b1f69b5eb7034963a96acf679e5a4c468c476ad8e519d1",
+    "formal_caps": "UNCHANGED_NO_OLD_REOPEN",
+    "fresh_consumer_bytes": 40590471,
+    "fresh_public_root": "/private/tmp/topolab-public-new-source-acquisition-20261028-v2",
+    "remaining_graphs": 1,
+    "remaining_named_FULL": 3780,
+    "remaining_top_CLI": 32,
+    "same_cause_software_round": 1
+  },
+  "publication": "All5 local checks; distinct review; protected exact-head and main all4 CI; actual result paired evidence and last returns within original continuous caps.",
+  "published_source_sha256": {
+    "docs/planning/p17_m2_content_verified_custody_proposal.json": "8fa602f3d86be03da0c336f7569a35a68ce31052517249e0bf32b35f098aa7e0",
+    "docs/planning/p17_m2_content_verified_custody_protocol.json": "8ecc3716306cd2e49d7d5fd46f61eb43b4d2740861a702e5bc8745b9500e3381",
+    "docs/planning/p17_m2_content_verified_source_acquisition_proposal.json": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+    "docs/planning/p17_m2_funded_acquisition_protocol.json": "df3de651f7a2bf3f553e181b184d6804d798cd2cfeb5deea088a611aa8745aac",
+    "docs/planning/p17_m2_funded_acquisition_remedy2_protocol.json": "b6a3549156e8600a7dc416e6ff68ff48939d8d2014c6343b1e0525245616bf27",
+    "docs/planning/p17_m2_hash_bound_acquisition_protocol.json": "47b5fc562d82c61b713598c9ee34f062decce217fc275acad7b2afef881159c0",
+    "docs/planning/p17_m2_input_export_preparation_proposal.json": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "docs/planning/p17_m2_source_acquisition_adapter_preparation_protocol.json": "ad3745d028931d5469e3be76467da391ef0289addbf46fbe909a808497c285f0",
+    "docs/planning/p17_m2_source_acquisition_execution_protocol.json": "a741defb22c33f39f571a1585a55e813132a2a3593648e00230b0093d2642763",
+    "scripts/p17_m2_ci_diagnosis.py": "e99d7825935700d85d10bcc70537bca458938f27027eae7d5faa00d7300be3e4",
+    "scripts/p17_m2_content_verified_control.py": "a0a4f1ce3aa3d5e01f3d03a3fc8bfa35b7c1d49297515e9932a00b3aa2d89c22",
+    "scripts/p17_m2_content_verified_independent.py": "5eacd8ec95e4137ccdb3eecb997092ac43d1a61d8fb11c6a9bef55708706c3e6",
+    "scripts/p17_m2_content_verified_public_fixture.py": "1de1827427b3f28536dcc2004d26b1c8e69deba7ac95007f5cfe9d7757cecf08",
+    "scripts/p17_m2_homotopy.py": "3d7723e0f62f93036027fea25a1386079482bdc09a4818c518bdc5999cb5e7d9",
+    "scripts/p17_m2_independent_audit.py": "300a330bc5681728930c95be4fdd67c66b10ea5abb0aab7cc15b382ca7e7153d",
+    "scripts/p17_m2_input_export.py": "cbf3caa19f30d162d8b748577ad4340b46e719e7c3407d77f6c591154f3a50ac",
+    "scripts/p17_m2_input_export_control.py": "94ac117823d9c9ddba92cccf7632608ad6d19423d2d59e5a0a7f691c50a66681",
+    "scripts/p17_m2_input_export_dispatch.js": "a712d5b038c335752c14080cecc06f056e15cd8e2f811049c5ad2435153545dd",
+    "scripts/p17_m2_input_export_independent.py": "73c6c8fd3da586cd2297d2142631d5dfc8c47f33ed8d52f6ac6212f5988cced9",
+    "scripts/p17_m2_local_input_control.py": "6cfdbfd15e5a6b083975d9c20107aa7107232072755a66a13fcf86a3f0eb0bfb",
+    "scripts/p17_m2_local_input_independent.py": "72cfbc964065fbf93078282c6f16e12753e1cc4534d1cb482a353cb06d692a74",
+    "scripts/p17_m2_local_input_version.py": "e43f56ddd90fc5b19e53caeae2d2ef1462cedf5e49f9d79f9604b5052b8e1184",
+    "scripts/p17_m2_resource_control.py": "ac8467b55f5ed459710eeeca23c7327fca0a68dc16866049e35cbdb1b8a56fbd",
+    "scripts/p17_m2_scientific_control.py": "79365900fd48de58825f2b42194f8cf5093ffac98f820e518bc04b90b467084c",
+    "scripts/p17_m2_scientific_independent.py": "9adad447ef45380b56707cc511e62e9fc3d761aa4ccfb1b7b760a10217309f51",
+    "scripts/p17_m2_scientific_metadata.mjs": "bfb2588e453bb1d0e5415619a2cf4475ad4cace0be118602ae522e200583d38d",
+    "scripts/p17_m2_scientific_metadata_manifest.mjs": "a0f022c45e93ffa5b0032152f77eb0177b7c9f6ac86b112d7523f3b51a43d620",
+    "scripts/p17_m2_scientific_orchestration.py": "492c87f31eda308c55f4ef49e77d18ed2b5a663f0a6341154ab09943d8f9e04f",
+    "scripts/p17_m2_scientific_tool_ingress.mjs": "2f493a5cdfeadf443094872fba6702037abb713a6121ea0db04c92a52597c4aa",
+    "scripts/p17_m2_source_acquisition_control.py": "41f7ebf7e44d42af6c0e9bff65f63bde8ca99ec909401a0ebc9e59bfbbc2f85e",
+    "scripts/p17_m2_source_acquisition_independent.py": "a8468a036787c4e29c94d775d12cd7497739a60a2706485de91e7fd781292027",
+    "scripts/p17_m2_source_verified_input.py": "a53090b1f8d5a22c634ff6a60f66aaf1d17e4f36e1c4fa34ad3d97cbb2291669",
+    "scripts/p17_m2_verified_input.py": "db4d4e6e286c4652694209e6c29360e98c9423afc09f3c16d8cbce3791d7614b"
+  },
+  "readiness_freeze_state": "REVIEWED_FROZEN",
+  "result_seconds": {
+    "exporter": 9000,
+    "independent": 9000
+  },
+  "role_order": [
+    "independent-public-check",
+    "exporter-r0",
+    "independent-r0",
+    "exporter-r1",
+    "independent-r1",
+    "shared-closeout"
+  ],
+  "schema": "topolab.v2.m2-new-source-acquisition-authority.v1",
+  "scientific_admission": "B and C not granted by this source protocol. Accepted input and result closure first; separate actual B/scientific contract under original gates",
+  "source_and_target_observations": {
+    "at_software_draft_freeze": "No original/Library generation/target probe or creation; all actual formal observations external only"
+  },
+  "source_identity_policy": "topolab.source-identity.prebound-sha256.v1",
+  "source_whitelist": {
+    "activation": "Only after frozen new authority/readiness/clean merged all4CI, perauthor perfileonce. R0 accepted by both before any R1 payload stat/open; never bootstrap trusted expected hash from current unbound read.",
+    "draft_raw_sha256": "401c32618ef6fb964d0efc425dc2f792ce92baf7a7e483d8bdbafa1c08906786",
+    "exact_derivation": "docs/planning/p17_m2_source_acquisition_execution_authorization_draft.json#/source_whitelist",
+    "metadata_acceptance_before_payload_stat_open": true,
+    "original_contract": "docs/planning/p17_m2_input_export_preparation_proposal.json",
+    "per_author_per_file_reads": 1,
+    "r0_metadata": 40,
+    "r1_payload": 558,
+    "raw_sha256": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+    "strict_unbound_metadata_count": 23,
+    "total_old_source_reads_per_attempt_max": 1196,
+    "version_members": 1071
+  },
+  "stop_and_remedy": "One source attempt only; first STOP freezes original result and only reserved NEW-only shared closeout. No source retry, posthash bootstrap, old HELD release or scientific relaxation. Public-only remedy reservation is separate, never formal original reads.",
+  "total_new_author_charged_seconds_cap": 201600,
+  "unstarted_result_closeout_allocation": {
+    "old_result_windows_and_MISS": "UNCHANGED_CLOSED",
+    "registered_before_any_future_phase": true,
+    "scientific_each_author_seconds": 9000,
+    "scientific_execution_applicability_windows": "UNCHANGED",
+    "source_each_author_seconds": 9000
+  }
+}

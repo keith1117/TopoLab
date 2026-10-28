@@ -48,7 +48,7 @@ export async function buildMetadataManifest({contractPath,contractSHA256,scope,o
   need(contractRaw.length<=limits.max_contract_bytes,'contract byte cap');
   activeLimits=limits;need(cache.size+1<=limits.max_files&&total<=limits.max_total_bytes,'metadata active policy bootstrap bounds');
   const root=policy.root,manifestPath=policy.manifests?.[scope];
-  need(typeof root==='string'&&(root.startsWith('/private/tmp/topolab-funded-continuation-20261026/')||root==='/private/tmp/topolab-funded-continuation-20261026'),'NEW metadata root');
+  need(typeof root==='string'&&['/private/tmp/topolab-funded-continuation-20261026','/private/tmp/topolab-new-source-science-20261028'].some(parent=>root===parent||root.startsWith(parent+'/')),'NEW metadata root');
   need(typeof manifestPath==='string'&&manifestPath.startsWith(root+'/')&&!manifestPath.split('/').slice(1).some(x=>!x||x==='.'||x==='..'),'registered literal manifest output');
   const wanted=new Map();
   const add=(p,cap)=>{need(typeof p==='string'&&p.startsWith(root+'/')&&!p.split('/').some(x=>x==='..'||x==='.'),'metadata path escaped root');need(!wanted.has(p)||wanted.get(p)===cap,'metadata path cap conflict');wanted.set(p,cap);};

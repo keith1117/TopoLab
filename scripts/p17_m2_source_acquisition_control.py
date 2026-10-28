@@ -24,6 +24,14 @@ FUNDED_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v2"
 FUNDED_PROTOCOL = "docs/planning/p17_m2_funded_acquisition_protocol.json"
 REMEDY_PROTOCOL = "docs/planning/p17_m2_funded_acquisition_remedy2_protocol.json"
 REMEDY_SCHEMA = "topolab.v2.m2-funded-acquisition-remedy-authority.v1"
+NEW_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v3"
+NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
+NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
+NEW_PUBLIC_PREFIX = "topolab-public-new-source-acquisition-"
+NEW_GENERATION = (
+    "/Users/keith1117/Library/Application Support/TopoLab-custody/"
+    "p17-m2-local-input-version-v7-hash-bound-20261028"
+)
 SOURCE_IDENTITY_POLICY = "topolab.source-identity.prebound-sha256.v1"
 REHEARSAL_SCOPE = "FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY"
 FORMAL_SCOPE = "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY"
@@ -80,13 +88,26 @@ except FileNotFoundError:
     REMEDY_AUTHORITY_RAW = None
 
 
+try:
+    NEW_AUTHORITY_RAW = load("p17_m2_source_acquisition_independent").native._software_bytes(
+        REPO / NEW_PROTOCOL
+    )
+except FileNotFoundError:
+    NEW_AUTHORITY_RAW = None
+
+
 def is_funded_authority(raw):
-    return raw is not None and (raw is FUNDED_AUTHORITY_RAW or raw is REMEDY_AUTHORITY_RAW)
+    return raw is not None and (
+        raw is FUNDED_AUTHORITY_RAW or raw is REMEDY_AUTHORITY_RAW or raw is NEW_AUTHORITY_RAW
+    )
 
 
 def authority_for_root(root):
     """Select only registered literals before any source or custody traversal."""
     literal = str(Path(os.path.abspath(root)))
+    if literal == NEW_GENERATION:
+        return NEW_AUTHORITY_RAW, 1
+    need(Path(literal).name != Path(NEW_GENERATION).name, "FORMAL_LITERAL_ROOT_REQUIRED")
     if (REMEDY_AUTHORITY_RAW is not None and literal ==
             "/Users/keith1117/Library/Application Support/TopoLab-custody/"
             "p17-m2-local-input-version-v6-hash-bound-20261026"):
@@ -107,7 +128,7 @@ def authority_for_root(root):
     return EXECUTION_AUTHORITY_RAW, 1
 
 
-def source_freeze():
+def source_freeze(execution_identity=None):
     paths = {
         *REPO.joinpath("scripts").glob("p17_m2_*.py"),
         *REPO.joinpath("scripts").glob("p17_m2_*.js"),
@@ -125,6 +146,9 @@ def source_freeze():
         paths.add(REPO / FUNDED_PROTOCOL)
     if (REPO / REMEDY_PROTOCOL).is_file():
         paths.add(REPO / REMEDY_PROTOCOL)
+    if execution_identity == NEW_IDENTITY:
+        paths.add(REPO / NEW_PROTOCOL)
+        paths.update(REPO.joinpath("scripts").glob("p17_m2_*.mjs"))
     return {str(p.relative_to(REPO)): base().sha(p.read_bytes()) for p in sorted(paths)}
 
 
@@ -136,6 +160,7 @@ def rehearsal_root(root):
                 "topolab-public-formal-binding-",
                 "topolab-public-hash-bound-",
                 "topolab-public-funded-acquisition-",
+                NEW_PUBLIC_PREFIX,
             )
         ),
         "REHEARSAL_ROOT_REQUIRED",
@@ -166,17 +191,19 @@ def make_plan(root, contract, source_identity):
     helper = base()
     now = round(time.time(), 3)
     end = datetime.fromtimestamp(now + 4500, UTC).isoformat(timespec="milliseconds")
-    funded = root.name.startswith("topolab-public-funded-acquisition-")
+    new = root.name.startswith(NEW_PUBLIC_PREFIX) or str(root) == NEW_GENERATION
+    funded = new or root.name.startswith("topolab-public-funded-acquisition-")
     compat = funded or root.name.startswith("topolab-public-hash-bound-")
     remedy = root.name.startswith("topolab-public-funded-acquisition-remedy2-")
-    protocol_path = (REMEDY_PROTOCOL if remedy else FUNDED_PROTOCOL if funded
-                     else COMPAT_PROTOCOL if compat else PROTOCOL)
+    protocol_path = (NEW_PROTOCOL if new else REMEDY_PROTOCOL if remedy
+                     else FUNDED_PROTOCOL if funded else COMPAT_PROTOCOL if compat else PROTOCOL)
     protocol_sha = helper.sha((REPO / protocol_path).read_bytes())
     proposal_sha = helper.sha((REPO / PROPOSAL).read_bytes())
     return {
         "schema": "topolab.v2.m2-source-acquisition-plan.v1",
         "execution_identity": (
-            FUNDED_IDENTITY if funded else COMPAT_IDENTITY if compat else IDENTITY
+            NEW_IDENTITY if new else FUNDED_IDENTITY if funded else COMPAT_IDENTITY if compat
+            else IDENTITY
         ),
         **({"source_identity_policy": SOURCE_IDENTITY_POLICY} if compat else {}),
         "scope": REHEARSAL_SCOPE,
@@ -202,7 +229,7 @@ def make_plan(root, contract, source_identity):
             **({"source_identity_policy": SOURCE_IDENTITY_POLICY} if compat else {}),
             **({"authority_protocol_path": protocol_path} if funded else {}),
         },
-        "source_tree": source_freeze(),
+        "source_tree": source_freeze(NEW_IDENTITY if new else None),
         "runtime": helper.runtime(),
         "role_order": list(helper.CAPS),
         "roles": {r: {"argv": argv_for(root, "payload", "@PLAN_SHA256@", r)} for r in helper.CAPS},
@@ -214,7 +241,9 @@ def make_plan(root, contract, source_identity):
         "actor_activation_UTC_seconds": now,
         "actor_window_seconds": 4500,
         "actor_deadlines_UTC": {k: end.replace("+00:00", "Z") for k in ("exporter", "independent")},
-        "result_window_projection_seconds": {"exporter": 7200, "independent": 7200},
+        "result_window_projection_seconds": {
+            "exporter": 9000 if new else 7200, "independent": 9000 if new else 7200,
+        },
     }
 
 
@@ -622,17 +651,75 @@ def checked_setup(root, plan):
     return proof
 
 
+def new_source_parameters(authority):
+    """The NEW owner grant is a single literal route, never an old-quota extension."""
+    parent = "/Users/keith1117/Library/Application Support/TopoLab-custody"
+    expected_budget = {
+        "clock_start_utc": "2026-10-28T06:39:14Z",
+        "clock_start_unix_ms": 1793169554000,
+        "outer_wall_seconds": 129600,
+        "total_author_seconds_cap": 201600,
+        "executor_author_seconds_cap": 82800,
+        "independent_author_seconds_cap": 82800,
+        "all_review_and_new_adapter_author_seconds_cap": 36000,
+        "conditional_executor_seconds_cap": 39600,
+        "conditional_independent_seconds_cap": 39600,
+        "source_attempts": 1,
+        "source_CLI_max": 26,
+        "source_FULL_max": 3780,
+        "source_common_each": 4500,
+        "source_result_each_author_each_attempt": 9000,
+        "source_each_author_once_per_original_per_attempt": 1,
+        "source_max_reads_each_attempt": 1196,
+        "source_metadata_payload_output_members": [40, 558, 1071],
+        "resource_RSS_bytes": 4294967296,
+        "old_allocations": "CLOSED_NO_TRANSFER",
+        "external_paid_commitments": 0,
+    }
+    budget = authority.get("budget", {})
+    need(
+        authority.get("schema") == NEW_SCHEMA
+        and authority.get("execution_identity") == NEW_IDENTITY
+        and type(authority.get("total_new_author_charged_seconds_cap")) is int
+        and authority["total_new_author_charged_seconds_cap"] == 201600
+        and type(authority.get("outer_wall_seconds")) is int
+        and authority["outer_wall_seconds"] == 129600
+        and authority.get("source_identity_policy") == SOURCE_IDENTITY_POLICY
+        and authority.get("actors") == {
+            "executor": "/root", "independent": "/root/ci_recovery_independent",
+        }
+        and authority.get("fixed_target") == {
+            "parent": parent,
+            "attempts": {"1": {
+                "generation": NEW_GENERATION,
+                "backup": NEW_GENERATION + "-independent-backup",
+            }},
+        }
+        and isinstance(budget, dict)
+        and base().canonical({key: budget.get(key) for key in expected_budget})
+        == base().canonical(expected_budget),
+        "NEW_SOURCE_AUTHORITY_PARAMETERS_DIFFER",
+    )
+
+
 def formal_plan(authority_raw, *, attempt=1):
     """Pure, software-only formal metadata. Constructing it grants no target access."""
     helper = base()
     authority = load("p17_m2_input_export").parse(authority_raw)
     proposal_raw = (REPO / PROPOSAL).read_bytes()
     proposal = json.loads(proposal_raw)
+    new = authority.get("schema") == NEW_SCHEMA
+    if new:
+        new_source_parameters(authority)
     remedy = authority.get("schema") == REMEDY_SCHEMA
-    funded = remedy or authority.get("schema") == "topolab.v2.m2-funded-acquisition-authority.v1"
+    funded = new or remedy or authority.get("schema") == (
+        "topolab.v2.m2-funded-acquisition-authority.v1"
+    )
     need(
         (funded or authority["schema"] == "topolab.v2.m2-source-acquisition-execution-authority.v1")
-        and authority["execution_identity"] == (FUNDED_IDENTITY if funded else IDENTITY)
+        and authority["execution_identity"] == (
+            NEW_IDENTITY if new else FUNDED_IDENTITY if funded else IDENTITY
+        )
         and authority["proposal_sha256"] == helper.sha(proposal_raw)
         and isinstance(authority["owner_approval_reference"], str)
         and bool(authority["owner_approval_reference"].strip())
@@ -646,11 +733,15 @@ def formal_plan(authority_raw, *, attempt=1):
             }
         )
         and authority["formal_seconds"] == 4500
-        and authority["result_seconds"] == {"exporter": 7200, "independent": 7200},
+        and authority["result_seconds"] == {
+            "exporter": 9000 if new else 7200, "independent": 9000 if new else 7200,
+        },
         "FORMAL_EXECUTION_AUTHORITY_INVALID",
     )
     need(
-        type(attempt) is int and attempt in ((2,) if remedy else (1, 2) if funded else (1,)),
+        type(attempt) is int and attempt in (
+            (1,) if new else (2,) if remedy else (1, 2) if funded else (1,)
+        ),
         "UNREGISTERED_FORMAL_ATTEMPT",
     )
     target = (
@@ -681,11 +772,12 @@ def formal_plan(authority_raw, *, attempt=1):
         target_access=True,
         execution_protocol_sha256=execution_sha,
     )
-    protocol_path = REMEDY_PROTOCOL if remedy else FUNDED_PROTOCOL if funded else EXECUTION_PROTOCOL
+    protocol_path = (NEW_PROTOCOL if new else REMEDY_PROTOCOL if remedy else FUNDED_PROTOCOL
+                     if funded else EXECUTION_PROTOCOL)
     plan["source_tree"][protocol_path] = execution_sha
     if funded:
         plan.update(
-            execution_identity=FUNDED_IDENTITY,
+            execution_identity=NEW_IDENTITY if new else FUNDED_IDENTITY,
             source_identity_policy=SOURCE_IDENTITY_POLICY,
             preparation_contract_sha256=execution_sha,
         )
@@ -700,10 +792,15 @@ def formal_plan(authority_raw, *, attempt=1):
 
 def source_role_windows(authority, caller_start, native_start, observed, minimum_remaining=4200):
     """Check supplied actual clocks; this arithmetic grants no execution admission."""
-    need(authority.get("execution_identity") == FUNDED_IDENTITY,
+    new = authority.get("execution_identity") == NEW_IDENTITY
+    need(new or authority.get("execution_identity") == FUNDED_IDENTITY,
          "SOURCE_FUNDED_CLOCK_IDENTITY_REQUIRED")
     remedy = authority.get("schema") == REMEDY_SCHEMA
-    if remedy:
+    if new:
+        new_source_parameters(authority)
+        need(type(minimum_remaining) is int and minimum_remaining == 4200,
+             "NEW_SOURCE_SUFFIX_RESERVATION_REQUIRED")
+    elif remedy:
         load("p17_m2_source_acquisition_independent").validate_remedy_authority(
             authority, formal=False
         )
@@ -725,11 +822,52 @@ def source_role_windows(authority, caller_start, native_start, observed, minimum
                 minimum_remaining=minimum_remaining)
 
 
+def new_source_readiness(authority):
+    """Read only the NEW literal metadata proof paths before common main checks."""
+    new_source_parameters(authority)
+    closures = [
+        "/private/tmp/topolab-ci-recovery-result-primary-v1-20261028/publication-closure-v1.json",
+        "/private/tmp/topolab-ci-recovery-result-backup-v1-20261028/publication-closure-v1.json",
+    ]
+    preflight_path = (
+        "/private/tmp/topolab-new-source-science-20261028/independent/preflight-source-v3.json"
+    )
+    need(authority.get("preparation_closure_paths") == closures
+         and authority.get("independent_preflight_path") == preflight_path
+         and all(isinstance(authority.get(key), str)
+                 and re.fullmatch(r"[0-9a-f]{64}", authority[key])
+                 and authority[key] != "0" * 64
+                 for key in ("preparation_closure_sha256", "independent_preflight_sha256")),
+         "NEW_LITERAL_READINESS_PROOFS_REQUIRED")
+    need(0 <= time.time() - 1793169554 <= 129600 - 4500 - 9000,
+         "NEW_COMPLETE_SOURCE_AND_RESULT_SUFFIX_UNAVAILABLE")
+    frozen = {key: value for key, value in source_freeze(NEW_IDENTITY).items()
+              if key != NEW_PROTOCOL}
+    need(authority.get("published_source_sha256") == frozen,
+         "PUBLISHED_IMPLEMENTATION_SOURCE_CHANGED")
+    checker = load("p17_m2_source_acquisition_independent")
+    protocol_raw = checker.native._software_bytes(REPO / NEW_PROTOCOL)
+    need(base().canonical(json.loads(protocol_raw)) == base().canonical(authority),
+         "NEW_AUTHORITY_BYTES_CHANGED")
+    preflight_raw = checker.native._software_bytes(Path(preflight_path))
+    need(base().sha(preflight_raw) == authority["independent_preflight_sha256"],
+         "INDEPENDENT_PREFLIGHT_HASH_CHANGED")
+    checker.check_funded_preflight(formal_plan(protocol_raw), preflight_raw)
+    for path in closures:
+        need(base().sha(checker.native._software_bytes(Path(path)))
+             == authority["preparation_closure_sha256"], "PREPARATION_CLOSURE_CHANGED")
+
+
 def activation_readiness(authority):
     """Before target IO: distinct appointments, immutable evidence refs and actual clean-main CI."""
-    funded = authority.get("execution_identity") == FUNDED_IDENTITY
+    new = authority.get("execution_identity") == NEW_IDENTITY
+    if new:
+        need(authority.get("readiness_freeze_state") == "REVIEWED_FROZEN",
+             "NEW_READINESS_NOT_FROZEN")
+        new_source_readiness(authority)
+    funded = new or authority.get("execution_identity") == FUNDED_IDENTITY
     remedy = authority.get("schema") == REMEDY_SCHEMA
-    if funded:
+    if funded and not new:
         need(
             authority.get("readiness_freeze_state") == "REVIEWED_FROZEN",
             "FUNDED_READINESS_NOT_FROZEN",
@@ -830,7 +968,7 @@ def activation_readiness(authority):
         return json.loads(command(["gh", "api", "repos/keith1117/TopoLab/" + endpoint]))
 
     need(github("commits/main")["sha"] == head, "EXACT_MERGED_MAIN_REQUIRED")
-    for name, expected in source_freeze().items():
+    for name, expected in source_freeze(authority["execution_identity"]).items():
         if not funded and name != EXECUTION_PROTOCOL:
             need(
                 base().sha(
@@ -919,6 +1057,7 @@ def checked(root, expected):
             "topolab-public-formal-binding-",
             "topolab-public-hash-bound-",
             "topolab-public-funded-acquisition-",
+            NEW_PUBLIC_PREFIX,
         )
     ):
         root = rehearsal_root(literal)
@@ -939,6 +1078,8 @@ def checked(root, expected):
         == (
             declared["execution_identity"]
             if scope == FORMAL_SCOPE
+            else NEW_IDENTITY
+            if literal.name.startswith(NEW_PUBLIC_PREFIX)
             else FUNDED_IDENTITY
             if literal.name.startswith("topolab-public-funded-acquisition-")
             else COMPAT_IDENTITY
@@ -948,7 +1089,7 @@ def checked(root, expected):
         and plan["formal_authority"] is (scope == FORMAL_SCOPE),
         "ACQUISITION_BINDING_CHANGED",
     )
-    need(plan["source_tree"] == source_freeze(), "SOURCE_FREEZE_CHANGED")
+    need(plan["source_tree"] == source_freeze(plan["execution_identity"]), "SOURCE_FREEZE_CHANGED")
     actual = helper.runtime()
     need(
         all(plan["runtime"][k] == v for k, v in actual.items() if k != "orig_argv"),
@@ -969,6 +1110,10 @@ class AcquisitionTransport:
 
     @property
     def identity(self):
+        if self.root.name.startswith(NEW_PUBLIC_PREFIX) or (
+            self.scope == FORMAL_SCOPE and str(self.root) == NEW_GENERATION
+        ):
+            return NEW_IDENTITY
         if self.root.name.startswith("topolab-public-funded-acquisition-"):
             return FUNDED_IDENTITY
         if (
@@ -982,12 +1127,15 @@ class AcquisitionTransport:
 
     @property
     def result_windows(self):
+        if self.identity == NEW_IDENTITY:
+            return (("exporter", 9000), ("independent", 9000))
         return (("exporter", 7200), ("independent", 7200))
 
     @property
     def source_identity_policy(self):
         return (
-            SOURCE_IDENTITY_POLICY if self.identity in (COMPAT_IDENTITY, FUNDED_IDENTITY) else None
+            SOURCE_IDENTITY_POLICY
+            if self.identity in (COMPAT_IDENTITY, FUNDED_IDENTITY, NEW_IDENTITY) else None
         )
 
     def argv_for(self, root, mode, plan_sha, role):
@@ -1183,6 +1331,49 @@ class AcquisitionTransport:
             Path(plan["backup_root"]) if self.scope == FORMAL_SCOPE else self.root / "backup-prefix"
         )
 
+    def read_registry(self, root, plan, role):
+        """Bind the R1 buffer before any payload IO; keep legacy routing unchanged."""
+        if self.identity != NEW_IDENTITY or role not in ("exporter-r1", "independent-r1"):
+            return base().read_json(root / "registry.json")
+        checker = self.independent()
+        reader = None
+        context = {"stage": "accepted R0 registry before R1", "role": role,
+                   "metadata_root": str(root), "original_payload_reads": 0}
+        try:
+            producer = load("p17_m2_input_export")
+            local = load("p17_m2_local_input_version")
+            reader = producer.Reader(root, execution_identity=local.IDENTITY,
+                                     source_identity_checks=True)
+            accepted_raw = reader.read("independent-r0-accepted.json", 16 * 1024**2,
+                                       group="accepted_metadata", total=32 * 1024**2)
+            accepted = checker.native.base.parse(accepted_raw, canonical_required=True)
+            wire_raw = reader.read("receipts/independent-r0-wire.json", 16 * 1024**2,
+                                   group="accepted_metadata", total=32 * 1024**2)
+            wire = dict(checker.native.base.parse(wire_raw, canonical_required=True),
+                        **self.resource_evidence(root, self.plan_sha, "independent-r0"))
+            proof = self.audit_saved(root, "independent-r0", accepted["raw_tool_events"], wire=wire)
+            need(proof.get("full_role_evidence_accepted") is True,
+                 "R0_REGISTRY_NATIVE_ACCEPTANCE_REQUIRED")
+            r0 = checker.native._proof(
+                wire, "SOURCE_ACQUISITION_R0_CHECKED",
+                expected_identity=self.identity, expected_scope=self.scope,
+            )
+            context.update(accepted_record_sha256=base().sha(accepted_raw),
+                           accepted_registry_sha256=r0["source_registry_sha256"])
+            raw = reader.read("registry.json", 8 * 1024**2,
+                              expected=r0["source_registry_sha256"],
+                              group="accepted_registry", total=8 * 1024**2)
+            return checker.accepted_r0_registry(raw, wire, plan=plan)
+        except Exception as error:
+            context.update(primary_error={"type": type(error).__name__, "reason": str(error)},
+                           metadata_reader=(None if reader is None else {
+                               "attempts": reader.attempts, "rows": reader.rows,
+                               "source_identities": reader.source_observations,
+                               "failures": reader.failures,
+                           }))
+            error.independent_read_failure = context
+            raise
+
     def predecessor(self, root, plan, role):
         need(role in plan["roles"] or role in plan["metadata_actions"], "UNREGISTERED_ROLE")
         order = plan["role_order"] + list(base().METADATA_CAPS)
@@ -1250,10 +1441,15 @@ class AcquisitionTransport:
         packet = base().read_json(root / "receipts" / (role + "-wire.json"))
         return dict(packet, **self.resource_evidence(root, self.plan_sha, role))
 
-    def audit_saved(self, root, role, events):
-        packet = base().read_json(root / "receipts" / (role + "-wire.json"))
-        resources = self.resource_evidence(root, self.plan_sha, role, tolerate_missing=True)
-        failures = resources.pop("resource_read_failures")
+    def audit_saved(self, root, role, events, *, wire=None):
+        if wire is None:
+            packet = base().read_json(root / "receipts" / (role + "-wire.json"))
+            resources = self.resource_evidence(root, self.plan_sha, role, tolerate_missing=True)
+            failures = resources.pop("resource_read_failures")
+        else:
+            packet = wire
+            resources = {key: wire[key] for key in ("inner_evidence", "native_profiles")}
+            failures = []
         checker = self.independent().native
         if role in base().METADATA_CAPS and role != "final-filing":
             result = checker.audit_metadata(

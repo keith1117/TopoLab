@@ -1,5 +1,7 @@
 # Validation evidence index
 
+Latest [new source v3 implementation and entry frontier](p17_m2_new_source_acquisition.md): actual public32/1071/native independent audit and three late READY anchors; protected publication remains required and actual original input/B/C/P17 remain conditional.
+
 Latest [CI diagnostic repair and new-funded failure closeout](p17_m2_ci_recovery_closeout.md): raw runner shutdown/initiator UNKNOWN, regression-first envelope parser, fresh review and finite paired metadata/accounting closure; P17 remains unrepaired.
 
 

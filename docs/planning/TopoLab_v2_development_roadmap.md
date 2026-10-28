@@ -1,5 +1,7 @@
 # TopoLab v2 Development Roadmap
 
+Current continuous action: [new source v3 compatibility](p17_m2_new_source_acquisition_protocol.md) and [actual frontier](../validation/p17_m2_new_source_acquisition.md). Diagnostic protected-main CI/paired actual closure are complete. Public-v1 byte-premise STOP remains; corrected public v2 returned32 calls0/1071 members and different-author native audit0. Signed preflight and three late READY anchors now precede final checks/protected publication and once-only source acceptance; B precedes fixed C/H17. All old failures/costs/closed quotas and strict unbound rules remain. Public PASS is not original input acceptance or P17 repair.
+
 F is published and closed: [PR211](https://github.com/keith1117/TopoLab/pull/211),
 main `b0fe2350ac68a88a05e974926a2b0fe6a1302bf7`, all four exact-main
 [CI39473450571 jobs](https://github.com/keith1117/TopoLab/actions/runs/39473450571) successful.

@@ -185,3 +185,79 @@ def test_capacity_inventory_does_not_retry_other_failures(tmp_path, monkeypatch,
     with pytest.raises(PermissionError if kind == 'permission' else ValueError):
         module.namespace_check(root, additional_files=512 if kind == 'cap' else 0)
     assert snapshots == 1
+
+
+@pytest.mark.parametrize('kind', ['symlink', 'hardlink', 'zero-link-observation'])
+@pytest.mark.parametrize('directory_fstat_fails', [False, True])
+def test_rejected_namespace_entry_retains_original_tuple_without_retry(
+    tmp_path, monkeypatch, kind, directory_fstat_fails
+):
+    import json
+    import stat
+    from types import SimpleNamespace
+
+    module = control()
+    root = tmp_path / ('topolab-public-namespace-entry-context-' + kind)
+    root.mkdir(mode=0o700)
+    entry = root / 'entry'
+    entry.write_bytes(b'original entry')
+    if kind == 'symlink':
+        entry.unlink()
+        entry.symlink_to('absent-target')
+    elif kind == 'hardlink':
+        os.link(entry, root / 'second-link')
+    observed = entry.lstat()
+    original_stat = os.stat
+    original_fstat = os.fstat
+    original_listdir = os.listdir
+    snapshots = 0
+    fstats = 0
+
+    def counted_listdir(fd):
+        nonlocal snapshots
+        snapshots += 1
+        return original_listdir(fd)
+
+    def original_rejection_tuple(path, *args, **kwargs):
+        info = original_stat(path, *args, **kwargs)
+        if kind == 'zero-link-observation' and path == 'entry':
+            return SimpleNamespace(**{
+                name: 0 if name == 'st_nlink' else getattr(info, name)
+                for name in ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns',
+                             'st_mode', 'st_nlink', 'st_uid')
+            })
+        return info
+
+    def observe_directory(fd):
+        nonlocal fstats
+        fstats += 1
+        if directory_fstat_fails and fstats == 2:
+            raise PermissionError('rejected-entry parent observation denied')
+        return original_fstat(fd)
+
+    monkeypatch.setattr(module.os, 'listdir', counted_listdir)
+    monkeypatch.setattr(module.os, 'stat', original_rejection_tuple)
+    monkeypatch.setattr(module.os, 'fstat', observe_directory)
+    with pytest.raises(ValueError, match='NAMESPACE_ORDINARY_SINGLE_LINK_REQUIRED') as caught:
+        module.namespace_check(root)
+    context = json.loads(caught.value.args[-1])
+    rejection = context['namespace_entry_failure']
+    assert rejection['entry'] in ('entry', 'second-link')
+    assert rejection['entry_tuple'] == {
+        name: getattr(observed, name)
+        for name in ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns')
+    }
+    assert rejection['entry_mode'] == observed.st_mode
+    assert rejection['entry_nlink'] == (0 if kind == 'zero-link-observation' else observed.st_nlink)
+    assert rejection['entry_uid'] == os.getuid()
+    assert stat.S_ISREG(observed.st_mode) is (kind != 'symlink')
+    if directory_fstat_fails:
+        assert rejection['directory_tuple'] is None
+        assert rejection['secondary_failures'] == [{
+            'stage': 'rejected-entry-directory-fstat', 'type': 'PermissionError',
+            'reason': 'rejected-entry parent observation denied',
+        }]
+    else:
+        assert rejection['directory_tuple']['st_ino'] == root.stat().st_ino
+        assert rejection['secondary_failures'] == []
+    assert snapshots == 1

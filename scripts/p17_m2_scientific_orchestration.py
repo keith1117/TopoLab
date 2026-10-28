@@ -775,7 +775,25 @@ def publication_metadata(contract, contract_sha, role):
     """Separately billed repository eligibility; no scientific inputs or leases."""
     began = time.time()
     control = load("p17_m2_source_acquisition_control")
-    authority = control.load("p17_m2_input_export").parse(control.FUNDED_AUTHORITY_RAW)
+    authority_raw = control.FUNDED_AUTHORITY_RAW
+    if "acquisition" in contract:
+        acquisition = contract["acquisition"]
+        content = acquisition.get("content_root") if type(acquisition) is dict else None
+        if type(content) is not str:
+            raise ValueError("REGISTERED_SCIENTIFIC_ACQUISITION_REQUIRED")
+        path = Path(content)
+        if (not path.is_absolute() or str(path) != content or path.name != "content"
+                or any(part in (".", "..") for part in path.parts)):
+            raise ValueError("REGISTERED_SCIENTIFIC_ACQUISITION_REQUIRED")
+        authority_raw, attempt = control.authority_for_root(path.parent)
+        if (authority_raw is None
+                or (attempt == 2 and authority_raw is not control.REMEDY_AUTHORITY_RAW)):
+            raise ValueError("REGISTERED_SCIENTIFIC_ACQUISITION_AUTHORITY_REQUIRED")
+        declared = control.formal_plan(authority_raw, attempt=attempt)
+        if (declared["root"] != str(path.parent)
+                or declared["content_root"] != content):
+            raise ValueError("REGISTERED_SCIENTIFIC_ACQUISITION_REQUIRED")
+    authority = control.load("p17_m2_input_export").parse(authority_raw)
     readiness = control.activation_readiness(authority)
     return {
         "execution_identity": IDENTITY,
