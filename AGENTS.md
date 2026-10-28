@@ -17,21 +17,19 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Current continuous action: [source2 strict-unbound STOP](docs/validation/p17_m2_source2_unbound_metadata_stop.md).
-PR227/main1f41011 and all-four exact-main CI40455188819 passed before new v6.
-Three of six roles launched; exporter R0 correctly rejected ordinal6, unbound
-mtime+109ns before hash/closing. Original reads6, completed hashes5, payload0,
-independent original reads0; no input/B/C acceptance or P17 repair. The reserved
-NEW-only shared closeout verified43 failed-prefix members/521343B, returning
-original STOP. FULL900 paid,2700 and filing180 closed;10 formal CLI calls.
-Both registered attempts are consumed. No third attempt, old reread, post-failure
-hash bootstrap or manual HELD release. Complete failure result review/checks,
-protected publication and paired metadata retention/actual final returns by
-conservative shared T1+7200=08:22:07.998Z2026-10-27 and each earlier applicable cap.
-Source2 author phases12600 and aggregate235800/original36h remain unchanged.
-The owner's continuous instruction overrides one-slice scheduling stops; actual
-input, scientific, resource and finite-call blockers remain. Uniform/default,
-historical all-paid FAIL, full fitPENDING4GiB and fixed P17/unrepaired remain.
+Current continuous action: [CI diagnosis and new-funded failure closeout](docs/validation/p17_m2_ci_recovery_closeout.md)
+under the [new finite protocol](docs/planning/p17_m2_ci_recovery_closeout_protocol.json).
+First complete the diagnostic repair, distinct review, normal exact-head PR/main
+four-job CI, paired complete metadata retention and actual accounting/return
+supplements. Source2 stays strict-unbound STOP, its result window MISS, old
+allowances closed and v6/backup HELD. Fixed P17 is unrepaired; input/B/C absent.
+The owner overrides one-slice scheduling stops and funds still-unstarted work;
+continue when dependencies actually pass. Next requires a new reviewed source
+identity/adapters/author/target binding and one exact-whitelist attempt. Preserve
+strict reads for unbound entries; accepted input before B, accepted B before C.
+All science/resource Gates and historical costs/UNKNOWN/seals remain. Read the
+new report before dependent work; raw-index cached-stat drift is not staged
+content change and the25 original dirty files remain outside these commits.
 
 Read the [frozen source-acquisition authority](docs/planning/p17_m2_source_acquisition_execution_protocol.md)
 and [actual STOP result](docs/validation/p17_m2_source_acquisition_execution.md).
