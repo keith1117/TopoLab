@@ -1,0 +1,198 @@
+{
+  "authority": "Owner direct continue and automatic finite funding for unstarted repairs/closeout; then original scientific gates",
+  "budget": {
+    "all_time_accounting": "Continuous author wall incl waiting and actual last return, FULL separate overlapping ledger; future endpoints UNKNOWN never counted actual",
+    "conditional_unstarted_reserve": {
+      "B_C_attempts_max": 1,
+      "B_FULL_max": 180,
+      "C_independent_FULL_max": 3600,
+      "C_producer_FULL_max": 10800,
+      "fresh_independent_seconds": 36000,
+      "new_source_and_scientific_result_phase_each_seconds_max": 14400,
+      "root_seconds": 50400,
+      "scientific_formal_CLI_max": 24,
+      "scientific_shared_FULL_max": 180,
+      "scope": "No read or role grant is created by reservation; exact frozen whitelist/authors/targets/dependencies/call table and trusted preread binding still required. Real scientific FAIL is not retried; unchanged all-paidFAIL cannot be passed by this budget",
+      "source_FULL_max": 3780,
+      "source_attempts_max": 1,
+      "source_formal_CLI_max": 26,
+      "source_old_original_reads_max": 1196,
+      "state": "RESERVED_NOT_ADMITTED; latest-contract scientific and input feasibility must be adjudicated before any role or target access"
+    },
+    "current_recovery_phase": {
+      "common_deadline_utc": "2026-10-28T18:39:14Z",
+      "fresh_independent": 43200,
+      "includes": "All context recovery, diagnosis, public RED/GREEN, software repair, waits/tests/CI, protected publication, both complete metadata archives, old actual/UNKNOWN cost audit, actual final returns; no narrow subphase resets",
+      "root": 43200
+    },
+    "external_paid_commitments": 0,
+    "fresh_reviews": {
+      "spec": 7200,
+      "standards": 7200
+    },
+    "independent_total_cap_seconds": 79200,
+    "monetary_fees": "UNKNOWN_NOT_ZERO",
+    "new_reviewers_total_cap_seconds": 14400,
+    "new_scientific_source_or_target_IO": 0,
+    "no_midphase_expansion": true,
+    "old_author_budgets": "ALL_CLOSED_NO_TRANSFER; priorspent/overruns/MISS/UNKNOWN unchanged",
+    "outer_wall_cap_seconds": 129600,
+    "owner_authority": "2026-10-28 direct continue instruction: new finite budgets for unstarted repair/closeout; diagnose canceled main CI, repair diagnostic parser, independent review, paired archives, final billing; then original scientific gates towardP17; no old grant reopened",
+    "public_software_limits": {
+      "CI_runs_max": 6,
+      "CI_watch_refreshes_max": 1440,
+      "GitHub_metadata_GET_max": 192,
+      "fix_rounds_per_confirmed_cause": 2,
+      "local_full_regression_campaigns_max": 4,
+      "public_FULL_max": 30240,
+      "public_native_CLI_max": 128
+    },
+    "registered_unix_ns": 1793169663935518000,
+    "resources": {
+      "compressed_metadata_archive_bytes_max": 2147483648,
+      "metadata_members_max": 8192,
+      "metadata_total_bytes_max": 268435456,
+      "native_RSS_bytes": 4294967296,
+      "single_metadata_bytes_max": 134217728
+    },
+    "root_start_unix_ms": 1793169554000,
+    "root_start_utc": "2026-10-28T06:39:14Z",
+    "root_total_cap_seconds": 93600,
+    "schema": "topolab.owner-authorized-new-recovery-budget.v1",
+    "total_new_author_seconds_cap": 187200
+  },
+  "completion": "Actual repair regression, distinct review, all five checks, normal protected exact-head PR/main four-CI, paired complete replay/independent inodes/outside anchor and actual command-return supplements. Future final-return facts remain unknown until observed.",
+  "date": "2026-10-28",
+  "frozen_failed_main": {
+    "attempt": 1,
+    "commit": "627e4d9d4068ff485f1aae45c39610b406a573c2",
+    "quality_job": 122072016288,
+    "run": 40469234730,
+    "tree": "700db6f8c0662a2653e2db629a3a42a0f52774a4"
+  },
+  "new_budget_raw_sha256": "ca0338f0c3c4b7c31c83233d0c0f083efadf3f0b3435e07590af6739c7fa17b0",
+  "next_gate": "New compatible source authority plus both adapters, exact original whitelist and one prospectively registered NEW attempt. Source acceptance before B; B and all unchanged science/resource gates before fixed C. This recovery protocol grants no input/target/scientific role by itself.",
+  "paired_metadata_roots": [
+    "/private/tmp/topolab-ci-recovery-result-primary-v1-20261028",
+    "/private/tmp/topolab-ci-recovery-result-backup-v1-20261028"
+  ],
+  "public_native_accounting_audit": {
+    "all_native_OS_process_population": "UNKNOWN_NOT_AGGREGATED",
+    "audit_path": "/private/tmp/topolab-ci-recovery-20261028/spec/native-call-accounting-interpretation-v1.json",
+    "audit_sha256": "6e42d37d46498be0a55b8d2bdcd0f0a42eb54f1cc92c6eb965e1e2168fcd3e19",
+    "original_registration_status": "Preserved; native_CLI not explicitly defined as standalone. No retrospective all-process exclusion or cap PASS.",
+    "registered_native_role_projection_known": 0,
+    "synthetic_FULL": "Not automatically scientific paid; any proved real native trial retains its actual charge regardless of pytest parent. All testing/CI time and fees retained.",
+    "whole_action_128_cap_compliance": "UNKNOWN_NOT_CERTIFIED",
+    "whole_action_30240_actual_native_FULL_compliance": "UNKNOWN_NOT_CERTIFIED"
+  },
+  "recovery_authors": {
+    "executor": "/root",
+    "independent": "/root/ci_recovery_independent",
+    "spec": "/root/ci_recovery_spec",
+    "standards": "/root/ci_recovery_standards"
+  },
+  "schema": "topolab.v2.m2-ci-recovery-closeout-protocol.v1",
+  "snapshot_boundary": "Exact reviewed metadata whitelist only; previous external failure packets, command outputs, plans/reviews/cost records plus this recovery; old original/Library generation/scientific payload reads0. Huge test trees and earlier complete archives remain at their separately anchored locations.",
+  "unchanged": "Every old failure/cost/UNKNOWN/seal/HELD lease; source2 STOP and original deadline MISS; historical all-paid FAIL/full-fitPENDING; uniform default; fixedP17 unrepaired.",
+  "unstarted_dependency_allocation": {
+    "additional_unstarted_full_regression_remedy_campaigns_max": 2,
+    "admission": "Only if all remaining actual work and reserved suffix fits every continuous cap; unused margin is not an automatic extension. A real scientific FAIL is never a software retry. No original/target/formal role comes from this reservation.",
+    "already_started_caps": "UNCHANGED root43200/independent43200; current two reviewers7200 each; current public CI6; original starts and all spent costs retained",
+    "conditional_core_allocation_seconds": {
+      "B_C_max": 14760,
+      "independent_margin": 2340,
+      "root_margin": 5940,
+      "scientific_result_each_max": 7200,
+      "source_formal_max": 4500,
+      "source_result_each_max": 7200,
+      "sum": 33660
+    },
+    "cumulative_action_CI_ceiling": 18,
+    "current_full_regression_campaign_cap_4": "UNCHANGED; cumulative maximum6, every new commit still runs all5; no repeat merely to harvest PASS",
+    "external_paid_commitments": 0,
+    "formal_and_original_caps": "UNCHANGED one NEW source,1196 reads/26CLI/FULL3780; B/C once/24CLI/FULL14760; old quotas never reopened",
+    "future_CI_runs_max": 12,
+    "monetary_fees": "UNKNOWN_NOT_ZERO",
+    "original_registration_sha256": "ca0338f0c3c4b7c31c83233d0c0f083efadf3f0b3435e07590af6739c7fa17b0",
+    "outer_wall_129600_from_original_new_start": "UNCHANGED",
+    "owner_authority": "Explicit automatic finite NEW funding for still-unstarted repairs and closeout, then unchanged science gates",
+    "prospective_unstarted_author_allocation": {
+      "all_review_and_new_adapter_authors_total_cap_seconds": 25200,
+      "effective_independent_total_cap_seconds": 79200,
+      "effective_root_total_cap_seconds": 82800,
+      "fresh_independent_conditional_seconds_unchanged": 36000,
+      "from_root_conditional_reserve_seconds": 50400,
+      "new_independent_adapter_implementation_author": "/root/source_route_independent_implementation",
+      "new_independent_adapter_implementation_seconds": 7200,
+      "new_role_clocks": "UNSTARTED; prospective starts must be recorded before context/delegation; continuous through actual final return",
+      "new_route_spec_author": "/root/source_route_spec",
+      "new_route_spec_seconds": 1800,
+      "new_route_standards_author": "/root/source_route_standards",
+      "new_route_standards_seconds": 1800,
+      "root_conditional_remainder_seconds": 39600,
+      "total_author_seconds_added": 0,
+      "total_new_author_cap_unchanged": 187200
+    },
+    "registered_ns": 1793171818815341000,
+    "replaces_only_unstarted_reservation_sha256": "e7b0978e0e473d8f001dc200eca6262fe5c653f4fd36a386203966483cfd3171",
+    "schema": "topolab.owner-unstarted-dependency-allocation.v2",
+    "unstarted_publication_families": {
+      "accepted_input_scientific_binding": {
+        "inspected_same_head_hosted_interruption_retry_max": 1,
+        "normal_feature_push_PR_main_runs": 3
+      },
+      "actual_source_or_scientific_result": {
+        "inspected_same_head_hosted_interruption_retry_max": 1,
+        "normal_feature_push_PR_main_runs": 3
+      },
+      "new_source_identity_compatibility": {
+        "inspected_same_head_hosted_interruption_retry_max": 1,
+        "normal_feature_push_PR_main_runs": 3
+      }
+    }
+  },
+  "unstarted_dependency_allocation_raw_sha256": "1a5dab49373eb567c7c9fdcffe74c0badfd36d81ebd03d89c76e6a340f0652e9",
+  "unstarted_publication_raw_sha256": "e7b0978e0e473d8f001dc200eca6262fe5c653f4fd36a386203966483cfd3171",
+  "unstarted_publication_reservation": {
+    "author_seconds_added": 0,
+    "authority": "Latest explicit owner instruction auto-register sufficient finite NEW budget for unstarted repairs/closeout then original scientific gates; earlier request automatically expand unstarted items",
+    "conditional_source_and_science_reserve": "187200 total author cap unchanged; root50400/fresh-independent36000 remain unstarted",
+    "cumulative_action_CI_ceiling": 12,
+    "external_paid_commitments": 0,
+    "families": {
+      "new_scientific_binding_publication": {
+        "PR": 1,
+        "feature_push": 1,
+        "merged_main": 1
+      },
+      "new_source_publication": {
+        "PR": 1,
+        "feature_push": 1,
+        "merged_main": 1
+      }
+    },
+    "fees": "UNKNOWN_NOT_ZERO",
+    "formal_calls_added": 0,
+    "new_CI_workflow_runs_cap": 6,
+    "no_started_cap_increase": true,
+    "not_admission": "No original/target/role permission until independently reviewed frozen new authority exact whitelist and protected allCI source; no old balance reopened",
+    "preparation_and_adapter_public_software": "charged to current continuous recovery clocks before conditional formal-phase start, not free",
+    "previous_public_software_CI_cap_6": "UNCHANGED including currently running same-main attempt2 and diagnostic release; unused cannot reset/transfer",
+    "prospective_conditional_clock_allocation": {
+      "B_plus_C_max_seconds": 14760,
+      "independent_cap_seconds": 36000,
+      "independent_unassigned_margin_seconds": 2340,
+      "root_cap_seconds": 50400,
+      "scientific_result_each_max_seconds": 7200,
+      "source_formal_max_seconds": 4500,
+      "source_result_each_max_seconds": 7200,
+      "total_assigned_sequential_seconds": 33660
+    },
+    "registered_ns": 1793170594262834000,
+    "schema": "topolab.owner-new-unstarted-publication-reservation.v1",
+    "scope": "Only still-unstarted NEW source-identity compatibility publication and, after accepted input, NEW scientific binding-contract publication",
+    "source_original_reads_added": 0
+  },
+  "unstarted_publication_reservation_status": "Historical initial unstarted reservation; superseded before any family starts by unstarted_dependency_allocation; bytes retained"
+}

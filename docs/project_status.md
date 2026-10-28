@@ -1,11 +1,33 @@
 # Current project status
 
-Updated:2026-10-27. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-10-28. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: source2 stopped on unbound metadata; result closure
+## Current: CI diagnostic repair and new-funded closeout (2026-10-28)
+
+[New recovery evidence](validation/p17_m2_ci_recovery_closeout.md) and
+[finite protocol](planning/p17_m2_ci_recovery_closeout_protocol.json) record fresh
+main627e4d9 and the raw runner shutdown signal that interrupted main CI40469234730.
+Initiator remains UNKNOWN. The diagnostic's wrong-envelope StopIteration has a
+public regression and minimal CLI repair; distinct Standards/Spec reviews pass.
+All five local checks pass (3004/1 skip). Same-head CI attempt2 has passed all
+four jobs. Both new metadata archives pass complete distinct-author replay and
+an outside integrity anchor; this repair's protected publication and fresh
+paired publication/actual-return supplements are pending at authoring.
+Original source2 STOP and deadline MISS remain; old quotas stay closed.
+
+New independent feasibility review finds the prospective M2 query route
+conditionally feasible, not admitted. After recovery closure continue to a new
+compatible source identity and two-end authority/target binding, public regression
+and publication. One NEW strict/unbound-aware acquisition must actually complete
+40 metadata/558 payload per author and1071-member version before B. Accepted B
+and frozen scientific input/call/resource tables precede fixed C/H17. No new
+scientific result or seed17 repair exists. Historical all-paid FAIL/full-fitPENDING,
+uniform default and all original dirty files/failure scenes are retained.
+
+## Historical: source2 stopped on unbound metadata; result closure
 
 [Actual source2 evidence](validation/p17_m2_source2_unbound_metadata_stop.md)
 records protected PR227/main1f41011cbb17a3fee18ab0815ad414a5ddc754b5 and

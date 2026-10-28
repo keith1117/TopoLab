@@ -1,5 +1,8 @@
 # Planning index
 
+Latest [new CI recovery/closeout finite protocol](p17_m2_ci_recovery_closeout_protocol.json): current recovery and separately registered still-unstarted publication families; old quotas closed, input/B/C Gates unchanged.
+
+
 Latest [reserved source2 orchestration remedy](p17_m2_funded_acquisition_remedy2_protocol.md) ([JSON](p17_m2_funded_acquisition_remedy2_protocol.json)): retain source1 zero-role deadline STOP/v5 HELD; new finite prelude only after regression, distinct review, public preflight and protected publication.
 
 

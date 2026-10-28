@@ -1,5 +1,8 @@
 # Validation evidence index
 
+Latest [CI diagnostic repair and new-funded failure closeout](p17_m2_ci_recovery_closeout.md): raw runner shutdown/initiator UNKNOWN, regression-first envelope parser, fresh review and finite paired metadata/accounting closure; P17 remains unrepaired.
+
+
 Latest [source2 strict-unbound metadata STOP](p17_m2_source2_unbound_metadata_stop.md): PR227/main CI passed; R0 ordinal6 unbound mtime+109ns correctly rejected,5 hashes/payload0,43-member NEW shared backup, FULL900 paid/2700 closed, input/B/C absent and P17 unrepaired.
 
 Latest [source1 zero-role STOP and source2 remedy](p17_m2_source2_orchestration_remedy.md): PR226/main CI passed; setup0 but first-role caller deadline expired, source reads/native roles/FULL0, v5 HELD isolated; paired remedy and fresh acceptance remain conditional.

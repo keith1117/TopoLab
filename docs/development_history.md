@@ -8,6 +8,16 @@ next slice or a development primary describe their historical context.
 Read [project status](project_status.md) for the current boundary and
 [validation reports](validation/README.md) for the authoritative evidence.
 
+## 2026-10-28 — CI diagnostic repair and new-funded failure closeout
+
+[New evidence](validation/p17_m2_ci_recovery_closeout.md) records independent raw
+runner-shutdown attribution to the interruption mechanism, initiator UNKNOWN,
+regression-first command-envelope diagnostic repair and fresh two-axis review.
+New finite clocks cover normal publication, paired metadata replay and honest
+old UNKNOWN/deadline-MISS accounting. Conditional NEW source/B/C reserves retain
+all scientific/input/resource dependencies; no old quota or failed scene is reused.
+P17 remains unrepaired; the next capability is new source-identity compatibility.
+
 ## 2026-10-27 — Source2 strict-unbound metadata STOP
 
 [Actual report](validation/p17_m2_source2_unbound_metadata_stop.md) records PR227,

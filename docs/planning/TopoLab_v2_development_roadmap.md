@@ -2433,7 +2433,22 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-## Current: source2 unbound metadata STOP (2026-10-27)
+## Current: recover CI diagnosis and close failure evidence (2026-10-28)
+
+[New-funded recovery](../validation/p17_m2_ci_recovery_closeout.md) retains the
+original source2 STOP/result-window MISS and all closed allowances. Raw main CI
+logs establish runner shutdown during pytest, with initiator UNKNOWN. Complete
+the regression-first diagnostic repair, distinct review, exact-head protected
+PR/main CI, paired full metadata replay and actual cost/return supplements.
+The owner's continuous authority then permits the next dependent capability:
+new source authority/adapters, exact whitelist/targets/authors and finite once-only
+strict-unbound acquisition. Twenty-three unbound entries remain strict; no old
+failed member is post-hashed. Accepted40/558/1071 input precedes B, accepted B and
+frozen scientific tables precede C. Prospective native H query feasibility is not
+rejected solely by old all-paid FAIL/full-fitPENDING, whose original scopes remain.
+No new science metric or P17 repair is established; uniform stays default.
+
+## Historical: source2 unbound metadata STOP (2026-10-27)
 
 [Actual source2 result](../validation/p17_m2_source2_unbound_metadata_stop.md)
 retains protected PR227/main1f41011 and exact-main all-four CI40455188819 PASS,
