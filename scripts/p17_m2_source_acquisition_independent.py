@@ -12,6 +12,7 @@ import importlib.util
 import json
 import os
 import re
+import shlex
 from copy import deepcopy
 from pathlib import Path
 from typing import Any
@@ -22,6 +23,19 @@ HASH_BOUND_POLICY = "topolab.source-identity.prebound-sha256.v1"
 HASH_BOUND_PROTOCOL = "docs/planning/p17_m2_hash_bound_acquisition_protocol.json"
 FUNDED_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v2"
 FUNDED_PROTOCOL = "docs/planning/p17_m2_funded_acquisition_protocol.json"
+NEW_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v3"
+NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
+NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
+NEW_PUBLIC_PREFIX = "topolab-public-new-source-acquisition-"
+NEW_EVIDENCE = "/private/tmp/topolab-new-source-science-20261028/"
+NEW_PUBLIC_EVIDENCE = "/private/tmp/topolab-ci-recovery-20261028/"
+NEW_PUBLIC_ROOT = "/private/tmp/topolab-public-new-source-acquisition-20261028-v2"
+NEW_PUBLIC_REPO = "/private/tmp/topolab-source-route-20261028"
+NEW_PUBLIC_PYTHON = (
+    "/Library/Frameworks/Python.framework/Versions/3.12/Resources/"
+    "Python.app/Contents/MacOS/Python"
+)
+NEW_PUBLIC_TABLE_SHA256 = "92d9b8b48e60ce23296f6514d26fb4d7ea298ee3f32510311e1dcc7914f2cba5"
 REMEDY_PROTOCOL = "docs/planning/p17_m2_funded_acquisition_remedy2_protocol.json"
 REMEDY_SCHEMA = "topolab.v2.m2-funded-acquisition-remedy-authority.v1"
 FUNDED_FROZEN_SHA256 = "df3de651f7a2bf3f553e181b184d6804d798cd2cfeb5deea088a611aa8745aac"
@@ -115,7 +129,7 @@ def sampler_profiles(folder: Path, record: dict[str, Any]) -> dict[str, bytes]:
 
 
 def _source_policy(plan: dict[str, Any]) -> str | None:
-    if plan.get("execution_identity") in (HASH_BOUND_IDENTITY, FUNDED_IDENTITY):
+    if plan.get("execution_identity") in (HASH_BOUND_IDENTITY, FUNDED_IDENTITY, NEW_IDENTITY):
         require(plan.get("source_identity_policy") == HASH_BOUND_POLICY
                 and plan.get("binding", {}).get("source_identity_policy") == HASH_BOUND_POLICY,
                 "hash-bound source policy differs")
@@ -127,6 +141,11 @@ def _source_policy(plan: dict[str, Any]) -> str | None:
 
 
 def _protocol_path(plan: dict[str, Any]) -> str:
+    if plan.get("execution_identity") == NEW_IDENTITY:
+        _source_policy(plan)
+        require(plan.get("binding", {}).get("authority_protocol_path") == NEW_PROTOCOL,
+                "new source authority protocol differs")
+        return NEW_PROTOCOL
     if plan.get("execution_identity") == FUNDED_IDENTITY:
         _source_policy(plan)
         if plan.get("binding", {}).get("authority_protocol_path") == REMEDY_PROTOCOL:
@@ -149,13 +168,14 @@ def _hash_bound_authority(plan: dict[str, Any]) -> dict[str, Any]:
     protocol = _protocol_path(plan)
     funded = plan.get("execution_identity") == FUNDED_IDENTITY
     remedy = protocol == REMEDY_PROTOCOL
+    new = protocol == NEW_PROTOCOL
     raw = native._software_bytes(REPO / protocol)
     require(digest(raw) == plan["source_tree"][protocol]
             == plan["binding"]["preparation_protocol_sha256"]
             == plan["preparation_contract_sha256"], "hash-bound authority freeze differs")
     authority = native.base.parse(raw)
     require(
-        authority.get("schema") == (REMEDY_SCHEMA if remedy else
+        authority.get("schema") == (NEW_SCHEMA if new else REMEDY_SCHEMA if remedy else
                                    "topolab.v2.m2-funded-acquisition-authority.v1" if funded
                                    else "topolab.v2.m2-hash-bound-acquisition-authority.v1")
         and authority.get("execution_identity") == plan["execution_identity"]
@@ -169,13 +189,14 @@ def _hash_bound_authority(plan: dict[str, Any]) -> dict[str, Any]:
         and type(authority.get("formal_seconds")) is int
         and authority["formal_seconds"] == 4500
         and canonical(authority.get("result_seconds")) == canonical(
-            {"exporter": 7200, "independent": 7200} if funded
+            {"exporter": 9000, "independent": 9000} if new
+            else {"exporter": 7200, "independent": 7200} if funded
             else {"exporter": 1200, "independent": 1200})
         and type(authority.get("outer_wall_seconds")) is int
-        and authority["outer_wall_seconds"] == (129600 if funded else 14400)
+        and authority["outer_wall_seconds"] == (129600 if funded or new else 14400)
         and type(authority.get("total_new_author_charged_seconds_cap")) is int
         and authority["total_new_author_charged_seconds_cap"]
-        == (235800 if remedy else 194400 if funded else 18000),
+        == (201600 if new else 235800 if remedy else 194400 if funded else 18000),
         "hash-bound authority identity/permissions/budget differs",
     )
     actors = authority.get("actors", {})
@@ -184,7 +205,9 @@ def _hash_bound_authority(plan: dict[str, Any]) -> dict[str, Any]:
                     for v in actors.values())
             and actors["executor"] != actors["independent"],
             "hash-bound authority requires distinct actual authors")
-    if funded:
+    if new:
+        _validate_new_authority(authority, plan)
+    elif funded:
         _validate_funded_authority(authority, plan)
     return authority
 
@@ -196,6 +219,15 @@ def remedy_projection_sha256(authority: dict[str, Any]) -> str:
                 "independent_preflight_sha256"):
         projection.pop(key, None)
     projection["remedy"]["review"].pop("sha256", None)
+    return digest(canonical(projection))
+
+
+def new_authority_projection_sha256(authority: dict[str, Any]) -> str:
+    """Fix every reviewed semantic field before the three late readiness anchors."""
+    projection = deepcopy(authority)
+    for key in ("readiness_freeze_state", "published_source_sha256",
+                "independent_preflight_sha256"):
+        projection.pop(key, None)
     return digest(canonical(projection))
 
 
@@ -365,6 +397,96 @@ def _validate_funded_authority(authority: dict[str, Any], plan: dict[str, Any]) 
                 "funded authority actual source freeze/preflight binding differs")
 
 
+def _validate_new_authority(authority: dict[str, Any], plan: dict[str, Any]) -> None:
+    """Only the separately funded v3 literal authority can name this generation."""
+    require(authority.get("formal_admission") == "CONDITIONAL_ON_FROZEN_READINESS"
+            and authority["actors"] == {"executor": "/root",
+                                      "independent": "/root/ci_recovery_independent"}
+            and authority.get("role_order") == ROLE_ORDER
+            and canonical(authority.get("FULL_by_role")) == canonical({
+                "independent-public-check": 300, "exporter-r0": 300,
+                "independent-r0": 300, "exporter-r1": 1200,
+                "independent-r1": 1200, "shared-closeout": 300}),
+            "new source authority actors/order/FULL differ")
+    expected = {"original_contract": CONTENT_CONTRACT,
+                "raw_sha256": CONTENT_CONTRACT_SHA256,
+                "per_author_per_file_reads": 1, "r0_metadata": 40, "r1_payload": 558,
+                "version_members": 1071, "total_old_source_reads_per_attempt_max": 1196,
+                "metadata_acceptance_before_payload_stat_open": True,
+                "strict_unbound_metadata_count": 23}
+    whitelist = authority.get("source_whitelist", {})
+    require(isinstance(whitelist, dict)
+            and canonical({key: whitelist.get(key) for key in expected}) == canonical(expected),
+            "new source exact whitelist/read quota differs")
+    parent = "/Users/keith1117/Library/Application Support/TopoLab-custody"
+    generation = parent + "/p17-m2-local-input-version-v7-hash-bound-20261028"
+    require(authority.get("fixed_target") == {"parent": parent, "attempts": {"1": {
+        "generation": generation, "backup": generation + "-independent-backup"}}},
+            "new source literal target inventory differs")
+    budget = authority.get("budget", {})
+    expected_budget = {
+        "schema": "topolab.new-source-v3.finite-authority-budget.v1",
+        "clock_start_unix_ms": 1793169554000,
+        "clock_start_utc": "2026-10-28T06:39:14Z",
+        "outer_wall_seconds": 129600, "total_author_seconds_cap": 201600,
+        "executor_author_seconds_cap": 82800, "independent_author_seconds_cap": 82800,
+        "all_review_and_new_adapter_author_seconds_cap": 36000,
+        "conditional_executor_seconds_cap": 39600, "conditional_independent_seconds_cap": 39600,
+        "source_attempts": 1, "source_CLI_max": 26, "source_FULL_max": 3780,
+        "source_common_each": 4500, "source_result_each_author_each_attempt": 9000,
+        "source_each_author_once_per_original_per_attempt": 1,
+        "source_max_reads_each_attempt": 1196,
+        "source_metadata_payload_output_members": [40, 558, 1071],
+        "resource_RSS_bytes": 4294967296, "external_paid_commitments": 0,
+        "fees": "UNKNOWN_NOT_ZERO", "old_allocations": "CLOSED_NO_TRANSFER",
+        "old_paid_ledger": "12721.16417100014444982 >7200 retained FAIL",
+    }
+    require(isinstance(budget, dict)
+            and canonical({key: budget.get(key) for key in expected_budget})
+            == canonical(expected_budget)
+            and authority.get("budget_initial_raw_sha256")
+            == "ca0338f0c3c4b7c31c83233d0c0f083efadf3f0b3435e07590af6739c7fa17b0"
+            and authority.get("budget_allocation_raw_sha256")
+            == "02d3e2853a6d9e474b2eaa201d7a1cc88675dd9c58f64e61b9ae93beec4022b3",
+            "new source finite budget/closed old allocation differs")
+    require(canonical(authority.get("custody_integrity")) == canonical({
+        "directory_create_mode": "0700", "file_create_mode": "0600",
+        "exact_manifest": True, "independent_inodes": True,
+        "independent_anchor_outside_custody": True, "reverify_each_read": True,
+        "permanent_0555_required": False,
+        "lease": ("real cooperative leases bind registered TopoLab tools only; "
+                  "no FileProvider exclusion"),
+        "no_never_sync_or_upload_or_continuous_availability_claim": True,
+    }), "new source custody policy differs")
+    require(authority.get("preparation_closure_paths") == [
+                "/private/tmp/topolab-ci-recovery-result-primary-v1-20261028/"
+                "publication-closure-v1.json",
+                "/private/tmp/topolab-ci-recovery-result-backup-v1-20261028/"
+                "publication-closure-v1.json",
+            ] and authority.get("independent_preflight_path")
+            == NEW_EVIDENCE + "independent/preflight-source-v3.json",
+            "new source literal readiness metadata paths differ")
+    if plan.get("scope") == FORMAL_SCOPE:
+        require(type(plan.get("binding", {}).get("formal_attempt")) is int
+                and plan["binding"]["formal_attempt"] == 1,
+                "new source once-only formal attempt differs")
+        require(authority.get("readiness_freeze_state") == "REVIEWED_FROZEN"
+                and isinstance(authority.get("implementation_base_commit"), str)
+                and re.fullmatch("[0-9a-f]{40}", authority["implementation_base_commit"])
+                and authority["implementation_base_commit"] != "0" * 40
+                and authority.get("published_source_sha256")
+                == {key: value for key, value in plan["source_tree"].items()
+                    if key != NEW_PROTOCOL}
+                and all(isinstance(authority.get(key), str)
+                        and native.base.SHA.fullmatch(authority[key])
+                        and authority[key] != "0" * 64 for key in (
+                            "preparation_closure_sha256", "independent_preflight_sha256")),
+                "new source published readiness/actual freeze pending or different")
+    else:
+        require(Path(plan.get("root", "")).name.startswith(NEW_PUBLIC_PREFIX),
+                "new source public root prefix differs")
+
+
 def _validate_hash_bound_binding(plan: dict[str, Any]) -> dict[str, Any]:
     _source_policy(plan)
     binding = plan.get("binding", {})
@@ -379,7 +501,8 @@ def _validate_hash_bound_binding(plan: dict[str, Any]) -> dict[str, Any]:
               "intended_formal_scope", "formal_authority", "old_original_access",
               "target_access", "B_C", "source_identity_policy"}
     funded = plan.get("execution_identity") == FUNDED_IDENTITY
-    if funded:
+    new = plan.get("execution_identity") == NEW_IDENTITY
+    if funded or new:
         fields.add("authority_protocol_path")
         if formal:
             fields.add("formal_attempt")
@@ -406,7 +529,7 @@ def _validate_hash_bound_binding(plan: dict[str, Any]) -> dict[str, Any]:
     if formal:
         require(all(isinstance(authority.get(k), str) and native.base.SHA.fullmatch(authority[k])
                     for k in ("preparation_closure_sha256", "independent_preflight_sha256"))
-                and (funded or (isinstance(authority.get("implementation_commit"), str)
+                and (funded or new or (isinstance(authority.get("implementation_commit"), str)
                                and re.fullmatch("[0-9a-f]{40}",
                                                 authority["implementation_commit"]))),
                 "hash-bound formal readiness references missing")
@@ -467,7 +590,9 @@ def public_prepare_suffix(plan: dict[str, Any]) -> tuple[str, ...]:
     present = fields & set(binding)
     if not present:
         return ()
-    require(present == fields and plan.get("execution_identity") == FUNDED_IDENTITY
+    identity = plan.get("execution_identity")
+    prefix = NEW_PUBLIC_PREFIX if identity == NEW_IDENTITY else "topolab-public-funded-acquisition-"
+    require(present == fields and identity in (FUNDED_IDENTITY, NEW_IDENTITY)
             and plan.get("scope") == REHEARSAL_SCOPE and plan.get("formal_authority") is False,
             "public source plan is restricted to new funded rehearsal")
     name, expected_sha = binding["public_source_plan"], binding["public_source_plan_sha256"]
@@ -475,7 +600,7 @@ def public_prepare_suffix(plan: dict[str, Any]) -> tuple[str, ...]:
             and native.base.SHA.fullmatch(expected_sha), "public source plan path/hash missing")
     path = Path(name)
     require(path.is_absolute() and ".." not in path.parts and path.name == "plan.json"
-            and path.parent.name.startswith("topolab-public-funded-acquisition-")
+            and path.parent.name.startswith(prefix)
             and str(path) == name and str(path.parent) != plan.get("root"),
             "public source plan literal path differs")
     try:
@@ -489,7 +614,7 @@ def public_prepare_suffix(plan: dict[str, Any]) -> tuple[str, ...]:
     permissions = source.get("binding", {})
     require(isinstance(permissions, dict), "public source plan permissions missing")
     require(source.get("schema") == "topolab.v2.m2-source-acquisition-plan.v1"
-            and source.get("execution_identity") == FUNDED_IDENTITY
+            and source.get("execution_identity") == identity
             and source.get("source_identity_policy") == HASH_BOUND_POLICY
             and source.get("scope") == REHEARSAL_SCOPE
             and source.get("formal_authority") is False
@@ -513,7 +638,7 @@ def public_prepare_suffix(plan: dict[str, Any]) -> tuple[str, ...]:
 def validate_binding(plan: dict[str, Any]) -> dict[str, Any]:
     """Check authority and optional NEW public plan before payload/target IO."""
     public_prepare_suffix(plan)
-    if plan.get("execution_identity") in (HASH_BOUND_IDENTITY, FUNDED_IDENTITY):
+    if plan.get("execution_identity") in (HASH_BOUND_IDENTITY, FUNDED_IDENTITY, NEW_IDENTITY):
         return _validate_hash_bound_binding(plan)
     binding = plan.get("binding", {})
     formal = plan.get("scope") == FORMAL_SCOPE
@@ -662,10 +787,222 @@ def validate_binding(plan: dict[str, Any]) -> dict[str, Any]:
     return binding
 
 
+
+def _new_tool_stdout(row: dict[str, Any]) -> str:
+    """Reconcile one owned exec/poll chain without predicting its actual return."""
+    start, end, calls = row.get("start"), row.get("end"), row.get("rawCalls")
+    require(all(type(value) is int and 0 <= value <= 9007199254740991
+                for value in (start, end)) and start <= end
+            and isinstance(calls, list) and 0 < len(calls) <= 4096,
+            "new source public actual row clock/calls missing")
+    session = None
+    previous = start
+    fragments = []
+    for position, call in enumerate(calls):
+        require(isinstance(call, dict), "new source public actual tool call missing")
+        result, observed = call.get("result"), call.get("observed_return_ms")
+        require(type(observed) is int and previous <= observed <= end
+                and isinstance(result, dict) and isinstance(result.get("output"), str)
+                and result.get("truncated") is not True
+                and not re.search(r"Warning: truncated output|[0-9]+ tokens truncated",
+                                  result["output"]),
+                "new source public raw actual return/output incomplete")
+        if position == 0:
+            args = call.get("args", {})
+            expected_command = ["env", "OMP_NUM_THREADS=1", "OPENBLAS_NUM_THREADS=1",
+                                "MKL_NUM_THREADS=1", "VECLIB_MAXIMUM_THREADS=1",
+                                "NUMEXPR_NUM_THREADS=1", *row["argv"]]
+            require(call.get("kind") == "exec_command" and isinstance(args, dict)
+                    and isinstance(args.get("cmd"), str)
+                    and shlex.split(args["cmd"]) == expected_command
+                    and args.get("workdir") == NEW_PUBLIC_REPO and args.get("login") is False,
+                    "new source public actual exec command/argv/cwd differs")
+        else:
+            require(call.get("kind") == "write_stdin"
+                    and isinstance(call.get("args"), dict)
+                    and type(call["args"].get("session_id")) is int
+                    and call["args"]["session_id"] == session
+                    and call["args"].get("chars", "") == "",
+                    "new source public wait does not own its actual session")
+        if position + 1 == len(calls):
+            require(type(result.get("exit_code")) is int and result["exit_code"] == 0
+                    and result.get("session_id") is None,
+                    "new source public final actual tool exit unavailable or failed")
+        else:
+            owned = result.get("session_id")
+            require(result.get("exit_code") is None and type(owned) is int and owned > 0
+                    and (session is None or session == owned),
+                    "new source public unresolved actual session differs")
+            session = owned
+        fragments.append(result["output"])
+        previous = observed
+    stdout = "".join(fragments)
+    require(type(row.get("exit_code")) is int and row["exit_code"] == 0
+            and row.get("stdout") == stdout,
+            "new source public actual exit/stdout projection differs")
+    return stdout
+
+
+def _new_public_pipeline(plan: dict[str, Any], authority: dict[str, Any],
+                         reference: Any) -> None:
+    """Close one fixed public32 graph from actual MCP returns and its authority bytes."""
+    require(isinstance(reference, dict) and set(reference) == {
+                "path", "sha256", "summary_stdout_sha256", "certificate_stdout_sha256",
+                "authority_snapshot_sha256"}
+            and reference["path"]
+            == NEW_PUBLIC_EVIDENCE + "source-v3-public-pipeline-v2.actual.json"
+            and all(isinstance(reference[key], str) and native.base.SHA.fullmatch(reference[key])
+                    and reference[key] != "0" * 64 for key in reference if key != "path"),
+            "new source actual public pipeline reference missing or outside whitelist")
+    raw = native._software_bytes(Path(reference["path"]))
+    require(digest(raw) == reference["sha256"], "new source public actual index SHA256 differs")
+    index = native.base.parse(raw)
+    roles = [*ROLE_ORDER, "final-filing", "lease-release", "public-consumer", "reader-ack"]
+    expected = {
+        "schema": "topolab.v3.new-source-public-tool-index.v1",
+        "execution_identity": NEW_IDENTITY, "root": NEW_PUBLIC_ROOT, "repo": NEW_PUBLIC_REPO,
+        "native_interpreter": NEW_PUBLIC_PYTHON, "call_table_sha256": NEW_PUBLIC_TABLE_SHA256,
+        "clock_domain": "UTC_UNIX_MILLISECONDS", "clock_resolution_ms": 1,
+        "cliCount": 32, "rolesDone": roles, "active": None, "pipelineComplete": True,
+    }
+    require(isinstance(index, dict)
+            and canonical({key: index.get(key) for key in expected}) == canonical(expected)
+            and isinstance(index.get("planSha"), str)
+            and native.base.SHA.fullmatch(index["planSha"])
+            and type(index.get("pipelineEnd")) is int
+            and 1793169554000 <= index["pipelineEnd"] <= 9007199254740991,
+            "new source public actual index identity/clock/completeness differs")
+    commands = [("prepare", [NEW_PUBLIC_PYTHON, "-I",
+        NEW_PUBLIC_REPO + "/scripts/p17_m2_source_acquisition_control.py", "prepare-rehearsal",
+        "--root", NEW_PUBLIC_ROOT])]
+    prefix = commands[0][1][:3]
+    for role in roles:
+        if role == "public-consumer":
+            commands.append(("certificate-certify-rehearsal", [*prefix, "certify-rehearsal",
+                "--root", NEW_PUBLIC_ROOT, "--plan-sha", index["planSha"],
+                "--role", "certificate"]))
+        for mode in ("supervise", "record", "bind"):
+            argv = [*prefix, mode, "--root", NEW_PUBLIC_ROOT, "--plan-sha", index["planSha"],
+                    "--role", role]
+            if role in ("public-consumer", "reader-ack"):
+                argv.extend(("--reader-role", "scientific-auditor"))
+            commands.append((role + "-" + mode, argv))
+    rows = index.get("completed")
+    require(isinstance(rows, list) and len(rows) == len(commands) == 32,
+            "new source public actual32 calls missing")
+    previous = 1793169554000
+    outputs = {}
+    for row, (label, argv) in zip(rows, commands, strict=True):
+        require(isinstance(row, dict) and row.get("label") == label and row.get("argv") == argv,
+                "new source public actual literal call order/argv differs")
+        outputs[label] = _new_tool_stdout(row)
+        require(previous <= row["start"] <= row["end"] <= index["pipelineEnd"],
+                "new source public actual calls overlap or clock differs")
+        previous = row["end"]
+    require(index["pipelineEnd"] <= plan["actor_activation_UTC_seconds"] * 1000,
+            "new source public actual returns follow formal activation")
+    prepare = native.base.parse(outputs["prepare"].encode("utf-8"))
+    require(prepare.get("plan_sha256") == index["planSha"]
+            and prepare.get("scope") == REHEARSAL_SCOPE
+            and prepare.get("formal_authority") is False,
+            "new source public actual prepare scope/plan differs")
+    for role in roles:
+        bound = native.base.parse(outputs[role + "-bind"].encode("utf-8"))
+        common = (bound.get("role") == role and bound.get("reason") is None
+                  and canonical(bound.get("actual_exit_codes")) == canonical([0, 0])
+                  and bound.get("secondary_failures") == [])
+        if role in (*ROLE_ORDER, "final-filing"):
+            accepted = (bound.get("full_role_evidence_accepted") is True
+                        and bound.get("evidence_complete") is True
+                        and bound.get("primary_failure") is None
+                        and bound.get("execution_identity") == NEW_IDENTITY
+                        and bound.get("plan_sha256") == index["planSha"])
+        else:
+            accepted = (bound.get("metadata_evidence_accepted") is True
+                        and bound.get("full_role_evidence_accepted") is False
+                        and bound.get("formal_role_or_new_allowance") is False
+                        and bound.get("frozen_FULL_seconds") is None
+                        and bound.get("status") == "PUBLIC_METADATA_ACTION_OBSERVED")
+        require(common and accepted, "new source public actual independent role audit differs")
+    cert_raw = native._software_bytes(Path(
+        NEW_PUBLIC_EVIDENCE + "source-v3-public-pipeline-v2-certificate.stdout"))
+    require(digest(cert_raw) == reference["certificate_stdout_sha256"]
+            and cert_raw == outputs["certificate-certify-rehearsal"].encode("utf-8"),
+            "new source public actual certificate stdout differs")
+    certificate = native.base.parse(cert_raw)
+    expected_cert = {"scope": REHEARSAL_SCOPE, "formal_authority": False,
+                     "source_input_accepted": False, "B_C_admission": False,
+                     "formal_or_scientific_admission": False, "member_count": 1071}
+    require(canonical({key: certificate.get(key) for key in expected_cert})
+            == canonical(expected_cert)
+            and isinstance(certificate.get("version_id"), str)
+            and native.base.SHA.fullmatch(certificate["version_id"]),
+            "new source public actual certificate scope/version differs")
+    public_raw = native._software_bytes(Path(NEW_PUBLIC_ROOT) / "plan.json")
+    public = native.base.parse(public_raw)
+    require(digest(public_raw) == index["planSha"]
+            and public.get("execution_identity") == NEW_IDENTITY
+            and public.get("scope") == REHEARSAL_SCOPE and public.get("formal_authority") is False
+            and public.get("root") == NEW_PUBLIC_ROOT
+            and public.get("source_identity_policy") == HASH_BOUND_POLICY
+            and all(public.get("binding", {}).get(key) is False for key in (
+                "formal_authority", "old_original_access", "target_access", "B_C"))
+            and {key: value for key, value in public.get("source_tree", {}).items()
+                 if key != NEW_PROTOCOL} == authority["published_source_sha256"]
+            and {key: value for key, value in public.get("runtime", {}).items()
+                 if key != "orig_argv"}
+            == {key: value for key, value in plan["runtime"].items() if key != "orig_argv"},
+            "new source public actual software/runtime/permission graph differs")
+    snapshot = native._software_bytes(Path(
+        NEW_PUBLIC_EVIDENCE + "source-v3-public-authority-snapshot-v5.json"))
+    require(digest(snapshot) == reference["authority_snapshot_sha256"]
+            == public["source_tree"].get(NEW_PROTOCOL)
+            == public.get("contract_sha256") == public.get("preparation_contract_sha256")
+            == public.get("binding", {}).get("preparation_protocol_sha256")
+            and new_authority_projection_sha256(native.base.parse(snapshot))
+            == new_authority_projection_sha256(authority),
+            "new source public actual authority snapshot/projection differs")
+    summary_raw = native._software_bytes(Path(
+        NEW_PUBLIC_EVIDENCE + "source-v3-public-pipeline-v2.stdout"))
+    require(digest(summary_raw) == reference["summary_stdout_sha256"],
+            "new source public actual summary SHA256 differs")
+    summary = native.base.parse(summary_raw)
+    expected_summary = {
+        "schema": "topolab.v3.new-source-public-pipeline-summary.v1",
+        "status": "PASS_ACTUAL_PUBLIC32_SOURCE_PIPELINE",
+        "scope": "NEW_PUBLIC_SOURCE_PIPELINE_ONLY",
+        "execution_identity": NEW_IDENTITY, "source_identity_policy": HASH_BOUND_POLICY,
+        "root": NEW_PUBLIC_ROOT, "call_table_sha256": NEW_PUBLIC_TABLE_SHA256,
+        "plan_sha256": index["planSha"], "actual_tool_index_sha256": reference["sha256"],
+        "certificate_stdout_sha256": reference["certificate_stdout_sha256"],
+        "source_version_id": certificate["version_id"], "source_version_member_count": 1071,
+        "actual_top_source_CLI_calls": 32, "actual_roles": roles,
+        "consumer": {"reader_role": "scientific-auditor", "members": 1069,
+                     "total_bytes": 40590471, "same_read_buffer": True},
+        "reader_ack": {"actual_exit_code": 0, "metadata_evidence_accepted": True,
+                       "active_lease_absent_after_actual_return": True,
+                       "cooperative_lease_absent_after_actual_return": True},
+        "formal_authority": False, "source_input_accepted": False,
+        "B_C_admission": False, "seed17_repaired": False,
+    }
+    require(canonical({key: summary.get(key) for key in expected_summary})
+            == canonical(expected_summary), "new source public actual summary evidence differs")
+    consumption = native.base.parse(native._software_bytes(
+        Path(NEW_PUBLIC_ROOT) / "public-consumption.json"))
+    require(canonical({key: consumption.get(key) for key in (
+                "scope", "execution_identity", "role", "member_count", "total_bytes",
+                "same_read_buffer", "formal_authority")})
+            == canonical({"scope": REHEARSAL_SCOPE, "execution_identity": NEW_IDENTITY,
+                          "role": "scientific-auditor", "member_count": 1069,
+                          "total_bytes": 40590471, "same_read_buffer": True,
+                          "formal_authority": False}),
+            "new source public actual consumer evidence differs")
+
 def check_funded_preflight(plan: dict[str, Any], raw: bytes) -> dict[str, Any]:
     """Replay separately authored metadata against its frozen digest/source/runtime."""
     validate_binding(plan)
-    require(plan.get("execution_identity") == FUNDED_IDENTITY
+    identity = plan.get("execution_identity")
+    require(identity in (FUNDED_IDENTITY, NEW_IDENTITY)
             and plan.get("scope") == FORMAL_SCOPE, "funded preflight requires formal metadata")
     authority = _hash_bound_authority(plan)
     require(digest(raw) == authority["independent_preflight_sha256"],
@@ -678,13 +1015,21 @@ def check_funded_preflight(plan: dict[str, Any], raw: bytes) -> dict[str, Any]:
                  "total_old_source_reads_per_attempt_max": 1196,
                  "per_author_per_file_reads": 1}
     require(preflight.get("status") == "PASS_PUBLIC_METADATA_LAUNCH_PREFLIGHT"
-            and preflight.get("execution_identity") == FUNDED_IDENTITY
+            and preflight.get("execution_identity") == identity
             and preflight.get("actors") == authority["actors"]
             and preflight.get("published_source_sha256") == authority["published_source_sha256"]
             and isinstance(supplied, dict)
             and canonical({key: supplied.get(key) for key in runtime}) == canonical(runtime)
             and canonical(preflight.get("expected_white_list_contract")) == canonical(whitelist),
             "funded independent preflight source/runtime/whitelist differs")
+    if identity == NEW_IDENTITY:
+        require(preflight.get("schema") == "topolab.new-source-v3.independent-preflight.v1"
+                and preflight.get("author") == authority["actors"]["independent"]
+                and preflight.get("authority_protocol_path") == NEW_PROTOCOL
+                and preflight.get("reviewed_authority_projection_sha256")
+                == new_authority_projection_sha256(authority),
+                "new source preflight distinct author/protocol/projection differs")
+        _new_public_pipeline(plan, authority, preflight.get("actual_public_pipeline"))
     if _protocol_path(plan) == REMEDY_PROTOCOL:
         require(preflight.get("authority_protocol_path") == REMEDY_PROTOCOL
                 and type(preflight.get("remedy_formal_attempt")) is int
@@ -700,6 +1045,8 @@ def result_window_seconds(plan: dict[str, Any]) -> tuple[int, int]:
     validate_binding(plan)
     if plan.get("execution_identity") == HASH_BOUND_IDENTITY and plan["scope"] == FORMAL_SCOPE:
         return (1200, 1200)
+    if plan.get("execution_identity") == NEW_IDENTITY:
+        return (9000, 9000)
     return (7200, 7200)
 
 
@@ -707,7 +1054,7 @@ def rehearsal_root(root: Path) -> Path:
     literal = Path(os.path.abspath(root))
     require(
         literal.name.startswith(("topolab-public-formal-binding-", "topolab-public-hash-bound-",
-                                     "topolab-public-funded-acquisition-"))
+                                     "topolab-public-funded-acquisition-", NEW_PUBLIC_PREFIX))
         and any(
             literal.is_relative_to(parent) and literal != Path(parent)
             for parent in ("/private/tmp", "/tmp", "/private/var/folders")
@@ -721,15 +1068,20 @@ def _member_root(plan: dict[str, Any], name: str, root: Path) -> Path:
     if plan.get("scope") == FORMAL_SCOPE:
         if _source_policy(plan):
             funded = plan.get("execution_identity") == FUNDED_IDENTITY
-            index = (plan.get("binding", {}).get("formal_attempt") if funded
+            new = plan.get("execution_identity") == NEW_IDENTITY
+            index = (plan.get("binding", {}).get("formal_attempt") if funded or new
                      else plan.get("attempt_index"))
-            require(type(index) is int and index in (1, 2), "hash-bound attempt index differs")
+            require(type(index) is int and index in ((1,) if new else (1, 2)),
+                    "hash-bound attempt index differs")
             targets = _hash_bound_authority(plan)["fixed_target"]
             parent = Path("/Users/keith1117/Library/Application Support/TopoLab-custody")
             require(targets["parent"] == str(parent), "hash-bound custody parent differs")
             target = targets["attempts"][str(index)]
-            version = index + (4 if funded else 2)
-            parent /= f"p17-m2-local-input-version-v{version}-hash-bound-20261026"
+            if new:
+                parent /= "p17-m2-local-input-version-v7-hash-bound-20261028"
+            else:
+                version = index + (4 if funded else 2)
+                parent /= f"p17-m2-local-input-version-v{version}-hash-bound-20261026"
             require(target["generation"] == str(parent)
                     and target["backup"] == str(parent) + "-independent-backup",
                     "hash-bound frozen target differs")
@@ -745,6 +1097,9 @@ def _member_root(plan: dict[str, Any], name: str, root: Path) -> Path:
         }[name]
         require(plan["root"] == str(parent), "formal generation literal differs")
     else:
+        require(not Path(plan["root"]).name.startswith(NEW_PUBLIC_PREFIX)
+                or plan.get("execution_identity") == NEW_IDENTITY,
+                "new source public namespace requires its new identity")
         parent = rehearsal_root(Path(plan["root"]))
         expected = (
             parent
@@ -765,7 +1120,7 @@ def _source_identity(plan: dict[str, Any]) -> dict[str, str]:
     return plan["source_identity" if plan["scope"] == FORMAL_SCOPE else "public_source_identity"]
 
 
-def check_expected_source_hashes(rows, registry, contract, stage):
+def check_expected_source_hashes(rows, registry, contract, stage, *, enforce_r0_order=False):
     """Bind each pre-read hash to independently accepted lineage, never its own row."""
     require(stage in ("r0", "r1"), "source hash binding stage differs")
     if stage == "r0":
@@ -791,6 +1146,54 @@ def check_expected_source_hashes(rows, registry, contract, stage):
                 and row["sha256"] == sources[name]["sha256"]
                 and row["byte_size"] == sources[name]["byte_size"],
                 "source prebound hash differs from accepted lineage")
+    if stage == "r0" and enforce_r0_order:
+        additional = contract["R0"]["bounded_additional_metadata"]
+        order = ([row["relative_path"] for row in contract["R0"]["literal_bootstrap_files"]]
+                 + additional["W_units"]
+                 + [row["selection"]["path"] for row in registry["models"]]
+                 + additional["reference_units"])
+        require([row["path"] for row in rows] == order, "source R0 read order differs")
+
+
+def accepted_r0_registry(raw: bytes, r0_wire: dict[str, Any], *,
+                         plan: dict[str, Any]) -> dict[str, Any]:
+    """Parse one registry buffer bound to an already native-audited R0 wire.
+
+    The caller must audit this exact wire with its trusted actual events first.
+    This semantic check issues no native, source or scientific authority.
+    """
+    require(plan.get("execution_identity") == NEW_IDENTITY
+            and _source_policy(plan) == HASH_BOUND_POLICY
+            and isinstance(raw, bytes) and 0 < len(raw) <= 8 * native.base.MIB,
+            "new source accepted R0 registry identity/size differs")
+    proof = native._proof(r0_wire, "SOURCE_ACQUISITION_R0_CHECKED",
+                          expected_identity=NEW_IDENTITY, expected_scope=plan["scope"])
+    require(type(proof.get("source_count")) is int and proof["source_count"] == 40
+            and proof.get("source_registry_sha256") == digest(raw)
+            and proof.get("source_contract_sha256")
+            == digest(canonical(plan["content_contract"]))
+            and proof.get("root") == plan["source_root"]
+            and proof.get("source_identity") == _source_identity(plan)
+            and proof.get("source_comparison")
+            == "PREBOUND_HASH_AND_PHYSICAL_IDENTITY_MATCHED_TIMESTAMPS_RETAINED"
+            and type(proof.get("compared_fields")) is int and proof["compared_fields"] > 0
+            and proof.get("helper_identity_relabelled") is False
+            and proof.get("formal_or_scientific_admission") is False,
+            "new source registry differs from accepted independent R0 proof")
+    registry = native.base.parse(raw, canonical_required=True)
+    require(isinstance(registry, dict), "new source accepted R0 registry is not an object")
+    checker = helper("acquisition_accepted_registry", "p17_m2_input_export_independent.py")
+    checker.check_registry_shape(registry, plan["content_contract"])
+    check_expected_source_hashes(proof["source_rows"], registry, plan["content_contract"], "r0",
+                                 enforce_r0_order=True)
+    references = ([row["checkpoint"] for row in registry["models"]]
+                  + [row["artifact"] for row in registry["labels"]]
+                  + [row["packet"] for row in registry["scalars"]])
+    require(len(references) == 558
+            and all(isinstance(row.get("path"), str) for row in references)
+            and len({row["path"] for row in references}) == 558,
+            "new source accepted R0 registry lacks exact558 distinct payload paths")
+    return registry
 
 
 def independent_r0(
@@ -818,7 +1221,10 @@ def independent_r0(
         reader = checker.OnceReader(source, 40, 32 * checker.MIB, source_identity_checks=True,
                                     source_identity_policy=policy)
         readers["source"] = reader
-        registry = checker.build_registry(reader, contract)
+        if plan["execution_identity"] == NEW_IDENTITY:
+            registry = checker.build_registry(reader, contract, selection_before_reference=True)
+        else:
+            registry = checker.build_registry(reader, contract)
         checker.check_registry_shape(registry, contract)
         compared = checker.compare_words(registry, producer_registry)
         local = helper("acquisition_r0_local_independent", "p17_m2_local_input_independent.py")
@@ -826,7 +1232,9 @@ def independent_r0(
                                       source_identity_policy=policy)
         if policy:
             for rows in (reader.observations, producer_rows):
-                check_expected_source_hashes(rows, registry, contract, "r0")
+                check_expected_source_hashes(
+                    rows, registry, contract, "r0",
+                    enforce_r0_order=plan["execution_identity"] == NEW_IDENTITY)
         return {
             "status": "SOURCE_ACQUISITION_R0_CHECKED",
             "execution_identity": plan["execution_identity"],
@@ -1106,7 +1514,13 @@ def _check_software(plan: dict[str, Any]) -> None:
     execution = _protocol_path(plan)
     contracts = (*native.SOFTWARE_CONTRACTS, PROPOSAL, PREPARATION_PROTOCOL)
     formal = plan["scope"] == FORMAL_SCOPE
-    for path in (EXECUTION_PROTOCOL, HASH_BOUND_PROTOCOL, FUNDED_PROTOCOL, REMEDY_PROTOCOL):
+    authorities = (EXECUTION_PROTOCOL, HASH_BOUND_PROTOCOL, FUNDED_PROTOCOL, REMEDY_PROTOCOL)
+    if plan.get("execution_identity") == NEW_IDENTITY:
+        authorities += (NEW_PROTOCOL,)
+        contracts += ("scripts/p17_m2_scientific_tool_ingress.mjs",
+                      "scripts/p17_m2_scientific_metadata.mjs",
+                      "scripts/p17_m2_scientific_metadata_manifest.mjs")
+    for path in authorities:
         try:
             native._software_bytes(REPO / path)
         except FileNotFoundError:
@@ -1214,9 +1628,10 @@ class _AcquisitionCertificatePolicy:
 
     def check_source_rows(self, proof, count, registry):
         if self.source_identity_policy:
-            check_expected_source_hashes(proof["source_rows"], registry,
-                                        self.plan["content_contract"],
-                                        "r0" if count == 40 else "r1")
+            check_expected_source_hashes(
+                proof["source_rows"], registry, self.plan["content_contract"],
+                "r0" if count == 40 else "r1",
+                enforce_r0_order=self.identity == NEW_IDENTITY and count == 40)
 
     def check_filing(self, result: dict[str, Any], wire: dict[str, Any]) -> None:
         start = native.number(wire["pending"]["result_start_UTC_seconds"], positive=True)
@@ -1312,7 +1727,7 @@ def validate_setup(
     )
     if plan["scope"] == FORMAL_SCOPE:
         authority = native.base.parse(native._software_bytes(REPO / _protocol_path(plan)))
-        if plan["execution_identity"] == FUNDED_IDENTITY:
+        if plan["execution_identity"] in (FUNDED_IDENTITY, NEW_IDENTITY):
             check_funded_preflight(plan, native._software_bytes(
                 Path(authority["independent_preflight_path"])))
             for closure in authority["preparation_closure_paths"]:

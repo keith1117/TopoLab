@@ -5,7 +5,46 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: CI diagnostic repair and new-funded closeout (2026-10-28)
+## Current: new source v3 compatibility (2026-10-28)
+
+[Executable route and evidence](validation/p17_m2_new_source_acquisition.md)
+and [new finite authority](planning/p17_m2_new_source_acquisition_protocol.md)
+bind both readers to one future v7 attempt. Public regressions, fresh reviews,
+final READY checks and protected publication precede actual source entry. Diagnostic
+PR229 is merged at5c6078b; all four exact-main CI jobs pass. Paired
+late closure and actual-return supplements are complete. The first fresh public
+graph completed32 actual source CLI returns0 but stopped acceptance on an old
+fixture byte premise:90256736 expected versus40590471 actual. Independent NEW
+manifest summation confirms40590471. Preserve that graph and FULL3780 charge;
+regression/minimal correction/fresh review precede the sole remaining public
+graph32/FULL3780. Independent table review also found the NEW R0 reader order
+differed from contracted7/3/12/18; real public RED precedes a NEW-only reader/
+audit fix, fresh review and next complete regression. Allocation-v6 registers
+201600 total without increasing any started clock or source/scientific gate.
+Complete campaign6 retains one legacy public shared namespace STOP with an
+UNKNOWN rejected entry; the original NEW temporary tree later became unavailable.
+The minimal original-tuple recording correction passes62 focused checks without
+relaxing rejection. Distinct review/62 focused checks and full campaign7 pass3116/1 skip.
+A second confirmed compatibility defect selected closed v5 for scientific v7
+publication metadata; exact-authority routing passes103 focused public checks.
+Fresh distinct review and complete campaign8 passed3129/1 skip, actual1648.571910s.
+The final fresh public v2 graph completed32 actual calls/1071 version members,
+1069 consumer members/40590471 bytes and real ACK. Different-author native audit
+returned0/0.376699s and independently reconciled8 event pairs/native certificate
+and both same-FD post-ACK absence observations. Root verified its complete report
+and actual external return. Signed preflight1eded8ed binds this evidence; only
+the three late anchors form READY. A caller projection guard first stopped
+before any write because its hand-written JSON omitted the canonical final LF;
+using the existing projection function passed, with no source/preflight change.
+The separate software-only supplement fixes12 campaigns without clock/call/FULL
+extension; READY bytes still require their complete precommit check.
+Public allowance64 calls/FULL7560 is fully consumed, including failed v1.
+Final READY checks and normal protected PR/exact-main four-CI publication remain
+required before the once-only formal entry; no additional public graph is granted.
+Formal v7 targets remain unprobed and original reads0.
+No new original read, input acceptance, B/C result or P17 repair exists.
+
+## Preceding: CI diagnostic repair and new-funded closeout (2026-10-28)
 
 [New recovery evidence](validation/p17_m2_ci_recovery_closeout.md) and
 [finite protocol](planning/p17_m2_ci_recovery_closeout_protocol.json) record fresh
@@ -14,8 +53,10 @@ Initiator remains UNKNOWN. The diagnostic's wrong-envelope StopIteration has a
 public regression and minimal CLI repair; distinct Standards/Spec reviews pass.
 All five local checks pass (3004/1 skip). Same-head CI attempt2 has passed all
 four jobs. Both new metadata archives pass complete distinct-author replay and
-an outside integrity anchor; this repair's protected publication and fresh
-paired publication/actual-return supplements are pending at authoring.
+an outside integrity anchor. PR229 is now protected-merged at5c6078b and all
+four exact-main CI40659854274 jobs pass. The fresh paired publication closure,
+late687-buffer metadata evidence and paired actual-return supplement are
+independently checked; immutable outside anchors retain the actual filing returns.
 Original source2 STOP and deadline MISS remain; old quotas stay closed.
 
 New independent feasibility review finds the prospective M2 query route

@@ -107,6 +107,7 @@ def namespace_check(root, *, additional_bytes=0, additional_files=0, evidence=Tr
         error.namespace_inventory_failures = failures
         context = canonical({
             'namespace_inventory_failures': failures,
+            'namespace_entry_failure': getattr(error, 'namespace_entry_failure', None),
             'root_before': physical(before) if before is not None else None,
             'root_closing': physical(after) if after is not None else None,
             'primary_type': type(error).__name__, 'primary_reason': str(error),
@@ -158,10 +159,23 @@ def _namespace_snapshot(anchor, *, additional_bytes, additional_files, evidence)
                             )
                         )
                     else:
-                        need(
-                            stat.S_ISREG(info.st_mode) and info.st_nlink == 1,
-                            "NAMESPACE_ORDINARY_SINGLE_LINK_REQUIRED",
-                        )
+                        if not (stat.S_ISREG(info.st_mode) and info.st_nlink == 1):
+                            error = ValueError("NAMESPACE_ORDINARY_SINGLE_LINK_REQUIRED")
+                            observation = dict(
+                                entry=name, entry_tuple=physical(info),
+                                entry_mode=info.st_mode, entry_nlink=info.st_nlink,
+                                entry_uid=info.st_uid, directory_tuple=None,
+                                secondary_failures=[],
+                            )
+                            try:
+                                observation['directory_tuple'] = physical(os.fstat(descriptor))
+                            except Exception as secondary:
+                                observation['secondary_failures'].append(dict(
+                                    stage='rejected-entry-directory-fstat',
+                                    type=type(secondary).__name__, reason=str(secondary),
+                                ))
+                            error.namespace_entry_failure = observation
+                            raise error
                         count += 1
                         size += info.st_size
                         if child_evidence:
@@ -697,7 +711,11 @@ def _content_step(root, plan, role, readers, *, adapter=None):
             "helper_execution_identity": local.IDENTITY,
             "helper_identity_relabelled": False,
         }
-    registry = read_json(root / "registry.json")
+    registry = (
+        transport.read_registry(root, plan, role)
+        if adapter is not None and hasattr(transport, "read_registry")
+        else read_json(root / "registry.json")
+    )
     if role == "independent-r0":
         proof = independent.independent_r0(
             source,

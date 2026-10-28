@@ -7,7 +7,7 @@ import crypto from 'node:crypto';
 import * as ingress from '../scripts/p17_m2_scientific_tool_ingress.mjs';
 import {buildMetadataManifest} from '../scripts/p17_m2_scientific_metadata_manifest.mjs';
 import * as observer from '../scripts/p17_m2_scientific_metadata.mjs';
-const actionParent='/private/tmp/topolab-funded-continuation-20261026';
+const actionParent='/private/tmp/topolab-new-source-science-20261028';
 const identity='topolab.v2.p17-m2-native-homotopy.rss.v1',role='resource-preflight';
 const hash=raw=>crypto.createHash('sha256').update(raw).digest('hex');
 const canonical=v=>v===null?'null':Array.isArray(v)?'['+v.map(canonical).join(',')+']':typeof v==='object'?'{'+Object.keys(v).sort().map(k=>JSON.stringify(k)+':'+canonical(v[k])).join(',')+'}':JSON.stringify(v);
@@ -72,6 +72,17 @@ test('manifest semantic failure preserves successful contract prefix and origina
   await assert.rejects(buildMetadataManifest({...f,scope:'B',observer}),error=>{
     const failure=error.metadata_manifest_failure;assert.match(error.message,/registered inner start/);assert.equal(failure.metadata_files_read,1);assert.equal(failure.metadata_bytes_read,f.raw.length);assert.equal(failure.prior_observations.length,1);assert.equal(failure.prior_observations[0].sha256,hash(f.raw));assert.deepEqual(failure.prior_observations[0].before,failure.prior_observations[0].closing);return true;
   });
+});
+test('legacy action root remains accepted and new lookalike root is refused before member IO',async()=>{
+  for(const [literal,reason] of [
+    ['/private/tmp/topolab-funded-continuation-20261026/PUBLIC_ONLY_NOT_CREATED',/registered inner start/],
+    [actionParent+'-lookalike/PUBLIC_ONLY_NOT_CREATED',/NEW metadata root/],
+  ]){
+    const root=await publicRoot(),contract=contractFor(literal,{invalidStart:true}),f=await contractFile(contract,root);
+    await assert.rejects(buildMetadataManifest({...f,scope:'B',observer}),error=>{
+      assert.match(error.message,reason);assert.equal(error.metadata_manifest_failure.prior_observations.length,1);return true;
+    });
+  }
 });
 test('manifest rejects nonformal scope, enlarged byte/count caps and formal public override',async()=>{
   const root=await publicRoot();await assert.rejects(buildMetadataManifest({contractPath:root+'/absent',contractSHA256:'a'.repeat(64),scope:'UNKNOWN',observer}),/scope/);

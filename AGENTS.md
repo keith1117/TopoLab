@@ -17,19 +17,21 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Current continuous action: [CI diagnosis and new-funded failure closeout](docs/validation/p17_m2_ci_recovery_closeout.md)
-under the [new finite protocol](docs/planning/p17_m2_ci_recovery_closeout_protocol.json).
-First complete the diagnostic repair, distinct review, normal exact-head PR/main
-four-job CI, paired complete metadata retention and actual accounting/return
-supplements. Source2 stays strict-unbound STOP, its result window MISS, old
-allowances closed and v6/backup HELD. Fixed P17 is unrepaired; input/B/C absent.
-The owner overrides one-slice scheduling stops and funds still-unstarted work;
-continue when dependencies actually pass. Next requires a new reviewed source
-identity/adapters/author/target binding and one exact-whitelist attempt. Preserve
-strict reads for unbound entries; accepted input before B, accepted B before C.
-All science/resource Gates and historical costs/UNKNOWN/seals remain. Read the
-new report before dependent work; raw-index cached-stat drift is not staged
-content change and the25 original dirty files remain outside these commits.
+Current continuous action: [new source v3 compatibility and entry](docs/validation/p17_m2_new_source_acquisition.md)
+under its [finite authority](docs/planning/p17_m2_new_source_acquisition_protocol.md).
+Diagnostic PR229/main CI and paired actual closure are complete. Public v1
+STOP/FULL3780 remains; corrected public v2 completed32 actual calls,1071 version
+members and1069 consumer members/40590471 bytes. Different-author native audit
+and root verification passed; preflight1eded8ed binds source/runtime/actual returns.
+Only three late anchors form READY. Complete final READY checks and protected
+PR/exact-main four-CI publication before one exact-whitelist v7 attempt. Twenty-three
+unbound metadata entries remain strict; no posthash bootstrap or old-scene reuse.
+Input acceptance precedes B; independent B and a frozen input-bound scientific
+contract precede fixed C/H17. The owner overrides one-slice scheduling stops;
+continue when dependencies actually pass within registered finite clocks.
+P17 remains unrepaired, uniform default, full v2 open. All old STOPs/costs/UNKNOWN,
+result-window MISS, closed quotas and held leases remain. Preserve all25 original
+dirty files; do not reset/clean/stash or mix them into new commits.
 
 Read the [frozen source-acquisition authority](docs/planning/p17_m2_source_acquisition_execution_protocol.md)
 and [actual STOP result](docs/validation/p17_m2_source_acquisition_execution.md).

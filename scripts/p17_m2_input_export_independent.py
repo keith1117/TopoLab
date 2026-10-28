@@ -465,7 +465,8 @@ def closed_units(
     return payloads
 
 
-def build_registry(reader: OnceReader, contract: dict[str, Any]) -> dict[str, Any]:
+def build_registry(reader: OnceReader, contract: dict[str, Any], *,
+                   selection_before_reference: bool = False) -> dict[str, Any]:
     """Derive the finite registry independently; no payload stat or open here."""
     old = {}
     for spec in contract["R0"]["literal_bootstrap_files"]:
@@ -548,32 +549,37 @@ def build_registry(reader: OnceReader, contract: dict[str, Any]) -> dict[str, An
         old[wroot + "/progress.json"],
         old[wroot + "/summary.json"],
     )
-    refroot = "b4-30-z-reflection-repair-v2/sentinel/reference"
-    context_path = "b4-30-z-reflection-repair-v2/context.json"
-    context_sha = next(
-        spec["expected_sha256"]
-        for spec in contract["R0"]["literal_bootstrap_files"]
-        if spec["relative_path"] == context_path
-    )
-    units = contract["scalars"]["case_ids"]
-    uniform_refs = closed_units(
-        reader,
-        refroot,
-        context_sha,
-        units,
-        old[refroot + "/progress.json"],
-        old[refroot + "/summary.json"],
-    )
-    scalars = []
-    for ordinal, (case_id, ref) in enumerate(zip(units, uniform_refs, strict=True)):
-        path = f"{refroot}/units/{ordinal:04d}.json"
-        with reader.validation(path):
-            scalars.append({
-                "case_id": case_id,
-                "context_sha256": context_sha,
-                "unit": next(row for row in reader.table if row["path"] == path),
-                "packet": fit_reference(refroot, ref, "outcome"),
-            })
+
+    def reference_scalars():
+        refroot = "b4-30-z-reflection-repair-v2/sentinel/reference"
+        context_path = "b4-30-z-reflection-repair-v2/context.json"
+        context_sha = next(
+            spec["expected_sha256"]
+            for spec in contract["R0"]["literal_bootstrap_files"]
+            if spec["relative_path"] == context_path
+        )
+        units = contract["scalars"]["case_ids"]
+        uniform_refs = closed_units(
+            reader,
+            refroot,
+            context_sha,
+            units,
+            old[refroot + "/progress.json"],
+            old[refroot + "/summary.json"],
+        )
+        result = []
+        for ordinal, (case_id, ref) in enumerate(zip(units, uniform_refs, strict=True)):
+            path = f"{refroot}/units/{ordinal:04d}.json"
+            with reader.validation(path):
+                result.append({
+                    "case_id": case_id,
+                    "context_sha256": context_sha,
+                    "unit": next(row for row in reader.table if row["path"] == path),
+                    "packet": fit_reference(refroot, ref, "outcome"),
+                })
+        return result
+
+    scalars = [] if selection_before_reference else reference_scalars()
     models = []
     for spec in contract["checkpoints"]["fixed_rows"]:
         family, seed = spec["family"], spec["seed"]
@@ -631,6 +637,8 @@ def build_registry(reader: OnceReader, contract: dict[str, Any]) -> dict[str, An
                 "checkpoint": checkpoint,
             }
         )
+    if selection_before_reference:
+        scalars = reference_scalars()
     require(len(reader.table) == 40, "R0 metadata count differs")
     require(
         sum(row["artifact"]["byte_size"] for row in labels) <= 768 * MIB

@@ -7,12 +7,13 @@ const need = (value, reason) => { if (!value) throw Error(reason); };
 const resolve = (argv, sha) => argv.map(word => word.replaceAll('@SCIENTIFIC_CONTRACT_SHA256@', sha));
 const roles = ['resource-preflight','scientific-producer','scientific-auditor'];
 const labels = ['controller','binder','verifier','final-observer'];
-const parent = '/private/tmp/topolab-funded-continuation-20261026';
+const parents = ['/private/tmp/topolab-funded-continuation-20261026',
+  '/private/tmp/topolab-new-source-science-20261028'];
 async function put(path, raw) {
   const evidence={path,bytes:raw.length,sha256:hash(raw),stage:'literal-output',parent_observations:[],secondary_errors:[]};
   let handle,directory,problem=null;
   try {
-    need(path.startsWith(parent+'/')&&!path.split('/').slice(1).some(word=>!word||word==='..'||word==='.'), 'unregistered NEW metadata output');
+    need(parents.some(parent=>path.startsWith(parent+'/'))&&!path.split('/').slice(1).some(word=>!word||word==='..'||word==='.'), 'unregistered NEW metadata output');
     evidence.stage='output-parents';let component='';
     for(const word of path.split('/').slice(1,-1)){
       component+='/'+word;const s=await fs.lstat(component,{bigint:true});
