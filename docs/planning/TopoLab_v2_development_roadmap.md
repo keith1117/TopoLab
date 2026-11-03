@@ -2448,6 +2448,11 @@ input precedes B and fixed input-bound C, preserving all original scientific
 standards. The grant overrides scheduling stops and funds only finite new work;
 all old STOPs/costs/closed quotas/seals/all-paid FAIL/full-fit PENDING4GiB remain.
 No public, contract or input-only pass is a fixed P17 repair.
+Public graph1's encoding STOP is retained; reviewed graph2/native auditor and
+paired599-member metadata replay pass. PR232's first Linux quality fixture setup
+fails, so a public RED/GREEN test-environment remedy uses reserved publication
+family2, without changing production freeze or any started clock. Original
+registration remains unstarted until updated exact-head/main four-CI pass.
 
 ## Historical: v7 STOP and expired-result recovery (2026-11-03)
 

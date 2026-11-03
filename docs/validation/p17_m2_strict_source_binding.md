@@ -59,6 +59,74 @@ receipts are filed externally before any formal original observation. Two fresh
 reviewers independently check Standards and Spec against baseline
 cd01589b9e33534101c29ef368ee680cb66e88da, including untracked additions.
 
+## Actual public proof and first CI stop
+
+Public graph1 stopped when the independent caller wrote insertion-order JSON
+instead of the required sorted ASCII canonical packet. No source content was
+read. The same completed native role's return was retained before its cap;
+only reserved metadata closeout followed. FULL150+150+prepaid180=480 remains
+charged, lease HELD, no bindings. A public RED/GREEN caller fix and distinct
+review preceded the sole reserved graph2. Its v2 packet writer rejects parent
+traversal and symlinks through held directory FDs; the initially rejected writer
+and all failing checks remain external and immutable.
+
+Graph2 completed both strict23 public reads and the full independent comparison,
+all five core native/actual-return proofs, lease release after both readers,
+and the metadata auditor's own measured return:
+
+| Role | FULL seconds | Actual caller wall seconds | RSS envelope bytes |
+|---|---:|---:|---:|
+| producer availability |150|10.844|172670976|
+| independent availability |150|13.592|184942592|
+| binding producer |300|7.359|181157888|
+| binding independent |300|7.577|184893440|
+| binding closeout |180|10.318|185827328|
+| independent metadata auditor |120|10.469|196460544|
+
+The prepaid closeout is counted once. Complete paired public certificate SHA256:
+`3505f22a9c8c5e708276217e94c0ffeb1bc81adaf179967b499358433785f124`.
+This is PUBLIC current-byte evidence, not original binding or input acceptance.
+An independent audit of the helper's real software-native unit additionally
+retains FULL150+nonrefundable shared180=330. Thus official public1680 plus unit330
+gives a known new FULL lower bound2010. Other unmeasured software/CI costs remain
+UNKNOWN_NOT_ZERO; labels never erase actual native charges.
+
+The paired preparation archive has599 regular metadata members/8197082 raw bytes,
+private0700/0600 modes and independent inodes. Archive SHA256:
+`89894d457333a49bb4f6148f54cc1077b82a71c0cd804de57d725e7370d3f324`.
+Outside anchor SHA256:
+`596cb1800726cab52a115d934d1885719c254e25e8b9c387b5924574a3b3e072`.
+Different-author replay checked all members and the captured complete native
+certificate; audit SHA256:
+`0cef2850e4d44f1573d23f8bece66b8150a3f1c08c69b12e1bd5aeb23aff7d7d`.
+The28 explicit omissions record caches and public-source/software-fixture trees;
+the inventory also excludes retention outputs. None were followed. The first archive inventory refused a
+pytest current symlink before creating an archive; its exact historical path
+was not recorded and remains UNKNOWN. The v2 inventory records omissions and
+failure context. Source mtime_ns values remain exact in the member manifest;
+zero TAR-container timestamps are not source timestamp restoration or tolerance.
+
+Local campaign1 completed locked sync/Ruff/mypy/all pytest/whitespace:
+3212 passed, one selected-Linux-surface skip,1903.54 seconds. However PR232 head
+`a2bf66928feaa45983522d90e4f3a84e74ac3e28` quality run41715382738 failed with
+3205 passed,6 platform skips and2 fixture-setup errors. The production CLI
+correctly refused an unspecified thread environment; the local campaign wrapper
+had supplied all five values1, while Linux quality had not. The fixture also
+discarded canonical stdout when reporting failure. Both absent and conflicting
+inherited environments were reproduced RED before explicitly passing the frozen
+thread environment in both test CLI calls and retaining stdout/stderr. The
+four affected public checks then passed, including actual missing-native-launch
+rejection. No production source, policy, runtime guard or numerical threshold
+changed; the accepted public source freeze remains exact.
+
+The new CI-harness remedy registration SHA256:
+`b5ea0a1903a7272b155021115f5c482f1e195239325ae52acb29ce576d954434`.
+It closes first-family failure allowances, uses pre-registered reserve family2
+within the same five-family/twenty-workflow-attempt ceiling, and preserves all
+started author/phase clocks. Same-open-budget different-author delta review,
+complete campaign2 and exact updated-PR/main four-CI remain required before any
+original source observation. Original binding/input/B/C are still0; P17 unrepaired.
+
 ## Funding, preservation and scientific limits
 
 Evidence root:

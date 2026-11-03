@@ -2,6 +2,7 @@
 
 import importlib.util
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -228,11 +229,24 @@ def actual_public_plan(tmp_path_factory):
     result = subprocess.run(
         [sys.executable, "-I", str(REPO / "scripts/p17_m2_source_binding.py"),
          "prepare-public", "--root", str(root)],
-        capture_output=True, text=True, check=False)
-    assert result.returncode == 0, result.stderr
+        capture_output=True, text=True, check=False,
+        env={**os.environ, **binding_module().THREADS})
+    assert result.returncode == 0, (result.stdout, result.stderr)
     output = json.loads(result.stdout)
     plan = json.loads((root / "plan.json").read_bytes())
     return root, output, plan
+
+
+@pytest.mark.parametrize("inherited", [None, "7"])
+def test_public_plan_fixture_sets_locked_threads_without_inherited_environment(
+        tmp_path_factory, monkeypatch, inherited):
+    for name in binding_module().THREADS:
+        if inherited is None:
+            monkeypatch.delenv(name, raising=False)
+        else:
+            monkeypatch.setenv(name, inherited)
+    _, _, plan = actual_public_plan.__wrapped__(tmp_path_factory)
+    assert plan["runtime"]["threads"] == binding_module().THREADS
 
 
 def test_real_public_prepare_freezes_plan_and_actual_cooperative_lease(actual_public_plan):
@@ -255,11 +269,13 @@ def test_real_payload_refuses_missing_native_launch_before_source_observations(a
         [sys.executable, "-I", str(REPO / "scripts/p17_m2_source_binding.py"), "payload",
          "--plan", str(root / "plan.json"), "--plan-sha", output["plan_sha256"],
          "--role", "producer-availability"],
-        capture_output=True, text=True, check=False)
+        capture_output=True, text=True, check=False,
+        env={**os.environ, **binding_module().THREADS})
     assert result.returncode == 1
     failed = json.loads(result.stdout)
     assert failed["status"] == "STOP_NO_RETRY"
     assert failed["stage"] == "payload_launch"
+    assert "active.json" in failed["primary_error"]["reason"]
     assert failed["source_attempts"] == []
     assert not (root / "producer-availability-output.json").exists()
 

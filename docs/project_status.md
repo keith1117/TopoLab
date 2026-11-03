@@ -16,9 +16,20 @@ and its independently measured metadata auditor's actual return must close.
 
 The owner's new finite allocation covers implementation, independent review,
 normal protected publication, bounded new registration and conditional input/B/C.
-It extends no started clock or old allowance. At this authoring frontier official
-graphs, original reads, input acceptance and B/C remain unstarted. Complete public
-native verification, all repository checks and exact PR/main four-CI first.
+It extends no started clock or old allowance. Public graph1 closed after a caller
+packet-encoding STOP, retaining FULL480/HELD; the reviewed reserved graph2 passed
+strict23/native5 and the independently measured auditor. Official public FULL1680
+and an additional software-native unit FULL330 give a known new2010 lower bound;
+other software/CI costs remain UNKNOWN_NOT_ZERO. The599-member preparation
+metadata pair and outside anchors passed different-author replay.
+
+Local campaign1 passed3212/one platform skip. PR232 head a2bf669 failed Linux
+quality setup for two new tests: their CLI fixture inherited unset thread limits.
+Absent/conflicting-environment RED precedes the test-only explicit-environment
+fix, retained stdout diagnostics and different-author delta review. Production
+runtime guards/source hashes remain unchanged. The pre-registered reserve
+publication family2 and full campaign2 must pass exact PR/main four-CI first.
+Original reads, input acceptance and B/C remain unstarted.
 Then execute the admitted23 registration; only accepted bindings can precede the
 compatible40/558/1071 input adapters and full six-role acceptance. B and fixed C
 remain downstream. P17 is unrepaired, uniform default, historical all-paid FAIL,
