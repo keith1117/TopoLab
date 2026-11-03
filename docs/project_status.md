@@ -1,11 +1,42 @@
 # Current project status
 
-Updated:2026-10-28. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-11-03. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: new source v3 compatibility (2026-10-28)
+## Current: v7 STOP and expired-result recovery (2026-11-03)
+
+[Recovered result and evidence limits](validation/p17_m2_source_v7_expired_result_recovery.md)
+follow source PR230/main20640851 and all-four main CI40713275964 PASS.
+The historical attempt reached exporter R0 strict STOP at unbound ordinal7:
+330 bytes returned, mtime-63ns,7 attempts/6 complete hashes, payload0. Earlier
+prebound-51/-101/-114ns changes matched complete buffer hashes and closing
+observations. No time tolerance or posthash trust was used. Input remains
+unaccepted; B/C did not start and fixed P17 remains unrepaired.
+
+The owner paused before the reserved shared closeout. Its original window,
+result9000 and conditional/outer windows have expired; shared17-19 may not run
+now. The recorded six source CLI calls/FULL600 remain, with3180 unused FULL
+closed including the unstarted shared300. New funding does not reopen them.
+
+On resume, both authors independently recovered four exact native metadata
+files/30357 bytes from the surviving failed generation, matching the historical
+tool-conversation pins. The exact backup leaf and original temporary checkpoint,
+preparation archives and raw external return directories are absent. Cause and
+whether that backup was ever created remain UNKNOWN; do not call the missing
+archives currently verified. Full historical resource/return/accounting closure
+cannot be newly certified from the recovered subset.
+
+The new finite budget covers only read-only failed metadata, preservation of
+the two original dirty workspaces, independent review, mandatory software checks,
+protected result publication and new paired metadata retention/actual returns.
+Those publication steps remain pending at this report's authoring frontier.
+The next input condition is trusted pre-read content binding or stable strict
+reading for every unbound member under separately admitted new authority.
+Historical all-paid FAIL/full-fit PENDING4GiB and every old seal remain.
+
+## Historical: new source v3 compatibility preparation (2026-10-28)
 
 [Executable route and evidence](validation/p17_m2_new_source_acquisition.md)
 and [new finite authority](planning/p17_m2_new_source_acquisition_protocol.md)

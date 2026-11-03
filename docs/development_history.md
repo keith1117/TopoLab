@@ -1,5 +1,17 @@
 # Development history
 
+## 2026-11-03 — v7 STOP and expired-result evidence recovery
+
+[Result](validation/p17_m2_source_v7_expired_result_recovery.md) separates the
+historical strict-unbound-63ns source STOP from the resumed metadata-only
+closeout. Two authors recovered four pinned native files/30357 bytes; missing
+temporary archives/returns, expired shared/result windows and incomplete
+historical accounting remain explicit. New private snapshots preserve the25
+existing dirty files without original index writes. No source retry, shared
+role, payload, B/C or scientific metric is obtained through this recovery.
+Fixed P17 remains unrepaired; normal result publication and paired retention
+have their own new finite accounting and external actual-return closure.
+
 ## 2026-10-28 — New source v3 executable compatibility
 
 [New capability](validation/p17_m2_new_source_acquisition.md) binds the once-only

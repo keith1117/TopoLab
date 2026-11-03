@@ -17,21 +17,22 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Current continuous action: [new source v3 compatibility and entry](docs/validation/p17_m2_new_source_acquisition.md)
-under its [finite authority](docs/planning/p17_m2_new_source_acquisition_protocol.md).
-Diagnostic PR229/main CI and paired actual closure are complete. Public v1
-STOP/FULL3780 remains; corrected public v2 completed32 actual calls,1071 version
-members and1069 consumer members/40590471 bytes. Different-author native audit
-and root verification passed; preflight1eded8ed binds source/runtime/actual returns.
-Only three late anchors form READY. Complete final READY checks and protected
-PR/exact-main four-CI publication before one exact-whitelist v7 attempt. Twenty-three
-unbound metadata entries remain strict; no posthash bootstrap or old-scene reuse.
-Input acceptance precedes B; independent B and a frozen input-bound scientific
-contract precede fixed C/H17. The owner overrides one-slice scheduling stops;
-continue when dependencies actually pass within registered finite clocks.
-P17 remains unrepaired, uniform default, full v2 open. All old STOPs/costs/UNKNOWN,
-result-window MISS, closed quotas and held leases remain. Preserve all25 original
-dirty files; do not reset/clean/stash or mix them into new commits.
+Current action: [v7 STOP and expired-result recovery](docs/validation/p17_m2_source_v7_expired_result_recovery.md).
+PR230/main20640851 and all four main CI jobs precede the historical v7 attempt.
+Recovered native metadata confirms exporter R0 STOP at unbound ordinal7:
+330 bytes, mtime-63ns,7 attempts/6 hashes, payload0. Prebound mtime changes
+passed their hash/closing checks; the unbound rule remains strict. Input is
+unaccepted, P17 unrepaired, uniform default and full v2 open.
+The owner resumed on2026-11-03 after the original source/result/outer windows
+expired. Shared17-19 stayed unlaunched and cannot be invoked now. All old
+quotas/STOPs/UNKNOWN and HELD failure leases remain closed or quarantined.
+New finite authority covers metadata recovery and normal failed-result
+publication/independent retention only. Missing temporary receipts and incomplete
+historical accounting stay explicit; source retries and B/C remain unadmitted.
+Preserve all25 original dirty files; use the independent clean checkout.
+After result closure, the remaining input condition is trustworthy pre-read
+binding or a stable strict read for every unbound entry under separately
+admitted new authority. Never bootstrap that binding from a stopped read.
 
 Read the [frozen source-acquisition authority](docs/planning/p17_m2_source_acquisition_execution_protocol.md)
 and [actual STOP result](docs/validation/p17_m2_source_acquisition_execution.md).
