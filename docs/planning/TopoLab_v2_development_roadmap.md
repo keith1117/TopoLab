@@ -1,6 +1,6 @@
 # TopoLab v2 Development Roadmap
 
-Current continuous action: [new source v3 compatibility](p17_m2_new_source_acquisition_protocol.md) and [actual frontier](../validation/p17_m2_new_source_acquisition.md). Diagnostic protected-main CI/paired actual closure are complete. Public-v1 byte-premise STOP remains; corrected public v2 returned32 calls0/1071 members and different-author native audit0. Signed preflight and three late READY anchors now precede final checks/protected publication and once-only source acceptance; B precedes fixed C/H17. All old failures/costs/closed quotas and strict unbound rules remain. Public PASS is not original input acceptance or P17 repair.
+Current continuous action: [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md). Source PR230/main20640851/all-four CI preceded the historical unbound ordinal7 mtime-63ns STOP. Two authors recovered four native metadata files; old temporary evidence and complete accounting remain unavailable. Original shared/result windows have expired. New finite metadata-only result publication/retention does not reopen source quotas or admit B/C. Fixed P17 remains unrepaired.
 
 F is published and closed: [PR211](https://github.com/keith1117/TopoLab/pull/211),
 main `b0fe2350ac68a88a05e974926a2b0fe6a1302bf7`, all four exact-main
@@ -2435,7 +2435,22 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-## Current: recover CI diagnosis and close failure evidence (2026-10-28)
+## Current: v7 STOP and expired-result recovery (2026-11-03)
+
+[Recovered result](../validation/p17_m2_source_v7_expired_result_recovery.md)
+retains7 attempts/6 hashes/payload0, unaccepted input and the strict unbound
+mtime-63ns STOP. Prebound-51/-101/-114ns changes passed known-hash/closing
+checks. Four native metadata files/30357 bytes survive and match historical
+tool-conversation pins; original temporary returns/archives and complete
+accounting closure remain unavailable. The unstarted shared17-19 and original
+result/outer windows expired while paused; no invocation or old quota transfer
+is allowed now. Complete only new finite metadata recovery, independent review,
+normal result publication and paired actual retention. The input gate remains
+blocked until every unbound entry has trusted pre-read binding or stable strict
+reading under separately admitted authority. Input precedes B then fixed C;
+old scientific FAIL/full-fit PENDING4GiB and uniform default remain.
+
+## Historical: recover CI diagnosis and close failure evidence (2026-10-28)
 
 [New-funded recovery](../validation/p17_m2_ci_recovery_closeout.md) retains the
 original source2 STOP/result-window MISS and all closed allowances. Raw main CI
