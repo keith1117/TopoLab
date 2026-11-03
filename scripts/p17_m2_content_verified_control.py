@@ -1267,11 +1267,20 @@ def native_module(root=None):
 
 def supervise(root, plan, plan_sha, role, *, adapter=None):
     transport = adapter or _PublicTransport()
+    caps = getattr(transport, "role_caps", CAPS)
+    shared_role = getattr(transport, "shared_role", "shared-closeout")
+    shared_reserved = getattr(transport, "shared_reserved_FULL_seconds", caps.get(shared_role, 300))
+    formal_seconds = getattr(transport, "formal_seconds", 4500)
+    suffix_reserve = getattr(transport, "formal_reserve_seconds", 600)
+
+    def frozen_cap(name):
+        return caps[name] if name in caps else role_cap(name)
+
     import resource
     import subprocess
 
     transport.predecessor(root, plan, role)
-    need(not (root / "STOP.json").exists() or role == "shared-closeout", "STOP_NO_RETRY")
+    need(not (root / "STOP.json").exists() or role == shared_role, "STOP_NO_RETRY")
     folder = root / "receipts"
     folder.mkdir(mode=0o700, exist_ok=True)
     pending = {
@@ -1282,7 +1291,7 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
         execution_identity=transport.identity,
         role=role,
         plan_sha256=plan_sha,
-        frozen_FULL_seconds=role_cap(role) if role in CAPS or role == "final-filing" else None,
+        frozen_FULL_seconds=frozen_cap(role) if role in caps or role == "final-filing" else None,
         clock_domain="functions.exec.Date.now.UTC-seconds",
         clock_resolution_seconds=0.001,
         status="PENDING_BEFORE_DISPATCH",
@@ -1302,12 +1311,13 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
             for k, seconds in transport.result_windows
         }
     transport.put(folder / (role + "-pending.json"), pending)
-    if role in CAPS:
+    if role in caps:
         now = time.time()
-        remaining = sum(CAPS[r] for r in plan["role_order"][plan["role_order"].index(role) :])
-        deadline = plan["actor_activation_UTC_seconds"] + 4500
+        remaining = sum(caps[r] for r in plan["role_order"][plan["role_order"].index(role) :])
+        deadline = plan["actor_activation_UTC_seconds"] + formal_seconds
         need(
-            now >= plan["actor_activation_UTC_seconds"] and deadline - now >= remaining + 240 + 360,
+            now >= plan["actor_activation_UTC_seconds"]
+            and deadline - now >= remaining + suffix_reserve,
             "remaining full sequence/coordination/seal window unavailable",
         )
     # Native timer's actual exit is observed by wait4; supervisor exit is external.
@@ -1315,8 +1325,8 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
         transport.put(
             root / "ledger-reservation.json",
             {
-                "shared_reserved_FULL_seconds": 300,
-                "role_FULL_seconds": CAPS,
+                "shared_reserved_FULL_seconds": shared_reserved,
+                "role_FULL_seconds": caps,
                 "refunds_allowed": False,
                 "scope": transport.scope,
                 "reserved_UTC_seconds": time.time(),
@@ -1329,12 +1339,12 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
         root / (role + "-dispatch-charge.json"),
         {
             "role": role,
-            "frozen_FULL_seconds": role_cap(role)
-            if role in CAPS or role == "final-filing"
+            "frozen_FULL_seconds": frozen_cap(role)
+            if role in caps or role == "final-filing"
             else None,
             "charged_FULL_seconds": 0
-            if role == "shared-closeout"
-            else (role_cap(role) if role in CAPS or role == "final-filing" else None),
+            if role == shared_role
+            else (frozen_cap(role) if role in caps or role == "final-filing" else None),
             "charged_UTC_seconds": time.time(),
             "execution_identity": transport.identity,
             "plan_sha256": plan_sha,
@@ -1364,7 +1374,7 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
                 if time.monotonic() - started > (
                     1
                     if str(plan.get("public_fault", "")).startswith("outer-watchdog")
-                    else role_cap(role) - 5
+                    else frozen_cap(role) - 5
                 ):
                     transport.namespace_check(
                         root, additional_files=16, additional_bytes=4 * 1024**2

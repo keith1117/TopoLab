@@ -1,5 +1,9 @@
 # Validation evidence index
 
+Current [strict23 source-binding implementation and evidence](p17_m2_strict_source_binding.md):
+public regression-first independent readers and complete native/return audit;
+formal original binding, full-input acceptance and B/C remain separately gated.
+
 Latest [v7 STOP and expired-result recovery](p17_m2_source_v7_expired_result_recovery.md):
 four pinned native metadata files recovered independently; unbound ordinal7
 mtime-63ns remains STOP,7 attempts/6 hashes/payload0. Expired shared/result

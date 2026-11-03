@@ -256,12 +256,29 @@ def _terminate(pgid, child):
     return result(gone, observation_started)
 
 
-def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5):
-    """Record a bounded public command, including failure and observed group exit.
+def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
+           measurement_scope=None):
+    """Record a bounded command, including failure and observed group exit.
 
     API is also tested using newly authored subprocess fixtures. Public CLI argv
-    is literal below. No scientific dispatch or PASS is available.
+    is literal below. A separately admitted strict23 adapter supplies its explicit
+    metadata scope; this primitive grants no source or scientific authority.
     """
+    if measurement_scope is not None:
+        scopes = ("PUBLIC_STRICT_BINDING_REGISTRATION_ONLY",
+                  "FORMAL_STRICT_BINDING_REGISTRATION_ONLY",
+                  "STRICT_BINDING_CERTIFICATE_METADATA_ONLY")
+        roles = (("binding-certificate-auditor",) if measurement_scope == scopes[2] else
+                 ("producer-availability", "independent-availability", "binding-producer",
+                  "binding-independent", "binding-closeout"))
+        if not (
+            measurement_scope in scopes and role in roles and isinstance(argv, list)
+            and len(argv) == 10 and argv[1:4] == [
+                "-I", str(REPO / "scripts/p17_m2_source_binding.py"), "payload"]
+            and argv[4] == "--plan" and argv[6] == "--plan-sha"
+            and argv[8:] == ["--role", role]
+        ):
+            raise ValueError("strict23 measurement requires its registered literal payload argv")
     if (
         re.fullmatch(r"[a-z][a-z0-9-]{0,47}", role) is None
         or not math.isfinite(timeout)
@@ -299,6 +316,14 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5):
         "profile": profile.name,
         "log": log.name,
     }
+    if measurement_scope is not None:
+        # Retain the primitive's historical label. It is not an assertion that
+        # the new outer authority reads zero originals or grants scientific IO.
+        identity.update(
+            measurement_scope=measurement_scope,
+            measurement_execution_identity=(
+                "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1"),
+        )
     atomic_new(root / "pending.json", {**identity, "status": "PENDING_BEFORE_INTERPRETER"})
     samples, helpers, reason, error = [], [], None, None
     known_pids, escaped_groups = set(), set()

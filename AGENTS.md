@@ -17,7 +17,18 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Current action: [v7 STOP and expired-result recovery](docs/validation/p17_m2_source_v7_expired_result_recovery.md).
+Current action: [strict23 source binding](docs/planning/p17_m2_strict_source_binding_protocol.md)
+under the direct2026-11-03 continuous owner grant. Read its
+[actual frontier](docs/validation/p17_m2_strict_source_binding.md) before execution.
+Complete public native/independent-return verification, five checks and protected
+exact-head/latest-main four-CI publication before the new bounded original reads.
+Accepted23 binding precedes compatible40/558/1071 input publication/acceptance;
+accepted input precedes B, then separately frozen fixed C under unchanged gates.
+Source registration, software or input acceptance alone never repairs P17.
+All old quotas/failures/HELD scenes and the25 dirty files remain preserved.
+This grant overrides the one-slice stop only for its finite continuous action.
+
+Historical [v7 STOP and expired-result recovery](docs/validation/p17_m2_source_v7_expired_result_recovery.md):
 PR230/main20640851 and all four main CI jobs precede the historical v7 attempt.
 Recovered native metadata confirms exporter R0 STOP at unbound ordinal7:
 330 bytes, mtime-63ns,7 attempts/6 hashes, payload0. Prebound mtime changes

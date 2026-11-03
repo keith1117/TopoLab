@@ -1,0 +1,274 @@
+{
+  "schema": "topolab.v2.m2-strict-source-binding-authority.v1",
+  "execution_identity": "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1",
+  "owner_authority": "Direct2026-11-03 user instruction: resolve23unbound through trustedhash or strictstable read; automatically register sufficient finite NEWbudget/contracts, continuous independent-reviewed protected publication then input/B/C only under unchanged scientificgates; oldclosed unchanged.",
+  "base_main": "cd01589b9e33534101c29ef368ee680cb66e88da",
+  "budget_raw_sha256": "729dbf472c3271ee11369c9ab21ff357f74dcc99ed9c9ecf0f9f0b84cca8da6f",
+  "budget_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/budget-registration-v1.json",
+  "actors": {
+    "producer": "/root",
+    "independent": "/root/binding_route_independent_v1"
+  },
+  "evidence_root": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z",
+  "registration_source_root": "/Users/keith1117/Documents/TopoLab-data",
+  "source_whitelist": [
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/progress.json",
+      "max_bytes": 1048576
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/summary.json",
+      "max_bytes": 1048576
+    },
+    {
+      "path": "b4-5-weighted-terminal/fit/units/0000.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-5-weighted-terminal/fit/units/0001.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-5-weighted-terminal/fit/units/0002.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0000.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0001.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0002.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0003.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0004.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0005.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0006.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0007.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0008.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0009.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0010.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0011.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0012.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0013.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0014.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0015.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0016.json",
+      "max_bytes": 32768
+    },
+    {
+      "path": "b4-30-z-reflection-repair-v2/sentinel/reference/units/0017.json",
+      "max_bytes": 32768
+    }
+  ],
+  "exact_whitelist_derivation": {
+    "path": "docs/planning/p17_m2_source_acquisition_execution_authorization_draft.json",
+    "sha256": "401c32618ef6fb964d0efc425dc2f792ce92baf7a7e483d8bdbafa1c08906786",
+    "selector": "/source_whitelist/static_metadata_files[expected_sha256=null]"
+  },
+  "registration_rule": {
+    "reads_per_author_per_file_per_attempt": 1,
+    "readers": 2,
+    "files_per_author": 23,
+    "max_bytes_each_author": 2785280,
+    "strict_fields": [
+      "st_dev",
+      "st_ino",
+      "st_size",
+      "st_mtime_ns"
+    ],
+    "observation_points": [
+      "declared",
+      "before",
+      "after",
+      "closing"
+    ],
+    "pre_read_expected_sha256": null,
+    "source_identity_policy": null,
+    "hash_and_parse_same_complete_buffer": true,
+    "canonical_JSON_required": true,
+    "raw_original_persistence": false,
+    "first_observation_proves_unpublished_history": false,
+    "failed_read_or_failed_attempt_may_establish_trust": false,
+    "producer_independent_tuple_comparison": "exact all4 fields at all4 points plus full length/SHA/order; no timetolerance"
+  },
+  "availability_rule": {
+    "purpose": "No-content prospective availability/quiescence only; no trust/hash or substitution for strictdeclared/pre/post/closing observations",
+    "per_author_per_file_readonly_opens": 1,
+    "metadata_observations_per_file_max": 8,
+    "fixed_interval_seconds": 0.05,
+    "required_terminal_identical_observations": 3,
+    "max_seconds_each_author": 150,
+    "content_read_bytes": 0,
+    "no_source_modifications": true,
+    "on_dev_inode_size_change": "STOP",
+    "on_mtime_change": "retain allraw integers; finalstable3 required before closing availability; strictregistrationstillfresh",
+    "interval_sequence": "declared pathstat, opened fstat, then3 pairs(each preceded by0.05s sleep): descriptor fstat and freshly rewalked pathstat. Eight observations max; no claimed delay withinpair or betweendeclared/opened. Stop immediately on any dev/inode/size mismatch, preserving observedprefix."
+  },
+  "attempts": {
+    "max": 2,
+    "remedy": "Only after diagnosed authorized softwarecorrection with publicRED/GREEN, distinctreview and protectedrelease; no blindretry, no failedbuffertrust, no scienceFAILretry",
+    "each_caller_seconds": 3600,
+    "result_each_author_seconds_all_attempts": 12240,
+    "FULL_by_role": {
+      "producer-availability": 150,
+      "independent-availability": 150,
+      "binding-producer": 300,
+      "binding-independent": 300,
+      "binding-closeout": 180
+    },
+    "FULL_each": 1080,
+    "FULL_all_attempts": 2160,
+    "top_controlled_CLI_max_all_attempts": 48,
+    "original_content_reads_max_all_attempts": 92,
+    "result_stage_scope": "Bindingresult plus newcompatiblefullinputadapter/publicnative/review/checks/protectedmainCI and pairedresultretention. No neworiginalfullinput beforeallnewgates."
+  },
+  "public_verification": {
+    "source": "Newpublishedpublicgeneratoronly",
+    "binding_graphs_max": 2,
+    "binding_FULL_each": 1080,
+    "binding_top_CLI_each_max": 24,
+    "binding_remedy": "Onefreshgraphonlyafterconfirmedengineeringfix/publicregression/distinctreview; no blindrepeat.",
+    "separate_future_fullinput_graphs_max": 2,
+    "separate_future_fullinput_FULL_each": 3780,
+    "separate_future_fullinput_top_CLI_each_max": 32,
+    "global_graphs_max": 4,
+    "global_top_CLI_max": 112,
+    "global_public_FULL_max": 9720,
+    "new_metadata_auditors_FULL_total": 480,
+    "old_public_graphs_and_costs": "ALL_CLOSED_UNCHANGED_NO_TRANSFER"
+  },
+  "entry": {
+    "public_software": true,
+    "formal_sources": "Only publishedcleanlockedlatestmain/all4exactmainCI/freshdistinctreview; completeactualpublicnative/returns and independentpreflight; frozenexactroleargv/runtime/source/byte/read/lease/charge plan beforefirstsourceobservation",
+    "formal_targets": "NoLibrarygenerationprobeorcreationduringbinding. Futureinputtargetsremainunprobed untilseparatepublishedfullinputauthority."
+  },
+  "custody": {
+    "directory_mode": "0700",
+    "file_mode": "0600",
+    "exact_manifest": true,
+    "independent_backup_inodes": true,
+    "outside_anchor": true,
+    "permanent_0555_required": false,
+    "lease": "Real cooperative attempt/read lease, held through observed lastreturn; registeredTopoLab tools only, noFileProvider/allwriterexclusion",
+    "no_sync_upload_or_continuous_availability_promise": true
+  },
+  "native_resource": {
+    "limit_bytes": 4294967296,
+    "method": "B430_STYLE_NATIVE_RSS_AND_COMPLETE_EXIT_EMPIRICAL_ACCEPTANCE",
+    "reuse": "p17_m2_resource_control.invoke/bind_exit, originalhelperidentitiesdisclosed",
+    "coverage": "Eachavailability/read/closeout pluscontroller/binder/lastverifier and actualnative/externalreturns; absentunit/coverage/exit meansSTOP; nofullfitcredit",
+    "threads": 1,
+    "fees": "UNKNOWN_NOT_ZERO; externalnewpaidcommitments0"
+  },
+  "failure": "Freeze fullpacket/prefix/rawtuples/primaryandsecondaryerrors/actualreturns/resources/wholeelapsed/FULL; no furthercontentconsumption. Atmost2pureSWfixrounds/rootcause insidefinitebudget. Only preregisteredremedy afterallgates.",
+  "output_certificate": "Freshstable23registration ONLY, semanticpair plus actualnative/return/lease evidence and independentpair/certificateaudit; exactSHAanchored beforeanylaterR0open. Notinputacceptance, historicalprovenanceprooforP17repair.",
+  "downstream": {
+    "input": "Separatelypublishedcompatibleexecutionidentity with prereadcertificate23map atbothreaders andcertaudit; unchanged40/558/1071 closure, actualsixroles/R0beforeR1",
+    "B": "Onlyaftercompleteinputacceptance; independentnewnative4GiBpreflight FULL180 and exactinput/role/calltables",
+    "C": "OnlyafterB and frozennewinput-boundC, fixed18cases/19methods/342queries,H17primary, unchangedquality/speed/no-regression/models/callcaps; C14580max",
+    "historical_all_paid": "12721.16417100014444982>7200 PERMANENT_FAIL_UNCHANGED",
+    "full_fit": "PENDING4GiB unchanged",
+    "P17": "UNREPAIRED untilactualscientificmetricsandindependentacceptance",
+    "uniform_default": true
+  },
+  "budget_allocation_v2_sha256": "b3b02c9ad54d9075104cfefc02aa0f5e3983ca153ac9c3560350b24e29dc432f",
+  "budget_allocation_v2_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/unstarted-stage-allocation-v2.json",
+  "preparation_proofs": {
+    "public_native_root": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/topolab-public-strict-binding-v1",
+    "public_certificate_paths": [
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-v1.json",
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-backup-v1.json"
+    ],
+    "independent_preflight_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/independent/strict-binding-preflight-v1.json",
+    "independent_preflight_actual_return_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/independent/strict-binding-preflight-v1.actual.json",
+    "rule": "Actualcompletepublicnativecertificate replay, freshreview/main4CI, independentlywrittenpreflight and actualreturn required. ExactSHAarguments frozeninplanbeforeanysourceobservation; not a PASSflag. Two certificatefiles must be byteidenticalordinarysinglelinkindependentinodes."
+  },
+  "unstarted_execution_registration_v3": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/unstarted-execution-registration-v3.json",
+    "sha256": "a68971a02b6f6cef7c56546583144c0e3d1a9225146449f91a3cd76350c6b6d4",
+    "total_author_seconds_unchanged": 244800,
+    "future_FULL_projection": 34680,
+    "started_clocks_extended": false
+  },
+  "metadata_auditor": {
+    "schema": "topolab.v2.m2-strict-source-binding.metadata-plan.v1",
+    "scope": "STRICT_BINDING_CERTIFICATE_METADATA_ONLY",
+    "role": "binding-certificate-auditor",
+    "author": "/root/binding_route_independent_v1",
+    "FULL": 120,
+    "timeout": 110,
+    "window": 300,
+    "max": 4,
+    "source_original_reads": 0,
+    "separate_native_RSS_exit_and_actual_return_required": true,
+    "no_core5_retry_or_window_extension": true
+  },
+  "CLI_accounting": {
+    "per_binding_ceremony_source_role_controls": 22,
+    "source_role_control_cap": 24,
+    "controls": "prepare-core1 +5core*(supervise,record,accept)15 +certify-core1 +prepare-audit1 +metadataauditor*(supervise,record,accept)3 +finalize-result1",
+    "additional_metadata_CLI_each_max": 26,
+    "metadata_breakdown": {
+      "file_actual_event": 12,
+      "raw_actual_packet_persistence": 12,
+      "show_commands": 2
+    },
+    "metadata_charged_to": "ROOT/I2048separatemetadataallowances; includedinallouterCLI512 andactualcontinuousauthorwall, neverdropped",
+    "outer_CLI_each_ceremony_max": 48,
+    "four_binding_ceremonies_outer_max": 192,
+    "fullinput_public_and_formal_outer_max": 116,
+    "B_C_outer_max": 12,
+    "total_named_outer_max": 320,
+    "global_named_outer_cap": 512,
+    "owned_empty_polls_each_supervise_or_record_max": 16,
+    "polls_each_ceremony_max": 192,
+    "poll_wait_ms_max": 30000,
+    "polls": "Allrawactualownedemptyreturnfragmentsretained, chargedasadditionalboundedmetadataactionsandwholecallerwall; nonempty/unowned/missingterminalreject.",
+    "actual_record_stdout": "Concatenate every original result.output fragment verbatim; reject tool truncation/excess polls; require UTF8 bytes exactly canonical complete on-disk wire (pending/completion/fullcollector), retain integer nanoseconds; both observed hashes issued only after equality."
+  }
+}

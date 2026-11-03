@@ -1,5 +1,10 @@
 # Planning index
 
+Current [strict23 source binding](p17_m2_strict_source_binding_protocol.md)
+([finite authority](p17_m2_strict_source_binding_protocol.json)): separately
+funded two-author strict observations, native actual-return and metadata-auditor
+closure before compatible full-input admission; no old quota or science reset.
+
 Latest [new source v3 compatibility](p17_m2_new_source_acquisition_protocol.md) ([finite JSON](p17_m2_new_source_acquisition_protocol.json)): actual public32/native independent preflight complete; final READY checks/protected publication precede the once-only v7 attempt. Old quotas/strict unbound rules/scientific Gates retained.
 
 Latest [new CI recovery/closeout finite protocol](p17_m2_ci_recovery_closeout_protocol.json): current recovery and separately registered still-unstarted publication families; old quotas closed, input/B/C Gates unchanged.

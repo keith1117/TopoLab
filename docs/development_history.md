@@ -1,5 +1,23 @@
 # Development history
 
+## 2026-11-03 — Strict registration of the23 unbound metadata files
+
+[New source-binding capability](validation/p17_m2_strict_source_binding.md) uses
+strict complete same-buffer reads and independent physical/hash comparison
+before any later pre-read expectation exists. Availability remains a bounded
+no-content observation; the existing native/return engine and a separate measured
+metadata auditor close actual evidence. Public regressions retain source failure
+context and legacy defaults. New finite owner authority continues through normal
+publication, conditional actual binding, then accepted input/B/C under unchanged
+scientific gates. Original25 changes and all old failures/closed grants remain;
+this software frontier establishes no P17 repair or scientific metric.
+Public graph1's caller-encoding STOP/FULL480/HELD is retained; reviewed graph2
+and its own-return metadata auditor pass. Paired599-member preparation retention
+and all captured certificate hashes pass independently. First local campaign
+passes3212/one platform skip; PR232's two Linux fixture-setup errors lead to
+absent/conflicting-environment RED/GREEN and a test-only explicit-thread remedy.
+Production freeze and source quotas remain unchanged; publication is still gated.
+
 ## 2026-11-03 — v7 STOP and expired-result evidence recovery
 
 [Result](validation/p17_m2_source_v7_expired_result_recovery.md) separates the

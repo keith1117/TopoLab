@@ -1,6 +1,6 @@
 # TopoLab v2 Development Roadmap
 
-Current continuous action: [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md). Source PR230/main20640851/all-four CI preceded the historical unbound ordinal7 mtime-63ns STOP. Two authors recovered four native metadata files; old temporary evidence and complete accounting remain unavailable. Original shared/result windows have expired. New finite metadata-only result publication/retention does not reopen source quotas or admit B/C. Fixed P17 remains unrepaired.
+Current continuous action: [strict registration of23 unbound metadata entries](p17_m2_strict_source_binding_protocol.md), followed by independently accepted input and conditional B/C under unchanged scientific Gates. New finite funding covers this continuous action; old quotas remain closed. Fixed P17 remains unrepaired. The [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md) is historical: ordinal7 mtime-63ns, missing temporary evidence and incomplete old accounting remain retained failures.
 
 F is published and closed: [PR211](https://github.com/keith1117/TopoLab/pull/211),
 main `b0fe2350ac68a88a05e974926a2b0fe6a1302bf7`, all four exact-main
@@ -2435,7 +2435,26 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-## Current: v7 STOP and expired-result recovery (2026-11-03)
+## Current: strict23 source binding and conditional downstream execution
+
+The direct2026-11-03 continuous grant adopts the
+[strict-registration contract](p17_m2_strict_source_binding_protocol.md), with
+[actual frontier](../validation/p17_m2_strict_source_binding.md). Two strict
+first-read tables/native returns and a separately measured independent metadata
+auditor must establish the23 pre-read bindings. Availability never creates trust.
+Protected publication and exact latest-main four-CI precede original access.
+Actual accepted bindings precede compatible40/558/1071 full input admission;
+input precedes B and fixed input-bound C, preserving all original scientific
+standards. The grant overrides scheduling stops and funds only finite new work;
+all old STOPs/costs/closed quotas/seals/all-paid FAIL/full-fit PENDING4GiB remain.
+No public, contract or input-only pass is a fixed P17 repair.
+Public graph1's encoding STOP is retained; reviewed graph2/native auditor and
+paired599-member metadata replay pass. PR232's first Linux quality fixture setup
+fails, so a public RED/GREEN test-environment remedy uses reserved publication
+family2, without changing production freeze or any started clock. Original
+registration remains unstarted until updated exact-head/main four-CI pass.
+
+## Historical: v7 STOP and expired-result recovery (2026-11-03)
 
 [Recovered result](../validation/p17_m2_source_v7_expired_result_recovery.md)
 retains7 attempts/6 hashes/payload0, unaccepted input and the strict unbound
