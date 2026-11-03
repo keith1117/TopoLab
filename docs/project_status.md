@@ -5,7 +5,26 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: v7 STOP and expired-result recovery (2026-11-03)
+## Current: strict23 source binding under new continuous authority
+
+[New contract](planning/p17_m2_strict_source_binding_protocol.md) and
+[actual frontier](validation/p17_m2_strict_source_binding.md) address the23
+unbound metadata entries through two independently authored strict first reads.
+Bounded no-content availability observes raw metadata only; it never supplies a
+trusted hash or replaces declared/FD/post/closing checks. A new native certificate
+and its independently measured metadata auditor's actual return must close.
+
+The owner's new finite allocation covers implementation, independent review,
+normal protected publication, bounded new registration and conditional input/B/C.
+It extends no started clock or old allowance. At this authoring frontier official
+graphs, original reads, input acceptance and B/C remain unstarted. Complete public
+native verification, all repository checks and exact PR/main four-CI first.
+Then execute the admitted23 registration; only accepted bindings can precede the
+compatible40/558/1071 input adapters and full six-role acceptance. B and fixed C
+remain downstream. P17 is unrepaired, uniform default, historical all-paid FAIL,
+full-fit PENDING4GiB and every old failure/UNKNOWN/cost/quota/seal remain.
+
+## Historical: v7 STOP and expired-result recovery (2026-11-03)
 
 [Recovered result and evidence limits](validation/p17_m2_source_v7_expired_result_recovery.md)
 follow source PR230/main20640851 and all-four main CI40713275964 PASS.

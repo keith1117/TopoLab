@@ -1706,3 +1706,15 @@ from TopoLab's own actual zero-role STOP. It uses new public regression data;
 original numerical readers, models and historical authorities remain. No
 upstream source or scientific result was imported. See the
 [remedy report](docs/validation/p17_m2_source2_orchestration_remedy.md).
+
+## 2026-11-03 strict source binding
+
+The strict23 registration, separately authored reader/certificate comparison,
+actual-event filing and native adapter are original TopoLab work over its own
+published strict reader, resource supervisor and content-verified interfaces.
+New public buffers and independently authored fault cases exercise exact integer
+metadata, failure context and actual-return binding. No Hack3D implementation,
+comments, layout or figures were consulted or imported. New observations can
+establish current pre-read hashes only; they do not prove unpublished historical
+source provenance or fixed P17 repair. Generated evidence remains external; see
+the [strict binding report](docs/validation/p17_m2_strict_source_binding.md).
