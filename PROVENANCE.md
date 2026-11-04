@@ -1718,3 +1718,12 @@ comments, layout or figures were consulted or imported. New observations can
 establish current pre-read hashes only; they do not prove unpublished historical
 source provenance or fixed P17 repair. Generated evidence remains external; see
 the [strict binding report](docs/validation/p17_m2_strict_source_binding.md).
+
+## 2026-11-03 — Exact-file coordinated strict source reads
+
+The new Swift/Python control handshake and public cooperating-writer fixture are
+original TopoLab implementations using Apple's Foundation NSFileCoordinator API:
+https://developer.apple.com/documentation/foundation/nsfilecoordinator/coordinate(readingitemat:options:error:byaccessor:)
+Only the documented exact-file accessor lifetime motivates the interface; no
+Apple example implementation or unlicensed upstream code is copied. Coordination
+is not proof against uncoordinated writers, historical content or old fault cause.

@@ -5,35 +5,26 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: strict23 source binding under new continuous authority
+## Current: coordinated strict23 remedy after retained formal1 STOP
 
-[New contract](planning/p17_m2_strict_source_binding_protocol.md) and
-[actual frontier](validation/p17_m2_strict_source_binding.md) address the23
-unbound metadata entries through two independently authored strict first reads.
-Bounded no-content availability observes raw metadata only; it never supplies a
-trusted hash or replaces declared/FD/post/closing checks. A new native certificate
-and its independently measured metadata auditor's actual return must close.
+[New contract](planning/p17_m2_coordinated_source_binding_protocol.md) and
+[actual frontier](validation/p17_m2_coordinated_source_binding.md) retain published
+PR232/mainbb770/all-four CI, then formal1 strict STOP on its fifth421-byte
+metadata read (mtime-108ns before SHA/closing). FULL780, all actual native failure
+returns and prepaid HELD closeout remain; no accepted23 or full input exists.
 
-The owner's new finite allocation covers implementation, independent review,
-normal protected publication, bounded new registration and conditional input/B/C.
-It extends no started clock or old allowance. Public graph1 closed after a caller
-packet-encoding STOP, retaining FULL480/HELD; the reviewed reserved graph2 passed
-strict23/native5 and the independently measured auditor. Official public FULL1680
-and an additional software-native unit FULL330 give a known new2010 lower bound;
-other software/CI costs remain UNKNOWN_NOT_ZERO. The599-member preparation
-metadata pair and outside anchors passed different-author replay.
-
-Local campaign1 passed3212/one platform skip. PR232 head a2bf669 failed Linux
-quality setup for two new tests: their CLI fixture inherited unset thread limits.
-Absent/conflicting-environment RED precedes the test-only explicit-environment
-fix, retained stdout diagnostics and different-author delta review. Production
-runtime guards/source hashes remain unchanged. The pre-registered reserve
-publication family2 and full campaign2 must pass exact PR/main four-CI first.
-Original reads, input acceptance and B/C remain unstarted.
-Then execute the admitted23 registration; only accepted bindings can precede the
-compatible40/558/1071 input adapters and full six-role acceptance. B and fixed C
-remain downstream. P17 is unrepaired, uniform default, historical all-paid FAIL,
-full-fit PENDING4GiB and every old failure/UNKNOWN/cost/quota/seal remain.
+A new prospective exact-file coordination route keeps all strict physical/hash/
+same-buffer/closing and cross-author checks. New public coordination and failure
+regressions, distinct reviews, actual native/independent-auditor returns, complete
+checks, protected latest-main CI and fresh preflight precede sole formal2.
+The sole coordinated public graph and independent own-return auditor now pass:
+23 reads per author,46 helper native exits, public FULL1200 and paired certificate
+09a922ea. Fresh Standards/Spec reviews close with no open findings. Complete campaign4 passes3271 tests/one platform skip and all five checks.
+Protected publication remains pending; formal2 is not admitted yet.
+Finite v4 reallocates unstarted work only; fixed deadlines and old balances stay.
+Only accepted formal23 precedes compatible40/558/1071 input, then B and fixed C.
+P17 is unrepaired, uniform default, historical all-paid FAIL/full-fit PENDING4GiB;
+original25 dirty files and every old failure/UNKNOWN/cost/quota/seal remain.
 
 ## Historical: v7 STOP and expired-result recovery (2026-11-03)
 

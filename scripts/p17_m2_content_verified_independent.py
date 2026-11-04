@@ -102,6 +102,7 @@ def audit_resources(
     inner_evidence: dict[str, Any] | None,
     native_profiles: dict[str, bytes] | None,
     expected_identity: str = EXECUTION_IDENTITY,
+    registered_source_children: dict[int, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Reconcile each actual PID once; inherited native parsing is independent code."""
     result: dict[str, Any] = {
@@ -115,7 +116,9 @@ def audit_resources(
     inner, inner_problem = None, "UNKNOWN_MISSING_INNER_EVIDENCE"
     try:
         require(inner_evidence is not None, inner_problem)
-        inner = base.audit_native_record(**inner_evidence, failure_recording=True)
+        inner = base.audit_native_record(
+            **inner_evidence, failure_recording=True,
+            registered_source_children=registered_source_children)
         result["inner_minimum_charge_seconds"] = inner["inner_minimum_charge_seconds"]
         result["inner_record_sha256"] = inner["record_canonical_sha256"]
         result["inner_actual_exit_code"] = inner_evidence["record"]["exit_code"]

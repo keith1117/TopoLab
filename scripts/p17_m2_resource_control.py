@@ -257,7 +257,7 @@ def _terminate(pgid, child):
 
 
 def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
-           measurement_scope=None):
+           measurement_scope=None, registered_source_child_cap=0):
     """Record a bounded command, including failure and observed group exit.
 
     API is also tested using newly authored subprocess fixtures. Public CLI argv
@@ -279,6 +279,13 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
             and argv[8:] == ["--role", role]
         ):
             raise ValueError("strict23 measurement requires its registered literal payload argv")
+    if (type(registered_source_child_cap) is not int
+            or registered_source_child_cap not in (0, 1)
+            or (registered_source_child_cap and not (
+                measurement_scope in ('PUBLIC_STRICT_BINDING_REGISTRATION_ONLY',
+                                      'FORMAL_STRICT_BINDING_REGISTRATION_ONLY')
+                and role in ('binding-producer', 'binding-independent')))):
+        raise ValueError('registered source child scope differs')
     if (
         re.fullmatch(r"[a-z][a-z0-9-]{0,47}", role) is None
         or not math.isfinite(timeout)
@@ -324,9 +331,12 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
             measurement_execution_identity=(
                 "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1"),
         )
+    if registered_source_child_cap:
+        identity['registered_source_child_cap'] = registered_source_child_cap
     atomic_new(root / "pending.json", {**identity, "status": "PENDING_BEFORE_INTERPRETER"})
     samples, helpers, reason, error = [], [], None, None
     known_pids, escaped_groups = set(), set()
+    source_command_pids = set()
     child = None
     cleanup = {"group_gone": None, "leader_exit": None, "signals": []}
     try:
@@ -369,6 +379,9 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
                     + controller_peak,
                 }
                 samples.append(sample)
+                if registered_source_child_cap:
+                    source_command_pids.update(r['pid'] for r in rows
+                        if r['parent'] == child.pid and r['pid'] != child.pid)
                 if helper["problem"] is not None:
                     reason = helper["problem"]
                     break
@@ -377,8 +390,12 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
                 # sessions are retained and stopped, never silently admitted.
                 if (
                     escaped_groups
-                    or len(rows) > 2
-                    or any(r["pid"] != child.pid and r["parent"] != child.pid for r in rows)
+                    or (registered_source_child_cap and len(source_command_pids) > 1)
+                    or len(rows) > 2 + registered_source_child_cap
+                    or any(r["pid"] != child.pid and r["parent"] != child.pid
+                           and not (registered_source_child_cap and r['parent'] in {
+                               item['pid'] for item in rows if item['parent'] == child.pid})
+                           for r in rows)
                 ):
                     reason = "RESOURCE_UNKNOWN_STOP_UNREGISTERED_DESCENDANT"
                     break

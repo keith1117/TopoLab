@@ -949,6 +949,7 @@ def audit_native_record(
     expected_argv: list[str],
     platform: str,
     failure_recording: bool = False,
+    registered_source_children: dict[int, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Reconcile only explicit NEW receipts; read no path and trust no PASS.
 
@@ -998,6 +999,33 @@ def audit_native_record(
         record["timer_native_exit"], launch_pid, platform,
         expected_exit=record["exit_code"] if failure_recording else 0,
     )
+    source_children = registered_source_children or {}
+    source_peak = 0
+    if source_children:
+        require(type(record.get('registered_source_child_cap')) is int
+                and record.get('registered_source_child_cap') == 1
+                and record.get('measurement_execution_identity') ==
+                'topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1'
+                and record.get('measurement_scope') in (
+                    'PUBLIC_STRICT_BINDING_REGISTRATION_ONLY',
+                    'FORMAL_STRICT_BINDING_REGISTRATION_ONLY')
+                and expected_role in ('binding-producer', 'binding-independent')
+                and len(source_children) <= 23, 'unregistered source child authority')
+        for pid, child in source_children.items():
+            require(type(pid) is int and pid > 0 and child['pid'] == pid
+                    and type(child['exit_code']) is int
+                    and (child['exit_code'] == 0 or failure_recording)
+                    and child['statistics_source'] == 'os.wait4'
+                    and child['platform'] == platform and child['rss_unit'] ==
+                    ('bytes' if platform == 'darwin' else 'KiB*1024'),
+                    'source child native exit identity/units differ')
+            for name in ('user_seconds', 'system_seconds'):
+                _nonnegative(child['native'][name])
+            source_peak = max(source_peak, _nonnegative(
+                child['native']['rss_bytes'], integer=True, positive=True))
+    else:
+        require('registered_source_child_cap' not in record,
+                'source child proof missing')
     helpers, samples = record["helpers"], record["samples"]
     require(
         isinstance(helpers, list)
@@ -1012,6 +1040,7 @@ def audit_native_record(
     helper_peak = 0
     empirical_peak = measured["rss_bytes"]
     previous = None
+    command_pids: set[int] = set()
     for index, (helper, sample) in enumerate(zip(helpers, samples, strict=True)):
         name = f"sampler-{index}.time"
         require(
@@ -1045,8 +1074,12 @@ def audit_native_record(
         )
         require(sample_controller <= controller, "controller sample exceeds high-water")
         process_rows = sample["roles"]
+        if source_children:
+            command_pids.update(row['pid'] for row in process_rows
+                                if row['parent'] == launch_pid and row['pid'] != launch_pid)
+            require(len(command_pids) <= 1, 'registered command inventory differs')
         require(
-            len(process_rows) <= 2
+            len(process_rows) <= (3 if source_children else 2)
             and len({row["pid"] for row in process_rows}) == len(process_rows),
             "unregistered/duplicate process in role",
         )
@@ -1056,7 +1089,10 @@ def audit_native_record(
             _nonnegative(row["parent"], integer=True)
             require(
                 row["pgid"] == launch_pid
-                and (row["pid"] == launch_pid or row["parent"] == launch_pid),
+                and (row["pid"] == launch_pid or row["parent"] == launch_pid
+                     or (row['pid'] in source_children and row['parent'] in {
+                         item['pid'] for item in process_rows
+                         if item['parent'] == launch_pid})),
                 "observed process escaped role tree",
             )
             group += _nonnegative(row["rss_bytes"], integer=True)
@@ -1070,7 +1106,7 @@ def audit_native_record(
         record["native_plus_controller_and_sampler_rss_bytes"] == overlap,
         "native overlap addition differs",
     )
-    empirical_peak = max(empirical_peak, overlap)
+    empirical_peak = max(empirical_peak, overlap + source_peak)
     require(
         empirical_peak <= limit
         and all(item["group_gone"] is True for item in record["escaped_group_cleanup"]),

@@ -205,9 +205,18 @@ def audit_role(plan, role, evidence, trusted_external_record):
              and plan["roles"][role]["FULL"] == cap, "registered FULL differs")
         pending = evidence["pending"]
         inner = evidence["inner_evidence"]
+        source_children = None
+        if plan['context'].get('attempt') == 2 and plan.get('coordination') and role in (
+                'binding-producer', 'binding-independent'):
+            wire = json.loads(inner['log'])
+            failed_wire = wire.get('binding_failure') or wire.get('independent_failure') or wire
+            records = failed_wire.get('source_coordination', [])
+            source_children = {row['helper_pid']: row['helper_native_exit']
+                               for row in records if row.get('helper_native_exit') is not None}
+            source_children = source_children or None
         resources = checker.audit_resources(
             completion, inner_evidence=inner, native_profiles=evidence["native_profiles"],
-            expected_identity=IDENTITY)
+            expected_identity=IDENTITY, registered_source_children=source_children)
         result["resource_evidence"] = resources
         for key in ("RSS_envelope_bytes", "RSS_components_bytes", "inner_minimum_charge_seconds"):
             result[key] = resources[key]
@@ -221,6 +230,11 @@ def audit_role(plan, role, evidence, trusted_external_record):
         need(plan["schema"] == expected_schema
              and plan["context"]["execution_identity"] == IDENTITY
              and plan["context"]["scope"] in scopes, "native plan scope differs")
+        attempt = plan["context"].get("attempt", 1)
+        need(type(attempt) is int and attempt in (1, 2), "native attempt differs")
+        if attempt == 2 or plan.get("coordination") is not None:
+            load("p17_m2_source_binding_independent")._coordination_config(
+                {"attempt": attempt}, plan.get("coordination"))
         need(type(plan["started_unix_ns"]) is int and type(plan["deadline_unix_ns"]) is int
              and plan["deadline_unix_ns"] - plan["started_unix_ns"] == window_seconds * 10**9
              and plan["actor_activation_UTC_seconds"] == plan["started_unix_ns"] / 10**9
@@ -278,6 +292,16 @@ def audit_role(plan, role, evidence, trusted_external_record):
              and resources["inner_actual_exit_code"] == 0
              and all(code == 0 for code in resources["actual_component_exit_codes"])
              and completion["domain_status"] == "PASS", "payload/actual exit failure")
+        if plan['context'].get('attempt') == 2 and role in (
+                'binding-producer', 'binding-independent'):
+            need(source_children is not None and len(records) == len(source_children) == 23,
+                 'exact23 source helper native exits required')
+            load('p17_m2_source_binding_independent')._coordination_trace(
+                wire, plan['context'], plan['coordination'])
+            need(all(first <= row['ready']['entered_ns'] / 10**9
+                     <= row['release']['left_ns'] / 10**9
+                     <= row['helper_native_exit']['wait_finished_ns'] / 10**9 <= last
+                     for row in records), 'coordinated claim outside actual source role')
         result.update(status="PASS_STRICT_BINDING_NATIVE_ROLE", reason=None,
                       full_role_evidence_accepted=True)
     except (KeyError, TypeError, ValueError, OverflowError) as error:
@@ -310,7 +334,13 @@ def audit_certificate(plan, evidence_by_role, trusted_events_by_role, primary, i
          and evidence_by_role["binding-independent"]["inner_evidence"]["log"]
          == canonical(independent), "strict pair differs from actual native buffers")
     bindings = load("p17_m2_source_binding_independent").validate_pair(
-        primary, independent, plan["context"])
+        primary, independent, plan["context"], coordination=plan.get("coordination"))
+    if plan["context"]["attempt"] == 2:
+        for role, wire in (("binding-producer", primary), ("binding-independent", independent)):
+            for record in wire["source_coordination"]:
+                need(audits[role]["T0"] <= record["ready"]["entered_ns"] / 10**9
+                     <= record["release"]["left_ns"] / 10**9 <= audits[role]["T1"],
+                     "coordinated claim outside actual source role")
     closeout_raw = evidence_by_role["binding-closeout"]["inner_evidence"]["log"]
     closeout = json.loads(closeout_raw)
     need(canonical(closeout) == closeout_raw and set(closeout) == {
@@ -354,7 +384,7 @@ def audit_certificate(plan, evidence_by_role, trusted_events_by_role, primary, i
     need(isinstance(before, dict) and set(before) == {"st_dev", "st_ino"}
          and all(type(value) is int for value in before.values()) and before == after,
          "held parent identity changed at lease absence observation")
-    return {
+    certificate = {
         "schema": "topolab.v2.m2-strict-source-binding.certificate.v1",
         "execution_identity": IDENTITY, "scope": plan["context"]["scope"],
         "plan_sha256": sha(canonical(plan)), "registered_context": plan["context"],
@@ -372,6 +402,13 @@ def audit_certificate(plan, evidence_by_role, trusted_events_by_role, primary, i
             "software_only=True is the retained instrumentation label; it is not an "
             "original_source_reads=0 assertion or formal/scientific admission"),
     }
+    if plan["context"]["attempt"] == 2:
+        certificate["coordination"] = plan["coordination"]
+        certificate["source_coordination"] = {
+            "producer": primary["source_coordination"],
+            "independent": independent["source_coordination"],
+        }
+    return certificate
 
 
 def main():
@@ -399,7 +436,9 @@ def main():
         result = native.invoke(
             output, args.role, argv_for(plan, "payload", args.role),
             timeout=plan["roles"][args.role]["timeout"],
-            measurement_scope=plan["context"]["scope"])
+            measurement_scope=plan["context"]["scope"],
+            registered_source_child_cap=int(plan['context'].get('attempt') == 2
+                and args.role in ('binding-producer', 'binding-independent')))
         print(canonical(result).decode(), end="")
         return 0 if result["software_result"] == "PUBLIC_COMMAND_EXIT_OBSERVED" else 1
     print(canonical(result).decode(), end="")

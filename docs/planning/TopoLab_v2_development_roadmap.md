@@ -2435,7 +2435,18 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-## Current: strict23 source binding and conditional downstream execution
+## Current: coordinated strict23 remedy with unchanged downstream Gates
+
+The [prospective coordination contract](p17_m2_coordinated_source_binding_protocol.md)
+and [actual frontier](../validation/p17_m2_coordinated_source_binding.md) retain
+published PR232/mainbb770 and formal1 fifth-file mtime-108ns strict STOP/FULL780.
+New exact-file coordination, both strict readers, owned-helper native resource/
+exit coverage and different-author audit must pass public/review/checks/protected
+publication before sole formal2. Accepted23 precedes compatible full-input
+40/558/1071 acceptance, then B/fixed C. Fixed deadlines, every historical Gate,
+all-paid FAIL, full-fit PENDING4GiB and P17 unrepaired remain.
+
+## Historical: strict23 preparation frontier before formal1
 
 The direct2026-11-03 continuous grant adopts the
 [strict-registration contract](p17_m2_strict_source_binding_protocol.md), with

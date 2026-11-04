@@ -4,7 +4,10 @@ import importlib.util
 import json
 import os
 import sys
+import time
+from contextlib import contextmanager
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -40,6 +43,148 @@ def small_sources(module, tmp_path):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(module.canonical({"new_public_fixture": i}))
     return source
+
+
+def coordinated_authority(module, tmp_path, monkeypatch):
+    authority = json.loads(module.AUTHORITY.read_bytes())
+    authority["coordination"] = {
+        "identity": "topolab.source-read.foundation-coordination.v1",
+        "binary": str(tmp_path / "new-public-coordination-helper"), "sha256": "3" * 64,
+        "request_timeout_seconds": 10, "release_timeout_seconds": 5, "reading_options": 0,
+        "source_swift_sha256": "4" * 64, "compiler_sha256": "5" * 64,
+    }
+    authority["evidence_root"] = str(tmp_path)
+    authority["preparation_proofs"]["public_native_root"] = str(
+        tmp_path / "topolab-public-coordinated-binding-plan")
+    path = tmp_path / "new-public-coordinated-authority.json"
+    path.write_bytes(module.canonical(authority))
+    monkeypatch.setattr(module, "COORDINATED_AUTHORITY", path, raising=False)
+    return authority
+
+
+def test_attempt2_public_prepare_selects_new_authority_and_frozen_coordinator(
+    tmp_path, monkeypatch,
+):
+    module = binding_module()
+    authority = coordinated_authority(module, tmp_path, monkeypatch)
+    active = module.runtime()
+    monkeypatch.setattr(module, "runtime", lambda: dict(
+        active, isolated=1, cwd=str(module.REPO), threads=module.THREADS))
+    root = tmp_path / "topolab-public-coordinated-binding-plan"
+    result = module.prepare_public(root, attempt=2)
+    plan = module.load_plan(root / "plan.json", result["plan_sha256"])
+    assert plan["context"]["attempt"] == 2
+    assert plan["context"]["authority_sha256"] == module.sha(
+        module.COORDINATED_AUTHORITY.read_bytes())
+    assert plan["coordination"] == authority["coordination"]
+    assert len(plan["context"]["source_tree"]) == 18
+    assert set(module.source_freeze()) < set(module.source_freeze(2))
+    assert "coordination" not in plan["context"]
+    assert (root / "custody.cooperative-reader.lease").exists()
+    module.admit_plan(plan, "producer-availability")
+
+
+def public_coordinator_fixture(module, monkeypatch):
+    state = SimpleNamespace(active=False, records=[])
+
+    class Coordinator:
+        def __init__(self, config, source):
+            self.config, self.source, self.records = config, source, []
+
+        @contextmanager
+        def claim(self, relative):
+            path = self.source / relative
+            info = path.stat(follow_symlinks=False)
+            url = path.as_uri()
+            pid = 2000 + len(self.records)
+            entered = time.time_ns()
+            row = {"path": relative, "requested_url": url, "accessor_url": url,
+                   "namespace_before": module.physical(info), "helper_pid": pid,
+                   "helper_sha256": self.config["sha256"],
+                   "strategy_identity": self.config["identity"],
+                   "ready": {"event": "accessor_entered", "pid": pid,
+                             "requested_url": url, "accessor_url": url, "entered_ns": entered},
+                   "reader_start_ns": time.time_ns()}
+            self.records.append(row)
+            state.records.append(row)
+            state.active = True
+            try:
+                yield path
+            finally:
+                state.active = False
+                row.update(reader_end_ns=time.time_ns(), release_requested_ns=time.time_ns())
+                row["release"] = {"event": "accessor_returned", "pid": pid,
+                                  "left_ns": time.time_ns()}
+                row["helper_exit_code"] = 0
+                row["helper_native_exit"] = {
+                    "pid": pid, "exit_code": 0, "statistics_source": "os.wait4",
+                    "platform": "darwin", "rss_unit": "bytes",
+                    "native": {"rss_bytes": 1024, "user_seconds": 0.01,
+                               "system_seconds": 0.01}, "wait_finished_ns": time.time_ns()}
+
+    original = module.load
+    monkeypatch.setattr(module, "load", lambda name: SimpleNamespace(Coordinator=Coordinator)
+                        if name == "p17_m2_source_coordination" else original(name))
+    return state, Coordinator
+
+
+def test_attempt2_producer_and_independent_keep_strict_packets_inside_claim(tmp_path, monkeypatch):
+    module = binding_module()
+    authority = coordinated_authority(module, tmp_path, monkeypatch)
+    source = small_sources(module, tmp_path).rename(
+        tmp_path / "topolab-public-coordinated-binding-source")
+    context = dict(public_context(module, source), attempt=2,
+                   authority_sha256=module.sha(module.COORDINATED_AUTHORITY.read_bytes()),
+                   source_tree=module.source_freeze(2))
+    state, Coordinator = public_coordinator_fixture(module, monkeypatch)
+    producer = module.load("p17_m2_input_export")
+    original = producer.Reader.packet
+
+    def packet(reader, *args, **kwargs):
+        assert state.active
+        value = original(reader, *args, **kwargs)
+        assert state.active and reader.source_observations[-1]["closing"] is not None
+        return value
+
+    monkeypatch.setattr(producer.Reader, "packet", packet)
+    primary = module.register(source, context, coordination=authority["coordination"])
+    checker = module.load("p17_m2_source_binding_independent")
+    monkeypatch.setattr(checker, "coordination_module", lambda: SimpleNamespace(
+        Coordinator=Coordinator))
+    independent = checker.register(source, context, primary, coordination=authority["coordination"])
+    bindings = checker.validate_pair(primary, independent, context,
+                                     coordination=authority["coordination"])
+    assert len(bindings) == 23 and len(primary["source_coordination"]) == 23
+    assert primary["pre_read_expected_sha256"] is None
+    assert all(row["declared"] == row["closing"] for row in primary["rows"])
+
+
+def test_coordinated_remedy_cannot_restart_absolute_result_stage(tmp_path, monkeypatch):
+    module = binding_module()
+    deadline = 1793759678449
+    authority = {"reallocation_v4": {"path": str(tmp_path / "v4.json"), "sha256": "3" * 64},
+                 "binding_result_deadline_ms": deadline}
+    allocation = {
+        "binding_result": {"deadline_ms": deadline, "cap_each_unchanged": 12240},
+        "formal1": {"status": "CLOSED_STOP_NO_RETRY_HELD",
+                    "failed_buffers_establish_trust": False},
+        "formal2_unstarted": {"max": 1, "core_FULL": 1080, "metadata_auditor_FULL": 120},
+        "all_old_balances_reopened": False,
+    }
+    monkeypatch.setattr(module, "read_metadata", lambda *args, **kwargs: (
+        allocation, module.canonical(allocation)))
+    monkeypatch.setattr(module.time, "time_ns", lambda: (deadline - 1000) * 10**6)
+    with pytest.raises(ValueError, match="absolute result suffix"):
+        module.coordinated_remedy_readiness(authority, deadline - 3899 * 1000)
+
+
+def test_coordinated_public_family_rejects_unregistered_root_before_creation(tmp_path, monkeypatch):
+    module = binding_module()
+    coordinated_authority(module, tmp_path, monkeypatch)
+    root = tmp_path / "topolab-public-coordinated-binding-unregistered"
+    with pytest.raises(ValueError, match="registered coordinated public graph"):
+        module.prepare_public(root, attempt=2)
+    assert not root.exists() and not root.with_name(root.name + "-source").exists()
 
 
 def test_producer_registers_exact23_stable_first_reads(tmp_path):
@@ -352,3 +497,58 @@ def test_availability_interruption_retains_declared_and_opened_context(tmp_path,
     assert failure["content_read_bytes"] == 0
     assert [row["point"] for row in failure["rows"][0]["observations"]] == ["declared", "opened"]
     assert failure["primary_error"]["type"] == "KeyboardInterrupt"
+
+
+def test_coordinated_producer_stops_after_first_replaced_namespace(tmp_path, monkeypatch):
+    from contextlib import contextmanager
+
+    module = binding_module()
+    authority = coordinated_authority(module, tmp_path, monkeypatch)
+    source = small_sources(module, tmp_path).rename(
+        tmp_path / 'topolab-public-coordinated-binding-source')
+    context = dict(public_context(module, source), attempt=2,
+                   authority_sha256=module.sha(module.authority_path(2).read_bytes()),
+                   source_tree=module.source_freeze(2))
+    _, coordinator_class = public_coordinator_fixture(module, monkeypatch)
+    original = coordinator_class.claim
+    replaced = []
+
+    @contextmanager
+    def replacement(self, relative):
+        with original(self, relative) as path:
+            if not replaced:
+                target = path.with_name('new-public-replacement.json')
+                target.write_bytes(path.read_bytes())
+                target.replace(path)
+                replaced.append(True)
+            yield path
+
+    monkeypatch.setattr(coordinator_class, 'claim', replacement)
+    with pytest.raises(ValueError, match='namespace identity differs') as stopped:
+        module.register(source, context, coordination=authority['coordination'])
+    packet = stopped.value.binding_failure
+    assert packet['attempts'] == [module.whitelist()[0]['path']]
+    assert len(packet['rows']) == len(packet['source_coordination']) == 1
+    assert packet['source_coordination'][0]['namespace_before']['st_ino'] != (
+        packet['rows'][0]['declared']['st_ino'])
+
+
+def test_formal_metadata_auditor_cannot_start_a_new_window_after_result_deadline(
+    tmp_path, monkeypatch
+):
+    module = binding_module()
+    authority = json.loads(module.COORDINATED_AUTHORITY.read_bytes())
+    core_root = tmp_path / 'topolab-public-coordinated-binding-window'
+    core_root.mkdir()
+    context = dict(public_context(module, core_root), attempt=2, scope=module.FORMAL_SCOPE)
+    core = {'root': str(core_root), 'context': context,
+            'coordination': authority['coordination'],
+            'deadline_unix_ns': authority['binding_result_deadline_ms'] * 10**6}
+    bundle = {'plan': core}
+    monkeypatch.setattr(module, 'read_metadata', lambda *args, **kwargs: (bundle, b''))
+    monkeypatch.setattr(module, 'replay_bundle', lambda value: None)
+    monkeypatch.setattr(module.time, 'time_ns', lambda:
+                        authority['binding_result_deadline_ms'] * 10**6 + 1)
+    with pytest.raises(ValueError, match='metadata audit suffix'):
+        module.prepare_metadata_audit(core_root / 'certificate-bundle.json', '3' * 64)
+    assert not Path(str(core_root) + '-certificate-audit').exists()

@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-03 — Coordinated strict23 remedy after formal1 STOP
+
+[Actual evidence and prospective capability](validation/p17_m2_coordinated_source_binding.md) retain PR232/main/all-four CI, fifth-file strict mtime-108ns STOP and FULL780/HELD closeout. New exact-file claims surround unchanged strict readers; public cooperating-writer, native child/exit/RSS and cleanup failure regressions precede sole gated formal2. No failed-buffer trust, input acceptance or P17 repair is claimed. Finite unstarted allocations change prospectively; all started clocks and historical facts remain.
+
 ## 2026-11-03 — Strict registration of the23 unbound metadata files
 
 [New source-binding capability](validation/p17_m2_strict_source_binding.md) uses

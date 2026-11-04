@@ -331,6 +331,7 @@ def test_certificate_replays_native_strict_pair_and_actual_lease_return(tmp_path
     assert certificate["historical_provenance_proved"] is False
     assert certificate["own_future_return"].startswith("NOT_CLAIMED")
     assert certificate["source_observations"] == facts[-1]["rows"]
+    assert "coordination" not in certificate and "source_coordination" not in certificate
 
 
 @pytest.mark.parametrize("damage", ["release-before-reader", "lease-replaced",
@@ -440,3 +441,117 @@ def test_metadata_supervisor_has_no_core_shared_prepayment(tmp_path):
     assert ledger["shared_reserved_FULL_seconds"] == 0
     assert ledger["role_FULL_seconds"] == {"binding-certificate-auditor": 120}
     assert charge["charged_FULL_seconds"] == 120
+
+
+def coordinated_native_subject(module, tmp_path):
+    """Captured semantic/native scalar fixture, not actual Foundation execution."""
+    plan, evidences, events, primary, independent = certificate_subject(module, tmp_path)
+    plan["context"]["attempt"] = 2
+    plan["coordination"] = {
+        "identity": "topolab.source-read.foundation-coordination.v1",
+        "binary": str(tmp_path / "new-public-native-helper"), "sha256": "3" * 64,
+        "request_timeout_seconds": 10, "release_timeout_seconds": 5, "reading_options": 0,
+        "source_swift_sha256": "4" * 64, "compiler_sha256": "5" * 64,
+    }
+    for role, wire in (("binding-producer", primary), ("binding-independent", independent)):
+        wire["attempt"] = 2
+        wire["source_coordination"] = []
+        start = int(events[role][0]["start_seconds"] * 10**9) + 1000
+        for ordinal, row in enumerate(wire["rows"]):
+            url = (Path(wire["source_root"]) / row["path"]).as_uri()
+            pid, entered = 2000 + ordinal, start + ordinal * 1000
+            wire["source_coordination"].append({
+                "path": row["path"], "requested_url": url, "accessor_url": url,
+                "namespace_before": dict(row["declared"]),
+                "helper_pid": pid, "helper_sha256": plan["coordination"]["sha256"],
+                "strategy_identity": plan["coordination"]["identity"],
+                "ready": {"event": "accessor_entered", "pid": pid,
+                          "requested_url": url, "accessor_url": url, "entered_ns": entered},
+                "reader_start_ns": entered + 1, "reader_end_ns": entered + 2,
+                "release_requested_ns": entered + 3,
+                "release": {"event": "accessor_returned", "pid": pid, "left_ns": entered + 4},
+                "helper_exit_code": 0,
+                "helper_native_exit": {"pid": pid,"exit_code":0,
+                    "statistics_source":"os.wait4","platform":"darwin","rss_unit":"bytes",
+                    "native":{"rss_bytes":30,"user_seconds":.01,"system_seconds":.01},
+                    "wait_finished_ns":entered+5},
+            })
+        evidence = evidences[role]
+        evidence["inner_evidence"]["record"]["registered_source_child_cap"] = 1
+        evidence["inner_evidence"]["log"] = module.canonical(wire)
+        evidence["inner_evidence"]["record"]["log_sha256"] = module.sha(
+            evidence["inner_evidence"]["log"])
+    closeout = json.loads(evidences["binding-closeout"]["inner_evidence"]["log"])
+    closeout["context"] = plan["context"]
+    closeout["producer_wire_sha256"] = module.sha(module.canonical(primary))
+    closeout["independent_wire_sha256"] = module.sha(module.canonical(independent))
+    seal_closeout(module, plan, evidences, events, closeout)
+    for role in module.CAPS:
+        reseal(module, plan, evidences[role], events[role], role)
+    return plan, evidences, events, primary, independent
+
+
+def test_attempt2_native_role_requires_frozen_coordination_without_erasing_charge():
+    module = adapter()
+    plan, evidence, events = native_subject(module)
+    plan["context"]["attempt"] = 2
+    reseal(module, plan, evidence, events)
+    result = module.audit_role(plan, "binding-producer", evidence, events)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert "coordinated strategy configuration" in result["reason"]
+    assert result["charged_FULL_seconds"] == 300
+    assert result["whole_wall_seconds"] == 17.25
+
+
+def test_attempt2_certificate_binds_config_and_both_claim_inventories(tmp_path):
+    module = adapter()
+    facts = coordinated_native_subject(module, tmp_path)
+    certificate = module.audit_certificate(*facts)
+    assert certificate["coordination"] == facts[0]["coordination"]
+    assert certificate["source_coordination"] == {
+        "producer": facts[-2]["source_coordination"],
+        "independent": facts[-1]["source_coordination"],
+    }
+    assert certificate["charged_FULL_seconds"] == 1080
+    assert certificate["input_acceptance"] is False and certificate["B_C_admission"] is False
+
+
+@pytest.mark.parametrize("damage", ["options", "timeout", "binary_hash", "identity"])
+def test_attempt2_native_role_rejects_unfrozen_strategy_in_metadata_replay(tmp_path, damage):
+    module = adapter()
+    plan, evidences, events, _, _ = coordinated_native_subject(module, tmp_path)
+    if damage == "options":
+        plan["coordination"]["reading_options"] = True
+    elif damage == "timeout":
+        plan["coordination"]["request_timeout_seconds"] = 11
+    elif damage == "binary_hash":
+        plan["coordination"]["sha256"] = "not a hash"
+    else:
+        plan["coordination"]["identity"] = "unregistered-strategy"
+    role = "binding-producer"
+    reseal(module, plan, evidences[role], events[role], role)
+    result = module.audit_role(plan, role, evidences[role], events[role])
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["charged_FULL_seconds"] == 300 and result["whole_wall_seconds"] == 17.25
+    assert result["resource_evidence"]["RSS_envelope_bytes"] == 1010
+
+
+@pytest.mark.parametrize("role", ["binding-producer", "binding-independent"])
+def test_coordinated_claim_cannot_outlive_or_predate_actual_source_role(tmp_path, role):
+    module = adapter()
+    plan, evidences, events, primary, independent = coordinated_native_subject(module, tmp_path)
+    wire = primary if role == "binding-producer" else independent
+    # Shift the whole serial inventory, so only its actual-role bound is damaged.
+    for row in wire["source_coordination"]:
+        for key in ("reader_start_ns", "reader_end_ns", "release_requested_ns"):
+            row[key] += 10**15
+        row["ready"]["entered_ns"] += 10**15
+        row["release"]["left_ns"] += 10**15
+        row["helper_native_exit"]["wait_finished_ns"] += 10**15
+    evidence = evidences[role]
+    evidence["inner_evidence"]["log"] = module.canonical(wire)
+    evidence["inner_evidence"]["record"]["log_sha256"] = module.sha(
+        evidence["inner_evidence"]["log"])
+    reseal(module, plan, evidence, events[role], role)
+    with pytest.raises(ValueError, match="outside actual source role"):
+        module.audit_certificate(plan, evidences, events, primary, independent)
