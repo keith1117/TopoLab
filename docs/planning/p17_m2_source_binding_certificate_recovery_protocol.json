@@ -1,0 +1,234 @@
+{
+  "schema": "topolab.v2.m2-strict-source-binding.certificate-recovery-protocol.v1",
+  "execution_identity": "topolab.v2.p17-binding-certificate-recovery.20261104.v1",
+  "scope": "STRICT_BINDING_CERTIFICATE_RECOVERY_METADATA_ONLY",
+  "evidence_root": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z",
+  "actors": {
+    "producer": "/root",
+    "independent": "/root/binding_route_independent_v1"
+  },
+  "captured_cores": {
+    "public": {
+      "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/topolab-public-coordinated-binding-v2/certificate-bundle.json",
+      "sha256": "1eb6b8ff74114fe9b856715b04f75fb8b609bd5805ad6277fcce17da5f5785ba",
+      "context": {
+        "actors": {
+          "independent": "/root/binding_route_independent_v1",
+          "producer": "/root"
+        },
+        "attempt": 2,
+        "authority_sha256": "d8d710bcd10939fe964777d2f7a9bfcdc5218174cb58a4cdeee3e4c7b29b2f6e",
+        "execution_identity": "topolab.v2.p17-source-binding-window2.20261104.v1",
+        "scope": "PUBLIC_STRICT_BINDING_REGISTRATION_ONLY",
+        "source_root": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/topolab-public-coordinated-binding-v2-source",
+        "source_tree": {
+          "docs/planning/p17_m2_coordinated_source_binding_protocol.json": "5f4649814a36d511245a2303b184f0017eee671e530ded566bfee12d76d28b17",
+          "docs/planning/p17_m2_coordinated_source_binding_window2_protocol.json": "d8d710bcd10939fe964777d2f7a9bfcdc5218174cb58a4cdeee3e4c7b29b2f6e",
+          "docs/planning/p17_m2_input_export_preparation_proposal.json": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+          "docs/planning/p17_m2_source_acquisition_execution_authorization_draft.json": "401c32618ef6fb964d0efc425dc2f792ce92baf7a7e483d8bdbafa1c08906786",
+          "docs/planning/p17_m2_strict_source_binding_protocol.json": "e9dbb6357794b1ef2d43507e8b24d523507db794307332b8e695eedcb2558a04",
+          "native/p17_m2_source_coordinator.swift": "3f35990ce37826db2af67b36c2a8a401e3258834e4b74663b8e6f76ba1175fe3",
+          "pyproject.toml": "6b32d6c1b0f0134b17595262bc070aa9c29a49dcd5254f08bb805f0d3f86e06f",
+          "scripts/p17_m2_content_verified_control.py": "aaa3e7d9d4b4ea88aa8487a167b3c6f1c89242028dfee9a66f397222e5dd18ba",
+          "scripts/p17_m2_content_verified_independent.py": "92870d105de878b523b08aa52608ff1d0feec03ce7ea9c6605e8cd85cef3fa14",
+          "scripts/p17_m2_content_verified_public_fixture.py": "1de1827427b3f28536dcc2004d26b1c8e69deba7ac95007f5cfe9d7757cecf08",
+          "scripts/p17_m2_homotopy.py": "3d7723e0f62f93036027fea25a1386079482bdc09a4818c518bdc5999cb5e7d9",
+          "scripts/p17_m2_input_export.py": "cbf3caa19f30d162d8b748577ad4340b46e719e7c3407d77f6c591154f3a50ac",
+          "scripts/p17_m2_input_export_independent.py": "8cffd1aacfc63ea56f0223bf131bdc484febe9292d00058308cba9292a4e10c9",
+          "scripts/p17_m2_resource_control.py": "f5038d500d0f2b6de3b3d460e9643e69411a171bfa744d54d8593155c1a842df",
+          "scripts/p17_m2_source_binding.py": "6736be7b7ba816ff911b600d7c75c441acb65131deaf93f1a805b2fb77c160a6",
+          "scripts/p17_m2_source_binding_independent.py": "76e233dafec49fab0a34033a3442c86d545c827c705e243b88884eadd2adc27b",
+          "scripts/p17_m2_source_binding_native.py": "88fe7d21109609d5918bcb5ea96fd6a4a32a0f9ccb69f82e116801a6bc606a89",
+          "scripts/p17_m2_source_coordination.py": "2e21aa8e53c473be1f233b9fdf4a1c07c679928175d190a9dd01df40a54c10f1",
+          "uv.lock": "9c84a5ab362e8848d7ccab0142e9fe33aee5700abf5866d843a4c9cb23920292"
+        }
+      }
+    },
+    "formal": {
+      "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/binding-formal-v3/certificate-bundle.json",
+      "sha256": "ff5acace575365b2eeaf94884740363631056e57b92635caba85735bb53d0bf0",
+      "context": {
+        "actors": {
+          "independent": "/root/binding_route_independent_v1",
+          "producer": "/root"
+        },
+        "attempt": 2,
+        "authority_sha256": "d8d710bcd10939fe964777d2f7a9bfcdc5218174cb58a4cdeee3e4c7b29b2f6e",
+        "execution_identity": "topolab.v2.p17-source-binding-window2.20261104.v1",
+        "scope": "FORMAL_STRICT_BINDING_REGISTRATION_ONLY",
+        "source_root": "/Users/keith1117/Documents/TopoLab-data",
+        "source_tree": {
+          "docs/planning/p17_m2_coordinated_source_binding_protocol.json": "5f4649814a36d511245a2303b184f0017eee671e530ded566bfee12d76d28b17",
+          "docs/planning/p17_m2_coordinated_source_binding_window2_protocol.json": "d8d710bcd10939fe964777d2f7a9bfcdc5218174cb58a4cdeee3e4c7b29b2f6e",
+          "docs/planning/p17_m2_input_export_preparation_proposal.json": "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad",
+          "docs/planning/p17_m2_source_acquisition_execution_authorization_draft.json": "401c32618ef6fb964d0efc425dc2f792ce92baf7a7e483d8bdbafa1c08906786",
+          "docs/planning/p17_m2_strict_source_binding_protocol.json": "e9dbb6357794b1ef2d43507e8b24d523507db794307332b8e695eedcb2558a04",
+          "native/p17_m2_source_coordinator.swift": "3f35990ce37826db2af67b36c2a8a401e3258834e4b74663b8e6f76ba1175fe3",
+          "pyproject.toml": "6b32d6c1b0f0134b17595262bc070aa9c29a49dcd5254f08bb805f0d3f86e06f",
+          "scripts/p17_m2_content_verified_control.py": "aaa3e7d9d4b4ea88aa8487a167b3c6f1c89242028dfee9a66f397222e5dd18ba",
+          "scripts/p17_m2_content_verified_independent.py": "92870d105de878b523b08aa52608ff1d0feec03ce7ea9c6605e8cd85cef3fa14",
+          "scripts/p17_m2_content_verified_public_fixture.py": "1de1827427b3f28536dcc2004d26b1c8e69deba7ac95007f5cfe9d7757cecf08",
+          "scripts/p17_m2_homotopy.py": "3d7723e0f62f93036027fea25a1386079482bdc09a4818c518bdc5999cb5e7d9",
+          "scripts/p17_m2_input_export.py": "cbf3caa19f30d162d8b748577ad4340b46e719e7c3407d77f6c591154f3a50ac",
+          "scripts/p17_m2_input_export_independent.py": "8cffd1aacfc63ea56f0223bf131bdc484febe9292d00058308cba9292a4e10c9",
+          "scripts/p17_m2_resource_control.py": "f5038d500d0f2b6de3b3d460e9643e69411a171bfa744d54d8593155c1a842df",
+          "scripts/p17_m2_source_binding.py": "6736be7b7ba816ff911b600d7c75c441acb65131deaf93f1a805b2fb77c160a6",
+          "scripts/p17_m2_source_binding_independent.py": "76e233dafec49fab0a34033a3442c86d545c827c705e243b88884eadd2adc27b",
+          "scripts/p17_m2_source_binding_native.py": "88fe7d21109609d5918bcb5ea96fd6a4a32a0f9ccb69f82e116801a6bc606a89",
+          "scripts/p17_m2_source_coordination.py": "2e21aa8e53c473be1f233b9fdf4a1c07c679928175d190a9dd01df40a54c10f1",
+          "uv.lock": "9c84a5ab362e8848d7ccab0142e9fe33aee5700abf5866d843a4c9cb23920292"
+        }
+      }
+    }
+  },
+  "targets": {
+    "public": [
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/topolab-public-binding-certificate-recovery-v1",
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/topolab-public-binding-certificate-recovery-v2"
+    ],
+    "formal": [
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/binding-formal-v3-certificate-recovery-v1",
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/binding-formal-v3-certificate-recovery-v2"
+    ]
+  },
+  "budget": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/NEW-unstarted-certificate-recovery-funding-v8.json",
+    "sha256": "783983299db3b90f5009de50c7aca105f215585c0dd8ac41dd68493ed61e62c5"
+  },
+  "budget_review": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/independent/certificate-recovery-v8-budget-review-v1.json",
+    "sha256": "e238048b84d70da37e627b10481b9e5946930c312491afb1b39692c222226e2d"
+  },
+  "limits": {
+    "FULL": 120,
+    "timeout": 110,
+    "window_seconds": 300,
+    "reserve_seconds": 60,
+    "prepare_to_supervise_max_seconds": 30,
+    "global_deadline_ms": 1793828280000,
+    "software_start_ms": 1793771639540,
+    "software_deadline_ms": 1793782439540,
+    "recovery_stage_seconds": 1200,
+    "public_attempts_max": 1,
+    "formal_attempts_max": 1,
+    "new_original_source_reads": 0,
+    "new_Foundation_helpers": 0,
+    "native_limit_bytes": 4294967296,
+    "software_metadata_each": 320,
+    "recovery_metadata_each": 64,
+    "namespace_files": 512,
+    "namespace_bytes": 268435456,
+    "plan_bytes": 16777216,
+    "remaining_native_FULL_reservation": 240
+  },
+  "gates": {
+    "formal": "New protected exact-main four successful CI jobs, new public native+external return certificate, fresh different-author reviews, actual independent preflight+return, and actual software phase closure before recovery activation. No old role/window reopened.",
+    "remedy": "CLOSED_UNUSED_NO_TRANSFER. Only NEW recovery_attempt1 is admitted; old captured Source core actualattempt2 is unchanged."
+  },
+  "preparation_proofs": {
+    "public_certificate_paths": [
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-recovery-v3.json",
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-recovery-backup-v3.json"
+    ],
+    "preflight_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/independent/binding-certificate-recovery-preflight-v1.json",
+    "preflight_actual_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/independent/binding-certificate-recovery-preflight-v1.actual.json",
+    "recovery_activation_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/binding-certificate-recovery-activation-v1.json"
+  },
+  "formal_certificate_paths": [
+    "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/formal-binding-certificate-recovered-v1.json",
+    "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/formal-binding-certificate-recovered-backup-v1.json"
+  ],
+  "failure": "Freeze complete original packets, primary/secondary errors, FULL120 and UNKNOWN. NEW recovery_attempt2 allocations close unused without transfer; no prepare/SUP retry. Complete nonzero SUP retained before its sole cleanup REC; live sessions preserve STOP without concurrent REC. Public-v1 is permanently stopped for collector callback return-type mismatch; public-v3 is one separately funded NEW call, not a retry or unused-quota transfer.",
+  "retained_facts": {
+    "old_FULL_lower": 6390,
+    "historical_scientific_all_paid": "12721.16417100014444982>7200 FAIL",
+    "full_fit": "PENDING4GiB",
+    "P17": "UNREPAIRED",
+    "input_acceptance": false,
+    "B_C_admission": false,
+    "old_scene_writes": false,
+    "0555_permanence_required": false,
+    "leases": "cooperative registered-tools only; no FileProvider/allwriter exclusion",
+    "no_sync_upload_availability_promise": true,
+    "public_v1_callback_STOP_FULL": 120,
+    "current_known_NEW_FULL_lower": 6510
+  },
+  "review_paths": {
+    "standards": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/certificate-writer-standards-review-v1.json",
+    "spec": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/certificate-writer-spec-review-v1.json"
+  },
+  "review_authors": {
+    "standards": "/root/certificate_writer_standards_v1",
+    "spec": "/root/certificate_writer_spec_v1"
+  },
+  "certificate_paths": {
+    "public": [
+      [
+        "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-recovery-v3.json",
+        "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-recovery-backup-v3.json"
+      ]
+    ],
+    "formal": [
+      [
+        "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/formal-binding-certificate-recovered-v1.json",
+        "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/formal-binding-certificate-recovered-backup-v1.json"
+      ],
+      [
+        "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/formal-binding-certificate-recovered-v2.json",
+        "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/formal-binding-certificate-recovered-backup-v2.json"
+      ]
+    ]
+  },
+  "delta_review_budget": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/NEW-unstarted-captured-proof-delta-review-v9.json",
+    "sha256": "baf1ab55b8421c12b16de8ca4ba1e543df0624f72d761f3c2b5af3058c336bb0"
+  },
+  "captured_entry_rule": "Native admission and final certificate replay bind exact raw review/preflight/public-envelope/actual/activation bytes to references and replay complete native/core/return semantics. NEW recovery_attempt1 only; all attempt2 entry points reject. Captured successful Source19 core actualattempt2 remains unchanged.",
+  "closed_remedy_paths": {
+    "public": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/certificate-recovery-public-remedy-v1.json",
+    "formal": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/certificate-recovery-formal-remedy-v1.json"
+  },
+  "closed_unused_remedy_allocations": {
+    "status": "CLOSED_UNUSED_NO_TRANSFER",
+    "public_attempt2_FULL": 120,
+    "formal_metadata_attempt2_FULL": 120,
+    "additional_native_calls": 0,
+    "targets": [
+      "topolab-public-binding-certificate-recovery-v2",
+      "binding-formal-v3-certificate-recovery-v2"
+    ],
+    "target_names_historical_preregistration_only_unprobed": true
+  },
+  "primary_only_budget_v10": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/NEW-unstarted-final-check-primary-only-v10.json",
+    "sha256": "d9a92405f28e641cc07a94ed83480591db6105ecda81faf07984880fc72540ce"
+  },
+  "primary_public_root": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/topolab-public-binding-certificate-recovery-v3",
+  "closed_public_targets": {
+    "failed_primary_v1": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/topolab-public-binding-certificate-recovery-v1",
+    "closed_unused_v2": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/topolab-public-binding-certificate-recovery-v2",
+    "reuse_or_probe": false
+  },
+  "closed_public_certificate_paths": [
+    [
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-recovery-v1.json",
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-recovery-backup-v1.json"
+    ],
+    [
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-recovery-v2.json",
+      "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-recovery-backup-v2.json"
+    ]
+  ],
+  "writer_interface_budget_v11": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/NEW-unstarted-writer-interface-publication-v11.json",
+    "sha256": "8d3519893ff3f29af1e452f39323afd4422b93c0b8226d333093ef10d772392c"
+  },
+  "publication_only": {
+    "seconds_each": 7200,
+    "starts": "Actual software closure, within unchanged 08:53:59.540 software cap; all unused software allowance closes.",
+    "closes": "Actual protected release/main all4CI and retention final return, then separately activated 1200 metadata recovery; both complete actual closures required.",
+    "global_deadline_ms": 1793828280000,
+    "metadata_each": 128,
+    "closed_old_allowances_not_reused": true
+  }
+}

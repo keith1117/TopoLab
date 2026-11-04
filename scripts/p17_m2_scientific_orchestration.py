@@ -776,6 +776,7 @@ def publication_metadata(contract, contract_sha, role):
     began = time.time()
     control = load("p17_m2_source_acquisition_control")
     authority_raw = control.FUNDED_AUTHORITY_RAW
+    registered_authority = None
     if "acquisition" in contract:
         acquisition = contract["acquisition"]
         content = acquisition.get("content_root") if type(acquisition) is dict else None
@@ -786,15 +787,27 @@ def publication_metadata(contract, contract_sha, role):
                 or any(part in (".", "..") for part in path.parts)):
             raise ValueError("REGISTERED_SCIENTIFIC_ACQUISITION_REQUIRED")
         authority_raw, attempt = control.authority_for_root(path.parent)
+        registered = control.load("p17_m2_registered_input")
+        registered_root = str(path.parent) in registered.GENERATIONS
         if (authority_raw is None
-                or (attempt == 2 and authority_raw is not control.REMEDY_AUTHORITY_RAW)):
+                or (registered_root and (
+                    authority_raw != registered.authority_raw()
+                    or attempt != registered.GENERATIONS.index(str(path.parent)) + 1))
+                or (attempt == 2 and authority_raw is not control.REMEDY_AUTHORITY_RAW
+                    and not registered_root)):
             raise ValueError("REGISTERED_SCIENTIFIC_ACQUISITION_AUTHORITY_REQUIRED")
-        declared = control.formal_plan(authority_raw, attempt=attempt)
-        if (declared["root"] != str(path.parent)
-                or declared["content_root"] != content):
-            raise ValueError("REGISTERED_SCIENTIFIC_ACQUISITION_REQUIRED")
+        if registered_root:
+            registered_authority = registered
+        else:
+            declared = control.formal_plan(authority_raw, attempt=attempt)
+            if (declared["root"] != str(path.parent)
+                    or declared["content_root"] != content):
+                raise ValueError("REGISTERED_SCIENTIFIC_ACQUISITION_REQUIRED")
     authority = control.load("p17_m2_input_export").parse(authority_raw)
-    readiness = control.activation_readiness(authority)
+    readiness = (
+        registered_authority.publication_readiness(authority)
+        if registered_authority is not None else control.activation_readiness(authority)
+    )
     return {
         "execution_identity": IDENTITY,
         "scientific_contract_sha256": contract_sha,

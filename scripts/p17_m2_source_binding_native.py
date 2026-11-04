@@ -15,6 +15,11 @@ from pathlib import Path
 
 IDENTITY = "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1"
 WINDOW2_IDENTITY = "topolab.v2.p17-source-binding-window2.20261104.v1"
+RECOVERY_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v1"
+RECOVERY_V3_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v3"
+RECOVERY_V4_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v4"
+RECOVERY_IDENTITIES = (RECOVERY_IDENTITY, RECOVERY_V3_IDENTITY, RECOVERY_V4_IDENTITY)
+RECOVERY_SCOPE = "STRICT_BINDING_CERTIFICATE_RECOVERY_METADATA_ONLY"
 REPO = Path(__file__).resolve().parents[1]
 CAPS = {"producer-availability": 150, "independent-availability": 150,
         "binding-producer": 300, "binding-independent": 300, "binding-closeout": 180}
@@ -62,6 +67,11 @@ def execution_profile(plan):
     context = plan.get("context")
     need(isinstance(context, dict), "native execution identity context missing")
     identity, attempt = context.get("execution_identity"), context.get("attempt", 1)
+    if identity in RECOVERY_IDENTITIES:
+        need(type(attempt) is int and attempt == 1 and plan.get("schema") == METADATA_SCHEMA
+             and context.get("scope") == RECOVERY_SCOPE,
+             "recovery execution permits only its metadata profile")
+        return identity, 300
     need(type(attempt) is int and (
         (identity == IDENTITY and attempt in (1, 2))
         or (identity == WINDOW2_IDENTITY and attempt == 2)),
@@ -71,7 +81,9 @@ def execution_profile(plan):
 
 def role_profile(plan):
     """Identity selects the core window; metadata always retains its own 300s."""
-    _, core_seconds = execution_profile(plan)
+    identity, core_seconds = execution_profile(plan)
+    if identity in RECOVERY_IDENTITIES:
+        return METADATA_CAPS, 300, (RECOVERY_SCOPE,), METADATA_AUTHORS
     if plan.get("schema") == METADATA_SCHEMA:
         return METADATA_CAPS, 300, (METADATA_SCOPE,), METADATA_AUTHORS
     return CAPS, core_seconds, SCOPES, AUTHORS
@@ -81,8 +93,17 @@ def argv_for(plan, mode, role):
     caps, _, _, _ = role_profile(plan)
     need(role in caps and mode in ("supervise", "run", "record", "payload"),
          "unregistered native command")
-    script = "p17_m2_source_binding.py" if mode == "payload" else "p17_m2_source_binding_native.py"
-    return [plan["runtime"]["python"], "-I", str(REPO / "scripts" / script), mode,
+    script = ("p17_m2_source_binding_recovery.py"
+              if plan["context"]["execution_identity"] in RECOVERY_IDENTITIES else
+              "p17_m2_source_binding.py" if mode == "payload"
+              else "p17_m2_source_binding_native.py")
+    # Captured plans pin their original checkout. This is command reconstruction,
+    # not execution admission: predecessor still requires the current runtime.
+    cwd = plan["runtime"].get("cwd", str(REPO))
+    need(isinstance(cwd, str) and Path(cwd).is_absolute()
+         and not any(part in (".", "..") for part in cwd.split("/")),
+         "captured runtime cwd must be an absolute literal")
+    return [plan["runtime"]["python"], "-I", str(Path(cwd) / "scripts" / script), mode,
             "--plan", str(Path(plan["root"]) / "plan.json"),
             "--plan-sha", sha(canonical(plan)), "--role", role]
 
@@ -160,6 +181,8 @@ class MetadataTransport(Transport):
 
 
 def transport_for(plan):
+    if plan.get("context", {}).get("execution_identity") in RECOVERY_IDENTITIES:
+        return load("p17_m2_source_binding_recovery").Transport(plan)
     return MetadataTransport(plan) if plan.get("schema") == METADATA_SCHEMA else Transport(plan)
 
 
@@ -186,7 +209,7 @@ def role_evidence(root, plan_sha, role):
     transport = transport_for(plan)
     return {
         **base.read_json(Path(root) / "receipts" / (role + "-wire.json")),
-        **transport.resource_evidence(Path(root), plan_sha, role),
+        **transport.resource_evidence(Path(root), plan_sha, role, tolerate_missing=True),
     }
 
 
@@ -329,7 +352,21 @@ def audit_role(plan, role, evidence, trusted_external_record):
         result["reason"] = f"{type(error).__name__}: {error}"
     if isinstance(completion, dict):
         result["primary_failure"] = completion.get("primary_failure")
-        result["secondary_failures"] = completion.get("secondary_failures", [])
+        result["secondary_failures"] = list(completion.get("secondary_failures", []))
+    if isinstance(evidence, dict) and evidence.get("resource_read_failures"):
+        result["resource_read_failures"] = evidence["resource_read_failures"]
+    first = trusted_external_record[0] if trusted_external_record else {}
+    failure = first.get("observed_failure", {})
+    primary = failure.get("primary_error") if isinstance(failure, dict) else None
+    if (result["charged_FULL_seconds"] is not None and first.get("complete") is True
+            and type(first.get("exit_code")) is int and first["exit_code"] != 0
+            and isinstance(failure, dict)
+            and failure.get("status") == "STOP_NO_RETRY" and isinstance(primary, dict)):
+        previous = result.get("primary_failure")
+        if previous is not None and previous != primary:
+            result.setdefault("secondary_failures", []).append(previous)
+        result["primary_failure"] = primary
+        result["original_supervisor_failure"] = failure
     return result
 
 

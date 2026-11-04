@@ -2,10 +2,78 @@
 
 Updated:2026-11-04. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
-independent preflight remain required. Scientific execution is paused. No
+independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: new finite strict23 window after published coordination
+## Current: protected PR235 test-fixture portability repair
+
+[New identity2 contract](planning/p17_m2_registered_input_v2_protocol.md) and
+[retained result](validation/p17_m2_input_closure_coordination_repair.md) keep
+all prior failures. Latest remote main remains c684a321/all-four CI41773437388.
+Both original strict23 tables/46 helper exits/core lease release remain captured;
+no new original registration read or helper is granted.
+
+V16 full campaignR8 passed all five checks,3404 tests/one selected Linux skip,
+with frozen source unchanged. New public metadata-v3/v5 accepted its own native
+and original finalizer return. Full PUBLIC input1 then stopped before Popen:
+first SUP80.316s late; pending300 is not a paid Native receipt and missing
+supervisor/group-gone UNKNOWN remain. PUBLIC2 completed six native roles,
+backup, filing and actual lease release, but final certificate STOPped because
+its compiler omitted three declared mjs files. All41 source bytes matched.
+Its real inter-role coordination407.761s exceeds unchanged240s, so repairing
+only the compiler cannot accept that old cohort. Result closing also missed
+its1800s window by43.605s; every failure/cost remains.
+
+V16/V20 closed FAILED at actual10:45:28.004Z, before the old V16 hard limit.
+Unused publication/formal/native allowances closed without transfer. Paired
+1761-member/53416508-byte metadata retention passed full independent replay.
+Original25 HEAD/index/status/dirty bytes still match. Known NEW FULL lower94530
+includes R8's independently correlated25800 once; other costs remain UNKNOWN.
+
+NEW V22 starts10:49:00.022Z2026-11-04, ends12:49:00.022Z; original ROOT/I21:38Z
+remains stronger. It funds a prospective compatible identity2/metadata4,
+regression-first three-mjs compiler repair, real two-author long-await caller,
+new fresh reviews, oneR9 full check and one new PUBLIC3 only. Prior public1/2
+never reopen. The caller keeps exact millisecond role clocks, rejects >240s,
+waits only bounded new metadata and preserves every actual request/return.
+Normal protected exact-head/main four CI still precede Original/Library IO.
+NEW public and formal metadata auditor quotas are each1/FULL120; original
+Source2484/helper138/4GiB and40/558/1071 remain. Formal targets8/9 stay unprobed.
+A private scientific constructor/explicit auditor transport projection is now
+software-tested; its actual input-bound contract/B/C are not yet admitted.
+
+Fresh final Standards/Spec now pass after regression-first backup-name and
+formal dynamic-reference fixes. Metadata4/public6 passes FULL120/23bindings.
+PUBLIC3 actually completes all six roles,40/558 per author,1071 members,
+independent backup/filing/lease and final true-return certificate. First entry
+539ms, actual coordination8.861<240s; paired194-member metadata/full independent
+replay pass. This is PUBLIC only, formal input remains unaccepted. R9 began
+before final source corrections and cannot establish unchanged final bytes;
+new bounded R10/campaign15 must pass before actual preparation closure. Known
+NEW FULL lower98430 plus unreconciled R9/R10/other UNKNOWN costs. Latest fresh
+remote fetch still mainc684a321. All later protected publication/formal Gates stay.
+
+Final R10 now passes all five checks,3447/one platform skip/source unchanged.
+Root/I independently replay all1697 R9 and1691 R10 fee metadata: eachNative FULL
+has conservative87600<100000 upper, correlated25800 lower, total stillUNKNOWN.
+Known NEW FULL lower150030; upper is never booked as paid. Auxiliary V24 close
+exceeded its900s by at least32.212s and staysFAIL; active Root/I replay does not
+reopen that author or erase its costs. Actual preparation closed12:46:29.352Z,7049.330/7200s,4266-member paired
+metadata/full independent replay. New7200s/128-call publication phase ends
+14:46:29.352Z; protected exact-head/main4CI precede formal metadata/input.
+
+PR235/head4ff1871 is open. Exact PR CI41833143189 quality fails32 recovery
+fixture tests on Linux's unwritable `/private`; other three jobs pass. A new
+path-ownership RED precedes the test-only owned-root/reseal correction and44
+focused PASS. Production source45/metadata26 and PUBLIC3/metadata6 stay unchanged.
+NEW finite V26 R11/fresh review/fresh-head CI is underway; old failure/costs stay.
+Publication14:46:29.352Z is not extended; formal input/B/C remain unstarted.
+
+Accepted complete input precedes B180 then fixed C14580 and every unchanged
+scientific Gate. Historical12721.16417100014444982>7200 remains all-paid FAIL,
+full-fit PENDING4GiB, uniform default, P17 unrepaired and full v2 open.
+
+## Historical: new finite strict23 window after published coordination
 
 [New contract](planning/p17_m2_coordinated_source_binding_window2_protocol.md) and
 [actual frontier](validation/p17_m2_coordinated_source_binding_window2.md) retain

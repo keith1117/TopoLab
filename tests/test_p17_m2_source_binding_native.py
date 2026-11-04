@@ -395,6 +395,213 @@ def test_metadata_auditor_has_separate_native_cap_and_actual_return():
     assert result["B_C_admission"] is False
 
 
+def test_missing_native_payload_keeps_the_original_supervisor_failure(tmp_path):
+    module = adapter()
+    core = module.load("p17_m2_source_binding")
+    plan, evidence, events = metadata_subject(module)
+    role = "binding-certificate-auditor"
+    root = tmp_path / (core.public_prefix(1) + "-missing-native")
+    root.mkdir(mode=0o700)
+    (root / "receipts").mkdir(mode=0o700)
+    plan["root"] = str(root)
+    reseal(module, plan, evidence, events, role)
+    original = {"type": "ValueError",
+                "reason": "remaining full sequence/coordination/seal window unavailable"}
+    events[0]["exit_code"] = 1
+    events[0]["observed_failure"] = {"status": "STOP_NO_RETRY", "primary_error": original}
+    evidence["completion"].update(
+        status="FAILED_INTERNAL_COMPLETION", domain_status="UNKNOWN",
+        primary_failure=None, cleanup={"group_gone": None},
+        secondary_failures=[{"stage": "collect", "type": "FileNotFoundError",
+                             "reason": "missing supervisor.json"}])
+    (root / "plan.json").write_bytes(module.canonical(plan))
+    (root / "receipts" / (role + "-wire.json")).write_bytes(module.canonical({
+        "pending": evidence["pending"], "completion": evidence["completion"]}))
+
+    retained = module.role_evidence(root, module.sha(module.canonical(plan)), role)
+    result = module.audit_role(plan, role, retained, events)
+
+    assert result["primary_failure"] == original
+    assert result["charged_FULL_seconds"] == 120
+    assert result["full_role_evidence_accepted"] is False
+    assert result["closed_attempt_verified"] is False
+    assert result["RSS_envelope_bytes"] is None
+    assert result["missing_evidence_cost"] == "UNKNOWN_NOT_ZERO"
+    assert any("missing supervisor" in item["reason"] for item in result["secondary_failures"])
+    assert result["resource_read_failures"]
+
+
+@pytest.mark.parametrize("diagnostic", [None, [], "not a structured failure"])
+def test_unstructured_supervisor_diagnostic_still_returns_stop(diagnostic):
+    module = adapter()
+    plan, evidence, events = metadata_subject(module)
+    events[0]["exit_code"] = 1
+    events[0]["observed_failure"] = diagnostic
+    result = module.audit_role(plan, "binding-certificate-auditor", evidence, events)
+    assert result["status"] == "STOP_NO_RETRY"
+    assert result["full_role_evidence_accepted"] is False
+    assert result["charged_FULL_seconds"] == 120
+
+
+def test_actual_event_retains_complete_nonzero_supervisor_failure(tmp_path):
+    module = adapter()
+    core = module.load("p17_m2_source_binding")
+    plan, evidence, _ = metadata_subject(module)
+    role = "binding-certificate-auditor"
+    root = tmp_path / (core.public_prefix(1) + "-guard-return")
+    root.mkdir(mode=0o700)
+    (root / "receipts").mkdir(mode=0o700)
+    plan["root"] = str(root)
+    pending = evidence["pending"]
+    (root / "receipts" / (role + "-pending.json")).write_bytes(module.canonical(pending))
+    failure = {"status": "STOP_NO_RETRY", "primary_error": {
+        "type": "ValueError",
+        "reason": "remaining full sequence/coordination/seal window unavailable"},
+        "secondary_errors": [{"type": "OSError", "reason": "retained secondary context"}]}
+    output = module.canonical(failure).decode()
+    argv = module.argv_for(plan, "supervise", role)
+    request = {"cmd": core.literal_command(argv), "workdir": str(REPO), "max_output_tokens": 20000}
+    packet = {"schema": "topolab.v2.m2-strict-source-binding.actual-call.v1",
+              "author": plan["roles"][role]["author"], "argv": argv, "event_id": "public-guard",
+              "request": request, "responses": [{"tool": "exec_command", "arguments": request,
+              "requested_ms": 1000000, "returned_ms": 1001000,
+              "result": {"exit_code": 1, "output": output}}]}
+    path = root / "original-supervisor-packet.json"
+    raw = module.canonical(packet)
+    path.write_bytes(raw)
+
+    saved = core.file_actual_event(plan, role, "supervise", path, module.sha(raw))
+    event = json.loads(Path(saved["event_path"]).read_bytes())
+
+    assert event["observed_failure"] == failure
+    assert event["observed_stdout_sha256"] == module.sha(output.encode())
+    assert event["raw_packet_sha256"] == module.sha(raw)
+
+
+def test_new_recovery_execution_has_only_the_metadata_profile():
+    module = adapter()
+    plan, _, _ = metadata_subject(module)
+    plan["context"].update(
+        execution_identity="topolab.v2.p17-binding-certificate-recovery.20261104.v1",
+        scope="STRICT_BINDING_CERTIFICATE_RECOVERY_METADATA_ONLY", attempt=1)
+    assert module.execution_profile(plan)[1] == 300
+    caps, seconds, scopes, authors = module.role_profile(plan)
+    assert caps == {"binding-certificate-auditor": 120}
+    assert seconds == 300
+    assert scopes == ("STRICT_BINDING_CERTIFICATE_RECOVERY_METADATA_ONLY",)
+    assert authors["binding-certificate-auditor"] == "/root/binding_route_independent_v1"
+    argv = module.argv_for(plan, "supervise", "binding-certificate-auditor")
+    assert argv[2] == str(REPO / "scripts/p17_m2_source_binding_recovery.py")
+    with pytest.raises(ValueError):
+        module.argv_for(plan, "supervise", "binding-producer")
+    plan["context"]["scope"] = "FORMAL_STRICT_BINDING_REGISTRATION_ONLY"
+    with pytest.raises(ValueError):
+        module.execution_profile(plan)
+
+
+@pytest.mark.parametrize("mode", ["supervise", "run", "record", "payload"])
+def test_captured_command_uses_hash_bound_historical_runtime_cwd(mode):
+    module = adapter()
+    plan, _, _ = native_subject(module)
+    historical = Path("/private/tmp/topolab-historical-captured-checkout")
+    plan["runtime"]["cwd"] = str(historical)
+    argv = module.argv_for(plan, mode, "binding-producer")
+    script = ("p17_m2_source_binding.py" if mode == "payload"
+              else "p17_m2_source_binding_native.py")
+    assert argv[2] == str(historical / "scripts" / script)
+    assert argv[0] == plan["runtime"]["python"]
+
+
+def test_scalar_historical_fixture_without_cwd_keeps_current_default():
+    module = adapter()
+    plan, _, _ = native_subject(module)
+    plan["runtime"].pop("cwd", None)
+    assert module.argv_for(plan, "payload", "binding-producer")[2] == str(
+        REPO / "scripts/p17_m2_source_binding.py")
+
+
+@pytest.mark.parametrize('identity', [
+    'topolab.v2.p17-binding-certificate-recovery.20261104.v3',
+    'topolab.v2.p17-binding-certificate-recovery.20261104.v4'])
+def test_v16_recovery_identity_has_only_unchanged_metadata_window(identity):
+    module = adapter()
+    plan, _, _ = metadata_subject(module)
+    plan["context"].update(
+        execution_identity=identity,
+        scope=module.RECOVERY_SCOPE, attempt=1)
+    assert module.execution_profile(plan)[1] == 300
+    assert module.role_profile(plan)[:3] == (
+        {"binding-certificate-auditor": 120}, 300, (module.RECOVERY_SCOPE,))
+    assert module.argv_for(plan, "supervise", "binding-certificate-auditor")[2] == str(
+        REPO / "scripts/p17_m2_source_binding_recovery.py")
+    plan["context"]["attempt"] = 2
+    with pytest.raises(ValueError):
+        module.execution_profile(plan)
+
+
+@pytest.mark.parametrize('identity', [
+    'topolab.v2.p17-binding-certificate-recovery.20261104.v3',
+    'topolab.v2.p17-binding-certificate-recovery.20261104.v4'])
+def test_v16_payload_and_measurement_identity_require_metadata_scope(
+        tmp_path, monkeypatch, identity):
+    module = adapter()
+    module.load('p17_m2_homotopy')
+    role = "binding-certificate-auditor"
+    argv = module.load("p17_m2_source_binding").role_argv(
+        tmp_path, "payload", "a" * 64, role, sys.executable, execution_identity=identity)
+    measurement = module.load("p17_m2_resource_control")
+
+    def before_dispatch():
+        raise RuntimeError("v16 registered metadata clock boundary")
+
+    monkeypatch.setattr(measurement, "monotonic", before_dispatch)
+    with pytest.raises(RuntimeError, match="v16 registered metadata"):
+        measurement.invoke(tmp_path, role, argv, timeout=110,
+                           measurement_scope=module.RECOVERY_SCOPE,
+                           measurement_execution_identity=identity)
+    for scope, child in [(module.SCOPES[1], 0), (module.RECOVERY_SCOPE, 1)]:
+        with pytest.raises(ValueError):
+            measurement.invoke(tmp_path, role, argv, timeout=110,
+                               measurement_scope=scope,
+                               measurement_execution_identity=identity,
+                               registered_source_child_cap=child)
+
+
+def test_recovery_payload_argv_requires_its_explicit_identity(tmp_path):
+    module = adapter()
+    core = module.load("p17_m2_source_binding")
+    argv = core.role_argv(tmp_path, "payload", "a" * 64, "binding-certificate-auditor",
+                          sys.executable, execution_identity=module.RECOVERY_IDENTITY)
+    assert argv[2] == str(REPO / "scripts/p17_m2_source_binding_recovery.py")
+    original = core.role_argv(tmp_path, "payload", "a" * 64,
+                             "binding-certificate-auditor", sys.executable)
+    assert original[2] == str(REPO / "scripts/p17_m2_source_binding.py")
+
+
+def test_recovery_measurement_admits_only_the_registered_metadata_command(tmp_path, monkeypatch):
+    module = adapter()
+    module.load("p17_m2_homotopy")
+    measurement = module.load("p17_m2_resource_control")
+    role = "binding-certificate-auditor"
+    argv = [sys.executable, "-I", str(REPO / "scripts/p17_m2_source_binding_recovery.py"),
+            "payload", "--plan", str(tmp_path / "plan.json"), "--plan-sha", "a" * 64,
+            "--role", role]
+
+    def clock_boundary():
+        raise RuntimeError("registered command reached clock boundary without dispatch")
+
+    monkeypatch.setattr(measurement, "monotonic", clock_boundary)
+    with pytest.raises(RuntimeError, match="reached clock boundary"):
+        measurement.invoke(tmp_path, role, argv, timeout=110,
+                           measurement_scope=module.RECOVERY_SCOPE,
+                           measurement_execution_identity=module.RECOVERY_IDENTITY)
+    with pytest.raises(ValueError):
+        measurement.invoke(tmp_path, role, argv, timeout=110,
+                           measurement_scope=module.RECOVERY_SCOPE,
+                           measurement_execution_identity=module.RECOVERY_IDENTITY,
+                           registered_source_child_cap=1)
+
+
 @pytest.mark.parametrize("scope,role", [
     ("STRICT_BINDING_CERTIFICATE_METADATA_ONLY", "binding-producer"),
     ("FORMAL_STRICT_BINDING_REGISTRATION_ONLY", "binding-certificate-auditor"),

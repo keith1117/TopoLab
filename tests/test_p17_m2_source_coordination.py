@@ -31,6 +31,7 @@ def fixture(tmp_path, mode="normal"):
         f"mode={mode!r}\n"
         "path=Path(sys.argv[1]).as_uri()\n"
         "if mode=='timeout':time.sleep(2)\n"
+        "if mode=='delayed_start':time.sleep(1.1)\n"
         "if mode=='request_error':sys.exit(3)\n"
         "actual=path+'-changed' if mode=='url' else path\n"
         "print(json.dumps(dict(event='accessor_entered',pid=os.getpid(),"
@@ -44,7 +45,8 @@ def fixture(tmp_path, mode="normal"):
     helper.chmod(0o700)
     config = dict(identity="topolab.source-read.foundation-coordination.v1",
                   binary=str(helper), sha256=hashlib.sha256(helper.read_bytes()).hexdigest(),
-                  request_timeout_seconds=1.0, release_timeout_seconds=0.5,
+                  request_timeout_seconds=0.25 if mode == "timeout" else 10,
+                  release_timeout_seconds=5,
                   reading_options=0, source_swift_sha256="a" * 64,
                   compiler_sha256="b" * 64)
     return source, config
@@ -63,6 +65,18 @@ def test_claim_holds_owned_child_until_public_read_and_release(tmp_path):
     assert row["ready"]["entered_ns"] <= row["reader_start_ns"] <= row["reader_end_ns"]
     assert row["reader_end_ns"] <= row["release_requested_ns"] <= row["release"]["left_ns"]
     assert row["namespace_before"]["st_size"] == 16
+
+
+def test_successful_public_helper_startup_uses_full_registered_window(tmp_path):
+    module = subject()
+    source, config = fixture(tmp_path, "delayed_start")
+    reader = module.Coordinator(config, source)
+    with reader.claim("unit.json") as accessor:
+        assert accessor.read_bytes() == b'{"public":true}\n'
+    row = reader.records[0]
+    assert row["helper_exit_code"] == 0
+    assert row["ready"]["entered_ns"] <= row["reader_start_ns"] <= row["reader_end_ns"]
+    assert row["reader_end_ns"] <= row["release_requested_ns"] <= row["release"]["left_ns"]
 
 
 @pytest.mark.parametrize("mode", ["url", "request_error", "timeout", "early_exit"])

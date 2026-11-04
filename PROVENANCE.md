@@ -1737,3 +1737,34 @@ interfaces. Standard Python Decimal preserves the recorded execution-clock
 value; it does not transform source mtime_ns or any numerical convention. No
 upstream implementation, datasets, weights or figures were imported. Historical
 failures/unknowns and original readers/coordination equations remain.
+
+## 2026-11-04 — Closed strict23 metadata certificate recovery
+
+The narrow metadata replayer, consecutive caller and incomplete-native failure
+recording are original TopoLab work derived from its own actual late SUP and
+closed successful strict23/native/lease evidence. New public failure and
+scope/identity fixtures preserve the original source policy separately from
+the new metadata execution. No original source reread, upstream implementation,
+scientific model or numerical threshold is introduced. See the
+[actual frontier](docs/validation/p17_m2_source_binding_certificate_recovery.md).
+
+## 2026-11-04 — Registered23 input readers and bounded inventory rescan
+
+Original TopoLab implementation derives from the owner-authorized strict23
+certificate semantics and observed public POSIX unlink behavior. Separately
+authored producer/checker reuse same-buffer hash/parse and complete actual-return
+Gates. No upstream code, dataset, weights or figures were used; no scientific
+acceptance is established by these software changes.
+
+
+## 2026-11-04 — complete closure and actual two-author cohort caller
+
+Original TopoLab work derives from its own exact old-source closure mismatch,
+actual tool clocks and fixed contract. The compiler explicitly includes existing
+mjs files; a narrow actual-tool boundary and bounded receipt waiter run the real
+two-author schedule without model handoffs. The independent scientific constructor
+uses versioned published case metadata/equations and existing TopoLab modules.
+Its explicit transport view preserves the original independent audit packet,
+descriptors, decision and failed predicates while exposing the completed-row
+count required by the existing metadata observer. No upstream code, dataset,
+model, numerical tolerance or scientific threshold was imported or changed.

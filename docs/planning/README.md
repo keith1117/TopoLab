@@ -1,6 +1,8 @@
 # Planning index
 
-Current [finite strict23 window2](p17_m2_coordinated_source_binding_window2_protocol.md) ([new JSON](p17_m2_coordinated_source_binding_window2_protocol.json)): published coordination, retained old deadline/STOPs and fresh1800 identity; strict23/input/B/C remain separately gated.
+Current [strict23 certificate metadata recovery](p17_m2_source_binding_certificate_recovery_protocol.md) ([NEW authority](p17_m2_source_binding_certificate_recovery_protocol.json)): both source authors passed23; later audit predispatch STOP/FULL1200 retained, new metadata-only software/execution budgets and unchanged input/B/C Gates.
+
+Historical [finite strict23 window2](p17_m2_coordinated_source_binding_window2_protocol.md) ([new JSON](p17_m2_coordinated_source_binding_window2_protocol.json)): published coordination, retained old deadline/STOPs and fresh1800 identity; strict23/input/B/C remain separately gated.
 
 Historical [coordinated strict23 remedy](p17_m2_coordinated_source_binding_protocol.md) ([finite authority](p17_m2_coordinated_source_binding_protocol.json)): prospective exact-file claims, unchanged strict observations, retained formal1 STOP/FULL780 and one separately gated remedy.
 
@@ -331,3 +333,7 @@ existence; its validation report determines whether its Gate passed or failed.
 ## B4.51 real executable and full-resource preregistration
 
 - [Frozen TEXT protocol](b4_51_real_certification_executable_full_resource_preregistration_protocol.md) · [finite requirements contract](b4_51_real_certification_executable_full_resource_preregistration_contract.json)
+
+- [Registered strict23 complete-input capability](p17_m2_registered_input_protocol.md)
+
+- [Registered input identity2: closure and continuous cohort](p17_m2_registered_input_v2_protocol.md)
