@@ -18,21 +18,38 @@ WINDOW2_IDENTITY = "topolab.v2.p17-source-binding-window2.20261104.v1"
 RECOVERY_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v1"
 RECOVERY_V3_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v3"
 RECOVERY_V4_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v4"
-RECOVERY_IDENTITIES = (RECOVERY_IDENTITY, RECOVERY_V3_IDENTITY, RECOVERY_V4_IDENTITY)
+RECOVERY_V5_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v5"
+RECOVERY_V6_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v6"
+RECOVERY_V7_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v7"
+RECOVERY_IDENTITIES = (
+    RECOVERY_IDENTITY,
+    RECOVERY_V3_IDENTITY,
+    RECOVERY_V4_IDENTITY,
+                       RECOVERY_V5_IDENTITY,
+    RECOVERY_V6_IDENTITY,
+    RECOVERY_V7_IDENTITY,
+)
 RECOVERY_SCOPE = "STRICT_BINDING_CERTIFICATE_RECOVERY_METADATA_ONLY"
 REPO = Path(__file__).resolve().parents[1]
-CAPS = {"producer-availability": 150, "independent-availability": 150,
-        "binding-producer": 300, "binding-independent": 300, "binding-closeout": 180}
+CAPS = {
+    "producer-availability": 150,
+    "independent-availability": 150,
+        "binding-producer": 300,
+    "binding-independent": 300,
+    "binding-closeout": 180,
+}
 SCOPES = ("PUBLIC_STRICT_BINDING_REGISTRATION_ONLY", "FORMAL_STRICT_BINDING_REGISTRATION_ONLY")
 METADATA_SCHEMA = "topolab.v2.m2-strict-source-binding.metadata-plan.v1"
 METADATA_SCOPE = "STRICT_BINDING_CERTIFICATE_METADATA_ONLY"
 METADATA_CAPS = {"binding-certificate-auditor": 120}
 METADATA_AUTHORS = {"binding-certificate-auditor": "/root/binding_route_independent_v1"}
-AUTHORS = {"producer-availability": "/root",
+AUTHORS = {
+    "producer-availability": "/root",
            "independent-availability": "/root/binding_route_independent_v1",
            "binding-producer": "/root",
            "binding-independent": "/root/binding_route_independent_v1",
-           "binding-closeout": "/root"}
+           "binding-closeout": "/root",
+}
 
 
 def canonical(value):
@@ -83,7 +100,16 @@ def role_profile(plan):
     """Identity selects the core window; metadata always retains its own 300s."""
     identity, core_seconds = execution_profile(plan)
     if identity in RECOVERY_IDENTITIES:
-        return METADATA_CAPS, 300, (RECOVERY_SCOPE,), METADATA_AUTHORS
+        return (
+            METADATA_CAPS,
+            300,
+            (RECOVERY_SCOPE,),
+            (
+                {"binding-certificate-auditor": "/root/permission_remedy_reader_v1"}
+                if identity == RECOVERY_V7_IDENTITY
+                else METADATA_AUTHORS
+            ),
+        )
     if plan.get("schema") == METADATA_SCHEMA:
         return METADATA_CAPS, 300, (METADATA_SCOPE,), METADATA_AUTHORS
     return CAPS, core_seconds, SCOPES, AUTHORS
@@ -91,21 +117,44 @@ def role_profile(plan):
 
 def argv_for(plan, mode, role):
     caps, _, _, _ = role_profile(plan)
-    need(role in caps and mode in ("supervise", "run", "record", "payload"),
-         "unregistered native command")
-    script = ("p17_m2_source_binding_recovery.py"
-              if plan["context"]["execution_identity"] in RECOVERY_IDENTITIES else
-              "p17_m2_source_binding.py" if mode == "payload"
-              else "p17_m2_source_binding_native.py")
+    need(
+        role in caps and mode in ("supervise", "run", "record", "payload"),
+        "unregistered native command",
+    )
+    script = (
+        "p17_m2_source_binding_recovery_v7.py"
+        if plan["context"]["execution_identity"] == RECOVERY_V7_IDENTITY
+        else "p17_m2_source_binding_recovery_v6.py"
+        if plan["context"]["execution_identity"] == RECOVERY_V6_IDENTITY
+        else "p17_m2_source_binding_recovery_v5.py"
+        if plan["context"]["execution_identity"] == RECOVERY_V5_IDENTITY
+        else "p17_m2_source_binding_recovery.py"
+        if plan["context"]["execution_identity"] in RECOVERY_IDENTITIES
+        else "p17_m2_source_binding.py"
+        if mode == "payload"
+        else "p17_m2_source_binding_native.py"
+    )
     # Captured plans pin their original checkout. This is command reconstruction,
     # not execution admission: predecessor still requires the current runtime.
     cwd = plan["runtime"].get("cwd", str(REPO))
-    need(isinstance(cwd, str) and Path(cwd).is_absolute()
-         and not any(part in (".", "..") for part in cwd.split("/")),
-         "captured runtime cwd must be an absolute literal")
-    return [plan["runtime"]["python"], "-I", str(Path(cwd) / "scripts" / script), mode,
-            "--plan", str(Path(plan["root"]) / "plan.json"),
-            "--plan-sha", sha(canonical(plan)), "--role", role]
+    need(
+        isinstance(cwd, str)
+        and Path(cwd).is_absolute()
+        and not any(part in (".", "..") for part in cwd.split("/")),
+        "captured runtime cwd must be an absolute literal",
+    )
+    return [
+        plan["runtime"]["python"],
+        "-I",
+        str(Path(cwd) / "scripts" / script),
+        mode,
+        "--plan",
+        str(Path(plan["root"]) / "plan.json"),
+        "--plan-sha",
+        sha(canonical(plan)),
+        "--role",
+        role,
+    ]
 
 
 class Transport:
@@ -182,7 +231,14 @@ class MetadataTransport(Transport):
 
 def transport_for(plan):
     if plan.get("context", {}).get("execution_identity") in RECOVERY_IDENTITIES:
-        return load("p17_m2_source_binding_recovery").Transport(plan)
+        recovery = load("p17_m2_source_binding_recovery")
+        if plan["context"]["execution_identity"] in (
+            RECOVERY_V5_IDENTITY,
+            RECOVERY_V6_IDENTITY,
+            RECOVERY_V7_IDENTITY,
+        ):
+            recovery = recovery.for_identity(plan["context"]["execution_identity"])
+        return recovery.Transport(plan)
     return MetadataTransport(plan) if plan.get("schema") == METADATA_SCHEMA else Transport(plan)
 
 
@@ -510,10 +566,16 @@ if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except Exception as error:
-        print(canonical({"status": "STOP_NO_RETRY", "primary_error": {
-            "type": type(error).__name__, "reason": str(error)},
+        print(
+            canonical(
+                {
+                    "status": "STOP_NO_RETRY",
+                    "primary_error": {"type": type(error).__name__, "reason": str(error)},
             "binding_failure": getattr(error, "binding_failure", None),
             "strict_binding_failure": getattr(error, "strict_binding_failure", None),
             "namespace_entry_failure": getattr(error, "namespace_entry_failure", None),
-        }).decode(), end="")
+        }
+            ).decode(),
+            end="",
+        )
         raise SystemExit(1) from error

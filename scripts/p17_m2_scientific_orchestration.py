@@ -786,6 +786,7 @@ def publication_metadata(contract, contract_sha, role):
         if (not path.is_absolute() or str(path) != content or path.name != "content"
                 or any(part in (".", "..") for part in path.parts)):
             raise ValueError("REGISTERED_SCIENTIFIC_ACQUISITION_REQUIRED")
+        control = control.for_root(path.parent)
         authority_raw, attempt = control.authority_for_root(path.parent)
         registered = control.load("p17_m2_registered_input")
         registered_root = str(path.parent) in registered.GENERATIONS

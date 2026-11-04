@@ -256,10 +256,20 @@ def _terminate(pgid, child):
     return result(gone, observation_started)
 
 
-def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
-           measurement_scope=None, registered_source_child_cap=0,
-           measurement_execution_identity=(
-               "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1")):
+def invoke(
+    output,
+    role,
+    argv,
+    *,
+    timeout,
+    limit_bytes=LIMIT,
+    interval=0.5,
+    measurement_scope=None,
+    registered_source_child_cap=0,
+    measurement_execution_identity=(
+        "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1"
+    ),
+):
     """Record a bounded command, including failure and observed group exit.
 
     API is also tested using newly authored subprocess fixtures. Public CLI argv
@@ -272,39 +282,76 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
         "topolab.v2.p17-binding-certificate-recovery.20261104.v1",
         "topolab.v2.p17-binding-certificate-recovery.20261104.v3",
         "topolab.v2.p17-binding-certificate-recovery.20261104.v4",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v5",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v6",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v7",
     )
-    if (measurement_execution_identity not in measurement_identities
-            or (measurement_scope is None
-                and measurement_execution_identity != measurement_identities[0])):
+    if measurement_execution_identity not in measurement_identities or (
+        measurement_scope is None and measurement_execution_identity != measurement_identities[0]
+    ):
         raise ValueError("strict23 measurement identity requires its registered scope")
     if measurement_scope is not None:
-        scopes = ("PUBLIC_STRICT_BINDING_REGISTRATION_ONLY",
-                  "FORMAL_STRICT_BINDING_REGISTRATION_ONLY",
-                  "STRICT_BINDING_CERTIFICATE_METADATA_ONLY",
-                  "STRICT_BINDING_CERTIFICATE_RECOVERY_METADATA_ONLY")
+        scopes = (
+            "PUBLIC_STRICT_BINDING_REGISTRATION_ONLY",
+            "FORMAL_STRICT_BINDING_REGISTRATION_ONLY",
+            "STRICT_BINDING_CERTIFICATE_METADATA_ONLY",
+            "STRICT_BINDING_CERTIFICATE_RECOVERY_METADATA_ONLY",
+        )
         recovery = measurement_execution_identity in measurement_identities[2:]
         if recovery != (measurement_scope == scopes[3]):
             raise ValueError("recovery measurement identity/scope differs")
-        script = ("p17_m2_source_binding_recovery.py" if recovery
-                  else "p17_m2_source_binding.py")
-        roles = (("binding-certificate-auditor",) if measurement_scope in scopes[2:] else
-                 ("producer-availability", "independent-availability", "binding-producer",
-                  "binding-independent", "binding-closeout"))
+        script = {
+            "topolab.v2.p17-binding-certificate-recovery.20261104.v5": (
+                "p17_m2_source_binding_recovery_v5.py"
+            ),
+            "topolab.v2.p17-binding-certificate-recovery.20261104.v6": (
+                "p17_m2_source_binding_recovery_v6.py"
+            ),
+            "topolab.v2.p17-binding-certificate-recovery.20261104.v7": (
+                "p17_m2_source_binding_recovery_v7.py"
+            ),
+        }.get(
+            measurement_execution_identity,
+            "p17_m2_source_binding_recovery.py" if recovery else "p17_m2_source_binding.py",
+        )
+        roles = (
+            ("binding-certificate-auditor",)
+            if measurement_scope in scopes[2:]
+            else (
+                "producer-availability",
+                "independent-availability",
+                "binding-producer",
+                "binding-independent",
+                "binding-closeout",
+            )
+        )
         if not (
-            measurement_scope in scopes and role in roles and isinstance(argv, list)
-            and len(argv) == 10 and argv[1:4] == [
-                "-I", str(REPO / "scripts" / script), "payload"]
-            and argv[4] == "--plan" and argv[6] == "--plan-sha"
+            measurement_scope in scopes
+            and role in roles
+            and isinstance(argv, list)
+            and len(argv) == 10
+            and argv[1:4] == ["-I", str(REPO / "scripts" / script), "payload"]
+            and argv[4] == "--plan"
+            and argv[6] == "--plan-sha"
             and argv[8:] == ["--role", role]
         ):
             raise ValueError("strict23 measurement requires its registered literal payload argv")
-    if (type(registered_source_child_cap) is not int
-            or registered_source_child_cap not in (0, 1)
-            or (registered_source_child_cap and not (
-                measurement_scope in ('PUBLIC_STRICT_BINDING_REGISTRATION_ONLY',
-                                      'FORMAL_STRICT_BINDING_REGISTRATION_ONLY')
-                and role in ('binding-producer', 'binding-independent')))):
-        raise ValueError('registered source child scope differs')
+    if (
+        type(registered_source_child_cap) is not int
+        or registered_source_child_cap not in (0, 1)
+        or (
+            registered_source_child_cap
+            and not (
+                measurement_scope
+                in (
+                    "PUBLIC_STRICT_BINDING_REGISTRATION_ONLY",
+                    "FORMAL_STRICT_BINDING_REGISTRATION_ONLY",
+                )
+                and role in ("binding-producer", "binding-independent")
+            )
+        )
+    ):
+        raise ValueError("registered source child scope differs")
     if (
         re.fullmatch(r"[a-z][a-z0-9-]{0,47}", role) is None
         or not math.isfinite(timeout)
@@ -350,7 +397,7 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
             measurement_execution_identity=measurement_execution_identity,
         )
     if registered_source_child_cap:
-        identity['registered_source_child_cap'] = registered_source_child_cap
+        identity["registered_source_child_cap"] = registered_source_child_cap
     atomic_new(root / "pending.json", {**identity, "status": "PENDING_BEFORE_INTERPRETER"})
     samples, helpers, reason, error = [], [], None, None
     known_pids, escaped_groups = set(), set()
@@ -398,8 +445,9 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
                 }
                 samples.append(sample)
                 if registered_source_child_cap:
-                    source_command_pids.update(r['pid'] for r in rows
-                        if r['parent'] == child.pid and r['pid'] != child.pid)
+                    source_command_pids.update(
+                        r["pid"] for r in rows if r["parent"] == child.pid and r["pid"] != child.pid
+                    )
                 if helper["problem"] is not None:
                     reason = helper["problem"]
                     break
@@ -410,10 +458,16 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
                     escaped_groups
                     or (registered_source_child_cap and len(source_command_pids) > 1)
                     or len(rows) > 2 + registered_source_child_cap
-                    or any(r["pid"] != child.pid and r["parent"] != child.pid
-                           and not (registered_source_child_cap and r['parent'] in {
-                               item['pid'] for item in rows if item['parent'] == child.pid})
-                           for r in rows)
+                    or any(
+                        r["pid"] != child.pid
+                        and r["parent"] != child.pid
+                        and not (
+                            registered_source_child_cap
+                            and r["parent"]
+                            in {item["pid"] for item in rows if item["parent"] == child.pid}
+                        )
+                        for r in rows
+                    )
                 ):
                     reason = "RESOURCE_UNKNOWN_STOP_UNREGISTERED_DESCENDANT"
                     break

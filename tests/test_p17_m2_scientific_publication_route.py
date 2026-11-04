@@ -131,3 +131,23 @@ def test_registered_remedy_scientific_route_rejects_substituted_authority(monkey
             {'acquisition': {'content_root': registered.GENERATIONS[1] + '/content'},
              'source_freeze': {}}, '2' * 64, 'resource-preflight')
     assert observed == []
+
+@pytest.mark.parametrize('attempt', [1, 2])
+def test_v27_registered_input_routes_metadata_without_restarting_source(monkeypatch, attempt):
+    module, old, observed = publication(monkeypatch)
+    control = old.for_registered_identity(
+        'topolab.v2.p17-m2-registered-source-acquisition.20261104.v3')
+    registered = control.load('p17_m2_registered_input')
+    raw = control.base().canonical({'execution_identity': registered.IDENTITY})
+    target = registered.GENERATIONS[attempt - 1]
+    monkeypatch.setattr(registered, 'authority_raw', lambda: raw)
+    monkeypatch.setattr(control, 'authority_for_root', lambda root: (raw, attempt))
+    monkeypatch.setattr(registered, 'publication_readiness',
+                        lambda authority: observed.append(authority) or {'main': '1' * 40})
+    monkeypatch.setattr(control, 'formal_plan',
+                        lambda *a, **k: pytest.fail('metadata cannot restart source'))
+    result = module.publication_metadata(
+        {'acquisition': {'content_root': target + '/content'}, 'source_freeze': {}},
+        '2' * 64, 'resource-preflight')
+    assert result['metadata_only'] is True
+    assert observed == [{'execution_identity': registered.IDENTITY}]

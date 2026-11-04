@@ -17,30 +17,30 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Read [identity2 closure/coordination contract](docs/planning/p17_m2_registered_input_v2_protocol.md)
-and [actual failures/frontier](docs/validation/p17_m2_input_closure_coordination_repair.md).
-Original strict23/46 helper exits/core lease release remain captured after
-PR234/mainc684a321/main4CI; later metadata STOP remains. V16 R8 all five checks
-3404PASS/one platform skip and metadata-public-v5 passed software scope only.
-Full public1 late-start STOP and public2 certificate38/41 STOP plus true
-407.761>240 resourceFAIL remain. Public2 result close also exceeded1800s by43.605.
-V16/V20 genuinely closed FAILED; old costs/quotas/HELD scenes remain. PUBLIC3
-now passes six roles,40/558 per author,1071 members, real lease/backup/certificate;
-firstSUP539ms, coordination8.861<240s. Its194-member paired metadata/full audit
-and timely581.273s result close pass in PUBLIC scope only. R10 all five checks
-3447PASS/one platform skip and finalsource unchanged; R9 source-change FAIL stays.
-Root/I full fee replay gives conservative87600<100000 each, known NEW FULL lower
-150030/other totalsUNKNOWN. V24 auxiliary author close overrun>=32.212s remains
-FAIL; its old allowance never reopens. Original25 hashes/index/status match.
-NEW V22 software10:49:00.022→12:49:00.022Z2026-11-04; originalROOT/I21:38Z stays.
-Preparation actually closed12:46:29.352Z,7049.330/7200s/Root183calls; oldunused
-closes. Newpublication7200s/128calls each ends14:46:29.352Z. Protected exact-head/main4CI publication,
-formal metadata4 and independent preflight precede Original/Library IO. No formal
-input or B/C is yet accepted. ExactSource2484/helper138/4GiB/40-558-1071 remain;
-targets8/9 fixed/unprobed. Input→B180→fixedC14580 retains original scientific
-Gates. Historical all-paid12721.16417100014444982>7200 FAIL, full-fitPENDING4GiB,
-P17unrepaired/uniformdefault/fullv2open and every old STOP/cost/UNKNOWN/seal remain.
-Owner continuous authority overrides one-slice scheduling stops only.
+Read the [current frontier](docs/validation/p17_m2_continuous_input_profile.md)
+and [status](docs/project_status.md). Fresh remote main remains1c38cbf; PR235
+and its exact-main four-job CI passed. Captured strict23/46 helpers/core lease
+remain; no registration reread. Full input/B/C are unaccepted; P17 unrepaired.
+V27 pre-Native suffix STOP, R14 technical PASS/budget FAIL, metadata8 approval
+service timeout before CreateProcess and R15 late actual closing remain failures.
+Root sampling-gap cause is UNKNOWN; old independent model-capacity error is
+separate. Both old source snapshots and all failed/HELD scenes remain preserved.
+NEW V33 registered20:13:37.118Z; software/review/publication/public14400s ends
+Nov5 00:13:37.118Z. New19800 author seconds add to122400, cumulative142200/
+Nov5 09:08Z within original outer151200. Old budgets never reopen or transfer.
+Explicit7/5 preserves old4/2+5/3+6/4 protocol bytes/defaults. Regression, distinct
+reviews, all-five checks and protected exact-main four-job CI precede public9.
+Same fresh reader must obtain harmless permission preflight before actor300.
+One public9 remedy; no automatic public10. V34 corrects a prepublication
+contract entry typo and funds one R17 plus new final reviewers; R16/old reviews
+remain closed. Existing Root/Reader deadlines/counters and real guards apply.
+Formalmeta7/gen14/15 remain unprobed; the second attempt needs an explicit NEW
+complete within-global wall suffix. Input40/558/1071/2392 reads, whole2484/
+helper138/4GiB/240, private copies/hashes/outside anchors/real leases remain.
+Known NEW FULL lower228150; other fees UNKNOWN_NOT_ZERO. Original25 preserved;
+historical all-paid FAIL/full-fitPENDING/uniform default/fullv2 open remain.
+Accepted input→B180→fixed C14580 original Gates. Continuous owner authority
+overrides one-slice scheduling stops only.
 
 ## Provenance boundary
 

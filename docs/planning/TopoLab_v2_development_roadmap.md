@@ -1,20 +1,24 @@
 # TopoLab v2 Development Roadmap
 
-Current continuous action: [identity2 closure/coordination repair](p17_m2_registered_input_v2_protocol.md),
-with [actual retained failures](../validation/p17_m2_input_closure_coordination_repair.md).
-V16/V20 closed FAILED; PUBLIC2 compiler38/41 and actual407.761>240 remain FAIL.
-NEW V22 ends12:49:00.022Z; original ROOT/I21:38Z stays. Fresh final reviews,
-metadata4/public6 and PUBLIC3 pass in public scope. Actual coordination8.861<240s,
-194-member paired metadata replay and timely public-only result closure pass.
-Final R10 all five checks/source unchanged3447PASS/one skip. Root/I bounded
-softwareNative FULL87600 each is below100000; actualtotalUNKNOWN, knownlower
-150030. Auxiliary V24 closing overrun staysFAIL. Preparation actually closed12:46:29.352Z
-with4266-member paired full replay. Newpublication ends14:46:29.352Z. Next:
-test-only PR235 Linux fixture portability repair/R11/fresh review, then protected
-exact-head/main four-CI publication, formal metadata/input and B/C. Production
-source45/metadata26/public certificates stay unchanged; old32CI failures remain.
-Original/Library IO remains gated; no old quota reopens and P17 is unrepaired.
-
+Current continuous action: [input profile continuation](../validation/p17_m2_continuous_input_profile.md)
+after V27's correct pre-Native4171.721<4200 STOP. Metadata7 PUBLIC-only passes;
+no full input/B/C/P17 acceptance. R14 all-five3466PASS/one skip/source unchanged
+is technical PASS but UTC3354.953814>2100 budgetFAIL; clock cause UNKNOWN.
+Metadata8 approval-service timeout stopped before CreateProcess; R15 passed
+technical checks but missed actual closing. Root sampling-gap cause UNKNOWN.
+NEW V33 actual20:13:37.118 funds14400s software/review/publication/public ending
+Nov5 00:13:37.118Z. New19800 seconds add to122400, cumulative142200/Nov5 09:08Z
+inside original outer151200; no old counter/clock/fee/unused balance resets.
+Exact7/5 profiles retain old4/2+5/3+6/4 bytes/defaults. Regression, fresh review,
+all-five and protected exact-main four-job CI precede sole public9. Permission
+preflight must precede actor300; no automatic public10. Contract-entry P2/R16
+interruption remain; NEW V34 funds R17/final reviews inside the same clocks.
+Formalmeta7/gen14/15
+stay unprobed; second input wall needs explicit NEW within-global full suffix.
+Exact40/558/1071/2392/whole2484/helper138,
+4GiB/240/rawmtime/hash/lease/backup/Gate order remain. Acceptedinput→B180→fixed
+C14580 original science Gates, historicalallpaidFAIL/fullfitPENDING/uniform/
+P17unrepaired/fullv2 open. Original25 and all old failed/HELD scenes preserved.
 
 Historical entry: [metadata-only strict23 certificate recovery](p17_m2_source_binding_certificate_recovery_protocol.md) after both authors'23 source reads passed and a later audit SUP missed its guard window. Independently accepted certificate/input and B/C remain subject to their respective Gates under unchanged scientific Gates. NEW finite funding retains every old cost/closed quota and the original100800s/21:38Z limit. P17 remains unrepaired. The [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md) is historical: ordinal7 mtime-63ns, missing temporary evidence and incomplete old accounting remain retained failures.
 

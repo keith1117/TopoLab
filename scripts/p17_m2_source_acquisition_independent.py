@@ -24,8 +24,12 @@ HASH_BOUND_PROTOCOL = "docs/planning/p17_m2_hash_bound_acquisition_protocol.json
 FUNDED_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v2"
 FUNDED_PROTOCOL = "docs/planning/p17_m2_funded_acquisition_protocol.json"
 NEW_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v3"
+CONTINUATION_INPUT = None
+CONTINUATION_CONFIG = {}
+GLOBAL_DEADLINE_MS = 1793828280000
 REGISTERED_IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v2"
 REGISTERED_PROTOCOL = "docs/planning/p17_m2_registered_input_v2_protocol.json"
+REGISTERED_SCHEMA = "topolab.v2.m2-registered-source-acquisition-authority.v2"
 REGISTERED_PREFIX = "topolab-public-registered-source-acquisition-"
 NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
 NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
@@ -80,6 +84,11 @@ def digest(raw: bytes) -> str:
 
 
 def helper(name: str, filename: str) -> Any:
+    if CONTINUATION_INPUT is not None and filename in {
+        'p17_m2_source_acquisition_control.py', 'p17_m2_source_binding_recovery.py'}:
+        continuation = helper('input_continuation', 'p17_m2_input_continuation.py')
+        return continuation.profile('control' if 'acquisition_control' in filename else 'recovery',
+                                    CONTINUATION_INPUT)
     spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name(filename))
     require(spec and spec.loader, "independent source helper unavailable")
     module = importlib.util.module_from_spec(spec)
@@ -179,7 +188,7 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
             == plan['binding']['preparation_protocol_sha256']
             == plan['preparation_contract_sha256'], 'registered authority freeze differs')
     value = native.base.parse(raw)
-    require(value.get('schema') == 'topolab.v2.m2-registered-source-acquisition-authority.v2'
+    require(value.get('schema') == REGISTERED_SCHEMA
             and value.get('execution_identity') == REGISTERED_IDENTITY
             and value.get('source_identity_policy') == HASH_BOUND_POLICY
             and value.get('registration_identity') == 'topolab.strict23-preread-registration.v1'
@@ -187,7 +196,7 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
             and type(value.get('formal_seconds')) is int and value['formal_seconds'] == 4500
             and canonical(value.get('result_seconds')) == canonical({
                 'exporter': 1800, 'independent': 1800})
-            and value.get('global_deadline_ms') == 1793828280000
+            and value.get('global_deadline_ms') == GLOBAL_DEADLINE_MS
             and isinstance(value.get('owner_approval_reference'), str)
             and bool(value['owner_approval_reference'].strip())
             and canonical(value.get('permissions')) == canonical({
@@ -1271,7 +1280,9 @@ def _registered_preflight(plan, raw):
             'registered preparation actual return/stdout differs')
     packet = native.base.parse(raw)
     argv = [plan['runtime']['python'], '-I',
-            str(Path(plan['runtime']['cwd']) / 'scripts/p17_m2_registered_input.py'),
+            str(Path(plan['runtime']['cwd']) / 'scripts' /
+                (CONTINUATION_CONFIG['input_entry'] if CONTINUATION_INPUT is not None
+                 else 'p17_m2_registered_input.py')),
             'preflight', '--readiness-sha', ready_pin['sha256']]
     started, ended = recovery.exact_actual(packet, argv, authority['actors']['independent'])
     expected = {'status': 'PASS_REGISTERED_INPUT_METADATA_PREFLIGHT',
@@ -1333,6 +1344,11 @@ def check_funded_preflight(plan: dict[str, Any], raw: bytes) -> dict[str, Any]:
 
 def result_window_seconds(plan: dict[str, Any]) -> tuple[int, int]:
     """Return the independently authority-checked result clocks, without target IO."""
+    identity = plan.get('execution_identity')
+    if (identity in helper('input_continuation', 'p17_m2_input_continuation.py').INPUT_IDENTITIES
+            and REGISTERED_IDENTITY != identity):
+        return helper('input_continuation', 'p17_m2_input_continuation.py').profile(
+            'independent', identity).result_window_seconds(plan)
     validate_binding(plan)
     if plan.get('execution_identity') == REGISTERED_IDENTITY:
         return (1800, 1800)
@@ -1359,6 +1375,11 @@ def rehearsal_root(root: Path) -> Path:
 
 
 def _member_root(plan: dict[str, Any], name: str, root: Path) -> Path:
+    identity = plan.get('execution_identity')
+    if (identity in helper('input_continuation', 'p17_m2_input_continuation.py').INPUT_IDENTITIES
+            and REGISTERED_IDENTITY != identity):
+        return helper('input_continuation', 'p17_m2_input_continuation.py').profile(
+            'independent', identity)._member_root(plan, name, root)
     if plan.get('execution_identity') == REGISTERED_IDENTITY:
         authority = _registered_authority(plan)
         if plan.get('scope') == FORMAL_SCOPE:
@@ -1368,6 +1389,10 @@ def _member_root(plan: dict[str, Any], name: str, root: Path) -> Path:
             parent = Path('/Users/keith1117/Library/Application Support/TopoLab-custody')
             basename = f'p17-m2-local-input-version-v{attempt + 7}-strict-binding-{suffix}'
             generation = parent / basename
+            if CONTINUATION_INPUT is not None:
+                generation = Path(helper('input_continuation',
+                    'p17_m2_input_continuation.py').config(
+                        REGISTERED_IDENTITY)['generations'][attempt - 1])
             expected_target = {'generation': str(generation),
                                'backup': str(generation) + '-independent-backup'}
             require(authority['fixed_target']['parent'] == str(parent)
@@ -1875,7 +1900,13 @@ def _check_software(plan: dict[str, Any]) -> None:
                       'scripts/m2_acquisition_actual_boundary.mjs',
                       'scripts/await_m2_acquisition_receipt.py',
                       'scripts/file_m2_acquisition_event.py',
-                      'docs/planning/p17_m2_source_binding_certificate_recovery_v4_protocol.json')
+                      (CONTINUATION_CONFIG['recovery_protocol']
+                       if CONTINUATION_INPUT is not None else
+                       'docs/planning/p17_m2_source_binding_certificate_recovery_v4_protocol.json'))
+        if CONTINUATION_INPUT is not None:
+            contracts += ('scripts/p17_m2_input_continuation.py',
+                          'scripts/' + CONTINUATION_CONFIG['recovery_entry'],
+                          'scripts/' + CONTINUATION_CONFIG['input_entry'])
     for path in authorities:
         try:
             native._software_bytes(REPO / path)
@@ -2024,6 +2055,13 @@ def audit_certificate(
     bundle: dict[str, Any], *, trusted_tool_events: dict[str, list[dict[str, Any]]]
 ) -> CheckedAcquisitionInput:
     """Replay new native/source/backup/lease/charges; a rehearsal stays nonformal."""
+    identity = (bundle.get('plan', {}).get('execution_identity')
+                if isinstance(bundle, dict) else None)
+    if (identity in helper('input_continuation', 'p17_m2_input_continuation.py').INPUT_IDENTITIES
+            and REGISTERED_IDENTITY != identity):
+        continuation = helper('input_continuation', 'p17_m2_input_continuation.py')
+        return continuation.profile('independent', identity).audit_certificate(
+            bundle, trusted_tool_events=trusted_tool_events)
     require(
         isinstance(bundle, dict) and isinstance(bundle.get("plan"), dict),
         "independent source certificate requires complete actual evidence",

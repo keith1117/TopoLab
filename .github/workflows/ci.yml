@@ -7,11 +7,20 @@ on:
 jobs:
   quality:
     runs-on: ubuntu-latest
+    env:
+      OMP_NUM_THREADS: 1
+      OPENBLAS_NUM_THREADS: 1
+      MKL_NUM_THREADS: 1
+      VECLIB_MAXIMUM_THREADS: 1
+      NUMEXPR_NUM_THREADS: 1
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
       - run: uv sync --dev --locked
       - run: uv run ruff check .
       - run: uv run mypy src

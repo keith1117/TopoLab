@@ -18,7 +18,8 @@ def module():
 
 
 def test_actual_cohort_schedule_and_failed407761ms_regression():
-    result = subprocess.run(['node', '--test', 'tests/test_m2_acquisition_cohort.mjs'],
+    result = subprocess.run(['node', '--test', 'tests/test_m2_acquisition_cohort.mjs',
+                             'tests/test_p17_m2_permission_preflight.mjs'],
                             cwd=REPO, capture_output=True, timeout=10)
     assert result.returncode == 0, result.stdout + result.stderr
 

@@ -12,12 +12,22 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
+GLOBAL_DEADLINE_MS = 1793828280000
+PUBLIC_ATTEMPTS_TOTAL = 3
+PUBLIC_GRAPHS_MAX = 1
 IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v2"
 PROTOCOL = "docs/planning/p17_m2_registered_input_v2_protocol.json"
 SCHEMA = "topolab.v2.m2-registered-source-acquisition-authority.v2"
 PUBLIC_PREFIX = "topolab-public-registered-source-acquisition-"
 POLICY = "topolab.source-identity.prebound-sha256.v1"
 REGISTRATION_IDENTITY = "topolab.strict23-preread-registration.v1"
+CLI_ENTRY = "p17_m2_registered_input.py"
+NEW_BUDGET_REFERENCE = {
+    "path": "/Users/keith1117/Documents/TopoLab-data/"
+            "p17-m2-source-binding-v1-20261103T173800Z/"
+            "NEW-unstarted-input-closure-coordination-repair-v22.json",
+    "sha256": "b8d09dec380471e61b112dd7d91411860787e782c606528c0c47cee10b7f07fb",
+}
 PARENT = "/Users/keith1117/Library/Application Support/TopoLab-custody"
 GENERATIONS = tuple(
     PARENT + "/p17-m2-local-input-version-v" + number + "-strict-binding-" + suffix
@@ -213,7 +223,7 @@ def authority(raw=None):
         value.get("profile") == "NEW_REGISTERED_INPUT_COMPACT_RESULT_1800"
         and value.get("formal_seconds") == 4500
         and value.get("result_seconds") == {"exporter": 1800, "independent": 1800}
-        and value.get("global_deadline_ms") == 1793828280000,
+        and value.get("global_deadline_ms") == GLOBAL_DEADLINE_MS,
         "registered finite compact profile differs",
     )
     need(
@@ -238,13 +248,7 @@ def authority(raw=None):
         "registered permissions differ",
     )
     need(
-        value.get("new_input_budget")
-        == {
-            "path": "/Users/keith1117/Documents/TopoLab-data/"
-            "p17-m2-source-binding-v1-20261103T173800Z/"
-            "NEW-unstarted-input-closure-coordination-repair-v22.json",
-            "sha256": "b8d09dec380471e61b112dd7d91411860787e782c606528c0c47cee10b7f07fb",
-        },
+        value.get("new_input_budget") == NEW_BUDGET_REFERENCE,
         "registered new input budget pin differs",
     )
     limits = value.get("input_limits", {})
@@ -261,10 +265,10 @@ def authority(raw=None):
             "FULL_each_input_ceiling": 3780,
             "FULL_all_input_attempts_ceiling": 7560,
             "formal_top_control_CLI_all": 52,
-            "public_graphs_max": 1,
+            "public_graphs_max": PUBLIC_GRAPHS_MAX,
             "public_top_control_CLI_all": 64,
-            "public_FULL_all_ceiling": 3780,
-            "original_public1_2_and_new3_total_attempts": 3,
+            "public_FULL_all_ceiling": 3780 * PUBLIC_GRAPHS_MAX,
+            "original_public1_2_and_new3_total_attempts": PUBLIC_ATTEMPTS_TOTAL,
             "coordination_seconds_max": 240,
             "prepare_to_first_SUP_seconds_max": 30,
             "RSS_bytes": 4294967296,
@@ -315,6 +319,11 @@ def prepare_rehearsal(root, reference):
     import time
 
     root = control.rehearsal_root(root)
+    policy = authority()
+    need(str(root) in policy["public_roots"], "unregistered public input generation")
+    need(not policy.get("conditional_public_remedy") or str(root) !=
+         policy["conditional_public_remedy"]["root"],
+         "registered public remedy requires separately diagnosed published readiness")
     policy, reference, envelope = _registration_plan(root, "public", reference)
     need(str(root) in policy["public_roots"], "unregistered public input generation")
     core_plan = envelope["core_bundle"]["plan"]
@@ -603,7 +612,7 @@ def publication_readiness(value):
     argv = [
         control.base().runtime()["python"],
         "-I",
-        str(Path(__file__).resolve()),
+        str(REPO / "scripts" / CLI_ENTRY),
         "preflight",
         "--readiness-sha",
         digest,

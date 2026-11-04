@@ -2372,7 +2372,8 @@ def grant_scientific_input(certificate, contract, role, admission):
         "scientific B admission belongs to another contract",
     )
     require(
-        isinstance(certificate, acquisition.CheckedAcquisitionInput)
+        helper("p17_m2_source_verified_input").checked_acquisition_issuer(
+            certificate, acquisition) is not None
         and not isinstance(certificate, CheckedScientificInput),
         "actual independently accepted acquisition certificate required",
     )
