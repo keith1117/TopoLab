@@ -20,7 +20,8 @@ def checked_acquisition_issuer(certificate, historical=None):
     for suffix, identity in (
             ('_prospective_v27', 'topolab.v2.p17-m2-registered-source-acquisition.20261104.v3'),
             ('_prospective_v31', 'topolab.v2.p17-m2-registered-source-acquisition.20261104.v4'),
-            ('_prospective_v33', 'topolab.v2.p17-m2-registered-source-acquisition.20261104.v5')):
+            ('_prospective_v33', 'topolab.v2.p17-m2-registered-source-acquisition.20261104.v5'),
+            ('_prospective_v35', 'topolab.v2.p17-m2-registered-source-acquisition.20261104.v6')):
         prospective = sys.modules.get("p17_m2_source_acquisition_independent" + suffix)
         if (prospective is not None
                 and Path(prospective.__file__).resolve() == Path(__file__).with_name(

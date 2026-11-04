@@ -9,6 +9,8 @@ for(const root of ['/private/tmp/topolab-public-registered4-source-acquisition-2
 
 const V33_ROOTS=["/private/tmp/topolab-public-registered5-source-acquisition-20261104-v7", "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v14-strict-binding-20261104", "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v15-strict-binding-remedy-20261104"];
 for(const root of V33_ROOTS)ROOTS.add(root);
+const V35_ROOTS=["/private/tmp/topolab-public-registered6-source-acquisition-20261104-v7", "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v16-strict-binding-20261104", "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v17-strict-binding-remedy-20261104"];
+for(const root of V35_ROOTS)ROOTS.add(root);
 const PHYSICAL='/Library/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python';
 const quote=s=>"'"+s.replaceAll("'","'\"'\"'")+"'";
 const word=s=>/^[A-Za-z0-9_@%+=:,./-]+$/.test(s)?s:quote(s);
@@ -17,7 +19,7 @@ const require=(condition,reason)=>{if(!condition)throw Error('ACTUAL_BOUNDARY_ST
 export function createActualBoundary(dispatch,config) {
  const raw=[],packets={},accepted=[];
  let projection;
- const actor=config.author==='independent'?(V33_ROOTS.includes(config.root)?'/root/permission_remedy_reader_v1':'/root/binding_route_independent_v1'):'/root';
+ const actor=config.author==='independent'?(V35_ROOTS.includes(config.root)?'/root/ci_clock_reader_v1':V33_ROOTS.includes(config.root)?'/root/permission_remedy_reader_v1':'/root/binding_route_independent_v1'):'/root';
  require(['producer','independent'].includes(config.author)&&config.repo===REPO&&config.evidence_root===R&&ROOTS.has(config.root)&&/^[A-Za-z0-9_-]{1,100}$/.test(config.event_prefix),'fixed caller context');
  const control=config.repo+'/scripts/p17_m2_source_acquisition_control.py';
  const filer=config.repo+'/scripts/file_m2_acquisition_event.py';
@@ -118,15 +120,16 @@ export async function captureDispatch(dispatch,tool,args,raw,now=Date.now) {
  raw.push(row);return row;
 }
 export async function permissionThenPrepare(dispatch,config,raw,now=Date.now) {
- require(config.author==='/root/permission_remedy_reader_v1'&&config.repo===REPO&&config.evidence_root===R&&/^[A-Za-z0-9_-]{1,100}$/.test(config.event_prefix)&&/^[a-f0-9]{64}$/.test(config.standards_sha)&&/^[a-f0-9]{64}$/.test(config.spec_sha),'fixed permission caller context');
- const entry=REPO+'/scripts/p17_m2_source_binding_recovery_v7.py';
+ require(['/root/permission_remedy_reader_v1','/root/ci_clock_reader_v1'].includes(config.author)&&config.repo===REPO&&config.evidence_root===R&&/^[A-Za-z0-9_-]{1,100}$/.test(config.event_prefix)&&/^[a-f0-9]{64}$/.test(config.standards_sha)&&/^[a-f0-9]{64}$/.test(config.spec_sha),'fixed permission caller context');
+ const v35=config.author==='/root/ci_clock_reader_v1';
+ const entry=REPO+'/scripts/'+(v35?'p17_m2_source_binding_recovery_v8.py':'p17_m2_source_binding_recovery_v7.py');
  const python=REPO+'/.venv/bin/python',words=[python,'-I',entry,'--help'];
  const prefix=['env','OMP_NUM_THREADS=1','OPENBLAS_NUM_THREADS=1','MKL_NUM_THREADS=1','VECLIB_MAXIMUM_THREADS=1','NUMEXPR_NUM_THREADS=1',python,'-I',entry];
  const args={cmd:literalCommand(words),workdir:REPO,login:false,yield_time_ms:1000,max_output_tokens:4000,sandbox_permissions:'require_escalated',justification:'Approve the authorized exact metadata entry prefix using harmless help before any actor, Native, root or Source work.',prefix_rule:prefix};
  const approved=await captureDispatch(dispatch,'exec_command',args,raw,now);
  require(approved.result?.exit_code===0&&approved.result.session_id==null&&approved.result.output.includes('usage:'),'permission complete successful actual return required');
  const packet={schema:'topolab.v2.m2-strict-source-binding.actual-call.v1',author:config.author,event_id:config.event_prefix+'-permission',argv:words,request:args,responses:[approved]};
- const path=R+'/independent/V33-public9-permission-preflight-raw-actual-call.json';
+ const path=R+'/independent/'+(v35?'V35-public9-permission-preflight-raw-actual-call.json':'V33-public9-permission-preflight-raw-actual-call.json');
  const saved=await captureDispatch(dispatch,'exec_command',{cmd:literalCommand([PHYSICAL,'-I',REPO+'/scripts/file_m2_acquisition_event.py','persist','--packet-json',JSON.stringify(packet),'--destination',path]),workdir:REPO,login:false,yield_time_ms:1000,max_output_tokens:2000},raw,now);
  require(saved.result?.exit_code===0&&saved.result.session_id==null,'permission courier complete return required');
  const pin=JSON.parse(saved.result.output);

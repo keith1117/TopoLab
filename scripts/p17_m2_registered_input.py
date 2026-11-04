@@ -593,7 +593,8 @@ def activation_readiness(value, plan):
 
     policy = authority(producer.canonical(value))
     need(
-        time.time_ns() // 10**6 + (4500 + 1800) * 1000 <= policy["global_deadline_ms"],
+        time.time_ns() // 10**6 + (4500 + 1800) * 1000 <= min(policy["global_deadline_ms"],
+               policy.get("independent_author_deadline_ms", policy["global_deadline_ms"])),
         "registered complete formal/result suffix unavailable",
     )
     trusted_registration(plan)
@@ -627,7 +628,8 @@ def publication_readiness(value):
         <= started
         <= ended
         <= time.time_ns() // 10**6
-        <= policy["global_deadline_ms"],
+        <= min(policy["global_deadline_ms"],
+               policy.get("independent_author_deadline_ms", policy["global_deadline_ms"])),
         "registered independent actual preflight differs",
     )
     combined = dict(

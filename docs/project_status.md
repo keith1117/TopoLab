@@ -5,47 +5,42 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: finite permission remedy after captured strict23 reads
+## Current: CI clock repair and new unstarted continuation
 
-[New profile capability/frontier](validation/p17_m2_continuous_input_profile.md)
-keeps PR235/main1c38cbf/all-four CI, captured strict23/46 helpers/core lease,
-all old failures/costs/UNKNOWN and original25. V27 PUBLIC4 correctly stopped
-before first SUP: remaining4171.721<4200 by28.279s. Metadata7 passes only public
-scope/FULL120; no full input/Original/Library/B/C was accepted. R14 all-five
-checks3466PASS/one skip/source unchanged pass technical scope, but UTC3354.953814
-exceeds2100 and remains budgetFAIL; pytest1747.92 is a different measurement,
-clock discrepancy cause UNKNOWN. Old source70-member paired snapshot fully replayed.
+[Actual frontier](validation/p17_m2_ci_clock_and_input_continuation.md) retains
+PR235/main1c38cbf/all-four CI and captured strict23/46 helpers/core lease.
+PR236 head1efe remains unmerged: three CI jobs pass; quality failed one public
+clock fixture after its historical21:38Z deadline. Production correctly rejects;
+local RED reproduces. Explicit fixture-clock/expiry regression precedes minimal
+repair and fresh full checks/reviews/normal protected publication. Old R14 wall
+FAIL/R15 late actual return/R16 interrupted807/R17 all-five3509PASS remain.
+R18 closed1FAIL/3536PASS/1skip in1597.86s; source unchanged/UTC budget/groups
+pass. The old public9 fixture omitted the new hash-pinned context read and hit
+its nonexistent path. Independent RED matches. Failed source60/original return
+and terminal are retained as76 members in independent copies. Software-only
+NEW V36 funds one R20/ordinal25, FULL ceiling100000/UTC4200+600 closing and two
+fresh600s/24-call reviews, inside unchanged V35software/global limits. Four
+pure old/new pinned-context cases now pass; production/protocol bytes stay.
 
-V31 metadata8 stopped before CreateProcess because automatic permission approval
-review timed out;167267ms remained below the unchanged180000ms guard, so no
-retry occurred. Its exact failed-call endpoints remain UNKNOWN. R15 all-five
-technical/source/driver-budget checks passed, but actual final return20:10:56Z
-missed its600s closing suffix and old18:46:40.406Z parent. Old stage stays FAIL.
-Root sampling-gap cause is UNKNOWN; independent model-capacity failure is a
-separately observed fact. Old70- and78-member source pairs preserve their bytes.
+NEW V35 actually registered22:12:50.485Z; software includes earlier preregistered
+22:12:49.237Z start and endsNov5 02:12:49.237Z. New8520 seconds add to142200,
+cumulative150720/global11:30Z inside unchanged original151200/11:38Z outer.
+Old counters/elapsed/fees/unused closures are not reset/transferred. Fresh Reader
+uses conservative startup anchor and ends10:53:49.237Z, stronger than global.
+New exact8/6 profiles retain all earlier bytes/defaults. FIRST actual public9
+needs regression, distinct review, all-five and protected exact-main four CI,
+then same-author harmless permission help before actor300. No automaticpublic10
+or Source8; public9 target was never created. New registered6 PUBLIC7, formalmeta8
+and gen16/17 remain unprobed before Gates at the same selected Library parent.
+Exact40/558/1071/2392/whole2484/helper138/4GiB/240 and real leases/hash/private
+copies/outside anchors remain. Formal remedy2 wall is CLOSED absent NEW complete
+within-global activation. No new registration read/Foundation helper follows.
 
-NEW V33 actually registered20:13:37.118Z. Software/review/publication/public
-14400s endsNov5 00:13:37.118Z; prospective19800 author-seconds add to122400,
-cumulative142200 endsNov5 09:08Z inside unchanged original outer151200.
-No elapsed/call/fee reset or old unused transfer. New exact7/5 profiles preserve
-old4/2+5/3+6/4 protocols/defaults. A prelaunch UTC-driver regression and original
-error-capture repair precede fresh reviews, all-five R16 and protected PR/main
-four-job CI, then the one public9 remedy. Standards found a stale v4 description
-in the new v5 contract; R16 stopped with807 tests passed/pytest130/outer1 and
-unchanged source. The minimal correction passes31 focused checks. NEW V34
-reserves R17 and new final reviews, within unchanged V33 clocks/counters. Same fresh reader obtains harmless
-permission preflight before actor300; no automatic public10. Formalmeta7 and
-gen14/15 remain unprobed. Second formal attempt requires explicit NEW complete
-within-global wall activation; its FULL reservation alone does not admit it.
-No new Original registration read/helper; exact40/558/1071/2392/whole2484/
-helper138/4GiB/240/cooperative leases/hash/private copies/outside anchors remain.
-
-Accepted input→actual B180→fixed C14580 under original science Gates. Known NEW
-FULL lower228150 after independent R14/R15 replay and Root byte adoption;
-failed public receipts retain their charges, otherUNKNOWN fees,
-permanent scientific
-12721.16417100014444982>7200 FAIL/full-fitPENDING4GiB stay. P17 UNREPAIRED,
-uniform default/fullv2 open; software/public acceptance is not a scientific repair.
+Accepted complete input→B180→fixed C14580 original science. KnownNEWFULL lower
+254550, other fees UNKNOWN_NOT_ZERO; historical all-paid FAIL/fullfitPENDING4GiB,
+uniform default/fullv2 open/P17UNREPAIRED remain. Original25 byte/HEAD/index/status
+preserved; old primaryclosure matchesf2586..., exact oldtmpmirror missing/cause
+UNKNOWN/no recreation.5435-member paired evidence was independently replayed.
 
 ## Historical: new finite strict23 window after published coordination
 

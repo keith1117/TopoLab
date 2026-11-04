@@ -21,6 +21,7 @@ RECOVERY_V4_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v4"
 RECOVERY_V5_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v5"
 RECOVERY_V6_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v6"
 RECOVERY_V7_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v7"
+RECOVERY_V8_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v8"
 RECOVERY_IDENTITIES = (
     RECOVERY_IDENTITY,
     RECOVERY_V3_IDENTITY,
@@ -28,6 +29,7 @@ RECOVERY_IDENTITIES = (
                        RECOVERY_V5_IDENTITY,
     RECOVERY_V6_IDENTITY,
     RECOVERY_V7_IDENTITY,
+    RECOVERY_V8_IDENTITY,
 )
 RECOVERY_SCOPE = "STRICT_BINDING_CERTIFICATE_RECOVERY_METADATA_ONLY"
 REPO = Path(__file__).resolve().parents[1]
@@ -105,7 +107,9 @@ def role_profile(plan):
             300,
             (RECOVERY_SCOPE,),
             (
-                {"binding-certificate-auditor": "/root/permission_remedy_reader_v1"}
+                {"binding-certificate-auditor": "/root/ci_clock_reader_v1"}
+                if identity == RECOVERY_V8_IDENTITY
+                else {"binding-certificate-auditor": "/root/permission_remedy_reader_v1"}
                 if identity == RECOVERY_V7_IDENTITY
                 else METADATA_AUTHORS
             ),
@@ -122,7 +126,9 @@ def argv_for(plan, mode, role):
         "unregistered native command",
     )
     script = (
-        "p17_m2_source_binding_recovery_v7.py"
+        "p17_m2_source_binding_recovery_v8.py"
+        if plan["context"]["execution_identity"] == RECOVERY_V8_IDENTITY
+        else "p17_m2_source_binding_recovery_v7.py"
         if plan["context"]["execution_identity"] == RECOVERY_V7_IDENTITY
         else "p17_m2_source_binding_recovery_v6.py"
         if plan["context"]["execution_identity"] == RECOVERY_V6_IDENTITY
@@ -236,6 +242,7 @@ def transport_for(plan):
             RECOVERY_V5_IDENTITY,
             RECOVERY_V6_IDENTITY,
             RECOVERY_V7_IDENTITY,
+            RECOVERY_V8_IDENTITY,
         ):
             recovery = recovery.for_identity(plan["context"]["execution_identity"])
         return recovery.Transport(plan)

@@ -190,13 +190,16 @@ def role_argv(root, mode, expected_sha, role, python, *, execution_identity=None
         "topolab.v2.p17-binding-certificate-recovery.20261104.v5",
         "topolab.v2.p17-binding-certificate-recovery.20261104.v6",
         "topolab.v2.p17-binding-certificate-recovery.20261104.v7",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v8",
     )
     need(
         execution_identity in (None, IDENTITY, WINDOW2_ID, *recovery),
         "unregistered command execution identity",
     )
     script = (
-        "p17_m2_source_binding_recovery_v7.py"
+        "p17_m2_source_binding_recovery_v8.py"
+        if execution_identity == "topolab.v2.p17-binding-certificate-recovery.20261104.v8"
+        else "p17_m2_source_binding_recovery_v7.py"
         if execution_identity == "topolab.v2.p17-binding-certificate-recovery.20261104.v7"
         else "p17_m2_source_binding_recovery_v6.py"
         if execution_identity == "topolab.v2.p17-binding-certificate-recovery.20261104.v6"
@@ -762,6 +765,14 @@ def load_plan(path, expected_sha):
             recovery = recovery.for_identity(
                 "topolab.v2.p17-binding-certificate-recovery.20261104.v7"
             )
+        if path.parent.name == "binding-formal-v3-certificate-recovery-v8":
+            recovery = recovery.for_identity(
+                "topolab.v2.p17-binding-certificate-recovery.20261104.v8")
+        if path.parent.name == "topolab-public-binding-certificate-recovery-v9":
+            # The never-created fixed public9 name now has two historical policies.
+            # Select from the pinned plan identity, never from a renamed target.
+            captured, _ = read_metadata(path, 16 * 1024**2, expected=expected_sha)
+            recovery = recovery.for_identity(captured["context"]["execution_identity"])
         return recovery.load_plan(path, expected_sha)
     formal_roots = {
         str(

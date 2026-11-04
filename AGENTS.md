@@ -17,30 +17,38 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Read the [current frontier](docs/validation/p17_m2_continuous_input_profile.md)
-and [status](docs/project_status.md). Fresh remote main remains1c38cbf; PR235
-and its exact-main four-job CI passed. Captured strict23/46 helpers/core lease
-remain; no registration reread. Full input/B/C are unaccepted; P17 unrepaired.
-V27 pre-Native suffix STOP, R14 technical PASS/budget FAIL, metadata8 approval
-service timeout before CreateProcess and R15 late actual closing remain failures.
-Root sampling-gap cause is UNKNOWN; old independent model-capacity error is
-separate. Both old source snapshots and all failed/HELD scenes remain preserved.
-NEW V33 registered20:13:37.118Z; software/review/publication/public14400s ends
-Nov5 00:13:37.118Z. New19800 author seconds add to122400, cumulative142200/
-Nov5 09:08Z within original outer151200. Old budgets never reopen or transfer.
-Explicit7/5 preserves old4/2+5/3+6/4 protocol bytes/defaults. Regression, distinct
-reviews, all-five checks and protected exact-main four-job CI precede public9.
-Same fresh reader must obtain harmless permission preflight before actor300.
-One public9 remedy; no automatic public10. V34 corrects a prepublication
-contract entry typo and funds one R17 plus new final reviewers; R16/old reviews
-remain closed. Existing Root/Reader deadlines/counters and real guards apply.
-Formalmeta7/gen14/15 remain unprobed; the second attempt needs an explicit NEW
-complete within-global wall suffix. Input40/558/1071/2392 reads, whole2484/
-helper138/4GiB/240, private copies/hashes/outside anchors/real leases remain.
-Known NEW FULL lower228150; other fees UNKNOWN_NOT_ZERO. Original25 preserved;
-historical all-paid FAIL/full-fitPENDING/uniform default/fullv2 open remain.
-Accepted input→B180→fixed C14580 original Gates. Continuous owner authority
-overrides one-slice scheduling stops only.
+Read the [CI-clock/input frontier](docs/validation/p17_m2_ci_clock_and_input_continuation.md)
+and [status](docs/project_status.md). Main1c38cbf/PR235 all-four CI remain.
+PR236 head1efe is unmerged: three CI jobs pass; quality1FAIL/3472PASS/37skip
+from a public fixture using current UTC beyond old v2's21:38Z deadline. Local
+RED reproduces; production expiry rejection is correct. Inject explicit test
+clock and retain expired negative; do not loosen production clocks or Gates.
+Old R14 wallFAIL/R15 late-returnMISS/R16STOP/R17 all-five3509PASS remain.
+R18 closed1FAIL/3536PASS/1skip: old public9 fixture omitted the new pinned
+context read. Failed source60/original terminal are retained in a76-member
+independent pair. NEW software-only V36/R20 once fixes that fixture; four pure
+old/new-context cases pass. Production/protocol bytes and V35 clocks stay.
+Captured strict23 per old author/46 helpers/core lease release remain; no
+registration reread. Full input/B/C unaccepted, P17 unrepaired/uniform default.
+NEW V35 actual22:12:50.485Z; software14400s includes preregistration latency,
+endsNov5 02:12:49.237Z. New8520 author seconds add to142200, cumulative150720/
+Nov5 11:30Z inside unchanged original151200/11:38Z outer. All old elapsed,
+fees, counters and closed quotas stay; old Root378 used/1606 unused closed.
+Fresh Reader conservatively starts at preregistration22:12:49.237Z;45660s
+ends10:53:49.237Z, stronger than global. Actual startup endpoint is UNKNOWN.
+Explicit8/6 preserves old4/2+5/3+6/4+7/5 bytes/defaults. New regressions,
+distinct reviews/all-five/protected PR/exact-main4CI precede FIRST public9.
+Same fresh reader actual harmless prefix help must precede actor300; unchanged
+120+60/110/30 guards; no automatic public10 or Source8. Public9 name was never
+created; only its unstarted allocation changes, not an old failed scene.
+New registered6 PUBLIC7/formalmeta8/gen16/17 at same parent remain unprobed.
+Source40/558/1071/2392 reads, whole2484/helper138/4GiB/240/private copies/hashes/
+outside anchors/real leases remain. Remedy2 wall stays CLOSED absent explicit
+NEW full within-global suffix. Accepted input→B180→fixed C14580 original Gates.
+KnownNEWFULL lower254550; other fees UNKNOWN. Original25 preserved; old v1
+primary closure hash matches but exact old tmp mirror Missing/causeUNKNOWN.
+No recreation, reset, lease unlock or scientific repair claim. Continuous owner
+authority overrides one-slice scheduling stops only.
 
 ## Provenance boundary
 

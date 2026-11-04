@@ -587,24 +587,46 @@ def test_v33_permission_actual_raw_replay_before_actor(monkeypatch, fault):
             "topolab.v2.p17-binding-certificate-recovery.20261104.v6",
         ),
         ("topolab-public-binding-certificate-recovery-v9", RECOVERY),
+        (
+            "topolab-public-binding-certificate-recovery-v9",
+            "topolab.v2.p17-binding-certificate-recovery.20261104.v8",
+        ),
         ("binding-formal-v3-certificate-recovery-v7", RECOVERY),
     ],
 )
-def test_exact_metadata_plan_ingress_selects_fixed_profile_before_io(monkeypatch, name, identity):
+def test_exact_metadata_plan_ingress_selects_fixed_profile(monkeypatch, name, identity):
     core = module("p17_m2_source_binding")
     recovery = core.load("p17_m2_source_binding_recovery")
+    path = Path("/PUBLIC_NOT_OPENED") / name / "plan.json"
+    context = {"context": {"execution_identity": identity}}
+    raw = core.canonical(context)
+    pin = core.sha(raw)
+    reads = []
+
+    def read_metadata(actual_path, limit, *, expected):
+        assert name == "topolab-public-binding-certificate-recovery-v9"
+        assert (actual_path, limit, expected) == (path, 16 * 1024**2, pin)
+        reads.append(actual_path)
+        return context, raw
 
     class Selected:
+        def __init__(self, selected_identity):
+            self.identity = selected_identity
+
+        def for_identity(self, selected_identity):
+            return Selected(selected_identity)
+
         def load_plan(self, path, pin):
-            raise RuntimeError("selected " + identity)
+            raise RuntimeError("selected " + self.identity)
 
     def select(actual):
-        assert actual == identity
-        return Selected()
+        return Selected(actual)
 
+    monkeypatch.setattr(core, "read_metadata", read_metadata)
     monkeypatch.setattr(recovery, "for_identity", select)
     with pytest.raises(RuntimeError, match="selected " + identity):
-        core.load_plan(Path("/PUBLIC_NOT_OPENED") / name / "plan.json", "a" * 64)
+        core.load_plan(path, pin)
+    assert reads == ([path] if name.endswith("recovery-v9") else [])
 
 
 def test_v33_permission_path_rejected_before_any_metadata_read(monkeypatch):

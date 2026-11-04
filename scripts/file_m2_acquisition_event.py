@@ -50,6 +50,14 @@ V33_FORMAL = (
 )
 V33_ROOTS = (V33_PUBLIC, *V33_FORMAL)
 
+V35_IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v6"
+V35_PUBLIC = "/private/tmp/topolab-public-registered6-source-acquisition-20261104-v7"
+V35_FORMAL = (
+    PARENT + "p17-m2-local-input-version-v16-strict-binding-20261104",
+    PARENT + "p17-m2-local-input-version-v17-strict-binding-remedy-20261104",
+)
+V35_ROOTS = (V35_PUBLIC, *V35_FORMAL)
+
 IDENTITY = 'topolab.v2.p17-m2-registered-source-acquisition.20261104.v2'
 
 
@@ -77,7 +85,7 @@ def persist(packet, destination):
     )
     certificate = path in {
         Path(value) / "certify-rehearsal-raw-actual-call.json"
-        for value in (PUBLIC, NEW_PUBLIC, *V31_PUBLIC, V33_PUBLIC)
+        for value in (PUBLIC, NEW_PUBLIC, *V31_PUBLIC, V33_PUBLIC, V35_PUBLIC)
     }
     assert path.is_relative_to(EVIDENCE) or certificate, "literal courier path refused"
     raw = canonical(packet)
@@ -102,7 +110,7 @@ def persist(packet, destination):
 
 
 def file_event(root, plan_sha, role, mode, path, pin):
-    assert root in (*ROOTS, *NEW_ROOTS, *V31_ROOTS, *V33_ROOTS) and mode in (
+    assert root in (*ROOTS, *NEW_ROOTS, *V31_ROOTS, *V33_ROOTS, *V35_ROOTS) and mode in (
         "supervise",
         "record",
     ), "literal root/mode refused"
@@ -117,6 +125,9 @@ def file_event(root, plan_sha, role, mode, path, pin):
         control = control.for_registered_identity(identity)
     if root in V33_ROOTS:
         identity = V33_IDENTITY
+        control = control.for_registered_identity(identity)
+    if root in V35_ROOTS:
+        identity = V35_IDENTITY
         control = control.for_registered_identity(identity)
     core = recovery.load("p17_m2_source_binding")
     base = control.base()
@@ -134,7 +145,9 @@ def file_event(root, plan_sha, role, mode, path, pin):
     packet, _ = core.read_metadata(Path(path), 16 * 1024**2, expected=pin, canonical_required=True)
     author = (
         (
-            "/root/permission_remedy_reader_v1"
+            "/root/ci_clock_reader_v1"
+            if root in V35_ROOTS
+            else "/root/permission_remedy_reader_v1"
             if root in V33_ROOTS
             else "/root/binding_route_independent_v1"
         )

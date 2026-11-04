@@ -105,7 +105,8 @@ def source_freeze():
             CONTINUATION_CONFIG["input_protocol"],
         ):
             frozen[name] = sha((REPO / name).read_bytes())
-    if CONTINUATION_INPUT == load("p17_m2_input_continuation").V33_INPUT:
+    if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
+                              load("p17_m2_input_continuation").V35_INPUT):
         for name in (
             "scripts/p17_m2_source_verified_input.py",
             "scripts/p17_m2_scientific_independent.py",
@@ -154,7 +155,9 @@ def budget_readiness():
         keys = load('p17_m2_input_continuation').budget_keys(IDENTITY)
     captures = {key: capture_ref(policy[key]) for key in keys}
     _captured_budget(captures)
-    need(time.time_ns() <= policy['limits']['global_deadline_ms'] * 10**6,
+    need(time.time_ns() <= min(policy['limits']['global_deadline_ms'],
+        policy.get('independent_author_deadline_ms',
+                   policy['limits']['global_deadline_ms'])) * 10**6,
          'finite recovery global deadline unavailable')
     return captures
 
@@ -621,7 +624,8 @@ def prepare(
     core, policy = load("p17_m2_source_binding"), authority()
     root = _root(kind, attempt)
     permission = None
-    if CONTINUATION_INPUT == load("p17_m2_input_continuation").V33_INPUT:
+    if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
+                              load("p17_m2_input_continuation").V35_INPUT):
         need(
             permission_packet is not None and permission_packet_sha is not None,
             "actual approved permission preflight required before actor/root preparation",
@@ -663,7 +667,9 @@ def prepare(
         else entry["formal"]["activation"]["deadline_ms"]
     ) * 10**6
     need(
-        started + 300 * 10**9 <= min(limit, policy["limits"]["global_deadline_ms"] * 10**6),
+        started + 300 * 10**9 <= min(limit, policy["limits"]["global_deadline_ms"] * 10**6,
+            policy.get("independent_author_deadline_ms",
+                       policy["limits"]["global_deadline_ms"]) * 10**6),
         "complete immutable recovery window unavailable",
     )
     context = _context(kind)
@@ -744,7 +750,9 @@ def _captured_activation(activation, raw, expected_sha, tree):
          and activation.get('software_source_tree') == tree
          and type(activation.get('started_ms')) is int
          and activation.get('deadline_ms') == activation['started_ms'] + 1200000
-         and activation['deadline_ms'] <= policy['limits']['global_deadline_ms'],
+         and activation['deadline_ms'] <= min(policy['limits']['global_deadline_ms'],
+             policy.get('independent_author_deadline_ms',
+                        policy['limits']['global_deadline_ms'])),
          'captured activation schema/source/fixed clock differs')
     closure = activation['software_closure_actual']
     _, ended = exact_actual(closure, closure['argv'], policy['actors']['producer'])
@@ -944,11 +952,13 @@ def _plan_shape(plan, *, historical=False):
         and entry.get("old_scene_write") is False,
         "new finite metadata entry differs",
     )
-    if CONTINUATION_INPUT == load("p17_m2_input_continuation").V33_INPUT:
+    if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
+                              load("p17_m2_input_continuation").V35_INPUT):
         checked_permission(
             entry.get("permission"), runtime, before_ms=plan["started_unix_ns"] // 10**6
         )
-    if CONTINUATION_INPUT == load("p17_m2_input_continuation").V33_INPUT:
+    if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
+                              load("p17_m2_input_continuation").V35_INPUT):
         _publication_shape(entry.get("permission_publication"))
     _captured_budget(entry.get("budget_evidence"))
     for axis in ("standards", "spec"):
@@ -987,7 +997,9 @@ def _plan_shape(plan, *, historical=False):
             "public recovery outside fixed software stage",
         )
     need(
-        plan["deadline_unix_ns"] <= policy["limits"]["global_deadline_ms"] * 10**6,
+        plan["deadline_unix_ns"] <= min(policy["limits"]["global_deadline_ms"],
+            policy.get("independent_author_deadline_ms",
+                       policy["limits"]["global_deadline_ms"])) * 10**6,
         "recovery beyond unchanged global hard limit",
     )
     return plan
@@ -1154,7 +1166,8 @@ def finalize(plan):
     policy, root = authority(), Path(plan['root'])
     deadline = (policy['limits']['software_deadline_ms'] if plan['kind'] == 'public'
                 else plan['entry']['formal']['activation']['deadline_ms'])
-    need(time.time_ns() // 10**6 <= min(deadline, policy['limits']['global_deadline_ms']),
+    need(time.time_ns() // 10**6 <= min(deadline, policy['limits']['global_deadline_ms'],
+             policy.get('independent_author_deadline_ms', policy['limits']['global_deadline_ms'])),
          'fixed new recovery result deadline expired')
     core, native = load('p17_m2_source_binding'), load('p17_m2_source_binding_native')
     bundle = read_ref(plan['bundle'])

@@ -119,3 +119,17 @@ test('V33 single PUBLIC7 and exact formal14/15 retain fixed gates and reject old
  }
  assert.throws(()=>launchGate({...plan,root:roots[0].replace('-v7','-v8')},roles[0],[],start),/root/);
 });
+
+test('V35 registered6 PUBLIC7 and GEN16/17 require exact input6 and actual full suffix',()=>{
+ const roots=['/private/tmp/topolab-public-registered6-source-acquisition-20261104-v7',
+  ...['p17-m2-local-input-version-v16-strict-binding-20261104','p17-m2-local-input-version-v17-strict-binding-remedy-20261104'].map(name=>'/Users/keith1117/Library/Application Support/TopoLab-custody/'+name)];
+ for(const literal of roots){
+  const formal=literal.includes('/TopoLab-custody/');
+  const next={...plan,root:literal,execution_identity:'topolab.v2.p17-m2-registered-source-acquisition.20261104.v6',scope:formal?'SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY':plan.scope,formal_authority:formal};
+  assert.equal(launchGate(next,roles[0],[],start).index,0);
+  assert.throws(()=>launchGate({...next,execution_identity:'topolab.v2.p17-m2-registered-source-acquisition.20261104.v5'},roles[0],[],start),/identity/);
+  assert.throws(()=>launchGate({...next,applicable_deadline_ms:start+4199999},roles[0],[],start),/suffix/);
+  const fake=dispatcher();assert.doesNotThrow(()=>actualModule.createActualBoundary(fake.invoke,{...actualConfig,author:'independent',root:literal}));assert.equal(fake.calls.length,0);
+ }
+ assert.throws(()=>launchGate({...plan,root:roots[0].replace('-v7','-v8')},roles[0],[],start),/root/);
+});

@@ -27,11 +27,13 @@ KINDS = {
 }
 
 
-# Three frozen configurations only; this is not an extension registry.
+# Four frozen configurations only; this is not an extension registry.
 V31_RECOVERY = "topolab.v2.p17-binding-certificate-recovery.20261104.v6"
 V31_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v4"
 V33_RECOVERY = "topolab.v2.p17-binding-certificate-recovery.20261104.v7"
 V33_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v5"
+V35_RECOVERY = "topolab.v2.p17-binding-certificate-recovery.20261104.v8"
+V35_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v6"
 CONFIGS = {
     INPUT: {
         "input": INPUT,
@@ -112,6 +114,34 @@ CONFIGS = {
             "sha256": "78de11fcc8a47fbbe32accd5958471d0c763db202cbb7f74d343f360ba453641",
         },
     },
+    V35_INPUT: {
+        "input": "topolab.v2.p17-m2-registered-source-acquisition.20261104.v6",
+        "recovery": "topolab.v2.p17-binding-certificate-recovery.20261104.v8",
+        "prefix": "topolab-public-registered6-source-acquisition-",
+        "generations": (
+            PARENT + "p17-m2-local-input-version-v16-strict-binding-20261104",
+            PARENT + "p17-m2-local-input-version-v17-strict-binding-remedy-20261104",
+        ),
+        "recovery_protocol": (
+            "docs/planning/p17_m2_source_binding_certificate_recovery_v8_protocol.json"
+        ),
+        "input_protocol": "docs/planning/p17_m2_registered_input_v6_protocol.json",
+        "schema": "topolab.v2.m2-registered-source-acquisition-authority.v6",
+        "recovery_entry": "p17_m2_source_binding_recovery_v8.py",
+        "input_entry": "p17_m2_registered_input_v6.py",
+        "cache_suffix": "_prospective_v35",
+        "global_deadline_ms": 1793878200000,
+        "public_attempts_total": 7,
+        "public_graphs_max": 1,
+        "budget": {
+            "path": (
+                "/Users/keith1117/Documents/TopoLab-data/"
+                "p17-m2-source-binding-v1-20261103T173800Z/"
+                "NEW-unstarted-clock-fixture-and-continuous-input-v35.json"
+            ),
+            "sha256": "74331d05644d37e6f0f967b2094b063e225c8b9325f2f9b60d936c0603cd3544",
+        },
+    },
 }
 INPUT_IDENTITIES = tuple(CONFIGS)
 RECOVERY_IDENTITIES = tuple(value["recovery"] for value in CONFIGS.values())
@@ -186,6 +216,9 @@ def profile(kind, identity=INPUT):
 
 
 def budget_keys(identity):
+    if identity == V35_RECOVERY:
+        return ("budget", "budget_review", "software_activation", "registration_actual",
+                "independent_author_clock")
     if identity == V33_RECOVERY:
         return (
             "budget",
@@ -208,6 +241,8 @@ def budget_keys(identity):
 
 def captured_budget(module, captures):
     """Replay raw preregistration, actual return, finite caps and failed-old seal."""
+    if module.IDENTITY == V35_RECOVERY:
+        return captured_v35_budget(module, captures)
     if module.IDENTITY == V33_RECOVERY:
         return captured_v33_budget(module, captures)
     if module.IDENTITY == V31_RECOVERY:
@@ -607,4 +642,152 @@ def captured_v33_budget(module, captures):
         and stopped.get("retry_not_executed_because_remaining_less_than_frozen_suffix") is True,
         "V33 old permission STOP must remain closed",
     )
+    return values
+
+
+def captured_v35_budget(module, captures):
+    """Replay the finite V35 replacement grant and the original registration return."""
+    policy = module.authority()
+    keys = budget_keys(V35_RECOVERY)
+    module.need(isinstance(captures, dict) and set(captures) == set(keys),
+                "complete captured V35 budget required")
+    values = {}
+    for key in keys:
+        module.need(captures[key]["reference"] == policy[key], "V35 reference differs")
+        values[key] = module.captured_value(captures[key])
+    budget, review, activation, registration, clock = (values[key] for key in keys)
+    phases = {
+        "software_review_publication_public": 14400, "formal_metadata": 1200,
+        "primary_input_formal_and_result": 6300, "scientific_contract_publication": 7200,
+        "B_C_original": 14760, "final_actual_return_retention": 1800,
+    }
+    calls = {"software_publication": 512, "formal_metadata": 64,
+             "input_all_attempts": 512, "scientific_contract_publication": 256,
+             "B_C": 512, "final_filing": 128, "total": 1984}
+    module.need(
+        budget.get("schema") == "topolab.owner.NEW-unstarted-clock-fixture-and-continuous-input.v35"
+        and budget.get("NEW_primary_phase_maxima_seconds") == phases
+        and budget.get("sum_primary_maxima_seconds") == 45660
+        and budget.get("NEW_Root_metadata_calls") == calls
+        and budget.get("NEW_global_deadline_ms")
+        == policy["limits"]["global_deadline_ms"] == 1793878200000
+        and budget.get("original_author_start_ms") == 1793727480000
+        and budget.get("old_cumulative_Root_author_seconds142200_retained") is True
+        and budget.get("NEW_additional_Root_author_seconds") == 8520
+        and budget.get("NEW_cumulative_Root_author_seconds") == 150720
+        and budget.get("original_outer_deadline_ms_UNCHANGED") == 1793878680000
+        and budget.get("original_outer151200_UNCHANGED") is True
+        and budget.get("identities") == {"metadata": V35_RECOVERY, "input": V35_INPUT},
+        "V35 finite clocks/calls/identities differ")
+    source = {"new_Original_registration_reads": 0, "new_Foundation_helpers": 0,
+              "files_once_each_author_attempt": 598, "all_formal_Original_reads2392": True,
+              "whole_Original_reads2484_helpers138": True,
+              "metadata40_payload558_version1071": True,
+              "source_coordination_seconds240": True, "native_RSS4294967296": True,
+              "fixed_models_panel_quality_speed_windows_and_resources": True,
+              "no_scientific_retry_search": True, "same_issuer_two_fix_rounds_not_reopened": True}
+    module.need(
+        budget.get("source_and_science_UNCHANGED") == source
+        and budget.get("NEW_named_Native_FULL") == {"metadata_public9_once": 120,
+            "public_source7_once": 3780, "formal_metadata8_once": 120,
+            "formal_input_two_attempts": 7560, "B_once": 180, "C_once": 14580, "total": 26340}
+        and budget.get("NEW_independent") == {"author": "/root/ci_clock_reader_v1",
+            "wall_cap_seconds": 45660, "metadata_calls": 1984, "logical_GitHub_GET": 128,
+            "global_deadline_ms": 1793878200000, "no_old_author_balance_reused": True}
+        and budget.get("NEW_engineer") == {"author": "/root/ci_clock_engineer_v1",
+            "seconds_including_startup_filing_actual_return": 1800, "calls": 64}
+        and budget.get("NEW_reviewers") == {"authors": ["/root/ci_clock_standards_v1",
+            "/root/ci_clock_spec_v1"], "seconds_each_including_actual_return": 900,
+            "calls_each": 32}
+        and budget.get("NEW_Root_logical_GitHub_GET") == 256
+        and budget.get("NEW_CI_workflow_runs_max") == 12,
+        "V35 exact source/resource/author caps differ")
+    module.need(budget.get("ROOT_counter_base_before_registration") == 2062
+        and budget.get("ROOT_collaboration_upper_base") == 42
+        and budget.get("known_NEW_FULL_lower") == 254550
+        and budget.get("NEW_software_full_campaigns") == [
+            {"label": "R18_CLOCK_FIX_AND_NEW_UNSTARTED_PROFILE", "ordinal": 23,
+             "Native_FULL_max": 100000, "UTC_seconds": 4200,
+             "closing_suffix_seconds": 600, "calls": 1},
+            {"label": "R19_ACTUAL_ACCEPTED_INPUT_SCIENTIFIC_CONTRACT", "ordinal": 24,
+             "Native_FULL_max": 100000, "UTC_seconds": 4200,
+             "closing_suffix_seconds": 600, "calls": 1,
+             "condition": "Only after actual accepted full input; scientific contract/publication "
+                          "phase must have complete actual suffix"}],
+        "V35 original counters/fresh campaigns differ")
+    selected = config(V35_INPUT)
+    targets = budget.get("targets", {})
+    module.need(targets.get("parent") == PARENT.rstrip("/")
+        and targets.get("public_metadata") == policy["targets"]["public"][0]
+        and targets.get("formal_metadata") == policy["targets"]["formal"][0]
+        and targets.get("public_source")
+        == "/private/tmp/topolab-public-registered6-source-acquisition-20261104-v7"
+        and targets.get("formal") == [Path(root).name for root in selected["generations"]]
+        and targets.get("backup_suffix") == "-independent-backup"
+        and targets.get("all_formal_unprobed") is True
+        and targets.get("no_old_failed_scene_or_HELD_lease_reuse") is True,
+        "V35 exact fixed targets differ")
+    event = registration.get("original", {})
+    result = event.get("result", {})
+    returned = event.get("returned_ms")
+    output = {"path": "NEW-unstarted-clock-fixture-and-continuous-input-v35.json",
+              "bytes": 7124, "sha256": policy["budget"]["sha256"],
+              "software_deadline_ms": 1793844769237, "registered_headroom_ms": 2170763}
+    module.need(registration.get("schema") == "topolab.NEW-V35.registration-original-actual.v1"
+        and event.get("tool") == "exec_command"
+        and event.get("requested_ms") == 1793830370327
+        and returned == 1793830370485
+        and result.get("exit_code") == 0 and result.get("session_id") is None
+        and module.json.loads(result.get("output", "null")) == output
+        and len(captures["budget"]["raw"].encode()) == 7124,
+        "V35 original registration return differs")
+    module.need(activation.get("schema") == "topolab.NEW-V35.software-activation.v1"
+        and activation.get("author") == "/root"
+        and activation.get("software_start_ms") == budget.get("registered_before_new_work_ms")
+        == policy["limits"]["software_start_ms"] == 1793830369237
+        and activation.get("registration_actual_return_ms") == returned
+        and activation.get("software_deadline_ms")
+        == policy["limits"]["software_deadline_ms"] == 1793844769237
+        and activation.get("global_deadline_ms") == 1793878200000
+        and activation.get("original_author_start_ms") == 1793727480000
+        and activation.get("cumulative_Root_author_seconds") == 150720
+        and activation.get("old_cumulative142200_retained") is True
+        and activation.get("additional8520_not_reset") is True
+        and activation.get("old_allocation_unused_closed_not_transferred") is True
+        and activation.get("new_grant_sha256") == policy["budget"]["sha256"]
+        and 1793878200000 - returned - 45660000 == 2169515,
+        "V35 declared start/actual return/complete suffix differs")
+    arithmetic = review.get("arithmetic", {})
+    module.need(review.get("schema") == "topolab.independent.V35.budget-and-clock-review.v1"
+        and review.get("status") == "PASS_budgetonly"
+        and review.get("author") == policy["actors"]["independent"] == "/root/ci_clock_reader_v1"
+        and arithmetic.get("sum_primary_seconds") == 45660
+        and arithmetic.get("registration_headroom_after_all_primary_maxima_ms") == 2169515
+        and arithmetic.get("software_start_ms") == 1793830369237
+        and arithmetic.get("software_deadline_ms") == 1793844769237
+        and review.get("no_old_budget_or_author_balance_reused") is True,
+        "V35 independent budget/clock review differs")
+    module.need(clock.get("schema")
+        == "topolab.independent.V35.conservative-startup-clock-supplement.v1"
+        and clock.get("author") == "/root/ci_clock_reader_v1"
+        and clock.get("status") == "PASS_budgetonly_STRICTER_CLOCK"
+        and clock.get("conservative_author_budget_start_ms") == 1793830369237
+        and clock.get("effective_author_deadline_ms") == 1793876029237
+        and clock.get("no_clock_reset_or_old_budget_transfer") is True
+        and policy.get("independent_author_start_ms") == 1793830369237
+        and policy.get("independent_author_deadline_ms") == 1793876029237,
+        "V35 conservative independent author clock differs")
+    failure = budget.get("failed_PR236", {})
+    stopped = budget.get("old_unstarted_scopes_closed", {})
+    module.need(failure.get("head") == "1efe58cf4fc877c6fda272b7610ae8bd4ee2436d"
+        and failure.get("run") == 41915681708 and failure.get("quality_job") == 126874584970
+        and failure.get("status") == "1 failed 3472 passed37skipped"
+        and {"path": failure.get("log_path"), "sha256": failure.get("log_sha256")}
+        == policy["prior_failed_CI"]
+        and all(stopped.get(key) is True for key in ("metadata_public9_Native0",
+            "formal_metadata7_0", "Source_PUBLIC7_registered5_actor0",
+            "formal_gen14_15_reads0", "B_C0", "old_unused_balances_closed_no_transfer"))
+        and stopped.get("Root_V33_used_conservative") == 378
+        and stopped.get("Root_V33_unused_closed") == 1606,
+        "V35 failed CI/old unstarted allocations must remain closed")
     return values

@@ -1,6 +1,8 @@
 # Validation evidence index
 
-Current [continuous input profile](p17_m2_continuous_input_profile.md): captured strict23 core, approval-service STOP, R14/R15 budget failures, new finite7/5 permission remedy and pending input/scientific Gates; P17 unrepaired.
+Current [CI clock repair and new input continuation](p17_m2_ci_clock_and_input_continuation.md): reproduced fixture-time FAIL, unchanged production expiry, new finite8/6 software/input Gates; P17 remains unrepaired.
+
+Historical [continuous input profile](p17_m2_continuous_input_profile.md): captured strict23 core, approval-service STOP, R14/R15 budget failures, new finite7/5 permission remedy and pending input/scientific Gates; P17 unrepaired.
 
 Current [protected input publication and prospective continuation](p17_m2_prospective_input_publication_continuation.md): PR235/main1c38cbf, all-five R11 software PASS, old main-CI deadline FAIL and unlaunched input; NEW finite v5/v3 preparation, no P17 repair claim.
 

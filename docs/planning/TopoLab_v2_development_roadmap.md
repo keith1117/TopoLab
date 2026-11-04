@@ -1,24 +1,22 @@
 # TopoLab v2 Development Roadmap
 
-Current continuous action: [input profile continuation](../validation/p17_m2_continuous_input_profile.md)
-after V27's correct pre-Native4171.721<4200 STOP. Metadata7 PUBLIC-only passes;
-no full input/B/C/P17 acceptance. R14 all-five3466PASS/one skip/source unchanged
-is technical PASS but UTC3354.953814>2100 budgetFAIL; clock cause UNKNOWN.
-Metadata8 approval-service timeout stopped before CreateProcess; R15 passed
-technical checks but missed actual closing. Root sampling-gap cause UNKNOWN.
-NEW V33 actual20:13:37.118 funds14400s software/review/publication/public ending
-Nov5 00:13:37.118Z. New19800 seconds add to122400, cumulative142200/Nov5 09:08Z
-inside original outer151200; no old counter/clock/fee/unused balance resets.
-Exact7/5 profiles retain old4/2+5/3+6/4 bytes/defaults. Regression, fresh review,
-all-five and protected exact-main four-job CI precede sole public9. Permission
-preflight must precede actor300; no automatic public10. Contract-entry P2/R16
-interruption remain; NEW V34 funds R17/final reviews inside the same clocks.
-Formalmeta7/gen14/15
-stay unprobed; second input wall needs explicit NEW within-global full suffix.
-Exact40/558/1071/2392/whole2484/helper138,
-4GiB/240/rawmtime/hash/lease/backup/Gate order remain. Acceptedinput→B180→fixed
-C14580 original science Gates, historicalallpaidFAIL/fullfitPENDING/uniform/
-P17unrepaired/fullv2 open. Original25 and all old failed/HELD scenes preserved.
+Current continuous action: [CI-clock repair/input continuation](../validation/p17_m2_ci_clock_and_input_continuation.md).
+PR236 head1efe has three CI successes and one fixture-time FAIL; production
+old-deadline rejection is correct. Explicit test clocks/expiry negative precede
+minimal repair, new8/6 profiles, fresh review/all-five/protected exact-main4CI.
+R18 retained1FAIL/3536PASS/1skip: old public9 fixture omitted pinned-context IO.
+Independent RED and76-member failed source/terminal pair precede the test-only
+V36/R20 once remedy. Four pure v7/v8 routing cases pass; fresh600s/24-call
+reviews and complete UTC4200+600 campaign remain under unchanged V35 deadlines.
+NEW V35 actual22:12:50.485Z/14400s software endsNov5 02:12:49.237Z. Root adds
+8520 seconds to142200, cumulative150720/global11:30 within oldouter151200/11:38.
+Fresh Reader conservative startup ends10:53:49.237Z. No old counter/fee/time or
+unused balance resets. FIRST actualpublic9 same uncreated name/noautomatic10;
+new registered6 PUBLIC7/formalmeta8/gen16/17 unprobed at same Library parent.
+Source40/558/1071/2392/whole2484/helper138/4GiB/240/hash/leases/copies remain.
+Accepted input→B180→fixedC14580 original Gates; P17 unrepaired/uniform/default/
+fullv2 open/historical allpaidFAIL/fullfitPENDING remain. Original25/oldscenes
+preserved; exactoldtmpmirror currentlyMissing/causeUNKNOWN without recreation.
 
 Historical entry: [metadata-only strict23 certificate recovery](p17_m2_source_binding_certificate_recovery_protocol.md) after both authors'23 source reads passed and a later audit SUP missed its guard window. Independently accepted certificate/input and B/C remain subject to their respective Gates under unchanged scientific Gates. NEW finite funding retains every old cost/closed quota and the original100800s/21:38Z limit. P17 remains unrepaired. The [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md) is historical: ordinal7 mtime-63ns, missing temporary evidence and incomplete old accounting remain retained failures.
 

@@ -285,6 +285,7 @@ def invoke(
         "topolab.v2.p17-binding-certificate-recovery.20261104.v5",
         "topolab.v2.p17-binding-certificate-recovery.20261104.v6",
         "topolab.v2.p17-binding-certificate-recovery.20261104.v7",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v8",
     )
     if measurement_execution_identity not in measurement_identities or (
         measurement_scope is None and measurement_execution_identity != measurement_identities[0]
@@ -309,6 +310,9 @@ def invoke(
             ),
             "topolab.v2.p17-binding-certificate-recovery.20261104.v7": (
                 "p17_m2_source_binding_recovery_v7.py"
+            ),
+            "topolab.v2.p17-binding-certificate-recovery.20261104.v8": (
+                "p17_m2_source_binding_recovery_v8.py"
             ),
         }.get(
             measurement_execution_identity,

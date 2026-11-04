@@ -1,5 +1,20 @@
 # Development history
 
+## 2026-11-04 — CI clock fixture repair and unstarted continuation
+
+[Evidence](validation/p17_m2_ci_clock_and_input_continuation.md) preserves
+PR236's Linux1FAIL/3472PASS/37skip from a public fixture crossing an old frozen
+deadline, plus local RED and correct production rejection. Explicit positive/
+expired test clocks and new bounded8/6 profiles precede fresh release/input
+Gates. NEW V35 adds8520 prospective author seconds, cumulative150720 within
+original151200; old quotas/counters/fees remain closed and charged. Source/B/C
+are unaccepted and fixedP17 remains unrepaired.5435 paired metadata members were
+fully replayed; original25 remain protected and oldtmpmirror absence is disclosed.
+R18 retained1FAIL/3536PASS/1skip from the old public9 fixture's omitted pinned
+context read; failed60-source/terminal pair76 members precedes the test-only
+NEW V36/R20 remedy under unchanged clocks. Four routing/80 focused pure cases
+pass; fresh distinct review/full checks/publication still precede actual input.
+
 ## 2026-11-04 — Finite permission remedy with retained timing failures
 
 [Actual frontier](validation/p17_m2_continuous_input_profile.md) retains V27

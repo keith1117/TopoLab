@@ -1792,3 +1792,13 @@ the unchanged actor window. Exact failed tool arguments, actual endpoints and
 thrown errors are retained without fabricated process returns. The old failure
 scene and script remain unchanged; a public prelaunch-deadline regression
 precedes the new external watchdog version. No scientific criterion changes.
+
+## 2026-11-04 — deterministic public clock fixtures and unstarted profiles
+
+Original TopoLab work separates explicit unit-test time from unchanged frozen
+production expiry. A reproduced post-deadline CI fixture failure precedes the
+minimal positive/expired regression repair. A new fixed compatible execution
+profile prospectively binds finite budgets and authors for unstarted work,
+retaining historical observations, hashes, deadlines and protocol bytes. No
+external code, model, dataset, numerical method or scientific limit is imported
+or changed. Actual source/scientific acceptance remains separately required.

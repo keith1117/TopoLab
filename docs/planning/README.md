@@ -1,6 +1,8 @@
 # Planning index
 
-Current [recovery7](p17_m2_source_binding_certificate_recovery_v7_protocol.md) / [input5](p17_m2_registered_input_v5_protocol.md): finite new permission remedy, preserved old profiles/STOPs, preflight before actor, protected main before public9, unchanged input/scientific Gates.
+Current [recovery8](p17_m2_source_binding_certificate_recovery_v8_protocol.md) / [input6](p17_m2_registered_input_v6_protocol.md): finite new unstarted continuation after a reproduced historical-clock fixture FAIL; old defaults/bytes/scientific Gates remain.
+
+Historical [recovery7](p17_m2_source_binding_certificate_recovery_v7_protocol.md) / [input5](p17_m2_registered_input_v5_protocol.md): finite new permission remedy, preserved old profiles/STOPs, preflight before actor, protected main before public9, unchanged input/scientific Gates.
 
 Current prospective input continuation retains the old publication deadline FAIL and funds explicit new v5/v3 compatibility under [unchanged scientific Gates](../validation/p17_m2_prospective_input_publication_continuation.md).
 

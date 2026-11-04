@@ -1,0 +1,7 @@
+# V35 metadata recovery v8
+
+The [frozen JSON](p17_m2_source_binding_certificate_recovery_v8_protocol.json) binds the explicit v8 identity, fresh `/root/ci_clock_reader_v1`, NEW V35 grant/registration/activation/independent review and retained failed PR236 quality log. The declared software start is1793830369237; registration latency is charged. Software ends1793844769237; cumulative global ends1793878200000 inside unchanged outer1793878680000. Old allocations, failures, fees and counters remain closed.
+
+This compatibility profile adopts the same never-created public9 literal and formal metadata8. It permits only the FIRST actual public9, never automatic public10. Fresh source reviews, all five checks and protected exact-main four-job CI precede the harmless exact env/interpreter/v8 `--help` permission preflight. Its successful original canonical receipt precedes any actor300/root/Native. Prepare requires `--permission-packet` and `--permission-packet-sha` at the fixed V35 public/formal path. FULL120, timeout110, reserve60, first SUP30 and4GiB remain. One conditional service retry requires the original complete suffix; continuing service failure closes software/evidence.
+
+No original registration read/Foundation helper is repeated. Captured strict23/46 helper/core lease evidence is reused only as metadata. Input and science acceptance remain separate; all-paid historical FAIL, full-fit PENDING4GiB, fixed P17 unrepaired and uniform default remain. Old sixteen JSON/MD companions retain their bytes.

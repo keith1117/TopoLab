@@ -49,6 +49,14 @@ V33_FORMAL = (
 )
 V33_ROOTS = (V33_PUBLIC, *V33_FORMAL)
 
+V35_IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v6"
+V35_PUBLIC = "/private/tmp/topolab-public-registered6-source-acquisition-20261104-v7"
+V35_FORMAL = (
+    PARENT + "p17-m2-local-input-version-v16-strict-binding-20261104",
+    PARENT + "p17-m2-local-input-version-v17-strict-binding-remedy-20261104",
+)
+V35_ROOTS = (V35_PUBLIC, *V35_FORMAL)
+
 ROLES = (
     'independent-public-check',
     'exporter-r0',
@@ -111,10 +119,12 @@ def read_metadata(path):
 
 def project(plan, raw, root):
     identity = (
-        V33_IDENTITY
+        V35_IDENTITY
+        if root in V35_ROOTS
+        else V33_IDENTITY
         if root in V33_ROOTS
         else V31_IDENTITY
-        if root in (*V31_PUBLIC, *V31_FORMAL, *V33_ROOTS)
+        if root in (*V31_PUBLIC, *V31_FORMAL, *V33_ROOTS, *V35_ROOTS)
         else NEW_IDENTITY
         if root in (NEW_PUBLIC, *NEW_FORMAL)
         else IDENTITY
@@ -126,7 +136,7 @@ def project(plan, raw, root):
         and plan.get("actor_window_seconds") == 4500,
         "exact plan profile/root required",
     )
-    formal = root in (*FORMAL, *NEW_FORMAL, *V31_FORMAL, *V33_FORMAL)
+    formal = root in (*FORMAL, *NEW_FORMAL, *V31_FORMAL, *V33_FORMAL, *V35_FORMAL)
     need(
         plan.get("formal_authority") is formal
         and plan.get("scope")
@@ -148,7 +158,11 @@ def project(plan, raw, root):
         "role_order": list(ROLES),
         "coordination_limit_ms": 240000,
         "applicable_deadline_ms": (
-            1793869680000
+            1793876029237
+            if root in V35_FORMAL
+            else 1793844769237
+            if root == V35_PUBLIC
+            else 1793869680000
             if root in V33_FORMAL
             else 1793837617118
             if root == V33_PUBLIC
@@ -185,7 +199,8 @@ def role_projection(accepted, plan_sha, role, *, identity=IDENTITY):
 
 def wait(root, role, seconds):
     need(
-        root in (PUBLIC, *FORMAL, NEW_PUBLIC, *NEW_FORMAL, *V31_PUBLIC, *V31_FORMAL, *V33_ROOTS)
+        root in (PUBLIC, *FORMAL, NEW_PUBLIC, *NEW_FORMAL, *V31_PUBLIC,
+                 *V31_FORMAL, *V33_ROOTS, *V35_ROOTS)
         and os.path.normpath(root) == root,
         "exact literal root required",
     )
