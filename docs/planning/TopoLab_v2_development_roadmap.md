@@ -1,6 +1,6 @@
 # TopoLab v2 Development Roadmap
 
-Current continuous action: [strict registration of23 unbound metadata entries](p17_m2_strict_source_binding_protocol.md), followed by independently accepted input and conditional B/C under unchanged scientific Gates. New finite funding covers this continuous action; old quotas remain closed. Fixed P17 remains unrepaired. The [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md) is historical: ordinal7 mtime-63ns, missing temporary evidence and incomplete old accounting remain retained failures.
+Current continuous action: [new finite strict23 window](p17_m2_coordinated_source_binding_window2_protocol.md), followed by independently accepted input and conditional B/C under unchanged scientific Gates. New finite funding covers this continuous action; old quotas remain closed. Fixed P17 remains unrepaired. The [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md) is historical: ordinal7 mtime-63ns, missing temporary evidence and incomplete old accounting remain retained failures.
 
 F is published and closed: [PR211](https://github.com/keith1117/TopoLab/pull/211),
 main `b0fe2350ac68a88a05e974926a2b0fe6a1302bf7`, all four exact-main
@@ -2435,7 +2435,19 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-## Current: coordinated strict23 remedy with unchanged downstream Gates
+## Current: finite strict23 window2 with unchanged downstream Gates
+
+[New authority](p17_m2_coordinated_source_binding_window2_protocol.md) and
+[actual evidence](../validation/p17_m2_coordinated_source_binding_window2.md)
+retain PR233/maina7bd/all-four CI, strict formal1 STOP/FULL780, the old-window
+zero launch and metadata timeout/truncation. New source19 identity selects
+actualattempt2/core1800/result1800, with unchanged strict reads/legacy replay.
+Independent actual metadata/retention/funding remedies pass; sourcepreparation
+ends fixed05:33:09.138Z2026-11-04. Freshreviews/newpublic/fullchecks/protected
+main4CI/new preflight precede originals; accepted23 then fullinput precede B/C.
+No old allowance/reset or scientific change, no P17 repair or full-fit credit.
+
+## Historical: coordinated strict23 remedy with unchanged downstream Gates
 
 The [prospective coordination contract](p17_m2_coordinated_source_binding_protocol.md)
 and [actual frontier](../validation/p17_m2_coordinated_source_binding.md) retain

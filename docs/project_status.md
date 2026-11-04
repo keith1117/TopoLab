@@ -1,11 +1,32 @@
 # Current project status
 
-Updated:2026-11-03. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-11-04. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution is paused. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: coordinated strict23 remedy after retained formal1 STOP
+## Current: new finite strict23 window after published coordination
+
+[New contract](planning/p17_m2_coordinated_source_binding_window2_protocol.md) and
+[actual frontier](validation/p17_m2_coordinated_source_binding_window2.md) retain
+PR233/maina7bd88e/all-four CI, canceled-required-quality repair, formal1 strict
+STOP/FULL780/HELD and the expired old formal2 window with zero launch.
+Old result used12150.689/12240 seconds; remaining89.311 closes. A metadata
+subtask timeout/truncated return remains a failure; new v3 full independent
+main proof, final1224-member paired retention and budget review now pass.
+New finite preparation ends05:33:09.138Z2026-11-04; actual ROOT/I global100800
+and21:38Z stay. New actualattempt2 identity selects1800 core/result windows,
+keeps old3600 replay and every strict source/scientific rule. Fresh Standards
+and Spec reviews pass after the metadata/core policy-mixing P2 regression/fix.
+The sole NEW public graph and own native auditor now independently pass:
+46 helper exits, full actual returns/lease release and pair71446495; FULL1200
+is paid once. Complete campaign5 passes all five checks,3310 tests/one platform
+skip; protected exact-head/main4CI and new actual source19 preflight remain required. Current binding-action original reads still ROOT5/I0;
+new formal2/input/B/C are unstarted and P17 unrepaired.
+Only accepted23 precedes full40/558/1071 input, then B and fixed C. Historical
+all-paid FAIL/full-fit PENDING4GiB/uniform default/25 dirty files/old scenes stay.
+
+## Historical frozen frontier: coordinated strict23 remedy after retained formal1 STOP
 
 [New contract](planning/p17_m2_coordinated_source_binding_protocol.md) and
 [actual frontier](validation/p17_m2_coordinated_source_binding.md) retain published

@@ -564,3 +564,58 @@ def test_namespace_mtime_before_claim_is_recorded_without_weakening_strict_point
     wire = binding.register(source, context, primary, coordination=config)
     binding.validate_pair(primary, wire, context, coordination=config)
     assert wire["rows"][0]["declared"] == wire["rows"][0]["closing"]
+
+
+WINDOW2_IDENTITY = "topolab.v2.p17-source-binding-window2.20261104.v1"
+
+
+def test_window2_independent_strict_pair_uses_new_identity_without_relabeling_helper(
+    tmp_path, monkeypatch,
+):
+    source, context, primary, config = coordinated_fixture(tmp_path)
+    context["execution_identity"] = primary["execution_identity"] = WINDOW2_IDENTITY
+    binding = load_binding()
+    state = fake_coordinator_module(monkeypatch, binding)
+    independent = binding.register(source, context, primary, coordination=config)
+    assert independent["execution_identity"] == WINDOW2_IDENTITY
+    assert independent["helper_execution_identity"] == (
+        "topolab.v2.p17-m2-source-stable-export.v1")
+    assert independent["helper_identity_relabelled"] is False
+    assert len(state.instances[0].records) == len(independent["rows"]) == 23
+    assert binding.validate_pair(primary, independent, context, coordination=config)
+    assert all(row["declared"] == row["before"] == row["after"] == row["closing"]
+               for row in independent["rows"])
+
+
+@pytest.mark.parametrize("identity,attempt", [
+    ("topolab.v2.p17-source-binding-window2.20261104.v1", 1),
+    ("topolab.v2.p17-source-binding-window2.20261104.v1-unknown", 2),
+])
+def test_window2_invalid_profile_stops_before_source_with_complete_context(
+    tmp_path, monkeypatch, identity, attempt,
+):
+    source, context = public_source(tmp_path)
+    context.update(execution_identity=identity, attempt=attempt)
+    binding = load_binding()
+    monkeypatch.setattr(binding, "reader_module", lambda: pytest.fail("source reader reached"))
+    with pytest.raises(ValueError) as stopped:
+        binding.register(source, context, coordination=coordination_config(tmp_path))
+    packet = stopped.value.strict_binding_failure
+    assert packet["context"] == context and packet["stage"] == "context_validation"
+    assert packet["attempts"] == packet["rows"] == []
+
+
+@pytest.mark.parametrize("new_context", [True, False])
+def test_window2_and_historical_wires_cannot_be_cross_labeled_before_io(
+    tmp_path, monkeypatch, new_context,
+):
+    source, context, primary, config = coordinated_fixture(tmp_path)
+    if new_context:
+        context["execution_identity"] = WINDOW2_IDENTITY
+    else:
+        primary["execution_identity"] = WINDOW2_IDENTITY
+    binding = load_binding()
+    monkeypatch.setattr(binding, "reader_module", lambda: pytest.fail("source reader reached"))
+    with pytest.raises(ValueError) as stopped:
+        binding.register(source, context, primary, coordination=config)
+    assert stopped.value.strict_binding_failure["attempts"] == []

@@ -160,7 +160,8 @@ def test_scoped_native_measurement_refuses_arbitrary_command_before_launch(tmp_p
 
     module = adapter()
     native = module.Transport({"root": str(tmp_path),
-                               "context": {"scope": module.SCOPES[0]}}).native_module()
+                               "context": {"scope": module.SCOPES[0],
+                                           "execution_identity": module.IDENTITY}}).native_module()
     with pytest.raises(ValueError, match="strict23.*literal"):
         native.invoke(tmp_path / "uncreated", "binding-producer",
                       [sys.executable, "-c", "raise RuntimeError('not authorized')"],
@@ -401,7 +402,8 @@ def test_metadata_auditor_has_separate_native_cap_and_actual_return():
 def test_metadata_measurement_scope_cannot_launch_source_role(tmp_path, scope, role):
     module = adapter()
     native = module.Transport({"root": str(tmp_path),
-                               "context": {"scope": module.SCOPES[0]}}).native_module()
+                               "context": {"scope": module.SCOPES[0],
+                                           "execution_identity": module.IDENTITY}}).native_module()
     argv = [sys.executable, "-I", str(REPO / "scripts/p17_m2_source_binding.py"), "payload",
             "--plan", str(tmp_path / "plan.json"), "--plan-sha", "a" * 64, "--role", role]
     with pytest.raises(ValueError, match="strict23.*literal"):
@@ -428,7 +430,8 @@ def test_metadata_supervisor_has_no_core_shared_prepayment(tmp_path):
     started = round(time.time(), 3)
     plan = {"schema": module.METADATA_SCHEMA, "root": str(root),
             "runtime": {"python": sys.executable},
-            "context": {"scope": module.METADATA_SCOPE},
+            "context": {"scope": module.METADATA_SCOPE,
+                        "execution_identity": module.IDENTITY},
             "actor_activation_UTC_seconds": started, "actor_window_seconds": 300,
             "actor_deadlines_UTC": {}, "role_order": ["binding-certificate-auditor"]}
     plan_sha = module.sha(module.canonical(plan))
@@ -555,3 +558,218 @@ def test_coordinated_claim_cannot_outlive_or_predate_actual_source_role(tmp_path
     reseal(module, plan, evidence, events[role], role)
     with pytest.raises(ValueError, match="outside actual source role"):
         module.audit_certificate(plan, evidences, events, primary, independent)
+
+
+WINDOW2_IDENTITY = "topolab.v2.p17-source-binding-window2.20261104.v1"
+
+
+def window2_subject(module, tmp_path):
+    """New public scalar fixtures only; these are not actual native observations."""
+    plan, evidences, actuals, primary, independent = coordinated_native_subject(module, tmp_path)
+    plan["context"]["execution_identity"] = WINDOW2_IDENTITY
+    plan["actor_window_seconds"] = 1800
+    plan["deadline_unix_ns"] = plan["started_unix_ns"] + 1800 * 10**9
+    deadline = plan["actor_activation_UTC_seconds"] + 1800
+    plan["actor_deadlines_UTC"] = {
+        key: datetime.fromtimestamp(deadline, UTC).isoformat(timespec="milliseconds")
+        .replace("+00:00", "Z") for key in ("exporter", "independent")}
+    for wire in (primary, independent):
+        wire["execution_identity"] = WINDOW2_IDENTITY
+    for role, evidence in evidences.items():
+        for packet in (evidence["pending"], evidence["completion"]):
+            packet.update(execution_identity=WINDOW2_IDENTITY, actor_window_seconds=1800,
+                          actor_deadlines_UTC=plan["actor_deadlines_UTC"])
+        evidence["inner_evidence"]["record"]["measurement_execution_identity"] = WINDOW2_IDENTITY
+        if role in ("binding-producer", "binding-independent"):
+            wire = primary if role == "binding-producer" else independent
+            evidence["inner_evidence"]["log"] = module.canonical(wire)
+            evidence["inner_evidence"]["record"]["log_sha256"] = module.sha(
+                evidence["inner_evidence"]["log"])
+    closeout = json.loads(evidences["binding-closeout"]["inner_evidence"]["log"])
+    closeout["context"] = plan["context"]
+    closeout["producer_wire_sha256"] = module.sha(module.canonical(primary))
+    closeout["independent_wire_sha256"] = module.sha(module.canonical(independent))
+    seal_closeout(module, plan, evidences, actuals, closeout)
+    for role in module.CAPS:
+        reseal(module, plan, evidences[role], actuals[role], role)
+    return plan, evidences, actuals, primary, independent
+
+
+def test_window2_certificate_replays_new_identity_native_pair_and_1800_window(tmp_path):
+    module = adapter()
+    plan, evidences, actuals, primary, independent = window2_subject(module, tmp_path)
+    proof = module.audit_certificate(plan, evidences, actuals, primary, independent)
+    assert proof["execution_identity"] == WINDOW2_IDENTITY
+    assert proof["registered_context"]["attempt"] == 2
+    assert proof["charged_FULL_seconds"] == 1080
+    assert proof["input_acceptance"] is proof["B_C_admission"] is False
+    assert all(p["execution_identity"] == WINDOW2_IDENTITY
+               for p in proof["native_role_audits"].values())
+    transport = module.transport_for(plan)
+    assert transport.identity == WINDOW2_IDENTITY and transport.formal_seconds == 1800
+
+
+@pytest.mark.parametrize("fault", ["pending", "completion", "measurement", "old_window"])
+def test_window2_native_rejects_old_identity_at_each_layer_and_old_window(
+    tmp_path, fault,
+):
+    module = adapter()
+    plan, evidences, actuals, _, _ = window2_subject(module, tmp_path)
+    role = "producer-availability"
+    evidence = evidences[role]
+    if fault in ("pending", "completion"):
+        evidence[fault]["execution_identity"] = module.IDENTITY
+    elif fault == "measurement":
+        evidence["inner_evidence"]["record"]["measurement_execution_identity"] = module.IDENTITY
+    else:
+        plan["deadline_unix_ns"] = plan["started_unix_ns"] + 3600 * 10**9
+        plan["actor_window_seconds"] = 3600
+    reseal(module, plan, evidence, actuals[role], role)
+    proof = module.audit_role(plan, role, evidence, actuals[role])
+    assert proof["status"] == "STOP_NO_RETRY"
+    assert proof["full_role_evidence_accepted"] is False
+    assert proof["whole_wall_seconds"] == 17.25
+    assert proof["charged_FULL_seconds"] == 150
+
+
+@pytest.mark.parametrize("identity,attempt", [
+    ("unregistered-window2", 2), (WINDOW2_IDENTITY, 1),
+])
+def test_window2_native_unknown_identity_retains_actual_span_as_stop(identity, attempt):
+    module = adapter()
+    plan, evidence, events = native_subject(module)
+    plan["context"].update(execution_identity=identity, attempt=attempt)
+    evidence["completion"]["primary_failure"] = {"reason": "retained public context"}
+    proof = module.audit_role(plan, "binding-producer", evidence, events)
+    assert proof["status"] == "STOP_NO_RETRY"
+    assert proof["whole_wall_seconds"] == 17.25
+    assert proof["primary_failure"] == {"reason": "retained public context"}
+    assert "identity" in proof["reason"] or "profile" in proof["reason"]
+
+
+def test_window2_metadata_transport_keeps_300_seconds_and_new_identity(tmp_path):
+    module = adapter()
+    plan, evidence, events = metadata_subject(module)
+    plan["context"].update(execution_identity=WINDOW2_IDENTITY, attempt=2)
+    plan["coordination"] = {
+        "identity": "topolab.source-read.foundation-coordination.v1",
+        "binary": str(tmp_path / "new-public-native-helper"), "sha256": "3" * 64,
+        "request_timeout_seconds": 10, "release_timeout_seconds": 5, "reading_options": 0,
+        "source_swift_sha256": "4" * 64, "compiler_sha256": "5" * 64}
+    for packet in (evidence["pending"], evidence["completion"]):
+        packet["execution_identity"] = WINDOW2_IDENTITY
+    evidence["inner_evidence"]["record"]["measurement_execution_identity"] = WINDOW2_IDENTITY
+    reseal(module, plan, evidence, events, "binding-certificate-auditor")
+    transport = module.transport_for(plan)
+    assert transport.identity == WINDOW2_IDENTITY
+    assert transport.formal_seconds == 300 and transport.formal_reserve_seconds == 60
+    proof = module.audit_role(plan, "binding-certificate-auditor", evidence, events)
+    assert proof["full_role_evidence_accepted"] is True
+    assert proof["charged_FULL_seconds"] == 120
+
+
+def test_window2_payload_launch_requires_matching_measurement_identity(tmp_path, monkeypatch):
+    module = adapter()
+    plan, _, _ = native_subject(module)
+    plan["root"] = str(tmp_path)
+    plan["context"].update(execution_identity=WINDOW2_IDENTITY, attempt=2)
+    role = "producer-availability"
+    active = {"role": role, "plan_sha256": module.sha(module.canonical(plan)), "status": "ACTIVE"}
+    started = {"role": role, "software_only": True,
+               "measurement_scope": plan["context"]["scope"],
+               "measurement_execution_identity": WINDOW2_IDENTITY,
+               "argv": module.argv_for(plan, "payload", role), "pid": 333}
+    base = module.load("p17_m2_content_verified_control")
+    monkeypatch.setattr(base, "read_json",
+                        lambda p: active if p.name == "active.json" else started)
+    monkeypatch.setattr(module.os, "getppid", lambda: 333)
+    monkeypatch.setattr(module.os, "getpgrp", lambda: 333)
+    module.assert_payload_launch(plan, role)
+    started["measurement_execution_identity"] = module.IDENTITY
+    with pytest.raises(ValueError, match="parent/group/scope"):
+        module.assert_payload_launch(plan, role)
+
+
+
+@pytest.mark.parametrize("identity,attempt,seconds", [
+    ("topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1", 1, 3600),
+    ("topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1", 2, 3600),
+    ("topolab.v2.p17-source-binding-window2.20261104.v1", 2, 1800),
+])
+def test_window2_profile_selects_only_new_core_window_with_legacy_compatibility(
+    tmp_path, identity, attempt, seconds,
+):
+    module = adapter()
+    plan = {"root": str(tmp_path), "context": {
+        "scope": module.SCOPES[0], "execution_identity": identity, "attempt": attempt}}
+    core = module.transport_for(plan)
+    assert core.identity == identity and core.formal_seconds == seconds
+    assert core.formal_reserve_seconds == 600 and core.role_caps == module.CAPS
+    plan["schema"] = module.METADATA_SCHEMA
+    plan["context"]["scope"] = module.METADATA_SCOPE
+    metadata = module.transport_for(plan)
+    assert metadata.identity == identity and metadata.formal_seconds == 300
+    assert metadata.formal_reserve_seconds == 60
+    assert metadata.role_caps == {"binding-certificate-auditor": 120}
+
+
+def test_window2_run_passes_identity_to_native_measurement_before_dispatch(
+    tmp_path, monkeypatch, capsys,
+):
+    from types import SimpleNamespace
+
+    module = adapter()
+    plan = {
+        "schema": "topolab.v2.m2-strict-source-binding.plan.v1",
+        "root": str(tmp_path),
+        "runtime": {"python": sys.executable},
+        "roles": {"producer-availability": {"timeout": 140}},
+        "context": {"execution_identity": WINDOW2_IDENTITY, "attempt": 2,
+                    "scope": module.SCOPES[0]},
+    }
+    calls = []
+
+    def invoke(output, role, argv, **kwargs):
+        assert kwargs["measurement_execution_identity"] == WINDOW2_IDENTITY
+        assert kwargs["measurement_scope"] == module.SCOPES[0]
+        assert kwargs["registered_source_child_cap"] == 0
+        calls.append((output, role, argv, kwargs))
+        return {"software_result": "PUBLIC_COMMAND_EXIT_OBSERVED"}
+
+    class PublicTransport(module.Transport):
+        def predecessor(self, *args):
+            pass
+
+        def native_module(self):
+            return SimpleNamespace(invoke=invoke)
+
+    producer = SimpleNamespace(load_plan=lambda *args: plan)
+    monkeypatch.setattr(module, "load", lambda name: producer)
+    monkeypatch.setattr(module, "transport_for", lambda p: PublicTransport(p))
+    (tmp_path / "receipts").mkdir(mode=0o700)
+    monkeypatch.setattr(sys, "argv", [
+        "native", "run", "--plan", str(tmp_path / "plan.json"),
+        "--plan-sha", module.sha(module.canonical(plan)), "--role", "producer-availability"])
+    assert module.main() == 0 and len(calls) == 1
+    assert "PUBLIC_COMMAND_EXIT_OBSERVED" in capsys.readouterr().out
+
+
+
+def test_window2_metadata_cannot_adopt_source_child_resource_authority(tmp_path):
+    module = adapter()
+    plan, evidence, events = metadata_subject(module)
+    plan["context"].update(execution_identity=WINDOW2_IDENTITY, attempt=2)
+    plan["coordination"] = {
+        "identity": "topolab.source-read.foundation-coordination.v1",
+        "binary": str(tmp_path / "new-public-native-helper"), "sha256": "3" * 64,
+        "request_timeout_seconds": 10, "release_timeout_seconds": 5, "reading_options": 0,
+        "source_swift_sha256": "4" * 64, "compiler_sha256": "5" * 64}
+    for packet in (evidence["pending"], evidence["completion"]):
+        packet["execution_identity"] = WINDOW2_IDENTITY
+    evidence["inner_evidence"]["record"].update(
+        measurement_execution_identity=WINDOW2_IDENTITY, registered_source_child_cap=1)
+    reseal(module, plan, evidence, events, "binding-certificate-auditor")
+    proof = module.audit_role(plan, "binding-certificate-auditor", evidence, events)
+    assert proof["status"] == "STOP_NO_RETRY"
+    assert proof["charged_FULL_seconds"] == 120
+    assert "source child" in proof["reason"]

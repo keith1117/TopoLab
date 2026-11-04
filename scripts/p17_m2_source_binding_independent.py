@@ -17,6 +17,7 @@ REPO = Path(__file__).resolve().parents[1]
 CONTENT_CONTRACT = "docs/planning/p17_m2_input_export_preparation_proposal.json"
 CONTENT_SHA256 = "f2ed2a971e9a3d76e0d5fba6123080b94feaf5dad384a1a8cad4ca4c3a43f1ad"
 IDENTITY = "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1"
+WINDOW2_IDENTITY = "topolab.v2.p17-source-binding-window2.20261104.v1"
 SCHEMA = "topolab.v2.m2-strict-source-binding.read.v1"
 CONTEXT_KEYS = (
     "execution_identity", "scope", "attempt", "source_root", "authority_sha256",
@@ -85,9 +86,12 @@ def coordination_module():
 def _context(context):
     require(isinstance(context, dict) and set(context) == set(CONTEXT_KEYS),
             "registration context keys differ")
-    require(context["execution_identity"] == IDENTITY and context["scope"] in SCOPES
-            and type(context["attempt"]) is int and context["attempt"] in (1, 2)
-            and context["actors"] == ACTORS, "registration identity/scope/actors differ")
+    identity, attempt = context["execution_identity"], context["attempt"]
+    require(type(attempt) is int and (
+        (identity == IDENTITY and attempt in (1, 2))
+        or (identity == WINDOW2_IDENTITY and attempt == 2))
+        and context["scope"] in SCOPES and context["actors"] == ACTORS,
+        "registration identity/scope/actors differ")
     root = context["source_root"]
     require(isinstance(root, str) and Path(root).is_absolute()
             and str(Path(root)) == root and ".." not in Path(root).parts,

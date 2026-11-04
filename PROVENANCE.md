@@ -1727,3 +1727,13 @@ https://developer.apple.com/documentation/foundation/nsfilecoordinator/coordinat
 Only the documented exact-file accessor lifetime motivates the interface; no
 Apple example implementation or unlicensed upstream code is copied. Coordination
 is not proof against uncoordinated writers, historical content or old fault cause.
+
+
+## 2026-11-04 — Finite coordinated registration window
+
+The explicit new window, exact remaining-cohort selection and native measurement
+identity are original TopoLab work over its own strict registration/resource
+interfaces. Standard Python Decimal preserves the recorded execution-clock
+value; it does not transform source mtime_ns or any numerical convention. No
+upstream implementation, datasets, weights or figures were imported. Historical
+failures/unknowns and original readers/coordination equations remain.

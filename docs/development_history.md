@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-04 — Finite coordinated strict23 window2
+
+[New capability and actual frontier](validation/p17_m2_coordinated_source_binding_window2.md) retain published PR233/main/all-four CI, required-check cancellation/repair, strict formal1 STOP and zero-launch old-window expiry. Independently repaired metadata capture and paired retention preserve all failures; new explicitly funded identity selects bounded1800 core/result windows with old3600 replay and strict reading unchanged. Fresh review/public evidence/publication precede sole remaining actualattempt2, accepted23 precedes fullinput/B/C. Original25 and old scenes/costs/UNKNOWN stay; P17 is unrepaired.
+
 ## 2026-11-03 — Coordinated strict23 remedy after formal1 STOP
 
 [Actual evidence and prospective capability](validation/p17_m2_coordinated_source_binding.md) retain PR232/main/all-four CI, fifth-file strict mtime-108ns STOP and FULL780/HELD closeout. New exact-file claims surround unchanged strict readers; public cooperating-writer, native child/exit/RSS and cleanup failure regressions precede sole gated formal2. No failed-buffer trust, input acceptance or P17 repair is claimed. Finite unstarted allocations change prospectively; all started clocks and historical facts remain.
