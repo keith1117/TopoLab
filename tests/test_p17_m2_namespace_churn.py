@@ -45,6 +45,128 @@ def test_completed_sampler_unlink_during_capacity_inventory_gets_complete_rescan
     assert (root / 'retained-evidence').read_bytes() == b'abc'
 
 
+def test_zero_link_stat_followed_by_confirmed_absence_gets_complete_rescan(
+    tmp_path, monkeypatch
+):
+    module = control()
+    root = tmp_path / 'topolab-public-namespace-unlinked-stat'
+    root.mkdir(mode=0o700)
+    (root / 'retained-evidence').write_bytes(b'abc')
+    (root / 'sampler-0.time').write_bytes(b'transient profile')
+    original = os.stat
+    removed = False
+
+    def stat_during_unlink(path, *args, **kwargs):
+        nonlocal removed
+        if path == 'sampler-0.time' and not removed:
+            descriptor = os.open(path, os.O_RDONLY, dir_fd=kwargs['dir_fd'])
+            try:
+                os.unlink(path, dir_fd=kwargs['dir_fd'])
+                removed = True
+                observed = os.fstat(descriptor)
+                assert observed.st_nlink == 0
+                return observed
+            finally:
+                os.close(descriptor)
+        return original(path, *args, **kwargs)
+
+    monkeypatch.setattr(module.os, 'stat', stat_during_unlink)
+    result = module.namespace_check(root)
+    assert result['count'] == result['evidence_count'] == 1
+    assert result['size'] == result['evidence_size'] == 3
+    assert len(result['enumeration_rescans']) == 1
+    observation = result['enumeration_rescans'][0]
+    assert observation['entry'] == 'sampler-0.time'
+    assert observation['entry_nlink'] == 0
+    assert observation['closing_path_absent'] is True
+    assert observation['entry_tuple']['st_size'] == len(b'transient profile')
+    assert (root / 'retained-evidence').read_bytes() == b'abc'
+
+
+@pytest.mark.parametrize('closing', ['replacement', 'permission'])
+def test_zero_link_requires_closing_absence_and_preserves_original_rejection(
+    tmp_path, monkeypatch, closing
+):
+    import json
+
+    module = control()
+    root = tmp_path / ('topolab-public-unlinked-closing-' + closing)
+    root.mkdir(mode=0o700)
+    (root / 'sampler-0.time').write_bytes(b'original profile')
+    original = os.stat
+    removed = False
+
+    def raced_stat(path, *args, **kwargs):
+        nonlocal removed
+        if path == 'sampler-0.time':
+            if removed and closing == 'permission':
+                raise PermissionError('closing observation denied')
+            if not removed:
+                descriptor = os.open(path, os.O_RDONLY, dir_fd=kwargs['dir_fd'])
+                try:
+                    os.unlink(path, dir_fd=kwargs['dir_fd'])
+                    removed = True
+                    if closing == 'replacement':
+                        (root / path).write_bytes(b'replacement')
+                    return os.fstat(descriptor)
+                finally:
+                    os.close(descriptor)
+        return original(path, *args, **kwargs)
+
+    monkeypatch.setattr(module.os, 'stat', raced_stat)
+    with pytest.raises(ValueError, match='NAMESPACE_ORDINARY_SINGLE_LINK_REQUIRED') as caught:
+        module.namespace_check(root)
+    context = json.loads(caught.value.args[-1])
+    assert context['namespace_inventory_failures'] == []
+    row = context['namespace_entry_failure']
+    assert row['entry_nlink'] == 0
+    assert row['entry_tuple']['st_size'] == len(b'original profile')
+    assert row['secondary_failures'] == ([dict(
+        stage='unlinked-entry-closing-stat', type='PermissionError',
+        reason='closing observation denied',
+    )] if closing == 'permission' else [])
+
+
+def test_repeated_zero_link_and_absence_stops_after_three_complete_attempts(
+    tmp_path, monkeypatch
+):
+    module = control()
+    root = tmp_path / 'topolab-public-unlinked-continuous'
+    root.mkdir(mode=0o700)
+    original_listdir, original_stat = os.listdir, os.stat
+    scans = 0
+    pending = None
+
+    def listed(fd):
+        nonlocal scans, pending
+        pending = f'sampler-{scans}.time'
+        descriptor = os.open(pending, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600, dir_fd=fd)
+        os.close(descriptor)
+        scans += 1
+        return original_listdir(fd)
+
+    def raced_stat(path, *args, **kwargs):
+        nonlocal pending
+        if path == pending:
+            descriptor = os.open(path, os.O_RDONLY, dir_fd=kwargs['dir_fd'])
+            try:
+                os.unlink(path, dir_fd=kwargs['dir_fd'])
+                pending = None
+                return os.fstat(descriptor)
+            finally:
+                os.close(descriptor)
+        return original_stat(path, *args, **kwargs)
+
+    monkeypatch.setattr(module.os, 'listdir', listed)
+    monkeypatch.setattr(module.os, 'stat', raced_stat)
+    with pytest.raises(FileNotFoundError) as caught:
+        module.namespace_check(root)
+    assert scans == 3
+    rows = caught.value.namespace_inventory_failures
+    assert len(rows) == 3
+    assert all(row['entry_nlink'] == 0 and row['closing_path_absent'] for row in rows)
+
+
 def test_continuously_changing_capacity_inventory_stops_with_complete_attempt_context(
     tmp_path, monkeypatch
 ):

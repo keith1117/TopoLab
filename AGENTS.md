@@ -17,115 +17,30 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Current action: [new finite strict23 window](docs/planning/p17_m2_coordinated_source_binding_window2_protocol.md)
-under the continuous owner grant. Read its [actual frontier](docs/validation/p17_m2_coordinated_source_binding_window2.md).
-PR233/maina7bd88e/all-four CI is published; required-quality cancellation/repair,
-formal1 fifth-file mtime-108ns STOP/FULL780/HELD, zero-launch old-window expiry
-and metadata subtask timeout/truncation remain. New preparation has fixed
-05:33:09.138Z2026-11-04 deadline; original ROOT/I21:38Z/global/old costs stay.
-New identity uses only actualattempt2/core1800 and actual-closeout result1800;
-old3600 replay, strict23 and all scientific Gates remain. Fresh reviews, actual
-NEW public evidence, five checks/protected main4CI/new preflight precede originals.
-Accepted23 precedes40/558/1071 input, then B/fixed C. P17 unrepaired. Preserve
-original25 and old failed scenes; no old quota, directory or lease reuse.
-The owner overrides the one-slice stop only for this finite continuous action.
-
-Historical [v7 STOP and expired-result recovery](docs/validation/p17_m2_source_v7_expired_result_recovery.md):
-PR230/main20640851 and all four main CI jobs precede the historical v7 attempt.
-Recovered native metadata confirms exporter R0 STOP at unbound ordinal7:
-330 bytes, mtime-63ns,7 attempts/6 hashes, payload0. Prebound mtime changes
-passed their hash/closing checks; the unbound rule remains strict. Input is
-unaccepted, P17 unrepaired, uniform default and full v2 open.
-The owner resumed on2026-11-03 after the original source/result/outer windows
-expired. Shared17-19 stayed unlaunched and cannot be invoked now. All old
-quotas/STOPs/UNKNOWN and HELD failure leases remain closed or quarantined.
-New finite authority covers metadata recovery and normal failed-result
-publication/independent retention only. Missing temporary receipts and incomplete
-historical accounting stay explicit; source retries and B/C remain unadmitted.
-Preserve all25 original dirty files; use the independent clean checkout.
-After result closure, the remaining input condition is trustworthy pre-read
-binding or a stable strict read for every unbound entry under separately
-admitted new authority. Never bootstrap that binding from a stopped read.
-
-Read the [frozen source-acquisition authority](docs/planning/p17_m2_source_acquisition_execution_protocol.md)
-and [actual STOP result](docs/validation/p17_m2_source_acquisition_execution.md).
-Formal v1 is CLOSED_STOP_NO_RETRY: source PR222/main e890cb7/all-four CI40222089168
-preceded unique setup and3/6 actual roles. Public PASS; exporter R0 stopped on
-13th metadata fstat mtime+89ns,12 completed hashes; independent R0/R1 unlaunched,
-payload0 and input version unaccepted. Shared returned the original STOP while
-checking171 NEW failed-prefix backup members; complete packets/costs remain.
-FULL900 paid once,2700 unused closed. No retry/reset, fallback directory or filing/
-release/certificate; failed generation/HELD cooperative lease stay quarantined.
-Finish only this grant's finite result review/checks/protected PR/main CI and
-immutable NEW retention inside same result deadline21:11:53.915Z2026-10-25, then
-STOP. External actual-return closure controls publication completion. Future
-work needs a new finite owner decision; no automatic successor or B/C/science.
-Provider/writer cause UNKNOWN; preserve25 existing uncommitted files and all
-old FAIL/cost/UNKNOWN/quota/seal facts. Production/test/authority bytes stay frozen.
-
-Historical v1 is a usable interim delivery. The owner retains
-**FULL_V2_OPEN_NO_ADMITTED_ROUTE**, fixed P/17/unrepaired,4GiB and independent
-preflight. Uniform stays default; full v2 still requires reproducible same-quality
-learned end-to-end acceleration. I1 public software is published through PR197/198,
-main57c73b8 and all four main CI contexts passed. Its mandatory selected-host
-pre-entry lifetime UNKNOWN closes NO_ADMISSIBLE_ROUTE, not measured>4GiB or
-scientific acceptance. Read [current status](docs/project_status.md) for evidence,
-retained failures/costs/quotas/seals and the one next item.
-
-Read the [R1 plan](docs/planning/TopoLab_v2_delivery_execution_plan.md) after the
-[English reassessment](docs/planning/TopoLab_v2_delivery_reassessment.md).
-Reassessment Section4 methods are effective; the [roadmap Section6](docs/planning/TopoLab_v2_development_roadmap.md#6-current-sequence-after-the-delivery-reassessment)
-separates current rules, historical observations and pending acceptance advice.
-The English roadmap controls scientific Gate order; README is the public entry.
-No scientific threshold, budget, access or concrete environment admission changes.
-B4.51 FAIL_PROCESS_SOURCE_FREEZE/consumed1/1 quotas, D1 STOP/unlaunched0/1/FULL60,
-owner-closed rescue and solver-internal rejection remain; B4.52 NOT_SELECTED_BY_R1.
-Known-paid12721.16417100014444982>7200 cannot pass unchanged all-paid feasibility;
-full fit PENDING4GiB and every old UNKNOWN/seal remain. Read applicable frozen
-contracts before dependent work; unresolved substantive conflicts stop that work.
-
-B guest-capacity adoption remains ADOPTED_PROSPECTIVELY; ENVIRONMENT_NOT_ADMITTED,
-for compatible future guest contracts only; excluded host overhead UNKNOWN.
-The owner separately adopted B4.30-style RSS/full-exit empirical acceptance for
-NEW M2 native identity only, retaining4GiB and independent preflight. This is
-not a-priori allocation assurance or a change to old I1/D1/B contracts.
-
-M2 H stage A is closed through PR202/203/main65bbbd3. Old
-[R/v1](docs/planning/p17_m2_input_export_preparation_protocol.md) remains
-STOP_NO_RETRY / FAIL_FULL_NAMED_WALL_CHARGE_BINDING:109.224s+10>immutable20s,
-final serializer exit1, full RSS UNKNOWN, old reads0, R0/R1 closed unlaunched.
-Failed FULL120+shared FULL60=180/1860s; closed1680s never transfers. Source PR204/
-main43ffed0 preceded entry; result PR205/main3459dd5 and all four main CI passed.
-
-R/v2 source PR206/main04d14c9 passed all-four CI, but formal preparation closed
-unlaunched when its original independent window expired: roles/old reads/IO0,
-UNKNOWN_NOT_RUN. Result PR207/main e1e52f3/all-four CI completed. Old v1/v2
-frozen files, STOP/costs and closed allowances retain bytes and never transfer.
-
-[R/v3](docs/planning/p17_m2_input_export_readiness_protocol.md) stays STOP_NO_RETRY:
-3/6 launched, metadata12 attempted/11 hash rows;12th identity field/cause UNKNOWN.
-Payload0/12/528/18; failed full RSS UNKNOWN/exits1/1. Paid300/closed1560 remains.
-PR209/main85644c4/all-four CI and merged-branch cleanup completed, worktree retained.
-Original result overrun18.633086s and separate followup335.755696s remain costs.
-
-F is published/closed through PR211/mainb0fe235/all-four exact-main CI39473450571;
-local2290 passed/1 skip. Its first unchanged cleanup assertion failure/cost/cause
-UNKNOWN remains, not fixed by passing repeats. Frozen reports retain bytes.
-R-STABLE software/zero-launch is published through PR213/main6654ca2 and all-four
-exact-main CI39510351493; local2417/1 skip and independent332 retain software scope.
-Its original protocol/reports/budgets remain frozen and closed.
-The owner next granted20min related writer runtime metadata and conditional new
-six roles. Read the [new authority](docs/planning/p17_m2_source_custody_export_protocol.md)/
-[JSON](docs/planning/p17_m2_source_custody_export_protocol.json) and
-[actual report](docs/validation/p17_m2_source_custody_export.md). Original clock
-used747.144801625/1200s, no interruption reset. Live iCloud Documents sync covers
-four declared paths without project-scoped control; OneDrive current Documents
-mapping remains unavailable. NO_SOURCE_ADMISSION_KEEP_STOP, formal0/6/old stat-read0/
-no DATA root, plan or lease. No source adaptation or shared/global sync change.
-Finish normal result publication, retain worktree and STOP; report concrete
-iCloud control/OneDrive mapping gaps. No retry, source change, generic proof/guard
-sequel, B/C/D or automatic successor; all unused budgets close without transfer.
-Keep4GiB/independent preflight and every old failure/cost/UNKNOWN/quota/seal.
+Read [identity2 closure/coordination contract](docs/planning/p17_m2_registered_input_v2_protocol.md)
+and [actual failures/frontier](docs/validation/p17_m2_input_closure_coordination_repair.md).
+Original strict23/46 helper exits/core lease release remain captured after
+PR234/mainc684a321/main4CI; later metadata STOP remains. V16 R8 all five checks
+3404PASS/one platform skip and metadata-public-v5 passed software scope only.
+Full public1 late-start STOP and public2 certificate38/41 STOP plus true
+407.761>240 resourceFAIL remain. Public2 result close also exceeded1800s by43.605.
+V16/V20 genuinely closed FAILED; old costs/quotas/HELD scenes remain. PUBLIC3
+now passes six roles,40/558 per author,1071 members, real lease/backup/certificate;
+firstSUP539ms, coordination8.861<240s. Its194-member paired metadata/full audit
+and timely581.273s result close pass in PUBLIC scope only. R10 all five checks
+3447PASS/one platform skip and finalsource unchanged; R9 source-change FAIL stays.
+Root/I full fee replay gives conservative87600<100000 each, known NEW FULL lower
+150030/other totalsUNKNOWN. V24 auxiliary author close overrun>=32.212s remains
+FAIL; its old allowance never reopens. Original25 hashes/index/status match.
+NEW V22 software10:49:00.022→12:49:00.022Z2026-11-04; originalROOT/I21:38Z stays.
+Preparation actually closed12:46:29.352Z,7049.330/7200s/Root183calls; oldunused
+closes. Newpublication7200s/128calls each ends14:46:29.352Z. Protected exact-head/main4CI publication,
+formal metadata4 and independent preflight precede Original/Library IO. No formal
+input or B/C is yet accepted. ExactSource2484/helper138/4GiB/40-558-1071 remain;
+targets8/9 fixed/unprobed. Input→B180→fixedC14580 retains original scientific
+Gates. Historical all-paid12721.16417100014444982>7200 FAIL, full-fitPENDING4GiB,
+P17unrepaired/uniformdefault/fullv2open and every old STOP/cost/UNKNOWN/seal remain.
+Owner continuous authority overrides one-slice scheduling stops only.
 
 ## Provenance boundary
 

@@ -1,5 +1,30 @@
 # Development history
 
+## 2026-11-04 — Strict23 core passed; metadata predispatch STOP and recovery
+
+[Actual evidence](validation/p17_m2_source_binding_certificate_recovery.md)
+retains protected PR234/mainc684a321/all-four CI and both authors'23 successful
+strict reads/46 real helper exits, exact comparison and actual lease release.
+The sixth named SUP was14.066854s late; the remaining120+60 guard correctly
+refused before native payload. Secondary receipt errors and groupgone UNKNOWN,
+FULL1200/knownNEW6390,449-member independent-inode failure retention and actual
+closure remain. NEW V8 funds bounded metadata-only recovery with oldSource19
+separate from new execution/software; public regression/minimal failure-context
+repair and review precede new native acceptance. No original retry, full input,
+B/C or fixedP17 repair is claimed. Original25 and old scenes remain untouched.
+Later captured-proof and writer-interface/path-guard regressions retain their
+original counterexamples and closed failed attempts. Fresh writer Standards/Spec
+and NEW public-v3 complete native/actual-return replay pass, certificate09668863,
+known NEW FULL6630. R5's omitted native-test permission is separately reproduced;
+one NEW V13 complete permission-correct check is bounded by unchanged deadlines.
+Normal protected publication and formal metadata recovery remain required.
+R6 retains3350PASS/one public helper fixture timeout/one skip. Its original1s
+startup cause stays UNKNOWN; a deterministic1.1s RED and test-only10/5-window
+correction pass fresh13-case independent review. NEW finite R7 is running.
+Recovered software-native bookings are grouped by original execution root to
+remove a copied shared-prepayment duplicate; ROOT's714-member/21-group replay
+adopts22500 additional FULL, current known lower29130 and other fees UNKNOWN.
+
 ## 2026-11-04 — Finite coordinated strict23 window2
 
 [New capability and actual frontier](validation/p17_m2_coordinated_source_binding_window2.md) retain published PR233/main/all-four CI, required-check cancellation/repair, strict formal1 STOP and zero-launch old-window expiry. Independently repaired metadata capture and paired retention preserve all failures; new explicitly funded identity selects bounded1800 core/result windows with old3600 replay and strict reading unchanged. Fresh review/public evidence/publication precede sole remaining actualattempt2, accepted23 precedes fullinput/B/C. Original25 and old scenes/costs/UNKNOWN stay; P17 is unrepaired.
@@ -2554,3 +2579,44 @@ seconds covers minimal paired regression-first remedy/new review/preflight and
 normal publication; its actual results control later admission. FixedP17,
 uniform/default, historical FAIL/UNKNOWN/costs/seals remain. Continuous action
 proceeds to input-bound contract/B/C only after their real dependency Gates.
+
+
+## 2026-11-04 — registered23 input capability and retained inventory STOP
+
+[Contract](planning/p17_m2_registered_input_protocol.md) and
+[report](validation/p17_m2_registered_input.md) retain old V8 R7 inventory STOP,
+late closing refusal and closed-unlaunched V15. NEW V16/V18 prepare a minimal
+confirmed-absence rescan and exact23 certificate-derived producer/independent
+reader integration. Known NEW FULL lower64830; no formal input/B/C acceptance or
+P17 repair is claimed. Original25, old costs/failures/quotas/scientific Gates stay.
+
+
+## 2026-11-04 — actual PUBLIC certificate and coordination failures; new repair
+
+[Report](validation/p17_m2_input_closure_coordination_repair.md) preserves R8
+3404PASS/one skip, new metadata software PASS and two failed full-public attempts.
+PUB2 all native/backup/filing/release passed, but compiler38/41 and407.761>240
+remain certificate/resource FAIL. Actual result closing+43.605s remains. V16/V20
+closed FAILED; paired1761 metadata/53MB full independent replay and original25
+preservation pass. Known NEW FULL lower94530. New identity2/compiler fix/real
+dual-author continuous caller and metadata4 are prospectively funded V22; no
+Original/Library IO, input acceptance or P17 repair is claimed.
+
+The same new closure action now passes PUBLIC3 with539ms first entry,
+8.861s actual coordination,40/558 per author,1071 members and full native/actual
+certificate/lease closure. Fresh review caught and regression-fixed certificate
+pair names and dynamic formal references before that entry.194-member paired
+retention passes complete independent replay. Final R10/publication/formal input
+remain pending; every old failure and P17/uniform/scientific limit remains.
+
+Final R10 passes3447/one skip/all five checks/source unchanged; R9 staysfreezeFAIL.
+Full Root/I replay of1697/1691 metadata gives87600 conservativeNative FULL upper
+per100000 allocation and25800 correlated lower each, known NEW lower150030.
+V24 auxiliary900s closing overrun>=32.212s staysFAIL with unusedcallsclosed;
+active Root/I re-audit no old author reopening. Actual prepclosure/publication
+and formal input/B/C still gate fixedP17; historical all-paidFAIL remains.
+
+Actual preparation closed12:46:29.352Z/7049.330s with4266-member paired full
+independent metadata replay; original actual1bb6576e. New finite protected
+publication7200s/128calls each then formal metadata/input/B/C; noOriginalor
+LibraryIO or P17 repair is created by this preparation PASS.

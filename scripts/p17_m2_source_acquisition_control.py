@@ -32,6 +32,22 @@ NEW_GENERATION = (
     "/Users/keith1117/Library/Application Support/TopoLab-custody/"
     "p17-m2-local-input-version-v7-hash-bound-20261028"
 )
+REGISTERED_IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v2"
+REGISTERED_PROTOCOL = "docs/planning/p17_m2_registered_input_v2_protocol.json"
+REGISTERED_PUBLIC_PREFIX = "topolab-public-registered-source-acquisition-"
+REGISTERED_GENERATIONS = (
+    "/Users/keith1117/Library/Application Support/TopoLab-custody/"
+    "p17-m2-local-input-version-v8-strict-binding-20261103",
+    "/Users/keith1117/Library/Application Support/TopoLab-custody/"
+    "p17-m2-local-input-version-v9-strict-binding-remedy-20261103",
+)
+
+
+def registered_root(root):
+    return (str(root) in REGISTERED_GENERATIONS
+            or Path(root).name.startswith(REGISTERED_PUBLIC_PREFIX))
+
+
 SOURCE_IDENTITY_POLICY = "topolab.source-identity.prebound-sha256.v1"
 REHEARSAL_SCOPE = "FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY"
 FORMAL_SCOPE = "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY"
@@ -105,6 +121,11 @@ def is_funded_authority(raw):
 def authority_for_root(root):
     """Select only registered literals before any source or custody traversal."""
     literal = str(Path(os.path.abspath(root)))
+    if literal in REGISTERED_GENERATIONS:
+        return (load("p17_m2_registered_input").authority_raw(),
+                REGISTERED_GENERATIONS.index(literal) + 1)
+    need(Path(literal).name not in {Path(p).name for p in REGISTERED_GENERATIONS},
+         "FORMAL_LITERAL_ROOT_REQUIRED")
     if literal == NEW_GENERATION:
         return NEW_AUTHORITY_RAW, 1
     need(Path(literal).name != Path(NEW_GENERATION).name, "FORMAL_LITERAL_ROOT_REQUIRED")
@@ -146,6 +167,16 @@ def source_freeze(execution_identity=None):
         paths.add(REPO / FUNDED_PROTOCOL)
     if (REPO / REMEDY_PROTOCOL).is_file():
         paths.add(REPO / REMEDY_PROTOCOL)
+    if execution_identity == REGISTERED_IDENTITY:
+        paths.update(REPO / name for name in (
+            "scripts/await_m2_acquisition_receipt.py", "scripts/m2_acquisition_cohort.mjs",
+            "scripts/m2_acquisition_actual_boundary.mjs", "scripts/file_m2_acquisition_event.py",
+        ))
+        paths.add(REPO / REGISTERED_PROTOCOL)
+        paths.add(
+            REPO / "docs/planning/p17_m2_source_binding_certificate_recovery_v4_protocol.json"
+        )
+        paths.update(REPO.joinpath("scripts").glob("p17_m2_*.mjs"))
     if execution_identity == NEW_IDENTITY:
         paths.add(REPO / NEW_PROTOCOL)
         paths.update(REPO.joinpath("scripts").glob("p17_m2_*.mjs"))
@@ -161,6 +192,7 @@ def rehearsal_root(root):
                 "topolab-public-hash-bound-",
                 "topolab-public-funded-acquisition-",
                 NEW_PUBLIC_PREFIX,
+                REGISTERED_PUBLIC_PREFIX,
             )
         ),
         "REHEARSAL_ROOT_REQUIRED",
@@ -186,23 +218,26 @@ def argv_for(root, mode, plan_sha, role, *, reader_role="scientific-producer"):
     return argv
 
 
-def make_plan(root, contract, source_identity):
+def make_plan(root, contract, source_identity, *, strict23_registration=None):
     """Build the public projection; formal_plan replaces only declared authority inputs."""
     helper = base()
     now = round(time.time(), 3)
     end = datetime.fromtimestamp(now + 4500, UTC).isoformat(timespec="milliseconds")
+    registered = registered_root(root)
     new = root.name.startswith(NEW_PUBLIC_PREFIX) or str(root) == NEW_GENERATION
     funded = new or root.name.startswith("topolab-public-funded-acquisition-")
-    compat = funded or root.name.startswith("topolab-public-hash-bound-")
+    compat = registered or funded or root.name.startswith("topolab-public-hash-bound-")
     remedy = root.name.startswith("topolab-public-funded-acquisition-remedy2-")
-    protocol_path = (NEW_PROTOCOL if new else REMEDY_PROTOCOL if remedy
+    protocol_path = (REGISTERED_PROTOCOL if registered else NEW_PROTOCOL if new
+                     else REMEDY_PROTOCOL if remedy
                      else FUNDED_PROTOCOL if funded else COMPAT_PROTOCOL if compat else PROTOCOL)
     protocol_sha = helper.sha((REPO / protocol_path).read_bytes())
     proposal_sha = helper.sha((REPO / PROPOSAL).read_bytes())
     return {
         "schema": "topolab.v2.m2-source-acquisition-plan.v1",
         "execution_identity": (
-            NEW_IDENTITY if new else FUNDED_IDENTITY if funded else COMPAT_IDENTITY if compat
+            REGISTERED_IDENTITY if registered else NEW_IDENTITY if new
+            else FUNDED_IDENTITY if funded else COMPAT_IDENTITY if compat
             else IDENTITY
         ),
         **({"source_identity_policy": SOURCE_IDENTITY_POLICY} if compat else {}),
@@ -227,9 +262,12 @@ def make_plan(root, contract, source_identity):
             "target_access": False,
             "B_C": False,
             **({"source_identity_policy": SOURCE_IDENTITY_POLICY} if compat else {}),
-            **({"authority_protocol_path": protocol_path} if funded else {}),
+            **({"authority_protocol_path": protocol_path} if funded or registered else {}),
+            **({"strict23_registration": strict23_registration} if registered else {}),
         },
-        "source_tree": source_freeze(NEW_IDENTITY if new else None),
+        "source_tree": source_freeze(
+            REGISTERED_IDENTITY if registered else NEW_IDENTITY if new else None
+        ),
         "runtime": helper.runtime(),
         "role_order": list(helper.CAPS),
         "roles": {r: {"argv": argv_for(root, "payload", "@PLAN_SHA256@", r)} for r in helper.CAPS},
@@ -242,7 +280,8 @@ def make_plan(root, contract, source_identity):
         "actor_window_seconds": 4500,
         "actor_deadlines_UTC": {k: end.replace("+00:00", "Z") for k in ("exporter", "independent")},
         "result_window_projection_seconds": {
-            "exporter": 9000 if new else 7200, "independent": 9000 if new else 7200,
+            "exporter": 1800 if registered else 9000 if new else 7200,
+            "independent": 1800 if registered else 9000 if new else 7200,
         },
     }
 
@@ -426,7 +465,12 @@ def copy_public_source(root, source, *, began):
         raise
 
 
-def prepare_rehearsal(root, *, public_source_plan=None, public_source_plan_sha=None):
+def prepare_rehearsal(root, *, public_source_plan=None, public_source_plan_sha=None,
+                      strict23_registration=None):
+    if Path(root).name.startswith(REGISTERED_PUBLIC_PREFIX):
+        need(public_source_plan is None and public_source_plan_sha is None,
+             "REGISTERED_PUBLIC_SOURCE_FROM_ACCEPTED_CERTIFICATE_ONLY")
+        return load("p17_m2_registered_input").prepare_rehearsal(root, strict23_registration)
     root = rehearsal_root(root)
     context = None
     if public_source_plan is not None or public_source_plan_sha is not None:
@@ -635,6 +679,26 @@ def checked_setup(root, plan):
         need(authority_raw is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
         authority = load("p17_m2_input_export").parse(authority_raw)
         readiness = proof["readiness"]
+        if plan["execution_identity"] == REGISTERED_IDENTITY:
+            registered = load("p17_m2_registered_input")
+            inputs, digest = registered.readiness_inputs(authority)
+            reference = plan["independent_preflight"]
+            raw = load("p17_m2_source_acquisition_independent").native._software_bytes(
+                Path(reference["path"]))
+            need(
+                plan["activation_readiness"] == readiness["readiness_reference"]
+                == {"path": authority["readiness_path"], "sha256": digest}
+                and reference == readiness["independent_preflight_reference"]
+                == {"path": authority["independent_preflight_actual_path"],
+                    "sha256": helper.sha(raw)},
+                "REGISTERED_SETUP_DYNAMIC_PROOFS_REQUIRED",
+            )
+            load("p17_m2_source_acquisition_independent").check_funded_preflight(plan, raw)
+            authority = dict(
+                authority,
+                preparation_closure_sha256=inputs["preparation_closure_sha256"],
+                independent_preflight_sha256=helper.sha(raw),
+            )
         need(
             readiness["actors"] == authority["actors"]
             and all(
@@ -702,10 +766,13 @@ def new_source_parameters(authority):
     )
 
 
-def formal_plan(authority_raw, *, attempt=1):
+def formal_plan(authority_raw, *, attempt=1, strict23_registration=None):
     """Pure, software-only formal metadata. Constructing it grants no target access."""
     helper = base()
     authority = load("p17_m2_input_export").parse(authority_raw)
+    if authority.get("execution_identity") == REGISTERED_IDENTITY:
+        return load("p17_m2_registered_input").formal_plan(
+            authority_raw, attempt=attempt, strict23_registration=strict23_registration)
     proposal_raw = (REPO / PROPOSAL).read_bytes()
     proposal = json.loads(proposal_raw)
     new = authority.get("schema") == NEW_SCHEMA
@@ -860,6 +927,8 @@ def new_source_readiness(authority):
 
 def activation_readiness(authority):
     """Before target IO: distinct appointments, immutable evidence refs and actual clean-main CI."""
+    if authority.get("execution_identity") == REGISTERED_IDENTITY:
+        raise ValueError("REGISTERED_ACTIVATION_REQUIRES_DYNAMIC_ACCEPTED_PROOF_PLAN")
     new = authority.get("execution_identity") == NEW_IDENTITY
     if new:
         need(authority.get("readiness_freeze_state") == "REVIEWED_FROZEN",
@@ -943,6 +1012,11 @@ def activation_readiness(authority):
                 == authority["preparation_closure_sha256"],
                 "PREPARATION_CLOSURE_CHANGED",
             )
+    return published_main_readiness(authority, funded=funded)
+
+
+def published_main_readiness(authority, *, funded):
+    """Shared exact clean-main/protection/four-CI gate, including the NEW route."""
     actors = authority.get("actors", {})
     implementation_key = "implementation_base_commit" if funded else "implementation_commit"
     need(
@@ -1015,7 +1089,9 @@ def activation_readiness(authority):
     )
 
 
-def activate_formal(root):
+def activate_formal(root, *, strict23_registration=None):
+    if str(Path(os.path.abspath(root))) in REGISTERED_GENERATIONS:
+        return load("p17_m2_registered_input").activate_formal(root, strict23_registration)
     # Earlier preparation-only grants closed without a funded complete suffix.
     if Path(root).name in (
         "p17-m2-local-input-version-v3-hash-bound-20261026",
@@ -1058,6 +1134,7 @@ def checked(root, expected):
             "topolab-public-hash-bound-",
             "topolab-public-funded-acquisition-",
             NEW_PUBLIC_PREFIX,
+            REGISTERED_PUBLIC_PREFIX,
         )
     ):
         root = rehearsal_root(literal)
@@ -1065,7 +1142,23 @@ def checked(root, expected):
     else:
         authority_raw, attempt = authority_for_root(literal)
         need(authority_raw is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
-        declared = formal_plan(authority_raw, attempt=attempt)
+        registration = None
+        if str(literal) in REGISTERED_GENERATIONS:
+            saved = helper.read_json(literal / "plan.json")
+            need(helper.sha(helper.canonical(saved)) == expected, "PLAN_SHA_CHANGED")
+            registration = saved.get("binding", {}).get("strict23_registration")
+            registered = load("p17_m2_registered_input")
+            policy = registered.authority(authority_raw)
+            for key, name in (("activation_readiness", "readiness_path"),
+                              ("independent_preflight", "independent_preflight_actual_path")):
+                need(saved.get(key, {}).get("path") == policy[name],
+                     "REGISTERED_READINESS_LITERAL_CHANGED")
+                registered._read_pin(saved.get(key))
+        declared = formal_plan(authority_raw, attempt=attempt, strict23_registration=registration)
+        if str(literal) in REGISTERED_GENERATIONS:
+            # Reuse only the exact saved references already literal/hash checked above.
+            for key in ("activation_readiness", "independent_preflight"):
+                declared[key] = saved[key]
         load("p17_m2_source_acquisition_independent").validate_binding(declared)
         need(str(literal) == declared["root"], "FORMAL_LITERAL_ROOT_REQUIRED")
         root, scope = literal, FORMAL_SCOPE
@@ -1078,6 +1171,8 @@ def checked(root, expected):
         == (
             declared["execution_identity"]
             if scope == FORMAL_SCOPE
+            else REGISTERED_IDENTITY
+            if literal.name.startswith(REGISTERED_PUBLIC_PREFIX)
             else NEW_IDENTITY
             if literal.name.startswith(NEW_PUBLIC_PREFIX)
             else FUNDED_IDENTITY
@@ -1110,6 +1205,8 @@ class AcquisitionTransport:
 
     @property
     def identity(self):
+        if registered_root(self.root):
+            return REGISTERED_IDENTITY
         if self.root.name.startswith(NEW_PUBLIC_PREFIX) or (
             self.scope == FORMAL_SCOPE and str(self.root) == NEW_GENERATION
         ):
@@ -1127,6 +1224,8 @@ class AcquisitionTransport:
 
     @property
     def result_windows(self):
+        if self.identity == REGISTERED_IDENTITY:
+            return (("exporter", 1800), ("independent", 1800))
         if self.identity == NEW_IDENTITY:
             return (("exporter", 9000), ("independent", 9000))
         return (("exporter", 7200), ("independent", 7200))
@@ -1135,8 +1234,18 @@ class AcquisitionTransport:
     def source_identity_policy(self):
         return (
             SOURCE_IDENTITY_POLICY
-            if self.identity in (COMPAT_IDENTITY, FUNDED_IDENTITY, NEW_IDENTITY) else None
+            if self.identity in (
+                COMPAT_IDENTITY, FUNDED_IDENTITY, NEW_IDENTITY, REGISTERED_IDENTITY
+            )
+            else None
         )
+
+    def source_reader(self, source, journal=None, **kwargs):
+        if self.identity != REGISTERED_IDENTITY:
+            return load("p17_m2_input_export").Reader(source, journal, **kwargs)
+        plan = base().read_json(self.root / "plan.json")
+        need(base().sha(base().canonical(plan)) == self.plan_sha, "PLAN_SHA_CHANGED")
+        return load("p17_m2_registered_input").source_reader(plan, source, journal, **kwargs)
 
     def argv_for(self, root, mode, plan_sha, role):
         return argv_for(root, mode, plan_sha, role, reader_role=self.reader_role)
@@ -1281,7 +1390,11 @@ class AcquisitionTransport:
             )
         authority_raw, attempt = authority_for_root(root)
         need(authority_raw is not None, "FORMAL_AUTHORITY_NOT_GRANTED")
-        if is_funded_authority(authority_raw):
+        if self.identity == REGISTERED_IDENTITY:
+            registered = load("p17_m2_registered_input").authority(authority_raw)
+            target = registered["fixed_target"]["attempts"][str(attempt)]
+            generation, backup_name = target["generation"], target["backup"]
+        elif is_funded_authority(authority_raw):
             declared = formal_plan(authority_raw, attempt=attempt)
             generation, backup_name = declared["root"], declared["backup_root"]
         else:
@@ -1333,7 +1446,8 @@ class AcquisitionTransport:
 
     def read_registry(self, root, plan, role):
         """Bind the R1 buffer before any payload IO; keep legacy routing unchanged."""
-        if self.identity != NEW_IDENTITY or role not in ("exporter-r1", "independent-r1"):
+        if (self.identity not in (NEW_IDENTITY, REGISTERED_IDENTITY)
+                or role not in ("exporter-r1", "independent-r1")):
             return base().read_json(root / "registry.json")
         checker = self.independent()
         reader = None
@@ -1741,7 +1855,22 @@ def main():
     parser.add_argument("--reader-role", default="scientific-producer")
     parser.add_argument("--public-source-plan", type=Path)
     parser.add_argument("--public-source-plan-sha")
+    parser.add_argument("--registration-certificate-sha")
+    parser.add_argument("--registration-finalize-actual-sha")
     args = parser.parse_args()
+    registration = None
+    suffix = []
+    registered = registered_root(Path(args.root))
+    if registered and args.mode in ("prepare-rehearsal", "activate-formal"):
+        registration = load("p17_m2_registered_input").registration_reference(
+            "formal" if args.mode == "activate-formal" else "public",
+            args.registration_certificate_sha, args.registration_finalize_actual_sha)
+        suffix = ["--registration-certificate-sha", args.registration_certificate_sha,
+                  "--registration-finalize-actual-sha", args.registration_finalize_actual_sha]
+    else:
+        need(args.registration_certificate_sha is None
+             and args.registration_finalize_actual_sha is None,
+             "REGISTERED_PREPARE_ACTIVATION_ARGUMENTS_ONLY")
     need(
         args.mode == "prepare-rehearsal"
         or (args.public_source_plan is None and args.public_source_plan_sha is None),
@@ -1763,16 +1892,17 @@ def main():
                 "activate-formal",
                 "--root",
                 args.root,
-            ],
+            ] + suffix,
             "ACTUAL_ARGV_CHANGED",
         )
-        result = activate_formal(args.root)
+        result = activate_formal(args.root, strict23_registration=registration)
     elif args.mode == "prepare-rehearsal":
         need(args.plan_sha is None and args.role is None, "SETUP_ROLE_FORBIDDEN")
         result = prepare_rehearsal(
             args.root,
             public_source_plan=args.public_source_plan,
             public_source_plan_sha=args.public_source_plan_sha,
+            strict23_registration=registration,
         )
     else:
         root, plan = checked(args.root, args.plan_sha)

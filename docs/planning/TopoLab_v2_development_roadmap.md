@@ -1,6 +1,21 @@
 # TopoLab v2 Development Roadmap
 
-Current continuous action: [new finite strict23 window](p17_m2_coordinated_source_binding_window2_protocol.md), followed by independently accepted input and conditional B/C under unchanged scientific Gates. New finite funding covers this continuous action; old quotas remain closed. Fixed P17 remains unrepaired. The [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md) is historical: ordinal7 mtime-63ns, missing temporary evidence and incomplete old accounting remain retained failures.
+Current continuous action: [identity2 closure/coordination repair](p17_m2_registered_input_v2_protocol.md),
+with [actual retained failures](../validation/p17_m2_input_closure_coordination_repair.md).
+V16/V20 closed FAILED; PUBLIC2 compiler38/41 and actual407.761>240 remain FAIL.
+NEW V22 ends12:49:00.022Z; original ROOT/I21:38Z stays. Fresh final reviews,
+metadata4/public6 and PUBLIC3 pass in public scope. Actual coordination8.861<240s,
+194-member paired metadata replay and timely public-only result closure pass.
+Final R10 all five checks/source unchanged3447PASS/one skip. Root/I bounded
+softwareNative FULL87600 each is below100000; actualtotalUNKNOWN, knownlower
+150030. Auxiliary V24 closing overrun staysFAIL. Preparation actually closed12:46:29.352Z
+with4266-member paired full replay. Newpublication ends14:46:29.352Z. Next:
+protected exact-head/main four-CI
+publication, formal metadata/input, then B/C under their original Gates.
+Original/Library IO remains gated; no old quota reopens and P17 is unrepaired.
+
+
+Historical entry: [metadata-only strict23 certificate recovery](p17_m2_source_binding_certificate_recovery_protocol.md) after both authors'23 source reads passed and a later audit SUP missed its guard window. Independently accepted certificate/input and B/C remain subject to their respective Gates under unchanged scientific Gates. NEW finite funding retains every old cost/closed quota and the original100800s/21:38Z limit. P17 remains unrepaired. The [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md) is historical: ordinal7 mtime-63ns, missing temporary evidence and incomplete old accounting remain retained failures.
 
 F is published and closed: [PR211](https://github.com/keith1117/TopoLab/pull/211),
 main `b0fe2350ac68a88a05e974926a2b0fe6a1302bf7`, all four exact-main
@@ -2435,7 +2450,37 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-## Current: finite strict23 window2 with unchanged downstream Gates
+## Current: successful strict23 core and metadata-only certificate recovery
+
+[New authority](p17_m2_source_binding_certificate_recovery_protocol.md) and
+[actual result](../validation/p17_m2_source_binding_certificate_recovery.md)
+retain source PR234/mainc684a321/four-CI, actual independent preflight, both
+authors'23 strict reads/native helper exits and real lease release. The later
+metadata call missed the120+60 entry guard by14.066854s before payload launch.
+It is a retained orchestration STOP, not a source failure or input/scientific
+acceptance. FULL1200/knownNEW6390 and complete449-member paired failure closure
+stay. Source19 successful core metadata may only be consumed after separately
+funded new independent metadata execution/own-return acceptance; no source
+reread or new Foundation helper is granted. New software/public regressions,
+fresh reviews, all checks/protected publication/main4CI and actual preflight
+precede that recovery. Original100800s/21:38Z stays; no closed balance transfers.
+Then actual40/558/1071 input precedes B and unchanged fixed C/P17. All-paid
+historical FAIL, full-fit PENDING4GiB, uniform default and P17 unrepaired remain.
+
+Fresh writer reviews and actual NEW public-v3 native/return replay now pass,
+certificate09668863 and known NEW FULL6630. R5's caller permission omission
+reproduces kern.clockrate denial; the unchanged single test passes with proper
+permissions. A single NEW V13 complete check remains within original software/
+global deadlines. Protected main4CI, actual phase closures and new independent
+formal metadata execution remain prerequisites; no public proof admits input.
+R6 retains its sole public1s startup-fixture timeout; deterministic RED and a
+test-only existing10/5-window correction precede NEW R7 and distinct review.
+Production21 and all scientific rules remain. Complete software-native billing
+replay corrects a duplicated shared prepayment, raising current known FULL lower
+to29130, with remaining software fees UNKNOWN_NOT_ZERO. Historical all-paid
+failure is unchanged; new future calls need the complete actual remaining suffix.
+
+## Historical: finite strict23 window2 with unchanged downstream Gates
 
 [New authority](p17_m2_coordinated_source_binding_window2_protocol.md) and
 [actual evidence](../validation/p17_m2_coordinated_source_binding_window2.md)
@@ -3050,3 +3095,20 @@ preflight30d3b86c precede all-five local checks2949 passed/1 platform skip.
 Exact-head/main CI and complete NEW retention still gate formal entry. The
 finite v11c reallocation preserves61h while reserving each scientific result
 suffix7560s, with no closed-balance transfer or scientific relaxation.
+
+
+## Current: registered23 complete-input capability (2026-11-04)
+
+The [new contract](p17_m2_registered_input_protocol.md) and
+[actual report](../validation/p17_m2_registered_input.md) connect only accepted
+strict23 hashes to both independently authored source readers and complete input
+certificate replay. The previous R7 public software failure (owned inventory
+inode unlinked/nlink0) has a new RED/minimal confirmed-absence bounded-rescan
+fix; source rules remain unchanged. V8 late closure and all failed suites retain
+costs; V15 closed unlaunched. NEW V16 ends10:56:26.099Z, original21:38Z stays.
+V18 freezes two still-unstarted4500/1800 input attempts/FULL3780 each, within
+original read/helper/resource bounds. New software/public proof/reviews/main4CI
+and actual metadata-v3 acceptance precede formal40/558/1071 input. Accepted input
+precedes original B then fixed C; none is currently accepted. Known NEW FULL
+lower64830 plus UNKNOWN_NOT_ZERO costs; historical all-paid FAIL/full-fitPENDING,
+uniform default, P17 unrepaired and every old closed quota/scene stay.

@@ -169,8 +169,15 @@ def runtime():
     }
 
 
-def role_argv(root, mode, expected_sha, role, python):
-    script = "p17_m2_source_binding.py" if mode == "payload" else "p17_m2_source_binding_native.py"
+def role_argv(root, mode, expected_sha, role, python, *, execution_identity=None):
+    recovery = ("topolab.v2.p17-binding-certificate-recovery.20261104.v1",
+                "topolab.v2.p17-binding-certificate-recovery.20261104.v3",
+                "topolab.v2.p17-binding-certificate-recovery.20261104.v4")
+    need(execution_identity in (None, IDENTITY, WINDOW2_ID, *recovery),
+         "unregistered command execution identity")
+    script = ("p17_m2_source_binding_recovery.py" if execution_identity in recovery else
+              "p17_m2_source_binding.py" if mode == "payload"
+              else "p17_m2_source_binding_native.py")
     return [python, "-I", str(REPO / "scripts" / script), mode,
             "--plan", str(Path(root) / "plan.json"), "--plan-sha", expected_sha, "--role", role]
 
@@ -242,6 +249,15 @@ def file_actual_event(plan, role, mode, packet_path, packet_sha):
              "exit_code": responses[-1]["result"]["exit_code"], "raw_packet_sha256": packet_sha}
     root = Path(plan["root"])
     if mode == "supervise":
+        if event["exit_code"] != 0:
+            returned = "".join(item["result"]["output"] for item in responses).encode("utf-8")
+            event["observed_stdout_sha256"] = sha(returned)
+            try:
+                failure = json.loads(returned)
+            except (ValueError, UnicodeError):
+                failure = None
+            if isinstance(failure, dict) and failure.get("status") == "STOP_NO_RETRY":
+                event["observed_failure"] = failure
         pending, _ = read_metadata(root / "receipts" / (role + "-pending.json"),
                                    65536, canonical_required=True)
         event["observed_pending_sha256"] = sha(canonical(pending))
@@ -676,6 +692,9 @@ def load_plan(path, expected_sha):
     need(path.is_absolute() and path.name == "plan.json" and ".." not in path.parts
          and isinstance(expected_sha, str) and re.fullmatch(r"[0-9a-f]{64}", expected_sha),
          "literal pinned plan required")
+    if path.parent.name.startswith(("topolab-public-binding-certificate-recovery-",
+                                    "binding-formal-v3-certificate-recovery-")):
+        return load("p17_m2_source_binding_recovery").load_plan(path, expected_sha)
     formal_roots = {str(Path(json.loads(AUTHORITY.read_bytes())["evidence_root"])
                         / f"binding-formal-v{attempt}") for attempt in (1, 2, 3)}
     need(path.parent.name.startswith((public_prefix(1), public_prefix(2)))

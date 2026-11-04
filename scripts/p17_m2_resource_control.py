@@ -269,6 +269,9 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
     measurement_identities = (
         "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1",
         "topolab.v2.p17-source-binding-window2.20261104.v1",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v1",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v3",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v4",
     )
     if (measurement_execution_identity not in measurement_identities
             or (measurement_scope is None
@@ -277,14 +280,20 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
     if measurement_scope is not None:
         scopes = ("PUBLIC_STRICT_BINDING_REGISTRATION_ONLY",
                   "FORMAL_STRICT_BINDING_REGISTRATION_ONLY",
-                  "STRICT_BINDING_CERTIFICATE_METADATA_ONLY")
-        roles = (("binding-certificate-auditor",) if measurement_scope == scopes[2] else
+                  "STRICT_BINDING_CERTIFICATE_METADATA_ONLY",
+                  "STRICT_BINDING_CERTIFICATE_RECOVERY_METADATA_ONLY")
+        recovery = measurement_execution_identity in measurement_identities[2:]
+        if recovery != (measurement_scope == scopes[3]):
+            raise ValueError("recovery measurement identity/scope differs")
+        script = ("p17_m2_source_binding_recovery.py" if recovery
+                  else "p17_m2_source_binding.py")
+        roles = (("binding-certificate-auditor",) if measurement_scope in scopes[2:] else
                  ("producer-availability", "independent-availability", "binding-producer",
                   "binding-independent", "binding-closeout"))
         if not (
             measurement_scope in scopes and role in roles and isinstance(argv, list)
             and len(argv) == 10 and argv[1:4] == [
-                "-I", str(REPO / "scripts/p17_m2_source_binding.py"), "payload"]
+                "-I", str(REPO / "scripts" / script), "payload"]
             and argv[4] == "--plan" and argv[6] == "--plan-sha"
             and argv[8:] == ["--role", role]
         ):

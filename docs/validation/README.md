@@ -1,5 +1,7 @@
 # Validation evidence index
 
+Current [strict23 actual result and metadata recovery](p17_m2_source_binding_certificate_recovery.md): both authors'23 reads/native core pass; later metadata SUP missed its guard window before payload. Full failure/accounting/449-member paired closure retained; NEW metadata-only recovery remains gated and P17 unrepaired.
+
 Current [strict23 window2 frontier](p17_m2_coordinated_source_binding_window2.md): published main/four-CI and new independent metadata closure, retained formal1 STOP/old-window zero launch; new window software and original admission remain gated, P17 unrepaired.
 
 Historical [coordinated strict23 frontier](p17_m2_coordinated_source_binding.md): published baseline, retained formal1 mtime-108ns STOP, public coordination/native bookkeeping regressions and conditional sole formal2; P17 remains unrepaired.
@@ -340,3 +342,7 @@ Do not replace old results or publish generated artifacts to tidy the directory.
 The frozen protocol retains the source-bound preparation scope. Actual entry
 stopped before old reads; supplements retain that failure and closed roles.
 No B/C or P/17 repair claim and no continuing R authority.
+
+- [Registered strict23 input capability and retained software failures](p17_m2_registered_input.md)
+
+- [Input closure/coordination failures and new finite repair](p17_m2_input_closure_coordination_repair.md)

@@ -91,3 +91,43 @@ def test_legacy_metadata_interface_without_acquisition_keeps_original_authority(
     module.publication_metadata({'source_freeze': {}}, '2' * 64, 'resource-preflight')
     assert control.base().canonical(observed[0]) == control.base().canonical(
         control.load('p17_m2_input_export').parse(control.FUNDED_AUTHORITY_RAW))
+
+@pytest.mark.parametrize('attempt', [1, 2])
+def test_registered_input_scientific_publication_uses_exact_new_authority(monkeypatch, attempt):
+    module, control, observed = publication(monkeypatch)
+    registered = control.load('p17_m2_registered_input')
+    raw = control.base().canonical({'execution_identity': registered.IDENTITY})
+    target = registered.GENERATIONS[attempt - 1]
+    monkeypatch.setattr(registered, 'authority_raw', lambda: raw)
+    monkeypatch.setattr(control, 'authority_for_root', lambda root: (raw, attempt))
+    calls = []
+
+    def declared(value, *, attempt):
+        calls.append((value, attempt))
+        return {'root': target, 'content_root': target + '/content'}
+
+    monkeypatch.setattr(control, 'formal_plan', declared)
+    monkeypatch.setattr(registered, 'publication_readiness',
+                        lambda authority: observed.append(authority) or {'main': '1' * 40},
+                        raising=False)
+    monkeypatch.setattr(control, 'activation_readiness',
+                        lambda authority: pytest.fail('science must not restart input activation'))
+    result = module.publication_metadata(
+        {'acquisition': {'content_root': target + '/content'}, 'source_freeze': {}},
+        '2' * 64, 'resource-preflight')
+    assert result['metadata_only'] is True
+    assert calls == []  # Metadata publication does not reconstruct/restart input activation.
+    assert observed == [{'execution_identity': registered.IDENTITY}]
+
+
+def test_registered_remedy_scientific_route_rejects_substituted_authority(monkeypatch):
+    module, control, observed = publication(monkeypatch)
+    registered = control.load('p17_m2_registered_input')
+    raw = control.base().canonical({'execution_identity': registered.IDENTITY})
+    monkeypatch.setattr(registered, 'authority_raw', lambda: raw)
+    monkeypatch.setattr(control, 'authority_for_root', lambda root: (b'{}', 2))
+    with pytest.raises(ValueError, match='ACQUISITION_AUTHORITY_REQUIRED'):
+        module.publication_metadata(
+            {'acquisition': {'content_root': registered.GENERATIONS[1] + '/content'},
+             'source_freeze': {}}, '2' * 64, 'resource-preflight')
+    assert observed == []

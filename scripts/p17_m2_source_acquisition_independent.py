@@ -24,6 +24,9 @@ HASH_BOUND_PROTOCOL = "docs/planning/p17_m2_hash_bound_acquisition_protocol.json
 FUNDED_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v2"
 FUNDED_PROTOCOL = "docs/planning/p17_m2_funded_acquisition_protocol.json"
 NEW_IDENTITY = "topolab.v2.p17-m2-hash-bound-source-acquisition.v3"
+REGISTERED_IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v2"
+REGISTERED_PROTOCOL = "docs/planning/p17_m2_registered_input_v2_protocol.json"
+REGISTERED_PREFIX = "topolab-public-registered-source-acquisition-"
 NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
 NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
 NEW_PUBLIC_PREFIX = "topolab-public-new-source-acquisition-"
@@ -129,7 +132,8 @@ def sampler_profiles(folder: Path, record: dict[str, Any]) -> dict[str, bytes]:
 
 
 def _source_policy(plan: dict[str, Any]) -> str | None:
-    if plan.get("execution_identity") in (HASH_BOUND_IDENTITY, FUNDED_IDENTITY, NEW_IDENTITY):
+    if plan.get("execution_identity") in (
+            HASH_BOUND_IDENTITY, FUNDED_IDENTITY, NEW_IDENTITY, REGISTERED_IDENTITY):
         require(plan.get("source_identity_policy") == HASH_BOUND_POLICY
                 and plan.get("binding", {}).get("source_identity_policy") == HASH_BOUND_POLICY,
                 "hash-bound source policy differs")
@@ -141,6 +145,11 @@ def _source_policy(plan: dict[str, Any]) -> str | None:
 
 
 def _protocol_path(plan: dict[str, Any]) -> str:
+    if plan.get("execution_identity") == REGISTERED_IDENTITY:
+        _source_policy(plan)
+        require(plan.get("binding", {}).get("authority_protocol_path") == REGISTERED_PROTOCOL,
+                "registered source authority protocol differs")
+        return REGISTERED_PROTOCOL
     if plan.get("execution_identity") == NEW_IDENTITY:
         _source_policy(plan)
         require(plan.get("binding", {}).get("authority_protocol_path") == NEW_PROTOCOL,
@@ -164,8 +173,142 @@ def _protocol_path(plan: dict[str, Any]) -> str:
     return HASH_BOUND_PROTOCOL if _source_policy(plan) else EXECUTION_PROTOCOL
 
 
+def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
+    raw = native._software_bytes(REPO / REGISTERED_PROTOCOL)
+    require(digest(raw) == plan['source_tree'][REGISTERED_PROTOCOL]
+            == plan['binding']['preparation_protocol_sha256']
+            == plan['preparation_contract_sha256'], 'registered authority freeze differs')
+    value = native.base.parse(raw)
+    require(value.get('schema') == 'topolab.v2.m2-registered-source-acquisition-authority.v2'
+            and value.get('execution_identity') == REGISTERED_IDENTITY
+            and value.get('source_identity_policy') == HASH_BOUND_POLICY
+            and value.get('registration_identity') == 'topolab.strict23-preread-registration.v1'
+            and value.get('profile') == 'NEW_REGISTERED_INPUT_COMPACT_RESULT_1800'
+            and type(value.get('formal_seconds')) is int and value['formal_seconds'] == 4500
+            and canonical(value.get('result_seconds')) == canonical({
+                'exporter': 1800, 'independent': 1800})
+            and value.get('global_deadline_ms') == 1793828280000
+            and isinstance(value.get('owner_approval_reference'), str)
+            and bool(value['owner_approval_reference'].strip())
+            and canonical(value.get('permissions')) == canonical({
+                'formal_activation': True, 'old_original_access': True,
+                'target_access': True, 'B_C': False})
+            and value.get('role_order') == ROLE_ORDER
+            and canonical(value.get('FULL_by_role')) == canonical({
+                'independent-public-check': 300, 'exporter-r0': 300, 'independent-r0': 300,
+                'exporter-r1': 1200, 'independent-r1': 1200, 'shared-closeout': 300}),
+            'registered authority identity/permissions/compact resource profile differs')
+    actors = value.get('actors', {})
+    require(set(actors) == {'executor', 'independent'}
+            and all(isinstance(x, str) and x.strip() and 'UNAPPOINTED' not in x
+                    for x in actors.values())
+            and actors['executor'] != actors['independent'],
+            'registered authority requires distinct actual authors')
+    limits = value.get('input_limits', {})
+    require(limits.get('attempts') == 2
+            and limits.get('source_reads_each_author_each_attempt') == 598
+            and limits.get('source_reads_all_input_attempts') == 2392
+            and limits.get('original_reads_including_closed_registration') == 2484
+            and limits.get('registered_foundation_helpers_all') == 138
+            and limits.get('source_counts') == [40, 558]
+            and limits.get('version_members') == 1071
+            and limits.get('FULL_each_input_ceiling') == 3780
+            and limits.get('RSS_bytes') == 4 * 1024**3,
+            'registered fixed input/resource limits differ')
+    return value
+
+
+def registered_source_bindings(certificate: dict[str, Any]) -> dict[str, Any]:
+    """Derive anchors independently from the audited strict source observations."""
+    binding = helper('registered_metadata_specs', 'p17_m2_source_binding_independent.py')
+    specs = binding.metadata_specs()
+    rows = certificate.get('source_observations')
+    keys = {'st_dev', 'st_ino', 'st_size', 'st_mtime_ns'}
+    require(isinstance(rows, list) and len(rows) == 23
+            and [row.get('path') for row in rows] == [row['path'] for row in specs],
+            'registered independent exact23 source observations required')
+    result = {}
+    for row, spec in zip(rows, specs, strict=True):
+        points = [row.get(name) for name in ('declared', 'before', 'after', 'closing')]
+        require(all(isinstance(point, dict) and set(point) == keys
+                    and all(type(point[key]) is int for key in keys) for point in points)
+                and all(point == points[0] for point in points)
+                and type(row.get('byte_size')) is int
+                and 0 < row['byte_size'] <= spec['max_bytes']
+                and points[0]['st_size'] == row['byte_size']
+                and isinstance(row.get('sha256'), str) and native.base.SHA.fullmatch(row['sha256']),
+                'registered independent strict tuple/hash/length differs')
+        result[row['path']] = {'sha256': row['sha256'], 'byte_size': row['byte_size'],
+                               'declared': dict(points[0])}
+    return result
+
+
+def _trusted_registered_sources(plan: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
+    require(plan.get('execution_identity') == REGISTERED_IDENTITY,
+            'registered source execution identity required')
+    reference = plan.get('binding', {}).get('strict23_registration')
+    require(isinstance(reference, dict) and set(reference) == {
+        'certificate_path', 'certificate_sha256', 'finalize_actual_path', 'finalize_actual_sha256'},
+        'registered source exact certificate/actual references required')
+    require(plan.get('scope') in (FORMAL_SCOPE, REHEARSAL_SCOPE), 'registered source scope differs')
+    kind = 'formal' if plan['scope'] == FORMAL_SCOPE else 'public'
+    recovery = helper('registered_recovery_audit', 'p17_m2_source_binding_recovery.py')
+    policy = recovery.authority()
+    paths = policy['certificate_paths'][kind][0]
+    actual_path = str(recovery._root(kind, 1) / 'finalize-result-raw-actual-call.json')
+    require(reference['certificate_path'] == paths[0]
+            and reference['finalize_actual_path'] == actual_path
+            and all(isinstance(reference[name], str)
+                    and native.base.SHA.fullmatch(reference[name])
+                    for name in ('certificate_sha256', 'finalize_actual_sha256')),
+            'registered source proof literals/hash shape differs')
+    envelope, _ = recovery.certificate_pair(kind, 1, reference['certificate_sha256'])
+    require(digest(canonical(envelope)) == reference['certificate_sha256'],
+            'registered certificate pair SHA differs')
+    actual_raw = native._software_bytes(Path(actual_path))
+    require(digest(actual_raw) == reference['finalize_actual_sha256'],
+            'registered finalize actual buffer SHA differs')
+    certificate, _ = recovery.verify_registration(
+        envelope, native.base.parse(actual_raw), kind=kind)
+    require(certificate['registered_context']['source_root'] == plan.get('source_root'),
+            'registered independent source root differs')
+    return certificate, registered_source_bindings(certificate)
+
+
+def _registered_once_reader(primitive, root, max_files, total_bytes, *, registrations, **kwargs):
+    class RegisteredOnceReader(primitive.OnceReader):
+        def _read(self, relative, maximum, *, sha256, byte_size, facts):
+            anchor = registrations.get(relative)
+            if anchor is not None:
+                facts['registered_preread_anchor'] = dict(anchor['declared'])
+                require(sha256 is None or sha256 == anchor['sha256'],
+                        'registered independent prebound hash conflicts')
+                require(byte_size is None or byte_size == anchor['byte_size'],
+                        'registered independent prebound bytes conflict')
+                sha256, byte_size = anchor['sha256'], anchor['byte_size']
+                facts['expected_sha256'] = sha256
+            return super()._read(relative, maximum, sha256=sha256,
+                                 byte_size=byte_size, facts=facts)
+
+        def _same_identity(self, left, right, facts):
+            anchor = registrations.get(facts['path'])
+            if anchor is not None:
+                require(all(point[key] == anchor['declared'][key]
+                            for point in (left, right)
+                            for key in ('st_dev', 'st_ino', 'st_size')),
+                        'registered independent physical anchor differs')
+            return super()._same_identity(left, right, facts)
+
+    require(kwargs.get('source_identity_checks') is True
+            and kwargs.get('source_identity_policy') == HASH_BOUND_POLICY,
+            'registered independent reader requires closing/hash policy')
+    return RegisteredOnceReader(root, max_files, total_bytes, **kwargs)
+
+
 def _hash_bound_authority(plan: dict[str, Any]) -> dict[str, Any]:
     protocol = _protocol_path(plan)
+    if protocol == REGISTERED_PROTOCOL:
+        return _registered_authority(plan)
     funded = plan.get("execution_identity") == FUNDED_IDENTITY
     remedy = protocol == REMEDY_PROTOCOL
     new = protocol == NEW_PROTOCOL
@@ -502,7 +645,10 @@ def _validate_hash_bound_binding(plan: dict[str, Any]) -> dict[str, Any]:
               "target_access", "B_C", "source_identity_policy"}
     funded = plan.get("execution_identity") == FUNDED_IDENTITY
     new = plan.get("execution_identity") == NEW_IDENTITY
-    if funded or new:
+    registered = plan.get("execution_identity") == REGISTERED_IDENTITY
+    if registered:
+        fields.add('strict23_registration')
+    if funded or new or registered:
         fields.add("authority_protocol_path")
         if formal:
             fields.add("formal_attempt")
@@ -527,9 +673,11 @@ def _validate_hash_bound_binding(plan: dict[str, Any]) -> dict[str, Any]:
             == binding["proposal_sha256"] == plan["source_tree"][PROPOSAL],
             "hash-bound inherited acquisition proposal differs")
     if formal:
-        require(all(isinstance(authority.get(k), str) and native.base.SHA.fullmatch(authority[k])
+        require(registered or all(
+                    isinstance(authority.get(k), str) and native.base.SHA.fullmatch(authority[k])
                     for k in ("preparation_closure_sha256", "independent_preflight_sha256"))
-                and (funded or new or (isinstance(authority.get("implementation_commit"), str)
+                and (funded or new or registered or (
+                    isinstance(authority.get("implementation_commit"), str)
                                and re.fullmatch("[0-9a-f]{40}",
                                                 authority["implementation_commit"]))),
                 "hash-bound formal readiness references missing")
@@ -546,8 +694,18 @@ def _validate_hash_bound_binding(plan: dict[str, Any]) -> dict[str, Any]:
                 "hash-bound original content/identity differs")
     else:
         _content_projection(plan)
+    if registered:
+        _trusted_registered_sources(plan)
     for name in ("source_root", "content_root", "backup_root"):
         _member_root(plan, name, Path(plan[name]))
+    if registered and formal:
+        reference = plan.get('independent_preflight', {})
+        require(reference.get('path') == authority['independent_preflight_actual_path']
+                and isinstance(reference.get('sha256'), str)
+                and native.base.SHA.fullmatch(reference['sha256']),
+                'registered actual independent preflight required before original access')
+        actual_raw = native._software_bytes(Path(reference['path']))
+        _registered_preflight(plan, actual_raw)
     return binding
 
 
@@ -586,6 +744,14 @@ def _content_projection(plan: dict[str, Any]) -> None:
 def public_prepare_suffix(plan: dict[str, Any]) -> tuple[str, ...]:
     """Bind NEW public data reuse to its real controller CLI; never formal access."""
     binding = plan.get("binding", {})
+    if plan.get('execution_identity') == REGISTERED_IDENTITY:
+        reference = binding.get('strict23_registration', {})
+        require(isinstance(reference, dict) and all(
+            isinstance(reference.get(name), str) and native.base.SHA.fullmatch(reference[name])
+            for name in ('certificate_sha256', 'finalize_actual_sha256')),
+            'registered prepare exact real proof hashes required')
+        return ('--registration-certificate-sha', reference['certificate_sha256'],
+                '--registration-finalize-actual-sha', reference['finalize_actual_sha256'])
     fields = {"public_source_plan", "public_source_plan_sha256"}
     present = fields & set(binding)
     if not present:
@@ -638,7 +804,8 @@ def public_prepare_suffix(plan: dict[str, Any]) -> tuple[str, ...]:
 def validate_binding(plan: dict[str, Any]) -> dict[str, Any]:
     """Check authority and optional NEW public plan before payload/target IO."""
     public_prepare_suffix(plan)
-    if plan.get("execution_identity") in (HASH_BOUND_IDENTITY, FUNDED_IDENTITY, NEW_IDENTITY):
+    if plan.get("execution_identity") in (
+            HASH_BOUND_IDENTITY, FUNDED_IDENTITY, NEW_IDENTITY, REGISTERED_IDENTITY):
         return _validate_hash_bound_binding(plan)
     binding = plan.get("binding", {})
     formal = plan.get("scope") == FORMAL_SCOPE
@@ -998,10 +1165,134 @@ def _new_public_pipeline(plan: dict[str, Any], authority: dict[str, Any],
                           "formal_authority": False}),
             "new source public actual consumer evidence differs")
 
+def _registered_read_pin(reference):
+    require(isinstance(reference, dict) and set(reference) == {'path', 'sha256'}
+            and isinstance(reference['path'], str) and Path(reference['path']).is_absolute()
+            and '..' not in Path(reference['path']).parts
+            and isinstance(reference['sha256'], str)
+            and native.base.SHA.fullmatch(reference['sha256']),
+            'registered exact metadata reference required')
+    raw = native._software_bytes(Path(reference['path']))
+    require(digest(raw) == reference['sha256'], 'registered metadata buffer SHA differs')
+    return native.base.parse(raw)
+
+
+def _registered_preflight(plan, raw):
+    """Independently replay public native, pair retention and the actual I preflight."""
+    authority = _registered_authority(plan)
+    require(plan.get('scope') == FORMAL_SCOPE, 'registered preflight requires formal scope')
+    ready_pin, actual_pin = plan.get('activation_readiness'), plan.get('independent_preflight')
+    require(isinstance(ready_pin, dict) and ready_pin.get('path') == authority['readiness_path']
+            and isinstance(actual_pin, dict)
+            and actual_pin.get('path') == authority['independent_preflight_actual_path']
+            and digest(raw) == actual_pin.get('sha256'),
+            'registered formal readiness/actual literal binding differs')
+    ready = _registered_read_pin(ready_pin)
+    frozen = {name: value for name, value in plan['source_tree'].items()
+              if name != REGISTERED_PROTOCOL}
+    runtime = {key: value for key, value in plan['runtime'].items() if key != 'orig_argv'}
+    require(ready.get('schema') == 'topolab.registered-input.activation-readiness.v1'
+            and ready.get('execution_identity') == REGISTERED_IDENTITY
+            and ready.get('actors') == authority['actors']
+            and ready.get('new_input_budget') == authority['new_input_budget']
+            and ready.get('published_source_sha256') == frozen
+            and all(ready.get('runtime', {}).get(key) == value for key, value in runtime.items()),
+            'registered independent readiness software/runtime/actors differs')
+    _registered_read_pin(authority['new_input_budget'])
+    public_pin = ready.get('public_native_acceptance', {})
+    require(public_pin.get('path') in {root + '/accepted-acquisition-bundle.json'
+                                     for root in authority['public_roots']},
+            'registered full public acceptance literal differs')
+    serializer = helper('registered_public_serialization', 'p17_m2_content_verified_control.py')
+    accepted = serializer.evidence_json(_registered_read_pin(public_pin), decode=True)
+    audit_certificate(accepted['bundle'], trusted_tool_events=accepted['events'])
+    public_plan = accepted['bundle']['plan']
+    public_root = Path(public_plan['root'])
+    require(public_plan['execution_identity'] == REGISTERED_IDENTITY
+            and public_plan['scope'] == REHEARSAL_SCOPE
+            and public_plan['source_tree'] == plan['source_tree']
+            and str(public_root) in authority['public_roots']
+            and public_pin['path'] == str(public_root / 'accepted-acquisition-bundle.json'),
+            'registered complete public proof policy differs')
+    recovery = helper('registered_preflight_return', 'p17_m2_source_binding_recovery.py')
+    cert_pin = ready.get('public_certificate_actual', {})
+    require(cert_pin.get('path') == str(public_root / authority['public_certificate_actual_name']),
+            'registered public certificate actual literal differs')
+    actual = _registered_read_pin(cert_pin)
+    argv = [plan['runtime']['python'], '-I',
+            str(Path(plan['runtime']['cwd']) / 'scripts/p17_m2_source_acquisition_control.py'),
+            'certify-rehearsal', '--root', str(public_root), '--plan-sha',
+            digest(canonical(public_plan)), '--role', 'certificate']
+    first, public_end = recovery.exact_actual(actual, argv, authority['actors']['executor'])
+    expected = {'scope': REHEARSAL_SCOPE, 'formal_authority': False,
+                'source_input_accepted': False, 'formal_or_scientific_admission': False,
+                'B_C_admission': False,
+                'member_count': len(accepted['bundle']['manifest']['members']),
+                'version_id': accepted['bundle']['version_id']}
+    require(''.join(row['result']['output'] for row in actual['responses']).encode('utf-8')
+            == canonical(expected)
+            and first >= max(row['end_seconds'] * 1000 for events in accepted['events'].values()
+                             for row in events), 'registered public certificate actual differs')
+    paths = ready.get('preparation_closure_paths')
+    require(paths == authority['preparation_closure_paths'] and len(paths) == 2,
+            'registered private preparation closure pair required')
+    import stat
+    closures, inodes = [], []
+    for path in paths:
+        closure = _registered_read_pin({'path': path,
+                                       'sha256': ready['preparation_closure_sha256']})
+        info = Path(path).lstat()
+        require(stat.S_ISREG(info.st_mode) and stat.S_IMODE(info.st_mode) == 0o600
+                and info.st_nlink == 1, 'registered private ordinary closure required')
+        closures.append(closure)
+        inodes.append((info.st_dev, info.st_ino))
+    require(closures[0] == closures[1] and inodes[0] != inodes[1],
+            'registered independent closure copies required')
+    closure = closures[0]
+    require(closure.get('schema') == 'topolab.registered-input.preparation-closure.v1'
+            and closure.get('execution_identity') == REGISTERED_IDENTITY
+            and closure.get('source_tree') == plan['source_tree']
+            and closure.get('public_native_acceptance') == public_pin
+            and closure.get('new_input_budget') == authority['new_input_budget']
+            and closure.get('status') == 'COMPLETE_SOFTWARE_ONLY'
+            and closure.get('own_future_return') == 'NOT_CLAIMED',
+            'registered preparation closure content differs')
+    retention_pin = ready.get('preparation_retention_actual', {})
+    require(retention_pin.get('path') == authority['preparation_retention_actual_path'],
+            'registered retention actual literal differs')
+    retention = _registered_read_pin(retention_pin)
+    retained_first, retained_end = recovery.exact_actual(
+        retention, closure['retention_argv'], authority['actors']['executor'])
+    require(''.join(row['result']['output'] for row in retention['responses']).encode('utf-8')
+            == canonical({'status': 'REGISTERED_INPUT_PREPARATION_PAIR_RETAINED',
+                          'closure_paths': paths, 'sha256': ready['preparation_closure_sha256'],
+                          'own_future_return': 'NOT_CLAIMED'})
+            and public_end <= retained_first <= retained_end,
+            'registered preparation actual return/stdout differs')
+    packet = native.base.parse(raw)
+    argv = [plan['runtime']['python'], '-I',
+            str(Path(plan['runtime']['cwd']) / 'scripts/p17_m2_registered_input.py'),
+            'preflight', '--readiness-sha', ready_pin['sha256']]
+    started, ended = recovery.exact_actual(packet, argv, authority['actors']['independent'])
+    expected = {'status': 'PASS_REGISTERED_INPUT_METADATA_PREFLIGHT',
+                'execution_identity': REGISTERED_IDENTITY,
+                'author': authority['actors']['independent'], 'readiness_path': ready_pin['path'],
+                'readiness_sha256': ready_pin['sha256'], 'published_source_sha256': frozen,
+                'runtime': ready['runtime'], 'actors': authority['actors'],
+                'new_input_budget': authority['new_input_budget'], 'source_stat_reads': 0,
+                'target_stat_reads': 0, 'own_future_return': 'NOT_CLAIMED'}
+    require(''.join(row['result']['output'] for row in packet['responses']).encode('utf-8')
+            == canonical(expected) and retained_end <= started <= ended
+            <= authority['global_deadline_ms'], 'registered independent actual preflight differs')
+    return expected
+
+
 def check_funded_preflight(plan: dict[str, Any], raw: bytes) -> dict[str, Any]:
     """Replay separately authored metadata against its frozen digest/source/runtime."""
     validate_binding(plan)
     identity = plan.get("execution_identity")
+    if identity == REGISTERED_IDENTITY:
+        return _registered_preflight(plan, raw)
     require(identity in (FUNDED_IDENTITY, NEW_IDENTITY)
             and plan.get("scope") == FORMAL_SCOPE, "funded preflight requires formal metadata")
     authority = _hash_bound_authority(plan)
@@ -1043,6 +1334,8 @@ def check_funded_preflight(plan: dict[str, Any], raw: bytes) -> dict[str, Any]:
 def result_window_seconds(plan: dict[str, Any]) -> tuple[int, int]:
     """Return the independently authority-checked result clocks, without target IO."""
     validate_binding(plan)
+    if plan.get('execution_identity') == REGISTERED_IDENTITY:
+        return (1800, 1800)
     if plan.get("execution_identity") == HASH_BOUND_IDENTITY and plan["scope"] == FORMAL_SCOPE:
         return (1200, 1200)
     if plan.get("execution_identity") == NEW_IDENTITY:
@@ -1054,7 +1347,8 @@ def rehearsal_root(root: Path) -> Path:
     literal = Path(os.path.abspath(root))
     require(
         literal.name.startswith(("topolab-public-formal-binding-", "topolab-public-hash-bound-",
-                                     "topolab-public-funded-acquisition-", NEW_PUBLIC_PREFIX))
+                                     "topolab-public-funded-acquisition-", NEW_PUBLIC_PREFIX,
+                                     REGISTERED_PREFIX))
         and any(
             literal.is_relative_to(parent) and literal != Path(parent)
             for parent in ("/private/tmp", "/tmp", "/private/var/folders")
@@ -1065,6 +1359,33 @@ def rehearsal_root(root: Path) -> Path:
 
 
 def _member_root(plan: dict[str, Any], name: str, root: Path) -> Path:
+    if plan.get('execution_identity') == REGISTERED_IDENTITY:
+        authority = _registered_authority(plan)
+        if plan.get('scope') == FORMAL_SCOPE:
+            attempt = plan['binding'].get('formal_attempt')
+            require(type(attempt) is int and attempt in (1, 2), 'registered formal attempt differs')
+            suffix = '20261103' if attempt == 1 else 'remedy-20261103'
+            parent = Path('/Users/keith1117/Library/Application Support/TopoLab-custody')
+            basename = f'p17-m2-local-input-version-v{attempt + 7}-strict-binding-{suffix}'
+            generation = parent / basename
+            expected_target = {'generation': str(generation),
+                               'backup': str(generation) + '-independent-backup'}
+            require(authority['fixed_target']['parent'] == str(parent)
+                    and authority['fixed_target']['attempts'][str(attempt)] == expected_target
+                    and plan['root'] == str(generation), 'registered fixed generation differs')
+            expected = {'source_root': Path('/Users/keith1117/Documents/TopoLab-data'),
+                        'content_root': generation / 'content',
+                        'backup_root': Path(expected_target['backup'])}[name]
+        else:
+            parent = rehearsal_root(Path(plan['root']))
+            certificate, _ = _trusted_registered_sources(plan)
+            expected = {'source_root': Path(certificate['registered_context']['source_root']),
+                        'content_root': parent / 'content',
+                        'backup_root': parent / 'backup-content'}[name]
+        require(plan[name] == str(expected) and str(root) == str(expected)
+                and root.is_absolute() and '..' not in root.parts,
+                'registered source/content/backup literal differs')
+        return expected
     if plan.get("scope") == FORMAL_SCOPE:
         if _source_policy(plan):
             funded = plan.get("execution_identity") == FUNDED_IDENTITY
@@ -1120,7 +1441,8 @@ def _source_identity(plan: dict[str, Any]) -> dict[str, str]:
     return plan["source_identity" if plan["scope"] == FORMAL_SCOPE else "public_source_identity"]
 
 
-def check_expected_source_hashes(rows, registry, contract, stage, *, enforce_r0_order=False):
+def check_expected_source_hashes(rows, registry, contract, stage, *, enforce_r0_order=False,
+                                 registrations=None):
     """Bind each pre-read hash to independently accepted lineage, never its own row."""
     require(stage in ("r0", "r1"), "source hash binding stage differs")
     if stage == "r0":
@@ -1128,6 +1450,12 @@ def check_expected_source_hashes(rows, registry, contract, stage, *, enforce_r0_
                     for row in contract["R0"]["literal_bootstrap_files"]}
         expected.update({row["selection"]["path"]: row["selection"]["sha256"]
                          for row in registry["models"]})
+        if registrations is not None:
+            require(len(registrations) == 23 and all(
+                expected.get(name) is None or expected[name] == value['sha256']
+                for name, value in registrations.items()),
+                'registered hash conflicts with an already trusted metadata hash')
+            expected.update({name: value['sha256'] for name, value in registrations.items()})
         sources = {row["path"]: row for row in registry["metadata"]}
         count = 40
     else:
@@ -1146,6 +1474,12 @@ def check_expected_source_hashes(rows, registry, contract, stage, *, enforce_r0_
                 and row["sha256"] == sources[name]["sha256"]
                 and row["byte_size"] == sources[name]["byte_size"],
                 "source prebound hash differs from accepted lineage")
+        if registrations is not None and name in registrations:
+            anchor = registrations[name]['declared']
+            require(all(row[point][key] == anchor[key]
+                        for point in ('declared', 'before', 'after', 'closing')
+                        for key in ('st_dev', 'st_ino', 'st_size')),
+                    'registered source serialized physical anchor differs')
     if stage == "r0" and enforce_r0_order:
         additional = contract["R0"]["bounded_additional_metadata"]
         order = ([row["relative_path"] for row in contract["R0"]["literal_bootstrap_files"]]
@@ -1162,12 +1496,13 @@ def accepted_r0_registry(raw: bytes, r0_wire: dict[str, Any], *,
     The caller must audit this exact wire with its trusted actual events first.
     This semantic check issues no native, source or scientific authority.
     """
-    require(plan.get("execution_identity") == NEW_IDENTITY
+    require(plan.get("execution_identity") in (NEW_IDENTITY, REGISTERED_IDENTITY)
             and _source_policy(plan) == HASH_BOUND_POLICY
             and isinstance(raw, bytes) and 0 < len(raw) <= 8 * native.base.MIB,
             "new source accepted R0 registry identity/size differs")
     proof = native._proof(r0_wire, "SOURCE_ACQUISITION_R0_CHECKED",
-                          expected_identity=NEW_IDENTITY, expected_scope=plan["scope"])
+                          expected_identity=plan['execution_identity'],
+                          expected_scope=plan["scope"])
     require(type(proof.get("source_count")) is int and proof["source_count"] == 40
             and proof.get("source_registry_sha256") == digest(raw)
             and proof.get("source_contract_sha256")
@@ -1184,8 +1519,10 @@ def accepted_r0_registry(raw: bytes, r0_wire: dict[str, Any], *,
     require(isinstance(registry, dict), "new source accepted R0 registry is not an object")
     checker = helper("acquisition_accepted_registry", "p17_m2_input_export_independent.py")
     checker.check_registry_shape(registry, plan["content_contract"])
+    registrations = (_trusted_registered_sources(plan)[1]
+                     if plan['execution_identity'] == REGISTERED_IDENTITY else None)
     check_expected_source_hashes(proof["source_rows"], registry, plan["content_contract"], "r0",
-                                 enforce_r0_order=True)
+                                 enforce_r0_order=True, registrations=registrations)
     references = ([row["checkpoint"] for row in registry["models"]]
                   + [row["artifact"] for row in registry["labels"]]
                   + [row["packet"] for row in registry["scalars"]])
@@ -1218,10 +1555,16 @@ def independent_r0(
         checker.B3_DATA_HASH = source_binding["B3_DATA_HASH"]
         checker.CATALOG_HASH = source_binding["CATALOG_HASH"]
         policy = _source_policy(plan)
-        reader = checker.OnceReader(source, 40, 32 * checker.MIB, source_identity_checks=True,
-                                    source_identity_policy=policy)
+        registrations = (_trusted_registered_sources(plan)[1]
+                         if plan['execution_identity'] == REGISTERED_IDENTITY else None)
+        reader = (_registered_once_reader(
+            checker, source, 40, 32 * checker.MIB, registrations=registrations,
+            source_identity_checks=True, source_identity_policy=policy)
+            if registrations is not None else checker.OnceReader(
+                source, 40, 32 * checker.MIB, source_identity_checks=True,
+                source_identity_policy=policy))
         readers["source"] = reader
-        if plan["execution_identity"] == NEW_IDENTITY:
+        if plan["execution_identity"] in (NEW_IDENTITY, REGISTERED_IDENTITY):
             registry = checker.build_registry(reader, contract, selection_before_reference=True)
         else:
             registry = checker.build_registry(reader, contract)
@@ -1234,7 +1577,8 @@ def independent_r0(
             for rows in (reader.observations, producer_rows):
                 check_expected_source_hashes(
                     rows, registry, contract, "r0",
-                    enforce_r0_order=plan["execution_identity"] == NEW_IDENTITY)
+                    enforce_r0_order=plan["execution_identity"] in (
+                        NEW_IDENTITY, REGISTERED_IDENTITY), registrations=registrations)
         return {
             "status": "SOURCE_ACQUISITION_R0_CHECKED",
             "execution_identity": plan["execution_identity"],
@@ -1520,6 +1864,18 @@ def _check_software(plan: dict[str, Any]) -> None:
         contracts += ("scripts/p17_m2_scientific_tool_ingress.mjs",
                       "scripts/p17_m2_scientific_metadata.mjs",
                       "scripts/p17_m2_scientific_metadata_manifest.mjs")
+    if plan.get('execution_identity') == REGISTERED_IDENTITY:
+        authorities += (REGISTERED_PROTOCOL,)
+        contracts += ('scripts/p17_m2_registered_input.py',
+                      'scripts/p17_m2_source_binding_recovery.py',
+                      'scripts/p17_m2_scientific_tool_ingress.mjs',
+                      'scripts/p17_m2_scientific_metadata.mjs',
+                      'scripts/p17_m2_scientific_metadata_manifest.mjs',
+                      'scripts/m2_acquisition_cohort.mjs',
+                      'scripts/m2_acquisition_actual_boundary.mjs',
+                      'scripts/await_m2_acquisition_receipt.py',
+                      'scripts/file_m2_acquisition_event.py',
+                      'docs/planning/p17_m2_source_binding_certificate_recovery_v4_protocol.json')
     for path in authorities:
         try:
             native._software_bytes(REPO / path)
@@ -1628,10 +1984,14 @@ class _AcquisitionCertificatePolicy:
 
     def check_source_rows(self, proof, count, registry):
         if self.source_identity_policy:
+            registrations = (_trusted_registered_sources(self.plan)[1]
+                             if self.identity == REGISTERED_IDENTITY else None)
             check_expected_source_hashes(
                 proof["source_rows"], registry, self.plan["content_contract"],
                 "r0" if count == 40 else "r1",
-                enforce_r0_order=self.identity == NEW_IDENTITY and count == 40)
+                enforce_r0_order=(self.identity in (NEW_IDENTITY, REGISTERED_IDENTITY)
+                                  and count == 40),
+                registrations=registrations if count == 40 else None)
 
     def check_filing(self, result: dict[str, Any], wire: dict[str, Any]) -> None:
         start = native.number(wire["pending"]["result_start_UTC_seconds"], positive=True)
@@ -1727,7 +2087,14 @@ def validate_setup(
     )
     if plan["scope"] == FORMAL_SCOPE:
         authority = native.base.parse(native._software_bytes(REPO / _protocol_path(plan)))
-        if plan["execution_identity"] in (FUNDED_IDENTITY, NEW_IDENTITY):
+        if plan['execution_identity'] == REGISTERED_IDENTITY:
+            _registered_preflight(plan, native._software_bytes(
+                Path(plan['independent_preflight']['path'])))
+            captured = _registered_read_pin(plan['activation_readiness'])
+            authority = dict(
+                authority, preparation_closure_sha256=captured['preparation_closure_sha256'],
+                independent_preflight_sha256=plan['independent_preflight']['sha256'])
+        elif plan["execution_identity"] in (FUNDED_IDENTITY, NEW_IDENTITY):
             check_funded_preflight(plan, native._software_bytes(
                 Path(authority["independent_preflight_path"])))
             for closure in authority["preparation_closure_paths"]:

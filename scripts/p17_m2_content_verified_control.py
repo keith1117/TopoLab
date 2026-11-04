@@ -159,13 +159,32 @@ def _namespace_snapshot(anchor, *, additional_bytes, additional_files, evidence)
                             )
                         )
                     else:
+                        closing_failure = None
+                        if stat.S_ISREG(info.st_mode) and info.st_nlink == 0:
+                            try:
+                                os.stat(name, dir_fd=descriptor, follow_symlinks=False)
+                            except FileNotFoundError as missing:
+                                changed = _NamespaceEntryDisappeared(*missing.args)
+                                directory = os.fstat(descriptor)
+                                changed.observation = dict(
+                                    entry=name, entry_tuple=physical(info), entry_nlink=0,
+                                    closing_path_absent=True,
+                                    directory_dev=directory.st_dev,
+                                    directory_inode=directory.st_ino, reason=str(missing),
+                                )
+                                raise changed from missing
+                            except OSError as secondary:
+                                closing_failure = dict(
+                                    stage='unlinked-entry-closing-stat',
+                                    type=type(secondary).__name__, reason=str(secondary),
+                                )
                         if not (stat.S_ISREG(info.st_mode) and info.st_nlink == 1):
                             error = ValueError("NAMESPACE_ORDINARY_SINGLE_LINK_REQUIRED")
                             observation = dict(
                                 entry=name, entry_tuple=physical(info),
                                 entry_mode=info.st_mode, entry_nlink=info.st_nlink,
                                 entry_uid=info.st_uid, directory_tuple=None,
-                                secondary_failures=[],
+                                secondary_failures=([closing_failure] if closing_failure else []),
                             )
                             try:
                                 observation['directory_tuple'] = physical(os.fstat(descriptor))
@@ -693,7 +712,7 @@ def _content_step(root, plan, role, readers, *, adapter=None):
     source = Path(plan["source_root"]) if adapter is not None else root / "public-source"
     contract = plan["content_contract"]
     if role == "exporter-r0":
-        reader = producer.Reader(
+        reader = getattr(transport, "source_reader", producer.Reader)(
             source,
             FailureJournal(root / (role + "-source-failure-rows.jsonl")),
             execution_identity=local.IDENTITY,
@@ -736,7 +755,7 @@ def _content_step(root, plan, role, readers, *, adapter=None):
             else local.LocalContent(root / "content", registry, plan["contract_sha256"])
         )
         content.write("source_registry.json", producer.canonical(registry))
-        reader = producer.Reader(
+        reader = getattr(transport, "source_reader", producer.Reader)(
             source,
             FailureJournal(root / (role + "-source-failure-rows.jsonl")),
             execution_identity=local.IDENTITY,
