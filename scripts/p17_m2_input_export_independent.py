@@ -1004,8 +1004,9 @@ def audit_native_record(
     if source_children:
         require(type(record.get('registered_source_child_cap')) is int
                 and record.get('registered_source_child_cap') == 1
-                and record.get('measurement_execution_identity') ==
-                'topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1'
+                and record.get('measurement_execution_identity') in (
+                    'topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1',
+                    'topolab.v2.p17-source-binding-window2.20261104.v1')
                 and record.get('measurement_scope') in (
                     'PUBLIC_STRICT_BINDING_REGISTRATION_ONLY',
                     'FORMAL_STRICT_BINDING_REGISTRATION_ONLY')

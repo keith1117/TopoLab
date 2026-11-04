@@ -17,14 +17,17 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Current action: [coordinated strict23 remedy](docs/planning/p17_m2_coordinated_source_binding_protocol.md)
-under the continuous owner grant. Read its [actual frontier](docs/validation/p17_m2_coordinated_source_binding.md).
-Published PR232/mainbb770/all-four CI preceded formal1 fifth-file strict mtime-108ns
-STOP/FULL780/HELD closeout. The new exact-file claim preserves all strict fields;
-public native/independent return, fresh reviews, complete checks/protected main CI
-and fresh preflight precede sole formal2. Accepted23 precedes compatible40/558/1071
-input, then B/fixed C under unchanged Gates. P17 remains unrepaired. Keep fixed
-budgets/deadlines, all old closed grants/HELD scenes and original25 dirty files.
+Current action: [new finite strict23 window](docs/planning/p17_m2_coordinated_source_binding_window2_protocol.md)
+under the continuous owner grant. Read its [actual frontier](docs/validation/p17_m2_coordinated_source_binding_window2.md).
+PR233/maina7bd88e/all-four CI is published; required-quality cancellation/repair,
+formal1 fifth-file mtime-108ns STOP/FULL780/HELD, zero-launch old-window expiry
+and metadata subtask timeout/truncation remain. New preparation has fixed
+05:33:09.138Z2026-11-04 deadline; original ROOT/I21:38Z/global/old costs stay.
+New identity uses only actualattempt2/core1800 and actual-closeout result1800;
+old3600 replay, strict23 and all scientific Gates remain. Fresh reviews, actual
+NEW public evidence, five checks/protected main4CI/new preflight precede originals.
+Accepted23 precedes40/558/1071 input, then B/fixed C. P17 unrepaired. Preserve
+original25 and old failed scenes; no old quota, directory or lease reuse.
 The owner overrides the one-slice stop only for this finite continuous action.
 
 Historical [v7 STOP and expired-result recovery](docs/validation/p17_m2_source_v7_expired_result_recovery.md):

@@ -1,8 +1,10 @@
 # Validation evidence index
 
-Current [coordinated strict23 frontier](p17_m2_coordinated_source_binding.md): published baseline, retained formal1 mtime-108ns STOP, public coordination/native bookkeeping regressions and conditional sole formal2; P17 remains unrepaired.
+Current [strict23 window2 frontier](p17_m2_coordinated_source_binding_window2.md): published main/four-CI and new independent metadata closure, retained formal1 STOP/old-window zero launch; new window software and original admission remain gated, P17 unrepaired.
 
-Current [strict23 source-binding implementation and evidence](p17_m2_strict_source_binding.md):
+Historical [coordinated strict23 frontier](p17_m2_coordinated_source_binding.md): published baseline, retained formal1 mtime-108ns STOP, public coordination/native bookkeeping regressions and conditional sole formal2; P17 remains unrepaired.
+
+Historical [strict23 source-binding implementation and evidence](p17_m2_strict_source_binding.md):
 public regression-first independent readers and complete native/return audit;
 formal original binding, full-input acceptance and B/C remain separately gated.
 

@@ -257,13 +257,23 @@ def _terminate(pgid, child):
 
 
 def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
-           measurement_scope=None, registered_source_child_cap=0):
+           measurement_scope=None, registered_source_child_cap=0,
+           measurement_execution_identity=(
+               "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1")):
     """Record a bounded command, including failure and observed group exit.
 
     API is also tested using newly authored subprocess fixtures. Public CLI argv
     is literal below. A separately admitted strict23 adapter supplies its explicit
     metadata scope; this primitive grants no source or scientific authority.
     """
+    measurement_identities = (
+        "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1",
+        "topolab.v2.p17-source-binding-window2.20261104.v1",
+    )
+    if (measurement_execution_identity not in measurement_identities
+            or (measurement_scope is None
+                and measurement_execution_identity != measurement_identities[0])):
+        raise ValueError("strict23 measurement identity requires its registered scope")
     if measurement_scope is not None:
         scopes = ("PUBLIC_STRICT_BINDING_REGISTRATION_ONLY",
                   "FORMAL_STRICT_BINDING_REGISTRATION_ONLY",
@@ -324,12 +334,11 @@ def invoke(output, role, argv, *, timeout, limit_bytes=LIMIT, interval=0.5,
         "log": log.name,
     }
     if measurement_scope is not None:
-        # Retain the primitive's historical label. It is not an assertion that
-        # the new outer authority reads zero originals or grants scientific IO.
+        # Preserve the primitive schema and explicit registered caller identity.
+        # This label alone grants no source access or scientific admission.
         identity.update(
             measurement_scope=measurement_scope,
-            measurement_execution_identity=(
-                "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1"),
+            measurement_execution_identity=measurement_execution_identity,
         )
     if registered_source_child_cap:
         identity['registered_source_child_cap'] = registered_source_child_cap

@@ -18,12 +18,15 @@ import sys
 import time
 from copy import deepcopy
 from datetime import UTC, datetime
+from decimal import Decimal
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 AUTHORITY = REPO / "docs/planning/p17_m2_strict_source_binding_protocol.json"
 COORDINATED_AUTHORITY = REPO / "docs/planning/p17_m2_coordinated_source_binding_protocol.json"
+WINDOW2_AUTHORITY = REPO / "docs/planning/p17_m2_coordinated_source_binding_window2_protocol.json"
 IDENTITY = "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1"
+WINDOW2_ID = "topolab.v2.p17-source-binding-window2.20261104.v1"
 PUBLIC_SCOPE = "PUBLIC_STRICT_BINDING_REGISTRATION_ONLY"
 FORMAL_SCOPE = "FORMAL_STRICT_BINDING_REGISTRATION_ONLY"
 READ_SCHEMA = "topolab.v2.m2-strict-source-binding.read.v1"
@@ -77,9 +80,25 @@ def whitelist():
     return rows
 
 
-def authority_path(attempt=1):
+def authority_path(attempt=1, *, window2=False):
     need(type(attempt) is int and attempt in (1, 2), "literal source attempt required")
+    need(type(window2) is bool and (not window2 or attempt == 2),
+         "new window requires the sole remaining actual attempt2")
+    if window2:
+        return WINDOW2_AUTHORITY
     return AUTHORITY if attempt == 1 else COORDINATED_AUTHORITY
+
+
+def context_window2(context):
+    return context["execution_identity"] == WINDOW2_ID
+
+
+def authority_for_context(context):
+    return authority_path(context["attempt"], window2=context_window2(context))
+
+
+def core_window_seconds(context):
+    return 1800 if context_window2(context) else 3600
 
 
 def public_prefix(attempt):
@@ -88,8 +107,8 @@ def public_prefix(attempt):
             else "topolab-public-coordinated-binding-")
 
 
-def source_freeze(attempt=1):
-    authority_path(attempt)
+def source_freeze(attempt=1, *, window2=False):
+    authority_path(attempt, window2=window2)
     names = [
         "scripts/p17_m2_source_binding.py",
         "scripts/p17_m2_source_binding_independent.py",
@@ -112,7 +131,10 @@ def source_freeze(attempt=1):
                      "native/p17_m2_source_coordinator.swift"):
             frozen[name] = sha((REPO / name).read_bytes())
         frozen["docs/planning/p17_m2_coordinated_source_binding_protocol.json"] = sha(
-            authority_path(attempt).read_bytes())
+            COORDINATED_AUTHORITY.read_bytes())
+    if window2:
+        frozen["docs/planning/p17_m2_coordinated_source_binding_window2_protocol.json"] = sha(
+            WINDOW2_AUTHORITY.read_bytes())
     return frozen
 
 
@@ -121,7 +143,7 @@ def plan_coordination(plan):
     coordination = plan.get("coordination")
     load("p17_m2_source_binding_independent")._coordination_config(context, coordination)
     if context["attempt"] == 2:
-        authority = json.loads(authority_path(2).read_bytes())
+        authority = json.loads(authority_for_context(context).read_bytes())
         need(coordination == authority["coordination"], "plan coordinated strategy differs")
     return coordination
 
@@ -247,15 +269,18 @@ def file_actual_event(plan, role, mode, packet_path, packet_sha):
             "original_source_reads_this_command": 0}
 
 
-def prepare_public(root, attempt=1):
+def prepare_public(root, attempt=1, *, window2=False):
     """Create one NEW public graph and a real exclusive cooperative reader lease."""
+    authority_path(attempt, window2=window2)
     root = Path(os.path.abspath(root))
     metadata_path_guard(root / "plan.json")
     need(root.name.startswith(public_prefix(attempt)), "public root literal required")
     if attempt == 2:
-        authority = json.loads(authority_path(attempt).read_bytes())
+        authority = json.loads(authority_path(attempt, window2=window2).read_bytes())
         need(root == Path(authority["preparation_proofs"]["public_native_root"]),
              "only the registered coordinated public graph is authorized")
+        if window2:
+            window2_preparation_readiness(authority)
     need(runtime()["isolated"] == 1 and runtime()["cwd"] == str(REPO)
          and runtime()["threads"] == THREADS, "isolated locked single-thread runtime required")
     directory = source_parent(root.parent, "unused")
@@ -273,23 +298,26 @@ def prepare_public(root, attempt=1):
     return write_core_plan(root, source, PUBLIC_SCOPE, attempt,
         {"scope": PUBLIC_SCOPE, "old_original_access": False,
          "public_content_contract_sha256": public_contract_sha,
-         "public_source_identity_sha256": public_identity_sha}, time.time_ns())
+         "public_source_identity_sha256": public_identity_sha}, time.time_ns(), window2=window2)
 
 
-def write_core_plan(root, source, scope, attempt, entry, started_ns):
-    authority_raw = authority_path(attempt).read_bytes()
+def write_core_plan(root, source, scope, attempt, entry, started_ns, *, window2=False):
+    authority_raw = authority_path(attempt, window2=window2).read_bytes()
     authority = json.loads(authority_raw)
     context = {
-        "execution_identity": IDENTITY, "scope": scope, "attempt": attempt,
+        "execution_identity": WINDOW2_ID if window2 else IDENTITY,
+        "scope": scope, "attempt": attempt,
         "source_root": str(source), "authority_sha256": sha(authority_raw),
-        "source_tree": source_freeze(attempt), "actors": authority["actors"],
+        "source_tree": source_freeze(attempt, window2=window2), "actors": authority["actors"],
     }
     load("p17_m2_source_binding_independent")._coordination_config(
         context, authority.get("coordination") if attempt == 2 else None)
     now = started_ns / 10**9
-    deadline = datetime.fromtimestamp(now + 3600, UTC).isoformat().replace("+00:00", "Z")
+    window = core_window_seconds(context)
+    deadline = datetime.fromtimestamp(now + window, UTC).isoformat().replace("+00:00", "Z")
     lease = {"schema": "topolab.v2.m2-strict-source-binding.lease.v1",
-             "execution_identity": IDENTITY, "scope": "COOPERATIVE_REGISTERED_TOPOLAB_ONLY",
+             "execution_identity": context["execution_identity"],
+             "scope": "COOPERATIVE_REGISTERED_TOPOLAB_ONLY",
              "context_sha256": sha(canonical(context)), "state": "HELD",
              "registered_readers": list(ROLE_CAPS), "acquired_UTC_seconds": now}
     lease_path = root / "custody.cooperative-reader.lease"
@@ -303,8 +331,8 @@ def write_core_plan(root, source, scope, attempt, entry, started_ns):
             else "producer"], "FULL": full, "timeout": full - (20 if full == 180 else 10),
             "argv": role_argv(root, "payload", "@PLAN_SHA256@", role, runtime()["python"])}
             for role, full in ROLE_CAPS.items()},
-        "actor_activation_UTC_seconds": now, "actor_window_seconds": 3600,
-        "started_unix_ns": started_ns, "deadline_unix_ns": started_ns + 3600 * 10**9,
+        "actor_activation_UTC_seconds": now, "actor_window_seconds": window,
+        "started_unix_ns": started_ns, "deadline_unix_ns": started_ns + window * 10**9,
         "actor_deadlines_UTC": {key: deadline for key in ("exporter", "independent")},
         "lease": {"path": str(lease_path), "sha256": lease_sha,
                   "identity": physical(lease_path.stat())},
@@ -317,7 +345,7 @@ def write_core_plan(root, source, scope, attempt, entry, started_ns):
             "scope": scope, "old_original_reads": 0, "formal_admission": scope == FORMAL_SCOPE}
 
 
-def publication_readiness(attempt=1):
+def publication_readiness(attempt=1, *, window2=False):
     """Observe current remote main and its protected exact-head CI, never origin/main."""
     def command(argv):
         return subprocess.run(argv, cwd=REPO, env={**os.environ, "GIT_OPTIONAL_LOCKS": "0"},
@@ -350,8 +378,14 @@ def publication_readiness(attempt=1):
             if {"quality", "frontend", "clean-linux-smoke", "i1-native-software"} <= passed:
                 return {"main": head, "tree": main["commit"]["tree"]["sha"],
                         "main_CI_run": run["id"], "jobs": jobs,
-                        "protection": protection, "source_tree": source_freeze(attempt)}
+                        "protection": protection,
+                        "source_tree": source_freeze(attempt, window2=window2)}
     raise ValueError("STRICT_BINDING: all four exact-main CI jobs required")
+
+
+def metadata_context(core):
+    """Derive the auditor policy from captured core facts, including historical ones."""
+    return dict(deepcopy(core["context"]), scope=METADATA_SCOPE, source_root=core["root"])
 
 
 def verify_result_envelope(envelope):
@@ -361,6 +395,8 @@ def verify_result_envelope(envelope):
     certificate = replay_bundle(envelope["core_bundle"])
     native = load("p17_m2_source_binding_native")
     plan = envelope["metadata_plan"]
+    need(plan["context"] == metadata_context(envelope["core_bundle"]["plan"]),
+         "metadata auditor policy context differs from core")
     evidence = load("p17_m2_content_verified_control").evidence_json(
         envelope["metadata_evidence"], decode=True)
     proof = native.audit_role(plan, METADATA_ROLE, evidence, envelope["metadata_events"])
@@ -371,8 +407,9 @@ def verify_result_envelope(envelope):
     return certificate, proof
 
 
-def preparation_readiness(certificate_sha, preflight_sha, preflight_return_sha, *, attempt=1):
-    authority_raw = authority_path(attempt).read_bytes()
+def preparation_readiness(certificate_sha, preflight_sha, preflight_return_sha, *, attempt=1,
+                          window2=False):
+    authority_raw = authority_path(attempt, window2=window2).read_bytes()
     authority = json.loads(authority_raw)
     paths = authority["preparation_proofs"]
     packets = []
@@ -390,7 +427,9 @@ def preparation_readiness(certificate_sha, preflight_sha, preflight_return_sha, 
     certificate, audit = verify_result_envelope(packets[0][0])
     need(certificate["scope"] == PUBLIC_SCOPE
          and certificate["registered_context"]["attempt"] == attempt
-         and certificate["registered_source_tree"] == source_freeze(attempt)
+         and certificate["registered_source_tree"] == source_freeze(attempt, window2=window2)
+         and certificate["registered_context"]["execution_identity"]
+         == authority["execution_identity"]
          and certificate["registered_context"]["authority_sha256"] == sha(authority_raw),
          "current complete public binding evidence required")
     preflight, _ = read_metadata(Path(paths["independent_preflight_path"]), 2 * 1024**2,
@@ -399,8 +438,8 @@ def preparation_readiness(certificate_sha, preflight_sha, preflight_return_sha, 
                               2 * 1024**2, expected=preflight_return_sha, canonical_required=True)
     need(preflight.get("schema") == "topolab.v2.m2-strict-source-binding.preflight.v1"
          and preflight.get("author") == authority["actors"]["independent"]
-         and preflight.get("execution_identity") == IDENTITY
-         and preflight.get("source_tree") == source_freeze(attempt)
+         and preflight.get("execution_identity") == authority["execution_identity"]
+         and preflight.get("source_tree") == source_freeze(attempt, window2=window2)
          and preflight.get("authority_sha256") == sha(authority_raw)
          and preflight.get("public_certificate_sha256") == certificate_sha
          and preflight.get("metadata_auditor_T1") == audit["T1"]
@@ -431,6 +470,14 @@ def coordinated_remedy_readiness(authority, caller_start_ms):
          and caller_start_ms + 3900 * 1000 <= deadline
          and time.time_ns() <= deadline * 10**6,
          "coordinated remedy quota or absolute result suffix unavailable")
+    captured_previous_failure(authority, allocation)
+    return {"reallocation_v4_sha256": reference["sha256"],
+            "remedy_STOP_sha256": authority["remedy_previous_attempt"]["STOP_sha256"],
+            "binding_result_deadline_ms": deadline}
+
+
+def captured_previous_failure(authority, allocation):
+    """Replay the immutable failed native prefix; never reopen its source or lease."""
     previous = authority["remedy_previous_attempt"]
     root = Path(previous["root"])
     need(root == Path(authority["evidence_root"]) / "binding-formal-v1",
@@ -458,19 +505,110 @@ def coordinated_remedy_readiness(authority, caller_start_ms):
          and closeout["lease_state"] == "HELD" and closeout["bindings"] is None
          and closeout["original_STOP"] == stop,
          "previous failed prefix closeout is not actually closed/HELD")
-    return {"reallocation_v4_sha256": reference["sha256"],
-            "remedy_STOP_sha256": previous["STOP_sha256"],
-            "binding_result_deadline_ms": deadline}
+    return previous["STOP_sha256"]
 
 
-def prepare_formal(attempt, certificate_sha, preflight_sha, preflight_return_sha, caller_start_ms):
+def window2_preparation_readiness(authority, *, prospective_start_ms=None):
+    """New funding is explicit; the old clock and failed cohort remain closed."""
+    config = authority["window2"]
+    need(authority["execution_identity"] == WINDOW2_ID
+         and type(config["core_seconds"]) is int and config["core_seconds"] == 1800
+         and type(config["post_result_seconds"]) is int and config["post_result_seconds"] == 1800,
+         "registered new window identity/profile required")
+    references = config["evidence"]
+    need(set(references) == {"v5", "v6", "v7", "activation", "old_actual_closure",
+                             "old_expiry", "CI_repair", "retention_review", "funding_review"},
+         "complete new window funding/retention references required")
+    records = {name: read_metadata(Path(ref["path"]), 2 * 1024**2,
+                                   expected=ref["sha256"])[0]
+               for name, ref in references.items()}
+    activation, closure, expired = (records[key] for key in (
+        "activation", "old_actual_closure", "old_expiry"))
+    v5, v6, v7, review = (records[key] for key in ("v5", "v6", "v7", "funding_review"))
+    start, deadline = config["preparation_start_ms"], config["preparation_deadline_ms"]
+    observed = time.time_ns() // 10**6 if prospective_start_ms is None else prospective_start_ms
+    need(type(start) is int and type(deadline) is int and type(observed) is int
+         and deadline - start == 10800 * 1000 and start <= observed <= deadline
+         and config["core_seconds"] == config["post_result_seconds"] == 1800
+         and config["global_deadline_ms"] == 1793828280000,
+         "fixed new preparation/window bounds unavailable")
+    event = closure["actual_event"]
+    need(activation["status"] == "ACTIVATED_PREPARATION_ONLY_NO_FORMAL_ADMISSION"
+         and activation["new_source_preparation_start_ms"] == start
+         and activation["new_source_preparation_deadline_ms"] == deadline
+         and closure["closed_ms"] == event["returned_ms"] == start
+         and event["requested_ms"] <= event["returned_ms"] < 1793759678449
+         and event["result"]["exit_code"] == 0
+         and event["result"].get("session_id") is None
+         and closure["elapsed_ms"] == start - 1793747438449 <= 12240 * 1000
+         and expired["status"] == "OLD_V4_ADMISSION_WINDOW_EXPIRED_NEVER_STARTED"
+         and expired["formal2_roles"] == expired["formal2_original_content_reads"]
+         == expired["formal2_FULL_paid"] == 0,
+         "old stopped/result clock or unstarted cohort closure differs")
+    need(v5["source_new_profile"]["formal_attempts_remaining"] == 1
+         and v5["source_new_profile"]["core_caller_seconds"] == 1800
+         and v5["source_new_profile"]["post_result_seconds"] == 1800
+         and v5["source_new_profile"]["content_reads_new_slot_total"] == 46
+         and v6["NEW_metadata_dispatches_each"] == 1536
+         and v7["NEW_author_seconds_total"] == 14400
+         and v7["cumulative_author_reservation_upper"] == 259200
+         and v7["stronger_actual_global_elapsed_seconds_each_unchanged"] == 100800
+         and v7["selected_future_caps_each"]["source_preparation"] == 10800
+         and review["status"] ==
+         "CONDITIONAL_BUDGET_ARITHMETIC_AND_PREPARATION_ACTIVATION_PASS_NO_FORMAL_ADMISSION"
+         and review["V7_sha256"] == references["v7"]["sha256"]
+         and review["activation_sha256"] == references["activation"]["sha256"]
+         and review["actual_old_closure_courier_sha256"]
+         == references["old_actual_closure"]["sha256"]
+         and records["retention_review"]["status"] ==
+         "PAIRED_ARCHIVE_FULL_MEMBER_AND_SEMANTIC_REPLAY_PASS_HISTORICAL_FAILURE_RETAINED",
+         "new finite funding/independent retention review differs")
+    return {name: ref["sha256"] for name, ref in references.items()}
+
+
+def window2_formal_readiness(authority, caller_start_ms):
+    pins = window2_preparation_readiness(authority, prospective_start_ms=caller_start_ms)
+    need(caller_start_ms >= 1793759678449
+         and caller_start_ms + 3600 * 1000 <= authority["window2"]["global_deadline_ms"],
+         "new complete source/result suffix or expired old cohort unavailable")
+    reference = authority["reallocation_v4"]
+    allocation, _ = read_metadata(Path(reference["path"]), 32768,
+                                  expected=reference["sha256"], canonical_required=True)
+    stop_sha = captured_previous_failure(authority, allocation)
+    return {"window2_budget_sha256": pins, "remedy_STOP_sha256": stop_sha}
+
+
+def create_formal_root(authority, attempt, *, window2=False):
+    """At admitted entry only, refuse any old cohort and atomically claim this one."""
+    parent = Path(authority["evidence_root"])
+    name = authority["formal_root_name"] if window2 else f"binding-formal-v{attempt}"
+    need(not window2 or attempt == 2 and name == "binding-formal-v3",
+         "remaining actual formal2 target differs")
+    directory = source_parent(parent, "unused")
+    try:
+        if window2:
+            try:
+                os.stat("binding-formal-v2", dir_fd=directory, follow_symlinks=False)
+            except FileNotFoundError as error:
+                need(error.errno == 2, "old formal2 cohort absence unknown")
+            else:
+                raise ValueError("STRICT_BINDING: old formal2 cohort already exists")
+        os.mkdir(name, mode=0o700, dir_fd=directory)
+        os.fsync(directory)
+    finally:
+        os.close(directory)
+    return parent / name
+
+
+def prepare_formal(attempt, certificate_sha, preflight_sha, preflight_return_sha, caller_start_ms,
+                   *, window2=False):
     need(type(attempt) is int and attempt in (1, 2)
          and type(caller_start_ms) is int and caller_start_ms > 0,
          "new finite formal attempt/caller start required")
-    authority = json.loads(authority_path(attempt).read_bytes())
+    authority = json.loads(authority_path(attempt, window2=window2).read_bytes())
     preflight = preparation_readiness(certificate_sha, preflight_sha, preflight_return_sha,
-                                      attempt=attempt)
-    publication = publication_readiness(attempt)
+                                      attempt=attempt, window2=window2)
+    publication = publication_readiness(attempt, window2=window2)
     need(preflight.get("main") == publication["main"]
          and preflight.get("main_CI_run") == publication["main_CI_run"],
          "independent preflight must observe the actual current main CI")
@@ -486,20 +624,16 @@ def prepare_formal(attempt, certificate_sha, preflight_sha, preflight_return_sha
          and allocation["stages_each_root_I"]["binding_result"] == 12240
          and caller_start_ms * 10**6 <= time.time_ns()
          <= caller_start_ms * 10**6 + 120 * 10**9
-         and caller_start_ms + (3900 if attempt == 2 else 3600 + 12240) * 1000
+         and caller_start_ms + (3600 if window2 else
+                               3900 if attempt == 2 else 3600 + 12240) * 1000
          <= budget["root_independent_deadline_ms"],
          "complete source/result suffix or original author budget unavailable")
-    remedy = coordinated_remedy_readiness(authority, caller_start_ms) if attempt == 2 else {}
-    if attempt == 2:
+    remedy = (window2_formal_readiness(authority, caller_start_ms) if window2 else
+              coordinated_remedy_readiness(authority, caller_start_ms) if attempt == 2 else {})
+    if attempt == 2 and not window2:
         need(authority["binding_result_deadline_ms"] <= budget["root_independent_deadline_ms"],
              "result deadline exceeds original author budget")
-    root = Path(authority["evidence_root"]) / f"binding-formal-v{attempt}"
-    directory = source_parent(root.parent, "unused")
-    try:
-        os.mkdir(root.name, mode=0o700, dir_fd=directory)
-        os.fsync(directory)
-    finally:
-        os.close(directory)
+    root = create_formal_root(authority, attempt, window2=window2)
     entry = {"schema": "topolab.v2.m2-strict-source-binding.formal-entry.v1",
              "scope": FORMAL_SCOPE, "old_original_access": True,
              "public_certificate_sha256": certificate_sha, "preflight_sha256": preflight_sha,
@@ -507,7 +641,7 @@ def prepare_formal(attempt, certificate_sha, preflight_sha, preflight_return_sha
              "publication": publication, "budget_raw_sha256": authority["budget_raw_sha256"],
              **remedy}
     return write_core_plan(root, Path(authority["registration_source_root"]), FORMAL_SCOPE,
-                           attempt, entry, caller_start_ms * 10**6)
+                           attempt, entry, caller_start_ms * 10**6, window2=window2)
 
 
 def read_metadata(path, maximum, *, expected=None, canonical_required=False):
@@ -543,7 +677,7 @@ def load_plan(path, expected_sha):
          and isinstance(expected_sha, str) and re.fullmatch(r"[0-9a-f]{64}", expected_sha),
          "literal pinned plan required")
     formal_roots = {str(Path(json.loads(AUTHORITY.read_bytes())["evidence_root"])
-                        / f"binding-formal-v{attempt}") for attempt in (1, 2)}
+                        / f"binding-formal-v{attempt}") for attempt in (1, 2, 3)}
     need(path.parent.name.startswith((public_prefix(1), public_prefix(2)))
          or str(path.parent) in formal_roots
          or str(path.parent) in {root + "-certificate-audit" for root in formal_roots},
@@ -558,10 +692,20 @@ def load_plan(path, expected_sha):
     return plan
 
 
+def result_deadline_ns(core):
+    """The new result clock starts at the actual closeout return, never at now."""
+    proof, _, _ = accepted_role(core, "binding-closeout")
+    exact = Decimal(str(proof["T1"])) * 10**9
+    need(exact.is_finite() and exact == exact.to_integral_value(),
+         "actual closeout execution-clock value differs")
+    return int(exact) + 1800 * 10**9
+
+
 def check_metadata_suffix(core, started):
     if core['context']['attempt'] == 2:
-        limit = core['deadline_unix_ns'] + 300 * 10**9
-        if core['context']['scope'] == FORMAL_SCOPE:
+        limit = (result_deadline_ns(core) if context_window2(core["context"])
+                 else core['deadline_unix_ns'] + 300 * 10**9)
+        if core['context']['scope'] == FORMAL_SCOPE and not context_window2(core["context"]):
             authority = json.loads(authority_path(2).read_bytes())
             limit = min(limit, authority['binding_result_deadline_ms'] * 10**6)
         need(type(started) is int and started + 300 * 10**9 <= limit,
@@ -589,10 +733,8 @@ def prepare_metadata_audit(bundle_path, expected_sha):
         os.close(directory)
     now = started / 10**9
     attempt = core["context"]["attempt"]
-    authority_raw = authority_path(attempt).read_bytes()
     plan_coordination(core)
-    context = dict(core["context"], scope=METADATA_SCOPE, source_root=str(bundle_path.parent),
-                   source_tree=source_freeze(attempt), authority_sha256=sha(authority_raw))
+    context = metadata_context(core)
     deadline = datetime.fromtimestamp(now + 300, UTC).isoformat().replace("+00:00", "Z")
     plan = {"schema": METADATA_SCHEMA, "root": str(root), "context": context,
             "runtime": runtime(), "role_order": [METADATA_ROLE],
@@ -619,13 +761,15 @@ def admit_metadata_plan(plan, role):
          and runtime()["cwd"] == str(REPO) and runtime()["threads"] == THREADS,
          "metadata-only native plan/runtime differs")
     context = plan["context"]
-    authority_raw = authority_path(context["attempt"]).read_bytes()
+    authority_raw = authority_for_context(context).read_bytes()
     plan_coordination(plan)
     need(set(context) == {"execution_identity", "scope", "attempt", "source_root",
                           "authority_sha256", "source_tree", "actors"}
-         and context["execution_identity"] == IDENTITY and context["scope"] == METADATA_SCOPE
+         and context["execution_identity"] == json.loads(authority_raw)["execution_identity"]
+         and context["scope"] == METADATA_SCOPE
          and context["actors"] == json.loads(authority_raw)["actors"]
-         and context["source_tree"] == source_freeze(context["attempt"])
+         and context["source_tree"] == source_freeze(
+             context["attempt"], window2=context_window2(context))
          and context["authority_sha256"] == sha(authority_raw),
          "metadata-only context/frozen code differs")
     expected_role = {"author": context["actors"]["independent"], "FULL": 120, "timeout": 110,
@@ -649,6 +793,8 @@ def admit_metadata_plan(plan, role):
                               canonical_required=True)
     need(sha(canonical(bundle["plan"])) == plan["entry"]["core_plan_sha256"],
          "metadata-only core plan differs")
+    need(context == metadata_context(bundle["plan"]),
+         "metadata auditor policy context differs from core")
     check_metadata_suffix(bundle['plan'], plan['started_unix_ns'])
     replay_bundle(bundle)
 
@@ -685,9 +831,11 @@ def admit_plan(plan, role):
          "frozen isolated runtime differs")
     need(type(plan.get("started_unix_ns")) is int
          and type(plan.get("deadline_unix_ns")) is int
-         and plan["deadline_unix_ns"] - plan["started_unix_ns"] == 3600 * 10**9
+         and plan["deadline_unix_ns"] - plan["started_unix_ns"]
+         == core_window_seconds(context) * 10**9
          and plan.get("actor_activation_UTC_seconds") == plan["started_unix_ns"] / 10**9
-         and type(plan.get("actor_window_seconds")) is int and plan["actor_window_seconds"] == 3600
+         and type(plan.get("actor_window_seconds")) is int
+         and plan["actor_window_seconds"] == core_window_seconds(context)
          and plan["started_unix_ns"] <= time.time_ns() <= plan["deadline_unix_ns"],
          "bounded immutable dispatch window unavailable")
     for name, full in ROLE_CAPS.items():
@@ -708,29 +856,33 @@ def admit_plan(plan, role):
              and plan["entry"]["old_original_access"] is False,
              "public plan cannot grant original source access")
         if context["attempt"] == 2:
-            authority = json.loads(authority_path(2).read_bytes())
+            authority = json.loads(authority_for_context(context).read_bytes())
             need(root == Path(authority["preparation_proofs"]["public_native_root"])
                  and context["source_root"] == str(root.with_name(root.name + "-source")),
                  "coordinated public plan differs from its single registered graph")
     else:
         entry = plan.get("entry", {})
-        authority = json.loads(authority_path(context["attempt"]).read_bytes())
+        authority = json.loads(authority_for_context(context).read_bytes())
         need(entry.get("schema") == "topolab.v2.m2-strict-source-binding.formal-entry.v1"
              and entry.get("scope") == FORMAL_SCOPE and entry.get("old_original_access") is True
-             and root == Path(authority["evidence_root"]) / f"binding-formal-v{context['attempt']}"
+             and root == Path(authority["evidence_root"]) / (
+                 authority["formal_root_name"] if context_window2(context)
+                 else f"binding-formal-v{context['attempt']}")
              and entry.get("budget_raw_sha256") == authority["budget_raw_sha256"]
              and entry.get("publication", {}).get("source_tree")
-             == source_freeze(context["attempt"])
+             == source_freeze(context["attempt"], window2=context_window2(context))
              and sys.platform == "darwin" and platform.machine() == "arm64",
              "formal publication/public-preflight entry missing")
         preflight = preparation_readiness(entry["public_certificate_sha256"],
             entry["preflight_sha256"], entry["preflight_actual_return_sha256"],
-            attempt=context["attempt"])
+            attempt=context["attempt"], window2=context_window2(context))
         need(preflight["main"] == entry["publication"]["main"]
              and preflight["main_CI_run"] == entry["publication"]["main_CI_run"],
              "frozen main/independent preflight differs")
         if context["attempt"] == 2:
-            remedy = coordinated_remedy_readiness(authority, plan["started_unix_ns"] // 10**6)
+            remedy = (window2_formal_readiness(authority, plan["started_unix_ns"] // 10**6)
+                      if context_window2(context) else
+                      coordinated_remedy_readiness(authority, plan["started_unix_ns"] // 10**6))
             need(all(entry.get(key) == value for key, value in remedy.items()),
                  "frozen coordinated remedy evidence differs")
     lease = plan["lease"]
@@ -745,7 +897,8 @@ def admit_plan(plan, role):
         os.close(parent)
     need(physical(current) == lease["identity"] and stat.S_ISREG(current.st_mode)
          and current.st_nlink == 1 and stat.S_IMODE(current.st_mode) == 0o600
-         and value.get("state") == "HELD" and value.get("execution_identity") == IDENTITY
+         and value.get("state") == "HELD"
+         and value.get("execution_identity") == context["execution_identity"]
          and value.get("context_sha256") == sha(canonical(context)),
          "real cooperative lease no longer held")
     need(not (root / "STOP.json").exists() or role == "binding-closeout", "STOP_NO_RETRY")
@@ -863,6 +1016,8 @@ def certify_core(plan):
 
 def finalize_result(core_plan):
     """File two independent NEW copies after the auditor's actual native return."""
+    if context_window2(core_plan["context"]):
+        need(time.time_ns() <= result_deadline_ns(core_plan), "fixed result window expired")
     root = Path(core_plan["root"])
     core, _ = read_metadata(root / "certificate-bundle.json", 32 * 1024**2,
                             canonical_required=True)
@@ -883,7 +1038,7 @@ def finalize_result(core_plan):
     need(core_plan == core["plan"] and audit["T1"] >= max(
         row["T1"] for row in certificate["native_role_audits"].values()),
         "result auditor must follow all source-role actual returns")
-    authority = json.loads(authority_path(core_plan["context"]["attempt"]).read_bytes())
+    authority = json.loads(authority_for_context(core_plan["context"]).read_bytes())
     if core_plan["context"]["scope"] == PUBLIC_SCOPE:
         paths = list(map(Path, authority["preparation_proofs"]["public_certificate_paths"]))
     else:
@@ -965,7 +1120,8 @@ def payload(plan, role):
         source_failure = (getattr(error, "binding_failure", None)
                           or getattr(error, "strict_binding_failure", None))
         return {"schema": "topolab.v2.m2-strict-source-binding.failure.v1",
-                "status": "STOP_NO_RETRY", "execution_identity": IDENTITY,
+                "status": "STOP_NO_RETRY", "execution_identity":
+                plan.get("context", {}).get("execution_identity", IDENTITY),
                 "role": role, "stage": stage,
                 "source_attempts": (source_failure or {}).get("attempts", []),
                 "binding_failure": getattr(error, "binding_failure", None),
@@ -976,11 +1132,12 @@ def payload(plan, role):
 def check_context(source, context):
     need(set(context) == {"execution_identity", "scope", "attempt", "source_root",
                           "authority_sha256", "source_tree", "actors"}, "context fields differ")
-    authority_raw = authority_path(context["attempt"]).read_bytes()
+    authority_raw = authority_for_context(context).read_bytes()
     authority = json.loads(authority_raw)
-    need(context["execution_identity"] == IDENTITY
+    need(context["execution_identity"] == authority["execution_identity"]
          and context["authority_sha256"] == sha(authority_raw)
-         and context["source_tree"] == source_freeze(context["attempt"])
+         and context["source_tree"] == source_freeze(
+             context["attempt"], window2=context_window2(context))
          and context["actors"] == authority["actors"]
          and type(context["attempt"]) is int and context["attempt"] in (1, 2)
          and context["scope"] in (PUBLIC_SCOPE, FORMAL_SCOPE)
@@ -1152,6 +1309,7 @@ def main():
     parser.add_argument("--bundle")
     parser.add_argument("--bundle-sha")
     parser.add_argument("--attempt", type=int, default=1)
+    parser.add_argument("--window2", action="store_true")
     parser.add_argument("--certificate-sha")
     parser.add_argument("--preflight-sha")
     parser.add_argument("--preflight-return-sha")
@@ -1160,10 +1318,12 @@ def main():
     parser.add_argument("--packet-sha")
     parser.add_argument("--event-mode", choices=("supervise", "record"))
     args = parser.parse_args()
+    need(not args.window2 or args.mode in ("prepare-public", "prepare-formal"),
+         "a frozen role cannot switch execution windows")
     if args.mode == "prepare-public":
         need(args.root is not None and args.plan is args.plan_sha is args.role is None,
              "public setup accepts only a new literal root")
-        result = prepare_public(args.root, attempt=args.attempt)
+        result = prepare_public(args.root, attempt=args.attempt, window2=args.window2)
     elif args.mode == "prepare-formal":
         need(args.root is args.plan is args.plan_sha is args.role is args.events_sha is None
              and sys.platform == "darwin" and platform.machine() == "arm64"
@@ -1172,7 +1332,8 @@ def main():
                          args.certificate_sha, args.preflight_sha, args.preflight_return_sha)),
              "formal actual public evidence/main preflight SHA prerequisites required")
         result = prepare_formal(args.attempt, args.certificate_sha, args.preflight_sha,
-                                args.preflight_return_sha, args.caller_start_ms)
+                                args.preflight_return_sha, args.caller_start_ms,
+                                window2=args.window2)
     elif args.mode == "prepare-audit":
         need(args.root is args.plan is args.plan_sha is args.role is args.events_sha is None
              and args.bundle is not None and args.bundle_sha is not None,

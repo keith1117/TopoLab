@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 
 IDENTITY = "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1"
+WINDOW2_IDENTITY = "topolab.v2.p17-source-binding-window2.20261104.v1"
 REPO = Path(__file__).resolve().parents[1]
 CAPS = {"producer-availability": 150, "independent-availability": 150,
         "binding-producer": 300, "binding-independent": 300, "binding-closeout": 180}
@@ -56,11 +57,24 @@ def load(name):
     return module
 
 
+def execution_profile(plan):
+    """Select only a registered identity; historical windows remain unchanged."""
+    context = plan.get("context")
+    need(isinstance(context, dict), "native execution identity context missing")
+    identity, attempt = context.get("execution_identity"), context.get("attempt", 1)
+    need(type(attempt) is int and (
+        (identity == IDENTITY and attempt in (1, 2))
+        or (identity == WINDOW2_IDENTITY and attempt == 2)),
+        "unregistered native execution identity/attempt profile")
+    return identity, 1800 if identity == WINDOW2_IDENTITY else 3600
+
+
 def role_profile(plan):
-    """Two explicit plans; a metadata audit cannot acquire a source-role scope."""
+    """Identity selects the core window; metadata always retains its own 300s."""
+    _, core_seconds = execution_profile(plan)
     if plan.get("schema") == METADATA_SCHEMA:
         return METADATA_CAPS, 300, (METADATA_SCOPE,), METADATA_AUTHORS
-    return CAPS, 3600, SCOPES, AUTHORS
+    return CAPS, core_seconds, SCOPES, AUTHORS
 
 
 def argv_for(plan, mode, role):
@@ -83,6 +97,8 @@ class Transport:
     formal_reserve_seconds = 600
 
     def __init__(self, plan):
+        self.identity, _ = execution_profile(plan)
+        self.formal_seconds = role_profile(plan)[1]
         self.plan = plan
         self.root = Path(plan["root"])
         self.scope = plan["context"]["scope"]
@@ -149,6 +165,7 @@ def transport_for(plan):
 
 def assert_payload_launch(plan, role):
     """Refuse direct payload calls before any source observation."""
+    identity, _ = execution_profile(plan)
     base = load("p17_m2_content_verified_control")
     root = Path(plan["root"])
     active = base.read_json(root / "active.json")
@@ -156,7 +173,7 @@ def assert_payload_launch(plan, role):
     need(active == {"role": role, "plan_sha256": sha(canonical(plan)), "status": "ACTIVE"}
          and started["role"] == role and started["software_only"] is True
          and started.get("measurement_scope") == plan["context"]["scope"]
-         and started.get("measurement_execution_identity") == IDENTITY
+         and started.get("measurement_execution_identity") == identity
          and started["argv"] == argv_for(plan, "payload", role)
          and started["pid"] == os.getppid() == os.getpgrp(),
          "registered native payload parent/group/scope required")
@@ -175,11 +192,14 @@ def role_evidence(root, plan_sha, role):
 
 def audit_role(plan, role, evidence, trusted_external_record):
     """Retain a failed or incomplete role and its fixed FULL charge."""
-    caps, window_seconds, scopes, authors = role_profile(plan)
+    # Keep any actual caller span even if identity validation itself fails.
+    caps = METADATA_CAPS if plan.get("schema") == METADATA_SCHEMA else CAPS
+    context = plan.get("context")
+    identity = context.get("execution_identity") if isinstance(context, dict) else None
     cap = caps.get(role)
     result = {
         "status": "STOP_NO_RETRY", "reason": "ACTUAL_NATIVE_RETURN_REQUIRED",
-        "execution_identity": IDENTITY, "role": role,
+        "execution_identity": identity, "role": role,
         "frozen_FULL_seconds": cap, "charged_FULL_seconds": None,
         "known_cost_lower_bound_seconds": None,
         "whole_wall_seconds": None, "missing_evidence_cost": "UNKNOWN_NOT_ZERO",
@@ -195,6 +215,7 @@ def audit_role(plan, role, evidence, trusted_external_record):
         whole = last - first
         result.update(T0=first, T1=last, whole_wall_seconds=whole,
                       known_cost_lower_bound_seconds=math.ceil(whole + 10))
+        caps, window_seconds, scopes, authors = role_profile(plan)
         if (cap is not None and trusted_external_record[0]["argv"]
                 == argv_for(plan, "supervise", role)
                 and trusted_external_record[0].get("author") == authors[role]):
@@ -216,7 +237,7 @@ def audit_role(plan, role, evidence, trusted_external_record):
             source_children = source_children or None
         resources = checker.audit_resources(
             completion, inner_evidence=inner, native_profiles=evidence["native_profiles"],
-            expected_identity=IDENTITY, registered_source_children=source_children)
+            expected_identity=identity, registered_source_children=source_children)
         result["resource_evidence"] = resources
         for key in ("RSS_envelope_bytes", "RSS_components_bytes", "inner_minimum_charge_seconds"):
             result[key] = resources[key]
@@ -228,7 +249,7 @@ def audit_role(plan, role, evidence, trusted_external_record):
         expected_schema = (METADATA_SCHEMA if caps is METADATA_CAPS
                            else "topolab.v2.m2-strict-source-binding.plan.v1")
         need(plan["schema"] == expected_schema
-             and plan["context"]["execution_identity"] == IDENTITY
+             and plan["context"]["execution_identity"] == identity
              and plan["context"]["scope"] in scopes, "native plan scope differs")
         attempt = plan["context"].get("attempt", 1)
         need(type(attempt) is int and attempt in (1, 2), "native attempt differs")
@@ -252,7 +273,7 @@ def audit_role(plan, role, evidence, trusted_external_record):
              "actual external author differs")
         need(all(event.get("complete") is True and type(event.get("exit_code")) is int
                  for event in trusted_external_record), "actual external exit UNKNOWN")
-        need(pending["execution_identity"] == IDENTITY and pending["role"] == role
+        need(pending["execution_identity"] == identity and pending["role"] == role
              and pending["plan_sha256"] == plan_sha
              and type(pending["frozen_FULL_seconds"]) is int
              and pending["frozen_FULL_seconds"] == cap
@@ -273,7 +294,7 @@ def audit_role(plan, role, evidence, trusted_external_record):
         checker._actual_record_return(pending, completion, trusted_external_record)
         need(inner["expected_role"] == role
              and inner["expected_argv"] == argv_for(plan, "payload", role)
-             and inner["record"].get("measurement_execution_identity") == IDENTITY
+             and inner["record"].get("measurement_execution_identity") == identity
              and inner["record"].get("measurement_scope") == plan["context"]["scope"],
              "explicit measurement identity/scope differs")
         need(inner["record"]["timeout_seconds"] == plan["roles"][role]["timeout"]
@@ -386,7 +407,8 @@ def audit_certificate(plan, evidence_by_role, trusted_events_by_role, primary, i
          "held parent identity changed at lease absence observation")
     certificate = {
         "schema": "topolab.v2.m2-strict-source-binding.certificate.v1",
-        "execution_identity": IDENTITY, "scope": plan["context"]["scope"],
+        "execution_identity": plan["context"]["execution_identity"],
+        "scope": plan["context"]["scope"],
         "plan_sha256": sha(canonical(plan)), "registered_context": plan["context"],
         "registered_source_tree": plan["context"]["source_tree"],
         "bindings": bindings, "native_role_audits": audits,
@@ -437,6 +459,7 @@ def main():
             output, args.role, argv_for(plan, "payload", args.role),
             timeout=plan["roles"][args.role]["timeout"],
             measurement_scope=plan["context"]["scope"],
+            measurement_execution_identity=transport.identity,
             registered_source_child_cap=int(plan['context'].get('attempt') == 2
                 and args.role in ('binding-producer', 'binding-independent')))
         print(canonical(result).decode(), end="")

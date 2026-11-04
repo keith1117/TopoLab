@@ -1,8 +1,10 @@
 # Planning index
 
-Current [coordinated strict23 remedy](p17_m2_coordinated_source_binding_protocol.md) ([finite authority](p17_m2_coordinated_source_binding_protocol.json)): prospective exact-file claims, unchanged strict observations, retained formal1 STOP/FULL780 and one separately gated remedy.
+Current [finite strict23 window2](p17_m2_coordinated_source_binding_window2_protocol.md) ([new JSON](p17_m2_coordinated_source_binding_window2_protocol.json)): published coordination, retained old deadline/STOPs and fresh1800 identity; strict23/input/B/C remain separately gated.
 
-Current [strict23 source binding](p17_m2_strict_source_binding_protocol.md)
+Historical [coordinated strict23 remedy](p17_m2_coordinated_source_binding_protocol.md) ([finite authority](p17_m2_coordinated_source_binding_protocol.json)): prospective exact-file claims, unchanged strict observations, retained formal1 STOP/FULL780 and one separately gated remedy.
+
+Historical [strict23 source binding](p17_m2_strict_source_binding_protocol.md)
 ([finite authority](p17_m2_strict_source_binding_protocol.json)): separately
 funded two-author strict observations, native actual-return and metadata-auditor
 closure before compatible full-input admission; no old quota or science reset.
