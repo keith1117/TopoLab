@@ -2620,3 +2620,8 @@ Actual preparation closed12:46:29.352Z/7049.330s with4266-member paired full
 independent metadata replay; original actual1bb6576e. New finite protected
 publication7200s/128calls each then formal metadata/input/B/C; noOriginalor
 LibraryIO or P17 repair is created by this preparation PASS.
+
+PR235/head4ff quality genuinely fails32 Linux fixture path writes, other3CIpass.
+A new owned-temp-only RED precedes local scalar-fixture correction/44focusedPASS;
+production45/26/public certificates remain unchanged. NEW V26 bounded full16,
+fresh review and new exact-head CI retain old failure/fees and publicationhard.

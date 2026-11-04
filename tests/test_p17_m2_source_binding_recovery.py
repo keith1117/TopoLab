@@ -56,6 +56,15 @@ def captured_bundle(tmp_path):
     fixture = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(fixture)
     native = fixture.adapter()
+    original_subject = fixture.native_subject
+
+    def owned_subject(module, *, failed=False):
+        plan, evidence, events = original_subject(module, failed=failed)
+        plan['root'] = str(tmp_path / 'topolab-public-captured-core')
+        fixture.reseal(module, plan, evidence, events)
+        return plan, evidence, events
+
+    fixture.native_subject = owned_subject
     plan, evidence, events, primary, independent = fixture.window2_subject(native, tmp_path)
     certificate = native.audit_certificate(plan, evidence, events, primary, independent)
     bundle = {'schema': 'topolab.v2.m2-strict-source-binding.evidence-bundle.v1',
@@ -677,3 +686,16 @@ def test_full_input_registration_rejects_unclosed_or_detached_finalize(
         actual['responses'][0]['requested_ms'] = int(proof['T0'] * 1000) - 1
     with pytest.raises(ValueError):
         subject.verify_registration(envelope, actual, kind='public')
+
+
+def test_recovery_fixture_never_creates_platform_literal_directories(tmp_path, monkeypatch):
+    subject = module()
+    original_mkdir = Path.mkdir
+
+    def owned_mkdir(path, *args, **kwargs):
+        assert path.is_relative_to(tmp_path), 'fixture directory outside test-owned tmp_path'
+        return original_mkdir(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, 'mkdir', owned_mkdir)
+    _, bundle = captured_bundle(tmp_path)
+    public_preparation(subject, tmp_path, bundle, monkeypatch)

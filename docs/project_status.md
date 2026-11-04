@@ -5,7 +5,7 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: new closure/compiler and continuous-cohort repair
+## Current: protected PR235 test-fixture portability repair
 
 [New identity2 contract](planning/p17_m2_registered_input_v2_protocol.md) and
 [retained result](validation/p17_m2_input_closure_coordination_repair.md) keep
@@ -61,6 +61,13 @@ exceeded its900s by at least32.212s and staysFAIL; active Root/I replay does not
 reopen that author or erase its costs. Actual preparation closed12:46:29.352Z,7049.330/7200s,4266-member paired
 metadata/full independent replay. New7200s/128-call publication phase ends
 14:46:29.352Z; protected exact-head/main4CI precede formal metadata/input.
+
+PR235/head4ff1871 is open. Exact PR CI41833143189 quality fails32 recovery
+fixture tests on Linux's unwritable `/private`; other three jobs pass. A new
+path-ownership RED precedes the test-only owned-root/reseal correction and44
+focused PASS. Production source45/metadata26 and PUBLIC3/metadata6 stay unchanged.
+NEW finite V26 R11/fresh review/fresh-head CI is underway; old failure/costs stay.
+Publication14:46:29.352Z is not extended; formal input/B/C remain unstarted.
 
 Accepted complete input precedes B180 then fixed C14580 and every unchanged
 scientific Gate. Historical12721.16417100014444982>7200 remains all-paid FAIL,

@@ -260,3 +260,36 @@ immutable archive contents were never rewritten. Later tail proofs keep their ow
 new paths. Protected exact-head/main four-CI, publication actual closure, formal
 metadata4 and source preflight are still required; Original/Library IO remains0.
 This software preparation is not input/B/C/P17 acceptance.
+
+
+## Exact PR235 quality failure and test-only portability repair
+
+Reviewed44-path commit4ff1871/tree3210a4e was pushed and opened as
+[PR235](https://github.com/keith1117/TopoLab/pull/235). Its exact-head PR
+[CI41833143189](https://github.com/keith1117/TopoLab/actions/runs/41833143189)
+passes frontend, clean-linux-smoke and i1-native-software, but quality genuinely
+fails32 tests/3379 pass/37 platform skips in1502.65s. This is an assertion/setup
+failure, not a hosted-runner shutdown: every failure reaches the public recovery
+fixture's attempted mkdir of `/private` on Linux. Full242472-byte failed job log
+SHA `f4c30300567b3e108980f76cdde3db16a3446faf99ea1225f1e9274eca05e703`
+is retained externally; the first overwide display was truncated and is not
+used as a full log. The failed head/run and costs remain; no merge/retry occurs.
+
+A new public regression denies any fixture mkdir outside its own tmp_path. It
+fails before the fix at the fixed `/private/tmp/topolab-public-strict-binding-native-audit-unit`
+path. A local scalar-fixture wrapper now selects an owned tmp root and reseals
+its original transport before constructing the coordinated certificate. All44
+recovery tests and Ruff/diff checks pass. No production reader, source45,
+metadata26, real contract, numerical criterion, Native outcome or scientific
+permission changes. PUBLIC3/metadata6 source bindings remain exact.
+
+NEW V26 preregisters bounded campaign16 (2100s plus600 closure suffix,
+100000 software Native FULL), one fresh600s/16-call independent test reviewer,
+64 repair metadata calls each and four new workflow attempts. Old V25's two
+started runs remain; its two unstarted allowances close without transfer.
+Cumulative workflow reservation35 is not actual paid or an old counter reset.
+Original publication14:46:29.352Z and ROOT/I21:38Z remain hard limits. New R11
+starts13:23:52.716Z with final-source/test freeze
+`51bdbe79a2c4f3468653d7fa93aac4fd05bdf7d02cd064dd41027150ebcb99e4`;
+full validation/review/fresh exact-head CI are pending at this authoring frontier.
+There is no new Original read, Library probe, formal input/B/C or P17 result.

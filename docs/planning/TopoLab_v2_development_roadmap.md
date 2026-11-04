@@ -10,8 +10,9 @@ Final R10 all five checks/source unchanged3447PASS/one skip. Root/I bounded
 softwareNative FULL87600 each is below100000; actualtotalUNKNOWN, knownlower
 150030. Auxiliary V24 closing overrun staysFAIL. Preparation actually closed12:46:29.352Z
 with4266-member paired full replay. Newpublication ends14:46:29.352Z. Next:
-protected exact-head/main four-CI
-publication, formal metadata/input, then B/C under their original Gates.
+test-only PR235 Linux fixture portability repair/R11/fresh review, then protected
+exact-head/main four-CI publication, formal metadata/input and B/C. Production
+source45/metadata26/public certificates stay unchanged; old32CI failures remain.
 Original/Library IO remains gated; no old quota reopens and P17 is unrepaired.
 
 
