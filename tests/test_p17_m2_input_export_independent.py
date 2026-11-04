@@ -2151,3 +2151,50 @@ def test_stable_complete_actual_argv_binds_all_source_role_arguments(
     else:
         with pytest.raises(ValueError, match="complete argv"):
             checker.stable_argv_checked(plan, "a" * 64, "independent-r0")
+
+
+def test_registered_coordinator_child_is_counted_and_unregistered_pid_refused() -> None:
+    record, profile, helpers = resource_subject()
+    record['registered_source_child_cap'] = 1
+    record['measurement_execution_identity'] = (
+        'topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1')
+    record['measurement_scope'] = 'PUBLIC_STRICT_BINDING_REGISTRATION_ONLY'
+    record['role'] = 'binding-producer'
+    row = {'pid': 12, 'parent': 11, 'pgid': 10, 'rss_bytes': 35}
+    record['samples'][0]['roles'].append(row)
+    record['samples'][0]['group_plus_controller_rss_bytes'] += 35
+    evidence = {12: {'pid': 12, 'exit_code': 0, 'statistics_source': 'os.wait4',
+                     'platform': 'darwin', 'rss_unit': 'bytes',
+                     'native': {'rss_bytes': 40, 'user_seconds': .01, 'system_seconds': .01},
+                     'wait_finished_ns': 1000}}
+    kwargs = dict(profile=profile, log=b'', helper_profiles=helpers,
+                  expected_role='binding-producer', expected_argv=['new-public-tool'],
+                  platform='darwin', registered_source_children=evidence)
+    result = checker.audit_native_record(record, **kwargs)
+    assert result['inner_empirical_RSS_bytes'] == 230
+    row['pid'] = 13
+    with pytest.raises(ValueError, match='escaped role tree'):
+        checker.audit_native_record(record, **kwargs)
+    row['pid'] = 12
+    evidence[12]['native']['rss_bytes'] = 0
+    with pytest.raises(ValueError):
+        checker.audit_native_record(record, **kwargs)
+
+
+def test_registered_coordinator_refuses_an_extra_timer_sibling() -> None:
+    record, profile, helpers = resource_subject()
+    record.update(registered_source_child_cap=1, role='binding-producer',
+        measurement_scope='PUBLIC_STRICT_BINDING_REGISTRATION_ONLY',
+        measurement_execution_identity=(
+            'topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1'))
+    record['samples'][0]['roles'].append(
+        {'pid': 13, 'parent': 10, 'pgid': 10, 'rss_bytes': 35})
+    record['samples'][0]['group_plus_controller_rss_bytes'] += 35
+    children = {12: {'pid': 12, 'exit_code': 0, 'statistics_source': 'os.wait4',
+        'platform': 'darwin', 'rss_unit': 'bytes',
+        'native': {'rss_bytes': 40, 'user_seconds': .01, 'system_seconds': .01},
+        'wait_finished_ns': 1000}}
+    with pytest.raises(ValueError, match='command inventory'):
+        checker.audit_native_record(record, profile=profile, log=b'', helper_profiles=helpers,
+            expected_role='binding-producer', expected_argv=['new-public-tool'],
+            platform='darwin', registered_source_children=children)

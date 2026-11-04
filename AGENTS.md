@@ -17,16 +17,15 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Current action: [strict23 source binding](docs/planning/p17_m2_strict_source_binding_protocol.md)
-under the direct2026-11-03 continuous owner grant. Read its
-[actual frontier](docs/validation/p17_m2_strict_source_binding.md) before execution.
-Complete public native/independent-return verification, five checks and protected
-exact-head/latest-main four-CI publication before the new bounded original reads.
-Accepted23 binding precedes compatible40/558/1071 input publication/acceptance;
-accepted input precedes B, then separately frozen fixed C under unchanged gates.
-Source registration, software or input acceptance alone never repairs P17.
-All old quotas/failures/HELD scenes and the25 dirty files remain preserved.
-This grant overrides the one-slice stop only for its finite continuous action.
+Current action: [coordinated strict23 remedy](docs/planning/p17_m2_coordinated_source_binding_protocol.md)
+under the continuous owner grant. Read its [actual frontier](docs/validation/p17_m2_coordinated_source_binding.md).
+Published PR232/mainbb770/all-four CI preceded formal1 fifth-file strict mtime-108ns
+STOP/FULL780/HELD closeout. The new exact-file claim preserves all strict fields;
+public native/independent return, fresh reviews, complete checks/protected main CI
+and fresh preflight precede sole formal2. Accepted23 precedes compatible40/558/1071
+input, then B/fixed C under unchanged Gates. P17 remains unrepaired. Keep fixed
+budgets/deadlines, all old closed grants/HELD scenes and original25 dirty files.
+The owner overrides the one-slice stop only for this finite continuous action.
 
 Historical [v7 STOP and expired-result recovery](docs/validation/p17_m2_source_v7_expired_result_recovery.md):
 PR230/main20640851 and all four main CI jobs precede the historical v7 attempt.
