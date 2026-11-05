@@ -34,10 +34,23 @@ PLAN_SCHEMA = "topolab.v2.m2-strict-source-binding.plan.v1"
 METADATA_SCHEMA = "topolab.v2.m2-strict-source-binding.metadata-plan.v1"
 METADATA_SCOPE = "STRICT_BINDING_CERTIFICATE_METADATA_ONLY"
 METADATA_ROLE = "binding-certificate-auditor"
-ROLE_CAPS = {"producer-availability": 150, "independent-availability": 150,
-             "binding-producer": 300, "binding-independent": 300, "binding-closeout": 180}
-THREADS = {key: "1" for key in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
-                               "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS")}
+ROLE_CAPS = {
+    "producer-availability": 150,
+    "independent-availability": 150,
+             "binding-producer": 300,
+    "binding-independent": 300,
+    "binding-closeout": 180,
+}
+THREADS = {
+    key: "1"
+    for key in (
+        "OMP_NUM_THREADS",
+        "OPENBLAS_NUM_THREADS",
+        "MKL_NUM_THREADS",
+                               "VECLIB_MAXIMUM_THREADS",
+        "NUMEXPR_NUM_THREADS",
+    )
+}
 
 
 def need(ok, reason):
@@ -170,16 +183,46 @@ def runtime():
 
 
 def role_argv(root, mode, expected_sha, role, python, *, execution_identity=None):
-    recovery = ("topolab.v2.p17-binding-certificate-recovery.20261104.v1",
-                "topolab.v2.p17-binding-certificate-recovery.20261104.v3",
-                "topolab.v2.p17-binding-certificate-recovery.20261104.v4")
-    need(execution_identity in (None, IDENTITY, WINDOW2_ID, *recovery),
-         "unregistered command execution identity")
-    script = ("p17_m2_source_binding_recovery.py" if execution_identity in recovery else
-              "p17_m2_source_binding.py" if mode == "payload"
-              else "p17_m2_source_binding_native.py")
-    return [python, "-I", str(REPO / "scripts" / script), mode,
-            "--plan", str(Path(root) / "plan.json"), "--plan-sha", expected_sha, "--role", role]
+    recovery = (
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v1",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v3",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v4",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v5",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v6",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v7",
+        "topolab.v2.p17-binding-certificate-recovery.20261104.v8",
+    )
+    need(
+        execution_identity in (None, IDENTITY, WINDOW2_ID, *recovery),
+        "unregistered command execution identity",
+    )
+    script = (
+        "p17_m2_source_binding_recovery_v8.py"
+        if execution_identity == "topolab.v2.p17-binding-certificate-recovery.20261104.v8"
+        else "p17_m2_source_binding_recovery_v7.py"
+        if execution_identity == "topolab.v2.p17-binding-certificate-recovery.20261104.v7"
+        else "p17_m2_source_binding_recovery_v6.py"
+        if execution_identity == "topolab.v2.p17-binding-certificate-recovery.20261104.v6"
+        else "p17_m2_source_binding_recovery_v5.py"
+        if execution_identity == "topolab.v2.p17-binding-certificate-recovery.20261104.v5"
+        else "p17_m2_source_binding_recovery.py"
+        if execution_identity in recovery
+        else "p17_m2_source_binding.py"
+        if mode == "payload"
+        else "p17_m2_source_binding_native.py"
+    )
+    return [
+        python,
+        "-I",
+        str(REPO / "scripts" / script),
+        mode,
+        "--plan",
+        str(Path(root) / "plan.json"),
+        "--plan-sha",
+        expected_sha,
+        "--role",
+        role,
+    ]
 
 
 def literal_command(argv):
@@ -689,25 +732,80 @@ def metadata_path_guard(path):
 def load_plan(path, expected_sha):
     """Read one exact pinned plan. Historical replay does not re-admit sources."""
     path = Path(path)
-    need(path.is_absolute() and path.name == "plan.json" and ".." not in path.parts
-         and isinstance(expected_sha, str) and re.fullmatch(r"[0-9a-f]{64}", expected_sha),
-         "literal pinned plan required")
-    if path.parent.name.startswith(("topolab-public-binding-certificate-recovery-",
-                                    "binding-formal-v3-certificate-recovery-")):
-        return load("p17_m2_source_binding_recovery").load_plan(path, expected_sha)
-    formal_roots = {str(Path(json.loads(AUTHORITY.read_bytes())["evidence_root"])
-                        / f"binding-formal-v{attempt}") for attempt in (1, 2, 3)}
-    need(path.parent.name.startswith((public_prefix(1), public_prefix(2)))
-         or str(path.parent) in formal_roots
-         or str(path.parent) in {root + "-certificate-audit" for root in formal_roots},
-         "unregistered metadata plan root")
+    need(
+        path.is_absolute()
+        and path.name == "plan.json"
+        and ".." not in path.parts
+        and isinstance(expected_sha, str)
+        and re.fullmatch(r"[0-9a-f]{64}", expected_sha),
+        "literal pinned plan required",
+    )
+    if path.parent.name.startswith(
+        ("topolab-public-binding-certificate-recovery-", "binding-formal-v3-certificate-recovery-")
+    ):
+        recovery = load("p17_m2_source_binding_recovery")
+        if path.parent.name in (
+            "topolab-public-binding-certificate-recovery-v7",
+            "binding-formal-v3-certificate-recovery-v5",
+        ):
+            recovery = recovery.for_identity(
+                "topolab.v2.p17-binding-certificate-recovery.20261104.v5"
+            )
+        if path.parent.name in (
+            "topolab-public-binding-certificate-recovery-v8",
+            "binding-formal-v3-certificate-recovery-v6",
+        ):
+            recovery = recovery.for_identity(
+                "topolab.v2.p17-binding-certificate-recovery.20261104.v6"
+            )
+        if path.parent.name in (
+            "topolab-public-binding-certificate-recovery-v9",
+            "binding-formal-v3-certificate-recovery-v7",
+        ):
+            recovery = recovery.for_identity(
+                "topolab.v2.p17-binding-certificate-recovery.20261104.v7"
+            )
+        if path.parent.name == "binding-formal-v3-certificate-recovery-v8":
+            recovery = recovery.for_identity(
+                "topolab.v2.p17-binding-certificate-recovery.20261104.v8")
+        if path.parent.name == "topolab-public-binding-certificate-recovery-v9":
+            # The never-created fixed public9 name now has two historical policies.
+            # Select from the pinned plan identity, never from a renamed target.
+            captured, _ = read_metadata(path, 16 * 1024**2, expected=expected_sha)
+            recovery = recovery.for_identity(captured["context"]["execution_identity"])
+        return recovery.load_plan(path, expected_sha)
+    formal_roots = {
+        str(
+            Path(json.loads(AUTHORITY.read_bytes())["evidence_root"]) / f"binding-formal-v{attempt}"
+        )
+        for attempt in (1, 2, 3)
+    }
+    need(
+        path.parent.name.startswith((public_prefix(1), public_prefix(2)))
+        or str(path.parent) in formal_roots
+        or str(path.parent) in {root + "-certificate-audit" for root in formal_roots},
+        "unregistered metadata plan root",
+    )
     old_root = Path("/Users/keith1117/Documents/TopoLab-data")
-    need(not any(old_root.joinpath(part) in path.parents for part in (
-        "b3-v1-fits", "b4-5-weighted-terminal", "b3-v1-data", "b4-30-z-reflection-repair-v2")),
-        "old source namespace is not a plan")
+    need(
+        not any(
+            old_root.joinpath(part) in path.parents
+            for part in (
+                "b3-v1-fits",
+                "b4-5-weighted-terminal",
+                "b3-v1-data",
+                "b4-30-z-reflection-repair-v2",
+            )
+        ),
+        "old source namespace is not a plan",
+    )
     plan, _ = read_metadata(path, 2 * 1024**2, expected=expected_sha, canonical_required=True)
-    need(isinstance(plan, dict) and plan.get("schema") in (PLAN_SCHEMA, METADATA_SCHEMA)
-         and plan.get("root") == str(path.parent), "plan schema/root differs")
+    need(
+        isinstance(plan, dict)
+        and plan.get("schema") in (PLAN_SCHEMA, METADATA_SCHEMA)
+        and plan.get("root") == str(path.parent),
+        "plan schema/root differs",
+    )
     return plan
 
 
@@ -1397,6 +1495,15 @@ if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except Exception as exc:
-        print(canonical({"status": "STOP_NO_RETRY", "stage": "control",
-                         "source_attempts": [], **error_context(exc)}).decode(), end="")
+        print(
+            canonical(
+                {
+                    "status": "STOP_NO_RETRY",
+                    "stage": "control",
+                         "source_attempts": [],
+                    **error_context(exc),
+                }
+            ).decode(),
+            end="",
+        )
         raise SystemExit(1) from exc

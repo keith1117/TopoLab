@@ -1768,3 +1768,37 @@ Its explicit transport view preserves the original independent audit packet,
 descriptors, decision and failed predicates while exposing the completed-row
 count required by the existing metadata observer. No upstream code, dataset,
 model, numerical tolerance or scientific threshold was imported or changed.
+
+## 2026-11-04 — prospective publication and input identities
+
+Original TopoLab work separates a new, preregistered finite continuation from
+an expired publication window. Explicit entrypoints select isolated metadata,
+producer and independent profiles while retaining historical defaults, protocol
+bytes, raw clocks, captured strict23 evidence and old failures. New literal
+root/identity routing is shared with actual caller and scientific publication
+admission. No upstream code, new numerical method, dataset, model, tolerance or
+scientific acceptance threshold is introduced.
+
+## 2026-11-04 — explicit finite continuous profiles
+
+Original TopoLab work extends its fixed, separately budgeted execution
+profiles from captured actual clock/return failures. Independent implementations
+retain original strict source observations, opaque authority checks and every
+scientific threshold. No upstream code, data, weights, figure or numerical
+algorithm was copied or changed. Software clock diagnostics use new public
+processes only and preserve the unknown cause of historical clock differences.
+The third compatible profile prospectively separates permission preflight from
+the unchanged actor window. Exact failed tool arguments, actual endpoints and
+thrown errors are retained without fabricated process returns. The old failure
+scene and script remain unchanged; a public prelaunch-deadline regression
+precedes the new external watchdog version. No scientific criterion changes.
+
+## 2026-11-04 — deterministic public clock fixtures and unstarted profiles
+
+Original TopoLab work separates explicit unit-test time from unchanged frozen
+production expiry. A reproduced post-deadline CI fixture failure precedes the
+minimal positive/expired regression repair. A new fixed compatible execution
+profile prospectively binds finite budgets and authors for unstarted work,
+retaining historical observations, hashes, deadlines and protocol bytes. No
+external code, model, dataset, numerical method or scientific limit is imported
+or changed. Actual source/scientific acceptance remains separately required.

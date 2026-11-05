@@ -312,9 +312,13 @@ def test_new_authority_rejects_forged_resource_or_full_limits(registered):
         api.authority(producer.canonical(value))
 
 
-def test_publication_seam_never_restarts_formal_input(registered, monkeypatch):
+@pytest.mark.parametrize("deadline_offset_ms", [-1, 0, 1])
+def test_publication_seam_never_restarts_formal_input(registered, monkeypatch, deadline_offset_ms):
+    import time
     api, _, _, _, _ = registered
     policy = api.authority()
+    monkeypatch.setattr(time, "time_ns",
+                        lambda: (policy["global_deadline_ms"] + deadline_offset_ms) * 10**6)
     ready = {"preparation_closure_sha256": "1" * 64, "_preparation_actual_returned_ms": 1}
     digest = "2" * 64
     actual = {"responses": [{"result": {"output": ""}}]}
@@ -336,6 +340,11 @@ def test_publication_seam_never_restarts_formal_input(registered, monkeypatch):
     monkeypatch.setattr(
         api.control, "published_main_readiness", lambda value, **kwargs: {"main_CI_run": 17}
     )
+    if deadline_offset_ms > 0:
+        with pytest.raises(ValueError, match="actual preflight differs"):
+            api.publication_readiness(policy)
+        assert len(seen) == 1
+        return
     result = api.publication_readiness(policy)
     assert result["main_CI_run"] == 17
     assert result["readiness_reference"]["sha256"] == digest

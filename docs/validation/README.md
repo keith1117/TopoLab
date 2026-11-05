@@ -1,5 +1,11 @@
 # Validation evidence index
 
+Current [CI clock repair and new input continuation](p17_m2_ci_clock_and_input_continuation.md): reproduced fixture-time FAIL, unchanged production expiry, new finite8/6 software/input Gates; P17 remains unrepaired.
+
+Historical [continuous input profile](p17_m2_continuous_input_profile.md): captured strict23 core, approval-service STOP, R14/R15 budget failures, new finite7/5 permission remedy and pending input/scientific Gates; P17 unrepaired.
+
+Current [protected input publication and prospective continuation](p17_m2_prospective_input_publication_continuation.md): PR235/main1c38cbf, all-five R11 software PASS, old main-CI deadline FAIL and unlaunched input; NEW finite v5/v3 preparation, no P17 repair claim.
+
 Current [strict23 actual result and metadata recovery](p17_m2_source_binding_certificate_recovery.md): both authors'23 reads/native core pass; later metadata SUP missed its guard window before payload. Full failure/accounting/449-member paired closure retained; NEW metadata-only recovery remains gated and P17 unrepaired.
 
 Current [strict23 window2 frontier](p17_m2_coordinated_source_binding_window2.md): published main/four-CI and new independent metadata closure, retained formal1 STOP/old-window zero launch; new window software and original admission remain gated, P17 unrepaired.

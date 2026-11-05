@@ -21,6 +21,9 @@ IDENTITY = 'topolab.v2.p17-binding-certificate-recovery.20261104.v4'
 SCOPE = 'STRICT_BINDING_CERTIFICATE_RECOVERY_METADATA_ONLY'
 RECOVERY_SCOPE = SCOPE
 ROLE = 'binding-certificate-auditor'
+CLI_ENTRY = 'p17_m2_source_binding_recovery.py'
+CONTINUATION_INPUT = None
+CONTINUATION_CONFIG = {}
 PLAN_SCHEMA = 'topolab.v2.m2-strict-source-binding.metadata-plan.v1'
 ENVELOPE_SCHEMA = 'topolab.v2.m2-strict-source-binding.recovered-result.v1'
 FUTURE = 'NOT_CLAIMED_REQUIRES_SEPARATE_ACTUAL_OBSERVATION'
@@ -54,6 +57,12 @@ def sha(raw):
     return load('p17_m2_source_binding').sha(raw)
 
 
+def for_identity(identity):
+    if identity == 'topolab.v2.p17-binding-certificate-recovery.20261104.v4':
+        return load('p17_m2_source_binding_recovery')
+    return load('p17_m2_input_continuation').profile('recovery', identity)
+
+
 def authority():
     value = json.loads(AUTHORITY.read_bytes())
     need(value['execution_identity'] == IDENTITY and value['scope'] == SCOPE,
@@ -73,15 +82,40 @@ def replay_core(bundle, kind):
 
 
 def source_freeze():
-    frozen = load('p17_m2_source_binding').source_freeze(2, window2=True)
-    frozen['scripts/p17_m2_source_binding_recovery.py'] = sha(Path(__file__).read_bytes())
+    frozen = load("p17_m2_source_binding").source_freeze(2, window2=True)
+    frozen["scripts/p17_m2_source_binding_recovery.py"] = sha(Path(__file__).read_bytes())
     frozen[PROTOCOL_PATH] = sha(AUTHORITY.read_bytes())
-    for name in ('scripts/p17_m2_source_acquisition_control.py',
-                 'scripts/p17_m2_source_acquisition_independent.py',
-                 'scripts/p17_m2_registered_input.py',
-                 'docs/planning/p17_m2_registered_input_v2_protocol.json',
-                 'scripts/p17_m2_scientific_orchestration.py'):
+    for name in (
+        "scripts/p17_m2_source_acquisition_control.py",
+        "scripts/p17_m2_source_acquisition_independent.py",
+        "scripts/p17_m2_registered_input.py",
+        (
+            CONTINUATION_CONFIG["input_protocol"]
+            if CONTINUATION_INPUT is not None
+            else "docs/planning/p17_m2_registered_input_v2_protocol.json"
+        ),
+        "scripts/p17_m2_scientific_orchestration.py",
+    ):
         frozen[name] = sha((REPO / name).read_bytes())
+    if CONTINUATION_INPUT is not None:
+        for name in (
+            "scripts/p17_m2_input_continuation.py",
+            "scripts/" + CONTINUATION_CONFIG["recovery_entry"],
+            "scripts/" + CONTINUATION_CONFIG["input_entry"],
+            CONTINUATION_CONFIG["input_protocol"],
+        ):
+            frozen[name] = sha((REPO / name).read_bytes())
+    if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
+                              load("p17_m2_input_continuation").V35_INPUT):
+        for name in (
+            "scripts/p17_m2_source_verified_input.py",
+            "scripts/p17_m2_scientific_independent.py",
+            "scripts/await_m2_acquisition_receipt.py",
+            "scripts/file_m2_acquisition_event.py",
+            "scripts/m2_acquisition_cohort.mjs",
+            "scripts/m2_acquisition_actual_boundary.mjs",
+        ):
+            frozen[name] = sha((REPO / name).read_bytes())
     return frozen
 
 
@@ -91,7 +125,6 @@ def read_ref(reference, maximum=32 * 1024**2):
          and re.fullmatch('[0-9a-f]{64}', reference['sha256']), 'literal metadata pin required')
     return load('p17_m2_source_binding').read_metadata(
         Path(reference['path']), maximum, expected=reference['sha256'])[0]
-
 
 
 def capture_ref(reference, maximum=32 * 1024**2):
@@ -116,17 +149,23 @@ def captured_value(capture, value_key='value'):
 
 def budget_readiness():
     policy = authority()
-    captures = {key: capture_ref(policy[key]) for key in (
-        'budget', 'budget_review', 'software_activation', 'registration_actual',
-        'prior_failed_metadata_closure', 'prior_failed_metadata_closure_actual')}
+    keys = ('budget', 'budget_review', 'software_activation', 'registration_actual',
+            'prior_failed_metadata_closure', 'prior_failed_metadata_closure_actual')
+    if CONTINUATION_INPUT is not None:
+        keys = load('p17_m2_input_continuation').budget_keys(IDENTITY)
+    captures = {key: capture_ref(policy[key]) for key in keys}
     _captured_budget(captures)
-    need(time.time_ns() <= policy['limits']['global_deadline_ms'] * 10**6,
+    need(time.time_ns() <= min(policy['limits']['global_deadline_ms'],
+        policy.get('independent_author_deadline_ms',
+                   policy['limits']['global_deadline_ms'])) * 10**6,
          'finite recovery global deadline unavailable')
     return captures
 
 
 def _captured_budget(captures):
     """Bind the new V22 authority to original registration and failed-old closure."""
+    if CONTINUATION_INPUT is not None:
+        return load('p17_m2_input_continuation').captured_budget(sys.modules[__name__], captures)
     policy = authority()
     keys = ('budget', 'budget_review', 'software_activation', 'registration_actual',
             'prior_failed_metadata_closure', 'prior_failed_metadata_closure_actual')
@@ -415,7 +454,7 @@ def public_readiness(attempt, expected_sha, actual_sha):
     need(certificate['scope'] == load('p17_m2_source_binding').PUBLIC_SCOPE,
          'public captured core required')
     argv = [plan['runtime']['python'], '-I',
-            str(REPO / 'scripts/p17_m2_source_binding_recovery.py'),
+            str(REPO / 'scripts' / CLI_ENTRY),
             'finalize-result', '--plan', str(Path(plan['root']) / 'plan.json'),
             '--plan-sha', sha(canonical(plan))]
     reference = {'path': str(Path(plan['root']) / 'finalize-result-raw-actual-call.json'),
@@ -438,7 +477,7 @@ def preflight_argv(attempt, public_sha, finalize_actual_sha, standards_sha, spec
                    activation_sha):
     _root('public', attempt)
     return [load('p17_m2_source_binding').runtime()['python'], '-I',
-            str(REPO / 'scripts/p17_m2_source_binding_recovery.py'), 'preflight',
+            str(REPO / 'scripts' / CLI_ENTRY), 'preflight',
             '--attempt', str(attempt), '--public-certificate-sha', public_sha,
             '--finalize-actual-sha', finalize_actual_sha, '--standards-sha', standards_sha,
             '--spec-sha', spec_sha, '--activation-sha', activation_sha]
@@ -538,63 +577,168 @@ def formal_readiness(public_sha, preflight_sha, preflight_return_sha, activation
                 'sha256': activation_sha})['raw']}
 
 
-def prepare(kind, attempt=1, *, standards_sha=None, spec_sha=None,
-            public_certificate_sha=None, preflight_sha=None, preflight_return_sha=None,
-            activation_sha=None):
+def checked_permission(capture, runtime, *, before_ms=None):
+    need(isinstance(capture, dict), "captured permission actual required")
+    need(capture.get("reference", {}).get("path") in authority()[
+        "permission_preflight"]["packet_paths"].values(), "literal permission packet pin required")
+    packet = captured_value(capture)
+    argv = [runtime["python"], "-I", str(REPO / "scripts" / CLI_ENTRY), "--help"]
+    first, last = exact_actual(packet, argv, authority()["actors"]["independent"])
+    request = packet["request"]
+    prefix = [
+        "env",
+        "OMP_NUM_THREADS=1",
+        "OPENBLAS_NUM_THREADS=1",
+        "MKL_NUM_THREADS=1",
+        "VECLIB_MAXIMUM_THREADS=1",
+        "NUMEXPR_NUM_THREADS=1",
+        *argv[:3],
+    ]
+    need(
+        request.get("sandbox_permissions") == "require_escalated"
+        and request.get("prefix_rule") == prefix
+        and len(packet["responses"]) == 1
+        and packet["responses"][0]["result"]["exit_code"] == 0
+        and "usage:" in packet["responses"][0]["result"]["output"]
+        and first >= authority()["limits"]["software_start_ms"]
+        and last <= (time.time_ns() // 10**6 if before_ms is None else before_ms),
+        "permission actual author/prefix/help/ordering differs",
+    )
+    return first, last
+
+
+def prepare(
+    kind,
+    attempt=1,
+    *,
+    standards_sha=None,
+    spec_sha=None,
+    public_certificate_sha=None,
+    preflight_sha=None,
+    preflight_return_sha=None,
+    activation_sha=None,
+    permission_packet=None,
+    permission_packet_sha=None,
+):
     """Prepare one fixed new metadata attempt and return its exact small command table."""
-    core, policy = load('p17_m2_source_binding'), authority()
+    core, policy = load("p17_m2_source_binding"), authority()
     root = _root(kind, attempt)
+    permission = None
+    if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
+                              load("p17_m2_input_continuation").V35_INPUT):
+        need(
+            permission_packet is not None and permission_packet_sha is not None,
+            "actual approved permission preflight required before actor/root preparation",
+        )
+        need(permission_packet == policy["permission_preflight"]["packet_paths"][kind],
+             "literal permission packet path required before metadata read")
+        permission = capture_ref({"path": permission_packet, "sha256": permission_packet_sha})
+        checked_permission(permission, core.runtime())
     reviews = review_readiness(standards_sha, spec_sha)
     budget = budget_readiness()
     runtime = core.runtime()
-    need(runtime['isolated'] == 1 and runtime['cwd'] == str(REPO)
-         and runtime['threads'] == core.THREADS, 'isolated locked single-thread runtime required')
-    entry = {'budget': policy['budget'], 'budget_evidence': budget,
-             'reviews': reviews, 'old_source_access': False,
-             'old_scene_write': False}
-    if kind == 'formal':
-        entry['formal'] = formal_readiness(public_certificate_sha, preflight_sha,
-                                          preflight_return_sha, activation_sha)
-    pin = policy['captured_cores'][kind]
-    bundle = read_ref({'path': pin['path'], 'sha256': pin['sha256']})
+    need(
+        runtime["isolated"] == 1
+        and runtime["cwd"] == str(REPO)
+        and runtime["threads"] == core.THREADS,
+        "isolated locked single-thread runtime required",
+    )
+    entry = {
+        "budget": policy["budget"],
+        "budget_evidence": budget,
+        "reviews": reviews,
+        "old_source_access": False,
+        "old_scene_write": False,
+    }
+    if permission is not None:
+        entry["permission"] = permission
+        entry["permission_publication"] = publication_readiness()
+    if kind == "formal":
+        entry["formal"] = formal_readiness(
+            public_certificate_sha, preflight_sha, preflight_return_sha, activation_sha
+        )
+    pin = policy["captured_cores"][kind]
+    bundle = read_ref({"path": pin["path"], "sha256": pin["sha256"]})
     replay_core(bundle, kind)
     started = time.time_ns()
-    limit = (policy['limits']['software_deadline_ms'] if kind == 'public'
-             else entry['formal']['activation']['deadline_ms']) * 10**6
-    need(started + 300 * 10**9 <= min(limit, policy['limits']['global_deadline_ms'] * 10**6),
-         'complete immutable recovery window unavailable')
+    limit = (
+        policy["limits"]["software_deadline_ms"]
+        if kind == "public"
+        else entry["formal"]["activation"]["deadline_ms"]
+    ) * 10**6
+    need(
+        started + 300 * 10**9 <= min(limit, policy["limits"]["global_deadline_ms"] * 10**6,
+            policy.get("independent_author_deadline_ms",
+                       policy["limits"]["global_deadline_ms"]) * 10**6),
+        "complete immutable recovery window unavailable",
+    )
     context = _context(kind)
     deadline = datetime.fromtimestamp((started + 300 * 10**9) / 10**9, UTC).isoformat()
-    plan = {'schema': PLAN_SCHEMA, 'root': str(root), 'context': context,
-            'runtime': runtime, 'kind': kind, 'recovery_attempt': attempt,
-            'captured_core_context': deepcopy(bundle['plan']['context']),
-            'bundle': {'path': pin['path'], 'sha256': pin['sha256']},
-            'role_order': [ROLE], 'roles': {ROLE: {'author': policy['actors']['independent'],
-                'FULL': 120, 'timeout': 110, 'argv': core.role_argv(
-                    root, 'payload', '@PLAN_SHA256@', ROLE, runtime['python'],
-                    execution_identity=IDENTITY)}},
-            'started_unix_ns': started, 'deadline_unix_ns': started + 300 * 10**9,
-            'actor_activation_UTC_seconds': started / 10**9, 'actor_window_seconds': 300,
-            'actor_deadlines_UTC': {key: deadline.replace('+00:00', 'Z') for key in
-                                    ('exporter', 'independent')}, 'entry': entry}
+    plan = {
+        "schema": PLAN_SCHEMA,
+        "root": str(root),
+        "context": context,
+        "runtime": runtime,
+        "kind": kind,
+        "recovery_attempt": attempt,
+        "captured_core_context": deepcopy(bundle["plan"]["context"]),
+        "bundle": {"path": pin["path"], "sha256": pin["sha256"]},
+        "role_order": [ROLE],
+        "roles": {
+            ROLE: {
+                "author": policy["actors"]["independent"],
+                "FULL": 120,
+                "timeout": 110,
+                "argv": core.role_argv(
+                    root,
+                    "payload",
+                    "@PLAN_SHA256@",
+                    ROLE,
+                    runtime["python"],
+                    execution_identity=IDENTITY,
+                ),
+            }
+        },
+        "started_unix_ns": started,
+        "deadline_unix_ns": started + 300 * 10**9,
+        "actor_activation_UTC_seconds": started / 10**9,
+        "actor_window_seconds": 300,
+        "actor_deadlines_UTC": {
+            key: deadline.replace("+00:00", "Z") for key in ("exporter", "independent")
+        },
+        "entry": entry,
+    }
     # No target stat/open/mkdir occurs before every admission dependency above.
-    parent = core.source_parent(root.parent, 'unused')
+    parent = core.source_parent(root.parent, "unused")
     try:
         os.mkdir(root.name, mode=0o700, dir_fd=parent)
         os.fsync(parent)
     finally:
         os.close(parent)
-    plan_sha = write_new(root / 'plan.json', plan)
-    native = load('p17_m2_source_binding_native')
-    commands = {mode: {'argv': native.argv_for(plan, mode, ROLE),
-                       'cmd': core.literal_command(native.argv_for(plan, mode, ROLE))}
-                for mode in ('supervise', 'record')}
-    return {'root': str(root), 'plan_path': str(root / 'plan.json'), 'plan_sha256': plan_sha,
-            'execution_identity': IDENTITY, 'scope': SCOPE, 'role': ROLE,
-            'author': policy['actors']['independent'], 'actor_start_ms': started // 10**6,
-            'deadline_ms': plan['deadline_unix_ns'] // 10**6, 'FULL': 120,
-            'reserve_seconds': 60, 'window_seconds': 300, 'commands': commands}
-
+    plan_sha = write_new(root / "plan.json", plan)
+    native = load("p17_m2_source_binding_native")
+    commands = {
+        mode: {
+            "argv": native.argv_for(plan, mode, ROLE),
+            "cmd": core.literal_command(native.argv_for(plan, mode, ROLE)),
+        }
+        for mode in ("supervise", "record")
+    }
+    return {
+        "root": str(root),
+        "plan_path": str(root / "plan.json"),
+        "plan_sha256": plan_sha,
+        "execution_identity": IDENTITY,
+        "scope": SCOPE,
+        "role": ROLE,
+        "author": policy["actors"]["independent"],
+        "actor_start_ms": started // 10**6,
+        "deadline_ms": plan["deadline_unix_ns"] // 10**6,
+        "FULL": 120,
+        "reserve_seconds": 60,
+        "window_seconds": 300,
+        "commands": commands,
+    }
 
 
 def _captured_activation(activation, raw, expected_sha, tree):
@@ -606,7 +750,9 @@ def _captured_activation(activation, raw, expected_sha, tree):
          and activation.get('software_source_tree') == tree
          and type(activation.get('started_ms')) is int
          and activation.get('deadline_ms') == activation['started_ms'] + 1200000
-         and activation['deadline_ms'] <= policy['limits']['global_deadline_ms'],
+         and activation['deadline_ms'] <= min(policy['limits']['global_deadline_ms'],
+             policy.get('independent_author_deadline_ms',
+                        policy['limits']['global_deadline_ms'])),
          'captured activation schema/source/fixed clock differs')
     closure = activation['software_closure_actual']
     _, ended = exact_actual(closure, closure['argv'], policy['actors']['producer'])
@@ -614,7 +760,8 @@ def _captured_activation(activation, raw, expected_sha, tree):
     publication_start, publication_end = exact_actual(publication_closure,
         publication_closure['argv'], policy['actors']['producer'])
     need(ended <= publication_start <= publication_end
-         <= ended + policy['publication_only']['seconds_each'] * 1000
+         <= (policy['limits']['software_deadline_ms'] if CONTINUATION_INPUT is not None
+             else ended + policy['publication_only']['seconds_each'] * 1000)
          and publication_end == activation['started_ms']
          and policy['limits']['software_start_ms'] <= ended
          <= policy['limits']['software_deadline_ms'],
@@ -640,7 +787,7 @@ def _captured_public(public, expected_sha, tree):
     actual = captured_value({'reference': reference, 'raw': public.get('finalize_actual_raw'),
                              'value': public['finalize_actual']})
     argv = [plan['runtime']['python'], '-I',
-            str(REPO / 'scripts/p17_m2_source_binding_recovery.py'), 'finalize-result',
+            str(REPO / 'scripts' / CLI_ENTRY), 'finalize-result',
             '--plan', str(Path(plan['root']) / 'plan.json'),
             '--plan-sha', sha(canonical(plan))]
     first, last = exact_actual(actual, argv, authority()['actors']['producer'])
@@ -692,7 +839,7 @@ def _captured_formal(admitted, context, runtime):
     need(actual.get('author') == policy['actors']['independent']
          and actual.get('preflight_sha256') == reference['sha256'],
          'captured preflight actual SHA/author differs')
-    argv = [runtime['python'], '-I', str(REPO / 'scripts/p17_m2_source_binding_recovery.py'),
+    argv = [runtime['python'], '-I', str(REPO / 'scripts' / CLI_ENTRY),
         'preflight', '--attempt', str(preflight['public_recovery_attempt']),
         '--public-certificate-sha', public_sha, '--finalize-actual-sha',
         public['finalize_actual_reference']['sha256'], '--standards-sha',
@@ -728,69 +875,133 @@ def _captured_formal(admitted, context, runtime):
 
 def _plan_shape(plan, *, historical=False):
     policy = authority()
-    kind, attempt = plan.get('kind'), plan.get('recovery_attempt')
-    need(plan.get('schema') == PLAN_SCHEMA and plan.get('root') == str(_root(kind, attempt))
-         and plan.get('role_order') == [ROLE], 'recovery plan/root/role inventory differs')
-    context = plan['context']
-    need(set(context) == {'execution_identity', 'scope', 'attempt', 'source_root',
-                          'authority_sha256', 'source_tree', 'actors'}
-         and context['execution_identity'] == IDENTITY and context['scope'] == SCOPE
-         and type(context['attempt']) is int and context['attempt'] == 1
-         and context['authority_sha256'] == sha(AUTHORITY.read_bytes())
-         and context['actors'] == policy['actors']
-         and context['source_root'] == str(Path(policy['captured_cores'][kind]['path']).parent),
-         'new recovery context must not relabel captured source identity')
-    tree = context['source_tree']
-    need(isinstance(tree, dict) and set(tree) == set(source_freeze())
-         and all(isinstance(value, str) and re.fullmatch('[0-9a-f]{64}', value)
-                 for value in tree.values()), 'complete recovery software freeze differs')
+    kind, attempt = plan.get("kind"), plan.get("recovery_attempt")
+    need(
+        plan.get("schema") == PLAN_SCHEMA
+        and plan.get("root") == str(_root(kind, attempt))
+        and plan.get("role_order") == [ROLE],
+        "recovery plan/root/role inventory differs",
+    )
+    context = plan["context"]
+    need(
+        set(context)
+        == {
+            "execution_identity",
+            "scope",
+            "attempt",
+            "source_root",
+            "authority_sha256",
+            "source_tree",
+            "actors",
+        }
+        and context["execution_identity"] == IDENTITY
+        and context["scope"] == SCOPE
+        and type(context["attempt"]) is int
+        and context["attempt"] == 1
+        and context["authority_sha256"] == sha(AUTHORITY.read_bytes())
+        and context["actors"] == policy["actors"]
+        and context["source_root"] == str(Path(policy["captured_cores"][kind]["path"]).parent),
+        "new recovery context must not relabel captured source identity",
+    )
+    tree = context["source_tree"]
+    need(
+        isinstance(tree, dict)
+        and set(tree) == set(source_freeze())
+        and all(
+            isinstance(value, str) and re.fullmatch("[0-9a-f]{64}", value)
+            for value in tree.values()
+        ),
+        "complete recovery software freeze differs",
+    )
     if not historical:
-        need(context == _context(kind), 'current recovery source freeze differs')
-    expected = policy['captured_cores'][kind]
-    need(plan.get('captured_core_context') == expected['context']
-         and plan.get('bundle') == {'path': expected['path'], 'sha256': expected['sha256']},
-         'captured core context/pin differs')
-    runtime = plan['runtime']
-    expected_role = {'author': policy['actors']['independent'], 'FULL': 120, 'timeout': 110,
-                     'argv': load('p17_m2_source_binding').role_argv(
-                         plan['root'], 'payload', '@PLAN_SHA256@', ROLE, runtime['python'],
-                         execution_identity=IDENTITY)}
-    need(plan['roles'] == {ROLE: expected_role}
-         and type(plan['started_unix_ns']) is int and type(plan['deadline_unix_ns']) is int
-         and plan['deadline_unix_ns'] - plan['started_unix_ns'] == 300 * 10**9
-         and plan['actor_activation_UTC_seconds'] == plan['started_unix_ns'] / 10**9
-         and type(plan['actor_window_seconds']) is int and plan['actor_window_seconds'] == 300,
-         'immutable recovery native cap/window differs')
-    entry = plan['entry']
-    need(entry.get('budget') == policy['budget'] and entry.get('old_source_access') is False
-         and entry.get('old_scene_write') is False, 'new finite metadata entry differs')
-    _captured_budget(entry.get('budget_evidence'))
-    for axis in ('standards', 'spec'):
-        report = captured_value(entry['reviews'][axis], 'report')
-        reference = entry['reviews'][axis]['reference']
-        need(reference['path'] == policy['review_paths'][axis]
-             and report.get('author') == policy['review_authors'][axis]
-             and report.get('execution_identity') == IDENTITY
-             and report.get('status') == 'PASS' and report.get('open_findings') == []
-             and report.get('reviewed_source_tree') == tree,
-             'captured fresh review differs from new software freeze')
-    need('remedy' not in entry, 'NEW recovery remedy closed unused; primary only')
-    if kind == 'formal':
-        _captured_formal(entry['formal'], context, runtime)
-        admitted = entry['formal']
-        preflight = admitted['preflight']
-        need(preflight['source_tree'] == tree and preflight['execution_identity'] == IDENTITY
-             and preflight['scope'] == SCOPE and preflight['authority_sha256']
-             == context['authority_sha256'], 'formal preflight policy differs')
-        activation = admitted['activation']
-        need(activation['software_source_tree'] == tree
-             and plan['deadline_unix_ns'] <= activation['deadline_ms'] * 10**6,
-             'formal native window exceeds new activated result stage')
+        need(context == _context(kind), "current recovery source freeze differs")
+    expected = policy["captured_cores"][kind]
+    need(
+        plan.get("captured_core_context") == expected["context"]
+        and plan.get("bundle") == {"path": expected["path"], "sha256": expected["sha256"]},
+        "captured core context/pin differs",
+    )
+    runtime = plan["runtime"]
+    expected_role = {
+        "author": policy["actors"]["independent"],
+        "FULL": 120,
+        "timeout": 110,
+        "argv": load("p17_m2_source_binding").role_argv(
+            plan["root"],
+            "payload",
+            "@PLAN_SHA256@",
+            ROLE,
+            runtime["python"],
+            execution_identity=IDENTITY,
+        ),
+    }
+    need(
+        plan["roles"] == {ROLE: expected_role}
+        and type(plan["started_unix_ns"]) is int
+        and type(plan["deadline_unix_ns"]) is int
+        and plan["deadline_unix_ns"] - plan["started_unix_ns"] == 300 * 10**9
+        and plan["actor_activation_UTC_seconds"] == plan["started_unix_ns"] / 10**9
+        and type(plan["actor_window_seconds"]) is int
+        and plan["actor_window_seconds"] == 300,
+        "immutable recovery native cap/window differs",
+    )
+    entry = plan["entry"]
+    need(
+        entry.get("budget") == policy["budget"]
+        and entry.get("old_source_access") is False
+        and entry.get("old_scene_write") is False,
+        "new finite metadata entry differs",
+    )
+    if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
+                              load("p17_m2_input_continuation").V35_INPUT):
+        checked_permission(
+            entry.get("permission"), runtime, before_ms=plan["started_unix_ns"] // 10**6
+        )
+    if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
+                              load("p17_m2_input_continuation").V35_INPUT):
+        _publication_shape(entry.get("permission_publication"))
+    _captured_budget(entry.get("budget_evidence"))
+    for axis in ("standards", "spec"):
+        report = captured_value(entry["reviews"][axis], "report")
+        reference = entry["reviews"][axis]["reference"]
+        need(
+            reference["path"] == policy["review_paths"][axis]
+            and report.get("author") == policy["review_authors"][axis]
+            and report.get("execution_identity") == IDENTITY
+            and report.get("status") == "PASS"
+            and report.get("open_findings") == []
+            and report.get("reviewed_source_tree") == tree,
+            "captured fresh review differs from new software freeze",
+        )
+    need("remedy" not in entry, "NEW recovery remedy closed unused; primary only")
+    if kind == "formal":
+        _captured_formal(entry["formal"], context, runtime)
+        admitted = entry["formal"]
+        preflight = admitted["preflight"]
+        need(
+            preflight["source_tree"] == tree
+            and preflight["execution_identity"] == IDENTITY
+            and preflight["scope"] == SCOPE
+            and preflight["authority_sha256"] == context["authority_sha256"],
+            "formal preflight policy differs",
+        )
+        activation = admitted["activation"]
+        need(
+            activation["software_source_tree"] == tree
+            and plan["deadline_unix_ns"] <= activation["deadline_ms"] * 10**6,
+            "formal native window exceeds new activated result stage",
+        )
     else:
-        need(plan['deadline_unix_ns'] <= policy['limits']['software_deadline_ms'] * 10**6,
-             'public recovery outside fixed software stage')
-    need(plan['deadline_unix_ns'] <= policy['limits']['global_deadline_ms'] * 10**6,
-         'recovery beyond unchanged global hard limit')
+        need(
+            plan["deadline_unix_ns"] <= policy["limits"]["software_deadline_ms"] * 10**6,
+            "public recovery outside fixed software stage",
+        )
+    need(
+        plan["deadline_unix_ns"] <= min(policy["limits"]["global_deadline_ms"],
+            policy.get("independent_author_deadline_ms",
+                       policy["limits"]["global_deadline_ms"])) * 10**6,
+        "recovery beyond unchanged global hard limit",
+    )
     return plan
 
 
@@ -918,7 +1129,7 @@ def verify_registration(envelope, finalize_actual, *, kind='formal'):
          and plan['context']['source_tree'] == source_freeze(),
          'registration kind/scope/current published software differs')
     argv = [plan['runtime']['python'], '-I',
-            str(Path(plan['runtime']['cwd']) / 'scripts/p17_m2_source_binding_recovery.py'),
+            str(Path(plan['runtime']['cwd']) / 'scripts' / CLI_ENTRY),
             'finalize-result', '--plan', str(Path(plan['root']) / 'plan.json'),
             '--plan-sha', sha(canonical(plan))]
     first, last = exact_actual(finalize_actual, argv, authority()['actors']['producer'])
@@ -955,7 +1166,8 @@ def finalize(plan):
     policy, root = authority(), Path(plan['root'])
     deadline = (policy['limits']['software_deadline_ms'] if plan['kind'] == 'public'
                 else plan['entry']['formal']['activation']['deadline_ms'])
-    need(time.time_ns() // 10**6 <= min(deadline, policy['limits']['global_deadline_ms']),
+    need(time.time_ns() // 10**6 <= min(deadline, policy['limits']['global_deadline_ms'],
+             policy.get('independent_author_deadline_ms', policy['limits']['global_deadline_ms'])),
          'fixed new recovery result deadline expired')
     core, native = load('p17_m2_source_binding'), load('p17_m2_source_binding_native')
     bundle = read_ref(plan['bundle'])
@@ -977,45 +1189,93 @@ def finalize(plan):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode', choices=('prepare', 'supervise', 'run', 'record', 'payload',
-        'file-actual-event', 'accept-role', 'show-commands', 'finalize-result', 'preflight'))
-    parser.add_argument('--kind', choices=('public', 'formal'))
-    parser.add_argument('--attempt', type=int, choices=(1,), default=1)
-    for key in ('plan', 'plan-sha', 'role', 'events-sha', 'packet', 'packet-sha', 'event-mode',
-                'standards-sha', 'spec-sha', 'public-certificate-sha', 'preflight-sha',
-                'preflight-return-sha', 'activation-sha', 'finalize-actual-sha'):
-        parser.add_argument('--' + key)
+    parser.add_argument(
+        "mode",
+        choices=(
+            "prepare",
+            "supervise",
+            "run",
+            "record",
+            "payload",
+            "file-actual-event",
+            "accept-role",
+            "show-commands",
+            "finalize-result",
+            "preflight",
+        ),
+    )
+    parser.add_argument("--kind", choices=("public", "formal"))
+    parser.add_argument("--attempt", type=int, choices=(1,), default=1)
+    for key in (
+        "plan",
+        "plan-sha",
+        "role",
+        "events-sha",
+        "packet",
+        "packet-sha",
+        "event-mode",
+        "standards-sha",
+        "spec-sha",
+        "public-certificate-sha",
+        "preflight-sha",
+        "preflight-return-sha",
+        "activation-sha",
+        "finalize-actual-sha",
+        "permission-packet",
+        "permission-packet-sha",
+    ):
+        parser.add_argument("--" + key)
     args = parser.parse_args()
-    if args.mode == 'prepare':
-        result = prepare(args.kind, args.attempt, standards_sha=args.standards_sha,
-            spec_sha=args.spec_sha, public_certificate_sha=args.public_certificate_sha,
-            preflight_sha=args.preflight_sha, preflight_return_sha=args.preflight_return_sha,
-            activation_sha=args.activation_sha)
-    elif args.mode == 'preflight':
-        result = preflight(args.attempt, args.public_certificate_sha, args.finalize_actual_sha,
-            standards_sha=args.standards_sha, spec_sha=args.spec_sha,
-            activation_sha=args.activation_sha)
-    elif args.mode in ('supervise', 'run', 'record'):
-        return load('p17_m2_source_binding_native').main()
+    if args.mode == "prepare":
+        result = prepare(
+            args.kind,
+            args.attempt,
+            standards_sha=args.standards_sha,
+            spec_sha=args.spec_sha,
+            public_certificate_sha=args.public_certificate_sha,
+            preflight_sha=args.preflight_sha,
+            preflight_return_sha=args.preflight_return_sha,
+            activation_sha=args.activation_sha,
+            permission_packet=args.permission_packet,
+            permission_packet_sha=args.permission_packet_sha,
+        )
+    elif args.mode == "preflight":
+        result = preflight(
+            args.attempt,
+            args.public_certificate_sha,
+            args.finalize_actual_sha,
+            standards_sha=args.standards_sha,
+            spec_sha=args.spec_sha,
+            activation_sha=args.activation_sha,
+        )
+    elif args.mode in ("supervise", "run", "record"):
+        return load("p17_m2_source_binding_native").main()
     else:
         plan = load_plan(args.plan, args.plan_sha)
-        core = load('p17_m2_source_binding')
-        if args.mode == 'payload':
+        core = load("p17_m2_source_binding")
+        if args.mode == "payload":
             result = payload(plan, args.role)
-        elif args.mode == 'file-actual-event':
-            result = core.file_actual_event(plan, args.role, args.event_mode,
-                                           args.packet, args.packet_sha)
-        elif args.mode == 'accept-role':
+        elif args.mode == "file-actual-event":
+            result = core.file_actual_event(
+                plan, args.role, args.event_mode, args.packet, args.packet_sha
+            )
+        elif args.mode == "accept-role":
             result = core.accept_role(plan, args.role, args.events_sha)
-        elif args.mode == 'show-commands':
-            native = load('p17_m2_source_binding_native')
-            result = {ROLE: {mode: {'argv': native.argv_for(plan, mode, ROLE),
-                'cmd': core.literal_command(native.argv_for(plan, mode, ROLE))}
-                for mode in ('supervise', 'record')}}
+        elif args.mode == "show-commands":
+            native = load("p17_m2_source_binding_native")
+            result = {
+                ROLE: {
+                    mode: {
+                        "argv": native.argv_for(plan, mode, ROLE),
+                        "cmd": core.literal_command(native.argv_for(plan, mode, ROLE)),
+                    }
+                    for mode in ("supervise", "record")
+                }
+            }
         else:
             result = finalize(plan)
-    print(canonical(result).decode(), end='')
-    return 1 if result.get('status') == 'STOP_NO_RETRY' else 0
+    print(canonical(result).decode(), end="")
+    return 1 if result.get("status") == "STOP_NO_RETRY" else 0
 
 
 if __name__ == '__main__':
@@ -1025,8 +1285,16 @@ if __name__ == '__main__':
     except BaseException as error:
         if isinstance(error, SystemExit):
             raise
-        print(canonical({'status': 'STOP_NO_RETRY', 'stage': 'recovery_control',
+        print(
+            canonical(
+                {
+                    'status': 'STOP_NO_RETRY',
+                    'stage': 'recovery_control',
             'original_source_reads': 0,
             'publication_failure': getattr(error, 'recovery_publication_failure', None),
-            **load('p17_m2_source_binding').error_context(error)}).decode(), end='')
+            **load('p17_m2_source_binding').error_context(error),
+                }
+            ).decode(),
+            end='',
+        )
         raise SystemExit(1) from error

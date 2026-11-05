@@ -1,5 +1,49 @@
 # Development history
 
+## 2026-11-04 — CI clock fixture repair and unstarted continuation
+
+[Evidence](validation/p17_m2_ci_clock_and_input_continuation.md) preserves
+PR236's Linux1FAIL/3472PASS/37skip from a public fixture crossing an old frozen
+deadline, plus local RED and correct production rejection. Explicit positive/
+expired test clocks and new bounded8/6 profiles precede fresh release/input
+Gates. NEW V35 adds8520 prospective author seconds, cumulative150720 within
+original151200; old quotas/counters/fees remain closed and charged. Source/B/C
+are unaccepted and fixedP17 remains unrepaired.5435 paired metadata members were
+fully replayed; original25 remain protected and oldtmpmirror absence is disclosed.
+R18 retained1FAIL/3536PASS/1skip from the old public9 fixture's omitted pinned
+context read; failed60-source/terminal pair76 members precedes the test-only
+NEW V36/R20 remedy under unchanged clocks. Four routing/80 focused pure cases
+pass; fresh distinct review/full checks/publication still precede actual input.
+
+## 2026-11-04 — Finite permission remedy with retained timing failures
+
+[Actual frontier](validation/p17_m2_continuous_input_profile.md) retains V27
+PUBLIC4's28.279s missing suffix before any Native role, public-only metadata7,
+all issuer review FAILs and R14 technical3466PASS versus UTCbudgetFAIL.
+Metadata8 approval-service timeout stopped before CreateProcess; R15 passed
+technical checks but missed actual closing. Root gap cause remains UNKNOWN.
+NEW V33 adds19800 prospective seconds to122400, cumulative142200/Nov5 09:08Z
+inside unchanged outer151200; old unused grants close. Exact7/5 profiles retain
+old defaults/bytes; prelaunch UTC/error-capture regressions, distinct reviews,
+all-five and protected exact-main CI precede sole public9. A prepublication
+contract-entry P2 stopped R16 at807 tests/pytest130; the regression-first minimal
+correction uses NEW V34 R17/final-review reservations, without old quota reuse.
+Input/formal/B/C
+remain separate Gates; second input wall is CLOSED absent a new complete suffix.
+Original25/failed HELD scenes/oldcosts/UNKNOWN and fixedP17unrepaired remain.
+
+## 2026-11-04 — Protected input release and expired publication continuation
+
+[Retained result](validation/p17_m2_prospective_input_publication_continuation.md)
+records normal PR235/main1c38cbf release after regression-first Linux fixture
+repair, fresh review and R11 all-five3448PASS/one platform skip. Main CI was
+running at14:46:29.352Z; old publication is FAILED with metadata4/input unlaunched
+and old unused quotas closed. NEW V27 prospectively funds explicit v5/v3 routes,
+finite review/public/regression/publication and conditional formal input, without
+registration reread or old-clock reset. Captured strict23 and PUBLIC3 remain
+scoped historical evidence; known NEW FULL lower175830/other totalsUNKNOWN,
+original25/failed scenes preserved, B/C/P17 unaccepted under original Gates.
+
 ## 2026-11-04 — Strict23 core passed; metadata predispatch STOP and recovery
 
 [Actual evidence](validation/p17_m2_source_binding_certificate_recovery.md)

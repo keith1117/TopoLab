@@ -3,6 +3,19 @@ const ID='topolab.v2.p17-m2-registered-source-acquisition.20261104.v2';
 const PUBLIC='/private/tmp/topolab-public-registered-source-acquisition-20261104-v3';
 const PARENT='/Users/keith1117/Library/Application Support/TopoLab-custody/';
 const FORMAL=[PARENT+'p17-m2-local-input-version-v8-strict-binding-20261103',PARENT+'p17-m2-local-input-version-v9-strict-binding-remedy-20261103'];
+const NEW_ID='topolab.v2.p17-m2-registered-source-acquisition.20261104.v3';
+const NEW_PUBLIC='/private/tmp/topolab-public-registered3-source-acquisition-20261104-v4';
+const NEW_FORMAL=["/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v10-strict-binding-20261104", "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v11-strict-binding-remedy-20261104"];
+const V31_ID='topolab.v2.p17-m2-registered-source-acquisition.20261104.v4';
+const V31_PUBLIC=['/private/tmp/topolab-public-registered4-source-acquisition-20261104-v5','/private/tmp/topolab-public-registered4-source-acquisition-20261104-v6'];
+const V31_FORMAL=[PARENT+'p17-m2-local-input-version-v12-strict-binding-20261104',PARENT+'p17-m2-local-input-version-v13-strict-binding-remedy-20261104'];
+
+const V33_ID='topolab.v2.p17-m2-registered-source-acquisition.20261104.v5';
+const V33_PUBLIC='/private/tmp/topolab-public-registered5-source-acquisition-20261104-v7';
+const V33_FORMAL=["/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v14-strict-binding-20261104", "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v15-strict-binding-remedy-20261104"];
+const V35_ID='topolab.v2.p17-m2-registered-source-acquisition.20261104.v6';
+const V35_PUBLIC='/private/tmp/topolab-public-registered6-source-acquisition-20261104-v7';
+const V35_FORMAL=["/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v16-strict-binding-20261104", "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v17-strict-binding-remedy-20261104"];
 const ROLES=['independent-public-check','exporter-r0','independent-r0','exporter-r1','independent-r1','shared-closeout'];
 const FULL=[300,300,300,1200,1200,300];
 const require=(condition,reason)=>{if(!condition)throw Error('COHORT_STOP: '+reason);};
@@ -16,9 +29,13 @@ export function coordinateMilliseconds(proofs) {
  return total;
 }
 export function launchGate(plan,role,proofs,now) {
- const formal=FORMAL.includes(plan.root);
- require(plan.root===PUBLIC||formal,'closed or unregistered root');
- require(plan.execution_identity===ID&&/^[a-f0-9]{64}$/.test(plan.plan_sha256),'execution identity/plan hash');
+ const v35=plan.root===V35_PUBLIC||V35_FORMAL.includes(plan.root);
+ const v33=plan.root===V33_PUBLIC||V33_FORMAL.includes(plan.root);
+ const v31=V31_PUBLIC.includes(plan.root)||V31_FORMAL.includes(plan.root);
+ const next=plan.root===NEW_PUBLIC||NEW_FORMAL.includes(plan.root);
+ const formal=v35?V35_FORMAL.includes(plan.root):v33?V33_FORMAL.includes(plan.root):v31?V31_FORMAL.includes(plan.root):next?NEW_FORMAL.includes(plan.root):FORMAL.includes(plan.root);
+ require(plan.root===PUBLIC||next||v31||v33||v35||formal,'closed or unregistered root');
+ require(plan.execution_identity===(v35?V35_ID:v33?V33_ID:v31?V31_ID:next?NEW_ID:ID)&&/^[a-f0-9]{64}$/.test(plan.plan_sha256),'execution identity/plan hash');
  require(plan.scope===(formal?'SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY':'FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY')&&plan.formal_authority===formal,'scope');
  require(plan.actor_window_seconds===4500&&plan.coordination_limit_ms===240000&&JSON.stringify(plan.role_order)===JSON.stringify(ROLES),'frozen profile/order');
  require(integer(now)&&integer(plan.actor_start_ms)&&now>=plan.actor_start_ms,'actual clock');

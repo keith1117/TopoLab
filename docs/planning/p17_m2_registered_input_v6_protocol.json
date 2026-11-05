@@ -1,0 +1,190 @@
+{
+  "schema": "topolab.v2.m2-registered-source-acquisition-authority.v6",
+  "execution_identity": "topolab.v2.p17-m2-registered-source-acquisition.20261104.v6",
+  "source_identity_policy": "topolab.source-identity.prebound-sha256.v1",
+  "registration_identity": "topolab.strict23-preread-registration.v1",
+  "owner_approval_reference": "Explicit V35 finite clock-fixture repair and replacement of unstarted allocations; no old balance reopens",
+  "actors": {
+    "executor": "/root",
+    "independent": "/root/ci_clock_reader_v1"
+  },
+  "permissions": {
+    "formal_activation": true,
+    "old_original_access": true,
+    "target_access": true,
+    "B_C": false
+  },
+  "proposal_sha256": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+  "budget": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/NEW-unstarted-clock-fixture-and-continuous-input-v35.json",
+    "sha256": "74331d05644d37e6f0f967b2094b063e225c8b9325f2f9b60d936c0603cd3544"
+  },
+  "new_software_budget": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/NEW-unstarted-clock-fixture-and-continuous-input-v35.json",
+    "sha256": "74331d05644d37e6f0f967b2094b063e225c8b9325f2f9b60d936c0603cd3544"
+  },
+  "profile": "NEW_REGISTERED_INPUT_COMPACT_RESULT_1800",
+  "formal_seconds": 4500,
+  "result_seconds": {
+    "exporter": 1800,
+    "independent": 1800
+  },
+  "global_deadline_ms": 1793878200000,
+  "fixed_target": {
+    "parent": "/Users/keith1117/Library/Application Support/TopoLab-custody",
+    "attempts": {
+      "1": {
+        "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v16-strict-binding-20261104",
+        "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v16-strict-binding-20261104-independent-backup"
+      },
+      "2": {
+        "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v17-strict-binding-remedy-20261104",
+        "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v17-strict-binding-remedy-20261104-independent-backup"
+      }
+    }
+  },
+  "public_roots": [
+    "/private/tmp/topolab-public-registered6-source-acquisition-20261104-v7"
+  ],
+  "role_order": [
+    "independent-public-check",
+    "exporter-r0",
+    "independent-r0",
+    "exporter-r1",
+    "independent-r1",
+    "shared-closeout"
+  ],
+  "FULL_by_role": {
+    "independent-public-check": 300,
+    "exporter-r0": 300,
+    "independent-r0": 300,
+    "exporter-r1": 1200,
+    "independent-r1": 1200,
+    "shared-closeout": 300
+  },
+  "input_limits": {
+    "attempts": 2,
+    "source_reads_each_author_each_attempt": 598,
+    "source_reads_all_input_attempts": 2392,
+    "original_reads_including_closed_registration": 2484,
+    "registered_foundation_helpers_all": 138,
+    "source_counts": [
+      40,
+      558
+    ],
+    "version_members": 1071,
+    "FULL_each_input_ceiling": 3780,
+    "FULL_all_input_attempts_ceiling": 7560,
+    "formal_top_control_CLI_all": 52,
+    "public_graphs_max": 1,
+    "public_top_control_CLI_all": 64,
+    "public_FULL_all_ceiling": 3780,
+    "RSS_bytes": 4294967296,
+    "metadata_action_cap": 180,
+    "original_public1_2_and_new3_total_attempts": 7,
+    "coordination_seconds_max": 240,
+    "prepare_to_first_SUP_seconds_max": 30
+  },
+  "registration": {
+    "public": {
+      "kind": "public",
+      "certificate_paths": [
+        "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-recovery-v9.json",
+        "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/public-binding-certificate-recovery-backup-v9.json"
+      ],
+      "finalize_actual_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/topolab-public-binding-certificate-recovery-v9/finalize-result-raw-actual-call.json",
+      "captured_core_sha256": "1eb6b8ff74114fe9b856715b04f75fb8b609bd5805ad6277fcce17da5f5785ba",
+      "metadata_execution_identity": "topolab.v2.p17-binding-certificate-recovery.20261104.v8"
+    },
+    "formal": {
+      "kind": "formal",
+      "certificate_paths": [
+        "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/formal-binding-certificate-recovered-v8.json",
+        "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/formal-binding-certificate-recovered-backup-v8.json"
+      ],
+      "finalize_actual_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/binding-formal-v3-certificate-recovery-v8/finalize-result-raw-actual-call.json",
+      "captured_core_sha256": "ff5acace575365b2eeaf94884740363631056e57b92635caba85735bb53d0bf0",
+      "metadata_execution_identity": "topolab.v2.p17-binding-certificate-recovery.20261104.v8"
+    }
+  },
+  "readiness_freeze_state": "CONDITIONAL_ON_REAL_EXTERNAL_PROOFS",
+  "implementation_base_commit": "1efe58cf4fc877c6fda272b7610ae8bd4ee2436d",
+  "custody_integrity": {
+    "directory_create_mode": "0700",
+    "file_create_mode": "0600",
+    "permanent_0555_required": false,
+    "independent_inodes": true,
+    "exact_manifest": true,
+    "independent_anchor_outside_custody": true,
+    "reverify_each_read": true,
+    "lease": "Registered TopoLab tools only; no FileProvider exclusion or perpetual sync/availability guarantee"
+  },
+  "prebound_rules": "Only accepted new metadata-v8 native envelope + Root exact finalize actual + independent byte-identical inode certificate pair bind the23 original strict observations. Same dev/inode/size and complete same-buffer SHA/length/closing/source semantics required; raw mtime_ns/differences retained. Other first observations strict; no tolerance/rounding.",
+  "R0_R1_dependency": "Independent R0 complete actual native acceptance and exact registry same-buffer proof before either R1 payload stat/read.",
+  "failure": "Freeze complete STOP/context/tuples/errors/actual resources/FULL; downstream unopened. At most two software fixes per root cause; only preregistered attempt2 after diagnosis, public regression and distinct review/publication, within unchanged totals.",
+  "scientific": "Input acceptance only; B180 and C14580 and all original scientific gates follow. Historical allpaid12721.16417100014444982>7200 remains FAIL, fullfitPENDING4GiB, fixed P17 unrepaired, uniform default.",
+  "new_input_budget": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/NEW-unstarted-clock-fixture-and-continuous-input-v35.json",
+    "sha256": "74331d05644d37e6f0f967b2094b063e225c8b9325f2f9b60d936c0603cd3544"
+  },
+  "readiness_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/independent/registered-input-activation-readiness-v6.json",
+  "independent_preflight_actual_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/independent/registered-input-preflight-actual-v6.json",
+  "readiness_schema": {
+    "schema": "topolab.registered-input.activation-readiness.v1",
+    "required": [
+      "schema",
+      "execution_identity",
+      "actors",
+      "runtime",
+      "published_source_sha256",
+      "new_input_budget",
+      "public_native_acceptance",
+      "public_certificate_actual",
+      "preparation_closure_paths",
+      "preparation_closure_sha256",
+      "preparation_retention_actual"
+    ],
+    "preflight_actual": "Separate original actual-call packet for explicit registered_input_v6.py preflight --readiness-sha SHA; true terminal/stdout/author/cwd required."
+  },
+  "public_certificate_actual_name": "certify-rehearsal-raw-actual-call.json",
+  "preparation_closure_paths": [
+    "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/registered-input-preparation-closure-v6.json",
+    "/private/tmp/topolab-registered-input-preparation-backup-20261104-v6/publication-closure.json"
+  ],
+  "preparation_retention_actual_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/registered-input-preparation-v5-retention-raw-actual-call.json",
+  "preparation_closure_schema": {
+    "schema": "topolab.registered-input.preparation-closure.v1",
+    "execution_identity": "topolab.v2.p17-m2-registered-source-acquisition.20261104.v6",
+    "required": [
+      "schema",
+      "execution_identity",
+      "source_tree",
+      "public_native_acceptance",
+      "new_input_budget",
+      "status",
+      "own_future_return",
+      "retention_argv"
+    ],
+    "status": "COMPLETE_SOFTWARE_ONLY",
+    "own_future_return": "NOT_CLAIMED",
+    "retention_actual_stdout": {
+      "status": "REGISTERED_INPUT_PREPARATION_PAIR_RETAINED",
+      "closure_paths": [
+        "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/registered-input-preparation-closure-v6.json",
+        "/private/tmp/topolab-registered-input-preparation-backup-20261104-v6/publication-closure.json"
+      ],
+      "sha256": "ACTUAL_CLOSURE_SHA256",
+      "own_future_return": "NOT_CLAIMED"
+    }
+  },
+  "formal_remedy_activation": "CLOSED. Named FULL3780 is no wall admission: second maximal attempt cannot fit primary6300. Requires separate explicit NEW within-global complete suffix activation and diagnosed/regressed/reviewed/published compatible readiness; no old conditional6300 reuse.",
+  "closed_history": "PUBLIC1 pre-Popen STOP/REC failed; PUBLIC2 all native+filing+lease PASS but certificate closure38/41 STOP AND coordination407.761>240 resourceFAIL. No recovery of old public2 into PASS. Old41/code/packets/snapshots retained unchanged.",
+  "new_cohort_orchestration": "Separate real producer/independent tool dispatchers in long await loops, bounded exact-receipt waits; no model turn between six-role dependencies. Whole original actual events remain required. Caller rejects cumulative gap >240, never adjusts native clocks/fields.",
+  "current_repair_scope": "Four fixed isolated configurations: historical V27 v5/v3, V31 v6/v4, V33 v7/v5 and explicit V35 v8/v6. All historical defaults/bytes retained.",
+  "historical_budget_reference_closed": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/budget-registration-v1.json",
+    "sha256": "729dbf472c3271ee11369c9ab21ff357f74dcc99ed9c9ecf0f9f0b84cca8da6f"
+  },
+  "independent_author_start_ms": 1793830369237,
+  "independent_author_deadline_ms": 1793876029237
+}

@@ -32,6 +32,8 @@ NEW_GENERATION = (
     "/Users/keith1117/Library/Application Support/TopoLab-custody/"
     "p17-m2-local-input-version-v7-hash-bound-20261028"
 )
+CONTINUATION_INPUT = None
+CONTINUATION_CONFIG = {}
 REGISTERED_IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v2"
 REGISTERED_PROTOCOL = "docs/planning/p17_m2_registered_input_v2_protocol.json"
 REGISTERED_PUBLIC_PREFIX = "topolab-public-registered-source-acquisition-"
@@ -56,7 +58,25 @@ PROPOSAL = "docs/planning/p17_m2_content_verified_source_acquisition_proposal.js
 EXECUTION_PROTOCOL = "docs/planning/p17_m2_source_acquisition_execution_protocol.json"
 
 
+def for_root(root):
+    continuation = load('p17_m2_input_continuation')
+    selected = continuation.config_for_root(root)
+    return (for_registered_identity(selected['input']) if selected is not None
+            else load('p17_m2_source_acquisition_control'))
+
+
+def for_registered_identity(identity):
+    return load('p17_m2_input_continuation').profile('control', identity)
+
+
 def load(name):
+    if CONTINUATION_INPUT is not None and name in {
+        'p17_m2_registered_input', 'p17_m2_source_acquisition_independent',
+        'p17_m2_source_binding_recovery'}:
+        kind = {'p17_m2_registered_input': 'registered',
+                'p17_m2_source_acquisition_independent': 'independent',
+                'p17_m2_source_binding_recovery': 'recovery'}[name]
+        return load('p17_m2_input_continuation').profile(kind, CONTINUATION_INPUT)
     path = Path(__file__).with_name(name + ".py")
     existing = sys.modules.get(name)
     if existing is not None and Path(existing.__file__).resolve() == path.resolve():
@@ -150,6 +170,9 @@ def authority_for_root(root):
 
 
 def source_freeze(execution_identity=None):
+    if (execution_identity in load('p17_m2_input_continuation').INPUT_IDENTITIES
+            and REGISTERED_IDENTITY != execution_identity):
+        return for_registered_identity(execution_identity).source_freeze(execution_identity)
     paths = {
         *REPO.joinpath("scripts").glob("p17_m2_*.py"),
         *REPO.joinpath("scripts").glob("p17_m2_*.js"),
@@ -174,7 +197,9 @@ def source_freeze(execution_identity=None):
         ))
         paths.add(REPO / REGISTERED_PROTOCOL)
         paths.add(
-            REPO / "docs/planning/p17_m2_source_binding_certificate_recovery_v4_protocol.json"
+            REPO / (CONTINUATION_CONFIG['recovery_protocol']
+                    if CONTINUATION_INPUT is not None else
+                    'docs/planning/p17_m2_source_binding_certificate_recovery_v4_protocol.json')
         )
         paths.update(REPO.joinpath("scripts").glob("p17_m2_*.mjs"))
     if execution_identity == NEW_IDENTITY:
@@ -1858,6 +1883,10 @@ def main():
     parser.add_argument("--registration-certificate-sha")
     parser.add_argument("--registration-finalize-actual-sha")
     args = parser.parse_args()
+    continuation = load('p17_m2_input_continuation')
+    selected = continuation.config_for_root(args.root)
+    if selected is not None and REGISTERED_IDENTITY != selected['input']:
+        return for_registered_identity(selected['input']).main()
     registration = None
     suffix = []
     registered = registered_root(Path(args.root))

@@ -3,6 +3,14 @@
 const R='/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z';
 const REPO='/private/tmp/topolab-input-certificate-closure-20261104';
 const ROOTS=new Set(['/private/tmp/topolab-public-registered-source-acquisition-20261104-v3',...['p17-m2-local-input-version-v8-strict-binding-20261103','p17-m2-local-input-version-v9-strict-binding-remedy-20261103'].map(name=>'/Users/keith1117/Library/Application Support/TopoLab-custody/'+name)]);
+ROOTS.add('/private/tmp/topolab-public-registered3-source-acquisition-20261104-v4');
+for(const name of ["p17-m2-local-input-version-v10-strict-binding-20261104", "p17-m2-local-input-version-v11-strict-binding-remedy-20261104"])ROOTS.add('/Users/keith1117/Library/Application Support/TopoLab-custody/'+name);
+for(const root of ['/private/tmp/topolab-public-registered4-source-acquisition-20261104-v5','/private/tmp/topolab-public-registered4-source-acquisition-20261104-v6',...['p17-m2-local-input-version-v12-strict-binding-20261104','p17-m2-local-input-version-v13-strict-binding-remedy-20261104'].map(name=>'/Users/keith1117/Library/Application Support/TopoLab-custody/'+name)])ROOTS.add(root);
+
+const V33_ROOTS=["/private/tmp/topolab-public-registered5-source-acquisition-20261104-v7", "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v14-strict-binding-20261104", "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v15-strict-binding-remedy-20261104"];
+for(const root of V33_ROOTS)ROOTS.add(root);
+const V35_ROOTS=["/private/tmp/topolab-public-registered6-source-acquisition-20261104-v7", "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v16-strict-binding-20261104", "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-v17-strict-binding-remedy-20261104"];
+for(const root of V35_ROOTS)ROOTS.add(root);
 const PHYSICAL='/Library/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python';
 const quote=s=>"'"+s.replaceAll("'","'\"'\"'")+"'";
 const word=s=>/^[A-Za-z0-9_@%+=:,./-]+$/.test(s)?s:quote(s);
@@ -11,16 +19,14 @@ const require=(condition,reason)=>{if(!condition)throw Error('ACTUAL_BOUNDARY_ST
 export function createActualBoundary(dispatch,config) {
  const raw=[],packets={},accepted=[];
  let projection;
- const actor=config.author==='independent'?'/root/binding_route_independent_v1':'/root';
+ const actor=config.author==='independent'?(V35_ROOTS.includes(config.root)?'/root/ci_clock_reader_v1':V33_ROOTS.includes(config.root)?'/root/permission_remedy_reader_v1':'/root/binding_route_independent_v1'):'/root';
  require(['producer','independent'].includes(config.author)&&config.repo===REPO&&config.evidence_root===R&&ROOTS.has(config.root)&&/^[A-Za-z0-9_-]{1,100}$/.test(config.event_prefix),'fixed caller context');
  const control=config.repo+'/scripts/p17_m2_source_acquisition_control.py';
  const filer=config.repo+'/scripts/file_m2_acquisition_event.py';
  const waiter=config.repo+'/scripts/await_m2_acquisition_receipt.py';
  const argv=(mode,role)=>[PHYSICAL,'-I',control,mode,'--root',config.root,'--plan-sha',projection.plan_sha256,'--role',role];
  async function invoke(tool,args){
-  const row=await dispatch(tool,args);
-  require(row.tool===tool&&JSON.stringify(row.arguments)===JSON.stringify(args)&&Number.isSafeInteger(row.requested_ms)&&Number.isSafeInteger(row.returned_ms)&&row.requested_ms<=row.returned_ms,'original tool row required');
-  raw.push(row);return row;
+  return captureDispatch(dispatch,tool,args,raw);
  }
  async function complete(words,{native=false,max=20000}={}){
   const args={cmd:literalCommand(words),workdir:config.repo,login:false,yield_time_ms:1000,max_output_tokens:max,...(native?{sandbox_permissions:'require_escalated',justification:'Run the authorized bounded acquisition role with complete native RSS and exit evidence; no original reads before frozen gates.'}:{})};
@@ -102,4 +108,31 @@ export function createActualBoundary(dispatch,config) {
   await persist(packet,R+'/'+config.event_prefix+'-'+config.author+'-caller-STOP.json');
  }
  return {prepare,plan,wait:async role=>(await get(role)).proofs,run:roleRun,metadata:roleRun,certificate,freeze,raw,packets,accepted};
+}
+
+// Permission-service waits happen before the immutable300s metadata actor starts.
+// Thrown dispatch errors retain exact arguments and original error, never fake exits.
+export async function captureDispatch(dispatch,tool,args,raw,now=Date.now) {
+ const requested_ms=now();let row;
+ try {row=await dispatch(tool,args);}
+ catch(error){raw.push({tool,arguments:args,requested_ms,returned_ms:now(),error:String(error)});throw error;}
+ require(row.tool===tool&&JSON.stringify(row.arguments)===JSON.stringify(args)&&Number.isSafeInteger(row.requested_ms)&&Number.isSafeInteger(row.returned_ms)&&row.requested_ms<=row.returned_ms,'original tool row required');
+ raw.push(row);return row;
+}
+export async function permissionThenPrepare(dispatch,config,raw,now=Date.now) {
+ require(['/root/permission_remedy_reader_v1','/root/ci_clock_reader_v1'].includes(config.author)&&config.repo===REPO&&config.evidence_root===R&&/^[A-Za-z0-9_-]{1,100}$/.test(config.event_prefix)&&/^[a-f0-9]{64}$/.test(config.standards_sha)&&/^[a-f0-9]{64}$/.test(config.spec_sha),'fixed permission caller context');
+ const v35=config.author==='/root/ci_clock_reader_v1';
+ const entry=REPO+'/scripts/'+(v35?'p17_m2_source_binding_recovery_v8.py':'p17_m2_source_binding_recovery_v7.py');
+ const python=REPO+'/.venv/bin/python',words=[python,'-I',entry,'--help'];
+ const prefix=['env','OMP_NUM_THREADS=1','OPENBLAS_NUM_THREADS=1','MKL_NUM_THREADS=1','VECLIB_MAXIMUM_THREADS=1','NUMEXPR_NUM_THREADS=1',python,'-I',entry];
+ const args={cmd:literalCommand(words),workdir:REPO,login:false,yield_time_ms:1000,max_output_tokens:4000,sandbox_permissions:'require_escalated',justification:'Approve the authorized exact metadata entry prefix using harmless help before any actor, Native, root or Source work.',prefix_rule:prefix};
+ const approved=await captureDispatch(dispatch,'exec_command',args,raw,now);
+ require(approved.result?.exit_code===0&&approved.result.session_id==null&&approved.result.output.includes('usage:'),'permission complete successful actual return required');
+ const packet={schema:'topolab.v2.m2-strict-source-binding.actual-call.v1',author:config.author,event_id:config.event_prefix+'-permission',argv:words,request:args,responses:[approved]};
+ const path=R+'/independent/'+(v35?'V35-public9-permission-preflight-raw-actual-call.json':'V33-public9-permission-preflight-raw-actual-call.json');
+ const saved=await captureDispatch(dispatch,'exec_command',{cmd:literalCommand([PHYSICAL,'-I',REPO+'/scripts/file_m2_acquisition_event.py','persist','--packet-json',JSON.stringify(packet),'--destination',path]),workdir:REPO,login:false,yield_time_ms:1000,max_output_tokens:2000},raw,now);
+ require(saved.result?.exit_code===0&&saved.result.session_id==null,'permission courier complete return required');
+ const pin=JSON.parse(saved.result.output);
+ require(pin.path===path&&/^[a-f0-9]{64}$/.test(pin.sha256),'permission courier literal pin required');
+ return captureDispatch(dispatch,'exec_command',{cmd:literalCommand([python,'-I',entry,'prepare','--kind','public','--attempt','1','--standards-sha',config.standards_sha,'--spec-sha',config.spec_sha,'--permission-packet',path,'--permission-packet-sha',pin.sha256]),workdir:REPO,login:false,yield_time_ms:1000,max_output_tokens:20000},raw,now);
 }

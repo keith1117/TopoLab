@@ -1,20 +1,22 @@
 # TopoLab v2 Development Roadmap
 
-Current continuous action: [identity2 closure/coordination repair](p17_m2_registered_input_v2_protocol.md),
-with [actual retained failures](../validation/p17_m2_input_closure_coordination_repair.md).
-V16/V20 closed FAILED; PUBLIC2 compiler38/41 and actual407.761>240 remain FAIL.
-NEW V22 ends12:49:00.022Z; original ROOT/I21:38Z stays. Fresh final reviews,
-metadata4/public6 and PUBLIC3 pass in public scope. Actual coordination8.861<240s,
-194-member paired metadata replay and timely public-only result closure pass.
-Final R10 all five checks/source unchanged3447PASS/one skip. Root/I bounded
-softwareNative FULL87600 each is below100000; actualtotalUNKNOWN, knownlower
-150030. Auxiliary V24 closing overrun staysFAIL. Preparation actually closed12:46:29.352Z
-with4266-member paired full replay. Newpublication ends14:46:29.352Z. Next:
-test-only PR235 Linux fixture portability repair/R11/fresh review, then protected
-exact-head/main four-CI publication, formal metadata/input and B/C. Production
-source45/metadata26/public certificates stay unchanged; old32CI failures remain.
-Original/Library IO remains gated; no old quota reopens and P17 is unrepaired.
-
+Current continuous action: [CI-clock repair/input continuation](../validation/p17_m2_ci_clock_and_input_continuation.md).
+PR236 head1efe has three CI successes and one fixture-time FAIL; production
+old-deadline rejection is correct. Explicit test clocks/expiry negative precede
+minimal repair, new8/6 profiles, fresh review/all-five/protected exact-main4CI.
+R18 retained1FAIL/3536PASS/1skip: old public9 fixture omitted pinned-context IO.
+Independent RED and76-member failed source/terminal pair precede the test-only
+V36/R20 once remedy. Four pure v7/v8 routing cases pass; fresh600s/24-call
+reviews and complete UTC4200+600 campaign remain under unchanged V35 deadlines.
+NEW V35 actual22:12:50.485Z/14400s software endsNov5 02:12:49.237Z. Root adds
+8520 seconds to142200, cumulative150720/global11:30 within oldouter151200/11:38.
+Fresh Reader conservative startup ends10:53:49.237Z. No old counter/fee/time or
+unused balance resets. FIRST actualpublic9 same uncreated name/noautomatic10;
+new registered6 PUBLIC7/formalmeta8/gen16/17 unprobed at same Library parent.
+Source40/558/1071/2392/whole2484/helper138/4GiB/240/hash/leases/copies remain.
+Accepted input→B180→fixedC14580 original Gates; P17 unrepaired/uniform/default/
+fullv2 open/historical allpaidFAIL/fullfitPENDING remain. Original25/oldscenes
+preserved; exactoldtmpmirror currentlyMissing/causeUNKNOWN without recreation.
 
 Historical entry: [metadata-only strict23 certificate recovery](p17_m2_source_binding_certificate_recovery_protocol.md) after both authors'23 source reads passed and a later audit SUP missed its guard window. Independently accepted certificate/input and B/C remain subject to their respective Gates under unchanged scientific Gates. NEW finite funding retains every old cost/closed quota and the original100800s/21:38Z limit. P17 remains unrepaired. The [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md) is historical: ordinal7 mtime-63ns, missing temporary evidence and incomplete old accounting remain retained failures.
 
