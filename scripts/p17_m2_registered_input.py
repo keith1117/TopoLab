@@ -220,12 +220,20 @@ def authority(raw=None):
         "registered authority identity/policy differs",
     )
     need(
-        value.get("profile") == "NEW_REGISTERED_INPUT_COMPACT_RESULT_1800"
+        value.get("profile") == ("NEW_REGISTERED_INPUT_WHOLE_4500"
+                                if IDENTITY.endswith("20261116.v1")
+                                else "NEW_REGISTERED_INPUT_COMPACT_RESULT_1800")
         and value.get("formal_seconds") == 4500
         and value.get("result_seconds") == {"exporter": 1800, "independent": 1800}
         and value.get("global_deadline_ms") == GLOBAL_DEADLINE_MS,
         "registered finite compact profile differs",
     )
+    if IDENTITY.endswith("20261116.v1"):
+        need(value.get("whole_attempt_seconds") == 4500
+             and value.get("mandatory_result_suffix_seconds") == 7200
+             and value.get("new_Original_registration_reads") == 0
+             and value.get("new_Foundation_helpers") == 0,
+             "NEW whole4500/suffix/source quota differs")
     need(
         value.get("fixed_target")
         == {
@@ -333,8 +341,13 @@ def prepare_rehearsal(root, reference):
         ("public-content-contract.json", "public_content_contract_sha256"),
         ("public-source-identity.json", "public_source_identity_sha256"),
     ):
-        raw = checker.native._software_bytes(Path(core_plan["root"]) / name)
+        path = (Path(policy["public_projection_captures"][name]["path"])
+                if IDENTITY.endswith("20261116.v1") else Path(core_plan["root"]) / name)
+        raw = checker.native._software_bytes(path)
         need(producer.sha(raw) == core_plan["entry"][key], "captured public projection SHA differs")
+        if IDENTITY.endswith("20261116.v1"):
+            need(producer.sha(raw) == policy["public_projection_captures"][name]["sha256"],
+                 "NEW public projection capture pin differs")
         values.append(producer.parse(raw))
     plan = control.make_plan(root, *values, strict23_registration=reference)
     plan["source_root"] = core_plan["context"]["source_root"]
@@ -593,7 +606,9 @@ def activation_readiness(value, plan):
 
     policy = authority(producer.canonical(value))
     need(
-        time.time_ns() // 10**6 + (4500 + 1800) * 1000 <= min(policy["global_deadline_ms"],
+        (plan["whole_end_ms"] + 7200000 if IDENTITY.endswith("20261116.v1")
+         else time.time_ns() // 10**6 + (4500 + 1800) * 1000)
+        <= min(policy["global_deadline_ms"],
                policy.get("independent_author_deadline_ms", policy["global_deadline_ms"])),
         "registered complete formal/result suffix unavailable",
     )

@@ -256,14 +256,26 @@ def _result_window(
     )
     start = number(record["result_start_UTC_seconds"], positive=True)
     require(round(start * 1000) / 1000 == start, "result start clock resolution differs")
+    end = start + min(result_seconds)
+    new_whole = record.get("execution_identity") == (
+        "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1")
+    if new_whole:
+        first, whole_end = record.get("whole_start_ms"), record.get("whole_end_ms")
+        require(type(first) is int and type(whole_end) is int
+                and whole_end == first + 4500000
+                and record["actor_activation_UTC_seconds"] == first / 1000
+                and first / 1000 <= start <= whole_end / 1000,
+                "NEW original whole4500 result clock differs")
+        end = min(end, whole_end / 1000)
     expected = {
-        actor: datetime.fromtimestamp(start + seconds, UTC)
+        actor: datetime.fromtimestamp(min(start + seconds, whole_end / 1000)
+                                      if new_whole else start + seconds, UTC)
         .isoformat(timespec="milliseconds")
         .replace("+00:00", "Z")
         for actor, seconds in zip(("exporter", "independent"), result_seconds, strict=True)
     }
     require(record["result_deadlines_UTC"] == expected, "immutable result deadlines differ")
-    return start, start + min(result_seconds)
+    return start, end
 
 
 def evidence_digest(value: Any) -> str | None:

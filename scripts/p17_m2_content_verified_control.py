@@ -1318,13 +1318,18 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
             transport.argv_for(root, m, plan_sha, role) for m in ("supervise", "record")
         ],
     )
+    new_whole = plan.get("execution_identity") == (
+        "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1")
+    if new_whole:
+        pending.update(whole_start_ms=plan["whole_start_ms"], whole_end_ms=plan["whole_end_ms"])
     if role == "final-filing":
         frontier = transport.audit_saved(
             root, "shared-closeout", read_json(root / "shared-closeout-events.json")
         )["T1"]
         pending["result_start_UTC_seconds"] = frontier
         pending["result_deadlines_UTC"] = {
-            k: datetime.fromtimestamp(frontier + seconds, UTC)
+            k: datetime.fromtimestamp(min(frontier + seconds, plan["whole_end_ms"] / 1000)
+                                      if new_whole else frontier + seconds, UTC)
             .isoformat(timespec="milliseconds")
             .replace("+00:00", "Z")
             for k, seconds in transport.result_windows

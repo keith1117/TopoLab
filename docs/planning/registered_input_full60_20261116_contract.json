@@ -1,0 +1,216 @@
+{
+  "FULL_by_role": {
+    "exporter-r0": 300,
+    "exporter-r1": 1200,
+    "independent-public-check": 300,
+    "independent-r0": 300,
+    "independent-r1": 1200,
+    "shared-closeout": 300
+  },
+  "R0_R1_dependency": "Independent R0 complete actual native acceptance and exact registry same-buffer proof before either R1 payload stat/read.",
+  "actors": {
+    "executor": "/root",
+    "independent": "/root/full60_independent"
+  },
+  "ancillary_named_FULL": {
+    "conservative_reserved_total": 22320,
+    "formal_consumers": "DENY",
+    "graphs_max": 3,
+    "lease_release_each_graph": 180,
+    "legacy_inner_None": "RETAINED_NOT_ZERO_NOT_RETROACTIVELY_REWRITTEN",
+    "new_outer_tariff": "First/failureFULL180 with complete original SUP-to-REC span+10<=180",
+    "optional_PUBLIC_reader_and_ack_calls_max": 2,
+    "optional_PUBLIC_reader_and_ack_each": 180,
+    "remaining_unassigned": 1680,
+    "unchanged_whole_ceiling": 24000
+  },
+  "budget": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/owner-budget-registration.json",
+    "sha256": "cfa8ac55d9f1879fdc9242db76b78c6661f38649e97162d0fe39339600629ec0"
+  },
+  "closed_history": "PUBLIC1 pre-Popen STOP/REC failed; PUBLIC2 all native+filing+lease PASS but certificate closure38/41 STOP AND coordination407.761>240 resourceFAIL. No recovery of old public2 into PASS. Old41/code/packets/snapshots retained unchanged.",
+  "current_repair_scope": "NEW dated20261116 profile only, no old identity reopened",
+  "custody_integrity": {
+    "directory_create_mode": "0700",
+    "exact_manifest": true,
+    "file_create_mode": "0600",
+    "independent_anchor_outside_custody": true,
+    "independent_inodes": true,
+    "lease": "Registered TopoLab tools only; no FileProvider exclusion or perpetual sync/availability guarantee",
+    "permanent_0555_required": false,
+    "reverify_each_read": true
+  },
+  "execution_identity": "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1",
+  "failure": "Freeze complete STOP/context/tuples/errors/actual resources/FULL; downstream unopened. At most two software fixes per root cause; only preregistered attempt2 after diagnosis, public regression and distinct review/publication, within unchanged totals.",
+  "fixed_target": {
+    "attempts": {
+      "1": {
+        "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-20261116-full60-a1-independent-backup",
+        "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-20261116-full60-a1"
+      },
+      "2": {
+        "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-20261116-full60-a2-independent-backup",
+        "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-local-input-version-20261116-full60-a2"
+      }
+    },
+    "parent": "/Users/keith1117/Library/Application Support/TopoLab-custody"
+  },
+  "formal_remedy_activation": "DENY until separately preserved diagnosed/regressed/different-author-reviewed/protected-published new remedy and full original4500+7200 suffix; no old call or current failed attempt resets",
+  "formal_seconds": 4500,
+  "global_deadline_ms": 1794852900000,
+  "historical_budget_reference_closed": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/budget-registration-v1.json",
+    "sha256": "729dbf472c3271ee11369c9ab21ff357f74dcc99ed9c9ecf0f9f0b84cca8da6f"
+  },
+  "implementation_base_commit": "29fa55edd3415c60c3ca4502aa8ef6bd14f363cf",
+  "independent_author_deadline_ms": 1794852900000,
+  "independent_author_start_ms": 1794824100000,
+  "independent_preflight_actual_path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/input-preflight-actual-a1.json",
+  "input_limits": {
+    "FULL_all_input_attempts_ceiling": 7560,
+    "FULL_each_input_ceiling": 3780,
+    "RSS_bytes": 4294967296,
+    "attempts": 2,
+    "coordination_seconds_max": 240,
+    "formal_top_control_CLI_all": 52,
+    "metadata_action_cap": 180,
+    "original_public1_2_and_new3_total_attempts": 1,
+    "original_reads_including_closed_registration": 2484,
+    "prepare_to_first_SUP_seconds_max": 30,
+    "public_FULL_all_ceiling": 3780,
+    "public_graphs_max": 1,
+    "public_top_control_CLI_all": 64,
+    "registered_foundation_helpers_all": 138,
+    "source_counts": [
+      40,
+      558
+    ],
+    "source_reads_all_input_attempts": 2392,
+    "source_reads_each_author_each_attempt": 598,
+    "version_members": 1071
+  },
+  "mandatory_result_suffix_seconds": 7200,
+  "new_Foundation_helpers": 0,
+  "new_Original_registration_reads": 0,
+  "new_cohort_orchestration": "Separate real producer/independent tool dispatchers in long await loops, bounded exact-receipt waits; no model turn between six-role dependencies. Whole original actual events remain required. Caller rejects cumulative gap >240, never adjusts native clocks/fields.",
+  "new_input_budget": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/owner-budget-registration.json",
+    "sha256": "cfa8ac55d9f1879fdc9242db76b78c6661f38649e97162d0fe39339600629ec0"
+  },
+  "new_software_budget": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/owner-budget-registration.json",
+    "sha256": "cfa8ac55d9f1879fdc9242db76b78c6661f38649e97162d0fe39339600629ec0"
+  },
+  "owner_approval_reference": "2026-11-16 NEW finite container/FULL60 then gated input; all closed historical quotas remain closed",
+  "permissions": {
+    "B_C": false,
+    "formal_activation": true,
+    "old_original_access": true,
+    "target_access": true
+  },
+  "prebound_rules": "Only accepted new NEW dated20261116 metadata native envelope + Root exact finalize actual + independent byte-identical inode certificate pair bind the23 original strict observations. Same dev/inode/size and complete same-buffer SHA/length/closing/source semantics required; raw mtime_ns/differences retained. Other first observations strict; no tolerance/rounding.",
+  "preparation_closure_paths": [
+    "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/input-preparation-closure-a1.json",
+    "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116-backup/input-preparation-closure-a1.json"
+  ],
+  "preparation_closure_schema": {
+    "execution_identity": "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1",
+    "own_future_return": "NOT_CLAIMED",
+    "required": [
+      "schema",
+      "execution_identity",
+      "source_tree",
+      "public_native_acceptance",
+      "new_input_budget",
+      "status",
+      "own_future_return",
+      "retention_argv"
+    ],
+    "retention_actual_stdout": {
+      "closure_paths": [
+        "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/input-preparation-closure-a1.json",
+        "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116-backup/input-preparation-closure-a1.json"
+      ],
+      "own_future_return": "NOT_CLAIMED",
+      "sha256": "ACTUAL_CLOSURE_SHA256",
+      "status": "REGISTERED_INPUT_PREPARATION_PAIR_RETAINED"
+    },
+    "schema": "topolab.registered-input.preparation-closure.v1",
+    "status": "COMPLETE_SOFTWARE_ONLY"
+  },
+  "preparation_retention_actual_path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/input-preparation-retention-actual-a1.json",
+  "profile": "NEW_REGISTERED_INPUT_WHOLE_4500",
+  "proposal_sha256": "2c7d0e9243b3ab6beda9344b06c7e88cfbf03910f7104fa43f91c54670a32304",
+  "public_certificate_actual_name": "certify-rehearsal-raw-actual-call.json",
+  "public_projection_captures": {
+    "public-content-contract.json": {
+      "path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/public-projection-availability-capture/public-content-contract.json",
+      "sha256": "82d0c5610e644bbb2e6d637f2bd9505beb5995a7e88b7b69d78131ba2c25b339"
+    },
+    "public-source-identity.json": {
+      "path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/public-projection-availability-capture/public-source-identity.json",
+      "sha256": "b45c6ca13a6d9c9a06f989b535b526f1ad117506971ff0e777c28ed5de939192"
+    }
+  },
+  "public_roots": [
+    "/private/tmp/topolab-public-full60-source-acquisition-20261116-a1"
+  ],
+  "readiness_freeze_state": "CONDITIONAL_ON_REAL_EXTERNAL_PROOFS",
+  "readiness_path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/input-activation-readiness-a1.json",
+  "readiness_schema": {
+    "preflight_actual": "Separate original actual-call packet for explicit registered_input_full60_20261116.py preflight --readiness-sha SHA; true terminal/stdout/author/cwd required.",
+    "required": [
+      "schema",
+      "execution_identity",
+      "actors",
+      "runtime",
+      "published_source_sha256",
+      "new_input_budget",
+      "public_native_acceptance",
+      "public_certificate_actual",
+      "preparation_closure_paths",
+      "preparation_closure_sha256",
+      "preparation_retention_actual"
+    ],
+    "schema": "topolab.registered-input.activation-readiness.v1"
+  },
+  "registration": {
+    "formal": {
+      "captured_core_sha256": "ff5acace575365b2eeaf94884740363631056e57b92635caba85735bb53d0bf0",
+      "certificate_paths": [
+        "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/formal-metadata-certificate-a1.json",
+        "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116-backup/formal-metadata-certificate-a1.json"
+      ],
+      "finalize_actual_path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/metadata-formal-a1/finalize-result-raw-actual-call.json",
+      "kind": "formal",
+      "metadata_execution_identity": "topolab.v2.p17-binding-certificate-recovery.20261116.v1"
+    },
+    "public": {
+      "captured_core_sha256": "1eb6b8ff74114fe9b856715b04f75fb8b609bd5805ad6277fcce17da5f5785ba",
+      "certificate_paths": [
+        "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/public-metadata-certificate-a1.json",
+        "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116-backup/public-metadata-certificate-a1.json"
+      ],
+      "finalize_actual_path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/metadata-public-a1/finalize-result-raw-actual-call.json",
+      "kind": "public",
+      "metadata_execution_identity": "topolab.v2.p17-binding-certificate-recovery.20261116.v1"
+    }
+  },
+  "registration_identity": "topolab.strict23-preread-registration.v1",
+  "result_seconds": {
+    "exporter": 1800,
+    "independent": 1800
+  },
+  "role_order": [
+    "independent-public-check",
+    "exporter-r0",
+    "independent-r0",
+    "exporter-r1",
+    "independent-r1",
+    "shared-closeout"
+  ],
+  "schema": "topolab.v2.m2-registered-source-acquisition-authority.20261116.v1",
+  "scientific": "Input acceptance only; B180 and C14580 and all original scientific gates follow. Historical allpaid12721.16417100014444982>7200 remains FAIL, fullfitPENDING4GiB, fixed P17 unrepaired, uniform default.",
+  "source_identity_policy": "topolab.source-identity.prebound-sha256.v1",
+  "whole_attempt_seconds": 4500
+}
