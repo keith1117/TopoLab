@@ -17,32 +17,28 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-The later 2026-11-16 owner instruction authorizes one NEW finite container,
-detached-helper and FULL60 integration followed conditionally by input acceptance.
-Read the [new contract](docs/planning/public_containment_full60_input_protocol.md)
-and [integration record](docs/validation/public_containment_full60_input.md).
-Global10:15–18:15UTC/Root and new independent lead28800s each, new FULL<=24000,
-public attempts2, input attempts2 remain finite with mandatory7200s result suffix.
-Actual public payload is denied until frozen reviewed protected-main/all-four-CI
-source and harmless permission preflight. Input additionally requires accepted
-public/metadata proof and a complete compatible exact-whitelist contract; new
-Original-registration reads/Foundation helpers0. No B/C or old quota reopens.
+The 2026-11-16 finite integration has actual public acceptance: container PID
+namespace/detached helpers and producer/independent FULL60 returns passed.
+[Integration](docs/validation/public_containment_full60_input.md) and
+[input result](docs/validation/full60_input_admission.md) retain complete evidence.
+Public metadata passed; formal metadata attempt1 STOPPED because its22,943,707-byte
+plan exceeded the frozen16MiB reader cap before payload. Both metadata quotas
+are1/1 consumed; no metadata attempt2/reset/retry or input successor is allowed.
+Input0/6, Original-registration/Foundation/Library/B/C0; P17 remains unrepaired.
 
-The 2026-11-16 owner instruction authorizes repairing the current worker deadline
-blocker. Read [the repair record](docs/validation/p17_m2_worker_deadline_repair.md)
-and [status](docs/project_status.md). The published baseline is main8651ad1/
-PR236/all-four CI; the later V37 candidate was never published and its allowances
-are CLOSED. Its nested cleanup could catch the work50 alarm before the closing5
-alarm was armed. New public software uses an independent supervisor with absolute
-UTC/monotonic deadlines fixed before launch; worker exit is not namespace closure.
-Full60 actual-return, exact-CID watchdog, detached helpers, complete input and B/C
-remain separately unaccepted. No old role, clock, source read or allowance reopens.
-KnownNEWFULL lower334530 and other fees UNKNOWN_NOT_ZERO remain; historical
-12721.16417100014444982>7200/full-fit PENDING4GiB/fixedP17 unrepaired/uniform default
-and all failures/seals remain. Preserve the original25 dirty files and old HELD
-scenes. Close this engineering repair after independent review, required checks
-and normal protected publication; next is complete new public integration and
-admission under a valid finite execution contract, never an old formal retry.
+The [lossless byte-bound repair](docs/planning/metadata_plan_byte_bound_repair.md)
+removes only a redundant parsed preflight copy, retains original raw/hash and
+checks full plan size before target IO. Its13,504,549-byte projection is software
+only; the stopped attempt stays FAIL/RSS UNKNOWN. Close required regression,
+normal protected result publication and external retention, then STOP. The next
+owner decision is one concrete fresh finite metadata/input authority, not an
+automatic guard/toy chain, replacement identity or reopened allowance.
+
+Original10:15–18:15UTC/Root and lead28800s, FULL<=24000/result7200 remain finite.
+New FULL360 raises known lower334530 to334890; other fees UNKNOWN_NOT_ZERO.
+K12721.16417100014444982>7200/all-paid FAIL, full-fit PENDING4GiB/uniform default,
+all old failures/costs/UNKNOWN/seals and original25 dirty files/HEAD/index/status
+remain. No scientific B/C, fit, search or final seal is granted.
 
 ## Provenance boundary
 

@@ -1824,3 +1824,16 @@ and [Python process APIs](https://docs.python.org/3.12/library/os.html).
 Public subprocess/FIFO and declared fake-CLI regressions contain no upstream
 implementation, model, label or scientific input. The actual Docker/return
 acceptance is a separately frozen, finite call; software tests are not that proof.
+
+
+## 2026-11-16 — Lossless bounded metadata plan serialization
+
+Original TopoLab software derives from its own retained22,943,707-byte formal
+metadata plan/read-cap failure. The NEW wire keeps the complete raw preflight
+and SHA, omits only its redundant parsed cache, and validates total canonical
+bytes before target IO. Historical defaults, source/actual-return checks,
+16MiB/4GiB, numerical methods/tolerances, failures and consumed quotas remain.
+No upstream implementation, figure, dataset, model or original input was imported.
+The same slice's dated clock/runtime bridge independently uses Python standard
+source/process APIs and the existing locked TopoLab dependencies; captured old
+source contexts are audit buffers, not copied upstream code or new source reads.

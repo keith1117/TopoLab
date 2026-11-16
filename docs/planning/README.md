@@ -1,11 +1,15 @@
 # Planning index
 
-Current [NEW finite containment/FULL60 and gated input](public_containment_full60_input_protocol.md)
-([machine contract](public_containment_full60_input_contract.json)): one new
-bounded integration, actual external return before captured-metadata and exact
-input admission; all old failures/costs/closed quotas/seals remain.
+Current [finite containment/input contract](public_containment_full60_input_protocol.md)
+([machine](public_containment_full60_input_contract.json)) has actual public
+acceptance and a stopped formal-metadata attempt. [Dated input protocol](full60_input_admission_protocol.md)
+links its [metadata](binding_recovery_full60_20261116_contract.json),
+[input](registered_input_full60_20261116_contract.json) and
+[component-review partition](full60_input_cross_review_partition.json).
+[Lossless plan-byte repair](metadata_plan_byte_bound_repair.md) is software only;
+closed metadata quotas and all old failures/costs/seals remain. No automatic retry.
 
-Current [recovery8](p17_m2_source_binding_certificate_recovery_v8_protocol.md) / [input6](p17_m2_registered_input_v6_protocol.md): finite new unstarted continuation after a reproduced historical-clock fixture FAIL; old defaults/bytes/scientific Gates remain.
+Historical [recovery8](p17_m2_source_binding_certificate_recovery_v8_protocol.md) / [input6](p17_m2_registered_input_v6_protocol.md): finite new unstarted continuation after a reproduced historical-clock fixture FAIL; old defaults/bytes/scientific Gates remain.
 
 Historical [recovery7](p17_m2_source_binding_certificate_recovery_v7_protocol.md) / [input5](p17_m2_registered_input_v5_protocol.md): finite new permission remedy, preserved old profiles/STOPs, preflight before actor, protected main before public9, unchanged input/scientific Gates.
 

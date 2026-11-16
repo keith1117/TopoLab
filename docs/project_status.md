@@ -5,35 +5,44 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: NEW finite containment/FULL60 and gated input acceptance
+## Current: real containment/FULL60 accepted; formal metadata stopped
 
-The owner's later continuation authorizes the
-[new finite contract](planning/public_containment_full60_input_protocol.md).
-[Integration evidence](validation/public_containment_full60_input.md) separates
-public software, actual Docker/terminal-return acceptance, captured strict23
-metadata recovery and complete input. Its global10:15–18:15UTC window includes
-startup/failures/review/waits/checks/publication, with7200s reserved result suffix.
-Root/new independent lead each28800s, new FULL<=24000, public attempts<=2 and
-input attempts<=2; all old balances stay closed. Each entry needs its complete
-remaining fixed call and result suffix. No accepted input or P17 repair is claimed.
+The [finite integration](planning/public_containment_full60_input_protocol.md)
+actually passed both owned Docker cases and detached helper termination.
+Producer original14.487s and independent guarded audit6.752s returned0/no session
+inside50s, FULL60 each. Source PR238/main1466dc1/all-four CI preceded actual
+preflight and independent full-static preregistration. [Evidence](validation/public_containment_full60_input.md)
+retains raw CLI/namespace/process waits, original returns, source pins and backups.
 
-Preparation adds an early guardian for final filing and each detached helper.
-A surviving controller entry owns and actually reaps the prescribed killed work
-child; driver observes both helper entries' real terminal exits. Public raw
-Docker states/returns and the complete original external tool span require
-separate independent replay. These are prerequisites, not evidence supplied by
-the fake-CLI/process tests. Public proof remains denied until exact reviewed
-source passes protected publication/main four CI and harmless preflight.
+Input source PR239/maine917b1a/all-four CI preceded fresh metadata. Public metadata
+passed: original10.980s,704921600-byte RSS envelope, all actual exits0 and Root
+finalizer0 with independent-inode certificate pair. Independent preflight and
+Root's true post-public software/publication closures fixed the original1200s
+formal recovery window. No old clock or source registration was reset.
 
-Two captured strict23 metadata buffers retain their exact raw hashes and logical
-historical contexts. Availability is not new physical strict-source acceptance;
-metadata-only recovery may open the new captures only, never embedded old paths.
-Original-registration reads/Foundation helpers remain0. Complete40/558/1071 input
-needs a new reviewed compatible dispatch/whitelist/role-cost contract and actual
-R0 then independent acceptance before R1. Formal target/lease access and B/C
-remain denied until their applicable gates. Original25 dirty files and old scenes,
-K12721.16417100014444982>7200, knownNEWFULL lower334530, every other old failure,
-UNKNOWN/fee/quota/seal, full-fit PENDING4GiB and uniform default remain.
+**Formal metadata attempt1 STOPPED before payload:** its22,943,707-byte plan
+exceeded the unchanged16,777,216-byte reader cap. SUP and its event filing each
+returned1; no source-established pending, hence no REC/accept/finalize or input.
+FULL120 is retained and whole-role RSS remains UNKNOWN, not measured>4GiB.
+Both metadata quotas are consumed1/1; no metadata attempt2 or old retry exists.
+Input0/6, public input graph0, Original-registration/Foundation/Library/B/C0.
+
+The [software repair](planning/metadata_plan_byte_bound_repair.md) keeps the exact
+raw preflight and SHA, omits its redundant parsed cache only for the NEW wire,
+and checks full canonical size before target creation. Exact size arithmetic
+using the bounded real preflight projects13,504,549 bytes; this is not a repeated
+formal execution or input PASS. [Full result](validation/full60_input_admission.md)
+retains first/secondary failures, failed scenes and the independent review.
+Required result regression passed3626 tests with two unchanged conditional skips.
+Normal protected publication/retention is bound by external
+`repair-result-publication-closure-v1.json`; its actual completion must be
+verified before later work. Close that publication and stop.
+
+New FULL360/24000 raises retained known lower334530 to334890; unused allowances
+close without transfer. Software/review/CI/publication fees are additional
+UNKNOWN_NOT_ZERO. All old failures, K12721.16417100014444982>7200/all-paid FAIL,
+closed quotas, seals, full-fit PENDING4GiB, uniform default and fixedP17 unrepaired
+remain. Original25 dirty files, HEADs, indices and status are preserved.
 
 ## Historical: independent worker deadline repair
 
@@ -773,23 +782,17 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 <a id="unique-next-item-owner-decision-on-new-r-stable-scope-and-source-control"></a>
 
-## Unique next item: separate source/formal/result authority decision
+## Unique next item: fresh bounded metadata/input authority after the stopped plan
 
-After this formal-adapter public preparation's actual protected publication and
-external closure, stop. The next decision is one concrete prospective contract
-for the exact source whitelist, real target/private-root binding, compatible
-execution identity, fresh six-role4500s window and result7200s/7200s including
-filing FULL180. Keep the already approved content/tuple/one-read/4GiB/FULL rules;
-public certificates cannot authorize original sources or scientific consumers.
-The new custody model retains provider UNKNOWN without requiring a never-sync
-promise; no third-directory search or provider guard chain is commissioned.
-
-This slice grants no such source/target access or activation. A later “continue”
-first checks the exact PR/main CI and listed external closure; if complete, it
-may prepare the concrete authority decision only, not access originals, create
-formal targets, restart old roles, reuse closed budgets or run B/C. Only actual
-independent R0 acceptance can precede a future authorized R1. Fixed P/17 remains
-unrepaired, and B resource preflight/C repair stay later separately approved Gates.
+First finish this slice's exact result PR/main CI and external retention closure,
+then stop. A later continuation does not reopen formal metadata attempt1 or run
+B/C. The next owner decision is a concrete fresh finite metadata/input contract
+using the lossless bounded wire and fresh compatible source/review/runtime/
+actual-return bindings, with complete4500+7200 admission before input. Preserve
+all consumed calls, failures, costs and old seals; no automatic replacement
+identity, third-directory search, Original registration, Foundation helper or
+generic guard/toy chain is commissioned. Actual independent R0 must precede
+both R1 payloads; input acceptance still precedes separately approved B then C.
 
 ### Historical route decision after two target non-admissions
 
