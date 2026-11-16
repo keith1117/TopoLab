@@ -192,7 +192,9 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
             and value.get('execution_identity') == REGISTERED_IDENTITY
             and value.get('source_identity_policy') == HASH_BOUND_POLICY
             and value.get('registration_identity') == 'topolab.strict23-preread-registration.v1'
-            and value.get('profile') == 'NEW_REGISTERED_INPUT_COMPACT_RESULT_1800'
+            and value.get('profile') == ('NEW_REGISTERED_INPUT_WHOLE_4500'
+                if REGISTERED_IDENTITY.endswith('20261116.v1')
+                else 'NEW_REGISTERED_INPUT_COMPACT_RESULT_1800')
             and type(value.get('formal_seconds')) is int and value['formal_seconds'] == 4500
             and canonical(value.get('result_seconds')) == canonical({
                 'exporter': 1800, 'independent': 1800})
@@ -759,8 +761,16 @@ def public_prepare_suffix(plan: dict[str, Any]) -> tuple[str, ...]:
             isinstance(reference.get(name), str) and native.base.SHA.fullmatch(reference[name])
             for name in ('certificate_sha256', 'finalize_actual_sha256')),
             'registered prepare exact real proof hashes required')
-        return ('--registration-certificate-sha', reference['certificate_sha256'],
-                '--registration-finalize-actual-sha', reference['finalize_actual_sha256'])
+        suffix = ('--registration-certificate-sha', reference['certificate_sha256'],
+                  '--registration-finalize-actual-sha', reference['finalize_actual_sha256'])
+        if REGISTERED_IDENTITY.endswith('20261116.v1'):
+            first, last = plan.get('whole_start_ms'), plan.get('whole_end_ms')
+            require(type(first) is int and type(last) is int and last == first + 4500000
+                    and plan.get('actor_activation_UTC_seconds') == first / 1000
+                    and 1794824100000 <= first and last + 7200000 <= 1794852900000,
+                    'NEW original whole4500/7200 actor binding differs')
+            suffix += ('--whole-start-ms', str(first))
+        return suffix
     fields = {"public_source_plan", "public_source_plan_sha256"}
     present = fields & set(binding)
     if not present:
@@ -1907,6 +1917,14 @@ def _check_software(plan: dict[str, Any]) -> None:
             contracts += ('scripts/p17_m2_input_continuation.py',
                           'scripts/' + CONTINUATION_CONFIG['recovery_entry'],
                           'scripts/' + CONTINUATION_CONFIG['input_entry'])
+        if REGISTERED_IDENTITY.endswith('20261116.v1'):
+            contracts += tuple('scripts/' + name for name in (
+                'full60_input_loader.py', 'full60_input_window.py', 'full60_public_capability.py',
+                CONTINUATION_CONFIG['control_entry'], CONTINUATION_CONFIG['caller_waiter'],
+                CONTINUATION_CONFIG['caller_filer'], CONTINUATION_CONFIG['caller_cohort'],
+                CONTINUATION_CONFIG['caller_boundary'], 'public_containment_entry.py',
+                'public_containment_driver.py', 'public_containment_audit.py',
+                'public_worker_deadline.py', 'public_deadline_guardian.py'))
     for path in authorities:
         try:
             native._software_bytes(REPO / path)
@@ -1920,13 +1938,17 @@ def _check_software(plan: dict[str, Any]) -> None:
         contracts=contracts,
         verifier_path="scripts/p17_m2_source_acquisition_independent.py",
         verifier_sha256=MODULE_SOURCE_SHA256,
-        controller="p17_m2_source_acquisition_control.py",
+        controller=(CONTINUATION_CONFIG['control_entry']
+                    if REGISTERED_IDENTITY.endswith('20261116.v1')
+                    else "p17_m2_source_acquisition_control.py"),
         prepare_mode="activate-formal" if formal else "prepare-rehearsal",
         repo_guard=rehearsal_root,
         prepare_suffix=public_prepare_suffix(plan),
     )
     python = plan["runtime"]["python"]
-    script = str(Path(plan["runtime"]["cwd"]) / "scripts/p17_m2_source_acquisition_control.py")
+    script = str(Path(plan["runtime"]["cwd"]) / "scripts" / (
+        CONTINUATION_CONFIG['control_entry'] if REGISTERED_IDENTITY.endswith('20261116.v1')
+        else "p17_m2_source_acquisition_control.py"))
     for role in ("public-consumer", "reader-ack"):
         require(
             plan["metadata_actions"][role]["argv"]
@@ -2031,6 +2053,9 @@ class _AcquisitionCertificatePolicy:
             start <= result["T0"] <= result["T1"] <= start + min(self.result_seconds),
             "actual filing exceeds both source result windows",
         )
+        if self.identity.endswith('20261116.v1'):
+            require(result['T1'] * 1000 <= self.plan['whole_end_ms'],
+                    'NEW actual filing exceeds original whole4500')
 
     def check_release(self, result: dict[str, Any], filing: dict[str, Any]) -> None:
         require(
@@ -2039,6 +2064,9 @@ class _AcquisitionCertificatePolicy:
             <= self.result_start + min(self.result_seconds),
             "actual release exceeds source result window",
         )
+        if self.identity.endswith('20261116.v1'):
+            require(result['T1'] * 1000 <= self.plan['whole_end_ms'],
+                    'NEW actual lease release exceeds original whole4500')
 
     def certificate(self, binding: dict[str, Any]) -> CheckedAcquisitionInput:
         binding["verified_plan"] = self.plan

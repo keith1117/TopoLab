@@ -34,6 +34,7 @@ NEW_GENERATION = (
 )
 CONTINUATION_INPUT = None
 CONTINUATION_CONFIG = {}
+WHOLE_REQUESTED_MS = None
 REGISTERED_IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v2"
 REGISTERED_PROTOCOL = "docs/planning/p17_m2_registered_input_v2_protocol.json"
 REGISTERED_PUBLIC_PREFIX = "topolab-public-registered-source-acquisition-"
@@ -202,10 +203,22 @@ def source_freeze(execution_identity=None):
                     'docs/planning/p17_m2_source_binding_certificate_recovery_v4_protocol.json')
         )
         paths.update(REPO.joinpath("scripts").glob("p17_m2_*.mjs"))
+        if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
+            paths.update(REPO / ("scripts/" + name) for name in (
+                "full60_input_loader.py", "full60_input_window.py", "full60_public_capability.py",
+                CONTINUATION_CONFIG["control_entry"], CONTINUATION_CONFIG["input_entry"],
+                CONTINUATION_CONFIG["recovery_entry"], CONTINUATION_CONFIG["caller_waiter"],
+                CONTINUATION_CONFIG["caller_filer"], CONTINUATION_CONFIG["caller_cohort"],
+                CONTINUATION_CONFIG["caller_boundary"], "public_containment_entry.py",
+                "public_containment_driver.py", "public_containment_audit.py",
+                "public_deadline_guardian.py", "public_worker_deadline.py"))
     if execution_identity == NEW_IDENTITY:
         paths.add(REPO / NEW_PROTOCOL)
         paths.update(REPO.joinpath("scripts").glob("p17_m2_*.mjs"))
-    return {str(p.relative_to(REPO)): base().sha(p.read_bytes()) for p in sorted(paths)}
+    frozen = {str(p.relative_to(REPO)): base().sha(p.read_bytes()) for p in sorted(paths)}
+    if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
+        load("full60_input_loader").verify_loaded(REPO, frozen)
+    return frozen
 
 
 def rehearsal_root(root):
@@ -229,7 +242,9 @@ def argv_for(root, mode, plan_sha, role, *, reader_role="scientific-producer"):
     argv = [
         str(Path(sys.orig_argv[0]).resolve()),
         "-I",
-        str(Path(__file__).resolve()),
+        str(Path(__file__).with_name(CONTINUATION_CONFIG["control_entry"]).resolve())
+        if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT
+        else str(Path(__file__).resolve()),
         mode,
         "--root",
         str(root),
@@ -247,6 +262,14 @@ def make_plan(root, contract, source_identity, *, strict23_registration=None):
     """Build the public projection; formal_plan replaces only declared authority inputs."""
     helper = base()
     now = round(time.time(), 3)
+    whole = None
+    if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
+        window = load("full60_input_window")
+        whole = {"whole_start_ms": WHOLE_REQUESTED_MS,
+                 "whole_end_ms": WHOLE_REQUESTED_MS + 4500000
+                 if type(WHOLE_REQUESTED_MS) is int else None}
+        window.check(whole, time.time_ns() // 10**6)
+        now = WHOLE_REQUESTED_MS / 1000
     end = datetime.fromtimestamp(now + 4500, UTC).isoformat(timespec="milliseconds")
     registered = registered_root(root)
     new = root.name.startswith(NEW_PUBLIC_PREFIX) or str(root) == NEW_GENERATION
@@ -259,6 +282,7 @@ def make_plan(root, contract, source_identity, *, strict23_registration=None):
     protocol_sha = helper.sha((REPO / protocol_path).read_bytes())
     proposal_sha = helper.sha((REPO / PROPOSAL).read_bytes())
     return {
+        **(whole or {}),
         "schema": "topolab.v2.m2-source-acquisition-plan.v1",
         "execution_identity": (
             REGISTERED_IDENTITY if registered else NEW_IDENTITY if new
@@ -1151,6 +1175,7 @@ def activate_formal(root, *, strict23_registration=None):
 
 
 def checked(root, expected):
+    global WHOLE_REQUESTED_MS
     helper = base()
     literal = Path(os.path.abspath(root))
     if literal.name.startswith(
@@ -1171,6 +1196,8 @@ def checked(root, expected):
         if str(literal) in REGISTERED_GENERATIONS:
             saved = helper.read_json(literal / "plan.json")
             need(helper.sha(helper.canonical(saved)) == expected, "PLAN_SHA_CHANGED")
+            if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
+                WHOLE_REQUESTED_MS = saved["whole_start_ms"]
             registration = saved.get("binding", {}).get("strict23_registration")
             registered = load("p17_m2_registered_input")
             policy = registered.authority(authority_raw)
@@ -1189,6 +1216,8 @@ def checked(root, expected):
         root, scope = literal, FORMAL_SCOPE
     plan = helper.read_json(root / "plan.json")
     need(helper.sha(helper.canonical(plan)) == expected, "PLAN_SHA_CHANGED")
+    if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
+        load("full60_input_window").check(plan, time.time_ns() // 10**6)
     need(
         plan["root"] == str(root)
         and plan["scope"] == scope
@@ -1394,7 +1423,31 @@ class AcquisitionTransport:
         return self.independent().sampler_profiles(folder, record)
 
     def native_module(self, root=None):
-        native = base().native_module()
+        if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
+            base().load("p17_m2_homotopy")
+            relative = "scripts/p17_m2_resource_control.py"
+            path = REPO / relative
+            raw = path.read_bytes()
+            plan = base().read_json(self.root / "plan.json")
+            need(base().sha(base().canonical(plan)) == self.plan_sha
+                 and base().sha(raw) == plan["source_tree"][relative],
+                 "NEW native private source/plan freeze differs")
+            key = "p17_m2_resource_control_full60_" + base().sha(str(self.root).encode())[:16]
+            spec = importlib.util.spec_from_file_location(key, path)
+            native = importlib.util.module_from_spec(spec)
+            sys.modules[key] = native
+            exec(compile(raw, str(path), "exec"), native.__dict__)
+            load("full60_input_loader").loaded_source_sha256[str(path.resolve())] = base().sha(raw)
+            original_invoke = native.invoke
+
+            def invoke(*args, **kwargs):
+                kwargs.setdefault("measurement_scope", self.scope)
+                kwargs.setdefault("measurement_execution_identity", REGISTERED_IDENTITY)
+                return original_invoke(*args, **kwargs)
+
+            native.invoke = invoke
+        else:
+            native = base().native_module()
         if root is not None:
             snapshot = native._snapshot
 
@@ -1858,6 +1911,7 @@ def verify_retained_evidence(root, manifest_raw, expected_manifest_sha256):
 
 
 def main():
+    global WHOLE_REQUESTED_MS
     modes = (
         "prepare-rehearsal",
         "activate-formal",
@@ -1882,11 +1936,18 @@ def main():
     parser.add_argument("--public-source-plan-sha")
     parser.add_argument("--registration-certificate-sha")
     parser.add_argument("--registration-finalize-actual-sha")
+    parser.add_argument("--whole-start-ms", type=int)
     args = parser.parse_args()
     continuation = load('p17_m2_input_continuation')
     selected = continuation.config_for_root(args.root)
     if selected is not None and REGISTERED_IDENTITY != selected['input']:
         return for_registered_identity(selected['input']).main()
+    whole_profile = CONTINUATION_INPUT == continuation.FULL60_INPUT
+    if whole_profile and args.mode in ("prepare-rehearsal", "activate-formal"):
+        load("full60_input_window").declare(args.whole_start_ms, time.time_ns() // 10**6)
+        WHOLE_REQUESTED_MS = args.whole_start_ms
+    else:
+        need(args.whole_start_ms is None, "NEW whole start is only supplied at initial entry")
     registration = None
     suffix = []
     registered = registered_root(Path(args.root))
@@ -1896,6 +1957,8 @@ def main():
             args.registration_certificate_sha, args.registration_finalize_actual_sha)
         suffix = ["--registration-certificate-sha", args.registration_certificate_sha,
                   "--registration-finalize-actual-sha", args.registration_finalize_actual_sha]
+        if whole_profile:
+            suffix += ["--whole-start-ms", str(args.whole_start_ms)]
     else:
         need(args.registration_certificate_sha is None
              and args.registration_finalize_actual_sha is None,
@@ -1917,7 +1980,8 @@ def main():
             == [
                 str(Path(sys.orig_argv[0]).resolve()),
                 "-I",
-                str(Path(__file__).resolve()),
+                str(Path(__file__).with_name(CONTINUATION_CONFIG["control_entry"]).resolve())
+                if whole_profile else str(Path(__file__).resolve()),
                 "activate-formal",
                 "--root",
                 args.root,

@@ -27,6 +27,14 @@ COORDINATED_AUTHORITY = REPO / "docs/planning/p17_m2_coordinated_source_binding_
 WINDOW2_AUTHORITY = REPO / "docs/planning/p17_m2_coordinated_source_binding_window2_protocol.json"
 IDENTITY = "topolab.v2.p17-source-binding-and-conditional-repair.20261103.v1"
 WINDOW2_ID = "topolab.v2.p17-source-binding-window2.20261104.v1"
+FULL60_RECOVERY_ID = "topolab.v2.p17-binding-certificate-recovery.20261116.v1"
+FULL60_RECOVERY_ROOTS = tuple(
+    "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/"
+    + name for name in ("metadata-public-a1", "metadata-formal-a1")
+)
+FULL60_METADATA_MODE = False
+FULL60_METADATA_EVIDENCE = Path(
+    "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116")
 PUBLIC_SCOPE = "PUBLIC_STRICT_BINDING_REGISTRATION_ONLY"
 FORMAL_SCOPE = "FORMAL_STRICT_BINDING_REGISTRATION_ONLY"
 READ_SCHEMA = "topolab.v2.m2-strict-source-binding.read.v1"
@@ -191,13 +199,16 @@ def role_argv(root, mode, expected_sha, role, python, *, execution_identity=None
         "topolab.v2.p17-binding-certificate-recovery.20261104.v6",
         "topolab.v2.p17-binding-certificate-recovery.20261104.v7",
         "topolab.v2.p17-binding-certificate-recovery.20261104.v8",
+        FULL60_RECOVERY_ID,
     )
     need(
         execution_identity in (None, IDENTITY, WINDOW2_ID, *recovery),
         "unregistered command execution identity",
     )
     script = (
-        "p17_m2_source_binding_recovery_v8.py"
+        "binding_recovery_full60_20261116.py"
+        if execution_identity == FULL60_RECOVERY_ID
+        else "p17_m2_source_binding_recovery_v8.py"
         if execution_identity == "topolab.v2.p17-binding-certificate-recovery.20261104.v8"
         else "p17_m2_source_binding_recovery_v7.py"
         if execution_identity == "topolab.v2.p17-binding-certificate-recovery.20261104.v7"
@@ -720,6 +731,15 @@ def read_metadata(path, maximum, *, expected=None, canonical_required=False):
 
 def metadata_path_guard(path):
     """NEW metadata helpers cannot become a route into old inputs or failed custody."""
+    if FULL60_METADATA_MODE:
+        backup = Path(str(FULL60_METADATA_EVIDENCE) + "-backup")
+        backup_certificate = path.parent == backup and path.name in (
+            "public-metadata-certificate-a1.json", "formal-metadata-certificate-a1.json")
+        need(path.is_absolute() and ".." not in path.parts
+             and ((path.is_relative_to(FULL60_METADATA_EVIDENCE)
+                   and path != FULL60_METADATA_EVIDENCE) or backup_certificate),
+             "original or historical namespace is not NEW metadata")
+        return
     evidence = Path(json.loads(AUTHORITY.read_bytes())["evidence_root"])
     data = Path("/Users/keith1117/Documents/TopoLab-data")
     library = Path("/Users/keith1117/Library")
@@ -740,6 +760,9 @@ def load_plan(path, expected_sha):
         and re.fullmatch(r"[0-9a-f]{64}", expected_sha),
         "literal pinned plan required",
     )
+    if str(path.parent) in FULL60_RECOVERY_ROOTS:
+        recovery = load("p17_m2_source_binding_recovery").for_identity(FULL60_RECOVERY_ID)
+        return recovery.load_plan(path, expected_sha)
     if path.parent.name.startswith(
         ("topolab-public-binding-certificate-recovery-", "binding-formal-v3-certificate-recovery-")
     ):

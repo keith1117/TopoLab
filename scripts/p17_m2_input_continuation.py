@@ -4,6 +4,7 @@ Only explicit new identities/literals select these private module instances.
 Historical modules and protocol bytes retain their original defaults and clocks.
 """
 
+import hashlib
 import importlib.util
 import sys
 from pathlib import Path
@@ -34,7 +35,34 @@ V33_RECOVERY = "topolab.v2.p17-binding-certificate-recovery.20261104.v7"
 V33_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v5"
 V35_RECOVERY = "topolab.v2.p17-binding-certificate-recovery.20261104.v8"
 V35_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v6"
+FULL60_RECOVERY = "topolab.v2.p17-binding-certificate-recovery.20261116.v1"
+FULL60_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1"
+FULL60_EVIDENCE = (
+    "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116"
+)
+FULL60_BUDGET_SHA = "cfa8ac55d9f1879fdc9242db76b78c6661f38649e97162d0fe39339600629ec0"
 CONFIGS = {
+    FULL60_INPUT: {
+        "input": FULL60_INPUT, "recovery": FULL60_RECOVERY,
+        "prefix": "topolab-public-full60-source-acquisition-",
+        "generations": tuple(PARENT + "p17-m2-local-input-version-20261116-full60-a" + str(i)
+                             for i in (1, 2)),
+        "recovery_protocol": "docs/planning/binding_recovery_full60_20261116_contract.json",
+        "input_protocol": "docs/planning/registered_input_full60_20261116_contract.json",
+        "schema": "topolab.v2.m2-registered-source-acquisition-authority.20261116.v1",
+        "recovery_entry": "binding_recovery_full60_20261116.py",
+        "input_entry": "registered_input_full60_20261116.py",
+        "control_entry": "input_control_full60_20261116.py",
+        "cache_suffix": "_full60_20261116", "global_deadline_ms": 1794852900000,
+        "public_attempts_total": 1, "public_graphs_max": 1,
+        "whole_attempt_seconds": 4500, "result_suffix_seconds": 7200,
+        "caller_waiter": "await_full60_input_receipt.py",
+        "caller_filer": "file_full60_input_event.py",
+        "caller_cohort": "full60_input_cohort.mjs",
+        "caller_boundary": "full60_input_actual_boundary.mjs",
+        "budget": {"path": FULL60_EVIDENCE + "/owner-budget-registration.json",
+                   "sha256": FULL60_BUDGET_SHA},
+    },
     INPUT: {
         "input": INPUT,
         "recovery": RECOVERY,
@@ -179,7 +207,15 @@ def profile(kind, identity=INPUT):
     result = importlib.util.module_from_spec(spec)
     sys.modules[key] = result
     try:
-        spec.loader.exec_module(result)
+        if selected["input"] == FULL60_INPUT:
+            raw = path.read_bytes()
+            loader = sys.modules.get("full60_input_loader")
+            if loader is not None:
+                loader.loaded_source_sha256[str(path.resolve())] = hashlib.sha256(raw).hexdigest()
+            exec(compile(raw, str(path), "exec"), result.__dict__)
+            result.loaded_source_sha256 = hashlib.sha256(raw).hexdigest()
+        else:
+            spec.loader.exec_module(result)
         result.CONTINUATION_INPUT = selected["input"]
         result.CONTINUATION_CONFIG = selected
         result.GLOBAL_DEADLINE_MS = selected["global_deadline_ms"]
@@ -216,6 +252,8 @@ def profile(kind, identity=INPUT):
 
 
 def budget_keys(identity):
+    if identity == FULL60_RECOVERY:
+        return ("budget", "budget_review", "ancillary_budget_review")
     if identity == V35_RECOVERY:
         return ("budget", "budget_review", "software_activation", "registration_actual",
                 "independent_author_clock")
@@ -239,8 +277,62 @@ def budget_keys(identity):
     return keys + (("prior_failed_continuation",) if identity == V31_RECOVERY else ())
 
 
+def captured_full60_budget(module, captures):
+    policy = module.authority()
+    module.need(set(captures) == {"budget", "budget_review", "ancillary_budget_review"},
+                "NEW exact budget/review/allocation required")
+    values = {}
+    for key, capture in captures.items():
+        module.need(capture["reference"] == policy[key], "NEW budget reference differs")
+        values[key] = module.captured_value(capture)
+    budget, review = values["budget"], values["budget_review"]
+    module.need(policy["budget"] == CONFIGS[FULL60_INPUT]["budget"]
+                and budget["execution_identity"]
+                == "topolab.container-full60-input-admission.20261116.v1"
+                and budget["start_unix_ns"] == 1794824100000000000
+                and budget["end_unix_ns"] == 1794852900000000000
+                and budget["global_wall_seconds"] == 28800
+                and budget["new_FULL_total_ceiling_seconds"] == 24000
+                and budget["phase_limits"]["input_one_attempt_whole_seconds_max"] == 4500
+                and budget["phase_limits"]["final_result_publication_and_return_seconds_reserved"]
+                == 7200 and budget["old_allowances"] == "CLOSED_NO_TRANSFER",
+                "NEW owner clocks/caps or old closure differs")
+    module.need(review["schema"] == "topolab.independent.NEW-full60-input-budget-review.v1"
+                and review["status"] == "PASS_FINITE_BUDGET_NO_ACCESS_GRANT"
+                and review["author"] == "/root/full60_independent"
+                and review["owner_budget_sha256"] == FULL60_BUDGET_SHA
+                and review["input_identity"] == FULL60_INPUT
+                and review["metadata_identity"] == FULL60_RECOVERY
+                and review["global_start_ms"] == 1794824100000
+                and review["global_end_ms"] == 1794852900000
+                and review["new_Original_registration_reads"] == 0
+                and review["new_Foundation_helpers"] == 0
+                and review["input_one_attempt_whole_seconds_max"] == 4500
+                and review["mandatory_remaining_publication_actual_return_suffix_seconds"] == 7200
+                and review["named_FULL_each_input_graph"] == 3780
+                and review["formal_all_attempts_new_reads_max"] == 2392
+                and review["conservative_named_reservation"]["sum"] == 21420,
+                "NEW independent budget/source/whole-cap review differs")
+    extra = values["ancillary_budget_review"]
+    module.need(extra["schema"]
+                == "topolab.independent.NEW-full60-input-budget-allocation-supplement.v1"
+                and extra["status"] == "PASS_FINITE_INTERNAL_ALLOCATION_NO_EXECUTION_ACCESS"
+                and extra["author"] == "/root/full60_independent"
+                and extra["owner_budget_sha256"] == FULL60_BUDGET_SHA
+                and extra["new_conservative_named_reservation"] == 22320
+                and extra["unchanged_NEW_FULL_ceiling"] == 24000
+                and extra["remaining_unassigned"] == 1680
+                and extra["new_prebound_lease_FULL"]["sum"] == 540
+                and extra["optional_NEW_PUBLIC_consumer_ack_FULL"]["sum"] == 360
+                and extra["unchanged_author_global_read_call_campaign_caps"] is True,
+                "NEW ancillary allocation differs or expands fixed budget")
+    return values
+
+
 def captured_budget(module, captures):
     """Replay raw preregistration, actual return, finite caps and failed-old seal."""
+    if module.IDENTITY == FULL60_RECOVERY:
+        return captured_full60_budget(module, captures)
     if module.IDENTITY == V35_RECOVERY:
         return captured_v35_budget(module, captures)
     if module.IDENTITY == V33_RECOVERY:

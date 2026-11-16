@@ -24,6 +24,32 @@ ROLE = 'binding-certificate-auditor'
 CLI_ENTRY = 'p17_m2_source_binding_recovery.py'
 CONTINUATION_INPUT = None
 CONTINUATION_CONFIG = {}
+FULL60_INPUT = 'topolab.v2.p17-m2-registered-source-acquisition.20261116.v1'
+FULL60_RECOVERY = 'topolab.v2.p17-binding-certificate-recovery.20261116.v1'
+FULL60_EVIDENCE = Path(
+    '/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116')
+_FULL60_CORE = None
+FULL60_REVIEW_PARTITION = 'docs/planning/full60_input_cross_review_partition.json'
+FULL60_LEAD_FILES = {
+    'scripts/p17_m2_source_binding_recovery.py', 'scripts/p17_m2_source_binding_native.py',
+    'scripts/p17_m2_resource_control.py', 'scripts/p17_m2_source_binding.py',
+    'scripts/binding_recovery_full60_20261116.py',
+    'tests/test_binding_recovery_full60_20261116.py',
+}
+FULL60_ROOT_FILES = {
+    'docs/planning/binding_recovery_full60_20261116_contract.json',
+    'docs/planning/full60_input_cross_review_partition.json',
+    'docs/planning/registered_input_full60_20261116_contract.json',
+    'scripts/await_full60_input_receipt.py', 'scripts/file_full60_input_event.py',
+    'scripts/full60_input_actual_boundary.mjs', 'scripts/full60_input_cohort.mjs',
+    'scripts/full60_input_loader.py', 'scripts/full60_input_window.py',
+    'scripts/full60_public_capability.py', 'scripts/input_control_full60_20261116.py',
+    'scripts/p17_m2_content_verified_control.py', 'scripts/p17_m2_content_verified_independent.py',
+    'scripts/p17_m2_input_continuation.py', 'scripts/p17_m2_registered_input.py',
+    'scripts/p17_m2_source_acquisition_control.py',
+    'scripts/p17_m2_source_acquisition_independent.py', 'scripts/p17_m2_source_verified_input.py',
+    'scripts/registered_input_full60_20261116.py', 'tests/test_full60_input_window.py',
+}
 PLAN_SCHEMA = 'topolab.v2.m2-strict-source-binding.metadata-plan.v1'
 ENVELOPE_SCHEMA = 'topolab.v2.m2-strict-source-binding.recovered-result.v1'
 FUTURE = 'NOT_CLAIMED_REQUIRES_SEPARATE_ACTUAL_OBSERVATION'
@@ -31,6 +57,8 @@ FUTURE = 'NOT_CLAIMED_REQUIRES_SEPARATE_ACTUAL_OBSERVATION'
 
 def load(name):
     import importlib.util
+    if CONTINUATION_INPUT == FULL60_INPUT and name == 'p17_m2_source_binding':
+        return enable_new_metadata_mode()
     path = REPO / 'scripts' / (name + '.py')
     old = sys.modules.get(name)
     if old is not None and Path(old.__file__).resolve() == path:
@@ -42,6 +70,31 @@ def load(name):
     sys.modules[name] = result
     spec.loader.exec_module(result)
     return result
+
+
+def enable_new_metadata_mode():
+    """Use a private source-compiled core; historical/shared defaults stay closed."""
+    import hashlib
+    import types
+
+    global _FULL60_CORE
+    need(CONTINUATION_INPUT == FULL60_INPUT and IDENTITY == FULL60_RECOVERY,
+         'NEW metadata mode requires its exact selected profile')
+    if _FULL60_CORE is None:
+        path = REPO / 'scripts/p17_m2_source_binding.py'
+        raw = path.read_bytes()
+        key = 'p17_m2_source_binding_full60_metadata_20261116'
+        module = types.ModuleType(key)
+        module.__file__ = str(path)
+        sys.modules[key] = module
+        exec(compile(raw, str(path), 'exec', dont_inherit=True), module.__dict__)
+        module.FULL60_METADATA_MODE = True
+        module.loaded_source_sha256 = hashlib.sha256(raw).hexdigest()
+        loader = sys.modules.get('full60_input_loader')
+        if loader is not None:
+            loader.loaded_source_sha256[str(path.resolve())] = module.loaded_source_sha256
+        _FULL60_CORE = module
+    return _FULL60_CORE
 
 
 def need(condition, reason):
@@ -74,9 +127,18 @@ def replay_core(bundle, kind):
     """Re-audit captured complete five-role evidence without source-path IO."""
     need(kind in ('public', 'formal'), 'literal captured core kind required')
     pin = authority()['captured_cores'][kind]
+    logical_path = pin['path']
+    if CONTINUATION_INPUT == FULL60_INPUT:
+        need(IDENTITY == FULL60_RECOVERY
+             and pin['path'] == str(FULL60_EVIDENCE / 'metadata-availability-capture'
+                                    / (kind + '-core.json'))
+             and pin.get('capture_path', pin['path']) == pin['path']
+             and isinstance(pin.get('historical_bundle_path'), str),
+             'NEW metadata capture/historical reference differs')
+        logical_path = pin['historical_bundle_path']
     need(sha(canonical(bundle)) == pin['sha256']
          and bundle['plan']['context'] == pin['context']
-         and str(Path(bundle['plan']['root']) / 'certificate-bundle.json') == pin['path'],
+         and str(Path(bundle['plan']['root']) / 'certificate-bundle.json') == logical_path,
          'captured successful core/context pin differs')
     return load('p17_m2_source_binding').replay_bundle(bundle)
 
@@ -116,6 +178,28 @@ def source_freeze():
             "scripts/m2_acquisition_actual_boundary.mjs",
         ):
             frozen[name] = sha((REPO / name).read_bytes())
+    if CONTINUATION_INPUT == FULL60_INPUT:
+        for name in (
+            'scripts/full60_input_loader.py',
+            'scripts/full60_public_capability.py',
+            'scripts/input_control_full60_20261116.py',
+            'scripts/p17_m2_source_verified_input.py',
+            'scripts/p17_m2_scientific_independent.py',
+            *(('scripts/' + CONTINUATION_CONFIG[key]) for key in (
+                'caller_waiter', 'caller_filer', 'caller_cohort', 'caller_boundary')),
+            'scripts/public_containment_entry.py',
+            'scripts/public_containment_driver.py',
+            'scripts/public_deadline_guardian.py',
+            'scripts/public_worker_deadline.py',
+            'scripts/public_containment_audit.py',
+        ):
+            frozen[name] = sha((REPO / name).read_bytes())
+        partition, _ = component_review_partition()
+        for name in (FULL60_REVIEW_PARTITION, *partition['members']):
+            frozen[name] = sha((REPO / name).read_bytes())
+        loader = sys.modules.get('full60_input_loader')
+        if loader is not None:
+            loader.verify_loaded(REPO, frozen)
     return frozen
 
 
@@ -145,6 +229,18 @@ def captured_value(capture, value_key='value'):
     value = json.loads(capture['raw'])
     need(value == capture.get(value_key), 'captured raw/report buffer differs')
     return value
+
+
+def checked_full60_public_capability(capture):
+    """Replay the captured real public gate without following package pointers."""
+    need(CONTINUATION_INPUT == FULL60_INPUT and IDENTITY == FULL60_RECOVERY
+         and isinstance(capture, dict), 'NEW captured public capability required')
+    expected = str(FULL60_EVIDENCE / 'public-full60-final-acceptance-a1.json')
+    need(authority().get('public_capability_path') == expected
+         and capture.get('reference', {}).get('path') == expected,
+         'NEW exact public capability path differs')
+    captured_value(capture)
+    return load('full60_public_capability').verify_public_capability(capture['raw'].encode('utf-8'))
 
 
 def budget_readiness():
@@ -242,13 +338,81 @@ def review_readiness(standards_sha, spec_sha):
         reference = {'path': policy['review_paths'][axis], 'sha256': expected}
         captured = capture_ref(reference)
         report = captured['value']
-        need(report.get('status') == 'PASS' and report.get('open_findings') == []
-             and report.get('author') == policy['review_authors'][axis]
-             and report.get('execution_identity') == IDENTITY
-             and report.get('reviewed_source_tree') == source_freeze(),
-             'fresh different-author review/source freeze differs')
+        if CONTINUATION_INPUT != FULL60_INPUT:
+            need(report.get('status') == 'PASS' and report.get('open_findings') == []
+                 and report.get('author') == policy['review_authors'][axis]
+                 and report.get('execution_identity') == IDENTITY
+                 and report.get('reviewed_source_tree') == source_freeze(),
+                 'fresh different-author review/source freeze differs')
         reports[axis] = {'reference': reference, 'report': report, 'raw': captured['raw']}
+    if CONTINUATION_INPUT == FULL60_INPUT:
+        validate_component_reviews(reports, source_freeze())
     return reports
+
+
+def component_review_partition():
+    """Read the NEW bounded writer/reviewer partition; it grants no data access."""
+    need(CONTINUATION_INPUT == FULL60_INPUT and IDENTITY == FULL60_RECOVERY,
+         'NEW component review requires its exact profile')
+    schema = authority().get('review_schema', {})
+    need(schema.get('kind') == 'NEW_COMPONENT_CROSS_REVIEW'
+         and schema.get('partition_path') == FULL60_REVIEW_PARTITION
+         and schema.get('required_axes') == ['standards', 'spec']
+         and schema.get('full_source_tree_is_version_pin') is True,
+         'NEW component review policy differs')
+    raw = (REPO / FULL60_REVIEW_PARTITION).read_bytes()
+    need(len(raw) <= 65536, 'NEW component partition byte cap')
+    value = json.loads(raw)
+    members = value.get('members', {})
+    need(value.get('schema') == 'topolab.NEW-full60-input-cross-review-partition.v1'
+         and value.get('execution_identity') == FULL60_RECOVERY
+         and value.get('jointly_owned') == 'DENY_NO_SELF_REVIEW'
+         and value.get('source_tree_is_version_pin_not_review_scope') is True
+         and isinstance(members, dict) and set(members) == FULL60_LEAD_FILES | FULL60_ROOT_FILES,
+         'NEW component partition exact26 coverage incomplete')
+    for name, item in members.items():
+        path = Path(name)
+        writer = '/root/full60_independent' if name in FULL60_LEAD_FILES else '/root'
+        reviewer = '/root' if writer != '/root' else '/root/full60_independent'
+        need(isinstance(name, str) and not path.is_absolute() and str(path) == name
+             and '..' not in path.parts and path.parts[0] in ('scripts', 'tests', 'docs')
+             and path.suffix in ('.py', '.mjs', '.js', '.json', '.md')
+             and isinstance(item, dict) and set(item) == {'writer', 'reviewer', 'required_axes'}
+             and item['writer'] == writer and item['reviewer'] == reviewer
+             and item['required_axes'] == ['standards', 'spec'],
+             'NEW component partition path/writer/nonwriter axes differ')
+    return value, sha(raw)
+
+
+def validate_component_reviews(captures, tree):
+    """Require both axes for every changed file from its assigned nonwriter."""
+    policy = authority()
+    partition, digest = component_review_partition()
+    need(isinstance(captures, dict) and set(captures) == {'standards', 'spec'}
+         and set(policy['review_authors'].values()) == {'/root', '/root/full60_independent'}
+         and tree.get(FULL60_REVIEW_PARTITION) == digest,
+         'NEW component review version/author coverage differs')
+    covered = set()
+    for slot in ('standards', 'spec'):
+        capture = captures[slot]
+        report = captured_value(capture, 'report')
+        author = policy['review_authors'][slot]
+        expected = {name: tree[name] for name, item in partition['members'].items()
+                    if item['reviewer'] == author}
+        need(capture['reference']['path'] == policy['review_paths'][slot]
+             and report.get('schema') == 'topolab.NEW-full60-input-component-cross-review.v1'
+             and report.get('execution_identity') == IDENTITY and report.get('author') == author
+             and report.get('kind') == 'COMPONENT_CROSS_REVIEW'
+             and report.get('status') == 'PASS_COMPONENT_CROSS_REVIEW'
+             and report.get('axes') == ['standards', 'spec'] and report.get('open_findings') == []
+             and report.get('reviewed_source_tree') == tree
+             and report.get('partition_sha256') == digest
+             and report.get('reviewed_files') == expected and expected,
+             'NEW component review exact nonwriter/two-axis coverage incomplete')
+        need(not (covered & set(expected)), 'NEW component review overlaps assigned scope')
+        covered.update(expected)
+    need(covered == set(partition['members']), 'NEW component review union incomplete')
+    return captures
 
 
 def _root(kind, attempt):
@@ -619,13 +783,14 @@ def prepare(
     activation_sha=None,
     permission_packet=None,
     permission_packet_sha=None,
+    public_capability_sha=None,
 ):
     """Prepare one fixed new metadata attempt and return its exact small command table."""
     core, policy = load("p17_m2_source_binding"), authority()
     root = _root(kind, attempt)
     permission = None
     if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
-                              load("p17_m2_input_continuation").V35_INPUT):
+                              load("p17_m2_input_continuation").V35_INPUT, FULL60_INPUT):
         need(
             permission_packet is not None and permission_packet_sha is not None,
             "actual approved permission preflight required before actor/root preparation",
@@ -637,6 +802,22 @@ def prepare(
     reviews = review_readiness(standards_sha, spec_sha)
     budget = budget_readiness()
     runtime = core.runtime()
+    public_capability = None
+    if CONTINUATION_INPUT == FULL60_INPUT:
+        need(isinstance(public_capability_sha, str)
+             and re.fullmatch('[0-9a-f]{64}', public_capability_sha),
+             'NEW real public capability CLI SHA required before metadata preparation')
+        expected_public_path = str(FULL60_EVIDENCE / 'public-full60-final-acceptance-a1.json')
+        need(policy.get('public_capability_path') == expected_public_path,
+             'NEW exact public capability path required before metadata read')
+        public_capability = capture_ref({
+            'path': expected_public_path, 'sha256': public_capability_sha})
+        checked_full60_public_capability(public_capability)
+        need(time.time_ns() + (300 + 7200) * 10**9 <= min(
+            policy['limits']['global_deadline_ms'],
+            policy.get('independent_author_deadline_ms',
+                       policy['limits']['global_deadline_ms'])) * 10**6,
+             'NEW complete metadata window plus7200s result suffix unavailable')
     need(
         runtime["isolated"] == 1
         and runtime["cwd"] == str(REPO)
@@ -650,6 +831,8 @@ def prepare(
         "old_source_access": False,
         "old_scene_write": False,
     }
+    if public_capability is not None:
+        entry['public_capability'] = public_capability
     if permission is not None:
         entry["permission"] = permission
         entry["permission_publication"] = publication_readiness()
@@ -818,14 +1001,18 @@ def _captured_formal(admitted, context, runtime):
          and preflight.get('runtime') == runtime and preflight.get('budget') == policy['budget'],
          'captured formal preflight full schema/policy differs')
     _captured_budget(preflight.get('budget_evidence'))
-    for axis in ('standards', 'spec'):
-        report = captured_value(preflight['reviews'][axis], 'report')
-        need(report.get('status') == 'PASS' and report.get('open_findings') == []
-             and report.get('author') == policy['review_authors'][axis]
-             and report.get('execution_identity') == IDENTITY
-             and report.get('reviewed_source_tree') == context['source_tree']
-             and preflight['reviews'][axis]['reference']['path'] == policy['review_paths'][axis],
-             'captured preflight review differs')
+    if CONTINUATION_INPUT == FULL60_INPUT:
+        validate_component_reviews(preflight.get('reviews'), context['source_tree'])
+    else:
+        for axis in ('standards', 'spec'):
+            report = captured_value(preflight['reviews'][axis], 'report')
+            need(report.get('status') == 'PASS' and report.get('open_findings') == []
+                 and report.get('author') == policy['review_authors'][axis]
+                 and report.get('execution_identity') == IDENTITY
+                 and report.get('reviewed_source_tree') == context['source_tree']
+                 and preflight['reviews'][axis]['reference']['path']
+                 == policy['review_paths'][axis],
+                 'captured preflight review differs')
     public_sha = admitted['public_certificate_sha256']
     need(preflight.get('public_certificate_sha256') == public_sha,
          'captured public certificate reference differs')
@@ -952,27 +1139,32 @@ def _plan_shape(plan, *, historical=False):
         and entry.get("old_scene_write") is False,
         "new finite metadata entry differs",
     )
+    if CONTINUATION_INPUT == FULL60_INPUT:
+        checked_full60_public_capability(entry.get('public_capability'))
     if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
-                              load("p17_m2_input_continuation").V35_INPUT):
+                              load("p17_m2_input_continuation").V35_INPUT, FULL60_INPUT):
         checked_permission(
             entry.get("permission"), runtime, before_ms=plan["started_unix_ns"] // 10**6
         )
     if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
-                              load("p17_m2_input_continuation").V35_INPUT):
+                              load("p17_m2_input_continuation").V35_INPUT, FULL60_INPUT):
         _publication_shape(entry.get("permission_publication"))
     _captured_budget(entry.get("budget_evidence"))
-    for axis in ("standards", "spec"):
-        report = captured_value(entry["reviews"][axis], "report")
-        reference = entry["reviews"][axis]["reference"]
-        need(
-            reference["path"] == policy["review_paths"][axis]
-            and report.get("author") == policy["review_authors"][axis]
-            and report.get("execution_identity") == IDENTITY
-            and report.get("status") == "PASS"
-            and report.get("open_findings") == []
-            and report.get("reviewed_source_tree") == tree,
-            "captured fresh review differs from new software freeze",
-        )
+    if CONTINUATION_INPUT == FULL60_INPUT:
+        validate_component_reviews(entry.get('reviews'), tree)
+    else:
+        for axis in ("standards", "spec"):
+            report = captured_value(entry["reviews"][axis], "report")
+            reference = entry["reviews"][axis]["reference"]
+            need(
+                reference["path"] == policy["review_paths"][axis]
+                and report.get("author") == policy["review_authors"][axis]
+                and report.get("execution_identity") == IDENTITY
+                and report.get("status") == "PASS"
+                and report.get("open_findings") == []
+                and report.get("reviewed_source_tree") == tree,
+                "captured fresh review differs from new software freeze",
+            )
     need("remedy" not in entry, "NEW recovery remedy closed unused; primary only")
     if kind == "formal":
         _captured_formal(entry["formal"], context, runtime)
@@ -1026,6 +1218,13 @@ def admit_plan(plan, role):
          'actual isolated recovery runtime differs')
     need(plan['started_unix_ns'] <= time.time_ns() <= plan['deadline_unix_ns'],
          'immutable metadata recovery role window expired')
+    if CONTINUATION_INPUT == FULL60_INPUT:
+        policy = authority()
+        need(time.time_ns() + (120 + 60 + 7200) * 10**9 <= min(
+            policy['limits']['global_deadline_ms'],
+            policy.get('independent_author_deadline_ms',
+                       policy['limits']['global_deadline_ms'])) * 10**6,
+             'NEW complete metadata FULL/closing plus7200s suffix unavailable')
     budget_readiness()
     bundle = read_ref(plan['bundle'])
     replay_core(bundle, plan['kind'])
@@ -1223,6 +1422,7 @@ def main():
         "finalize-actual-sha",
         "permission-packet",
         "permission-packet-sha",
+        "public-capability-sha",
     ):
         parser.add_argument("--" + key)
     args = parser.parse_args()
@@ -1238,6 +1438,7 @@ def main():
             activation_sha=args.activation_sha,
             permission_packet=args.permission_packet,
             permission_packet_sha=args.permission_packet_sha,
+            public_capability_sha=args.public_capability_sha,
         )
     elif args.mode == "preflight":
         result = preflight(
