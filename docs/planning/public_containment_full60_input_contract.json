@@ -1,0 +1,139 @@
+{
+  "CI_runs_max": 12,
+  "FULL_ceiling_seconds": 24000,
+  "entry_requires_remaining_result_suffix_seconds": 7200,
+  "failure_rules": [
+    "Retain first primary and all secondary failures, actual response/exit, resource and all first/failure charges",
+    "STOP current attempted scope; no accepted successor on failed/unknown/incomplete proof",
+    "No frozen source mutation and continued same attempt",
+    "Only predeclared new remedy after diagnosis/public regression/independent review/normal publication and complete remaining suffix; no global or author reset",
+    "If exact metadata/source provenance unavailable, close input unstarted; never repair by rereading registration or inventing return packets"
+  ],
+  "fix_rounds_same_cause_max": 2,
+  "global_end_UTC": "2026-11-16T18:15:00Z",
+  "global_start_UTC": "2026-11-16T10:15:00Z",
+  "identity": "topolab.container-full60-input-admission.20261116.v1",
+  "independent_lead_cap_seconds": 28800,
+  "input": {
+    "actual_original_whitelist": "UNASSIGNED_DENY",
+    "attempts_max": 2,
+    "capsules_are_exact_raw_bytes_no_embedded_pointer_following": true,
+    "captured_strict23_requires_fresh_metadata_actual_return_audit": true,
+    "each_author_each_file_each_attempt_max": 1,
+    "metadata_capsule_whitelist": {
+      "formal": {
+        "bytes": 899013,
+        "capture_path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/metadata-availability-capture/formal-core.json",
+        "historical_bundle_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/binding-formal-v3/certificate-bundle.json",
+        "sha256": "ff5acace575365b2eeaf94884740363631056e57b92635caba85735bb53d0bf0"
+      },
+      "public": {
+        "bytes": 588835,
+        "capture_path": "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/metadata-availability-capture/public-core.json",
+        "historical_bundle_path": "/Users/keith1117/Documents/TopoLab-data/p17-m2-source-binding-v1-20261103T173800Z/topolab-public-coordinated-binding-v2/certificate-bundle.json",
+        "sha256": "1eb6b8ff74114fe9b856715b04f75fb8b609bd5805ad6277fcce17da5f5785ba"
+      }
+    },
+    "metadata_each_author": 40,
+    "new_Foundation_helpers": 0,
+    "new_Original_registration_reads": 0,
+    "new_targets_not_probed": {
+      "backups_suffix": "-independent-backup",
+      "generation_names": [
+        "p17-m2-local-input-version-20261116-full60-a1",
+        "p17-m2-local-input-version-20261116-full60-a2"
+      ],
+      "parent": "/Users/keith1117/Library/Application Support/TopoLab-custody"
+    },
+    "old_failed_generation_or_HELD_lease_reuse": false,
+    "old_whole_ceiling_retained": 2484,
+    "payload_each_author": 558,
+    "public_before_input_and_independent_R0_before_R1": true,
+    "roles_each_attempt": 6,
+    "state": "DENY_PENDING_PUBLIC_AND_EXACT_METADATA_WHITELIST_REVIEW",
+    "strict_first_observation_and_prebound_same_buffer_hash_policies_UNCHANGED": true,
+    "total_original_input_reads_max": 2392,
+    "version_members": 1071,
+    "window_each_seconds_max": 4500
+  },
+  "old_science": {
+    "B_C_fit_search_final_seals": "NOT_GRANTED",
+    "P17": "UNREPAIRED",
+    "full_fit": "PENDING4GiB",
+    "historical_K": "12721.16417100014444982>7200_RETAINED_FAIL",
+    "new_software_RSS_fills_no_historical_gap": true,
+    "prior_NEW_FULL_lower": 334530,
+    "uniform_default": true
+  },
+  "owner_budget_sha256": "cfa8ac55d9f1879fdc9242db76b78c6661f38649e97162d0fe39339600629ec0",
+  "public": {
+    "Docker": {
+      "context": "desktop-linux",
+      "cpu_count_max": 1,
+      "drop_cap": "SYS_ADMIN",
+      "exact_immutable_CID_image_name_owner_labels_before_every_signal": true,
+      "foreign_container_mutation": false,
+      "host_pid_namespace": false,
+      "image": "sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a",
+      "memory_bytes": 3221225472,
+      "memory_swap_equal_memory": true,
+      "mounts": [],
+      "network": "none",
+      "pids_max": 256,
+      "privileged": false,
+      "restart": "no",
+      "retain_failed_scenes": true,
+      "security_opt": "no-new-privileges"
+    },
+    "FULL_each_seconds": 60,
+    "actual_external_return_seconds_max": 50,
+    "attempts_max": 2,
+    "billing": "FULL60 charged on first/failure; ceil(external_span_seconds+10)<=60 required for acceptance",
+    "detached_host_helpers_must_have_actual_exit_and_no_live_successor": true,
+    "driver_internal_work_end_seconds": 40,
+    "expected": {
+      "accepted_guardian_watchdog_exits": 0,
+      "all_success_helper_entries_actual_exit": 0,
+      "controller_work_intentional_exit": -9,
+      "namespace_stopped_pid": 0,
+      "pid1_death_wait_exit": 23,
+      "surviving_controller_entry_actual_exit": 0,
+      "watchdog_container_kill_wait_exit": 137
+    },
+    "external_T0": "Before first authoritative exec request, including all startup/approval latency",
+    "external_T1": "After terminal complete original result and no live session; includes all native work/startup/helpers/final filing",
+    "guardian_until_final_fsync_then_cancel_reap_and_os__exit": true,
+    "independent_audit": {
+      "FULL_each_seconds": 60,
+      "calls_max": 2,
+      "entry": "scripts/public_containment_entry.py --audit PACKAGE --sha256 PACKAGE_SHA --public-static-sha256 INDEPENDENT_PREBOUND_STATIC_SHA --requested-ms T0_MS",
+      "independent_prelaunch_entire_static_sha_required": true,
+      "own_FULL60_plus_result7200_admission": true,
+      "own_original_T0_guardian45_actual_T1_at_most50": true
+    },
+    "independent_filing_guardian_end_seconds": 45,
+    "independent_worker_stop_seconds": 42,
+    "modes": [
+      "pid1-death",
+      "host-controller-death"
+    ],
+    "program_before_return_never_attests_own_future_return": true,
+    "requires_T1_minus_T0_at_most_seconds": 50,
+    "same_common_clock": true
+  },
+  "reviewers_each_cap_seconds": 3600,
+  "root_cap_seconds": 28800,
+  "schema": "topolab.public-containment-full60-input-contract.v1",
+  "software": {
+    "all_checks_and_protected_exact_head_main_four_CI_before_actual_proof": true,
+    "helper_sha256": "e4923c8abcc151e914176162aadcb1332abe44e5d6ae4b4452d1e21e83caa7be",
+    "neutral_tool_files_explicit_future_source_binding": true,
+    "new_entry_and_driver_and_independent_auditor": "REVIEW_AND_PUBLICATION_PENDING_DENY_ACTUAL_LAUNCH",
+    "old_35_path_candidate": "NOT_IMPORTED_BY_DEFAULT",
+    "old_V37_R22": "CLOSED_NOT_RUN",
+    "ordinary_regressions_CI": "Finite wall/campaign/CI scopes, all costs retained; no closed R22 execution. Named nested Native invocation requires exact tariff coverage before any optional Parent4800 admission; DENY if full coverage exceeds unchanged24000.",
+    "published_worker_helper": "scripts/public_worker_deadline.py"
+  },
+  "software_campaigns_max": 4,
+  "state": "PREPARATION_DENY_ACTUAL_LAUNCH_UNTIL_FROZEN_REVIEWED_PUBLISHED"
+}

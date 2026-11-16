@@ -1812,3 +1812,15 @@ supervisor owns the worker independently, fixes absolute deadlines before launch
 and retains actual exits/errors. New public subprocess/FIFO/lock regressions use
 no upstream implementation, dataset, model, figure or scientific input. Numerical
 methods, source-identity policy and scientific acceptance remain unchanged.
+
+## 2026-11-16 — Public container and detached-helper integration
+
+Original TopoLab software independently composes the published worker supervisor
+with an early filing guardian, exact-CID watchdog and surviving controller entry.
+OS/runtime semantics are checked against the
+[Linux PID namespace manual](https://man7.org/linux/man-pages/man7/pid_namespaces.7.html),
+[Docker execution documentation](https://docs.docker.com/engine/containers/run/)
+and [Python process APIs](https://docs.python.org/3.12/library/os.html).
+Public subprocess/FIFO and declared fake-CLI regressions contain no upstream
+implementation, model, label or scientific input. The actual Docker/return
+acceptance is a separately frozen, finite call; software tests are not that proof.

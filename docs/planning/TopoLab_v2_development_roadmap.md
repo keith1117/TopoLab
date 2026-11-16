@@ -2447,10 +2447,15 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-Current successor and limits are in the [worker deadline repair](../validation/p17_m2_worker_deadline_repair.md)
-and [current status](../project_status.md). Complete prospective public
-integration is still required before any new formal input/B/C; closed V37 and
-historical successor text below grant no execution or budget.
+Current owner-authorized successor is the
+[NEW finite containment/FULL60 and gated input contract](public_containment_full60_input_protocol.md),
+with [actual frontier](../validation/public_containment_full60_input.md) and
+[current status](../project_status.md). Early final-filing/detached-helper
+guardians, exact owned container namespace proof and actual original-tool return
+precede fresh metadata recovery and complete input. Global10:15–18:15UTC/new
+FULL<=24000/7200s result suffix and separately gated exact input roles apply.
+Original-registration/Foundation0; no B/C, old role/quota/cost/seal reset or
+scientific acceptance follows from public software checks. FixedP17 is unrepaired.
 
 
 ## Current: successful strict23 core and metadata-only certificate recovery
