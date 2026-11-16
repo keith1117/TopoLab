@@ -1,5 +1,9 @@
 # Validation evidence index
 
+Current [NEW public containment/FULL60 and gated input](public_containment_full60_input.md):
+early filing/detached-helper guardians and separately audited actual container/
+external-return evidence; complete input and P17 repair remain gated.
+
 Current [independent worker deadline repair](p17_m2_worker_deadline_repair.md): archived nested-catch RED, independent supervisor and public process integration; namespace/input/B/C remain unaccepted and P17 unrepaired.
 
 Historical [CI clock repair and new input continuation](p17_m2_ci_clock_and_input_continuation.md): reproduced fixture-time FAIL, unchanged production expiry, new finite8/6 software/input Gates; P17 remains unrepaired.

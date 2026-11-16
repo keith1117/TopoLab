@@ -17,6 +17,17 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
+The later 2026-11-16 owner instruction authorizes one NEW finite container,
+detached-helper and FULL60 integration followed conditionally by input acceptance.
+Read the [new contract](docs/planning/public_containment_full60_input_protocol.md)
+and [integration record](docs/validation/public_containment_full60_input.md).
+Global10:15–18:15UTC/Root and new independent lead28800s each, new FULL<=24000,
+public attempts2, input attempts2 remain finite with mandatory7200s result suffix.
+Actual public payload is denied until frozen reviewed protected-main/all-four-CI
+source and harmless permission preflight. Input additionally requires accepted
+public/metadata proof and a complete compatible exact-whitelist contract; new
+Original-registration reads/Foundation helpers0. No B/C or old quota reopens.
+
 The 2026-11-16 owner instruction authorizes repairing the current worker deadline
 blocker. Read [the repair record](docs/validation/p17_m2_worker_deadline_repair.md)
 and [status](docs/project_status.md). The published baseline is main8651ad1/

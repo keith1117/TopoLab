@@ -5,7 +5,37 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: independent worker deadline repair
+## Current: NEW finite containment/FULL60 and gated input acceptance
+
+The owner's later continuation authorizes the
+[new finite contract](planning/public_containment_full60_input_protocol.md).
+[Integration evidence](validation/public_containment_full60_input.md) separates
+public software, actual Docker/terminal-return acceptance, captured strict23
+metadata recovery and complete input. Its global10:15–18:15UTC window includes
+startup/failures/review/waits/checks/publication, with7200s reserved result suffix.
+Root/new independent lead each28800s, new FULL<=24000, public attempts<=2 and
+input attempts<=2; all old balances stay closed. Each entry needs its complete
+remaining fixed call and result suffix. No accepted input or P17 repair is claimed.
+
+Preparation adds an early guardian for final filing and each detached helper.
+A surviving controller entry owns and actually reaps the prescribed killed work
+child; driver observes both helper entries' real terminal exits. Public raw
+Docker states/returns and the complete original external tool span require
+separate independent replay. These are prerequisites, not evidence supplied by
+the fake-CLI/process tests. Public proof remains denied until exact reviewed
+source passes protected publication/main four CI and harmless preflight.
+
+Two captured strict23 metadata buffers retain their exact raw hashes and logical
+historical contexts. Availability is not new physical strict-source acceptance;
+metadata-only recovery may open the new captures only, never embedded old paths.
+Original-registration reads/Foundation helpers remain0. Complete40/558/1071 input
+needs a new reviewed compatible dispatch/whitelist/role-cost contract and actual
+R0 then independent acceptance before R1. Formal target/lease access and B/C
+remain denied until their applicable gates. Original25 dirty files and old scenes,
+K12721.16417100014444982>7200, knownNEWFULL lower334530, every other old failure,
+UNKNOWN/fee/quota/seal, full-fit PENDING4GiB and uniform default remain.
+
+## Historical: independent worker deadline repair
 
 The owner requested continuation from the linked seed17 chat and repair of the
 current blocker. [Repair evidence](validation/p17_m2_worker_deadline_repair.md)
