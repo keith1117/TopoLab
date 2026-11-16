@@ -1,5 +1,11 @@
 # NEW finite public containment/FULL60 and gated input
 
+Latest actual result: **public container/detached-helper/FULL60 integration
+accepted; public metadata accepted; formal metadata STOP; input not run**.
+The [input and byte-bound repair supplement](full60_input_admission.md) records
+the concrete22,943,707-byte formal-plan failure and software-only correction.
+The preparation text below retains its original authoring frontier.
+
 Owner instruction:2026-11-16. Identity
 `topolab.container-full60-input-admission.20261116.v1`.
 [Protocol](../planning/public_containment_full60_input_protocol.md) and
@@ -160,3 +166,49 @@ source payload0, formal custody target/lease0, B/C0. Software publication and
 actual acceptance are pending; no software test or budget registration closes
 those gates. Continue this newly authorized slice through its admitted next
 step; stop only on an actual gate/resource/finite-budget blocker.
+
+
+## Actual integrated container and external-return acceptance
+
+Source [PR238](https://github.com/keith1117/TopoLab/pull/238) merged normally as
+`1466dc1cf1498a285be7dff504371b0370bd4e6f`, tree
+`90a184d0ba4f35177327a5fdc2f0d3910b74d136`. All four exact PR-head and merged-main
+[CI43868014920](https://github.com/keith1117/TopoLab/actions/runs/43868014920)
+checks passed. Real metadata-only preflight returned0/no session in6.192s;
+no container was created or started by it. The independent author then bound the
+entire1951-byte static plan before the first producer request.
+
+The first actual public call returned0/no session: original
+T0=1794835283019ms, T1=1794835297506ms, span14.487s. It ran both owned container
+cases: PID1 exit23 and watchdog kill exit137, with stopped/Pid0 terminal states.
+The setsid descendant's same PID namespace and reparenting were captured. All
+four detached watchdog/controller entries actually returned0; controller work
+returned0 in the PID1 case and the prescribed-9 in the controller-death case.
+A raw Running/Pid>0 state after the controller work's actual death preceded the
+watchdog kill. Failed or foreign containers were not swept; these new stopped
+scenes remain retained.
+
+The independent guarded audit was a separate actual call, original
+T0=1794835393551ms, T1=1794835400303ms, span6.752s, terminal0/no session. It
+replayed38 exact artifacts, the runtime plan, five source buffers, raw Docker
+CLI results and the complete original producer responses against its prebound
+static SHA. Both original spans satisfy50s and their immutable FULL60 tariffs.
+Before-return records retain pending future-return fields; the original terminal
+responses establish the completed cancellation/reap/exit paths. Two first calls
+book **FULL120**; the unused second calls are not reusable authority.
+
+The final accepted public capability is1872145 bytes, SHA
+`cbde20d8c29815e91cc01649d57c8bb723b4e9e0a35c9c583c2422d01db96988`.
+The package SHA is
+`e616f298e735d60dc390f6e813757c0957a19ce61ffa1062751e21237d395809`;
+independent acceptance receipt SHA is
+`1755159b5af2db1b6cbf75c48a65e4c79c54b8dd5e7415fec3f35534db1a686b`.
+Generated data remain in the new external root and verified independent-inode
+copies. They establish this public integration capability, not input acceptance,
+a historical memory proof, full-fit or fixedP17 repair.
+
+Public metadata later passed FULL120; formal metadata stopped at its first
+unreadable plan and also costsFULL120. See the [complete input result](full60_input_admission.md).
+Total new named FULL is360, raising the retained known lower334530 to334890;
+other software/CI/publication costs stay UNKNOWN_NOT_ZERO. All old failures,
+K12721.16417100014444982>7200, closed quotas and seals remain.

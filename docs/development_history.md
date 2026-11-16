@@ -1,5 +1,22 @@
 # Development history
 
+## 2026-11-16 — Real containment acceptance and stopped formal metadata
+
+[Integration evidence](validation/public_containment_full60_input.md) records
+PR238/main1466dc1/four-CI, real two-case namespace/helper termination and original
+producer14.487s/independent6.752s terminal0 returns. PR239/maine917b1a/four-CI
+preceded accepted public metadata10.980s/704921600 bytes and Root actual0/pair.
+[Input result](validation/full60_input_admission.md) retains formal metadata1
+SUP/file1 from22,943,707>16,777,216 plan bytes, no pending/REC/payload/input and
+RSS UNKNOWN. FULL360/known lower334890; all other fees UNKNOWN_NOT_ZERO.
+The [software-only repair](planning/metadata_plan_byte_bound_repair.md) preserves
+raw bytes/hash, removes a redundant parsed cache and rejects size before target
+creation; exact projection13,504,549 is not a retried PASS. Both metadata quotas
+consumed1/1; input/Original/Foundation/Library/B/C0. Original25 and all old failures,
+K>7200, quotas/seals/PENDING4GiB/uniform/P17 unrepaired remain. Normal result
+publication then a fresh concrete authority decision; no automatic guard chain.
+
+
 ## 2026-11-16 — Independent public worker deadline repair
 
 [Evidence](validation/p17_m2_worker_deadline_repair.md) records the archived

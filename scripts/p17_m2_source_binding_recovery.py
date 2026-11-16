@@ -231,6 +231,51 @@ def captured_value(capture, value_key='value'):
     return value
 
 
+def formal_preflight(admitted):
+    """Rebuild only a NEW raw-only view; retained raw bytes remain authoritative."""
+    capture = {'reference': admitted['preflight_reference'], 'raw': admitted['preflight_raw']}
+    marker = admitted.get('preflight_representation')
+    if marker is None:
+        return captured_value(dict(capture, value=admitted['preflight']))
+    need(CONTINUATION_INPUT == FULL60_INPUT and IDENTITY == FULL60_RECOVERY
+         and marker == 'SHA256_RAW_ONLY_V1' and 'preflight' not in admitted,
+         'formal preflight representation differs')
+    reference, raw = capture['reference'], capture['raw']
+    need(isinstance(raw, str) and isinstance(reference, dict)
+         and set(reference) == {'path', 'sha256'}
+         and isinstance(reference['sha256'], str)
+         and re.fullmatch('[0-9a-f]{64}', reference['sha256'])
+         and sha(raw.encode('utf-8')) == reference['sha256'],
+         'captured preflight reference/raw SHA differs')
+    return json.loads(raw)
+
+
+def compact_formal_entry(admitted):
+    """Omit the redundant parsed copy, preserving every original preflight byte."""
+    need(CONTINUATION_INPUT == FULL60_INPUT and IDENTITY == FULL60_RECOVERY,
+         'NEW formal preflight representation required')
+    formal_preflight(admitted)  # Verify raw/value agreement before dropping the cache.
+    result = dict(admitted)
+    result.pop('preflight')
+    result['preflight_representation'] = 'SHA256_RAW_ONLY_V1'
+    return result
+
+
+def publish_plan(root, plan, *, maximum=None):
+    """Reject an unreadable complete wire before any parent/target filesystem IO."""
+    if maximum is not None:
+        need(type(maximum) is int and maximum > 0 and len(canonical(plan)) <= maximum,
+             'complete metadata plan byte cap exceeded before target creation')
+    core = load('p17_m2_source_binding')
+    parent = core.source_parent(root.parent, 'unused')
+    try:
+        os.mkdir(root.name, mode=0o700, dir_fd=parent)
+        os.fsync(parent)
+    finally:
+        os.close(parent)
+    return write_new(root / 'plan.json', plan)
+
+
 def checked_full60_public_capability(capture):
     """Replay the captured real public gate without following package pointers."""
     need(CONTINUATION_INPUT == FULL60_INPUT and IDENTITY == FULL60_RECOVERY
@@ -840,6 +885,8 @@ def prepare(
         entry["formal"] = formal_readiness(
             public_certificate_sha, preflight_sha, preflight_return_sha, activation_sha
         )
+        if CONTINUATION_INPUT == FULL60_INPUT:
+            entry["formal"] = compact_formal_entry(entry["formal"])
     pin = policy["captured_cores"][kind]
     bundle = read_ref({"path": pin["path"], "sha256": pin["sha256"]})
     replay_core(bundle, kind)
@@ -892,13 +939,9 @@ def prepare(
         "entry": entry,
     }
     # No target stat/open/mkdir occurs before every admission dependency above.
-    parent = core.source_parent(root.parent, "unused")
-    try:
-        os.mkdir(root.name, mode=0o700, dir_fd=parent)
-        os.fsync(parent)
-    finally:
-        os.close(parent)
-    plan_sha = write_new(root / "plan.json", plan)
+    plan_sha = publish_plan(
+        root, plan, maximum=policy['limits']['plan_bytes']
+        if CONTINUATION_INPUT == FULL60_INPUT else None)
     native = load("p17_m2_source_binding_native")
     commands = {
         mode: {
@@ -989,8 +1032,7 @@ def _captured_formal(admitted, context, runtime):
     need(isinstance(admitted, dict), 'captured formal entry required')
     reference = admitted['preflight_reference']
     need(reference['path'] == proofs['preflight_path'], 'captured preflight path differs')
-    preflight = captured_value({'reference': reference, 'raw': admitted['preflight_raw'],
-                                'value': admitted['preflight']})
+    preflight = formal_preflight(admitted)
     need(preflight.get('schema') == 'topolab.v2.m2-strict-source-binding.recovery-preflight.v1'
          and type(preflight.get('public_recovery_attempt')) is int
          and preflight['public_recovery_attempt'] == 1
@@ -1058,6 +1100,7 @@ def _captured_formal(admitted, context, runtime):
     need(preflight['main'] == preflight['publication']['main'] == admitted['publication']['main']
          and preflight['main_CI_run'] == preflight['publication']['main_CI_run']
          == admitted['publication']['main_CI_run'], 'captured exact-main publication differs')
+    return preflight
 
 
 def _plan_shape(plan, *, historical=False):
@@ -1167,9 +1210,8 @@ def _plan_shape(plan, *, historical=False):
             )
     need("remedy" not in entry, "NEW recovery remedy closed unused; primary only")
     if kind == "formal":
-        _captured_formal(entry["formal"], context, runtime)
+        preflight = _captured_formal(entry["formal"], context, runtime)
         admitted = entry["formal"]
-        preflight = admitted["preflight"]
         need(
             preflight["source_tree"] == tree
             and preflight["execution_identity"] == IDENTITY

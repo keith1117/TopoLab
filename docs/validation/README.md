@@ -1,10 +1,14 @@
 # Validation evidence index
 
-Current [NEW public containment/FULL60 and gated input](public_containment_full60_input.md):
-early filing/detached-helper guardians and separately audited actual container/
-external-return evidence; complete input and P17 repair remain gated.
+Current [real container/detached-helper/FULL60 acceptance](public_containment_full60_input.md):
+producer14.487s and independent6.752s original0, two real cases, FULL120.
+[Input/metadata outcome and byte-bound repair](full60_input_admission.md): public
+metadata accepted; formal metadata1 STOP on22,943,707>16,777,216 bytes, FULL120
+and RSS UNKNOWN. Lossless software projection13,504,549 is not a retried PASS.
+Total new FULL360/known lower334890; input/Original/Foundation/Library/B/C0,
+old costs/quotas/seals/P17 unrepaired retained.
 
-Current [independent worker deadline repair](p17_m2_worker_deadline_repair.md): archived nested-catch RED, independent supervisor and public process integration; namespace/input/B/C remain unaccepted and P17 unrepaired.
+Historical [independent worker deadline repair](p17_m2_worker_deadline_repair.md): archived nested-catch RED, independent supervisor and public process integration; namespace/input/B/C remain unaccepted and P17 unrepaired.
 
 Historical [CI clock repair and new input continuation](p17_m2_ci_clock_and_input_continuation.md): reproduced fixture-time FAIL, unchanged production expiry, new finite8/6 software/input Gates; P17 remains unrepaired.
 

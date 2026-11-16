@@ -1,16 +1,17 @@
 # TopoLab v2 Development Roadmap
 
-Current engineering action: [independent worker deadline repair](../validation/p17_m2_worker_deadline_repair.md).
-The exact archived V37 work50 alarm can be caught before its closing5 is armed.
-A new independent supervisor fixes the worker deadline before launch and retains
-actual exit/failure evidence. Public worker termination does not establish
-namespace/detached-helper closure, FULL60 return, input acceptance or P17 repair.
-V37 formal0/6/B/C0 and all old allowances remain CLOSED; knownNEWFULL lower334530
-and other UNKNOWN_NOT_ZERO costs stay. Baseline PR236/main8651ad1/all-four CI is
-verified; the later candidate35 remains unpublished. Complete new public
-integration/independent actual-return and a valid finite execution contract remain
-before input, then B, then fixed C under unchanged scientific Gates. Historical
-all-paid FAIL/full-fit PENDING4GiB/uniform default/P17 unrepaired remain.
+Current engineering outcome: [actual containment/FULL60 integration accepted](../validation/public_containment_full60_input.md),
+followed by [formal metadata STOP and a software byte-bound repair](../validation/full60_input_admission.md).
+Producer14.487s/independent6.752s actual0 and two container/helper cases passed;
+public metadata passed10.980s/704921600 bytes. Formal metadata1 failed before
+payload because22,943,707>16,777,216 plan bytes; RSS UNKNOWN and FULL120 remain.
+Lossless raw-only serialization projects13,504,549 bytes and rejects oversize
+before target IO, but does not repeat or accept the stopped role. Both metadata
+quotas consumed1/1; input/Original/Foundation/Library/B/C0. New FULL360/known
+lower334890 and all other UNKNOWN_NOT_ZERO costs retain all history. Complete
+normal result publication/retention, then one concrete fresh metadata/input
+authority decision, without an automatic guard chain or old allowance reset.
+FixedP17 unrepaired/full-fit PENDING4GiB/all-paid FAIL/uniform default remain.
 
 Historical entry: [metadata-only strict23 certificate recovery](p17_m2_source_binding_certificate_recovery_protocol.md) after both authors'23 source reads passed and a later audit SUP missed its guard window. Independently accepted certificate/input and B/C remain subject to their respective Gates under unchanged scientific Gates. NEW finite funding retains every old cost/closed quota and the original100800s/21:38Z limit. P17 remains unrepaired. The [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md) is historical: ordinal7 mtime-63ns, missing temporary evidence and incomplete old accounting remain retained failures.
 
@@ -2447,16 +2448,18 @@ search on B5 outcomes.
 
 ## 6. Current sequence after the delivery reassessment
 
-Current owner-authorized successor is the
-[NEW finite containment/FULL60 and gated input contract](public_containment_full60_input_protocol.md),
-with [actual frontier](../validation/public_containment_full60_input.md) and
-[current status](../project_status.md). Early final-filing/detached-helper
-guardians, exact owned container namespace proof and actual original-tool return
-precede fresh metadata recovery and complete input. Global10:15–18:15UTC/new
-FULL<=24000/7200s result suffix and separately gated exact input roles apply.
-Original-registration/Foundation0; no B/C, old role/quota/cost/seal reset or
-scientific acceptance follows from public software checks. FixedP17 is unrepaired.
-
+The [NEW finite integration contract](public_containment_full60_input_protocol.md)
+now has an [actual capability result](../validation/public_containment_full60_input.md):
+real container namespace/detached-helper termination and both original FULL60
+returns accepted. Public metadata passed; formal metadata1 stopped on an
+oversized plan before payload. The [lossless software repair](metadata_plan_byte_bound_repair.md)
+preserves raw bytes and all predicates with an early unchanged16MiB guard;
+its projected13,504,549 bytes is not an executed formal PASS. See the
+[input result](../validation/full60_input_admission.md) and [status](../project_status.md).
+After result publication/retention, the next item is one concrete fresh finite
+metadata/input authority decision. Both current metadata quotas remain consumed;
+input0/6 and Original-registration/Foundation/Library/B/C0. No old failure/cost/
+quota/seal or clock resets. Input still precedes separate B and fixed C/P17.
 
 ## Current: successful strict23 core and metadata-only certificate recovery
 
