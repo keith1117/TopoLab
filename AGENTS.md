@@ -17,38 +17,21 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Read the [CI-clock/input frontier](docs/validation/p17_m2_ci_clock_and_input_continuation.md)
-and [status](docs/project_status.md). Main1c38cbf/PR235 all-four CI remain.
-PR236 head1efe is unmerged: three CI jobs pass; quality1FAIL/3472PASS/37skip
-from a public fixture using current UTC beyond old v2's21:38Z deadline. Local
-RED reproduces; production expiry rejection is correct. Inject explicit test
-clock and retain expired negative; do not loosen production clocks or Gates.
-Old R14 wallFAIL/R15 late-returnMISS/R16STOP/R17 all-five3509PASS remain.
-R18 closed1FAIL/3536PASS/1skip: old public9 fixture omitted the new pinned
-context read. Failed source60/original terminal are retained in a76-member
-independent pair. NEW software-only V36/R20 once fixes that fixture; four pure
-old/new-context cases pass. Production/protocol bytes and V35 clocks stay.
-Captured strict23 per old author/46 helpers/core lease release remain; no
-registration reread. Full input/B/C unaccepted, P17 unrepaired/uniform default.
-NEW V35 actual22:12:50.485Z; software14400s includes preregistration latency,
-endsNov5 02:12:49.237Z. New8520 author seconds add to142200, cumulative150720/
-Nov5 11:30Z inside unchanged original151200/11:38Z outer. All old elapsed,
-fees, counters and closed quotas stay; old Root378 used/1606 unused closed.
-Fresh Reader conservatively starts at preregistration22:12:49.237Z;45660s
-ends10:53:49.237Z, stronger than global. Actual startup endpoint is UNKNOWN.
-Explicit8/6 preserves old4/2+5/3+6/4+7/5 bytes/defaults. New regressions,
-distinct reviews/all-five/protected PR/exact-main4CI precede FIRST public9.
-Same fresh reader actual harmless prefix help must precede actor300; unchanged
-120+60/110/30 guards; no automatic public10 or Source8. Public9 name was never
-created; only its unstarted allocation changes, not an old failed scene.
-New registered6 PUBLIC7/formalmeta8/gen16/17 at same parent remain unprobed.
-Source40/558/1071/2392 reads, whole2484/helper138/4GiB/240/private copies/hashes/
-outside anchors/real leases remain. Remedy2 wall stays CLOSED absent explicit
-NEW full within-global suffix. Accepted input→B180→fixed C14580 original Gates.
-KnownNEWFULL lower254550; other fees UNKNOWN. Original25 preserved; old v1
-primary closure hash matches but exact old tmp mirror Missing/causeUNKNOWN.
-No recreation, reset, lease unlock or scientific repair claim. Continuous owner
-authority overrides one-slice scheduling stops only.
+The 2026-11-16 owner instruction authorizes repairing the current worker deadline
+blocker. Read [the repair record](docs/validation/p17_m2_worker_deadline_repair.md)
+and [status](docs/project_status.md). The published baseline is main8651ad1/
+PR236/all-four CI; the later V37 candidate was never published and its allowances
+are CLOSED. Its nested cleanup could catch the work50 alarm before the closing5
+alarm was armed. New public software uses an independent supervisor with absolute
+UTC/monotonic deadlines fixed before launch; worker exit is not namespace closure.
+Full60 actual-return, exact-CID watchdog, detached helpers, complete input and B/C
+remain separately unaccepted. No old role, clock, source read or allowance reopens.
+KnownNEWFULL lower334530 and other fees UNKNOWN_NOT_ZERO remain; historical
+12721.16417100014444982>7200/full-fit PENDING4GiB/fixedP17 unrepaired/uniform default
+and all failures/seals remain. Preserve the original25 dirty files and old HELD
+scenes. Close this engineering repair after independent review, required checks
+and normal protected publication; next is complete new public integration and
+admission under a valid finite execution contract, never an old formal retry.
 
 ## Provenance boundary
 

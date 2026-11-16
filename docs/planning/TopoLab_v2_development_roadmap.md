@@ -1,22 +1,16 @@
 # TopoLab v2 Development Roadmap
 
-Current continuous action: [CI-clock repair/input continuation](../validation/p17_m2_ci_clock_and_input_continuation.md).
-PR236 head1efe has three CI successes and one fixture-time FAIL; production
-old-deadline rejection is correct. Explicit test clocks/expiry negative precede
-minimal repair, new8/6 profiles, fresh review/all-five/protected exact-main4CI.
-R18 retained1FAIL/3536PASS/1skip: old public9 fixture omitted pinned-context IO.
-Independent RED and76-member failed source/terminal pair precede the test-only
-V36/R20 once remedy. Four pure v7/v8 routing cases pass; fresh600s/24-call
-reviews and complete UTC4200+600 campaign remain under unchanged V35 deadlines.
-NEW V35 actual22:12:50.485Z/14400s software endsNov5 02:12:49.237Z. Root adds
-8520 seconds to142200, cumulative150720/global11:30 within oldouter151200/11:38.
-Fresh Reader conservative startup ends10:53:49.237Z. No old counter/fee/time or
-unused balance resets. FIRST actualpublic9 same uncreated name/noautomatic10;
-new registered6 PUBLIC7/formalmeta8/gen16/17 unprobed at same Library parent.
-Source40/558/1071/2392/whole2484/helper138/4GiB/240/hash/leases/copies remain.
-Accepted input→B180→fixedC14580 original Gates; P17 unrepaired/uniform/default/
-fullv2 open/historical allpaidFAIL/fullfitPENDING remain. Original25/oldscenes
-preserved; exactoldtmpmirror currentlyMissing/causeUNKNOWN without recreation.
+Current engineering action: [independent worker deadline repair](../validation/p17_m2_worker_deadline_repair.md).
+The exact archived V37 work50 alarm can be caught before its closing5 is armed.
+A new independent supervisor fixes the worker deadline before launch and retains
+actual exit/failure evidence. Public worker termination does not establish
+namespace/detached-helper closure, FULL60 return, input acceptance or P17 repair.
+V37 formal0/6/B/C0 and all old allowances remain CLOSED; knownNEWFULL lower334530
+and other UNKNOWN_NOT_ZERO costs stay. Baseline PR236/main8651ad1/all-four CI is
+verified; the later candidate35 remains unpublished. Complete new public
+integration/independent actual-return and a valid finite execution contract remain
+before input, then B, then fixed C under unchanged scientific Gates. Historical
+all-paid FAIL/full-fit PENDING4GiB/uniform default/P17 unrepaired remain.
 
 Historical entry: [metadata-only strict23 certificate recovery](p17_m2_source_binding_certificate_recovery_protocol.md) after both authors'23 source reads passed and a later audit SUP missed its guard window. Independently accepted certificate/input and B/C remain subject to their respective Gates under unchanged scientific Gates. NEW finite funding retains every old cost/closed quota and the original100800s/21:38Z limit. P17 remains unrepaired. The [v7 STOP and expired-result recovery](../validation/p17_m2_source_v7_expired_result_recovery.md) is historical: ordinal7 mtime-63ns, missing temporary evidence and incomplete old accounting remain retained failures.
 
@@ -2452,6 +2446,12 @@ search on B5 outcomes.
   routine slice results belong in the linked status and evidence documents.
 
 ## 6. Current sequence after the delivery reassessment
+
+Current successor and limits are in the [worker deadline repair](../validation/p17_m2_worker_deadline_repair.md)
+and [current status](../project_status.md). Complete prospective public
+integration is still required before any new formal input/B/C; closed V37 and
+historical successor text below grant no execution or budget.
+
 
 ## Current: successful strict23 core and metadata-only certificate recovery
 

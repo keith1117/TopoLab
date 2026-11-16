@@ -1,11 +1,44 @@
 # Current project status
 
-Updated:2026-11-04. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-11-16. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: CI clock repair and new unstarted continuation
+## Current: independent worker deadline repair
+
+The owner requested continuation from the linked seed17 chat and repair of the
+current blocker. [Repair evidence](validation/p17_m2_worker_deadline_repair.md)
+records the exact archived-driver RED and the prospective independent supervisor.
+It fixes absolute UTC/monotonic deadlines before launching the worker, kills its
+owned process group on timeout, observes the actual worker exit and retains
+primary/secondary failures. Caught work alarms and blocked worker filing cannot
+postpone that supervisor's termination request. This is public software evidence. All five local checks pass at the isolated
+source:3545 tests passed/2 unchanged conditional skips. Protected publication
+receipts are bound by the repair report's external closure.
+
+Remote main8651ad1268c26cd6fa1e1f09424b5bedd8fdc0bd/PR236 and CI41941201733 were
+verified successful before this change; old text below retains its authoring
+frontier. V37 closed BLOCKED_AFTER_TWO_SOFTWARE_ROUNDS with formal0/6/B/C0;
+its candidate35 paths were not published. Its temporary mirror is now absent,
+cause UNKNOWN; the surviving prebound software helper files were hash-verified
+and copied into new persistent independent-inode storage. The original archive
+was not modified or represented as a currently complete verified backup.
+
+Known NEW FULL lower334530 is retained; new maintenance/CI/publication costs are
+additional, UNKNOWN_NOT_ZERO where unmeasured. All old unused allowances stay
+closed. Original25 workspace contents/HEAD/index/status are preserved. No old
+scientific input, formal role, custody target or HELD lease was used in this repair.
+Fixed P/17 remains unrepaired; uniform default, all-paid historical FAIL and
+full-fit PENDING4GiB remain. Worker termination alone does not establish Docker
+namespace/detached-helper cleanup, FULL60 return or complete input acceptance.
+
+Next prerequisite is complete prospective public integration of the remaining
+candidate, including exact-CID independent watchdog and actual outer-return
+acceptance under a new valid finite contract. Only independently accepted input
+can precede B resource admission and fixed C; this repair starts none of them.
+
+## Historical: CI clock repair and new unstarted continuation
 
 [Actual frontier](validation/p17_m2_ci_clock_and_input_continuation.md) retains
 PR235/main1c38cbf/all-four CI and captured strict23/46 helpers/core lease.

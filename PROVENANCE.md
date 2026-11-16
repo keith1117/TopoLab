@@ -1802,3 +1802,13 @@ profile prospectively binds finite budgets and authors for unstarted work,
 retaining historical observations, hashes, deadlines and protocol bytes. No
 external code, model, dataset, numerical method or scientific limit is imported
 or changed. Actual source/scientific acceptance remains separately required.
+
+
+## 2026-11-16 — Independent public worker deadline supervisor
+
+Original TopoLab work derives from the retained V37 nested-alarm failure and
+POSIX process/session signals exposed by Python's standard library. The new
+supervisor owns the worker independently, fixes absolute deadlines before launch
+and retains actual exits/errors. New public subprocess/FIFO/lock regressions use
+no upstream implementation, dataset, model, figure or scientific input. Numerical
+methods, source-identity policy and scientific acceptance remain unchanged.
