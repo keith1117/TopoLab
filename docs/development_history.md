@@ -1,5 +1,15 @@
 # Development history
 
+## 2026-11-16 — Independent public worker deadline repair
+
+[Evidence](validation/p17_m2_worker_deadline_repair.md) records the archived
+nested-catch RED, independent absolute-deadline supervisor and real-process
+regressions. Exact archived-driver integration terminates the blocked worker
+with actual exit-9; supervisor exit1 retains STOP. No Docker/original-input/formal
+role or B/C was launched. V37 failure/closed quotas/NEW FULL lower334530 remain;
+namespace closure, FULL60 actual return, input and fixedP17 repair remain open.
+Original25 changes are preserved; new maintenance costs remain additional.
+
 ## 2026-11-04 — CI clock fixture repair and unstarted continuation
 
 [Evidence](validation/p17_m2_ci_clock_and_input_continuation.md) preserves

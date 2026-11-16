@@ -1,6 +1,8 @@
 # Validation evidence index
 
-Current [CI clock repair and new input continuation](p17_m2_ci_clock_and_input_continuation.md): reproduced fixture-time FAIL, unchanged production expiry, new finite8/6 software/input Gates; P17 remains unrepaired.
+Current [independent worker deadline repair](p17_m2_worker_deadline_repair.md): archived nested-catch RED, independent supervisor and public process integration; namespace/input/B/C remain unaccepted and P17 unrepaired.
+
+Historical [CI clock repair and new input continuation](p17_m2_ci_clock_and_input_continuation.md): reproduced fixture-time FAIL, unchanged production expiry, new finite8/6 software/input Gates; P17 remains unrepaired.
 
 Historical [continuous input profile](p17_m2_continuous_input_profile.md): captured strict23 core, approval-service STOP, R14/R15 budget failures, new finite7/5 permission remedy and pending input/scientific Gates; P17 unrepaired.
 
