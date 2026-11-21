@@ -1,8 +1,10 @@
 # Validation evidence index
 
-[Public exporter R1 throughput](public_input_r1_throughput.md) records 558 reads,
-1,071 independently checked members and a 22.412 s external software return on
-a rebuilt fixture. A new physical registration precedes named public input.
+[Staged source and input acceptance](staged_source_input_acceptance.md) records
+23 independently verified public anchors, six accepted public roles and a
+formal activation stop on the contract digest before target setup.
+[Earlier R1 throughput](public_input_r1_throughput.md) measured the rebuilt
+fixture before its named rehearsal.
 
 [November 21 metadata and input acceptance](metadata_input_20261121.md) records the formal 23-binding PASS, three accepted public input roles and the exporter R1 timeout. The cumulative cost lower bound is 337,539 FULL.
 

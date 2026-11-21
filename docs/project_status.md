@@ -5,6 +5,17 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
+## November 21 staged public acceptance and formal activation stop
+
+The fixed public source passed independent physical registration for 23 files.
+All six public roles passed and both copies matched all 1,071 members. Formal
+preflight passed. Formal activation rejected the digest of a reserialized
+contract before target setup or the first formal role. Next, repair the formal
+plan's published-byte binding and test it on a formatted software fixture.
+The formal attempt is closed. Charges booked were 5,160 of 9,120 FULL.
+The cumulative known lower bound is 342,699 FULL plus unpriced costs.
+[Result and accounting](validation/staged_source_input_acceptance.md)
+
 ## November 21 public source reconstruction and throughput decision
 
 A fresh reconstruction matched the retained public registry byte for byte.

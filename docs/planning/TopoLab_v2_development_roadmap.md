@@ -1,11 +1,13 @@
 # TopoLab v2 Development Roadmap
 
-**November 21 public input route.** The byte-identical public registry was
-rebuilt locally. All 558 payload reads and 1,071 output members passed the
-software comparison. The actual command returned in 22.412 s. Register the
-23 physical anchors at the staged public path (full exporter return 11.443 s)
-before the next named public attempt. Formal input and scientific B/C remain open.
-[Throughput evidence](../validation/public_input_r1_throughput.md)
+**November 21 input custody.** Both readers registered the 23 physical public
+anchors. All six public roles passed for the 1,071-member version. Formal
+activation stopped after a successful independent preflight. Its plan hashed
+a compact serialization of the published contract. The next software task is
+to bind the exact published bytes and exercise formal-plan validation with a
+formatted fixture. A new formal attempt requires separate authority. Scientific
+B/C and fixed P/17 remain open.
+[Acceptance and stop](../validation/staged_source_input_acceptance.md) · [Earlier throughput](../validation/public_input_r1_throughput.md)
 
 **November 21 input attempt.** Formal metadata passed on the repaired
 protected main. Public input stopped with three of six roles accepted. Exporter

@@ -1,5 +1,14 @@
 # Development history
 
+## 2026-11-21 — Staged public input accepted, formal authority digest rejected
+
+Two readers registered the same 23 files. The six-role rehearsal returned
+a certificate for 1,071 verified members. Formal preflight passed, then the
+plan's compact contract digest differed from the published file digest.
+Activation stopped before formal reads or role dispatch. The contract closed
+with 5,160 FULL booked, raising the cumulative known lower bound to 342,699
+FULL. [Result](validation/staged_source_input_acceptance.md)
+
 ## 2026-11-21 — Exporter throughput on the reconstructed public source
 
 The exporter completed 558 reads and 1,071 members under the original
