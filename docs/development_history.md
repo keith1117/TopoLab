@@ -1,5 +1,14 @@
 # Development history
 
+## 2026-11-21 — Exporter throughput on the reconstructed public source
+
+The exporter completed 558 reads and 1,071 members under the original
+content-version contract. Independent comparison passed for 7,325,084 fields.
+The observed software call returned in 22.412 s. The final persistent source
+contains all 598 verified inputs. Its full exporter returned in 11.443 s. The
+next step is physical registration there before the six-role input rehearsal. Named FULL 0,
+prior lower bound 337,539. [Measurement](validation/public_input_r1_throughput.md)
+
 ## 2026-11-21 — Formal metadata accepted, public input stopped
 
 Protected-main PR 241 passed the repaired 23-binding metadata gate under 16 MiB.

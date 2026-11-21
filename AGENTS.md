@@ -22,8 +22,13 @@ The [November 21 result](docs/validation/metadata_input_20261121.md) closes the
 passed all 23 bindings under 16 MiB. Public input accepted three of six roles.
 Exporter R1 timed out after 278 of 558 public payload receipts, its external
 record stayed unopened and the public lease marker is HELD. Formal input and
-scientific B/C remain unadmitted. A fresh decision must address R1 throughput
-and caller return time before another named attempt.
+scientific B/C remain unadmitted.
+
+The [R1 throughput result](docs/validation/public_input_r1_throughput.md) checked
+558 reads and 1,071 members on rebuilt public bytes with an actual 22.412 s
+software return. The final staged public source contains all 598 files and
+yielded the same version in an 11.443 s external return. Next obtain a fresh
+strict 23-file registration at that path before a new named input grant.
 
 Booked charges were 2,640 FULL including the nonrefundable shared reservation.
 The R1 elapsed-time floor raises the cumulative known lower bound to 337,539 FULL.

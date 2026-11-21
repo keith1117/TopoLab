@@ -1,5 +1,8 @@
 # Planning index
 
+The next public input route uses a freshly reconstructed fixture with a new
+23-file registration at its final path. [Measured basis](../validation/public_input_r1_throughput.md)
+
 The [November 21 finite contract](metadata_input_20261121.md) closed with formal metadata accepted and public input timed out at exporter R1. [Result](../validation/metadata_input_20261121.md)
 
 November 16 [finite containment/input contract](public_containment_full60_input_protocol.md)

@@ -1,6 +1,13 @@
 # TopoLab v2 Development Roadmap
 
-**November 21 delivery status.** Formal metadata passed on the repaired
+**November 21 public input route.** The byte-identical public registry was
+rebuilt locally. All 558 payload reads and 1,071 output members passed the
+software comparison. The actual command returned in 22.412 s. Register the
+23 physical anchors at the staged public path (full exporter return 11.443 s)
+before the next named public attempt. Formal input and scientific B/C remain open.
+[Throughput evidence](../validation/public_input_r1_throughput.md)
+
+**November 21 input attempt.** Formal metadata passed on the repaired
 protected main. Public input stopped with three of six roles accepted. Exporter
 R1 recorded 278 of 558 payload receipts before timeout. Formal input admission
 and the seed-17 repair are open. A new decision would need to address exporter
