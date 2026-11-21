@@ -1,6 +1,8 @@
 # Planning index
 
-Current [finite containment/input contract](public_containment_full60_input_protocol.md)
+The [November 21 finite contract](metadata_input_20261121.md) closed with formal metadata accepted and public input timed out at exporter R1. [Result](../validation/metadata_input_20261121.md)
+
+November 16 [finite containment/input contract](public_containment_full60_input_protocol.md)
 ([machine](public_containment_full60_input_contract.json)) has actual public
 acceptance and a stopped formal-metadata attempt. [Dated input protocol](full60_input_admission_protocol.md)
 links its [metadata](binding_recovery_full60_20261116_contract.json),

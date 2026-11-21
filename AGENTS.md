@@ -17,28 +17,20 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-The 2026-11-16 finite integration has actual public acceptance: container PID
-namespace/detached helpers and producer/independent FULL60 returns passed.
-[Integration](docs/validation/public_containment_full60_input.md) and
-[input result](docs/validation/full60_input_admission.md) retain complete evidence.
-Public metadata passed; formal metadata attempt1 STOPPED because its22,943,707-byte
-plan exceeded the frozen16MiB reader cap before payload. Both metadata quotas
-are1/1 consumed; no metadata attempt2/reset/retry or input successor is allowed.
-Input0/6, Original-registration/Foundation/Library/B/C0; P17 remains unrepaired.
+The [November 21 result](docs/validation/metadata_input_20261121.md) closes the
+[finite contract](docs/planning/metadata_input_20261121.md). Formal metadata
+passed all 23 bindings under 16 MiB. Public input accepted three of six roles.
+Exporter R1 timed out after 278 of 558 public payload receipts, its external
+record stayed unopened and the public lease marker is HELD. Formal input and
+scientific B/C remain unadmitted. A fresh decision must address R1 throughput
+and caller return time before another named attempt.
 
-The [lossless byte-bound repair](docs/planning/metadata_plan_byte_bound_repair.md)
-removes only a redundant parsed preflight copy, retains original raw/hash and
-checks full plan size before target IO. Its13,504,549-byte projection is software
-only; the stopped attempt stays FAIL/RSS UNKNOWN. Close required regression,
-normal protected result publication and external retention, then STOP. The next
-owner decision is one concrete fresh finite metadata/input authority, not an
-automatic guard/toy chain, replacement identity or reopened allowance.
-
-Original10:15–18:15UTC/Root and lead28800s, FULL<=24000/result7200 remain finite.
-New FULL360 raises known lower334530 to334890; other fees UNKNOWN_NOT_ZERO.
-K12721.16417100014444982>7200/all-paid FAIL, full-fit PENDING4GiB/uniform default,
-all old failures/costs/UNKNOWN/seals and original25 dirty files/HEAD/index/status
-remain. No scientific B/C, fit, search or final seal is granted.
+Booked charges were 2,640 FULL including the nonrefundable shared reservation.
+The R1 elapsed-time floor raises the cumulative known lower bound to 337,539 FULL.
+Other fees remain UNKNOWN_NOT_ZERO. Preserve the November 16 metadata failure, all consumed quotas, prior costs, seals and both original
+dirty workspaces. Real containment, detached helpers and FULL60 have already
+passed. Fixed P/17 is unrepaired, uniform is default, full fit is PENDING4GiB
+and the all-paid failure remains.
 
 ## Provenance boundary
 

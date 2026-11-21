@@ -1,6 +1,12 @@
 # TopoLab v2 Development Roadmap
 
-Current engineering outcome: [actual containment/FULL60 integration accepted](../validation/public_containment_full60_input.md),
+**November 21 delivery status.** Formal metadata passed on the repaired
+protected main. Public input stopped with three of six roles accepted. Exporter
+R1 recorded 278 of 558 payload receipts before timeout. Formal input admission
+and the seed-17 repair are open. A new decision would need to address exporter
+throughput and the external return deadline. [Result](../validation/metadata_input_20261121.md)
+
+November 16 engineering outcome: [actual containment/FULL60 integration accepted](../validation/public_containment_full60_input.md),
 followed by [formal metadata STOP and a software byte-bound repair](../validation/full60_input_admission.md).
 Producer14.487s/independent6.752s actual0 and two container/helper cases passed;
 public metadata passed10.980s/704921600 bytes. Formal metadata1 failed before
