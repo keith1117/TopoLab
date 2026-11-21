@@ -18,6 +18,8 @@ def checked_acquisition_issuer(certificate, historical=None):
     if historical is not None and isinstance(certificate, historical.CheckedAcquisitionInput):
         return historical
     for suffix, identity in (
+            ('_staged_20261121',
+             'topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1'),
             ('_nov21', 'topolab.v2.p17-m2-registered-source-acquisition.20261121.v1'),
             ('_full60_20261116', 'topolab.v2.p17-m2-registered-source-acquisition.20261116.v1'),
             ('_prospective_v27', 'topolab.v2.p17-m2-registered-source-acquisition.20261104.v3'),

@@ -225,7 +225,10 @@ def source_freeze(execution_identity=None):
                 paths.add(REPO / "scripts" / CONTINUATION_CONFIG["preparation_entry"])
             if CONTINUATION_CONFIG.get("review_partition"):
                 paths.add(REPO / CONTINUATION_CONFIG["review_partition"])
-            if CONTINUATION_INPUT == load("p17_m2_input_continuation").NOV21_INPUT:
+            paths.update(REPO / "scripts" / name for name in CONTINUATION_CONFIG.get(
+                "registration_helpers", ()))
+            if CONTINUATION_INPUT in (load("p17_m2_input_continuation").NOV21_INPUT,
+                                       load("p17_m2_input_continuation").STAGED_INPUT):
                 paths.add(REPO / "scripts" / CONTINUATION_CONFIG["caller_generator"])
     if execution_identity == NEW_IDENTITY:
         paths.add(REPO / NEW_PROTOCOL)
@@ -1960,7 +1963,7 @@ def main():
     parser.add_argument("--whole-start-ms", type=int)
     args = parser.parse_args()
     continuation = load('p17_m2_input_continuation')
-    if CONTINUATION_INPUT == continuation.NOV21_INPUT:
+    if CONTINUATION_INPUT in (continuation.NOV21_INPUT, continuation.STAGED_INPUT):
         need(args.root in (*REGISTERED_GENERATIONS, CONTINUATION_CONFIG['public_root']),
              "NEW_INPUT_LITERAL_ROOT_REQUIRED")
     selected = continuation.config_for_root(args.root)
@@ -1983,7 +1986,8 @@ def main():
             args.registration_certificate_sha, args.registration_finalize_actual_sha)
         suffix = ["--registration-certificate-sha", args.registration_certificate_sha,
                   "--registration-finalize-actual-sha", args.registration_finalize_actual_sha]
-        if CONTINUATION_INPUT == continuation.NOV21_INPUT and args.mode == "prepare-rehearsal":
+        if (CONTINUATION_INPUT in (continuation.NOV21_INPUT, continuation.STAGED_INPUT)
+                and args.mode == "prepare-rehearsal"):
             formal_registration = load("p17_m2_registered_input").registration_reference(
                 "formal", args.formal_registration_certificate_sha,
                 args.formal_registration_finalize_actual_sha)
@@ -2029,7 +2033,7 @@ def main():
         result = activate_formal(args.root, strict23_registration=registration)
     elif args.mode == "prepare-rehearsal":
         need(args.plan_sha is None and args.role is None, "SETUP_ROLE_FORBIDDEN")
-        if CONTINUATION_INPUT == continuation.NOV21_INPUT:
+        if CONTINUATION_INPUT in (continuation.NOV21_INPUT, continuation.STAGED_INPUT):
             need(sys.flags.isolated == 1 and sys.orig_argv == [
                 str(Path(sys.orig_argv[0]).resolve()), "-I",
                 str(Path(__file__).with_name(CONTINUATION_CONFIG["control_entry"]).resolve()),

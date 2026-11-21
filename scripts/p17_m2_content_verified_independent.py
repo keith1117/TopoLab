@@ -259,7 +259,8 @@ def _result_window(
     end = start + min(result_seconds)
     new_whole = record.get("execution_identity") in (
         "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1",
-        "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1")
+        "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1")
     if new_whole:
         first, whole_end = record.get("whole_start_ms"), record.get("whole_end_ms")
         require(type(first) is int and type(whole_end) is int

@@ -45,7 +45,43 @@ NOV21_RECOVERY = "topolab.v2.p17-binding-certificate-recovery.20261121.v1"
 NOV21_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1"
 NOV21_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121"
 NOV21_BUDGET_SHA = "9200b495ea726459094868265e6cf61b3364e10515a91e815db2baa95dbc0d47"
+STAGED_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1"
+STAGED_BINDING = "topolab.public-local-strict23.staged-20261121.v1"
+STAGED_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/staged-input-acceptance-20261121"
+STAGED_BUDGET_SHA = "7212bce05d9f1d953c44b800c59d941e2e1e44111777845ae57f2479be170687"
 CONFIGS = {
+    STAGED_INPUT: {
+        "input": STAGED_INPUT, "recovery": STAGED_BINDING,
+        "prefix": "topolab-public-staged-input-20261121-",
+        "public_root": "/private/tmp/topolab-public-staged-input-20261121-a1",
+        "public_source": "/Users/keith1117/Library/Application Support/"
+                         "TopoLab-public-fixtures/exporter-r1-20261121-v1/source",
+        "generations": (PARENT + "p17-m2-staged-input-20261121-a1",),
+        "recovery_protocol": "docs/planning/staged_public_binding_contract.json",
+        "input_protocol": "docs/planning/staged_registered_input_contract.json",
+        "schema": "topolab.v2.m2-registered-source-acquisition-authority.staged-20261121.v1",
+        "recovery_entry": "staged_public_binding.py",
+        "registration_module": "staged_public_binding",
+        "preparation_entry": "staged_input_preparation.py",
+        "input_entry": "staged_registered_input.py",
+        "control_entry": "staged_input_control.py",
+        "evidence_root": STAGED_EVIDENCE,
+        "cache_suffix": "_staged_20261121", "global_deadline_ms": 1795351200000,
+        "public_attempts_total": 1, "public_graphs_max": 1,
+        "whole_attempt_seconds": 4500, "result_suffix_seconds": 7200,
+        "window_module": "staged_input_window",
+        "public_capability_module": "full60_public_capability",
+        "caller_generator": "build_staged_input_caller.py",
+        "caller_waiter": "staged_input_waiter.py",
+        "caller_filer": "staged_input_filer.py",
+        "caller_cohort": "staged_input_actor.mjs",
+        "caller_boundary": "staged_input_actor.mjs",
+        "registration_helpers": (
+            "staged_public_binding.py", "staged_public_binding_independent.py",
+            "staged_binding_source.py", "staged_binding_evidence.py", "staged_binding_caller.mjs"),
+        "budget": {"path": STAGED_EVIDENCE + "/owner-budget-registration.json",
+                   "sha256": STAGED_BUDGET_SHA},
+    },
     NOV21_INPUT: {
         "input": NOV21_INPUT, "recovery": NOV21_RECOVERY,
         "prefix": "topolab-public-source-acquisition-20261121-",
@@ -214,7 +250,7 @@ def config(identity):
 
 
 def is_whole_input(identity):
-    return identity in (FULL60_INPUT, NOV21_INPUT)
+    return identity in (FULL60_INPUT, NOV21_INPUT, STAGED_INPUT)
 
 
 def window(identity):
@@ -234,7 +270,7 @@ def window(identity):
 
 def config_for_root(root):
     for value in CONFIGS.values():
-        if value["input"] == NOV21_INPUT:
+        if value["input"] in (NOV21_INPUT, STAGED_INPUT):
             if str(root) in (*value["generations"], value["public_root"]):
                 return value
             continue

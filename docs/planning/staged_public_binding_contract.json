@@ -1,0 +1,53 @@
+{
+  "schema": "topolab.public-local-strict23.staged-20261121.v1",
+  "owner_budget_sha256": "7212bce05d9f1d953c44b800c59d941e2e1e44111777845ae57f2479be170687",
+  "evidence": "/Users/keith1117/Documents/TopoLab-data/staged-input-acceptance-20261121",
+  "source": "/Users/keith1117/Library/Application Support/TopoLab-public-fixtures/exporter-r1-20261121-v1/source",
+  "candidate_sha256": "2a30ad2fb1c43aa42c7edbcaa3b2affe7a9e70a449a6a064a51085f3f57e2357",
+  "index_sha256": "185ae72128ff9dcb869ebf2697c2aff09a46c5821547b4d29dd88d187ca445af",
+  "manifest_sha256": "681443becc5fe7b672ab8a60f60f09a243f5a203bb3ff3398e28ab0d362f431f",
+  "role_order": [
+    "producer-availability",
+    "independent-availability",
+    "binding-producer",
+    "binding-independent",
+    "binding-closeout",
+    "binding-certificate-auditor"
+  ],
+  "FULL": [
+    150,
+    150,
+    300,
+    300,
+    180,
+    120
+  ],
+  "actors": [
+    "/root",
+    "/root/full60_independent",
+    "/root",
+    "/root/full60_independent",
+    "/root",
+    "/root/full60_independent"
+  ],
+  "core_seconds": 1800,
+  "result_seconds_from_actual_closeout": 1800,
+  "outer_role_seconds": [
+    150,
+    150,
+    300,
+    300,
+    180,
+    120
+  ],
+  "per_role_return_margin_seconds": 15,
+  "public_content_reads_each": 23,
+  "new_original_registration": 0,
+  "new_foundation_helpers": 0,
+  "old_formal_admission": {
+    "certificate_sha256": "56a7ef886ba8c634eb505004f0498d739c45cafa4bd63d925e424f92811da167",
+    "actual_sha256": "c1709f92c3ed9544b49ebe428714e50f2685b1ff95d2d02a340dcdd47b7204b5",
+    "acceptance_sha256": "84e25808d6f6fe8027a5d67cad6a875b53708e1675ac0ac1a28abbba24b90a6d",
+    "main": "b40fc83d569165719dd1b9f26a7b40e198705970"
+  }
+}

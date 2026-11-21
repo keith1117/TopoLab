@@ -290,14 +290,28 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1",
         "topolab.v2.p17-binding-certificate-recovery.20261121.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1",
+        "topolab.public-local-strict23.staged-20261121.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1",
     )
     if measurement_execution_identity not in measurement_identities or (
         measurement_scope is None and measurement_execution_identity != measurement_identities[0]
     ):
         raise ValueError("strict23 measurement identity requires its registered scope")
-    if measurement_execution_identity in (
+    if measurement_execution_identity == 'topolab.public-local-strict23.staged-20261121.v1':
+        if not (
+            measurement_scope == 'STAGED_LOCAL_PUBLIC_STRICT23_ONLY'
+            and role in (
+                'producer-availability', 'independent-availability', 'binding-producer',
+                'binding-independent', 'binding-closeout', 'binding-certificate-auditor')
+            and registered_source_child_cap == 0
+            and argv == [str(REPO / '.venv/bin/python'), '-I',
+                         str(REPO / 'scripts/staged_public_binding.py'), 'payload', role]
+        ):
+            raise ValueError('staged binding measurement requires exact public payload/scope/role')
+    elif measurement_execution_identity in (
         "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1",
     ):
         dated = measurement_execution_identity.endswith("20261121.v1")
         input_entry = "input_control_20261121.py" if dated else "input_control_full60_20261116.py"
@@ -311,6 +325,13 @@ def invoke(
                 "/Users/keith1117/Library/Application Support/TopoLab-custody/"
                 "p17-m2-local-input-version-20261121-a1",
             )
+        if measurement_execution_identity == (
+                'topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1'):
+            input_entry = 'staged_input_control.py'
+            public = '/private/tmp/topolab-public-staged-input-20261121-a1'
+            formal = (
+                '/Users/keith1117/Library/Application Support/TopoLab-custody/'
+                'p17-m2-staged-input-20261121-a1',)
         if not (
             measurement_scope in (
                 "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY",
@@ -338,6 +359,10 @@ def invoke(
                      and argv[11] in ("scientific-producer", "scientific-auditor")))
         ):
             raise ValueError("NEW input measurement requires exact neutral payload/scope/role")
+        if measurement_execution_identity == (
+                'topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1'):
+            if argv[0] != str(Path(sys.orig_argv[0]).resolve()):
+                raise ValueError('staged input measurement requires its physical interpreter')
     elif measurement_scope is not None:
         scopes = (
             "PUBLIC_STRICT_BINDING_REGISTRATION_ONLY",

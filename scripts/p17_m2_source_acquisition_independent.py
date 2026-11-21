@@ -190,6 +190,11 @@ def _whole_profile(identity=None):
     return continuation.is_whole_input(REGISTERED_IDENTITY if identity is None else identity)
 
 
+def _metadata_first_profile():
+    profiles = helper('input_continuation', 'p17_m2_input_continuation.py')
+    return REGISTERED_IDENTITY in (profiles.NOV21_INPUT, profiles.STAGED_INPUT)
+
+
 def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
     raw = native._software_bytes(REPO / REGISTERED_PROTOCOL)
     require(digest(raw) == plan['source_tree'][REGISTERED_PROTOCOL]
@@ -235,8 +240,7 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
             and limits.get('FULL_each_input_ceiling') == 3780
             and limits.get('RSS_bytes') == 4 * 1024**3,
             'registered fixed input/resource limits differ')
-    if REGISTERED_IDENTITY == helper(
-            'input_continuation', 'p17_m2_input_continuation.py').NOV21_INPUT:
+    if _metadata_first_profile():
         require(limits.get('FULL_all_input_attempts_ceiling') == 3780
                 and limits.get('formal_top_control_CLI_all') == 52
                 and limits.get('public_top_control_CLI_all') == 64
@@ -299,14 +303,46 @@ def _trusted_registered_sources(plan: dict[str, Any]) -> tuple[dict[str, Any], d
         })
         if memo_key in memo:
             return memo[memo_key]
-    if (REGISTERED_IDENTITY == helper(
-            'input_continuation', 'p17_m2_input_continuation.py').NOV21_INPUT and kind == 'public'):
+    if _metadata_first_profile() and kind == 'public':
         _trusted_registered_sources({
             'execution_identity': REGISTERED_IDENTITY, 'scope': FORMAL_SCOPE,
             'source_root': '/Users/keith1117/Documents/TopoLab-data',
             'binding': {'strict23_registration': plan.get('binding', {}).get(
                 'formal_strict23_registration')},
         })
+    if REGISTERED_IDENTITY == helper(
+            'input_continuation', 'p17_m2_input_continuation.py').STAGED_INPUT:
+        policy = native.base.parse(native._software_bytes(REPO / REGISTERED_PROTOCOL))
+        require(policy.get('execution_identity') == REGISTERED_IDENTITY
+                and policy.get('schema') == REGISTERED_SCHEMA,
+                'staged independent authority identity differs')
+        pin = policy['registration'][kind]
+        require(reference['certificate_path'] == pin['certificate_paths'][0]
+                and reference['finalize_actual_path'] == pin['finalize_actual_path'],
+                'staged independent fixed proof paths differ')
+        raw = native._software_bytes(Path(reference['certificate_path']))
+        actual_raw = native._software_bytes(Path(reference['finalize_actual_path']))
+        require(digest(raw) == reference['certificate_sha256']
+                and digest(actual_raw) == reference['finalize_actual_sha256']
+                and all(key not in pin or reference[key] == pin[key]
+                        for key in ('certificate_sha256', 'finalize_actual_sha256')),
+                'staged independent same-buffer proof SHA differs')
+        registration = helper('staged_registration_replay',
+                              CONTINUATION_CONFIG['registration_module'] + '.py')
+        replay = (registration.verified_formal_registration if kind == 'formal'
+                  else registration.verified_registration)
+        context, observations = replay(certificate_raw=raw, finalize_actual_raw=actual_raw)
+        certificate = native.base.parse(raw)['core_bundle']['certificate']
+        expected_source = (CONTINUATION_CONFIG['public_source'] if kind == 'public'
+                           else '/Users/keith1117/Documents/TopoLab-data')
+        require(canonical(context) == canonical(certificate['registered_context'])
+                and canonical(observations) == canonical(certificate['source_observations'])
+                and context['source_root'] == plan.get('source_root') == expected_source,
+                'staged independent same-buffer source facts differ')
+        result = certificate, registered_source_bindings(certificate)
+        if memo is not None:
+            memo[memo_key] = result
+        return result
     recovery = helper('registered_recovery_audit', 'p17_m2_source_binding_recovery.py')
     policy = recovery.authority()
     paths = policy['certificate_paths'][kind][0]
@@ -706,8 +742,7 @@ def _validate_hash_bound_binding(plan: dict[str, Any]) -> dict[str, Any]:
     registered = plan.get("execution_identity") == REGISTERED_IDENTITY
     if registered:
         fields.add('strict23_registration')
-        if (not formal and REGISTERED_IDENTITY == helper(
-                'input_continuation', 'p17_m2_input_continuation.py').NOV21_INPUT):
+        if not formal and _metadata_first_profile():
             fields.add('formal_strict23_registration')
     if funded or new or registered:
         fields.add("authority_protocol_path")
@@ -813,8 +848,7 @@ def public_prepare_suffix(plan: dict[str, Any]) -> tuple[str, ...]:
             'registered prepare exact real proof hashes required')
         suffix = ('--registration-certificate-sha', reference['certificate_sha256'],
                   '--registration-finalize-actual-sha', reference['finalize_actual_sha256'])
-        if (plan.get('scope') == REHEARSAL_SCOPE and REGISTERED_IDENTITY == helper(
-                'input_continuation', 'p17_m2_input_continuation.py').NOV21_INPUT):
+        if plan.get('scope') == REHEARSAL_SCOPE and _metadata_first_profile():
             formal_reference = binding.get('formal_strict23_registration', {})
             require(isinstance(formal_reference, dict) and all(
                 isinstance(formal_reference.get(name), str)
@@ -887,8 +921,7 @@ def public_prepare_suffix(plan: dict[str, Any]) -> tuple[str, ...]:
 def validate_binding(plan: dict[str, Any]) -> dict[str, Any]:
     """Check authority and optional NEW public plan before payload/target IO."""
     public_prepare_suffix(plan)
-    if (plan.get('execution_identity') == REGISTERED_IDENTITY == helper(
-            'input_continuation', 'p17_m2_input_continuation.py').NOV21_INPUT
+    if (plan.get('execution_identity') == REGISTERED_IDENTITY and _metadata_first_profile()
             and _REGISTERED_SOURCE_REPLAY.get() is None):
         token = _REGISTERED_SOURCE_REPLAY.set({})
         try:
@@ -1270,6 +1303,20 @@ def _registered_read_pin(reference):
 
 def _registered_preflight(plan, raw):
     """Independently replay public native, pair retention and the actual I preflight."""
+    if REGISTERED_IDENTITY == helper(
+            'input_continuation', 'p17_m2_input_continuation.py').STAGED_INPUT:
+        evidence = Path(CONTINUATION_CONFIG['evidence_root'])
+        for folder in (evidence, evidence.with_name(evidence.name + '-backup')):
+            directory = native.base.nofollow_parent(folder / 'input-public-caller-STOP.json')
+            try:
+                try:
+                    os.stat('input-public-caller-STOP.json', dir_fd=directory,
+                            follow_symlinks=False)
+                except FileNotFoundError:
+                    continue
+                raise ValueError('STAGED_PUBLIC_STOP_VETO: ' + str(folder))
+            finally:
+                os.close(directory)
     authority = _registered_authority(plan)
     require(plan.get('scope') == FORMAL_SCOPE, 'registered preflight requires formal scope')
     ready_pin, actual_pin = plan.get('activation_readiness'), plan.get('independent_preflight')
@@ -2019,8 +2066,9 @@ def _check_software(plan: dict[str, Any]) -> None:
                 contracts += ('scripts/' + CONTINUATION_CONFIG['preparation_entry'],)
             if CONTINUATION_CONFIG.get('review_partition'):
                 contracts += (CONTINUATION_CONFIG['review_partition'],)
-            if CONTINUATION_INPUT == helper(
-                    'input_continuation', 'p17_m2_input_continuation.py').NOV21_INPUT:
+            contracts += tuple('scripts/' + name for name in CONTINUATION_CONFIG.get(
+                'registration_helpers', ()))
+            if _metadata_first_profile():
                 contracts += ('scripts/' + CONTINUATION_CONFIG['caller_generator'],)
     for path in authorities:
         try:
