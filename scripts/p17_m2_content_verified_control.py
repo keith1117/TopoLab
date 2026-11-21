@@ -1298,6 +1298,24 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
     import resource
     import subprocess
 
+    def reserve_shared():
+        if not (root / "ledger-reservation.json").exists():
+            transport.put(
+                root / "ledger-reservation.json",
+                {
+                    "shared_reserved_FULL_seconds": shared_reserved,
+                    "role_FULL_seconds": caps,
+                    "refunds_allowed": False,
+                    "scope": transport.scope,
+                    "reserved_UTC_seconds": time.time(),
+                    "execution_identity": transport.identity,
+                    "plan_sha256": plan_sha,
+                },
+            )
+
+    if plan.get("execution_identity") == (
+            "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1"):
+        reserve_shared()
     transport.predecessor(root, plan, role)
     need(not (root / "STOP.json").exists() or role == shared_role, "STOP_NO_RETRY")
     folder = root / "receipts"
@@ -1320,7 +1338,8 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
     )
     new_whole = plan.get("execution_identity") in (
         "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1",
-        "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1")
+        "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1")
     if new_whole:
         pending.update(whole_start_ms=plan["whole_start_ms"], whole_end_ms=plan["whole_end_ms"])
     if role == "final-filing":
@@ -1346,19 +1365,7 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
             "remaining full sequence/coordination/seal window unavailable",
         )
     # Native timer's actual exit is observed by wait4; supervisor exit is external.
-    if not (root / "ledger-reservation.json").exists():
-        transport.put(
-            root / "ledger-reservation.json",
-            {
-                "shared_reserved_FULL_seconds": shared_reserved,
-                "role_FULL_seconds": caps,
-                "refunds_allowed": False,
-                "scope": transport.scope,
-                "reserved_UTC_seconds": time.time(),
-                "execution_identity": transport.identity,
-                "plan_sha256": plan_sha,
-            },
-        )
+    reserve_shared()
     transport.put(root / "active.json", {"role": role, "plan_sha256": plan_sha, "status": "ACTIVE"})
     transport.put(
         root / (role + "-dispatch-charge.json"),

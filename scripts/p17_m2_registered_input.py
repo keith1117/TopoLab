@@ -69,6 +69,32 @@ def _whole_profile():
     return control.load("p17_m2_input_continuation").is_whole_input(IDENTITY)
 
 
+def _metadata_first_profile():
+    profiles = control.load("p17_m2_input_continuation")
+    return IDENTITY in (profiles.NOV21_INPUT, profiles.STAGED_INPUT)
+
+
+def public_stop_veto():
+    """Any retained staged public STOP closes later preparation and admission."""
+    profiles = control.load("p17_m2_input_continuation")
+    if IDENTITY != profiles.STAGED_INPUT:
+        return
+    import os
+
+    evidence = Path(control.CONTINUATION_CONFIG["evidence_root"])
+    for folder in (evidence, evidence.with_name(evidence.name + "-backup")):
+        directory = control.base().nofollow_directory(folder)
+        try:
+            try:
+                os.stat("input-public-caller-STOP.json", dir_fd=directory,
+                        follow_symlinks=False)
+            except FileNotFoundError:
+                continue
+            raise ValueError("STOP: STAGED_PUBLIC_STOP_VETO: " + str(folder))
+        finally:
+            os.close(directory)
+
+
 def is_root(root):
     """Memory-only routing, with no authority or existence inference."""
     selected = control.load("p17_m2_input_continuation").CONFIGS.get(IDENTITY, {})
@@ -116,13 +142,15 @@ def registration_bindings(certificate):
 def trusted_registration(plan, *, certificate_buffer=None):
     """Replay actual acceptance before deriving any expected source hash."""
     need(certificate_buffer is None or (
-        IDENTITY == control.load("p17_m2_input_continuation").NOV21_INPUT
+        _metadata_first_profile()
         and type(certificate_buffer) is bytes and len(certificate_buffer) <= 16 * 1024**2),
         "NEW bounded certificate byte buffer required")
     need(
         plan.get("execution_identity") == IDENTITY and plan.get("source_identity_policy") == POLICY,
         "registered execution identity required",
     )
+    need(plan.get("scope") in (control.FORMAL_SCOPE, control.REHEARSAL_SCOPE),
+         "registration source scope differs")
     reference = plan.get("binding", {}).get("strict23_registration")
     need(
         isinstance(reference, dict) and set(reference) == REGISTRATION_KEYS,
@@ -135,11 +163,11 @@ def trusted_registration(plan, *, certificate_buffer=None):
         and reference["finalize_actual_path"] == pin["finalize_actual_path"],
         "registration frozen proof paths differ",
     )
-    if (IDENTITY == control.load("p17_m2_input_continuation").NOV21_INPUT
-            and kind == "public"):
+    if _metadata_first_profile() and kind == "public":
         _registration_plan(
             None, "formal", plan.get("binding", {}).get("formal_strict23_registration"))
     values = []
+    buffers = {}
     checker = control.load("p17_m2_source_acquisition_independent")
     for prefix in ("certificate", "finalize_actual"):
         path, expected = reference[prefix + "_path"], reference[prefix + "_sha256"]
@@ -156,17 +184,31 @@ def trusted_registration(plan, *, certificate_buffer=None):
                else checker.native._software_bytes(Path(path)))
         need(type(raw) is bytes, "registration proof byte buffer required")
         need(hashlib.sha256(raw).hexdigest() == expected, "registration proof SHA differs")
+        buffers[prefix] = raw
         values.append(producer.parse(raw))
+    if IDENTITY == control.load("p17_m2_input_continuation").STAGED_INPUT:
+        for key in ("certificate_sha256", "finalize_actual_sha256"):
+            need(key not in pin or reference[key] == pin[key], "staged fixed proof SHA differs")
+        helper = control.load(control.CONTINUATION_CONFIG["registration_module"])
+        replay = (helper.verified_formal_registration if kind == "formal"
+                  else helper.verified_registration)
+        context, observations = replay(certificate_raw=buffers["certificate"],
+                                       finalize_actual_raw=buffers["finalize_actual"])
+        certificate = values[0]["core_bundle"]["certificate"]
+        expected_source = (control.CONTINUATION_CONFIG["public_source"] if kind == "public"
+                           else "/Users/keith1117/Documents/TopoLab-data")
+        need(producer.canonical(certificate["registered_context"]) == producer.canonical(context)
+             and producer.canonical(certificate["source_observations"])
+             == producer.canonical(observations)
+             and context["source_root"] == plan.get("source_root") == expected_source,
+             "staged replay differs from same-buffer context/observations/source")
+        return certificate, registration_bindings(certificate)
     recovery = control.load("p17_m2_source_binding_recovery")
     paired, paths = recovery.certificate_pair(kind, 1, reference["certificate_sha256"])
     need(
         [str(path) for path in paths] == pin["certificate_paths"]
         and producer.canonical(paired) == producer.canonical(values[0]),
         "registration independent certificate pair differs",
-    )
-    need(
-        plan.get("scope") in (control.FORMAL_SCOPE, control.REHEARSAL_SCOPE),
-        "registration source scope differs",
     )
     certificate, proof = control.load("p17_m2_source_binding_recovery").verify_registration(
         *values, kind=kind
@@ -340,8 +382,8 @@ def _registration_plan(root, kind, reference, *, formal_reference=None):
     }
     if formal_reference is not None:
         partial["binding"]["formal_strict23_registration"] = formal_reference
-    trusted_registration(partial, certificate_buffer=(envelope_raw if IDENTITY == control.load(
-        "p17_m2_input_continuation").NOV21_INPUT else None))
+    trusted_registration(partial, certificate_buffer=(
+        envelope_raw if _metadata_first_profile() else None))
     return policy, reference, envelope
 
 
@@ -350,7 +392,8 @@ def prepare_rehearsal(root, reference, *, formal_reference=None):
     import os
     import time
 
-    new_profile = IDENTITY == control.load("p17_m2_input_continuation").NOV21_INPUT
+    public_stop_veto()
+    new_profile = _metadata_first_profile()
     if not new_profile:
         root = control.rehearsal_root(root)
     policy = authority()
@@ -368,7 +411,8 @@ def prepare_rehearsal(root, reference, *, formal_reference=None):
     if new_profile:
         root = control.rehearsal_root(root)
     need(str(root) in policy["public_roots"], "unregistered public input generation")
-    core_plan = envelope["core_bundle"]["plan"]
+    staged = IDENTITY == control.load("p17_m2_input_continuation").STAGED_INPUT
+    core_plan = None if staged else envelope["core_bundle"]["plan"]
     checker = control.load("p17_m2_source_acquisition_independent")
     values = []
     for name, key in (
@@ -378,7 +422,9 @@ def prepare_rehearsal(root, reference, *, formal_reference=None):
         path = (Path(policy["public_projection_captures"][name]["path"])
                 if _whole_profile() else Path(core_plan["root"]) / name)
         raw = checker.native._software_bytes(path)
-        need(producer.sha(raw) == core_plan["entry"][key], "captured public projection SHA differs")
+        if not staged:
+            need(producer.sha(raw) == core_plan["entry"][key],
+                 "captured public projection SHA differs")
         if _whole_profile():
             need(producer.sha(raw) == policy["public_projection_captures"][name]["sha256"],
                  "NEW public projection capture pin differs")
@@ -386,7 +432,8 @@ def prepare_rehearsal(root, reference, *, formal_reference=None):
     plan = control.make_plan(root, *values, strict23_registration=reference)
     if formal_reference is not None:
         plan["binding"]["formal_strict23_registration"] = formal_reference
-    plan["source_root"] = core_plan["context"]["source_root"]
+    plan["source_root"] = (envelope["core_bundle"]["certificate"]["registered_context"][
+        "source_root"] if staged else core_plan["context"]["source_root"])
     checker.validate_binding(plan)
     helper = control.base()
     parent = helper.nofollow_directory(root.parent)
@@ -482,6 +529,7 @@ def _read_pin(reference):
 
 def readiness_inputs(policy):
     """Re-audit exact public native and actual outer return; no source/target IO."""
+    public_stop_veto()
     checker = control.load("p17_m2_source_acquisition_independent")
     raw = checker.native._software_bytes(Path(policy["readiness_path"]))
     ready = producer.parse(raw)
@@ -648,6 +696,7 @@ def activation_readiness(value, plan):
     """Input clocks and source registration precede shared publication gates."""
     import time
 
+    public_stop_veto()
     policy = authority(producer.canonical(value))
     need(
         (control.load("p17_m2_input_continuation").window(IDENTITY).check(
@@ -665,6 +714,7 @@ def publication_readiness(value):
     """Actual publication evidence without starting a second input clock."""
     import time
 
+    public_stop_veto()
     policy = authority(producer.canonical(value))
     ready, digest = readiness_inputs(policy)
     checker = control.load("p17_m2_source_acquisition_independent")
@@ -709,6 +759,7 @@ def publication_readiness(value):
 
 
 def activate_formal(root, reference):
+    public_stop_veto()
     policy = authority()
     need(str(root) in GENERATIONS, "registered formal literal required")
     attempt = GENERATIONS.index(str(root)) + 1
@@ -719,6 +770,7 @@ def activate_formal(root, reference):
     plan["activation_readiness"] = ready["readiness_reference"]
     plan["independent_preflight"] = ready["independent_preflight_reference"]
     control.load("p17_m2_source_acquisition_independent").validate_binding(plan)
+    public_stop_veto()
     return control.setup_formal(plan, ready)
 
 

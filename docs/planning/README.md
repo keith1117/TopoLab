@@ -1,5 +1,7 @@
 # Planning index
 
+[Staged public registration and formal input contract](staged_source_input_acceptance.md)
+
 The next public input route uses a freshly reconstructed fixture with a new
 23-file registration at its final path. [Measured basis](../validation/public_input_r1_throughput.md)
 
