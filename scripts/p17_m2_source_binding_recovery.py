@@ -28,6 +28,10 @@ FULL60_INPUT = 'topolab.v2.p17-m2-registered-source-acquisition.20261116.v1'
 FULL60_RECOVERY = 'topolab.v2.p17-binding-certificate-recovery.20261116.v1'
 FULL60_EVIDENCE = Path(
     '/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116')
+NOV21_INPUT = 'topolab.v2.p17-m2-registered-source-acquisition.20261121.v1'
+NOV21_RECOVERY = 'topolab.v2.p17-binding-certificate-recovery.20261121.v1'
+NOV21_EVIDENCE = Path(
+    '/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121')
 _FULL60_CORE = None
 FULL60_REVIEW_PARTITION = 'docs/planning/full60_input_cross_review_partition.json'
 FULL60_LEAD_FILES = {
@@ -55,9 +59,30 @@ ENVELOPE_SCHEMA = 'topolab.v2.m2-strict-source-binding.recovered-result.v1'
 FUTURE = 'NOT_CLAIMED_REQUIRES_SEPARATE_ACTUAL_OBSERVATION'
 
 
+def modern_metadata():
+    """Select only the two separately registered finite metadata profiles."""
+    return (CONTINUATION_INPUT, IDENTITY) in (
+        (FULL60_INPUT, FULL60_RECOVERY), (NOV21_INPUT, NOV21_RECOVERY))
+
+
+def metadata_evidence():
+    return NOV21_EVIDENCE if CONTINUATION_INPUT == NOV21_INPUT else FULL60_EVIDENCE
+
+
+def review_partition_path():
+    return ('docs/planning/input_review_20261121.json'
+            if CONTINUATION_INPUT == NOV21_INPUT else FULL60_REVIEW_PARTITION)
+
+
+def metadata_buffer_limit(maximum):
+    """New authority never enlarges the retained single-buffer reader cap."""
+    need(type(maximum) is int and maximum > 0, 'positive metadata byte cap required')
+    return min(maximum, 16 * 1024**2) if CONTINUATION_INPUT == NOV21_INPUT else maximum
+
+
 def load(name):
     import importlib.util
-    if CONTINUATION_INPUT == FULL60_INPUT and name == 'p17_m2_source_binding':
+    if modern_metadata() and name == 'p17_m2_source_binding':
         return enable_new_metadata_mode()
     path = REPO / 'scripts' / (name + '.py')
     old = sys.modules.get(name)
@@ -78,17 +103,21 @@ def enable_new_metadata_mode():
     import types
 
     global _FULL60_CORE
-    need(CONTINUATION_INPUT == FULL60_INPUT and IDENTITY == FULL60_RECOVERY,
+    need(modern_metadata(),
          'NEW metadata mode requires its exact selected profile')
     if _FULL60_CORE is None:
         path = REPO / 'scripts/p17_m2_source_binding.py'
         raw = path.read_bytes()
-        key = 'p17_m2_source_binding_full60_metadata_20261116'
+        key = ('p17_m2_source_binding_metadata_20261121' if CONTINUATION_INPUT == NOV21_INPUT
+               else 'p17_m2_source_binding_full60_metadata_20261116')
         module = types.ModuleType(key)
         module.__file__ = str(path)
         sys.modules[key] = module
         exec(compile(raw, str(path), 'exec', dont_inherit=True), module.__dict__)
         module.FULL60_METADATA_MODE = True
+        module.FULL60_METADATA_EVIDENCE = metadata_evidence()
+        if CONTINUATION_INPUT == NOV21_INPUT:
+            module.METADATA_BUFFER_CAP = 16 * 1024**2
         module.loaded_source_sha256 = hashlib.sha256(raw).hexdigest()
         loader = sys.modules.get('full60_input_loader')
         if loader is not None:
@@ -128,9 +157,8 @@ def replay_core(bundle, kind):
     need(kind in ('public', 'formal'), 'literal captured core kind required')
     pin = authority()['captured_cores'][kind]
     logical_path = pin['path']
-    if CONTINUATION_INPUT == FULL60_INPUT:
-        need(IDENTITY == FULL60_RECOVERY
-             and pin['path'] == str(FULL60_EVIDENCE / 'metadata-availability-capture'
+    if modern_metadata():
+        need(pin['path'] == str(metadata_evidence() / 'metadata-availability-capture'
                                     / (kind + '-core.json'))
              and pin.get('capture_path', pin['path']) == pin['path']
              and isinstance(pin.get('historical_bundle_path'), str),
@@ -178,11 +206,12 @@ def source_freeze():
             "scripts/m2_acquisition_actual_boundary.mjs",
         ):
             frozen[name] = sha((REPO / name).read_bytes())
-    if CONTINUATION_INPUT == FULL60_INPUT:
+    if modern_metadata():
         for name in (
             'scripts/full60_input_loader.py',
             'scripts/full60_public_capability.py',
-            'scripts/input_control_full60_20261116.py',
+            'scripts/' + CONTINUATION_CONFIG.get(
+                'control_entry', 'input_control_full60_20261116.py'),
             'scripts/p17_m2_source_verified_input.py',
             'scripts/p17_m2_scientific_independent.py',
             *(('scripts/' + CONTINUATION_CONFIG[key]) for key in (
@@ -195,7 +224,7 @@ def source_freeze():
         ):
             frozen[name] = sha((REPO / name).read_bytes())
         partition, _ = component_review_partition()
-        for name in (FULL60_REVIEW_PARTITION, *partition['members']):
+        for name in (review_partition_path(), *partition['members']):
             frozen[name] = sha((REPO / name).read_bytes())
         loader = sys.modules.get('full60_input_loader')
         if loader is not None:
@@ -208,12 +237,12 @@ def read_ref(reference, maximum=32 * 1024**2):
          and isinstance(reference['sha256'], str)
          and re.fullmatch('[0-9a-f]{64}', reference['sha256']), 'literal metadata pin required')
     return load('p17_m2_source_binding').read_metadata(
-        Path(reference['path']), maximum, expected=reference['sha256'])[0]
+        Path(reference['path']), metadata_buffer_limit(maximum), expected=reference['sha256'])[0]
 
 
 def capture_ref(reference, maximum=32 * 1024**2):
     value, raw = load('p17_m2_source_binding').read_metadata(
-        Path(reference['path']), maximum, expected=reference['sha256'])
+        Path(reference['path']), metadata_buffer_limit(maximum), expected=reference['sha256'])
     return {'reference': deepcopy(reference), 'raw': raw.decode('utf-8'), 'value': value}
 
 
@@ -237,7 +266,7 @@ def formal_preflight(admitted):
     marker = admitted.get('preflight_representation')
     if marker is None:
         return captured_value(dict(capture, value=admitted['preflight']))
-    need(CONTINUATION_INPUT == FULL60_INPUT and IDENTITY == FULL60_RECOVERY
+    need(modern_metadata()
          and marker == 'SHA256_RAW_ONLY_V1' and 'preflight' not in admitted,
          'formal preflight representation differs')
     reference, raw = capture['reference'], capture['raw']
@@ -252,7 +281,7 @@ def formal_preflight(admitted):
 
 def compact_formal_entry(admitted):
     """Omit the redundant parsed copy, preserving every original preflight byte."""
-    need(CONTINUATION_INPUT == FULL60_INPUT and IDENTITY == FULL60_RECOVERY,
+    need(modern_metadata(),
          'NEW formal preflight representation required')
     formal_preflight(admitted)  # Verify raw/value agreement before dropping the cache.
     result = dict(admitted)
@@ -278,12 +307,16 @@ def publish_plan(root, plan, *, maximum=None):
 
 def checked_full60_public_capability(capture):
     """Replay the captured real public gate without following package pointers."""
-    need(CONTINUATION_INPUT == FULL60_INPUT and IDENTITY == FULL60_RECOVERY
+    need(modern_metadata()
          and isinstance(capture, dict), 'NEW captured public capability required')
-    expected = str(FULL60_EVIDENCE / 'public-full60-final-acceptance-a1.json')
+    expected = str(metadata_evidence() / 'public-full60-final-acceptance-a1.json')
     need(authority().get('public_capability_path') == expected
          and capture.get('reference', {}).get('path') == expected,
          'NEW exact public capability path differs')
+    if CONTINUATION_INPUT == NOV21_INPUT:
+        need(capture['reference'].get('sha256')
+             == authority().get('retained_public_capability_sha256'),
+             'NEW retained public capability SHA differs')
     captured_value(capture)
     return load('full60_public_capability').verify_public_capability(capture['raw'].encode('utf-8'))
 
@@ -383,42 +416,52 @@ def review_readiness(standards_sha, spec_sha):
         reference = {'path': policy['review_paths'][axis], 'sha256': expected}
         captured = capture_ref(reference)
         report = captured['value']
-        if CONTINUATION_INPUT != FULL60_INPUT:
+        if not modern_metadata():
             need(report.get('status') == 'PASS' and report.get('open_findings') == []
                  and report.get('author') == policy['review_authors'][axis]
                  and report.get('execution_identity') == IDENTITY
                  and report.get('reviewed_source_tree') == source_freeze(),
                  'fresh different-author review/source freeze differs')
         reports[axis] = {'reference': reference, 'report': report, 'raw': captured['raw']}
-    if CONTINUATION_INPUT == FULL60_INPUT:
+    if modern_metadata():
         validate_component_reviews(reports, source_freeze())
     return reports
 
 
 def component_review_partition():
     """Read the NEW bounded writer/reviewer partition; it grants no data access."""
-    need(CONTINUATION_INPUT == FULL60_INPUT and IDENTITY == FULL60_RECOVERY,
+    need(modern_metadata(),
          'NEW component review requires its exact profile')
     schema = authority().get('review_schema', {})
     need(schema.get('kind') == 'NEW_COMPONENT_CROSS_REVIEW'
-         and schema.get('partition_path') == FULL60_REVIEW_PARTITION
+         and schema.get('partition_path') == review_partition_path()
          and schema.get('required_axes') == ['standards', 'spec']
          and schema.get('full_source_tree_is_version_pin') is True,
          'NEW component review policy differs')
-    raw = (REPO / FULL60_REVIEW_PARTITION).read_bytes()
+    raw = (REPO / review_partition_path()).read_bytes()
     need(len(raw) <= 65536, 'NEW component partition byte cap')
     value = json.loads(raw)
     members = value.get('members', {})
     need(value.get('schema') == 'topolab.NEW-full60-input-cross-review-partition.v1'
-         and value.get('execution_identity') == FULL60_RECOVERY
+         and value.get('execution_identity') == IDENTITY
          and value.get('jointly_owned') == 'DENY_NO_SELF_REVIEW'
          and value.get('source_tree_is_version_pin_not_review_scope') is True
-         and isinstance(members, dict) and set(members) == FULL60_LEAD_FILES | FULL60_ROOT_FILES,
+         and isinstance(members, dict) and set(members) == (
+             set(schema.get('expected_members', [])) if CONTINUATION_INPUT == NOV21_INPUT
+             else FULL60_LEAD_FILES | FULL60_ROOT_FILES) and members,
          'NEW component partition exact26 coverage incomplete')
     for name, item in members.items():
         path = Path(name)
-        writer = '/root/full60_independent' if name in FULL60_LEAD_FILES else '/root'
-        reviewer = '/root' if writer != '/root' else '/root/full60_independent'
+        if CONTINUATION_INPUT == NOV21_INPUT:
+            need(isinstance(item, dict), 'NEW component writer/reviewer required')
+            writer, reviewer = item.get('writer'), item.get('reviewer')
+            need(writer in ('/root', '/root/full60_independent',
+                            '/root/containment_standards', '/root/containment_spec')
+                 and reviewer in ('/root', '/root/full60_independent') and reviewer != writer,
+                 'NEW component nonwriter review required')
+        else:
+            writer = '/root/full60_independent' if name in FULL60_LEAD_FILES else '/root'
+            reviewer = '/root' if writer != '/root' else '/root/full60_independent'
         need(isinstance(name, str) and not path.is_absolute() and str(path) == name
              and '..' not in path.parts and path.parts[0] in ('scripts', 'tests', 'docs')
              and path.suffix in ('.py', '.mjs', '.js', '.json', '.md')
@@ -435,7 +478,7 @@ def validate_component_reviews(captures, tree):
     partition, digest = component_review_partition()
     need(isinstance(captures, dict) and set(captures) == {'standards', 'spec'}
          and set(policy['review_authors'].values()) == {'/root', '/root/full60_independent'}
-         and tree.get(FULL60_REVIEW_PARTITION) == digest,
+         and tree.get(review_partition_path()) == digest,
          'NEW component review version/author coverage differs')
     covered = set()
     for slot in ('standards', 'spec'):
@@ -480,6 +523,9 @@ def write_new(path, value):
     """Create metadata under a held no-follow parent; never replace prior evidence."""
     core = load('p17_m2_source_binding')
     path, raw = Path(path), canonical(value)
+    if CONTINUATION_INPUT == NOV21_INPUT:
+        need(len(raw) <= metadata_buffer_limit(16 * 1024**2),
+             'complete NEW metadata byte cap exceeded before target IO')
     core.metadata_path_guard(path)
     parent = core.source_parent(path.parent, 'unused')
     try:
@@ -704,6 +750,7 @@ def preflight(attempt, public_sha, finalize_actual_sha, *, standards_sha, spec_s
          <= activation['software_closure_actual']['responses'][-1]['returned_ms'],
          'software closure precedes actual public final return')
     publication = publication_readiness()
+    check_activation_publication(activation, publication)
     runtime = load('p17_m2_source_binding').runtime()
     need(runtime['isolated'] == 1 and runtime['cwd'] == str(REPO)
          and runtime['threads'] == load('p17_m2_source_binding').THREADS,
@@ -770,6 +817,7 @@ def formal_readiness(public_sha, preflight_sha, preflight_return_sha, activation
          and preflight.get('main_CI_run') == publication['main_CI_run'],
          'fresh exact main differs from independent preflight')
     activation = activation_readiness(activation_sha)
+    check_activation_publication(activation, publication)
     need(preflight['activation_sha256'] == activation_sha
          and preflight['activation'] == activation, 'actual recovery activation changed')
     return {'preflight': preflight, 'preflight_actual': actual, 'publication': publication,
@@ -803,9 +851,11 @@ def checked_permission(capture, runtime, *, before_ms=None):
         "NUMEXPR_NUM_THREADS=1",
         *argv[:3],
     ]
+    permission_scope = ('prefix_rule' not in request if CONTINUATION_INPUT == NOV21_INPUT
+                        else request.get('prefix_rule') == prefix)
     need(
         request.get("sandbox_permissions") == "require_escalated"
-        and request.get("prefix_rule") == prefix
+        and permission_scope
         and len(packet["responses"]) == 1
         and packet["responses"][0]["result"]["exit_code"] == 0
         and "usage:" in packet["responses"][0]["result"]["output"]
@@ -835,7 +885,8 @@ def prepare(
     root = _root(kind, attempt)
     permission = None
     if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
-                              load("p17_m2_input_continuation").V35_INPUT, FULL60_INPUT):
+                              load("p17_m2_input_continuation").V35_INPUT,
+                              FULL60_INPUT, NOV21_INPUT):
         need(
             permission_packet is not None and permission_packet_sha is not None,
             "actual approved permission preflight required before actor/root preparation",
@@ -848,11 +899,11 @@ def prepare(
     budget = budget_readiness()
     runtime = core.runtime()
     public_capability = None
-    if CONTINUATION_INPUT == FULL60_INPUT:
+    if modern_metadata():
         need(isinstance(public_capability_sha, str)
              and re.fullmatch('[0-9a-f]{64}', public_capability_sha),
              'NEW real public capability CLI SHA required before metadata preparation')
-        expected_public_path = str(FULL60_EVIDENCE / 'public-full60-final-acceptance-a1.json')
+        expected_public_path = str(metadata_evidence() / 'public-full60-final-acceptance-a1.json')
         need(policy.get('public_capability_path') == expected_public_path,
              'NEW exact public capability path required before metadata read')
         public_capability = capture_ref({
@@ -885,7 +936,7 @@ def prepare(
         entry["formal"] = formal_readiness(
             public_certificate_sha, preflight_sha, preflight_return_sha, activation_sha
         )
-        if CONTINUATION_INPUT == FULL60_INPUT:
+        if modern_metadata():
             entry["formal"] = compact_formal_entry(entry["formal"])
     pin = policy["captured_cores"][kind]
     bundle = read_ref({"path": pin["path"], "sha256": pin["sha256"]})
@@ -941,7 +992,7 @@ def prepare(
     # No target stat/open/mkdir occurs before every admission dependency above.
     plan_sha = publish_plan(
         root, plan, maximum=policy['limits']['plan_bytes']
-        if CONTINUATION_INPUT == FULL60_INPUT else None)
+        if modern_metadata() else None)
     native = load("p17_m2_source_binding_native")
     commands = {
         mode: {
@@ -981,10 +1032,27 @@ def _captured_activation(activation, raw, expected_sha, tree):
                         policy['limits']['global_deadline_ms'])),
          'captured activation schema/source/fixed clock differs')
     closure = activation['software_closure_actual']
-    _, ended = exact_actual(closure, closure['argv'], policy['actors']['producer'])
+    closure_argv = closure['argv']
     publication_closure = activation['publication_closure_actual']
+    publication_argv = publication_closure['argv']
+    if CONTINUATION_INPUT == NOV21_INPUT:
+        main, run = activation.get('main'), activation.get('main_CI_run')
+        need(isinstance(main, str) and re.fullmatch('[0-9a-f]{40}', main)
+             and type(run) is int and run > 0, 'NEW activation exact-main pins required')
+        closure_argv = ['git', '--no-optional-locks', 'diff', '--check', 'HEAD']
+        publication_argv = ['gh', 'run', 'view', str(run), '--exit-status', '--json',
+                            'headSha,status,conclusion']
+    _, ended = exact_actual(closure, closure_argv, policy['actors']['producer'])
     publication_start, publication_end = exact_actual(publication_closure,
-        publication_closure['argv'], policy['actors']['producer'])
+        publication_argv, policy['actors']['producer'])
+    if CONTINUATION_INPUT == NOV21_INPUT:
+        def output(packet):
+            return ''.join(row['result']['output'] for row in packet['responses'])
+
+        need(output(closure) == '', 'NEW software closure stdout must be empty')
+        need(json.loads(output(publication_closure)) == {
+            'headSha': main, 'status': 'completed', 'conclusion': 'success'},
+            'NEW publication closure stdout differs from registered main/run')
     need(ended <= publication_start <= publication_end
          <= (policy['limits']['software_deadline_ms'] if CONTINUATION_INPUT is not None
              else ended + policy['publication_only']['seconds_each'] * 1000)
@@ -993,6 +1061,14 @@ def _captured_activation(activation, raw, expected_sha, tree):
          <= policy['limits']['software_deadline_ms'],
          'captured software closure actual does not establish activation')
     return activation
+
+
+def check_activation_publication(activation, publication):
+    """Bind the original closing return to each later fresh Main/CI observation."""
+    if CONTINUATION_INPUT == NOV21_INPUT:
+        need(activation.get('main') == publication.get('main')
+             and activation.get('main_CI_run') == publication.get('main_CI_run'),
+             'NEW activation exact-main differs from fresh publication')
 
 
 def _captured_public(public, expected_sha, tree):
@@ -1043,7 +1119,7 @@ def _captured_formal(admitted, context, runtime):
          and preflight.get('runtime') == runtime and preflight.get('budget') == policy['budget'],
          'captured formal preflight full schema/policy differs')
     _captured_budget(preflight.get('budget_evidence'))
-    if CONTINUATION_INPUT == FULL60_INPUT:
+    if modern_metadata():
         validate_component_reviews(preflight.get('reviews'), context['source_tree'])
     else:
         for axis in ('standards', 'spec'):
@@ -1097,6 +1173,8 @@ def _captured_formal(admitted, context, runtime):
          'captured activation/public/preflight chronology differs')
     _publication_shape(preflight['publication'])
     _publication_shape(admitted['publication'])
+    check_activation_publication(activation, preflight['publication'])
+    check_activation_publication(activation, admitted['publication'])
     need(preflight['main'] == preflight['publication']['main'] == admitted['publication']['main']
          and preflight['main_CI_run'] == preflight['publication']['main_CI_run']
          == admitted['publication']['main_CI_run'], 'captured exact-main publication differs')
@@ -1182,18 +1260,20 @@ def _plan_shape(plan, *, historical=False):
         and entry.get("old_scene_write") is False,
         "new finite metadata entry differs",
     )
-    if CONTINUATION_INPUT == FULL60_INPUT:
+    if modern_metadata():
         checked_full60_public_capability(entry.get('public_capability'))
     if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
-                              load("p17_m2_input_continuation").V35_INPUT, FULL60_INPUT):
+                              load("p17_m2_input_continuation").V35_INPUT,
+                              FULL60_INPUT, NOV21_INPUT):
         checked_permission(
             entry.get("permission"), runtime, before_ms=plan["started_unix_ns"] // 10**6
         )
     if CONTINUATION_INPUT in (load("p17_m2_input_continuation").V33_INPUT,
-                              load("p17_m2_input_continuation").V35_INPUT, FULL60_INPUT):
+                              load("p17_m2_input_continuation").V35_INPUT,
+                              FULL60_INPUT, NOV21_INPUT):
         _publication_shape(entry.get("permission_publication"))
     _captured_budget(entry.get("budget_evidence"))
-    if CONTINUATION_INPUT == FULL60_INPUT:
+    if modern_metadata():
         validate_component_reviews(entry.get('reviews'), tree)
     else:
         for axis in ("standards", "spec"):
@@ -1260,7 +1340,7 @@ def admit_plan(plan, role):
          'actual isolated recovery runtime differs')
     need(plan['started_unix_ns'] <= time.time_ns() <= plan['deadline_unix_ns'],
          'immutable metadata recovery role window expired')
-    if CONTINUATION_INPUT == FULL60_INPUT:
+    if modern_metadata():
         policy = authority()
         need(time.time_ns() + (120 + 60 + 7200) * 10**9 <= min(
             policy['limits']['global_deadline_ms'],
@@ -1313,6 +1393,9 @@ class Transport(load('p17_m2_source_binding_native').MetadataTransport):
              and not any(part in ('.', '..') for part in literal.split('/')),
              'literal recovery writer path cannot contain dot segments')
         path = Path(literal)
+        if CONTINUATION_INPUT == NOV21_INPUT:
+            need(len(canonical(value)) <= metadata_buffer_limit(16 * 1024**2),
+                 'complete NEW native metadata byte cap exceeded before target IO')
         load('p17_m2_source_binding').metadata_path_guard(path)
         need(path.is_relative_to(self.root), 'recovery write outside one new attempt')
         self.namespace_check(self.root, additional_bytes=len(canonical(value)), additional_files=1)
@@ -1391,7 +1474,8 @@ def certificate_pair(kind, attempt, expected_sha):
     buffers, identities = [], []
     for path in paths:
         value, raw = load('p17_m2_source_binding').read_metadata(
-            path, 40 * 1024**2, expected=expected_sha, canonical_required=True)
+            path, metadata_buffer_limit(40 * 1024**2),
+            expected=expected_sha, canonical_required=True)
         info = path.lstat()
         need(stat.S_ISREG(info.st_mode) and info.st_nlink == 1
              and stat.S_IMODE(info.st_mode) == 0o600, 'private ordinary certificate required')
@@ -1400,6 +1484,19 @@ def certificate_pair(kind, attempt, expected_sha):
     need(buffers[0][1] == buffers[1][1] and identities[0] != identities[1],
          'independent byte-identical certificate copies required')
     return buffers[0][0], paths
+
+
+def result_envelope(plan, bundle, events, evidence):
+    """Build the complete wire consumed by subsequent registration readers."""
+    envelope = {'schema': ENVELOPE_SCHEMA, 'core_bundle': bundle, 'metadata_plan': plan,
+                'metadata_events': events,
+                'metadata_evidence': load('p17_m2_content_verified_control').evidence_json(
+                    evidence),
+                'own_future_return': FUTURE}
+    if CONTINUATION_INPUT == NOV21_INPUT:
+        need(len(canonical(envelope)) <= metadata_buffer_limit(16 * 1024**2),
+             'complete NEW certificate metadata byte cap exceeded before target IO')
+    return envelope
 
 
 def finalize(plan):
@@ -1415,11 +1512,7 @@ def finalize(plan):
     events = core.read_metadata(root / (ROLE + '-events.json'), 2 * 1024**2,
                                 canonical_required=True)[0]
     evidence = native.role_evidence(root, sha(canonical(plan)), ROLE)
-    envelope = {'schema': ENVELOPE_SCHEMA, 'core_bundle': bundle, 'metadata_plan': plan,
-                'metadata_events': events,
-                'metadata_evidence': load('p17_m2_content_verified_control').evidence_json(
-                    evidence),
-                'own_future_return': FUTURE}
+    envelope = result_envelope(plan, bundle, events, evidence)
     certificate, proof = verify_result_envelope(envelope)
     paths = list(map(Path, policy['certificate_paths'][plan['kind']][plan['recovery_attempt'] - 1]))
     hashes = [write_new(path, envelope) for path in paths]

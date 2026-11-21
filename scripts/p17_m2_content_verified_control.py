@@ -1318,8 +1318,9 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
             transport.argv_for(root, m, plan_sha, role) for m in ("supervise", "record")
         ],
     )
-    new_whole = plan.get("execution_identity") == (
-        "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1")
+    new_whole = plan.get("execution_identity") in (
+        "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1")
     if new_whole:
         pending.update(whole_start_ms=plan["whole_start_ms"], whole_end_ms=plan["whole_end_ms"])
     if role == "final-filing":

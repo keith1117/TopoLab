@@ -28,7 +28,7 @@ KINDS = {
 }
 
 
-# Four frozen configurations only; this is not an extension registry.
+# Only these fixed configurations can select a continuation.
 V31_RECOVERY = "topolab.v2.p17-binding-certificate-recovery.20261104.v6"
 V31_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.20261104.v4"
 V33_RECOVERY = "topolab.v2.p17-binding-certificate-recovery.20261104.v7"
@@ -41,7 +41,38 @@ FULL60_EVIDENCE = (
     "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116"
 )
 FULL60_BUDGET_SHA = "cfa8ac55d9f1879fdc9242db76b78c6661f38649e97162d0fe39339600629ec0"
+NOV21_RECOVERY = "topolab.v2.p17-binding-certificate-recovery.20261121.v1"
+NOV21_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1"
+NOV21_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121"
+NOV21_BUDGET_SHA = "9200b495ea726459094868265e6cf61b3364e10515a91e815db2baa95dbc0d47"
 CONFIGS = {
+    NOV21_INPUT: {
+        "input": NOV21_INPUT, "recovery": NOV21_RECOVERY,
+        "prefix": "topolab-public-source-acquisition-20261121-",
+        "public_root": "/private/tmp/topolab-public-source-acquisition-20261121-a1",
+        "generations": (PARENT + "p17-m2-local-input-version-20261121-a1",),
+        "recovery_protocol": "docs/planning/binding_recovery_20261121_contract.json",
+        "input_protocol": "docs/planning/registered_input_20261121_contract.json",
+        "schema": "topolab.v2.m2-registered-source-acquisition-authority.20261121.v1",
+        "recovery_entry": "binding_recovery_20261121.py",
+        "preparation_entry": "input_preparation_20261121.py",
+        "input_entry": "registered_input_20261121.py",
+        "control_entry": "input_control_20261121.py",
+        "review_partition": "docs/planning/input_review_20261121.json",
+        "evidence_root": NOV21_EVIDENCE,
+        "cache_suffix": "_nov21", "global_deadline_ms": 1795281660000,
+        "public_attempts_total": 1, "public_graphs_max": 1,
+        "whole_attempt_seconds": 4500, "result_suffix_seconds": 7200,
+        "window_module": "metadata_input_window_20261121",
+        "public_capability_module": "full60_public_capability",
+        "caller_generator": "build_input_caller_20261121.py",
+        "caller_waiter": "await_input_receipt_20261121.py",
+        "caller_filer": "file_input_event_20261121.py",
+        "caller_cohort": "full60_input_cohort.mjs",
+        "caller_boundary": "full60_input_actual_boundary.mjs",
+        "budget": {"path": NOV21_EVIDENCE + "/owner-budget-registration.json",
+                   "sha256": NOV21_BUDGET_SHA},
+    },
     FULL60_INPUT: {
         "input": FULL60_INPUT, "recovery": FULL60_RECOVERY,
         "prefix": "topolab-public-full60-source-acquisition-",
@@ -182,8 +213,31 @@ def config(identity):
     raise ValueError("continuation: unregistered exact identity")
 
 
+def is_whole_input(identity):
+    return identity in (FULL60_INPUT, NOV21_INPUT)
+
+
+def window(identity):
+    """Load the clock for one explicitly registered whole-attempt profile."""
+    if not is_whole_input(identity):
+        raise ValueError("continuation: no registered whole-attempt clock")
+    name = config(identity).get("window_module", "full60_input_window")
+    loader = sys.modules.get("full60_input_loader")
+    path = REPO / "scripts" / (name + ".py")
+    if loader is not None:
+        return loader.load(name, path)
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def config_for_root(root):
     for value in CONFIGS.values():
+        if value["input"] == NOV21_INPUT:
+            if str(root) in (*value["generations"], value["public_root"]):
+                return value
+            continue
         if str(root) in value["generations"] or Path(root).name.startswith(value["prefix"]):
             return value
     return None
@@ -207,7 +261,7 @@ def profile(kind, identity=INPUT):
     result = importlib.util.module_from_spec(spec)
     sys.modules[key] = result
     try:
-        if selected["input"] == FULL60_INPUT:
+        if is_whole_input(selected["input"]):
             raw = path.read_bytes()
             loader = sys.modules.get("full60_input_loader")
             if loader is not None:
@@ -252,6 +306,8 @@ def profile(kind, identity=INPUT):
 
 
 def budget_keys(identity):
+    if identity == NOV21_RECOVERY:
+        return ("budget", "budget_review")
     if identity == FULL60_RECOVERY:
         return ("budget", "budget_review", "ancillary_budget_review")
     if identity == V35_RECOVERY:
@@ -331,6 +387,29 @@ def captured_full60_budget(module, captures):
 
 def captured_budget(module, captures):
     """Replay raw preregistration, actual return, finite caps and failed-old seal."""
+    if module.IDENTITY == NOV21_RECOVERY:
+        policy = module.authority()
+        pin = CONFIGS[NOV21_INPUT]["budget"]
+        module.need(set(captures) == {"budget", "budget_review"} and policy["budget"] == pin,
+                    "Nov21 budget identity or captures differ")
+        values = {}
+        for key, capture in captures.items():
+            module.need(capture["reference"] == policy[key], "Nov21 budget reference differs")
+            values[key] = module.captured_value(capture)
+        budget, review = values["budget"], values["budget_review"]
+        module.need(
+            budget["execution_identity"] == "topolab.metadata-input-acceptance.20261121.v1"
+            and budget["new_FULL_ceiling"] == 8160
+            and budget["global_end_ms"] == policy["limits"]["global_deadline_ms"]
+            and budget["preparation_deadline_ms"] == policy["limits"]["software_deadline_ms"]
+            and review["schema"] == "topolab.metadata-input-budget-review.20261121.v1"
+            and review["author"] == policy["actors"]["independent"] == "/root/full60_independent"
+            and review["status"] == "PASS_FINITE_BUDGET_NO_ACCESS_GRANT"
+            and review["owner_budget_sha256"] == pin["sha256"]
+            and all(review[key] == budget[key]
+                    for key in ("new_FULL_ceiling", "global_start_ms", "global_end_ms")),
+            "Nov21 independent review, named fees or clocks differ")
+        return values
     if module.IDENTITY == FULL60_RECOVERY:
         return captured_full60_budget(module, captures)
     if module.IDENTITY == V35_RECOVERY:

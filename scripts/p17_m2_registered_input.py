@@ -65,8 +65,15 @@ def need(ok, reason):
         raise ValueError("STOP: " + reason)
 
 
+def _whole_profile():
+    return control.load("p17_m2_input_continuation").is_whole_input(IDENTITY)
+
+
 def is_root(root):
     """Memory-only routing, with no authority or existence inference."""
+    selected = control.load("p17_m2_input_continuation").CONFIGS.get(IDENTITY, {})
+    if selected.get("public_root") is not None:
+        return str(root) in (*GENERATIONS, selected["public_root"])
     return str(root) in GENERATIONS or Path(root).name.startswith(PUBLIC_PREFIX)
 
 
@@ -106,8 +113,12 @@ def registration_bindings(certificate):
     return result
 
 
-def trusted_registration(plan):
+def trusted_registration(plan, *, certificate_buffer=None):
     """Replay actual acceptance before deriving any expected source hash."""
+    need(certificate_buffer is None or (
+        IDENTITY == control.load("p17_m2_input_continuation").NOV21_INPUT
+        and type(certificate_buffer) is bytes and len(certificate_buffer) <= 16 * 1024**2),
+        "NEW bounded certificate byte buffer required")
     need(
         plan.get("execution_identity") == IDENTITY and plan.get("source_identity_policy") == POLICY,
         "registered execution identity required",
@@ -117,6 +128,17 @@ def trusted_registration(plan):
         isinstance(reference, dict) and set(reference) == REGISTRATION_KEYS,
         "strict23 registration proof required",
     )
+    kind = "formal" if plan.get("scope") == control.FORMAL_SCOPE else "public"
+    pin = authority()["registration"][kind]
+    need(
+        reference["certificate_path"] == pin["certificate_paths"][0]
+        and reference["finalize_actual_path"] == pin["finalize_actual_path"],
+        "registration frozen proof paths differ",
+    )
+    if (IDENTITY == control.load("p17_m2_input_continuation").NOV21_INPUT
+            and kind == "public"):
+        _registration_plan(
+            None, "formal", plan.get("binding", {}).get("formal_strict23_registration"))
     values = []
     checker = control.load("p17_m2_source_acquisition_independent")
     for prefix in ("certificate", "finalize_actual"):
@@ -130,16 +152,11 @@ def trusted_registration(plan):
             and re.fullmatch("[0-9a-f]{64}", expected),
             "registration literal proof path/hash required",
         )
-        raw = checker.native._software_bytes(Path(path))
+        raw = (certificate_buffer if prefix == "certificate" and certificate_buffer is not None
+               else checker.native._software_bytes(Path(path)))
+        need(type(raw) is bytes, "registration proof byte buffer required")
         need(hashlib.sha256(raw).hexdigest() == expected, "registration proof SHA differs")
         values.append(producer.parse(raw))
-    kind = "formal" if plan.get("scope") == control.FORMAL_SCOPE else "public"
-    pin = authority()["registration"][kind]
-    need(
-        reference["certificate_path"] == pin["certificate_paths"][0]
-        and reference["finalize_actual_path"] == pin["finalize_actual_path"],
-        "registration frozen proof paths differ",
-    )
     recovery = control.load("p17_m2_source_binding_recovery")
     paired, paths = recovery.certificate_pair(kind, 1, reference["certificate_sha256"])
     need(
@@ -221,14 +238,14 @@ def authority(raw=None):
     )
     need(
         value.get("profile") == ("NEW_REGISTERED_INPUT_WHOLE_4500"
-                                if IDENTITY.endswith("20261116.v1")
+                                if _whole_profile()
                                 else "NEW_REGISTERED_INPUT_COMPACT_RESULT_1800")
         and value.get("formal_seconds") == 4500
         and value.get("result_seconds") == {"exporter": 1800, "independent": 1800}
         and value.get("global_deadline_ms") == GLOBAL_DEADLINE_MS,
         "registered finite compact profile differs",
     )
-    if IDENTITY.endswith("20261116.v1"):
+    if _whole_profile():
         need(value.get("whole_attempt_seconds") == 4500
              and value.get("mandatory_result_suffix_seconds") == 7200
              and value.get("new_Original_registration_reads") == 0
@@ -263,15 +280,15 @@ def authority(raw=None):
     need(
         limits
         == {
-            "attempts": 2,
+            "attempts": len(GENERATIONS),
             "source_reads_each_author_each_attempt": 598,
-            "source_reads_all_input_attempts": 2392,
+            "source_reads_all_input_attempts": 1196 * len(GENERATIONS),
             "original_reads_including_closed_registration": 2484,
             "registered_foundation_helpers_all": 138,
             "source_counts": [40, 558],
             "version_members": 1071,
             "FULL_each_input_ceiling": 3780,
-            "FULL_all_input_attempts_ceiling": 7560,
+            "FULL_all_input_attempts_ceiling": 3780 * len(GENERATIONS),
             "formal_top_control_CLI_all": 52,
             "public_graphs_max": PUBLIC_GRAPHS_MAX,
             "public_top_control_CLI_all": 64,
@@ -295,12 +312,16 @@ def authority(raw=None):
     return value
 
 
-def _registration_plan(root, kind, reference):
+def _registration_plan(root, kind, reference, *, formal_reference=None):
     policy = authority()
     need(
         isinstance(reference, dict) and set(reference) == REGISTRATION_KEYS,
         "accepted new strict23 registration is not frozen",
     )
+    pin = policy["registration"][kind]
+    need(reference["certificate_path"] == pin["certificate_paths"][0]
+         and reference["finalize_actual_path"] == pin["finalize_actual_path"],
+         "registration frozen proof paths differ")
     envelope_raw = control.load("p17_m2_source_acquisition_independent").native._software_bytes(
         Path(reference["certificate_path"])
     )
@@ -317,22 +338,35 @@ def _registration_plan(root, kind, reference):
         "source_root": source,
         "binding": {"strict23_registration": reference},
     }
-    trusted_registration(partial)
+    if formal_reference is not None:
+        partial["binding"]["formal_strict23_registration"] = formal_reference
+    trusted_registration(partial, certificate_buffer=(envelope_raw if IDENTITY == control.load(
+        "p17_m2_input_continuation").NOV21_INPUT else None))
     return policy, reference, envelope
 
 
-def prepare_rehearsal(root, reference):
+def prepare_rehearsal(root, reference, *, formal_reference=None):
     """Reuse only the captured NEW public source inode, with fresh custody/lease."""
     import os
     import time
 
-    root = control.rehearsal_root(root)
+    new_profile = IDENTITY == control.load("p17_m2_input_continuation").NOV21_INPUT
+    if not new_profile:
+        root = control.rehearsal_root(root)
     policy = authority()
     need(str(root) in policy["public_roots"], "unregistered public input generation")
     need(not policy.get("conditional_public_remedy") or str(root) !=
          policy["conditional_public_remedy"]["root"],
          "registered public remedy requires separately diagnosed published readiness")
-    policy, reference, envelope = _registration_plan(root, "public", reference)
+    if new_profile:
+        need(isinstance(formal_reference, dict) and set(formal_reference) == REGISTRATION_KEYS,
+             "accepted formal metadata is required before NEW public preparation")
+    else:
+        need(formal_reference is None, "formal metadata proof is NEW public preparation only")
+    policy, reference, envelope = _registration_plan(
+        root, "public", reference, formal_reference=formal_reference)
+    if new_profile:
+        root = control.rehearsal_root(root)
     need(str(root) in policy["public_roots"], "unregistered public input generation")
     core_plan = envelope["core_bundle"]["plan"]
     checker = control.load("p17_m2_source_acquisition_independent")
@@ -342,14 +376,16 @@ def prepare_rehearsal(root, reference):
         ("public-source-identity.json", "public_source_identity_sha256"),
     ):
         path = (Path(policy["public_projection_captures"][name]["path"])
-                if IDENTITY.endswith("20261116.v1") else Path(core_plan["root"]) / name)
+                if _whole_profile() else Path(core_plan["root"]) / name)
         raw = checker.native._software_bytes(path)
         need(producer.sha(raw) == core_plan["entry"][key], "captured public projection SHA differs")
-        if IDENTITY.endswith("20261116.v1"):
+        if _whole_profile():
             need(producer.sha(raw) == policy["public_projection_captures"][name]["sha256"],
                  "NEW public projection capture pin differs")
         values.append(producer.parse(raw))
     plan = control.make_plan(root, *values, strict23_registration=reference)
+    if formal_reference is not None:
+        plan["binding"]["formal_strict23_registration"] = formal_reference
     plan["source_root"] = core_plan["context"]["source_root"]
     checker.validate_binding(plan)
     helper = control.base()
@@ -374,7 +410,7 @@ def prepare_rehearsal(root, reference):
 def formal_plan(raw, *, attempt=1, strict23_registration=None):
     """Pure plan construction; no original source or custody inspection."""
     policy = authority(raw)
-    need(type(attempt) is int and attempt in (1, 2), "registered attempt differs")
+    need(type(attempt) is int and 1 <= attempt <= len(GENERATIONS), "registered attempt differs")
     reference = strict23_registration
     need(
         isinstance(reference, dict) and set(reference) == REGISTRATION_KEYS,
@@ -524,6 +560,9 @@ def readiness_inputs(policy):
         "registered public certificate actual stdout/chronology differs",
     )
     need(last <= policy["global_deadline_ms"], "registered public actual exceeds global deadline")
+    if _whole_profile():
+        need(last <= public_plan["whole_end_ms"],
+             "NEW public certificate actual return exceeds original whole4500")
     paths = ready.get("preparation_closure_paths")
     need(
         paths == policy["preparation_closure_paths"],
@@ -558,6 +597,11 @@ def readiness_inputs(policy):
         and closure.get("own_future_return") == "NOT_CLAIMED",
         "registered actual preparation closure content differs",
     )
+    selected = control.load("p17_m2_input_continuation").CONFIGS.get(IDENTITY, {})
+    if selected.get("preparation_entry"):
+        need(closure.get("retention_argv") == [
+            runtime["python"], "-I", str(REPO / "scripts" / selected["preparation_entry"]),
+            "retain"], "NEW preparation retention literal argv differs")
     retention_pin = ready.get("preparation_retention_actual", {})
     need(
         retention_pin.get("path") == policy["preparation_retention_actual_path"],
@@ -606,7 +650,8 @@ def activation_readiness(value, plan):
 
     policy = authority(producer.canonical(value))
     need(
-        (plan["whole_end_ms"] + 7200000 if IDENTITY.endswith("20261116.v1")
+        (control.load("p17_m2_input_continuation").window(IDENTITY).check(
+            plan, time.time_ns() // 10**6) + 7200000 if _whole_profile()
          else time.time_ns() // 10**6 + (4500 + 1800) * 1000)
         <= min(policy["global_deadline_ms"],
                policy.get("independent_author_deadline_ms", policy["global_deadline_ms"])),

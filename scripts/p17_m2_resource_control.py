@@ -288,18 +288,29 @@ def invoke(
         "topolab.v2.p17-binding-certificate-recovery.20261104.v8",
         "topolab.v2.p17-binding-certificate-recovery.20261116.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1",
+        "topolab.v2.p17-binding-certificate-recovery.20261121.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1",
     )
     if measurement_execution_identity not in measurement_identities or (
         measurement_scope is None and measurement_execution_identity != measurement_identities[0]
     ):
         raise ValueError("strict23 measurement identity requires its registered scope")
-    if measurement_execution_identity == (
-        "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1"
+    if measurement_execution_identity in (
+        "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1",
     ):
+        dated = measurement_execution_identity.endswith("20261121.v1")
+        input_entry = "input_control_20261121.py" if dated else "input_control_full60_20261116.py"
         public = '/private/tmp/topolab-public-full60-source-acquisition-20261116-a1'
         formal = tuple(
             '/Users/keith1117/Library/Application Support/TopoLab-custody/'
             'p17-m2-local-input-version-20261116-full60-a' + str(i) for i in (1, 2))
+        if dated:
+            public = "/private/tmp/topolab-public-source-acquisition-20261121-a1"
+            formal = (
+                "/Users/keith1117/Library/Application Support/TopoLab-custody/"
+                "p17-m2-local-input-version-20261121-a1",
+            )
         if not (
             measurement_scope in (
                 "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY",
@@ -313,7 +324,7 @@ def invoke(
             and registered_source_child_cap == 0
             and isinstance(argv, list)
             and len(argv) == (12 if role in ("public-consumer", "reader-ack") else 10)
-            and argv[1:4] == ["-I", str(REPO / "scripts/input_control_full60_20261116.py"),
+            and argv[1:4] == ["-I", str(REPO / "scripts" / input_entry),
                              "payload"]
             and argv[4] == "--root" and argv[6] == "--plan-sha"
             and argv[5] in (public, *formal)
@@ -353,6 +364,9 @@ def invoke(
             "topolab.v2.p17-binding-certificate-recovery.20261116.v1": (
                 "binding_recovery_full60_20261116.py"
             ),
+            "topolab.v2.p17-binding-certificate-recovery.20261121.v1": (
+                "binding_recovery_20261121.py"
+            ),
         }.get(
             measurement_execution_identity,
             "p17_m2_source_binding_recovery.py" if recovery else "p17_m2_source_binding.py",
@@ -379,12 +393,17 @@ def invoke(
             and argv[8:] == ["--role", role]
         ):
             raise ValueError("strict23 measurement requires its registered literal payload argv")
-        if measurement_execution_identity == (
-            "topolab.v2.p17-binding-certificate-recovery.20261116.v1"
+        if measurement_execution_identity in (
+            "topolab.v2.p17-binding-certificate-recovery.20261116.v1",
+            "topolab.v2.p17-binding-certificate-recovery.20261121.v1",
         ):
             metadata_root = (
                 '/Users/keith1117/Documents/TopoLab-data/'
                 'container-full60-input-admission-20261116/')
+            if measurement_execution_identity.endswith("20261121.v1"):
+                metadata_root = (
+                    "/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121/"
+                )
             if not (argv[5] in tuple(metadata_root + name + '/plan.json' for name in (
                     'metadata-public-a1', 'metadata-formal-a1'))
                     and isinstance(argv[7], str) and re.fullmatch('[0-9a-f]{64}', argv[7])):

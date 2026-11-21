@@ -257,8 +257,9 @@ def _result_window(
     start = number(record["result_start_UTC_seconds"], positive=True)
     require(round(start * 1000) / 1000 == start, "result start clock resolution differs")
     end = start + min(result_seconds)
-    new_whole = record.get("execution_identity") == (
-        "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1")
+    new_whole = record.get("execution_identity") in (
+        "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1")
     if new_whole:
         first, whole_end = record.get("whole_start_ms"), record.get("whole_end_ms")
         require(type(first) is int and type(whole_end) is int

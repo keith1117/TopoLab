@@ -32,7 +32,13 @@ FULL60_RECOVERY_ROOTS = tuple(
     "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116/"
     + name for name in ("metadata-public-a1", "metadata-formal-a1")
 )
+NOV21_RECOVERY_ID = "topolab.v2.p17-binding-certificate-recovery.20261121.v1"
+NOV21_RECOVERY_ROOTS = tuple(
+    "/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121/"
+    + name for name in ("metadata-public-a1", "metadata-formal-a1")
+)
 FULL60_METADATA_MODE = False
+METADATA_BUFFER_CAP = None
 FULL60_METADATA_EVIDENCE = Path(
     "/Users/keith1117/Documents/TopoLab-data/container-full60-input-admission-20261116")
 PUBLIC_SCOPE = "PUBLIC_STRICT_BINDING_REGISTRATION_ONLY"
@@ -200,13 +206,16 @@ def role_argv(root, mode, expected_sha, role, python, *, execution_identity=None
         "topolab.v2.p17-binding-certificate-recovery.20261104.v7",
         "topolab.v2.p17-binding-certificate-recovery.20261104.v8",
         FULL60_RECOVERY_ID,
+        NOV21_RECOVERY_ID,
     )
     need(
         execution_identity in (None, IDENTITY, WINDOW2_ID, *recovery),
         "unregistered command execution identity",
     )
     script = (
-        "binding_recovery_full60_20261116.py"
+        "binding_recovery_20261121.py"
+        if execution_identity == NOV21_RECOVERY_ID
+        else "binding_recovery_full60_20261116.py"
         if execution_identity == FULL60_RECOVERY_ID
         else "p17_m2_source_binding_recovery_v8.py"
         if execution_identity == "topolab.v2.p17-binding-certificate-recovery.20261104.v8"
@@ -716,6 +725,16 @@ def prepare_formal(attempt, certificate_sha, preflight_sha, preflight_return_sha
 
 def read_metadata(path, maximum, *, expected=None, canonical_required=False):
     """Check and parse a single NEW metadata buffer, never scientific source bytes."""
+    raw = read_metadata_bytes(path, maximum, expected=expected)
+    value = load("p17_m2_input_export").parse(raw)
+    need(not canonical_required or canonical(value) == raw, "metadata canonical JSON differs")
+    return value, raw
+
+
+def read_metadata_bytes(path, maximum, *, expected=None):
+    """Use the same physical reader for bounded JSON and native text receipts."""
+    if METADATA_BUFFER_CAP is not None:
+        maximum = min(maximum, METADATA_BUFFER_CAP)
     path = Path(path)
     metadata_path_guard(path)
     producer = load("p17_m2_input_export")
@@ -724,9 +743,7 @@ def read_metadata(path, maximum, *, expected=None, canonical_required=False):
                              source_identity_policy=producer.PREBOUND_SHA256_POLICY
                              if expected is not None else None)
     raw = reader.read(path.name, maximum, expected=expected)
-    value = producer.parse(raw)
-    need(not canonical_required or canonical(value) == raw, "metadata canonical JSON differs")
-    return value, raw
+    return raw
 
 
 def metadata_path_guard(path):
@@ -760,6 +777,9 @@ def load_plan(path, expected_sha):
         and re.fullmatch(r"[0-9a-f]{64}", expected_sha),
         "literal pinned plan required",
     )
+    if str(path.parent) in NOV21_RECOVERY_ROOTS:
+        recovery = load("p17_m2_source_binding_recovery").for_identity(NOV21_RECOVERY_ID)
+        return recovery.load_plan(path, expected_sha)
     if str(path.parent) in FULL60_RECOVERY_ROOTS:
         recovery = load("p17_m2_source_binding_recovery").for_identity(FULL60_RECOVERY_ID)
         return recovery.load_plan(path, expected_sha)
