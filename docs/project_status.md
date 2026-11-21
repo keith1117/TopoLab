@@ -5,6 +5,17 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
+## November 21 public source reconstruction and throughput decision
+
+A fresh reconstruction matched the retained public registry byte for byte.
+R1 exported all 558 payloads, and an independent implementation verified
+1,071 members. The supervised software command returned in 22.412 s.
+All 598 source files are staged at a fixed local path. A second export there
+returned in 11.443 s and matched the independently verified version. The next
+step is a fresh strict 23-file registration at that path. The old public graph is closed at 3/6 and formal
+input remains unlaunched. This software slice spent zero named FULL. The
+cumulative known lower bound remains 337,539. [Evidence](validation/public_input_r1_throughput.md)
+
 ## November 21 formal metadata accepted, input blocked at exporter R1
 
 The repaired formal plan (13,502,329 bytes) and certificate (14,567,437 bytes)

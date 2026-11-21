@@ -1,5 +1,9 @@
 # Validation evidence index
 
+[Public exporter R1 throughput](public_input_r1_throughput.md) records 558 reads,
+1,071 independently checked members and a 22.412 s external software return on
+a rebuilt fixture. A new physical registration precedes named public input.
+
 [November 21 metadata and input acceptance](metadata_input_20261121.md) records the formal 23-binding PASS, three accepted public input roles and the exporter R1 timeout. The cumulative cost lower bound is 337,539 FULL.
 
 November 16 [real container/detached-helper/FULL60 acceptance](public_containment_full60_input.md):
