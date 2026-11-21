@@ -1,0 +1,248 @@
+{
+  "execution_identity": "topolab.v2.p17-binding-certificate-recovery.20261121.v1",
+  "jointly_owned": "DENY_NO_SELF_REVIEW",
+  "members": {
+    "docs/planning/binding_recovery_20261121_contract.json": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root"
+    },
+    "docs/planning/input_review_20261121.json": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root"
+    },
+    "docs/planning/metadata_input_20261121.md": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root"
+    },
+    "docs/planning/registered_input_20261121_contract.json": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root"
+    },
+    "scripts/await_input_receipt_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_standards"
+    },
+    "scripts/binding_recovery_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root",
+      "writer": "/root/full60_independent"
+    },
+    "scripts/build_input_caller_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_standards"
+    },
+    "scripts/file_input_event_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_standards"
+    },
+    "scripts/full60_input_actual_boundary.mjs": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_standards"
+    },
+    "scripts/full60_input_cohort.mjs": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_standards"
+    },
+    "scripts/input_control_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_spec"
+    },
+    "scripts/input_preparation_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root"
+    },
+    "scripts/metadata_input_window_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root"
+    },
+    "scripts/p17_m2_content_verified_control.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_spec"
+    },
+    "scripts/p17_m2_content_verified_independent.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_spec"
+    },
+    "scripts/p17_m2_input_continuation.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root"
+    },
+    "scripts/p17_m2_registered_input.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_spec"
+    },
+    "scripts/p17_m2_resource_control.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_standards"
+    },
+    "scripts/p17_m2_source_acquisition_control.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_spec"
+    },
+    "scripts/p17_m2_source_acquisition_independent.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_spec"
+    },
+    "scripts/p17_m2_source_binding.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root",
+      "writer": "/root/full60_independent"
+    },
+    "scripts/p17_m2_source_binding_native.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root",
+      "writer": "/root/full60_independent"
+    },
+    "scripts/p17_m2_source_binding_recovery.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root",
+      "writer": "/root/full60_independent"
+    },
+    "scripts/p17_m2_source_verified_input.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_spec"
+    },
+    "scripts/registered_input_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_spec"
+    },
+    "tests/test_binding_recovery_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root",
+      "writer": "/root/full60_independent"
+    },
+    "tests/test_input_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_spec"
+    },
+    "tests/test_input_caller_20261121.mjs": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_standards"
+    },
+    "tests/test_input_caller_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root/containment_standards"
+    },
+    "tests/test_input_preparation_20261121.py": {
+      "required_axes": [
+        "standards",
+        "spec"
+      ],
+      "reviewer": "/root/full60_independent",
+      "writer": "/root"
+    }
+  },
+  "schema": "topolab.NEW-full60-input-cross-review-partition.v1",
+  "source_tree_is_version_pin_not_review_scope": true
+}

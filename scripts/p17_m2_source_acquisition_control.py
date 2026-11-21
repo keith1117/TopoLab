@@ -46,7 +46,13 @@ REGISTERED_GENERATIONS = (
 )
 
 
+def _whole_profile():
+    return load("p17_m2_input_continuation").is_whole_input(CONTINUATION_INPUT)
+
+
 def registered_root(root):
+    if CONTINUATION_CONFIG.get("public_root") is not None:
+        return str(root) in (*REGISTERED_GENERATIONS, CONTINUATION_CONFIG["public_root"])
     return (str(root) in REGISTERED_GENERATIONS
             or Path(root).name.startswith(REGISTERED_PUBLIC_PREFIX))
 
@@ -203,26 +209,37 @@ def source_freeze(execution_identity=None):
                     'docs/planning/p17_m2_source_binding_certificate_recovery_v4_protocol.json')
         )
         paths.update(REPO.joinpath("scripts").glob("p17_m2_*.mjs"))
-        if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
+        if _whole_profile():
             paths.update(REPO / ("scripts/" + name) for name in (
-                "full60_input_loader.py", "full60_input_window.py", "full60_public_capability.py",
+                "full60_input_loader.py",
+                CONTINUATION_CONFIG.get("window_module", "full60_input_window") + ".py",
+                CONTINUATION_CONFIG.get(
+                    "public_capability_module", "full60_public_capability") + ".py",
                 CONTINUATION_CONFIG["control_entry"], CONTINUATION_CONFIG["input_entry"],
                 CONTINUATION_CONFIG["recovery_entry"], CONTINUATION_CONFIG["caller_waiter"],
                 CONTINUATION_CONFIG["caller_filer"], CONTINUATION_CONFIG["caller_cohort"],
                 CONTINUATION_CONFIG["caller_boundary"], "public_containment_entry.py",
                 "public_containment_driver.py", "public_containment_audit.py",
                 "public_deadline_guardian.py", "public_worker_deadline.py"))
+            if CONTINUATION_CONFIG.get("preparation_entry"):
+                paths.add(REPO / "scripts" / CONTINUATION_CONFIG["preparation_entry"])
+            if CONTINUATION_CONFIG.get("review_partition"):
+                paths.add(REPO / CONTINUATION_CONFIG["review_partition"])
+            if CONTINUATION_INPUT == load("p17_m2_input_continuation").NOV21_INPUT:
+                paths.add(REPO / "scripts" / CONTINUATION_CONFIG["caller_generator"])
     if execution_identity == NEW_IDENTITY:
         paths.add(REPO / NEW_PROTOCOL)
         paths.update(REPO.joinpath("scripts").glob("p17_m2_*.mjs"))
     frozen = {str(p.relative_to(REPO)): base().sha(p.read_bytes()) for p in sorted(paths)}
-    if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
+    if _whole_profile():
         load("full60_input_loader").verify_loaded(REPO, frozen)
     return frozen
 
 
 def rehearsal_root(root):
     root = Path(os.path.abspath(root))
+    if CONTINUATION_CONFIG.get("public_root") is not None:
+        need(str(root) == CONTINUATION_CONFIG["public_root"], "NEW_PUBLIC_LITERAL_ROOT_REQUIRED")
     need(
         root.name.startswith(
             (
@@ -243,7 +260,7 @@ def argv_for(root, mode, plan_sha, role, *, reader_role="scientific-producer"):
         str(Path(sys.orig_argv[0]).resolve()),
         "-I",
         str(Path(__file__).with_name(CONTINUATION_CONFIG["control_entry"]).resolve())
-        if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT
+        if _whole_profile()
         else str(Path(__file__).resolve()),
         mode,
         "--root",
@@ -263,8 +280,8 @@ def make_plan(root, contract, source_identity, *, strict23_registration=None):
     helper = base()
     now = round(time.time(), 3)
     whole = None
-    if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
-        window = load("full60_input_window")
+    if _whole_profile():
+        window = load("p17_m2_input_continuation").window(CONTINUATION_INPUT)
         whole = {"whole_start_ms": WHOLE_REQUESTED_MS,
                  "whole_end_ms": WHOLE_REQUESTED_MS + 4500000
                  if type(WHOLE_REQUESTED_MS) is int else None}
@@ -515,11 +532,12 @@ def copy_public_source(root, source, *, began):
 
 
 def prepare_rehearsal(root, *, public_source_plan=None, public_source_plan_sha=None,
-                      strict23_registration=None):
+                      strict23_registration=None, formal_strict23_registration=None):
     if Path(root).name.startswith(REGISTERED_PUBLIC_PREFIX):
         need(public_source_plan is None and public_source_plan_sha is None,
              "REGISTERED_PUBLIC_SOURCE_FROM_ACCEPTED_CERTIFICATE_ONLY")
-        return load("p17_m2_registered_input").prepare_rehearsal(root, strict23_registration)
+        return load("p17_m2_registered_input").prepare_rehearsal(
+            root, strict23_registration, formal_reference=formal_strict23_registration)
     root = rehearsal_root(root)
     context = None
     if public_source_plan is not None or public_source_plan_sha is not None:
@@ -1196,7 +1214,7 @@ def checked(root, expected):
         if str(literal) in REGISTERED_GENERATIONS:
             saved = helper.read_json(literal / "plan.json")
             need(helper.sha(helper.canonical(saved)) == expected, "PLAN_SHA_CHANGED")
-            if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
+            if _whole_profile():
                 WHOLE_REQUESTED_MS = saved["whole_start_ms"]
             registration = saved.get("binding", {}).get("strict23_registration")
             registered = load("p17_m2_registered_input")
@@ -1216,8 +1234,9 @@ def checked(root, expected):
         root, scope = literal, FORMAL_SCOPE
     plan = helper.read_json(root / "plan.json")
     need(helper.sha(helper.canonical(plan)) == expected, "PLAN_SHA_CHANGED")
-    if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
-        load("full60_input_window").check(plan, time.time_ns() // 10**6)
+    if _whole_profile():
+        load("p17_m2_input_continuation").window(CONTINUATION_INPUT).check(
+            plan, time.time_ns() // 10**6)
     need(
         plan["root"] == str(root)
         and plan["scope"] == scope
@@ -1423,7 +1442,7 @@ class AcquisitionTransport:
         return self.independent().sampler_profiles(folder, record)
 
     def native_module(self, root=None):
-        if CONTINUATION_INPUT == load("p17_m2_input_continuation").FULL60_INPUT:
+        if _whole_profile():
             base().load("p17_m2_homotopy")
             relative = "scripts/p17_m2_resource_control.py"
             path = REPO / relative
@@ -1936,19 +1955,26 @@ def main():
     parser.add_argument("--public-source-plan-sha")
     parser.add_argument("--registration-certificate-sha")
     parser.add_argument("--registration-finalize-actual-sha")
+    parser.add_argument("--formal-registration-certificate-sha")
+    parser.add_argument("--formal-registration-finalize-actual-sha")
     parser.add_argument("--whole-start-ms", type=int)
     args = parser.parse_args()
     continuation = load('p17_m2_input_continuation')
+    if CONTINUATION_INPUT == continuation.NOV21_INPUT:
+        need(args.root in (*REGISTERED_GENERATIONS, CONTINUATION_CONFIG['public_root']),
+             "NEW_INPUT_LITERAL_ROOT_REQUIRED")
     selected = continuation.config_for_root(args.root)
     if selected is not None and REGISTERED_IDENTITY != selected['input']:
         return for_registered_identity(selected['input']).main()
-    whole_profile = CONTINUATION_INPUT == continuation.FULL60_INPUT
+    whole_profile = _whole_profile()
     if whole_profile and args.mode in ("prepare-rehearsal", "activate-formal"):
-        load("full60_input_window").declare(args.whole_start_ms, time.time_ns() // 10**6)
+        load("p17_m2_input_continuation").window(CONTINUATION_INPUT).declare(
+            args.whole_start_ms, time.time_ns() // 10**6)
         WHOLE_REQUESTED_MS = args.whole_start_ms
     else:
         need(args.whole_start_ms is None, "NEW whole start is only supplied at initial entry")
     registration = None
+    formal_registration = None
     suffix = []
     registered = registered_root(Path(args.root))
     if registered and args.mode in ("prepare-rehearsal", "activate-formal"):
@@ -1957,12 +1983,24 @@ def main():
             args.registration_certificate_sha, args.registration_finalize_actual_sha)
         suffix = ["--registration-certificate-sha", args.registration_certificate_sha,
                   "--registration-finalize-actual-sha", args.registration_finalize_actual_sha]
+        if CONTINUATION_INPUT == continuation.NOV21_INPUT and args.mode == "prepare-rehearsal":
+            formal_registration = load("p17_m2_registered_input").registration_reference(
+                "formal", args.formal_registration_certificate_sha,
+                args.formal_registration_finalize_actual_sha)
+            suffix += ["--formal-registration-certificate-sha",
+                       args.formal_registration_certificate_sha,
+                       "--formal-registration-finalize-actual-sha",
+                       args.formal_registration_finalize_actual_sha]
         if whole_profile:
             suffix += ["--whole-start-ms", str(args.whole_start_ms)]
     else:
         need(args.registration_certificate_sha is None
              and args.registration_finalize_actual_sha is None,
              "REGISTERED_PREPARE_ACTIVATION_ARGUMENTS_ONLY")
+    if formal_registration is None:
+        need(args.formal_registration_certificate_sha is None
+             and args.formal_registration_finalize_actual_sha is None,
+             "FORMAL_METADATA_PROOFS_NEW_PUBLIC_PREPARE_ONLY")
     need(
         args.mode == "prepare-rehearsal"
         or (args.public_source_plan is None and args.public_source_plan_sha is None),
@@ -1991,11 +2029,18 @@ def main():
         result = activate_formal(args.root, strict23_registration=registration)
     elif args.mode == "prepare-rehearsal":
         need(args.plan_sha is None and args.role is None, "SETUP_ROLE_FORBIDDEN")
+        if CONTINUATION_INPUT == continuation.NOV21_INPUT:
+            need(sys.flags.isolated == 1 and sys.orig_argv == [
+                str(Path(sys.orig_argv[0]).resolve()), "-I",
+                str(Path(__file__).with_name(CONTINUATION_CONFIG["control_entry"]).resolve()),
+                "prepare-rehearsal", "--root", args.root,
+            ] + suffix, "ACTUAL_ARGV_CHANGED")
         result = prepare_rehearsal(
             args.root,
             public_source_plan=args.public_source_plan,
             public_source_plan_sha=args.public_source_plan_sha,
             strict23_registration=registration,
+            formal_strict23_registration=formal_registration,
         )
     else:
         root, plan = checked(args.root, args.plan_sha)

@@ -23,6 +23,7 @@ RECOVERY_V6_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v6"
 RECOVERY_V7_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v7"
 RECOVERY_V8_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261104.v8"
 FULL60_RECOVERY_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261116.v1"
+NOV21_RECOVERY_IDENTITY = "topolab.v2.p17-binding-certificate-recovery.20261121.v1"
 RECOVERY_IDENTITIES = (
     RECOVERY_IDENTITY,
     RECOVERY_V3_IDENTITY,
@@ -32,6 +33,7 @@ RECOVERY_IDENTITIES = (
     RECOVERY_V7_IDENTITY,
     RECOVERY_V8_IDENTITY,
     FULL60_RECOVERY_IDENTITY,
+    NOV21_RECOVERY_IDENTITY,
 )
 RECOVERY_SCOPE = "STRICT_BINDING_CERTIFICATE_RECOVERY_METADATA_ONLY"
 REPO = Path(__file__).resolve().parents[1]
@@ -110,7 +112,7 @@ def role_profile(plan):
             (RECOVERY_SCOPE,),
             (
                 {"binding-certificate-auditor": "/root/full60_independent"}
-                if identity == FULL60_RECOVERY_IDENTITY
+                if identity in (FULL60_RECOVERY_IDENTITY, NOV21_RECOVERY_IDENTITY)
                 else {"binding-certificate-auditor": "/root/ci_clock_reader_v1"}
                 if identity == RECOVERY_V8_IDENTITY
                 else {"binding-certificate-auditor": "/root/permission_remedy_reader_v1"}
@@ -130,7 +132,9 @@ def argv_for(plan, mode, role):
         "unregistered native command",
     )
     script = (
-        "binding_recovery_full60_20261116.py"
+        "binding_recovery_20261121.py"
+        if plan["context"]["execution_identity"] == NOV21_RECOVERY_IDENTITY
+        else "binding_recovery_full60_20261116.py"
         if plan["context"]["execution_identity"] == FULL60_RECOVERY_IDENTITY
         else "p17_m2_source_binding_recovery_v8.py"
         if plan["context"]["execution_identity"] == RECOVERY_V8_IDENTITY
@@ -200,6 +204,9 @@ class Transport:
 
     def put(self, path, value):
         need(path.is_relative_to(self.root), "metadata write outside registered attempt")
+        if self.identity == NOV21_RECOVERY_IDENTITY:
+            need(len(canonical(value)) <= 16 * 1024**2,
+                 "NEW native metadata byte cap exceeded before target IO")
         self.namespace_check(self.root, additional_bytes=len(canonical(value)), additional_files=1)
         return load("p17_m2_content_verified_control").put(path, value)
 
@@ -223,8 +230,52 @@ class Transport:
         return module
 
     def resource_evidence(self, root, plan_sha, role, **kwargs):
+        if self.identity == NOV21_RECOVERY_IDENTITY:
+            return self.bounded_metadata_evidence(root, plan_sha, role, **kwargs)
         return load("p17_m2_content_verified_control").resource_evidence(
             root, plan_sha, role, adapter=self, **kwargs)
+
+    def bounded_metadata_evidence(self, root, plan_sha, role, *, tolerate_missing=False):
+        """Bound native text buffers before IO; retain missing-resource failures."""
+        core = load('p17_m2_source_binding_recovery').for_identity(self.identity).load(
+            'p17_m2_source_binding')
+        need(Path(root) == self.root and plan_sha == sha(canonical(self.plan))
+             and role in self.role_caps, 'NEW native resource request differs')
+        folder = self.root / 'receipts' / role / role
+        failures = []
+
+        def take(path, *, parsed=False):
+            try:
+                raw = core.read_metadata_bytes(path, 16 * 1024**2)
+                return json.loads(raw) if parsed else raw
+            except Exception as error:
+                if not tolerate_missing:
+                    raise
+                failures.append({'stage': 'bounded native metadata',
+                                 'type': type(error).__name__, 'reason': str(error)})
+                return None
+
+        record = take(folder / 'command.json', parsed=True)
+        inner = None
+        if record is not None:
+            inner = {'record': record, 'profile': take(folder / 'command.time'),
+                     'log': take(folder / 'command.log'), 'helper_profiles': {},
+                     'expected_role': role,
+                     'expected_argv': self.argv_for(root, 'payload', plan_sha, role),
+                     'platform': sys.platform}
+            for helper in record['helpers']:
+                name = helper['profile']
+                need(isinstance(name, str) and Path(name).name == name
+                     and name not in ('.', '..'), 'NEW native helper profile basename differs')
+                raw = take(folder / name)
+                if raw is not None:
+                    inner['helper_profiles'][name] = raw
+        outer = take(self.root / 'receipts' / (role + '-controller.time'))
+        result = {'inner_evidence': inner,
+                  'native_profiles': {'outer-controller': outer} if outer is not None else {}}
+        if tolerate_missing:
+            result['resource_read_failures'] = failures
+        return result
 
 
 class MetadataTransport(Transport):
@@ -250,6 +301,7 @@ def transport_for(plan):
             RECOVERY_V7_IDENTITY,
             RECOVERY_V8_IDENTITY,
             FULL60_RECOVERY_IDENTITY,
+            NOV21_RECOVERY_IDENTITY,
         ):
             recovery = recovery.for_identity(plan["context"]["execution_identity"])
         return recovery.Transport(plan)
