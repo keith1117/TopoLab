@@ -1,6 +1,8 @@
 # Validation evidence index
 
-Current [real container/detached-helper/FULL60 acceptance](public_containment_full60_input.md):
+[November 21 metadata and input acceptance](metadata_input_20261121.md) records the formal 23-binding PASS, three accepted public input roles and the exporter R1 timeout. The cumulative cost lower bound is 337,539 FULL.
+
+November 16 [real container/detached-helper/FULL60 acceptance](public_containment_full60_input.md):
 producer14.487s and independent6.752s original0, two real cases, FULL120.
 [Input/metadata outcome and byte-bound repair](full60_input_admission.md): public
 metadata accepted; formal metadata1 STOP on22,943,707>16,777,216 bytes, FULL120

@@ -1,5 +1,15 @@
 # Development history
 
+## 2026-11-21 — Formal metadata accepted, public input stopped
+
+Protected-main PR 241 passed the repaired 23-binding metadata gate under 16 MiB.
+Public input accepted the independent public check and both R0 roles. Exporter
+R1 reached the native timeout after 278 of 558 verified public payload reads.
+The external return missed the acceptance deadline. Formal input was unlaunched.
+Booked charges were 2,640 FULL. The measured lower bound is 2,649 this round
+and 337,539 cumulatively. Both caller failures, the old fees and the seals
+are retained. [Evidence](validation/metadata_input_20261121.md)
+
 ## 2026-11-16 — Real containment acceptance and stopped formal metadata
 
 [Integration evidence](validation/public_containment_full60_input.md) records

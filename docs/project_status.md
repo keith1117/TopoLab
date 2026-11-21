@@ -1,11 +1,21 @@
 # Current project status
 
-Updated:2026-11-16. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-11-21. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
-## Current: real containment/FULL60 accepted; formal metadata stopped
+## November 21 formal metadata accepted, input blocked at exporter R1
+
+The repaired formal plan (13,502,329 bytes) and certificate (14,567,437 bytes)
+passed all 23 bindings under the original 16 MiB limit. Public input accepted
+three of six roles. Exporter R1 timed out with 278 of 558 public payload receipts.
+Formal input and scientific B/C have zero launches. New charges total 2,640
+FULL including the shared reservation. The cumulative known lower bound is
+337,539 FULL when the measured R1 overrun is included. The next decision concerns
+exporter R1 throughput and its actual return deadline. This attempt is closed. [Result](validation/metadata_input_20261121.md)
+
+## November 16 containment and retained metadata failure
 
 The [finite integration](planning/public_containment_full60_input_protocol.md)
 actually passed both owned Docker cases and detached helper termination.
