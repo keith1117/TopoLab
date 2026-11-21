@@ -13,7 +13,10 @@ import re
 import stat
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[1]
+# CI may read reviewed source from a different checkout. Generated commands still
+# target only the contract's exact production runtime; a checkout grants no target access.
+SOURCE_CHECKOUT = Path(__file__).resolve().parents[1]
+RUNTIME_REPO = Path("/private/tmp/topolab-meta-input-20261121")
 EVIDENCE = Path("/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121")
 IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1"
 BUDGET_SHA = "9200b495ea726459094868265e6cf61b3364e10515a91e815db2baa95dbc0d47"
@@ -118,7 +121,7 @@ def build(config, sources, source_pins):
     )
     need(
         config.get("execution_identity") == IDENTITY
-        and config.get("repo") == str(REPO)
+        and config.get("repo") == str(RUNTIME_REPO)
         and config.get("evidence_root") == str(EVIDENCE)
         and config.get("owner_budget_sha256") == BUDGET_SHA,
         "NEW exact identity/runtime/budget configuration required",
@@ -209,7 +212,7 @@ def main():
         "complete freeze arguments required",
     )
     config = json.loads(read_once(args.config, args.config_sha256, 262144))
-    sources = {name: (REPO / "scripts" / name).read_bytes() for name in SOURCE_FILES}
+    sources = {name: (SOURCE_CHECKOUT / "scripts" / name).read_bytes() for name in SOURCE_FILES}
     value = build(
         config,
         sources,

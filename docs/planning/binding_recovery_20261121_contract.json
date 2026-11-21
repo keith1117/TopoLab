@@ -200,8 +200,8 @@
     "standards": "/root"
   },
   "review_paths": {
-    "spec": "/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121/input-cross-review-independent-v1.json",
-    "standards": "/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121/input-cross-review-root-v1.json"
+    "spec": "/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121/input-cross-review-independent-v2.json",
+    "standards": "/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121/input-cross-review-root-v2.json"
   },
   "review_schema": {
     "every_changed_file_other_than_writer_required": true,

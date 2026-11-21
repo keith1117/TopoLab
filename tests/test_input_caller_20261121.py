@@ -127,8 +127,24 @@ console.log(JSON.stringify({denied,calls:calls.length,original_start:true}));
     assert json.loads(result.stdout) == {"denied": True, "calls": 2, "original_start": True}
 
 
-def test_frozen_program_binds_sources_and_preserves_tool_approval_fields():
-    subject = load("build_input_caller_20261121")
+def caller_builder_from_other_checkout(tmp_path):
+    checkout = tmp_path / "reviewed-source-checkout"
+    path = checkout / "scripts/build_input_caller_20261121.py"
+    path.parent.mkdir(parents=True)
+    path.write_bytes((REPO / "scripts/build_input_caller_20261121.py").read_bytes())
+    spec = importlib.util.spec_from_file_location("caller_builder_other_checkout", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert module.SOURCE_CHECKOUT == checkout
+    assert module.RUNTIME_REPO == Path("/private/tmp/topolab-meta-input-20261121")
+    assert module.SOURCE_CHECKOUT != module.RUNTIME_REPO
+    return module
+
+
+def test_frozen_program_binds_sources_and_preserves_tool_approval_fields(
+    tmp_path, monkeypatch, capsys
+):
+    subject = caller_builder_from_other_checkout(tmp_path)
     sources = {name: (REPO / "scripts" / name).read_bytes() for name in subject.SOURCE_FILES}
     pins = {name: subject.sha(raw) for name, raw in sources.items()}
     gate = {
@@ -142,11 +158,14 @@ def test_frozen_program_binds_sources_and_preserves_tool_approval_fields():
         "event_prefix": "declared-software-only",
         "metadata_gate": gate,
         "execution_identity": NEW_INPUT,
-        "repo": str(REPO),
+        "repo": str(subject.RUNTIME_REPO),
         "evidence_root": str(subject.EVIDENCE),
         "owner_budget_sha256": subject.BUDGET_SHA,
     }
     packet = subject.build(config, sources, pins)
+    assert packet["config"]["repo"] == str(subject.RUNTIME_REPO)
+    with pytest.raises(ValueError, match="exact identity/runtime/budget"):
+        subject.build(dict(config, repo=str(subject.SOURCE_CHECKOUT)), sources, pins)
     assert packet["program_sha256"] == subject.sha(packet["program"].encode())
     assert "await tools[tool](args)" in packet["program"]
     assert "sandbox_permissions" in packet["program"]
@@ -154,6 +173,39 @@ def test_frozen_program_binds_sources_and_preserves_tool_approval_fields():
     changed[subject.SOURCE_FILES[0]] += b"\n"
     with pytest.raises(ValueError, match="source buffers"):
         subject.build(config, changed, pins)
+
+    # Exercise the CLI source reads too: these declared fixture buffers differ
+    # from the production checkout, so reading RUNTIME_REPO would fail their pins.
+    cli_pins = {}
+    for name, raw in sources.items():
+        raw += b"\n// Declared software-only source-checkout fixture.\n"
+        (subject.SOURCE_CHECKOUT / "scripts" / name).write_bytes(raw)
+        cli_pins[name] = subject.sha(raw)
+    published = []
+    monkeypatch.setattr(subject, "read_once", lambda *_: subject.canonical(config))
+    monkeypatch.setattr(subject, "publish", lambda path, raw: published.append(raw) or Path(path))
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        [
+            "build_input_caller_20261121.py",
+            "--config",
+            str(tmp_path / "mock-config.json"),
+            "--config-sha256",
+            "a" * 64,
+            "--output",
+            str(tmp_path / "mock-artifact.json"),
+            "--boundary-sha256",
+            cli_pins[subject.SOURCE_FILES[0]],
+            "--cohort-sha256",
+            cli_pins[subject.SOURCE_FILES[1]],
+        ],
+    )
+    subject.main()
+    cli_packet = json.loads(published[0])
+    assert cli_packet["source_sha256"] == cli_pins
+    assert cli_packet["config"]["repo"] == str(subject.RUNTIME_REPO)
+    assert json.loads(capsys.readouterr().out)["execution_authority"] is False
 
 
 def test_two_author_scheduling_effects_and_failure_state_machine():
@@ -277,8 +329,8 @@ def test_new_caller_stop_retains_first_full_failure_and_signals_peer(tmp_path):
         api["persist"](failure, tmp_path / "root-failure.json")
 
 
-def test_generated_program_executes_real_dispatch_api_shape_with_injected_tools():
-    subject = load("build_input_caller_20261121")
+def test_generated_program_executes_real_dispatch_api_shape_with_injected_tools(tmp_path):
+    subject = caller_builder_from_other_checkout(tmp_path)
     sources = {name: (REPO / "scripts" / name).read_bytes() for name in subject.SOURCE_FILES}
     config = {
         "author": "independent",
@@ -286,7 +338,7 @@ def test_generated_program_executes_real_dispatch_api_shape_with_injected_tools(
         "root": "/private/tmp/topolab-public-source-acquisition-20261121-a1",
         "event_prefix": "declared-generated-dispatch",
         "execution_identity": NEW_INPUT,
-        "repo": str(REPO),
+        "repo": str(subject.RUNTIME_REPO),
         "evidence_root": str(subject.EVIDENCE),
         "owner_budget_sha256": subject.BUDGET_SHA,
         "metadata_gate": {
@@ -322,6 +374,8 @@ const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
 const run=new AsyncFunction('tools','store','text',packet.program);
 run(tools,(key,value)=>{stored=value;},value=>{printed=value;}).then(()=>{
  assert.equal(stored.result.status,'STOP_RETAINED_NO_RETRY');
+ assert.equal(packet.config.repo,'/private/tmp/topolab-meta-input-20261121');
+ assert.ok(calls.every(args=>args.workdir===packet.config.repo));
  const native=calls.filter(x=>/\.py (supervise|record) /.test(x.cmd.split(' --packet-json ')[0]));
  assert.equal(native.length,2);assert.ok(native.every(x=>x.sandbox_permissions==='require_escalated'&&x.prefix_rule===undefined));
  assert.equal(stored.packets['independent-public-check-supervise'].packet.responses[0].result.exit_code,1);
@@ -352,6 +406,7 @@ def test_sup_pending_must_match_new_source_established_role_plan_and_clocks():
     )
     root = "/private/tmp/declared-software-pending-only"
     role, pin = "independent-r1", "a" * 64
+
     def argv(root, mode, plan_sha, role):
         return [str(root), mode, plan_sha, role]
 
