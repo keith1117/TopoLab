@@ -1,5 +1,7 @@
 # Planning index
 
+[Exporter R0 read recovery and formal input contract](r0_read_input_recovery.md)
+
 [Formal-only input grant and published-byte binding](formal_input_published_authority.md) closed after
 formal activation passed and exporter R0 stopped on metadata read 34.
 [Result](../validation/formal_input_published_authority.md)

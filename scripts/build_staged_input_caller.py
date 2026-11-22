@@ -97,13 +97,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for field in ("config", "config-sha256", "actor-sha256", "output", "emit", "artifact-sha256"):
         parser.add_argument("--" + field)
-    parser.add_argument("--formal-only", action="store_true")
+    routes = parser.add_mutually_exclusive_group()
+    routes.add_argument("--formal-only", action="store_true")
+    routes.add_argument("--r0-read", action="store_true")
     args = parser.parse_args()
     selected = wire
-    if args.formal_only:
+    if args.formal_only or args.r0_read:
         import runpy
 
-        route = runpy.run_path(str(SOURCE_CHECKOUT / "scripts/formal_input_route.py"))
+        name = "r0_input_route.py" if args.r0_read else "formal_input_route.py"
+        route = runpy.run_path(str(SOURCE_CHECKOUT / "scripts" / name))
         selected = route["filer"]()
     if args.emit:
         selected.need(

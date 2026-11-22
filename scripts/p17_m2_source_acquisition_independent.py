@@ -33,6 +33,7 @@ REGISTERED_PROTOCOL = "docs/planning/p17_m2_registered_input_v2_protocol.json"
 REGISTERED_SCHEMA = "topolab.v2.m2-registered-source-acquisition-authority.v2"
 REGISTERED_PREFIX = "topolab-public-registered-source-acquisition-"
 FORMAL_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1"
+R0_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1"
 NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
 NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
 NEW_PUBLIC_PREFIX = "topolab-public-new-source-acquisition-"
@@ -197,14 +198,15 @@ def _metadata_first_profile():
 
 
 def _formal_only_profile():
-    return REGISTERED_IDENTITY == FORMAL_INPUT
+    return REGISTERED_IDENTITY in (FORMAL_INPUT, R0_INPUT)
 
 
-def _prior_public_module():
+def _prior_public_module(name='formal_input_independent'):
     """Share only this source-pinned module/cache with the producer in one process."""
     import sys
 
-    name = 'formal_input_independent'
+    require(name in ('formal_input_independent', 'r0_read_independent'),
+            'exact independent metadata module required')
     path = Path(__file__).with_name(name + '.py')
     raw = native._software_bytes(path)
     current = sys.modules.get(name)
@@ -306,7 +308,9 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
                 and value.get('mandatory_result_suffix_seconds') == 7200
                 and value.get('new_input_budget') == CONTINUATION_CONFIG['budget']
                 and value.get('public_roots') == []
-                and value.get('prior_public') == _prior_public_module().expected_prior(),
+                and value.get('prior_public') == _prior_public_module().expected_prior(
+                    _prior_public_module().R0_EVIDENCE
+                    if REGISTERED_IDENTITY == R0_INPUT else _prior_public_module().EVIDENCE),
                 'NEW formal-only budget/root/prior limits differ')
     return value
 
@@ -1402,6 +1406,12 @@ def _formal_registered_preflight(plan, raw):
             'NEW formal historical public references differ')
     history = _prior_public_module().verify_prior_public(
         prior, _formal_pair(prior['bundle']), _formal_pair(prior['actual']))
+    read_proof = None
+    if REGISTERED_IDENTITY == R0_INPUT:
+        read_proof = _prior_public_module('r0_read_independent').verified_readiness(
+            authority, plan['source_tree'])
+        require(ready.get('r0_read_verification') == read_proof,
+                'R0 readiness independent single-file proof differs')
     paths = ready.get('preparation_closure_paths')
     require(paths == authority['preparation_closure_paths'] and len(paths) == 2,
             'NEW formal preparation pair paths differ')
@@ -1421,6 +1431,9 @@ def _formal_registered_preflight(plan, raw):
             and closure.get('own_future_return') == 'NOT_CLAIMED'
             and closure.get('retention_argv') == argv,
             'NEW formal preparation closure content differs')
+    if read_proof is not None:
+        require(closure.get('r0_read_verification') == read_proof,
+                'R0 closure independent single-file proof differs')
     retention_pin = ready.get('preparation_retention_actual', {})
     require(retention_pin.get('path') == authority['preparation_retention_actual_path'],
             'NEW formal retention actual literal differs')
@@ -1435,6 +1448,9 @@ def _formal_registered_preflight(plan, raw):
             and history['public_end_ms'] <= retained_first <= retained_end
             and authority['independent_author_start_ms'] <= retained_first,
             'NEW formal preparation original return/stdout differs')
+    if read_proof is not None:
+        require(read_proof['verified_returned_ms'] <= retained_first,
+                'R0 verification return must precede actual preparation')
     require(_formal_pair(actual_pin) == raw, 'NEW formal actual buffer pair differs')
     packet = native.base.parse(raw)
     argv = [plan['runtime']['python'], '-I', str(REPO / 'scripts'
@@ -1448,6 +1464,8 @@ def _formal_registered_preflight(plan, raw):
                     runtime=ready['runtime'], actors=authority['actors'],
                     new_input_budget=authority['new_input_budget'], source_stat_reads=0,
                     target_stat_reads=0, own_future_return='NOT_CLAIMED')
+    if read_proof is not None:
+        expected['r0_read_verification'] = read_proof
     require(''.join(row['result']['output'] for row in packet['responses']).encode()
             == canonical(expected) and retained_end <= started <= ended
             <= authority['global_deadline_ms'],

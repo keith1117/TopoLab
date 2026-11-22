@@ -71,19 +71,20 @@ def _whole_profile():
 
 def _metadata_first_profile():
     profiles = control.load("p17_m2_input_continuation")
-    return IDENTITY in (profiles.NOV21_INPUT, profiles.STAGED_INPUT, profiles.FORMAL_INPUT)
+    return IDENTITY in (profiles.NOV21_INPUT, profiles.STAGED_INPUT,
+                        *profiles.FORMAL_ONLY_IDENTITIES)
 
 
 def public_stop_veto(*, formal_activation=False):
     """Any retained staged public STOP closes later preparation and admission."""
     profiles = control.load("p17_m2_input_continuation")
-    if IDENTITY not in (profiles.STAGED_INPUT, profiles.FORMAL_INPUT):
+    if IDENTITY not in (profiles.STAGED_INPUT, *profiles.FORMAL_ONLY_IDENTITIES):
         return
     import os
 
     evidence = Path(control.CONTINUATION_CONFIG["evidence_root"])
     locations = [(evidence, "input-public-caller-STOP.json")]
-    if IDENTITY == profiles.FORMAL_INPUT:
+    if IDENTITY in profiles.FORMAL_ONLY_IDENTITIES:
         locations = [(Path(profiles.STAGED_EVIDENCE), "input-public-caller-STOP.json"),
                      (evidence, "input-formal-caller-STOP.json")]
     elif formal_activation:
@@ -326,7 +327,7 @@ def authority(raw=None):
         value.get("new_input_budget") == NEW_BUDGET_REFERENCE,
         "registered new input budget pin differs",
     )
-    if IDENTITY == control.load("p17_m2_input_continuation").FORMAL_INPUT:
+    if IDENTITY in control.load("p17_m2_input_continuation").FORMAL_ONLY_IDENTITIES:
         need(value.get("public_roots") == []
              and set(value.get("registration", {})) == {"formal"}
              and value.get("ancillary_named_FULL") == {
@@ -492,7 +493,7 @@ def formal_plan(raw, *, attempt=1, strict23_registration=None):
     del plan["public_source_identity"]
     proposal = producer.parse((REPO / control.PROPOSAL).read_bytes())
     digest = producer.sha(raw)
-    if IDENTITY == control.load("p17_m2_input_continuation").FORMAL_INPUT:
+    if IDENTITY in control.load("p17_m2_input_continuation").FORMAL_ONLY_IDENTITIES:
         need(digest == plan["preparation_contract_sha256"],
              "formal plan requires the exact published authority buffer")
     plan.update(
@@ -660,7 +661,7 @@ def readiness_inputs(policy):
     _read_pin(policy["new_input_budget"])
     public_pin = ready.get("public_native_acceptance", {})
     certificate_pin = ready.get("public_certificate_actual", {})
-    if IDENTITY == control.load("p17_m2_input_continuation").FORMAL_INPUT:
+    if IDENTITY in control.load("p17_m2_input_continuation").FORMAL_ONLY_IDENTITIES:
         need(ready.get("prior_public") == policy["prior_public"]
              and public_pin == policy["prior_public"]["bundle"]
              and certificate_pin == policy["prior_public"]["actual"],
@@ -704,9 +705,15 @@ def readiness_inputs(policy):
         "registered actual preparation closure content differs",
     )
     profiles = control.load("p17_m2_input_continuation")
-    if IDENTITY == profiles.FORMAL_INPUT:
+    if IDENTITY in profiles.FORMAL_ONLY_IDENTITIES:
         need(closure.get("prior_public") == policy["prior_public"],
              "formal preparation closure historical pins differ")
+    if IDENTITY == profiles.R0_INPUT:
+        read_proof = control.load("r0_read_independent").verified_readiness(
+            policy, closure["source_tree"])
+        need(ready.get("r0_read_verification") == closure.get("r0_read_verification") == read_proof,
+             "registered R0 single-file verification differs")
+        last = max(last, read_proof["verified_returned_ms"])
     selected = profiles.CONFIGS.get(IDENTITY, {})
     if selected.get("preparation_entry"):
         need(closure.get("retention_argv") == [
@@ -739,6 +746,8 @@ def readiness_inputs(policy):
 
 def preflight_summary(policy, ready, digest):
     return {
+        **({"r0_read_verification": ready["r0_read_verification"]}
+           if IDENTITY == control.load("p17_m2_input_continuation").R0_INPUT else {}),
         "status": "PASS_REGISTERED_INPUT_METADATA_PREFLIGHT",
         "execution_identity": IDENTITY,
         "author": policy["actors"]["independent"],
@@ -810,6 +819,9 @@ def publication_readiness(value):
         independent_preflight_sha256=producer.sha(raw),
     )
     main = control.published_main_readiness(combined, funded=True)
+    if IDENTITY == control.load("p17_m2_input_continuation").R0_INPUT:
+        need(main["main"] == ready["r0_read_verification"]["source_main"],
+             "single-file verified source differs from protected main")
     return dict(
         main,
         readiness_reference={"path": policy["readiness_path"], "sha256": digest},

@@ -1837,3 +1837,14 @@ No upstream implementation, figure, dataset, model or original input was importe
 The same slice's dated clock/runtime bridge independently uses Python standard
 source/process APIs and the existing locked TopoLab dependencies; captured old
 source contexts are audit buffers, not copied upstream code or new source reads.
+
+
+## 2026-11-22 — Darwin file availability during the exporter R0 read
+
+The macOS SDK system header `sys/stat.h` defines `SF_DATALESS` as
+`0x40000000`. TopoLab recorded the flag and allocated block count from the
+four existing stat observations of its registered reader. The two measured
+timings come from separate actual reads of the registered reference unit.
+The historical failure record has neither field. The provider responsible
+for the previous timeout remains unknown.
+[Read recovery contract](docs/planning/r0_read_input_recovery.md)

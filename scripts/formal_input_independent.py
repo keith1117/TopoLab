@@ -22,6 +22,7 @@ from pathlib import Path
 
 OLD_REPO = Path('/private/tmp/topolab-staged-input-20261121')
 EVIDENCE = Path('/Users/keith1117/Documents/TopoLab-data/formal-input-20261122')
+R0_EVIDENCE = EVIDENCE.parent / 'r0-read-acceptance-20261122'
 DATA = EVIDENCE.parent
 OLD_IDENTITY = 'topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1'
 OLD_ROOT = '/private/tmp/topolab-public-staged-input-20261121-a1'
@@ -51,12 +52,15 @@ def sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
-def expected_prior():
+def expected_prior(evidence_root=None):
+    evidence_root = EVIDENCE if evidence_root is None else Path(evidence_root)
+    need(evidence_root in (EVIDENCE, R0_EVIDENCE), 'fixed historical evidence namespace differs')
     return dict(identity=OLD_IDENTITY, root=OLD_ROOT, source_main=OLD_MAIN,
                 source_tree_sha256=TREE_SHA, plan_sha256=PLAN_SHA,
                 version_id=VERSION, member_count=1071,
-                bundle=dict(path=str(EVIDENCE / 'prior-public-bundle.json'), sha256=BUNDLE_SHA),
-                actual=dict(path=str(EVIDENCE / 'prior-public-certificate-actual.json'),
+                bundle=dict(path=str(evidence_root / 'prior-public-bundle.json'),
+                            sha256=BUNDLE_SHA),
+                actual=dict(path=str(evidence_root / 'prior-public-certificate-actual.json'),
                             sha256=ACTUAL_SHA))
 
 
@@ -295,7 +299,7 @@ def _replay_historical(accepted):
 
 def verify_prior_public(prior, bundle_raw, actual_raw):
     """Require exact admitted bytes and all original checks; never a producer PASS."""
-    need(type(prior) is dict and prior == expected_prior()
+    need(type(prior) is dict and prior in (expected_prior(), expected_prior(R0_EVIDENCE))
          and type(prior.get('member_count')) is int, 'fixed prior_public differs')
     need(type(bundle_raw) is bytes and type(actual_raw) is bytes
          and 0 < len(bundle_raw) <= CAP and 0 < len(actual_raw) <= CAP

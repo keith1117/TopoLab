@@ -231,7 +231,7 @@ def source_freeze(execution_identity=None):
                 "registration_helpers", ()))
             if CONTINUATION_INPUT in (load("p17_m2_input_continuation").NOV21_INPUT,
                                        load("p17_m2_input_continuation").STAGED_INPUT,
-                                       load("p17_m2_input_continuation").FORMAL_INPUT):
+                                       *load("p17_m2_input_continuation").FORMAL_ONLY_IDENTITIES):
                 paths.add(REPO / "scripts" / CONTINUATION_CONFIG["caller_generator"])
     if execution_identity == NEW_IDENTITY:
         paths.add(REPO / NEW_PROTOCOL)
@@ -1966,7 +1966,7 @@ def main():
     parser.add_argument("--whole-start-ms", type=int)
     args = parser.parse_args()
     continuation = load('p17_m2_input_continuation')
-    if CONTINUATION_INPUT == continuation.FORMAL_INPUT:
+    if CONTINUATION_INPUT in continuation.FORMAL_ONLY_IDENTITIES:
         if args.mode == "activate-formal":
             allowed = args.role is None
         elif args.mode == "certify-input-version":
@@ -2043,7 +2043,7 @@ def main():
             ] + suffix,
             "ACTUAL_ARGV_CHANGED",
         )
-        if CONTINUATION_INPUT == continuation.FORMAL_INPUT:
+        if CONTINUATION_INPUT in continuation.FORMAL_ONLY_IDENTITIES:
             registered = load("p17_m2_registered_input")
             registered.public_stop_veto()
             evidence = Path(CONTINUATION_CONFIG["evidence_root"])
@@ -2122,7 +2122,14 @@ def main():
             )
         else:
             result = payload(root, plan, args.role, transport)
-    print(base().canonical(result).decode(), end="")
+    raw_return = base().canonical(result)
+    if CONTINUATION_INPUT == continuation.R0_INPUT and args.mode in ("record", "bind"):
+        # Retain the complete returned value, including post-write cleanup failures.
+        base().put(root / "receipts" / f"{args.role}-{args.mode}-original.json", result)
+        outward = load("r0_caller_receipt").project(
+            args.mode, args.role, args.plan_sha, result, raw_return)
+        raw_return = base().canonical(outward)
+    print(raw_return.decode(), end="")
     return 1 if result.get("status") in ("STOP_NO_RETRY", "FAILED_INTERNAL_COMPLETION") else 0
 
 

@@ -23,6 +23,7 @@ FORMAL = (
 )
 ROOTS = (PUBLIC, FORMAL)
 SOURCE_DIGESTS = {}
+return_projection = None
 PYTHON = (
     "/Library/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python"
 )
@@ -377,6 +378,12 @@ def checked_plan(root, plan_sha):
     return plan, raw
 
 
+def return_bytes(mode, role, plan_sha, value, raw):
+    if return_projection is None:
+        return raw
+    return canonical(return_projection(mode, role, plan_sha, value, raw))
+
+
 def file_event(root, plan_sha, role, mode, packet_path, packet_sha):
     need(
         root in ROOTS and role in FULL and mode in ("supervise", "record"),
@@ -415,7 +422,8 @@ def file_event(root, plan_sha, role, mode, packet_path, packet_sha):
     if mode == "record":
         wire, wire_raw = read_json(Path(root) / "receipts" / (role + "-wire.json"))
         need(
-            "".join(r["result"]["output"] for r in packet["responses"]).encode() == wire_raw,
+            "".join(r["result"]["output"] for r in packet["responses"]).encode()
+            == return_bytes("record", role, plan_sha, wire, wire_raw),
             "original complete record stdout differs",
         )
         event["observed_completion_sha256"] = sha(canonical(wire["completion"]))
@@ -581,7 +589,7 @@ def accept_role(root, plan_sha, role, packet_path, packet_sha):
         and result.get("plan_sha256") == plan_sha
         and result.get("actual_exit_codes") == [0, 0]
         and "".join(row["result"]["output"] for row in packet["responses"]).encode()
-        == canonical(result),
+        == return_bytes("bind", role, plan_sha, result, canonical(result)),
         "original successful bind/proof stdout differs",
     )
     from decimal import Decimal
@@ -703,6 +711,8 @@ def retain_failure(root, plan_sha, role, packet_path, packet_sha):
             )
         ]
         names += ["receipts/sampler-watchdog-" + role + suffix for suffix in (".json", ".time")]
+    if return_projection is not None and role != "none":
+        names += [f"receipts/{role}-{mode}-original.json" for mode in ("record", "bind")]
     captured = []
     for index, relative in enumerate(names):
         item = dict(relative=relative, acceptance="NOT_CLAIMED")
@@ -732,6 +742,10 @@ def retain_failure(root, plan_sha, role, packet_path, packet_sha):
         full_role_resource="UNKNOWN_UNLESS_ALREADY_COMPLETE",
     )
     result = publish_pair(EVIDENCE / (prefix + "-existing-custody.json"), canonical(summary))
+    if return_projection is not None:
+        need(result["status"] == "PAIRED_PERSISTED", "failure manifest custody incomplete")
+        return dict(status=summary["status"], captures=len(captured),
+                    manifest={key: result[key] for key in ("path", "sha256", "bytes")})
     return dict(summary, manifest=result)
 
 

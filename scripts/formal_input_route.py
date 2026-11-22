@@ -27,15 +27,16 @@ def sibling(name, **bindings):
     return module
 
 
-def filer():
+def filer(*, repo=REPO, evidence=EVIDENCE, identity=IDENTITY, budget=BUDGET,
+          target=TARGET, control_entry="formal_input_control.py"):
     module = sibling("staged_input_filer")
     module.SOURCE_DIGESTS = SOURCE_DIGESTS
-    module.RUNTIME_REPO = REPO
-    module.EVIDENCE = EVIDENCE
-    module.BACKUP = EVIDENCE.with_name(EVIDENCE.name + "-backup")
-    module.IDENTITY = IDENTITY
-    module.BUDGET_SHA = BUDGET
-    module.FORMAL = TARGET
-    module.ROOTS = (TARGET,)
-    module.CONTROL_ENTRY = "formal_input_control.py"
+    module.RUNTIME_REPO = repo
+    module.EVIDENCE = evidence
+    module.BACKUP = evidence.with_name(evidence.name + "-backup")
+    module.IDENTITY = identity
+    module.BUDGET_SHA = budget
+    module.FORMAL = target
+    module.ROOTS = (target,)
+    module.CONTROL_ENTRY = control_entry
     return module

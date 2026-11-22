@@ -50,6 +50,10 @@ def profiles(tmp_path, monkeypatch):
     formal.mkdir(mode=0o700)
     formal.with_name(formal.name + '-backup').mkdir(mode=0o700)
     monkeypatch.setitem(value.config(value.FORMAL_INPUT), 'evidence_root', str(formal))
+    read_evidence = tmp_path / 'r0-read-software-evidence'
+    read_evidence.mkdir(mode=0o700)
+    read_evidence.with_name(read_evidence.name + '-backup').mkdir(mode=0o700)
+    monkeypatch.setitem(value.config(value.R0_INPUT), 'evidence_root', str(read_evidence))
     return value
 
 
@@ -445,11 +449,11 @@ def test_unobservable_stop_copy_namespace_fails_closed(profiles):
         subject.public_stop_veto()
 
 
-@pytest.mark.parametrize("current", [False, True], ids=["staged", "formal-only"])
+@pytest.mark.parametrize("current", [None, "FORMAL_INPUT", "R0_INPUT"])
 def test_formal_activation_and_independent_verifier_use_indented_published_bytes(
         profiles, monkeypatch, tmp_path, current):
     """Exercise the activation builder and verifier together, up to the custody boundary."""
-    identity = profiles.FORMAL_INPUT if current else IDENTITY
+    identity = getattr(profiles, current) if current else IDENTITY
     if current:
         old = profiles.config(IDENTITY)['evidence_root']
         monkeypatch.setattr(profiles, 'STAGED_EVIDENCE', old)
@@ -487,8 +491,9 @@ def test_formal_activation_and_independent_verifier_use_indented_published_bytes
         checker.validate_binding(plan)
 
 
-def test_formal_only_route_binds_one_new_generation_and_no_public_quota(profiles):
-    registered = profiles.profile('registered', profiles.FORMAL_INPUT)
+@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT'])
+def test_formal_only_route_binds_one_new_generation_and_no_public_quota(profile_name, profiles):
+    registered = profiles.profile('registered', getattr(profiles, profile_name))
     policy = registered.authority()
     root = policy['fixed_target']['attempts']['1']['generation']
     old_public = profiles.config(IDENTITY)['public_root']
@@ -501,9 +506,10 @@ def test_formal_only_route_binds_one_new_generation_and_no_public_quota(profiles
     assert profiles.config_for_root(old_formal)['input'] == IDENTITY
 
 
-def test_new_formal_measurement_accepts_only_the_exact_formal_role_command(
+@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT'])
+def test_new_formal_measurement_accepts_only_the_exact_formal_role_command(profile_name,
         profiles, tmp_path, monkeypatch):
-    config = profiles.config(profiles.FORMAL_INPUT)
+    config = profiles.config(getattr(profiles, profile_name))
     resource = load('p17_m2_resource_control')
     argv = [str(Path(sys.orig_argv[0]).resolve()), '-I',
             str(REPO / 'scripts' / config['control_entry']), 'payload',
@@ -532,9 +538,11 @@ def test_new_formal_measurement_accepts_only_the_exact_formal_role_command(
     'supervise', 'record', 'bind', 'run', 'payload',
     'certify-input-version', 'prepare-rehearsal', 'certify-rehearsal',
 ])
-def test_formal_entry_routes_nested_commands_before_touching_custody(profiles, monkeypatch, mode):
-    subject = profiles.profile('control', profiles.FORMAL_INPUT)
-    config = profiles.config(profiles.FORMAL_INPUT)
+@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT'])
+def test_formal_entry_routes_nested_commands_before_touching_custody(
+        profile_name, profiles, monkeypatch, mode):
+    subject = profiles.profile('control', getattr(profiles, profile_name))
+    config = profiles.config(getattr(profiles, profile_name))
     root = config['generations'][0]
     role = 'certificate' if mode.startswith('certify') else 'exporter-r0'
     argv = subject.argv_for(Path(root), mode, 'a' * 64, role)
@@ -565,9 +573,11 @@ def test_repaired_binary_cannot_reopen_closed_staged_formal_attempt(profiles, mo
 @pytest.mark.parametrize('mode', ['supervise', 'record', 'run', 'payload', 'bind',
                                   'certify-input-version'])
 @pytest.mark.parametrize('peer', [False, True])
-def test_formal_control_rejects_either_stop_before_target(profiles, monkeypatch, mode, peer):
-    subject = profiles.profile('control', profiles.FORMAL_INPUT)
-    config = profiles.config(profiles.FORMAL_INPUT)
+@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT'])
+def test_formal_control_rejects_either_stop_before_target(
+        profile_name, profiles, monkeypatch, mode, peer):
+    subject = profiles.profile('control', getattr(profiles, profile_name))
+    config = profiles.config(getattr(profiles, profile_name))
     evidence = Path(config['evidence_root'])
     if peer:
         evidence = evidence.with_name(evidence.name + '-backup')
@@ -578,3 +588,68 @@ def test_formal_control_rejects_either_stop_before_target(profiles, monkeypatch,
     monkeypatch.setattr(subject, 'checked', lambda *_: pytest.fail('target reached after STOP'))
     with pytest.raises(ValueError, match='input-formal-caller-STOP'):
         subject.main()
+
+
+@pytest.mark.parametrize('timeout', [False, True])
+def test_candidate_observes_one_actual_registered_reader_call(profiles, tmp_path, monkeypatch,
+                                                             timeout):
+    import os
+    import runpy
+    from contextlib import contextmanager
+
+    subject = profiles.profile('registered', profiles.R0_INPUT)
+    worker = runpy.run_path(str(REPO / 'scripts/r0_read_observation.py'))
+    raw = subject.producer.canonical({'x': 'a' * 481})
+    assert len(raw) == 490
+    root = tmp_path.resolve()
+    target = root / worker['UNIT']
+    target.parent.mkdir(parents=True)
+    target.write_bytes(raw)
+    physical = {k: getattr(target.stat(), k) for k in subject.PHYSICAL}
+    digest = hashlib.sha256(raw).hexdigest()
+    bound = dict(sha256=digest, byte_size=490, declared=physical)
+    reader = subject._RegisteredReader(
+        root, registration={worker['UNIT']: bound},
+        execution_identity=subject.producer.LOCAL_IDENTITY,
+        source_identity_checks=True, source_identity_policy=subject.POLICY)
+    observe = worker['observe']
+    monkeypatch.setitem(observe.__globals__, 'EXPECTED', digest)
+    if timeout:
+        @contextmanager
+        def blocked(*args, **kwargs):
+            def read(_limit):
+                raise TimeoutError(60, 'Operation timed out')
+            yield SimpleNamespace(read=read)
+
+        monkeypatch.setattr(os, 'fdopen', blocked)
+    actual = observe(reader)
+    facts = actual['reader_facts']
+    points = [row['stage'] for row in actual['open_identity_trace']]
+    assert reader.attempts == [worker['UNIT']]
+    if timeout:
+        assert actual['status'] == 'STOP' and actual['error']['errno'] == 60
+        assert facts['stage'] == 'bounded_read' and facts['returned_bytes'] is None
+        assert facts['closing'] is actual['raw_b64'] is None and points == ['declared', 'before']
+    else:
+        import base64
+        assert actual['status'] == 'COMPLETE' and base64.b64decode(actual['raw_b64']) == raw
+        assert facts['returned_bytes'] == 490 and facts['closing'] == physical
+        assert points == ['declared', 'before', 'after', 'closing']
+
+
+@pytest.mark.parametrize('mode', ['record', 'bind'])
+def test_compact_return_binds_every_byte_of_the_full_native_result(mode):
+    import runpy
+
+    wire = runpy.run_path(str(REPO / 'scripts/r0_input_route.py'))['filer']()
+    native = dict(status='STOP_NO_RETRY', evidence_complete=False,
+                  full_role_evidence_accepted=False, history=['d' * 64] * 2000)
+    raw = wire.canonical(native)
+    plan = 'c' * 64
+    packet = wire.return_bytes(mode, 'exporter-r0', plan, native, raw)
+    assert len(raw) > 100_000 and len(packet) < 512
+    expected = json.loads(packet)
+    assert expected['status'] == native['status'] and expected['record_bytes'] == len(raw)
+    assert expected['record_sha256'] == hashlib.sha256(raw).hexdigest()
+    assert not expected['full_role_evidence_accepted']
+    assert wire.return_bytes(mode, 'exporter-r0', plan, native, raw + b' ') != packet
