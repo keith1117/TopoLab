@@ -14,13 +14,13 @@ wire.__file__ = str(path)
 exec(compile(path.read_bytes(), str(path), "exec"), wire.__dict__)
 
 
-def build(config, source, expected_sha):
+def build(config, source, expected_sha, *, wire=wire):
     wire.need(
         type(source) is bytes and len(source) <= 128 * 1024 and wire.sha(source) == expected_sha,
         "complete reviewed actor buffer SHA required",
     )
     wire.need(
-        config.get("repo") == str(RUNTIME_REPO)
+        config.get("repo") == str(wire.RUNTIME_REPO)
         and config.get("evidence_root") == str(wire.EVIDENCE)
         and config.get("execution_identity") == wire.IDENTITY
         and config.get("owner_budget_sha256") == wire.BUDGET_SHA,
@@ -29,6 +29,7 @@ def build(config, source, expected_sha):
     wire.need(
         config.get("author") in ("producer", "independent")
         and type(config.get("formal")) is bool
+        and config.get("root") in wire.ROOTS
         and config.get("root") == (wire.FORMAL if config["formal"] else wire.PUBLIC)
         and re.fullmatch("[A-Za-z0-9_-]{1,80}", config.get("event_prefix", "")),
         "new actor/root qualification differs",
@@ -96,31 +97,38 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for field in ("config", "config-sha256", "actor-sha256", "output", "emit", "artifact-sha256"):
         parser.add_argument("--" + field)
+    parser.add_argument("--formal-only", action="store_true")
     args = parser.parse_args()
+    selected = wire
+    if args.formal_only:
+        import runpy
+
+        route = runpy.run_path(str(SOURCE_CHECKOUT / "scripts/formal_input_route.py"))
+        selected = route["filer"]()
     if args.emit:
-        wire.need(
+        selected.need(
             isinstance(args.artifact_sha256, str)
             and re.fullmatch("[a-f0-9]{64}", args.artifact_sha256),
             "strict external artifact SHA256 required before emit",
         )
-        value = wire.paired_actual(dict(path=args.emit, sha256=args.artifact_sha256))
-        wire.need(
+        value = selected.paired_actual(dict(path=args.emit, sha256=args.artifact_sha256))
+        selected.need(
             value.get("schema") == "topolab.staged-input-actor-program.v1"
-            and value.get("execution_identity") == wire.IDENTITY
-            and wire.sha(value["program"].encode()) == value["program_sha256"],
+            and value.get("execution_identity") == selected.IDENTITY
+            and selected.sha(value["program"].encode()) == value["program_sha256"],
             "frozen actor artifact differs",
         )
         print(json.dumps(value, separators=(",", ":")))
         return
-    wire.need(
+    selected.need(
         all((args.config, args.config_sha256, args.actor_sha256, args.output)),
         "complete freeze arguments required",
     )
-    config, _ = wire.read_json(wire.evidence_path(args.config), args.config_sha256)
+    config, _ = selected.read_json(selected.evidence_path(args.config), args.config_sha256)
     source = (SOURCE_CHECKOUT / "scripts/staged_input_actor.mjs").read_bytes()
-    artifact = build(config, source, args.actor_sha256)
-    result = wire.publish_pair(args.output, wire.canonical(artifact))
-    wire.need(
+    artifact = build(config, source, args.actor_sha256, wire=selected)
+    result = selected.publish_pair(args.output, selected.canonical(artifact))
+    selected.need(
         result["status"] == "PAIRED_PERSISTED",
         "frozen software artifact pair incomplete: " + str(result),
     )

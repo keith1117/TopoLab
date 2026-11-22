@@ -71,33 +71,41 @@ def _whole_profile():
 
 def _metadata_first_profile():
     profiles = control.load("p17_m2_input_continuation")
-    return IDENTITY in (profiles.NOV21_INPUT, profiles.STAGED_INPUT)
+    return IDENTITY in (profiles.NOV21_INPUT, profiles.STAGED_INPUT, profiles.FORMAL_INPUT)
 
 
-def public_stop_veto():
+def public_stop_veto(*, formal_activation=False):
     """Any retained staged public STOP closes later preparation and admission."""
     profiles = control.load("p17_m2_input_continuation")
-    if IDENTITY != profiles.STAGED_INPUT:
+    if IDENTITY not in (profiles.STAGED_INPUT, profiles.FORMAL_INPUT):
         return
     import os
 
     evidence = Path(control.CONTINUATION_CONFIG["evidence_root"])
-    for folder in (evidence, evidence.with_name(evidence.name + "-backup")):
-        directory = control.base().nofollow_directory(folder)
-        try:
+    locations = [(evidence, "input-public-caller-STOP.json")]
+    if IDENTITY == profiles.FORMAL_INPUT:
+        locations = [(Path(profiles.STAGED_EVIDENCE), "input-public-caller-STOP.json"),
+                     (evidence, "input-formal-caller-STOP.json")]
+    elif formal_activation:
+        locations.append((evidence, "input-formal-caller-STOP.json"))
+    for parent, marker in locations:
+        for folder in (parent, parent.with_name(parent.name + "-backup")):
+            directory = control.base().nofollow_directory(folder)
             try:
-                os.stat("input-public-caller-STOP.json", dir_fd=directory,
-                        follow_symlinks=False)
-            except FileNotFoundError:
-                continue
-            raise ValueError("STOP: STAGED_PUBLIC_STOP_VETO: " + str(folder))
-        finally:
-            os.close(directory)
+                try:
+                    os.stat(marker, dir_fd=directory, follow_symlinks=False)
+                except FileNotFoundError:
+                    continue
+                raise ValueError("STOP: STAGED_PUBLIC_STOP_VETO: " + str(folder / marker))
+            finally:
+                os.close(directory)
 
 
 def is_root(root):
     """Memory-only routing, with no authority or existence inference."""
     selected = control.load("p17_m2_input_continuation").CONFIGS.get(IDENTITY, {})
+    if selected.get("public_graphs_max") == 0:
+        return str(root) in GENERATIONS
     if selected.get("public_root") is not None:
         return str(root) in (*GENERATIONS, selected["public_root"])
     return str(root) in GENERATIONS or Path(root).name.startswith(PUBLIC_PREFIX)
@@ -186,7 +194,7 @@ def trusted_registration(plan, *, certificate_buffer=None):
         need(hashlib.sha256(raw).hexdigest() == expected, "registration proof SHA differs")
         buffers[prefix] = raw
         values.append(producer.parse(raw))
-    if IDENTITY == control.load("p17_m2_input_continuation").STAGED_INPUT:
+    if control.CONTINUATION_CONFIG.get("registration_module") == "staged_public_binding":
         for key in ("certificate_sha256", "finalize_actual_sha256"):
             need(key not in pin or reference[key] == pin[key], "staged fixed proof SHA differs")
         helper = control.load(control.CONTINUATION_CONFIG["registration_module"])
@@ -318,6 +326,15 @@ def authority(raw=None):
         value.get("new_input_budget") == NEW_BUDGET_REFERENCE,
         "registered new input budget pin differs",
     )
+    if IDENTITY == control.load("p17_m2_input_continuation").FORMAL_INPUT:
+        need(value.get("public_roots") == []
+             and set(value.get("registration", {})) == {"formal"}
+             and value.get("ancillary_named_FULL") == {
+                 "filing_each_included_in_FULL3780": 180, "graphs_max": 1,
+                 "input_each_including_lease": 3960, "lease_release_each_graph": 180,
+                 "new_FULL_ceiling": 3960, "registration": 0,
+                 "shared_300_prepaid_on_first_input_launch": True},
+             "formal-only admission limits differ")
     limits = value.get("input_limits", {})
     need(
         limits
@@ -333,7 +350,7 @@ def authority(raw=None):
             "FULL_all_input_attempts_ceiling": 3780 * len(GENERATIONS),
             "formal_top_control_CLI_all": 52,
             "public_graphs_max": PUBLIC_GRAPHS_MAX,
-            "public_top_control_CLI_all": 64,
+            "public_top_control_CLI_all": 64 if PUBLIC_GRAPHS_MAX else 0,
             "public_FULL_all_ceiling": 3780 * PUBLIC_GRAPHS_MAX,
             "original_public1_2_and_new3_total_attempts": PUBLIC_ATTEMPTS_TOTAL,
             "coordination_seconds_max": 240,
@@ -475,6 +492,9 @@ def formal_plan(raw, *, attempt=1, strict23_registration=None):
     del plan["public_source_identity"]
     proposal = producer.parse((REPO / control.PROPOSAL).read_bytes())
     digest = producer.sha(raw)
+    if IDENTITY == control.load("p17_m2_input_continuation").FORMAL_INPUT:
+        need(digest == plan["preparation_contract_sha256"],
+             "formal plan requires the exact published authority buffer")
     plan.update(
         scope=control.FORMAL_SCOPE,
         formal_authority=True,
@@ -527,30 +547,30 @@ def _read_pin(reference):
     return producer.parse(raw)
 
 
-def readiness_inputs(policy):
-    """Re-audit exact public native and actual outer return; no source/target IO."""
-    public_stop_veto()
+def prior_public_proof(policy):
+    """Replay the two retained buffers from the closed public grant."""
+    import os
+
+    prior = policy["prior_public"]
+    evidence = Path(control.CONTINUATION_CONFIG["evidence_root"])
+    peer = evidence.with_name(evidence.name + "-backup")
+    raw = []
+    read = control.load("p17_m2_source_acquisition_independent").native._software_bytes
+    for key, name in (("bundle", "prior-public-bundle.json"),
+                      ("actual", "prior-public-certificate-actual.json")):
+        path, other = evidence / name, peer / name
+        need(prior[key]["path"] == str(path), "historical receipt location differs")
+        data = read(path)
+        need(producer.sha(data) == prior[key]["sha256"] and read(other) == data
+             and not os.path.samefile(path, other), "historical receipt pair differs")
+        raw.append(data)
     checker = control.load("p17_m2_source_acquisition_independent")
-    raw = checker.native._software_bytes(Path(policy["readiness_path"]))
-    ready = producer.parse(raw)
-    frozen = {
-        key: digest for key, digest in control.source_freeze(IDENTITY).items() if key != PROTOCOL
-    }
-    runtime = control.base().runtime()
-    need(
-        ready.get("schema") == "topolab.registered-input.activation-readiness.v1"
-        and ready.get("execution_identity") == IDENTITY
-        and ready.get("actors") == policy["actors"]
-        and ready.get("new_input_budget") == policy["new_input_budget"]
-        and ready.get("published_source_sha256") == frozen
-        and all(
-            ready.get("runtime", {}).get(key) == value
-            for key, value in runtime.items()
-            if key != "orig_argv"
-        ),
-        "registered readiness software/runtime/actors/budget differs",
-    )
-    _read_pin(policy["new_input_budget"])
+    proof = checker._prior_public_module().verify_prior_public(prior, *raw)
+    return prior["bundle"], prior["actual"], proof["public_end_ms"]
+
+
+def same_profile_public_return(policy, ready):
+    checker = control.load("p17_m2_source_acquisition_independent")
     public_pin = ready.get("public_native_acceptance", {})
     need(
         public_pin.get("path")
@@ -611,6 +631,44 @@ def readiness_inputs(policy):
     if _whole_profile():
         need(last <= public_plan["whole_end_ms"],
              "NEW public certificate actual return exceeds original whole4500")
+    return last
+
+
+def readiness_inputs(policy):
+    """Re-audit exact public native and actual outer return; no source/target IO."""
+    public_stop_veto()
+    checker = control.load("p17_m2_source_acquisition_independent")
+    raw = checker.native._software_bytes(Path(policy["readiness_path"]))
+    ready = producer.parse(raw)
+    frozen = {
+        key: digest for key, digest in control.source_freeze(IDENTITY).items() if key != PROTOCOL
+    }
+    runtime = control.base().runtime()
+    need(
+        ready.get("schema") == "topolab.registered-input.activation-readiness.v1"
+        and ready.get("execution_identity") == IDENTITY
+        and ready.get("actors") == policy["actors"]
+        and ready.get("new_input_budget") == policy["new_input_budget"]
+        and ready.get("published_source_sha256") == frozen
+        and all(
+            ready.get("runtime", {}).get(key) == value
+            for key, value in runtime.items()
+            if key != "orig_argv"
+        ),
+        "registered readiness software/runtime/actors/budget differs",
+    )
+    _read_pin(policy["new_input_budget"])
+    public_pin = ready.get("public_native_acceptance", {})
+    certificate_pin = ready.get("public_certificate_actual", {})
+    if IDENTITY == control.load("p17_m2_input_continuation").FORMAL_INPUT:
+        need(ready.get("prior_public") == policy["prior_public"]
+             and public_pin == policy["prior_public"]["bundle"]
+             and certificate_pin == policy["prior_public"]["actual"],
+             "formal readiness historical pins differ")
+        last = prior_public_proof(policy)[2]
+    else:
+        last = same_profile_public_return(policy, ready)
+    recovery = control.load("p17_m2_source_binding_recovery")
     paths = ready.get("preparation_closure_paths")
     need(
         paths == policy["preparation_closure_paths"],
@@ -645,7 +703,11 @@ def readiness_inputs(policy):
         and closure.get("own_future_return") == "NOT_CLAIMED",
         "registered actual preparation closure content differs",
     )
-    selected = control.load("p17_m2_input_continuation").CONFIGS.get(IDENTITY, {})
+    profiles = control.load("p17_m2_input_continuation")
+    if IDENTITY == profiles.FORMAL_INPUT:
+        need(closure.get("prior_public") == policy["prior_public"],
+             "formal preparation closure historical pins differ")
+    selected = profiles.CONFIGS.get(IDENTITY, {})
     if selected.get("preparation_entry"):
         need(closure.get("retention_argv") == [
             runtime["python"], "-I", str(REPO / "scripts" / selected["preparation_entry"]),
@@ -759,18 +821,19 @@ def publication_readiness(value):
 
 
 def activate_formal(root, reference):
-    public_stop_veto()
-    policy = authority()
+    public_stop_veto(formal_activation=True)
+    raw = authority_raw()
+    policy = authority(raw)
     need(str(root) in GENERATIONS, "registered formal literal required")
     attempt = GENERATIONS.index(str(root)) + 1
     need(attempt == 1, "registered remedy requires separately diagnosed published readiness")
-    plan = formal_plan(producer.canonical(policy), attempt=attempt, strict23_registration=reference)
+    plan = formal_plan(raw, attempt=attempt, strict23_registration=reference)
     ready = activation_readiness(policy, plan)
-    plan = formal_plan(producer.canonical(policy), attempt=attempt, strict23_registration=reference)
+    plan = formal_plan(raw, attempt=attempt, strict23_registration=reference)
     plan["activation_readiness"] = ready["readiness_reference"]
     plan["independent_preflight"] = ready["independent_preflight_reference"]
     control.load("p17_m2_source_acquisition_independent").validate_binding(plan)
-    public_stop_veto()
+    public_stop_veto(formal_activation=True)
     return control.setup_formal(plan, ready)
 
 

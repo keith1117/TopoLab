@@ -7,6 +7,14 @@ const PUBLIC='/private/tmp/topolab-public-staged-input-20261121-a1';
 const FORMAL='/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-staged-input-20261121-a1';
 const PYTHON='/Library/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python';
 const GLOBAL_START=Date.parse('2026-11-21T20:40:00Z'),GLOBAL_END=Date.parse('2026-11-22T12:40:00Z');
+const formalOnly={
+ REPO:'/private/tmp/topolab-formal-input-20261122', E:'/Users/keith1117/Documents/TopoLab-data/formal-input-20261122',
+ ID:'topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1', BUDGET:'96c2a727428bb7d30c8d2c00dee43c1f42c7f55b73660959cc51c8c33db33f7b',
+ PUBLIC:null, FORMAL:'/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-formal-input-20261122-a1',
+ GLOBAL_START:Date.parse('2026-11-22T03:40:00Z'), GLOBAL_END:Date.parse('2026-11-22T21:40:00Z'), prefix:'formal_input'
+};
+const staged={REPO,E,ID,BUDGET,PUBLIC,FORMAL,GLOBAL_START,GLOBAL_END,prefix:'staged_input'};
+function routeFor(identity){return identity===formalOnly.ID?formalOnly:staged;}
 const ROLES=['independent-public-check','exporter-r0','independent-r0','exporter-r1','independent-r1','shared-closeout'];
 const FULL=[300,300,300,1200,1200,300];
 const need=(condition,reason)=>{if(!condition)throw Error('STAGED_CALLER_STOP: '+reason);};
@@ -14,6 +22,8 @@ const hash=s=>typeof s==='string'&&/^[a-f0-9]{64}$/.test(s);
 const quote=s=>/^[A-Za-z0-9_@%+=:,./-]+$/.test(s)?s:"'"+s.replaceAll("'","'\"'\"'")+"'";
 export const literalCommand=argv=>'exec '+['env','OMP_NUM_THREADS=1','OPENBLAS_NUM_THREADS=1','MKL_NUM_THREADS=1','VECLIB_MAXIMUM_THREADS=1','NUMEXPR_NUM_THREADS=1',...argv].map(quote).join(' ');
 export function qualify(config){
+ const route=routeFor(config.execution_identity),{REPO,E,ID,BUDGET,PUBLIC,FORMAL}=route;
+ need(route!==formalOnly||config.formal===true,'formal-only contract');
  need(['producer','independent'].includes(config.author)&&typeof config.formal==='boolean','separate registered author/scope required');
  need(config.root===(config.formal?FORMAL:PUBLIC)&&/^[A-Za-z0-9_-]{1,80}$/.test(config.event_prefix),'literal new target/prefix required');
  for(const [key,value] of Object.entries({repo:REPO,evidence_root:E,execution_identity:ID,owner_budget_sha256:BUDGET}))
@@ -24,6 +34,8 @@ export function qualify(config){
  return {...config,repo:REPO,evidence_root:E,execution_identity:ID,owner_budget_sha256:BUDGET};
 }
 export function launchGate(plan,role,proofs,now){
+ const {ID,PUBLIC,FORMAL,GLOBAL_START,GLOBAL_END}=routeFor(plan.execution_identity);
+ need(typeof plan.root==='string','literal root required');
  const index=ROLES.indexOf(role);
  need(index>=0&&plan.execution_identity===ID&&hash(plan.plan_sha256)&&[PUBLIC,FORMAL].includes(plan.root),'new plan/role differs');
  need(plan.formal_authority===(plan.root===FORMAL)&&plan.scope===(plan.root===FORMAL?'SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY':'FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY'),'plan scope differs');
@@ -40,7 +52,9 @@ export function launchGate(plan,role,proofs,now){
 }
 export async function executeActor(input,dispatch,now=Date.now){
  const config=qualify(input),raw=[],packets={},observed=[],author=config.author==='producer'?'/root':'/root/full60_independent';
- const control=REPO+'/scripts/staged_input_control.py',filer=REPO+'/scripts/staged_input_filer.py',waiter=REPO+'/scripts/staged_input_waiter.py';
+ const {REPO,E,ID,PUBLIC,GLOBAL_START,GLOBAL_END,prefix:scriptPrefix}=routeFor(config.execution_identity);
+ const script=REPO+'/scripts/'+scriptPrefix;
+ const control=script+'_control.py',filer=script+'_filer.py',waiter=script+'_waiter.py';
  const prefix=config.event_prefix+'-'+config.author;
  let plan=null,active=null,serial=0,toolCalls=0,failureDeadline=null;
  async function invoke(tool,args){

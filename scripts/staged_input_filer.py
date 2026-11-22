@@ -16,11 +16,13 @@ EVIDENCE = Path("/Users/keith1117/Documents/TopoLab-data/staged-input-acceptance
 BACKUP = Path(str(EVIDENCE) + "-backup")
 IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1"
 BUDGET_SHA = "7212bce05d9f1d953c44b800c59d941e2e1e44111777845ae57f2479be170687"
+CONTROL_ENTRY = "staged_input_control.py"
 PUBLIC = "/private/tmp/topolab-public-staged-input-20261121-a1"
 FORMAL = (
     "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-staged-input-20261121-a1"
 )
 ROOTS = (PUBLIC, FORMAL)
+SOURCE_DIGESTS = {}
 PYTHON = (
     "/Library/Frameworks/Python.framework/Versions/3.12/Resources/Python.app/Contents/MacOS/Python"
 )
@@ -264,7 +266,8 @@ def persist(packet, destination):
             "new caller STOP identity differs",
         )
     target = Path(destination)
-    public_certificate = target == Path(PUBLIC) / "certify-rehearsal-raw-actual-call.json"
+    public_certificate = (PUBLIC in ROOTS
+                          and target == Path(PUBLIC) / "certify-rehearsal-raw-actual-call.json")
     raw = canonical(packet)
     if public_certificate:
         saved = write_private(target, raw)
@@ -306,6 +309,7 @@ def input_profile():
     loader = source_module("full60_input_loader", path)
     loader.loaded_source_sha256[str(path.resolve())] = loader.source_buffer_sha256
     loader.loaded_source_sha256[str(Path(__file__).resolve())] = sha(Path(__file__).read_bytes())
+    loader.loaded_source_sha256.update(SOURCE_DIGESTS)
     loader.install(require_locked_environment=True)
     # The selected registration replayer has ordinary imports from this frozen directory.
     sys.path.insert(0, str(path.parent))
@@ -350,6 +354,13 @@ def matching_pending(pending, plan, plan_sha, role, control):
     )
 
 
+def check_executed(plan):
+    for path, digest in SOURCE_DIGESTS.items():
+        relative = str(Path(path).relative_to(SOURCE_CHECKOUT))
+        need(plan.get("source_tree", {}).get(relative) == digest,
+             "caller executed source differs: " + relative)
+
+
 def checked_plan(root, plan_sha):
     need(
         root in ROOTS and isinstance(plan_sha, str) and len(plan_sha) == 64,
@@ -362,6 +373,7 @@ def checked_plan(root, plan_sha):
         and plan.get("formal_authority") is (root == FORMAL),
         "new plan scope/root differs",
     )
+    check_executed(plan)
     return plan, raw
 
 
@@ -435,7 +447,7 @@ def control_argv(root, mode, plan_sha, role):
     return [
         PYTHON,
         "-I",
-        str(RUNTIME_REPO / "scripts/staged_input_control.py"),
+        str(RUNTIME_REPO / "scripts" / CONTROL_ENTRY),
         mode,
         "--root",
         root,
@@ -452,7 +464,7 @@ def activation_return(plan, plan_sha, packet):
     argv = [
         PYTHON,
         "-I",
-        str(RUNTIME_REPO / "scripts/staged_input_control.py"),
+        str(RUNTIME_REPO / "scripts" / CONTROL_ENTRY),
         "activate-formal" if formal else "prepare-rehearsal",
         "--root",
         plan["root"],

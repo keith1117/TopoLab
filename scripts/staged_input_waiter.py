@@ -7,11 +7,13 @@ import types
 from decimal import Decimal
 from pathlib import Path
 
-path = Path(__file__).with_name("staged_input_filer.py")
-wire = types.ModuleType("staged_input_wire_for_waiter")
-wire.__file__ = str(path)
-exec(compile(path.read_bytes(), str(path), "exec"), wire.__dict__)
-window = wire.source_module("staged_input_window", path.with_name("staged_input_window.py"))
+if "wire" not in globals():
+    path = Path(__file__).with_name("staged_input_filer.py")
+    wire = types.ModuleType("staged_input_wire_for_waiter")
+    wire.__file__ = str(path)
+    exec(compile(path.read_bytes(), str(path), "exec"), wire.__dict__)
+    window = wire.source_module("staged_input_window", path.with_name("staged_input_window.py"))
+
 
 
 def milliseconds(seconds):
@@ -38,6 +40,7 @@ def project(plan, raw, root, now_ms):
         and plan.get("role_order") == list(wire.ROLES),
         "new literal plan identity/root/scope/order differs",
     )
+    wire.check_executed(plan)
     window.check(plan, now_ms)
     start = milliseconds(plan["actor_activation_UTC_seconds"])
     wire.need(start == plan["whole_start_ms"], "original activation clock differs")
@@ -170,7 +173,7 @@ def initial_metadata(root, release):
         == [
             wire.PYTHON,
             "-I",
-            str(wire.RUNTIME_REPO / "scripts/staged_input_control.py"),
+            str(wire.RUNTIME_REPO / "scripts" / wire.CONTROL_ENTRY),
             "activate-formal" if formal else "prepare-rehearsal",
             "--root",
             root,

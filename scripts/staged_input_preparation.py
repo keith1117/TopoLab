@@ -66,7 +66,7 @@ def public_proof(subject, policy):
     )
 
 
-def prepare(subject, mode):
+def prepare(subject, mode, *, entry=ENTRY):
     subject.public_stop_veto()
     policy = subject.authority()
 
@@ -80,11 +80,13 @@ def prepare(subject, mode):
     within_budget()
     base = subject.control.base()
     producer = subject.producer
-    public, certificate, public_end = public_proof(subject, policy)
+    historical = subject.IDENTITY == subject.control.load("p17_m2_input_continuation").FORMAL_INPUT
+    public, certificate, public_end = (subject.prior_public_proof(policy) if historical
+                                       else public_proof(subject, policy))
     tree = subject.control.source_freeze(subject.IDENTITY)
     paths = policy["preparation_closure_paths"]
     runtime = base.runtime()
-    argv = [runtime["python"], "-I", str(ENTRY), "retain"]
+    argv = [runtime["python"], "-I", str(entry), "retain"]
     closure = {
         "schema": "topolab.registered-input.preparation-closure.v1",
         "execution_identity": subject.IDENTITY,
@@ -95,6 +97,8 @@ def prepare(subject, mode):
         "own_future_return": "NOT_CLAIMED",
         "retention_argv": argv,
     }
+    if historical:
+        closure["prior_public"] = policy["prior_public"]
     digest = producer.sha(producer.canonical(closure))
     summary = {
         "status": "REGISTERED_INPUT_PREPARATION_PAIR_RETAINED",
@@ -141,6 +145,8 @@ def prepare(subject, mode):
         "preparation_closure_sha256": digest,
         "preparation_retention_actual": {"path": str(path), "sha256": producer.sha(raw)},
     }
+    if historical:
+        ready["prior_public"] = policy["prior_public"]
     within_budget()
     base.put(Path(policy["readiness_path"]), ready)
     return {"path": policy["readiness_path"], "sha256": producer.sha(producer.canonical(ready))}

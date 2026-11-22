@@ -292,6 +292,7 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1",
         "topolab.public-local-strict23.staged-20261121.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1",
     )
     if measurement_execution_identity not in measurement_identities or (
         measurement_scope is None and measurement_execution_identity != measurement_identities[0]
@@ -312,6 +313,7 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.20261116.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1",
     ):
         dated = measurement_execution_identity.endswith("20261121.v1")
         input_entry = "input_control_20261121.py" if dated else "input_control_full60_20261116.py"
@@ -332,6 +334,16 @@ def invoke(
             formal = (
                 '/Users/keith1117/Library/Application Support/TopoLab-custody/'
                 'p17-m2-staged-input-20261121-a1',)
+        if measurement_execution_identity == (
+                "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1"):
+            input_entry = "formal_input_control.py"
+            formal = ("/Users/keith1117/Library/Application Support/TopoLab-custody/"
+                      "p17-m2-formal-input-20261122-a1",)
+            if (measurement_scope != "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY"
+                    or role in ("reader-ack", "public-consumer")
+                    or len(argv) < 6 or argv[5] not in formal
+                    or argv[0] != str(Path(sys.orig_argv[0]).resolve())):
+                raise ValueError("formal input measurement requires exact neutral formal payload")
         if not (
             measurement_scope in (
                 "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY",
