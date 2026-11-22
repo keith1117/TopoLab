@@ -1,9 +1,10 @@
 # Planning index
 
-[Staged public registration and formal input contract](staged_source_input_acceptance.md)
-
-The next public input route uses a freshly reconstructed fixture with a new
-23-file registration at its final path. [Measured basis](../validation/public_input_r1_throughput.md)
+The [staged input contract](staged_source_input_acceptance.md) closed after
+23 public registrations, six accepted public roles and a formal activation
+digest failure before the first formal role. The next repair concerns the
+published contract bytes used by the formal plan.
+[Result](../validation/staged_source_input_acceptance.md)
 
 The [November 21 finite contract](metadata_input_20261121.md) closed with formal metadata accepted and public input timed out at exporter R1. [Result](../validation/metadata_input_20261121.md)
 

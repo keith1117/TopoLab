@@ -17,25 +17,20 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-The [November 21 result](docs/validation/metadata_input_20261121.md) closes the
-[finite contract](docs/planning/metadata_input_20261121.md). Formal metadata
-passed all 23 bindings under 16 MiB. Public input accepted three of six roles.
-Exporter R1 timed out after 278 of 558 public payload receipts, its external
-record stayed unopened and the public lease marker is HELD. Formal input and
-scientific B/C remain unadmitted.
+The [staged input result](docs/validation/staged_source_input_acceptance.md)
+closes the [finite contract](docs/planning/staged_source_input_acceptance.md).
+Both readers verified the 23 public physical anchors. Six public roles, filing,
+lease release and the certificate for 1,071 members passed. Formal preflight
+passed. Formal activation rejected its compact contract digest before target
+setup or role dispatch. Next repair the formal plan's exact published-byte
+binding on a software fixture. A new named attempt requires separate authority.
 
-The [R1 throughput result](docs/validation/public_input_r1_throughput.md) checked
-558 reads and 1,071 members on rebuilt public bytes with an actual 22.412 s
-software return. The final staged public source contains all 598 files and
-yielded the same version in an 11.443 s external return. Next obtain a fresh
-strict 23-file registration at that path before a new named input grant.
-
-Booked charges were 2,640 FULL including the nonrefundable shared reservation.
-The R1 elapsed-time floor raises the cumulative known lower bound to 337,539 FULL.
-Other fees remain UNKNOWN_NOT_ZERO. Preserve the November 16 metadata failure, all consumed quotas, prior costs, seals and both original
-dirty workspaces. Real containment, detached helpers and FULL60 have already
-passed. Fixed P/17 is unrepaired, uniform is default, full fit is PENDING4GiB
-and the all-paid failure remains.
+The contract booked 5,160 FULL for completed stages. The cumulative known
+lower bound is 342,699 FULL plus unpriced costs. Preserve all prior charges,
+failures, seals, consumed quotas and both original dirty workspaces. Original
+formal metadata, containment, detached helpers and FULL60 retain their previous
+acceptance. Fixed P/17 remains unrepaired, uniform is default, full fit is
+PENDING4GiB and the all-paid failure remains.
 
 ## Provenance boundary
 
