@@ -10,23 +10,30 @@ const PUBLIC='/private/tmp/topolab-public-staged-input-20261121-a1';
 const FORMAL='/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-staged-input-20261121-a1';
 const RECOVERY_ID='topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1';
 const RECOVERY_ROOT='/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-r0-read-20261122-a1';
-function config(author,formal=false,current=false){return qualify({author,formal,root:current==='recovery'?RECOVERY_ROOT:current?CURRENT_ROOT:formal?FORMAL:PUBLIC,
- ...(current?{execution_identity:current==='recovery'?RECOVERY_ID:CURRENT_ID}:{}),event_prefix:'mock-'+author,
+const CATALOG_ID='topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1';
+const CATALOG_ROOT='/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-catalog-r0-20261122-a1';
+const CATALOG_START=1795381093469;
+function prefixFor(current){
+ return current==='catalog'?'catalog_input':current==='recovery'?'r0_input':current?'formal_input':'staged_input';
+}
+function config(author,formal=false,current=false){return qualify({author,formal,root:current==='catalog'?CATALOG_ROOT:current==='recovery'?RECOVERY_ROOT:current?CURRENT_ROOT:formal?FORMAL:PUBLIC,
+ ...(current?{execution_identity:current==='catalog'?CATALOG_ID:current==='recovery'?RECOVERY_ID:CURRENT_ID}:{}),event_prefix:'mock-'+author,
  registration_certificate_sha:(formal?'c':'a').repeat(64),registration_finalize_actual_sha:(formal?'d':'b').repeat(64),
  formal_registration_certificate_sha:'c'.repeat(64),formal_registration_finalize_actual_sha:'d'.repeat(64)});}
 function graph({formal=false,current=false,supExit=0,late=null,partial=false,failPacket=false,pollDrift=false,truncate=false}={}){
+ const start=current==='catalog'?CATALOG_START:START;
  let plan,created,serial=0;const ready=new Promise(r=>created=r),proofs=[],calls=[],wakes=[];
  const publish=()=>{for(const fn of wakes.splice(0))fn();};
  const dispatcher=author=>async(tool,args)=>{
   const requested_ms=Date.now();calls.push({author,tool,args});let output='{}',exit_code=0;
   if(tool==='write_stdin'){if(pollDrift)return {tool,arguments:args,requested_ms,returned_ms:Date.now(),result:{output:'original drift',session_id:8}};throw Error('DECLARED_POLL_FAILURE');}
   const cmd=args.cmd.split(' --packet-json ')[0];
-  const prefix=current==='recovery'?'r0_input':current?'formal_input':'staged_input';
+  const prefix=prefixFor(current);
   if(cmd.includes(' prepare-rehearsal ')||cmd.includes(' activate-formal ')){
    const route=config(author,formal,current);plan={root:route.root,plan_sha256:'f'.repeat(64),execution_identity:route.execution_identity,
     formal_authority:formal,scope:formal?'SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY':'FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY',actor_window_seconds:4500,
-    actor_start_ms:START,whole_start_ms:START,whole_end_ms:START+4500000,
-    role_order:ROLES,coordination_limit_ms:240000,applicable_deadline_ms:START+4500000};
+    actor_start_ms:start,whole_start_ms:start,whole_end_ms:start+4500000,
+    role_order:ROLES,coordination_limit_ms:240000,applicable_deadline_ms:start+4500000};
    created();output=JSON.stringify({formal_authority:formal,plan_sha256:plan.plan_sha256});
   }else if(cmd.includes(prefix+'_waiter.py')){
    await ready;const role=cmd.match(/--role ([a-z0-9-]+)/)[1];
@@ -42,16 +49,16 @@ function graph({formal=false,current=false,supExit=0,late=null,partial=false,fai
    output=JSON.stringify({status:'PAIRED_PERSISTED',path:config(author,formal,current).evidence_root+'/mock-'+serial+++'.json',sha256:'a'.repeat(64)});
   }else if(cmd.includes(prefix+'_control.py bind ')){
    const role=cmd.match(/--role ([a-z0-9-]+)/)[1];
-   if(ROLES.includes(role)){proofs.push({role,accepted:true,complete:true,actual_exit_codes:[0,0],T0_ms:START,T1_ms:START});publish();}
+   if(ROLES.includes(role)){proofs.push({role,accepted:true,complete:true,actual_exit_codes:[0,0],T0_ms:start,T1_ms:start});publish();}
    output=JSON.stringify({full_role_evidence_accepted:true,metadata_evidence_accepted:true});
   }else if(cmd.includes(' certify-'))output=JSON.stringify({source_input_accepted:false});
   return {tool,arguments:args,requested_ms,returned_ms:Date.now(),result:{output,exit_code}};
  };
  return {dispatcher,proofs,calls};
 }
-for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'recovery']])test(
+for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'recovery'],[true,'catalog']])test(
  'two actors complete the SUP/REC schedule (formal='+formal+', current='+current+')',async()=>{
- const old=Date.now;Date.now=()=>START;
+ const old=Date.now;Date.now=()=>current==='catalog'?CATALOG_START:START;
  try{
   const h=graph({formal,current});const [root,independent]=await Promise.all([
    executeActor(config('producer',formal,current),h.dispatcher('producer')),
@@ -63,8 +70,8 @@ for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'rec
   assert.equal(native.length,16);assert.ok(native.every(c=>c.args.sandbox_permissions==='require_escalated'));
   assert.ok(h.calls.every(c=>c.args.prefix_rule===undefined));
   for(const row of h.calls){const cmd=row.args.cmd.split(' --packet-json ')[0];
-   const prefix=current==='recovery'?'r0_input':current?'formal_input':'staged_input';
-   if(current)assert.equal(row.args.workdir,current==='recovery'?'/private/tmp/topolab-r0-read-20261122':'/private/tmp/topolab-formal-input-20261122');
+   const prefix=prefixFor(current);
+   if(current)assert.equal(row.args.workdir,current==='catalog'?'/private/tmp/topolab-catalog-r0-20261122':current==='recovery'?'/private/tmp/topolab-r0-read-20261122':'/private/tmp/topolab-formal-input-20261122');
    if(cmd.includes(prefix+'_filer.py persist')||cmd.includes(prefix+'_waiter.py'))assert.equal(row.args.sandbox_permissions,undefined);
    if(formal&&cmd.includes(prefix+'_filer.py file '))assert.equal(row.args.sandbox_permissions,'require_escalated');
   }

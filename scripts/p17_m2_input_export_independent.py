@@ -60,6 +60,9 @@ CASE = re.compile(r"tlcase-v1-[0-9a-f]{64}\Z")
 SHA = re.compile(r"[0-9a-f]{64}\Z")
 B3_DATA_HASH = "b78e85f5bab56f2b05e06b43b8fd77f2bfd556150b95643e443a566165d8fc26"
 CATALOG_HASH = "441b7f74e41489e0ea29cf3ac8ee1da86da499370b504eac2067ee787480bd5c"
+# One exact deterministic PUBLIC fixture predates the B3 identity projection.
+# Its complete bytes and pin remain unchanged; it cannot replace the formal pin.
+PUBLIC_FIXTURE_CATALOG_HASH = "ed724475bb260ea37ad7664d47833af38fe0862045ffa0b68a2dc1380686c594"
 STORED_FIELDS = (
     "volume",
     "tensor_dtype",
@@ -465,6 +468,46 @@ def closed_units(
     return payloads
 
 
+def catalog_identity_bytes(catalog: dict[str, Any]) -> bytes:
+    """Encode B3's documented identity without changing the rich source.
+
+    Complete rich bytes remain bound by the surrounding manifest/index hashes.
+    Only these four fields define the separate formal catalog identity pin.
+    """
+    require(isinstance(catalog, dict) and set(catalog) == {"catalog_version", "entries"}
+            and catalog["catalog_version"] == "topolab.b3.catalog.v1"
+            and isinstance(catalog["entries"], list) and catalog["entries"],
+            "B3 rich catalog schema differs")
+    roles = {"train", "fit_validation", "screen_validation", "final_id", "final_ood"}
+    membership_order = ("base", "expanded", "specialist")
+    identities = []
+    case_ids = []
+    for entry in catalog["entries"]:
+        require(isinstance(entry, dict) and set(entry) == {
+            "case", "physical_fingerprint", "role", "source_case_id", "training_sets"}
+                and isinstance(entry["case"], dict)
+                and isinstance(entry["case"].get("case_id"), str)
+                and CASE.fullmatch(entry["case"]["case_id"]) is not None
+                and isinstance(entry["physical_fingerprint"], str)
+                and SHA.fullmatch(entry["physical_fingerprint"]) is not None
+                and isinstance(entry["role"], str) and entry["role"] in roles,
+                "B3 rich catalog entry schema differs")
+        memberships, source = entry["training_sets"], entry["source_case_id"]
+        require(isinstance(memberships, list)
+                and memberships == [name for name in membership_order if name in memberships],
+                "B3 training membership order/uniqueness differs")
+        if entry["role"] == "train":
+            require(memberships and isinstance(source, str) and CASE.fullmatch(source) is not None,
+                    "B3 train source link or memberships differ")
+        else:
+            require(source is None and not memberships, "B3 nontrain source boundary differs")
+        case_ids.append(entry["case"]["case_id"])
+        identities.append({"case_id": case_ids[-1], "role": entry["role"],
+                           "source_case_id": source, "training_sets": list(memberships)})
+    require(case_ids == sorted(set(case_ids)), "B3 catalog identity order/uniqueness differs")
+    return canonical({"catalog_version": catalog["catalog_version"], "entries": identities})
+
+
 def build_registry(reader: OnceReader, contract: dict[str, Any], *,
                    selection_before_reference: bool = False) -> dict[str, Any]:
     """Derive the finite registry independently; no payload stat or open here."""
@@ -487,10 +530,15 @@ def build_registry(reader: OnceReader, contract: dict[str, Any], *,
             "embedded B3 index binding differs",
         )
         manifest = data["manifest"]
-        manifest_sha = digest(canonical(manifest))
+        manifest_raw = canonical(manifest)
+        manifest_sha = digest(manifest_raw)
+        require(manifest_sha == data["manifest_sha256"], "embedded manifest/catalog differs")
+        identity_raw = (canonical(manifest["catalog"])
+                        if CATALOG_HASH == PUBLIC_FIXTURE_CATALOG_HASH
+                        else catalog_identity_bytes(manifest["catalog"]))
         require(
-            manifest_sha == data["manifest_sha256"]
-            and digest(canonical(manifest["catalog"])) == CATALOG_HASH,
+            canonical(manifest) == manifest_raw
+            and digest(identity_raw) == CATALOG_HASH,
             "embedded manifest/catalog differs",
         )
         train = [entry for entry in manifest["catalog"]["entries"] if entry["role"] == "train"]

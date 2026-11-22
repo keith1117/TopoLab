@@ -2123,7 +2123,7 @@ def main():
         else:
             result = payload(root, plan, args.role, transport)
     raw_return = base().canonical(result)
-    if CONTINUATION_INPUT == continuation.R0_INPUT and args.mode in ("record", "bind"):
+    if CONTINUATION_INPUT in continuation.PROOF_MODULES and args.mode in ("record", "bind"):
         # Retain the complete returned value, including post-write cleanup failures.
         base().put(root / "receipts" / f"{args.role}-{args.mode}-original.json", result)
         outward = load("r0_caller_receipt").project(

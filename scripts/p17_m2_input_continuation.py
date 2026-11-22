@@ -270,7 +270,8 @@ CONFIGS[FORMAL_INPUT] = {
 }
 
 R0_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1"
-FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT)
+CATALOG_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1"
+FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT)
 R0_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/r0-read-acceptance-20261122"
 CONFIGS[R0_INPUT] = {
     **CONFIGS[FORMAL_INPUT],
@@ -293,6 +294,35 @@ CONFIGS[R0_INPUT] = {
         "r0_read_observation.py", "r0_read_independent.py", "r0_caller_receipt.py"),
     "budget": {"path": R0_EVIDENCE + "/owner-budget-registration.json",
                "sha256": "149fe42c5df8849c49d3cb39b62004a8b0d7d82bf3ce1c7bca131f24f9c0b666"},
+}
+
+CATALOG_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/catalog-r0-acceptance-20261122"
+CONFIGS[CATALOG_INPUT] = {
+    **CONFIGS[R0_INPUT],
+    "input": CATALOG_INPUT,
+    "prefix": "topolab-unfunded-catalog-20261122-",
+    "generations": (PARENT + "p17-m2-catalog-r0-20261122-a1",),
+    "input_protocol": "docs/planning/catalog_input_contract.json",
+    "schema": "topolab.v2.m2-registered-source-acquisition-authority.catalog-20261122.v1",
+    "preparation_entry": "catalog_input_preparation.py",
+    "input_entry": "catalog_registered_input.py",
+    "control_entry": "catalog_input_control.py",
+    "evidence_root": CATALOG_EVIDENCE,
+    "cache_suffix": "_catalog_20261122",
+    "global_deadline_ms": 1795467483469,
+    "window_module": "catalog_input_window",
+    "caller_waiter": "catalog_input_waiter.py",
+    "caller_filer": "catalog_input_filer.py",
+    "registration_helpers": (*CONFIGS[R0_INPUT]["registration_helpers"],
+                             "catalog_input_route.py", "catalog_input_offline.py"),
+    "budget": {"path": CATALOG_EVIDENCE + "/owner-budget-registration.json",
+               "sha256": "985ad9aa67a4cbdc8a5c36cadbf4c7920f39559c57e2115a98e902d17d31c11f"},
+}
+
+# Preparation and its replay use the same evidence key for each published profile.
+PROOF_MODULES = {
+    R0_INPUT: ("r0_read_verification", "r0_read_independent"),
+    CATALOG_INPUT: ("catalog_verification", "catalog_input_offline"),
 }
 
 INPUT_IDENTITIES = tuple(CONFIGS)

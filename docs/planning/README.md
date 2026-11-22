@@ -1,5 +1,8 @@
 # Planning index
 
+[Independent R0 catalog repair and formal input contract](catalog_input_acceptance.md)
+registers offline verification and one fresh six-role attempt.
+
 [Exporter R0 read recovery and formal input contract](r0_read_input_recovery.md)
 closed after two roles passed and independent R0 rejected the B3 catalog
 identity. [Result](../validation/r0_read_input_recovery.md)

@@ -85,9 +85,9 @@ def prepare(subject, mode, *, entry=ENTRY):
     public, certificate, public_end = (subject.prior_public_proof(policy) if historical
                                        else public_proof(subject, policy))
     tree = subject.control.source_freeze(subject.IDENTITY)
-    is_recovery = subject.IDENTITY == profiles.R0_INPUT
-    verification = (subject.control.load("r0_read_independent").verified_readiness(policy, tree)
-                    if is_recovery else None)
+    proof_spec = profiles.PROOF_MODULES.get(subject.IDENTITY)
+    verification = (subject.control.load(proof_spec[1]).verified_readiness(policy, tree)
+                    if proof_spec else None)
     paths = policy["preparation_closure_paths"]
     runtime = base.runtime()
     argv = [runtime["python"], "-I", str(entry), "retain"]
@@ -103,8 +103,8 @@ def prepare(subject, mode, *, entry=ENTRY):
     }
     if historical:
         closure["prior_public"] = policy["prior_public"]
-    if is_recovery:
-        closure["r0_read_verification"] = verification
+    if proof_spec:
+        closure[proof_spec[0]] = verification
     digest = producer.sha(producer.canonical(closure))
     summary = {
         "status": "REGISTERED_INPUT_PREPARATION_PAIR_RETAINED",
@@ -153,10 +153,10 @@ def prepare(subject, mode, *, entry=ENTRY):
     }
     if historical:
         ready["prior_public"] = policy["prior_public"]
-    if is_recovery:
+    if proof_spec:
         subject.need(verification["verified_returned_ms"] <= first,
                      "read verification after retain")
-        ready["r0_read_verification"] = verification
+        ready[proof_spec[0]] = verification
     within_budget()
     base.put(Path(policy["readiness_path"]), ready)
     return {"path": policy["readiness_path"], "sha256": producer.sha(producer.canonical(ready))}

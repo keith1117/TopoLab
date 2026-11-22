@@ -100,12 +100,15 @@ def main():
     routes = parser.add_mutually_exclusive_group()
     routes.add_argument("--formal-only", action="store_true")
     routes.add_argument("--r0-read", action="store_true")
+    routes.add_argument("--catalog", action="store_true")
     args = parser.parse_args()
     selected = wire
-    if args.formal_only or args.r0_read:
+    if args.formal_only or args.r0_read or args.catalog:
         import runpy
 
         name = "r0_input_route.py" if args.r0_read else "formal_input_route.py"
+        if args.catalog:
+            name = "catalog_input_route.py"
         route = runpy.run_path(str(SOURCE_CHECKOUT / "scripts" / name))
         selected = route["filer"]()
     if args.emit:
