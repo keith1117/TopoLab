@@ -1,5 +1,12 @@
 # TopoLab v2 Development Roadmap
 
+**November 22 R0 read recovery.** Exporter R0 accepted all 40 original files.
+Independent R0 stopped on the embedded B3 catalog identity after seven reads.
+The graph closed at 2/6 with a HELD lease. Payload and formal version
+acceptance remain open. The next input repair is the catalog identity
+comparison. [Result](../validation/r0_read_input_recovery.md)
+
+
 **November 22 formal input.** The published-byte repair passed formal
 activation. One of six roles passed. Exporter R0 recorded 33 successful
 metadata reads before read 34 timed out. The next input decision concerns

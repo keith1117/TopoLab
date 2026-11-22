@@ -1,5 +1,15 @@
 # Development history
 
+## 2026-11-22 — Exporter R0 completed all 40 formal metadata reads
+
+The protected candidate read the registered 490-byte unit twice and passed
+independent verification. One new formal run accepted two roles. Independent
+R0 stopped after seven complete bootstrap reads at the B3 catalog identity
+comparison. The lease is HELD. New charges total 2,400 FULL, bringing the
+known lower bound to 345,999 FULL plus unpriced costs.
+[Result](validation/r0_read_input_recovery.md)
+
+
 ## 2026-11-22 — Published-byte repair passed formal activation
 
 The independent verifier accepted the indented contract and the actual formal

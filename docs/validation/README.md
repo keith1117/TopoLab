@@ -1,5 +1,10 @@
 # Validation evidence index
 
+[R0 read recovery and formal input acceptance](r0_read_input_recovery.md)
+records the two protected-candidate reads, all 40 exporter reads, the
+independent catalog rejection, held lease and separate 2,400 FULL charge.
+
+
 [November 22 formal input acceptance](formal_input_published_authority.md)
 records successful activation with the published contract, the failed 34th
 metadata read, the held lease and the 900 FULL charge.
