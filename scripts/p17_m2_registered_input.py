@@ -708,11 +708,13 @@ def readiness_inputs(policy):
     if IDENTITY in profiles.FORMAL_ONLY_IDENTITIES:
         need(closure.get("prior_public") == policy["prior_public"],
              "formal preparation closure historical pins differ")
-    if IDENTITY == profiles.R0_INPUT:
-        read_proof = control.load("r0_read_independent").verified_readiness(
+    proof_spec = profiles.PROOF_MODULES.get(IDENTITY)
+    if proof_spec:
+        field, module = proof_spec
+        read_proof = control.load(module).verified_readiness(
             policy, closure["source_tree"])
-        need(ready.get("r0_read_verification") == closure.get("r0_read_verification") == read_proof,
-             "registered R0 single-file verification differs")
+        need(ready.get(field) == closure.get(field) == read_proof,
+             "registered input verification differs")
         last = max(last, read_proof["verified_returned_ms"])
     selected = profiles.CONFIGS.get(IDENTITY, {})
     if selected.get("preparation_entry"):
@@ -745,9 +747,9 @@ def readiness_inputs(policy):
 
 
 def preflight_summary(policy, ready, digest):
+    spec = control.load("p17_m2_input_continuation").PROOF_MODULES.get(IDENTITY)
     return {
-        **({"r0_read_verification": ready["r0_read_verification"]}
-           if IDENTITY == control.load("p17_m2_input_continuation").R0_INPUT else {}),
+        **({spec[0]: ready[spec[0]]} if spec else {}),
         "status": "PASS_REGISTERED_INPUT_METADATA_PREFLIGHT",
         "execution_identity": IDENTITY,
         "author": policy["actors"]["independent"],
@@ -819,9 +821,10 @@ def publication_readiness(value):
         independent_preflight_sha256=producer.sha(raw),
     )
     main = control.published_main_readiness(combined, funded=True)
-    if IDENTITY == control.load("p17_m2_input_continuation").R0_INPUT:
-        need(main["main"] == ready["r0_read_verification"]["source_main"],
-             "single-file verified source differs from protected main")
+    spec = control.load("p17_m2_input_continuation").PROOF_MODULES.get(IDENTITY)
+    if spec:
+        need(main["main"] == ready[spec[0]]["source_main"],
+             "verified source differs from protected main")
     return dict(
         main,
         readiness_reference={"path": policy["readiness_path"], "sha256": digest},

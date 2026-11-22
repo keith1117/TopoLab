@@ -18,8 +18,13 @@ const r0Read={
  ID:'topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1', BUDGET:'149fe42c5df8849c49d3cb39b62004a8b0d7d82bf3ce1c7bca131f24f9c0b666',
  PUBLIC:null, FORMAL:'/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-r0-read-20261122-a1', GLOBAL_START:1795333814731, GLOBAL_END:1795420214731, prefix:'r0_input'
 };
+const catalog={
+ REPO:'/private/tmp/topolab-catalog-r0-20261122', E:'/Users/keith1117/Documents/TopoLab-data/catalog-r0-acceptance-20261122',
+ ID:'topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1', BUDGET:'985ad9aa67a4cbdc8a5c36cadbf4c7920f39559c57e2115a98e902d17d31c11f',
+ PUBLIC:null, FORMAL:'/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-catalog-r0-20261122-a1', GLOBAL_START:1795381083469, GLOBAL_END:1795467483469, prefix:'catalog_input'
+};
 const staged={REPO,E,ID,BUDGET,PUBLIC,FORMAL,GLOBAL_START,GLOBAL_END,prefix:'staged_input'};
-function routeFor(identity){return [staged,formalOnly,r0Read].find(route=>route.ID===identity)??staged;}
+function routeFor(identity){return [staged,formalOnly,r0Read,catalog].find(route=>route.ID===identity)??staged;}
 const ROLES=['independent-public-check','exporter-r0','independent-r0','exporter-r1','independent-r1','shared-closeout'];
 const FULL=[300,300,300,1200,1200,300];
 const need=(condition,reason)=>{if(!condition)throw Error('STAGED_CALLER_STOP: '+reason);};
@@ -145,7 +150,7 @@ export async function executeActor(input,dispatch,now=Date.now){
   const secondary=[];if(active?.first_failure){if(String(reason)!==active.first_failure)secondary.push({stage:'after first '+active.role,reason:String(reason)});reason=active.first_failure;}
   failureDeadline??=Math.min(now()+180000,GLOBAL_END);
   const failure={schema:'topolab.staged-input-caller-failure.v1',author,event_id:prefix+'-STOP',execution_identity:ID,caller_root:config.root,reason:String(reason),plan,active,observed,
-   ...(ID===r0Read.ID?{original_row_count:raw.length,full_rows_custody:'outer actor result'}:{original_rows:raw}),shared_reservation:packets.shared_reservation??'NOT_REQUESTED_BY_THIS_ACTOR',own_future_return:'NOT_CLAIMED'};
+   ...([r0Read.ID,catalog.ID].includes(ID)?{original_row_count:raw.length,full_rows_custody:'outer actor result'}:{original_rows:raw}),shared_reservation:packets.shared_reservation??'NOT_REQUESTED_BY_THIS_ACTOR',own_future_return:'NOT_CLAIMED'};
   let saved=null;
   try{saved=await persist(failure,'caller-STOP');}catch(error){secondary.push({stage:'failure packet',reason:String(error)});}
   if(saved&&plan){

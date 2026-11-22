@@ -34,6 +34,7 @@ REGISTERED_SCHEMA = "topolab.v2.m2-registered-source-acquisition-authority.v2"
 REGISTERED_PREFIX = "topolab-public-registered-source-acquisition-"
 FORMAL_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1"
 R0_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1"
+CATALOG_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1"
 NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
 NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
 NEW_PUBLIC_PREFIX = "topolab-public-new-source-acquisition-"
@@ -198,14 +199,14 @@ def _metadata_first_profile():
 
 
 def _formal_only_profile():
-    return REGISTERED_IDENTITY in (FORMAL_INPUT, R0_INPUT)
+    return REGISTERED_IDENTITY in (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT)
 
 
 def _prior_public_module(name='formal_input_independent'):
     """Share only this source-pinned module/cache with the producer in one process."""
     import sys
 
-    require(name in ('formal_input_independent', 'r0_read_independent'),
+    require(name in ('formal_input_independent', 'r0_read_independent', 'catalog_input_offline'),
             'exact independent metadata module required')
     path = Path(__file__).with_name(name + '.py')
     raw = native._software_bytes(path)
@@ -308,9 +309,10 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
                 and value.get('mandatory_result_suffix_seconds') == 7200
                 and value.get('new_input_budget') == CONTINUATION_CONFIG['budget']
                 and value.get('public_roots') == []
-                and value.get('prior_public') == _prior_public_module().expected_prior(
-                    _prior_public_module().R0_EVIDENCE
-                    if REGISTERED_IDENTITY == R0_INPUT else _prior_public_module().EVIDENCE),
+                and value.get('prior_public') == _prior_public_module().expected_prior({
+                    FORMAL_INPUT: _prior_public_module().EVIDENCE,
+                    R0_INPUT: _prior_public_module().R0_EVIDENCE,
+                    CATALOG_INPUT: _prior_public_module().CATALOG_EVIDENCE}[REGISTERED_IDENTITY]),
                 'NEW formal-only budget/root/prior limits differ')
     return value
 
@@ -1407,11 +1409,14 @@ def _formal_registered_preflight(plan, raw):
     history = _prior_public_module().verify_prior_public(
         prior, _formal_pair(prior['bundle']), _formal_pair(prior['actual']))
     read_proof = None
-    if REGISTERED_IDENTITY == R0_INPUT:
-        read_proof = _prior_public_module('r0_read_independent').verified_readiness(
+    proof_spec = {R0_INPUT: ('r0_read_verification', 'r0_read_independent'),
+                  CATALOG_INPUT: ('catalog_verification', 'catalog_input_offline')}
+    if REGISTERED_IDENTITY in proof_spec:
+        proof_key, proof_module = proof_spec[REGISTERED_IDENTITY]
+        read_proof = _prior_public_module(proof_module).verified_readiness(
             authority, plan['source_tree'])
-        require(ready.get('r0_read_verification') == read_proof,
-                'R0 readiness independent single-file proof differs')
+        require(ready.get(proof_key) == read_proof,
+                'registered readiness independent prerequisite proof differs')
     paths = ready.get('preparation_closure_paths')
     require(paths == authority['preparation_closure_paths'] and len(paths) == 2,
             'NEW formal preparation pair paths differ')
@@ -1432,8 +1437,8 @@ def _formal_registered_preflight(plan, raw):
             and closure.get('retention_argv') == argv,
             'NEW formal preparation closure content differs')
     if read_proof is not None:
-        require(closure.get('r0_read_verification') == read_proof,
-                'R0 closure independent single-file proof differs')
+        require(closure.get(proof_key) == read_proof,
+                'registered closure independent prerequisite proof differs')
     retention_pin = ready.get('preparation_retention_actual', {})
     require(retention_pin.get('path') == authority['preparation_retention_actual_path'],
             'NEW formal retention actual literal differs')
@@ -1450,7 +1455,7 @@ def _formal_registered_preflight(plan, raw):
             'NEW formal preparation original return/stdout differs')
     if read_proof is not None:
         require(read_proof['verified_returned_ms'] <= retained_first,
-                'R0 verification return must precede actual preparation')
+                'prerequisite verification return must precede actual preparation')
     require(_formal_pair(actual_pin) == raw, 'NEW formal actual buffer pair differs')
     packet = native.base.parse(raw)
     argv = [plan['runtime']['python'], '-I', str(REPO / 'scripts'
@@ -1465,7 +1470,7 @@ def _formal_registered_preflight(plan, raw):
                     new_input_budget=authority['new_input_budget'], source_stat_reads=0,
                     target_stat_reads=0, own_future_return='NOT_CLAIMED')
     if read_proof is not None:
-        expected['r0_read_verification'] = read_proof
+        expected[proof_key] = read_proof
     require(''.join(row['result']['output'] for row in packet['responses']).encode()
             == canonical(expected) and retained_end <= started <= ended
             <= authority['global_deadline_ms'],
@@ -2473,7 +2478,7 @@ def validate_setup(
     if plan["scope"] == FORMAL_SCOPE:
         authority = native.base.parse(native._software_bytes(REPO / _protocol_path(plan)))
         if plan['execution_identity'] == REGISTERED_IDENTITY:
-            _registered_preflight(plan, native._software_bytes(
+            prerequisite = _registered_preflight(plan, native._software_bytes(
                 Path(plan['independent_preflight']['path'])))
             captured = _registered_read_pin(plan['activation_readiness'])
             authority = dict(
@@ -2487,6 +2492,9 @@ def validate_setup(
                         == authority["preparation_closure_sha256"],
                         "funded preparation closure metadata changed")
         ready = setup["readiness"]
+        if plan['execution_identity'] == CATALOG_INPUT:
+            require(ready['main'] == prerequisite['catalog_verification']['source_main'],
+                    'catalog offline source differs from actual activation main')
         filesystem = setup["filesystem"]
         require(
             ready["actors"] == authority["actors"]

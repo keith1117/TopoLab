@@ -229,7 +229,12 @@ def test_primary_accepts_independently_authored_original_weight_bytes(family: st
     checker.check_safetensors(raw, row)
 
 
-def test_R0_wire_from_new_synthetic_metadata_only(monkeypatch, tmp_path: Path) -> None:  # type: ignore[no-untyped-def]
+@pytest.mark.parametrize("tamper", ["none", "identity", "nonidentity", "manifest", "raw",
+                                  "path", "size", "projection-mutation", "formal-full-pin",
+                                  "legacy-good",
+                                  "legacy-identity", "legacy-nonidentity", "legacy-dynamic-pin",
+                                  "legacy-formal-pin"])
+def test_R0_wire_from_new_synthetic_metadata_only(monkeypatch, tmp_path: Path, tamper) -> None:  # type: ignore[no-untyped-def]
     # Reuse the primary's new metadata as a test subject, filling the committed
     # schema's fields its minimal fixture omitted. No historical path is read.
     spec = importlib.util.spec_from_file_location(
@@ -243,20 +248,25 @@ def test_R0_wire_from_new_synthetic_metadata_only(monkeypatch, tmp_path: Path) -
     fit_path = tmp_path / "b3-v1-fits/b3_training.json"
     fits = checker.parse(fit_path.read_bytes())
     data = fits["context"]["data_index"]
+    from topolab.b3_catalog import build_b3_case_catalog
+
+    legacy = tamper.startswith("legacy-")
+    rich_catalog = (dict(catalog_version="topolab.b3.catalog.v1", entries=[
+        checker.public_label((12, 6, 3) if i < 432 else (24, 12, 6), i+1)["entry"]
+        for i in range(528)]) if legacy else build_b3_case_catalog().model_dump(mode="json"))
+    if legacy and tamper != "legacy-formal-pin":
+        monkeypatch.setattr(checker, "CATALOG_HASH", checker.PUBLIC_FIXTURE_CATALOG_HASH)
+    train = [entry for entry in rich_catalog["entries"] if entry["role"] == "train"]
     for i, outcome in enumerate(data["entries"], 1):
-        entry = outcome["entry"]
-        case_id = "tlcase-v1-" + f"{i:064x}"
-        entry["case"]["case_id"] = case_id
+        entry = outcome["entry"] = deepcopy(train[i-1])
+        case_id = entry["case"]["case_id"]
         artifact = outcome["artifact"]
         artifact["access"]["entry"] = deepcopy(entry)
         artifact["relative_path"] = (
             f"artifacts/label/{case_id}/{artifact['access']['artifact_sha256']}.json"
         )
     manifest = data["manifest"]
-    manifest["catalog"] = {
-        "catalog_version": "topolab.b3.catalog.v1",
-        "entries": [o["entry"] for o in data["entries"]],
-    }
+    manifest["catalog"] = deepcopy(rich_catalog)
     manifest_sha = checker.digest(checker.canonical(manifest))
     data["manifest_sha256"] = manifest_sha
     for outcome in data["entries"]:
@@ -267,9 +277,18 @@ def test_R0_wire_from_new_synthetic_metadata_only(monkeypatch, tmp_path: Path) -
     fits["context_sha256"] = checker.digest(checker.canonical(fits["context"]))
     contract["R0"]["embedded_B3_data_index_sha256"] = data_sha
     monkeypatch.setattr(checker, "B3_DATA_HASH", data_sha)
-    monkeypatch.setattr(
-        checker, "CATALOG_HASH", checker.digest(checker.canonical(manifest["catalog"]))
-    )
+    identity = dict(catalog_version="topolab.b3.catalog.v1", entries=[dict(
+        case_id=e["case"]["case_id"], role=e["role"], source_case_id=e["source_case_id"],
+        training_sets=e["training_sets"]) for e in manifest["catalog"]["entries"]])
+    if legacy:
+        assert (checker.digest(checker.canonical(rich_catalog))
+                == checker.PUBLIC_FIXTURE_CATALOG_HASH)
+    else:
+        assert checker.digest(checker.canonical(identity)) == checker.CATALOG_HASH == (
+            "441b7f74e41489e0ea29cf3ac8ee1da86da499370b504eac2067ee787480bd5c")
+    if tamper == "formal-full-pin":
+        monkeypatch.setattr(checker, "CATALOG_HASH",
+                            checker.digest(checker.canonical(rich_catalog)))
     wroot = "b4-5-weighted-terminal/fit"
     for row in contract["checkpoints"]["fixed_rows"]:
         weighted = row["family"] == "W"
@@ -299,7 +318,55 @@ def test_R0_wire_from_new_synthetic_metadata_only(monkeypatch, tmp_path: Path) -
         (tmp_path / root / f"artifacts/selection/{ref['sha256']}.json").write_bytes(raw)
         if weighted:
             unit_path.write_bytes(checker.canonical(unit))
-    fit_path.write_bytes(checker.canonical(fits))
+    if tamper in ("legacy-identity", "legacy-nonidentity", "legacy-dynamic-pin"):
+        changed = manifest["catalog"]["entries"][0]
+        if tamper == "legacy-identity":
+            changed["training_sets"] = ["base"]
+        else:
+            changed["physical_fingerprint"] = "0" * 64
+        if tamper == "legacy-dynamic-pin":
+            monkeypatch.setattr(checker, "CATALOG_HASH",
+                                checker.digest(checker.canonical(manifest["catalog"])))
+        manifest_sha = checker.digest(checker.canonical(manifest))
+        data["manifest_sha256"] = manifest_sha
+        for outcome in data["entries"]:
+            outcome["artifact"]["manifest_sha256"] = manifest_sha
+        next_sha = checker.digest(checker.canonical(data))
+        fits["context"]["data_index_sha256"] = next_sha
+        monkeypatch.setattr(checker, "B3_DATA_HASH", next_sha)
+        fits["context_sha256"] = checker.digest(checker.canonical(fits["context"]))
+    if tamper in ("identity", "nonidentity", "manifest", "path", "size"):
+        if tamper == "identity":
+            changed = next(e for e in manifest["catalog"]["entries"] if e["role"] == "train")
+            changed["training_sets"] = ["specialist"]
+            manifest_sha = checker.digest(checker.canonical(manifest))
+            data["manifest_sha256"] = manifest_sha
+            for outcome in data["entries"]:
+                outcome["artifact"]["manifest_sha256"] = manifest_sha
+        elif tamper == "nonidentity":
+            manifest["catalog"]["entries"][0]["case"]["problem"]["material"][
+                "solid_modulus"] += 1
+        elif tamper == "manifest":
+            manifest["context"]["source_revision"] = "d" * 40
+        elif tamper == "path":
+            data["entries"][0]["artifact"]["relative_path"] = "artifacts/label/wrong.json"
+        else:
+            data["entries"][0]["artifact"]["byte_size"] = -1
+        if tamper != "nonidentity":
+            next_sha = checker.digest(checker.canonical(data))
+            fits["context"]["data_index_sha256"] = next_sha
+            monkeypatch.setattr(checker, "B3_DATA_HASH", next_sha)
+        fits["context_sha256"] = checker.digest(checker.canonical(fits["context"]))
+    if tamper == "projection-mutation":
+        original = checker.catalog_identity_bytes
+
+        def mutating_projection(catalog):  # type: ignore[no-untyped-def]
+            projected = original(catalog)
+            catalog["entries"][0].pop("physical_fingerprint")
+            return projected
+
+        monkeypatch.setattr(checker, "catalog_identity_bytes", mutating_projection)
+    fit_path.write_bytes(checker.canonical(fits) + (b"\n" if tamper == "raw" else b""))
     for base, count in ((wroot, 3), ("b4-30-z-reflection-repair-v2/sentinel/reference", 18)):
         previous = "0" * 64
         for i in range(count):
@@ -323,11 +390,20 @@ def test_R0_wire_from_new_synthetic_metadata_only(monkeypatch, tmp_path: Path) -
         summary_path.write_bytes(checker.canonical(summary))
     for item in contract["R0"]["literal_bootstrap_files"]:
         item["expected_sha256"] = checker.digest((tmp_path / item["relative_path"]).read_bytes())
-    expected = checker.build_registry(checker.OnceReader(tmp_path, 40, 32 * checker.MIB), contract)
+    before = {p: p.read_bytes() for p in tmp_path.rglob("*.json")}
+    if tamper not in ("none", "legacy-good"):
+        with pytest.raises(ValueError):
+            checker.build_registry(checker.OnceReader(tmp_path, 40, 32 * checker.MIB), contract,
+                                   selection_before_reference=True)
+        assert before == {p: p.read_bytes() for p in before}
+        return
+    expected = checker.build_registry(checker.OnceReader(tmp_path, 40, 32 * checker.MIB), contract,
+                                      selection_before_reference=True)
     actual = subject.register(subject.Reader(tmp_path), contract)
     assert checker.compare_words(expected, actual) > 6000
     assert len(expected["metadata"]) == 40
     assert len(expected["labels"]) == 528
+    assert before == {p: p.read_bytes() for p in before}
     assert not any(
         "artifacts/label/" in r["path"] or r["path"].endswith(".safetensors")
         for r in expected["metadata"]

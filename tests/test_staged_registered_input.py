@@ -54,6 +54,10 @@ def profiles(tmp_path, monkeypatch):
     read_evidence.mkdir(mode=0o700)
     read_evidence.with_name(read_evidence.name + '-backup').mkdir(mode=0o700)
     monkeypatch.setitem(value.config(value.R0_INPUT), 'evidence_root', str(read_evidence))
+    catalog = tmp_path / 'catalog-software-evidence'
+    catalog.mkdir(mode=0o700)
+    catalog.with_name(catalog.name + '-backup').mkdir(mode=0o700)
+    monkeypatch.setitem(value.config(value.CATALOG_INPUT), 'evidence_root', str(catalog))
     return value
 
 
@@ -491,7 +495,7 @@ def test_formal_activation_and_independent_verifier_use_indented_published_bytes
         checker.validate_binding(plan)
 
 
-@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT'])
+@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT', 'CATALOG_INPUT'])
 def test_formal_only_route_binds_one_new_generation_and_no_public_quota(profile_name, profiles):
     registered = profiles.profile('registered', getattr(profiles, profile_name))
     policy = registered.authority()
@@ -506,7 +510,7 @@ def test_formal_only_route_binds_one_new_generation_and_no_public_quota(profile_
     assert profiles.config_for_root(old_formal)['input'] == IDENTITY
 
 
-@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT'])
+@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT', 'CATALOG_INPUT'])
 def test_new_formal_measurement_accepts_only_the_exact_formal_role_command(profile_name,
         profiles, tmp_path, monkeypatch):
     config = profiles.config(getattr(profiles, profile_name))
@@ -538,7 +542,7 @@ def test_new_formal_measurement_accepts_only_the_exact_formal_role_command(profi
     'supervise', 'record', 'bind', 'run', 'payload',
     'certify-input-version', 'prepare-rehearsal', 'certify-rehearsal',
 ])
-@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT'])
+@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT', 'CATALOG_INPUT'])
 def test_formal_entry_routes_nested_commands_before_touching_custody(
         profile_name, profiles, monkeypatch, mode):
     subject = profiles.profile('control', getattr(profiles, profile_name))
@@ -573,7 +577,7 @@ def test_repaired_binary_cannot_reopen_closed_staged_formal_attempt(profiles, mo
 @pytest.mark.parametrize('mode', ['supervise', 'record', 'run', 'payload', 'bind',
                                   'certify-input-version'])
 @pytest.mark.parametrize('peer', [False, True])
-@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT'])
+@pytest.mark.parametrize('profile_name', ['FORMAL_INPUT', 'R0_INPUT', 'CATALOG_INPUT'])
 def test_formal_control_rejects_either_stop_before_target(
         profile_name, profiles, monkeypatch, mode, peer):
     subject = profiles.profile('control', getattr(profiles, profile_name))
