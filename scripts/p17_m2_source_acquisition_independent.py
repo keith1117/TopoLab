@@ -32,6 +32,7 @@ REGISTERED_IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.20261104.
 REGISTERED_PROTOCOL = "docs/planning/p17_m2_registered_input_v2_protocol.json"
 REGISTERED_SCHEMA = "topolab.v2.m2-registered-source-acquisition-authority.v2"
 REGISTERED_PREFIX = "topolab-public-registered-source-acquisition-"
+FORMAL_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1"
 NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
 NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
 NEW_PUBLIC_PREFIX = "topolab-public-new-source-acquisition-"
@@ -195,6 +196,37 @@ def _metadata_first_profile():
     return REGISTERED_IDENTITY in (profiles.NOV21_INPUT, profiles.STAGED_INPUT)
 
 
+def _formal_only_profile():
+    return REGISTERED_IDENTITY == FORMAL_INPUT
+
+
+def _prior_public_module():
+    """Share only this source-pinned module/cache with the producer in one process."""
+    import sys
+
+    name = 'formal_input_independent'
+    path = Path(__file__).with_name(name + '.py')
+    raw = native._software_bytes(path)
+    current = sys.modules.get(name)
+    if (current is not None and Path(current.__file__).resolve() == path.resolve()
+            and getattr(current, 'MODULE_SOURCE_SHA256', None) == digest(raw)):
+        return current
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    try:
+        exec(compile(raw, str(path), 'exec', dont_inherit=True), module.__dict__)
+        # Bind the code actually compiled, rather than a later source self-read.
+        module.MODULE_SOURCE_SHA256 = digest(raw)
+        loader = sys.modules.get('full60_input_loader')
+        if loader is not None:
+            loader.loaded_source_sha256[str(path.resolve())] = digest(raw)
+    except BaseException:
+        sys.modules.pop(name, None)
+        raise
+    return module
+
+
 def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
     raw = native._software_bytes(REPO / REGISTERED_PROTOCOL)
     require(digest(raw) == plan['source_tree'][REGISTERED_PROTOCOL]
@@ -257,6 +289,25 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
                 and value.get('new_input_budget') == CONTINUATION_CONFIG['budget']
                 and value.get('public_roots') == [CONTINUATION_CONFIG['public_root']],
                 'NEW exact single-attempt budget/root/whole limits differ')
+    if _formal_only_profile():
+        require(plan.get('scope') == FORMAL_SCOPE
+                and limits.get('FULL_all_input_attempts_ceiling') == 3780
+                and limits.get('formal_top_control_CLI_all') == 52
+                and limits.get('public_top_control_CLI_all') == 0
+                and limits.get('public_FULL_all_ceiling') == 0
+                and limits.get('public_graphs_max') == 0
+                and limits.get('original_public1_2_and_new3_total_attempts') == 0
+                and limits.get('coordination_seconds_max') == 240
+                and limits.get('prepare_to_first_SUP_seconds_max') == 30
+                and limits.get('metadata_action_cap') == 180
+                and value.get('new_Original_registration_reads') == 0
+                and value.get('new_Foundation_helpers') == 0
+                and value.get('whole_attempt_seconds') == 4500
+                and value.get('mandatory_result_suffix_seconds') == 7200
+                and value.get('new_input_budget') == CONTINUATION_CONFIG['budget']
+                and value.get('public_roots') == []
+                and value.get('prior_public') == _prior_public_module().expected_prior(),
+                'NEW formal-only budget/root/prior limits differ')
     return value
 
 
@@ -310,8 +361,9 @@ def _trusted_registered_sources(plan: dict[str, Any]) -> tuple[dict[str, Any], d
             'binding': {'strict23_registration': plan.get('binding', {}).get(
                 'formal_strict23_registration')},
         })
-    if REGISTERED_IDENTITY == helper(
-            'input_continuation', 'p17_m2_input_continuation.py').STAGED_INPUT:
+    if (REGISTERED_IDENTITY == helper(
+            'input_continuation', 'p17_m2_input_continuation.py').STAGED_INPUT
+            or _formal_only_profile()):
         policy = native.base.parse(native._software_bytes(REPO / REGISTERED_PROTOCOL))
         require(policy.get('execution_identity') == REGISTERED_IDENTITY
                 and policy.get('schema') == REGISTERED_SCHEMA,
@@ -921,7 +973,8 @@ def public_prepare_suffix(plan: dict[str, Any]) -> tuple[str, ...]:
 def validate_binding(plan: dict[str, Any]) -> dict[str, Any]:
     """Check authority and optional NEW public plan before payload/target IO."""
     public_prepare_suffix(plan)
-    if (plan.get('execution_identity') == REGISTERED_IDENTITY and _metadata_first_profile()
+    if (plan.get('execution_identity') == REGISTERED_IDENTITY
+            and (_metadata_first_profile() or _formal_only_profile())
             and _REGISTERED_SOURCE_REPLAY.get() is None):
         token = _REGISTERED_SOURCE_REPLAY.set({})
         try:
@@ -1301,8 +1354,111 @@ def _registered_read_pin(reference):
     return native.base.parse(raw)
 
 
+def _formal_pair(reference):
+    """Bind two exact private buffers, without following any evidence pointer."""
+    import stat
+
+    path = Path(reference['path'])
+    evidence = Path(CONTINUATION_CONFIG['evidence_root'])
+    require(path.parent == evidence and '..' not in path.parts,
+            'NEW formal private metadata literal differs')
+    peer = evidence.with_name(evidence.name + '-backup') / path.name
+    first, second = native._software_bytes(path), native._software_bytes(peer)
+    a, b = path.lstat(), peer.lstat()
+    require(first == second and digest(first) == reference['sha256']
+            and (a.st_dev, a.st_ino) != (b.st_dev, b.st_ino)
+            and all(stat.S_ISREG(x.st_mode) and stat.S_IMODE(x.st_mode) == 0o600
+                    and x.st_nlink == 1 and x.st_uid == os.getuid() for x in (a, b)),
+            'NEW formal private pair bytes/identity differ')
+    return first
+
+
+def _formal_registered_preflight(plan, raw):
+    """New source/clock gate plus historical bytes under their historical identity."""
+    authority = _registered_authority(plan)
+    require(plan.get('scope') == FORMAL_SCOPE, 'formal-only preflight scope differs')
+    ready_pin, actual_pin = plan.get('activation_readiness'), plan.get('independent_preflight')
+    require(isinstance(ready_pin, dict) and ready_pin.get('path') == authority['readiness_path']
+            and isinstance(actual_pin, dict)
+            and actual_pin.get('path') == authority['independent_preflight_actual_path']
+            and digest(raw) == actual_pin.get('sha256'),
+            'NEW formal readiness/actual literal binding differs')
+    ready = _registered_read_pin(ready_pin)
+    frozen = {name: value for name, value in plan['source_tree'].items()
+              if name != REGISTERED_PROTOCOL}
+    runtime = {key: value for key, value in plan['runtime'].items() if key != 'orig_argv'}
+    require(ready.get('schema') == 'topolab.registered-input.activation-readiness.v1'
+            and ready.get('execution_identity') == REGISTERED_IDENTITY
+            and ready.get('actors') == authority['actors']
+            and ready.get('new_input_budget') == authority['new_input_budget']
+            and ready.get('published_source_sha256') == frozen
+            and ready.get('runtime') == runtime,
+            'NEW formal independent readiness source/runtime/actors differs')
+    _registered_read_pin(authority['new_input_budget'])
+    prior = authority['prior_public']
+    require(ready.get('prior_public') == prior
+            and ready.get('public_native_acceptance') == prior['bundle']
+            and ready.get('public_certificate_actual') == prior['actual'],
+            'NEW formal historical public references differ')
+    history = _prior_public_module().verify_prior_public(
+        prior, _formal_pair(prior['bundle']), _formal_pair(prior['actual']))
+    paths = ready.get('preparation_closure_paths')
+    require(paths == authority['preparation_closure_paths'] and len(paths) == 2,
+            'NEW formal preparation pair paths differ')
+    closure_raw = _formal_pair(dict(path=paths[0], sha256=ready['preparation_closure_sha256']))
+    require(str(Path(paths[0]).parent.with_name(Path(paths[0]).parent.name + '-backup')
+                / Path(paths[0]).name) == paths[1], 'NEW formal preparation peer differs')
+    closure = native.base.parse(closure_raw)
+    argv = [plan['runtime']['python'], '-I', str(REPO / 'scripts'
+            / CONTINUATION_CONFIG['preparation_entry']), 'retain']
+    require(closure.get('schema') == 'topolab.registered-input.preparation-closure.v1'
+            and closure.get('execution_identity') == REGISTERED_IDENTITY
+            and closure.get('source_tree') == plan['source_tree']
+            and closure.get('public_native_acceptance') == prior['bundle']
+            and closure.get('prior_public') == prior
+            and closure.get('new_input_budget') == authority['new_input_budget']
+            and closure.get('status') == 'COMPLETE_SOFTWARE_ONLY'
+            and closure.get('own_future_return') == 'NOT_CLAIMED'
+            and closure.get('retention_argv') == argv,
+            'NEW formal preparation closure content differs')
+    retention_pin = ready.get('preparation_retention_actual', {})
+    require(retention_pin.get('path') == authority['preparation_retention_actual_path'],
+            'NEW formal retention actual literal differs')
+    retention = native.base.parse(_formal_pair(retention_pin))
+    recovery = helper('formal_preflight_return', 'p17_m2_source_binding_recovery.py')
+    retained_first, retained_end = recovery.exact_actual(
+        retention, argv, authority['actors']['executor'])
+    require(''.join(row['result']['output'] for row in retention['responses']).encode()
+            == canonical(dict(status='REGISTERED_INPUT_PREPARATION_PAIR_RETAINED',
+                              closure_paths=paths, sha256=ready['preparation_closure_sha256'],
+                              own_future_return='NOT_CLAIMED'))
+            and history['public_end_ms'] <= retained_first <= retained_end
+            and authority['independent_author_start_ms'] <= retained_first,
+            'NEW formal preparation original return/stdout differs')
+    require(_formal_pair(actual_pin) == raw, 'NEW formal actual buffer pair differs')
+    packet = native.base.parse(raw)
+    argv = [plan['runtime']['python'], '-I', str(REPO / 'scripts'
+            / CONTINUATION_CONFIG['input_entry']), 'preflight', '--readiness-sha',
+            ready_pin['sha256']]
+    started, ended = recovery.exact_actual(packet, argv, authority['actors']['independent'])
+    expected = dict(status='PASS_REGISTERED_INPUT_METADATA_PREFLIGHT',
+                    execution_identity=REGISTERED_IDENTITY,
+                    author=authority['actors']['independent'], readiness_path=ready_pin['path'],
+                    readiness_sha256=ready_pin['sha256'], published_source_sha256=frozen,
+                    runtime=ready['runtime'], actors=authority['actors'],
+                    new_input_budget=authority['new_input_budget'], source_stat_reads=0,
+                    target_stat_reads=0, own_future_return='NOT_CLAIMED')
+    require(''.join(row['result']['output'] for row in packet['responses']).encode()
+            == canonical(expected) and retained_end <= started <= ended
+            <= authority['global_deadline_ms'],
+            'NEW formal independent original preflight stdout/clock differs')
+    return expected
+
+
 def _registered_preflight(plan, raw):
     """Independently replay public native, pair retention and the actual I preflight."""
+    if _formal_only_profile():
+        return _formal_registered_preflight(plan, raw)
     if REGISTERED_IDENTITY == helper(
             'input_continuation', 'p17_m2_input_continuation.py').STAGED_INPUT:
         evidence = Path(CONTINUATION_CONFIG['evidence_root'])
@@ -2068,7 +2224,7 @@ def _check_software(plan: dict[str, Any]) -> None:
                 contracts += (CONTINUATION_CONFIG['review_partition'],)
             contracts += tuple('scripts/' + name for name in CONTINUATION_CONFIG.get(
                 'registration_helpers', ()))
-            if _metadata_first_profile():
+            if _metadata_first_profile() or _formal_only_profile():
                 contracts += ('scripts/' + CONTINUATION_CONFIG['caller_generator'],)
     for path in authorities:
         try:

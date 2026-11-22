@@ -44,7 +44,12 @@ def profiles(tmp_path, monkeypatch):
     evidence = tmp_path / 'default-software-evidence'
     evidence.mkdir(mode=0o700)
     evidence.with_name(evidence.name + '-backup').mkdir(mode=0o700)
+    monkeypatch.setattr(value, 'STAGED_EVIDENCE', str(evidence))
     monkeypatch.setitem(value.config(IDENTITY), 'evidence_root', str(evidence))
+    formal = tmp_path / 'formal-software-evidence'
+    formal.mkdir(mode=0o700)
+    formal.with_name(formal.name + '-backup').mkdir(mode=0o700)
+    monkeypatch.setitem(value.config(value.FORMAL_INPUT), 'evidence_root', str(formal))
     return value
 
 
@@ -438,3 +443,138 @@ def test_unobservable_stop_copy_namespace_fails_closed(profiles):
     evidence.with_name(evidence.name + '-backup').rmdir()
     with pytest.raises((OSError, ValueError)):
         subject.public_stop_veto()
+
+
+@pytest.mark.parametrize("current", [False, True], ids=["staged", "formal-only"])
+def test_formal_activation_and_independent_verifier_use_indented_published_bytes(
+        profiles, monkeypatch, tmp_path, current):
+    """Exercise the activation builder and verifier together, up to the custody boundary."""
+    identity = profiles.FORMAL_INPUT if current else IDENTITY
+    if current:
+        old = profiles.config(IDENTITY)['evidence_root']
+        monkeypatch.setattr(profiles, 'STAGED_EVIDENCE', old)
+        evidence = tmp_path / 'new-formal-metadata'
+        evidence.mkdir(mode=0o700)
+        evidence.with_name(evidence.name + '-backup').mkdir(mode=0o700)
+        monkeypatch.setitem(profiles.config(identity), 'evidence_root', str(evidence))
+    subject = profiles.profile('registered', identity)
+    checker = profiles.profile('independent', identity)
+    published = (REPO / subject.PROTOCOL).read_bytes()
+    expected = hashlib.sha256(published).hexdigest()
+    assert b'\n  "' in published and subject.producer.canonical(json.loads(published)) != published
+    policy = subject.authority(published)
+    reference = dict(certificate_path=policy['registration']['formal']['certificate_paths'][0],
+                     certificate_sha256='1' * 64, finalize_actual_path='fixture-finalizer',
+                     finalize_actual_sha256='2' * 64)
+    preflight = dict(path=policy['independent_preflight_actual_path'], sha256='3' * 64)
+    ready = dict(readiness_reference={}, independent_preflight_reference=preflight)
+    clock = profiles.window(identity).START_MS
+    monkeypatch.setattr(subject.control, 'WHOLE_REQUESTED_MS', clock)
+    monkeypatch.setattr(subject.control.time, 'time_ns', lambda: clock * 10**6)
+    monkeypatch.setattr(subject, 'activation_readiness', lambda *_: ready)
+    monkeypatch.setattr(checker, '_trusted_registered_sources', lambda *_: ({}, {}))
+    monkeypatch.setattr(checker, '_registered_preflight', lambda *_: None)
+    read_software = checker.native._software_bytes
+    monkeypatch.setattr(checker.native, '_software_bytes',
+                        lambda path: b'fixture' if str(path) == preflight['path']
+                        else read_software(path))
+    monkeypatch.setattr(subject.control, 'setup_formal', lambda plan, _ready: plan)
+    plan = subject.activate_formal(subject.GENERATIONS[0], reference)
+    assert plan['contract_sha256'] == plan['binding']['execution_protocol_sha256'] == expected
+    plan['binding']['execution_protocol_sha256'] = subject.producer.sha(
+        subject.producer.canonical(policy))
+    with pytest.raises(ValueError, match='hash-bound execution authority freeze differs'):
+        checker.validate_binding(plan)
+
+
+def test_formal_only_route_binds_one_new_generation_and_no_public_quota(profiles):
+    registered = profiles.profile('registered', profiles.FORMAL_INPUT)
+    policy = registered.authority()
+    root = policy['fixed_target']['attempts']['1']['generation']
+    old_public = profiles.config(IDENTITY)['public_root']
+    old_formal = profiles.config(IDENTITY)['generations'][0]
+    assert registered.control.registered_root(Path(root)) and registered.is_root(root)
+    assert all(not registered.is_root(p) and not registered.control.registered_root(Path(p))
+               for p in (old_public, old_formal, root + '-copy'))
+    assert policy['public_roots'] == [] and policy['input_limits']['public_graphs_max'] == 0
+    assert policy['ancillary_named_FULL']['new_FULL_ceiling'] == 3960
+    assert profiles.config_for_root(old_formal)['input'] == IDENTITY
+
+
+def test_new_formal_measurement_accepts_only_the_exact_formal_role_command(
+        profiles, tmp_path, monkeypatch):
+    config = profiles.config(profiles.FORMAL_INPUT)
+    resource = load('p17_m2_resource_control')
+    argv = [str(Path(sys.orig_argv[0]).resolve()), '-I',
+            str(REPO / 'scripts' / config['control_entry']), 'payload',
+            '--root', config['generations'][0], '--plan-sha', 'a' * 64, '--role', 'exporter-r0']
+
+    def accepted(*_args, **_kwargs):
+        raise LookupError('reached sandboxed measurement boundary')
+
+    monkeypatch.setattr(Path, 'mkdir', accepted)
+
+    def invoke(scope, words):
+        resource.invoke(tmp_path, 'exporter-r0', words, timeout=300, measurement_scope=scope,
+                        measurement_execution_identity=config['input'])
+
+    with pytest.raises(LookupError, match='measurement boundary'):
+        invoke('SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY', argv)
+    for wrong in ('FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY', 'OTHER'):
+        with pytest.raises(ValueError):
+            invoke(wrong, argv)
+    argv[5] = profiles.config(IDENTITY)['generations'][0]
+    with pytest.raises(ValueError):
+        invoke('SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY', argv)
+
+
+@pytest.mark.parametrize('mode', [
+    'supervise', 'record', 'bind', 'run', 'payload',
+    'certify-input-version', 'prepare-rehearsal', 'certify-rehearsal',
+])
+def test_formal_entry_routes_nested_commands_before_touching_custody(profiles, monkeypatch, mode):
+    subject = profiles.profile('control', profiles.FORMAL_INPUT)
+    config = profiles.config(profiles.FORMAL_INPUT)
+    root = config['generations'][0]
+    role = 'certificate' if mode.startswith('certify') else 'exporter-r0'
+    argv = subject.argv_for(Path(root), mode, 'a' * 64, role)
+    monkeypatch.setattr(sys, 'argv', argv[2:])
+    monkeypatch.chdir(REPO)
+
+    def reached(*_args, **_kwargs):
+        raise LookupError('would inspect the unique formal plan')
+
+    monkeypatch.setattr(subject, 'checked', reached)
+    if mode in ('prepare-rehearsal', 'certify-rehearsal'):
+        with pytest.raises(ValueError, match='FORMAL_ONLY_CONTRACT_REQUIRED'):
+            subject.main()
+    else:
+        with pytest.raises(LookupError, match='unique formal plan'):
+            subject.main()
+
+
+def test_repaired_binary_cannot_reopen_closed_staged_formal_attempt(profiles, monkeypatch):
+    subject = profiles.profile('registered', IDENTITY)
+    evidence = Path(profiles.config(IDENTITY)['evidence_root'])
+    (evidence.with_name(evidence.name + '-backup') / 'input-formal-caller-STOP.json').touch()
+    monkeypatch.setattr(subject, 'authority_raw', lambda: pytest.fail('consumed authority entered'))
+    with pytest.raises(ValueError, match='input-formal-caller-STOP'):
+        subject.activate_formal(subject.GENERATIONS[0], {})
+
+
+@pytest.mark.parametrize('mode', ['supervise', 'record', 'run', 'payload', 'bind',
+                                  'certify-input-version'])
+@pytest.mark.parametrize('peer', [False, True])
+def test_formal_control_rejects_either_stop_before_target(profiles, monkeypatch, mode, peer):
+    subject = profiles.profile('control', profiles.FORMAL_INPUT)
+    config = profiles.config(profiles.FORMAL_INPUT)
+    evidence = Path(config['evidence_root'])
+    if peer:
+        evidence = evidence.with_name(evidence.name + '-backup')
+    (evidence / 'input-formal-caller-STOP.json').touch()
+    role = 'certificate' if mode == 'certify-input-version' else 'exporter-r0'
+    argv = subject.argv_for(Path(config['generations'][0]), mode, 'a' * 64, role)
+    monkeypatch.setattr(sys, 'argv', argv[2:])
+    monkeypatch.setattr(subject, 'checked', lambda *_: pytest.fail('target reached after STOP'))
+    with pytest.raises(ValueError, match='input-formal-caller-STOP'):
+        subject.main()

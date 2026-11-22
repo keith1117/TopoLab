@@ -51,6 +51,8 @@ def _whole_profile():
 
 
 def registered_root(root):
+    if CONTINUATION_CONFIG.get("public_graphs_max") == 0:
+        return str(root) in REGISTERED_GENERATIONS
     if CONTINUATION_CONFIG.get("public_root") is not None:
         return str(root) in (*REGISTERED_GENERATIONS, CONTINUATION_CONFIG["public_root"])
     return (str(root) in REGISTERED_GENERATIONS
@@ -228,7 +230,8 @@ def source_freeze(execution_identity=None):
             paths.update(REPO / "scripts" / name for name in CONTINUATION_CONFIG.get(
                 "registration_helpers", ()))
             if CONTINUATION_INPUT in (load("p17_m2_input_continuation").NOV21_INPUT,
-                                       load("p17_m2_input_continuation").STAGED_INPUT):
+                                       load("p17_m2_input_continuation").STAGED_INPUT,
+                                       load("p17_m2_input_continuation").FORMAL_INPUT):
                 paths.add(REPO / "scripts" / CONTINUATION_CONFIG["caller_generator"])
     if execution_identity == NEW_IDENTITY:
         paths.add(REPO / NEW_PROTOCOL)
@@ -1963,6 +1966,16 @@ def main():
     parser.add_argument("--whole-start-ms", type=int)
     args = parser.parse_args()
     continuation = load('p17_m2_input_continuation')
+    if CONTINUATION_INPUT == continuation.FORMAL_INPUT:
+        if args.mode == "activate-formal":
+            allowed = args.role is None
+        elif args.mode == "certify-input-version":
+            allowed = args.role == "certificate"
+        else:
+            allowed = args.mode in ("supervise", "record", "run", "payload", "bind") and (
+                args.role in (*base().CAPS, "final-filing", "lease-release"))
+        need(args.root in REGISTERED_GENERATIONS and allowed, "FORMAL_ONLY_CONTRACT_REQUIRED")
+        load("p17_m2_registered_input").public_stop_veto()
     if CONTINUATION_INPUT in (continuation.NOV21_INPUT, continuation.STAGED_INPUT):
         need(args.root in (*REGISTERED_GENERATIONS, CONTINUATION_CONFIG['public_root']),
              "NEW_INPUT_LITERAL_ROOT_REQUIRED")
@@ -2030,6 +2043,14 @@ def main():
             ] + suffix,
             "ACTUAL_ARGV_CHANGED",
         )
+        if CONTINUATION_INPUT == continuation.FORMAL_INPUT:
+            registered = load("p17_m2_registered_input")
+            registered.public_stop_veto()
+            evidence = Path(CONTINUATION_CONFIG["evidence_root"])
+            claim = dict(execution_identity=CONTINUATION_INPUT, root=args.root,
+                         whole_start_ms=args.whole_start_ms, source_reads=0)
+            for folder in (evidence, evidence.with_name(evidence.name + "-backup")):
+                base().put(folder / "formal-activation-entry-a1.json", claim)
         result = activate_formal(args.root, strict23_registration=registration)
     elif args.mode == "prepare-rehearsal":
         need(args.plan_sha is None and args.role is None, "SETUP_ROLE_FORBIDDEN")

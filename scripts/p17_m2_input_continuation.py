@@ -238,6 +238,37 @@ CONFIGS = {
         },
     },
 }
+
+FORMAL_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1"
+FORMAL_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/formal-input-20261122"
+CONFIGS[FORMAL_INPUT] = {
+    **CONFIGS[STAGED_INPUT],
+    "input": FORMAL_INPUT,
+    "prefix": "topolab-unfunded-formal-only-20261122-",
+    "public_root": None,
+    "generations": (PARENT + "p17-m2-formal-input-20261122-a1",),
+    "input_protocol": "docs/planning/formal_registered_input_contract.json",
+    "schema": "topolab.v2.m2-registered-source-acquisition-authority.formal-20261122.v1",
+    "preparation_entry": "formal_input_preparation.py",
+    "input_entry": "formal_registered_input.py",
+    "control_entry": "formal_input_control.py",
+    "evidence_root": FORMAL_EVIDENCE,
+    "cache_suffix": "_formal_20261122",
+    "global_deadline_ms": 1795383600000,
+    "public_attempts_total": 0,
+    "public_graphs_max": 0,
+    "window_module": "formal_input_window",
+    "caller_generator": "build_staged_input_caller.py",
+    "caller_waiter": "formal_input_waiter.py",
+    "caller_filer": "formal_input_filer.py",
+    "registration_helpers": (
+        *CONFIGS[STAGED_INPUT]["registration_helpers"], "formal_input_independent.py",
+        "staged_input_waiter.py", "staged_input_filer.py", "staged_input_preparation.py",
+        "staged_input_window.py", "formal_input_route.py"),
+    "budget": {"path": FORMAL_EVIDENCE + "/owner-budget-registration.json",
+               "sha256": "96c2a727428bb7d30c8d2c00dee43c1f42c7f55b73660959cc51c8c33db33f7b"},
+}
+
 INPUT_IDENTITIES = tuple(CONFIGS)
 RECOVERY_IDENTITIES = tuple(value["recovery"] for value in CONFIGS.values())
 
@@ -250,7 +281,7 @@ def config(identity):
 
 
 def is_whole_input(identity):
-    return identity in (FULL60_INPUT, NOV21_INPUT, STAGED_INPUT)
+    return identity in (FULL60_INPUT, NOV21_INPUT, STAGED_INPUT, FORMAL_INPUT)
 
 
 def window(identity):
@@ -270,7 +301,7 @@ def window(identity):
 
 def config_for_root(root):
     for value in CONFIGS.values():
-        if value["input"] in (NOV21_INPUT, STAGED_INPUT):
+        if value["input"] in (NOV21_INPUT, STAGED_INPUT, FORMAL_INPUT):
             if str(root) in (*value["generations"], value["public_root"]):
                 return value
             continue

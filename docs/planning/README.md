@@ -1,5 +1,7 @@
 # Planning index
 
+[Formal-only input grant and published-byte binding](formal_input_published_authority.md)
+
 The [staged input contract](staged_source_input_acceptance.md) closed after
 23 public registrations, six accepted public roles and a formal activation
 digest failure before the first formal role. The next repair concerns the

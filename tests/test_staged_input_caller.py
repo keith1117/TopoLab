@@ -536,3 +536,22 @@ print(control.REGISTERED_IDENTITY+' '+registration.__name__)
     assert result.stdout.strip() == (
         "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1 staged_public_binding"
     )
+
+
+def test_formal_caller_checks_the_exact_executed_sibling_bytes():
+    import hashlib
+
+    route = load("formal_input_route")
+    wire = route.filer()
+    window = route.sibling("formal_input_window")
+    waiter = route.sibling("staged_input_waiter", wire=wire, window=window)
+    files = ("staged_input_filer.py", "staged_input_waiter.py", "formal_input_window.py")
+    tree = {
+        "scripts/" + name: hashlib.sha256((REPO / "scripts" / name).read_bytes()).hexdigest()
+        for name in files
+    }
+    assert waiter.wire is wire and waiter.window is window
+    wire.check_executed({"source_tree": tree})
+    tree["scripts/staged_input_filer.py"] = "0" * 64
+    with pytest.raises(ValueError, match="executed source differs"):
+        wire.check_executed({"source_tree": tree})
