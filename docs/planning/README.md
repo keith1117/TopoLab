@@ -1,6 +1,8 @@
 # Planning index
 
-[Formal-only input grant and published-byte binding](formal_input_published_authority.md)
+[Formal-only input grant and published-byte binding](formal_input_published_authority.md) closed after
+formal activation passed and exporter R0 stopped on metadata read 34.
+[Result](../validation/formal_input_published_authority.md)
 
 The [staged input contract](staged_source_input_acceptance.md) closed after
 23 public registrations, six accepted public roles and a formal activation

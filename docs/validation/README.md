@@ -1,5 +1,9 @@
 # Validation evidence index
 
+[November 22 formal input acceptance](formal_input_published_authority.md)
+records successful activation with the published contract, the failed 34th
+metadata read, the held lease and the 900 FULL charge.
+
 [Staged source and input acceptance](staged_source_input_acceptance.md) records
 23 independently verified public anchors, six accepted public roles and a
 formal activation stop on the contract digest before target setup.
