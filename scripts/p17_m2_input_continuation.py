@@ -269,6 +269,32 @@ CONFIGS[FORMAL_INPUT] = {
                "sha256": "96c2a727428bb7d30c8d2c00dee43c1f42c7f55b73660959cc51c8c33db33f7b"},
 }
 
+R0_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1"
+FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT)
+R0_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/r0-read-acceptance-20261122"
+CONFIGS[R0_INPUT] = {
+    **CONFIGS[FORMAL_INPUT],
+    "input": R0_INPUT,
+    "prefix": "topolab-unfunded-r0-read-20261122-",
+    "generations": (PARENT + "p17-m2-r0-read-20261122-a1",),
+    "input_protocol": "docs/planning/r0_read_input_contract.json",
+    "schema": "topolab.v2.m2-registered-source-acquisition-authority.r0-read-20261122.v1",
+    "preparation_entry": "r0_input_preparation.py",
+    "input_entry": "r0_registered_input.py",
+    "control_entry": "r0_input_control.py",
+    "evidence_root": R0_EVIDENCE,
+    "cache_suffix": "_r0_read_20261122",
+    "global_deadline_ms": 1795420214731,
+    "window_module": "r0_input_window",
+    "caller_waiter": "r0_input_waiter.py",
+    "caller_filer": "r0_input_filer.py",
+    "registration_helpers": (
+        *CONFIGS[FORMAL_INPUT]["registration_helpers"], "r0_input_route.py",
+        "r0_read_observation.py", "r0_read_independent.py", "r0_caller_receipt.py"),
+    "budget": {"path": R0_EVIDENCE + "/owner-budget-registration.json",
+               "sha256": "149fe42c5df8849c49d3cb39b62004a8b0d7d82bf3ce1c7bca131f24f9c0b666"},
+}
+
 INPUT_IDENTITIES = tuple(CONFIGS)
 RECOVERY_IDENTITIES = tuple(value["recovery"] for value in CONFIGS.values())
 
@@ -281,7 +307,7 @@ def config(identity):
 
 
 def is_whole_input(identity):
-    return identity in (FULL60_INPUT, NOV21_INPUT, STAGED_INPUT, FORMAL_INPUT)
+    return identity in (FULL60_INPUT, NOV21_INPUT, STAGED_INPUT, *FORMAL_ONLY_IDENTITIES)
 
 
 def window(identity):
@@ -301,7 +327,7 @@ def window(identity):
 
 def config_for_root(root):
     for value in CONFIGS.values():
-        if value["input"] in (NOV21_INPUT, STAGED_INPUT, FORMAL_INPUT):
+        if value["input"] in (NOV21_INPUT, STAGED_INPUT, *FORMAL_ONLY_IDENTITIES):
             if str(root) in (*value["generations"], value["public_root"]):
                 return value
             continue

@@ -293,6 +293,7 @@ def invoke(
         "topolab.public-local-strict23.staged-20261121.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1",
     )
     if measurement_execution_identity not in measurement_identities or (
         measurement_scope is None and measurement_execution_identity != measurement_identities[0]
@@ -314,6 +315,7 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.20261121.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1",
     ):
         dated = measurement_execution_identity.endswith("20261121.v1")
         input_entry = "input_control_20261121.py" if dated else "input_control_full60_20261116.py"
@@ -334,11 +336,14 @@ def invoke(
             formal = (
                 '/Users/keith1117/Library/Application Support/TopoLab-custody/'
                 'p17-m2-staged-input-20261121-a1',)
-        if measurement_execution_identity == (
-                "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1"):
-            input_entry = "formal_input_control.py"
+        if measurement_execution_identity in (
+                "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1",
+                "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1"):
+            recovery = measurement_execution_identity.endswith(".r0-read-20261122.v1")
+            input_entry = "r0_input_control.py" if recovery else "formal_input_control.py"
+            generation_prefix = "p17-m2-r0-read" if recovery else "p17-m2-formal-input"
             formal = ("/Users/keith1117/Library/Application Support/TopoLab-custody/"
-                      "p17-m2-formal-input-20261122-a1",)
+                      + generation_prefix + "-20261122-a1",)
             if (measurement_scope != "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY"
                     or role in ("reader-ack", "public-consumer")
                     or len(argv) < 6 or argv[5] not in formal

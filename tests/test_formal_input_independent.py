@@ -73,6 +73,27 @@ def test_new_consumers_share_exact_pinned_module_cache(monkeypatch):
     assert module._prior_public_module() is pinned
 
 
+def test_r0_namespace_is_selected_by_fixed_identity_not_fixture_storage(tmp_path, monkeypatch):
+    profiles, _old = acquisition()
+    module = profiles.profile('independent', profiles.R0_INPUT)
+    raw = (REPO / module.REGISTERED_PROTOCOL).read_bytes()
+    policy = json.loads(raw)
+    pinned = subject()
+    monkeypatch.setattr(module, 'CONTINUATION_CONFIG', dict(
+        module.CONTINUATION_CONFIG, evidence_root=str(tmp_path)))
+    monkeypatch.setattr(module, '_prior_public_module', lambda *_: pinned)
+    monkeypatch.setattr(module.native, '_software_bytes', lambda *_: raw)
+    plan = dict(scope=module.FORMAL_SCOPE,
+                source_tree={module.REGISTERED_PROTOCOL: module.digest(raw)},
+                binding=dict(preparation_protocol_sha256=module.digest(raw)),
+                preparation_contract_sha256=module.digest(raw))
+    assert module._registered_authority(plan) == policy
+    assert policy['prior_public'] == pinned.expected_prior(pinned.R0_EVIDENCE)
+    assert pinned.expected_prior()['bundle']['path'] != policy['prior_public']['bundle']['path']
+    with pytest.raises(ValueError, match='namespace'):
+        pinned.expected_prior(tmp_path)
+
+
 def test_new_helper_records_compiled_buffer_digest_not_its_later_self_claim(monkeypatch):
     _profiles, module = acquisition()
     raw = b'MODULE_SOURCE_SHA256 = "a-later-file-claim"\n'
@@ -225,9 +246,11 @@ def test_historical_sandbox_denies_business_io_and_restores_new_process_state(
     assert sys.modules[sentinel.__name__] is sentinel
 
 
-def preflight_fixture(monkeypatch, *, damage=None):
+def preflight_fixture(monkeypatch, *, damage=None, r0=False):
     """Build original tool packets and hashed wires only; no custody path is opened."""
-    _profiles, module = acquisition()
+    profiles, module = acquisition()
+    if r0:
+        module = profiles.profile('independent', profiles.R0_INPUT)
     pinned = subject()
     policy_raw = (REPO / module.REGISTERED_PROTOCOL).read_bytes()
     policy = json.loads(policy_raw)
@@ -242,7 +265,12 @@ def preflight_fixture(monkeypatch, *, damage=None):
         return {'public_end_ms': start - 1}
 
     pinned.verify_prior_public = historical
-    monkeypatch.setattr(module, '_prior_public_module', lambda: pinned)
+    read_proof = dict(source_main='d'*40, accepted_slots=[3, 4],
+                      verified_returned_ms=start + (11 if damage == 'r0-late' else 9))
+    reader_module = ModuleType('declared_r0_verifier')
+    reader_module.verified_readiness = lambda *_: read_proof
+    monkeypatch.setattr(module, '_prior_public_module', lambda name='formal_input_independent':
+                        reader_module if name == 'r0_read_independent' else pinned)
     runtime = dict(python='/declared/isolated-python', cwd=str(REPO), threads={'fixture': '1'})
     tree = {module.REGISTERED_PROTOCOL: module.digest(policy_raw),
             'scripts/declared-source.py': 'a' * 64}
@@ -259,6 +287,10 @@ def preflight_fixture(monkeypatch, *, damage=None):
                    new_input_budget=policy['new_input_budget'],
                    status='COMPLETE_SOFTWARE_ONLY', own_future_return='NOT_CLAIMED',
                    retention_argv=retention_argv)
+    if r0:
+        closure['r0_read_verification'] = deepcopy(read_proof)
+        if damage == 'r0-closure':
+            closure['r0_read_verification']['accepted_slots'] = [3]
     if damage == 'closure':
         closure['prior_public'] = dict(prior, source_main='0' * 40)
     closure_raw = module.canonical(closure)
@@ -295,6 +327,10 @@ def preflight_fixture(monkeypatch, *, damage=None):
                  preparation_closure_paths=paths,
                  preparation_closure_sha256=module.digest(closure_raw),
                  preparation_retention_actual=retention_pin)
+    if r0:
+        ready['r0_read_verification'] = deepcopy(read_proof)
+        if damage == 'r0-ready':
+            ready['r0_read_verification']['source_main'] = 'a'*40
     if damage == 'new-tree':
         ready['published_source_sha256'] = {'scripts/declared-source.py': 'b' * 64}
     if damage == 'new-runtime':
@@ -313,6 +349,8 @@ def preflight_fixture(monkeypatch, *, damage=None):
                     published_source_sha256=ready['published_source_sha256'], runtime=runtime,
                     actors=policy['actors'], new_input_budget=policy['new_input_budget'],
                     source_stat_reads=0, target_stat_reads=0, own_future_return='NOT_CLAIMED')
+    if r0 and damage != 'r0-stdout':
+        expected['r0_read_verification'] = deepcopy(read_proof)
     argv = [runtime['python'], '-I', str(REPO / 'scripts'
             / module.CONTINUATION_CONFIG['input_entry']), 'preflight', '--readiness-sha',
             ready_pin['sha256']]
@@ -350,6 +388,18 @@ def test_formal_preflight_binds_new_ready_and_original_returns_to_historical_byt
     module, plan, raw, expected, calls = preflight_fixture(monkeypatch)
     assert module._registered_preflight(plan, raw) == expected
     assert len(calls) == 1
+
+
+def test_r0_preflight_binds_verified_read_receipts_and_original_verifier_return(monkeypatch):
+    module, plan, raw, expected, _calls = preflight_fixture(monkeypatch, r0=True)
+    assert module._registered_preflight(plan, raw) == expected
+
+
+@pytest.mark.parametrize('damage', ['r0-late', 'r0-closure', 'r0-ready', 'r0-stdout'])
+def test_r0_proof_cannot_be_after_prepare_or_differ_between_ready_and_closure(monkeypatch, damage):
+    module, plan, raw, _expected, _calls = preflight_fixture(monkeypatch, damage=damage, r0=True)
+    with pytest.raises(ValueError):
+        module._registered_preflight(plan, raw)
 
 
 @pytest.mark.parametrize('damage', [

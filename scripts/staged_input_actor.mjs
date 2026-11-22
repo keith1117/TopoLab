@@ -13,8 +13,13 @@ const formalOnly={
  PUBLIC:null, FORMAL:'/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-formal-input-20261122-a1',
  GLOBAL_START:Date.parse('2026-11-22T03:40:00Z'), GLOBAL_END:Date.parse('2026-11-22T21:40:00Z'), prefix:'formal_input'
 };
+const r0Read={
+ REPO:'/private/tmp/topolab-r0-read-20261122', E:'/Users/keith1117/Documents/TopoLab-data/r0-read-acceptance-20261122',
+ ID:'topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1', BUDGET:'149fe42c5df8849c49d3cb39b62004a8b0d7d82bf3ce1c7bca131f24f9c0b666',
+ PUBLIC:null, FORMAL:'/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-r0-read-20261122-a1', GLOBAL_START:1795333814731, GLOBAL_END:1795420214731, prefix:'r0_input'
+};
 const staged={REPO,E,ID,BUDGET,PUBLIC,FORMAL,GLOBAL_START,GLOBAL_END,prefix:'staged_input'};
-function routeFor(identity){return identity===formalOnly.ID?formalOnly:staged;}
+function routeFor(identity){return [staged,formalOnly,r0Read].find(route=>route.ID===identity)??staged;}
 const ROLES=['independent-public-check','exporter-r0','independent-r0','exporter-r1','independent-r1','shared-closeout'];
 const FULL=[300,300,300,1200,1200,300];
 const need=(condition,reason)=>{if(!condition)throw Error('STAGED_CALLER_STOP: '+reason);};
@@ -23,7 +28,7 @@ const quote=s=>/^[A-Za-z0-9_@%+=:,./-]+$/.test(s)?s:"'"+s.replaceAll("'","'\"'\"
 export const literalCommand=argv=>'exec '+['env','OMP_NUM_THREADS=1','OPENBLAS_NUM_THREADS=1','MKL_NUM_THREADS=1','VECLIB_MAXIMUM_THREADS=1','NUMEXPR_NUM_THREADS=1',...argv].map(quote).join(' ');
 export function qualify(config){
  const route=routeFor(config.execution_identity),{REPO,E,ID,BUDGET,PUBLIC,FORMAL}=route;
- need(route!==formalOnly||config.formal===true,'formal-only contract');
+ need(route.PUBLIC!==null||config.formal===true,'formal-only contract');
  need(['producer','independent'].includes(config.author)&&typeof config.formal==='boolean','separate registered author/scope required');
  need(config.root===(config.formal?FORMAL:PUBLIC)&&/^[A-Za-z0-9_-]{1,80}$/.test(config.event_prefix),'literal new target/prefix required');
  for(const [key,value] of Object.entries({repo:REPO,evidence_root:E,execution_identity:ID,owner_budget_sha256:BUDGET}))
@@ -139,7 +144,8 @@ export async function executeActor(input,dispatch,now=Date.now){
  async function stop(reason){
   const secondary=[];if(active?.first_failure){if(String(reason)!==active.first_failure)secondary.push({stage:'after first '+active.role,reason:String(reason)});reason=active.first_failure;}
   failureDeadline??=Math.min(now()+180000,GLOBAL_END);
-  const failure={schema:'topolab.staged-input-caller-failure.v1',author,event_id:prefix+'-STOP',execution_identity:ID,caller_root:config.root,reason:String(reason),plan,active,observed,original_rows:raw,shared_reservation:packets.shared_reservation??'NOT_REQUESTED_BY_THIS_ACTOR',own_future_return:'NOT_CLAIMED'};
+  const failure={schema:'topolab.staged-input-caller-failure.v1',author,event_id:prefix+'-STOP',execution_identity:ID,caller_root:config.root,reason:String(reason),plan,active,observed,
+   ...(ID===r0Read.ID?{original_row_count:raw.length,full_rows_custody:'outer actor result'}:{original_rows:raw}),shared_reservation:packets.shared_reservation??'NOT_REQUESTED_BY_THIS_ACTOR',own_future_return:'NOT_CLAIMED'};
   let saved=null;
   try{saved=await persist(failure,'caller-STOP');}catch(error){secondary.push({stage:'failure packet',reason:String(error)});}
   if(saved&&plan){

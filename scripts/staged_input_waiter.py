@@ -111,7 +111,8 @@ def returned_predecessor(value, accepted_raw, release, plan_sha, root, role, now
         and first == release["actual_bind_start_ms"]
         and last == release["actual_bind_end_ms"]
         and "".join(row["result"]["output"] for row in bind_packet["responses"]).encode()
-        == wire.canonical(value["result"]),
+        == wire.return_bytes("bind", role, plan_sha, value["result"],
+                             wire.canonical(value["result"])),
         "actual binder response/stdout differs",
     )
     proof = predecessor(value, plan_sha, role)
