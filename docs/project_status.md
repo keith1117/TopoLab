@@ -5,6 +5,19 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
+## November 22 exporter R0 passed. Independent R0 stopped on catalog identity.
+
+Two registered-file reads on the protected candidate passed independent
+verification. The formal graph accepted its first two roles. Exporter R0
+completed all 40 metadata reads. Independent R0 read seven matching files
+and rejected the B3 catalog digest. Both R1 roles remained unentered. The
+new and previous formal leases are HELD. This contract booked 1,200 FULL
+for four physical observations and 1,200 FULL for formal dispatch, and
+closed 5,160 FULL unused. The cumulative known floor is 345,999 FULL plus
+unpriced costs. The next input repair concerns the independent B3 catalog
+identity projection. This formal attempt is closed.
+[Formal result and accounting](validation/r0_read_input_recovery.md)
+
 ## November 22 formal activation passed and exporter R0 stopped
 
 The plan bound the published authority bytes and formal activation returned 0.

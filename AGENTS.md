@@ -17,17 +17,18 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Read the [November 22 formal input result](docs/validation/formal_input_published_authority.md)
-before continuing input work. Published-byte validation and formal activation
-passed. Exporter R0 completed 33 metadata reads and timed out on item 34.
-The single attempt closed at 1/6 roles accepted with its lease HELD. Diagnose
-source availability from the retained evidence. Fresh physical reads and
-formal dispatch require a new finite contract.
+Read the [R0 recovery result](docs/validation/r0_read_input_recovery.md)
+before continuing input work. Exporter R0 completed all 40 metadata reads.
+Independent R0 stopped on the B3 catalog digest after seven reads. Use the
+published B3 catalog identity definition for the next software repair.
+The new graph closed at 2/6, with its lease HELD. A new formal attempt
+requires a new finite contract.
 
-The cumulative known lower bound is 343,599 FULL plus unpriced costs.
-Preserve previous failures, sealed quotas, charges and both original dirty
-workspaces. The 23-file registrations and six-role public acceptance stand.
-Fixed P/17 remains unrepaired, uniform is default and full fit is PENDING4GiB.
+Cumulative known lower bound is 345,999 FULL plus unpriced costs. Preserve
+both formal stops and leases, charges, closed balances, sealed quotas and
+both original dirty workspaces. The 23-file registrations and six-role public
+acceptance stand. Fixed P/17 remains unrepaired, uniform is default and full
+fit is PENDING4GiB.
 
 ## Provenance boundary
 
