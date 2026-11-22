@@ -1,5 +1,13 @@
 # Development history
 
+## 2026-11-22 — Published-byte repair passed formal activation
+
+The independent verifier accepted the indented contract and the actual formal
+plan. The first role passed. Exporter R0 stopped at metadata read 34 after
+33 successful reads. The new contract booked 900 FULL and closed with the
+lease HELD. The cumulative known lower bound reached 343,599 FULL.
+[Result](validation/formal_input_published_authority.md)
+
 ## 2026-11-21 — Staged public input accepted, formal authority digest rejected
 
 Two readers registered the same 23 files. The six-role rehearsal returned

@@ -1,5 +1,11 @@
 # TopoLab v2 Development Roadmap
 
+**November 22 formal input.** The published-byte repair passed formal
+activation. One of six roles passed. Exporter R0 recorded 33 successful
+metadata reads before read 34 timed out. The next input decision concerns
+bounded access to the registered metadata. The formal version and scientific
+B/C remain pending. [Result](../validation/formal_input_published_authority.md)
+
 **November 21 input custody.** Both readers registered the 23 physical public
 anchors. All six public roles passed for the 1,071-member version. Formal
 activation stopped after a successful independent preflight. Its plan hashed

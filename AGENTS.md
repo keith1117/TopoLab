@@ -17,20 +17,17 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-The [staged input result](docs/validation/staged_source_input_acceptance.md)
-closes the [finite contract](docs/planning/staged_source_input_acceptance.md).
-Both readers verified the 23 public physical anchors. Six public roles, filing,
-lease release and the certificate for 1,071 members passed. Formal preflight
-passed. Formal activation rejected its compact contract digest before target
-setup or role dispatch. Next repair the formal plan's exact published-byte
-binding on a software fixture. A new named attempt requires separate authority.
+Read the [November 22 formal input result](docs/validation/formal_input_published_authority.md)
+before continuing input work. Published-byte validation and formal activation
+passed. Exporter R0 completed 33 metadata reads and timed out on item 34.
+The single attempt closed at 1/6 roles accepted with its lease HELD. Diagnose
+source availability from the retained evidence. Fresh physical reads and
+formal dispatch require a new finite contract.
 
-The contract booked 5,160 FULL for completed stages. The cumulative known
-lower bound is 342,699 FULL plus unpriced costs. Preserve all prior charges,
-failures, seals, consumed quotas and both original dirty workspaces. Original
-formal metadata, containment, detached helpers and FULL60 retain their previous
-acceptance. Fixed P/17 remains unrepaired, uniform is default, full fit is
-PENDING4GiB and the all-paid failure remains.
+The cumulative known lower bound is 343,599 FULL plus unpriced costs.
+Preserve previous failures, sealed quotas, charges and both original dirty
+workspaces. The 23-file registrations and six-role public acceptance stand.
+Fixed P/17 remains unrepaired, uniform is default and full fit is PENDING4GiB.
 
 ## Provenance boundary
 

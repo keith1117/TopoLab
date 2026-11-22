@@ -1,9 +1,21 @@
 # Current project status
 
-Updated:2026-11-21. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-11-22. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
+
+## November 22 formal activation passed and exporter R0 stopped
+
+The plan bound the published authority bytes and formal activation returned 0.
+The first of six roles passed. Exporter R0 completed 33 of 40 metadata reads,
+then the bounded read of `sentinel/reference/units/0011.json` timed out.
+Independent R0 and both R1 readers did not launch. The lease is HELD and the
+formal input version is pending. The separate contract booked 900 FULL and
+closed 3,060 unused. Cumulative known lower bound is 343,599 FULL plus unpriced
+costs. The next input decision concerns source-read availability. Begin with
+the retained failure and preserve the stopped generation.
+[Formal result and accounting](validation/formal_input_published_authority.md)
 
 ## November 21 staged public acceptance and formal activation stop
 
