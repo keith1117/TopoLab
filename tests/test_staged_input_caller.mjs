@@ -13,15 +13,18 @@ const RECOVERY_ROOT='/Users/keith1117/Library/Application Support/TopoLab-custod
 const CATALOG_ID='topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1';
 const CATALOG_ROOT='/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-catalog-r0-20261122-a1';
 const CATALOG_START=1795381093469;
+const CYCLE_ID='topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1';
+const CYCLE_ROOT='/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-input-cycle-20261123-a1';
+function startFor(current){return current==='cycle'?1795403556212:current==='catalog'?CATALOG_START:START;}
 function prefixFor(current){
- return current==='catalog'?'catalog_input':current==='recovery'?'r0_input':current?'formal_input':'staged_input';
+ return current==='cycle'?'cycle_input':current==='catalog'?'catalog_input':current==='recovery'?'r0_input':current?'formal_input':'staged_input';
 }
-function config(author,formal=false,current=false){return qualify({author,formal,root:current==='catalog'?CATALOG_ROOT:current==='recovery'?RECOVERY_ROOT:current?CURRENT_ROOT:formal?FORMAL:PUBLIC,
- ...(current?{execution_identity:current==='catalog'?CATALOG_ID:current==='recovery'?RECOVERY_ID:CURRENT_ID}:{}),event_prefix:'mock-'+author,
+function config(author,formal=false,current=false){return qualify({author,formal,root:current==='cycle'?CYCLE_ROOT:current==='catalog'?CATALOG_ROOT:current==='recovery'?RECOVERY_ROOT:current?CURRENT_ROOT:formal?FORMAL:PUBLIC,
+ ...(current?{execution_identity:current==='cycle'?CYCLE_ID:current==='catalog'?CATALOG_ID:current==='recovery'?RECOVERY_ID:CURRENT_ID}:{}),event_prefix:'mock-'+author,
  registration_certificate_sha:(formal?'c':'a').repeat(64),registration_finalize_actual_sha:(formal?'d':'b').repeat(64),
  formal_registration_certificate_sha:'c'.repeat(64),formal_registration_finalize_actual_sha:'d'.repeat(64)});}
 function graph({formal=false,current=false,supExit=0,late=null,partial=false,failPacket=false,pollDrift=false,truncate=false}={}){
- const start=current==='catalog'?CATALOG_START:START;
+ const start=startFor(current);
  let plan,created,serial=0;const ready=new Promise(r=>created=r),proofs=[],calls=[],wakes=[];
  const publish=()=>{for(const fn of wakes.splice(0))fn();};
  const dispatcher=author=>async(tool,args)=>{
@@ -29,7 +32,8 @@ function graph({formal=false,current=false,supExit=0,late=null,partial=false,fai
   if(tool==='write_stdin'){if(pollDrift)return {tool,arguments:args,requested_ms,returned_ms:Date.now(),result:{output:'original drift',session_id:8}};throw Error('DECLARED_POLL_FAILURE');}
   const cmd=args.cmd.split(' --packet-json ')[0];
   const prefix=prefixFor(current);
-  if(cmd.includes(' prepare-rehearsal ')||cmd.includes(' activate-formal ')){
+  if(cmd.includes(' dispatch-note '))output=JSON.stringify({status:'COORDINATOR_NOTE_RETAINED'});
+  else if(cmd.includes(' prepare-rehearsal ')||cmd.includes(' activate-formal ')){
    const route=config(author,formal,current);plan={root:route.root,plan_sha256:'f'.repeat(64),execution_identity:route.execution_identity,
     formal_authority:formal,scope:formal?'SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY':'FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY',actor_window_seconds:4500,
     actor_start_ms:start,whole_start_ms:start,whole_end_ms:start+4500000,
@@ -56,9 +60,9 @@ function graph({formal=false,current=false,supExit=0,late=null,partial=false,fai
  };
  return {dispatcher,proofs,calls};
 }
-for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'recovery'],[true,'catalog']])test(
+for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'recovery'],[true,'catalog'],[true,'cycle']])test(
  'two actors complete the SUP/REC schedule (formal='+formal+', current='+current+')',async()=>{
- const old=Date.now;Date.now=()=>current==='catalog'?CATALOG_START:START;
+ const old=Date.now;Date.now=()=>startFor(current);
  try{
   const h=graph({formal,current});const [root,independent]=await Promise.all([
    executeActor(config('producer',formal,current),h.dispatcher('producer')),
@@ -71,7 +75,7 @@ for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'rec
   assert.ok(h.calls.every(c=>c.args.prefix_rule===undefined));
   for(const row of h.calls){const cmd=row.args.cmd.split(' --packet-json ')[0];
    const prefix=prefixFor(current);
-   if(current)assert.equal(row.args.workdir,current==='catalog'?'/private/tmp/topolab-catalog-r0-20261122':current==='recovery'?'/private/tmp/topolab-r0-read-20261122':'/private/tmp/topolab-formal-input-20261122');
+   if(current)assert.equal(row.args.workdir,current==='cycle'?'/private/tmp/topolab-input-cycle-20261123':current==='catalog'?'/private/tmp/topolab-catalog-r0-20261122':current==='recovery'?'/private/tmp/topolab-r0-read-20261122':'/private/tmp/topolab-formal-input-20261122');
    if(cmd.includes(prefix+'_filer.py persist')||cmd.includes(prefix+'_waiter.py'))assert.equal(row.args.sandbox_permissions,undefined);
    if(formal&&cmd.includes(prefix+'_filer.py file '))assert.equal(row.args.sandbox_permissions,'require_escalated');
   }

@@ -1,5 +1,7 @@
 # Planning index
 
+[Formal input campaign and launch ownership](formal_input_cycle.md) covers up to three separately charged attempts after the sealed activation collision.
+
 [Independent R0 catalog repair and formal input contract](catalog_input_acceptance.md)
 closed after independent offline verification and a formal stop before role one.
 [Result](../validation/catalog_input_acceptance.md)

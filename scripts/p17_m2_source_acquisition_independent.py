@@ -35,6 +35,7 @@ REGISTERED_PREFIX = "topolab-public-registered-source-acquisition-"
 FORMAL_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1"
 R0_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1"
 CATALOG_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1"
+CYCLE_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1"
 NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
 NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
 NEW_PUBLIC_PREFIX = "topolab-public-new-source-acquisition-"
@@ -199,14 +200,15 @@ def _metadata_first_profile():
 
 
 def _formal_only_profile():
-    return REGISTERED_IDENTITY in (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT)
+    return REGISTERED_IDENTITY in (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT)
 
 
 def _prior_public_module(name='formal_input_independent'):
     """Share only this source-pinned module/cache with the producer in one process."""
     import sys
 
-    require(name in ('formal_input_independent', 'r0_read_independent', 'catalog_input_offline'),
+    require(name in ('formal_input_independent', 'r0_read_independent', 'catalog_input_offline',
+                     'input_cycle_proof'),
             'exact independent metadata module required')
     path = Path(__file__).with_name(name + '.py')
     raw = native._software_bytes(path)
@@ -312,7 +314,8 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
                 and value.get('prior_public') == _prior_public_module().expected_prior({
                     FORMAL_INPUT: _prior_public_module().EVIDENCE,
                     R0_INPUT: _prior_public_module().R0_EVIDENCE,
-                    CATALOG_INPUT: _prior_public_module().CATALOG_EVIDENCE}[REGISTERED_IDENTITY]),
+                    CATALOG_INPUT: _prior_public_module().CATALOG_EVIDENCE,
+                    CYCLE_INPUT: _prior_public_module().CYCLE_EVIDENCE}[REGISTERED_IDENTITY]),
                 'NEW formal-only budget/root/prior limits differ')
     return value
 
@@ -1410,7 +1413,8 @@ def _formal_registered_preflight(plan, raw):
         prior, _formal_pair(prior['bundle']), _formal_pair(prior['actual']))
     read_proof = None
     proof_spec = {R0_INPUT: ('r0_read_verification', 'r0_read_independent'),
-                  CATALOG_INPUT: ('catalog_verification', 'catalog_input_offline')}
+                  CATALOG_INPUT: ('catalog_verification', 'catalog_input_offline'),
+                  CYCLE_INPUT: ('cycle_verification', 'input_cycle_proof')}
     if REGISTERED_IDENTITY in proof_spec:
         proof_key, proof_module = proof_spec[REGISTERED_IDENTITY]
         read_proof = _prior_public_module(proof_module).verified_readiness(
@@ -2492,9 +2496,12 @@ def validate_setup(
                         == authority["preparation_closure_sha256"],
                         "funded preparation closure metadata changed")
         ready = setup["readiness"]
-        if plan['execution_identity'] == CATALOG_INPUT:
-            require(ready['main'] == prerequisite['catalog_verification']['source_main'],
-                    'catalog offline source differs from actual activation main')
+        release_proof_keys = {CATALOG_INPUT: 'catalog_verification',
+                              CYCLE_INPUT: 'cycle_verification'}
+        if plan['execution_identity'] in release_proof_keys:
+            require(ready['main'] == prerequisite[
+                release_proof_keys[plan['execution_identity']]]['source_main'],
+                'offline source differs from actual activation main')
         filesystem = setup["filesystem"]
         require(
             ready["actors"] == authority["actors"]
