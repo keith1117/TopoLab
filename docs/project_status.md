@@ -5,6 +5,15 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
+## November 23 formal input A2 closed at 0/6
+
+The released exporter passed the second single-label recovery. A2 stopped when
+automatic approval declined the independent first-role REC filing. Both native
+commands returned 0. The independent audit verified the original caller trace
+and the 23-file archive. Four leases remain HELD. The cumulative known floor
+is 352,899 FULL plus unpriced work. Admission for A3 requires a verified
+single-use filing path and a fresh preflight. [A2 report](validation/formal_input_cycle_a2.md)
+
 ## November 23 formal input reached both 40-file R0 acceptances
 
 A1 closed at 3/6 after exporter R1 timed out on payload 35. Both authors

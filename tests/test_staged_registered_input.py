@@ -12,7 +12,8 @@ import pytest
 
 REPO = Path(__file__).resolve().parents[1]
 IDENTITY = 'topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1'
-FORMAL_PROFILES = ('FORMAL_INPUT', 'R0_INPUT', 'CATALOG_INPUT', 'CYCLE_INPUT', 'CYCLE_R1_INPUT')
+FORMAL_PROFILES = ('FORMAL_INPUT', 'R0_INPUT', 'CATALOG_INPUT', 'CYCLE_INPUT',
+                   'CYCLE_R1_INPUT', 'CYCLE_FILING_INPUT')
 BINDING = 'topolab.public-local-strict23.staged-20261121.v1'
 
 
@@ -67,6 +68,10 @@ def profiles(tmp_path, monkeypatch):
     second.mkdir(mode=0o700)
     second.with_name(second.name+'-backup').mkdir(mode=0o700)
     monkeypatch.setitem(value.config(value.CYCLE_R1_INPUT), 'evidence_root', str(second))
+    third = tmp_path / 'cycle-filing-evidence'
+    third.mkdir(mode=0o700)
+    third.with_name(third.name+'-backup').mkdir(mode=0o700)
+    monkeypatch.setitem(value.config(value.CYCLE_FILING_INPUT), 'evidence_root', str(third))
     return value
 
 

@@ -53,6 +53,9 @@ def build(config, source, expected_sha, *, wire=wire):
             == config["formal_registration_finalize_actual_sha"],
             "formal metadata pins differ",
         )
+    if wire.CONTROL_ENTRY == "cycle_filing_input_control.py":
+        # The filed JSON uses sorted keys. Regeneration must use that same byte order.
+        config = dict(sorted(config.items()))
     text = source.decode("utf-8")
     wire.need(
         not re.search(r"^\s*import\s", text, re.MULTILINE), "standalone reviewed actor required"
@@ -103,9 +106,11 @@ def main():
     routes.add_argument("--catalog", action="store_true")
     routes.add_argument("--input-cycle", action="store_true")
     routes.add_argument("--input-cycle-r1", action="store_true")
+    routes.add_argument("--input-cycle-filing", action="store_true")
     args = parser.parse_args()
     selected = wire
-    if args.formal_only or args.r0_read or args.catalog or args.input_cycle or args.input_cycle_r1:
+    if any((args.formal_only, args.r0_read, args.catalog, args.input_cycle,
+            args.input_cycle_r1, args.input_cycle_filing)):
         import runpy
 
         name = "r0_input_route.py" if args.r0_read else "formal_input_route.py"
@@ -115,6 +120,8 @@ def main():
             name = "cycle_input_route.py"
         if args.input_cycle_r1:
             name = "cycle_r1_input_route.py"
+        if args.input_cycle_filing:
+            name = "cycle_filing_input_route.py"
         route = runpy.run_path(str(SOURCE_CHECKOUT / "scripts" / name))
         selected = route["filer"]()
     if args.emit:

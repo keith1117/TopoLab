@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-23 — Independent first-role REC filing stopped A2
+
+The two single-label rechecks and the recovery replay passed. A2 closed at 0/6 with 600 FULL booked and 3,360 closed unused. Its independent audit verified the refusal and the 23-file archive. [A2 evidence](validation/formal_input_cycle_a2.md)
+
 ## 2026-11-23 — Both R0 readers accepted the formal metadata
 
 The repaired launch entered A1, which closed at 3/6 on exporter R1 label 23. The known floor at closure is 349,599 FULL. The first subsequent single-file recovery raised it to 350,799 FULL. [Evidence](validation/formal_input_cycle_a1.md)

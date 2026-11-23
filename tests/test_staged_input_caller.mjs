@@ -17,15 +17,15 @@ const CYCLE_ID='topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a
 const CYCLE_ROOT='/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-input-cycle-20261123-a1';
 const NEXT_ID=CYCLE_ID.replace('-a1.', '-a2.');
 const NEXT_ROOT=CYCLE_ROOT.replace(/-a1$/, '-a2');
-function startFor(current){return ['cycle','second'].includes(current)?1795403556212:current==='catalog'?CATALOG_START:START;}
+function startFor(current){return ['cycle','second','third'].includes(current)?1795403556212:current==='catalog'?CATALOG_START:START;}
 function prefixFor(current){
- return current==='second'?'cycle_r1_input':current==='cycle'?'cycle_input':current==='catalog'?'catalog_input':current==='recovery'?'r0_input':current?'formal_input':'staged_input';
+ return current==='third'?'cycle_filing_input':current==='second'?'cycle_r1_input':current==='cycle'?'cycle_input':current==='catalog'?'catalog_input':current==='recovery'?'r0_input':current?'formal_input':'staged_input';
 }
-function config(author,formal=false,current=false){return qualify({author,formal,root:current==='second'?NEXT_ROOT:current==='cycle'?CYCLE_ROOT:current==='catalog'?CATALOG_ROOT:current==='recovery'?RECOVERY_ROOT:current?CURRENT_ROOT:formal?FORMAL:PUBLIC,
- ...(current?{execution_identity:current==='second'?NEXT_ID:current==='cycle'?CYCLE_ID:current==='catalog'?CATALOG_ID:current==='recovery'?RECOVERY_ID:CURRENT_ID}:{}),event_prefix:'mock-'+author,
+function config(author,formal=false,current=false){return qualify({author,formal,root:current==='third'?CYCLE_ROOT.replace(/-a1$/,'-a3'):current==='second'?NEXT_ROOT:current==='cycle'?CYCLE_ROOT:current==='catalog'?CATALOG_ROOT:current==='recovery'?RECOVERY_ROOT:current?CURRENT_ROOT:formal?FORMAL:PUBLIC,
+ ...(current?{execution_identity:current==='third'?CYCLE_ID.replace('-a1.','-a3.'):current==='second'?NEXT_ID:current==='cycle'?CYCLE_ID:current==='catalog'?CATALOG_ID:current==='recovery'?RECOVERY_ID:CURRENT_ID}:{}),event_prefix:current==='third'?'cycle-20261123-'+author+'-a3':'mock-'+author,
  registration_certificate_sha:(formal?'c':'a').repeat(64),registration_finalize_actual_sha:(formal?'d':'b').repeat(64),
  formal_registration_certificate_sha:'c'.repeat(64),formal_registration_finalize_actual_sha:'d'.repeat(64)});}
-function graph({formal=false,current=false,supExit=0,late=null,partial=false,failPacket=false,pollDrift=false,truncate=false}={}){
+function graph({formal=false,current=false,supExit=0,late=null,partial=false,failPacket=false,pollDrift=false,truncate=false,declineRecordFiling=false}={}){
  const start=startFor(current);
  let plan,created,serial=0;const ready=new Promise(r=>created=r),proofs=[],calls=[],wakes=[];
  const publish=()=>{for(const fn of wakes.splice(0))fn();};
@@ -34,7 +34,11 @@ function graph({formal=false,current=false,supExit=0,late=null,partial=false,fai
   if(tool==='write_stdin'){if(pollDrift)return {tool,arguments:args,requested_ms,returned_ms:Date.now(),result:{output:'original drift',session_id:8}};throw Error('DECLARED_POLL_FAILURE');}
   const cmd=args.cmd.split(' --packet-json ')[0];
   const prefix=prefixFor(current);
+  if(declineRecordFiling&&cmd.includes(prefix+'_filer.py file ')&&cmd.includes('--event-mode record')){
+   throw Error('fixture approval refused recording an actual event');
+  }
   if(cmd.includes(' dispatch-note '))output=JSON.stringify({status:'COORDINATOR_NOTE_RETAINED'});
+  else if(cmd.includes(' enter-independent '))output=JSON.stringify({status:'INDEPENDENT_ACTOR_ENTERED'});
   else if(cmd.includes(' prepare-rehearsal ')||cmd.includes(' activate-formal ')){
    const route=config(author,formal,current);plan={root:route.root,plan_sha256:'f'.repeat(64),execution_identity:route.execution_identity,
     formal_authority:formal,scope:formal?'SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY':'FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY',actor_window_seconds:4500,
@@ -52,7 +56,7 @@ function graph({formal=false,current=false,supExit=0,late=null,partial=false,fai
   }else if(cmd.includes(prefix+'_filer.py retain-failure')){output=JSON.stringify({status:'FAILURE_CUSTODY_RETAINED_NO_ACCEPTANCE'});
   }else if(cmd.includes(prefix+'_filer.py persist')){
    if(failPacket&&args.cmd.includes('"supervise"')){exit_code=1;output='DECLARED_COURIER_FAILURE';return {tool,arguments:args,requested_ms,returned_ms:Date.now(),result:{exit_code,output}};}
-   output=JSON.stringify({status:'PAIRED_PERSISTED',path:config(author,formal,current).evidence_root+'/mock-'+serial+++'.json',sha256:'a'.repeat(64)});
+   output=JSON.stringify({status:'PAIRED_PERSISTED',path:config(author,formal,current).evidence_root+'/mock-'+serial+++'.json',sha256:'a'.repeat(64),file_intent_sha256:'1'.repeat(64),program_sha256:'2'.repeat(64)});
   }else if(cmd.includes(prefix+'_control.py bind ')){
    const role=cmd.match(/--role ([a-z0-9-]+)/)[1];
    if(ROLES.includes(role)){proofs.push({role,accepted:true,complete:true,actual_exit_codes:[0,0],T0_ms:start,T1_ms:start});publish();}
@@ -62,7 +66,7 @@ function graph({formal=false,current=false,supExit=0,late=null,partial=false,fai
  };
  return {dispatcher,proofs,calls};
 }
-for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'recovery'],[true,'catalog'],[true,'cycle'],[true,'second']])test(
+for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'recovery'],[true,'catalog'],[true,'cycle'],[true,'second'],[true,'third']])test(
  'two actors complete the SUP/REC schedule (formal='+formal+', current='+current+')',async()=>{
  const old=Date.now;Date.now=()=>startFor(current);
  try{
@@ -75,9 +79,18 @@ for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'rec
   const native=h.calls.filter(c=>/\.py (supervise|record) /.test(c.args.cmd.split(' --packet-json ')[0]));
   assert.equal(native.length,16);assert.ok(native.every(c=>c.args.sandbox_permissions==='require_escalated'));
   assert.ok(h.calls.every(c=>c.args.prefix_rule===undefined));
+  if(current==='third'){
+   const filings=h.calls.filter(c=>c.args.cmd.split(' --packet-json ')[0].includes('_filer.py file '));
+   assert.equal(filings.length,16);
+   for(const {args} of filings){
+    assert.ok(args.cmd.endsWith('--intent-sha '+'1'.repeat(64)+' --program-sha '+'2'.repeat(64)));
+    assert.ok(args.justification.includes('1'.repeat(64))&&args.justification.includes('2'.repeat(64)));
+    assert.ok(args.justification.includes('-actual-event.json'));
+   }
+  }
   for(const row of h.calls){const cmd=row.args.cmd.split(' --packet-json ')[0];
    const prefix=prefixFor(current);
-   if(current)assert.equal(row.args.workdir,current==='second'?'/private/tmp/topolab-input-cycle-20261123-a2':current==='cycle'?'/private/tmp/topolab-input-cycle-20261123':current==='catalog'?'/private/tmp/topolab-catalog-r0-20261122':current==='recovery'?'/private/tmp/topolab-r0-read-20261122':'/private/tmp/topolab-formal-input-20261122');
+   if(current)assert.equal(row.args.workdir,current==='third'?'/private/tmp/topolab-input-cycle-20261123-a3':current==='second'?'/private/tmp/topolab-input-cycle-20261123-a2':current==='cycle'?'/private/tmp/topolab-input-cycle-20261123':current==='catalog'?'/private/tmp/topolab-catalog-r0-20261122':current==='recovery'?'/private/tmp/topolab-r0-read-20261122':'/private/tmp/topolab-formal-input-20261122');
    if(cmd.includes(prefix+'_filer.py persist')||cmd.includes(prefix+'_waiter.py'))assert.equal(row.args.sandbox_permissions,undefined);
    if(formal&&cmd.includes(prefix+'_filer.py file '))assert.equal(row.args.sandbox_permissions,'require_escalated');
   }
@@ -141,5 +154,22 @@ test('new formal caller rejects the closed generation and uses the new filer on 
   assert.ok(calls[0].cmd.includes('formal_input_control.py activate-formal '));
   assert.ok(calls[1].cmd.includes('formal_input_filer.py persist '));
   assert.ok(calls.every(c=>c.workdir==='/private/tmp/topolab-formal-input-20261122'));
+ }finally{Date.now=old;}
+});
+
+test('a declined A3 REC filing retains both native returns and ends that original actor',async()=>{
+ const old=Date.now;Date.now=()=>startFor('third');
+ try{
+  const h=graph({formal:true,current:'third',declineRecordFiling:true});
+  // Initialize the injected dispatcher's plan without starting a second actor in this fixture.
+  await h.dispatcher('producer')('exec_command',{cmd:'fixture activate-formal plan'});
+  const r=await executeActor(config('independent',true,'third'),h.dispatcher('independent'));
+  assert.equal(r.status,'STOP_RETAINED_NO_RETRY');
+  assert.match(r.reason,/fixture approval refused/);
+  for(const mode of ['supervise','record'])assert.equal(r.active[mode].exit_code,0);
+  assert.deepEqual(r.observed,[]);
+  const commands=h.calls.map(c=>c.args.cmd.split(' --packet-json ')[0]);
+  assert.equal(commands.filter(c=>c.includes('_filer.py file ')&&c.includes('--event-mode record')).length,1);
+  assert.ok(!commands.some(c=>c.includes('_control.py bind ')||c.includes('_filer.py accept-role ')));
  }finally{Date.now=old;}
 });
