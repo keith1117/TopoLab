@@ -1318,7 +1318,8 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
         "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1",
-        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1"):
+        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1"):
         reserve_shared()
     transport.predecessor(root, plan, role)
     need(not (root / "STOP.json").exists() or role == shared_role, "STOP_NO_RETRY")
@@ -1347,7 +1348,8 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
         "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1",
-        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1")
+        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1")
     if new_whole:
         pending.update(whole_start_ms=plan["whole_start_ms"], whole_end_ms=plan["whole_end_ms"])
     if role == "final-filing":

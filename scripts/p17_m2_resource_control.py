@@ -296,6 +296,7 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1",
     )
     if measurement_execution_identity not in measurement_identities or (
         measurement_scope is None and measurement_execution_identity != measurement_identities[0]
@@ -320,6 +321,7 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1",
     ):
         dated = measurement_execution_identity.endswith("20261121.v1")
         input_entry = "input_control_20261121.py" if dated else "input_control_full60_20261116.py"
@@ -344,13 +346,16 @@ def invoke(
                 "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.v1",
                 "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1",
                 "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1",
-                "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1"):
+                "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
+                "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1"):
             profile = measurement_execution_identity.split(".")[-2]
             input_entry, generation = {
                 "formal-20261122": ("formal_input_control.py", "p17-m2-formal-input-20261122-a1"),
                 "r0-read-20261122": ("r0_input_control.py", "p17-m2-r0-read-20261122-a1"),
                 "catalog-20261122": ("catalog_input_control.py", "p17-m2-catalog-r0-20261122-a1"),
                 "cycle-20261123-a1": ("cycle_input_control.py", "p17-m2-input-cycle-20261123-a1"),
+                "cycle-20261123-a2": (
+                    "cycle_r1_input_control.py", "p17-m2-input-cycle-20261123-a2"),
             }[profile]
             formal = ("/Users/keith1117/Library/Application Support/TopoLab-custody/"
                       + generation,)

@@ -1,9 +1,18 @@
 # Current project status
 
-Updated:2026-11-22. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-11-23. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
+
+## November 23 formal input reached both 40-file R0 acceptances
+
+A1 closed at 3/6 after exporter R1 timed out on payload 35. Both authors
+accepted the 40-file registry. Three historical leases are HELD. The first
+single-file recovery matched the failed label's raw hash, registered length
+and physical identity. The known floor after that recheck is 350,799 FULL
+plus unpriced work. The second contract requires another protected-candidate
+read and fresh independent preflight. [A1 terminal report](validation/formal_input_cycle_a1.md)
 
 ## November 22 B3 identity verified offline. Formal activation stopped before role one.
 

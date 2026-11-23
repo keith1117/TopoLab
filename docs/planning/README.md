@@ -1,5 +1,7 @@
 # Planning index
 
+[Second formal input contract](input_cycle_a2_contract.json) follows the first accepted independent R0 and a timeout reading R1 payload 35. [A1 result](../validation/formal_input_cycle_a1.md)
+
 [Formal input campaign and launch ownership](formal_input_cycle.md) covers up to three separately charged attempts after the sealed activation collision.
 
 [Independent R0 catalog repair and formal input contract](catalog_input_acceptance.md)

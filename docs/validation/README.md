@@ -1,5 +1,7 @@
 # Validation evidence index
 
+[Formal input A1](formal_input_cycle_a1.md) reached both 40-file R0 acceptances and stopped at exporter R1 payload 35.
+
 [Independent B3 catalog identity and formal activation stop](catalog_input_acceptance.md)
 records the repaired digest, independent offline return, 0/6 formal result,
 exclusive receipt collision and new 900 FULL charge.

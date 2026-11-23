@@ -15,12 +15,14 @@ const CATALOG_ROOT='/Users/keith1117/Library/Application Support/TopoLab-custody
 const CATALOG_START=1795381093469;
 const CYCLE_ID='topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1';
 const CYCLE_ROOT='/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-input-cycle-20261123-a1';
-function startFor(current){return current==='cycle'?1795403556212:current==='catalog'?CATALOG_START:START;}
+const NEXT_ID=CYCLE_ID.replace('-a1.', '-a2.');
+const NEXT_ROOT=CYCLE_ROOT.replace(/-a1$/, '-a2');
+function startFor(current){return ['cycle','second'].includes(current)?1795403556212:current==='catalog'?CATALOG_START:START;}
 function prefixFor(current){
- return current==='cycle'?'cycle_input':current==='catalog'?'catalog_input':current==='recovery'?'r0_input':current?'formal_input':'staged_input';
+ return current==='second'?'cycle_r1_input':current==='cycle'?'cycle_input':current==='catalog'?'catalog_input':current==='recovery'?'r0_input':current?'formal_input':'staged_input';
 }
-function config(author,formal=false,current=false){return qualify({author,formal,root:current==='cycle'?CYCLE_ROOT:current==='catalog'?CATALOG_ROOT:current==='recovery'?RECOVERY_ROOT:current?CURRENT_ROOT:formal?FORMAL:PUBLIC,
- ...(current?{execution_identity:current==='cycle'?CYCLE_ID:current==='catalog'?CATALOG_ID:current==='recovery'?RECOVERY_ID:CURRENT_ID}:{}),event_prefix:'mock-'+author,
+function config(author,formal=false,current=false){return qualify({author,formal,root:current==='second'?NEXT_ROOT:current==='cycle'?CYCLE_ROOT:current==='catalog'?CATALOG_ROOT:current==='recovery'?RECOVERY_ROOT:current?CURRENT_ROOT:formal?FORMAL:PUBLIC,
+ ...(current?{execution_identity:current==='second'?NEXT_ID:current==='cycle'?CYCLE_ID:current==='catalog'?CATALOG_ID:current==='recovery'?RECOVERY_ID:CURRENT_ID}:{}),event_prefix:'mock-'+author,
  registration_certificate_sha:(formal?'c':'a').repeat(64),registration_finalize_actual_sha:(formal?'d':'b').repeat(64),
  formal_registration_certificate_sha:'c'.repeat(64),formal_registration_finalize_actual_sha:'d'.repeat(64)});}
 function graph({formal=false,current=false,supExit=0,late=null,partial=false,failPacket=false,pollDrift=false,truncate=false}={}){
@@ -60,7 +62,7 @@ function graph({formal=false,current=false,supExit=0,late=null,partial=false,fai
  };
  return {dispatcher,proofs,calls};
 }
-for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'recovery'],[true,'catalog'],[true,'cycle']])test(
+for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'recovery'],[true,'catalog'],[true,'cycle'],[true,'second']])test(
  'two actors complete the SUP/REC schedule (formal='+formal+', current='+current+')',async()=>{
  const old=Date.now;Date.now=()=>startFor(current);
  try{
@@ -75,7 +77,7 @@ for(const [formal,current] of [[false,false],[true,false],[true,true],[true,'rec
   assert.ok(h.calls.every(c=>c.args.prefix_rule===undefined));
   for(const row of h.calls){const cmd=row.args.cmd.split(' --packet-json ')[0];
    const prefix=prefixFor(current);
-   if(current)assert.equal(row.args.workdir,current==='cycle'?'/private/tmp/topolab-input-cycle-20261123':current==='catalog'?'/private/tmp/topolab-catalog-r0-20261122':current==='recovery'?'/private/tmp/topolab-r0-read-20261122':'/private/tmp/topolab-formal-input-20261122');
+   if(current)assert.equal(row.args.workdir,current==='second'?'/private/tmp/topolab-input-cycle-20261123-a2':current==='cycle'?'/private/tmp/topolab-input-cycle-20261123':current==='catalog'?'/private/tmp/topolab-catalog-r0-20261122':current==='recovery'?'/private/tmp/topolab-r0-read-20261122':'/private/tmp/topolab-formal-input-20261122');
    if(cmd.includes(prefix+'_filer.py persist')||cmd.includes(prefix+'_waiter.py'))assert.equal(row.args.sandbox_permissions,undefined);
    if(formal&&cmd.includes(prefix+'_filer.py file '))assert.equal(row.args.sandbox_permissions,'require_escalated');
   }

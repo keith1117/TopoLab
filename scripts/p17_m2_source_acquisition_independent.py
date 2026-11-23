@@ -36,6 +36,7 @@ FORMAL_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.formal-20261122.
 R0_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1"
 CATALOG_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1"
 CYCLE_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1"
+CYCLE_R1_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1"
 NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
 NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
 NEW_PUBLIC_PREFIX = "topolab-public-new-source-acquisition-"
@@ -200,7 +201,8 @@ def _metadata_first_profile():
 
 
 def _formal_only_profile():
-    return REGISTERED_IDENTITY in (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT)
+    return REGISTERED_IDENTITY in (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT,
+                                  CYCLE_R1_INPUT)
 
 
 def _prior_public_module(name='formal_input_independent'):
@@ -208,7 +210,7 @@ def _prior_public_module(name='formal_input_independent'):
     import sys
 
     require(name in ('formal_input_independent', 'r0_read_independent', 'catalog_input_offline',
-                     'input_cycle_proof'),
+                     'input_cycle_proof', 'input_cycle_r1_proof'),
             'exact independent metadata module required')
     path = Path(__file__).with_name(name + '.py')
     raw = native._software_bytes(path)
@@ -315,7 +317,8 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
                     FORMAL_INPUT: _prior_public_module().EVIDENCE,
                     R0_INPUT: _prior_public_module().R0_EVIDENCE,
                     CATALOG_INPUT: _prior_public_module().CATALOG_EVIDENCE,
-                    CYCLE_INPUT: _prior_public_module().CYCLE_EVIDENCE}[REGISTERED_IDENTITY]),
+                    CYCLE_INPUT: _prior_public_module().CYCLE_EVIDENCE,
+                    CYCLE_R1_INPUT: _prior_public_module().CYCLE_R1_EVIDENCE}[REGISTERED_IDENTITY]),
                 'NEW formal-only budget/root/prior limits differ')
     return value
 
@@ -1414,7 +1417,8 @@ def _formal_registered_preflight(plan, raw):
     read_proof = None
     proof_spec = {R0_INPUT: ('r0_read_verification', 'r0_read_independent'),
                   CATALOG_INPUT: ('catalog_verification', 'catalog_input_offline'),
-                  CYCLE_INPUT: ('cycle_verification', 'input_cycle_proof')}
+                  CYCLE_INPUT: ('cycle_verification', 'input_cycle_proof'),
+                  CYCLE_R1_INPUT: ('r1_recovery_verification', 'input_cycle_r1_proof')}
     if REGISTERED_IDENTITY in proof_spec:
         proof_key, proof_module = proof_spec[REGISTERED_IDENTITY]
         read_proof = _prior_public_module(proof_module).verified_readiness(
@@ -2497,7 +2501,8 @@ def validate_setup(
                         "funded preparation closure metadata changed")
         ready = setup["readiness"]
         release_proof_keys = {CATALOG_INPUT: 'catalog_verification',
-                              CYCLE_INPUT: 'cycle_verification'}
+                              CYCLE_INPUT: 'cycle_verification',
+                              CYCLE_R1_INPUT: 'r1_recovery_verification'}
         if plan['execution_identity'] in release_proof_keys:
             require(ready['main'] == prerequisite[
                 release_proof_keys[plan['execution_identity']]]['source_main'],
