@@ -5,6 +5,15 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
+## November 23 formal input campaign closed at 3/6
+
+A3 accepted both 40-file R0 reads. Exporter R1 read 558 payloads and wrote a
+1,071-member manifest. Its SUP filing returned a live session with 1.405 seconds
+left in the dispatch window. Independent R1, shared closeout and certificate
+issuance remain outstanding. All three attempts are consumed. Five leases are
+HELD. The campaign booked 8,700 FULL, closed 12,780 unused and raised the
+known floor to 355,599 FULL plus unpriced costs. [Final evidence](validation/formal_input_cycle_result.md)
+
 ## November 23 formal input A2 closed at 0/6
 
 The released exporter passed the second single-label recovery. A2 stopped when

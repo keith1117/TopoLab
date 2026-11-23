@@ -1,5 +1,7 @@
 # Validation evidence index
 
+[Formal input campaign closure](formal_input_cycle_result.md) records the two accepted R0 results, exporter R1's 558 payloads and 1,071-member manifest, the 3/6 stop and final ledger.
+
 [Formal input A2](formal_input_cycle_a2.md) records the protected reader recovery, first-role filing refusal, independent archive audit and 352,899 FULL known floor.
 
 [Formal input A1](formal_input_cycle_a1.md) reached both 40-file R0 acceptances and stopped at exporter R1 payload 35.
