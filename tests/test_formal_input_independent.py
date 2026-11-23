@@ -74,7 +74,8 @@ def test_new_consumers_share_exact_pinned_module_cache(monkeypatch):
 
 
 @pytest.mark.parametrize('identity_name,namespace', [
-    ('R0_INPUT', 'R0_EVIDENCE'), ('CATALOG_INPUT', 'CATALOG_EVIDENCE')])
+    ('R0_INPUT', 'R0_EVIDENCE'), ('CATALOG_INPUT', 'CATALOG_EVIDENCE'),
+    ('CYCLE_INPUT', 'CYCLE_EVIDENCE')])
 def test_namespace_is_selected_by_fixed_identity_not_fixture_storage(
         tmp_path, monkeypatch, identity_name, namespace):
     profiles, _old = acquisition()
@@ -249,16 +250,20 @@ def test_historical_sandbox_denies_business_io_and_restores_new_process_state(
     assert sys.modules[sentinel.__name__] is sentinel
 
 
-def preflight_fixture(monkeypatch, *, damage=None, r0=False, catalog=False):
+def preflight_fixture(monkeypatch, *, damage=None, r0=False, catalog=False, cycle=False):
     """Build original tool packets and hashed wires only; no custody path is opened."""
     profiles, module = acquisition()
     if r0:
         module = profiles.profile('independent', profiles.R0_INPUT)
     if catalog:
         module = profiles.profile('independent', profiles.CATALOG_INPUT)
-    prerequisite = r0 or catalog
-    proof_key = 'catalog_verification' if catalog else 'r0_read_verification'
-    proof_module = 'catalog_input_offline' if catalog else 'r0_read_independent'
+    if cycle:
+        module = profiles.profile('independent', profiles.CYCLE_INPUT)
+    prerequisite = r0 or catalog or cycle
+    proof_key = ('cycle_verification' if cycle else
+                 'catalog_verification' if catalog else 'r0_read_verification')
+    proof_module = ('input_cycle_proof' if cycle else
+                    'catalog_input_offline' if catalog else 'r0_read_independent')
     pinned = subject()
     policy_raw = (REPO / module.REGISTERED_PROTOCOL).read_bytes()
     policy = json.loads(policy_raw)
@@ -275,13 +280,18 @@ def preflight_fixture(monkeypatch, *, damage=None, r0=False, catalog=False):
     pinned.verify_prior_public = historical
     read_proof = dict(source_main='d'*40, accepted_slots=[3, 4],
                       verified_returned_ms=start + (11 if damage == 'r0-late' else 9))
-    if catalog:
+    if catalog or cycle:
         read_proof = dict(
             package=dict(path=str(evidence/'catalog-offline-package-a1.json'), sha256='1'*64),
             actual=dict(path=str(evidence/'catalog-offline-actual-a1.json'), sha256='2'*64),
             source_main='d'*40, authority_sha256=module.digest(policy_raw),
             worker_sha256='3'*64, checker_sha256='4'*64, slot=3,
             verified_returned_ms=start + (11 if damage == 'r0-late' else 9))
+        if cycle:
+            read_proof.update(previous_catalog_source_main='2a8e88b85d80b570b384ea923ef3fd312286cb8b',
+                              slot=1)
+            read_proof['package']['path'] = str(evidence/'cycle-offline-report-a1.json')
+            read_proof['actual']['path'] = str(evidence/'cycle-offline-actual-a1.json')
     reader_module = ModuleType('declared_r0_verifier')
     reader_module.verified_readiness = lambda *_: read_proof
     monkeypatch.setattr(module, '_prior_public_module', lambda name='formal_input_independent':
@@ -419,8 +429,18 @@ def test_catalog_preflight_binds_exact_offline_proof_and_original_verifier_retur
     assert 'r0_read_verification' not in expected
 
 
+def test_cycle_preflight_binds_new_source_separately_from_original_b3_release(monkeypatch):
+    module, plan, raw, expected, _calls = preflight_fixture(monkeypatch, cycle=True)
+    assert module._registered_preflight(plan, raw) == expected
+    proof = expected['cycle_verification']
+    assert proof['source_main'] == 'd'*40
+    assert proof['previous_catalog_source_main'] == '2a8e88b85d80b570b384ea923ef3fd312286cb8b'
+    assert 'catalog_verification' not in expected and 'r0_read_verification' not in expected
+
+
 @pytest.mark.parametrize('changed_main', [False, True])
-def test_catalog_setup_binds_offline_release_to_actual_activation_main(monkeypatch, changed_main):
+@pytest.mark.parametrize('cycle', [False, True])
+def test_setup_binds_offline_release_to_actual_activation_main(monkeypatch, changed_main, cycle):
     """Only generated control dictionaries are used; no formal path is opened."""
     spec = importlib.util.spec_from_file_location(
         'declared_setup_fixture', REPO/'tests/test_p17_m2_source_acquisition_independent.py')
@@ -428,7 +448,9 @@ def test_catalog_setup_binds_offline_release_to_actual_activation_main(monkeypat
     spec.loader.exec_module(fixture)
     _legacy, bundle, proof = fixture.setup_metadata_case()
     profiles, _old = acquisition()
-    module = profiles.profile('independent', profiles.CATALOG_INPUT)
+    identity = profiles.CYCLE_INPUT if cycle else profiles.CATALOG_INPUT
+    module = profiles.profile('independent', identity)
+    proof_key = 'cycle_verification' if cycle else 'catalog_verification'
     plan = bundle['plan']
     plan.update(execution_identity=module.REGISTERED_IDENTITY, scope=module.FORMAL_SCOPE,
                 activation_readiness={}, independent_preflight=dict(path='declared-actual',
@@ -439,8 +461,8 @@ def test_catalog_setup_binds_offline_release_to_actual_activation_main(monkeypat
     monkeypatch.setattr(module.native, '_software_bytes', lambda *_: module.canonical(policy))
     monkeypatch.setattr(module, '_registered_read_pin',
                         lambda *_: dict(preparation_closure_sha256='b'*64))
-    monkeypatch.setattr(module, '_registered_preflight', lambda *_: dict(
-        catalog_verification=dict(source_main='d'*40)))
+    monkeypatch.setattr(module, '_registered_preflight', lambda *_: {
+        proof_key: dict(source_main='d'*40)})
     initial = bundle['initial_lease']
     initial.update(execution_identity=module.REGISTERED_IDENTITY,
                    plan_sha256=module.digest(module.canonical(plan)))
@@ -464,11 +486,12 @@ def test_catalog_setup_binds_offline_release_to_actual_activation_main(monkeypat
 
 
 @pytest.mark.parametrize('damage', ['r0-late', 'r0-closure', 'r0-ready', 'r0-stdout'])
-@pytest.mark.parametrize('catalog', [False, True])
+@pytest.mark.parametrize('profile', ['r0', 'catalog', 'cycle'])
 def test_proof_cannot_be_after_prepare_or_differ_between_ready_and_closure(
-        monkeypatch, damage, catalog):
+        monkeypatch, damage, profile):
     module, plan, raw, _expected, _calls = preflight_fixture(
-        monkeypatch, damage=damage, r0=not catalog, catalog=catalog)
+        monkeypatch, damage=damage, r0=profile == 'r0', catalog=profile == 'catalog',
+        cycle=profile == 'cycle')
     with pytest.raises(ValueError):
         module._registered_preflight(plan, raw)
 

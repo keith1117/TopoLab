@@ -23,8 +23,13 @@ const catalog={
  ID:'topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1', BUDGET:'985ad9aa67a4cbdc8a5c36cadbf4c7920f39559c57e2115a98e902d17d31c11f',
  PUBLIC:null, FORMAL:'/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-catalog-r0-20261122-a1', GLOBAL_START:1795381083469, GLOBAL_END:1795467483469, prefix:'catalog_input'
 };
+const cycle={
+ REPO:'/private/tmp/topolab-input-cycle-20261123', E:'/Users/keith1117/Documents/TopoLab-data/input-cycle-20261123-a1',
+ ID:'topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1', BUDGET:'ebfe2a88f7c838a08bbc5e7f04c7978dd446b552c9e3db206b3a044dec580862',
+ PUBLIC:null, FORMAL:'/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-input-cycle-20261123-a1', GLOBAL_START:1795403546212, GLOBAL_END:1795576346212, prefix:'cycle_input'
+};
 const staged={REPO,E,ID,BUDGET,PUBLIC,FORMAL,GLOBAL_START,GLOBAL_END,prefix:'staged_input'};
-function routeFor(identity){return [staged,formalOnly,r0Read,catalog].find(route=>route.ID===identity)??staged;}
+function routeFor(identity){return [staged,formalOnly,r0Read,catalog,cycle].find(route=>route.ID===identity)??staged;}
 const ROLES=['independent-public-check','exporter-r0','independent-r0','exporter-r1','independent-r1','shared-closeout'];
 const FULL=[300,300,300,1200,1200,300];
 const need=(condition,reason)=>{if(!condition)throw Error('STAGED_CALLER_STOP: '+reason);};
@@ -150,7 +155,7 @@ export async function executeActor(input,dispatch,now=Date.now){
   const secondary=[];if(active?.first_failure){if(String(reason)!==active.first_failure)secondary.push({stage:'after first '+active.role,reason:String(reason)});reason=active.first_failure;}
   failureDeadline??=Math.min(now()+180000,GLOBAL_END);
   const failure={schema:'topolab.staged-input-caller-failure.v1',author,event_id:prefix+'-STOP',execution_identity:ID,caller_root:config.root,reason:String(reason),plan,active,observed,
-   ...([r0Read.ID,catalog.ID].includes(ID)?{original_row_count:raw.length,full_rows_custody:'outer actor result'}:{original_rows:raw}),shared_reservation:packets.shared_reservation??'NOT_REQUESTED_BY_THIS_ACTOR',own_future_return:'NOT_CLAIMED'};
+   ...([r0Read.ID,catalog.ID,cycle.ID].includes(ID)?{original_row_count:raw.length,full_rows_custody:'outer actor result'}:{original_rows:raw}),shared_reservation:packets.shared_reservation??'NOT_REQUESTED_BY_THIS_ACTOR',own_future_return:'NOT_CLAIMED'};
   let saved=null;
   try{saved=await persist(failure,'caller-STOP');}catch(error){secondary.push({stage:'failure packet',reason:String(error)});}
   if(saved&&plan){
@@ -164,6 +169,10 @@ export async function executeActor(input,dispatch,now=Date.now){
  try{
   if((!config.formal&&config.author==='independent')||(config.formal&&config.author==='producer')){
    const wholeStart=now();need(wholeStart>=GLOBAL_START&&wholeStart+4500000+7200000<=GLOBAL_END,'new whole4500/result reserve unavailable');
+   if(ID===cycle.ID){
+    const note=await command([PYTHON,'-I',filer,'dispatch-note','--root',config.root],{deadline:wholeStart+30000,max:3000});
+    need(JSON.parse(note.stdout).status==='COORDINATOR_NOTE_RETAINED','paired launch note missing');
+   }
    const words=[PYTHON,'-I',control,config.formal?'activate-formal':'prepare-rehearsal','--root',config.root,'--registration-certificate-sha',config.registration_certificate_sha,'--registration-finalize-actual-sha',config.registration_finalize_actual_sha];
    if(!config.formal)words.push('--formal-registration-certificate-sha',config.formal_registration_certificate_sha,'--formal-registration-finalize-actual-sha',config.formal_registration_finalize_actual_sha);
    words.push('--whole-start-ms',String(wholeStart));

@@ -271,7 +271,8 @@ CONFIGS[FORMAL_INPUT] = {
 
 R0_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1"
 CATALOG_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1"
-FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT)
+CYCLE_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1"
+FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT)
 R0_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/r0-read-acceptance-20261122"
 CONFIGS[R0_INPUT] = {
     **CONFIGS[FORMAL_INPUT],
@@ -319,10 +320,35 @@ CONFIGS[CATALOG_INPUT] = {
                "sha256": "985ad9aa67a4cbdc8a5c36cadbf4c7920f39559c57e2115a98e902d17d31c11f"},
 }
 
+CYCLE_CAMPAIGN = "/Users/keith1117/Documents/TopoLab-data/input-cycle-20261123"
+CYCLE_EVIDENCE = CYCLE_CAMPAIGN + "-a1"
+CONFIGS[CYCLE_INPUT] = {
+    **CONFIGS[CATALOG_INPUT],
+    "input": CYCLE_INPUT,
+    "prefix": "topolab-unfunded-cycle-20261123-a1-",
+    "generations": (PARENT + "p17-m2-input-cycle-20261123-a1",),
+    "input_protocol": "docs/planning/input_cycle_a1_contract.json",
+    "schema": "topolab.v2.m2-registered-source-acquisition-authority.cycle-20261123-a1.v1",
+    "preparation_entry": "cycle_input_preparation.py",
+    "input_entry": "cycle_registered_input.py",
+    "control_entry": "cycle_input_control.py",
+    "evidence_root": CYCLE_EVIDENCE,
+    "cache_suffix": "_cycle_20261123_a1",
+    "global_deadline_ms": 1795576346212,
+    "window_module": "cycle_input_window",
+    "caller_waiter": "cycle_input_waiter.py",
+    "caller_filer": "cycle_input_filer.py",
+    "registration_helpers": (*CONFIGS[CATALOG_INPUT]["registration_helpers"],
+                             "cycle_input_route.py", "input_cycle_proof.py"),
+    "budget": {"path": CYCLE_CAMPAIGN + "/attempt-1-budget.json",
+               "sha256": "ebfe2a88f7c838a08bbc5e7f04c7978dd446b552c9e3db206b3a044dec580862"},
+}
+
 # Preparation and its replay use the same evidence key for each published profile.
 PROOF_MODULES = {
     R0_INPUT: ("r0_read_verification", "r0_read_independent"),
     CATALOG_INPUT: ("catalog_verification", "catalog_input_offline"),
+    CYCLE_INPUT: ("cycle_verification", "input_cycle_proof"),
 }
 
 INPUT_IDENTITIES = tuple(CONFIGS)
