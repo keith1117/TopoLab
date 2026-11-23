@@ -17,18 +17,18 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Read the [R0 recovery result](docs/validation/r0_read_input_recovery.md)
-before continuing input work. Exporter R0 completed all 40 metadata reads.
-Independent R0 stopped on the B3 catalog digest after seven reads. Use the
-published B3 catalog identity definition for the next software repair.
-The new graph closed at 2/6, with its lease HELD. A new formal attempt
-requires a new finite contract.
+Read the [B3 catalog acceptance result](docs/validation/catalog_input_acceptance.md)
+before planning another input generation. The repaired independent checker
+passed the offline fitting-index entry. This formal attempt closed at 0/6
+when a coordinator note occupied the activator's exclusive receipt path.
+Reserve `formal-activation-entry-a1.json` in both evidence directories for
+the activation command. Actual independent R0 40/40 remains pending.
 
-Cumulative known lower bound is 345,999 FULL plus unpriced costs. Preserve
-both formal stops and leases, charges, closed balances, sealed quotas and
-both original dirty workspaces. The 23-file registrations and six-role public
-acceptance stand. Fixed P/17 remains unrepaired, uniform is default and full
-fit is PENDING4GiB.
+The known lower bound is 346,899 FULL plus unpriced costs. Preserve all
+formal stops, both earlier HELD leases, closed balances, sealed quotas and
+both original dirty workspaces. This attempt acquired no lease. The 23-file
+registrations and six-role public acceptance stand. Fixed P/17 remains
+unrepaired, uniform is default and full fit is PENDING4GiB.
 
 ## Provenance boundary
 

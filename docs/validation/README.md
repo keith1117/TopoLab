@@ -1,5 +1,9 @@
 # Validation evidence index
 
+[Independent B3 catalog identity and formal activation stop](catalog_input_acceptance.md)
+records the repaired digest, independent offline return, 0/6 formal result,
+exclusive receipt collision and new 900 FULL charge.
+
 [R0 read recovery and formal input acceptance](r0_read_input_recovery.md)
 records the two protected-candidate reads, all 40 exporter reads, the
 independent catalog rejection, held lease and separate 2,400 FULL charge.

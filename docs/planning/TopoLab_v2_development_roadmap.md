@@ -1,5 +1,11 @@
 # TopoLab v2 Development Roadmap
 
+**November 22 B3 catalog repair.** The independent checker passed the
+sealed offline verification. Formal activation stopped before the first role
+because the coordinator had occupied its exclusive receipt path. Formal
+R0 40/40 and the later input gates remain open.
+[Result](../validation/catalog_input_acceptance.md)
+
 **November 22 R0 read recovery.** Exporter R0 accepted all 40 original files.
 Independent R0 stopped on the embedded B3 catalog identity after seven reads.
 The graph closed at 2/6 with a HELD lease. Payload and formal version

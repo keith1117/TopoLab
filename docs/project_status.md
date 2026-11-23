@@ -5,6 +5,18 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
+## November 22 B3 identity verified offline. Formal activation stopped before role one.
+
+Protected main passed the independent B3 entry replay and both mutation
+controls. The new independent preflight returned 0. The coordinator used the
+activator's reserved entry filename for a launch note. Exclusive creation
+then failed before target setup. The single attempt closed at 0/6 with zero
+metadata or payload reads and no new lease. Both prior leases remain HELD.
+Three offline calls booked 900 FULL. The formal dispatch charge was zero,
+4,260 FULL closed unused, and the known floor is 346,899 FULL plus UNKNOWN.
+The independent R0 milestone still requires a real 40/40 receipt.
+[Result and accounting](validation/catalog_input_acceptance.md)
+
 ## November 22 exporter R0 passed. Independent R0 stopped on catalog identity.
 
 Two registered-file reads on the protected candidate passed independent
@@ -841,15 +853,13 @@ no old/full-fit gap. All frozen contracts/reports retain paths and bytes.
 
 ## Unique next item: fresh bounded metadata/input authority after the stopped plan
 
-First finish this slice's exact result PR/main CI and external retention closure,
-then stop. A later continuation does not reopen formal metadata attempt1 or run
-B/C. The next owner decision is a concrete fresh finite metadata/input contract
-using the lossless bounded wire and fresh compatible source/review/runtime/
-actual-return bindings, with complete4500+7200 admission before input. Preserve
-all consumed calls, failures, costs and old seals; no automatic replacement
-identity, third-directory search, Original registration, Foundation helper or
-generic guard/toy chain is commissioned. Actual independent R0 must precede
-both R1 payloads; input acceptance still precedes separately approved B then C.
+The catalog repair has passed its independent offline check. The latest
+formal activation consumed the one permitted attempt before target creation.
+A future input decision requires a fresh finite grant, a fresh generation
+and a coordinator that leaves the activator's exclusive entry paths available.
+Actual independent R0 acceptance precedes either R1 reader. Existing public
+and registration receipts retain their qualified use. All old costs, unknowns,
+leases and seals stay recorded. [Activation stop](validation/catalog_input_acceptance.md)
 
 ### Historical route decision after two target non-admissions
 

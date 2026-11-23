@@ -1,5 +1,12 @@
 # Development history
 
+## 2026-11-22 — Independent B3 identity passed offline
+
+The released independent R0 checker matched the frozen B3 digest. A formal
+activation stopped on the coordinator's existing entry file before setup.
+The graph closed at 0/6. The new 900 FULL charge brings the known floor to
+346,899 FULL plus UNKNOWN. [Result](validation/catalog_input_acceptance.md)
+
 ## 2026-11-22 — Exporter R0 completed all 40 formal metadata reads
 
 The protected candidate read the registered 490-byte unit twice and passed
