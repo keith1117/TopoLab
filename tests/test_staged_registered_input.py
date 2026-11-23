@@ -12,7 +12,7 @@ import pytest
 
 REPO = Path(__file__).resolve().parents[1]
 IDENTITY = 'topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1'
-FORMAL_PROFILES = ('FORMAL_INPUT', 'R0_INPUT', 'CATALOG_INPUT', 'CYCLE_INPUT')
+FORMAL_PROFILES = ('FORMAL_INPUT', 'R0_INPUT', 'CATALOG_INPUT', 'CYCLE_INPUT', 'CYCLE_R1_INPUT')
 BINDING = 'topolab.public-local-strict23.staged-20261121.v1'
 
 
@@ -63,6 +63,10 @@ def profiles(tmp_path, monkeypatch):
     cycle.mkdir(mode=0o700)
     cycle.with_name(cycle.name + '-backup').mkdir(mode=0o700)
     monkeypatch.setitem(value.config(value.CYCLE_INPUT), 'evidence_root', str(cycle))
+    second = tmp_path / 'cycle-r1-evidence'
+    second.mkdir(mode=0o700)
+    second.with_name(second.name+'-backup').mkdir(mode=0o700)
+    monkeypatch.setitem(value.config(value.CYCLE_R1_INPUT), 'evidence_root', str(second))
     return value
 
 
@@ -662,3 +666,73 @@ def test_compact_return_binds_every_byte_of_the_full_native_result(mode):
     assert expected['record_sha256'] == hashlib.sha256(raw).hexdigest()
     assert not expected['full_role_evidence_accepted']
     assert wire.return_bytes(mode, 'exporter-r0', plan, native, raw + b' ') != packet
+
+
+@pytest.mark.parametrize("failure", ["none", "timeout", "sha", "growth"])
+def test_registered_label_single_read_and_cold_failure(profiles, tmp_path, monkeypatch, failure):
+    subject = profiles.profile("registered", profiles.CYCLE_R1_INPUT)
+    root = tmp_path.resolve()
+    relative = "item.json"
+    raw = b"label payload"
+    (root / relative).write_bytes(raw)
+    plan = dict(execution_identity=subject.IDENTITY, source_root=str(root))
+    monkeypatch.setattr(subject, "trusted_registration", lambda _: ({}, {}))
+    reader = subject.source_reader(
+        plan,
+        root,
+        execution_identity=subject.producer.LOCAL_IDENTITY,
+        source_identity_checks=True,
+        source_identity_policy=subject.POLICY,
+    )
+    opened = []
+    original_fdopen = subject.producer.os.fdopen
+
+    class TracedReader:
+        def __init__(self, *args, **kwargs):
+            self.file = original_fdopen(*args, **kwargs)
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *exc):
+            self.file.close()
+
+        def read(self, count):
+            opened.append(count)
+            if failure == "timeout":
+                raise TimeoutError(60, "Operation timed out")
+            if failure == "growth":
+                return raw + b"x"
+            return self.file.read(count)
+
+    monkeypatch.setattr(subject.producer.os, "fdopen", TracedReader)
+    ref = dict(path=relative, byte_size=len(raw), sha256=hashlib.sha256(raw).hexdigest())
+    if failure == "sha":
+        ref["sha256"] = "0" * 64
+
+    def read():
+        return subject.producer.read_ref(
+            reader, ref, 64 * 1024**2, group="label", total=768 * 1024**2
+        )
+
+    if failure == "none":
+        assert read() == raw
+    else:
+        with pytest.raises((ValueError, TimeoutError)):
+            read()
+    assert opened == [len(raw) + 1]
+    facts = reader.source_facts[relative]
+    expected_points = (
+        ["declared", "before"]
+        if failure == "timeout"
+        else ["declared", "before", "after", "closing"]
+    )
+    # Returned length is checked before the closing walk on an oversized return.
+    if failure == "growth":
+        expected_points = ["declared", "before", "after"]
+    assert list(facts["storage"]) == expected_points
+    if failure == "timeout":
+        assert facts["stage"] == "bounded_read" and facts["returned_bytes"] is None
+        assert facts["storage"]["before"]["blocks"] == (root / relative).stat().st_blocks
+        assert facts["closing"] is None
+    assert len(reader.attempts) == 1

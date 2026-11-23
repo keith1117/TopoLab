@@ -31,19 +31,22 @@ def scratch_command(folder, command):
     nominal = options[options.index("--root") + 1]
     options[options.index("--root") + 1] = str(target)
     if mode == "dispatch-note":
-        assert entry == "cycle_input_filer.py"
-        wire = runpy.run_path(str(REPO / "scripts/cycle_input_route.py"))["filer"]()
+        assert entry in ("cycle_input_filer.py", "cycle_r1_input_filer.py")
+        route_path = REPO / "scripts" / entry.replace("_filer.py", "_route.py")
+        route = runpy.run_path(str(route_path))
+        wire = route["filer"]()
         assert nominal == wire.FORMAL
         wire.EVIDENCE = evidence
         wire.BACKUP = evidence.with_name("evidence-backup")
         wire.FORMAL = str(target)
         wire.ROOTS = (str(target),)
-        runpy.run_path(str(REPO / "scripts" / entry))["dispatch"](wire, [mode, *options])
+        route["sibling"]("cycle_input_filer").dispatch(wire, [mode, *options])
         return
-    assert entry == "cycle_input_control.py" and mode == "activate-formal"
+    assert entry in ("cycle_input_control.py", "cycle_r1_input_control.py")
+    assert mode == "activate-formal"
     control = runpy.run_path(str(REPO / "scripts" / entry))["subject"]
     profiles = control.load("p17_m2_input_continuation")
-    ident = profiles.CYCLE_INPUT
+    ident = control.REGISTERED_IDENTITY
     config = profiles.config(ident)
     assert (nominal,) == config["generations"]
     config.update(generations=(str(target),), evidence_root=str(evidence))
@@ -87,7 +90,7 @@ const [config,python,driver,folder,now]=process.argv.slice(1).map(JSON.parse);
 const responses=[];
 await executeActor(config,async (tool,args)=>{
  const entry=args.cmd.split(" --packet-json ")[0];
- if(!/cycle_input_(?:filer\.py dispatch-note|control\.py activate-formal) /.test(entry)){
+ if(!/cycle_(?:r1_)?input_(?:filer\.py dispatch-note|control\.py activate-formal) /.test(entry)){
    process.stdout.write(JSON.stringify(responses));process.exit(0);
  }
  const r=spawnSync(python,['-I',driver,folder,args.cmd],{encoding:'utf8',timeout:25000});
@@ -101,7 +104,8 @@ process.stdout.write(JSON.stringify(responses));
 
 
 @pytest.mark.parametrize("occupied", ["none", "primary", "backup"])
-def test_scheduled_activation_and_exclusive_duplicate(tmp_path, occupied):
+@pytest.mark.parametrize("ordinal", [1, 2])
+def test_scheduled_activation_and_exclusive_duplicate(tmp_path, occupied, ordinal):
     folder = tmp_path.resolve()
     for directory in ("evidence", "evidence-backup", "custody"):
         (folder / directory).mkdir(mode=0o700)
@@ -110,7 +114,7 @@ def test_scheduled_activation_and_exclusive_duplicate(tmp_path, occupied):
     if occupied != "none":
         (dirs[occupied == "backup"] / ENTRY).write_bytes(b"existing activation receipt")
 
-    policy = json.loads((REPO / "docs/planning/input_cycle_a1_contract.json").read_bytes())
+    policy = json.loads((REPO / f"docs/planning/input_cycle_a{ordinal}_contract.json").read_bytes())
     pin = policy["registration"]["formal"]
     config = dict(
         author="producer",

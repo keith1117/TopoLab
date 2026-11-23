@@ -265,11 +265,33 @@ class _RegisteredReader(producer.Reader):
             )
 
 
+class _RegisteredLabelReader(_RegisteredReader):
+    """Bound each A2 label transfer to its registered length plus the EOF check."""
+
+    def _read(self, relative, limit, *, expected=None, size=None, group="metadata", total=None):
+        if group == "label":
+            need(type(size) is int and 0 < size <= limit, "registered label size outside cap")
+            self._read_facts["storage"] = {}
+            limit = size
+        return super()._read(
+            relative, limit, expected=expected, size=size, group=group, total=total
+        )
+
+    def _identity(self, stage, value):
+        if "storage" in self._read_facts:
+            self._read_facts["storage"][stage] = dict(
+                flags=getattr(value, "st_flags", None), blocks=value.st_blocks,
+            )
+        super()._identity(stage, value)
+
+
 def source_reader(plan, root, journal=None, **kwargs):
     """The only producer factory; no caller-supplied registration map admitted."""
     need(str(Path(root).absolute()) == plan.get("source_root"), "registered source root differs")
     _, bindings = trusted_registration(plan)
-    return _RegisteredReader(root, journal, registration=bindings, **kwargs)
+    profiles = control.load("p17_m2_input_continuation")
+    reader = _RegisteredLabelReader if IDENTITY == profiles.CYCLE_R1_INPUT else _RegisteredReader
+    return reader(root, journal, registration=bindings, **kwargs)
 
 
 def authority_raw():

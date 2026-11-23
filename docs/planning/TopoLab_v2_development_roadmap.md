@@ -1,5 +1,7 @@
 # TopoLab v2 Development Roadmap
 
+**November 23 formal input.** Both R0 readers accepted 40/40. Exporter R1 stopped after 34/558. The next gate is independent verification of the single-file recovery, followed by a freshly admitted graph. [A1 evidence](../validation/formal_input_cycle_a1.md)
+
 **November 22 B3 catalog repair.** The independent checker passed the
 sealed offline verification. Formal activation stopped before the first role
 because the coordinator had occupied its exclusive receipt path. Formal

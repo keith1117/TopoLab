@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-23 — Both R0 readers accepted the formal metadata
+
+The repaired launch entered A1, which closed at 3/6 on exporter R1 label 23. The known floor at closure is 349,599 FULL. The first subsequent single-file recovery raised it to 350,799 FULL. [Evidence](validation/formal_input_cycle_a1.md)
+
 ## 2026-11-22 — Independent B3 identity passed offline
 
 The released independent R0 checker matched the frozen B3 digest. A formal
