@@ -265,7 +265,8 @@ def _result_window(
         "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
-        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1")
+        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1")
     if new_whole:
         first, whole_end = record.get("whole_start_ms"), record.get("whole_end_ms")
         require(type(first) is int and type(whole_end) is int

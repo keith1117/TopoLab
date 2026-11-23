@@ -273,7 +273,9 @@ R0_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1"
 CATALOG_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1"
 CYCLE_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1"
 CYCLE_R1_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1"
-FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT, CYCLE_R1_INPUT)
+CYCLE_FILING_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1"
+FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT, CYCLE_R1_INPUT,
+                          CYCLE_FILING_INPUT)
 R0_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/r0-read-acceptance-20261122"
 CONFIGS[R0_INPUT] = {
     **CONFIGS[FORMAL_INPUT],
@@ -366,11 +368,33 @@ CONFIGS[CYCLE_R1_INPUT] = {
                "sha256": "6f4168eb23d191629a98c42c469933e0016a1ba2090c521995fc0eeb606a06de"},
 }
 
+CONFIGS[CYCLE_FILING_INPUT] = {
+    **CONFIGS[CYCLE_R1_INPUT],
+    "input": CYCLE_FILING_INPUT,
+    "prefix": "topolab-unfunded-cycle-20261123-a3-",
+    "generations": (PARENT + "p17-m2-input-cycle-20261123-a3",),
+    "input_protocol": "docs/planning/input_cycle_a3_contract.json",
+    "schema": "topolab.v2.m2-registered-source-acquisition-authority.cycle-20261123-a3.v1",
+    "preparation_entry": "cycle_filing_input_preparation.py",
+    "input_entry": "cycle_filing_registered_input.py",
+    "control_entry": "cycle_filing_input_control.py",
+    "evidence_root": CYCLE_CAMPAIGN + "-a3",
+    "cache_suffix": "_cycle_20261123_a3",
+    "caller_waiter": "cycle_filing_input_waiter.py",
+    "caller_filer": "cycle_filing_input_filer.py",
+    "registration_helpers": (*CONFIGS[CYCLE_R1_INPUT]["registration_helpers"],
+                             "cycle_filing_input_route.py", "cycle_filing_intent.py",
+                             "input_cycle_filing_proof.py"),
+    "budget": {"path": CYCLE_CAMPAIGN + "/attempt-3-budget.json",
+               "sha256": "6b55fd1a56a19965a63e9073b24e984d335a25b74599b2a250586cd9fc28de80"},
+}
+
 # Preparation and its replay use the same evidence key for each published profile.
 PROOF_MODULES = {
     R0_INPUT: ("r0_read_verification", "r0_read_independent"),
     CATALOG_INPUT: ("catalog_verification", "catalog_input_offline"),
     CYCLE_INPUT: ("cycle_verification", "input_cycle_proof"),
+    CYCLE_FILING_INPUT: ("filing_verification", "input_cycle_filing_proof"),
     CYCLE_R1_INPUT: ("r1_recovery_verification", "input_cycle_r1_proof"),
 }
 

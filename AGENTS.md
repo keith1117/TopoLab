@@ -17,15 +17,13 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Read the [A1 terminal report](docs/validation/formal_input_cycle_a1.md)
-and [campaign contract](docs/planning/formal_input_cycle.md) before further
-input work. Both formal R0 readers accepted 40/40. A1 closed at 3/6 when
-exporter R1 timed out on payload 35. Preserve three HELD leases, all closed
-balances, both original workspaces and the 93-file control archive.
-
-The first single-file recheck matched the registered 472,469-byte label.
-The known floor is 350,799 FULL plus unpriced work. Admit A2 only after
-its protected-candidate recheck, independent recovery proof and fresh preflight.
+Read the [A2 terminal report](docs/validation/formal_input_cycle_a2.md) and
+[third contract](docs/planning/input_cycle_a3_contract.json) before further
+input work. A1 retains both formal 40/40 R0 receipts. A2 closed at 0/6 on
+automatic approval refusal of independent REC filing. Four leases remain HELD.
+The known floor is 352,899 FULL plus unpriced work. The final campaign slot
+requires the released, independently checked single-use filing path, fresh
+preflight, one new graph and original certificate return.
 The campaign ends at formal input acceptance. Uniform remains the default,
 fixed P/17 is unrepaired and full fit remains PENDING4GiB.
 
