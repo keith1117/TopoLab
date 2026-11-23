@@ -17,15 +17,15 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Read the [A2 terminal report](docs/validation/formal_input_cycle_a2.md) and
-[third contract](docs/planning/input_cycle_a3_contract.json) before further
-input work. A1 retains both formal 40/40 R0 receipts. A2 closed at 0/6 on
-automatic approval refusal of independent REC filing. Four leases remain HELD.
-The known floor is 352,899 FULL plus unpriced work. The final campaign slot
-requires the released, independently checked single-use filing path, fresh
-preflight, one new graph and original certificate return.
-The campaign ends at formal input acceptance. Uniform remains the default,
-fixed P/17 is unrepaired and full fit remains PENDING4GiB.
+Read the [closed campaign report](docs/validation/formal_input_cycle_result.md)
+before further input work. A3 closed at 3/6. Both R0 readers accepted 40/40.
+Exporter R1 produced 558 rows and a 1,071-member manifest. Its SUP filing
+returned live close to the role deadline. Independent R1, closeout and the
+certificate remain outstanding. All three attempts are consumed, five leases
+are HELD and the known floor is 355,599 FULL plus unpriced work.
+Further diagnosis or formal entry requires a new finite authorization.
+Uniform remains the default, fixed P/17 is unrepaired and full fit remains
+PENDING4GiB.
 
 ## Provenance boundary
 

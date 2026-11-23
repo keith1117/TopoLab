@@ -1,5 +1,12 @@
 # Development history
 
+## 2026-11-23 — Final input attempt completed the exporter payload table
+
+The first three roles passed. Exporter R1 recorded all 558 payloads before
+its SUP filing stopped close to deadline. The producer and independent
+returns and the 87-file control archive are sealed. The three-attempt campaign
+closed at 355,599 known FULL plus unpriced costs. [Terminal report](validation/formal_input_cycle_result.md)
+
 ## 2026-11-23 — Independent first-role REC filing stopped A2
 
 The two single-label rechecks and the recovery replay passed. A2 closed at 0/6 with 600 FULL booked and 3,360 closed unused. Its independent audit verified the refusal and the 23-file archive. [A2 evidence](validation/formal_input_cycle_a2.md)

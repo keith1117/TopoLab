@@ -1,5 +1,7 @@
 # TopoLab v2 Development Roadmap
 
+**November 23 formal input campaign closed.** A3 accepted three roles. Exporter R1 produced the full payload table and manifest. Its event filing stopped before REC. Five leases are HELD and the three authorized attempts are consumed. Further input work requires new finite authority. [Final evidence](../validation/formal_input_cycle_result.md)
+
 **November 23 formal input A2.** Formal input remains open after the first-role REC filing refusal. The last campaign slot requires verified filing of the original actor return, one fresh preflight and a new graph. [A2 terminal report](../validation/formal_input_cycle_a2.md)
 
 **November 23 formal input.** Both R0 readers accepted 40/40. Exporter R1 stopped after 34/558. The next gate is independent verification of the single-file recovery, followed by a freshly admitted graph. [A1 evidence](../validation/formal_input_cycle_a1.md)
