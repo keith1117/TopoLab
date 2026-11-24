@@ -290,7 +290,8 @@ def source_reader(plan, root, journal=None, **kwargs):
     need(str(Path(root).absolute()) == plan.get("source_root"), "registered source root differs")
     _, bindings = trusted_registration(plan)
     profiles = control.load("p17_m2_input_continuation")
-    label_profiles = (profiles.CYCLE_R1_INPUT, profiles.CYCLE_FILING_INPUT, profiles.WINDOW_FORMAL)
+    label_profiles = (profiles.CYCLE_R1_INPUT, profiles.CYCLE_FILING_INPUT, profiles.WINDOW_FORMAL,
+                      profiles.CERT_FORMAL)
     reader = _RegisteredLabelReader if IDENTITY in label_profiles else _RegisteredReader
     return reader(root, journal, registration=bindings, **kwargs)
 

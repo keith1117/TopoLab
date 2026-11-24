@@ -1844,6 +1844,38 @@ def bundle(root, plan, transport):
     }
 
 
+def certificate_result(facts, events, checker, *, historical_software_context=None):
+    """Generate the command result only after the independent complete certificate audit."""
+    if historical_software_context is None:
+        checker.audit_certificate(facts, trusted_tool_events=events)
+    else:
+        replay = checker.audit_certificate(facts, trusted_tool_events=events,
+                                           historical_software_context=historical_software_context)
+        binding = replay["historical_binding"]
+        need(replay["status"] == "PASS_HISTORICAL_CERTIFICATE_EVIDENCE_REPLAY"
+             and replay["formal_authority"] is False
+             and binding["version_id"] == facts["version_id"]
+             and binding["manifest"] == facts["manifest"], "offline certificate binding differs")
+        return dict(status=replay["status"], scope=replay["scope"], formal_authority=False,
+                    source_input_accepted=False, plan_sha256=facts["plan_sha256"],
+                    member_count=len(binding["manifest"]["members"]),
+                    version_id=binding["version_id"],
+                    historical_software_context=replay["historical_software_context"])
+    plan = facts["plan"]
+    summary = {
+        "scope": facts["scope"],
+        "formal_authority": plan["formal_authority"],
+        "source_input_accepted": plan["formal_authority"],
+        "formal_or_scientific_admission": False,
+        "B_C_admission": False,
+        "member_count": len(facts["manifest"]["members"]),
+        "version_id": facts["version_id"],
+    }
+    if plan["execution_identity"] == load("p17_m2_input_continuation").CERT_FORMAL:
+        summary["plan_sha256"] = facts["plan_sha256"]
+    return summary
+
+
 def verify_retained_evidence(root, manifest_raw, expected_manifest_sha256):
     """Verify this finite evidence set against an anchor held outside its custody directory.
 
@@ -2130,20 +2162,11 @@ def main():
                 r: base().read_json(root / (r + "-events.json"))
                 for r in [*plan["role_order"], "final-filing", "lease-release"]
             }
-            transport.independent().audit_certificate(facts, trusted_tool_events=events)
+            result = certificate_result(facts, events, transport.independent())
             base().put(
                 root / "accepted-acquisition-bundle.json",
                 base().evidence_json({"bundle": facts, "events": events}),
             )
-            result = {
-                "scope": transport.scope,
-                "formal_authority": plan["formal_authority"],
-                "source_input_accepted": plan["formal_authority"],
-                "formal_or_scientific_admission": False,
-                "B_C_admission": False,
-                "member_count": len(facts["manifest"]["members"]),
-                "version_id": facts["version_id"],
-            }
         elif args.mode == "run":
             result = transport.native_module(root).invoke(
                 root / "receipts" / args.role,

@@ -299,6 +299,7 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1",
     )
     if measurement_execution_identity not in measurement_identities or (
@@ -327,6 +328,7 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1",
     ):
         dated = measurement_execution_identity.endswith("20261121.v1")
@@ -355,7 +357,8 @@ def invoke(
                 "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
                 "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1",
                 "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1",
-                "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1"):
+                "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
+                "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1"):
             profile = measurement_execution_identity.split(".")[-2]
             input_entry, generation = {
                 "formal-20261122": ("formal_input_control.py", "p17-m2-formal-input-20261122-a1"),
@@ -364,6 +367,8 @@ def invoke(
                 "cycle-20261123-a1": ("cycle_input_control.py", "p17-m2-input-cycle-20261123-a1"),
                 "cycle-20261123-a2": (
                     "cycle_r1_input_control.py", "p17-m2-input-cycle-20261123-a2"),
+                "certificate-20261124": (
+                    "certificate_formal_control.py", "p17-m2-certificate-20261124-a1"),
                 "r1-window-20261123": (
                     "r1_window_formal_control.py", "p17-m2-r1-window-20261123-a1"),
                 "cycle-20261123-a3": (
