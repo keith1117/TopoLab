@@ -1666,6 +1666,53 @@ def _software_closure(
     return {name: digest(_software_bytes(repo / name)) for name in sorted(names | set(contracts))}
 
 
+_HISTORICAL_SOFTWARE_AUTHORITY = object()
+
+
+class HistoricalSoftwareContext:
+    """Exact old software bytes, distinct from the current replay implementation."""
+
+    __slots__ = ("repo", "source_main", "plan_sha256", "source_tree", "audit_sources",
+                 "_buffers", "modules")
+
+    def __init__(self, plan, repo, source_main, buffers, audit_sources, *, _authority=None):
+        require(_authority is _HISTORICAL_SOFTWARE_AUTHORITY,
+                "historical software context requires independent validation")
+        tree = {name: digest(raw) for name, raw in buffers.items()}
+        require(tree == plan["source_tree"], "historical complete source tree differs")
+        self.repo = Path(repo)
+        self.source_main = source_main
+        self.plan_sha256 = digest(canonical(plan))
+        self.source_tree = MappingProxyType(tree)
+        self.audit_sources = MappingProxyType(dict(audit_sources))
+        self._buffers = MappingProxyType(dict(buffers))
+        self.modules = {}
+
+    def check_plan(self, plan):
+        require(digest(canonical(plan)) == self.plan_sha256
+                and plan.get("runtime", {}).get("cwd") == str(self.repo)
+                and plan.get("source_tree") == dict(self.source_tree),
+                "historical software plan context differs")
+
+    def source_bytes(self, path):
+        try:
+            name = str(Path(path).relative_to(self.repo))
+        except ValueError as error:
+            raise ValueError("historical software path outside frozen checkout") from error
+        require(name in self._buffers, "historical software dependency absent from full tree")
+        return self._buffers[name]
+
+    def summary(self):
+        return dict(schema="topolab.historical-software-context.v1", checkout=str(self.repo),
+                    source_main=self.source_main, plan_sha256=self.plan_sha256,
+                    historical_source_tree_sha256=digest(canonical(dict(self.source_tree))),
+                    historical_verifier_sha256={name: self.source_tree[name] for name in (
+                        "scripts/p17_m2_source_acquisition_independent.py",
+                        "scripts/p17_m2_content_verified_independent.py")},
+                    actual_audit_sources_sha256=dict(self.audit_sources),
+                    scope="HISTORICAL_REPLAY_ONLY_NO_READER_OR_EXECUTION_GRANT")
+
+
 def _check_software(
     plan: dict[str, Any],
     *,
@@ -1676,6 +1723,7 @@ def _check_software(
     prepare_mode: str = "prepare-public",
     repo_guard: Any = None,
     prepare_suffix: tuple[str, ...] = (),
+    historical_software_context: HistoricalSoftwareContext | None = None,
 ) -> None:
     require(
         isinstance(plan.get("source_tree"), dict) and REQUIRED_HELPERS <= set(plan["source_tree"]),
@@ -1685,14 +1733,29 @@ def _check_software(
     require(isinstance(runtime, dict), "software closure runtime binding missing")
     own_repo = Path(__file__).resolve().parents[1]
     repo = Path(base.os.path.abspath(runtime["cwd"]))
-    if repo != own_repo:
+    historical = historical_software_context
+    if historical is not None:
+        require(type(historical) is HistoricalSoftwareContext,
+                "historical software context was not independently issued")
+        historical.check_plan(plan)
+        require(repo == historical.repo, "historical software checkout differs")
+    elif repo != own_repo:
         (public_root if repo_guard is None else repo_guard)(repo)
     frozen = _software_closure(repo, contracts=contracts)
-    require(
-        frozen == plan["source_tree"] == _software_closure(own_repo, contracts=contracts)
-        and frozen[verifier_path] == verifier_sha256,
-        "software closure/source freeze differs",
-    )
+    if historical is None:
+        require(
+            frozen == plan["source_tree"] == _software_closure(own_repo, contracts=contracts)
+            and frozen[verifier_path] == verifier_sha256,
+            "software closure/source freeze differs",
+        )
+    else:
+        require(frozen == plan["source_tree"] == dict(historical.source_tree),
+                "historical software closure/source freeze differs")
+        require(historical.audit_sources.get(str(own_repo / verifier_path)) == verifier_sha256
+                and historical.audit_sources.get(str(Path(__file__))) == MODULE_SOURCE_SHA256
+                and all(digest(_software_bytes(Path(name))) == sha
+                        for name, sha in historical.audit_sources.items()),
+                "actual audit implementation source differs from historical context")
     python = Path(sys.orig_argv[0]).resolve()
     require(
         runtime["python"] == str(python)

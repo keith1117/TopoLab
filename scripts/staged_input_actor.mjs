@@ -45,6 +45,11 @@ const windowFormal={
  FORMAL:'/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-r1-window-20261123-a1',
  GLOBAL_START:1795476230895,GLOBAL_END:1795670630895,prefix:'r1_window_formal'
 };
+const certificateFormal={
+ REPO:'/private/tmp/topolab-certificate-20261124',E:'/Users/keith1117/Documents/TopoLab-data/certificate-20261124-formal',BUDGET:'7ae3b524775086003d636d15e747333bdc7c9abd96ea34ea67f9f6e0cf999595',ID:'topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1',PUBLIC:null,
+ FORMAL:'/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-certificate-20261124-a1',
+ GLOBAL_START:1795512528325,GLOBAL_END:1795706928325,prefix:'certificate_formal'
+};
 const windowPublicID='topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1';
 const windowPublicRoots=Array.from({length:6},(_,i)=>'/private/tmp/topolab-public-r1-window-20261123-a'+(i+1));
 const staged={REPO,E,ID,BUDGET,PUBLIC,FORMAL,GLOBAL_START,GLOBAL_END,prefix:'staged_input'};
@@ -54,7 +59,7 @@ function routeFor(identity,root){
   return {REPO:windowRepo,E:root+'-evidence',ID:identity,BUDGET:windowBudget,PUBLIC:root,FORMAL:null,
    GLOBAL_START:1795476230895,GLOBAL_END:1795519430895,prefix:'r1_window_public'};
  }
- return [staged,formalOnly,r0Read,catalog,cycle,cycleR1,cycleFiling,windowFormal].find(route=>route.ID===identity)??staged;}
+ return [staged,formalOnly,r0Read,catalog,cycle,cycleR1,cycleFiling,windowFormal,certificateFormal].find(route=>route.ID===identity)??staged;}
 const ROLES=['independent-public-check','exporter-r0','independent-r0','exporter-r1','independent-r1','shared-closeout'];
 const FULL=[300,300,300,1200,1200,300];
 const need=(condition,reason)=>{if(!condition)throw Error('STAGED_CALLER_STOP: '+reason);};
@@ -62,7 +67,7 @@ const hash=s=>typeof s==='string'&&/^[a-f0-9]{64}$/.test(s);
 const quote=s=>/^[A-Za-z0-9_@%+=:,./-]+$/.test(s)?s:"'"+s.replaceAll("'","'\"'\"'")+"'";
 export const literalCommand=argv=>'exec '+['env','OMP_NUM_THREADS=1','OPENBLAS_NUM_THREADS=1','MKL_NUM_THREADS=1','VECLIB_MAXIMUM_THREADS=1','NUMEXPR_NUM_THREADS=1',...argv].map(quote).join(' ');
 export function initialWait(identity,mode,remaining){
- if([windowPublicID,windowFormal.ID].includes(identity)&&['file','record','bind'].includes(mode))
+ if([windowPublicID,windowFormal.ID,certificateFormal.ID].includes(identity)&&['file','record','bind'].includes(mode))
   return Math.max(250,Math.min(30000,remaining));
  return 1000;
 }
@@ -73,6 +78,7 @@ export function qualify(config){
  need(config.root===(config.formal?FORMAL:PUBLIC)&&/^[A-Za-z0-9_-]{1,80}$/.test(config.event_prefix),'literal new target/prefix required');
  for(const [key,value] of Object.entries({repo:REPO,evidence_root:E,execution_identity:ID,owner_budget_sha256:BUDGET}))
   need(config[key]===undefined||config[key]===value,'fixed '+key+' differs');
+ if(ID===certificateFormal.ID)need(config.event_prefix==='certificate-formal-'+config.author,'certificate caller prefix');
  if(ID===windowFormal.ID)need(config.event_prefix==='r1-window-formal-'+config.author,'formal caller prefix');
  if(ID===windowPublicID)need(config.formal===false&&config.event_prefix==='r1-window-'+config.author,'public graph only');
  if(ID===cycleFiling.ID)need(config.event_prefix==='cycle-20261123-'+config.author+'-a3','unregistered formal caller prefix');
@@ -116,7 +122,7 @@ export async function executeActor(input,dispatch,now=Date.now){
   const entry=words[2],mode=words[3];let purpose=null;
   if(native)purpose='执行本轮 '+mode+' '+active.role+'，采集原生 RSS 和完整退出回执';
   else if(config.formal&&entry===control)purpose=mode==='activate-formal'?'核验已发布 GitHub 源码及独立预检并创建本轮正式目标':'写入本轮正式输入的 '+mode+' 控制回执';
-  else if([cycleFiling.ID,windowFormal.ID].includes(ID)&&entry===filer&&mode==='file'){
+  else if([cycleFiling.ID,windowFormal.ID,certificateFormal.ID].includes(ID)&&entry===filer&&mode==='file'){
    const [role,eventMode,packetHash,intentHash,programHash]=[9,11,15,17,19].map(i=>words[i]);
    const outputs=[role+'-'+eventMode+'-actual-event.json'];
    if(eventMode==='record')outputs.push(role+'-events.json');
@@ -183,7 +189,7 @@ export async function executeActor(input,dispatch,now=Date.now){
    const saved=await persist(actual.packet,role+'-'+mode+'-actual');packets[role+'-'+mode]={...saved,packet:actual.packet};
    need(successful(actual),'first '+mode+' failed/live/late; no additional named command: '+actual.packet.event_id);
    const fileWords=[PYTHON,'-I',filer,'file','--root',config.root,'--plan-sha',plan.plan_sha256,'--role',role,'--event-mode',mode,'--packet',saved.path,'--packet-sha',saved.sha256];
-   if([cycleFiling.ID,windowPublicID,windowFormal.ID].includes(ID)){
+   if([cycleFiling.ID,windowPublicID,windowFormal.ID,certificateFormal.ID].includes(ID)){
     need(hash(saved.file_intent_sha256)&&hash(saved.program_sha256),'single-use filing evidence missing');
     fileWords.push('--intent-sha',saved.file_intent_sha256,'--program-sha',saved.program_sha256);
    }
@@ -200,7 +206,7 @@ export async function executeActor(input,dispatch,now=Date.now){
   const secondary=[];if(active?.first_failure){if(String(reason)!==active.first_failure)secondary.push({stage:'after first '+active.role,reason:String(reason)});reason=active.first_failure;}
   failureDeadline??=Math.min(now()+180000,GLOBAL_END);
   const failure={schema:'topolab.staged-input-caller-failure.v1',author,event_id:prefix+'-STOP',execution_identity:ID,caller_root:config.root,reason:String(reason),plan,active,observed,
-   ...([r0Read.ID,catalog.ID,cycle.ID,cycleR1.ID,cycleFiling.ID,windowPublicID,windowFormal.ID].includes(ID)?{original_row_count:raw.length,full_rows_custody:'outer actor result'}:{original_rows:raw}),shared_reservation:packets.shared_reservation??'NOT_REQUESTED_BY_THIS_ACTOR',own_future_return:'NOT_CLAIMED'};
+   ...([r0Read.ID,catalog.ID,cycle.ID,cycleR1.ID,cycleFiling.ID,windowPublicID,windowFormal.ID,certificateFormal.ID].includes(ID)?{original_row_count:raw.length,full_rows_custody:'outer actor result'}:{original_rows:raw}),shared_reservation:packets.shared_reservation??'NOT_REQUESTED_BY_THIS_ACTOR',own_future_return:'NOT_CLAIMED'};
   let saved=null;
   try{saved=await persist(failure,'caller-STOP');}catch(error){secondary.push({stage:'failure packet',reason:String(error)});}
   if(saved&&plan){
@@ -218,7 +224,7 @@ export async function executeActor(input,dispatch,now=Date.now){
   }
   if((!config.formal&&config.author==='independent')||(config.formal&&config.author==='producer')){
    const wholeStart=now();need(wholeStart>=GLOBAL_START&&wholeStart+4500000+7200000<=GLOBAL_END,'new whole4500/result reserve unavailable');
-   if([cycle.ID,cycleR1.ID,cycleFiling.ID,windowFormal.ID].includes(ID)){
+   if([cycle.ID,cycleR1.ID,cycleFiling.ID,windowFormal.ID,certificateFormal.ID].includes(ID)){
     const note=await command([PYTHON,'-I',filer,'dispatch-note','--root',config.root],{deadline:wholeStart+30000,max:3000});
     need(JSON.parse(note.stdout).status==='COORDINATOR_NOTE_RETAINED','paired launch note missing');
    }
@@ -234,7 +240,7 @@ export async function executeActor(input,dispatch,now=Date.now){
    }
    await get('plan');need(value.plan_sha256===plan.plan_sha256,'initial plan hash differs');
   }else{
-   if([cycleFiling.ID,windowFormal.ID].includes(ID)){
+   if([cycleFiling.ID,windowFormal.ID,certificateFormal.ID].includes(ID)){
     const entry=await command([PYTHON,'-I',filer,'enter-independent','--root',config.root]);
     need(JSON.parse(entry.stdout).status==='INDEPENDENT_ACTOR_ENTERED','independent caller entry missing');
    }

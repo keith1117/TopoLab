@@ -275,8 +275,9 @@ CYCLE_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1
 CYCLE_R1_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1"
 CYCLE_FILING_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1"
 WINDOW_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1"
+CERT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1"
 FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT, CYCLE_R1_INPUT,
-                          CYCLE_FILING_INPUT, WINDOW_FORMAL)
+                          CYCLE_FILING_INPUT, WINDOW_FORMAL, CERT_FORMAL)
 R0_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/r0-read-acceptance-20261122"
 CONFIGS[R0_INPUT] = {
     **CONFIGS[FORMAL_INPUT],
@@ -440,8 +441,33 @@ CONFIGS[WINDOW_FORMAL] = {
                "sha256": "d867948e0cf23b8a860a230be66fbedfc3c7cb5398168dada7fa71199fc2a35e"},
 }
 
+CONFIGS[CERT_FORMAL] = {
+    **CONFIGS[CYCLE_FILING_INPUT],
+    "input": CERT_FORMAL, "window_candidate": True,
+    "prefix": "topolab-unfunded-certificate-20261124-",
+    "generations": (PARENT + "p17-m2-certificate-20261124-a1",),
+    "input_protocol": "docs/planning/certificate_formal_contract.json",
+    "schema": "topolab.v2.m2-registered-source-acquisition-authority.certificate-20261124.v1",
+    "global_deadline_ms": 1795706928325,
+    "preparation_entry": "certificate_formal_preparation.py",
+    "input_entry": "certificate_formal_registered.py",
+    "control_entry": "certificate_formal_control.py",
+    "evidence_root": "/Users/keith1117/Documents/TopoLab-data/certificate-20261124-formal",
+    "cache_suffix": "_certificate_formal_20261124",
+    "window_module": "certificate_formal_clock",
+    "caller_waiter": "certificate_formal_waiter.py", "caller_filer": "certificate_formal_filer.py",
+    "registration_helpers": (*CONFIGS[CYCLE_FILING_INPUT]["registration_helpers"],
+                             "certificate_formal_route.py", "certificate_replay_proof.py",
+                             "certificate_replay_archive.py", "certificate_verify.py",
+                             "r1_window_scope.py"),
+    "budget": {"path": ("/Users/keith1117/Documents/TopoLab-data/certificate-20261124"
+                        "/owner-budget.json"),
+               "sha256": "7ae3b524775086003d636d15e747333bdc7c9abd96ea34ea67f9f6e0cf999595"},
+}
+
 # Preparation and its replay use the same evidence key for each published profile.
 PROOF_MODULES = {
+    CERT_FORMAL: ("certificate_verification", "certificate_replay_proof"),
     WINDOW_FORMAL: ("r1_window_verification", "r1_window_proof"),
     R0_INPUT: ("r0_read_verification", "r0_read_independent"),
     CATALOG_INPUT: ("catalog_verification", "catalog_input_offline"),

@@ -13,6 +13,7 @@ import json
 import os
 import re
 import shlex
+from contextlib import contextmanager
 from contextvars import ContextVar
 from copy import deepcopy
 from pathlib import Path
@@ -38,6 +39,7 @@ CATALOG_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.catalog-2026112
 CYCLE_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1"
 CYCLE_R1_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1"
 WINDOW_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1"
+CERT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1"
 CYCLE_FILING_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1"
 NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
 NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
@@ -75,6 +77,15 @@ ROLE_ORDER = [
 ]
 # Root guards share proof snapshots only within one validation, then discard them.
 _REGISTERED_SOURCE_REPLAY = ContextVar("NEW_registered_source_replay", default=None)
+_HISTORICAL_SOFTWARE_CONTEXT = ContextVar("certificate_historical_software", default=None)
+HISTORICAL_REPO = Path('/private/tmp/topolab-r1-window-20261123')
+HISTORICAL_MAIN = '96edccd4357472de7ae4565fd3f8494ffe000090'
+HISTORICAL_PLAN_SHA256 = 'cfbec3406121c55db47eda369a03913c9f74937771ab51d5ef00070711413599'
+
+
+def _software_repo():
+    context = _HISTORICAL_SOFTWARE_CONTEXT.get()
+    return REPO if context is None else context.repo
 
 
 def require(ok: Any, reason: str) -> None:
@@ -99,6 +110,28 @@ def helper(name: str, filename: str) -> Any:
         continuation = helper('input_continuation', 'p17_m2_input_continuation.py')
         return continuation.profile('control' if 'acquisition_control' in filename else 'recovery',
                                     CONTINUATION_INPUT)
+    context = _HISTORICAL_SOFTWARE_CONTEXT.get()
+    if context is not None:
+        key = (name, filename)
+        if key not in context.modules:
+            path = context.repo / 'scripts' / filename
+            raw = context.source_bytes(path)
+            spec = importlib.util.spec_from_file_location('historical_certificate_' + name, path)
+            require(spec and spec.loader, 'historical independent helper unavailable')
+            module = importlib.util.module_from_spec(spec)
+            exec(compile(raw, str(path), 'exec', dont_inherit=True), module.__dict__)
+            module.MODULE_SOURCE_SHA256 = digest(raw)
+            import sys
+            loader = sys.modules.get('full60_input_loader')
+            if loader is not None:
+                loader.loaded_source_sha256[str(path)] = digest(raw)
+            if filename == 'p17_m2_input_continuation.py':
+                # Private cache names isolate old helper execution from current profiles.
+                module.CONFIGS = deepcopy(module.CONFIGS)
+                for config in module.CONFIGS.values():
+                    config['cache_suffix'] += '_historical_certificate_96ed'
+            context.modules[key] = module
+        return context.modules[key]
     spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name(filename))
     require(spec and spec.loader, "independent source helper unavailable")
     module = importlib.util.module_from_spec(spec)
@@ -209,7 +242,7 @@ def _metadata_first_profile():
 
 def _formal_only_profile():
     return REGISTERED_IDENTITY in (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT,
-                                  CYCLE_R1_INPUT, CYCLE_FILING_INPUT, WINDOW_FORMAL)
+                                  CYCLE_R1_INPUT, CYCLE_FILING_INPUT, WINDOW_FORMAL, CERT_FORMAL)
 
 
 def _prior_public_module(name='formal_input_independent'):
@@ -218,8 +251,21 @@ def _prior_public_module(name='formal_input_independent'):
 
     require(name in ('formal_input_independent', 'r0_read_independent', 'catalog_input_offline',
                      'input_cycle_proof', 'input_cycle_r1_proof', 'input_cycle_filing_proof',
-                     'r1_window_proof'),
+                     'r1_window_proof', 'certificate_replay_proof'),
             'exact independent metadata module required')
+    if _HISTORICAL_SOFTWARE_CONTEXT.get() is not None:
+        if name == 'r1_window_proof':
+            import sys
+
+            # A nested historical registration may install its own real loader.
+            # Compile these old dependencies again into that active loader; never
+            # manufacture a pin from the currently imported candidate module.
+            context = _HISTORICAL_SOFTWARE_CONTEXT.get()
+            for dependency in ('staged_input_filer', 'r0_read_independent'):
+                filename = dependency + '.py'
+                context.modules.pop((dependency, filename), None)
+                sys.modules[dependency] = helper(dependency, filename)
+        return helper(name, name + '.py')
     path = Path(__file__).with_name(name + '.py')
     raw = native._software_bytes(path)
     current = sys.modules.get(name)
@@ -243,7 +289,7 @@ def _prior_public_module(name='formal_input_independent'):
 
 
 def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
-    raw = native._software_bytes(REPO / REGISTERED_PROTOCOL)
+    raw = native._software_bytes(_software_repo() / REGISTERED_PROTOCOL)
     require(digest(raw) == plan['source_tree'][REGISTERED_PROTOCOL]
             == plan['binding']['preparation_protocol_sha256']
             == plan['preparation_contract_sha256'], 'registered authority freeze differs')
@@ -328,7 +374,9 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
                     CYCLE_INPUT: _prior_public_module().CYCLE_EVIDENCE,
                     CYCLE_R1_INPUT: _prior_public_module().CYCLE_R1_EVIDENCE,
                     CYCLE_FILING_INPUT: _prior_public_module().CYCLE_FILING_EVIDENCE,
-                    WINDOW_FORMAL: _prior_public_module().WINDOW_EVIDENCE}[
+                    WINDOW_FORMAL: _prior_public_module().WINDOW_EVIDENCE,
+                    CERT_FORMAL: Path('/Users/keith1117/Documents/TopoLab-data/'
+                                      'certificate-20261124-formal')}[
                         REGISTERED_IDENTITY]),
                 'NEW formal-only budget/root/prior limits differ')
     return value
@@ -394,7 +442,7 @@ def _trusted_registered_sources(plan: dict[str, Any]) -> tuple[dict[str, Any], d
     if (REGISTERED_IDENTITY == helper(
             'input_continuation', 'p17_m2_input_continuation.py').STAGED_INPUT
             or _formal_only_profile()):
-        policy = native.base.parse(native._software_bytes(REPO / REGISTERED_PROTOCOL))
+        policy = native.base.parse(native._software_bytes(_software_repo() / REGISTERED_PROTOCOL))
         require(policy.get('execution_identity') == REGISTERED_IDENTITY
                 and policy.get('schema') == REGISTERED_SCHEMA,
                 'staged independent authority identity differs')
@@ -488,7 +536,7 @@ def _hash_bound_authority(plan: dict[str, Any]) -> dict[str, Any]:
     funded = plan.get("execution_identity") == FUNDED_IDENTITY
     remedy = protocol == REMEDY_PROTOCOL
     new = protocol == NEW_PROTOCOL
-    raw = native._software_bytes(REPO / protocol)
+    raw = native._software_bytes(_software_repo() / protocol)
     require(digest(raw) == plan["source_tree"][protocol]
             == plan["binding"]["preparation_protocol_sha256"]
             == plan["preparation_contract_sha256"], "hash-bound authority freeze differs")
@@ -579,7 +627,8 @@ def validate_remedy_authority(authority: dict[str, Any], *, formal: bool) -> Non
             and 1 <= remedy["software_round"] <= 2
             and remedy.get("base_authority_path") == FUNDED_PROTOCOL
             and remedy.get("base_authority_sha256") == FUNDED_FROZEN_SHA256
-            and digest(native._software_bytes(REPO / FUNDED_PROTOCOL)) == FUNDED_FROZEN_SHA256,
+            and digest(native._software_bytes(_software_repo() / FUNDED_PROTOCOL))
+            == FUNDED_FROZEN_SHA256,
             "source2 remedy immutable authority/finite windows differ")
     stop = _remedy_record(remedy.get("prior_zero_role_stop"),
                           REMEDY_EVIDENCE + "source-attempt1-zero-role-STOP.json")
@@ -842,11 +891,11 @@ def _validate_hash_bound_binding(plan: dict[str, Any]) -> dict[str, Any]:
             and set(plan.get("roles", {})) == set(ROLE_ORDER),
             "hash-bound plan/role/binding schema differs")
     authority = _hash_bound_authority(plan)
-    protocol_sha = digest(native._software_bytes(REPO / _protocol_path(plan)))
+    protocol_sha = digest(native._software_bytes(_software_repo() / _protocol_path(plan)))
     require(plan["contract_sha256"] == protocol_sha
             and (not formal or binding["execution_protocol_sha256"] == protocol_sha),
             "hash-bound execution authority freeze differs")
-    proposal_raw = native._software_bytes(REPO / PROPOSAL)
+    proposal_raw = native._software_bytes(_software_repo() / PROPOSAL)
     require(digest(proposal_raw) == PROPOSAL_SHA256 == plan["proposal_sha256"]
             == binding["proposal_sha256"] == plan["source_tree"][PROPOSAL],
             "hash-bound inherited acquisition proposal differs")
@@ -859,7 +908,7 @@ def _validate_hash_bound_binding(plan: dict[str, Any]) -> dict[str, Any]:
                                and re.fullmatch("[0-9a-f]{40}",
                                                 authority["implementation_commit"]))),
                 "hash-bound formal readiness references missing")
-        original = native._software_bytes(REPO / CONTENT_CONTRACT)
+        original = native._software_bytes(_software_repo() / CONTENT_CONTRACT)
         require(digest(original) == CONTENT_CONTRACT_SHA256
                 == plan["source_tree"][CONTENT_CONTRACT]
                 and canonical(plan["content_contract"]) == canonical(json.loads(original))
@@ -888,7 +937,7 @@ def _validate_hash_bound_binding(plan: dict[str, Any]) -> dict[str, Any]:
 
 
 def _content_projection(plan: dict[str, Any]) -> None:
-    original = native._software_bytes(REPO / CONTENT_CONTRACT)
+    original = native._software_bytes(_software_repo() / CONTENT_CONTRACT)
     require(digest(original) == CONTENT_CONTRACT_SHA256, "frozen content contract differs")
     expected = json.loads(original)
     actual = plan["content_contract"]
@@ -1051,7 +1100,7 @@ def validate_binding(plan: dict[str, Any]) -> dict[str, Any]:
         # The only authority input is the separately published reserved Git-local file.
         # Never discover a grant or inspect its scientific source/target while looking for it.
         try:
-            raw = native._software_bytes(REPO / EXECUTION_PROTOCOL)
+            raw = native._software_bytes(_software_repo() / EXECUTION_PROTOCOL)
         except OSError as error:
             raise ValueError("separate frozen execution authority protocol not granted") from error
         require(
@@ -1103,8 +1152,8 @@ def validate_binding(plan: dict[str, Any]) -> dict[str, Any]:
 
     for name in ("source_root", "content_root", "backup_root"):
         _member_root(plan, name, Path(plan[name]))
-    proposal_raw = native._software_bytes(REPO / PROPOSAL)
-    preparation_raw = native._software_bytes(REPO / PREPARATION_PROTOCOL)
+    proposal_raw = native._software_bytes(_software_repo() / PROPOSAL)
+    preparation_raw = native._software_bytes(_software_repo() / PREPARATION_PROTOCOL)
     protocol_sha = digest(preparation_raw)
     require(
         digest(proposal_raw)
@@ -1146,7 +1195,7 @@ def validate_binding(plan: dict[str, Any]) -> dict[str, Any]:
         "effective preparation authority/budgets differ; no formal grant",
     )
     if formal:
-        original = native._software_bytes(REPO / CONTENT_CONTRACT)
+        original = native._software_bytes(_software_repo() / CONTENT_CONTRACT)
         require(
             digest(original) == CONTENT_CONTRACT_SHA256 == plan["source_tree"][CONTENT_CONTRACT]
             and canonical(plan["content_contract"]) == canonical(json.loads(original))
@@ -1438,7 +1487,8 @@ def _formal_registered_preflight(plan, raw):
                   CYCLE_INPUT: ('cycle_verification', 'input_cycle_proof'),
                   CYCLE_R1_INPUT: ('r1_recovery_verification', 'input_cycle_r1_proof'),
                   CYCLE_FILING_INPUT: ('filing_verification', 'input_cycle_filing_proof'),
-                  WINDOW_FORMAL: ('r1_window_verification', 'r1_window_proof')}
+                  WINDOW_FORMAL: ('r1_window_verification', 'r1_window_proof'),
+                  CERT_FORMAL: ('certificate_verification', 'certificate_replay_proof')}
     if REGISTERED_IDENTITY in proof_spec:
         proof_key, proof_module = proof_spec[REGISTERED_IDENTITY]
         read_proof = _prior_public_module(proof_module).verified_readiness(
@@ -1452,7 +1502,7 @@ def _formal_registered_preflight(plan, raw):
     require(str(Path(paths[0]).parent.with_name(Path(paths[0]).parent.name + '-backup')
                 / Path(paths[0]).name) == paths[1], 'NEW formal preparation peer differs')
     closure = native.base.parse(closure_raw)
-    argv = [plan['runtime']['python'], '-I', str(REPO / 'scripts'
+    argv = [plan['runtime']['python'], '-I', str(_software_repo() / 'scripts'
             / CONTINUATION_CONFIG['preparation_entry']), 'retain']
     require(closure.get('schema') == 'topolab.registered-input.preparation-closure.v1'
             and closure.get('execution_identity') == REGISTERED_IDENTITY
@@ -1486,7 +1536,7 @@ def _formal_registered_preflight(plan, raw):
                 'prerequisite verification return must precede actual preparation')
     require(_formal_pair(actual_pin) == raw, 'NEW formal actual buffer pair differs')
     packet = native.base.parse(raw)
-    argv = [plan['runtime']['python'], '-I', str(REPO / 'scripts'
+    argv = [plan['runtime']['python'], '-I', str(_software_repo() / 'scripts'
             / CONTINUATION_CONFIG['input_entry']), 'preflight', '--readiness-sha',
             ready_pin['sha256']]
     started, ended = recovery.exact_actual(packet, argv, authority['actors']['independent'])
@@ -2229,8 +2279,101 @@ class CheckedAcquisitionInput(native.CheckedPublicInput):
 MODULE_SOURCE_SHA256 = digest(Path(__file__).read_bytes())
 
 
-def _check_software(plan: dict[str, Any]) -> None:
-    validate_binding(plan)
+def _historical_context_sources(plan):
+    """Reconcile every old file with both the old plan and published Git blobs."""
+    import io
+    import subprocess
+    import sys
+
+    require(plan.get('execution_identity') == WINDOW_FORMAL
+            and plan.get('scope') == FORMAL_SCOPE and plan.get('formal_authority') is True
+            and plan.get('runtime', {}).get('cwd') == str(HISTORICAL_REPO),
+            'historical software plan identity/checkout differs')
+    contracts = _software_contracts(plan, repo=HISTORICAL_REPO)
+    tree = native._software_closure(HISTORICAL_REPO, contracts=contracts)
+    require(tree == plan.get('source_tree'), 'historical complete source tree differs')
+    buffers = {name: native._software_bytes(HISTORICAL_REPO / name) for name in sorted(tree)}
+    require({name: digest(raw) for name, raw in buffers.items()} == tree,
+            'historical source changed during complete capture')
+    query = ''.join(HISTORICAL_MAIN + ':' + name + '\n' for name in buffers).encode('ascii')
+    result = subprocess.run(['git', '--no-optional-locks', 'cat-file', '--batch'],
+                            cwd=HISTORICAL_REPO, input=query, capture_output=True,
+                            timeout=20, check=False)
+    require(result.returncode == 0 and not result.stderr and len(result.stdout) <= 32 * 1024**2,
+            'historical published Git source unavailable')
+    stream = io.BytesIO(result.stdout)
+    for name, raw in buffers.items():
+        fields = stream.readline().split()
+        require(len(fields) == 3 and fields[1] == b'blob' and fields[2].isdigit()
+                and int(fields[2]) == len(raw) and stream.read(len(raw)) == raw
+                and stream.read(1) == b'\n',
+                'historical file differs from exact published Git blob: ' + name)
+    require(stream.read(1) == b'', 'historical published Git response has extra bytes')
+    loader = sys.modules.get('full60_input_loader')
+    executed = getattr(loader, 'loaded_source_sha256', {})
+    audits = {str(Path(__file__).resolve()): MODULE_SOURCE_SHA256,
+              str(Path(native.__file__).resolve()): native.MODULE_SOURCE_SHA256}
+    require(all(executed.get(name) == sha
+                and digest(native._software_bytes(Path(name))) == sha
+                for name, sha in audits.items()),
+            'actual audit compiled source buffers are not registered or differ')
+    return buffers, audits
+
+
+def historical_software_context(plan):
+    """Issue the single fixed old-plan context; it grants no source or reader access."""
+    require(isinstance(plan, dict) and digest(canonical(plan)) == HISTORICAL_PLAN_SHA256,
+            'historical software plan SHA differs')
+    buffers, audits = _historical_context_sources(plan)
+    return native.HistoricalSoftwareContext(
+        plan, HISTORICAL_REPO, HISTORICAL_MAIN, buffers, audits,
+        _authority=native._HISTORICAL_SOFTWARE_AUTHORITY)
+
+
+@contextmanager
+def _historical_import_scope(context):
+    """Run real old dependency buffers in a temporary, restored import namespace."""
+    import sys
+
+    original_modules = dict(sys.modules)
+    original_path = list(sys.path)
+    original_get_code = importlib.machinery.SourceFileLoader.get_code
+    original_bytecode = sys.dont_write_bytecode
+    loader = sys.modules.get('full60_input_loader')
+    original_loaded = dict(loader.loaded_source_sha256) if loader is not None else None
+    names = {Path(name).stem for name in context.source_tree
+             if name.startswith('scripts/') and name.endswith('.py')}
+    names.discard('full60_input_loader')  # Keep the actual current source-only compiler.
+    try:
+        for name in names:
+            sys.modules.pop(name, None)
+        sys.path.insert(0, str(context.repo / 'scripts'))
+        for name in ('staged_input_filer', 'r0_read_independent'):
+            sys.modules[name] = helper(name, name + '.py')
+        yield
+    finally:
+        for name, module in list(sys.modules.items()):
+            filename = getattr(module, '__file__', None)
+            historical = (isinstance(filename, str)
+                          and Path(filename).is_relative_to(context.repo))
+            if name in names or historical:
+                if name in original_modules:
+                    sys.modules[name] = original_modules[name]
+                else:
+                    sys.modules.pop(name, None)
+        for name in names:
+            if name in original_modules:
+                sys.modules[name] = original_modules[name]
+        sys.path[:] = original_path
+        importlib.machinery.SourceFileLoader.get_code = original_get_code
+        sys.dont_write_bytecode = original_bytecode
+        if original_loaded is not None:
+            loader.loaded_source_sha256.clear()
+            loader.loaded_source_sha256.update(original_loaded)
+
+
+def _software_contracts(plan: dict[str, Any], *, repo=None) -> tuple[str, ...]:
+    repo = _software_repo() if repo is None else Path(repo)
     execution = _protocol_path(plan)
     contracts = (*native.SOFTWARE_CONTRACTS, PROPOSAL, PREPARATION_PROTOCOL)
     formal = plan["scope"] == FORMAL_SCOPE
@@ -2275,16 +2418,37 @@ def _check_software(plan: dict[str, Any]) -> None:
                 contracts += (CONTINUATION_CONFIG['review_partition'],)
             contracts += tuple('scripts/' + name for name in CONTINUATION_CONFIG.get(
                 'registration_helpers', ()))
+            if CONTINUATION_CONFIG.get('window_candidate'):
+                directory = native.base.nofollow_parent(
+                    repo / 'scripts' / '.window-software-closure')
+                try:
+                    with os.scandir(directory) as entries:
+                        contracts += tuple('scripts/' + entry.name for entry in entries
+                                           if entry.name.startswith('r1_window_')
+                                           and entry.name.endswith('.py'))
+                finally:
+                    os.close(directory)
+                contracts += ('docs/planning/r1_window_formal_contract.json',
+                              'docs/planning/r1_window_public_contract.json')
             if _metadata_first_profile() or _formal_only_profile():
                 contracts += ('scripts/' + CONTINUATION_CONFIG['caller_generator'],)
     for path in authorities:
         try:
-            native._software_bytes(REPO / path)
+            native._software_bytes(repo / path)
         except FileNotFoundError:
             require(not formal or path != execution,
                     "separate frozen execution authority protocol not granted")
         else:
             contracts = tuple(dict.fromkeys((*contracts, path)))
+    return tuple(dict.fromkeys(contracts))
+
+
+def _check_software(plan: dict[str, Any]) -> None:
+    validate_binding(plan)
+    contracts = _software_contracts(plan)
+    formal = plan['scope'] == FORMAL_SCOPE
+    context = _HISTORICAL_SOFTWARE_CONTEXT.get()
+    options = {} if context is None else {'historical_software_context': context}
     native._check_software(
         plan,
         contracts=contracts,
@@ -2296,6 +2460,7 @@ def _check_software(plan: dict[str, Any]) -> None:
         prepare_mode="activate-formal" if formal else "prepare-rehearsal",
         repo_guard=rehearsal_root,
         prepare_suffix=public_prepare_suffix(plan),
+        **options,
     )
     python = plan["runtime"]["python"]
     script = str(Path(plan["runtime"]["cwd"]) / "scripts" / (
@@ -2421,6 +2586,13 @@ class _AcquisitionCertificatePolicy:
                     'NEW actual lease release exceeds original whole4500')
 
     def certificate(self, binding: dict[str, Any]) -> CheckedAcquisitionInput:
+        context = _HISTORICAL_SOFTWARE_CONTEXT.get()
+        if context is not None:
+            return dict(status='PASS_HISTORICAL_CERTIFICATE_EVIDENCE_REPLAY',
+                        historical_software_context=context.summary(),
+                        historical_binding=deepcopy(binding), source_input_accepted=False,
+                        formal_authority=False, B_C_admission=False,
+                        scope='HISTORICAL_REPLAY_ONLY_NO_READER_OR_EXECUTION_GRANT')
         binding["verified_plan"] = self.plan
         binding["supporting_verifier_sha256"] = self.plan["source_tree"][
             "scripts/p17_m2_content_verified_independent.py"
@@ -2432,9 +2604,28 @@ class _AcquisitionCertificatePolicy:
 
 
 def audit_certificate(
-    bundle: dict[str, Any], *, trusted_tool_events: dict[str, list[dict[str, Any]]]
+    bundle: dict[str, Any], *, trusted_tool_events: dict[str, list[dict[str, Any]]],
+    historical_software_context=None,
 ) -> CheckedAcquisitionInput:
     """Replay new native/source/backup/lease/charges; a rehearsal stays nonformal."""
+    context = historical_software_context
+    if context is not None:
+        require(type(context) is native.HistoricalSoftwareContext,
+                'historical software context was not independently issued')
+        require(isinstance(bundle, dict) and isinstance(bundle.get('plan'), dict),
+                'historical software plan missing')
+        context.check_plan(bundle['plan'])
+        require(context.plan_sha256 == HISTORICAL_PLAN_SHA256
+                and context.repo == HISTORICAL_REPO and context.source_main == HISTORICAL_MAIN,
+                'historical software context fixed authority differs')
+        token = _HISTORICAL_SOFTWARE_CONTEXT.set(context)
+        try:
+            with _historical_import_scope(context):
+                policy = _AcquisitionCertificatePolicy(bundle['plan'])
+                return native._audit_certificate(
+                    bundle, trusted_tool_events=trusted_tool_events, policy=policy)
+        finally:
+            _HISTORICAL_SOFTWARE_CONTEXT.reset(token)
     identity = (bundle.get('plan', {}).get('execution_identity')
                 if isinstance(bundle, dict) else None)
     if (identity in helper('input_continuation', 'p17_m2_input_continuation.py').INPUT_IDENTITIES
@@ -2504,7 +2695,8 @@ def validate_setup(
         "setup exceeds fixed window or first actual native precheck",
     )
     if plan["scope"] == FORMAL_SCOPE:
-        authority = native.base.parse(native._software_bytes(REPO / _protocol_path(plan)))
+        authority = native.base.parse(native._software_bytes(
+            _software_repo() / _protocol_path(plan)))
         if plan['execution_identity'] == REGISTERED_IDENTITY:
             prerequisite = _registered_preflight(plan, native._software_bytes(
                 Path(plan['independent_preflight']['path'])))
@@ -2524,7 +2716,8 @@ def validate_setup(
                               CYCLE_INPUT: 'cycle_verification',
                               CYCLE_R1_INPUT: 'r1_recovery_verification',
                               CYCLE_FILING_INPUT: 'filing_verification',
-                              WINDOW_FORMAL: 'r1_window_verification'}
+                              WINDOW_FORMAL: 'r1_window_verification',
+                              CERT_FORMAL: 'certificate_verification'}
         if plan['execution_identity'] in release_proof_keys:
             require(ready['main'] == prerequisite[
                 release_proof_keys[plan['execution_identity']]]['source_main'],
