@@ -5,6 +5,10 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
+## Formal input stopped at the first role on the repaired certificate release
+
+The complete independent certificate replay on protected main `671a21b3` passed. The new first-role native sampler found an unregistered descendant and stopped its process group. The binder returned 1. This graph accepted 0/6 and issued no certificate. The new lease is HELD alongside five older HELD leases. The known lower bound is 378,459 FULL plus unpriced costs. An independent terminal audit replayed the stop and verified all 95 archived controls. The previous graph's 6/6 and certificate exit 1 remain sealed. A subsequent input attempt requires bounded public diagnosis of the extra child and fresh formal authority. [Terminal evidence](validation/formal_input_certificate.md)
+
 ## Formal input reached six roles and stopped at certification
 
 Both R0 readers verified 40/40 metadata files and both R1 readers verified all

@@ -1,5 +1,7 @@
 # TopoLab v2 Development Roadmap
 
+**The certificate checker passed full historical replay.** The sole new formal graph stopped at 0/6 when the independent public check's measured process launched an extra child. The first-role binder returned 1 and the lease is HELD. A future input-only contract would need to identify and address the extra process on public evidence before reserving a new formal attempt. Scientific admission remains pending. [Result](../validation/formal_input_certificate.md)
+
 **Formal input reached 6/6.** Both R1 roles accepted the full payload table and matching 1,071-member version. The certificate returned 1 after identifying a software-freeze disagreement. The next input gate is an offline repair of the formal certificate's path selection, followed by fresh authority for one graph on the repaired freeze. [Result](../validation/r1_window_formal_result.md)
 
 **November 23 formal input campaign closed.** A3 accepted three roles. Exporter R1 produced the full payload table and manifest. Its event filing stopped before REC. Five leases are HELD and the three authorized attempts are consumed. Further input work requires new finite authority. [Final evidence](../validation/formal_input_cycle_result.md)
