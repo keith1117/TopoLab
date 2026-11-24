@@ -1,5 +1,13 @@
 # Development history
 
+## 2026-11-24 UTC — Six formal input roles passed and the certificate returned 1
+
+Two full-size public timing graphs and the protected-main independent replay
+passed. Both formal R1 binders returned with over 1,099 usable seconds left.
+The new lease was released. The final certificate rejected a 98-file software
+list against the 107-file plan. The campaign closed at 375,459 known FULL plus
+unpriced work. [Result](validation/r1_window_formal_result.md)
+
 ## 2026-11-23 — Final input attempt completed the exporter payload table
 
 The first three roles passed. Exporter R1 recorded all 558 payloads before
