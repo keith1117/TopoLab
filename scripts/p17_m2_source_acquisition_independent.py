@@ -37,6 +37,7 @@ R0_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.r0-read-20261122.v1"
 CATALOG_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1"
 CYCLE_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1"
 CYCLE_R1_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1"
+WINDOW_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1"
 CYCLE_FILING_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1"
 NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
 NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
@@ -111,6 +112,11 @@ native = helper("acquisition_raw_independent", "p17_m2_content_verified_independ
 def sampler_profiles(folder: Path, record: dict[str, Any]) -> dict[str, bytes]:
     """Independently reconcile every durable sample with native command helpers."""
     raw = native._software_bytes(folder / "sampler-evidence.jsonl")
+    return sampler_profile_buffers(raw, record)
+
+
+def sampler_profile_buffers(raw: bytes, record: dict[str, Any]) -> dict[str, bytes]:
+    """Reconcile the same complete sampler journal in live or archived custody."""
     require(raw.endswith(b"\n"), "sampler journal final newline missing")
     require(record.get("sampler_evidence_storage") == "topolab.source-sampler-evidence.v1"
             and record.get("sampler_journal_sha256") == digest(raw),
@@ -203,7 +209,7 @@ def _metadata_first_profile():
 
 def _formal_only_profile():
     return REGISTERED_IDENTITY in (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT,
-                                  CYCLE_R1_INPUT, CYCLE_FILING_INPUT)
+                                  CYCLE_R1_INPUT, CYCLE_FILING_INPUT, WINDOW_FORMAL)
 
 
 def _prior_public_module(name='formal_input_independent'):
@@ -211,7 +217,8 @@ def _prior_public_module(name='formal_input_independent'):
     import sys
 
     require(name in ('formal_input_independent', 'r0_read_independent', 'catalog_input_offline',
-                     'input_cycle_proof', 'input_cycle_r1_proof', 'input_cycle_filing_proof'),
+                     'input_cycle_proof', 'input_cycle_r1_proof', 'input_cycle_filing_proof',
+                     'r1_window_proof'),
             'exact independent metadata module required')
     path = Path(__file__).with_name(name + '.py')
     raw = native._software_bytes(path)
@@ -320,7 +327,8 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
                     CATALOG_INPUT: _prior_public_module().CATALOG_EVIDENCE,
                     CYCLE_INPUT: _prior_public_module().CYCLE_EVIDENCE,
                     CYCLE_R1_INPUT: _prior_public_module().CYCLE_R1_EVIDENCE,
-                    CYCLE_FILING_INPUT: _prior_public_module().CYCLE_FILING_EVIDENCE}[
+                    CYCLE_FILING_INPUT: _prior_public_module().CYCLE_FILING_EVIDENCE,
+                    WINDOW_FORMAL: _prior_public_module().WINDOW_EVIDENCE}[
                         REGISTERED_IDENTITY]),
                 'NEW formal-only budget/root/prior limits differ')
     return value
@@ -354,6 +362,13 @@ def registered_source_bindings(certificate: dict[str, Any]) -> dict[str, Any]:
 def _trusted_registered_sources(plan: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     require(plan.get('execution_identity') == REGISTERED_IDENTITY,
             'registered source execution identity required')
+    if CONTINUATION_CONFIG.get("public_roots"):
+        require(plan.get("root") in CONTINUATION_CONFIG["public_roots"]
+                and plan.get("scope") == REHEARSAL_SCOPE and plan.get("formal_authority") is False,
+                "public registration requires a literal timing fixture")
+        public = helper("r1_window_public", "r1_window_public.py")
+        certificate = public.check(plan)
+        return certificate, registered_source_bindings(certificate)
     reference = plan.get('binding', {}).get('strict23_registration')
     require(isinstance(reference, dict) and set(reference) == {
         'certificate_path', 'certificate_sha256', 'finalize_actual_path', 'finalize_actual_sha256'},
@@ -1422,7 +1437,8 @@ def _formal_registered_preflight(plan, raw):
                   CATALOG_INPUT: ('catalog_verification', 'catalog_input_offline'),
                   CYCLE_INPUT: ('cycle_verification', 'input_cycle_proof'),
                   CYCLE_R1_INPUT: ('r1_recovery_verification', 'input_cycle_r1_proof'),
-                  CYCLE_FILING_INPUT: ('filing_verification', 'input_cycle_filing_proof')}
+                  CYCLE_FILING_INPUT: ('filing_verification', 'input_cycle_filing_proof'),
+                  WINDOW_FORMAL: ('r1_window_verification', 'r1_window_proof')}
     if REGISTERED_IDENTITY in proof_spec:
         proof_key, proof_module = proof_spec[REGISTERED_IDENTITY]
         read_proof = _prior_public_module(proof_module).verified_readiness(
@@ -2507,7 +2523,8 @@ def validate_setup(
         release_proof_keys = {CATALOG_INPUT: 'catalog_verification',
                               CYCLE_INPUT: 'cycle_verification',
                               CYCLE_R1_INPUT: 'r1_recovery_verification',
-                              CYCLE_FILING_INPUT: 'filing_verification'}
+                              CYCLE_FILING_INPUT: 'filing_verification',
+                              WINDOW_FORMAL: 'r1_window_verification'}
         if plan['execution_identity'] in release_proof_keys:
             require(ready['main'] == prerequisite[
                 release_proof_keys[plan['execution_identity']]]['source_main'],

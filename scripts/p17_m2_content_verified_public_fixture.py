@@ -10,7 +10,28 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 
 
-def create_sources(root, checker):
+def window_label(label, ordinal, fill, checker):
+    """Deterministic synthetic arrays and histories at the sealed aggregate size."""
+    stored, result = label["stored"], label["result"]
+    count = len(stored["design_density"])
+    for key, phase in (("design_density", 1), ("physical_density", 2), ("sensitivity_weight", 3)):
+        values = [((index * 17 + ordinal + phase) % 512 + 256) / 1024 for index in range(count)]
+        stored[key] = values
+        if key in result:
+            result[key] = values
+    state = result["history"][-1] | {
+        key: stored[key] for key in ("design_density", "physical_density")
+    }
+    target = 461688 * (1 if count == 216 else 8)
+    history = result["history"] = []
+    step = len(checker.canonical(state)) + 4
+    steps = (target - len(checker.canonical(label)) - 1024) // step
+    history.extend(dict(state, iteration=i + 1) for i in range(steps))
+    stored["iterations"] = steps
+    fill(label, target)
+
+
+def create_sources(root, checker, *, window_scale=False):
     """Construct a new closed reference graph from independently authored public bytes."""
     root.mkdir()
     contract = json.loads(
@@ -47,7 +68,9 @@ def create_sources(root, checker):
         mesh = tuple(entry["case"]["problem"]["mesh"]["element_counts"])
         label = checker.public_label(mesh, ordinal)
         label["manifest_sha256"] = manifest_sha
-        if ordinal == 433:
+        if window_scale:
+            window_label(label, ordinal, maximum_json, checker)
+        elif ordinal == 433:
             prototype = label["result"]["history"][-1]
             label["result"]["history"] = [dict(prototype, iteration=i) for i in range(1, 361)]
             label["stored"]["iterations"] = 360
@@ -85,7 +108,7 @@ def create_sources(root, checker):
         context = contract["R0"]["W_context_sha256"] if family == "W" else fit_context_sha
         model = {"family": family, "seed": seed, "epoch": epoch, "context_sha256": context}
         raw = checker.public_model(model)
-        if family == "C" and seed == 17:
+        if not window_scale and family == "C" and seed == 17:
             header_size = int.from_bytes(raw[:8], "little")
             header = raw[8 : 8 + header_size]
             raw = (
@@ -117,7 +140,7 @@ def create_sources(root, checker):
             if family == "W"
             else history
         )
-        if family == "C" and seed == 17:
+        if not window_scale and family == "C" and seed == 17:
             history["history"] = [{}] * 200
             maximum_json(selection, 256 * 1024)
         raw = checker.canonical(selection)
@@ -128,7 +151,7 @@ def create_sources(root, checker):
             weighted.append(reference)
         else:
             fits["outcomes"].append({"recipe": family, "seed": seed, "selection": reference})
-    put("b3-v1-fits/b3_training.json", maximum_json(fits, 16 * 1048576))
+    put("b3-v1-fits/b3_training.json", fits if window_scale else maximum_json(fits, 16 * 1048576))
 
     def journal(base, context, names, payloads):
         previous = "0" * 64
@@ -197,7 +220,9 @@ def create_sources(root, checker):
                 },
             },
         }
-        if not references:
+        if window_scale:
+            maximum_json(packet, 699368 + int(len(references) < 7))
+        elif not references:
             maximum_json(packet, 4 * 1048576)
         raw = checker.canonical(packet)
         relative = f"artifacts/outcome/{checker.digest(raw)}.json"

@@ -298,6 +298,8 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1",
     )
     if measurement_execution_identity not in measurement_identities or (
         measurement_scope is None and measurement_execution_identity != measurement_identities[0]
@@ -324,6 +326,8 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1",
     ):
         dated = measurement_execution_identity.endswith("20261121.v1")
         input_entry = "input_control_20261121.py" if dated else "input_control_full60_20261116.py"
@@ -350,7 +354,8 @@ def invoke(
                 "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1",
                 "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
                 "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1",
-                "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1"):
+                "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1",
+                "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1"):
             profile = measurement_execution_identity.split(".")[-2]
             input_entry, generation = {
                 "formal-20261122": ("formal_input_control.py", "p17-m2-formal-input-20261122-a1"),
@@ -359,6 +364,8 @@ def invoke(
                 "cycle-20261123-a1": ("cycle_input_control.py", "p17-m2-input-cycle-20261123-a1"),
                 "cycle-20261123-a2": (
                     "cycle_r1_input_control.py", "p17-m2-input-cycle-20261123-a2"),
+                "r1-window-20261123": (
+                    "r1_window_formal_control.py", "p17-m2-r1-window-20261123-a1"),
                 "cycle-20261123-a3": (
                     "cycle_filing_input_control.py", "p17-m2-input-cycle-20261123-a3"),
             }[profile]
@@ -369,6 +376,16 @@ def invoke(
                     or len(argv) < 6 or argv[5] not in formal
                     or argv[0] != str(Path(sys.orig_argv[0]).resolve())):
                 raise ValueError("formal input measurement requires exact neutral formal payload")
+        if measurement_execution_identity.endswith(".r1-window-public-20261123.v1"):
+            roots = tuple(f"/private/tmp/topolab-public-r1-window-20261123-a{i}"
+                          for i in range(1, 7))
+            if (len(argv) != 10 or argv[5] not in roots
+                    or measurement_scope != "FORMAL_ADAPTER_PUBLIC_REHEARSAL_ONLY"
+                    or argv[0] != str(Path(sys.orig_argv[0]).resolve())
+                    or role not in ("independent-public-check", "exporter-r0", "independent-r0",
+                                    "exporter-r1", "independent-r1")):
+                raise ValueError("public R1 timing scope/role/root differs")
+            input_entry, public, formal = "r1_window_public_control.py", argv[5], ()
         if not (
             measurement_scope in (
                 "SOURCE_ATTESTED_RESTRICTED_INPUT_VERSION_ONLY",

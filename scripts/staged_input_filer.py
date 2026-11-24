@@ -467,7 +467,10 @@ def control_argv(root, mode, plan_sha, role):
 
 
 def activation_return(plan, plan_sha, packet):
-    reference = plan["binding"]["strict23_registration"]
+    public_timing = globals().get("window_public", False)
+    reference = (dict.fromkeys(("certificate_sha256", "finalize_actual_sha256"),
+                               plan["public_registration"]["sha256"]) if public_timing
+                 else plan["binding"]["strict23_registration"])
     formal = plan["formal_authority"]
     argv = [
         PYTHON,
@@ -481,7 +484,7 @@ def activation_return(plan, plan_sha, packet):
         "--registration-finalize-actual-sha",
         reference["finalize_actual_sha256"],
     ]
-    if not formal:
+    if not formal and not public_timing:
         ref = plan["binding"]["formal_strict23_registration"]
         argv += [
             "--formal-registration-certificate-sha",

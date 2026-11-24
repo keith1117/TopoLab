@@ -34,15 +34,13 @@ def build(config, source, expected_sha, *, wire=wire):
         and re.fullmatch("[A-Za-z0-9_-]{1,80}", config.get("event_prefix", "")),
         "new actor/root qualification differs",
     )
+    pins = ("registration_certificate_sha", "registration_finalize_actual_sha")
+    if not getattr(wire, "window_public", False):
+        pins += ("formal_registration_certificate_sha", "formal_registration_finalize_actual_sha")
     wire.need(
         all(
             isinstance(config.get(key), str) and re.fullmatch("[a-f0-9]{64}", config[key])
-            for key in (
-                "registration_certificate_sha",
-                "registration_finalize_actual_sha",
-                "formal_registration_certificate_sha",
-                "formal_registration_finalize_actual_sha",
-            )
+            for key in pins
         ),
         "four actual registration pins required",
     )
@@ -53,7 +51,8 @@ def build(config, source, expected_sha, *, wire=wire):
             == config["formal_registration_finalize_actual_sha"],
             "formal metadata pins differ",
         )
-    if wire.CONTROL_ENTRY == "cycle_filing_input_control.py":
+    if (wire.CONTROL_ENTRY in ("cycle_filing_input_control.py", "r1_window_formal_control.py")
+            or getattr(wire, "window_public", False)):
         # The filed JSON uses sorted keys. Regeneration must use that same byte order.
         config = dict(sorted(config.items()))
     text = source.decode("utf-8")
@@ -83,6 +82,13 @@ def build(config, source, expected_sha, *, wire=wire):
         )
         + "\n"
     )
+    if getattr(wire, "window_public", False):
+        # The frozen driver is identical across scratch roots. Only the separately
+        # hash-bound configuration supplied by the original caller varies.
+        program = program.replace("actor.qualify(" + json.dumps(config) + ")",
+                                  "actor.qualify(runtimeConfig)")
+        runtime_key = "'staged-input-'+config.event_prefix+'-'+config.author"
+        program = program.replace(json.dumps(key), runtime_key)
     return dict(
         schema="topolab.staged-input-actor-program.v1",
         execution_identity=wire.IDENTITY,
@@ -107,10 +113,11 @@ def main():
     routes.add_argument("--input-cycle", action="store_true")
     routes.add_argument("--input-cycle-r1", action="store_true")
     routes.add_argument("--input-cycle-filing", action="store_true")
+    routes.add_argument("--r1-window", action="store_true")
     args = parser.parse_args()
     selected = wire
     if any((args.formal_only, args.r0_read, args.catalog, args.input_cycle,
-            args.input_cycle_r1, args.input_cycle_filing)):
+            args.input_cycle_r1, args.input_cycle_filing, args.r1_window)):
         import runpy
 
         name = "r0_input_route.py" if args.r0_read else "formal_input_route.py"
@@ -122,6 +129,8 @@ def main():
             name = "cycle_r1_input_route.py"
         if args.input_cycle_filing:
             name = "cycle_filing_input_route.py"
+        if args.r1_window:
+            name = "r1_window_formal_route.py"
         route = runpy.run_path(str(SOURCE_CHECKOUT / "scripts" / name))
         selected = route["filer"]()
     if args.emit:

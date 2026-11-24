@@ -689,6 +689,8 @@ def content_step(root, plan, role, *, adapter=None):
             failure["source_identities"].extend(reader.source_observations)
             failure["source_failures"].extend(reader.failures)
             failure["source_facts"].update(reader.source_facts)
+            if hasattr(reader, "r1_timings"):
+                failure["partial_timings_ns"] = reader.r1_timings
         failure["independent_context"] = context
         for fact in failure["source_failures"]:
             if fact.get("recording_error"):
@@ -763,8 +765,21 @@ def _content_step(root, plan, role, readers, *, adapter=None):
             source_identity_policy=getattr(transport, "source_identity_policy", None),
         )
         readers.append(reader)
-        producer.export(reader, registry, contract, content.root, local_content=content)
+        capture = plan.get("execution_identity") in (
+            "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1",
+            "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
+        )
+        timings = {} if capture else None
+        if capture:
+            reader.r1_timings = timings
+        producer.export(reader, registry, contract, content.root, local_content=content,
+                        **({"timings": timings} if capture else {}))
+        start = time.perf_counter_ns()
         closed = content.finish()
+        if capture:
+            timings["finish"] = [time.perf_counter_ns() - start]
+            transport.put(root / "exporter-r1-timing.json", dict(clock="perf_counter_ns",
+                          ordered_durations_ns=timings, source_count=len(reader.rows)))
         descriptor = nofollow_directory(content.root)
         try:
             closed["root_identity"] = physical(os.fstat(descriptor))
@@ -1320,7 +1335,9 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
         "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1",
-        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1"):
+        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1"):
         reserve_shared()
     transport.predecessor(root, plan, role)
     need(not (root / "STOP.json").exists() or role == shared_role, "STOP_NO_RETRY")
@@ -1351,7 +1368,9 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
         "topolab.v2.p17-m2-registered-source-acquisition.catalog-20261122.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1",
-        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1")
+        "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1")
     if new_whole:
         pending.update(whole_start_ms=plan["whole_start_ms"], whole_end_ms=plan["whole_end_ms"])
     if role == "final-filing":
