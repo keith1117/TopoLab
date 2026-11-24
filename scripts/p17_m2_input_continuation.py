@@ -274,8 +274,9 @@ CATALOG_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.catalog-2026112
 CYCLE_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a1.v1"
 CYCLE_R1_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a2.v1"
 CYCLE_FILING_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1"
+WINDOW_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1"
 FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT, CYCLE_R1_INPUT,
-                          CYCLE_FILING_INPUT)
+                          CYCLE_FILING_INPUT, WINDOW_FORMAL)
 R0_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/r0-read-acceptance-20261122"
 CONFIGS[R0_INPUT] = {
     **CONFIGS[FORMAL_INPUT],
@@ -389,8 +390,59 @@ CONFIGS[CYCLE_FILING_INPUT] = {
                "sha256": "6b55fd1a56a19965a63e9073b24e984d335a25b74599b2a250586cd9fc28de80"},
 }
 
+# Public R1 timing runs have six literal scratch roots and no formal generation.
+WINDOW_PUBLIC = "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1"
+WINDOW_ROOTS = tuple(f"/private/tmp/topolab-public-r1-window-20261123-a{i}" for i in range(1, 7))
+CONFIGS[WINDOW_PUBLIC] = {
+    **CONFIGS[STAGED_INPUT],
+    "input": WINDOW_PUBLIC, "window_candidate": True,
+    "prefix": "topolab-public-r1-window-20261123-",
+    "generations": (), "public_root": None, "public_roots": WINDOW_ROOTS,
+    "input_protocol": "docs/planning/r1_window_public_contract.json",
+    "schema": "topolab.r1-window.public.v1",
+    "global_deadline_ms": 1795519430895,
+    "public_graphs_max": 6,
+    "control_entry": "r1_window_public_control.py",
+    "cache_suffix": "_window_public_20261123",
+    "caller_filer": "r1_window_public_filer.py",
+    "caller_waiter": "r1_window_public_waiter.py",
+    "window_module": "r1_window_public_clock",
+    "registration_helpers": (*CONFIGS[STAGED_INPUT]["registration_helpers"],
+                            "r1_window_scope.py", "r1_window_public.py",
+                            "r1_window_public_independent.py", "r1_window_public_route.py",
+                            "formal_input_route.py", "cycle_filing_intent.py",
+                            "r0_caller_receipt.py", "r0_read_independent.py",
+                            "staged_input_actor.mjs",
+                            "staged_input_filer.py", "staged_input_waiter.py",
+                            "build_staged_input_caller.py"),
+}
+
+CONFIGS[WINDOW_FORMAL] = {
+    **CONFIGS[CYCLE_FILING_INPUT],
+    "input": WINDOW_FORMAL, "window_candidate": True,
+    "prefix": "topolab-unfunded-r1-window-20261123-",
+    "generations": (PARENT + "p17-m2-r1-window-20261123-a1",),
+    "input_protocol": "docs/planning/r1_window_formal_contract.json",
+    "schema": "topolab.v2.m2-registered-source-acquisition-authority.r1-window-20261123.v1",
+    "global_deadline_ms": 1795670630895,
+    "preparation_entry": "r1_window_formal_preparation.py",
+    "input_entry": "r1_window_formal_registered.py",
+    "control_entry": "r1_window_formal_control.py",
+    "evidence_root": "/Users/keith1117/Documents/TopoLab-data/formal-r1-window-20261123-formal",
+    "cache_suffix": "_r1_window_formal_20261123",
+    "window_module": "r1_window_formal_clock",
+    "caller_waiter": "r1_window_formal_waiter.py", "caller_filer": "r1_window_formal_filer.py",
+    "registration_helpers": (*CONFIGS[CYCLE_FILING_INPUT]["registration_helpers"],
+                             "r1_window_formal_route.py", "r1_window_proof.py",
+                             "r1_window_scope.py"),
+    "budget": {"path": ("/Users/keith1117/Documents/TopoLab-data/formal-r1-window-20261123"
+                        "/owner-budget.json"),
+               "sha256": "d867948e0cf23b8a860a230be66fbedfc3c7cb5398168dada7fa71199fc2a35e"},
+}
+
 # Preparation and its replay use the same evidence key for each published profile.
 PROOF_MODULES = {
+    WINDOW_FORMAL: ("r1_window_verification", "r1_window_proof"),
     R0_INPUT: ("r0_read_verification", "r0_read_independent"),
     CATALOG_INPUT: ("catalog_verification", "catalog_input_offline"),
     CYCLE_INPUT: ("cycle_verification", "input_cycle_proof"),
@@ -410,7 +462,8 @@ def config(identity):
 
 
 def is_whole_input(identity):
-    return identity in (FULL60_INPUT, NOV21_INPUT, STAGED_INPUT, *FORMAL_ONLY_IDENTITIES)
+    return identity in (FULL60_INPUT, NOV21_INPUT, STAGED_INPUT, WINDOW_PUBLIC,
+                        *FORMAL_ONLY_IDENTITIES)
 
 
 def window(identity):
@@ -430,6 +483,10 @@ def window(identity):
 
 def config_for_root(root):
     for value in CONFIGS.values():
+        if value.get("public_roots"):
+            if str(root) in value["public_roots"]:
+                return value
+            continue
         if value["input"] in (NOV21_INPUT, STAGED_INPUT, *FORMAL_ONLY_IDENTITIES):
             if str(root) in (*value["generations"], value["public_root"]):
                 return value

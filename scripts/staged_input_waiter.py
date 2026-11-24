@@ -169,7 +169,7 @@ def initial_metadata(root, release):
     start = release.get("whole_start_ms")
     wire.need(
         type(start) is int
-        and len(argv) == (12 if formal else 16)
+        and len(argv) == (12 if formal or getattr(wire, "window_public", False) else 16)
         and argv[:6]
         == [
             wire.PYTHON,
@@ -185,7 +185,7 @@ def initial_metadata(root, release):
         "initial literal request differs",
     )
     pins = [argv[7], argv[9]]
-    if not formal:
+    if not formal and not getattr(wire, "window_public", False):
         wire.need(
             argv[10] == "--formal-registration-certificate-sha"
             and argv[12] == "--formal-registration-finalize-actual-sha",

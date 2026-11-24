@@ -1,0 +1,30 @@
+{
+  "schema": "topolab.r1-window.public.v1",
+  "execution_identity": "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1",
+  "owner_budget_sha256": "d867948e0cf23b8a860a230be66fbedfc3c7cb5398168dada7fa71199fc2a35e",
+  "roots": [
+    "/private/tmp/topolab-public-r1-window-20261123-a1",
+    "/private/tmp/topolab-public-r1-window-20261123-a2",
+    "/private/tmp/topolab-public-r1-window-20261123-a3",
+    "/private/tmp/topolab-public-r1-window-20261123-a4",
+    "/private/tmp/topolab-public-r1-window-20261123-a5",
+    "/private/tmp/topolab-public-r1-window-20261123-a6"
+  ],
+  "roles": [
+    "independent-public-check",
+    "exporter-r0",
+    "independent-r0",
+    "exporter-r1",
+    "independent-r1"
+  ],
+  "role_FULL": [
+    300,
+    300,
+    300,
+    1200,
+    1200
+  ],
+  "shared_reserved_FULL": 300,
+  "formal_authority": false,
+  "required_gate": "Actual on-time SUP, REC, event filing and bind of both R1 roles on two new matched-size fixtures from the same candidate. Public timing scope ends at independent R1."
+}

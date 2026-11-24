@@ -51,6 +51,8 @@ def _whole_profile():
 
 
 def registered_root(root):
+    if CONTINUATION_CONFIG.get("public_roots"):
+        return str(root) in CONTINUATION_CONFIG["public_roots"]
     if CONTINUATION_CONFIG.get("public_graphs_max") == 0:
         return str(root) in REGISTERED_GENERATIONS
     if CONTINUATION_CONFIG.get("public_root") is not None:
@@ -229,6 +231,10 @@ def source_freeze(execution_identity=None):
                 paths.add(REPO / CONTINUATION_CONFIG["review_partition"])
             paths.update(REPO / "scripts" / name for name in CONTINUATION_CONFIG.get(
                 "registration_helpers", ()))
+            if CONTINUATION_CONFIG.get("window_candidate"):
+                paths.update(REPO.joinpath("scripts").glob("r1_window_*.py"))
+                paths.update(REPO / "docs/planning" / name for name in (
+                    "r1_window_formal_contract.json", "r1_window_public_contract.json"))
             if CONTINUATION_INPUT in (load("p17_m2_input_continuation").NOV21_INPUT,
                                        load("p17_m2_input_continuation").STAGED_INPUT,
                                        *load("p17_m2_input_continuation").FORMAL_ONLY_IDENTITIES):
@@ -1269,7 +1275,10 @@ def checked(root, expected):
         all(plan["runtime"][k] == v for k, v in actual.items() if k != "orig_argv"),
         "RUNTIME_BINDING_CHANGED",
     )
-    load("p17_m2_source_acquisition_independent").validate_binding(plan)
+    if CONTINUATION_CONFIG.get("public_roots"):
+        load("r1_window_public").check(plan)
+    else:
+        load("p17_m2_source_acquisition_independent").validate_binding(plan)
     checked_setup(root, plan)
     AcquisitionTransport(root, expected, scope=scope).namespace_check(root)
     return root, plan
@@ -1324,6 +1333,12 @@ class AcquisitionTransport:
             return load("p17_m2_input_export").Reader(source, journal, **kwargs)
         plan = base().read_json(self.root / "plan.json")
         need(base().sha(base().canonical(plan)) == self.plan_sha, "PLAN_SHA_CHANGED")
+        if CONTINUATION_CONFIG.get("public_roots"):
+            module = load("p17_m2_registered_input")
+            certificate = load("r1_window_public").check(plan)
+            need(str(source) == plan["source_root"], "public reader source differs")
+            return module._RegisteredLabelReader(source, journal,
+                registration=module.registration_bindings(certificate), **kwargs)
         return load("p17_m2_registered_input").source_reader(plan, source, journal, **kwargs)
 
     def argv_for(self, root, mode, plan_sha, role):
@@ -1729,6 +1744,13 @@ def payload_body(root, plan, role, transport):
             B_C_admission=False,
             setup_proof_sha256=helper.sha(helper.canonical(checked_setup(root, plan))),
         )
+    if CONTINUATION_CONFIG.get("public_roots") and role in ("independent-r0", "independent-r1"):
+        registry = transport.read_registry(root, plan, role) if role == "independent-r1" else None
+        proof = load("r1_window_public_independent").verify_public_role(
+            plan, role, accepted_registry=registry)
+        name = "r0-proof.json" if role == "independent-r0" else "r1-proof.json"
+        transport.put(root / name, proof)
+        return proof
     if role == "shared-closeout":
         return helper.shared_payload(root, plan, adapter=transport)
     if role in ("public-consumer", "reader-ack"):
@@ -1966,6 +1988,19 @@ def main():
     parser.add_argument("--whole-start-ms", type=int)
     args = parser.parse_args()
     continuation = load('p17_m2_input_continuation')
+    if CONTINUATION_CONFIG.get("public_roots"):
+        need(args.root in CONTINUATION_CONFIG["public_roots"] and (
+            (args.mode == "prepare-rehearsal" and args.role is None)
+            or (args.mode in ("supervise", "record", "run", "payload", "bind")
+                and args.role in list(base().CAPS)[:5])),
+            "public R1 timing root or role is outside contract")
+        if args.mode == "prepare-rehearsal":
+            window = continuation.window(CONTINUATION_INPUT)
+            window.declare(args.whole_start_ms, time.time_ns() // 10**6)
+            WHOLE_REQUESTED_MS = args.whole_start_ms
+            result = load("r1_window_public").prepare(sys.modules[__name__], args.root, args)
+            print(base().canonical(result).decode(), end="")
+            return 0
     if CONTINUATION_INPUT in continuation.FORMAL_ONLY_IDENTITIES:
         if args.mode == "activate-formal":
             allowed = args.role is None
@@ -2123,7 +2158,9 @@ def main():
         else:
             result = payload(root, plan, args.role, transport)
     raw_return = base().canonical(result)
-    if CONTINUATION_INPUT in continuation.PROOF_MODULES and args.mode in ("record", "bind"):
+    compact = (CONTINUATION_INPUT in continuation.PROOF_MODULES
+               or CONTINUATION_CONFIG.get("public_roots"))
+    if compact and args.mode in ("record", "bind"):
         # Retain the complete returned value, including post-write cleanup failures.
         base().put(root / "receipts" / f"{args.role}-{args.mode}-original.json", result)
         outward = load("r0_caller_receipt").project(

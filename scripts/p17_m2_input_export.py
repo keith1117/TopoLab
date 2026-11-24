@@ -14,6 +14,7 @@ import re
 import stat
 import struct
 import sys
+import time
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -53,26 +54,30 @@ def parse(raw):
             result[k] = v
         return result
 
-    def number(text):
-        value = float(text)
-        need(math.isfinite(value), "nonfinite JSON number")
-        return value
-
     def bad(_):
         raise ValueError("STOP: nonfinite JSON literal")
 
-    result = json.loads(raw, object_pairs_hook=pairs, parse_float=number, parse_constant=bad)
+    # Let the native decoder convert floats. Inspect overflow on the parsed value
+    # and recurse only into containers, including objects outside the export view.
+    result = json.loads(raw, object_pairs_hook=pairs, parse_constant=bad)
 
-    def depth(value, n=0):
-        need(n <= 64, "JSON depth")
+    def inspect(value, depth):
         if isinstance(value, dict):
-            for v in value.values():
-                depth(v, n + 1)
+            children = value.values()
         elif isinstance(value, list):
-            for v in value:
-                depth(v, n + 1)
+            children = value
+        else:
+            if isinstance(value, float):
+                need(math.isfinite(value), "nonfinite JSON number")
+            return
+        need(depth < 64 or not value, "JSON depth")
+        for child in children:
+            if type(child) is float:
+                need(math.isfinite(child), "nonfinite JSON number")
+            elif isinstance(child, (dict, list)):
+                inspect(child, depth + 1)
 
-    depth(result)
+    inspect(result, 0)
     return result
 
 
@@ -726,7 +731,16 @@ def scalar_view(raw, item):
     }
 
 
-def export(reader, registry, contract, output, *, local_content=None):
+def export(reader, registry, contract, output, *, local_content=None, timings=None):
+    def measure(stage, operation, *args, **kwargs):
+        if timings is None:
+            return operation(*args, **kwargs)
+        start = time.perf_counter_ns()
+        try:
+            return operation(*args, **kwargs)
+        finally:
+            timings.setdefault(stage, []).append(time.perf_counter_ns() - start)
+
     need(local_content is None or output.absolute() == local_content.root,
          "local content output binding")
     need(
@@ -738,13 +752,13 @@ def export(reader, registry, contract, output, *, local_content=None):
     written, totals = [], {}
 
     def emit(path, value, each, total, group, raw=False):
-        data = value if raw else canonical(value)
+        data = value if raw else measure("serialize", canonical, value)
         totals[group] = totals.get(group, 0) + len(data)
         need(len(data) <= each and totals[group] <= total, "view byte cap")
         if local_content is None:
             new_file(output / path, data)
         else:
-            local_content.write(path, data)
+            measure("guard_and_write", local_content.write, path, data)
         written.append(ref(path, data))
 
     models = []
@@ -767,11 +781,12 @@ def export(reader, registry, contract, output, *, local_content=None):
         "models",
     )
     for item in registry["labels"]:
-        raw = read_ref(reader, item["artifact"], 64 * MIB, group="label", total=768 * MIB)
+        raw = measure("label_source_read", read_ref, reader, item["artifact"], 64 * MIB,
+                      group="label", total=768 * MIB)
         with reader.validation(item["artifact"]["path"], "json_parse"):
-            packet = parse(raw)
+            packet = measure("label_json_parse", parse, raw)
         with reader.validation(item["artifact"]["path"]):
-            producer, audit = label_views(packet, item)
+            producer, audit = measure("label_validation", label_views, packet, item)
         emit("nn/producer/" + item["case_id"] + ".json", producer, 128 * 1024, 32 * MIB, "producer")
         emit("nn/audit/" + item["case_id"] + ".json", audit, 2 * MIB, 256 * MIB, "audit")
         del raw, packet, producer, audit

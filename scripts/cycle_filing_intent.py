@@ -49,7 +49,13 @@ def validate_file_intent(intent, expected, *, consumed, stopped):
     return intent
 
 
-def prefix(actor):
+def graph_root(wire):
+    return getattr(wire, "graph_root", wire.FORMAL)
+
+
+def prefix(actor, wire=None):
+    if wire is not None and hasattr(wire, "actor_prefix"):
+        return wire.actor_prefix(actor)
     return f"cycle-20261123-{actor}-a3"
 
 
@@ -90,6 +96,21 @@ def either(wire, name):
 
 
 def entry_value(wire, builder, actor):
+    if getattr(wire, "window_public", False):
+        artifact, artifact_sha = pair(wire, prefix(actor, wire) + "-program.json")
+        config = artifact["config"]
+        _, registration_sha = pair(wire, "registration.json")
+        raw = (wire.RUNTIME_REPO / "scripts/staged_input_actor.mjs").read_bytes()
+        digest = wire.sha(raw)
+        wire.need(config["root"] == wire.PUBLIC and config["formal"] is False
+                  and config["author"] == actor and config["event_prefix"] == prefix(actor, wire)
+                  and config["registration_certificate_sha"] == registration_sha
+                  and artifact == builder.build(config, raw, digest, wire=wire),
+                  "public program/registration/scope differs")
+        return dict(schema=ENTRY_SCHEMA, execution_identity=wire.IDENTITY, root=wire.PUBLIC,
+                    author=AUTHORS[actor], owner_budget_sha256=wire.BUDGET_SHA,
+                    program_sha256=artifact["program_sha256"], artifact_sha256=artifact_sha,
+                    actor_sha256=digest, registration_sha256=registration_sha)
     ready, ready_sha = pair(wire, "input-activation-readiness-a1.json")
     _, preflight_sha = pair(wire, "input-preflight-actual-a1.json")
     wire.need(
@@ -97,16 +118,15 @@ def entry_value(wire, builder, actor):
         and ready["new_input_budget"]["sha256"] == wire.BUDGET_SHA,
         "wrong actor admission",
     )
-    artifact, artifact_sha = pair(wire, prefix(actor) + "-program.json")
+    artifact, artifact_sha = pair(wire, prefix(actor, wire) + "-program.json")
     config = artifact["config"]
-    contract = json.loads(
-        (wire.RUNTIME_REPO / "docs/planning/input_cycle_a3_contract.json").read_bytes()
-    )
+    protocol = getattr(wire, "protocol", "docs/planning/input_cycle_a3_contract.json")
+    contract = json.loads((wire.RUNTIME_REPO / protocol).read_bytes())
     reg = contract["registration"]["formal"]
     wire.need(
         config["formal"] is True
         and config["author"] == actor
-        and config["event_prefix"] == prefix(actor)
+        and config["event_prefix"] == prefix(actor, wire)
         and config["registration_certificate_sha"] == reg["certificate_sha256"]
         and config["registration_finalize_actual_sha"] == reg["finalize_actual_sha256"],
         "unregistered actor or registration pins",
@@ -130,24 +150,27 @@ def entry_value(wire, builder, actor):
     )
 
 
-def entry_name(actor):
-    return prefix(actor) + "-filing-entry.json"
+def entry_name(actor, wire=None):
+    return prefix(actor, wire) + "-filing-entry.json"
 
 
 def derive(wire, builder, root, plan_sha, role, mode, path, packet_sha):
     actor = owner(role)
-    stem = prefix(actor) + "-" + actor
+    stem = prefix(actor, wire) + "-" + actor
     wire.need(
-        root == wire.FORMAL and path == str(wire.EVIDENCE / f"{stem}-{role}-{mode}-actual.json"),
+        root == graph_root(wire)
+        and path == str(wire.EVIDENCE / f"{stem}-{role}-{mode}-actual.json"),
         "unexpected original filing path",
     )
     packet, _ = pair(wire, Path(path).name, packet_sha)
     plan, _ = wire.checked_plan(root, plan_sha)
-    entry, entry_sha = pair(wire, entry_name(actor))
+    entry, entry_sha = pair(wire, entry_name(actor, wire))
     wire.need(
         entry == entry_value(wire, builder, actor)
-        and plan["activation_readiness"]["sha256"] == entry["readiness_sha256"]
-        and plan["independent_preflight"]["sha256"] == entry["preflight_sha256"]
+        and (plan["public_registration"]["sha256"] == entry["registration_sha256"]
+             if getattr(wire, "window_public", False) else
+             plan["activation_readiness"]["sha256"] == entry["readiness_sha256"]
+             and plan["independent_preflight"]["sha256"] == entry["preflight_sha256"])
         and plan["source_tree"]["scripts/staged_input_actor.mjs"] == entry["actor_sha256"],
         "formal plan and entry disagree",
     )
@@ -231,10 +254,10 @@ def guard(wire, intent, expected):
         intent,
         expected,
         consumed=either(wire, ticket(role, mode, "spent")),
-        stopped=either(wire, wire.stop_path(wire.FORMAL).name),
+        stopped=either(wire, wire.stop_path(graph_root(wire)).name),
     )
     wire.need(
-        all(not present(wire, Path(wire.FORMAL) / name) for name in intent["outputs"]),
+        all(not present(wire, Path(graph_root(wire)) / name) for name in intent["outputs"]),
         "formal event output already exists",
     )
 
@@ -243,11 +266,13 @@ def persist_return(wire, builder, packet, destination):
     name = Path(destination).name
     actor = next((key for key, author in AUTHORS.items() if packet.get("author") == author), None)
     wire.need(actor is not None, "unknown submitter")
-    stem = prefix(actor) + "-" + actor + "-"
+    stem = prefix(actor, wire) + "-" + actor + "-"
     names = {stem + "caller-STOP.json"}
     for role in ROLE_ORDER:
         if owner(role) == actor:
             names.update(stem + role + "-" + kind + "-actual.json" for kind in (*MODES, "bind"))
+    if getattr(wire, "window_public", False) and actor == "independent":
+        names.add(stem + "activation-actual.json")
     if actor == "producer":
         names.update(
             (
@@ -312,12 +337,17 @@ def dispatch(wire, sibling, argv):
     os.umask(0o077)
     # All modes are selected literally. There is no fallback for an unsigned file request.
     mode = argv[0] if argv else None
-    if mode in ("enter-independent", "dispatch-note"):
-        wire.need(argv == [mode, "--root", wire.FORMAL], "wrong actor entry path")
+    if mode in ("enter-independent", "dispatch-note", "enter-public-producer"):
+        wire.need(mode != "enter-public-producer" or getattr(wire, "window_public", False),
+                  "public entry only")
+        wire.need(argv == [mode, "--root", graph_root(wire)], "wrong actor entry path")
         actor = "independent" if mode == "enter-independent" else "producer"
-        wire.need(not either(wire, wire.stop_path(wire.FORMAL).name), "closed graph")
+        wire.need(not either(wire, wire.stop_path(graph_root(wire)).name), "closed graph")
         entry = entry_value(wire, sibling("build_staged_input_caller"), actor)
-        exclusive_pair(wire, entry_name(actor), entry)
+        exclusive_pair(wire, entry_name(actor, wire), entry)
+        if mode == "enter-public-producer":
+            print(wire.canonical(dict(status="PUBLIC_PRODUCER_ENTERED")).decode(), end="")
+            return
         if actor == "producer":
             return sibling("cycle_input_filer").dispatch(wire, argv)
         result = dict(status="INDEPENDENT_ACTOR_ENTERED", program_sha256=entry["program_sha256"])
