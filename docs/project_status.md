@@ -1,9 +1,19 @@
 # Current project status
 
-Updated:2026-11-23. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-11-24 UTC. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
+
+## Formal input reached six roles and stopped at certification
+
+Both R0 readers verified 40/40 metadata files and both R1 readers verified all
+558 payloads. The 1,071-member versions match. Final filing and lease release
+passed. The certificate command returned 1 because its software list omitted
+nine of the plan's 107 files. The new formal lease is RELEASED and all five
+older leases remain HELD. The known floor is 375,459 FULL plus unpriced
+costs. The next input gate requires bounded repair of the certificate check
+and a new grant. [Terminal evidence](validation/r1_window_formal_result.md)
 
 ## November 23 formal input campaign closed at 3/6
 

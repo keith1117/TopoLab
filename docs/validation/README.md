@@ -1,5 +1,7 @@
 # Validation evidence index
 
+[Formal R1 timing and certificate result](r1_window_formal_result.md) records repeatable full-chain timing, six passed formal roles, lease release and the certificate software-list stop.
+
 [Formal input campaign closure](formal_input_cycle_result.md) records the two accepted R0 results, exporter R1's 558 payloads and 1,071-member manifest, the 3/6 stop and final ledger.
 
 [Formal input A2](formal_input_cycle_a2.md) records the protected reader recovery, first-role filing refusal, independent archive audit and 352,899 FULL known floor.

@@ -1,5 +1,7 @@
 # TopoLab v2 Development Roadmap
 
+**Formal input reached 6/6.** Both R1 roles accepted the full payload table and matching 1,071-member version. The certificate returned 1 after identifying a software-freeze disagreement. The next input gate is an offline repair of the formal certificate's path selection, followed by fresh authority for one graph on the repaired freeze. [Result](../validation/r1_window_formal_result.md)
+
 **November 23 formal input campaign closed.** A3 accepted three roles. Exporter R1 produced the full payload table and manifest. Its event filing stopped before REC. Five leases are HELD and the three authorized attempts are consumed. Further input work requires new finite authority. [Final evidence](../validation/formal_input_cycle_result.md)
 
 **November 23 formal input A2.** Formal input remains open after the first-role REC filing refusal. The last campaign slot requires verified filing of the original actor return, one fresh preflight and a new graph. [A2 terminal report](../validation/formal_input_cycle_a2.md)
