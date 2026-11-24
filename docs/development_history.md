@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-24 UTC — Repaired certificate replay passed and the formal first role stopped
+
+The independent software inventory now follows the registered contract and checks every selected file. The protected-release replay recovered the complete historical result. A new graph stopped at the independent public check's unregistered descendant, before either R0 or R1 ran. The original returns and 95 controls are sealed. The independent stop audit passed and the ledger closed at 378,459 known FULL plus unpriced work. [Terminal report](validation/formal_input_certificate.md)
+
 ## 2026-11-24 UTC — Six formal input roles passed and the certificate returned 1
 
 Two full-size public timing graphs and the protected-main independent replay
