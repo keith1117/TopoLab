@@ -1,5 +1,7 @@
 # Planning index
 
+[First-role recovery contract](first_role_child_recovery.md) capped public fixtures at 18 and formal input at one graph. The attempt stopped at shared closeout. [Result](../validation/formal_input_closeout_stop.md)
+
 [Formal input certificate contract](formal_input_certificate.md) bound the offline and single formal budgets. The release passed the sealed certificate replay and the formal first role stopped at its descendant guard. [Result](../validation/formal_input_certificate.md)
 
 [Second formal input contract](input_cycle_a2_contract.json) follows the first accepted independent R0 and a timeout reading R1 payload 35. [A1 result](../validation/formal_input_cycle_a1.md)

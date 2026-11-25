@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-25 UTC — First-role repair passed and shared closeout stopped
+
+Public creation traces identified a Git subprocess in the old readiness proof. The repaired first role passed twice on released software and in the formal graph. Five roles passed, including both full R1 verifications. The late return of the shared closeout recorder packet stopped binding. Both actor originals and 228 controls are sealed. [Formal result](validation/formal_input_closeout_stop.md)
+
 ## 2026-11-24 UTC — Repaired certificate replay passed and the formal first role stopped
 
 The independent software inventory now follows the registered contract and checks every selected file. The protected-release replay recovered the complete historical result. A new graph stopped at the independent public check's unregistered descendant, before either R0 or R1 ran. The original returns and 95 controls are sealed. The independent stop audit passed and the ledger closed at 378,459 known FULL plus unpriced work. [Terminal report](validation/formal_input_certificate.md)
