@@ -276,8 +276,9 @@ CYCLE_R1_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123
 CYCLE_FILING_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1"
 WINDOW_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1"
 CERT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1"
+CHILD_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.child-20261125.v1"
 FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT, CYCLE_R1_INPUT,
-                          CYCLE_FILING_INPUT, WINDOW_FORMAL, CERT_FORMAL)
+                          CYCLE_FILING_INPUT, WINDOW_FORMAL, CERT_FORMAL, CHILD_FORMAL)
 R0_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/r0-read-acceptance-20261122"
 CONFIGS[R0_INPUT] = {
     **CONFIGS[FORMAL_INPUT],
@@ -464,9 +465,35 @@ CONFIGS[CERT_FORMAL] = {
                         "/owner-budget.json"),
                "sha256": "7ae3b524775086003d636d15e747333bdc7c9abd96ea34ea67f9f6e0cf999595"},
 }
+CONFIGS[CHILD_FORMAL] = {
+    **CONFIGS[CYCLE_FILING_INPUT],
+    "input": CHILD_FORMAL, "window_candidate": True,
+    "prefix": "topolab-unfunded-child-20261125-",
+    "generations": (PARENT + "p17-m2-child-20261125-a1",),
+    "input_protocol": "docs/planning/child_formal_contract.json",
+    "schema": "topolab.v2.m2-registered-source-acquisition-authority.child-20261125.v1",
+    "global_deadline_ms": 1795786069520,
+    "preparation_entry": "child_formal_preparation.py",
+    "input_entry": "child_formal_registered.py",
+    "control_entry": "child_formal_control.py",
+    "evidence_root": "/Users/keith1117/Documents/TopoLab-data/child-20261125-formal",
+    "cache_suffix": "_child_formal_20261125",
+    "window_module": "child_formal_clock",
+    "caller_waiter": "child_formal_waiter.py", "caller_filer": "child_formal_filer.py",
+    "registration_helpers": (*CONFIGS[CYCLE_FILING_INPUT]["registration_helpers"],
+                             "child_formal_route.py", "certificate_replay_proof.py",
+                             "certificate_replay_archive.py", "certificate_verify.py",
+                             "child_readiness_proof.py", "child_verify.py",
+                             "child_public_control.py", "child_public_schedule.mjs",
+                             "r1_window_scope.py"),
+    "budget": {"path": ("/Users/keith1117/Documents/TopoLab-data/child-20261125"
+                        "/owner-budget.json"),
+               "sha256": "8693ffd9e9555a5247c2569c0d4f97331fbc7f6237dce25e2a80012c7f1c26dd"},
+}
 
 # Preparation and its replay use the same evidence key for each published profile.
 PROOF_MODULES = {
+    CHILD_FORMAL: ("child_verification", "child_readiness_proof"),
     CERT_FORMAL: ("certificate_verification", "certificate_replay_proof"),
     WINDOW_FORMAL: ("r1_window_verification", "r1_window_proof"),
     R0_INPUT: ("r0_read_verification", "r0_read_independent"),
