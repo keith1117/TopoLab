@@ -1,9 +1,13 @@
 # Current project status
 
-Updated:2026-11-24 UTC. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-11-25 UTC. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
+
+## Five formal input roles passed before the shared closeout stopped
+
+Both authors accepted 40 metadata files and 558 payloads. The exporter, independent reader and backup agreed on all 1,071 members. The shared closeout REC packet returned from paired persistence after its deadline. Binding, final filing, lease release and the certificate are outstanding. Seven leases are HELD. The independent stop audit passed. The single formal attempt is consumed and the cumulative known floor is 388,659 FULL plus unpriced costs. [Terminal report](validation/formal_input_closeout_stop.md)
 
 ## Formal input stopped at the first role on the repaired certificate release
 

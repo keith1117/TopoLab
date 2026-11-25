@@ -1,5 +1,7 @@
 # Validation evidence index
 
+[Five accepted formal roles and the shared closeout stop](formal_input_closeout_stop.md) records the first-role repair, complete metadata and payload results, late receipt and held lease.
+
 [Formal certificate repair and first-role stop](formal_input_certificate.md) records the protected-release offline pass, the 0/6 native descendant stop, evidence custody and the closed ledger.
 
 [Formal R1 timing and certificate result](r1_window_formal_result.md) records repeatable full-chain timing, six passed formal roles, lease release and the certificate software-list stop.

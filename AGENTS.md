@@ -17,12 +17,9 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Read the [closed campaign report](docs/validation/formal_input_cycle_result.md)
-before further input work. A3 closed at 3/6. Both R0 readers accepted 40/40.
-Exporter R1 produced 558 rows and a 1,071-member manifest. Its SUP filing
-returned live close to the role deadline. Independent R1, closeout and the
-certificate remain outstanding. All three attempts are consumed, five leases
-are HELD and the known floor is 355,599 FULL plus unpriced work.
+Read the [November 25 input result](docs/validation/formal_input_closeout_stop.md)
+before further input diagnosis or entry. The single graph closed at 5/6 after
+the shared closeout recorder packet returned late. Seven leases are HELD.
 Further diagnosis or formal entry requires a new finite authorization.
 Uniform remains the default, fixed P/17 is unrepaired and full fit remains
 PENDING4GiB.
