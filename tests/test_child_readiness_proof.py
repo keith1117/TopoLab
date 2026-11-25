@@ -22,6 +22,7 @@ def proof(monkeypatch):
     )
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+    monkeypatch.setattr(module, "REPO", SCRIPTS.parent)
     return module
 
 
