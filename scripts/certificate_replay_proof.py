@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import re
 import resource
 import subprocess
 import sys
@@ -137,6 +138,48 @@ def run(checker, bundle, events, *, publish):
     return raw.decode()
 
 
+def checkout_commit(repo):
+    """Resolve this checkout's local HEAD inside the measured process.
+
+    Preparation still verifies the clean protected branch and its actual CI.
+    The role checks its pinned commit and independently hashes the software bytes.
+    """
+    marker = repo / ".git"
+    gitdir = common = marker
+    if marker.is_file():
+        link = marker.read_text("utf-8").strip()
+        need(link.startswith("gitdir: "), "invalid worktree gitdir")
+        gitdir = (repo / link.removeprefix("gitdir: ")).resolve(strict=True)
+        back = gitdir / "gitdir"
+        need(
+            (gitdir / back.read_text("utf-8").strip()).resolve(strict=True) == marker.resolve(),
+            "worktree backlink differs",
+        )
+        common = (gitdir / (gitdir / "commondir").read_text("utf-8").strip()).resolve(strict=True)
+
+    head = (gitdir / "HEAD").read_text("ascii").strip()
+    if head.startswith("ref: "):
+        ref = head.removeprefix("ref: ")
+        need(
+            re.fullmatch(r"refs/heads/[A-Za-z0-9._/-]+", ref)
+            and all(part not in ("", ".", "..") for part in ref.split("/")),
+            "invalid branch reference",
+        )
+        try:
+            head = (common / ref).read_text("ascii").strip()
+        except FileNotFoundError:
+            refs = (common / "packed-refs").read_text("ascii").splitlines()
+            matches = []
+            for line in refs:
+                oid, _, name = line.partition(" ")
+                if name == ref:
+                    matches.append(oid)
+            need(len(matches) == 1, "missing or ambiguous packed branch")
+            head = matches[0]
+    need(re.fullmatch("[0-9a-f]{40}", head), "invalid commit identity")
+    return head
+
+
 def verified_readiness(policy, tree):
     import r0_read_independent as original
 
@@ -179,10 +222,7 @@ def verified_readiness(policy, tree):
         and report["contract_sha256"] == tree[PROTOCOL]
         and report["software_tree_sha256"] == sha(canonical(tree))
         and report["executed"] == {n: tree[n] for n in SOFTWARE}
-        and report["source_main"]
-        == subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=REPO, timeout=15)
-        .decode()
-        .strip(),
+        and report["source_main"] == checkout_commit(REPO),
         "independent complete replay or software version differs",
     )
     return dict(

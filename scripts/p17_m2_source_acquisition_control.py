@@ -1871,7 +1871,8 @@ def certificate_result(facts, events, checker, *, historical_software_context=No
         "member_count": len(facts["manifest"]["members"]),
         "version_id": facts["version_id"],
     }
-    if plan["execution_identity"] == load("p17_m2_input_continuation").CERT_FORMAL:
+    profiles = load("p17_m2_input_continuation")
+    if plan["execution_identity"] in (profiles.CERT_FORMAL, profiles.CHILD_FORMAL):
         summary["plan_sha256"] = facts["plan_sha256"]
     return summary
 

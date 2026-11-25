@@ -291,7 +291,7 @@ def source_reader(plan, root, journal=None, **kwargs):
     _, bindings = trusted_registration(plan)
     profiles = control.load("p17_m2_input_continuation")
     label_profiles = (profiles.CYCLE_R1_INPUT, profiles.CYCLE_FILING_INPUT, profiles.WINDOW_FORMAL,
-                      profiles.CERT_FORMAL)
+                      profiles.CERT_FORMAL, profiles.CHILD_FORMAL)
     reader = _RegisteredLabelReader if IDENTITY in label_profiles else _RegisteredReader
     return reader(root, journal, registration=bindings, **kwargs)
 
@@ -864,6 +864,9 @@ def activate_formal(root, reference):
     raw = authority_raw()
     policy = authority(raw)
     need(str(root) in GENERATIONS, "registered formal literal required")
+    profiles = control.load("p17_m2_input_continuation")
+    if IDENTITY == profiles.CHILD_FORMAL:
+        control.load("child_readiness_proof").require_released(policy)
     attempt = GENERATIONS.index(str(root)) + 1
     need(attempt == 1, "registered remedy requires separately diagnosed published readiness")
     plan = formal_plan(raw, attempt=attempt, strict23_registration=reference)

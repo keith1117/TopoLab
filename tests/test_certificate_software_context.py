@@ -19,7 +19,7 @@ def profile(identity_name='WINDOW_FORMAL'):
     return module, module.profile('independent', getattr(module, identity_name))
 
 
-@pytest.mark.parametrize('identity_name', ['WINDOW_FORMAL', 'CERT_FORMAL'])
+@pytest.mark.parametrize('identity_name', ['WINDOW_FORMAL', 'CERT_FORMAL', 'CHILD_FORMAL'])
 def test_window_software_selection_equals_producer_complete_tree(monkeypatch, identity_name):
     profiles, checker = profile(identity_name)
     monkeypatch.setattr(checker, 'validate_binding', lambda *_: None)
