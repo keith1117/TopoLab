@@ -20,7 +20,7 @@ def profile(identity_name='WINDOW_FORMAL'):
 
 
 @pytest.mark.parametrize('identity_name', ['WINDOW_FORMAL', 'CERT_FORMAL', 'CHILD_FORMAL',
-                                           'CLOSEOUT_FORMAL'])
+                                           'CLOSEOUT_FORMAL', 'READINESS_FORMAL'])
 def test_window_software_selection_equals_producer_complete_tree(monkeypatch, identity_name):
     profiles, checker = profile(identity_name)
     monkeypatch.setattr(checker, 'validate_binding', lambda *_: None)
@@ -45,6 +45,13 @@ def test_window_software_selection_equals_producer_complete_tree(monkeypatch, id
     assert actual == producer
     assert 'scripts/r1_window_verify.py' in actual
     assert 'docs/planning/r1_window_public_contract.json' in actual
+    if identity_name == 'READINESS_FORMAL':
+        assert {
+            'scripts/paired_readiness_independent.py', 'scripts/readiness_formal_preparation.py',
+            'scripts/readiness_release_verify.py', 'scripts/readiness_formal_filer.py',
+            'scripts/readiness_release_proof.py', 'scripts/readiness_release_fixtures.py',
+            'docs/planning/readiness_formal_contract.json',
+        } <= actual.keys()
     if identity_name == 'CLOSEOUT_FORMAL':
         assert {
             'scripts/closeout_public_control.py', 'scripts/closeout_public_schedule.mjs',
@@ -88,10 +95,11 @@ def test_certificate_profile_replays_only_its_new_literal_authority(monkeypatch)
     assert checker._formal_only_profile()
 
 
-def test_closeout_certificate_summary_binds_its_plan_and_checked_version():
+@pytest.mark.parametrize('identity_name', ['CLOSEOUT_FORMAL', 'READINESS_FORMAL'])
+def test_closeout_certificate_summary_binds_its_plan_and_checked_version(identity_name):
     from types import SimpleNamespace
 
-    profiles, checker = profile('CLOSEOUT_FORMAL')
+    profiles, checker = profile(identity_name)
     control = profiles.profile('control', checker.REGISTERED_IDENTITY)
     events = {'fixture': 'bound external returns'}
     visited = []

@@ -44,6 +44,10 @@ def build(config, source, expected_sha, *, wire=wire):
         ),
         "four actual registration pins required",
     )
+    if hasattr(wire, "audit_readiness_dispatch"):
+        wire.need(all(isinstance(config.get(k), str) and re.fullmatch("[a-f0-9]{64}", config[k])
+                      for k in ("readiness_sha256", "preflight_actual_sha256")),
+                  "formal scheduler requires this readiness and independent preflight return")
     if config["formal"]:
         wire.need(
             config["registration_certificate_sha"] == config["formal_registration_certificate_sha"]
@@ -53,7 +57,7 @@ def build(config, source, expected_sha, *, wire=wire):
         )
     if (wire.CONTROL_ENTRY in ("cycle_filing_input_control.py", "r1_window_formal_control.py",
                                 "certificate_formal_control.py", "child_formal_control.py",
-                                "closeout_formal_control.py")
+                                "closeout_formal_control.py", "readiness_formal_control.py")
             or getattr(wire, "window_public", False)):
         # The filed JSON uses sorted keys. Regeneration must use that same byte order.
         config = dict(sorted(config.items()))
@@ -104,6 +108,17 @@ def build(config, source, expected_sha, *, wire=wire):
     )
 
 
+def check_readiness_dispatch(wire, config):
+    """Reopen the complete independent return before releasing an actor program."""
+    packet_sha = wire.audit_readiness_dispatch()
+    _, raw = wire.read_json(wire.EVIDENCE / "input-activation-readiness-a1.json",
+                            config["readiness_sha256"])
+    wire.need(packet_sha == config["preflight_actual_sha256"]
+              and wire.sha(raw) == config["readiness_sha256"],
+              "actor configuration differs from the independently checked preflight")
+    return packet_sha
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for field in ("config", "config-sha256", "actor-sha256", "output", "emit", "artifact-sha256"):
@@ -117,13 +132,14 @@ def main():
     routes.add_argument("--input-cycle-filing", action="store_true")
     routes.add_argument("--r1-window", action="store_true")
     routes.add_argument("--child", action="store_true")
+    routes.add_argument("--readiness", action="store_true")
     routes.add_argument("--closeout", action="store_true")
     routes.add_argument("--certificate", action="store_true")
     args = parser.parse_args()
     selected = wire
     if any((args.formal_only, args.r0_read, args.catalog, args.input_cycle,
             args.input_cycle_r1, args.input_cycle_filing, args.r1_window,
-            args.certificate, args.child, args.closeout)):
+            args.certificate, args.child, args.closeout, args.readiness)):
         import runpy
 
         name = "r0_input_route.py" if args.r0_read else "formal_input_route.py"
@@ -137,6 +153,8 @@ def main():
             name = "cycle_filing_input_route.py"
         if args.r1_window:
             name = "r1_window_formal_route.py"
+        if args.readiness:
+            name = "readiness_formal_route.py"
         if args.closeout:
             name = "closeout_formal_route.py"
         if args.child:
@@ -158,6 +176,12 @@ def main():
             and selected.sha(value["program"].encode()) == value["program_sha256"],
             "frozen actor artifact differs",
         )
+        if hasattr(selected, "audit_readiness_dispatch"):
+            config = value["config"]
+            source = (SOURCE_CHECKOUT / "scripts/staged_input_actor.mjs").read_bytes()
+            selected.need(value == build(config, source, value["actor_sha256"], wire=selected),
+                          "frozen actor does not match its reviewed source")
+            check_readiness_dispatch(selected, config)
         print(json.dumps(value, separators=(",", ":")))
         return
     selected.need(

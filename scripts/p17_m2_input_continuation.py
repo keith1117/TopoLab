@@ -278,9 +278,10 @@ WINDOW_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261
 CERT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1"
 CHILD_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.child-20261125.v1"
 CLOSEOUT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1"
+READINESS_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.readiness-20261126-a1.v1"
 FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT, CYCLE_R1_INPUT,
                           CYCLE_FILING_INPUT, WINDOW_FORMAL, CERT_FORMAL, CHILD_FORMAL,
-                          CLOSEOUT_FORMAL)
+                          CLOSEOUT_FORMAL, READINESS_FORMAL)
 R0_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/r0-read-acceptance-20261122"
 CONFIGS[R0_INPUT] = {
     **CONFIGS[FORMAL_INPUT],
@@ -521,8 +522,33 @@ CONFIGS[CLOSEOUT_FORMAL] = {
                "sha256": "9afb732330236b115a42621441c5b5e7d019c05ce02d1154cd14902dde64b577"},
 }
 
+CONFIGS[READINESS_FORMAL] = {
+    **CONFIGS[CLOSEOUT_FORMAL],
+    "input": READINESS_FORMAL, "window_candidate": True,
+    "prefix": "topolab-unfunded-readiness-20261126-a1-",
+    "generations": (PARENT + "p17-m2-readiness-20261126-a1",),
+    "input_protocol": "docs/planning/readiness_formal_contract.json",
+    "schema": "topolab.v2.m2-registered-source-acquisition-authority.readiness-20261126-a1.v1",
+    "global_deadline_ms": 1795950534211,
+    "preparation_entry": "readiness_formal_preparation.py",
+    "input_entry": "readiness_formal_registered.py",
+    "control_entry": "readiness_formal_control.py",
+    "evidence_root": "/Users/keith1117/Documents/TopoLab-data/readiness-20261126-a1-formal",
+    "cache_suffix": "_readiness_formal_20261126_a1",
+    "window_module": "readiness_formal_clock",
+    "caller_waiter": "readiness_formal_waiter.py", "caller_filer": "readiness_formal_filer.py",
+    "registration_helpers": (*CONFIGS[CLOSEOUT_FORMAL]["registration_helpers"],
+                             "readiness_formal_route.py", "paired_readiness_independent.py",
+                             "readiness_release_proof.py", "readiness_release_verify.py",
+                             "readiness_release_fixtures.py"),
+    "budget": {"path": ("/Users/keith1117/Documents/TopoLab-data/readiness-20261126-a1"
+                        "/owner-budget.json"),
+               "sha256": "640b7726526afdb5ea161ccfbb83fa9f3cf56d7f764561eaf892716b18118581"},
+}
+
 # Preparation and its replay use the same evidence key for each published profile.
 PROOF_MODULES = {
+    READINESS_FORMAL: ("paired_readiness_verification", "readiness_release_proof"),
     CLOSEOUT_FORMAL: ("closeout_verification", "closeout_readiness_proof"),
     CHILD_FORMAL: ("child_verification", "child_readiness_proof"),
     CERT_FORMAL: ("certificate_verification", "certificate_replay_proof"),

@@ -1873,7 +1873,7 @@ def certificate_result(facts, events, checker, *, historical_software_context=No
     }
     profiles = load("p17_m2_input_continuation")
     if plan["execution_identity"] in (profiles.CERT_FORMAL, profiles.CHILD_FORMAL,
-                                       profiles.CLOSEOUT_FORMAL):
+                                       profiles.CLOSEOUT_FORMAL, profiles.READINESS_FORMAL):
         summary["plan_sha256"] = facts["plan_sha256"]
     return summary
 
