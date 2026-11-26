@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-26 UTC — Formal input certificate independently verified
+
+The B1 certificate command returned 0 after all six input roles passed, both readers verified 40 metadata files and 558 payloads, and the full 1,071-member inventories matched. The independent audit verified the original command against the archived plan and version. B1 released its lease and closed at 429,219 known FULL plus unpriced costs. [Formal input result](validation/formal_input_receipt_certificate.md)
+
 ## 2026-11-26 UTC — Readiness files verified and receipt encoding stopped entry
 
 Both formal readiness copies passed independent preflight on the corrected release. The actual independent startup required canonical preflight-envelope bytes and stopped before any producer dispatch or role. The independent audit verified the sealed stop and the 414,459 FULL known floor. [Evidence and ledger](validation/formal_input_paired_readiness.md)

@@ -1,5 +1,7 @@
 # Validation evidence index
 
+B1's formal certificate command returned 0. The independent audit verified the original return, the 1,071-member input version, the archived controls and the released lease. [Formal input certificate and closed ledger](formal_input_receipt_certificate.md)
+
 [Paired readiness and formal preflight receipt](formal_input_paired_readiness.md) records the independent entry error, archived original returns and closed ledger.
 
 Two complete public closeouts passed, and the caller rejected a return delivered after cutoff. The formal graph closed before activation on a missing readiness copy. [Controls, timing and terminal ledger](formal_input_closeout_return.md)
