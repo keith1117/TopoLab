@@ -1,9 +1,13 @@
 # Current project status
 
-Updated:2026-11-25 UTC. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
+Updated:2026-11-26 UTC. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
 Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
+
+## Formal input stopped before activation on a missing readiness copy
+
+Two complete public closeouts passed, with 275.696 and 279.553 seconds left at binding. A controlled late return stopped before filing. The new independent preflight passed. The single formal attempt then stopped at 0/6 because the independent entry could not open the backup readiness document. The producer received no dispatch. No new lease or certificate was issued. Seven historical leases remain HELD. The independent terminal audit passed. The campaign booked 10,200 FULL, closed 5,760 unused and raised the known lower bound to 398,859 FULL plus unpriced costs. [Formal result and next authorization](validation/formal_input_closeout_return.md)
 
 ## Five formal input roles passed before the shared closeout stopped
 

@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-26 UTC — Two public closeouts passed and formal entry stopped
+
+Both complete public graphs returned on time and the controlled late-delivery case stopped before filing. The independent verifier replayed their original controls. Formal preflight passed, then the first independent entry found the backup readiness document missing. The producer received no dispatch. The graph closed at 0/6. [Formal result](validation/formal_input_closeout_return.md)
+
 ## 2026-11-25 UTC — First-role repair passed and shared closeout stopped
 
 Public creation traces identified a Git subprocess in the old readiness proof. The repaired first role passed twice on released software and in the formal graph. Five roles passed, including both full R1 verifications. The late return of the shared closeout recorder packet stopped binding. Both actor originals and 228 controls are sealed. [Formal result](validation/formal_input_closeout_stop.md)

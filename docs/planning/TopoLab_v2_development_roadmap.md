@@ -1,5 +1,7 @@
 # TopoLab v2 Development Roadmap
 
+**November 26 formal input stopped before its first role.** The public closeout and late-delivery checks passed on the protected release. A fresh graph requires a preparation path and preflight that verify both copies of the activation readiness document before opening the attempt. [Formal result](../validation/formal_input_closeout_return.md)
+
 **November 25 formal input closed at 5/6.** The repaired first role and both complete R0 and R1 verifications passed. The shared closeout receipt arrived after its role deadline. A certificate requires a newly authorized graph after bounded public verification of the complete closeout path. [Result](../validation/formal_input_closeout_stop.md)
 
 **The certificate checker passed full historical replay.** The sole new formal graph stopped at 0/6 when the independent public check's measured process launched an extra child. The first-role binder returned 1 and the lease is HELD. A future input-only contract would need to identify and address the extra process on public evidence before reserving a new formal attempt. Scientific admission remains pending. [Result](../validation/formal_input_certificate.md)

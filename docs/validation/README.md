@@ -1,5 +1,7 @@
 # Validation evidence index
 
+Two complete public closeouts passed, and the caller rejected a return delivered after cutoff. The formal graph closed before activation on a missing readiness copy. [Controls, timing and terminal ledger](formal_input_closeout_return.md)
+
 [Five accepted formal roles and the shared closeout stop](formal_input_closeout_stop.md) records the first-role repair, complete metadata and payload results, late receipt and held lease.
 
 [Formal certificate repair and first-role stop](formal_input_certificate.md) records the protected-release offline pass, the 0/6 native descendant stop, evidence custody and the closed ledger.

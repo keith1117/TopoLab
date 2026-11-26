@@ -17,10 +17,11 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Read the [November 25 input result](docs/validation/formal_input_closeout_stop.md)
-before further input diagnosis or entry. The single graph closed at 5/6 after
-the shared closeout recorder packet returned late. Seven leases are HELD.
-Further diagnosis or formal entry requires a new finite authorization.
+Read the [November 26 input result](docs/validation/formal_input_closeout_return.md)
+before further input work. The public closeout passed twice. The new formal
+graph stopped at independent entry on the missing backup readiness document.
+Seven historical leases remain HELD. A new graph requires a fresh grant and
+public verification of paired readiness through independent entry.
 Uniform remains the default, fixed P/17 is unrepaired and full fit remains
 PENDING4GiB.
 
