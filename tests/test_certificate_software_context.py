@@ -20,7 +20,7 @@ def profile(identity_name='WINDOW_FORMAL'):
 
 
 @pytest.mark.parametrize('identity_name', ['WINDOW_FORMAL', 'CERT_FORMAL', 'CHILD_FORMAL',
-                                           'CLOSEOUT_FORMAL', 'READINESS_FORMAL'])
+                                           'CLOSEOUT_FORMAL', 'READINESS_FORMAL', 'RECEIPT_FORMAL'])
 def test_window_software_selection_equals_producer_complete_tree(monkeypatch, identity_name):
     profiles, checker = profile(identity_name)
     monkeypatch.setattr(checker, 'validate_binding', lambda *_: None)
@@ -51,6 +51,16 @@ def test_window_software_selection_equals_producer_complete_tree(monkeypatch, id
             'scripts/readiness_release_verify.py', 'scripts/readiness_formal_filer.py',
             'scripts/readiness_release_proof.py', 'scripts/readiness_release_fixtures.py',
             'docs/planning/readiness_formal_contract.json',
+        } <= actual.keys()
+    if identity_name == 'RECEIPT_FORMAL':
+        assert {
+            'scripts/receipt_formal_preparation.py', 'scripts/receipt_formal_registered.py',
+            'scripts/receipt_formal_control.py', 'scripts/receipt_formal_filer.py',
+            'scripts/receipt_formal_waiter.py', 'scripts/receipt_formal_route.py',
+            'scripts/receipt_formal_clock.py', 'scripts/paired_readiness_independent.py',
+            'scripts/independent_preflight_custody.py', 'scripts/receipt_release_verify.py',
+            'scripts/receipt_release_proof.py', 'scripts/receipt_release_fixtures.py',
+            'docs/planning/receipt_formal_contract.json',
         } <= actual.keys()
     if identity_name == 'CLOSEOUT_FORMAL':
         assert {
@@ -117,7 +127,7 @@ def test_window_replay_uses_only_its_frozen_prior_evidence_namespace(monkeypatch
         checker._registered_authority(plan)
 
 
-@pytest.mark.parametrize('identity_name', ['CLOSEOUT_FORMAL', 'READINESS_FORMAL'])
+@pytest.mark.parametrize('identity_name', ['CLOSEOUT_FORMAL', 'READINESS_FORMAL', 'RECEIPT_FORMAL'])
 def test_closeout_certificate_summary_binds_its_plan_and_checked_version(identity_name):
     from types import SimpleNamespace
 

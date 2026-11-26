@@ -292,7 +292,7 @@ def source_reader(plan, root, journal=None, **kwargs):
     profiles = control.load("p17_m2_input_continuation")
     label_profiles = (profiles.CYCLE_R1_INPUT, profiles.CYCLE_FILING_INPUT, profiles.WINDOW_FORMAL,
                       profiles.CERT_FORMAL, profiles.CHILD_FORMAL, profiles.CLOSEOUT_FORMAL,
-                      profiles.READINESS_FORMAL)
+                      profiles.READINESS_FORMAL, profiles.RECEIPT_FORMAL)
     reader = _RegisteredLabelReader if IDENTITY in label_profiles else _RegisteredReader
     return reader(root, journal, registration=bindings, **kwargs)
 
@@ -353,7 +353,7 @@ def authority(raw=None):
         "registered new input budget pin differs",
     )
     profiles = control.load("p17_m2_input_continuation")
-    if IDENTITY == profiles.READINESS_FORMAL:
+    if IDENTITY in (profiles.READINESS_FORMAL, profiles.RECEIPT_FORMAL):
         checker = control.load("p17_m2_source_acquisition_independent")
         checker._prior_public_module("paired_readiness_independent").require_policy_paths(
             value, control.CONTINUATION_CONFIG["evidence_root"])

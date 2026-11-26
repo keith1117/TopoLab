@@ -32,6 +32,7 @@ CERT_EVIDENCE = EVIDENCE.parent / "certificate-20261124-formal"
 CHILD_EVIDENCE = EVIDENCE.parent / "child-20261125-formal"
 CLOSEOUT_EVIDENCE = EVIDENCE.parent / "closeout-20261125-formal"
 READINESS_EVIDENCE = EVIDENCE.parent / "readiness-20261126-a1-formal"
+RECEIPT_EVIDENCE = EVIDENCE.parent / "receipt-20261126-b1-formal"
 DATA = EVIDENCE.parent
 OLD_IDENTITY = 'topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1'
 OLD_ROOT = '/private/tmp/topolab-public-staged-input-20261121-a1'
@@ -65,7 +66,8 @@ def expected_prior(evidence_root=None):
     evidence_root = EVIDENCE if evidence_root is None else Path(evidence_root)
     need(evidence_root in (EVIDENCE, R0_EVIDENCE, CATALOG_EVIDENCE, CYCLE_EVIDENCE,
                           CYCLE_R1_EVIDENCE, CYCLE_FILING_EVIDENCE, WINDOW_EVIDENCE,
-                          CERT_EVIDENCE, CHILD_EVIDENCE, CLOSEOUT_EVIDENCE, READINESS_EVIDENCE),
+                          CERT_EVIDENCE, CHILD_EVIDENCE, CLOSEOUT_EVIDENCE, READINESS_EVIDENCE,
+                          RECEIPT_EVIDENCE),
          'fixed historical evidence namespace differs')
     return dict(identity=OLD_IDENTITY, root=OLD_ROOT, source_main=OLD_MAIN,
                 source_tree_sha256=TREE_SHA, plan_sha256=PLAN_SHA,
@@ -316,7 +318,8 @@ def verify_prior_public(prior, bundle_raw, actual_raw):
         expected_prior(CYCLE_EVIDENCE), expected_prior(CYCLE_R1_EVIDENCE),
         expected_prior(CYCLE_FILING_EVIDENCE), expected_prior(WINDOW_EVIDENCE),
         expected_prior(CERT_EVIDENCE), expected_prior(CHILD_EVIDENCE),
-        expected_prior(CLOSEOUT_EVIDENCE), expected_prior(READINESS_EVIDENCE))
+        expected_prior(CLOSEOUT_EVIDENCE), expected_prior(READINESS_EVIDENCE),
+        expected_prior(RECEIPT_EVIDENCE))
          and type(prior.get('member_count')) is int, 'fixed prior_public differs')
     need(type(bundle_raw) is bytes and type(actual_raw) is bytes
          and 0 < len(bundle_raw) <= CAP and 0 < len(actual_raw) <= CAP

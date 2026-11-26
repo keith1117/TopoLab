@@ -17,11 +17,12 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Read the [November 26 input result](docs/validation/formal_input_closeout_return.md)
-before further input work. The public closeout passed twice. The new formal
-graph stopped at independent entry on the missing backup readiness document.
-Seven historical leases remain HELD. A new graph requires a fresh grant and
-public verification of paired readiness through independent entry.
+Read the [paired readiness result](docs/validation/formal_input_paired_readiness.md)
+and the [receipt contract](docs/planning/receipt_formal_contract.json) before
+further input work. Formal preflight verified both documents. Independent
+entry stopped at the preflight envelope encoding before any role. Seven
+historical leases remain HELD. The new receipt contract grants one input graph
+after actual-path verification of independent preflight storage and admission.
 Uniform remains the default, fixed P/17 is unrepaired and full fit remains
 PENDING4GiB.
 

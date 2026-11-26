@@ -1,5 +1,7 @@
 # TopoLab v2 Development Roadmap
 
+**November 26 paired readiness reached independent preflight.** Both formal files passed and the independent command returned 0. The first formal entry rejected the stored preflight envelope before opening the graph. The successor verifies the receipt writer, actual scheduler and entry on the same encoding before a new one-attempt contract enters formal custody. [Result](../validation/formal_input_paired_readiness.md) · [Contract](receipt_formal_contract.json)
+
 **November 26 formal input stopped before its first role.** The public closeout and late-delivery checks passed on the protected release. A fresh graph requires a preparation path and preflight that verify both copies of the activation readiness document before opening the attempt. [Formal result](../validation/formal_input_closeout_return.md)
 
 **November 25 formal input closed at 5/6.** The repaired first role and both complete R0 and R1 verifications passed. The shared closeout receipt arrived after its role deadline. A certificate requires a newly authorized graph after bounded public verification of the complete closeout path. [Result](../validation/formal_input_closeout_stop.md)

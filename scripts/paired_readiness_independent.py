@@ -13,6 +13,9 @@ PHYSICAL = ("st_dev", "st_ino", "st_size", "st_mtime_ns", "st_uid", "st_mode", "
 READY = "input-activation-readiness-a1.json"
 PREPARED = "input-readiness-original-return-a1.json"
 PREFLIGHT = "input-preflight-actual-a1.json"
+ORIGINAL = "input-preflight-original-a1.json"
+CUSTODY_ENTRY = "independent_preflight_custody.py"
+RECEIPT_ID = "topolab.v2.p17-m2-registered-source-acquisition.receipt-20261126-b1.v1"
 PREPARATION_ENTRY = "readiness_formal_preparation.py"
 
 
@@ -66,6 +69,10 @@ def pair(evidence, name):
     return raw, [a, b]
 
 
+def uses_canonical_preflight(policy):
+    return policy.get("execution_identity") == RECEIPT_ID or "preflight_custody_entry" in policy
+
+
 def require_policy_paths(policy, evidence):
     evidence = Path(evidence)
     peer = evidence.with_name(evidence.name + "-backup")
@@ -81,6 +88,13 @@ def require_policy_paths(policy, evidence):
         ),
         "paired readiness authority requires all literal paths",
     )
+    if uses_canonical_preflight(policy):
+        need(
+            policy.get("preflight_custody_entry") == CUSTODY_ENTRY
+            and policy.get("preparation_entry") == "receipt_formal_preparation.py"
+            and policy.get("independent_preflight_original_path") == str(evidence / ORIGINAL),
+            "fixed preflight custody and original evidence paths required",
+        )
 
 
 def capture(policy, tree, protocol, repo, evidence):
@@ -118,7 +132,20 @@ def capture(policy, tree, protocol, repo, evidence):
     )
     start, end, output = terminal(
         parse(prepared),
-        [ready["runtime"]["python"], "-I", str(repo / "scripts" / PREPARATION_ENTRY), "readiness"],
+        [
+            ready["runtime"]["python"],
+            "-I",
+            str(
+                repo
+                / "scripts"
+                / (
+                    policy["preparation_entry"]
+                    if uses_canonical_preflight(policy)
+                    else PREPARATION_ENTRY
+                )
+            ),
+            "readiness",
+        ],
         cwd=str(repo),
         author=policy["actors"]["executor"],
         window=(policy["independent_author_start_ms"], policy["global_deadline_ms"]),
@@ -160,16 +187,10 @@ def summary(policy, ready, digest, observed):
     )
 
 
-def audit_dispatch(policy, tree, protocol, repo, input_entry, evidence):
-    """Compare the fresh documents with the independent original immediately before dispatch."""
-    repo, evidence = Path(repo), Path(evidence)
-    raw, observed, prepared_end = capture(policy, tree, protocol, repo, evidence)
+def validate_preflight(policy, repo, input_entry, captured, packet):
+    """Replay the complete original tool rows against the current readiness documents."""
+    raw, observed, prepared_end = captured
     ready, digest = parse(raw), sha(raw)
-    packet_raw, _ = pair(evidence, PREFLIGHT)
-    need(
-        policy["independent_preflight_actual_path"] == str(evidence / PREFLIGHT),
-        "independent preflight location differs",
-    )
     argv = [
         ready["runtime"]["python"],
         "-I",
@@ -179,7 +200,7 @@ def audit_dispatch(policy, tree, protocol, repo, input_entry, evidence):
         digest,
     ]
     start, end, output = terminal(
-        parse(packet_raw),
+        packet,
         argv,
         cwd=str(repo),
         author=policy["actors"]["independent"],
@@ -191,4 +212,36 @@ def audit_dispatch(policy, tree, protocol, repo, input_entry, evidence):
         and output == canonical(summary(policy, ready, digest, observed)),
         "original independent preflight disagrees with readiness pair",
     )
+
+
+def observation_directory(policy):
+    return Path(policy["new_input_budget"]["path"]).parent
+
+
+def audit_dispatch(policy, tree, protocol, repo, input_entry, evidence):
+    """Require the same original and exact bytes the filing entry will consume."""
+    from staged_input_filer import read_json
+
+    repo, evidence = Path(repo), Path(evidence)
+    captured = capture(policy, tree, protocol, repo, evidence)
+    need(
+        policy["independent_preflight_actual_path"] == str(evidence / PREFLIGHT),
+        "independent preflight location differs",
+    )
+    if uses_canonical_preflight(policy):
+        require_policy_paths(policy, evidence)
+        # This is the formal entry's actual canonical file reader. Its bytes must
+        # reproduce every original field, including unmodified tool-output strings.
+        packet_raw, _ = pair(evidence, PREFLIGHT)
+        packet, _ = read_json(evidence / PREFLIGHT, sha(packet_raw))
+        original, _ = pair(observation_directory(policy), ORIGINAL)
+        archived_original, _ = pair(evidence, ORIGINAL)
+        need(
+            original == archived_original and canonical(parse(original)) == packet_raw,
+            "canonical preflight disagrees with preserved original packet",
+        )
+    else:
+        packet_raw, _ = pair(evidence, PREFLIGHT)
+        packet = parse(packet_raw)
+    validate_preflight(policy, repo, input_entry, captured, packet)
     return sha(packet_raw)
