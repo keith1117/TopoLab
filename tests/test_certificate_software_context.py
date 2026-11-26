@@ -95,6 +95,28 @@ def test_certificate_profile_replays_only_its_new_literal_authority(monkeypatch)
     assert checker._formal_only_profile()
 
 
+def test_window_replay_uses_only_its_frozen_prior_evidence_namespace(monkeypatch):
+    from types import SimpleNamespace
+
+    _, checker = profile()
+    raw = (REPO / checker.REGISTERED_PROTOCOL).read_bytes()
+    policy = checker.native.base.parse(raw)
+    sha = checker.digest(raw)
+    plan = dict(scope=checker.FORMAL_SCOPE, source_tree={checker.REGISTERED_PROTOCOL: sha},
+                binding=dict(preparation_protocol_sha256=sha), preparation_contract_sha256=sha)
+    root = Path('/Users/keith1117/Documents/TopoLab-data/formal-r1-window-20261123-formal')
+    assert checker._prior_public_module().expected_prior(root) == policy['prior_public']
+    # The immutable historical module predates later campaign constants.
+    prior = SimpleNamespace(WINDOW_EVIDENCE=root, expected_prior=lambda p:
+                            policy['prior_public'] if p == root else {})
+    monkeypatch.setattr(checker, '_prior_public_module', lambda: prior)
+    monkeypatch.setattr(checker.native, '_software_bytes', lambda *_: raw)
+    assert checker._registered_authority(plan) == policy
+    prior.WINDOW_EVIDENCE = root.with_name('wrong-window')
+    with pytest.raises(ValueError, match='prior limits differ'):
+        checker._registered_authority(plan)
+
+
 @pytest.mark.parametrize('identity_name', ['CLOSEOUT_FORMAL', 'READINESS_FORMAL'])
 def test_closeout_certificate_summary_binds_its_plan_and_checked_version(identity_name):
     from types import SimpleNamespace
