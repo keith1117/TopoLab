@@ -57,7 +57,8 @@ def build(config, source, expected_sha, *, wire=wire):
         )
     if (wire.CONTROL_ENTRY in ("cycle_filing_input_control.py", "r1_window_formal_control.py",
                                 "certificate_formal_control.py", "child_formal_control.py",
-                                "closeout_formal_control.py", "readiness_formal_control.py")
+                                "closeout_formal_control.py", "readiness_formal_control.py",
+                                "receipt_formal_control.py")
             or getattr(wire, "window_public", False)):
         # The filed JSON uses sorted keys. Regeneration must use that same byte order.
         config = dict(sorted(config.items()))
@@ -132,6 +133,7 @@ def main():
     routes.add_argument("--input-cycle-filing", action="store_true")
     routes.add_argument("--r1-window", action="store_true")
     routes.add_argument("--child", action="store_true")
+    routes.add_argument("--receipt", action="store_true")
     routes.add_argument("--readiness", action="store_true")
     routes.add_argument("--closeout", action="store_true")
     routes.add_argument("--certificate", action="store_true")
@@ -139,7 +141,7 @@ def main():
     selected = wire
     if any((args.formal_only, args.r0_read, args.catalog, args.input_cycle,
             args.input_cycle_r1, args.input_cycle_filing, args.r1_window,
-            args.certificate, args.child, args.closeout, args.readiness)):
+            args.certificate, args.child, args.closeout, args.readiness, args.receipt)):
         import runpy
 
         name = "r0_input_route.py" if args.r0_read else "formal_input_route.py"
@@ -153,6 +155,8 @@ def main():
             name = "cycle_filing_input_route.py"
         if args.r1_window:
             name = "r1_window_formal_route.py"
+        if args.receipt:
+            name = "receipt_formal_route.py"
         if args.readiness:
             name = "readiness_formal_route.py"
         if args.closeout:

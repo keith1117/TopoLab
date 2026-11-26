@@ -43,6 +43,7 @@ CERT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261
 CHILD_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.child-20261125.v1"
 CLOSEOUT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1"
 READINESS_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.readiness-20261126-a1.v1"
+RECEIPT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.receipt-20261126-b1.v1"
 CYCLE_FILING_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-20261123-a3.v1"
 NEW_PROTOCOL = "docs/planning/p17_m2_new_source_acquisition_protocol.json"
 NEW_SCHEMA = "topolab.v2.m2-new-source-acquisition-authority.v1"
@@ -246,7 +247,7 @@ def _metadata_first_profile():
 def _formal_only_profile():
     return REGISTERED_IDENTITY in (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT,
                                   CYCLE_R1_INPUT, CYCLE_FILING_INPUT, WINDOW_FORMAL, CERT_FORMAL,
-                                  CHILD_FORMAL, CLOSEOUT_FORMAL, READINESS_FORMAL)
+                                  CHILD_FORMAL, CLOSEOUT_FORMAL, READINESS_FORMAL, RECEIPT_FORMAL)
 
 
 def _prior_public_module(name='formal_input_independent'):
@@ -257,7 +258,7 @@ def _prior_public_module(name='formal_input_independent'):
                      'input_cycle_proof', 'input_cycle_r1_proof', 'input_cycle_filing_proof',
                      'r1_window_proof', 'certificate_replay_proof', 'child_readiness_proof',
                      'closeout_readiness_proof', 'paired_readiness_independent',
-                     'readiness_release_proof'),
+                     'readiness_release_proof', 'receipt_release_proof'),
             'exact independent metadata module required')
     if _HISTORICAL_SOFTWARE_CONTEXT.get() is not None:
         if name == 'r1_window_proof':
@@ -365,6 +366,7 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
             CYCLE_FILING_INPUT: 'CYCLE_FILING_EVIDENCE', WINDOW_FORMAL: 'WINDOW_EVIDENCE',
             CERT_FORMAL: 'CERT_EVIDENCE', CHILD_FORMAL: 'CHILD_EVIDENCE',
             CLOSEOUT_FORMAL: 'CLOSEOUT_EVIDENCE', READINESS_FORMAL: 'READINESS_EVIDENCE',
+            RECEIPT_FORMAL: 'RECEIPT_EVIDENCE',
         }[REGISTERED_IDENTITY]
         require(plan.get('scope') == FORMAL_SCOPE
                 and limits.get('FULL_all_input_attempts_ceiling') == 3780
@@ -384,7 +386,7 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
                 and value.get('public_roots') == []
                 and value.get('prior_public') == prior.expected_prior(getattr(prior, namespace)),
                 'NEW formal-only budget/root/prior limits differ')
-    if REGISTERED_IDENTITY == READINESS_FORMAL:
+    if REGISTERED_IDENTITY in (READINESS_FORMAL, RECEIPT_FORMAL):
         _prior_public_module('paired_readiness_independent').require_policy_paths(
             value, CONTINUATION_CONFIG['evidence_root'])
     return value
@@ -1470,7 +1472,7 @@ def _formal_registered_preflight(plan, raw):
             and actual_pin.get('path') == authority['independent_preflight_actual_path']
             and digest(raw) == actual_pin.get('sha256'),
             'NEW formal readiness/actual literal binding differs')
-    if REGISTERED_IDENTITY == READINESS_FORMAL:
+    if REGISTERED_IDENTITY in (READINESS_FORMAL, RECEIPT_FORMAL):
         paired = _prior_public_module('paired_readiness_independent')
         ready_raw, observation, prepared_end = paired.capture(
             authority, plan['source_tree'], REGISTERED_PROTOCOL, _software_repo(),
@@ -1507,7 +1509,8 @@ def _formal_registered_preflight(plan, raw):
                   CERT_FORMAL: ('certificate_verification', 'certificate_replay_proof'),
                   CHILD_FORMAL: ('child_verification', 'child_readiness_proof'),
                   CLOSEOUT_FORMAL: ('closeout_verification', 'closeout_readiness_proof'),
-                  READINESS_FORMAL: ('paired_readiness_verification', 'readiness_release_proof')}
+                  READINESS_FORMAL: ('paired_readiness_verification', 'readiness_release_proof'),
+                  RECEIPT_FORMAL: ('paired_readiness_verification', 'receipt_release_proof')}
     if REGISTERED_IDENTITY in proof_spec:
         proof_key, proof_module = proof_spec[REGISTERED_IDENTITY]
         read_proof = _prior_public_module(proof_module).verified_readiness(
@@ -1566,7 +1569,7 @@ def _formal_registered_preflight(plan, raw):
                     runtime=ready['runtime'], actors=authority['actors'],
                     new_input_budget=authority['new_input_budget'], source_stat_reads=0,
                     target_stat_reads=0, own_future_return='NOT_CLAIMED')
-    if REGISTERED_IDENTITY == READINESS_FORMAL:
+    if REGISTERED_IDENTITY in (READINESS_FORMAL, RECEIPT_FORMAL):
         require(retained_end <= prepared_end <= started, 'readiness original chronology differs')
         expected['paired_readiness'] = observation
     if read_proof is not None:
@@ -2742,7 +2745,8 @@ def validate_setup(
                               CERT_FORMAL: 'certificate_verification',
                               CHILD_FORMAL: 'child_verification',
                               CLOSEOUT_FORMAL: 'closeout_verification',
-                              READINESS_FORMAL: 'paired_readiness_verification'}
+                              READINESS_FORMAL: 'paired_readiness_verification',
+                              RECEIPT_FORMAL: 'paired_readiness_verification'}
         if plan['execution_identity'] in release_proof_keys:
             require(ready['main'] == prerequisite[
                 release_proof_keys[plan['execution_identity']]]['source_main'],

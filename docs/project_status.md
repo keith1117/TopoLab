@@ -5,6 +5,10 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
+## The paired readiness files passed and formal entry rejected the preflight envelope
+
+On protected main `07abc057`, independent preflight returned 0 on two matching 31,923-byte files. The formal entry required canonical JSON bytes for its preflight receipt and returned 1 before the first role. The producer received no dispatch. The terminal audit verified 0/6, zero formal reads, no certificate call and no new lease. The closed ledger records 414,459 known FULL plus unpriced costs. A fresh bounded input contract covers receipt storage, public reproduction and independent preflight on new paths. [Result](validation/formal_input_paired_readiness.md) · [Contract](planning/receipt_formal_contract.json)
+
 ## Formal input stopped before activation on a missing readiness copy
 
 Two complete public closeouts passed, with 275.696 and 279.553 seconds left at binding. A controlled late return stopped before filing. The new independent preflight passed. The single formal attempt then stopped at 0/6 because the independent entry could not open the backup readiness document. The producer received no dispatch. No new lease or certificate was issued. Seven historical leases remain HELD. The independent terminal audit passed. The campaign booked 10,200 FULL, closed 5,760 unused and raised the known lower bound to 398,859 FULL plus unpriced costs. [Formal result and next authorization](validation/formal_input_closeout_return.md)

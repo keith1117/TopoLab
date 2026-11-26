@@ -122,15 +122,17 @@ closeout_receipt.serve(persist, int(sys.argv[4]))
 
 
 
-def test_paired_readiness_profile_keeps_shared_rec_transport_and_original_clock():
-    contract = json.loads((REPO / "docs/planning/readiness_formal_contract.json").read_bytes())
+@pytest.mark.parametrize("profile", ["readiness", "receipt"])
+def test_paired_readiness_profile_keeps_shared_rec_transport_and_original_clock(profile):
+    contract = json.loads((REPO / f"docs/planning/{profile}_formal_contract.json").read_bytes())
     source = """
 import assert from 'node:assert/strict';
 import {initialWait, qualify, useCloseoutReceiver} from './scripts/staged_input_actor.mjs';
 const policy=JSON.parse(process.argv[1]), id=policy.execution_identity;
 const target=policy.fixed_target.attempts['1'].generation;
 const pin=policy.registration.formal;
-const config=qualify({formal:true,author:'independent',event_prefix:'readiness-formal-independent',
+const config=qualify({formal:true,author:'independent',
+  event_prefix:process.argv[2]+'-formal-independent',
   root:target,execution_identity:id,registration_certificate_sha:pin.certificate_sha256,
   formal_registration_certificate_sha:pin.certificate_sha256,
   registration_finalize_actual_sha:pin.finalize_actual_sha256,
@@ -149,6 +151,6 @@ assert.equal(initialWait(id,'file',50000),30000);
 assert.throws(()=>qualify({...config,root:target+'-unregistered'}));
 """
     subprocess.run(
-        ["node", "--input-type=module", "-e", source, json.dumps(contract)],
+        ["node", "--input-type=module", "-e", source, json.dumps(contract), profile],
         cwd=REPO, check=True, timeout=15,
     )

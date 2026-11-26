@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-26 UTC — Readiness files verified and receipt encoding stopped entry
+
+Both formal readiness copies passed independent preflight on the corrected release. The actual independent startup required canonical preflight-envelope bytes and stopped before any producer dispatch or role. The independent audit verified the sealed stop and the 414,459 FULL known floor. [Evidence and ledger](validation/formal_input_paired_readiness.md)
+
 ## 2026-11-26 UTC — Two public closeouts passed and formal entry stopped
 
 Both complete public graphs returned on time and the controlled late-delivery case stopped before filing. The independent verifier replayed their original controls. Formal preflight passed, then the first independent entry found the backup readiness document missing. The producer received no dispatch. The graph closed at 0/6. [Formal result](validation/formal_input_closeout_return.md)

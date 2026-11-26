@@ -279,9 +279,10 @@ CERT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261
 CHILD_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.child-20261125.v1"
 CLOSEOUT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1"
 READINESS_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.readiness-20261126-a1.v1"
+RECEIPT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.receipt-20261126-b1.v1"
 FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT, CYCLE_R1_INPUT,
                           CYCLE_FILING_INPUT, WINDOW_FORMAL, CERT_FORMAL, CHILD_FORMAL,
-                          CLOSEOUT_FORMAL, READINESS_FORMAL)
+                          CLOSEOUT_FORMAL, READINESS_FORMAL, RECEIPT_FORMAL)
 R0_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/r0-read-acceptance-20261122"
 CONFIGS[R0_INPUT] = {
     **CONFIGS[FORMAL_INPUT],
@@ -546,9 +547,34 @@ CONFIGS[READINESS_FORMAL] = {
                "sha256": "640b7726526afdb5ea161ccfbb83fa9f3cf56d7f764561eaf892716b18118581"},
 }
 
+CONFIGS[RECEIPT_FORMAL] = {
+    **CONFIGS[READINESS_FORMAL],
+    "input": RECEIPT_FORMAL, "window_candidate": True,
+    "prefix": "topolab-unfunded-receipt-20261126-b1-",
+    "generations": (PARENT + "p17-m2-receipt-20261126-b1",),
+    "input_protocol": "docs/planning/receipt_formal_contract.json",
+    "schema": "topolab.v2.m2-registered-source-acquisition-authority.receipt-20261126-b1.v1",
+    "global_deadline_ms": 1795963648582,
+    "preparation_entry": "receipt_formal_preparation.py",
+    "input_entry": "receipt_formal_registered.py",
+    "control_entry": "receipt_formal_control.py",
+    "evidence_root": "/Users/keith1117/Documents/TopoLab-data/receipt-20261126-b1-formal",
+    "cache_suffix": "_receipt_formal_20261126_b1",
+    "window_module": "receipt_formal_clock",
+    "caller_waiter": "receipt_formal_waiter.py", "caller_filer": "receipt_formal_filer.py",
+    "registration_helpers": (*CONFIGS[READINESS_FORMAL]["registration_helpers"],
+                             "receipt_formal_route.py", "independent_preflight_custody.py",
+                             "receipt_release_proof.py", "receipt_release_verify.py",
+                             "receipt_release_fixtures.py"),
+    "budget": {"path": ("/Users/keith1117/Documents/TopoLab-data/receipt-20261126-b1"
+                        "/owner-budget.json"),
+               "sha256": "6b6cbf793c6415125d68d031c822f5e9a44eb819247756cf77c921f9e8ea49dd"},
+}
+
 # Preparation and its replay use the same evidence key for each published profile.
 PROOF_MODULES = {
     READINESS_FORMAL: ("paired_readiness_verification", "readiness_release_proof"),
+    RECEIPT_FORMAL: ("paired_readiness_verification", "receipt_release_proof"),
     CLOSEOUT_FORMAL: ("closeout_verification", "closeout_readiness_proof"),
     CHILD_FORMAL: ("child_verification", "child_readiness_proof"),
     CERT_FORMAL: ("certificate_verification", "certificate_replay_proof"),
