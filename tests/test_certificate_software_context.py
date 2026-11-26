@@ -19,7 +19,8 @@ def profile(identity_name='WINDOW_FORMAL'):
     return module, module.profile('independent', getattr(module, identity_name))
 
 
-@pytest.mark.parametrize('identity_name', ['WINDOW_FORMAL', 'CERT_FORMAL', 'CHILD_FORMAL'])
+@pytest.mark.parametrize('identity_name', ['WINDOW_FORMAL', 'CERT_FORMAL', 'CHILD_FORMAL',
+                                           'CLOSEOUT_FORMAL'])
 def test_window_software_selection_equals_producer_complete_tree(monkeypatch, identity_name):
     profiles, checker = profile(identity_name)
     monkeypatch.setattr(checker, 'validate_binding', lambda *_: None)
@@ -44,6 +45,13 @@ def test_window_software_selection_equals_producer_complete_tree(monkeypatch, id
     assert actual == producer
     assert 'scripts/r1_window_verify.py' in actual
     assert 'docs/planning/r1_window_public_contract.json' in actual
+    if identity_name == 'CLOSEOUT_FORMAL':
+        assert {
+            'scripts/closeout_public_control.py', 'scripts/closeout_public_schedule.mjs',
+            'scripts/closeout_verify.py', 'scripts/closeout_readiness_proof.py',
+            'scripts/closeout_formal_filer.py', 'scripts/closeout_receipt.py',
+            'docs/planning/closeout_formal_contract.json',
+        } <= actual.keys()
 
 
 def test_historical_context_refuses_arbitrary_or_changed_plan_before_source_read(monkeypatch):
@@ -78,6 +86,27 @@ def test_certificate_profile_replays_only_its_new_literal_authority(monkeypatch)
     assert policy['prior_public']['bundle']['path'].startswith(
         '/Users/keith1117/Documents/TopoLab-data/certificate-20261124-formal/')
     assert checker._formal_only_profile()
+
+
+def test_closeout_certificate_summary_binds_its_plan_and_checked_version():
+    from types import SimpleNamespace
+
+    profiles, checker = profile('CLOSEOUT_FORMAL')
+    control = profiles.profile('control', checker.REGISTERED_IDENTITY)
+    events = {'fixture': 'bound external returns'}
+    visited = []
+
+    def capture(facts, *, trusted_tool_events):
+        visited.append((facts, trusted_tool_events))
+
+    facts = dict(plan=dict(execution_identity=checker.REGISTERED_IDENTITY, formal_authority=True),
+                 scope=checker.FORMAL_SCOPE, manifest={'members': ['fixture']},
+                 plan_sha256='1' * 64, version_id='2' * 64)
+    result = control.certificate_result(facts, events, SimpleNamespace(audit_certificate=capture))
+    assert visited == [(facts, events)]
+    assert result['plan_sha256'] == facts['plan_sha256']
+    assert result['version_id'] == facts['version_id']
+    assert result['member_count'] == len(facts['manifest']['members'])
 
 
 def test_historical_audit_requires_the_issued_context(monkeypatch):

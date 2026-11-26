@@ -251,7 +251,7 @@ def test_historical_sandbox_denies_business_io_and_restores_new_process_state(
 
 
 def preflight_fixture(monkeypatch, *, damage=None, r0=False, catalog=False, cycle=False,
-                      cycle_r1=False, cycle_filing=False, child=False):
+                      cycle_r1=False, cycle_filing=False, child=False, closeout=False):
     """Build original tool packets and hashed wires only; no custody path is opened."""
     profiles, module = acquisition()
     if r0:
@@ -266,14 +266,11 @@ def preflight_fixture(monkeypatch, *, damage=None, r0=False, catalog=False, cycl
         module = profiles.profile('independent', profiles.CYCLE_FILING_INPUT)
     if child:
         module = profiles.profile('independent', profiles.CHILD_FORMAL)
-    prerequisite = r0 or catalog or cycle or cycle_r1 or cycle_filing or child
-    proof_key = ('child_verification' if child else 'filing_verification' if cycle_filing else
-                 'r1_recovery_verification' if cycle_r1 else 'cycle_verification' if cycle else
-                 'catalog_verification' if catalog else 'r0_read_verification')
-    proof_module = ('child_readiness_proof' if child else
-                    'input_cycle_filing_proof' if cycle_filing else
-                    'input_cycle_r1_proof' if cycle_r1 else 'input_cycle_proof' if cycle else
-                    'catalog_input_offline' if catalog else 'r0_read_independent')
+    if closeout:
+        module = profiles.profile('independent', profiles.CLOSEOUT_FORMAL)
+    prerequisite = module.REGISTERED_IDENTITY in profiles.PROOF_MODULES
+    proof_key, proof_module = profiles.PROOF_MODULES.get(
+        module.REGISTERED_IDENTITY, ('r0_read_verification', 'r0_read_independent'))
     pinned = subject()
     policy_raw = (REPO / module.REGISTERED_PROTOCOL).read_bytes()
     policy = json.loads(policy_raw)
@@ -312,11 +309,12 @@ def preflight_fixture(monkeypatch, *, damage=None, r0=False, catalog=False, cycl
                               accepted_real_slots=[1, 2], approval_result='NOT_GUARANTEED')
             read_proof['package']['path'] = str(evidence/'filing-verification-a3.json')
             read_proof['actual']['path'] = str(evidence/'filing-verification-actual-a3.json')
-    if child:
+    if child or closeout:
+        prefix = 'closeout-readiness' if closeout else 'child-readiness'
         read_proof = dict(source_main='d'*40,
                           verified_returned_ms=start + (11 if damage == 'r0-late' else 9),
-                          package=dict(path=str(evidence/'child-readiness.json'), sha256='1'*64),
-                          actual=dict(path=str(evidence/'child-readiness-actual.json'),
+                          package=dict(path=str(evidence/f'{prefix}.json'), sha256='1'*64),
+                          actual=dict(path=str(evidence/f'{prefix}-actual.json'),
                                       sha256='2'*64))
     reader_module = ModuleType('declared_r0_verifier')
     reader_module.verified_readiness = lambda *_: read_proof
@@ -483,8 +481,22 @@ def test_cycle_filing_preflight_preserves_a2_history_and_binds_new_a3_source(mon
     assert 'r1_recovery_verification' not in expected
 
 
+@pytest.mark.parametrize('damage', [None, 'retention-return', 'actual-actor', 'r0-late'])
+def test_closeout_preflight_requires_same_plan_and_timely_originals(monkeypatch, damage):
+    checker, plan, raw, expected, _ = preflight_fixture(monkeypatch, closeout=True, damage=damage)
+    if damage:
+        with pytest.raises(ValueError):
+            checker._registered_preflight(plan, raw)
+    else:
+        assert checker._registered_preflight(plan, raw) == expected
+        proof = expected['closeout_verification']
+        assert proof['package']['path'].endswith(
+            '/closeout-20261125-formal/closeout-readiness.json')
+
+
 @pytest.mark.parametrize('changed_main', [False, True])
-@pytest.mark.parametrize('profile', ['catalog', 'cycle', 'cycle_r1', 'cycle_filing', 'child'])
+@pytest.mark.parametrize('profile', ['catalog', 'cycle', 'cycle_r1', 'cycle_filing', 'child',
+                                     'closeout'])
 def test_setup_binds_offline_release_to_actual_activation_main(monkeypatch, changed_main, profile):
     """Only generated control dictionaries are used; no formal path is opened."""
     spec = importlib.util.spec_from_file_location(
@@ -496,11 +508,12 @@ def test_setup_binds_offline_release_to_actual_activation_main(monkeypatch, chan
     identity = {'catalog': profiles.CATALOG_INPUT, 'cycle': profiles.CYCLE_INPUT,
                 'cycle_r1': profiles.CYCLE_R1_INPUT,
                 'cycle_filing': profiles.CYCLE_FILING_INPUT,
-                'child': profiles.CHILD_FORMAL}[profile]
+                'child': profiles.CHILD_FORMAL, 'closeout': profiles.CLOSEOUT_FORMAL}[profile]
     module = profiles.profile('independent', identity)
     proof_key = {'catalog': 'catalog_verification', 'cycle': 'cycle_verification',
                  'cycle_r1': 'r1_recovery_verification',
-                 'cycle_filing': 'filing_verification', 'child': 'child_verification'}[profile]
+                 'cycle_filing': 'filing_verification', 'child': 'child_verification',
+                 'closeout': 'closeout_verification'}[profile]
     plan = bundle['plan']
     plan.update(execution_identity=module.REGISTERED_IDENTITY, scope=module.FORMAL_SCOPE,
                 activation_readiness={}, independent_preflight=dict(path='declared-actual',

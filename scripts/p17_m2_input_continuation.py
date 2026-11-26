@@ -277,8 +277,10 @@ CYCLE_FILING_INPUT = "topolab.v2.p17-m2-registered-source-acquisition.cycle-2026
 WINDOW_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1"
 CERT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1"
 CHILD_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.child-20261125.v1"
+CLOSEOUT_FORMAL = "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1"
 FORMAL_ONLY_IDENTITIES = (FORMAL_INPUT, R0_INPUT, CATALOG_INPUT, CYCLE_INPUT, CYCLE_R1_INPUT,
-                          CYCLE_FILING_INPUT, WINDOW_FORMAL, CERT_FORMAL, CHILD_FORMAL)
+                          CYCLE_FILING_INPUT, WINDOW_FORMAL, CERT_FORMAL, CHILD_FORMAL,
+                          CLOSEOUT_FORMAL)
 R0_EVIDENCE = "/Users/keith1117/Documents/TopoLab-data/r0-read-acceptance-20261122"
 CONFIGS[R0_INPUT] = {
     **CONFIGS[FORMAL_INPUT],
@@ -490,9 +492,38 @@ CONFIGS[CHILD_FORMAL] = {
                         "/owner-budget.json"),
                "sha256": "8693ffd9e9555a5247c2569c0d4f97331fbc7f6237dce25e2a80012c7f1c26dd"},
 }
+CONFIGS[CLOSEOUT_FORMAL] = {
+    **CONFIGS[CYCLE_FILING_INPUT],
+    "input": CLOSEOUT_FORMAL, "window_candidate": True,
+    "prefix": "topolab-unfunded-closeout-20261125-",
+    "generations": (PARENT + "p17-m2-closeout-20261125-a1",),
+    "input_protocol": "docs/planning/closeout_formal_contract.json",
+    "schema": "topolab.v2.m2-registered-source-acquisition-authority.closeout-20261125.v1",
+    "global_deadline_ms": 1795918797213,
+    "preparation_entry": "closeout_formal_preparation.py",
+    "input_entry": "closeout_formal_registered.py",
+    "control_entry": "closeout_formal_control.py",
+    "evidence_root": "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal",
+    "cache_suffix": "_closeout_formal_20261125",
+    "window_module": "closeout_formal_clock",
+    "caller_waiter": "closeout_formal_waiter.py", "caller_filer": "closeout_formal_filer.py",
+    "registration_helpers": (*CONFIGS[CYCLE_FILING_INPUT]["registration_helpers"],
+                             "closeout_formal_route.py", "certificate_replay_proof.py",
+                             "certificate_replay_archive.py", "certificate_verify.py",
+                             "child_readiness_proof.py", "child_verify.py",
+                             "child_public_control.py", "child_public_schedule.mjs",
+                             "closeout_readiness_proof.py", "closeout_verify.py",
+                             "closeout_public_control.py", "closeout_public_schedule.mjs",
+                             "closeout_receipt.py",
+                             "r1_window_scope.py"),
+    "budget": {"path": ("/Users/keith1117/Documents/TopoLab-data/closeout-20261125"
+                        "/owner-budget.json"),
+               "sha256": "9afb732330236b115a42621441c5b5e7d019c05ce02d1154cd14902dde64b577"},
+}
 
 # Preparation and its replay use the same evidence key for each published profile.
 PROOF_MODULES = {
+    CLOSEOUT_FORMAL: ("closeout_verification", "closeout_readiness_proof"),
     CHILD_FORMAL: ("child_verification", "child_readiness_proof"),
     CERT_FORMAL: ("certificate_verification", "certificate_replay_proof"),
     WINDOW_FORMAL: ("r1_window_verification", "r1_window_proof"),
