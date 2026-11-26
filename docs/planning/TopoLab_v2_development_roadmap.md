@@ -1,5 +1,7 @@
 # TopoLab v2 Development Roadmap
 
+**November 26 scientific contract review stopped before B.** The candidate binds the certified B1 version and fixes the 360-row panel. Independent review found that the current entry cannot admit the historical issuer on a new scientific release or account for B independently. The 18-case scientific panel remains unrun. [Review and original-return evidence](../validation/native_bc_contract_review.md)
+
 **November 26 formal input acceptance completed.** Both readers verified the 40 metadata files and 558 payloads under the B1 contract. The original certificate return, the 1,071-member version and the released lease passed independent terminal audit. Scientific B/C and the fixed P/17 quality gate remain open. [Formal input certificate](../validation/formal_input_receipt_certificate.md)
 
 **November 26 paired readiness reached independent preflight.** Both formal files passed and the independent command returned 0. The first formal entry rejected the stored preflight envelope before opening the graph. The successor verifies the receipt writer, actual scheduler and entry on the same encoding before a new one-attempt contract enters formal custody. [Result](../validation/formal_input_paired_readiness.md) · [Contract](receipt_formal_contract.json)
