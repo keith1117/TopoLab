@@ -357,6 +357,15 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
                 and value.get('public_roots') == [CONTINUATION_CONFIG['public_root']],
                 'NEW exact single-attempt budget/root/whole limits differ')
     if _formal_only_profile():
+        prior = _prior_public_module()
+        # Resolve only this profile's constant in the source-pinned historical module.
+        namespace = {
+            FORMAL_INPUT: 'EVIDENCE', R0_INPUT: 'R0_EVIDENCE', CATALOG_INPUT: 'CATALOG_EVIDENCE',
+            CYCLE_INPUT: 'CYCLE_EVIDENCE', CYCLE_R1_INPUT: 'CYCLE_R1_EVIDENCE',
+            CYCLE_FILING_INPUT: 'CYCLE_FILING_EVIDENCE', WINDOW_FORMAL: 'WINDOW_EVIDENCE',
+            CERT_FORMAL: 'CERT_EVIDENCE', CHILD_FORMAL: 'CHILD_EVIDENCE',
+            CLOSEOUT_FORMAL: 'CLOSEOUT_EVIDENCE', READINESS_FORMAL: 'READINESS_EVIDENCE',
+        }[REGISTERED_IDENTITY]
         require(plan.get('scope') == FORMAL_SCOPE
                 and limits.get('FULL_all_input_attempts_ceiling') == 3780
                 and limits.get('formal_top_control_CLI_all') == 52
@@ -373,22 +382,7 @@ def _registered_authority(plan: dict[str, Any]) -> dict[str, Any]:
                 and value.get('mandatory_result_suffix_seconds') == 7200
                 and value.get('new_input_budget') == CONTINUATION_CONFIG['budget']
                 and value.get('public_roots') == []
-                and value.get('prior_public') == _prior_public_module().expected_prior({
-                    FORMAL_INPUT: _prior_public_module().EVIDENCE,
-                    R0_INPUT: _prior_public_module().R0_EVIDENCE,
-                    CATALOG_INPUT: _prior_public_module().CATALOG_EVIDENCE,
-                    CYCLE_INPUT: _prior_public_module().CYCLE_EVIDENCE,
-                    CYCLE_R1_INPUT: _prior_public_module().CYCLE_R1_EVIDENCE,
-                    CYCLE_FILING_INPUT: _prior_public_module().CYCLE_FILING_EVIDENCE,
-                    WINDOW_FORMAL: _prior_public_module().WINDOW_EVIDENCE,
-                    CERT_FORMAL: Path('/Users/keith1117/Documents/TopoLab-data/'
-                                      'certificate-20261124-formal'),
-                    CHILD_FORMAL: _prior_public_module().CHILD_EVIDENCE,
-                    CLOSEOUT_FORMAL: Path('/Users/keith1117/Documents/TopoLab-data/'
-                                         'closeout-20261125-formal'),
-                    READINESS_FORMAL: Path('/Users/keith1117/Documents/TopoLab-data/'
-                                           'readiness-20261126-a1-formal')}[
-                        REGISTERED_IDENTITY]),
+                and value.get('prior_public') == prior.expected_prior(getattr(prior, namespace)),
                 'NEW formal-only budget/root/prior limits differ')
     if REGISTERED_IDENTITY == READINESS_FORMAL:
         _prior_public_module('paired_readiness_independent').require_policy_paths(
