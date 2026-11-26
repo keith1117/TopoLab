@@ -22,7 +22,8 @@ closes the [B1 input contract](docs/planning/receipt_formal_contract.json).
 All six input roles passed. Independent terminal audit verified the certificate's
 original exit 0, plan digest and 1,071-member version. The B1 lease is RELEASED
 and seven historical leases remain HELD. Scientific execution requires separate
-authorization. Uniform remains the default, fixed P/17 is unrepaired and full
+authorization. The [scientific contract review](docs/validation/native_bc_contract_review.md)
+closed before B. B and C recorded zero dispatches. Uniform remains the default, fixed P/17 is unrepaired and full
 fit remains PENDING4GiB.
 
 ## Provenance boundary

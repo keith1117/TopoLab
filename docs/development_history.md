@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-26 UTC — Scientific contract review closed before preflight
+
+The B1-bound 18-reference and 342-query contract passed its declaration check. Independent engineering review found incompatible release and issuer checks and a B reservation charged to C. The review archived the first error and both readiness comparison returns. [Recorded stop](validation/native_bc_contract_review.md)
+
 ## 2026-11-26 UTC — Formal input certificate independently verified
 
 The B1 certificate command returned 0 after all six input roles passed, both readers verified 40 metadata files and 558 payloads, and the full 1,071-member inventories matched. The independent audit verified the original command against the archived plan and version. B1 released its lease and closed at 429,219 known FULL plus unpriced costs. [Formal input result](validation/formal_input_receipt_certificate.md)

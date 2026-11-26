@@ -5,6 +5,10 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
+## Native M2 scientific contract stopped before B
+
+Independent engineering review rejected the executable contract on protected source `d5e0fcdb`. B1 input and the 360 planned rows passed metadata checks. The isolated publication prerequisite failed to import its historical helper. With the helper available, the same original readiness records passed on the B1 release and failed on the prospective scientific checkout. B and C recorded zero dispatches, payload reads and scientific charges. [Review, accounting and archive](validation/native_bc_contract_review.md)
+
 ## Formal input certificate issued and independently verified
 
 On protected commit `d30c33b1`, B1 completed all six input roles. Each reader verified 40 metadata files and 558 payloads. All 1,071 version members matched the backup. The independent audit verified the certificate command's original exit 0 and its binding to the formal plan and version. The 270-control archive is sealed and the B1 lease is RELEASED. Seven historical leases remain HELD. The ledger closed at **429,219 known FULL** plus unpriced costs. Scientific execution requires separate authorization. [Certificate, independent audit and ledger](validation/formal_input_receipt_certificate.md)
