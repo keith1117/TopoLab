@@ -17,14 +17,13 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-Read the [paired readiness result](docs/validation/formal_input_paired_readiness.md)
-and the [receipt contract](docs/planning/receipt_formal_contract.json) before
-further input work. Formal preflight verified both documents. Independent
-entry stopped at the preflight envelope encoding before any role. Seven
-historical leases remain HELD. The new receipt contract grants one input graph
-after actual-path verification of independent preflight storage and admission.
-Uniform remains the default, fixed P/17 is unrepaired and full fit remains
-PENDING4GiB.
+The [formal input certificate](docs/validation/formal_input_receipt_certificate.md)
+closes the [B1 input contract](docs/planning/receipt_formal_contract.json).
+All six input roles passed. Independent terminal audit verified the certificate's
+original exit 0, plan digest and 1,071-member version. The B1 lease is RELEASED
+and seven historical leases remain HELD. Scientific execution requires separate
+authorization. Uniform remains the default, fixed P/17 is unrepaired and full
+fit remains PENDING4GiB.
 
 ## Provenance boundary
 
