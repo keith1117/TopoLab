@@ -1109,6 +1109,7 @@ def public_run(slot, *, origins=None):
         }
     return dict(
         result,
+        entry_sha256=sha(claim_raw),
         result_sha256=sha(summary_raw),
         archive_sha256=sha(archive),
         index_sha256=sha(inventory),
@@ -1132,14 +1133,107 @@ def candidate(runs, tree, main):
     )
 
 
-def public_reservations(slots):
-    """Keep all scheduled failures: reservations cannot be erased by later PASS."""
-    total, records = 0, []
+CLOSED_LEGACY_FEES = {
+    1: (
+        "d370b8b95a5d6e5b559f088594625d683ec106cf5fa27d0772e044b94da2ac07",
+        "13d579c6a7663d60128ff75c97465da3ddfb8d64b6d91c7de78d70bc22d81fdd",
+        "988f5f1e20d654bf6ad2b1abd30532603302fd6b74539fced68eb5b274b90f96",
+        "1170b919a93386b849a9f1f48514e877d651e97b5aa294832815179d54a21558",
+        "cb59a65f20af18144da58902c41124e535cefe4422cfad1a4a7c06f8d47953fd",
+    ),
+    2: (
+        "cbdd2541a36806f613e0b521c15a1a4d43ca6b15dff23735e7b204c704c6977f",
+        "355cdd4aef8928426bbd3eddc80b2b1eb7e2bce60df6d893a8a57d61e4be2357",
+        "d8fb7018a40ccf9d6db2faa5f2b7391e2218b0a31d2f8f000d19a367101f7ca2",
+        "8da552c2f6466a5faab2059686e4c223397f97e4dc28472f72a44b11ba3c1e77",
+        "f8f09cc0bc3ad91c06059ce99ffacb1dbce35533f4b581c340724429e2dd28c9",
+    ),
+    3: (
+        "f4e1ee913428d7d520605fd44a89791dc5e08fa001c79ec56021d9145f1072ad",
+        "3f64025d2d8ac1ec6baa3e12841fda6a4b19fe9f9f660893d208ece35d6f7fb4",
+        "1e2ddb93c4766ad90bac7e4484f59c2b2465329f36f4ff4ca9c1cf8f9b154dca",
+        "4c0f4e8678701b5ece82d8efce64aad79ed8f729ce1d8588da4301cb134474e7",
+        "230a580048b71df1eda565aba5183d9adaef2350381929883ae49315f5fa2d57",
+    ),
+}
+
+
+def closed_legacy_fee(slot, entry_raw):
+    """Replay only the three already closed, immutable campaign-control sets."""
+    result_raw = pair(DATA, f"public-{slot}-result.json")
+    index_raw = pair(DATA, f"public-{slot}-index.json")
+    archive_raw = pair(DATA, f"public-{slot}-evidence.tar.gz", 128 * 1024**2)
+    need(
+        tuple(map(sha, (entry_raw, result_raw, index_raw, archive_raw)))
+        == CLOSED_LEGACY_FEES[slot][:4],
+        "fixed historical fee control bytes changed",
+    )
+    result = parse(result_raw)
+    need(
+        result["archive_sha256"] == sha(archive_raw)
+        and result["index_sha256"] == sha(index_raw)
+        and result["fixture_charge_FULL"] == 600,
+        "fixed historical fee archive binding differs",
+    )
+    files = archive_buffers(archive_raw, index_raw)
+    need(
+        files["caller/entry.json"] == entry_raw
+        and not any(name.startswith("native/") for name in files),
+        "fixed historical fee original/native inventory differs",
+    )
+    need(
+        sha(files["caller/outer-original.json"]) == CLOSED_LEGACY_FEES[slot][4],
+        "fixed historical original outer changed",
+    )
+    outer = parse(files["caller/outer-original.json"])
+    if slot == 3:
+        need(
+            outer["status"] == "STOP_PUBLIC_CLOSEOUT"
+            and outer["stage"] == "caller-read-preregistered-entry"
+            and outer["calls"] == {}
+            and outer["native_roles_requested"] == 0
+            and outer["registration_command_original_result"]
+            == "UNAVAILABLE_NOT_ZERO_WRAPPER_DID_NOT_RETAIN",
+            "fixed pre-scheduler STOP or original UNKNOWN changed",
+        )
+    return dict(
+        charged_FULL=600,
+        result_sha256=sha(result_raw),
+        index_sha256=sha(index_raw),
+        archive_sha256=sha(archive_raw),
+        basis="PINNED_CLOSED_LEGACY_CONTROL_BYTES",
+        unpriced_registration_original=outer.get(
+            "registration_command_original_result", "NOT_APPLICABLE_TO_PINNED_PROBE"
+        ),
+    )
+
+
+def public_reservations(slots, *, runs=()):
+    """Check each original capacity hold, then charge its independently proved fee.
+
+    New fees come only from this invocation's complete public_run verdicts. An
+    extra or incomplete entry retains its costs and blocks admission; it cannot
+    be discounted by a producer summary or by the absence of Native files.
+    """
+    need(
+        type(slots) is list
+        and len(slots) == len(set(slots))
+        and all(type(n) is int and 1 <= n <= 16 for n in slots),
+        "fee slots differ",
+    )
+    need(
+        type(runs) in (list, tuple)
+        and len(runs) == len({r["slot"] for r in runs})
+        and all(type(r["slot"]) is int and r["slot"] in slots for r in runs),
+        "independent current-run fee verdicts differ",
+    )
+    accepted = {r["slot"]: r for r in runs}
+    total, held_history, records = 0, 0, []
     for slot in range(1, 17):
         try:
             raw = pair(DATA, f"public-{slot}-entry.json")
         except FileNotFoundError:
-            # A single missing peer cannot silently remove an already booked claim.
+            need(slot not in CLOSED_LEGACY_FEES, "known closed public entry missing")
             a = DATA / f"public-{slot}-entry.json"
             b = DATA.with_name(DATA.name + "-backup") / a.name
             need(not a.exists() and not b.exists(), "unpaired scheduled public entry")
@@ -1153,17 +1247,60 @@ def public_reservations(slots):
             and type(entry["slot"]) is int
             and type(amount) is int
             and amount in (600, 3600)
-            and total == entry["prior_charged_FULL"],
-            "public prior reservation changed",
+            and type(entry["prior_charged_FULL"]) is int
+            and total == entry["prior_charged_FULL"]
+            and total + amount <= 9600,
+            "public prior fee/capacity reservation changed",
         )
-        total += amount
-        records.append(dict(slot=slot, sha256=sha(raw), reserved_FULL=amount))
+        if slot in CLOSED_LEGACY_FEES:
+            fee = closed_legacy_fee(slot, raw)
+        else:
+            need(slot in accepted, "public entry lacks an independent closed fee proof")
+            run = accepted[slot]
+            result_raw = pair(DATA, f"public-{slot}-result.json")
+            index_raw = pair(DATA, f"public-{slot}-index.json")
+            expected = 3600 if run["kind"] == "FULL_POSITIVE" else 600
+            need(
+                run["kind"] in ("FULL_POSITIVE", "REPLAY_NEGATIVE")
+                and run["entry_sha256"] == sha(raw)
+                and run["root"] == entry["root"]
+                and type(run["known_FULL"]) is int
+                and run["known_FULL"] == expected
+                and expected == amount
+                and run["result_sha256"] == sha(result_raw)
+                and run["index_sha256"] == sha(index_raw)
+                and parse(result_raw)["archive_sha256"] == run["archive_sha256"]
+                and all(
+                    digest(run[k]) for k in ("result_sha256", "index_sha256", "archive_sha256")
+                ),
+                "independent closed fee/entry pins differ",
+            )
+            fee = dict(
+                charged_FULL=run["known_FULL"],
+                basis="THIS_INVOCATION_PUBLIC_RUN_VERDICT",
+                **{k: run[k] for k in ("result_sha256", "index_sha256", "archive_sha256")},
+            )
+        total += fee["charged_FULL"]
+        held_history += amount
+        records.append(
+            dict(
+                slot=slot,
+                entry_sha256=sha(raw),
+                reserved_FULL=amount,
+                fee=fee,
+                released_unused_capacity_FULL=amount - fee["charged_FULL"],
+            )
+        )
     need(
-        total <= 9600 and all(n in [r["slot"] for r in records] for n in slots),
-        "finite diagnostic ceiling exceeded",
+        total <= 9600 and all(slot in [r["slot"] for r in records] for slot in slots),
+        "finite diagnostic ceiling/selected entry differs",
     )
     return dict(
-        records=records, reserved_FULL=total, remaining_FULL=9600 - total, failures_retained=True
+        records=records,
+        charged_FULL=total,
+        reservation_history_FULL=held_history,
+        remaining_FULL=9600 - total,
+        failures_retained=True,
     )
 
 
@@ -1338,7 +1475,7 @@ def verify(slots):
     negative = public_run(slots[2], origins={r["slot"]: r for r in positives})
     runs = [*positives, negative]
     candidate(runs, tree, main)
-    ledger = public_reservations(slots)
+    ledger = public_reservations(slots, runs=runs)
     executed = compiled(tree, verification=True)
     need(
         sys.platform == "darwin"
