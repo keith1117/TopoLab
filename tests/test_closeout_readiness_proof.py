@@ -17,7 +17,7 @@ SCRIPTS = Path(__file__).resolve().parents[1] / "scripts"
 
 
 @pytest.fixture
-def proof(monkeypatch):
+def proof(monkeypatch, tmp_path):
     monkeypatch.syspath_prepend(str(SCRIPTS))
     spec = importlib.util.spec_from_file_location(
         "closeout_proof_test", SCRIPTS / "closeout_readiness_proof.py"
@@ -26,6 +26,8 @@ def proof(monkeypatch):
     spec.loader.exec_module(module)
     monkeypatch.setattr(module, "REPO", SCRIPTS.parent)
     monkeypatch.setattr(module, "PYTHON", sys.executable)
+    monkeypatch.setattr(module, "DATA", tmp_path / "evidence")
+    monkeypatch.setattr(module, "FORMAL", tmp_path / "evidence-formal")
     return module
 
 
@@ -232,7 +234,7 @@ def readiness(proof, monkeypatch):
         for n in (*proof.SOFTWARE, *proof.PRODUCTION, proof.PROTOCOL)
     }
     start = proof.START + 1000
-    entry = dict(argv=proof.gate_args([3, 4, 5]), start_ms=start, end_ms=start + 290000)
+    entry = dict(argv=proof.gate_args([4, 5, 6]), start_ms=start, end_ms=start + 290000)
     policy = dict(
         execution_identity=proof.IDENTITY,
         new_input_budget=dict(path=str(proof.DATA / "owner-budget.json"), sha256=proof.BUDGET),
@@ -248,7 +250,7 @@ def readiness(proof, monkeypatch):
         source_main="a" * 40,
         budget_sha256=proof.BUDGET,
         pricing_sha256=proof.PRICING,
-        slots=[3, 4, 5],
+        slots=[4, 5, 6],
         verification_slot=1,
         independent_entry=entry,
         authority_sha256=tree[proof.PROTOCOL],
@@ -411,14 +413,14 @@ def trace(frame, event, arg):
     reg.verified_formal_registration=lambda:({},[dict(path=str(i)) for i in range(23)])
     p.pair=lambda *a,**k:b'{}\n'
     p.pricing=lambda:{}
-    p.public_reservations=lambda slots:dict(reserved_FULL=9000,remaining_FULL=600)
+    p.public_reservations=lambda slots,**kw:dict(reserved_FULL=9000,remaining_FULL=600)
     p.time.time_ns=lambda:(p.START+1000)*10**6
     subprocess.check_output=lambda args,**kw:b'' if 'status' in args else (main+'\n').encode()
     import p17_m2_input_continuation as profiles
     control=profiles.profile('control',profiles.CLOSEOUT_FORMAL)
     profiles.profile('independent',profiles.CLOSEOUT_FORMAL)
     tree=control.source_freeze(p.IDENTITY)
-    entry=dict(argv=p.gate_args([3,4,5]),start_ms=p.START,end_ms=p.START+290000)
+    entry=dict(argv=p.gate_args([4,5,6]),start_ms=p.START,end_ms=p.START+290000)
     p.verification_entry=lambda slots,tree:(1,entry)
     p.public_run=lambda slot,origins=None:dict(slot=slot,source_main=main,source_tree=tree,
         kind='REPLAY_NEGATIVE' if origins is not None else 'FULL_POSITIVE')
@@ -439,7 +441,7 @@ def trace(frame, event, arg):
     wire.write_private=save
     return None
 sys.settrace(trace)
-sys.argv=['closeout_verify.py','verify','3','4','5']
+sys.argv=['closeout_verify.py','verify','4','5','6']
 runpy.run_path('scripts/closeout_verify.py',run_name='__main__')
 """.replace("MISSING", repr(missing))
     result = subprocess.run(
@@ -459,11 +461,10 @@ runpy.run_path('scripts/closeout_verify.py',run_name='__main__')
         assert value["verification_slot"] == 1 and value["status"] == proof.STATUS
 
 
-def full_fixture(proof, monkeypatch):
+def full_fixture(proof, monkeypatch, *, slot=3):
     """Six synthetic role wires; the published resource oracle is a separate seam."""
     from r0_caller_receipt import project
 
-    slot = 3
     root = f"/private/tmp/topolab-public-closeout-20261125-a{slot}"
     start = proof.START + 1000
     tree = {"scripts/closeout_public_schedule.mjs": "a" * 64}
@@ -1257,3 +1258,260 @@ def test_six_role_archive_caps_are_checked_before_any_member_read(proof, monkeyp
     index = {m.name: dict(bytes=m.size, sha256="0" * 64) for m in members}
     with pytest.raises(ValueError, match="archive inventory"):
         proof.archive_buffers(b"synthetic headers", proof.canonical(index))
+
+
+def fee_fixture(proof, monkeypatch):
+    """Fixed closed history plus current verifier-owned PASS facts, not producer claims."""
+    values, legacy, runs = {}, {}, []
+    total = 0
+    for slot in range(1, 7):
+        amount = 3600 if slot in (3, 4, 5) else 600
+        entry = dict(
+            slot=slot,
+            root=f"/private/tmp/topolab-public-closeout-20261125-a{slot}",
+            budget_sha256=proof.BUDGET,
+            pricing_sha256=proof.PRICING,
+            prior_charged_FULL=total,
+            fee_reservation_FULL=amount,
+        )
+        raw = proof.canonical(entry)
+        outer = dict(
+            status="STOP_PUBLIC_CLOSEOUT",
+            stage="caller-read-preregistered-entry",
+            calls={},
+            native_roles_requested=0,
+            registration_command_original_result="UNAVAILABLE_NOT_ZERO_WRAPPER_DID_NOT_RETAIN",
+        )
+        outer_raw = proof.canonical(outer)
+        files = {"caller/entry.json": raw, "caller/outer-original.json": outer_raw}
+        stream = io.BytesIO()
+        with tarfile.open(fileobj=stream, mode="w:gz") as archive:
+            for name, data in files.items():
+                item = tarfile.TarInfo(name)
+                item.size = len(data)
+                archive.addfile(item, io.BytesIO(data))
+        archive_raw = stream.getvalue()
+        index_raw = proof.canonical(
+            {n: dict(bytes=len(data), sha256=proof.sha(data)) for n, data in files.items()}
+        )
+        charge = 600 if slot <= 3 else amount
+        result_raw = proof.canonical(
+            dict(
+                fixture_charge_FULL=charge,
+                archive_sha256=proof.sha(archive_raw),
+                index_sha256=proof.sha(index_raw),
+            )
+        )
+        for suffix, data in (
+            ("entry.json", raw),
+            ("result.json", result_raw),
+            ("index.json", index_raw),
+            ("evidence.tar.gz", archive_raw),
+        ):
+            values[f"public-{slot}-{suffix}"] = data
+        if slot <= 3:
+            legacy[slot] = tuple(
+                map(proof.sha, (raw, result_raw, index_raw, archive_raw, outer_raw))
+            )
+        else:
+            runs.append(
+                dict(
+                    slot=slot,
+                    root=entry["root"],
+                    entry_sha256=proof.sha(raw),
+                    kind="FULL_POSITIVE" if slot in (4, 5) else "REPLAY_NEGATIVE",
+                    known_FULL=charge,
+                    result_sha256=proof.sha(result_raw),
+                    index_sha256=proof.sha(index_raw),
+                    archive_sha256=proof.sha(archive_raw),
+                )
+            )
+        total += charge
+
+    def pair(folder, name, maximum=16 * 1024**2):
+        assert folder == proof.DATA
+        if name not in values:
+            raise FileNotFoundError(name)
+        return values[name]
+
+    monkeypatch.setattr(proof, "pair", pair)
+    monkeypatch.setattr(proof, "CLOSED_LEGACY_FEES", legacy)
+    return values, runs
+
+
+def test_fee_capacity_and_charges_use_current_in_process_verdicts(proof, monkeypatch):
+    values, runs = fee_fixture(proof, monkeypatch)
+    ledger = proof.public_reservations([4, 5, 6], runs=runs)
+    assert ledger["charged_FULL"] == 9600 and ledger["remaining_FULL"] == 0
+    assert ledger["records"][2]["reserved_FULL"] == 3600
+    assert ledger["records"][2]["fee"]["charged_FULL"] == 600
+    assert ledger["records"][2]["released_unused_capacity_FULL"] == 3000
+    assert ledger["records"][2]["fee"]["unpriced_registration_original"].startswith("UNAVAILABLE")
+    assert ledger["reservation_history_FULL"] == 12600
+    assert proof.gate_args([4, 5, 6])[-3:] == ["4", "5", "6"]
+
+
+def test_no_native_legacy_failure_retains_600_and_original_unknown(proof, monkeypatch):
+    values, _ = fee_fixture(proof, monkeypatch)
+    for slot in (4, 5, 6):
+        for name in list(values):
+            if name.startswith(f"public-{slot}-"):
+                del values[name]
+    ledger = proof.public_reservations([])
+    assert ledger["charged_FULL"] == 1800 and ledger["remaining_FULL"] == 7800
+
+
+@pytest.mark.parametrize("missing", [1, 2, 3])
+def test_known_historical_entry_cannot_disappear_from_both_copies(proof, monkeypatch, missing):
+    values, _ = fee_fixture(proof, monkeypatch)
+    for name in list(values):
+        slot = int(name.split("-")[1])
+        if slot >= missing and name.endswith("-entry.json"):
+            del values[name]
+    with pytest.raises(ValueError, match="known closed public entry missing"):
+        proof.public_reservations([])
+
+
+def test_later_rebased_claims_do_not_excuse_a_missing_historical_fee(proof, monkeypatch):
+    values, runs = fee_fixture(proof, monkeypatch)
+    del values["public-3-entry.json"]
+    for run in runs:
+        name = f"public-{run['slot']}-entry.json"
+        entry = proof.parse(values[name])
+        entry["prior_charged_FULL"] -= 600
+        values[name] = proof.canonical(entry)
+        run["entry_sha256"] = proof.sha(values[name])
+    with pytest.raises(ValueError, match="known closed public entry missing"):
+        proof.public_reservations([4, 5, 6], runs=runs)
+
+
+def test_pending_future_entry_with_capacity_but_no_result_is_not_zero_fee(proof, monkeypatch):
+    values, _ = fee_fixture(proof, monkeypatch)
+    for name in list(values):
+        if name.startswith(("public-5-", "public-6-")) or name in (
+            "public-4-result.json",
+            "public-4-index.json",
+            "public-4-evidence.tar.gz",
+        ):
+            del values[name]
+    assert proof.parse(values["public-4-entry.json"])["prior_charged_FULL"] + 3600 < 9600
+    with pytest.raises(ValueError, match="independent closed fee proof"):
+        proof.public_reservations([])
+
+
+@pytest.mark.parametrize(
+    "damage",
+    [
+        "history-entry",
+        "history-result",
+        "history-index",
+        "history-archive",
+        "new-entry",
+        "new-result",
+        "new-index",
+        "new-archive-pin",
+        "unknown-extra-entry",
+        "missing-result",
+        "wrong-charge",
+        "wrong-capacity",
+        "missing-verdict",
+    ],
+)
+def test_fee_unknown_or_changed_evidence_never_releases_capacity(proof, monkeypatch, damage):
+    values, runs = fee_fixture(proof, monkeypatch)
+    if damage.startswith("history-"):
+        suffix = {
+            "entry": "entry.json",
+            "result": "result.json",
+            "index": "index.json",
+            "archive": "evidence.tar.gz",
+        }[damage.removeprefix("history-")]
+        values["public-3-" + suffix] += b" "
+    elif damage == "unknown-extra-entry":
+        values["public-7-entry.json"] = proof.canonical(
+            dict(
+                slot=7,
+                budget_sha256=proof.BUDGET,
+                pricing_sha256=proof.PRICING,
+                fee_reservation_FULL=600,
+                prior_charged_FULL=9600,
+            )
+        )
+    elif damage == "missing-result":
+        del values["public-4-result.json"]
+    elif damage == "missing-verdict":
+        runs = runs[1:]
+    elif damage == "wrong-capacity":
+        value = proof.parse(values["public-6-entry.json"])
+        value["fee_reservation_FULL"] = 3600
+        values["public-6-entry.json"] = proof.canonical(value)
+    elif damage == "wrong-charge":
+        runs[0]["known_FULL"] = 600
+    else:
+        key = {
+            "new-entry": "entry_sha256",
+            "new-result": "result_sha256",
+            "new-index": "index_sha256",
+            "new-archive-pin": "archive_sha256",
+        }[damage]
+        runs[0][key] = "0" * 64
+    with pytest.raises((ValueError, FileNotFoundError)):
+        proof.public_reservations([4, 5, 6], runs=runs)
+
+
+def test_new_four_five_six_verification_entry_is_bound_without_old_slot_assumption(
+    proof, monkeypatch
+):
+    start = proof.START + 1000
+    entry = dict(
+        schema="topolab.closeout-verification-entry.v1",
+        slot=1,
+        author=proof.AUTHOR,
+        argv=proof.gate_args([4, 5, 6]),
+        repo=str(proof.REPO),
+        worker_sha256="a" * 64,
+        budget_sha256=proof.BUDGET,
+        pricing_sha256=proof.PRICING,
+        charge_FULL=300,
+        start_ms=start,
+        end_ms=start + 290000,
+    )
+
+    def pair(folder, name, maximum=16 * 1024**2):
+        if name == "released-verification-1-entry.json":
+            return proof.canonical(entry)
+        raise FileNotFoundError(name)
+
+    monkeypatch.setattr(proof, "pair", pair)
+    monkeypatch.setattr(proof.time, "time_ns", lambda: (start + 1) * 10**6)
+    assert proof.verification_entry([4, 5, 6], {proof.WORKER: "a" * 64}) == (1, entry)
+    with pytest.raises(ValueError):
+        proof.verification_entry([3, 4, 5], {proof.WORKER: "a" * 64})
+
+
+def test_public_run_preserves_verified_entry_sha_for_current_slot_four(proof, monkeypatch):
+    slot, entry, summary, files = full_fixture(proof, monkeypatch, slot=4)
+    data = io.BytesIO()
+    with tarfile.open(fileobj=data, mode="w:gz") as archive:
+        for name, raw in files.items():
+            item = tarfile.TarInfo(name)
+            item.size = len(raw)
+            archive.addfile(item, io.BytesIO(raw))
+    index = proof.canonical(
+        {n: dict(bytes=len(raw), sha256=proof.sha(raw)) for n, raw in files.items()}
+    )
+    summary.update(archive_sha256=proof.sha(data.getvalue()), index_sha256=proof.sha(index))
+    values = {
+        "entry.json": proof.canonical(entry),
+        "result.json": proof.canonical(summary),
+        "index.json": index,
+        "evidence.tar.gz": data.getvalue(),
+    }
+    monkeypatch.setattr(
+        proof,
+        "pair",
+        lambda folder, name, maximum=16 * 1024**2: values[name.removeprefix("public-4-")],
+    )
+    run = proof.public_run(slot)
+    assert run["slot"] == 4 and run["known_FULL"] == 3600
+    assert run["entry_sha256"] == proof.sha(values["entry.json"])
