@@ -1,0 +1,257 @@
+{
+  "FULL_by_role": {
+    "exporter-r0": 300,
+    "exporter-r1": 1200,
+    "independent-public-check": 300,
+    "independent-r0": 300,
+    "independent-r1": 1200,
+    "shared-closeout": 300
+  },
+  "R0_R1_dependency": "Independent R0 complete actual native acceptance and exact registry same-buffer proof before either R1 payload stat/read.",
+  "actors": {
+    "executor": "/root",
+    "independent": "/root/full60_independent"
+  },
+  "actual_predecessor_release": "A successor requires the predecessor Native acceptance and the exact same-plan bind command actual terminal0/stdout retained in both external copies. A native role-accepted file alone does not prove the bind caller returned.",
+  "ancillary_named_FULL": {
+    "filing_each_included_in_FULL3780": 180,
+    "graphs_max": 1,
+    "input_each_including_lease": 3960,
+    "lease_release_each_graph": 180,
+    "new_FULL_ceiling": 3960,
+    "registration": 0,
+    "shared_300_prepaid_on_first_input_launch": true
+  },
+  "budget": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/closeout-20261125/owner-budget.json",
+    "sha256": "9afb732330236b115a42621441c5b5e7d019c05ce02d1154cd14902dde64b577"
+  },
+  "caller_shared_reservation": {
+    "FULL": 300,
+    "checked_refusal": "Caller reservation remains retained if checked, permission or deadline refuses before native ledger creation; missing Native evidence is UNKNOWN, not zero.",
+    "native_ledger_relationship": "Same exact graph/plan shared300 prepayment; do not add native and caller copies as separate charges. Native shared-closeout dispatch charge remains0.",
+    "paths": {
+      "formal": [
+        "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal/input-formal-caller-reservation.json",
+        "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal-backup/input-formal-caller-reservation.json"
+      ]
+    },
+    "persist_before_first_SUP": true,
+    "refunds_allowed": false
+  },
+  "closeout_verification_paths": {
+    "actual": "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal/closeout-readiness-actual.json",
+    "package": "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal/closeout-readiness.json"
+  },
+  "coordinator_note": "coordinator-launch-note-a1.json",
+  "custody_integrity": {
+    "directory_create_mode": "0700",
+    "exact_manifest": true,
+    "file_create_mode": "0600",
+    "independent_anchor_outside_custody": true,
+    "independent_inodes": true,
+    "lease": "Registered TopoLab tools only; no FileProvider exclusion or perpetual sync/availability guarantee",
+    "permanent_0555_required": false,
+    "reverify_each_read": true
+  },
+  "execution_identity": "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1",
+  "failure": "First failed named gate stops successors. No retries/reset. Shared300 is prepaid at first input launch; failed/live/late SUP does not authorize a new REC. Retain raw failure and bounded existing control receipts in both external copies.",
+  "fixed_target": {
+    "attempts": {
+      "1": {
+        "backup": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-closeout-20261125-a1-independent-backup",
+        "generation": "/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-closeout-20261125-a1"
+      }
+    },
+    "parent": "/Users/keith1117/Library/Application Support/TopoLab-custody"
+  },
+  "formal_seconds": 4500,
+  "global_deadline_ms": 1795918797213,
+  "historical_known_FULL_floor": 388659,
+  "implementation_base_commit": "31e209a39a88943bc93c0dadb9a89977560cccd8",
+  "independent_author_deadline_ms": 1795918797213,
+  "independent_author_start_ms": 1795659597213,
+  "independent_preflight_actual_path": "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal/input-preflight-actual-a1.json",
+  "initial_actual_return_gate": {
+    "clock": "Original requested whole_start_ms never resets; terminal initial return, custody, waiters and first SUP remain inside first-SUP30.",
+    "evidence": "Require true original activation stdout, terminal exit 0 and both raw copies before first supervisor.",
+    "formal": {
+      "author": "/root",
+      "mode": "activate-formal"
+    },
+    "release_paths": {
+      "formal": [
+        "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal/input-formal-activation-caller-release.json",
+        "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal-backup/input-formal-activation-caller-release.json"
+      ]
+    },
+    "standby": "Before initial actual-return admission, standby reads only new E metadata, never source, payload or formal Library target."
+  },
+  "input_limits": {
+    "FULL_all_input_attempts_ceiling": 3780,
+    "FULL_each_input_ceiling": 3780,
+    "RSS_bytes": 4294967296,
+    "attempts": 1,
+    "coordination_seconds_max": 240,
+    "formal_top_control_CLI_all": 52,
+    "metadata_action_cap": 180,
+    "original_public1_2_and_new3_total_attempts": 0,
+    "original_reads_including_closed_registration": 2484,
+    "prepare_to_first_SUP_seconds_max": 30,
+    "public_FULL_all_ceiling": 0,
+    "public_graphs_max": 0,
+    "public_top_control_CLI_all": 0,
+    "registered_foundation_helpers_all": 138,
+    "source_counts": [
+      40,
+      558
+    ],
+    "source_reads_all_input_attempts": 1196,
+    "source_reads_each_author_each_attempt": 598,
+    "version_members": 1071
+  },
+  "mandatory_result_suffix_seconds": 7200,
+  "new_Foundation_helpers": 0,
+  "new_Original_registration_reads": 0,
+  "new_input_budget": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/closeout-20261125/owner-budget.json",
+    "sha256": "9afb732330236b115a42621441c5b5e7d019c05ce02d1154cd14902dde64b577"
+  },
+  "new_software_budget": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/closeout-20261125/owner-budget.json",
+    "sha256": "9afb732330236b115a42621441c5b5e7d019c05ce02d1154cd14902dde64b577"
+  },
+  "original_registration_reads": 0,
+  "owner_approval_reference": "November 25 bounded shared-closeout diagnosis, public verification and one conditional formal input acceptance.",
+  "permissions": {
+    "B_C": false,
+    "formal_activation": true,
+    "old_original_access": true,
+    "target_access": true
+  },
+  "predecessor_control_index": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/child-20261125/formal-a1-index.json",
+    "sha256": "8696e01d9215fad464d0389177727c4160a6c79f23f84c88e283a711bd1f0205"
+  },
+  "predecessor_controls": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/child-20261125/formal-a1-controls.tar.gz",
+    "sha256": "a02ee784dc55715bf8e17432fef656707203f30f03469064e6d26a21ac95e1e6"
+  },
+  "predecessor_ledger": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/child-20261125/final-ledger.json",
+    "sha256": "f04cbb61ac968ea87b97a2af5341354723c103f2ceb3b51c69fb4d6df476b34e"
+  },
+  "predecessor_terminal": {
+    "path": "/Users/keith1117/Documents/TopoLab-data/child-20261125/formal-a1-terminal.json",
+    "sha256": "ac9e3deb7732e426a9251d716c8bb0c080533fa282ae3b8c8d92cbc4da592c37"
+  },
+  "preparation_closure_paths": [
+    "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal/input-preparation-closure-a1.json",
+    "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal-backup/input-preparation-closure-a1.json"
+  ],
+  "preparation_closure_schema": {
+    "execution_identity": "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1",
+    "own_future_return": "NOT_CLAIMED",
+    "required": [
+      "schema",
+      "execution_identity",
+      "source_tree",
+      "public_native_acceptance",
+      "new_input_budget",
+      "status",
+      "own_future_return",
+      "retention_argv",
+      "prior_public",
+      "closeout_verification"
+    ],
+    "retention_actual_stdout": {
+      "closure_paths": [
+        "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal/input-preparation-closure-a1.json",
+        "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal-backup/input-preparation-closure-a1.json"
+      ],
+      "own_future_return": "NOT_CLAIMED",
+      "sha256": "ACTUAL_CLOSURE_SHA256",
+      "status": "REGISTERED_INPUT_PREPARATION_PAIR_RETAINED"
+    },
+    "schema": "topolab.registered-input.preparation-closure.v1",
+    "status": "COMPLETE_SOFTWARE_ONLY"
+  },
+  "preparation_retention_actual_path": "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal/input-preparation-retention-actual-a1.json",
+  "prior_authority": {
+    "path": "docs/planning/child_formal_contract.json",
+    "sha256": "0d20a6c0c16885ac32f25c4aa8cd9de4c704c51655087f2908c4fb38ce8026f3",
+    "status": "Seven historical HELD leases. The immediate predecessor stopped at 5/6 after a late shared-closeout REC persistence return."
+  },
+  "prior_public": {
+    "actual": {
+      "path": "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal/prior-public-certificate-actual.json",
+      "sha256": "46a1f6ae72925c9bf28bb6eb57f7221999b9095d6d6244e220d8a31a573ca72b"
+    },
+    "bundle": {
+      "path": "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal/prior-public-bundle.json",
+      "sha256": "b5ffbe59de881707a2794118470c8c01fdef62e8860b668d91c9b312c3bb8f53"
+    },
+    "identity": "topolab.v2.p17-m2-registered-source-acquisition.staged-20261121.v1",
+    "member_count": 1071,
+    "plan_sha256": "6c72973b963c9ab744458fcc4dc64c2c7b8d7315b2cc75a6b5fd46250a2f4d71",
+    "root": "/private/tmp/topolab-public-staged-input-20261121-a1",
+    "source_main": "259766dbe6ee1598a6100e58fe2b669fd2907841",
+    "source_tree_sha256": "d66a910c78d6abf6ae5df81b0bd9d306ee9350c4b17acaf72580dcaadfffcecb",
+    "version_id": "c9ad14f2ca9c5e4d6859aa22dead7f98ef2ebd8ce8c24debf94ed1b634a8bd73"
+  },
+  "profile": "NEW_REGISTERED_INPUT_WHOLE_4500",
+  "public_certificate_actual_name": "certify-rehearsal-raw-actual-call.json",
+  "public_roots": [],
+  "readiness_freeze_state": "CONDITIONAL_ON_REAL_EXTERNAL_PROOFS",
+  "readiness_path": "/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal/input-activation-readiness-a1.json",
+  "readiness_schema": {
+    "preflight_actual": "Independent original closeout_formal_registered.py preflight return with exact SHA, runtime, stdout and exit.",
+    "required": [
+      "schema",
+      "execution_identity",
+      "actors",
+      "runtime",
+      "published_source_sha256",
+      "new_input_budget",
+      "public_native_acceptance",
+      "public_certificate_actual",
+      "preparation_closure_paths",
+      "preparation_closure_sha256",
+      "preparation_retention_actual",
+      "prior_public",
+      "closeout_verification"
+    ],
+    "schema": "topolab.registered-input.activation-readiness.v1"
+  },
+  "registration": {
+    "formal": {
+      "certificate_paths": [
+        "/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121/formal-metadata-certificate-a1.json",
+        "/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121-backup/formal-metadata-certificate-a1.json"
+      ],
+      "certificate_sha256": "56a7ef886ba8c634eb505004f0498d739c45cafa4bd63d925e424f92811da167",
+      "finalize_actual_path": "/Users/keith1117/Documents/TopoLab-data/metadata-input-acceptance-20261121/metadata-formal-a1/finalize-result-raw-actual-call.json",
+      "finalize_actual_sha256": "c1709f92c3ed9544b49ebe428714e50f2685b1ff95d2d02a340dcdd47b7204b5",
+      "kind": "formal",
+      "metadata_execution_identity": "topolab.v2.p17-binding-certificate-recovery.20261121.v1"
+    }
+  },
+  "registration_identity": "topolab.strict23-preread-registration.v1",
+  "result_seconds": {
+    "exporter": 1800,
+    "independent": 1800
+  },
+  "role_order": [
+    "independent-public-check",
+    "exporter-r0",
+    "independent-r0",
+    "exporter-r1",
+    "independent-r1",
+    "shared-closeout"
+  ],
+  "schema": "topolab.v2.m2-registered-source-acquisition-authority.closeout-20261125.v1",
+  "scope": "One formal graph after verified public closeout chains, released software, prior admission evidence and a new independent preflight.",
+  "source_identity_policy": "topolab.source-identity.prebound-sha256.v1",
+  "version_members_definition": "Registered source input version manifest members, independent of the size of the published software tree.",
+  "whole_attempt_seconds": 4500
+}

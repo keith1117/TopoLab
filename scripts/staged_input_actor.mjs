@@ -55,6 +55,10 @@ const childFormal={
  FORMAL:'/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-child-20261125-a1',
  GLOBAL_START:1795591669520,GLOBAL_END:1795786069520,prefix:'child_formal'
 };
+const closeoutFormal={
+ REPO:'/private/tmp/topolab-closeout-20261125',E:'/Users/keith1117/Documents/TopoLab-data/closeout-20261125-formal',BUDGET:'9afb732330236b115a42621441c5b5e7d019c05ce02d1154cd14902dde64b577',ID:'topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1',PUBLIC:null,
+ FORMAL:'/Users/keith1117/Library/Application Support/TopoLab-custody/p17-m2-closeout-20261125-a1',GLOBAL_START:1795659597213,GLOBAL_END:1795918797213,prefix:'closeout_formal'
+};
 const windowPublicID='topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1';
 const windowPublicRoots=Array.from({length:6},(_,i)=>'/private/tmp/topolab-public-r1-window-20261123-a'+(i+1));
 const staged={REPO,E,ID,BUDGET,PUBLIC,FORMAL,GLOBAL_START,GLOBAL_END,prefix:'staged_input'};
@@ -64,7 +68,7 @@ function routeFor(identity,root){
   return {REPO:windowRepo,E:root+'-evidence',ID:identity,BUDGET:windowBudget,PUBLIC:root,FORMAL:null,
    GLOBAL_START:1795476230895,GLOBAL_END:1795519430895,prefix:'r1_window_public'};
  }
- return [staged,formalOnly,r0Read,catalog,cycle,cycleR1,cycleFiling,windowFormal,certificateFormal,childFormal].find(route=>route.ID===identity)??staged;}
+ return [staged,formalOnly,r0Read,catalog,cycle,cycleR1,cycleFiling,windowFormal,certificateFormal,childFormal,closeoutFormal].find(route=>route.ID===identity)??staged;}
 const ROLES=['independent-public-check','exporter-r0','independent-r0','exporter-r1','independent-r1','shared-closeout'];
 const FULL=[300,300,300,1200,1200,300];
 const need=(condition,reason)=>{if(!condition)throw Error('STAGED_CALLER_STOP: '+reason);};
@@ -72,7 +76,7 @@ const hash=s=>typeof s==='string'&&/^[a-f0-9]{64}$/.test(s);
 const quote=s=>/^[A-Za-z0-9_@%+=:,./-]+$/.test(s)?s:"'"+s.replaceAll("'","'\"'\"'")+"'";
 export const literalCommand=argv=>'exec '+['env','OMP_NUM_THREADS=1','OPENBLAS_NUM_THREADS=1','MKL_NUM_THREADS=1','VECLIB_MAXIMUM_THREADS=1','NUMEXPR_NUM_THREADS=1',...argv].map(quote).join(' ');
 export function initialWait(identity,mode,remaining){
- if([windowPublicID,windowFormal.ID,certificateFormal.ID,childFormal.ID].includes(identity)&&['file','record','bind'].includes(mode))
+ if([windowPublicID,windowFormal.ID,certificateFormal.ID,childFormal.ID,closeoutFormal.ID].includes(identity)&&['file','record','bind'].includes(mode))
   return Math.max(250,Math.min(30000,remaining));
  return 1000;
 }
@@ -83,6 +87,7 @@ export function qualify(config){
  need(config.root===(config.formal?FORMAL:PUBLIC)&&/^[A-Za-z0-9_-]{1,80}$/.test(config.event_prefix),'literal new target/prefix required');
  for(const [key,value] of Object.entries({repo:REPO,evidence_root:E,execution_identity:ID,owner_budget_sha256:BUDGET}))
   need(config[key]===undefined||config[key]===value,'fixed '+key+' differs');
+ if(ID===closeoutFormal.ID)need(config.event_prefix==='closeout-formal-'+config.author,'closeout caller prefix');
  if(ID===childFormal.ID)need(config.event_prefix==='child-formal-'+config.author,'child caller prefix');
  if(ID===certificateFormal.ID)need(config.event_prefix==='certificate-formal-'+config.author,'certificate caller prefix');
  if(ID===windowFormal.ID)need(config.event_prefix==='r1-window-formal-'+config.author,'formal caller prefix');
@@ -123,6 +128,75 @@ export async function dispatchRoleEvents(steps) {
  }
  return steps.bind();
 }
+// Transfer the native REC response as data to an owned single-use worker.
+// The clock covers launch, input, durable paired writes and receipt delivery.
+export async function retainCloseoutRecord({argv, workdir, packet, deadline, invoke, now = Date.now}) {
+  const ready = 'CLOSEOUT_RECEIPT_READY_V1\n';
+  const data = JSON.stringify(packet) + '\n';
+  need(data.length <= 128 * 1024, 'closeout receipt too large');
+  let output = '';
+  let sessionId = null;
+  let calls = 0;
+
+  async function call(tool, args) {
+    need(++calls <= 65 && now() < deadline, 'closeout receipt dispatch deadline');
+    const row = await invoke(tool, args);
+    const delivered = now();
+    need(row && row.tool === tool && JSON.stringify(row.arguments) === JSON.stringify(args)
+      && Number.isSafeInteger(row.requested_ms) && Number.isSafeInteger(row.returned_ms)
+      && row.requested_ms <= row.returned_ms && row.returned_ms <= delivered
+      && delivered <= deadline, 'closeout receipt returned late or lacks original clock');
+
+    const result = row.result;
+    need(result && typeof result.output === 'string' && !result.output.includes('tokens truncated')
+      && !result.output.includes('Warning: truncated output') && (result.original_token_count == null
+      || Number.isInteger(result.original_token_count) && result.original_token_count <= args.max_output_tokens),
+      'incomplete closeout receipt output');
+    output += result.output;
+    need(output.length <= 64 * 1024, 'oversized closeout receipt return');
+    if (result.session_id == null) {
+      need(Number.isInteger(result.exit_code), 'missing closeout terminal status');
+    } else {
+      need(Number.isInteger(result.session_id) && result.exit_code == null
+        && (sessionId === null || result.session_id === sessionId), 'closeout receipt session drift');
+      sessionId = result.session_id;
+    }
+    return result;
+  }
+
+  function send(chars) {
+    const left = deadline - now();
+    need(left >= (chars ? 1 : 5000), 'insufficient closeout receipt window');
+    return call('write_stdin', {
+      session_id: sessionId, chars, yield_time_ms: Math.min(30000, left), max_output_tokens: 3000
+    });
+  }
+
+  const command = literalCommand([...argv, '--deadline-ms', String(deadline)]);
+  let result = await call('exec_command', {
+    cmd: command, workdir, login: false, tty: true, yield_time_ms: 1000, max_output_tokens: 3000
+  });
+  while (result.session_id != null && output !== ready) {
+    need(ready.startsWith(output), 'unexpected closeout receiver handshake');
+    result = await send('');
+  }
+  need(output === ready && result.session_id != null, 'closeout receiver never became ready');
+  result = await send(data);
+  while (result.session_id != null) result = await send('');
+  need(result.exit_code === 0, 'closeout receipt worker did not exit successfully');
+
+  const saved = JSON.parse(output.slice(ready.length));
+  need(saved.status === 'PAIRED_PERSISTED' && hash(saved.sha256)
+    && Number.isSafeInteger(saved.bytes) && saved.bytes > 0
+    && Array.isArray(saved.failures) && saved.failures.length === 0
+    && Array.isArray(saved.copies) && saved.copies.length === 2
+    && typeof saved.path === 'string' && saved.copies[0].path === saved.path
+    && typeof saved.copies[1].path === 'string' && saved.copies[1].path !== saved.path
+    && saved.copies.every(copy => copy.bytes === saved.bytes && copy.sha256 === saved.sha256)
+    && hash(saved.file_intent_sha256) && hash(saved.program_sha256),
+    'closeout receipt copies or ticket differ');
+  return saved;
+}
 export async function executeActor(input,dispatch,now=Date.now){
  const config=qualify(input),raw=[],packets={},observed=[],author=config.author==='producer'?'/root':'/root/full60_independent';
  const {REPO,E,ID,PUBLIC,GLOBAL_START,GLOBAL_END,prefix:scriptPrefix}=routeFor(config.execution_identity,config.root);
@@ -141,7 +215,7 @@ export async function executeActor(input,dispatch,now=Date.now){
   const entry=words[2],mode=words[3];let purpose=null;
   if(native)purpose='执行本轮 '+mode+' '+active.role+'，采集原生 RSS 和完整退出回执';
   else if(config.formal&&entry===control)purpose=mode==='activate-formal'?'核验已发布 GitHub 源码及独立预检并创建本轮正式目标':'写入本轮正式输入的 '+mode+' 控制回执';
-  else if([cycleFiling.ID,windowFormal.ID,certificateFormal.ID,childFormal.ID].includes(ID)&&entry===filer&&mode==='file'){
+  else if([cycleFiling.ID,windowFormal.ID,certificateFormal.ID,childFormal.ID,closeoutFormal.ID].includes(ID)&&entry===filer&&mode==='file'){
    const [role,eventMode,packetHash,intentHash,programHash]=[9,11,15,17,19].map(i=>words[i]);
    const outputs=[role+'-'+eventMode+'-actual-event.json'];
    if(eventMode==='record')outputs.push(role+'-events.json');
@@ -208,13 +282,17 @@ export async function executeActor(input,dispatch,now=Date.now){
     return actual;
    },
    retain:async(mode,actual)=>{
-    const saved=await persist(actual.packet,role+'-'+mode+'-actual');packets[role+'-'+mode]={...saved,packet:actual.packet};
+    const useReceiver=ID===closeoutFormal.ID&&role==='shared-closeout'&&mode==='record'&&successful(actual);
+    const saved=useReceiver
+     ? await retainCloseoutRecord({argv:[PYTHON,'-I',filer,'persist-closeout-record'],workdir:REPO,packet:actual.packet,deadline,invoke,now})
+     : await persist(actual.packet,role+'-'+mode+'-actual');
+    packets[role+'-'+mode]={...saved,packet:actual.packet};
     return saved;
    },
    accept:successful,
    file:async(mode,saved)=>{
     const fileWords=[PYTHON,'-I',filer,'file','--root',config.root,'--plan-sha',plan.plan_sha256,'--role',role,'--event-mode',mode,'--packet',saved.path,'--packet-sha',saved.sha256];
-    if([cycleFiling.ID,windowPublicID,windowFormal.ID,certificateFormal.ID,childFormal.ID].includes(ID)){
+    if([cycleFiling.ID,windowPublicID,windowFormal.ID,certificateFormal.ID,childFormal.ID,closeoutFormal.ID].includes(ID)){
      need(hash(saved.file_intent_sha256)&&hash(saved.program_sha256),'single-use filing evidence missing');
      fileWords.push('--intent-sha',saved.file_intent_sha256,'--program-sha',saved.program_sha256);
     }
@@ -233,7 +311,7 @@ export async function executeActor(input,dispatch,now=Date.now){
   const secondary=[];if(active?.first_failure){if(String(reason)!==active.first_failure)secondary.push({stage:'after first '+active.role,reason:String(reason)});reason=active.first_failure;}
   failureDeadline??=Math.min(now()+180000,GLOBAL_END);
   const failure={schema:'topolab.staged-input-caller-failure.v1',author,event_id:prefix+'-STOP',execution_identity:ID,caller_root:config.root,reason:String(reason),plan,active,observed,
-   ...([r0Read.ID,catalog.ID,cycle.ID,cycleR1.ID,cycleFiling.ID,windowPublicID,windowFormal.ID,certificateFormal.ID,childFormal.ID].includes(ID)?{original_row_count:raw.length,full_rows_custody:'outer actor result'}:{original_rows:raw}),shared_reservation:packets.shared_reservation??'NOT_REQUESTED_BY_THIS_ACTOR',own_future_return:'NOT_CLAIMED'};
+   ...([r0Read.ID,catalog.ID,cycle.ID,cycleR1.ID,cycleFiling.ID,windowPublicID,windowFormal.ID,certificateFormal.ID,childFormal.ID,closeoutFormal.ID].includes(ID)?{original_row_count:raw.length,full_rows_custody:'outer actor result'}:{original_rows:raw}),shared_reservation:packets.shared_reservation??'NOT_REQUESTED_BY_THIS_ACTOR',own_future_return:'NOT_CLAIMED'};
   let saved=null;
   try{saved=await persist(failure,'caller-STOP');}catch(error){secondary.push({stage:'failure packet',reason:String(error)});}
   if(saved&&plan){
@@ -251,7 +329,7 @@ export async function executeActor(input,dispatch,now=Date.now){
   }
   if((!config.formal&&config.author==='independent')||(config.formal&&config.author==='producer')){
    const wholeStart=now();need(wholeStart>=GLOBAL_START&&wholeStart+4500000+7200000<=GLOBAL_END,'new whole4500/result reserve unavailable');
-   if([cycle.ID,cycleR1.ID,cycleFiling.ID,windowFormal.ID,certificateFormal.ID,childFormal.ID].includes(ID)){
+   if([cycle.ID,cycleR1.ID,cycleFiling.ID,windowFormal.ID,certificateFormal.ID,childFormal.ID,closeoutFormal.ID].includes(ID)){
     const note=await command([PYTHON,'-I',filer,'dispatch-note','--root',config.root],{deadline:wholeStart+30000,max:3000});
     need(JSON.parse(note.stdout).status==='COORDINATOR_NOTE_RETAINED','paired launch note missing');
    }
@@ -267,7 +345,7 @@ export async function executeActor(input,dispatch,now=Date.now){
    }
    await get('plan');need(value.plan_sha256===plan.plan_sha256,'initial plan hash differs');
   }else{
-   if([cycleFiling.ID,windowFormal.ID,certificateFormal.ID,childFormal.ID].includes(ID)){
+   if([cycleFiling.ID,windowFormal.ID,certificateFormal.ID,childFormal.ID,closeoutFormal.ID].includes(ID)){
     const entry=await command([PYTHON,'-I',filer,'enter-independent','--root',config.root]);
     need(JSON.parse(entry.stdout).status==='INDEPENDENT_ACTOR_ENTERED','independent caller entry missing');
    }
