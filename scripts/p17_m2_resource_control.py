@@ -301,6 +301,7 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.child-20261125.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.readiness-20261126-a1.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1",
     )
@@ -332,6 +333,7 @@ def invoke(
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.child-20261125.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.readiness-20261126-a1.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1",
     ):
@@ -364,6 +366,7 @@ def invoke(
                 "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
                 "topolab.v2.p17-m2-registered-source-acquisition.child-20261125.v1",
                 "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1",
+                "topolab.v2.p17-m2-registered-source-acquisition.readiness-20261126-a1.v1",
                 "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1"):
             profile = measurement_execution_identity.split(".")[-2]
             input_entry, generation = {
@@ -373,6 +376,8 @@ def invoke(
                 "cycle-20261123-a1": ("cycle_input_control.py", "p17-m2-input-cycle-20261123-a1"),
                 "cycle-20261123-a2": (
                     "cycle_r1_input_control.py", "p17-m2-input-cycle-20261123-a2"),
+                "readiness-20261126-a1": (
+                    "readiness_formal_control.py", "p17-m2-readiness-20261126-a1"),
                 "closeout-20261125": (
                     "closeout_formal_control.py", "p17-m2-closeout-20261125-a1"),
                 "child-20261125": (

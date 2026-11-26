@@ -291,7 +291,8 @@ def source_reader(plan, root, journal=None, **kwargs):
     _, bindings = trusted_registration(plan)
     profiles = control.load("p17_m2_input_continuation")
     label_profiles = (profiles.CYCLE_R1_INPUT, profiles.CYCLE_FILING_INPUT, profiles.WINDOW_FORMAL,
-                      profiles.CERT_FORMAL, profiles.CHILD_FORMAL, profiles.CLOSEOUT_FORMAL)
+                      profiles.CERT_FORMAL, profiles.CHILD_FORMAL, profiles.CLOSEOUT_FORMAL,
+                      profiles.READINESS_FORMAL)
     reader = _RegisteredLabelReader if IDENTITY in label_profiles else _RegisteredReader
     return reader(root, journal, registration=bindings, **kwargs)
 
@@ -351,7 +352,12 @@ def authority(raw=None):
         value.get("new_input_budget") == NEW_BUDGET_REFERENCE,
         "registered new input budget pin differs",
     )
-    if IDENTITY in control.load("p17_m2_input_continuation").FORMAL_ONLY_IDENTITIES:
+    profiles = control.load("p17_m2_input_continuation")
+    if IDENTITY == profiles.READINESS_FORMAL:
+        checker = control.load("p17_m2_source_acquisition_independent")
+        checker._prior_public_module("paired_readiness_independent").require_policy_paths(
+            value, control.CONTINUATION_CONFIG["evidence_root"])
+    if IDENTITY in profiles.FORMAL_ONLY_IDENTITIES:
         need(value.get("public_roots") == []
              and set(value.get("registration", {})) == {"formal"}
              and value.get("ancillary_named_FULL") == {
@@ -663,11 +669,15 @@ def readiness_inputs(policy):
     """Re-audit exact public native and actual outer return; no source/target IO."""
     public_stop_veto()
     checker = control.load("p17_m2_source_acquisition_independent")
-    raw = checker.native._software_bytes(Path(policy["readiness_path"]))
+    tree = control.source_freeze(IDENTITY)
+    if "readiness_paths" in policy:
+        paired = checker._prior_public_module("paired_readiness_independent")
+        raw, copies, prepared_end = paired.capture(
+            policy, tree, PROTOCOL, REPO, Path(control.CONTINUATION_CONFIG["evidence_root"]))
+    else:
+        raw = checker.native._software_bytes(Path(policy["readiness_path"]))
     ready = producer.parse(raw)
-    frozen = {
-        key: digest for key, digest in control.source_freeze(IDENTITY).items() if key != PROTOCOL
-    }
+    frozen = {key: digest for key, digest in tree.items() if key != PROTOCOL}
     runtime = control.base().runtime()
     need(
         ready.get("schema") == "topolab.registered-input.activation-readiness.v1"
@@ -766,6 +776,10 @@ def readiness_inputs(policy):
         and last <= retained_first <= retained_last <= policy["global_deadline_ms"],
         "registered actual pair retention return/stdout/chronology differs",
     )
+    if "readiness_paths" in policy:
+        need(retained_last <= prepared_end, "readiness preparation chronology differs")
+        ready["_paired_readiness"] = copies
+        retained_last = prepared_end
     ready["_preparation_actual_returned_ms"] = retained_last
     return ready, producer.sha(raw)
 
@@ -773,6 +787,7 @@ def readiness_inputs(policy):
 def preflight_summary(policy, ready, digest):
     spec = control.load("p17_m2_input_continuation").PROOF_MODULES.get(IDENTITY)
     return {
+        **({"paired_readiness": ready["_paired_readiness"]} if "readiness_paths" in policy else {}),
         **({spec[0]: ready[spec[0]]} if spec else {}),
         "status": "PASS_REGISTERED_INPUT_METADATA_PREFLIGHT",
         "execution_identity": IDENTITY,
@@ -816,6 +831,12 @@ def publication_readiness(value):
     ready, digest = readiness_inputs(policy)
     checker = control.load("p17_m2_source_acquisition_independent")
     raw = checker.native._software_bytes(Path(policy["independent_preflight_actual_path"]))
+    if "readiness_paths" in policy:
+        paired = checker._prior_public_module("paired_readiness_independent")
+        need(paired.audit_dispatch(policy, ready["source_tree"], PROTOCOL, REPO, CLI_ENTRY,
+                                   control.CONTINUATION_CONFIG["evidence_root"])
+             == producer.sha(raw),
+             "formal activation requires the paired original independent preflight")
     actual = producer.parse(raw)
     argv = [
         control.base().runtime()["python"],

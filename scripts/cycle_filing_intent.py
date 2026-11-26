@@ -122,6 +122,14 @@ def entry_value(wire, builder, actor):
     config = artifact["config"]
     protocol = getattr(wire, "protocol", "docs/planning/input_cycle_a3_contract.json")
     contract = json.loads((wire.RUNTIME_REPO / protocol).read_bytes())
+    if "readiness_paths" in contract:
+        wire.need(ready.get("readiness_paths") == contract["readiness_paths"]
+                  == [str(root / "input-activation-readiness-a1.json")
+                      for root in (wire.EVIDENCE, wire.BACKUP)]
+                  and ready.get("target") == wire.FORMAL
+                  and config.get("readiness_sha256") == ready_sha
+                  and config.get("preflight_actual_sha256") == preflight_sha,
+                  "current formal entry readiness pair or preflight binding differs")
     reg = contract["registration"]["formal"]
     wire.need(
         config["formal"] is True
@@ -343,7 +351,11 @@ def dispatch(wire, sibling, argv):
         wire.need(argv == [mode, "--root", graph_root(wire)], "wrong actor entry path")
         actor = "independent" if mode == "enter-independent" else "producer"
         wire.need(not either(wire, wire.stop_path(graph_root(wire)).name), "closed graph")
-        entry = entry_value(wire, sibling("build_staged_input_caller"), actor)
+        builder = sibling("build_staged_input_caller")
+        entry = entry_value(wire, builder, actor)
+        if hasattr(wire, "audit_readiness_dispatch"):
+            wire.need(wire.audit_readiness_dispatch() == entry["preflight_sha256"],
+                      "independent preflight changed at actor entry")
         exclusive_pair(wire, entry_name(actor, wire), entry)
         if mode == "enter-public-producer":
             print(wire.canonical(dict(status="PUBLIC_PRODUCER_ENTERED")).decode(), end="")

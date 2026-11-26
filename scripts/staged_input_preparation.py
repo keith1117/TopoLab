@@ -9,6 +9,7 @@ import argparse
 import hashlib
 import os
 import runpy
+import stat
 import sys
 import time
 from pathlib import Path
@@ -64,6 +65,39 @@ def public_proof(subject, policy):
         {"path": str(cert_path), "sha256": producer.sha(packet)},
         last,
     )
+
+
+def readiness_copy(subject, path, written, expected):
+    """Reopen the closed file and bind its returned bytes to the exclusive write."""
+    base = subject.control.base()
+    parent = base.nofollow_directory(path.parent)
+    try:
+        flags = os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW
+        with os.fdopen(os.open(path.name, flags, dir_fd=parent), "rb") as stream:
+            opened = os.fstat(stream.fileno())
+            subject.need(
+                stat.S_ISREG(opened.st_mode) and stat.S_IMODE(opened.st_mode) == 0o600
+                and opened.st_uid == os.geteuid() and opened.st_nlink == 1
+                and opened.st_size == len(expected) and base.physical(opened) == written,
+                "readiness readback differs from the exclusive write",
+            )
+            raw = stream.read(len(expected) + 1)
+            last = os.fstat(stream.fileno())
+        closing_parent = base.nofollow_directory(path.parent)
+        try:
+            named = os.stat(path.name, dir_fd=closing_parent, follow_symlinks=False)
+        finally:
+            os.close(closing_parent)
+    finally:
+        os.close(parent)
+    fields = (*written, "st_uid", "st_mode", "st_nlink")
+    identity = {key: getattr(opened, key) for key in fields}
+    subject.need(
+        raw == expected and all(getattr(last, key) == getattr(named, key) == value
+                                for key, value in identity.items()),
+        "readiness file changed during readback",
+    )
+    return {"path": str(path), "sha256": subject.producer.sha(raw), **identity}
 
 
 def prepare(subject, mode, *, entry=ENTRY):
@@ -158,6 +192,32 @@ def prepare(subject, mode, *, entry=ENTRY):
                      "read verification after retain")
         ready[proof_spec[0]] = verification
     within_budget()
+    if "readiness_paths" in policy:
+        copies = policy["readiness_paths"]
+        subject.need(
+            isinstance(copies, list) and len(copies) == 2 and copies[0] == policy["readiness_path"]
+            and copies[0] != copies[1] and all(
+                isinstance(name, str) and Path(name).is_absolute() and str(Path(name)) == name
+                and ".." not in Path(name).parts for name in copies),
+            "two distinct absolute readiness paths required",
+        )
+        contract = subject.authority_raw()
+        contract_sha = producer.sha(contract)
+        subject.need(producer.parse(contract) == policy and tree[subject.PROTOCOL] == contract_sha,
+                     "readiness contract differs from frozen software")
+        ready.update(contract_sha256=contract_sha, source_tree=tree, readiness_paths=copies,
+                     target=policy["fixed_target"]["attempts"]["1"]["generation"])
+        expected = producer.canonical(ready)
+        written = []
+        for name in copies:
+            within_budget()
+            written.append(base.put(Path(name), ready))
+        records = [readiness_copy(subject, Path(name), identity, expected)
+                   for name, identity in zip(copies, written, strict=True)]
+        subject.need(len({(r["st_dev"], r["st_ino"]) for r in records}) == 2,
+                     "readiness copies share a physical file")
+        within_budget()
+        return {"path": copies[0], "sha256": producer.sha(expected), "readiness_copies": records}
     base.put(Path(policy["readiness_path"]), ready)
     return {"path": policy["readiness_path"], "sha256": producer.sha(producer.canonical(ready))}
 

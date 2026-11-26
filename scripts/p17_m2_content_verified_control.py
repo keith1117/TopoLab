@@ -770,6 +770,7 @@ def _content_step(root, plan, role, readers, *, adapter=None):
             "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
             "topolab.v2.p17-m2-registered-source-acquisition.child-20261125.v1",
             "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1",
+            "topolab.v2.p17-m2-registered-source-acquisition.readiness-20261126-a1.v1",
             "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1",
         )
         timings = {} if capture else None
@@ -1342,6 +1343,7 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.child-20261125.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.readiness-20261126-a1.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1"):
         reserve_shared()
@@ -1378,6 +1380,7 @@ def supervise(root, plan, plan_sha, role, *, adapter=None):
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-20261123.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.child-20261125.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.closeout-20261125.v1",
+        "topolab.v2.p17-m2-registered-source-acquisition.readiness-20261126-a1.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.certificate-20261124.v1",
         "topolab.v2.p17-m2-registered-source-acquisition.r1-window-public-20261123.v1")
     if new_whole:

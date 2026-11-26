@@ -119,3 +119,36 @@ closeout_receipt.serve(persist, int(sys.argv[4]))
     for clock in ("monotonic_us", "utc_us"):
         stamps = [times[key][clock] for key in keys]
         assert stamps == sorted(stamps)
+
+
+
+def test_paired_readiness_profile_keeps_shared_rec_transport_and_original_clock():
+    contract = json.loads((REPO / "docs/planning/readiness_formal_contract.json").read_bytes())
+    source = """
+import assert from 'node:assert/strict';
+import {initialWait, qualify, useCloseoutReceiver} from './scripts/staged_input_actor.mjs';
+const policy=JSON.parse(process.argv[1]), id=policy.execution_identity;
+const target=policy.fixed_target.attempts['1'].generation;
+const pin=policy.registration.formal;
+const config=qualify({formal:true,author:'independent',event_prefix:'readiness-formal-independent',
+  root:target,execution_identity:id,registration_certificate_sha:pin.certificate_sha256,
+  formal_registration_certificate_sha:pin.certificate_sha256,
+  registration_finalize_actual_sha:pin.finalize_actual_sha256,
+  formal_registration_finalize_actual_sha:pin.finalize_actual_sha256});
+assert.equal(config.owner_budget_sha256,policy.new_input_budget.sha256);
+const root = policy.readiness_path.slice(0,policy.readiness_path.lastIndexOf('/'));
+assert.equal(config.evidence_root,root);
+for(const role of policy.role_order){
+ for(const mode of ['supervise','record','bind']){
+  assert.equal(useCloseoutReceiver(id,role,mode,true),role==='shared-closeout' && mode==='record');
+  assert.equal(useCloseoutReceiver(id,role,mode,false),false);
+ }
+}
+assert.equal(initialWait(id,'bind',419),419);
+assert.equal(initialWait(id,'file',50000),30000);
+assert.throws(()=>qualify({...config,root:target+'-unregistered'}));
+"""
+    subprocess.run(
+        ["node", "--input-type=module", "-e", source, json.dumps(contract)],
+        cwd=REPO, check=True, timeout=15,
+    )
