@@ -1,5 +1,7 @@
 # TopoLab v2 Development Roadmap
 
+**R4 passed formal B and stopped before scientific production.** Platform approval denied the first C reservation after publication on `3378cede`. Resolution of the authority conflict precedes another formal attempt. C acceptance and fresh H/17 confirmation remain open. [Terminal evidence and accounting](../validation/native_c_reservation_approval_stop.md)
+
 **R4 passed independent source review.** The public candidate preserved the complete controller journal and correctly reported row failures. Its next gates are the protected release, exact-merge independent admission, a fresh empirical B and the fixed exposed C panel. New physical cases open only after full C acceptance. [R4 evidence](../validation/native_c_journal_receipt.md) · [Round contract](native_c_journal_return.md)
 
 **The C producer filed 18 references and 342 queries.** Formal B passed at `292bf9cf`. The caller stopped preparing its controller receipt, leaving the independent numerical gate open. The authorized successor requires a public repair, exact-merge review and its own formal B. Fresh H/17 confirmation remains conditional on complete C acceptance. [R3 terminal evidence](../validation/native_c_producer_journal_stop.md) · [Execution contract](native_c_row_return_authorization.md)

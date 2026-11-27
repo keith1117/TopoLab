@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-27 UTC — R4 formal B passed and approval stopped C reservation
+
+The independent reviewer verified the original single B return on the exact merge. C completed publication, then received an approval refusal before the producer reservation helper started. The formal ledger booked 360 FULL seconds and closed the unstarted producer and auditor allowances. [R4 terminal report](validation/native_c_reservation_approval_stop.md)
+
 ## 2026-11-27 UTC — Long C controller replies and cold resource verification
 
 R4 preserved each controller tool return in a bounded journal. The first public candidate exceeded its helper timeout. The second passed independent source review after cold-process measurement and public positive and failure tests. [Evidence](validation/native_c_journal_receipt.md)
