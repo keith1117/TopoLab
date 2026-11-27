@@ -461,6 +461,9 @@ def released_fixture(proof, monkeypatch):
                   child_released_paths=dict(package=str(proof.FORMAL / proof.RELEASED_PACKAGE),
                                             actual=str(proof.FORMAL / proof.RELEASED_ACTUAL)),
                   actors=dict(executor="/root", independent=proof.AUTHOR))
+    # The released packet's last synthetic response arrives at START + 12 seconds.
+    fixture_now_ns = (proof.START + 13_000) * 10**6
+    monkeypatch.setattr(proof, "time", SimpleNamespace(time_ns=lambda: fixture_now_ns))
     policy_raw = proof.canonical(policy)
     tree[proof.PROTOCOL] = proof.sha(policy_raw)
     child_report["authority_sha256"] = tree[proof.PROTOCOL]
@@ -549,6 +552,13 @@ def test_released_entry_replays_two_original_checks_without_recursive_readiness(
     result = proof.require_released(policy)
     assert result["source_main"] == report["source_main"]
     assert result["verified_returned_ms"] == actual["responses"][0]["returned_ms"]
+
+
+def test_released_entry_rejects_expired_activation(proof, monkeypatch):
+    policy, *_ = released_fixture(proof, monkeypatch)
+    monkeypatch.setattr(proof, "time", SimpleNamespace(time_ns=lambda: (proof.END + 1) * 10**6))
+    with pytest.raises(ValueError, match="released activation policy/deadline differs"):
+        proof.require_released(policy)
 
 
 @pytest.mark.parametrize("damage", ["exit", "actor", "late", "source", "tree", "context",
