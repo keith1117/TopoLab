@@ -2,6 +2,10 @@
 
 Updated 2026-11-27 UTC. **Full v2 remains open.** Uniform remains the default and fixed P/17 is unrepaired.
 
+## R4 formal B passed and C stopped at producer reservation
+
+On protected commit `3378cede`, formal B passed with a measured charge of 65.498 seconds. C publication returned 0. Platform review then denied the producer reservation before process creation, citing the session's exhausted formal-quota and R1 instructions. R4 recorded zero scientific reads, rows, independent numerical dispatches and new leases. The contract booked 360 FULL seconds and closed 14,400 unused. The cumulative known floor is **451,899 FULL seconds**, plus unpriced costs. Further formal work awaits resolution of the approval conflict. H/17 fresh confirmation remains conditional on a complete C pass. [Original returns, authority context and ledger](validation/native_c_reservation_approval_stop.md)
+
 ## R4 controller receipt passed independent source review
 
 The reviewed caller reconstructed all 217 genuine replies from the stopped R3 controller. The second candidate passed three public write and failure cases. The reviewer checked 596 files against both archives and verified the 445-file software freeze. Formal admission requires four passing PR checks, four on the exact merge, independent release there and a fresh B. The entering ledger is 451,539 known FULL seconds plus historical unpriced costs. [Public results](validation/native_c_journal_receipt.md) · [Execution contract](planning/native_c_journal_return.md)
