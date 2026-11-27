@@ -132,11 +132,14 @@ def read_native_log(path, cap=4 * 1024**2):
         raise
 
 
-def observe_native(contract, contract_sha, role, label):
+def observe_native(contract, contract_sha, role, label, *, clock_watcher=None):
     """Close one registered native timer; caller closes this dispatcher's exit."""
     resource, _ = native_helpers()
     role_spec = contract["roles"][role]
-    if label in ("reservation", "reader-ack"):
+    if clock_watcher is not None:
+        spec = clock_watcher.spec
+        argv = resolved_argv(spec["argv"], contract_sha)
+    elif label in ("reservation", "reader-ack"):
         spec = contract["shared_helpers"][role][label]
         argv = resolved_argv(spec["argv"], contract_sha)
     else:
@@ -199,6 +202,8 @@ def observe_native(contract, contract_sha, role, label):
                 os.set_blocking(child.stdout.fileno(), False)
                 captured = 0
                 while True:
+                    if clock_watcher is not None:
+                        clock_watcher.sample(resource, child, began)
                     try:
                         chunk = os.read(child.stdout.fileno(), 65536)
                     except BlockingIOError:
@@ -464,21 +469,45 @@ def source_manifest():
     return {name: sha((REPO / name).read_bytes()) for name in names.decode().split("\0") if name}
 
 
-def read_contract(path, expected_sha, *, payload_role=None, publication_check=False):
+def read_contract(path, expected_sha, *, payload_role=None, publication_check=False,
+                  independent_release=False):
     """Recheck SHA-bound bytes; Git eligibility belongs to publication metadata."""
     allowed = {
         REPO / "docs/planning/p17_m2_scientific_execution_protocol.json",
         REPO / "docs/planning/p17_m2_scientific_remedy_execution_protocol.json",
     }
     path = Path(os.path.abspath(path))
-    if path not in allowed:
+    entry_paths = load("native_bc_paths")
+    public_path = bool(entry_paths.is_public_contract_path(path))
+    if path not in allowed and not public_path:
         raise ValueError("UNREGISTERED_SCIENTIFIC_CONTRACT")
     checker = load("p17_m2_source_acquisition_independent")
     raw = checker.native._software_bytes(path)
     if sha(raw) != expected_sha:
         raise ValueError("SCIENTIFIC_CONTRACT_HASH_CHANGED")
     value = checker.native.base.parse(raw)
-    if publication_check:
+    if public_path or value.get("entry_repair") == entry_paths.IDENTITY:
+        root = value["api_metadata"]["root"]
+        is_public = entry_paths.scope(root) == "ENGINEERING_PUBLIC"
+        if (is_public != public_path or value.get("public_fixture_only") is not is_public
+                or value.get("entry_repair") != entry_paths.IDENTITY
+                or (public_path and path != entry_paths.public_contract_path(root))
+                or (not public_path and path != REPO / "docs/planning"
+                    / "p17_m2_scientific_execution_protocol.json")
+                or value["acquisition"]["plan_sha256"] != entry_paths.PLAN
+                or value["acquisition"]["version_id"] != entry_paths.VERSION):
+            raise ValueError("registered post-B1 scope, path or input identity differs")
+    # The independent release checker compares the committed contract and full
+    # tracked inventory once on M. Paid entries rehash that authenticated list
+    # in check_contract and recheck M and the original release in publication_metadata.
+    # No Git child runs inside a post-B1 measured publication.
+    check_git = publication_check and (
+        independent_release or value.get("entry_repair") != entry_paths.IDENTITY
+    )
+    if check_git and public_path:
+        if value["source_freeze"] != source_manifest():
+            raise ValueError("complete public candidate source freeze required")
+    elif check_git:
         committed = subprocess.run(
             ["git", "show", "HEAD:" + str(path.relative_to(REPO))],
             cwd=REPO,
@@ -652,7 +681,7 @@ def bind_exit(root, label, role, contract_sha, observed_exit):
     return result
 
 
-def load_role_evidence(contract, role):
+def load_role_evidence(contract, role, *, b_prefix_only=False):
     """Replay only finite NEW registered role files; never original sources."""
     root = Path(contract["roles"][role]["root"])
     reader = load("p17_m2_input_export_independent").OnceReader(
@@ -720,7 +749,33 @@ def load_role_evidence(contract, role):
         payload = load("p17_m2_input_export").parse(cases[0]["log"])
         rows = payload["result"]["attempted_rows"]
         inner_charge = payload["result"]["internal_row_charge_seconds"]
+    b_clock = {}
+    if (role == "resource-preflight"
+            and contract.get("entry_repair") == "native-bc-entry-20261126-r2"):
+        evidence_root = Path(contract["api_metadata"]["root"])
+        outer = load("p17_m2_input_export_independent").OnceReader(
+            evidence_root, 12, 32 * 1024**2, source_identity_checks=True
+        )
+        def registered(path, cap=1024**2):
+            return outer.read(str(Path(path).relative_to(evidence_root)), cap)
+        spec = contract["roles"][role]
+        b_clock = {
+            "b_start": outer.read("B-clock-start.json", 4096),
+            "b_manifest": registered(contract["api_metadata"]["manifests"]["B"], 16 * 1024**2),
+            "b_js_prefix": outer.read("B-js-prefix.json", 65536),
+            "b_publication_raw": registered(spec["publication_readiness_path"]),
+            "b_publication_event": json.loads(registered(spec["publication_return_path"])),
+            "b_publication_profile": registered(spec["publication_profile_path"]),
+            "b_publication_resource": registered(
+                spec["publication_profile_path"] + ".resource.json", 4 * 1024**2
+            ),
+        }
+        if not b_prefix_only:
+            b_clock["b_return"] = outer.read("B-clock-return.json", 1024**2)
+            b_clock["b_verify_profile"] = outer.read("B-verify.time", 1024**2)
+            b_clock["b_verify_resource"] = outer.read("B-verify.time.resource.json", 4 * 1024**2)
     return {
+        **b_clock,
         "execution_identity": IDENTITY,
         "scientific_contract_sha256": sha(canonical(contract)),
         "role": role,
@@ -771,9 +826,61 @@ def check_reader_ack_return(contract, role):
     )
 
 
+def repaired_publication(contract, contract_sha, role, *, actual_entry):
+    paths = load("native_bc_paths")
+    history = load("scientific_b1_history")
+    release = load("scientific_publication")
+    read = load("p17_m2_source_acquisition_independent").native._software_bytes
+    acquisition = contract["acquisition"]
+    required = ("native_bc_paths", "scientific_b1_history", "scientific_publication",
+                "scientific_entry_release")
+    for name in required:
+        relative = f"scripts/{name}.py"
+        if contract["source_freeze"].get(relative) != sha(read(REPO / relative)):
+            raise ValueError("SCIENTIFIC_PUBLICATION_HELPER_FREEZE_REQUIRED")
+    if contract["historical_issuer_commit"] != history.COMMIT:
+        raise ValueError("SEPARATE_HISTORICAL_ISSUANCE_COMMIT_REQUIRED")
+    if actual_entry:
+        timed = contract["roles"][role]["publication_timed_argv"]
+        if (timed[:3] != ["/usr/bin/time", "-l", "-o"]
+                or sys.orig_argv != startup_argv(timed[4:], contract_sha, contract["runtime"])):
+            raise ValueError("ACTUAL_ISOLATED_SCIENTIFIC_PUBLICATION_COMMAND_REQUIRED")
+    current = release.checked_release(
+        contract, contract_sha, role, release.checkout_head(REPO, read),
+        paths, read_native_log, sha(canonical(contract["source_freeze"])),
+    )
+    if current["scope"] == "PROTECTED_MAIN":
+        current["independent_release"] = load("scientific_entry_release").check_independent(
+            contract, contract_sha, current["main"], current["release_sha256"]
+        )
+    current["historical_issuance"] = history.inspect(
+        acquisition["plan_sha256"], acquisition["version_id"]
+    )
+    return current
+
+
 def publication_metadata(contract, contract_sha, role):
     """Separately billed repository eligibility; no scientific inputs or leases."""
     began = time.time()
+    if contract.get("entry_repair") == "native-bc-entry-20261126-r2":
+        readiness = repaired_publication(contract, contract_sha, role, actual_entry=True)
+    else:
+        readiness = legacy_publication_readiness(contract)
+    return {
+        "execution_identity": IDENTITY,
+        "scientific_contract_sha256": contract_sha,
+        "role": role,
+        "metadata_only": True,
+        "publication_readiness": readiness,
+        "source_freeze_sha256": sha(canonical(contract["source_freeze"])),
+        "runtime_sha256": sha(canonical(scientific_runtime())),
+        "start_seconds": began,
+        "end_seconds": time.time(),
+        "own_future_exit": "UNKNOWN_PENDING_ACTUAL_PUBLICATION_TOOL_RETURN",
+    }
+
+
+def legacy_publication_readiness(contract):
     control = load("p17_m2_source_acquisition_control")
     authority_raw = control.FUNDED_AUTHORITY_RAW
     registered_authority = None
@@ -805,22 +912,10 @@ def publication_metadata(contract, contract_sha, role):
                     or declared["content_root"] != content):
                 raise ValueError("REGISTERED_SCIENTIFIC_ACQUISITION_REQUIRED")
     authority = control.load("p17_m2_input_export").parse(authority_raw)
-    readiness = (
+    return (
         registered_authority.publication_readiness(authority)
         if registered_authority is not None else control.activation_readiness(authority)
     )
-    return {
-        "execution_identity": IDENTITY,
-        "scientific_contract_sha256": contract_sha,
-        "role": role,
-        "metadata_only": True,
-        "publication_readiness": readiness,
-        "source_freeze_sha256": sha(canonical(contract["source_freeze"])),
-        "runtime_sha256": sha(canonical(scientific_runtime())),
-        "start_seconds": began,
-        "end_seconds": time.time(),
-        "own_future_exit": "UNKNOWN_PENDING_ACTUAL_PUBLICATION_TOOL_RETURN",
-    }
 
 
 def checked_publication_metadata(contract, contract_sha, role):
@@ -829,17 +924,12 @@ def checked_publication_metadata(contract, contract_sha, role):
     raw = read(Path(spec["publication_readiness_path"]))
     proof = json.loads(raw)
     event = json.loads(read(Path(spec["publication_return_path"])))
-    head = read(REPO / ".git/HEAD").decode().strip()
-    if head.startswith("ref: refs/heads/"):
-        ref = head.removeprefix("ref: ")
-        try:
-            head = read(REPO / ".git" / ref).decode().strip()
-        except FileNotFoundError:
-            packed = read(REPO / ".git/packed-refs").decode().splitlines()
-            matches = [line.split()[0] for line in packed if line.endswith(" " + ref)]
-            if len(matches) != 1:
-                raise ValueError("ACTUAL_PUBLICATION_HEAD_UNAVAILABLE") from None
-            head = matches[0]
+    head = load("scientific_publication").checkout_head(REPO, read)
+    if contract.get("entry_repair") == "native-bc-entry-20261126-r2":
+        if proof.get("publication_readiness") != repaired_publication(
+            contract, contract_sha, role, actual_entry=False
+        ):
+            raise ValueError("MISMATCHED_SCIENTIFIC_RELEASE_OR_HISTORICAL_ISSUANCE")
     if (
         proof.get("execution_identity") != IDENTITY
         or proof.get("role") != role
@@ -865,6 +955,11 @@ def checked_publication_metadata(contract, contract_sha, role):
 
 
 def acquisition_certificate(contract):
+    if contract.get("entry_repair") == "native-bc-entry-20261126-r2":
+        item = contract["acquisition"]
+        return load("scientific_b1_history").verify_certificate(
+            item["plan_sha256"], item["version_id"]
+        )
     control = load("p17_m2_source_acquisition_control")
     root = Path(contract["acquisition"]["content_root"]).parent
     raw = control.base().read_json(root / "accepted-acquisition-bundle.json")

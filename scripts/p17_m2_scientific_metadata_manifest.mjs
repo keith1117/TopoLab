@@ -1,5 +1,6 @@
 // One action's bounded metadata inventory. No scans, subprocess or scientific input IO.
 import * as fs from 'node:fs/promises';
+import {entryRoot} from './native_bc_paths.mjs';
 import {constants as flags} from 'node:fs';
 import * as crypto from 'node:crypto';
 const hash=raw=>crypto.createHash('sha256').update(raw).digest('hex');
@@ -41,6 +42,8 @@ export async function buildMetadataManifest({contractPath,contractSHA256,scope,o
   const contract=observer.lossless(contractRaw,true).value;
   need(contract.schema==='topolab.v2.m2-scientific-contract.v1','metadata contract schema');
   need(!publicFixturePolicy||contract.public_fixture_only===true,'formal metadata policy override forbidden');
+  const r2=contract.entry_repair==='native-bc-entry-20261126-r2';
+  need(!r2||!publicFixturePolicy,'post-B1 manifest policy is frozen');
   stage='policy';const policy=publicFixturePolicy??contract.api_metadata,limits=policy?.limits;
   need(policy?.schema==='topolab.v2.m2-api-metadata-policy.v1'&&policy.sample_interval_seconds===0.5,'metadata policy');
   const ceilings={max_files:65536,max_total_bytes:512*1024**2,max_record_bytes:128*1024**2,max_log_bytes:4*1024**2,max_profile_bytes:1024**2,max_manifest_bytes:16*1024**2,max_contract_bytes:4*1024**2};
@@ -48,11 +51,21 @@ export async function buildMetadataManifest({contractPath,contractSHA256,scope,o
   need(contractRaw.length<=limits.max_contract_bytes,'contract byte cap');
   activeLimits=limits;need(cache.size+1<=limits.max_files&&total<=limits.max_total_bytes,'metadata active policy bootstrap bounds');
   const root=policy.root,manifestPath=policy.manifests?.[scope];
-  need(typeof root==='string'&&['/private/tmp/topolab-funded-continuation-20261026','/private/tmp/topolab-new-source-science-20261028'].some(parent=>root===parent||root.startsWith(parent+'/')),'NEW metadata root');
+  need(typeof root==='string'&&(r2 ? entryRoot(root,contract.public_fixture_only) : ['/private/tmp/topolab-funded-continuation-20261026','/private/tmp/topolab-new-source-science-20261028'].some(parent=>root===parent||root.startsWith(parent+'/'))),'NEW metadata root');
   need(typeof manifestPath==='string'&&manifestPath.startsWith(root+'/')&&!manifestPath.split('/').slice(1).some(x=>!x||x==='.'||x==='..'),'registered literal manifest output');
   const wanted=new Map();
   const add=(p,cap)=>{need(typeof p==='string'&&p.startsWith(root+'/')&&!p.split('/').some(x=>x==='..'||x==='.'),'metadata path escaped root');need(!wanted.has(p)||wanted.get(p)===cap,'metadata path cap conflict');wanted.set(p,cap);};
   stage='contract-namespace';
+  if(r2) {
+    add(root+'/B-clock-start.json',limits.max_record_bytes);
+    if(scope==='FINAL'){
+      for(const name of ['C-clock-start.json','B-js-prefix.json','B-clock-return.json'])
+        add(root+'/'+name,limits.max_record_bytes);
+      add(root+'/B-verify.time',limits.max_profile_bytes);
+      add(root+'/B-verify.time.resource.json',limits.max_record_bytes);
+      add(root+'/B-metadata-manifest.json',limits.max_manifest_bytes);
+    }
+  }
   for(const role of scope==='B'?['resource-preflight']:['resource-preflight','scientific-producer','scientific-auditor']) {
     const spec=contract.roles[role],r=spec.root;
     for(const label of ['reservation','controller','binder','verifier','final-observer',...(role==='resource-preflight'?[]:['reader-ack'])]) {
@@ -61,7 +74,11 @@ export async function buildMetadataManifest({contractPath,contractSHA256,scope,o
       add(item.profile_path,limits.max_profile_bytes);add(item.log_path,limits.max_log_bytes);add(r+'/'+label+'-return.json',limits.max_record_bytes);
     }
     for(const name of ['quota-pending.json','controller-summary.json','case-spans.json','controller-exit.json','binder-exit.json','verifier-exit.json'])add(r+'/'+name,limits.max_record_bytes);
-    if(contract.public_fixture_only!==true){add(r+'/trusted-returns.json',limits.max_record_bytes);add(spec.publication_readiness_path,limits.max_record_bytes);add(spec.publication_return_path,limits.max_record_bytes);}
+    if(r2){
+      add(spec.publication_profile_path,limits.max_profile_bytes);
+      add(spec.publication_profile_path+'.resource.json',limits.max_record_bytes);
+    }
+    if(r2||contract.public_fixture_only!==true){add(r+'/trusted-returns.json',limits.max_record_bytes);add(spec.publication_readiness_path,limits.max_record_bytes);add(spec.publication_return_path,limits.max_record_bytes);}
     for(const start of spec.inner_starts) {
       need(/^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$/.test(start.name)&&Number.isSafeInteger(start.timeout_seconds)&&start.timeout_seconds>0&&start.timeout_seconds<=spec.FULL_seconds,'registered inner start');
       const base=r+(role==='resource-preflight'?'/controls/':'/native/')+start.name;

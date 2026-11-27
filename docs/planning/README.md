@@ -1,5 +1,7 @@
 # Planning index
 
+The owner authorized one native B preflight and a conditional fixed C panel on the certified B1 version. The contract gives B 180 FULL seconds through the caller receipt and assigns three separate caps to C. [Authorized stages and stop rules](b1_native_bc_entry_repair_authorization.md)
+
 The shared-closeout recovery contract funded public diagnostics and a single conditional formal attempt. The public binding returned on time twice. Formal entry stopped on the missing readiness peer. [Contract](closeout_input_recovery.md) · [Result](../validation/formal_input_closeout_return.md)
 
 [First-role recovery contract](first_role_child_recovery.md) capped public fixtures at 18 and formal input at one graph. The attempt stopped at shared closeout. [Result](../validation/formal_input_closeout_stop.md)

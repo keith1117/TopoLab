@@ -147,3 +147,54 @@ test('bound-host aggregate policy stops before reading a member that exceeds it'
   const f=await boundFixture({mutateLimits:v=>v.max_total_bytes=4096});assert.ok(f.raw.length<4096);
   await assert.rejects(buildMetadataManifest({...f,scope:'B',observer}),error=>{const x=error.metadata_manifest_failure;assert.match(error.message,/metadata identity\/byte bound/);assert.ok(x.metadata_bytes_read<=4096);assert.ok(x.metadata_files_read>1);assert.equal(x.evidence.returned_bytes,0);assert.ok(x.evidence.before);assert.ok(x.evidence.closing);return true;});
 });
+
+test('caller rejects oversized and linked controls before any content read',async()=>{
+  const base=await fs.realpath(await fs.mkdtemp(path.join(os.tmpdir(),'topolab-caller-control-')));
+  try {
+    const file=path.join(base,'public.json'),link=path.join(base,'link.json');
+    await fs.writeFile(file,'12345678');
+    await fs.symlink(file,link);
+    observer.configure(crypto);
+    const {constants}=await import('node:fs');
+    for(const [name,cap] of [[file,7],[link,8]]){
+      await assert.rejects(observer.readCallerControl({fs,constants},name,cap),e=>{
+        assert.equal(e.metadata_evidence.returned_bytes,0);return true;
+      });
+    }
+    assert.equal(String(await observer.readCallerControl({fs,constants},file,8)),'12345678');
+  } finally {await fs.rm(base,{recursive:true,force:true});}
+});
+
+test('API exceptions retain the pending request and previously observed live session',async()=>{
+  const source=await fs.readFile(new URL('../scripts/native_bc_api_driver.js',import.meta.url),'utf8');
+  const run=new Function(source+'\nreturn nativeBCDispatch')();
+  for(const initial of [true,false]){
+    const journal=[];
+    let stopped=false;
+    const configured={repo:'/public',path:'/public/contract',digest:'0'.repeat(64),role,
+      author:'/root',release:{scope:'ENGINEERING_PUBLIC'},justification:'公开'};
+    const tools={
+      mcp__node_repl__js:async({code})=>{
+        if(code.includes('bcMod.journal')){
+          const match=code.match(/bcMod\.journal\(bcS,(.*)\)\)\)$/s);
+          const [_role,label,index,kind,value]=JSON.parse('['+match[1]+']');
+          journal.push({label,index,kind,value});
+        }
+        const value=code.includes('bcMod.argvFor')?['/public/registered']:true;
+        return {content:[{type:'text',text:JSON.stringify(value)}]};
+      },
+      exec_command:async()=>{
+        if(initial)throw Error('public dispatch exception');
+        return {session_id:73,output:'public prefix',exit_code:null};
+      },
+      write_stdin:async()=>{stopped=true;throw Error('public poll exception');},
+    };
+    await assert.rejects(run(tools,configured),/public (dispatch|poll) exception/);
+    assert.equal(stopped,!initial);
+    assert.deepEqual(journal.map(v=>v.kind),initial?['intent','exception']:
+      ['intent','returned','intent','exception']);
+    assert.equal(journal.at(-1).value.last_observed_session,initial?null:73);
+    assert.equal(journal.at(-1).value.tool,initial?'exec_command':'write_stdin');
+    assert.ok(journal.every(j=>j.label==='publication'));
+  }
+});

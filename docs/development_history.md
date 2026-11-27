@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-27 UTC — Post-B1 scientific entry and caller accounting
+
+The candidate binds its protected scientific release separately from the historical B1 issuance. Its complete public B exercise returned the expected three child exits and a 78.454-second charge. The fixed 360-row panel depends on a separate independent B at the exact scientific merge. [Evidence](validation/native_bc_entry_repair.md)
+
 ## 2026-11-26 UTC — Scientific contract review closed before preflight
 
 The B1-bound 18-reference and 342-query contract passed its declaration check. Independent engineering review found incompatible release and issuer checks and a B reservation charged to C. The review archived the first error and both readiness comparison returns. [Recorded stop](validation/native_bc_contract_review.md)

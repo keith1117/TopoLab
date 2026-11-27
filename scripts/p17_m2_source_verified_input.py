@@ -12,8 +12,30 @@ buffer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(buffer)
 
 
+B1_IDENTITY = "topolab.v2.p17-m2-registered-source-acquisition.receipt-20261126-b1.v1"
+B1_ISSUER_MODULE = "p17_m2_source_acquisition_independent_receipt_formal_20261126_b1"
+B1_PLAN = "d26d69bb62ff1488e12a52f2872f07ce00eac92eb4bd30413b53925411d4f739"
+B1_VERSION = "94e1ccdd7629cfbb697797da4235351c1fdefbcde8c40085dd0876ab3b6b23a7"
+
+
+def historical_b1_issuer(certificate):
+    """Only the local replay of the sealed B1 returns can attest a historical object."""
+    history = sys.modules.get("scientific_b1_history")
+    check = getattr(history, "historical_issuer", None)
+    expected = Path(__file__).with_name("scientific_b1_history.py").resolve()
+    if (history is None or getattr(history, "__file__", None) is None
+            or Path(history.__file__).resolve() != expected
+            or getattr(check, "__globals__", None) is not vars(history)
+            or getattr(check, "__code__", None) is None
+            or Path(check.__code__.co_filename).resolve() != expected):
+        return None
+    return check(certificate)
+
+
 def checked_acquisition_issuer(certificate, historical=None):
     """Recognize only opaque certificates from the registered live issuers."""
+    if type(certificate).__module__ == B1_ISSUER_MODULE:
+        return historical_b1_issuer(certificate)
     historical = historical or sys.modules.get("p17_m2_source_acquisition_independent")
     if historical is not None and isinstance(certificate, historical.CheckedAcquisitionInput):
         return historical

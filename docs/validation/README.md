@@ -1,5 +1,7 @@
 # Validation evidence index
 
+The post-B1 entry repair compares the historical issuer with the prospective scientific release and measures B through the caller’s final tool return. [Original counterexamples and public checks](native_bc_entry_repair.md)
+
 B1's formal certificate command returned 0. The independent audit verified the original return, the 1,071-member input version, the archived controls and the released lease. [Formal input certificate and closed ledger](formal_input_receipt_certificate.md)
 
 [Paired readiness and formal preflight receipt](formal_input_paired_readiness.md) records the independent entry error, archived original returns and closed ledger.

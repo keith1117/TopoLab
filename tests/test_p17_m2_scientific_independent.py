@@ -866,3 +866,40 @@ def test_actual_public_dispatcher_packet_matches_independent_schema(tmp_path, mo
     result = audit.check_native_dispatch(contract, "resource-preflight", "controller", evidence)
     assert result["native_rss_bytes"] > result["command_native_rss_bytes"] > 0
     assert evidence["log"] == b""
+
+
+def test_r2_shared_fee_contains_exactly_the_four_c_helpers(monkeypatch):
+    from types import SimpleNamespace
+
+    audit = checker()
+    monkeypatch.setattr(audit, "check_contract", lambda _value: "b" * 64)
+    contract = dict(shared_contract(audit), entry_repair="native-bc-entry-20261126-r2")
+    # Only the separately exercised native role populations are stubbed here.
+    monkeypatch.setattr(
+        audit, "check_b_preflight",
+        lambda *_args: SimpleNamespace(proof={"b_caller_end_ms": 100000}),
+    )
+    monkeypatch.setattr(audit, "check_scientific_role", lambda *_args: None)
+    b, prod, reviewer = "resource-preflight", "scientific-producer", "scientific-auditor"
+    records = [
+        shared_evidence(audit, role, label, start)
+        for role, label, start in (
+            (prod, "reservation", 200), (prod, "reader-ack", 400),
+            (reviewer, "reservation", 410), (reviewer, "reader-ack", 700),
+        )
+    ]
+    roles = {
+        role: {"raw_tool_events": [{"start_seconds": begin}, {"end_seconds": end}]}
+        for role, begin, end in ((b, 30, 80), (prod, 201, 399), (reviewer, 411, 699))
+    }
+    result = audit.check_shared_closeout(contract, records, role_evidence=roles)
+    assert [(row["role"], row["action"]) for row in result["helpers"]] == [
+        (prod, "reservation"), (prod, "reader-ack"), (reviewer, "reservation"),
+        (reviewer, "reader-ack"),
+    ]
+    assert result["active_helper_charge_seconds"] == pytest.approx(14.4)
+    b_reservation = shared_evidence(audit, b, "reservation", 20)
+    for wrong in ([b_reservation, *records], [b_reservation, *records[1:]],
+                  [records[0], records[0], *records[2:]]):
+        with pytest.raises(ValueError, match="helper"):
+            audit.check_shared_closeout(contract, wrong, role_evidence=roles)
