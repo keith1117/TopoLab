@@ -1,13 +1,10 @@
 # Current project status
 
-Updated:2026-11-26 UTC. **Owner decision: FULL_V2_OPEN_NO_ADMITTED_ROUTE retained.**
-Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
-independent preflight remain required. Scientific execution remains unadmitted. No
-executable scientific successor is admitted and no repair date is established.
+Updated 2026-11-27 UTC. **Full v2 remains open.** Uniform remains the default and fixed P/17 is unrepaired.
 
-## Post-B1 scientific entry repair
+## Formal native B passed and the C panel stopped
 
-The owner authorized one independent native B preflight after independent review and protected publication. Its complete final tool return gates the 18-case C panel. The certified B1 plan and version remain the input. The scientific result is pending. [Authorization and separate budgets](planning/b1_native_bc_entry_repair_authorization.md) · [Entry evidence](validation/native_bc_entry_repair.md)
+On protected scientific commit `9223a867`, formal B returned the bound empirical resource PASS at exit 0. C read all 542 producer members. The first uniform reference matched the historical scalar, but filing failed because the `rows/references` directory was missing. C filed 0/18 references, attempted 0/342 queries and stopped before the independent numerical auditor. The producer's new read lease remains held. The round booked 11,160 FULL seconds and closed its unused 3,600. The cumulative known floor is 440,379 FULL seconds. The current contract has closed and further scientific execution requires a new owner decision. [Original returns, terminal archive and ledger](validation/native_bc_first_reference_stop.md)
 
 ## Native M2 scientific contract stopped before B
 
