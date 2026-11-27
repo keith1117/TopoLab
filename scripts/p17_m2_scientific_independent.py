@@ -1158,7 +1158,9 @@ def retain_audit_failure(error, failure, writer):
                     "failure": failure,
                 }
             )
-            require(len(raw) <= 64 * 1024**2, "native auditor failure log64MiB cap exceeded")
+            short = helper("native_c_stop").compact_error(raw, failure)
+            if short is not None:
+                raw = canonical(short)
             sys.stderr.write(raw.decode("ascii"))
             sys.stderr.flush()
             error.scientific_failure_stderr_written = True
@@ -2352,6 +2354,33 @@ def check_public_scientific_reader_return(contract, role, evidence):
     )
 
 
+def stopped_reader_successor(root, retained):
+    """Fence the closed owner's original slot before opening the shared successor slot."""
+    native = acquisition.native
+    prior = root.with_name(root.name + ".cooperative-reader.lease")
+    directory = native.base.nofollow_parent(prior)
+    try:
+        fd = os.open(prior.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory)
+        try:
+            raw, identity = native._lease_read(directory, prior.name, fd)
+        finally:
+            os.close(fd)
+    finally:
+        os.close(directory)
+    require(digest(raw) == retained["record_sha256"]
+            and digest(canonical(identity)) == retained["identity_sha256"],
+            "retained scientific reader identity changed")
+    record = json.loads(raw)
+    require(record["root"] == str(root) and record["lease_path"] == str(prior)
+            and type(record["consumer_pid"]) is int and record["consumer_pid"] > 0,
+            "retained scientific reader binding differs")
+    try:
+        os.kill(record["consumer_pid"], 0)
+    except ProcessLookupError:
+        return root.with_name(root.name + ".r3.cooperative-reader.lease")
+    raise ValueError("retained scientific reader process still present")
+
+
 class CheckedScientificInput(acquisition.CheckedAcquisitionInput):
     """Separate scientific grant over an already independently accepted version."""
 
@@ -2396,6 +2425,20 @@ class CheckedScientificInput(acquisition.CheckedAcquisitionInput):
             )
             return root
         return super()._reader_root(root)
+
+    def _reader_lease_path(self, root):
+        contract = self._scientific_contract
+        if contract.get("attempt_id") != "native-bc-entry-20261127-r3":
+            return super()._reader_lease_path(root)
+        if contract["public_fixture_only"] and contract.get("retained_reader") is None:
+            return super()._reader_lease_path(root)
+        if not contract["public_fixture_only"]:
+            paths = helper("native_bc_paths")
+            require(contract.get("retained_reader") == paths.PREDECESSOR_LEASE
+                    and contract["input_version_id"] == paths.VERSION
+                    and contract["api_metadata"]["root"] == str(paths.FORMAL_ROOT),
+                    "registered predecessor and scientific successor required")
+        return stopped_reader_successor(root, contract["retained_reader"])
 
     def _reader_argv(self, action, role):
         require(
@@ -2579,7 +2622,7 @@ def acknowledge_scientific_reader(certificate, receipt, checked_return):
         certificate._reader_root_identity(root) == binding["root_identity"],
         "scientific reader local root identity changed",
     )
-    path = root.with_name(root.name + ".cooperative-reader.lease")
+    path = certificate._reader_lease_path(root)
     require(receipt["lease_path"] == str(path), "scientific reader lease path differs")
     native = acquisition.native
     directory = native.base.nofollow_parent(path)

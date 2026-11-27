@@ -257,6 +257,9 @@ def build_contract(acquisition, case_definitions, manifest, registry, *, runtime
     if entry_root is not None:
         value.update({
             "entry_repair": paths.IDENTITY,
+            "attempt_id": paths.ATTEMPT,
+            "retained_reader": paths.PREDECESSOR_LEASE if not public else None,
+            "public_row_fixture": paths.row_fixture(entry_root),
             "public_fixture_only": public,
             "historical_issuer_commit": paths.HISTORICAL,
             "host_requirement": {"cpu_brand": "Apple M2", "machine": "arm64",
@@ -276,12 +279,14 @@ def build_contract(acquisition, case_definitions, manifest, registry, *, runtime
                 "basename": "scientific-release.json",
             },
         })
+        public_author = public and not Path(output_root).name.split("-r3-", 1)[1].startswith(
+            ("merged-", "independent-")
+        )
         for stage, schema in (("B", "topolab.b-full-clock.v1"),
                               ("C", "topolab.c-shared-clock.v1")):
             value[stage.lower() + "_caller_clock"] = {
                 "schema": schema,
-                "author": ("/root" if public and not output_root.endswith("-merged")
-                           else "/root/authorize"),
+                "author": "/root" if public_author else "/root/r3_independent",
                 "verification_argv": watch(ROLES[0] if stage == "B" else ROLES[2],
                                            "verification"),
                 "verification_timed_argv": [

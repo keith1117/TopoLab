@@ -101,7 +101,9 @@ def checked_release(contract, contract_sha, role, head, paths, read_file, freeze
     need(
         contract["public_fixture_only"] is public
         and head != paths.HISTORICAL
-        and (not public or role == "resource-preflight")
+        and (not public or role == "resource-preflight"
+             or (role == "scientific-producer" and paths.row_fixture(root)
+                 and contract.get("public_row_fixture") == paths.row_fixture(root)))
         and spec
         == dict(scope=scope, evidence_root=str(evidence), basename="scientific-release.json"),
         "scope, role, checkout or release location differs",

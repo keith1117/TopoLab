@@ -249,15 +249,14 @@ def test_real_public_panel_files_queries_and_costs_with_pending_audit_status(tmp
     import hashlib
 
     driver = load()
-    helper = driver.load("p17_m2_content_verified_control")
-
-    def writer(relative, packet):
-        path = tmp_path / relative
-        path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
-        helper.put(path, packet)
-        raw = path.read_bytes()
-        return {"path": relative, "byte_size": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
-
+    orchestration = driver.load("p17_m2_scientific_orchestration")
+    root = tmp_path.resolve()
+    limits = {
+        "single_member_bytes_max": 16 * 1024**2,
+        "total_bytes_max": 64 * 1024**2,
+        "files_max": 64,
+    }
+    writer = orchestration.scientific_row_writer(root, "scientific-producer", limits)
     result = driver.public_fixture_panel(writer=writer)
     assert result["software_only"] is True
     assert result["status"] == "PRODUCER_PANEL_COMPLETE_PENDING_INDEPENDENT_AUDIT"
@@ -267,10 +266,42 @@ def test_real_public_panel_files_queries_and_costs_with_pending_audit_status(tmp
     assert result["measured_operations"]["FEM"] > 0
     assert result["measured_operations"]["NN_queries"] == 1
     for row in result["rows"]:
-        packet = json.loads((tmp_path / row["packet"]["path"]).read_bytes())
-        cost = json.loads((tmp_path / row["cost"]["path"]).read_bytes())
+        persisted = {}
+        for key in ("packet", "cost"):
+            descriptor = row[key]
+            raw = (root / "rows" / descriptor["path"]).read_bytes()
+            assert len(raw) == descriptor["byte_size"]
+            assert hashlib.sha256(raw).hexdigest() == descriptor["sha256"]
+            persisted[key] = json.loads(raw)
+        packet, cost = persisted["packet"], persisted["cost"]
         assert cost["packet_sha256"] == row["packet"]["sha256"]
         assert cost["charged_seconds"] >= packet["wall_seconds"] + 1
+
+
+def test_independent_row_directory_is_exclusive_and_persists_real_receipt(tmp_path):
+    import hashlib
+
+    orchestration = load().load("p17_m2_scientific_orchestration")
+    root = tmp_path.resolve()
+    limits = {
+        "single_member_bytes_max": 1024,
+        "total_bytes_max": 1024,
+        "files_max": 2,
+    }
+    write = orchestration.scientific_row_writer(root, "scientific-auditor", limits)
+    relative = "audited/reference-001.json"
+    packet = {"phase": "reference", "ordinal": 1}
+    receipt = write(relative, packet)
+    raw = (root / "rows" / relative).read_bytes()
+    assert receipt == {
+        "path": relative, "byte_size": len(raw), "sha256": hashlib.sha256(raw).hexdigest()
+    }
+    assert json.loads(raw) == packet
+    with pytest.raises(FileExistsError):
+        write(relative, {"overwritten": True})
+    assert (root / "rows" / relative).read_bytes() == raw
+    with pytest.raises(FileExistsError):
+        orchestration.scientific_row_writer(root, "scientific-auditor", limits)
 
 
 def test_new_public_model_prediction_retains_initial_bits_and_rejects_parameter_mutation():

@@ -949,6 +949,9 @@ class CheckedPublicInput:
             for word in words
         ]
 
+    def _reader_lease_path(self, root: Path) -> Path:
+        return root.with_name(root.name + ".cooperative-reader.lease")
+
     def acquire_reader(self, role: str) -> CheckedReaderLease:
         argv = self._reader_argv("public-consumer", role)
         require(getattr(sys, "orig_argv", None) == argv, "actual public reader orig_argv differs")
@@ -961,7 +964,7 @@ class CheckedPublicInput:
             self._reader_root_identity(root) == self._binding["root_identity"],
             "reader local root identity changed",
         )
-        path = root.with_name(root.name + ".cooperative-reader.lease")
+        path = self._reader_lease_path(root)
         directory = base.nofollow_parent(path)
         info = os.fstat(directory)
         require(

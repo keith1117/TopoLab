@@ -7,7 +7,7 @@ import * as crypto from 'node:crypto';
 import * as ingress from './p17_m2_scientific_tool_ingress.mjs';
 import * as observer from './p17_m2_scientific_metadata.mjs';
 import {buildMetadataManifest} from './p17_m2_scientific_metadata_manifest.mjs';
-import {entryRoot,formalRoot} from './native_bc_paths.mjs';
+import {entryRoot,formalRoot,rowFixture} from './native_bc_paths.mjs';
 const sha=raw=>crypto.createHash('sha256').update(raw).digest('hex');
 // Keep the complete tool request, including a localized approval prompt, in
 // the ASCII metadata format accepted by both independent parsers.
@@ -30,8 +30,9 @@ export async function openCaller(path,digest,author) {
   observer.configure(crypto);
   const raw=await read(path,4*MiB,digest);
   const c=observer.lossless(raw,true).value,root=c.api_metadata.root;
-  requireValue(sha(raw)===digest&&c.entry_repair==='native-bc-entry-20261126-r2'&&
-    entryRoot(root,c.public_fixture_only)&&(c.public_fixture_only?path===root+ext:path===formal)&&['/root','/root/authorize'].includes(author),
+  requireValue(sha(raw)===digest&&c.entry_repair==='native-bc-entry-20261126-r2'&&c.attempt_id==='native-bc-entry-20261127-r3'&&
+    c.public_row_fixture===rowFixture(root)&&
+    entryRoot(root,c.public_fixture_only)&&(c.public_fixture_only?path===root+ext:path===formal)&&['/root','/root/r3_independent'].includes(author),
     'registered post-B1 caller, contract and root required');
   const s={contract:c,contractSHA256:digest,contractPath:path,root,author};
   return s;
@@ -40,8 +41,10 @@ export async function openCaller(path,digest,author) {
 export function argvFor(s,role,label) {
   const c=s.contract, spec=c.roles[role];
   requireValue(roleScope[role]&&spec,'registered role required');
-  const expected=role==='scientific-producer'?'/root':'/root/authorize';
-  requireValue(c.public_fixture_only ? role==='resource-preflight' : s.author===expected,
+  const expected=role==='scientific-producer'?'/root':'/root/r3_independent';
+  const publicRole=role==='resource-preflight'||(role==='scientific-producer'&&rowFixture(s.root)&&
+    ['publication','reservation','controller'].includes(label));
+  requireValue(c.public_fixture_only ? publicRole&&s.author===c.b_caller_clock.author : s.author===expected,
     'role requires its registered caller');
   let command;
   if(label==='publication') command=spec.publication_argv;
@@ -66,7 +69,7 @@ async function writeRaw(path,raw) {
 }
 
 async function independentRelease(s) {
-  const fixed='/Users/keith1117/Documents/TopoLab-data/native-bc-entry-20261126-r2';
+  const fixed='/Users/keith1117/Documents/TopoLab-data/native-bc-entry-20261127-r3';
   requireValue(s.contract.scientific_release.evidence_root===fixed,'registered release directory required');
   const pair=async name=>{
     const p=fixed+'/'+name,b=fixed+'-backup/'+name;
@@ -80,7 +83,7 @@ async function independentRelease(s) {
   const expected=[s.contract.runtime.python_entry,'-I',s.contract.runtime.cwd+'/scripts/scientific_entry_release.py',
     '--contract',s.contractPath,'--contract-sha',s.contractSHA256];
   const rows=actual.responses,last=rows.at(-1);
-  requireValue(actual.author==='/root/authorize'&&JSON.stringify(actual.argv)===JSON.stringify(expected)&&
+  requireValue(actual.author==='/root/r3_independent'&&JSON.stringify(actual.argv)===JSON.stringify(expected)&&
     actual.schema==='topolab.v2.m2-strict-source-binding.actual-call.v1'&&last.result.exit_code===0&&
     last.result.session_id==null,'original independent exact-merge terminal required before B');
   const proof=JSON.parse(rows.map(r=>r.result.output).join(''));
@@ -89,7 +92,9 @@ async function independentRelease(s) {
     proof.host==='Apple M2'&&proof.version===s.contract.input_version_id&&
     proof.B1_plan_sha256===s.contract.acquisition.plan_sha256&&
     proof.public_raw_B_sha256===sha(await pair('merged-public-B-clock-return.json'))&&
-    proof.public_caller_sha256===sha(await pair('merged-public-B-caller-receipt.json')),
+    proof.public_caller_sha256===sha(await pair('merged-public-B-caller-receipt.json'))&&
+    proof.public_rows_sha256===sha(await pair('independent-row-return-merged.json'))&&
+    proof.prerow_stop_sha256===sha(await pair('merged-public-prerow-stop.json')),
     'exact-merge release/public exercise contract differs');
 }
 export async function begin(s,stage,startMs,publicRelease) {
@@ -97,7 +102,7 @@ export async function begin(s,stage,startMs,publicRelease) {
   const {root,contract:c,contractSHA256:digest}=s;
   requireValue(Number.isSafeInteger(startMs)&&startMs<=Date.now()&&['B','C'].includes(stage),'invalid caller start');
   if(stage==='B'){
-    requireValue(c.public_fixture_only||s.author==='/root/authorize','B independent caller required');
+    requireValue(c.public_fixture_only||s.author==='/root/r3_independent','B independent caller required');
     if(!c.public_fixture_only) await independentRelease(s);
     await fs.mkdir(root,{mode:0o700});
     for(const child of ['roles','shared']) await fs.mkdir(root+'/'+child,{mode:0o700});
@@ -111,7 +116,7 @@ export async function begin(s,stage,startMs,publicRelease) {
       await writeRaw(backup+'/scientific-release.json',releaseRaw);
     }
   } else {
-    requireValue(s.author==='/root'&&root===formalRoot,'C producer caller required');
+    requireValue(c.public_fixture_only ? rowFixture(root)&&s.author===c.b_caller_clock.author : s.author==='/root'&&root===formalRoot,'C producer caller required');
     const pass=JSON.parse(await read(root+'/B-caller-receipt.json'));
     const actual=await read(root+'/B-clock-return.json');
     const jsPrefixRaw=await read(root+'/B-js-prefix.json'),prefix=JSON.parse(jsPrefixRaw);
@@ -169,6 +174,16 @@ export async function receive(s,role,label,actual) {
   const rows=actual.responses,last=rows.at(-1);
   const root=s.root, raw=json(actual);
   await writeRaw(root+'/'+role+'-'+label+'-actual.json',raw);
+  if (role!=='resource-preflight'&&label==='controller'&&last.result.session_id==null) {
+    const commandOutput=rows.map(row=>row.result.output).join('');
+    const packet=observer.lossless(commandOutput,true).value;
+    if(last.result.exit_code!==0||packet.exit_code!==0){
+      const {stoppedController}=await import('./native_c_stop.mjs');
+      const stop=await stoppedController(s,role,actual,raw,read,observer);
+      await writeRaw(root+'/'+role+'-controller-stop.json',json(stop));
+      throw Error('STOP_C_CONTROLLER_OBSERVED: '+stop.first_error.reason);
+    }
+  }
   requireValue(last.result.exit_code===0&&last.result.session_id==null,'actual terminal command failed: '+role+'/'+label);
   const result={exit_code:last.result.exit_code,output:rows.map(row=>row.result.output).join('')};
   const info={...s,role,result,actualArgv:argv,start_seconds:rows[0].requested_ms/1000,

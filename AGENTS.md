@@ -17,7 +17,7 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-The [B1 input certificate](docs/validation/formal_input_receipt_certificate.md) remains issued and its lease released. The [native B/C terminal report](docs/validation/native_bc_first_reference_stop.md) records the formal B pass, the first C reference filing failure and the held scientific reader lease. The contract and unused budget are closed. Consult that report before any proposed restart or lease action. Further scientific execution requires new owner authorization. Uniform remains the default and full v2 remains open.
+The [B1 input certificate](docs/validation/formal_input_receipt_certificate.md) remains issued and its lease released. The [native B/C terminal report](docs/validation/native_bc_first_reference_stop.md) records the formal B pass, the first C reference filing failure and the held scientific reader lease. The contract and unused budget are closed. Consult that report before any proposed restart or lease action. The [successor contract](docs/planning/native_c_row_return_authorization.md) authorizes the frozen release, fresh B before C and conditional H/17 independent confirmation. Check its current external handoff before dispatch. Uniform remains the default and full v2 remains open.
 
 ## Provenance boundary
 

@@ -8,8 +8,8 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
-AUTHOR = "/root/authorize"
-PUBLIC = "/private/tmp/topolab-native-bc-public-20261126-r2-merged"
+AUTHOR = "/root/r3_independent"
+PUBLIC = "/private/tmp/topolab-native-bc-public-20261127-r3-merged-rows-positive"
 CHECKS = {"quality", "frontend", "clean-linux-smoke", "i1-native-software"}
 FORMAL_CONTRACT = REPO / "docs/planning/p17_m2_scientific_execution_protocol.json"
 
@@ -91,6 +91,8 @@ def check_independent(contract, contract_sha, main, release_sha):
         and result["version"] == contract["input_version_id"]
         and result["host"] == "Apple M2"
         and result["actor"] == AUTHOR
+        and result["public_rows_sha256"] == sha(pair(root, "independent-row-return-merged.json"))
+        and result["prerow_stop_sha256"] == sha(pair(root, "merged-public-prerow-stop.json"))
         and result["public_raw_B_sha256"] == sha(pair(root, "merged-public-B-clock-return.json"))
         and result["public_caller_sha256"] == sha(pair(root, "merged-public-B-caller-receipt.json"))
         and result["review_sha256"] == sha(pair(root, "independent-source-review.json"))
@@ -99,6 +101,63 @@ def check_independent(contract, contract_sha, main, release_sha):
         "independent release identities or original public returns differ",
     )
     return {"sha256": sha(raw), "main": main, "public_raw_B_sha256": result["public_raw_B_sha256"]}
+
+
+def checked_rows(root, contract_sha, freeze_sha, current):
+    raw = pair(root, "independent-row-return-merged.json")
+    actual = json.loads(pair(root, "independent-row-return-merged-actual.json"))
+    proof = json.loads(raw)
+    negative = PUBLIC.removesuffix("-rows-positive") + "-rows-failure"
+    expected_args = ["-B", "-I", str(root / "independent-row-return-check.py"),
+                     "--phase", "merged", "--formal-contract-sha", contract_sha,
+                     "--positive-root", PUBLIC, "--failure-root", negative]
+    need(actual["exit"] == 0 and actual["argv"][1:] == expected_args
+         and Path(actual["argv"][0]).is_absolute() and actual["cwd"] == str(REPO)
+         and actual["stdout"].encode("utf-8") == raw and actual["stderr"] == "",
+         "original independently executed row review required")
+    need(proof["status"] == "PASS_PUBLIC_ROW_RETURN_REVIEW" and proof["phase"] == "merged"
+         and proof["source_main"] == current and proof["scientific_contract_sha256"] == contract_sha
+         and proof["source_freeze_sha256"] == freeze_sha
+         and proof["checker_sha256"] == sha(pair(root, "independent-row-return-check.py"))
+         == json.loads(pair(root, "independent-source-review.json"))["checker_sha256"],
+         "independent public row review binding differs")
+    for key, path in (("positive", PUBLIC), ("failure", negative)):
+        read = module("p17_m2_scientific_orchestration").read_native_log
+        digest = sha(read(Path(path + ".contract.json"), cap=4 * 1024**2)[0])
+        original = read(Path(path) / "scientific-producer-controller-actual.json",
+                        cap=16 * 1024**2)[0]
+        need(proof[key]["contract_sha256"] == digest
+             and proof[key]["original_return_sha256"] == sha(original),
+             "original merged public row controller differs")
+    return sha(raw)
+
+
+def checked_prerow_stop(root, freeze, current):
+    control = module("p17_m2_scientific_orchestration")
+    directory = Path(PUBLIC.removesuffix("-rows-positive") + "-rows-prerow")
+    path = module("native_bc_paths").public_contract_path(directory)
+    contract_sha = sha(control.read_native_log(path)[0])
+    public = control.read_contract(path, contract_sha, publication_check=True,
+                                   independent_release=True)
+    admission = json.loads(control.read_native_log(directory / "B-caller-receipt.json")[0])
+    name = "scientific-producer-controller-stop.json"
+    raw = pair(root, "merged-public-prerow-stop.json")
+    stop = json.loads(raw)
+    original = control.read_native_log(directory / "scientific-producer-controller-actual.json")[0]
+    need(public.get("public_row_fixture") == "rows-prerow" and public["source_freeze"] == freeze
+         and admission["source_main"] == current
+         and admission["scientific_contract_sha256"] == contract_sha
+         and admission["status"] == "PASS_PREFLIGHT_RSS_EXIT_EMPIRICAL"
+         and raw == control.read_native_log(directory / name)[0]
+         and stop["status"] == "STOP_C_CONTROLLER_OBSERVED"
+         and stop["contract_sha256"] == contract_sha
+         and stop["actual_sha256"] == sha(original) and stop["successor_authorized"] is False
+         and stop["planned_rows"] == stop["unattempted_rows"] == 20
+         and stop["attempted_rows"] == stop["fully_filed_rows"] == 0
+         and stop["payload_exit"] != 0 and stop["controller_exit"] != 0
+         and stop["c_wall_to_return_seconds"] > 0 and stop["conservative_recorded_peak_bytes"] > 0,
+         "registered pre-panel write failure and actual zero-row STOP required")
+    return sha(raw)
 
 
 def main():
@@ -249,7 +308,11 @@ def main():
     )
     result = {
         "status": "PASS_EXACT_MERGE_PUBLIC_ENTRY",
+        "public_rows_sha256": checked_rows(
+            root, args.contract_sha, sha(control.canonical(contract["source_freeze"])), current
+        ),
         "actor": AUTHOR,
+        "prerow_stop_sha256": checked_prerow_stop(root, contract["source_freeze"], current),
         "main": current,
         "contract_sha256": args.contract_sha,
         "release_sha256": sha(release),

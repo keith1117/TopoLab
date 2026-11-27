@@ -5,6 +5,7 @@ new actual commands; a helper's consistent public record grants no B/C access.
 """
 
 import argparse
+import errno
 import hashlib
 import importlib.machinery
 import importlib.metadata
@@ -175,6 +176,8 @@ def observe_native(contract, contract_sha, role, label, *, clock_watcher=None):
     began, started = time.monotonic(), time.time_ns()
     errors, descendant_groups, watchdog = [], [], None
     child, cleanup, timed_out, captured = None, None, False, 0
+    drained_to_eof = False
+    drain_deadline = None
 
     def failed(stage, error):
         item = {"stage": stage, "type": type(error).__name__, "reason": str(error)}
@@ -207,15 +210,35 @@ def observe_native(contract, contract_sha, role, label, *, clock_watcher=None):
                     try:
                         chunk = os.read(child.stdout.fileno(), 65536)
                     except BlockingIOError:
-                        chunk = b""
+                        chunk = None
                     if chunk:
                         remaining = 4 * 1024**2 - captured
                         stream.write(chunk[: max(0, remaining)])
                         captured += len(chunk)
-                        if captured > 4 * 1024**2:
+                        if captured > 4 * 1024**2 and drain_deadline is None:
                             failed("native stdout cap", ValueError("NEW_NATIVE_LOG4MIB_CAP"))
-                            break
-                    if resource._native_poll(child) is not None and not chunk:
+                            # Only a scientific controller already filing its STOP can
+                            # drain diagnostics. No further bytes are saved. Give its
+                            # native timer a bounded opportunity to reap and profile it.
+                            if role not in ("scientific-producer", "scientific-auditor"):
+                                break
+                            if label != "controller":
+                                break
+                            try:
+                                stop_file = (destination.parent / "controller-failure.json").lstat()
+                            except FileNotFoundError:
+                                break
+                            if not stat.S_ISREG(stop_file.st_mode) or stop_file.st_nlink != 1:
+                                break
+                            drain_deadline = min(began + timeout, time.monotonic() + 2)
+                    if (
+                        resource._native_poll(child) is not None
+                        and not chunk
+                        and (drain_deadline is None or chunk == b"")
+                    ):
+                        drained_to_eof = chunk == b""
+                        break
+                    if drain_deadline is not None and time.monotonic() >= drain_deadline:
                         break
                     if time.monotonic() - began >= timeout:
                         timed_out = True
@@ -335,7 +358,10 @@ def observe_native(contract, contract_sha, role, label, *, clock_watcher=None):
         "stdout_observed_bytes": captured,
         "stdout_retained_bytes": None if log_raw is None else len(log_raw),
         "stdout_observed_truncated_bytes": max(0, captured - 4 * 1024**2),
-        "unobserved_stdout_after_cap": "UNKNOWN" if captured > 4 * 1024**2 else "NOT_TRUNCATED",
+        "unobserved_stdout_after_cap": (
+            ("DRAINED_TO_EOF" if drained_to_eof else "UNKNOWN")
+            if captured > 4 * 1024**2 else "NOT_TRUNCATED"
+        ),
         "timer_native_exit": timer,
         "self_rss_bytes_before_flush": resource._rss_self(),
         "self_rss_bytes_after_flush": None,
@@ -489,7 +515,11 @@ def read_contract(path, expected_sha, *, payload_role=None, publication_check=Fa
     if public_path or value.get("entry_repair") == entry_paths.IDENTITY:
         root = value["api_metadata"]["root"]
         is_public = entry_paths.scope(root) == "ENGINEERING_PUBLIC"
-        if (is_public != public_path or value.get("public_fixture_only") is not is_public
+        prior_lease = None if is_public else entry_paths.PREDECESSOR_LEASE
+        if (value.get("attempt_id") != entry_paths.ATTEMPT
+                or value.get("retained_reader") != prior_lease
+                or value.get("public_row_fixture") != entry_paths.row_fixture(root)
+                or is_public != public_path or value.get("public_fixture_only") is not is_public
                 or value.get("entry_repair") != entry_paths.IDENTITY
                 or (public_path and path != entry_paths.public_contract_path(root))
                 or (not public_path and path != REPO / "docs/planning"
@@ -585,6 +615,7 @@ def retain_payload_failure(root, role, contract_sha, error, *, certificate, leas
         "reason": str(error),
         "wall_seconds": time.monotonic() - began,
         "own_future_exit": "UNKNOWN_PENDING_ACTUAL_NATIVE_RETURN",
+        "row_execution_stage": getattr(error, "scientific_row_stage", None),
         "retained_context": {
             key: getattr(error, key)
             for key in ("scientific_stop_context", "scientific_failure")
@@ -616,8 +647,9 @@ def retain_payload_failure(root, role, contract_sha, error, *, certificate, leas
     try:
         if not getattr(error, "scientific_failure_stderr_written", False):
             raw = canonical(packet)
-            if len(raw) > 64 * 1024**2:
-                raise ValueError("SCIENTIFIC_FAILURE_LOG_CAP_EXCEEDED")
+            short = load("native_c_stop").compact_error(raw, packet)
+            if short is not None:
+                raw = canonical(short)
             sys.stderr.buffer.write(raw)
             sys.stderr.buffer.flush()
     except BaseException as secondary:
@@ -969,10 +1001,51 @@ def acquisition_certificate(contract):
     )
 
 
+def scientific_row_writer(root, role, limits, *, public_fixture=None):
+    """Prepare the role's private output tree before writing any admitted row."""
+    directories = {
+        "scientific-producer": ("references", "queries", "row-costs"),
+        "scientific-auditor": ("audited",),
+    }[role]
+    try:
+        private_mkdir(root / "rows")
+        for name in directories:
+            path = root / "rows" / name
+            if public_fixture == "rows-prerow" and name == "queries":
+                raise OSError(errno.ENOSPC, "public writer directory allocation failure", str(path))
+            private_mkdir(path)
+    except OSError as error:
+        # This function has not yet returned any writer to the numerical panel.
+        error.scientific_row_stage = "BEFORE_PANEL"
+        raise
+    helper = load("p17_m2_content_verified_control")
+    written_bytes, written_files = 0, 0
+
+    def writer(relative, packet):
+        nonlocal written_bytes, written_files
+        raw = canonical(packet)
+        path = Path(relative)
+        if (
+            path.is_absolute()
+            or any(part in (".", "..") for part in path.parts)
+            or len(raw) > limits["single_member_bytes_max"]
+            or written_files + 1 > limits["files_max"]
+            or written_bytes + len(raw) > limits["total_bytes_max"]
+        ):
+            raise RuntimeError("STOP_SCOPE_OR_WORK_CAP: scientific output bound")
+        helper.put(root / "rows" / relative, packet)
+        written_bytes += len(raw)
+        written_files += 1
+        return {"path": relative, "byte_size": len(raw), "sha256": sha(raw)}
+
+    return writer
+
+
 def scientific_payload(contract, contract_sha, role):
     """The actual paid child: independently grant a real lease before decoding."""
     began = time.monotonic()
     certificate = lease = consumer = None
+    panel_entered = False
     root = Path(contract["roles"][role]["root"])
     try:
         independent = load("p17_m2_scientific_independent")
@@ -989,43 +1062,51 @@ def scientific_payload(contract, contract_sha, role):
         admission = independent.check_b_preflight(
             contract, load_role_evidence(contract, "resource-preflight")
         )
-        certificate = independent.grant_scientific_input(
-            acquisition_certificate(contract), contract, role, admission
-        )
-        lease = certificate.acquire_reader(role)
-        consumer = load("p17_m2_source_verified_input").VerifiedAcquisitionInput(
-            certificate, role, reader_lease=lease
-        )
-        root = Path(contract["roles"][role]["root"])
-        private_mkdir(root / "rows")
-        helper = load("p17_m2_content_verified_control")
-        limits = contract["output_caps"][role]
-        written_bytes, written_files = 0, 0
-
-        def writer(relative, packet):
-            nonlocal written_bytes, written_files
-            raw = canonical(packet)
-            path = Path(relative)
+        public_fixture = contract.get("public_row_fixture")
+        if contract.get("public_fixture_only") is True or public_fixture is not None:
+            paths = load("native_bc_paths")
+            public_root = Path(contract["api_metadata"]["root"])
             if (
-                path.is_absolute()
-                or any(part in (".", "..") for part in path.parts)
-                or len(raw) > limits["single_member_bytes_max"]
-                or written_files + 1 > limits["files_max"]
-                or written_bytes + len(raw) > limits["total_bytes_max"]
+                contract.get("public_fixture_only") is not True
+                or contract.get("entry_repair") != paths.IDENTITY
+                or public_fixture is None
+                or public_fixture != paths.row_fixture(public_root)
+                or role != "scientific-producer"
+                or root != public_root / "roles" / role
             ):
-                raise RuntimeError("STOP_SCOPE_OR_WORK_CAP: scientific output bound")
-            helper.put(root / "rows" / relative, packet)
-            written_bytes += len(raw)
-            written_files += 1
-            return {"path": relative, "byte_size": len(raw), "sha256": sha(raw)}
-
+                raise ValueError("registered public row fixture required")
+        else:
+            certificate = independent.grant_scientific_input(
+                acquisition_certificate(contract), contract, role, admission
+            )
+            lease = certificate.acquire_reader(role)
+            consumer = load("p17_m2_source_verified_input").VerifiedAcquisitionInput(
+                certificate, role, reader_lease=lease
+            )
+        writer = scientific_row_writer(
+            root, role, contract["output_caps"][role], public_fixture=public_fixture
+        )
         deadline = contract["roles"][role]["inner_starts"][0]["timeout_seconds"]
 
         def checkpoint():
             if time.monotonic() - began >= deadline - 2:
                 raise TimeoutError("STOP_SCOPE_OR_WORK_CAP: scientific payload deadline")
 
-        if role == "scientific-producer":
+        if public_fixture is not None:
+
+            def public_writer(relative, packet):
+                if public_fixture == "rows-failure" and relative.startswith("queries/001-"):
+                    # Occupy the target after a genuine reference and cost have closed.
+                    private_mkdir(root / "rows" / relative)
+                return writer(relative, packet)
+
+            panel_entered = True
+            summary = load("p17_m2_scientific_control").public_fixture_panel(
+                writer=public_writer, contract_sha256=contract_sha, checkpoint=checkpoint
+            )
+            result = {"result": summary, "reader_pending": None}
+        elif role == "scientific-producer":
+            panel_entered = True
             result = load("p17_m2_scientific_control").produce(
                 contract,
                 consumer,
@@ -1037,6 +1118,7 @@ def scientific_payload(contract, contract_sha, role):
             producer_return = independent.check_scientific_role(
                 contract, "scientific-producer", load_role_evidence(contract, "scientific-producer")
             )
+            panel_entered = True
             result = independent.audit_panel(
                 contract,
                 consumer,
@@ -1053,6 +1135,8 @@ def scientific_payload(contract, contract_sha, role):
         }
         return result
     except BaseException as error:
+        if not panel_entered:
+            error.scientific_row_stage = "BEFORE_PANEL"
         retain_payload_failure(
             root,
             role,
@@ -1137,7 +1221,7 @@ def run_registered_role(contract, contract_sha, role):
                 )
     except BaseException as error:
         failure = retain_controller_failure(
-            root, role, contract_sha, spec, error, began=began, cases=cases
+            root, role, contract_sha, spec, error, began=began, cases=cases, contract=contract
         )
         error.scientific_controller_failure = failure
         raise
@@ -1156,7 +1240,9 @@ def run_registered_role(contract, contract_sha, role):
     return summary
 
 
-def retain_controller_failure(root, role, contract_sha, spec, error, *, began, cases):
+def retain_controller_failure(
+    root, role, contract_sha, spec, error, *, began, cases, contract=None
+):
     """Keep the primary failure even when context reads or filing also fail."""
     helper = load("p17_m2_content_verified_control")
     elapsed = time.monotonic() - began
@@ -1207,8 +1293,34 @@ def retain_controller_failure(root, role, contract_sha, spec, error, *, began, c
                 "reason": str(secondary),
             }
         )
-    # The complete object reaches the externally observed log even after filing fails.
-    sys.stderr.buffer.write(canonical(packet))
+    raw = canonical(packet)
+    if contract is not None and role in ("scientific-producer", "scientific-auditor"):
+        fixture = None
+        if contract.get("public_fixture_only"):
+            fixture = contract.get("public_row_fixture")
+        # Both C roles use the registered row table. The public exercise streams
+        # a single reference and all 19 methods instead.
+        counts = contract["call_plan"]
+        planned = 20 if fixture else len(counts["references"]) + len(counts["queries"])
+        summary = load("native_c_stop").metadata(packet, planned_rows=planned, original=raw)
+        raw = canonical(summary)
+        try:
+            helper.put(root / "controller-stop-metadata.json", summary)
+        except BaseException as secondary:
+            packet["secondary_errors"].append(
+                {
+                    "stage": "stop metadata filing",
+                    "type": type(secondary).__name__,
+                    "reason": str(secondary),
+                }
+            )
+        sys.stderr.buffer.write(raw)
+        if fixture == "rows-failure" and role == "scientific-producer":
+            # Drive the real terminal recorder past its fixed cap after the primary
+            # write failure has already been filed. The public run can only STOP.
+            sys.stderr.buffer.write(b"public stopped-row diagnostic\n" * 160000)
+    else:
+        sys.stderr.buffer.write(raw)
     sys.stderr.buffer.flush()
     return packet
 

@@ -26,8 +26,9 @@ async function nativeBCDispatch(tools, config) {
   const initialize=`var bcMod=await import(${args(pathToAPIModule)});var bcS=await bcMod.openCaller(${args(path)},${args(digest)},${args(author)});`;
   const begin=role==='scientific-auditor'?'{}':`await bcMod.begin(bcS,${args(stage)},${start},${args(release??null)})`;
   await metadata(initialize+'nodeRepl.write(JSON.stringify('+begin+'))','登记本次调用起点');
-  const labels=['publication','reservation','controller','binder','verifier','final-observer'];
-  if(stage==='C') labels.push('reader-ack');
+  const publicRows=stage==='C'&&await metadata('nodeRepl.write(JSON.stringify(bcS.contract.public_row_fixture))','核对公开行写入夹具');
+  const labels=publicRows?['publication','reservation','controller']:['publication','reservation','controller','binder','verifier','final-observer'];
+  if(stage==='C'&&!publicRows) labels.push('reader-ack');
   if(role!=='scientific-producer') labels.push('finish');
   const quote=word=>/^[a-zA-Z0-9_@%+=:,./-]+$/.test(word)?word:"'"+word.replaceAll("'","'\"'\"'")+"'";
   const env=['OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS'];
