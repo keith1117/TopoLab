@@ -17,14 +17,7 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-The [formal input certificate](docs/validation/formal_input_receipt_certificate.md)
-closes the [B1 input contract](docs/planning/receipt_formal_contract.json).
-All six input roles passed. Independent terminal audit verified the certificate's
-original exit 0, plan digest and 1,071-member version. The B1 lease is RELEASED
-and seven historical leases remain HELD. Scientific execution requires separate
-authorization. The [scientific contract review](docs/validation/native_bc_contract_review.md)
-closed before B. B and C recorded zero dispatches. Uniform remains the default, fixed P/17 is unrepaired and full
-fit remains PENDING4GiB.
+The [B1 input certificate](docs/validation/formal_input_receipt_certificate.md) remains issued and its lease released. The [native B/C terminal report](docs/validation/native_bc_first_reference_stop.md) records the formal B pass, the first C reference filing failure and the held scientific reader lease. The contract and unused budget are closed. Consult that report before any proposed restart or lease action. Further scientific execution requires new owner authorization. Uniform remains the default and full v2 remains open.
 
 ## Provenance boundary
 

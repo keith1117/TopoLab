@@ -1,6 +1,8 @@
 # TopoLab v2 Development Roadmap
 
-**The post-B1 native entry repair is authorized.** A protected scientific release and an independent public preflight precede the fixed 18-case C panel. Its role thresholds and scientific predicates remain frozen. [Authorization](b1_native_bc_entry_repair_authorization.md) · [Entry evidence](../validation/native_bc_entry_repair.md)
+**Formal native B passed and the C panel closed at its first reference.** The producer read its 542 authorized members and computed a matching uniform scalar. Missing parent directory `rows/references` prevented filing. H/17 and the end-to-end speed gate remain open. [Terminal record](../validation/native_bc_first_reference_stop.md)
+
+**The post-B1 native entry repair passed independent review.** The authorization required a protected scientific release and an independent public preflight before the fixed 18-case C panel. Its role thresholds and scientific predicates remain frozen. [Authorization](b1_native_bc_entry_repair_authorization.md) · [Entry evidence](../validation/native_bc_entry_repair.md)
 
 **November 26 scientific contract review stopped before B.** The candidate binds the certified B1 version and fixes the 360-row panel. Independent review found that the current entry cannot admit the historical issuer on a new scientific release or account for B independently. The 18-case scientific panel remains unrun. [Review and original-return evidence](../validation/native_bc_contract_review.md)
 

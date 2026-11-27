@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-27 UTC — Formal native B passed and C stopped on reference filing
+
+The B1-bound science release passed independent source review and formal B. C read the full producer view and computed one uniform reference, then stopped on its missing output parent. The paired formal archive retains the complete available prefix, the secondary recorder failure and the held reader lease. [Entry repair](validation/native_bc_entry_repair.md) · [Terminal result and ledger](validation/native_bc_first_reference_stop.md)
+
 ## 2026-11-27 UTC — Post-B1 scientific entry and caller accounting
 
 The candidate binds its protected scientific release separately from the historical B1 issuance. Its complete public B exercise returned the expected three child exits and a 78.454-second charge. The fixed 360-row panel depends on a separate independent B at the exact scientific merge. [Evidence](validation/native_bc_entry_repair.md)
