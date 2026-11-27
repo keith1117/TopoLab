@@ -1,6 +1,6 @@
 # TopoLab v2 Development Roadmap
 
-**The new C repair contract is active.** Independent review and a fresh exact-merge B gate the exposed C panel. Only a complete C pass admits new-sample H/17 confirmation. [Execution contract](native_c_row_return_authorization.md) · [Repair evidence](../validation/native_c_row_return.md)
+**The C producer filed 18 references and 342 queries.** Formal B passed at `292bf9cf`. The caller stopped preparing its controller receipt, leaving the independent numerical gate open. The authorized successor requires a public repair, exact-merge review and its own formal B. Fresh H/17 confirmation remains conditional on complete C acceptance. [R3 terminal evidence](../validation/native_c_producer_journal_stop.md) · [Execution contract](native_c_row_return_authorization.md)
 
 **Formal native B passed and the C panel closed at its first reference.** The producer read its 542 authorized members and computed a matching uniform scalar. Missing parent directory `rows/references` prevented filing. H/17 and the end-to-end speed gate remain open. [Terminal record](../validation/native_bc_first_reference_stop.md)
 
