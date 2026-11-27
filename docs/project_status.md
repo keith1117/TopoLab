@@ -2,13 +2,17 @@
 
 Updated 2026-11-27 UTC. **Full v2 remains open.** Uniform remains the default and fixed P/17 is unrepaired.
 
+## Formal B passed and the C caller stopped after 360 filed rows
+
+On protected science commit `292bf9cf`, the producer filed 18/18 references and 342/342 queries and exited 0. Platform review rejected the caller's 217-response filing request at its 64,000-byte limit. The producer recorded three H/17 failures with fallback. An independent archive review checked the producer's records. The independent numerical role received zero dispatches, so H/17 and end-to-end speed remain unevaluated. The R3 ledger closed at **451,539 known FULL seconds** plus unpriced costs. Both failed scientific reader leases remain held. The authorized successor begins with a public replay of the stopped caller. [Formal result, independent evidence and ledger](validation/native_c_producer_journal_stop.md)
+
 ## Native C repair and new conditional execution
 
 A fresh contract authorizes one B and, on a verified pass, one C. The first public candidate reproduced the historical stop and was rejected on failure-return coverage. Its successor passed independent source review. The reviewer reopened one reference and 19 queries and verified both a mid-panel write failure and a pre-panel directory failure. Protected release and independent admission on the exact merge precede formal B. A complete C pass admits prospective H/17 confirmation on new physical cases. [Contract](planning/native_c_row_return_authorization.md) · [Public evidence](validation/native_c_row_return.md)
 
 ## Formal native B passed and the C panel stopped
 
-On protected scientific commit `9223a867`, formal B returned the bound empirical resource PASS at exit 0. C read all 542 producer members. The first uniform reference matched the historical scalar, but filing failed because the `rows/references` directory was missing. C filed 0/18 references, attempted 0/342 queries and stopped before the independent numerical auditor. The producer's new read lease remains held. The round booked 11,160 FULL seconds and closed its unused 3,600. The cumulative known floor is 440,379 FULL seconds. The current contract has closed and further scientific execution requires a new owner decision. [Original returns, terminal archive and ledger](validation/native_bc_first_reference_stop.md)
+On protected scientific commit `9223a867`, formal B returned the bound empirical resource PASS at exit 0. C read all 542 producer members. The first uniform reference matched the historical scalar, but filing failed because the `rows/references` directory was missing. C filed 0/18 references, attempted 0/342 queries and stopped before the independent numerical auditor. The producer's new read lease remains held. The round booked 11,160 FULL seconds and closed its unused 3,600. The cumulative known floor is 440,379 FULL seconds. That contract closed before the owner authorized its successor. [Original returns, terminal archive and ledger](validation/native_bc_first_reference_stop.md)
 
 ## Native M2 scientific contract stopped before B
 

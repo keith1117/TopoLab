@@ -1,0 +1,35 @@
+# Formal B passed and C stopped after the producer completed its panel
+
+On protected commit `292bf9cf00cd547a81f5de0c088008fa79a75341`, the R3 producer filed all 18 fresh uniform references, 342 queries and 360 cost receipts. Its native controller exited 0. The caller then submitted the 217 original tool responses embedded in a JavaScript filing request. Platform auto-review rejected that request at its 64,000-byte limit. The producer acknowledgement and independent numerical audit remained unstarted. The frozen C quality and speed gates have no independent result. [Authorized sequence](../planning/native_c_row_return_authorization.md) · [Frozen R3 contract](https://github.com/keith1117/TopoLab/blob/292bf9cf00cd547a81f5de0c088008fa79a75341/docs/planning/p17_m2_scientific_execution_protocol.json)
+
+## Release and formal B
+
+The independent reviewer exercised the actual public entry at the merged revision. The producer created its own output directories and filed a reference and all 19 queries. The failure runs retained a mid-panel writer collision after a filed reference and a directory creation failure before any rows. The reviewer's release command returned 0 and bound the exercised revision, the three public exercises, the B1 source identity and the new contract (`42c1ee876470178c350c856ad6b7c72d308ae105aa8e2e3d681386f8e6875cb2`). Its original packet has SHA-256 `9b7923fbe7242b76dc1b03c35a166a87ad90c8d1042b36133c546fb759fffe03`. All four jobs passed at the PR head and exact main revision. [Writer and failure reproduction](native_c_row_return.md) · [Source PR](https://github.com/keith1117/TopoLab/pull/272) · [PR CI](https://github.com/keith1117/TopoLab/actions/runs/45978833660) · [Main CI](https://github.com/keith1117/TopoLab/actions/runs/45984518403)
+
+The single formal B returned `PASS_PREFLIGHT_RSS_EXIT_EMPIRICAL` at exit 0. The success, deliberate nonzero exit and timeout controls returned 0, 7 and −15. From first required operation to complete caller return, wall time was 104.546 seconds. The complete measured charge was 114.546 seconds, the booked charge was 180 FULL, and the conservative measured peak was 1,548,861,440 bytes against a 4 GiB limit. The original B packet has SHA-256 `bb0bd8b7ed38c0e61b2e04cc5d389948aa76e9485f6713eeb19b4479550d44c7` and its caller receipt has SHA-256 `7f2fa5bc1922e01a0d86de8c6cb9508dccc7d51c9d3b5e1d75fcbce89d294b51`. The independent original-return check exited 0. The certified input version is `94e1ccdd7629cfbb697797da4235351c1fdefbcde8c40085dd0876ab3b6b23a7`. [B1 issuance and lease](formal_input_receipt_certificate.md)
+
+## C producer and first error
+
+The producer’s native record counts 541 model and NN members. Its reference comparison also loaded the authorized uniform scalars, bringing the role view to 542 members. The successful native return retains aggregate load counts and omits the per-open and per-close identity table. The producer completed 37,984 FEM calls, 37,010 OC updates, 409 projections, 283 predictions and 18 nearest-neighbor queries. The archived packets bind every reference and query to its distinct cost receipt. Producer output classified 3 of the 18 fixed H/17 attempts as failed and recorded a fallback for each. The affected query ordinals are 16 (`033f380c…`), 92 (`55c1b3e6…`) and 130 (`838e2ccc…`). The independent archive check verified those labels against the producer's files. The terminal numerical re-solves, control comparisons and speed predicates require the independent scientific auditor, which received zero dispatches.
+
+The controller's first request and 216 subsequent polls preserve the original tool return sequence. The final poll returned exit 0, the process group had exited, and the combined output was 4,124 bytes matching the native dispatcher record (SHA-256 `5d13be457a679f9d3c6860acb95f747ab5735be697e57ff5def45c25be3cc665`). Filing the full request and response history into the caller's receipt exceeded the platform's strict JavaScript review limit. The first error has SHA-256 `d9cb8b77d84d1104bf985b505b2af6397ed323854b649c318fe36601ce1d54af`. The last original tool return is `scientific-producer-controller-api-216-returned.json` (SHA-256 `eed486da668ae563ecdf5b3631bc409b20ec8bdb0b0dc3f21d14d3d33f700203`). The controller's missing aggregate receipt stopped the remaining producer verification, lease acknowledgement and independent C role.
+
+The caller observed 6,512.897 seconds from controller request to its terminal tool return. The producer recorded 6,851.387 seconds across the 360 rows. The independent reconstruction established a 6,882.897-second lower bound on producer charges and a measured peak of 2,094,612,480 bytes for the observed prefix. Full C measured charge and peak remain unknown. All 217 original responses and observed exits remain in the stopped archive.
+
+## Accounting and retained evidence
+
+| Account | Authorized FULL seconds | Booked | Closed unused |
+|---|---:|---:|---:|
+| B | 180 | 180 | 0 |
+| C producer | 10,800 | 10,800 | 0 |
+| C independent numerical audit | 3,600 | 0 | 3,600 |
+| C shared preparation and closeout | 180 | 180 | 0 |
+| **Total** | **14,760** | **11,160** | **3,600** |
+
+The entering known floor was 440,379 FULL seconds. The closed formal account brings it to **451,539 FULL seconds**, plus unpriced historical costs. B1's issuance lease remains released. The seven earlier held leases and both stopped R2 and R3 scientific reader leases remain held. The R3 ledger is `formal-terminal-ledger.json` (SHA-256 `a455e0bef0476a31951dd2e44cd47c34c9abf2c9918f3d8a6da17d30ecf336c6`).
+
+The independent terminal command exited 0 with `PASS_INDEPENDENT_CLOSED_FAILURE_PREFIX_AUDIT`. It verified all 217 responses and both copies of the 25,441-member archive, the native clocks and 12,058 sampler observations, the role grants and held leases. It reopened zero B1 science payloads. The complete command envelope has SHA-256 `aceb9b3b3369e8d237a965b656915bfe76523fc7229e8fb938067ceff6193c1f`. Its verdict has SHA-256 `4c8ecdf41d275ad332adc1cd27ffcdc719c1f093689b74ca8d58076c5e863e4c`. Independent engineering and terminal review booked 3,222 of the 21,600 person-seconds authorized.
+
+The external trees `native-bc-entry-20261127-r3` and `native-bc-entry-20261127-r3-backup` each hold 25,441 formal files totaling 530,657,692 bytes. Their `formal-BC-terminal-index.json` has SHA-256 `b6b6aa6f93ba41cd0aeeae55781dccdb843ed055a9f863689854627c3e168097`. The independent reviewer verified 478,917,221 bytes of row packets and associated cost receipts against the two archives and working originals. The complete row-binding check's original packet has SHA-256 `91a868528e965d708dd1262807ca7555ebb80bb073af242406fbf9cef232d0ab`.
+
+The next authorized engineering work is a public reproduction of the caller's filing failure and independent review of the repaired entry. A new C attempt requires a fresh contract, new evidence directories, protected publication, and its own successful B. Fresh H/17 confirmation requires a complete formal C pass. [Conditional confirmation and stop rules](../planning/native_c_row_return_authorization.md)
