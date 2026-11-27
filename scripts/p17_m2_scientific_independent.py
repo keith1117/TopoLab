@@ -2354,10 +2354,9 @@ def check_public_scientific_reader_return(contract, role, evidence):
     )
 
 
-def stopped_reader_successor(root, retained):
+def verify_stopped_reader(root, prior, retained):
     """Fence the closed owner's original slot before opening the shared successor slot."""
     native = acquisition.native
-    prior = root.with_name(root.name + ".cooperative-reader.lease")
     directory = native.base.nofollow_parent(prior)
     try:
         fd = os.open(prior.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory)
@@ -2377,7 +2376,7 @@ def stopped_reader_successor(root, retained):
     try:
         os.kill(record["consumer_pid"], 0)
     except ProcessLookupError:
-        return root.with_name(root.name + ".r3.cooperative-reader.lease")
+        return
     raise ValueError("retained scientific reader process still present")
 
 
@@ -2428,17 +2427,26 @@ class CheckedScientificInput(acquisition.CheckedAcquisitionInput):
 
     def _reader_lease_path(self, root):
         contract = self._scientific_contract
-        if contract.get("attempt_id") != "native-bc-entry-20261127-r3":
+        paths = helper("native_bc_paths")
+        require(contract.get("attempt_id") != "native-bc-entry-20261127-r3",
+                "closed R3 reader cannot acquire another lease")
+        if contract.get("attempt_id") != paths.ATTEMPT:
             return super()._reader_lease_path(root)
-        if contract["public_fixture_only"] and contract.get("retained_reader") is None:
+        retained = contract.get("retained_reader")
+        if contract["public_fixture_only"] and retained is None:
             return super()._reader_lease_path(root)
         if not contract["public_fixture_only"]:
-            paths = helper("native_bc_paths")
-            require(contract.get("retained_reader") == paths.PREDECESSOR_LEASE
+            require(retained == paths.PREDECESSOR_LEASES
                     and contract["input_version_id"] == paths.VERSION
                     and contract["api_metadata"]["root"] == str(paths.FORMAL_ROOT),
-                    "registered predecessor and scientific successor required")
-        return stopped_reader_successor(root, contract["retained_reader"])
+                    "registered predecessors and scientific successor required")
+        require(isinstance(retained, list) and [row["suffix"] for row in retained]
+                == [row["suffix"] for row in paths.PREDECESSOR_LEASES],
+                "both retained scientific readers required")
+        for record in retained:
+            prior = root.with_name(root.name + record["suffix"])
+            verify_stopped_reader(root, prior, record)
+        return root.with_name(root.name + ".r4.cooperative-reader.lease")
 
     def _reader_argv(self, action, role):
         require(

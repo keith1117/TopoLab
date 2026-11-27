@@ -264,43 +264,48 @@ def test_public_and_formal_input_authorities_are_disjoint(tmp_path, monkeypatch)
         .exists()
     )
 
-@pytest.mark.parametrize("live", [False, True])
-def test_successor_preserves_stopped_lease_and_serializes_roles(tmp_path, monkeypatch, live):
+@pytest.mark.parametrize("live_slot", [None, 0, 1])
+def test_successor_preserves_both_stopped_leases(tmp_path, monkeypatch, live_slot):
     science, certificate, contract = public_reader_case(tmp_path, monkeypatch)
     root = Path(contract["acquisition"]["content_root"])
-    old = root.with_name(root.name + ".cooperative-reader.lease")
-    if live:
-        pid = os.getpid()
-    else:
-        process = subprocess.Popen([sys.executable, "-I", "-c", "pass"])
-        pid = process.pid
-        assert process.wait(timeout=10) == 0
-    raw = science.canonical({"root": str(root), "lease_path": str(old), "consumer_pid": pid})
-    with old.open("xb") as stream:
-        os.fchmod(stream.fileno(), 0o600)
-        stream.write(raw)
-    identity = science.acquisition.native._physical(old.stat())
-    contract.update(attempt_id="native-bc-entry-20261127-r3", retained_reader={
-        "record_sha256": science.digest(raw),
-        "identity_sha256": science.digest(science.canonical(identity)),
-    })
+    process = subprocess.Popen([sys.executable, "-I", "-c", "pass"])
+    assert process.wait(timeout=10) == 0
+    retained, originals = [], []
+    for i, suffix in enumerate((".cooperative-reader.lease", ".r3.cooperative-reader.lease")):
+        prior = root.with_name(root.name + suffix)
+        pid = os.getpid() if live_slot == i else process.pid
+        raw = science.canonical({"root": str(root), "lease_path": str(prior), "consumer_pid": pid})
+        with prior.open("xb") as stream:
+            os.fchmod(stream.fileno(), 0o600)
+            stream.write(raw)
+        physical = science.acquisition.native._physical(prior.stat())
+        retained.append({"suffix": suffix, "record_sha256": science.digest(raw),
+                         "identity_sha256": science.digest(science.canonical(physical))})
+        originals.append((prior, raw, physical))
+    contract.update(attempt_id="native-bc-entry-20261127-r4", retained_reader=retained)
+
     def grant(role):
         return science.grant_scientific_input(
             certificate, contract, role, public_admission(science, contract)
         )
+
+    successor = root.with_name(root.name + ".r4.cooperative-reader.lease")
     producer = grant(PRODUCER)
-    if live:
+    if live_slot is not None:
         with pytest.raises(ValueError, match="process still present"):
             producer.acquire_reader(PRODUCER)
-        assert not root.with_name(root.name + ".r3.cooperative-reader.lease").exists()
+        assert not successor.exists()
     else:
         lease = producer.acquire_reader(PRODUCER)
-        assert Path(lease.path) == root.with_name(root.name + ".r3.cooperative-reader.lease")
+        assert Path(lease.path) == successor
         with pytest.raises(ValueError, match="already held"):
             grant(AUDITOR).acquire_reader(AUDITOR)
         assert lease.pending_return()["lease_path"] == lease.path
-        old.write_bytes(raw.replace(b"consumer_pid", b"consumer_pIx"))
+    for prior, raw, physical in originals:
+        assert prior.read_bytes() == raw
+        assert science.acquisition.native._physical(prior.stat()) == physical
+    if live_slot is None:
+        prior, raw, _ = originals[1]
+        prior.write_bytes(raw.replace(b"consumer_pid", b"consumer_pIx"))
         with pytest.raises(ValueError, match="identity changed"):
             producer._reader_lease_path(root)
-        return
-    assert old.read_bytes() == raw and science.acquisition.native._physical(old.stat()) == identity

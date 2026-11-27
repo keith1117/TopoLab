@@ -17,6 +17,8 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
+R4 admission requires the [journal contract](docs/planning/native_c_journal_return.md), its [independent review](docs/validation/native_c_journal_receipt.md) and the latest external handoff. Verify the exact protected release and the original B receipt on that release before dispatching C.
+
 Before starting or resuming B/C, read the [R3 terminal report](docs/validation/native_c_producer_journal_stop.md) and the latest external handoff. R3 formal B passed. Its C producer filed all 360 rows and exited 0, then the caller stopped before the numerical auditor. Preserve both failed scientific reader leases. The [B1 certificate](docs/validation/formal_input_receipt_certificate.md) remains issued and its lease released. The [execution authorization](docs/planning/native_c_row_return_authorization.md) requires fresh B before each C and a complete C pass before new-sample H/17 confirmation. Uniform remains the default and full v2 remains open.
 
 ## Provenance boundary

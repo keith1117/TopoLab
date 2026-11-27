@@ -2,6 +2,10 @@
 
 Updated 2026-11-27 UTC. **Full v2 remains open.** Uniform remains the default and fixed P/17 is unrepaired.
 
+## R4 controller receipt passed independent source review
+
+The reviewed caller reconstructed all 217 genuine replies from the stopped R3 controller. The second candidate passed three public write and failure cases. The reviewer checked 596 files against both archives and verified the 445-file software freeze. Formal admission requires four passing PR checks, four on the exact merge, independent release there and a fresh B. The entering ledger is 451,539 known FULL seconds plus historical unpriced costs. [Public results](validation/native_c_journal_receipt.md) · [Execution contract](planning/native_c_journal_return.md)
+
 ## Formal B passed and the C caller stopped after 360 filed rows
 
 On protected science commit `292bf9cf`, the producer filed 18/18 references and 342/342 queries and exited 0. Platform review rejected the caller's 217-response filing request at its 64,000-byte limit. The producer recorded three H/17 failures with fallback. An independent archive review checked the producer's records. The independent numerical role received zero dispatches, so H/17 and end-to-end speed remain unevaluated. The R3 ledger closed at **451,539 known FULL seconds** plus unpriced costs. Both failed scientific reader leases remain held. The authorized successor begins with a public replay of the stopped caller. [Formal result, independent evidence and ledger](validation/native_c_producer_journal_stop.md)

@@ -1,5 +1,7 @@
 # Planning index
 
+[R4 contract for native C journal filing, formal B and the exposed panel](native_c_journal_return.md)
+
 [Native C repair, bounded retries and H/17 confirmation](native_c_row_return_authorization.md)
 
 The owner authorized one native B preflight and a conditional fixed C panel on the certified B1 version. The contract gives B 180 FULL seconds through the caller receipt and assigns three separate caps to C. [Authorized stages and stop rules](b1_native_bc_entry_repair_authorization.md)

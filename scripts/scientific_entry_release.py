@@ -9,7 +9,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 AUTHOR = "/root/r3_independent"
-PUBLIC = "/private/tmp/topolab-native-bc-public-20261127-r3-merged-rows-positive"
+PUBLIC = "/private/tmp/topolab-native-bc-public-20261127-r4-merged-rows-positive"
 CHECKS = {"quality", "frontend", "clean-linux-smoke", "i1-native-software"}
 FORMAL_CONTRACT = REPO / "docs/planning/p17_m2_scientific_execution_protocol.json"
 
@@ -92,6 +92,7 @@ def check_independent(contract, contract_sha, main, release_sha):
         and result["host"] == "Apple M2"
         and result["actor"] == AUTHOR
         and result["public_rows_sha256"] == sha(pair(root, "independent-row-return-merged.json"))
+        and result["journal_review_sha256"] == sha(pair(root, "independent-r4-journal-merged.json"))
         and result["prerow_stop_sha256"] == sha(pair(root, "merged-public-prerow-stop.json"))
         and result["public_raw_B_sha256"] == sha(pair(root, "merged-public-B-clock-return.json"))
         and result["public_caller_sha256"] == sha(pair(root, "merged-public-B-caller-receipt.json"))
@@ -157,6 +158,37 @@ def checked_prerow_stop(root, freeze, current):
          and stop["payload_exit"] != 0 and stop["controller_exit"] != 0
          and stop["c_wall_to_return_seconds"] > 0 and stop["conservative_recorded_peak_bytes"] > 0,
          "registered pre-panel write failure and actual zero-row STOP required")
+    return sha(raw)
+
+
+def checked_journal(root, contract, contract_sha, current):
+    name = "independent-r4-journal-check.py"
+    raw = pair(root, "independent-r4-journal-merged.json")
+    actual = json.loads(pair(root, "independent-r4-journal-merged-actual.json"))
+    review = json.loads(pair(root, "independent-source-review.json"))
+    expected = ["-B", "-I", str(root / name), "--phase", "merged",
+                "--formal-contract-sha", contract_sha]
+    need(actual["exit"] == 0 and Path(actual["argv"][0]).is_absolute()
+         and actual["argv"][1:] == expected and actual["cwd"] == str(REPO)
+         and actual["stdout"].encode("utf-8") == raw and actual["stderr"] == "",
+         "original exact-merge long journal check required")
+    proof = json.loads(raw)
+    control = module("p17_m2_scientific_orchestration")
+    need(proof["status"] == "PASS_INDEPENDENT_R4_JOURNAL_AND_LARGE_PREFIX"
+         and proof["actor"] == AUTHOR and proof["phase"] == "merged"
+         and proof["attempt_id"] == contract["attempt_id"] and proof["source_main"] == current
+         and proof["scientific_contract_sha256"] == contract_sha
+         and proof["source_freeze_sha256"] == sha(control.canonical(contract["source_freeze"]))
+         and proof["driver_sha256"] == contract["source_freeze"]["scripts/native_bc_api_driver.js"]
+         and proof["checker_sha256"] == review["journal_checker_sha256"] == sha(pair(root, name))
+         and proof["prior_terminal_prefix_sha256"]
+         == "4c8ecdf41d275ad332adc1cd27ffcdc719c1f093689b74ca8d58076c5e863e4c"
+         and proof["formal_roles"] == proof["scientific_payload_opens"] == 0,
+         "independent long journal proof or closed-source identity differs")
+    positive = proof["positive"]
+    need(positive["true_replies"] >= 217 and positive["final_outer_exit"] == 0
+         and positive["truncation"] is False and 0 < positive["source_expression_bytes"] <= 64000,
+         "observed long control return and bounded public entry required")
     return sha(raw)
 
 
@@ -312,6 +344,7 @@ def main():
             root, args.contract_sha, sha(control.canonical(contract["source_freeze"])), current
         ),
         "actor": AUTHOR,
+        "journal_review_sha256": checked_journal(root, contract, args.contract_sha, current),
         "prerow_stop_sha256": checked_prerow_stop(root, contract["source_freeze"], current),
         "main": current,
         "contract_sha256": args.contract_sha,

@@ -7,22 +7,12 @@ Full prior conversation exposure is disclosed in the independent stage-A report.
 
 import hashlib
 import json
+import math
 import re
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-import numpy as np
-
-from topolab.experiment import ExperimentCase
-from topolab.fem import build_constrained_dofs, build_load_vector
-from topolab.mesh import generate_structured_hex8
-from topolab.model import FaceLoad, FixedFaceSupport, PointLoad
-from topolab.simp import (
-    apply_density_filter,
-    backpropagate_density_gradient,
-    build_density_filter,
-    evaluate_compliance,
-    optimality_criteria_update,
-)
+if TYPE_CHECKING:
+    from topolab.experiment import ExperimentCase
 
 SCHEMA = "topolab.v2.m2-homotopy-witness.v1"
 POINT_FIELDS = {
@@ -50,10 +40,17 @@ def _require(condition: bool, message: str) -> None:
         raise ValueError(message)
 
 
+def evaluate_compliance(*args, **kwargs):
+    """Keep the per-solve callback available to the scientific caller's FEM counter."""
+    from topolab.simp import evaluate_compliance as solve
+
+    return solve(*args, **kwargs)
+
+
 def _number(value: Any, name: str, *, positive: bool = False) -> float:
     _require(type(value) in (int, float), name + " must be a finite number")
     result = float(value)
-    _require(bool(np.isfinite(result)), name + " must be finite")
+    _require(math.isfinite(result), name + " must be finite")
     _require(result > 0 if positive else result >= 0, name + " is out of range")
     return result
 
@@ -69,6 +66,8 @@ def _sequence(value: Any, name: str) -> list[Any]:
 
 
 def _vector(value: Any, count: int, name: str) -> Any:
+    import numpy as np
+
     rows = _sequence(value, name)
     _require(len(rows) == count, name + " length differs")
     _require(all(type(v) in (int, float) for v in rows), name + " must be numeric")
@@ -78,6 +77,8 @@ def _vector(value: Any, count: int, name: str) -> Any:
 
 
 def _close(left: Any, right: Any, message: str) -> None:
+    import numpy as np
+
     _require(bool(np.allclose(left, right, rtol=1e-9, atol=0)), message)
 
 
@@ -121,7 +122,7 @@ def _stop(points: list[dict[str, Any]], tolerance: float) -> bool:
 
 
 def audit_witness(
-    case: ExperimentCase,
+    case: "ExperimentCase",
     witness: dict[str, Any],
     reference: float | None = None,
     accepted: bool = False,
@@ -133,6 +134,18 @@ def audit_witness(
     checked, not represented as a replay of the entire p3 trajectory. With no
     reference, the compliance-ratio criterion remains unchecked explicitly.
     """
+    import numpy as np
+
+    from topolab.fem import build_constrained_dofs, build_load_vector
+    from topolab.mesh import generate_structured_hex8
+    from topolab.model import FaceLoad, FixedFaceSupport, PointLoad
+    from topolab.simp import (
+        apply_density_filter,
+        backpropagate_density_gradient,
+        build_density_filter,
+        optimality_criteria_update,
+    )
+
     _require(type(accepted) is bool, "accepted must be boolean")
     _require(
         type(witness) is dict
@@ -782,11 +795,12 @@ def audit_exit_binding(
 
 def audit_public_fixture(payload: dict[str, Any], *, fixture_bytes: bytes) -> dict[str, Any]:
     """Rebuild only the literal NEW seed17 public model, encoding and projection."""
+    import numpy as np
     import torch
 
     from topolab.b2_9_vector_load import encode_vector_load_case
     from topolab.b2_12_context_cnn import ContextCNN
-    from topolab.experiment import project_design_density
+    from topolab.experiment import ExperimentCase, project_design_density
     from topolab.problem import TopologyProblem
 
     _require(

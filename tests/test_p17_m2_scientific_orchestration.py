@@ -20,6 +20,57 @@ def load():
     return module
 
 
+def test_sampler_profiles_bind_every_member_and_both_caps(tmp_path):
+    module = load()
+    samples = {f"sampler-{i}.time": f"profile {i}\n".encode() for i in range(2)}
+    helpers = [{"profile": name, "profile_sha256": module.sha(raw)}
+               for name, raw in samples.items()]
+    for name, raw in samples.items():
+        (tmp_path / name).write_bytes(raw)
+    size = sum(map(len, samples.values()))
+    assert module.read_sampler_profiles(tmp_path, helpers, 2, size) == (samples, size)
+    with pytest.raises(ValueError, match="TOTAL_CAP"):
+        module.read_sampler_profiles(tmp_path, helpers, 1, size)
+    with pytest.raises(ValueError, match="byte cap"):
+        module.read_sampler_profiles(tmp_path, helpers, 2, size - 1)
+    with pytest.raises(ValueError, match="unregistered"):
+        module.read_sampler_profiles(tmp_path, helpers[::-1], 2, size)
+    (tmp_path / helpers[0]["profile"]).write_bytes(b"changed 0\n")
+    with pytest.raises(ValueError, match="digest differs"):
+        module.read_sampler_profiles(tmp_path, helpers, 2, size)
+
+
+@pytest.mark.parametrize("replace", ["file", "parent"])
+def test_sampler_profiles_rebind_literal_names_after_final_close(tmp_path, monkeypatch, replace):
+    module = load()
+    owner = module.load("p17_m2_content_verified_control")
+    directory = tmp_path / "original"
+    directory.mkdir()
+    name, raw = "sampler-0.time", b"meter\n"
+    (directory / name).write_bytes(raw)
+    open_directory = owner.nofollow_directory
+    opens = []
+
+    def replace_at_close(path):
+        if opens:
+            if replace == "file":
+                copy = directory / "other"
+                copy.write_bytes(raw)
+                copy.replace(directory / name)
+            else:
+                directory.rename(tmp_path / "old")
+                directory.mkdir()
+                (directory / name).write_bytes(raw)
+        opens.append(path)
+        return open_directory(path)
+
+    monkeypatch.setattr(owner, "nofollow_directory", replace_at_close)
+    helpers = [{"profile": name, "profile_sha256": module.sha(raw)}]
+    with pytest.raises(ValueError, match="(directory|identity) changed"):
+        module.read_sampler_profiles(directory, helpers, 1, len(raw))
+    assert opens == [directory, directory]
+
+
 def test_new_native_log_reader_accepts_real_empty_log_but_old_source_reader_refuses(tmp_path):
     module = load()
     path = tmp_path / "new-native.log"

@@ -3,6 +3,8 @@
 import hashlib
 import importlib.util
 import json
+import subprocess
+import sys
 from copy import deepcopy
 from pathlib import Path
 
@@ -269,6 +271,22 @@ def test_audit_actual_candidate_as_subject_after_independent_authorship(active):
     ).model_dump(mode="json")
     result = checker.audit_witness(case, actual, original["result"]["compliance"], accepted=True)
     assert result["converged"] and result["reference_checked"]
+
+
+def test_resource_audit_can_start_without_scientific_packages():
+    subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-S",
+            "-c",
+            "import runpy, sys\n"
+            "audit = runpy.run_path(sys.argv[1])\n"
+            "assert audit['audit_role_charge'](1, 2, 0, 0, 12) == 12",
+            str(checker.__file__),
+        ],
+        check=True,
+    )
 
 
 def resource_evidence(platform="darwin"):

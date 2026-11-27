@@ -1,5 +1,7 @@
 # Validation evidence index
 
+[R4 controller receipt, public write failures and independent source review](native_c_journal_receipt.md)
+
 Formal R3 B passed. The C producer filed all 360 rows, then the caller stopped before the independent numerical role. [Original tool returns, independent prefix audit and ledger](native_c_producer_journal_stop.md)
 
 [Native C row filing and bounded failure returns](native_c_row_return.md)
