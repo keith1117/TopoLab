@@ -1,5 +1,7 @@
 # Validation evidence index
 
+[Native C row filing and bounded failure returns](native_c_row_return.md)
+
 Formal native B passed. C stopped while filing its first uniform reference. [Raw return identities, archive and closed ledger](native_bc_first_reference_stop.md)
 
 The post-B1 entry repair compares the historical issuer with the prospective scientific release and measures B through the caller’s final tool return. [Original counterexamples and public checks](native_bc_entry_repair.md)

@@ -1036,7 +1036,7 @@ def produce(contract, consumer, *, contract_sha256, checkpoint, writer):
         raise
 
 
-def public_fixture_panel(*, writer):
+def public_fixture_panel(*, writer, contract_sha256=None, checkpoint=lambda: None):
     """Exercise the same complete streaming/charge loop using only NEW tiny data."""
     query = load("p17_m2_homotopy")
     case = query.read_public_manifest(
@@ -1065,8 +1065,8 @@ def public_fixture_panel(*, writer):
         table,
         assets,
         None,
-        contract_sha256=query.PUBLIC_FIXTURE_SHA256,
-        checkpoint=lambda: None,
+        contract_sha256=contract_sha256 or query.PUBLIC_FIXTURE_SHA256,
+        checkpoint=checkpoint,
         writer=writer,
         public_fixture_only=True,
         role_started=started,
