@@ -18,6 +18,7 @@ import stat
 import subprocess
 import sys
 import time
+from operator import attrgetter
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -515,7 +516,7 @@ def read_contract(path, expected_sha, *, payload_role=None, publication_check=Fa
     if public_path or value.get("entry_repair") == entry_paths.IDENTITY:
         root = value["api_metadata"]["root"]
         is_public = entry_paths.scope(root) == "ENGINEERING_PUBLIC"
-        prior_lease = None if is_public else entry_paths.PREDECESSOR_LEASE
+        prior_lease = None if is_public else entry_paths.PREDECESSOR_LEASES
         if (value.get("attempt_id") != entry_paths.ATTEMPT
                 or value.get("retained_reader") != prior_lease
                 or value.get("public_row_fixture") != entry_paths.row_fixture(root)
@@ -713,6 +714,54 @@ def bind_exit(root, label, role, contract_sha, observed_exit):
     return result
 
 
+def read_sampler_profiles(directory, helpers, remaining_files, remaining_bytes):
+    """Read the registered sibling files once, then rebind all names at the literal path."""
+    if len(helpers) > remaining_files:
+        raise ValueError("NEW_NATIVE_EVIDENCE_TOTAL_CAP")
+    open_directory = load("p17_m2_content_verified_control").nofollow_directory
+    identity = attrgetter("st_dev", "st_ino", "st_mode", "st_nlink", "st_size", "st_mtime_ns")
+    profiles, identities = {}, {}
+    used = 0
+    parent = open_directory(directory)
+    try:
+        for index, helper in enumerate(helpers):
+            name = f"sampler-{index}.time"
+            if helper.get("profile") != name:
+                raise ValueError(f"unregistered native sampler profile: {name}")
+            declared = os.stat(name, dir_fd=parent, follow_symlinks=False)
+            if not (stat.S_ISREG(declared.st_mode) and declared.st_nlink == 1
+                    and 0 < declared.st_size <= min(1024**2, remaining_bytes - used)):
+                raise ValueError(f"native sampler profile kind or byte cap: {name}")
+            expected = identity(declared)
+            fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=parent)
+            with os.fdopen(fd, "rb") as stream:
+                if identity(os.fstat(fd)) != expected:
+                    raise ValueError(f"native sampler identity changed before read: {name}")
+                raw = stream.read(declared.st_size + 1)
+                if identity(os.fstat(fd)) != expected or len(raw) != declared.st_size:
+                    raise ValueError(f"native sampler changed during read: {name}")
+            if sha(raw) != helper["profile_sha256"]:
+                raise ValueError(f"native sampler digest differs: {name}")
+            profiles[name], identities[name] = raw, expected
+            used += len(raw)
+
+        # The first descriptor pins every read to the actual measured directory.
+        # A second no-follow walk after the last close detects a replaced parent,
+        # including replacement by a different directory with identical contents.
+        closing = open_directory(directory)
+        try:
+            if not os.path.samestat(os.fstat(parent), os.fstat(closing)):
+                raise ValueError("native sampler directory changed at close")
+            for name, expected in identities.items():
+                if identity(os.stat(name, dir_fd=closing, follow_symlinks=False)) != expected:
+                    raise ValueError(f"native sampler identity changed at closing path: {name}")
+        finally:
+            os.close(closing)
+    finally:
+        os.close(parent)
+    return profiles, used
+
+
 def load_role_evidence(contract, role, *, b_prefix_only=False):
     """Replay only finite NEW registered role files; never original sources."""
     root = Path(contract["roles"][role]["root"])
@@ -720,16 +769,20 @@ def load_role_evidence(contract, role, *, b_prefix_only=False):
         root, 65536, 512 * 1024**2, source_identity_checks=True
     )
     cache = {}
+    cached_bytes = 0
+    sampler_files = 0
     log_facts = {}
 
     def read(relative, cap=1024**2):
+        nonlocal cached_bytes
         if relative not in cache:
             if relative.endswith(".log"):
                 raw, log_facts[relative] = read_native_log(root / relative, cap)
                 cache[relative] = raw
             else:
                 cache[relative] = reader.read(relative, cap)
-            if len(cache) > 65536 or sum(map(len, cache.values())) > 512 * 1024**2:
+            cached_bytes += len(cache[relative])
+            if len(cache) + sampler_files > 65536 or cached_bytes > 512 * 1024**2:
                 raise ValueError("NEW_NATIVE_EVIDENCE_TOTAL_CAP")
         return cache[relative]
 
@@ -742,11 +795,19 @@ def load_role_evidence(contract, role, *, b_prefix_only=False):
             "controls/" + spec["name"] if role == "resource-preflight" else "native/" + spec["name"]
         )
         record = parsed(directory + "/command.json", 128 * 1024**2)
-        profiles = {
-            item["profile"]: read(directory + "/" + item["profile"])
-            for item in record["helpers"]
-            if item.get("profile")
-        }
+        if role == "resource-preflight":
+            profiles = {
+                item["profile"]: read(directory + "/" + item["profile"])
+                for item in record["helpers"]
+                if item.get("profile")
+            }
+        else:
+            profiles, size = read_sampler_profiles(
+                root / directory, record["helpers"], 65536 - len(cache) - sampler_files,
+                512 * 1024**2 - cached_bytes,
+            )
+            sampler_files += len(profiles)
+            cached_bytes += size
         cases.append(
             {
                 "name": spec["name"],

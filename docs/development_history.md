@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-27 UTC — Long C controller replies and cold resource verification
+
+R4 preserved each controller tool return in a bounded journal. The first public candidate exceeded its helper timeout. The second passed independent source review after cold-process measurement and public positive and failure tests. [Evidence](validation/native_c_journal_receipt.md)
+
 ## 2026-11-27 UTC — Formal C producer completed and caller filing stopped
 
 After its new formal B passed, R3 filed all 360 production rows. The caller stopped after the controller exited 0. The original tool history, three producer-labeled H/17 fallbacks, retained reader lease and closed 11,160 FULL charge are archived. [Terminal report](validation/native_c_producer_journal_stop.md)

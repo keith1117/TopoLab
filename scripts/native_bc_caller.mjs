@@ -5,14 +5,11 @@ import {fileURLToPath} from 'node:url';
 import {constants} from 'node:fs';
 import * as crypto from 'node:crypto';
 import * as ingress from './p17_m2_scientific_tool_ingress.mjs';
+import {journalJSON as json,journalLink,replayJournal} from './native_bc_journal.mjs';
 import * as observer from './p17_m2_scientific_metadata.mjs';
 import {buildMetadataManifest} from './p17_m2_scientific_metadata_manifest.mjs';
 import {entryRoot,formalRoot,rowFixture} from './native_bc_paths.mjs';
 const sha=raw=>crypto.createHash('sha256').update(raw).digest('hex');
-// Keep the complete tool request, including a localized approval prompt, in
-// the ASCII metadata format accepted by both independent parsers.
-const json=value=>Buffer.from(JSON.stringify(value).replace(/[^\x00-\x7f]/g,
-  ch=>'\\u'+ch.charCodeAt(0).toString(16).padStart(4,'0'))+'\n','ascii');
 const requireValue=(ok,msg)=>{if(!ok)throw Error(msg);};
 const labels=['controller','binder','verifier','final-observer'];
 const expand=(args,sha)=>args.map(word=>word.replaceAll('@SCIENTIFIC_CONTRACT_SHA256@',sha));
@@ -30,7 +27,7 @@ export async function openCaller(path,digest,author) {
   observer.configure(crypto);
   const raw=await read(path,4*MiB,digest);
   const c=observer.lossless(raw,true).value,root=c.api_metadata.root;
-  requireValue(sha(raw)===digest&&c.entry_repair==='native-bc-entry-20261126-r2'&&c.attempt_id==='native-bc-entry-20261127-r3'&&
+  requireValue(sha(raw)===digest&&c.entry_repair==='native-bc-entry-20261126-r2'&&c.attempt_id==='native-bc-entry-20261127-r4'&&
     c.public_row_fixture===rowFixture(root)&&
     entryRoot(root,c.public_fixture_only)&&(c.public_fixture_only?path===root+ext:path===formal)&&['/root','/root/r3_independent'].includes(author),
     'registered post-B1 caller, contract and root required');
@@ -69,7 +66,7 @@ async function writeRaw(path,raw) {
 }
 
 async function independentRelease(s) {
-  const fixed='/Users/keith1117/Documents/TopoLab-data/native-bc-entry-20261127-r3';
+  const fixed='/Users/keith1117/Documents/TopoLab-data/native-bc-entry-20261127-r4';
   requireValue(s.contract.scientific_release.evidence_root===fixed,'registered release directory required');
   const pair=async name=>{
     const p=fixed+'/'+name,b=fixed+'-backup/'+name;
@@ -94,6 +91,7 @@ async function independentRelease(s) {
     proof.public_raw_B_sha256===sha(await pair('merged-public-B-clock-return.json'))&&
     proof.public_caller_sha256===sha(await pair('merged-public-B-caller-receipt.json'))&&
     proof.public_rows_sha256===sha(await pair('independent-row-return-merged.json'))&&
+    proof.journal_review_sha256===sha(await pair('independent-r4-journal-merged.json'))&&
     proof.prerow_stop_sha256===sha(await pair('merged-public-prerow-stop.json')),
     'exact-merge release/public exercise contract differs');
 }
@@ -159,18 +157,32 @@ export async function clockGuard(s,role,label) {
   return true;
 }
 
-export async function journal(s,role,label,index,kind,value) {
-  argvFor(s,role,label);
-  requireValue(Number.isSafeInteger(index)&&index>=0&&index<=4096&&
-    ['intent','returned','exception','filing-error'].includes(kind),'invalid API journal key');
-  const path=s.root+'/'+role+'-'+label+'-api-'+index+'-'+kind+'.json';
-  await writeRaw(path,json(value));
-  return true;
+function journalBinding(s,role,label) {
+  return {contractSHA256:s.contractSHA256,author:s.author,role,label,argv:argvFor(s,role,label),
+    cwd:s.contract.runtime.cwd,byteCap:s.contract.api_metadata.limits.max_record_bytes};
 }
 
-export async function receive(s,role,label,actual) {
-  const argv=argvFor(s,role,label);
-  requireValue(actual.author===s.author&&JSON.stringify(actual.argv)===JSON.stringify(argv),'original actor/command differs');
+export async function journal(s,role,label,index,kind,value,previous) {
+  const binding=journalBinding(s,role,label);
+  requireValue(Number.isSafeInteger(index)&&index>=0&&index<=4096&&
+    ['intent','returned','exception','filing-error'].includes(kind),'invalid API journal key');
+  const raw=json(value),path=s.root+'/'+role+'-'+label+'-api-'+index+'-'+kind+'.json';
+  const link=['intent','returned'].includes(kind)?journalLink(binding,index,kind,raw,previous):null;
+  await writeRaw(path,raw);
+  return link;
+}
+
+export async function receive(s,role,label,count,commitment) {
+  const binding=journalBinding(s,role,label),argv=binding.argv;
+  const stem=s.root+'/'+role+'-'+label;
+  requireValue(Number.isSafeInteger(count)&&count>0&&count<=4096&&
+    typeof commitment==='string'&&/^[a-f0-9]{64}$/.test(commitment),'invalid original journal commitment');
+  await writeRaw(stem+'-journal-commitment.json',json({
+    schema:'topolab.native-bc.journal-commitment.v1',contract_sha256:s.contractSHA256,
+    author:s.author,role,label,count,sha256:commitment,
+  }));
+  const actual=await replayJournal(binding,count,commitment,(index,kind,cap)=>
+    read(stem+'-api-'+index+'-'+kind+'.json',cap));
   const rows=actual.responses,last=rows.at(-1);
   const root=s.root, raw=json(actual);
   await writeRaw(root+'/'+role+'-'+label+'-actual.json',raw);
