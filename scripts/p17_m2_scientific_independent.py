@@ -1473,11 +1473,12 @@ acquisition = helper("p17_m2_source_acquisition_independent")
 class CheckedBAdmission:
     """Process-local independently replayed B; cannot be a serialized PASS."""
 
-    __slots__ = ("contract_sha256", "proof")
+    __slots__ = ("contract_sha256", "proof", "_caller_binding")
 
     def __init__(self, contract_sha256, proof, *, _authority=None):
         require(_authority is _SCIENCE_AUTHORITY, "actual checked B admission required")
         self.contract_sha256, self.proof = contract_sha256, deepcopy(proof)
+        self._caller_binding = contract_sha256, proof.get("b_caller_return_sha256")
 
     def __reduce_ex__(self, protocol):
         raise TypeError("replay actual B evidence; checked admission cannot be serialized")
@@ -1722,6 +1723,14 @@ def check_native_dispatch(contract, role, label, evidence):
         and event["start_seconds"] <= event["end_seconds"],
         "scientific actual dispatcher return/hash/argv differs",
     )
+    return _check_native_record(contract, contract_sha, role, label, spec, timed_argv, evidence)
+
+
+def _check_native_record(contract, contract_sha, role, label, spec, timed_argv, evidence):
+    """Verify actual captured process evidence after its independent caller has bound the bytes."""
+    raw, event = evidence["dispatch"], evidence["event"]
+    platform = contract["runtime"]["platform"]
+    dispatch_argv = resolve_argv(spec["dispatch_argv"], contract_sha)
     record = json.loads(raw)
     require(
         canonical(record) == raw
@@ -1916,7 +1925,8 @@ def check_shared_helper_return(contract, role, action, evidence):
 
 
 def check_shared_closeout(contract, evidence, *, role_evidence=None):
-    """Charge exactly five active helpers; do not charge the disjoint C gaps."""
+    """Charge each registered, disjoint shared helper exactly once."""
+    current = contract.get("entry_repair") == "native-bc-entry-20261126-r2"
     expected = [
         ("resource-preflight", "reservation"),
         ("scientific-producer", "reservation"),
@@ -1924,8 +1934,10 @@ def check_shared_closeout(contract, evidence, *, role_evidence=None):
         ("scientific-auditor", "reservation"),
         ("scientific-auditor", "reader-ack"),
     ]
+    if current:
+        expected = expected[1:]
     require(
-        type(evidence) is list and len(evidence) == 5,
+        type(evidence) is list and len(evidence) == len(expected),
         "complete scientific shared helper table required",
     )
     proofs, previous_end = [], None
@@ -1943,7 +1955,7 @@ def check_shared_closeout(contract, evidence, *, role_evidence=None):
         == {"resource-preflight", "scientific-producer", "scientific-auditor"},
         "complete actual scientific role lifetimes required",
     )
-    check_b_preflight(contract, role_evidence["resource-preflight"])
+    admission = check_b_preflight(contract, role_evidence["resource-preflight"])
     for role in ("scientific-producer", "scientific-auditor"):
         if contract.get("public_fixture_only", False):
             check_public_scientific_reader_return(contract, role, role_evidence[role])
@@ -1956,13 +1968,19 @@ def check_shared_closeout(contract, evidence, *, role_evidence=None):
         )
         for role, records in role_evidence.items()
     }
+    producer, auditor = timelines["scientific-producer"], timelines["scientific-auditor"]
+    p_reserve, p_ack, a_reserve, a_ack = (row["event"] for row in evidence[-4:])
+    b_end = timelines["resource-preflight"][1]
+    if current:
+        b_end = admission.proof["b_caller_end_ms"] / 1000
+    else:
+        require(evidence[0]["event"]["end_seconds"] <= timelines["resource-preflight"][0],
+                "scientific shared helpers overlap actual role lifetimes")
     require(
-        evidence[0]["event"]["end_seconds"] <= timelines["resource-preflight"][0]
-        and timelines["resource-preflight"][1] <= evidence[1]["event"]["start_seconds"]
-        and evidence[1]["event"]["end_seconds"] <= timelines["scientific-producer"][0]
-        and timelines["scientific-producer"][1] <= evidence[2]["event"]["start_seconds"]
-        and evidence[3]["event"]["end_seconds"] <= timelines["scientific-auditor"][0]
-        and timelines["scientific-auditor"][1] <= evidence[4]["event"]["start_seconds"],
+        b_end <= p_reserve["start_seconds"] and p_reserve["end_seconds"] <= producer[0]
+        and producer[1] <= p_ack["start_seconds"]
+        and p_ack["end_seconds"] <= a_reserve["start_seconds"]
+        and a_reserve["end_seconds"] <= auditor[0] and auditor[1] <= a_ack["start_seconds"],
         "scientific shared helpers overlap actual role lifetimes",
     )
     active = sum(item["active_charge_seconds"] for item in proofs) + 10
@@ -1970,6 +1988,7 @@ def check_shared_closeout(contract, evidence, *, role_evidence=None):
     return {
         "execution_identity": IDENTITY,
         "scientific_contract_sha256": check_contract(contract),
+        **({"b_admission_proof": admission.proof} if current else {}),
         "status": "SCIENTIFIC_SHARED_HELPERS_ACTUAL_RETURNS_VERIFIED",
         "FULL_charged_seconds": 180,
         "active_helper_charge_seconds": active,
@@ -2221,6 +2240,8 @@ def _check_role_envelope(contract, role, evidence, *, _public_reader=False):
     peak = max(max(peaks) + outer_peaks[0], max(outer_peaks[1:]), reservation["native_rss_bytes"])
     require(peak <= 4294967296, "FAIL_RESOURCE_CAP: scientific recorded-chain envelope")
     return {
+        **({"b_native_outer_seconds": sum(outer_walls)} if role == "resource-preflight"
+           and contract.get("entry_repair") == "native-bc-entry-20261126-r2" else {}),
         "execution_identity": IDENTITY,
         "scientific_contract_sha256": contract_sha,
         "role": role,
@@ -2237,8 +2258,24 @@ def _check_role_envelope(contract, role, evidence, *, _public_reader=False):
     }
 
 
-def check_b_preflight(contract, evidence):
+def checked_b_native_prefix(contract, evidence):
+    """Independently replay the complete native evidence. The caller still needs its exit."""
+    clock = helper("native_b_clock")
+    require(clock.enabled(contract), "R2 B clock policy required")
     proof = _check_role_envelope(contract, "resource-preflight", evidence)
+    audit = helper("p17_m2_scientific_independent")
+    prefix = clock.prefix_subject(contract, evidence, proof, audit)
+    return proof, prefix
+
+
+def check_b_preflight(contract, evidence):
+    if contract.get("entry_repair") == "native-bc-entry-20261126-r2":
+        proof, prefix = checked_b_native_prefix(contract, evidence)
+        proof.update(helper("native_b_clock").complete(
+            contract, evidence, prefix, helper("p17_m2_scientific_independent"),
+        ))
+    else:
+        proof = _check_role_envelope(contract, "resource-preflight", evidence)
     proof["status"] = "PASS_PREFLIGHT_RSS_EXIT_EMPIRICAL"
     return CheckedBAdmission(
         proof["scientific_contract_sha256"], proof, _authority=_SCIENCE_AUTHORITY
@@ -2346,6 +2383,20 @@ class CheckedScientificInput(acquisition.CheckedAcquisitionInput):
         )
         return digest(Path(__file__).read_bytes())
 
+    def _reader_root(self, root):
+        if (self._scientific_contract.get("entry_repair") == "native-bc-entry-20261126-r2"
+                and not self._scientific_contract["public_fixture_only"]):
+            # Replay already checked the B1 literal and its physical identity. Each
+            # reader lease still reopens and verifies the physical directory.
+            require(
+                str(root) == self._scientific_contract["acquisition"]["content_root"]
+                == self._binding["verified_plan"]["content_root"] == self._binding["root"]
+                and root.is_absolute() and ".." not in root.parts,
+                "B1 scientific reader root differs",
+            )
+            return root
+        return super()._reader_root(root)
+
     def _reader_argv(self, action, role):
         require(
             not self._reader_failed and role in self._binding["role_views"],
@@ -2371,15 +2422,50 @@ def grant_scientific_input(certificate, contract, role, admission):
         admission.contract_sha256 == contract_sha,
         "scientific B admission belongs to another contract",
     )
+    reader = helper("p17_m2_source_verified_input")
+    issuer = reader.checked_acquisition_issuer(certificate, acquisition)
     require(
-        helper("p17_m2_source_verified_input").checked_acquisition_issuer(
-            certificate, acquisition) is not None
+        issuer is not None
         and not isinstance(certificate, CheckedScientificInput),
         "actual independently accepted acquisition certificate required",
     )
     require(role in ("scientific-producer", "scientific-auditor"), "scientific reader role differs")
     binding = deepcopy(certificate._binding)
     public = contract.get("public_fixture_only", False)
+    repair = contract.get("entry_repair") == "native-bc-entry-20261126-r2"
+    historical = binding["verified_plan"].get("execution_identity") == reader.B1_IDENTITY
+    if historical or repair:
+        require(repair, "B1 scientific contract required")
+        proof = getattr(admission, "proof", {})
+        receipt_sha = proof.get("b_caller_return_sha256")
+        require(
+            type(admission) is CheckedBAdmission
+            and proof.get("status") == "PASS_PREFLIGHT_RSS_EXIT_EMPIRICAL"
+            and proof.get("role") == "resource-preflight"
+            and proof.get("scientific_contract_sha256") == contract_sha
+            and proof.get("actual_final_verifier_exit_observed") is True
+            and type(receipt_sha) is str and re.fullmatch(r"[0-9a-f]{64}", receipt_sha)
+            and getattr(admission, "_caller_binding", None) == (contract_sha, receipt_sha),
+            "actual complete same-contract B caller return required",
+        )
+        if public:
+            require(not historical and binding["version_id"] != reader.B1_VERSION
+                    and binding["plan_sha256"] != reader.B1_PLAN,
+                    "public grant cannot use B1")
+        else:
+            require(
+                historical and type(certificate).__module__ == reader.B1_ISSUER_MODULE
+                and issuer.REGISTERED_IDENTITY == reader.B1_IDENTITY
+                and binding["plan_sha256"] == reader.B1_PLAN
+                and digest(canonical(binding["verified_plan"])) == reader.B1_PLAN
+                and binding["version_id"] == reader.B1_VERSION
+                and digest(canonical(binding["manifest"])) == reader.B1_VERSION
+                and binding["root"] == binding["verified_plan"]["content_root"]
+                and binding["source_input_accepted"] is True
+                and binding["formal_authority"] is True
+                and binding["B_C_admission"] is False,
+                "historically verified B1 issuer, plan and version required",
+            )
     required_scope = acquisition.REHEARSAL_SCOPE if public else acquisition.FORMAL_SCOPE
     require(
         binding["scope"] == required_scope
@@ -2403,6 +2489,10 @@ def grant_scientific_input(certificate, contract, role, admission):
             [*binding["role_views"][role], *binding["role_views"]["reference-compatibility"]]
         )
     )
+    if repair:
+        require(binding["role_views"] == binding["manifest"]["role_views"]
+                and binding["role_views"]["reference-compatibility"] == ["uniform-scalars.json"],
+                "certified role views and uniform scalar permission required")
     require(
         contract["input_role_views"][role] == view
         and len(view) == (542 if role == "scientific-producer" else 1070),

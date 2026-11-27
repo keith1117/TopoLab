@@ -38,6 +38,7 @@ const roles=['resource-preflight','scientific-producer','scientific-auditor'];
 const labels=['controller','binder','verifier','final-observer'];
 const ID='topolab.v2.p17-m2-native-homotopy.rss.v1';
 const CAP=4294967296;
+const fullBClock = contract => contract.entry_repair === 'native-bc-entry-20261126-r2';
 const resolve = (a,sha) => a.map(s=>s.replaceAll('@SCIENTIFIC_CONTRACT_SHA256@',sha));
 
 // Compact JSON grammar; duplicate keys rejected. Unsafe integer tokens become
@@ -94,11 +95,17 @@ export function validateDispatch(contract,role,label,e){
   const sha=e.contract_sha256,shared=['reservation','reader-ack'].includes(label);
   const spec=shared?contract.shared_helpers[role][label]:contract.roles[role].native_dispatch[label];
   const argv=resolve(shared?spec.argv:contract.roles[role].exit_argv[label],sha),da=resolve(spec.dispatch_argv,sha);
-  const event=e.event,parsed=lossless(e.dispatch,true),r=parsed.value,span=event.end_seconds-event.start_seconds;
+  const event=e.event,span=event.end_seconds-event.start_seconds;
   need(eq(argv.slice(0,4),['/usr/bin/time','-l','-o',spec.profile_path])&&spec.timeout_seconds>0&&spec.timeout_seconds<=contract.roles[role].FULL_seconds,'registered native prefix/timeout');
   need(event.complete===true&&event.actual_tool_exit_code===0&&event.exit_code===0&&event.dispatcher_exit===0&&finite(event.start_seconds)&&finite(event.end_seconds)&&span>=0,'actual tool return missing');
   need(eq(event.argv,argv)&&eq(event.dispatch_argv,da)&&event.dispatch_stdout===e.dispatch.toString('ascii')&&event.dispatch_stdout_sha256===hash(e.dispatch),'actual argv/raw stdout anchor');
   need(event.stdout_sha256===hash(e.log)&&event.profile_sha256===hash(e.profile),'actual log/profile anchor');
+  return auditCapturedDispatch(contract,role,label,spec,argv,da,e);
+}
+
+function auditCapturedDispatch(contract,role,label,spec,argv,da,e){
+  const sha=e.contract_sha256,event=e.event,parsed=lossless(e.dispatch,true),r=parsed.value;
+  const span=event.end_seconds-event.start_seconds;
   need(r.schema==='topolab.v2.m2-native-dispatch.v1'&&r.execution_identity===ID&&r.contract_sha256===sha&&r.role===role&&r.label===label&&eq(r.argv,argv)&&eq(r.dispatch_argv,da),'dispatch identity');
   need(r.status==='COMPLETED_WITH_NATIVE_RETURN'&&r.exit_code===0&&r.group_gone===true&&eq(r.cleanup_errors,[])&&eq(r.descendant_groups,[])&&r.watchdog_helper===null,'dispatch outcome/coverage');
   need(r.log_sha256===hash(e.log)&&r.profile_sha256===hash(e.profile),'dispatch hashes');
@@ -116,6 +123,53 @@ export function validateDispatch(contract,role,label,e){
   need(event.start_seconds-1<=Number(r.started_unix_ns)/1e9&&Number(r.returned_unix_ns)/1e9<=event.end_seconds+1&&finite(r.elapsed_seconds)&&r.elapsed_seconds<=span+1&&r.elapsed_seconds<=spec.timeout_seconds+10&&measured.wall_seconds<=r.elapsed_seconds+1&&r.timer_native_exit.native.wall_seconds<=r.elapsed_seconds+1,'dispatch actual wall');
   const peak=measured.rss_bytes+timerRSS+Math.max(r.self_rss_bytes_before_flush,r.self_rss_bytes_after_flush);need(peak<=CAP,'outer native resource cap');
   return {role,label,peak_bytes:peak,command_rss_bytes:measured.rss_bytes,timer_rss_bytes:timerRSS,self_rss_bytes:Math.max(r.self_rss_bytes_before_flush,r.self_rss_bytes_after_flush),elapsed_seconds:r.elapsed_seconds,active_charge_seconds:span+1,dispatch_sha256:hash(e.dispatch),event,record:r,native:measured};
+}
+
+export function auditClockWatch(contract,sha,role,phase,resource,profile,log,start,end){
+  const publication=phase==='publication', b=role==='resource-preflight', reg=publication?
+    contract.roles[role]:contract[b?'b_caller_clock':'c_caller_clock'];
+  need(publication||(phase==='verification'&&(b||role==='scientific-auditor')),'unknown clock phase');
+  const argv=resolve(publication?reg.publication_timed_argv:reg.verification_timed_argv,sha);
+  const da=resolve(publication?reg.publication_argv:reg.verification_argv,sha);
+  const path=publication?reg.publication_profile_path:contract.api_metadata.root+'/'+(b?'B':'C')+'-verify.time';
+  need(contract.runtime.platform==='darwin'&&eq(argv.slice(0,4),['/usr/bin/time','-l','-o',path])
+    &&argv.length>4&&resource.length>0&&resource.length<=4*1024**2,'bounded clock native evidence');
+  const w=lossless(resource,true).value;
+  need(w.schema==='topolab.native-clock-watch.v1'&&
+    eq(Object.keys(w),['preflush_text','record_text','samples','schema','wrapper_rss_before_output']),
+    'native clock sidecar schema');
+  const spec={profile_path:path,log_path:path+'.command.log',timeout_seconds:170};
+  const d=auditCapturedDispatch(contract,role,'clock-'+phase,spec,argv,da,{
+    contract_sha256:sha,event:{start_seconds:start,end_seconds:end},profile,log,
+    dispatch:Buffer.from(w.record_text,'ascii'),preflush:Buffer.from(w.preflush_text,'ascii'),
+  });
+  const wrapper=w.wrapper_rss_before_output, timerPID=d.record.native_pid;
+  need(posint(wrapper)&&wrapper>=d.self_rss_bytes&&Array.isArray(w.samples)&&w.samples.length>0
+    &&w.samples.length<=342,'native clock wrapper self RSS or samples missing');
+  let previous=null,helperPeak=0,sampled=0;
+  for(const [i,s] of w.samples.entries()){
+    const h=s.helper,raw=Buffer.from(s.profile_text,'ascii'),hn=native(raw);
+    const name='sampler-'+i+'.time';
+    need(h.role==='rss-sampler-'+i&&eq(h.argv,['/usr/bin/time','-l','-o',path+'.samplers/'+name,
+      '/bin/ps','-axo','pid=,ppid=,pgid=,rss='])&&h.profile===name&&h.profile_sha256===hash(raw)
+      &&eq(h.native,hn)&&h.exit_code===0&&h.problem===null&&h.cleanup.group_gone===true
+      &&h.cleanup.final_group_gone===true&&h.cleanup.leader_exit===0&&eq(h.cleanup.signals,[])
+      &&h.cleanup.observation_limit_exceeded===false&&posint(h.pid),'native clock sampler profile/closure');
+    const helper=hn.rss_bytes+timer(h.timer_native_exit,h.pid,0);
+    need(finite(s.offset_seconds)&&s.offset_seconds<=d.elapsed_seconds
+      &&(previous===null||previous<s.offset_seconds)&&posint(s.controller_rss_bytes)
+      &&s.controller_rss_bytes<=wrapper,'native clock sample time/self RSS');
+    previous=s.offset_seconds;
+    need(Array.isArray(s.rows)&&s.rows.length<=2&&new Set(s.rows.map(r=>r.pid)).size===s.rows.length
+      &&s.rows.filter(r=>r.parent===timerPID).length<=1&&s.rows.every(r=>posint(r.pid)
+        &&Number.isSafeInteger(r.parent)&&r.parent>=0&&r.pgid===timerPID&&(r.pid===timerPID||r.parent===timerPID)
+        &&Number.isSafeInteger(r.rss_bytes)&&r.rss_bytes>=0),'native clock unregistered process/RSS');
+    helperPeak=Math.max(helperPeak,helper);
+    sampled=Math.max(sampled,helper+s.controller_rss_bytes+s.rows.reduce((sum,row)=>sum+row.rss_bytes,0));
+  }
+  const peak=Math.max(sampled,wrapper+d.command_rss_bytes+d.timer_rss_bytes+helperPeak);
+  need(peak<=CAP,'clock command/timer/observer/concurrent sampler exceeds 4GiB');
+  return {rss_bytes:peak,wall_seconds:Math.max(d.native.wall_seconds,d.elapsed_seconds)};
 }
 
 export function validateAck(v,sha,role,pendingRaw=null){
@@ -162,10 +216,10 @@ function tuple(st) {
   return {dev:String(st.dev),inode:String(st.ino),size:String(st.size),mtime_ns:String(st.mtimeNs),mode:String(st.mode),nlink:String(st.nlink)};
 }
 const sameTuple = (a,b) => a&&b&&['dev','ino','size','mtimeNs','mode','nlink'].every(k=>a[k]===b[k]);
-function reader({fs,constants},limits) {
+function reader({fs,constants},limits, allowNewControl=false) {
   const cache=new Map(),observations=[];let total=0;
   async function read(path,expected,cap) {
-    absolute(path);need(SHA256.test(expected),'trusted SHA256 anchor required');
+    absolute(path);need(SHA256.test(expected)||(allowNewControl&&expected===null),'trusted SHA256 anchor required');
     if(cache.has(path)){const prior=cache.get(path);need(prior.sha256===expected&&prior.raw.length<=cap,'cached metadata anchor/cap changed');return prior.raw;}
     need(cache.size<limits.max_files,'metadata file count cap');
     const evidence={path,declared:null,before:null,after:null,closing:null,returned_bytes:0,eof_probe_bytes:null,sha256:null,secondary_errors:[]};
@@ -189,7 +243,7 @@ function reader({fs,constants},limits) {
       }
       const extra=Buffer.alloc(1);evidence.eof_probe_bytes=(await h.read(extra,0,1,raw.length)).bytesRead;need(evidence.eof_probe_bytes===0,'metadata grew');
       after=await h.stat({bigint:true});evidence.after=tuple(after);need(sameTuple(before,after),'metadata fstat identity drift');
-      evidence.sha256=hash(raw);need(evidence.sha256===expected,'metadata anchor mismatch');
+      evidence.sha256=hash(raw);need(expected===null||evidence.sha256===expected,'metadata anchor mismatch');
     } catch(error){problem=error;}
     finally {
       if(h)try{await h.close();}catch(error){secondary('close',error);problem??=Error('metadata close failed');}
@@ -200,6 +254,13 @@ function reader({fs,constants},limits) {
     total+=raw.length;observations.push(evidence);cache.set(path,{raw,sha256:expected});return raw;
   }
   return {read,observations,get bytes(){return total;},get files(){return cache.size;},cache};
+}
+// A just-returned control has no pre-existing digest. Enforce the same FD,
+ // byte and closing checks before the caller computes its first digest.
+export async function readCallerControl(options,path,cap,expected=null) {
+  need(Number.isSafeInteger(cap)&&cap>0&&cap<=HARD_LIMITS.max_total_bytes,'literal control cap required');
+  const source=reader(options,{max_files:1,max_total_bytes:cap},true);
+  return source.read(path,expected,cap);
 }
 function policyFor(contract,options) {
   need(['B','FINAL'].includes(options.scope),'registered metadata scope required');
@@ -233,7 +294,11 @@ function namespaceFor(contract,policy,selected) {
       add(root+'/'+label+'-return.json',policy.limits.max_record_bytes);
     }
     for(const file of ['quota-pending.json','controller-summary.json','case-spans.json','controller-exit.json','binder-exit.json','verifier-exit.json'])add(root+'/'+file,policy.limits.max_record_bytes);
-    if(!contract.public_fixture_only){
+    if(fullBClock(contract)){
+      add(spec.publication_profile_path,policy.limits.max_profile_bytes);
+      add(spec.publication_profile_path+'.resource.json',policy.limits.max_record_bytes);
+    }
+    if(!contract.public_fixture_only||fullBClock(contract)){
       add(root+'/trusted-returns.json',policy.limits.max_record_bytes);
       add(spec.publication_readiness_path,policy.limits.max_record_bytes);
       add(spec.publication_return_path,policy.limits.max_record_bytes);
@@ -243,6 +308,17 @@ function namespaceFor(contract,policy,selected) {
       const base=root+(role==='resource-preflight'?'/controls/':'/native/')+start.name;
       add(base+'/command.json',policy.limits.max_record_bytes);add(base+'/command.time',policy.limits.max_profile_bytes);add(base+'/command.log',policy.limits.max_log_bytes);
       families.push({prefix:relative(base)+'/sampler-',max_index:Math.ceil(start.timeout_seconds/policy.sample_interval_seconds)+1,cap:policy.limits.max_profile_bytes});
+    }
+  }
+  if(fullBClock(contract)){
+    add(policy.root+'/B-clock-start.json',4096);
+    if(selected.length===3){
+      add(policy.root+'/C-clock-start.json',4096);
+      add(policy.root+'/B-clock-return.json',policy.limits.max_record_bytes);
+      add(policy.root+'/B-js-prefix.json',65536);
+      add(policy.root+'/B-verify.time',policy.limits.max_profile_bytes);
+      add(policy.root+'/B-verify.time.resource.json',policy.limits.max_record_bytes);
+      add(policy.manifests.B,policy.limits.max_manifest_bytes);
     }
   }
   const capFor=rel=>{
@@ -322,9 +398,18 @@ export async function auditPublication(contract,sha,role,chain,get,relative,cont
   const proof=lossless(proofRaw,true).value,event=lossless(await get(relative(spec.publication_return_path))).value;
   const reservation=lossless(chain.reservation.log).value;
   need(proof.execution_identity===ID&&proof.scientific_contract_sha256===sha&&proof.role===role&&proof.metadata_only===true&&typeof proof.publication_readiness?.main==='string'&&/^[0-9a-f]{40}$/.test(proof.publication_readiness.main),'publication identity/main');
+  if(contract.entry_repair==='native-bc-entry-20261126-r2'){
+    const release=proof.publication_readiness,history=release.historical_issuance;
+    const scope=contract.public_fixture_only?'ENGINEERING_PUBLIC':'PROTECTED_MAIN';
+    need(release.main!==contract.historical_issuer_commit&&release.scope===scope&&SHA256.test(release.release_sha256),'scientific release scope/commit');
+    need(history?.issuer_main==='d30c33b198099c09ee9c1fb7bbc14f43f8cf1676'&&history.issuer_main===contract.historical_issuer_commit&&history.plan_sha256===contract.acquisition.plan_sha256&&history.version_id===contract.acquisition.version_id&&history.certificate_exit===0&&history.lease==='RELEASED','historical issuance/role binding');
+    need(history.certificate_original_sha256==='68cf5367db2753e90904a6bf167c46d2d2a09ed76d0936c4770b045d5e52e2c0'&&history.certificate_stdout_sha256==='2b79796e837e9d93967a8bcbb802769a936157315dea22317c4de17c9e351455','historical original certificate');
+    if(scope==='PROTECTED_MAIN')need(Number.isSafeInteger(release.main_CI_run)&&release.main_CI_run>0&&release.independent_release?.main===release.main&&SHA256.test(release.independent_release.sha256)&&SHA256.test(release.independent_release.public_raw_B_sha256),'exact scientific protected release');
+  }
   need(proof.source_freeze_sha256===hash(contractFields.source_freeze)&&proof.runtime_sha256===hash(contractFields.runtime),'publication source/runtime binding');
   need(event.complete===true&&event.exit_code===0&&eq(event.argv,resolve(spec.publication_argv,sha))&&event.stdout_sha256===hash(proofRaw)&&finite(event.start_seconds)&&finite(event.end_seconds)&&finite(proof.start_seconds)&&finite(proof.end_seconds)&&event.start_seconds<=proof.start_seconds&&proof.start_seconds<=proof.end_seconds&&proof.end_seconds<=event.end_seconds&&event.end_seconds<=chain.reservation.event.start_seconds&&chain.reservation.event.start_seconds<=event.end_seconds+30,'actual fresh publication return before native reservation');
   need(eq(reservation.publication_readiness,proof)&&chain.reservation.event.publication_readiness_sha256===hash(proofRaw),'reservation publication proof anchor');
+  return {event,proof,proofRaw};
 }
 export async function observeMetadata(options) {
   need(SHA256.test(options.contractSHA256)&&SHA256.test(options.manifestSHA256),'trusted SHA256 anchor required');
@@ -333,7 +418,7 @@ export async function observeMetadata(options) {
     const contractRaw=await source.read(options.contractPath,options.contractSHA256,HARD_LIMITS.max_contract_bytes),contractParsed=lossless(contractRaw,true),contract=contractParsed.value,sha=options.contractSHA256;
     need(contract.schema==='topolab.v2.m2-scientific-contract.v1','scientific metadata contract schema');
     const {policy,publicOnly}=policyFor(contract,options),selected=options.scope==='B'?roles.slice(0,1):roles;
-    const contractFields=publicOnly?null:{runtime:rawField(contractParsed,'runtime'),source_freeze:rawField(contractParsed,'source_freeze')};
+    const contractFields=publicOnly&&!fullBClock(contract)?null:{runtime:rawField(contractParsed,'runtime'),source_freeze:rawField(contractParsed,'source_freeze')};
     need(contractRaw.length<=policy.limits.max_contract_bytes&&source.files<=policy.limits.max_files&&source.bytes<=policy.limits.max_total_bytes,'metadata policy bootstrap cap');
     Object.assign(operationLimits,policy.limits);
     const namespace=namespaceFor(contract,policy,selected),{relative,rootFor}=namespace;
@@ -355,6 +440,8 @@ export async function observeMetadata(options) {
       need(raw.length===item.bytes,'manifest byte size mismatch');consumed.add(rel);return raw;
     };
     const dispatches=[],byRole={},shared=[],payloads={},outcomes={},rolePeaks={},roleCharges={},innerResults={};let lastEnd=0,innerProfiles=0;
+    let bPrefix, startRaw, originalBManifestSHA, bCharge, cPrefix;
+    const publications={};
     for(const role of selected){
       const root=rootFor(role),chain=byRole[role]={};
       for(const label of ['reservation',...labels,...(role==='resource-preflight'?[]:['reader-ack'])]){
@@ -375,10 +462,18 @@ export async function observeMetadata(options) {
           shared.push(proof);
         }
       }
-      if(!publicOnly){
+      if(!publicOnly||fullBClock(contract)){
         const events=lossless(await get(relative(root+'/trusted-returns.json'))).value;
         need(eq(events,labels.map(label=>chain[label].event)),'complete role trusted-return table');
-        await auditPublication(contract,sha,role,chain,get,relative,contractFields);
+        const publication=await auditPublication(contract,sha,role,chain,get,relative,contractFields);
+        if(fullBClock(contract)){
+          const raw=await get(relative(contract.roles[role].publication_profile_path));
+          const event=publication.event,resource=await get(relative(contract.roles[role].publication_profile_path+'.resource.json'));
+          need(event.publication_resource_sha256===hash(resource),'publication clock resource hash');
+          const parsed=auditClockWatch(contract,sha,role,'publication',resource,raw,publication.proofRaw,event.start_seconds,event.end_seconds);
+          need(event.profile_sha256===hash(raw)&&parsed.rss_bytes<=CAP&&parsed.wall_seconds<=event.end_seconds-event.start_seconds+1,'publication native resource/profile');
+          publications[role]={...publication,raw,parsed};
+        }
       }
       let priorRaw=await get(relative(root+'/controller-summary.json'));
       need(priorRaw.equals(chain.controller.log),'controller summary actual raw log');
@@ -425,15 +520,194 @@ export async function observeMetadata(options) {
       const rows=role==='resource-preflight'||publicOnly?0:360,charge=Math.max(Math.max(whole,outerWall)+rows+10,internal);
       need(finite(internal)&&charge<=contract.roles[role].FULL_seconds,'complete scientific role charge exceeded');
       roleCharges[role]={FULL_charged_seconds:contract.roles[role].FULL_seconds,whole_wall_seconds:whole,inner_charge_seconds:internal,known_complete_charge_seconds:charge};
+      if(fullBClock(contract)&&role===roles[0]){
+        startRaw=await get(relative(policy.root+'/B-clock-start.json'));
+        const start=lossless(startRaw,true).value,publication=publications[role];
+        originalBManifestSHA=options.scope==='B'?options.manifestSHA256:hash(await get(relative(policy.manifests.B)));
+        need(start.schema==='topolab.b-clock-start.v1'&&start.contract_sha256===sha&&Object.keys(start).length===3
+          &&Number.isSafeInteger(start.start_ms)&&start.start_ms>=0&&start.start_ms/1000<=publication.event.start_seconds,
+          'B original caller start before first publication');
+        bPrefix={
+          schema:'topolab.b-verified-native-prefix.v1',contract_sha256:sha,source_main:publication.proof.publication_readiness.main,
+          input_version_id:contract.acquisition.version_id,
+          start_sha256:hash(startRaw),manifest_sha256:originalBManifestSHA,publication_start_seconds:publication.event.start_seconds,
+          publication_profile_sha256:hash(publication.raw),reservation_dispatch_sha256:chain.reservation.dispatch_sha256,
+          last_dispatch_sha256:chain['final-observer'].dispatch_sha256,last_profile_sha256:chain['final-observer'].event.profile_sha256,
+          last_native_end_seconds:chain['final-observer'].event.end_seconds,
+          native_nonoverlapping_seconds:outerWall+Math.max(chain.reservation.native.wall_seconds,chain.reservation.elapsed_seconds)+publication.parsed.wall_seconds,
+          inner_case_charge_seconds:internal,reservation_charge_seconds:chain.reservation.active_charge_seconds,
+          recorded_peak_bytes:Math.max(rolePeaks[role],publication.parsed.rss_bytes),
+        };
+      }
     }
     need(dispatches.length===(options.scope==='B'?5:17)&&shared.length===(options.scope==='B'?1:5),'registered native/shared helper count');
-    const active=shared.reduce((sum,proof)=>sum+proof.active_charge_seconds,10);need(active<=180,'shared active FULL180 exceeded');
+    const chargedShared=fullBClock(contract)?shared.filter(proof=>proof.role!==roles[0]):shared;
+    const active=chargedShared.length?chargedShared.reduce((sum,proof)=>sum+proof.active_charge_seconds,10):0;
+    need(active<=180,'shared active FULL180 exceeded');
+    if(bPrefix && options.scope==='FINAL'){
+      const jsPrefixRaw=await get(relative(policy.root+'/B-js-prefix.json'));
+      const original=lossless(jsPrefixRaw).value;
+      bCharge=validateBCallerClock({contract,contractSHA256:sha,startRaw,
+        returnRaw:await get(relative(policy.root+'/B-clock-return.json')),jsPrefixRaw,
+        verifyProfileRaw:await get(relative(policy.root+'/B-verify.time')),
+        verifyResourceRaw:await get(relative(policy.root+'/B-verify.time.resource.json')),manifestSHA256:originalBManifestSHA,
+        prefix:{...bPrefix,observer_started_ms:original.observer_started_ms,observer_completed_ms:original.observer_completed_ms}});
+      need(bCharge.b_caller_end_ms/1000<=publications[roles[1]].event.start_seconds,'C started before complete B caller return');
+      roleCharges[roles[0]]=bCharge;
+      rolePeaks[roles[0]]=bCharge.conservative_recorded_peak_bytes;
+      const cStartRaw=await get(relative(policy.root+'/C-clock-start.json')),cStart=lossless(cStartRaw,true).value;
+      need(cStart.schema==='topolab.c-clock-start.v1'&&cStart.contract_sha256===sha
+        &&Object.keys(cStart).length===3&&Number.isSafeInteger(cStart.start_ms)
+        &&bCharge.b_caller_end_ms<=cStart.start_ms,'C caller start/B complete return');
+      const spans=[];let prior=cStart.start_ms/1000;
+      let sharedNative=chargedShared.reduce((sum,item)=>sum+Math.max(item.native.wall_seconds,item.elapsed_seconds),0);
+      let sharedPeak=Math.max(...chargedShared.map(item=>item.peak_bytes));
+      for(const role of roles.slice(1)){
+        const p=publications[role],chain=byRole[role];
+        need(prior<=p.event.start_seconds&&p.event.end_seconds<=chain.reservation.event.start_seconds
+          &&chain.reservation.event.end_seconds<=chain.controller.event.start_seconds
+          &&chain['final-observer'].event.end_seconds<=chain['reader-ack'].event.start_seconds,'C caller shared chronology');
+        spans.push([chain.controller.event.start_seconds,chain['final-observer'].event.end_seconds]);
+        prior=chain['reader-ack'].event.end_seconds;
+        sharedNative+=p.parsed.wall_seconds;
+        sharedPeak=Math.max(sharedPeak,p.parsed.rss_bytes);
+      }
+      need(prior<=started/1000,'final C metadata replay preceded final ACK');
+      cPrefix={schema:'topolab.c-verified-native-prefix.v1',contract_sha256:sha,start_sha256:hash(cStartRaw),
+        manifest_sha256:options.manifestSHA256,b_caller_return_sha256:bCharge.b_caller_return_sha256,
+        b_caller_end_ms:bCharge.b_caller_end_ms,last_ack_dispatch_sha256:byRole[roles[2]]['reader-ack'].dispatch_sha256,
+        last_ack_end_seconds:prior,role_spans:spans,native_shared_seconds:sharedNative,
+        active_helper_charge_seconds:active-10,shared_prefix_peak_bytes:sharedPeak,observer_started_ms:started,
+        observer_completed_ms:Date.now()};
+
+    }
     need(consumed.size===Object.keys(manifest.files).length,'unconsumed metadata manifest member');
     if(!publicOnly&&options.scope==='FINAL'){
       const proof=payloads['scientific-auditor'].result.producer_return_verified,producer='scientific-producer';
       need(proof.execution_identity===ID&&proof.scientific_contract_sha256===sha&&proof.role===producer&&proof.status==='PASS_RSS_EXIT_EMPIRICAL'&&proof.actual_final_verifier_exit_observed===true&&proof.conservative_recorded_peak_bytes===rolePeaks[producer]&&Object.entries(roleCharges[producer]).every(([key,value])=>proof[key]===value),'independent producer native-return provenance');
     }
     const independent=outcomes['scientific-auditor']||null;
-    return {schema:'topolab.v2.m2-api-metadata-closeout.v2',scope:publicOnly?'NEW_PUBLIC_SOFTWARE_ONLY':options.scope,operation_scope:options.scope,status:options.scope==='B'?'ACTUAL_B_NATIVE_RETURNS_VERIFIED':'ACTUAL_17_NATIVE_RETURNS_AND_FIVE_SHARED_HELPERS_VERIFIED',contract_sha256:sha,manifest_sha256:options.manifestSHA256,actual_dispatcher_commands:dispatches.length,shared_helpers:shared.length,shared_active_charge_seconds:active,shared_native_peak_bytes:Math.max(...shared.map(p=>p.peak_bytes)),conservative_recorded_peaks_by_role:rolePeaks,role_charges:roleCharges,inner_resources:innerResults,inner_sampler_native_profiles:innerProfiles,last_ack_actual_exit_observed:options.scope==='FINAL',last_ack_lease_state:options.scope==='FINAL'?'RELEASED':'NOT_APPLICABLE_B_PREFIX',exact_ns_lexemes_preserved:true,metadata_files_read:source.files,metadata_bytes_read:source.bytes,limits:policy.limits,API_transport_infrastructure_RSS:'UNKNOWN_NOT_WHOLE_HOST_4GiB',native_helper_created:false,producer_PASS_used_as_oracle:false,scientific_FEM_or_model_or_input_consumption:0,formal_B_C_calls:0,independent_scientific_outcome:independent,seed17_repaired:!publicOnly&&options.scope==='FINAL'&&independent.scientific_predicates_passed===true,full_v2_delivered:false,observer_elapsed_seconds:(Date.now()-started)/1000,observations:source.observations};
+    if(bPrefix && options.scope==='B'){
+      need(started/1000>=bPrefix.last_native_end_seconds,'B JS replay preceded final native return');
+      bPrefix.observer_started_ms=started;
+      bPrefix.observer_completed_ms=Date.now();
+    }
+    return {...(bPrefix&&options.scope==='B'?{b_native_prefix:bPrefix}:{}),...(cPrefix?{c_native_prefix:cPrefix}:{}),schema:'topolab.v2.m2-api-metadata-closeout.v2',scope:publicOnly?'NEW_PUBLIC_SOFTWARE_ONLY':options.scope,operation_scope:options.scope,status:fullBClock(contract)?(options.scope==='B'?'B_NATIVE_PREFIX_PENDING_CALLER_RETURN':'C_NATIVE_PREFIX_PENDING_CALLER_RETURN'):(options.scope==='B'?'ACTUAL_B_NATIVE_RETURNS_VERIFIED':'ACTUAL_17_NATIVE_RETURNS_AND_FIVE_SHARED_HELPERS_VERIFIED'),contract_sha256:sha,manifest_sha256:options.manifestSHA256,actual_dispatcher_commands:dispatches.length,shared_helpers:chargedShared.length,shared_active_charge_seconds:active,shared_native_peak_bytes:Math.max(0,...chargedShared.map(p=>p.peak_bytes)),conservative_recorded_peaks_by_role:rolePeaks,role_charges:roleCharges,inner_resources:innerResults,inner_sampler_native_profiles:innerProfiles,last_ack_actual_exit_observed:options.scope==='FINAL',last_ack_lease_state:options.scope==='FINAL'?'RELEASED':'NOT_APPLICABLE_B_PREFIX',exact_ns_lexemes_preserved:true,metadata_files_read:source.files,metadata_bytes_read:source.bytes,limits:policy.limits,API_transport_infrastructure_RSS:'UNKNOWN_NOT_WHOLE_HOST_4GiB',native_helper_created:false,producer_PASS_used_as_oracle:false,scientific_FEM_or_model_or_input_consumption:0,formal_B_C_calls:0,independent_scientific_outcome:independent,seed17_repaired:!fullBClock(contract)&&!publicOnly&&options.scope==='FINAL'&&independent.scientific_predicates_passed===true,full_v2_delivered:false,observer_elapsed_seconds:(Date.now()-started)/1000,observations:source.observations};
   }catch(error){error.metadata_operation={scope:options.scope,contract_sha256:options.contractSHA256,manifest_sha256:options.manifestSHA256,metadata_files_read:source.files,metadata_bytes_read:source.bytes,observations:source.observations};throw error;}
+}
+
+function literalCommand(argv) {
+  const threads=['OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','VECLIB_MAXIMUM_THREADS','NUMEXPR_NUM_THREADS'];
+  const quote=s=>s&&/^[a-z0-9_@%+=:,./-]+$/i.test(s)?s:"'"+s.replaceAll("'", "'\"'\"'")+"'";
+  return 'exec '+['env',...threads.map(name=>name+'=1'),...argv].map(quote).join(' ');
+}
+
+function terminalReturn(contract, policy, sha, packet) {
+  const actual=packet.actual, argv=resolve(policy.verification_argv,sha), req=actual?.request;
+  need(actual?.schema==='topolab.v2.m2-strict-source-binding.actual-call.v1'
+    &&actual.author===policy.author&&eq(actual.argv,argv)&&req?.cmd===literalCommand(argv)
+    &&req.workdir===contract.runtime.cwd&&!Object.hasOwn(req,'prefix_rule'),'final verifier literal caller/argv differs');
+  const responses=actual.responses;
+  need(Array.isArray(responses)&&responses.length>0&&responses.length<=65,'bounded original verifier responses required');
+  let previous=0,session=null,output='';
+  for(const [index,row] of responses.entries()){
+    const result=row.result,args=row.arguments,ms=row.requested_ms,end=row.returned_ms;
+    need(Number.isSafeInteger(ms)&&Number.isSafeInteger(end)&&previous<=ms&&ms<=end
+      &&typeof result?.output==='string'&&!result.output.includes('Warning: truncated output')
+      &&!result.output.includes('tokens truncated'),'incomplete verifier original output/clock');
+    need(result.original_token_count==null || (Number.isSafeInteger(result.original_token_count)
+      &&result.original_token_count>=0&&posint(args.max_output_tokens??10000)
+      &&result.original_token_count<=(args.max_output_tokens??10000)),'truncated verifier token count');
+    if(index===0)need(row.tool==='exec_command'&&eq(args,req),'first verifier request differs');
+    else need(row.tool==='write_stdin'&&posint(args.session_id)&&args.session_id===session
+      &&(args.chars??'')===''&&Number.isSafeInteger(args.yield_time_ms??5000)
+      &&(args.yield_time_ms??5000)>=5000&&(args.yield_time_ms??5000)<=30000,'unowned verifier poll');
+    if(index===responses.length-1)need(result.exit_code===0&&result.session_id==null,'final actual verifier exit required');
+    else{
+      need(posint(result.session_id)&&result.exit_code==null&&(session===null||session===result.session_id),'changed live verifier session');
+      session=result.session_id;
+    }
+    output+=result.output;
+    previous=end;
+  }
+  return {first:responses[0].requested_ms,end:previous,output};
+}
+
+// The independent replay supplies prefix. The caller alone can observe the last verifier exit.
+export function validateBCallerClock({contract,contractSHA256,startRaw,returnRaw,jsPrefixRaw,verifyProfileRaw,verifyResourceRaw,manifestSHA256,prefix}){
+  const policy=contract.b_caller_clock,start=lossless(startRaw,true).value;
+  const stored=lossless(jsPrefixRaw).value,packet=lossless(compactLexemes(returnRaw)).value;
+  need(fullBClock(contract)&&policy?.schema==='topolab.b-full-clock.v1'
+    &&start.schema==='topolab.b-clock-start.v1'&&start.contract_sha256===contractSHA256
+    &&Object.keys(start).length===3&&Number.isSafeInteger(start.start_ms)&&start.start_ms>=0
+    &&eq(stored,prefix)&&prefix.schema==='topolab.b-verified-native-prefix.v1'
+    &&prefix.contract_sha256===contractSHA256&&prefix.start_sha256===hash(startRaw)
+    &&prefix.manifest_sha256===manifestSHA256,'complete B clock original evidence differs');
+  need(eq(Object.keys(packet).sort(),['actual','contract_sha256','schema','start_sha256','verification_profile_sha256','verification_resource_sha256'])
+    &&packet.schema==='topolab.b-clock-return.v1'&&packet.contract_sha256===contractSHA256
+    &&packet.start_sha256===hash(startRaw)&&packet.verification_profile_sha256===hash(verifyProfileRaw)
+    &&packet.verification_resource_sha256===hash(verifyResourceRaw),
+    'B original final caller packet/profile binding differs');
+  const actual=terminalReturn(contract,policy,contractSHA256,packet);
+  const stdout={caller_must_validate_actual_return:true,contract_sha256:contractSHA256,input_version_id:contract.acquisition.version_id,
+    js_prefix_sha256:hash(jsPrefixRaw),schema:'topolab.b-native-prefix-return.v1',source_main:prefix.source_main,
+    start_sha256:hash(startRaw),status:'PASS_PREFLIGHT_RSS_EXIT_EMPIRICAL'};
+  need(prefix.input_version_id===contract.acquisition.version_id,'B input version differs');
+  need(actual.output===JSON.stringify(stdout)+'\n'&&start.start_ms/1000<=prefix.publication_start_seconds
+    &&Number.isSafeInteger(prefix.observer_started_ms)&&Number.isSafeInteger(prefix.observer_completed_ms)
+    &&prefix.last_native_end_seconds<=prefix.observer_started_ms/1000
+    &&prefix.observer_started_ms<=prefix.observer_completed_ms&&prefix.observer_completed_ms<=actual.first,
+    'B final verifier raw return or chronological coverage differs');
+  const verified=auditClockWatch(contract,contractSHA256,roles[0],'verification',verifyResourceRaw,verifyProfileRaw,
+    Buffer.from(actual.output,'ascii'),actual.first/1000,actual.end/1000);
+  const whole=(actual.end-start.start_ms)/1000;
+  need(verified.wall_seconds<=(actual.end-actual.first)/1000+1,'B final native verifier lifetime differs');
+  const nativeWall=prefix.native_nonoverlapping_seconds+verified.wall_seconds;
+  const internal=prefix.inner_case_charge_seconds+prefix.reservation_charge_seconds;
+  const charge=Math.max(internal,Math.max(whole,nativeWall)+10);
+  const peak=Math.max(prefix.recorded_peak_bytes,verified.rss_bytes);
+  need(finite(charge)&&charge<=180,'B complete caller charge exceeds FULL180');
+  need(posint(peak)&&peak<=CAP,'B complete recorded native RSS exceeds 4GiB');
+  return {status:'PASS_PREFLIGHT_RSS_EXIT_EMPIRICAL',FULL_charged_seconds:180,whole_wall_seconds:whole,
+    whole_native_seconds:nativeWall,inner_charge_seconds:internal,known_complete_charge_seconds:charge,
+    conservative_recorded_peak_bytes:peak,reservation_helper_charged_in_shared_FULL180:false,
+    reservation_charge_seconds_in_C:0,actual_final_verifier_exit_observed:true,b_caller_start_ms:start.start_ms,
+    b_caller_end_ms:actual.end,b_caller_return_sha256:hash(returnRaw)};
+}
+
+export function validateCCallerClock({contract,contractSHA256,startRaw,returnRaw,jsPrefixRaw,verifyProfileRaw,verifyResourceRaw,manifestSHA256,prefix}){
+  const policy=contract.c_caller_clock,start=lossless(startRaw,true).value;
+  const stored=lossless(jsPrefixRaw).value,packet=lossless(compactLexemes(returnRaw)).value;
+  need(fullBClock(contract)&&policy?.schema==='topolab.c-shared-clock.v1'&&start.schema==='topolab.c-clock-start.v1'
+    &&start.contract_sha256===contractSHA256&&Object.keys(start).length===3&&Number.isSafeInteger(start.start_ms)
+    &&eq(stored,prefix)&&prefix.schema==='topolab.c-verified-native-prefix.v1'&&prefix.contract_sha256===contractSHA256
+    &&prefix.start_sha256===hash(startRaw)&&prefix.manifest_sha256===manifestSHA256
+    &&prefix.b_caller_end_ms<=start.start_ms,'complete C clock original evidence differs');
+  need(eq(Object.keys(packet).sort(),['actual','contract_sha256','schema','start_sha256','verification_profile_sha256','verification_resource_sha256'])
+    &&packet.schema==='topolab.c-clock-return.v1'&&packet.contract_sha256===contractSHA256
+    &&packet.start_sha256===hash(startRaw)&&packet.verification_profile_sha256===hash(verifyProfileRaw)
+    &&packet.verification_resource_sha256===hash(verifyResourceRaw),
+    'C original final caller packet/profile binding differs');
+  const actual=terminalReturn(contract,policy,contractSHA256,packet);
+  const stdout={contract_sha256:contractSHA256,js_prefix_sha256:hash(jsPrefixRaw),
+    schema:'topolab.c-native-prefix-return.v1',start_sha256:hash(startRaw),status:'VERIFIED_NATIVE_PREFIX_PENDING_CALLER_RETURN'};
+  need(actual.output===JSON.stringify(stdout)+'\n'&&Number.isSafeInteger(prefix.observer_started_ms)
+    &&Number.isSafeInteger(prefix.observer_completed_ms)&&prefix.last_ack_end_seconds<=prefix.observer_started_ms/1000
+    &&prefix.observer_started_ms<=prefix.observer_completed_ms&&prefix.observer_completed_ms<=actual.first,
+    'C verifier actual stdout or chronology differs');
+  const [[beginP,endP],[beginA,endA]]=prefix.role_spans;
+  need(start.start_ms/1000<=beginP&&beginP<=endP&&endP<=beginA&&beginA<=endA
+    &&endA<=prefix.last_ack_end_seconds,'C charged disjoint role span order');
+  const verified=auditClockWatch(contract,contractSHA256,roles[2],'verification',verifyResourceRaw,verifyProfileRaw,
+    Buffer.from(actual.output,'ascii'),actual.first/1000,actual.end/1000);
+  need(verified.wall_seconds<=(actual.end-actual.first)/1000+1,'C final native verifier lifetime differs');
+  const sharedWall=((1000*beginP-start.start_ms)+(1000*beginA-1000*endP)+(actual.end-1000*endA))/1000;
+  const nativeWall=prefix.native_shared_seconds+verified.wall_seconds;
+  const charge=Math.max(prefix.active_helper_charge_seconds+10,Math.max(sharedWall,nativeWall)+14);
+  const peak=Math.max(prefix.shared_prefix_peak_bytes,verified.rss_bytes);
+  need(finite(charge)&&charge<=180&&actual.end-start.start_ms<=14580000,'C complete shared charge exceeds FULL180');
+  need(posint(peak)&&peak<=CAP,'C complete recorded native RSS exceeds 4GiB');
+  return {FULL_charged_seconds:180,known_complete_charge_seconds:charge,shared_wall_seconds:sharedWall,
+    shared_native_seconds:nativeWall,shared_peak_bytes:peak,C_helper_recording_seconds:4,B_reservation_charge_seconds:0,
+    c_caller_start_ms:start.start_ms,c_caller_end_ms:actual.end,c_caller_return_sha256:hash(returnRaw)};
 }

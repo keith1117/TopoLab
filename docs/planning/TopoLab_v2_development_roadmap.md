@@ -1,5 +1,7 @@
 # TopoLab v2 Development Roadmap
 
+**The post-B1 native entry repair is authorized.** A protected scientific release and an independent public preflight precede the fixed 18-case C panel. Its role thresholds and scientific predicates remain frozen. [Authorization](b1_native_bc_entry_repair_authorization.md) · [Entry evidence](../validation/native_bc_entry_repair.md)
+
 **November 26 scientific contract review stopped before B.** The candidate binds the certified B1 version and fixes the 360-row panel. Independent review found that the current entry cannot admit the historical issuer on a new scientific release or account for B independently. The 18-case scientific panel remains unrun. [Review and original-return evidence](../validation/native_bc_contract_review.md)
 
 **November 26 formal input acceptance completed.** Both readers verified the 40 metadata files and 558 payloads under the B1 contract. The original certificate return, the 1,071-member version and the released lease passed independent terminal audit. Scientific B/C and the fixed P/17 quality gate remain open. [Formal input certificate](../validation/formal_input_receipt_certificate.md)

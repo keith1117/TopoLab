@@ -1,5 +1,7 @@
 // Actual API caller ingress only; never launches a process or reads scientific inputs.
 import * as fs from 'node:fs/promises';
+import {readCallerControl,configure} from './p17_m2_scientific_metadata.mjs';
+import {underEntryRoot} from './native_bc_paths.mjs';
 import {constants as flags} from 'node:fs';
 import * as crypto from 'node:crypto';
 const hash = raw => crypto.createHash('sha256').update(raw).digest('hex');
@@ -13,7 +15,7 @@ async function put(path, raw) {
   const evidence={path,bytes:raw.length,sha256:hash(raw),stage:'literal-output',parent_observations:[],secondary_errors:[]};
   let handle,directory,problem=null;
   try {
-    need(parents.some(parent=>path.startsWith(parent+'/'))&&!path.split('/').slice(1).some(word=>!word||word==='..'||word==='.'), 'unregistered NEW metadata output');
+    need((underEntryRoot(path)||parents.some(parent=>path.startsWith(parent+'/')))&&!path.split('/').slice(1).some(word=>!word||word==='..'||word==='.'), 'unregistered NEW metadata output');
     evidence.stage='output-parents';let component='';
     for(const word of path.split('/').slice(1,-1)){
       component+='/'+word;const s=await fs.lstat(component,{bigint:true});
@@ -30,6 +32,13 @@ async function put(path, raw) {
   if(problem){evidence.raw_output_base64=raw.toString('base64');problem.metadata_output_failure=evidence;throw problem;}
   return {path,bytes:raw.length,sha256:hash(raw)};
 }
+export async function entryControl({contract, name, raw}) {
+  const root=contract.api_metadata.root;
+  need(contract.entry_repair==='native-bc-entry-20261126-r2' && underEntryRoot(root+'/'+name)
+       && /^(?:B|C)-(?:clock-start|clock-return|js-prefix|caller-receipt)\.json$/.test(name),
+       'registered caller control required');
+  return put(root+'/'+name, Buffer.from(raw));
+}
 function actual({result,start_seconds,end_seconds}) {
   need(Number.isInteger(result.exit_code)&&result.session_id===undefined,'actual complete tool return required');
   need(Number.isFinite(start_seconds)&&Number.isFinite(end_seconds)&&0<=start_seconds&&start_seconds<=end_seconds,'actual tool clock required');
@@ -40,6 +49,14 @@ export async function publicationReturn({contract,contractSHA256,role,result,sta
   need(Array.isArray(actualArgv),'actual called argv required');
   const event={...actual({result,start_seconds,end_seconds}),argv:actualArgv,registered_argv_intent:resolve(contract.roles[role].publication_argv,contractSHA256),stdout_sha256:hash(Buffer.from(result.output,'utf8')),observer:'actual complete functions exec_command tool return; original stdout bytes'};
   const spec=contract.roles[role],proof=Buffer.from(result.output,'utf8');
+  if(contract.entry_repair==='native-bc-entry-20261126-r2') {
+    configure(crypto);
+    const profile=await readCallerControl({fs,constants:flags},spec.publication_profile_path,1024**2);
+    need(profile.length>0,'native publication profile required');
+    event.profile_sha256=hash(profile);
+    const resource=await readCallerControl({fs,constants:flags},spec.publication_profile_path+'.resource.json',4*1024**2);
+    event.publication_resource_sha256=hash(resource);
+  }
   const proofReceipt=await put(spec.publication_readiness_path,proof);
   const eventReceipt=await put(spec.publication_return_path,Buffer.from(JSON.stringify(event)+'\n'));
   return {event,proofReceipt,eventReceipt,native_helpers_spawned:0};

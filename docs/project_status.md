@@ -5,6 +5,10 @@ Full v2 remains the goal; fixed P/17 is unrepaired, uniform is default,4GiB and
 independent preflight remain required. Scientific execution remains unadmitted. No
 executable scientific successor is admitted and no repair date is established.
 
+## Post-B1 scientific entry repair
+
+The owner authorized one independent native B preflight after independent review and protected publication. Its complete final tool return gates the 18-case C panel. The certified B1 plan and version remain the input. The scientific result is pending. [Authorization and separate budgets](planning/b1_native_bc_entry_repair_authorization.md) · [Entry evidence](validation/native_bc_entry_repair.md)
+
 ## Native M2 scientific contract stopped before B
 
 Independent engineering review rejected the executable contract on protected source `d5e0fcdb`. B1 input and the 360 planned rows passed metadata checks. The isolated publication prerequisite failed to import its historical helper. With the helper available, the same original readiness records passed on the B1 release and failed on the prospective scientific checkout. B and C recorded zero dispatches, payload reads and scientific charges. [Review, accounting and archive](validation/native_bc_contract_review.md)

@@ -60,7 +60,7 @@ def versioned_bytes(name):
 
 
 def build_contract(acquisition, case_definitions, manifest, registry, *, runtime=None,
-                   source_freeze=None):
+                   source_freeze=None, entry_root=None):
     """Return full canonicalizable metadata; never follow content_root or create it."""
     control = orchestration()
     canonical, sha = control.canonical, control.sha
@@ -101,14 +101,31 @@ def build_contract(acquisition, case_definitions, manifest, registry, *, runtime
     python = actual_runtime["python_entry"]
     program = str(REPO / "scripts/p17_m2_scientific_orchestration.py")
     contract_path = str(REPO / CONTRACT_PATH)
+    output_root = OUTPUT_ROOT
+    public = False
+    if entry_root is not None:
+        paths = control.load("native_bc_paths")
+        release_scope = paths.scope(entry_root)
+        public = release_scope == "ENGINEERING_PUBLIC"
+        output_root = str(entry_root)
+        if public:
+            contract_path = str(paths.public_contract_path(entry_root))
+        need(acquisition["plan_sha256"] == paths.PLAN
+             and acquisition["version_id"] == paths.VERSION,
+             "registered historical B1 plan and version required")
     roles, shared, actions = {}, {}, {}
+
+    def watch(role, phase):
+        return [python, "-I", str(REPO / "scripts/native_clock_watch.py"),
+                "--contract", contract_path, "--contract-sha", TOKEN,
+                "--role", role, "--phase", phase]
 
     def command(mode, role, *tail, script=program):
         return [python, "-I", script, mode, "--contract", contract_path,
                 "--contract-sha", TOKEN, "--role", role, *tail]
 
     def dispatch(role, label, inner, timeout, *, helper=False):
-        base = (OUTPUT_ROOT + "/shared/" + role + "-" + label if helper
+        base = (output_root + "/shared/" + role + "-" + label if helper
                 else roles[role]["root"] + "/" + label)
         spec = {
             "dispatch_argv": command("observe-native", role, "--label", label),
@@ -125,17 +142,24 @@ def build_contract(acquisition, case_definitions, manifest, registry, *, runtime
     for role, full, payload_timeout, controller_timeout in zip(
         ROLES, (180, 10800, 3600), (None, 10200, 3000), (120, 10260, 3060), strict=True
     ):
-        role_root = OUTPUT_ROOT + "/roles/" + role
+        role_root = output_root + "/roles/" + role
         roles[role] = {
             "root": role_root, "FULL_seconds": full, "outer_invocations_max": 1,
             "argv": command("run", role, "--output", role_root),
             "reserve_argv": command("reserve", role),
             "publication_argv": command("publication-check", role),
-            "publication_readiness_path": OUTPUT_ROOT + "/" + role + "-publication.json",
-            "publication_return_path": OUTPUT_ROOT + "/" + role + "-publication-return.json",
+            "publication_readiness_path": output_root + "/" + role + "-publication.json",
+            "publication_return_path": output_root + "/" + role + "-publication-return.json",
             "exit_argv": {}, "native_dispatch": {},
         }
         spec = roles[role]
+        if entry_root is not None:
+            spec["publication_profile_path"] = output_root + "/" + role + "-publication.time"
+            spec["publication_timed_argv"] = [
+                "/usr/bin/time", "-l", "-o", spec["publication_profile_path"],
+                *spec["publication_argv"],
+            ]
+            spec["publication_argv"] = watch(role, "publication")
         for label, prior in (("controller", None), ("binder", "controller"),
                              ("verifier", "binder"), ("final-observer", "verifier")):
             inner = (spec["argv"] if prior is None else
@@ -215,12 +239,12 @@ def build_contract(acquisition, case_definitions, manifest, registry, *, runtime
         "disk_reservation_basis": "8GiB producer +2GiB auditor +512MiB metadata +32MiB two "
                                   "manifests +remaining1504MiB startup/failure/output margin; "
                                   "actual available disk remains a future checked gate",
-        "new_output_directories_before_reservation": [OUTPUT_ROOT, OUTPUT_ROOT + "/roles",
-                                                       OUTPUT_ROOT + "/shared"],
-        "api_metadata": {"schema": "topolab.v2.m2-api-metadata-policy.v1", "root": OUTPUT_ROOT,
+        "new_output_directories_before_reservation": [output_root, output_root + "/roles",
+                                                       output_root + "/shared"],
+        "api_metadata": {"schema": "topolab.v2.m2-api-metadata-policy.v1", "root": output_root,
                          "sample_interval_seconds": 0.5, "limits": limits,
-                         "manifests": {"B": OUTPUT_ROOT + "/B-metadata-manifest.json",
-                                       "FINAL": OUTPUT_ROOT + "/FINAL-metadata-manifest.json"}},
+                         "manifests": {"B": output_root + "/B-metadata-manifest.json",
+                                       "FINAL": output_root + "/FINAL-metadata-manifest.json"}},
         "auditor_transport_projection": {
             "schema": "topolab.v2.m2-auditor-completion-transport.v1",
             "count_field": "completed_rows", "descriptors_field": "completed_row_descriptors",
@@ -230,6 +254,42 @@ def build_contract(acquisition, case_definitions, manifest, registry, *, runtime
         "stop_policy": "first named failure/UNKNOWN: STOP_NO_RETRY; no quota transfer; "
                        "ordinary scientific failures remain failed and fully charged",
     }
+    if entry_root is not None:
+        value.update({
+            "entry_repair": paths.IDENTITY,
+            "public_fixture_only": public,
+            "historical_issuer_commit": paths.HISTORICAL,
+            "host_requirement": {"cpu_brand": "Apple M2", "machine": "arm64",
+                                 "rss_bytes_max": 4 * GIB},
+            "budget_assignment": {
+                "B_all_startup_reservation_to_observed_final_return_FULL": 180,
+                "C_producer_single_charge_cap": 10800, "C_independent_single_charge_cap": 3600,
+                "C_shared_prepare_control_and_closeout_FULL": 180, "mutual_transfers": False,
+            },
+            "activation_order": ["independent source and protected release review",
+                                 "independent B public controls", "C producer",
+                                 "C independent auditor",
+                                 "final original return and archive"],
+            "scientific_release": {
+                "scope": release_scope,
+                "evidence_root": str(entry_root) if public else str(paths.EVIDENCE),
+                "basename": "scientific-release.json",
+            },
+        })
+        for stage, schema in (("B", "topolab.b-full-clock.v1"),
+                              ("C", "topolab.c-shared-clock.v1")):
+            value[stage.lower() + "_caller_clock"] = {
+                "schema": schema,
+                "author": ("/root" if public and not output_root.endswith("-merged")
+                           else "/root/authorize"),
+                "verification_argv": watch(ROLES[0] if stage == "B" else ROLES[2],
+                                           "verification"),
+                "verification_timed_argv": [
+                    "/usr/bin/time", "-l", "-o", output_root + "/" + stage + "-verify.time",
+                    python, "-I", str(REPO / "scripts" / f"native_{stage.lower()}_prefix.py"),
+                    "--contract", contract_path, "--contract-sha", TOKEN,
+                ],
+            }
     need([len(value["input_role_views"][r]) for r in ROLES[1:]] == [542, 1070],
          "complete fixed scientific role unions required")
     need(len(canonical(value)) <= limits["max_contract_bytes"], "scientific contract4MiB cap")
@@ -276,6 +336,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mode", choices=("construct", "auditor-payload"))
     parser.add_argument("--metadata", type=Path)
+    parser.add_argument("--entry-root", type=Path)
     parser.add_argument("--contract", type=Path)
     parser.add_argument("--contract-sha")
     parser.add_argument("--role")
@@ -294,9 +355,10 @@ def main():
         need(type(metadata) is dict and set(metadata) == {
             "acquisition", "case_definitions", "manifest", "registry"
         }, "complete accepted metadata fields required")
-        result = build_contract(**metadata)
+        result = build_contract(**metadata, entry_root=args.entry_root)
     else:
-        need(args.metadata is None and args.contract is not None and args.contract_sha is not None
+        need(args.metadata is None and args.entry_root is None
+             and args.contract is not None and args.contract_sha is not None
              and args.role == "scientific-auditor" and sys.flags.isolated == 1
              and Path.cwd() == REPO, "registered isolated auditor payload required")
         contract = control.read_contract(args.contract, args.contract_sha,
