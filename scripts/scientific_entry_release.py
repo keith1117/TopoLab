@@ -9,7 +9,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 AUTHOR = "/root/r3_independent"
-PUBLIC = "/private/tmp/topolab-native-bc-public-20261127-r4-merged-rows-positive"
+PUBLIC = "/private/tmp/topolab-native-bc-public-20261127-r5-merged-rows-positive"
 CHECKS = {"quality", "frontend", "clean-linux-smoke", "i1-native-software"}
 FORMAL_CONTRACT = REPO / "docs/planning/p17_m2_scientific_execution_protocol.json"
 

@@ -282,14 +282,14 @@ def test_successor_preserves_both_stopped_leases(tmp_path, monkeypatch, live_slo
         retained.append({"suffix": suffix, "record_sha256": science.digest(raw),
                          "identity_sha256": science.digest(science.canonical(physical))})
         originals.append((prior, raw, physical))
-    contract.update(attempt_id="native-bc-entry-20261127-r4", retained_reader=retained)
+    contract.update(attempt_id="native-bc-entry-20261127-r5", retained_reader=retained)
 
     def grant(role):
         return science.grant_scientific_input(
             certificate, contract, role, public_admission(science, contract)
         )
 
-    successor = root.with_name(root.name + ".r4.cooperative-reader.lease")
+    successor = root.with_name(root.name + ".r5.cooperative-reader.lease")
     producer = grant(PRODUCER)
     if live_slot is not None:
         with pytest.raises(ValueError, match="process still present"):
@@ -309,3 +309,35 @@ def test_successor_preserves_both_stopped_leases(tmp_path, monkeypatch, live_slo
         prior.write_bytes(raw.replace(b"consumer_pid", b"consumer_pIx"))
         with pytest.raises(ValueError, match="identity changed"):
             producer._reader_lease_path(root)
+
+
+@pytest.mark.parametrize("attempt", ["native-bc-entry-20261127-r3", "native-bc-entry-20261127-r4"])
+def test_closed_scientific_attempt_cannot_acquire_new_reader(tmp_path, monkeypatch, attempt):
+    science, certificate, contract = public_reader_case(tmp_path, monkeypatch)
+    contract["attempt_id"] = attempt
+    grant = science.grant_scientific_input(
+        certificate, contract, PRODUCER, public_admission(science, contract)
+    )
+    with pytest.raises(ValueError, match="closed scientific attempt"):
+        grant.acquire_reader(PRODUCER)
+    root = Path(contract["acquisition"]["content_root"])
+    assert list(root.parent.glob("*.cooperative-reader.lease")) == []
+
+
+@pytest.mark.parametrize("ruling", [None, {"sealed_contract": "B4.51"}])
+def test_scientific_entry_rejects_missing_or_partial_registered_ruling(monkeypatch, ruling):
+    path = SCRIPTS / "p17_m2_scientific_orchestration.py"
+    spec = importlib.util.spec_from_file_location("ruling_test_orchestration", path)
+    entry = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(entry)
+    contract_path = entry.REPO / "docs/planning/p17_m2_scientific_execution_protocol.json"
+    contract = json.loads(contract_path.read_bytes())
+    assert contract["owner_ruling"] == entry.load("native_bc_paths").OWNER_RULING
+    del contract["owner_ruling"]
+    if ruling is not None:
+        contract["owner_ruling"] = ruling
+    raw = entry.canonical(contract)
+    checker = entry.load("p17_m2_source_acquisition_independent")
+    monkeypatch.setattr(checker.native, "_software_bytes", lambda path: raw)
+    with pytest.raises(ValueError, match="registered post-B1 scope"):
+        entry.read_contract(contract_path, entry.sha(raw))

@@ -258,6 +258,7 @@ def build_contract(acquisition, case_definitions, manifest, registry, *, runtime
         value.update({
             "entry_repair": paths.IDENTITY,
             "attempt_id": paths.ATTEMPT,
+            "owner_ruling": paths.OWNER_RULING,
             "retained_reader": paths.PREDECESSOR_LEASES if not public else None,
             "public_row_fixture": paths.row_fixture(entry_root),
             "public_fixture_only": public,
@@ -279,7 +280,7 @@ def build_contract(acquisition, case_definitions, manifest, registry, *, runtime
                 "basename": "scientific-release.json",
             },
         })
-        public_author = public and not Path(output_root).name.split("-r4-", 1)[1].startswith(
+        public_author = public and not Path(output_root).name.split("-r5-", 1)[1].startswith(
             ("merged-", "independent-")
         )
         for stage, schema in (("B", "topolab.b-full-clock.v1"),

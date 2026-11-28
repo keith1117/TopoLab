@@ -2428,8 +2428,9 @@ class CheckedScientificInput(acquisition.CheckedAcquisitionInput):
     def _reader_lease_path(self, root):
         contract = self._scientific_contract
         paths = helper("native_bc_paths")
-        require(contract.get("attempt_id") != "native-bc-entry-20261127-r3",
-                "closed R3 reader cannot acquire another lease")
+        require(contract.get("attempt_id") not in {
+            "native-bc-entry-20261127-r3", "native-bc-entry-20261127-r4",
+        }, "closed scientific attempt cannot acquire another lease")
         if contract.get("attempt_id") != paths.ATTEMPT:
             return super()._reader_lease_path(root)
         retained = contract.get("retained_reader")
@@ -2446,7 +2447,7 @@ class CheckedScientificInput(acquisition.CheckedAcquisitionInput):
         for record in retained:
             prior = root.with_name(root.name + record["suffix"])
             verify_stopped_reader(root, prior, record)
-        return root.with_name(root.name + ".r4.cooperative-reader.lease")
+        return root.with_name(root.name + ".r5.cooperative-reader.lease")
 
     def _reader_argv(self, action, role):
         require(

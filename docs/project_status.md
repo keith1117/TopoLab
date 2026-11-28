@@ -1,6 +1,10 @@
 # Current project status
 
-Updated 2026-11-27 UTC. **Full v2 remains open.** Uniform remains the default and fixed P/17 is unrepaired.
+Updated 2026-11-28 UTC. **Full v2 remains open.** Uniform remains the default and fixed P/17 is unrepaired.
+
+## R5 owner ruling and fresh B/C contract
+
+The owner confirmed that the exhausted quotas and R1-only clauses in the old instructions apply only to the sealed B4.51 contract. The new contract records that decision alongside the R4 reservation refusal and carries the existing B1 certificate. R5 requires public evidence, a protected release, exact-merge independent admission and a fresh verified B before submitting the C producer reservation for normal platform approval. Fresh-sample confirmation requires a full C pass and its independent conclusion. Entering costs are 451,899 known FULL seconds plus unpriced costs. [R5 contract, budgets and gates](planning/native_c_owner_authorization.md)
 
 ## R4 formal B passed and C stopped at producer reservation
 
