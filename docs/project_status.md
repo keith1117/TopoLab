@@ -2,6 +2,10 @@
 
 Updated 2026-11-28 UTC. **Full v2 remains open.** Uniform remains the default and fixed P/17 is unrepaired.
 
+## R5 completed formal C and failed the H/17 scientific gate
+
+The independently verified B passed on `cfe17999`. The producer and numerical auditor completed the 18 references and 342 queries. H/17 exceeded the compliance limit on three large-grid attempts and used fallback on all three. On the 13 targets its mean case ratio was 1.310 and its aggregate ratio was 1.313 against uniform. Nine of eleven predicates failed. Subtracting all three fallback durations still leaves the target ratios at 1.111 and 1.073. The route review closed the fixed 8+8 H/17 candidate and found no evidence-backed successor to freeze. Fresh physical confirmation remains closed. Both R5 readers released their lease. The known cumulative floor is 466,659 FULL seconds plus historical unpriced costs. [Scientific result, exposed-case diagnosis and accounts](validation/native_c_r5_result.md)
+
 ## R5 owner ruling and fresh B/C contract
 
 The owner confirmed that the exhausted quotas and R1-only clauses in the old instructions apply only to the sealed B4.51 contract. The new contract records that decision alongside the R4 reservation refusal and carries the existing B1 certificate. R5 requires public evidence, a protected release, exact-merge independent admission and a fresh verified B before submitting the C producer reservation for normal platform approval. Fresh-sample confirmation requires a full C pass and its independent conclusion. Entering costs are 451,899 known FULL seconds plus unpriced costs. [R5 contract, budgets and gates](planning/native_c_owner_authorization.md)

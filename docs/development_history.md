@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-28 UTC — Independent R5 panel rejected fixed H/17
+
+The R5 scientific release passed its own formal B and completed the first independent numerical review of all 360 C rows in this series. Three H/17 attempts failed on the larger grid. Nine of eleven predicates failed. R5 closed its leases and booked 14,760 FULL seconds for B and C. [R5 terminal evidence](validation/native_c_r5_result.md)
+
 ## 2026-11-28 UTC — Owner scoped the historical quotas and registered R5
 
 The owner assigned the exhausted quotas and R1-only instruction to the sealed B4.51 contract. R5 registered a fresh formal B and conditional C on the certified B1 version, with a separate reader lease and normal platform approval for producer reservation. [Scope, release gates and accounts](planning/native_c_owner_authorization.md)
