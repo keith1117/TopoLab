@@ -518,6 +518,7 @@ def read_contract(path, expected_sha, *, payload_role=None, publication_check=Fa
         is_public = entry_paths.scope(root) == "ENGINEERING_PUBLIC"
         prior_lease = None if is_public else entry_paths.PREDECESSOR_LEASES
         if (value.get("attempt_id") != entry_paths.ATTEMPT
+                or value.get("owner_ruling") != entry_paths.OWNER_RULING
                 or value.get("retained_reader") != prior_lease
                 or value.get("public_row_fixture") != entry_paths.row_fixture(root)
                 or is_public != public_path or value.get("public_fixture_only") is not is_public

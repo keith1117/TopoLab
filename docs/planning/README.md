@@ -1,5 +1,7 @@
 # Planning index
 
+[R5 owner ruling, formal B, C reservation and confirmation gates](native_c_owner_authorization.md)
+
 [R4 contract for native C journal filing, formal B and the exposed panel](native_c_journal_return.md)
 
 [Native C repair, bounded retries and H/17 confirmation](native_c_row_return_authorization.md)

@@ -1,5 +1,9 @@
 # Development history
 
+## 2026-11-28 UTC — Owner scoped the historical quotas and registered R5
+
+The owner assigned the exhausted quotas and R1-only instruction to the sealed B4.51 contract. R5 registered a fresh formal B and conditional C on the certified B1 version, with a separate reader lease and normal platform approval for producer reservation. [Scope, release gates and accounts](planning/native_c_owner_authorization.md)
+
 ## 2026-11-27 UTC — R4 formal B passed and approval stopped C reservation
 
 The independent reviewer verified the original single B return on the exact merge. C completed publication, then received an approval refusal before the producer reservation helper started. The formal ledger booked 360 FULL seconds and closed the unstarted producer and auditor allowances. [R4 terminal report](validation/native_c_reservation_approval_stop.md)

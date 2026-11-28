@@ -1,6 +1,6 @@
 // Match complete native-run directories before deriving any metadata member path.
-export const formalRoot = '/private/tmp/topolab-native-bc-run-20261127-r4';
-const publicRoot = /^\/private\/tmp\/topolab-native-bc-public-20261127-r4-[a-z0-9][a-z0-9-]{0,47}$/;
+export const formalRoot = '/private/tmp/topolab-native-bc-run-20261127-r5';
+const publicRoot = /^\/private\/tmp\/topolab-native-bc-public-20261127-r5-[a-z0-9][a-z0-9-]{0,47}$/;
 export function entryRoot(root, publicOnly) {
   return publicOnly === true ? publicRoot.test(root) : root === formalRoot;
 }

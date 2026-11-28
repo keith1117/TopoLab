@@ -27,7 +27,7 @@ export async function openCaller(path,digest,author) {
   observer.configure(crypto);
   const raw=await read(path,4*MiB,digest);
   const c=observer.lossless(raw,true).value,root=c.api_metadata.root;
-  requireValue(sha(raw)===digest&&c.entry_repair==='native-bc-entry-20261126-r2'&&c.attempt_id==='native-bc-entry-20261127-r4'&&
+  requireValue(sha(raw)===digest&&c.entry_repair==='native-bc-entry-20261126-r2'&&c.attempt_id==='native-bc-entry-20261127-r5'&&
     c.public_row_fixture===rowFixture(root)&&
     entryRoot(root,c.public_fixture_only)&&(c.public_fixture_only?path===root+ext:path===formal)&&['/root','/root/r3_independent'].includes(author),
     'registered post-B1 caller, contract and root required');
@@ -66,7 +66,7 @@ async function writeRaw(path,raw) {
 }
 
 async function independentRelease(s) {
-  const fixed='/Users/keith1117/Documents/TopoLab-data/native-bc-entry-20261127-r4';
+  const fixed='/Users/keith1117/Documents/TopoLab-data/native-bc-entry-20261127-r5';
   requireValue(s.contract.scientific_release.evidence_root===fixed,'registered release directory required');
   const pair=async name=>{
     const p=fixed+'/'+name,b=fixed+'-backup/'+name;
