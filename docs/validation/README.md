@@ -1,5 +1,7 @@
 # Validation evidence index
 
+R5 formal B passed. Independent numerical review completed all 360 C rows and returned `FAIL_SCIENCE_GATE`. [H/17 ratios by grid, failed predicates, original returns and closed accounts](native_c_r5_result.md)
+
 R4 formal B passed. Platform approval stopped C at the producer reservation before any scientific reads. [Original refusal, independent B check and closed ledger](native_c_reservation_approval_stop.md)
 
 [R4 controller receipt, public write failures and independent source review](native_c_journal_receipt.md)

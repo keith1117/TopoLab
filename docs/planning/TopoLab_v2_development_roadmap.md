@@ -1,5 +1,7 @@
 # TopoLab v2 Development Roadmap
 
+**R5 completed the fixed panel and H/17 failed scientific acceptance.** The small grid met the 0.90 timing thresholds. The large grid exceeded both thresholds and accounted for all three H/17 failures. No H seed passed its registered gate. Diagnose the exposed cases before freezing any new candidate. A full C pass remains the prerequisite for independent new-sample confirmation. [Independent result and closed ledger](../validation/native_c_r5_result.md)
+
 **R5 registered a new formal B and conditional C.** The owner resolved the scope of B4.51's exhausted quotas and R1-only instruction. R5 requires review, protected release and independent verification of its own B before C producer reservation goes to platform approval. Independent new-sample confirmation follows complete scientific C acceptance. [R5 contract and entry conditions](native_c_owner_authorization.md)
 
 **R4 passed formal B and stopped before scientific production.** Platform approval denied the first C reservation after publication on `3378cede`. Resolution of the authority conflict precedes another formal attempt. C acceptance and fresh H/17 confirmation remain open. [Terminal evidence and accounting](../validation/native_c_reservation_approval_stop.md)

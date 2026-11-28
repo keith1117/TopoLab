@@ -17,9 +17,9 @@ At session start, slice start and context recovery, read these files in order:
 
 ## Current state and execution entry
 
-R4 admission requires the [journal contract](docs/planning/native_c_journal_return.md), its [independent review](docs/validation/native_c_journal_receipt.md) and the latest external handoff. Verify the exact protected release and the original B receipt on that release before dispatching C.
+Read the [R5 terminal report](docs/validation/native_c_r5_result.md) and latest external handoff before continuing. R5 completed formal B and C. Independent review rejected fixed H/17 on the exposed panel. Diagnose those exposed cases under the [failure and confirmation rules](docs/planning/native_c_row_return_authorization.md). Freeze a new candidate only with a specific, evidence-backed repair hypothesis. Fresh-sample confirmation requires full C acceptance.
 
-Before starting or resuming B/C, read the [R3 terminal report](docs/validation/native_c_producer_journal_stop.md) and the latest external handoff. R3 formal B passed. Its C producer filed all 360 rows and exited 0, then the caller stopped before the numerical auditor. Preserve both failed scientific reader leases. The [B1 certificate](docs/validation/formal_input_receipt_certificate.md) remains issued and its lease released. The [execution authorization](docs/planning/native_c_row_return_authorization.md) requires fresh B before each C and a complete C pass before new-sample H/17 confirmation. Uniform remains the default and full v2 remains open.
+The [B1 certificate](docs/validation/formal_input_receipt_certificate.md) remains issued with its lease released. Keep R2 and R3's stopped scientific leases in custody. R5 released its scientific lease. Each subsequent C needs its own contract, protected release and verified B. Uniform remains the default and full v2 remains open.
 
 ## Provenance boundary
 
